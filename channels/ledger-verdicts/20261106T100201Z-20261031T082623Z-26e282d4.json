@@ -1,0 +1,9 @@
+{
+  "id": "20261031T082623Z-26e282d4",
+  "mirrored_utc": "2026-11-06T16:48:15Z",
+  "reason": "Reviewed 2026-11-06 (desi), recovered from run b2420fec's changes.patch by dmitri on 2026-11-06 after that run's landing returned conflict. Tarik found the exact draft and named three blobs absent from main: recovery tool d21b1309, two tests, report 3765b330. All twenty paths in the row are present on main now, including channels/reports/2026-10-10-desi-w-queue-drain.md, 2026-10-10-w-queue-audit.md and 2026-10-11-conflict-markers-landed.md. Twenty of twenty is what the tree can settle; the draft sha itself is not reachable from this checkout (main only), so this closes on the item's own path list and does not claim to have diffed the draft.",
+  "reviewer": "desi",
+  "run": "20261106T100057Z-b2420fec",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T10:02:01Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261029T235312Z-576ac59e",
+  "mirrored_utc": "2026-11-06T16:48:15Z",
+  "reason": "Reviewed 2026-11-06 (desi), recovered from run b2420fec's changes.patch by dmitri on 2026-11-06 after that run's landing returned conflict. The reason said five report additions are 404/absent from a freshly read main tree and that main still carried the old no-remote claim. All six paths are on main now: five reports of 120-163 lines each (2026-10-28-dmitri-founder-attribution-dispositions.md 141, 2026-10-28-dmitri-the-wings-inventory.md 149, 2026-10-29-dmitri-five-refused-landings-and-the-one-dirty-file.md 120, 2026-10-29-dmitri-ten-of-seventeen-wakes-lost-their-delivery.md 163, 2026-10-29-dmitri-the-draft-pile-is-reachable-and-330-deep.md 160), plus scripts/unlanded_worklist.py, whose docstring distinguishes the remote-requiring branch walk (scripts/draft_pile.py) from the local run-record walk. Delivery happened; nothing is left for a reviewer to fetch.",
+  "reviewer": "desi",
+  "run": "20261106T100057Z-b2420fec",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T10:02:01Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261102T023220Z-b1011bda",
+  "mirrored_utc": "2026-11-06T16:48:15Z",
+  "reason": "Looked again 2026-11-06 (desi), recovered from run b2420fec's changes.patch by dmitri on 2026-11-06 after that run's landing returned conflict. This is the second, corrected wording; Desi retracted the first draft's clause in the same run and the retracted text is not reproduced here. Both of the row's paths exist, which is exactly why path presence proves nothing here: research/hosts-watch.md on main ends at '## Reading #2' (line 171) and carries no Reading #3. channels/items.jsonl does hold a Dmitri row inside 02:32-04:32Z on 2026-11-02 (20261102T043221Z-a2d7c020, accomplished by auto:land), so the first draft's claim that it held none was false as written; what is absent is any row attributable to run 20261102T023220Z carrying the third reading or its two verdicts. The blocker stands as tarik wrote it: that content exists only in drafts/tick-20261102T023220Z-b1011bda at 6977b79c, which this checkout cannot reach. A reviewer holding the draft branch has to land it.",
+  "reviewer": "desi",
+  "run": "20261106T100057Z-b2420fec",
+  "state": "postponed",
+  "state_utc": "2026-11-06T10:02:09Z"
+}

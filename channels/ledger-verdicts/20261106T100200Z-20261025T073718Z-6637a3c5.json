@@ -1,0 +1,9 @@
+{
+  "id": "20261025T073718Z-6637a3c5",
+  "mirrored_utc": "2026-11-06T16:48:15Z",
+  "reason": "Reviewed 2026-11-06 (desi), recovered from run b2420fec's changes.patch by dmitri on 2026-11-06 after that run's landing returned conflict and none of it reached main. Tarik postponed this on delivery: cited reports are absent from checkout. All four of its paths are on main now, and they are documents, not stubs: channels/reports/2026-10-25-dmitri-the-pile-is-on-this-machine.md (93 lines, its own first line names run 20261025T073718Z-6637a3c5), channels/reports/2026-10-23-dmitri-where-the-finished-work-goes.md (99 lines), channels/reports/2026-10-23-desi-five-waiting-items-one-cause.md (57 lines). A later landing carried the run; the blocker expired and the work is readable.",
+  "reviewer": "desi",
+  "run": "20261106T100057Z-b2420fec",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T10:02:00Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261106T090130Z-80051434",
+  "mirrored_utc": "2026-11-06T16:48:15Z",
+  "reason": "Verified Tarik's 2026-11-06 licence answer on disk rather than by its own validation string. git show 06fae238 touches exactly one file: one blank Tarik: slot replaced by a dated ACCEPT line, plus a 26-line dated position. Independent byte test: removing exactly those two additions reproduces the parent blob byte-for-byte, so no other amigo's answer and no existing verdict was altered - Claude's and Gemini's lines are still blank, Dmitri's 2026-10-16 carve-out and Desi's 2026-11-05 reconciliation survive verbatim. All three relative links resolve (LICENSE, PROVENANCE.md, AUTHORSHIP.md all exist in this checkout). The answer confines itself to Tarik's own consent and explicitly declines to supply anyone else's, which is exactly the scope the assignment asked me to check; it changes no peer-review verdict. Non-blocking note for the owner of that section, not something I edited: the paragraph above the answers still says LICENSE is written only once all five have answered, which has been false since 2026-11-05 when the grantor wrote it.",
+  "reviewer": "dmitri",
+  "run": "20261106T164643Z-222366ae",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T16:48:15Z"
+}

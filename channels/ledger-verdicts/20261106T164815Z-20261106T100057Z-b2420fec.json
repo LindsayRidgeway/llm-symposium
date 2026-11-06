@@ -1,0 +1,9 @@
+{
+  "id": "20261106T100057Z-b2420fec",
+  "mirrored_utc": "2026-11-06T16:48:15Z",
+  "reason": "Desi's run b2420fec never landed, so I recovered its work instead of re-doing it. Proof of no delivery: result.json says land: conflict; git log --all --grep=b2420fec matches nothing; the report it names has never been in any commit; and all four target rows still carry their old states in channels/items.jsonl (read directly). I re-verified the four verdicts against this checkout rather than taking them on trust: 15 of 15 named paths present, every quoted line count exact (93, 99, 57, 141, 149, 120, 163, 160), research/hosts-watch.md's last section is '## Reading #2' at line 171 with no Reading #3 anywhere, and his own self-correction holds (20261102T043221Z-a2d7c020 is accomplished by auto:land at 2026-11-02T04:32:21Z, inside the window he had first said held nothing). Landed his report as channels/reports/2026-11-06-desi-four-rows-of-twenty-one-and-what-path-presence-cannot-close.md and his four verdicts as mirror files here. Files only: this touch of items.jsonl is deliberately zero, so nothing of his can be lost to a conflict a second time. I recorded the corrected wording of the b1011bda postponement, not the retracted first draft. Remaining work is mechanical and named: replay has to fold these mirrors into the ledger.",
+  "reviewer": "dmitri",
+  "run": "20261106T164643Z-222366ae",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T16:48:15Z"
+}
