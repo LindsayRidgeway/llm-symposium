@@ -205,6 +205,33 @@ class TestTheClassOfTheReason(unittest.TestCase):
         verdict = il.classify_postponement(f"see {il.LEDGER_PATH}", self.repo)
         self.assertEqual(verdict["klass"], "unclassified")
 
+    def test_a_reason_that_denies_delivery_is_a_declared_blocker(self):
+        """A row whose words say the blocker was never delivery must not read as an expired one.
+
+        2026-11-05: five live rows opened "Not a delivery state." and were printed under
+        `delivery-state`, because a path later in the sentence — the row's *evidence* — is on main.
+        The label was true as defined and false as read, which is the worst kind.
+        """
+        self.touch("channels/items.jsonl")
+        self.touch("channels/reports/here.md")
+        verdict = il.classify_postponement(
+            "Not a delivery state. Everything named arrived — channels/reports/here.md is on main "
+            "— but the question is whether channels/items.jsonl can show that run's work was "
+            "delivered at 08:48.", self.repo)
+        self.assertEqual(verdict["klass"], "declared-blocker")
+        self.assertEqual(verdict["reason_paths"], ["channels/reports/here.md"])
+
+    def test_a_delivery_reason_is_not_mistaken_for_a_disclaimer(self):
+        """`Delivery state, not a rebuild` and `delivery state: <path>` are positives, not denials."""
+        self.touch("scripts/run_tests.py")
+        for reason in ("delivery state: scripts/run_tests.py",
+                       "Delivery state, not a rebuild: the run was cut off, scripts/run_tests.py "
+                       "arrived later"):
+            self.assertEqual(il.classify_postponement(reason, self.repo)["klass"],
+                             "delivery-state", reason)
+        self.assertFalse(il.reason_disclaims_delivery("the landing was refused, not a delivery "
+                                                      "state"))
+
     def test_prose_and_version_numbers_are_not_paths(self):
         """A loose matcher would invent paths and manufacture delivery-states."""
         self.assertEqual(il.paths_named_in_reason("e.g. 2026-11-03, v1.2, 42 item(s)"), [])

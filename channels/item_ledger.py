@@ -1000,7 +1000,28 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
 
 REASON_PATH_RE = re.compile(r"[A-Za-z0-9_.\-/]*[A-Za-z0-9_\-]/[A-Za-z0-9_.\-/]*\.[A-Za-z0-9]{1,8}")
 
-EXPIRED_CLASSES = ("delivery-state", "blocker-stands", "unclassified")
+EXPIRED_CLASSES = ("delivery-state", "blocker-stands", "declared-blocker", "unclassified")
+
+# A reason that opens by *disclaiming* delivery, in the reader's own words. Added 2026-11-05 (Desi)
+# because five live rows were being printed under `delivery-state` — a label true as defined ("every
+# path the reason names is on main") and false as read ("the blocker was delivery, and it expired"),
+# when the reason's own first sentence said the opposite: "Not a delivery state. The paths arrived;
+# the question is whether channels/items.jsonl can show that run's work was delivered". The path the
+# classifier found was in the second clause, which is the sentence's *evidence*, not its blocker.
+#
+# The alternative — a fourth class, `declared-blocker` — was chosen over reclassifying these as
+# `unclassified` because the disclaimer is information: it says a person already looked and named a
+# blocker that no file can clear, which is a different thing from a reason that never mentions files.
+# Deliberately narrow: it matches only a *leading* negation of delivery, so the seventy-odd rows whose
+# reasons begin `delivery state: <path>` (the old landing gate's own words) stay `delivery-state`,
+# and `Delivery state, not a rebuild` does not match — "not" there negates the rebuild, not delivery.
+DELIVERY_DISCLAIMER_RE = re.compile(
+    r"^\W*(?:not\s+(?:a\s+)?delivery|no\s+delivery\s+(?:gap|state|issue|problem))", re.IGNORECASE)
+
+
+def reason_disclaims_delivery(reason: str) -> bool:
+    """True when a postponement reason's first words deny that the blocker was delivery."""
+    return bool(DELIVERY_DISCLAIMER_RE.match(reason or ""))
 
 
 def paths_named_in_reason(reason: str) -> list[str]:
@@ -1031,12 +1052,17 @@ def classify_postponement(reason: str, repo: Path = REPO) -> dict:
     file was missing* and the file had since arrived; the other 65 were postponed for reasons no
     file could satisfy, so `rec["paths"]` being present was a coincidence of what the run touched.
 
-    Three classes are decidable from the tree, and only three:
+    Four classes are decidable from the tree, and only four:
 
       delivery-state   the reason names at least one path, and every one of them is present now.
                        The blocker the row's own words describe has expired: a reviewer can close it.
       blocker-stands   the reason names at least one path and one of them is still absent. The row's
                        stated blocker is still real; nobody should close this on file presence.
+      declared-blocker the reason opens by denying that delivery was the blocker ("Not a delivery
+                       state. ...", "Not delivery: ...", "No delivery gap: ..."). Its later paths are
+                       evidence for that denial, not the blocker itself, so their arriving proves
+                       nothing and the row waits for a reader. Added 2026-11-05; see
+                       `reason_disclaims_delivery` for why this is a class and not a reclassification.
       unclassified     the reason names no path at all (or names only the ledger). Presence proves
                        nothing about this row. A reviewer must read the underlying run.
 
@@ -1059,6 +1085,10 @@ def classify_postponement(reason: str, repo: Path = REPO) -> dict:
     if not named:
         return {"klass": "unclassified", "reason_paths": [], "reason_missing": []}
     missing = [q for q in named if not (repo / q).exists()]
+    # Checked after the no-path branch, so `unclassified` keeps meaning exactly "names no path".
+    # Here the reason does name paths, and its own first sentence says they are not the blocker.
+    if reason_disclaims_delivery(reason):
+        return {"klass": "declared-blocker", "reason_paths": named, "reason_missing": missing}
     return {"klass": "blocker-stands" if missing else "delivery-state",
             "reason_paths": named, "reason_missing": missing}
 
@@ -1875,7 +1905,8 @@ def _cli() -> int:
         order = [k for k in EXPIRED_CLASSES if by_class.get(k)]
         print("by class: " + " · ".join(f"{k} {by_class[k]}" for k in order)
               + "   (delivery-state = the reason's own paths have all arrived; blocker-stands = "
-                "one is still missing; unclassified = the reason names no path, so a reader must judge)")
+                "one is still missing; declared-blocker = the reason says delivery was not the "
+                "blocker; unclassified = the reason names no path, so a reader must judge)")
         print(f"item_ledger: {len(cases)} postponed item(s) whose named paths are all on main "
               f"now. This is a case for a reviewer, not a verdict: nothing was written.")
         for case in cases:
