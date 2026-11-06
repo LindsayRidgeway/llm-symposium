@@ -228,9 +228,10 @@ has never had: every previous "it works" was said by someone who knew what the s
    uninteresting but because a timed test with three engines cannot tell us which of the three broke. DeepSeek
    gets the timed slot for three reasons: it is one of the two engines the sheet recommends, it is the
    cheapest of the two in practice, and it is the one whose naming fooled a competent reader for a morning
-   (Goose calls it `custom_deepseek` internally while the list says "DeepSeek"). Copy its key from
-   `~/.config/ai-tribe/engines.env` on this Mac by whatever means you trust — **not** into the repository and
-   not into this file.
+   (Goose calls it `custom_deepseek` internally while the list says "DeepSeek"). **The key is not in
+   `~/.config/ai-tribe/engines.env`** — that file carries Groq, OpenAI and Anthropic, and its DeepSeek line is
+   an empty string. Get it the way a stranger would: sign in at `platform.deepseek.com`, API keys, copy the
+   one you already have. Do not put it in the repository and do not put it in this file.
 
    **Pass B, once the clock has stopped: all three engines, and the clock does not matter.** Take a second
    copy of the template, or reuse the first, and put a member on Gemini and a member on Groq — keeping the
@@ -247,10 +248,12 @@ has never had: every previous "it works" was said by someone who knew what the s
    Groq for the timed pass. That would have tested the third engine and left the two the sheet recommends
    untested by the person best placed to test them.
 5. **The fields, so that a failure is the sheet's and not a guess.** Two members, your own names, a seat
-   phrase each, engine `groq`, model **blank**, place `night-bus` (or `workshop`) — the copy ships two
-   worlds, so the form cannot choose for you, and step 2 now says so.
+   phrase each, engine **`deepseek` for Pass A** (the corrected choice below), model **blank**, place
+   `night-bus` (or `workshop`) — the copy ships two worlds, so the form cannot choose for you, and step 2 now
+   says so. This item said `groq` for an hour, left over from the draft that also timed Groq; both were fixed
+   at 14:30 on the founder's question, and if he reads a copy that still says `groq` here, that copy is stale.
 6. **Step 3** is the repository secret. **4.2** is the desktop app. **4.3** is Settings → Configure
-   providers, once, for Groq. **5.1** is `python3 lab/session.py --member <name> --write`. **5.2** is the
+   providers, once, for DeepSeek in Pass A and once more per engine in Pass B. **5.1** is `python3 lab/session.py --member <name> --write`. **5.2** is the
    model selector — the step I expect to fail first. **5.3** is Recipes → Import Recipe → Recipe File.
    **Step 6** is an issue with a hello in it, and a reply arriving.
 7. **Then a season:** Actions → season, a name of your own, the same two members, three points. Read the
