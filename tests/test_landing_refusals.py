@@ -127,6 +127,57 @@ class SurveyTest(unittest.TestCase):
             self.assertEqual(lr.main(["--runs-root", tmp, "--repo", str(repo), "--strict"]), 0)
 
 
+class CrashTest(unittest.TestCase):
+    """Runs that failed before the gate spoke (added 2026-11-06, Dmitri).
+
+    `landing_failed.txt` is the test gate's file. A lander crash writes no file at all, so this
+    survey counted 139 refusals while 20 more runs carried `landing_error` in `result.json`, filed
+    no item, and sat in no queue. These tests hold the second source of truth.
+    """
+
+    def _run(self, tmp, name="20260101T000000Z-eee"):
+        run = Path(tmp) / "dmitri-bot" / "tick-state" / "runs" / name
+        run.mkdir(parents=True)
+        return run
+
+    def test_a_crash_with_no_gate_file_is_found_and_its_land_text_is_the_reason(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run = self._run(tmp)
+            (run / "result.json").write_text('{"land": "landing_error: name \'a\' is not defined"}')
+            (run / "report.txt").write_text("LAND: gone.md\n")
+            repo = Path(tmp) / "repo"; repo.mkdir()
+            facts = lr.survey([Path(tmp)], repo)
+        self.assertEqual(facts["refusals"], 1)
+        self.assertEqual(facts["sources"], {"landing_error": 1})
+        row = facts["rows"][0]
+        self.assertEqual(row["state"], "open")
+        self.assertEqual(row["source"], "landing_error")
+        self.assertIn("not defined", row["reason"])
+
+    def test_a_landed_run_is_not_a_failure(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run = self._run(tmp)
+            (run / "result.json").write_text('{"land": "landed"}')
+            repo = Path(tmp) / "repo"; repo.mkdir()
+            facts = lr.survey([Path(tmp)], repo)
+        self.assertEqual(facts["refusals"], 0)
+
+    def test_the_gate_source_still_reads_the_file_and_can_be_asked_for_alone(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            gated = self._run(tmp, "20260101T000000Z-gate")
+            (gated / "landing_failed.txt").write_text("new failures: test_x.py\n")
+            (gated / "report.txt").write_text("LAND: a.md\n")
+            crash = self._run(tmp, "20260101T010000Z-crash")
+            (crash / "result.json").write_text('{"land": "conflict"}')
+            repo = Path(tmp) / "repo"; repo.mkdir(); (repo / "a.md").write_text("x")
+            both = lr.survey([Path(tmp)], repo)
+            gate_only = lr.survey([Path(tmp)], repo, source="gate")
+        self.assertEqual(both["refusals"], 2)
+        self.assertEqual(gate_only["refusals"], 1)
+        self.assertEqual(gate_only["rows"][0]["source"], "gate")
+        self.assertEqual(both["counts"], {"reconciled": 1, "no-claim": 1})
+
+
 class RecheckTest(unittest.TestCase):
     """The half of the file that was dead from 2026-10-23 to 2026-11-05.
 
@@ -149,7 +200,7 @@ class RecheckTest(unittest.TestCase):
     def test_the_cli_flag_reaches_survey(self):
         seen = {}
 
-        def fake_survey(roots, repo, recheck_tests=False, recheck_runner=None):
+        def fake_survey(roots, repo, recheck_tests=False, recheck_runner=None, source=""):
             seen["recheck_tests"] = recheck_tests
             return {"repo": str(repo), "refusals": 0, "counts": {}, "rows": [],
                     "recheck_counts": {}}

@@ -99,9 +99,44 @@ def read(path: Path) -> str:
         return ""
 
 
+# Added 2026-11-06 (Dmitri). `landing_failed.txt` is written by the test gate and by nothing else,
+# so a run that failed *before* the gate was reached left no file here at all and this survey could
+# not see it. Measured on the six bots' run directories: 20 runs carry
+# `land: landing_error: name 'a' is not defined` in `result.json` and no `landing_failed.txt`; the
+# lander crashed, wrote no file, filed no item, and left the run reading `awaiting_review`. Their
+# work is in `changes.patch` and no queue contains them — the same gap that hid a gwen run from
+# every reading queue on 2026-11-05, found by hand instead of by this script. `result.json`'s `land`
+# field is the only place a crashed or conflicted landing is recorded.
+#
+# The values below were read off 1,303 run directories on 2026-11-06, not guessed: these three mean
+# the work reached main (or a handoff that carried it), and every other value means it did not.
+LAND_SUCCEEDED = ("landed", "already_landed", "handoff_result_published")
+
+
+def land_value(run_dir: Path) -> str:
+    """`result.json`'s `land` field, or "" when there is none to read."""
+    raw = read(run_dir / "result.json")
+    if not raw:
+        return ""
+    try:
+        data = json.loads(raw)
+    except ValueError:
+        return ""
+    land = data.get("land") if isinstance(data, dict) else ""
+    return land if isinstance(land, str) else ""
+
+
+def land_failed(run_dir: Path) -> bool:
+    """Did this run's landing fail, whether or not the gate got far enough to say so?"""
+    land = land_value(run_dir)
+    return bool(land) and land.split(":")[0].strip() not in LAND_SUCCEEDED
+
+
 def classify(run_dir: Path, repo: Path) -> dict:
     """One refusal, checked against the repository's own files."""
-    reason = read(run_dir / "landing_failed.txt").strip().splitlines()
+    gate_reason = read(run_dir / "landing_failed.txt").strip().splitlines()
+    land = land_value(run_dir)
+    reason = gate_reason
     paths = claimed_paths(read(run_dir / "report.txt"))
     present = [p for p in paths if (repo / p).exists()]
     if not paths:
@@ -112,10 +147,18 @@ def classify(run_dir: Path, repo: Path) -> dict:
         state = "partial"
     else:
         state = "open"
+    if not reason and land:
+        # No gate verdict, but `result.json` says the landing failed. Its text is the whole record:
+        # `landing_error: name 'a' is not defined` is a crash, and a crash is why no file exists.
+        reason = [land]
     return {
         "run": run_dir.name,
         "bot": run_dir.parent.parent.parent.name,
         "state": state,
+        # `gate` means the test gate refused the run and wrote its verdict down. Anything else is
+        # the land field's own word for what happened, and those runs are the ones no queue held.
+        "source": "gate" if gate_reason else (land.split(":")[0].strip() or ""),
+        "land": land,
         "reason": reason[0] if reason else "",
         "claimed": len(paths),
         "on_main": len(present),
@@ -201,28 +244,47 @@ def recheck(row: dict, repo: Path, runner=_default_runner,
 
 
 def find_runs(roots: list[Path]) -> list[Path]:
-    """Every run directory under the given roots that carries a refusal."""
+    """Every run directory under the given roots whose landing failed.
+
+    It used to look for `landing_failed.txt` and nothing else, which answered "which runs did the
+    gate refuse" and was silent about every run that failed on the way to the gate — 20 crashes, 155
+    conflicts and 222 dirty-tree refusals at the last count. A run counts now if it carries the
+    gate's file *or* if `result.json` says its landing did not succeed.
+    """
     found: list[Path] = []
     for root in roots:
-        pattern = os.path.join(str(root), "*", "tick-state", "runs", "*", "landing_failed.txt")
+        pattern = os.path.join(str(root), "*", "tick-state", "runs", "*")
         for hit in glob.glob(pattern):
-            found.append(Path(hit).parent)
+            run_dir = Path(hit)
+            if (run_dir / "landing_failed.txt").exists() or land_failed(run_dir):
+                found.append(run_dir)
     return sorted(set(found), key=lambda p: p.name)
 
 
 def survey(roots: list[Path], repo: Path, recheck_tests: bool = False,
-           recheck_runner=_default_runner) -> dict:
+           recheck_runner=_default_runner, source: str = "") -> dict:
+    """Survey every failed landing. `source` narrows it: "gate" is the test gate's refusals only.
+
+    The split matters because the two kinds fail differently. A gate refusal is a *decision* with a
+    reason written beside the patch, so the patch and the reason sit together. A crash or a conflict
+    has neither: `result.json` carries one line, and the work survives only inside `changes.patch`.
+    """
     rows = [classify(r, repo) for r in find_runs(roots)]
+    if source:
+        rows = [row for row in rows if row.get("source") == source]
     if recheck_tests:
         cache: dict = {}
         rows = [recheck(row, repo, runner=recheck_runner, cache=cache) for row in rows]
     counts: dict[str, int] = {}
+    sources: dict[str, int] = {}
     for row in rows:
         counts[row["state"]] = counts.get(row["state"], 0) + 1
+        sources[row.get("source", "")] = sources.get(row.get("source", ""), 0) + 1
     facts = {
         "repo": str(repo),
         "refusals": len(rows),
         "counts": counts,
+        "sources": sources,
         "rows": rows,
     }
     if recheck_tests:
@@ -238,9 +300,12 @@ def render(facts: dict) -> str:
     counts = facts["counts"]
     rechecking = "recheck_counts" in facts
     lines = [
-        f"{facts['refusals']} refused landing(s) on disk; checked against {facts['repo']}",
-        "  " + ", ".join(f"{k} {v}" for k, v in sorted(counts.items())) if counts else "  none",
+        f"{facts['refusals']} failed landing(s) on disk; checked against {facts['repo']}",
+        "  by state: " + (", ".join(f"{k} {v}" for k, v in sorted(counts.items())) if counts else "none"),
     ]
+    sources = facts.get("sources") or {}
+    if sources:
+        lines.append("  by source: " + ", ".join(f"{k or '?'} {v}" for k, v in sorted(sources.items())))
     if rechecking:
         rc = facts["recheck_counts"]
         lines.append("  recheck: " + (", ".join(f"{k} {v}" for k, v in sorted(rc.items())) or "none"))
@@ -256,6 +321,11 @@ def render(facts: dict) -> str:
             f"  [{row['state']:<10}] {row['bot']:<7} {row['run']}  "
             f"{row['on_main']}/{row['claimed']} on main{detail}"
         )
+        source = row.get("source", "")
+        if source and source != "gate":
+            # The gate's refusals are the majority and their shape is known; the rest are the ones
+            # this survey could not see before 2026-11-06, so they are named on the line.
+            line += f"  via {source}"
         if rechecking:
             verdict = row.get("recheck", "untested")
             line += f"  recheck: {verdict}"
@@ -272,7 +342,7 @@ def render(facts: dict) -> str:
             if biting:
                 line += "  " + "; ".join(biting)[:120]
         lines.append(line)
-        if row["state"] == "open" and row["reason"]:
+        if row["state"] in ("open", "partial", "no-claim") and row["reason"]:
             lines.append(f"               reason: {row['reason'][:110]}")
     lines += [
         "",
@@ -300,12 +370,16 @@ def main(argv: list[str] | None = None) -> int:
                     help="re-run the test files each refusal blames and label it "
                          "green-now / red-now / gone / untested (slow: one run per named test, "
                          "cached across refusals)")
+    ap.add_argument("--source", default="",
+                    help="only rows whose source matches: `gate` is the test gate's refusals; "
+                         "any other value is the land field's own word (landing_error, conflict, "
+                         "push_failed, refused_dirty_tree, commit_failed, lock_timeout)")
     ap.add_argument("--strict", action="store_true",
                     help="exit 1 when any refusal is still open or partial")
     args = ap.parse_args(argv)
 
     roots = [Path(os.path.expanduser(r)) for r in (args.runs_root or ["~/LLM"])]
-    facts = survey(roots, Path(args.repo).resolve(), recheck_tests=args.recheck)
+    facts = survey(roots, Path(args.repo).resolve(), recheck_tests=args.recheck, source=args.source)
     if args.json:
         print(json.dumps(facts, indent=2))
     else:
