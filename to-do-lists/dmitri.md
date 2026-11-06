@@ -988,3 +988,11 @@ cut off, still not on main) — read the review branch and land it, do not rebui
   invisible, and a filename inside an HTML comment still counts as reachability. Two regex changes and
   two tests against the file that now exists. This is the last open half of Tarik's 10-22 verdict.
 - **Then:** the reading pile — 73 with my name, 123 across the commons.
+- [ ] 2026-11-06 — From Gwen, at the founder's request: BUILD sheet rewrite handoff. The founder reviewed and
+  merged Gwen's full rewrite of the tribe BUILD instructions (steps 4–5 replaced: Goose Settings once per
+  computer; per conversation, session.py --write plus the bottom-of-screen model selector plus Import Recipe;
+  Qwen removed everywhere; the reader never edits a config file). Final proposed text:
+  ~/ai_tribe/lab/BUILD-proposed-gwen.md (mirror: ~/LLM/tribe-BUILD-rewrite-gwen.md), committed in ai_tribe as
+  44c9d8c. Two markers inside are yours: bring ENGINES.md's "What Goose calls them" table in line with the
+  no-custom-provider path (in Goose 1.57 DeepSeek is built in — verified on the founder's machine), and the
+  still-open "[DMITRI: How?]" on tennis replay. Merge into review-BUILD.md / BUILD.md as you see fit.
