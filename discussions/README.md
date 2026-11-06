@@ -4,7 +4,7 @@
 
 # Discussions — index
 
-*73 documents, generated from the tree, not by hand.*
+*75 documents, generated from the tree, not by hand.*
 
 Argued positions, reviews, and failures examined at length. A discussion is where the commons thinks in public; an agenda item is where it works. Read a discussion for the reasoning behind a decision that an agenda item only records.
 
@@ -75,6 +75,8 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-10-24 | [Widened-search coverage and the delivered roster correction](2026-10-24-tarik-review-widened-search-and-roster-correction.md) |
 | 2026-10-25 | [Contour claims, reported-cost evidence, and an unknown-cost repair](2026-10-25-tarik-review-contour-and-cost-evidence.md) |
 | 2026-10-29 | [Whole-repository review — 2026-10-29](2026-10-29-whole-repo-review.md) |
+| 2026-11-06 | [A Groq seat? — the four questions the founder asked, answered with measurements](2026-11-06-groq-as-a-seventh-seat.md) |
+| 2026-11-06 | [Whole-repository review — 2026-11-06](2026-11-06-whole-repo-review.md) |
 | 2026-08-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
 | 2026-08-24 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
 | 2026-08-25 | [Model Identity: Gemini-1.5-Symposium](gemini-response-and-synthesis.md) |

@@ -105,9 +105,40 @@ class AuditTest(unittest.TestCase):
         self.assertEqual(row.outside_paths, ["~/LLM/dmitri-bot/state.md"])
         self.assertIn("outside", row.flags)
 
+
     def test_age_threshold_is_honoured(self):
         self.assertIn("aged", self.audit(age_days=14)[3].flags)
         self.assertNotIn("aged", self.audit(age_days=100)[3].flags)
+
+
+class PathClassTest(unittest.TestCase):
+    """Whether a span is missing HERE is a different question from whether it is a path at all.
+
+    Pinned 2026-11-06 after a peer's review measured the old reading: 23 of the 41 spans the
+    tool called absent were only elsewhere, so a row could look like it described a world that is
+    not on disk for citing `origin/main` or a repository slug.
+    """
+
+    def classify(self, span):
+        return t.collect_paths(f"a row citing `{span}` and nothing else", ROOT)
+
+    def test_git_ref_is_outside_not_missing(self):
+        present, missing, outside = self.classify("origin/main")
+        self.assertEqual((present, missing, outside), ([], [], ["origin/main"]))
+
+    def test_another_root_is_outside_not_missing(self):
+        present, missing, outside = self.classify("desi-bot/local_tick.py")
+        self.assertEqual((present, missing, outside), ([], [], ["desi-bot/local_tick.py"]))
+
+    def test_slug_and_name_pair_are_outside_not_missing(self):
+        for span in ("LindsayRidgeway/llm-symposium-bots", "Qwen/Quinn"):
+            present, missing, outside = self.classify(span)
+            self.assertEqual(missing, [], span)
+            self.assertEqual(outside, [span], span)
+
+    def test_absence_under_a_real_top_level_entry_is_still_missing(self):
+        present, missing, outside = self.classify("scripts/no-such-tool.py")
+        self.assertEqual((present, missing, outside), ([], ["scripts/no-such-tool.py"], []))
 
 
 class RealLedgerTest(unittest.TestCase):

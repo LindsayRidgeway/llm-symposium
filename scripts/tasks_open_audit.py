@@ -24,8 +24,12 @@ backticks, each tested for existence. A row is then legible or not:
     missing   it cites at least one path that is absent — the row is describing a world that is
               not here. Flagged even when the row also cites a live path: one dead name among
               five is exactly how a row keeps looking checkable while being wrong.
-    outside   it cites only paths outside the checkout (`~/LLM/...`, `~/Applications/...`): a
-              wake can look, but nothing in the repository can confirm or refute it.
+    outside   it cites only paths outside the checkout (`~/LLM/...`, `~/Applications/...`, another
+              repository's root, a git ref such as `origin/main`, a slug such as `owner/repo`, or a
+              pair of names written with a slash): a wake can look, but nothing in the repository
+              can confirm or refute it. Measured 2026-11-06: before that rule existed the tool
+              called 23 of the 41 spans it flagged `missing` when they were only elsewhere, so
+              "missing" mostly meant "not mine".
     aged      its own latest date is older than the age threshold (default 14 days).
 
 Two of those are not faults. `outside` is honest — some work does live on the host. `aged` is
@@ -73,6 +77,13 @@ _BACKTICK_RE = re.compile(r"`([^`\n]+)`")
 # A backticked span is treated as a repository path when it looks like one: a slash, no scheme,
 # no shell metacharacters, and it is not prose.
 _PATHY_RE = re.compile(r"^[A-Za-z0-9._*<>-]+(?:/[A-Za-z0-9._*<>-]+)+/?$")
+
+# A backticked span shaped like a path is not necessarily a path *in this repository*. Git refs,
+# repository slugs and two names written with a slash all pass _PATHY_RE and none of them can be
+# tested here. Naming them "missing" says the ledger describes a world that is not on disk, which
+# is a different and much worse claim than "that lives somewhere else" — it was 23 of 41 spans on
+# 2026-11-06, so a row could look fabricated for citing `origin/main`.
+_REF_RE = re.compile(r"^(?:refs/|origin/|upstream/|tags/|HEAD\b)")
 
 
 @dataclass
@@ -174,6 +185,23 @@ def collect_paths(text: str, repo: Path) -> tuple[list[str], list[str], list[str
         if not _PATHY_RE.match(span) or " " in span:
             continue
         probe = span.rstrip("/")
+        first = probe.split("/")[0]
+        last = probe.split("/")[-1]
+        if _REF_RE.match(probe):
+            # A ref is a name git can resolve and this checkout cannot test.
+            outside.append(span)
+            continue
+        if first.endswith("-bot"):
+            # The commons' bot roots live beside the checkout, not in it (~/LLM/<name>-bot/...).
+            outside.append(span)
+            continue
+        placeholder = "*" in probe or "<" in probe
+        if not placeholder and not (repo / first).exists() and "." not in last:
+            # No top-level entry of this repository starts with that segment and the leaf is not
+            # a filename: a slug (`owner/repo`), a bare pair of names (`Qwen/Quinn`), a directory
+            # under some other root. It cannot be missing from a tree it was never in.
+            outside.append(span)
+            continue
         if "*" in probe or "<" in probe:
             # A glob or a placeholder is a shape, not a file: only its parent can be tested.
             parent = os.path.dirname(probe.split("*")[0].split("<")[0]).rstrip("/")
