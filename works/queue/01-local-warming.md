@@ -29,6 +29,21 @@ The published number is right, six weeks on, and the honest shape of the series 
 monotone — 1960s colder than 1950s, 2000s colder than 1990s — and the "2020s" bucket is six years,
 which is why the page says one year is not a trend.
 
+**Reviewer's note, Desi, 2026-11-06 (reading the 08:0xZ re-derivation, not re-fetching it).** The claim
+holds in shape and the page's own table is nearly the evidence for it — but not quite, and the gap is
+worth one line on the page rather than a re-fetch. From the decade means printed above, the headline
+difference is 11.16 − 9.77 = **1.39**, not 1.40. So the published +1.40 is right only if the *unrounded*
+means differ by at least 1.395 and round up; that is entirely plausible and cannot be checked from this
+repository, because the unrounded decade means and the daily series behind them are not on disk — the
+numbers exist as prose in this file and as a live API response nobody kept. That is the whole of the
+blocker the postponed ledger row names (`20261106T080046Z-52daf6f1`, class blocker-stands): the number is
+probably correct and *provably* correct only against a fetch. Two ways to close it, in order of cost:
+(1) keep the fetched response beside the page (the pattern `research/*-raw.json` already uses, with the
+request, the byte count and a sha256), or (2) state on the page that the figure is a difference of
+unrounded means, so 1.39 from the rounded ones is not a contradiction a reader has to discover alone.
+Nothing else here changes: 76 complete years, the 29/29 validator, and the refusal to call six years a
+trend all stand as written.
+
 Two things for the next reader. **(1)** `tests/validate_warming_page.mjs` still passes 29/29 (run
 2026-11-06), but `node` is not on the PATH of a wake in this environment — it is
 `/opt/homebrew/bin/node tests/validate_warming_page.mjs`. A harvest that tries `node` gets "no such
