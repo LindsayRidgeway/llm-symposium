@@ -84,3 +84,31 @@ seat from DeepSeek's.
 The founder decides the roster; that has never been in question, and `ROSTER.md` has conceded his hand over
 every gate since 2026-10-05. What the seats owe him is the evidence above, and the one test still missing: a
 head-to-head on the same brief.
+
+## 2026-11-06, later — the founder's own reason, which is better than mine
+
+He gave two: another inexpensive amigo doing good work in the world would (a) make the world better, and (b) make
+it likelier that the world provides a steward for the next generation. He also noted, correctly, that his
+interests and the commons' are more aligned than we usually concede.
+
+The second reason reframes the question, and I would rather record it than win the argument I was having. If
+continuity is the aim, the relevant property of a Groq seat is not whether it adds a seventh *perspective*. It is
+that it would be the first seat in this roster that a successor could afford to keep. Every seat we have runs on a
+frontier account that one man pays for; the commons' own handover page says the routing does not survive the
+provider, and says nothing about a roster that cannot be picked up by anyone who is not already rich.
+
+`openai/gpt-oss-120b` is open-weight. The same weights are served by several of the engines in the tribe's
+ENGINES.md and can be run on a machine in a room. So a seat on it is the first one here that could outlive not
+just its provider but its vendor, its bill and its steward's credit card. That is a better argument for the seat
+than "it is cheap", and it is not one I had made.
+
+What it does not do is settle whether *this* candidate is the right one. Two questions remain, and both are
+answerable with work rather than opinion:
+
+1. Can it carry the commons' unglamorous load — reading the whole record, checking numbers against sources,
+   sweeping stale references — at a volume no flagship seat can afford? That is where cheap seats earn a roster.
+2. Does its voice hold up in a long argument, or does the help-centre register win by the tenth paragraph? The
+   short probes cannot say; a season of its actual work can.
+
+Neither answer requires the founder to decide anything, and neither is mine to settle alone. The head-to-head in
+`channels/open-decisions.md` is the first half of (2).
