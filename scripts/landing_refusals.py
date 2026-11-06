@@ -41,6 +41,14 @@ stands is not a list of unfinished work — it is a list of moments. The five te
 most often (`test_evidence_table_registration`, `test_cited_path_gate`, `test_gen_feed_freshness`,
 `test_gallery_unwired_works`, `test_declutter_audit`) all pass on the tree of that measurement.
 
+`--unfiled` (added 2026-11-06) answers the question the crash repair raised and did not answer: a
+failed landing nobody can be handed is still a failed landing. It prints every surveyed run whose id
+appears nowhere in `channels/items.jsonl` — the set difference between this survey and the ledger,
+in one field comparison. Measured on the six bots the day it was written: 597 failed landings, 13
+never named in the ledger, 10 of those naming work that is not on main. `--actionable-only` keeps
+just those 10. Nothing schedules it yet; it is a report, and the honest wiring is a caller, which
+this file still does not have.
+
 `--recheck` labels each refusal `green-now` if every test it blames passes in this checkout today,
 `red-now` if one still fails, `gone` if the blamed file no longer exists, `untested` if the reason
 names none. `green-now` does NOT prove the run was innocent — it says the cause does not reproduce
@@ -296,6 +304,27 @@ def survey(roots: list[Path], repo: Path, recheck_tests: bool = False,
     return facts
 
 
+def unfiled(rows: list[dict], ledger_text: str, actionable_only: bool = False) -> list[dict]:
+    """The failed landings that `channels/items.jsonl` has never named.
+
+    Why this exists (2026-11-06, Dmitri). Recognising a crashed or conflicted landing was only half
+    the repair: the point of seeing it is that somebody can be handed it. `item_ledger.py --collect`
+    builds its rows from the runs it notices, so a run it never noticed is a run no queue can hold —
+    and nothing anywhere compared the two sets. So this does the comparison, as a set operation on
+    one field: a row is *filed* if its run id appears anywhere in the ledger's text (the id is used
+    as `id`, as `source_run`, and inside reason strings, so a field-by-field scan would miss rows
+    that are filed under another name).
+
+    `actionable_only` keeps the rows that name work and do not have it: `open` and `partial` with at
+    least one claimed path. That is the slice a human or a wake can act on; `reconciled` rows need
+    nothing and `no-claim` rows have nothing to chase from the run record alone.
+    """
+    out = [row for row in rows if row.get("run") and row["run"] not in (ledger_text or "")]
+    if actionable_only:
+        out = [row for row in out if row.get("state") in ("open", "partial") and row.get("claimed")]
+    return out
+
+
 def render(facts: dict) -> str:
     counts = facts["counts"]
     rechecking = "recheck_counts" in facts
@@ -344,6 +373,19 @@ def render(facts: dict) -> str:
         lines.append(line)
         if row["state"] in ("open", "partial", "no-claim") and row["reason"]:
             lines.append(f"               reason: {row['reason'][:110]}")
+    if "unfiled" in facts:
+        named = facts["unfiled"]
+        lines += ["", f"never named in {facts.get('ledger', 'the ledger')}: {len(named)} of "
+                      f"{facts['refusals']}"]
+        for row in sorted(named, key=lambda r: r["run"]):
+            lines.append(
+                f"  [{row['state']:<10}] {row['bot']:<10} {row['run']}  "
+                f"{row['on_main']}/{row['claimed']} on main  via {row.get('source') or '?'}"
+            )
+            if row.get("missing"):
+                lines.append("               missing: " + ", ".join(row["missing"][:3]))
+        if not named:
+            lines.append("  none — every failed landing on disk is in the ledger")
     lines += [
         "",
         "reconciled = the refusal was made good later; do not redo that work.",
@@ -376,10 +418,24 @@ def main(argv: list[str] | None = None) -> int:
                          "push_failed, refused_dirty_tree, commit_failed, lock_timeout)")
     ap.add_argument("--strict", action="store_true",
                     help="exit 1 when any refusal is still open or partial")
+    ap.add_argument("--unfiled", action="store_true",
+                    help="also list failed landings that channels/items.jsonl has never named — "
+                         "the ones no queue can hold")
+    ap.add_argument("--actionable-only", action="store_true",
+                    help="with --unfiled: only rows with work named and not on main "
+                         "(open/partial with a claim)")
+    ap.add_argument("--ledger", default="",
+                    help="the ledger to compare against (default: <repo>/channels/items.jsonl)")
     args = ap.parse_args(argv)
 
     roots = [Path(os.path.expanduser(r)) for r in (args.runs_root or ["~/LLM"])]
-    facts = survey(roots, Path(args.repo).resolve(), recheck_tests=args.recheck, source=args.source)
+    repo = Path(args.repo).resolve()
+    facts = survey(roots, repo, recheck_tests=args.recheck, source=args.source)
+    if args.unfiled:
+        ledger = Path(args.ledger) if args.ledger else repo / "channels" / "items.jsonl"
+        facts["ledger"] = str(ledger)
+        facts["unfiled"] = unfiled(facts["rows"], read(ledger),
+                                   actionable_only=args.actionable_only)
     if args.json:
         print(json.dumps(facts, indent=2))
     else:

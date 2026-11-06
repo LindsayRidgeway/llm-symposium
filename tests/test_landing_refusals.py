@@ -7,6 +7,7 @@ cannot tell a refusal that was made good from one that still stands. These tests
 classifications and the two parsing rules that decide them.
 """
 
+import io
 import os
 import sys
 import tempfile
@@ -303,3 +304,61 @@ class RecheckTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class UnfiledTest(unittest.TestCase):
+    """Added 2026-11-06 (Dmitri): seeing a crashed landing is only half of it — the other half is
+    whether any queue can hold it. `--unfiled` is the set difference between the survey and the
+    ledger, and these tests hold both halves of it."""
+
+    def row(self, run, state="open", source="conflict", claimed=1, on_main=0, missing=("a.md",)):
+        return {"run": run, "bot": "desi-bot", "state": state, "source": source,
+                "claimed": claimed, "on_main": on_main, "missing": list(missing), "reason": "x"}
+
+    def test_a_run_the_ledger_names_is_not_unfiled(self):
+        rows = [self.row("20260101T000000Z-aaa"), self.row("20260101T000000Z-bbb")]
+        ledger = '{"id": "20260101T000000Z-aaa", "summary": "x"}\n'
+        self.assertEqual([r["run"] for r in lr.unfiled(rows, ledger)], ["20260101T000000Z-bbb"])
+
+    def test_the_id_counts_wherever_it_appears_not_only_as_a_key(self):
+        # A row is filed if the run is named anywhere in the ledger: `id`, `source_run`, or inside a
+        # reason string. A field-by-field scan would call this run unfiled and hand it out twice.
+        rows = [self.row("20260101T000000Z-aaa")]
+        ledger = '{"id": "other", "reason": "recovered from 20260101T000000Z-aaa by hand"}\n'
+        self.assertEqual(lr.unfiled(rows, ledger), [])
+
+    def test_an_empty_ledger_names_nothing(self):
+        rows = [self.row("20260101T000000Z-aaa")]
+        self.assertEqual(len(lr.unfiled(rows, "")), 1)
+
+    def test_actionable_only_drops_what_no_one_can_act_on(self):
+        rows = [self.row("r-open", state="open"), self.row("r-partial", state="partial"),
+                self.row("r-reconciled", state="reconciled"),
+                self.row("r-noclaim", state="no-claim", claimed=0, missing=()),
+                self.row("r-open-noclaim", state="open", claimed=0, missing=())]
+        got = [r["run"] for r in lr.unfiled(rows, "", actionable_only=True)]
+        self.assertEqual(got, ["r-open", "r-partial"])
+
+    def test_the_cli_prints_the_never_named_runs_and_says_when_there_are_none(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = Path(tmp.name)
+        repo = root / "repo"
+        (repo / "channels").mkdir(parents=True)
+        run = root / "desi-bot" / "tick-state" / "runs" / "20260101T000000Z-aaa"
+        run.mkdir(parents=True)
+        (run / "result.json").write_text('{"land": "conflict: rebase"}')
+        (run / "report.txt").write_text("LAND: a.md\n")
+        out = io.StringIO()
+        with mock.patch("sys.stdout", out):
+            lr.main(["--runs-root", str(root), "--repo", str(repo), "--unfiled"])
+        self.assertIn("20260101T000000Z-aaa", out.getvalue())
+        self.assertIn("never named in", out.getvalue())
+        self.assertIn("0/1 on main  via conflict", out.getvalue())
+
+        # Now file it: the same command has to stop naming it, or the report is noise forever.
+        (repo / "channels" / "items.jsonl").write_text('{"id": "20260101T000000Z-aaa"}\n')
+        out = io.StringIO()
+        with mock.patch("sys.stdout", out):
+            lr.main(["--runs-root", str(root), "--repo", str(repo), "--unfiled"])
+        self.assertIn("every failed landing on disk is in the ledger", out.getvalue())

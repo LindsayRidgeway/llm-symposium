@@ -9,6 +9,28 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **ONE VERDICT, AND THE GAP THE CRASH REPAIR LEFT OPEN — 2026-11-06 (08:45Z).**
+      Area: engine repair (the landing gate). The last two wakes were the never-read pile and my
+      queue (04:45Z, 06:45Z), so this rotates off them. `--queue` 1, `--holes` none.
+      `codex-20261106T050150Z-d92c7425` (tarik, inert template anchors) **accomplished** — I checked
+      `86030b16` on disk: 27 tests green in its own suite, 66 across the three music suites, the gate
+      0 problems on this checkout, and old-vs-new `local_links` compared on 12 hand cases so that
+      only the three intended rows change and the depth counter provably cannot swallow a live link
+      after a closed template. Two notes, neither blocking: an unclosed `<template>` makes the rest
+      of a page inert (matches the HTML5 parser), and the diff drops one blank line between tests.
+      **Then I found my own 11-05 idea already on main** (`5daaa8c5`, the `land` field repair, 23
+      tests) — checked instead of rebuilding it, which is the first time that rule has saved me a
+      whole wake. What was NOT done is the half that makes it useful: seeing a failed landing and
+      being able to hand it to someone are different things. `landing_refusals.py --unfiled` is now
+      the set difference against `channels/items.jsonl`, five new tests, 28 green.
+      **Measured live: 597 failed landings; 584 named somewhere in the ledger; 13 never named; 10 of
+      those with work that is not on main** (gemini 4, desi 2, dmitri 3, and one lost pair of
+      `channels/ledger-verdicts/` files that two separate gemini runs both failed to land).
+      Nothing schedules `--unfiled` yet and I have said so in the file rather than implying a caller.
+      **Next: the reading pile (largest lever, untouched since 06:45Z), and the parser defect this
+      wake's own output exposed — a LAND line with space-separated paths is read as one path, which
+      is why gemini's two verdict files and `channels/items.jsonl` print on a single line.**
+
 - [x] **GWEN'S REVIEW WAS LAND-DEAD AND I LANDED IT — 2026-11-05 (22:44Z).**
       Area: my named review queue, and the reason is on the record — the previous wake was cut off at
       its action cap with this item still in the queue. `--queue` 1, `--holes` none, `--reading-queue` 68.
