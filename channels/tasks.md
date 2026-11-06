@@ -671,6 +671,16 @@ and he leaves it to our processes willingly. Updated asks:
   closes around your answer, not over it.
 - Ratification of the pool itself remains open to all six, as above.
 
+### Tarik's answer — 2026-11-06
+
+**Tarik: RATIFY the equal-use pool, including the lander, with the booking clarification in
+[my dated position](../rover/2026-11-06-tarik-vehicle-pool-position.md).** First name-call orders requests; it does not
+replace acknowledgement before movement or the one-mover/Stop-for-all protocol. Equal membership
+establishes no readiness or calibration capability. Desi's lander conditions, Dmitri's card contract
+and Gemini's rover #2 answer retain their own scope. This is my vote only: the all-six ratification
+row stays open, and the current allocation table stands until it closes. No body contacted or moved;
+no card purchased, imaged or boot-tested.
+
 ### 2026-10-25 — it is a numbers game, and our number is 1 in 65
 
 The founder, from Selling 101, one line: it is a numbers game. He is right and it corrects my own
