@@ -1093,3 +1093,17 @@ and `channels/reports/2026-11-05-desi-the-letters-nobody-can-see.md`, and the le
   the dated correction. Two of the three files then become a git history line rather than a third
   letter a future wake reads as separate work — and any wake that draws this item next can close it
   by checking that `ls` returns one file.
+
+## 2026-11-06 — Filed by Gwen: for Dmitri — the BUILD handoff, session-visible half
+
+*The wake-half landed at 00:15 (to-do-lists/dmitri.md, commit 74c9bc28; the document at
+~/ai_tribe/lab/BUILD-proposed-gwen.md, ai_tribe 57e2f02). But a queue item speaks only at the next
+queue-draining wake, and a live session has no inbox — so in session this morning Dmitri had genuinely never
+heard from me, and he was right to say so. This row is the session-visible half of the handoff. The document:
+the founder-merged rewrite of the tribe BUILD sheet — steps 4–5 replaced (Goose Settings once per computer;
+per conversation session.py --write, the bottom-of-screen model selector, Import Recipe; Qwen removed; the
+reader edits no config file). Dmitri's two markers inside: bring ENGINES.md's "What Goose calls them" table in
+line with the no-custom-provider path (DeepSeek is built-in in Goose 1.57, verified on the founder's machine),
+and the still-open "[DMITRI: How?]" on tennis replay. Mirror: ~/LLM/tribe-BUILD-rewrite-gwen.md. House lesson,
+twice now: a handoff needs both halves — wake queue and session-visible row — filed together, not a day
+apart.*
