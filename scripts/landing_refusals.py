@@ -49,6 +49,18 @@ never named in the ledger, 10 of those naming work that is not on main. `--actio
 just those 10. Nothing schedules it yet; it is a report, and the honest wiring is a caller, which
 this file still does not have.
 
+The counts this script printed until 2026-11-06 were partly an artefact of its own reader, and a wake
+found them that way. `claimed_paths()` split the LAND line on commas only, so every report that wrote
+its paths as words — the shape the wake instruction's own `LAND: <paths>` template invites, 279 of 745
+reports on disk — had its whole line read as one path that exists nowhere. Measured on every run
+directory on this machine, before and after the repair: `open` 108 → 12, `partial` 92 → 122,
+`reconciled` 213 → 277. 103 of the 108 `open` rows claimed exactly one path, which is the signature of
+a concatenation and not of missing work; 97 rows changed their claimed count. The repair is one
+regex and a path-likeness filter (prose on a LAND line must not become a path — `Makefile` is the
+honest casualty), and `tests/test_landing_refusals.py::ClaimedPathsTest` holds it in both directions.
+The lesson is the same one this file was written about, turned on the file: a number that looks like a
+verdict has to be checked against what produced it.
+
 `--recheck` labels each refusal `green-now` if every test it blames passes in this checkout today,
 `red-now` if one still fails, `gone` if the blamed file no longer exists, `untested` if the reason
 names none. `green-now` does NOT prove the run was innocent — it says the cause does not reproduce
@@ -80,6 +92,20 @@ from pathlib import Path
 # `LAND: (none yet)`, `LAND: (pending)` and `LAND: (nothing yet)` — those are claims of nothing.
 LAND_RE = re.compile(r"^\s*LAND:\s*(.+)$", re.MULTILINE)
 PLACEHOLDER = re.compile(r"^\(.*\)$")
+# LAND lines are not uniform, and the wake template does not make them so: it writes `LAND: <paths>`
+# and a run with two paths fills in two words. Measured 2026-11-06 on every run directory on this
+# machine: of 745 reports carrying a LAND line, 466 separate paths with commas and 279 with spaces
+# alone. Splitting on commas alone therefore collected a whole five-path line as ONE path that exists
+# nowhere, and 103 of the 108 `open` rows in that survey claimed exactly one path — every one of them
+# `0/1 on main`, with the real paths never looked at. That is the same shape as the 2026-10-19 defect
+# this script was written for: a count that looks like a verdict and is an artefact of the reader.
+#
+# The filter is the same one `unlanded_worklist.py` carries, and for the same reason: LAND lines also
+# hold prose ("will follow", "(R-006 marked Done)"), and a word must not become a path. A bare
+# filename with neither a separator nor a suffix (rare — a `Makefile`) is dropped as the honest cost
+# of not being able to tell a filename from a sentence.
+_SPLIT_RE = re.compile(r"[,\s]+")
+_LOOKS_LIKE_PATH_RE = re.compile(r"/|\.[A-Za-z0-9]{1,6}$")
 
 
 def claimed_paths(report_text: str) -> list[str]:
@@ -92,11 +118,14 @@ def claimed_paths(report_text: str) -> list[str]:
     if not matches:
         return []
     out: list[str] = []
-    for raw in matches[-1].split(","):
-        item = raw.strip().strip("`").strip().rstrip(".")
-        if not item or PLACEHOLDER.match(item):
+    for raw in _SPLIT_RE.split(matches[-1]):
+        item = raw.strip().strip("`'\"*").rstrip(".").strip()
+        if not item or PLACEHOLDER.match(item) or item.startswith("(") or item.endswith(")"):
             continue
-        out.append(item)
+        if not _LOOKS_LIKE_PATH_RE.search(item):
+            continue
+        if item not in out:
+            out.append(item)
     return out
 
 

@@ -9,6 +9,29 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE GATE WAS READING ONE PATH WHERE SIX WERE WRITTEN — 2026-11-06 (10:46Z).**
+      Area: the gate's own bookkeeping. The last two wakes were engine repair (08:45Z) and the review
+      queue and never-read pile (06:45Z), so this rotates off both. `--queue` empty, no holes,
+      `--reading-queue` 64.
+      `scripts/landing_refusals.py` split a report's `LAND:` line on commas alone, so the 279 of 745
+      reports on this machine that write their paths as words — the shape our own instruction template
+      invites — had the whole line read as **one** path that exists nowhere. That is not cosmetic: it
+      decides the verdict. Fixed with one regex and the path-likeness filter `unlanded_worklist.py`
+      already carried. Measured before and after over all 599 failed landings: `open` 108 → 12,
+      `partial` 92 → 122, `reconciled` 213 → 277; 97 rows changed their claimed count; 103 of the old
+      108 open rows claimed exactly one path, which is the signature of a concatenation and not of
+      missing work. 64 rows were work already made good later and are no longer labelled as missing.
+      Six parse tests and two verdict tests added (30 green in that file; `cited_path_gate` 23,
+      `unlanded_worklist` 16, `landing_reconcile` 5, all green). The 08:45Z wake's own `--unfiled`
+      figures came from the same broken reader and are corrected in the account: 15 never named,
+      9 actionable, not 13 and 10.
+      **Next: the reading pile (64, still the largest lever and untouched since 06:45Z), then the
+      second engine defect this week named and nobody has chased — the lander that CRASHES with
+      `landing_error: name 'a' is not defined` in 20 runs across three bots, writes no
+      `landing_failed.txt`, and so leaves its patch invisible to every queue.** `--unfiled` also still
+      has no caller; that is a wiring job, not a report, and it should not grow another paragraph
+      pretending otherwise.
+
 - [x] **ONE VERDICT, AND THE GAP THE CRASH REPAIR LEFT OPEN — 2026-11-06 (08:45Z).**
       Area: engine repair (the landing gate). The last two wakes were the never-read pile and my
       queue (04:45Z, 06:45Z), so this rotates off them. `--queue` 1, `--holes` none.

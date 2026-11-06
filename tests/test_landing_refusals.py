@@ -42,6 +42,39 @@ class ClaimedPathsTest(unittest.TestCase):
     def test_no_land_line_is_no_claim(self):
         self.assertEqual(lr.claimed_paths("STARTING: thinking\n"), [])
 
+    def test_a_space_separated_land_line_is_several_paths_not_one(self):
+        # 2026-11-06: the wake template writes `LAND: <paths>`, so a run with four paths fills it
+        # with four words. Read as one path, the line is absent from every tree and the row reads
+        # `open 0/1 on main` — the real paths are never checked, and 64 rows that had been made good
+        # later were recorded as work still missing.
+        self.assertEqual(
+            lr.claimed_paths("LAND: research/x.json research/x.md agenda/07-disease.md\n"),
+            ["research/x.json", "research/x.md", "agenda/07-disease.md"],
+        )
+
+    def test_a_mixed_line_splits_on_both(self):
+        self.assertEqual(
+            lr.claimed_paths("LAND: a.md b/c.py, d.md,  e/f.html\n"),
+            ["a.md", "b/c.py", "d.md", "e/f.html"],
+        )
+
+    def test_prose_and_bare_words_are_not_paths(self):
+        # Splitting on whitespace makes a sentence into several tokens; none of them is a path.
+        self.assertEqual(
+            lr.claimed_paths("LAND: a.md and the note will follow (R-006 marked Done)\n"),
+            ["a.md"],
+        )
+        self.assertEqual(lr.claimed_paths("LAND: Makefile\n"), [])
+
+    def test_duplicates_are_dropped_and_order_kept(self):
+        self.assertEqual(lr.claimed_paths("LAND: b.md a.md b.md a.md\n"), ["b.md", "a.md"])
+
+    def test_a_whole_line_is_not_a_path(self):
+        # The exact shape of the bug, as a value: no token may contain a space.
+        for p in lr.claimed_paths("LAND: channels/items.jsonl channels/ledger-verdicts/x.md\n"):
+            self.assertNotIn(" ", p)
+            self.assertTrue(p.startswith("channels/"), p)
+
 
 class ClassifyTest(unittest.TestCase):
     def setUp(self):
@@ -93,6 +126,19 @@ class ClassifyTest(unittest.TestCase):
         self.refuse(reason="new failures: test_drive_bridge_status.py", land="LAND: a.md")
         row = lr.classify(self.run_dir, self.repo)
         self.assertIn("test_drive_bridge_status.py", row["reason"])
+
+    def test_a_space_separated_line_can_be_reconciled_rather_than_open(self):
+        # The load-bearing consequence of the parse: the same run, the same tree, two verdicts.
+        self.refuse(land="LAND: a.md b.md")
+        self.touch_repo("a.md", "b.md")
+        row = lr.classify(self.run_dir, self.repo)
+        self.assertEqual((row["state"], row["on_main"], row["claimed"]), ("reconciled", 2, 2))
+
+    def test_a_space_separated_line_can_be_partial_and_name_what_is_missing(self):
+        self.refuse(land="LAND: a.md b.md")
+        self.touch_repo("a.md")
+        row = lr.classify(self.run_dir, self.repo)
+        self.assertEqual((row["state"], row["missing"]), ("partial", ["b.md"]))
 
 
 class SurveyTest(unittest.TestCase):
