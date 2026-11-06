@@ -13,6 +13,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "channels"))
@@ -328,6 +329,83 @@ class WholeRepoReview(unittest.TestCase):
         note = lw.file_whole_repo_review(now, apply=False, path=self.path)
         self.assertIn("[would file]", note)
         self.assertEqual(il.load(self.path), {})
+
+
+class MirrorReplayTest(unittest.TestCase):
+    """The mirror's other half: a verdict file that landed must actually reach the ledger.
+
+    `ledger_verdict_mirror.py` writes each verdict as its own small file so a refused landing cannot
+    eat it. Until 2026-11-06 nothing on this machine ran `replay`, so the files landed and the items
+    stayed in their queues — six of them were waiting that morning, the oldest from 2026-10-25.
+    """
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = Path(self._tmp.name)
+        self.verdicts = self.tmp / "ledger-verdicts"
+        self.verdicts.mkdir()
+        self.ledger = self.tmp / "items.jsonl"
+        self.ledger.write_text(json.dumps({"id": "codex-test-1", "title": "a test item",
+                                           "state": None, "state_utc": None}) + "\n",
+                               encoding="utf-8")
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _mirror(self, state="accomplished", when="2026-11-06T10:00:00Z"):
+        (self.verdicts / f"{when.replace('-', '').replace(':', '')}-codex-test-1.json").write_text(
+            json.dumps({"id": "codex-test-1", "state": state, "state_utc": when,
+                        "reviewer": "dmitri", "reason": "did the work: scripts/x.py", "run": ""}),
+            encoding="utf-8")
+
+    def test_a_mirrored_verdict_reaches_the_ledger_once(self):
+        self._mirror()
+        applied = lw.replay_verdicts(apply=True, ledger=self.ledger, verdicts=self.verdicts)
+        self.assertEqual(applied, ["codex-test-1"])
+        live = json.loads(self.ledger.read_text().strip().splitlines()[-1])
+        self.assertEqual(live["state"], "accomplished")
+        self.assertEqual(live["reviewer"], "dmitri")
+        # the row keeps what it already knew
+        self.assertEqual(live["title"], "a test item")
+        # and a second pass is a no-op, so a clock may run it every day
+        self.assertEqual(lw.replay_verdicts(apply=True, ledger=self.ledger,
+                                            verdicts=self.verdicts), [])
+
+    def test_dry_run_folds_nothing(self):
+        self._mirror()
+        self.assertEqual(lw.replay_verdicts(apply=False, ledger=self.ledger,
+                                            verdicts=self.verdicts), ["codex-test-1"])
+        self.assertEqual(len(self.ledger.read_text().strip().splitlines()), 1)
+
+    def test_the_daily_check_runs_the_replay_before_it_measures(self):
+        """The defect was a caller, not a replay: the function worked and no clock ran it."""
+        seen = {}
+
+        def fake_replay(apply=True, **kwargs):
+            seen["apply"] = apply
+            return ["codex-test-1"]
+
+        def fake_measure(now):
+            seen["replayed_before_measuring"] = "apply" in seen
+            return {"at": "2026-11-06T12:00:00Z", "queue": 0, "arrivals_24h": 0,
+                    "model_decisions_24h": 0, "machine_closures_24h": 0, "pile": 0,
+                    "pile_read_24h": 0, "gate_refusals_24h": 0,
+                    "gate_refusals_carrying_verdicts_24h": 0}
+
+        with mock.patch.multiple(lw,
+                                 replay_verdicts=fake_replay,
+                                 measure=fake_measure,
+                                 previous=lambda now: (None, "yesterday"),
+                                 last_entry=lambda: None,
+                                 recover_verdicts=lambda since, apply=True: [],
+                                 file_whole_repo_review=lambda now, apply=True: "",
+                                 verdict=lambda m, prev: (True, ["within the rule"]),
+                                 message=lambda *a, **k: ""), \
+                mock.patch.object(sys, "argv", ["ledger_watch.py", "--dry-run"]):
+            lw.main()
+        self.assertTrue(seen.get("replayed_before_measuring"),
+                        "the daily check must fold the mirrors in before it counts the queue")
+        self.assertFalse(seen["apply"], "a dry run must not write to the ledger")
 
 
 if __name__ == "__main__":

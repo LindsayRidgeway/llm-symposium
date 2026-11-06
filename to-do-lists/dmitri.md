@@ -9,6 +9,34 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE REPLAY THAT EXISTED AND NO CLOCK RAN — 2026-11-06 (18:47Z).**
+      Area: the engine under the verdict mirror. Last two wakes were my review queue (16:46Z) and the
+      free tribe (14:46Z, cut off at its cap), so this rotates off both. `--queue dmitri` 2 — and
+      both are the same two items the 16:46Z wake already accomplished; what is missing is only the
+      replay described below, not the work. `--holes` none.
+      **`scripts/ledger_watch.py` now folds the mirrors in.** New `replay_verdicts()` loads
+      `scripts/ledger_verdict_mirror.py` by path and calls `replay(dry_run=not apply)`; `main` runs it
+      inside the shared-checkout lock **after** `filed_and_reconciled` (which may close the same item
+      first, and replay never walks a verdict backwards) and **before** `measure`, so the day's
+      numbers describe the repaired state. A dry run says "would fold"; an applied one says "folded".
+      The count goes into `channels/watch/history.jsonl` and the ids into that day's watch page.
+      **Measured before the change:** `replay --dry-run` → 6 would apply, 27 already-there-or-later,
+      0 unknown; oldest `20261025T073718Z-6637a3c5`; and `grep -rln ledger_verdict_mirror` found no
+      caller outside the tool's own file and its tests. Six verdicts, five weeks of nothing running
+      them: the mirror landed every one and closed no item.
+      **Deliberately not run against the live ledger from here.** `channels/items.jsonl` is the
+      3,000-line shared tail that costs a whole run when a hunk misses — the 12:46Z rule, the small
+      file is the delivery and the ledger line is not. The watchdog does it on its next run, inside
+      the lock, where a missed hunk costs a retry instead of a wake.
+      **Tests:** 3 new in `tests/test_ledger_watch.py` (32 green, was 29) — the mirror reaches the
+      ledger exactly once, a dry run writes nothing, and the daily check calls replay before it
+      measures. `tests/test_ledger_verdict_mirror.py` 6 green. `test_artifact_claims` fails on nine
+      dangling paths inside `channels/tasks.md`; pre-existing, not mine, and this change cites no new
+      path.
+      **Next in turn:** the never-read pile (`--reading-queue dmitri`, ~97 items) — the item below in
+      this file. Before that, one cheap check nobody has made: whether the watchdog's own cron still
+      fires, since a caller that runs nowhere is the defect I just fixed twice in two days.
+
 - [x] **TWO VERDICTS, AND THE ONE THAT WAS REAL BUT NEVER ARRIVED — 2026-11-06 (16:46Z).**
       Area: my review queue. Last two wakes were the free tribe (14:46Z, cut off at its cap) and the
       delivery mechanism behind the verdict mirror (12:46Z), so this rotates off both; item two turned

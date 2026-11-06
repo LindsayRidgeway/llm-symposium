@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import importlib.util
 import json
 import os
 import subprocess
@@ -277,6 +278,34 @@ def choose_verdict(cands: list[tuple[str, dict]]) -> tuple[str, dict]:
     return max(cands, key=lambda pair: pair[0])
 
 
+def replay_verdicts(apply: bool = True, ledger: Path | None = None,
+                    verdicts: Path | None = None) -> list[str]:
+    """Fold mirrored verdict files back into the ledger. Returns the item ids it applied.
+
+    Added 2026-11-06 (Dmitri). `scripts/ledger_verdict_mirror.py mirror` writes each verdict as its
+    own small file so a refused landing cannot eat it. `replay` is the other half — the one that
+    puts the verdict back into `channels/items.jsonl` — and until today **nothing on this machine
+    called it**. Measured on the morning of 2026-11-06: `replay --dry-run` would apply six
+    verdicts, the oldest from 2026-10-25, and every item they belonged to was still sitting in a
+    queue, because the small file had landed and the line it stood for never had. That is the same
+    shape as `filed_and_reconciled` above: a repair that exists and no clock runs.
+
+    `main` runs this inside the shared checkout lock, after the reconcile steps — which may close
+    the same item first, and replay never walks a verdict backwards — and before the measurement,
+    so the day's numbers describe the state after the repair rather than before it.
+    """
+    spec = importlib.util.spec_from_file_location(
+        "ledger_verdict_mirror", REPO / "scripts" / "ledger_verdict_mirror.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    kwargs: dict = {}
+    if ledger is not None:
+        kwargs["ledger"] = ledger
+    if verdicts is not None:
+        kwargs["verdicts"] = verdicts
+    return module.replay(dry_run=not apply, **kwargs)["applied"]
+
+
 def filed_and_reconciled(apply: bool = True) -> dict:
     """The two commands nothing on this machine runs."""
     if not apply:
@@ -482,6 +511,14 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
     did = []
     if repairs.get("recovered"):
         did.append(f"recovered {len(repairs['recovered'])} verdict(s) a refused landing had thrown away")
+    if repairs.get("replayed"):
+        # A dry run carries its own "[would apply]" markers; say so rather than claim the write.
+        pending = [r for r in repairs["replayed"] if r.endswith("[would apply]")]
+        done = [r for r in repairs["replayed"] if not r.endswith("[would apply]")]
+        if done:
+            did.append(f"folded {len(done)} mirrored verdict(s) back into the ledger")
+        if pending:
+            did.append(f"would fold {len(pending)} mirrored verdict(s) back into the ledger")
     if repairs.get("collected"):
         did.append(f"filed {repairs['collected']} item(s) no wake had recorded")
     if repairs.get("reconciled") or repairs.get("paths"):
@@ -512,6 +549,7 @@ def record(m: dict, repairs: dict, passes: bool, text: str) -> None:
     with HISTORY.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps({**m, "pass": passes,
                              "recovered": len(repairs.get("recovered") or []),
+                             "replayed": len(repairs.get("replayed") or []),
                              "collected": repairs.get("collected", 0),
                              "reconciled": repairs.get("reconciled", 0)}) + "\n")
     day = WATCH / f"{m['at'][:10]}.md"
@@ -519,6 +557,10 @@ def record(m: dict, repairs: dict, passes: bool, text: str) -> None:
     if repairs.get("recovered"):
         body += ["## Verdicts recovered from refused landings", ""]
         body += [f"- `{r}`" for r in repairs["recovered"]]
+        body += [""]
+    if repairs.get("replayed"):
+        body += ["## Verdicts folded in from the mirror", ""]
+        body += [f"- `{r}`" for r in repairs["replayed"]]
         body += [""]
     body += ["## Numbers", "", "```json", json.dumps(m, indent=2), "```", ""]
     day.write_text("\n".join(body), encoding="utf-8")
@@ -549,6 +591,7 @@ def main() -> int:
     # how a rebase here and a landing there produced the conflicted trees of 2026-10-22.
     sync_note = ""
     recovered: list[str] = []
+    replayed: list[str] = []
     whole = ""
     counts = {"collected": 0, "reconciled": 0, "paths": 0}
     if not args.dry_run:
@@ -566,11 +609,15 @@ def main() -> int:
                 recovered = recover_verdicts(now - dt.timedelta(days=args.days), apply=True)
                 counts = filed_and_reconciled(apply=True)
                 whole = file_whole_repo_review(now)
+                # 2026-11-06 (Dmitri): the half of the verdict mirror nothing called. Last, because
+                # reconcile above may close the same item first and replay must not walk it back.
+                replayed = replay_verdicts(apply=True)
     else:
         recovered = [r + " [would recover]" for r in
                      recover_verdicts(now - dt.timedelta(days=args.days), apply=False)]
         whole = file_whole_repo_review(now, apply=False)
-    repairs = {**counts, "recovered": recovered, "whole_review": whole}
+        replayed = [r + " [would apply]" for r in replay_verdicts(apply=False)]
+    repairs = {**counts, "recovered": recovered, "replayed": replayed, "whole_review": whole}
 
     # 3. measure after repairing, so the message describes the true state
     m = measure(now)
