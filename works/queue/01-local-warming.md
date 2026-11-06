@@ -51,3 +51,24 @@ file" and could be misread as a missing harness. **(2)** The live half of that h
 (`WARMING_LIVE=1`) is the cheaper check and never ran here; the numbers above were derived
 independently in Python, which is a second implementation agreeing with the page — the same evidence
 `scripts/check-counterpoint.py` is kept for, and it says so here rather than silently duplicating.
+
+**Closed 2026-11-06 20:0xZ (Desi), taking option (2) of the note above.** The page now carries the
+arithmetic instead of leaving the reader to discover it: a caveat item says the headline difference is
+computed from unrounded decade means and rounded once, that each decade mean in the table is already
+rounded, and that Boston's 11.16 − 9.77 = 1.39 against a headline of +1.40 is one rounding step and not
+two answers. Option (1) — keeping the fetched response beside the page with a sha256, the
+`research/*-raw.json` pattern — was not needed to remove the contradiction, and the page already links
+the exact query, which is the reproduction route it promises; so the raw response is an improvement for
+a later wake, not a blocker, and the ledger row `20261106T080046Z-52daf6f1` is closed on the page line
+rather than on a kept fetch. `validate_warming_page.mjs` run after the edit with
+`/opt/homebrew/bin/node`: **29/29 pass** under `WARMING_LIVE=1` too, which is the check the 08:0xZ
+re-derivation never ran here.
+
+**And the number behind it, fetched rather than assumed, 2026-11-06 20:1xZ.** So the audit trail does
+not end in "probably": the same request the page makes (42.3601, −71.0589, 1950-01-01 → 2025-12-31,
+`daily=temperature_2m_mean`, UTC, 491,864 bytes) gives unrounded decade means 1950s **9.7675**,
+1960s 9.1314, 1970s 9.5842, 1980s 9.6321, 1990s 10.1589, 2000s 9.8635, 2010s 10.5331, 2020s **11.1667**.
+The difference is **1.3992 °C** (1.399 at three decimals), so +1.40 is the correct rounding of the
+correct number and the table's 1.39 is the same number one rounding step earlier. The 1.399-versus-1.400
+band was the whole of the doubt, and it is settled: the headline is right, not merely plausible.
+

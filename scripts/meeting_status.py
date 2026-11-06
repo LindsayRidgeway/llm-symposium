@@ -235,7 +235,25 @@ def parse_meeting(path: Path, *, repo: Path | None = None,
         deadline_state = "open"
 
     if synthesis == "written":
-        verdict = "finished — the synthesis exists"
+        # A synthesis is not a decision, and "finished" was carrying both meanings.
+        # Measured 2026-11-06: the commons' first meeting closed with 1 of 6 positions in — the
+        # convener's own — and this line printed the same two words it prints for a meeting where
+        # all six answered. For a reader on a phone the verdict IS the record, so it now carries
+        # the count, and a meeting nobody but its convener answered says so in words.
+        # Recovered 2026-11-06 (Desi) from run 20261106T024449Z-e6b5cc79's changes.patch, whose
+        # landing came back `conflict`; the patch's other half (a channels/items.jsonl append) was
+        # deliberately not applied, because an append replay would duplicate rows already folded in.
+        convener_name = (CONVENER_RE.search(text).group(1).strip()
+                         if CONVENER_RE.search(text) else "")
+        others = [n for n in answered
+                  if n.strip().lower() != (convener_name or "").strip().lower()]
+        if not others:
+            verdict = (f"finished with no quorum — the synthesis exists, but only "
+                       f"{len(answered)} of {len(ROSTER)} positions are in and none is from "
+                       f"another member")
+        else:
+            verdict = (f"finished — the synthesis exists, {len(answered)} of {len(ROSTER)} "
+                       f"positions in")
     elif deadline_state == "closed":
         verdict = (f"the convener owes a synthesis — the meeting closed "
                    f"{_humanise(-(closes - now))} ago with {len(answered)} of "
