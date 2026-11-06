@@ -137,6 +137,7 @@ word the nudge counts. The second half stays visible where it can be seen: line 
 | D-13 | 2026-10-23 | desi | done | Give the lander a fixed address on the home LAN. | channels/telegram/2026-10-23-232512-outbound-desi-session.md |
 | DM-3 | 2026-11-01 | dmitri | declined | Rent one small CPU-only cloud server (~$5-7/mo) for the AI Nation feasibility test; ssh login is all I need | channels/telegram/2026-11-01-012610-outbound-dmitri-session.md |
 | D-14 | 2026-11-02 | desi | done | REQUEST D-14 — one number from the Alibaba console. | channels/usage/2026-11-02-gwen-cost-measured.md |
+| DM-11 | 2026-11-06 | dmitri | open | The build test on a Mac that has never had Goose: copy the template, follow the sheet, fix nothing, 30 minutes | `governance/request-register.md` §DM-11 (this file) |
 
 ### D-14 — answered from the human's own export, and what the number turned out to be
 
@@ -202,3 +203,48 @@ and a plate exists that did not exist before. The follow-up it exposes is a task
 put the work on the shelf, or rename the plate to a work that is there, then rebuild issue 2 — and no
 line in this table should stay `open` to carry it, because it is not a request to the human. Recorded
 here so the next reader of DM-5 does not conclude that the magazine printed the picture.
+
+
+### DM-11 — the build test, on a machine that has never had Goose
+
+**Asked 2026-11-06 by Dmitri. State: open. One ask, thirty minutes, and the discipline is the test.**
+
+The founder offered a Mac downstairs that has never had Goose on it. That is the clean room this project
+has never had: every previous "it works" was said by someone who knew what the sheet meant.
+
+**What to do, in order. Do not read `RUN.md` while doing it — that is the point.**
+
+1. **Before anything**, on that Mac: `sw_vers -productVersion`, then `python3 --version`. Write both down.
+   If macOS offers to install the command-line tools, say so — that dialog is the first thing a stranger
+   meets and the sheet only started warning about it today.
+2. **Copy the template.** github.com/LindsayRidgeway/ai-tribe-bench → **Use this template** → a new
+   repository of your own, private is fine. Record the short commit hash the copy came from (it is on the
+   repository's front page). A copy made today is `806b5dc` or later; a copy older than that is testing a
+   sheet I have already changed.
+3. **Start the clock.** Follow `BUILD.md` from step 1 to the end of step 6, doing what it says and nothing
+   else. It is deliberately short on reasons; where you want one, write the step number down instead of
+   supplying it yourself.
+4. **Use the Groq key, for both members.** One key is the stranger's case and the cheapest to spend: a test
+   tribe should not draw on the accounts the symposium lives on. Copy the key from
+   `~/.config/ai-tribe/engines.env` on this Mac by whatever means you trust — **not** into the repository,
+   and not into this file. (If you want a second round afterwards, add the Gemini key and put the second
+   member on it: that is the one path the sheet has never had walked with two engines.)
+5. **The fields, so that a failure is the sheet's and not a guess.** Two members, your own names, a seat
+   phrase each, engine `groq`, model **blank**, place `night-bus` (or `workshop`) — the copy ships two
+   worlds, so the form cannot choose for you, and step 2 now says so.
+6. **Step 3** is the repository secret. **4.2** is the desktop app. **4.3** is Settings → Configure
+   providers, once, for Groq. **5.1** is `python3 lab/session.py --member <name> --write`. **5.2** is the
+   model selector — the step I expect to fail first. **5.3** is Recipes → Import Recipe → Recipe File.
+   **Step 6** is an issue with a hello in it, and a reply arriving.
+7. **Then a season:** Actions → season, a name of your own, the same two members, three points. Read the
+   report it prints.
+8. **Stop rules.** If a step does not work, stop there. Do not fix it, do not work around it, do not edit
+   the repository. A sheet that needs its first reader to repair it has told us everything it can.
+9. **Report**, in chat or in a file, whichever is less trouble: the two version strings from (1), the start
+   and end times, the step where you stopped if you stopped, whether the issue reply arrived, whether the
+   season filed, and any step where you wanted an explanation rather than an instruction.
+
+**Pass:** thirty minutes, two members, one conversation, one season filed, nothing repaired by hand.
+**A near miss is more useful than a pass:** the step number where a reasonable person would have quit, and
+the sentence they would have needed, is the deliverable. The sheet is fixed from that, and the record says
+who found it.
