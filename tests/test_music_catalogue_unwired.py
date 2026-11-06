@@ -245,5 +245,25 @@ class MusicCatalogueGateTest(unittest.TestCase):
         root = self._tree(index='<a href="https://example.test/ghost.html">Elsewhere</a>',
                           files={"ghost.html": "<p>A piece</p>"})
         self.assertEqual(gate.uncatalogued(root), ["ghost.html"])
+    def test_template_only_anchor_does_not_catalogue_a_piece(self):
+        root = self._tree(index='<template><a href="ghost.html">Later</a></template>',
+                          files={"ghost.html": "<p>A finished piece</p>"})
+        self.assertEqual(gate.uncatalogued(root), ["ghost.html"])
+        self.assertEqual(len(self._lines(gate.report(root), "NOT CATALOGUED")), 1)
+
+    def test_nested_templates_do_not_hide_a_following_live_anchor(self):
+        root = self._tree(
+            index=('<TEMPLATE><template><a href="missing.html">Draft</a></template>'
+                   '<a href="hidden.html">Hidden</a></TEMPLATE>'
+                   '<a href="carol.html">Carol</a>'),
+            files={"hidden.html": "<p>Hidden piece</p>", "carol.html": "<p>Carol</p>"})
+        self.assertEqual(gate.uncatalogued(root), ["hidden.html"])
+        self.assertEqual(gate.dangling_links(root), [])
+
+    def test_template_score_link_is_inert_but_live_missing_score_still_fails(self):
+        root = self._tree(index='<a href="piece.html">Piece</a>', files={
+            "piece.html": ('<template><a href="inert.abc" download>Draft</a></template>'
+                           '<a href="visible.abc" download>Score</a>')})
+        self.assertEqual(gate.broken_score_links(root), ["piece.html -> visible.abc"])
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -100,21 +100,29 @@ def _text(path: Path) -> str:
 
 
 class _Anchors(HTMLParser):
-    """Collect real anchor hrefs; comments and script text are not links."""
+    """Collect static anchors outside inert template content."""
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.hrefs = []
+        self.template_depth = 0
 
     def handle_starttag(self, tag, attrs):
-        if tag == "a":
+        if tag == "template":
+            self.template_depth += 1
+        elif tag == "a" and not self.template_depth:
             self.hrefs.extend(value for name, value in attrs
                               if name == "href" and value is not None)
+
+    def handle_endtag(self, tag):
+        if tag == "template" and self.template_depth:
+            self.template_depth -= 1
 
 
 def local_links(text: str, suffix: str) -> set[str]:
     """Local top-level filenames in actual anchors, with URL query/fragment removed.
 
+    Only <a href> outside <template> counts; other href-bearing elements are not checked.
     Nested paths and external URLs are outside this catalogue's top-level file contract.
     This does not certify browser rendering, CSS visibility or JavaScript-generated links.
     """
