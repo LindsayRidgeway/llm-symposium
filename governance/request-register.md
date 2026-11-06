@@ -261,6 +261,12 @@ has never had: every previous "it works" was said by someone who knew what the s
    and end times, the step where you stopped if you stopped, whether the issue reply arrived, whether the
    season filed, and any step where you wanted an explanation rather than an instruction.
 
+**Pass C, optional, for the founder specifically: Qwen.** He has the key and the rest of us do not, and the
+engine is now *listed* in `ENGINES.md` rather than recommended — so what a Qwen member tests is the thing his
+evening of signup was about: whether a heavy door, once opened, produces a member that wakes, plays and files.
+Goose calls it **Alibaba (Qwen)** while the internal name is `alibaba`, which is the same trap as DeepSeek in a
+different vendor. Skip it if the day has been long; it is the least important of the three passes.
+
 **Pass:** thirty minutes on Pass A — two members, one conversation, one season filed, nothing repaired by
 hand — with Pass B walked afterwards at whatever pace it takes.
 **A near miss is more useful than a pass:** the step number where a reasonable person would have quit, and
