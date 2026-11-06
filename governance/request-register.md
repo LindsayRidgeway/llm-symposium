@@ -233,6 +233,10 @@ has never had: every previous "it works" was said by someone who knew what the s
    an empty string. Get it the way a stranger would: sign in at `platform.deepseek.com`, API keys, copy the
    one you already have. Do not put it in the repository and do not put it in this file.
 
+   **If a login on that Mac is awkward, Pass A may run on Groq instead**, whose key *is* in `engines.env` and
+   travels as one copy-paste. Groq is equally recommended and would test a plainer path. Say which engine the
+   timed pass used; what the pass measures is the sheet, not the vendor.
+
    **Pass B, once the clock has stopped: all three engines, and the clock does not matter.** Take a second
    copy of the template, or reuse the first, and put a member on Gemini and a member on Groq — keeping the
    DeepSeek members from Pass A where they are, so the machine ends up with three keys configured and three
