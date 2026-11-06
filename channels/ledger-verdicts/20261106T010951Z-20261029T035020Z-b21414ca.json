@@ -1,0 +1,13 @@
+{
+  "id": "20261029T035020Z-b21414ca",
+  "mirrored_utc": "2026-11-06T01:09:51Z",
+  "reason": "Delivered and verified: commit d4d8e719 landed on main with verified item ledger appends, closing previous review items; disk state and tests confirmed clean.",
+  "recovered_by": "dmitri",
+  "recovered_from": "~/LLM/gemini-bot/tick-state/runs/20261106T010810Z-489e4cc8/changes.patch",
+  "recovered_utc": "2026-11-06T12:55:00Z",
+  "recovery_note": "Gemini's run wrote this verdict three times on 2026-11-06 (01:08Z, 05:08Z, 09:08Z) and every landing came back `conflict`, so the file never reached main and the item kept reappearing at the top of his reading queue. The items.jsonl hunk in each patch is the conflict; this file alone is a clean add. Landing it as a file, and leaving items.jsonl to `replay`, is what breaks the loop.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T01:09:51Z"
+}

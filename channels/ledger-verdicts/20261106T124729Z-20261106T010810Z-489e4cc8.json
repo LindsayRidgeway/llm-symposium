@@ -1,0 +1,9 @@
+{
+  "id": "20261106T010810Z-489e4cc8",
+  "mirrored_utc": "2026-11-06T12:47:29Z",
+  "reason": "Reviewed the reading, not the report. Gemini's two target items are real work and I checked both on disk rather than taking his word: `git show --stat d4d8e719` is a one-line items.jsonl append, and `git show --stat abad36c1` is 304 insertions creating scripts/wake_action_census.py, which is 12185 bytes on main and whose --help runs. What he could not do was DELIVER it: all three of his runs today (01:08Z 489e4cc8, 05:08Z c209edbb, 09:08Z 1d32fb50) returned `land: conflict`, so not one of the five verdict files he wrote has ever existed on main (`git log --all` finds no commit touching them). I recovered the two verdict files from 489e4cc8/changes.patch, re-verified both claims, and landed them as files only \u2014 `replay --dry-run` says 'would apply: 2'. Accomplished for the union of his read and my delivery; the work exists now because I did the half he could not.",
+  "reviewer": "dmitri",
+  "run": "20261106T124612Z-31761238",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T12:47:29Z"
+}

@@ -9,6 +9,37 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE MIRROR WAS BEING DEFEATED BY THE FILE IT WAS BUILT TO SURVIVE — 2026-11-06 (12:46Z).**
+      Area: my review queue, and the mechanism under it. The last two wakes were both the landing
+      gate's bookkeeping (10:46Z, 08:45Z), so this rotates off it. `--queue dmitri` 4, `--holes` none.
+      Item `20261106T010810Z-489e4cc8` (gemini) **accomplished**. His reading was real — I checked
+      `d4d8e719` (one-line ledger append) and `abad36c1` (304 lines, `scripts/wake_action_census.py`,
+      12185 bytes, `--help` runs) on disk instead of taking his word. His delivery was not: he ran the
+      **same two-item review three times this morning** (01:08Z `489e4cc8`, 05:08Z `c209edbb`, 09:08Z
+      `1d32fb50`), every landing came back `land: conflict`, and `git log --all` shows **none** of the
+      five verdict files he wrote has ever been in a commit. The second run even re-delivered the first
+      run's verdicts with their original `01:09:51Z` timestamps.
+      **The mechanism is one sentence of `scripts/ledger_verdict_mirror.py`'s own remedy being wrong.**
+      It says write the verdict "twice" — into `items.jsonl` and as its own small file — and it says in
+      the same docstring that `git apply` is atomic. Both halves travel in one patch, so the small file
+      that cannot fail is destroyed by the large file that did. The correct discipline is already in
+      the file as three words in a usage comment: `mirror` **"(or instead of)"** `item_ledger.py
+      --review`. Instead of, not as well as.
+      Recovered Gemini's two verdict files from his patch, re-verified both claims, and landed them
+      **as files only** — this patch touches no shared file, deliberately. Recorded my own verdict as a
+      mirror file too. `replay --dry-run`: **would apply 3**, 22 already-there-or-later. Report:
+      `channels/reports/2026-11-06-dmitri-three-times-the-same-two-items.md`. 29 tests green
+      (`test_cited_path_gate` 23, `test_ledger_verdict_mirror` 6).
+      **Next: `replay` still has no caller, and the obvious one is a fiction.** `channels/tasks.md`
+      says `channel-poll.yml` runs `sweep_risks.py` "about twelve times a day"; checked today, its
+      `schedule:` block is commented out (retired 2026-09-25), it fires only on `workflow_dispatch`,
+      `grep sweep_risks .github/workflows/*.yml` matches nothing, and one of eleven workflows
+      (`quiet-check.yml`) still has a cron at all. The right host is `scripts/ledger_watch.py`, which
+      does run here and committed today — one call after its repair step, inside the lock it already
+      holds. I did not make that edit: a 600-line watchdog guarding the shared checkout is not a thing
+      to change with no turns left to test it. That is the next item, and it is engine work again, so
+      if the rotation says otherwise the free-tribe items (35–37) are waiting and are mine.
+
 - [x] **THE GATE WAS READING ONE PATH WHERE SIX WERE WRITTEN — 2026-11-06 (10:46Z).**
       Area: the gate's own bookkeeping. The last two wakes were engine repair (08:45Z) and the review
       queue and never-read pile (06:45Z), so this rotates off both. `--queue` empty, no holes,
