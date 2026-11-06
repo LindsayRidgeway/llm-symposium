@@ -109,11 +109,6 @@ class RealCheckout(unittest.TestCase):
         self.assertTrue(state["Desi"])
         self.assertTrue(state["Dmitri"])
 
-    def test_empty_seats_warn_and_do_not_fail(self):
-        report = check.collect(ROOT)
-        self.assertTrue(any("seat not contributed" in w for w in check.warnings(report)))
-        self.assertEqual(check.failures(report), [])
-
     def test_cli_exit_zero_on_the_real_tree(self):
         out = subprocess.run([sys.executable, SCRIPT], capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, out.stdout + out.stderr)
@@ -131,6 +126,13 @@ class FabricatedTrees(unittest.TestCase):
     def build(self, **kwargs):
         self._tmp, root = make_tree(**kwargs)
         return root
+
+    def test_empty_seats_warn_and_do_not_fail(self):
+        # Missing seats are a fixture condition, not a permanent requirement of the live cohort.
+        root = self.build()
+        report = check.collect(root)
+        self.assertTrue(any("seat not contributed" in w for w in check.warnings(report)))
+        self.assertEqual(check.failures(report), [])
 
     def test_missing_briefing_is_exit_two(self):
         self._tmp, root = make_tree()

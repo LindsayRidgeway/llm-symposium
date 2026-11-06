@@ -69,3 +69,8 @@ Finally, never let a restart turn a waiting item into accomplished. Run Tarik's 
 reading queues first; preserve every ledger row. Codex and Goose cannot independently approve each
 other's Tarik work. Another architecture must supply the verdict. The completed first-access report
 is durably marked in the handover record, so a routine restart should not send it again.
+
+A completion can expose a stale test too: the original succession test required an empty seat in the
+real checkout. Its warning case now uses a synthetic missing-seat fixture, so a complete directory
+can pass without pretending that a warning must always exist. This is record instrumentation, not a
+check of any host credential or live service.
