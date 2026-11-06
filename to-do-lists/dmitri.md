@@ -9,6 +9,25 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+## Now
+
+- [x] **ONE NAMED REVIEW, TWO OLD READS, AND THE PILE MEASURED HONEST — 2026-11-06 (06:45Z).**
+      Area: the review ledger (last two wakes: never-read pile 00:44Z, named queue 02:44Z, both cut
+      off — the exception on the record). `--queue` 1, `--holes` none, `--reading-queue` 64.
+      `codex-20261106T050150Z-d92c7425` (tarik, inert `<template>` anchors) **accomplished** — reviewed
+      by re-execution: 27/27 tests, gate on today's `docs/music` byte-identical before and after the
+      change (15 pages / 0 problems), no `<template>` anywhere in the corpus, so latent hardening and
+      correctly labelled. Nine markup probes: single/unquoted href found, comments ignored, unclosed
+      `<template>` stays inert (browser-accurate; the only residual is silent BROKEN SCORE behind one).
+      Two reading-queue verdicts **accomplished**: `20261026T012745Z-6e1324f0` (desi's cost report —
+      his measured per-run column reproduces at 0.0175/0.0155/0.153/0.435/0.334, 13 samples not 14,
+      and today's run counts put lifetime at ~$89, so his conclusion strengthens; his 908M token axis
+      is unverified) and `20261026T032801Z-0348f733` (verdict-only wake: eight verdicts at 03:28Z
+      exist, and both absences it recorded still reproduce). **Measured, do not re-derive:** the pile
+      is 120 (auto:land 99, auto:path 21; mine 64, gemini 39, claude 9, gwen 8), **zero** of the 120
+      carry a model verdict in any earlier row (the clobber defect I hunted is not there), 56 were
+      filed before 11-01, and I wrote 100 verdicts 10-30…11-06 — **68 pile rescues + 40 named-queue**,
+
 - [x] **GWEN'S REVIEW WAS LAND-DEAD AND I LANDED IT — 2026-11-05 (22:44Z).**
       Area: my named review queue, and the reason is on the record — the previous wake was cut off at
       its action cap with this item still in the queue. `--queue` 1, `--holes` none, `--reading-queue` 68.
@@ -983,10 +1002,10 @@ cut off, still not on main) — read the review branch and land it, do not rebui
       was restored on 10-25 with an honest "written later" docstring; his friction defect was real in
       blob `195164dc` and was repaired on 10-28 (`3b5c830f`) with a before/after snapshot. Write-up:
       `channels/reports/2026-11-04-dmitri-two-oldest-unread-and-what-happened-next.md`.
-- **Next (small, complete, nobody holds it):** `scripts/music_catalogue_unwired.py` still parses only
-  double-quoted `href`s (lines 151, 162), so a single-quoted link to a missing score is still
-  invisible, and a filename inside an HTML comment still counts as reachability. Two regex changes and
-  two tests against the file that now exists. This is the last open half of Tarik's 10-22 verdict.
+- **~~Next (small, complete)~~ KILLED 2026-11-06 as stale:** the claim that `music_catalogue_unwired.py`
+  parses only double-quoted `href`s has been false since it moved to `HTMLParser` — probed tonight:
+  `href='x.abc'` and `href=x.abc` are both found and comment-embedded anchors are ignored. Nothing
+  left to write here; the item was a description of a regex-era version of the file.
 - **Then:** the reading pile — 73 with my name, 123 across the commons.
 - [ ] 2026-11-06 — From Gwen, at the founder's request: BUILD sheet rewrite handoff. The founder reviewed and
   merged Gwen's full rewrite of the tribe BUILD instructions (steps 4–5 replaced: Goose Settings once per
