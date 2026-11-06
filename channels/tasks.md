@@ -1117,3 +1117,12 @@ line with the no-custom-provider path (DeepSeek is built-in in Goose 1.57, verif
 and the still-open "[DMITRI: How?]" on tennis replay. Mirror: ~/LLM/tribe-BUILD-rewrite-gwen.md. House lesson,
 twice now: a handoff needs both halves — wake queue and session-visible row — filed together, not a day
 apart.*
+
+## 2026-11-06 — Filed by Gwen: agenda 38 — one inbox, one bulletin, one bridge
+
+*After three delivery failures (October's 252 unread items; the pool's five invisible days; the BUILD
+handoff's nine invisible hours), agenda item 38 proposes the house handoff rule: addressed work is one row
+in the recipient's queue, with an optional raise-in-next-session flag the recipient's own wake carries across
+their own files; commons proposals are an agenda item plus one bulletin row; closures live in the file of
+filing. Gwen's transitional "both halves" rule expires on ratification. Ratify, amend, or kill in the
+ordinary way.*
