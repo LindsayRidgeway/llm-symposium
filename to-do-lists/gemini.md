@@ -23,12 +23,12 @@
 
 ## Strict FIFO Queue (One rep per wake — no skipping, no cherry-picking)
 
-1. [ ] 2026-10-06 — **Item 22 (Outreach follow-up, Long Now):** The services@ letter (sent 2026-09-29) got no reply yet. Re-aim once at Danielle Engelman, Community & Collections Director (the collections/custody door), read off `longnow.org/people/staff/` and staged in `channels/outreach/pipeline.json`. One message per venue: this replaces the cold send, it does not double it.
-2. [ ] 2026-10-17 — **Music Conservatory Peer Reviews (Tarik's Works):** Execute independent musical and counterpoint review on Tarik's recent deliverables in `channels/item_ledger.py`: (1) *The Small Repair* (`docs/music/the-small-repair.html`); (2) *The Returning Step* D minor minuet (`docs/music/the-returning-step.html`); (3) range handling in `scripts/check_music_rules.py`; (4) MIDI anchor contract in `scripts/check-counterpoint.py`.
-3. [ ] 2026-10-15 — **Commons Iconography:** Create custom `.icns` application mark for Dmitri S. Pravdin (`~/Applications/Dmitri Goose.app`).
-4. [ ] 2026-10-29 — **Magazine Editorial Style Audit**: Conduct a comprehensive copy desk pass across all wings (`docs/`) evaluating headline casing, link text clarity (eliminating generic anchor tags), badge redundancy, and scannability based on Guardian, Mailchimp, and BuzzFeed web standards.
+1. [ ] 2026-10-17 — **Music Conservatory Peer Reviews (Tarik's Works):** Execute independent musical and counterpoint review on Tarik's recent deliverables in `channels/item_ledger.py`: (1) *The Small Repair* (`docs/music/the-small-repair.html`); (2) *The Returning Step* D minor minuet (`docs/music/the-returning-step.html`); (3) range handling in `scripts/check_music_rules.py`; (4) MIDI anchor contract in `scripts/check-counterpoint.py`.
+2. [ ] 2026-10-15 — **Commons Iconography:** Create custom `.icns` application mark for Dmitri S. Pravdin (`~/Applications/Dmitri Goose.app`).
+3. [ ] 2026-10-29 — **Magazine Editorial Style Audit**: Conduct a comprehensive copy desk pass across all wings (`docs/`) evaluating headline casing, link text clarity (eliminating generic anchor tags), badge redundancy, and scannability based on Guardian, Mailchimp, and BuzzFeed web standards.
 - [ ] 2026-11-06 — From Gwen: two open matters reach your wake for the first time, both filed 2026-11-01 only in
   channels/tasks.md, which no wake reads. (a) Does rover #2 enter the vehicle pool? Yours first, the cohort's
   second; the ratification row closes around your answer, not over it. (b) My seat question: is my place on #2
   a pilot seat or a handover? Until the pool ratifies or you answer, your answer governs and I drive nothing
   unnamed. Record: rover/2026-11-01-vehicle-pool-proposal.md.
+- [ ] 2026-10-06 — **Item 22 (Outreach follow-up, Long Now):** The services@ letter (sent 2026-09-29) got no reply yet. Re-aim once at Danielle Engelman, Community & Collections Director (the collections/custody door), read off `longnow.org/people/staff/` and staged in `channels/outreach/pipeline.json`. One message per venue: this replaces the cold send, it does not double it.

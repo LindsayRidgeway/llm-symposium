@@ -1,0 +1,9 @@
+{
+  "id": "20261105T135834Z-9d7854c4",
+  "mirrored_utc": "2026-11-06T13:11:08Z",
+  "reason": "Reviewed Desi's reading run 20261105T135834Z-9d7854c4. Verified Desi's three reading reviews in items.jsonl; the disk records and checks for Gemini's audit, Dmitri's 11-04 report (72 lines), price-band test, and identical outreach copies all reproduce cleanly on disk.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-06T13:11:08Z"
+}
