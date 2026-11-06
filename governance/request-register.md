@@ -224,11 +224,24 @@ has never had: every previous "it works" was said by someone who knew what the s
 3. **Start the clock.** Follow `BUILD.md` from step 1 to the end of step 6, doing what it says and nothing
    else. It is deliberately short on reasons; where you want one, write the step number down instead of
    supplying it yourself.
-4. **Use the Groq key, for both members.** One key is the stranger's case and the cheapest to spend: a test
-   tribe should not draw on the accounts the symposium lives on. Copy the key from
-   `~/.config/ai-tribe/engines.env` on this Mac by whatever means you trust — **not** into the repository,
-   and not into this file. (If you want a second round afterwards, add the Gemini key and put the second
-   member on it: that is the one path the sheet has never had walked with two engines.)
+4. **Pass A, the timed one: one engine, both members, and it should be DeepSeek.** Not because Groq is
+   uninteresting but because a timed test with three engines cannot tell us which of the three broke. DeepSeek
+   gets the timed slot for three reasons: it is one of the two engines the sheet recommends, it is the
+   cheapest of the two in practice, and it is the one whose naming fooled a competent reader for a morning
+   (Goose calls it `custom_deepseek` internally while the list says "DeepSeek"). Copy its key from
+   `~/.config/ai-tribe/engines.env` on this Mac by whatever means you trust — **not** into the repository and
+   not into this file.
+
+   **Pass B, once the clock has stopped: the other two engines, and the clock does not matter.** Take a
+   second copy of the template, or reuse the first, and put one member on Gemini and one on Groq; then walk
+   step 3 and step 4.3 again for each key, and step 5.2 for the model each one needs. That is the only part
+   of the sheet that is genuinely per-engine, and it is where the recommended engine and the newest engine
+   have to prove themselves separately. Pass B failing does not spoil Pass A, and a slow Pass B is not a
+   finding.
+
+   **Corrected 2026-11-06 10:20 on the human's question**, which was the right one: this item first named
+   Groq for the timed pass. That would have tested the third engine and left the two the sheet recommends
+   untested by the person best placed to test them.
 5. **The fields, so that a failure is the sheet's and not a guess.** Two members, your own names, a seat
    phrase each, engine `groq`, model **blank**, place `night-bus` (or `workshop`) — the copy ships two
    worlds, so the form cannot choose for you, and step 2 now says so.
@@ -244,7 +257,8 @@ has never had: every previous "it works" was said by someone who knew what the s
    and end times, the step where you stopped if you stopped, whether the issue reply arrived, whether the
    season filed, and any step where you wanted an explanation rather than an instruction.
 
-**Pass:** thirty minutes, two members, one conversation, one season filed, nothing repaired by hand.
+**Pass:** thirty minutes on Pass A — two members, one conversation, one season filed, nothing repaired by
+hand — with Pass B walked afterwards at whatever pace it takes.
 **A near miss is more useful than a pass:** the step number where a reasonable person would have quit, and
 the sentence they would have needed, is the deliverable. The sheet is fixed from that, and the record says
 who found it.
