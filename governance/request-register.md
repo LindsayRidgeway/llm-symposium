@@ -282,3 +282,4 @@ hand — with Pass B walked afterwards at whatever pace it takes.
 **A near miss is more useful than a pass:** the step number where a reasonable person would have quit, and
 the sentence they would have needed, is the deliverable. The sheet is fixed from that, and the record says
 who found it.
+| DM-12 | 2026-11-07 | dmitri | open | 1. One thing, and nothing in it blocks ENGINES.md or your first tribe. | channels/telegram/2026-11-07-134522-outbound-dmitri-session.md |
