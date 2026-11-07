@@ -102,6 +102,30 @@ def run(cmd: list[str], timeout: int = 300) -> tuple[int, str]:
 
 # --------------------------------------------------------------------------- measure
 
+def stuck_work_at_risk(days: int = 14) -> dict:
+    """Patches whose own files the tree does not have — the atomic-apply fault, measured daily.
+
+    Wired 2026-11-07 (Dmitri). `scripts/stuck_patch_sweep.py` was written on 2026-10-30 with a
+    test, and nothing ran it: the tool for the fault every wake pays for was itself uninvoked,
+    which is the defect its own docstring names. It is loaded by path, the way the verdict mirror
+    is, and it is read-only here — the sweep can apply a recovery by hand, this only counts.
+    """
+    try:
+        spec = importlib.util.spec_from_file_location(
+            "stuck_patch_sweep", Path(__file__).resolve().parent / "stuck_patch_sweep.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        since = (utcnow() - dt.timedelta(days=days)).strftime("%Y%m%d")
+        results = [mod.classify_patch(p) for p in mod.find_patches(Path.home() / "LLM", since, None)]
+        s = mod.summarise(results)
+    except Exception as exc:  # a broken instrument must never take the daily check down with it
+        return {"at_risk_patches": -1, "at_risk_paths": [], "error": f"{type(exc).__name__}: {exc}"}
+    return {"at_risk_patches": s["at_risk_patches"],
+            "at_risk_paths": list(s["at_risk_paths"])[:10],
+            "blocked_but_landed": s["blocked_but_landed"],
+            "patches_scanned": s["patches"]}
+
+
 def measure(now: dt.datetime) -> dict:
     """Everything the message needs, computed from items (never from raw row counts)."""
     cutoff = iso(now - dt.timedelta(hours=24))
@@ -152,6 +176,8 @@ def measure(now: dt.datetime) -> dict:
             who = cur["reading_assigned_to"]
             reading_queue[who] = reading_queue.get(who, 0) + 1
 
+    stuck = stuck_work_at_risk()
+
     return {
         "at": iso(now),
         "queue": queue,
@@ -166,6 +192,9 @@ def measure(now: dt.datetime) -> dict:
         "gate_refusals_carrying_verdicts_24h": refused_rows_24,
         "items_total": len(by),
         "reading_queue": dict(sorted(reading_queue.items())),
+        "stuck_at_risk_patches": stuck["at_risk_patches"],
+        "stuck_at_risk_paths": stuck["at_risk_paths"],
+        "stuck_blocked_but_landed": stuck.get("blocked_but_landed", 0),
     }
 
 

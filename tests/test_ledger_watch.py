@@ -408,5 +408,26 @@ class MirrorReplayTest(unittest.TestCase):
         self.assertFalse(seen["apply"], "a dry run must not write to the ledger")
 
 
+class StuckSweepWiringTest(unittest.TestCase):
+    """The sweep for the atomic-apply fault existed with a test and nothing ran it.
+
+    Wired 2026-11-07 (Dmitri). Two things matter: the daily numbers carry the sweep's honest count,
+    and a broken sweep reports itself rather than taking the daily check down with it.
+    """
+
+    def test_the_daily_numbers_carry_the_sweep(self):
+        got = lw.stuck_work_at_risk(days=7)
+        self.assertIn("at_risk_patches", got)
+        # -1 is the instrument reporting its own failure; 0 or more is a measurement
+        self.assertGreaterEqual(got["at_risk_patches"], 0, got)
+        self.assertIsInstance(got["at_risk_paths"], list)
+
+    def test_a_broken_sweep_reports_itself_and_does_not_raise(self):
+        with mock.patch.object(lw, "__file__", "/nonexistent/ledger_watch.py"):
+            got = lw.stuck_work_at_risk(days=7)
+        self.assertEqual(got["at_risk_patches"], -1)
+        self.assertIn("error", got)
+
+
 if __name__ == "__main__":
     unittest.main()

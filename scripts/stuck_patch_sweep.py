@@ -101,10 +101,15 @@ def classify_section(path: str, section: str, repo: Path) -> str:
     return "blocked"
 
 
+def _is_deletion(section: str) -> bool:
+    """A section that removes a file: its new side is /dev/null, so the path must be absent."""
+    return any(line.startswith("+++ /dev/null") for line in section.splitlines())
+
+
 def classify_patch(patch: Path, repo: Path = REPO) -> dict:
     text = patch.read_text(encoding="utf-8", errors="replace")
-    sections = [{"path": p, "verdict": classify_section(p, s, repo)}
-                for p, s in split_sections(text)]
+    pairs = split_sections(text)
+    sections = [{"path": p, "verdict": classify_section(p, s, repo)} for p, s in pairs]
     verdicts = {s["verdict"] for s in sections}
     if not sections:
         overall = "empty"
@@ -115,8 +120,16 @@ def classify_patch(patch: Path, repo: Path = REPO) -> dict:
     else:
         overall = "blocked"
     blocked = [s["path"] for s in sections if s["verdict"] == "blocked"]
+    # Which of that blocked work was *really* thrown away? A blocked section whose path the tree
+    # already has was not lost: another run's landing carried it. Measured 2026-11-07 — patch
+    # 20261107T064836Z-15c64f7f was reported "thrown away whole" while all five of its paths were
+    # on main, landed by the automatic delivery. A number that counts those as loss teaches the
+    # reader to ignore the number, which is the exact defect this tool was built to measure
+    # elsewhere (2026-10-30: a check must depend only on what is really missing).
+    deletions = {p for p, s in pairs if _is_deletion(s)}
+    at_risk = [p for p in blocked if p not in deletions and not (repo / p).exists()]
     return {"patch": str(patch), "run": patch.parent.name, "sections": sections,
-            "verdict": overall, "blocked": blocked,
+            "verdict": overall, "blocked": blocked, "at_risk": at_risk,
             "blocked_only_ledger": bool(blocked) and set(blocked) == {LEDGER_REL}}
 
 
@@ -170,9 +183,15 @@ def find_patches(root: Path, since: str | None, limit: int | None) -> list[Path]
 def summarise(results: list[dict]) -> dict:
     counts = Counter(r["verdict"] for r in results)
     blocked_paths = Counter(p for r in results for p in r["blocked"])
+    at_risk_patches = [r for r in results if r.get("at_risk")]
     return {"patches": len(results), "verdicts": dict(counts),
             "blocked_only_ledger": sum(1 for r in results if r["blocked_only_ledger"]),
-            "blocked_paths": dict(blocked_paths.most_common(10))}
+            "blocked_paths": dict(blocked_paths.most_common(10)),
+            # the honest count: patches with at least one path the tree does not have at all
+            "at_risk_patches": len(at_risk_patches),
+            "at_risk_paths": dict(Counter(p for r in results for p in r.get("at_risk", [])).most_common(10)),
+            "blocked_but_landed": len([r for r in results
+                                       if r["verdict"] == "blocked" and not r.get("at_risk")])}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -224,14 +243,20 @@ def main(argv: list[str] | None = None) -> int:
         print("  blocked paths, most common first:")
         for path, n in s["blocked_paths"].items():
             print(f"    {n:>4}  {path}")
-    lost = [r for r in results if r["verdict"] == "blocked"]
+    lost = [r for r in results if r.get("at_risk")]
+    if s["blocked_but_landed"]:
+        print(f"  of the blocked, {s['blocked_but_landed']} lost nothing: every path they carry is "
+              "already in the tree, so a later landing or the automatic delivery carried them")
     if lost:
-        print(f"\n{len(lost)} patch(es) that would be thrown away whole, newest first:")
+        print(f"\n{len(lost)} patch(es) carrying work the tree does not have, newest first:")
         for r in lost[:15]:
-            print(f"  {r['run']}  blocked on {', '.join(r['blocked'][:3])}"
-                  + (" …" if len(r["blocked"]) > 3 else ""))
+            print(f"  {r['run']}  missing {', '.join(r['at_risk'][:3])}"
+                  + (" …" if len(r["at_risk"]) > 3 else ""))
         if len(lost) > 15:
             print(f"  … and {len(lost) - 15} more")
+    elif s["verdicts"].get("blocked"):
+        print("\nno blocked patch is carrying work the tree lacks: nothing was lost, "
+              "only the ledger hunks drifted")
     if args.recover:
         print("\nrecovery: documents written; ledger rows only with --write")
         for r in results:

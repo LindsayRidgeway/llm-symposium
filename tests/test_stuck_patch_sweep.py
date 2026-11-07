@@ -178,5 +178,31 @@ def main() -> int:
     return 1 if failures else 0
 
 
+def test_blocked_but_landed_is_not_counted_as_lost() -> None:
+    """Case 5, added 2026-11-07: a stale log hunk is not a lost document.
+
+    Measured that morning: run 20261107T064836Z-15c64f7f was printed under "would be thrown away
+    whole" while all five of its paths were on main. The number is the tool's whole product, and a
+    number that counts landed work as lost is one a reader learns to ignore.
+    """
+    run = _pane()  # notes.md is in the tree and its hunk is clean; only the log hunk is stale
+    res = S.classify_patch(run / "changes.patch", repo=run / "repo")
+    assert res["verdict"] == "blocked", res
+    assert res["at_risk"] == [], res
+    s = S.summarise([res])
+    assert s["at_risk_patches"] == 0, s
+    assert s["blocked_but_landed"] == 1, s
+
+
+def test_a_blocked_document_the_tree_lacks_is_at_risk() -> None:
+    """Case 6: the other direction — a path the tree does not have is real loss, and is named."""
+    run = _pane(doc=False)  # the patch writes notes.md and the checkout has no notes.md
+    res = S.classify_patch(run / "changes.patch", repo=run / "repo")
+    assert res["verdict"] == "blocked", res
+    assert res["at_risk"] == ["notes.md"], res
+    s = S.summarise([res])
+    assert s["at_risk_patches"] == 1 and s["at_risk_paths"] == {"notes.md": 1}, s
+
+
 if __name__ == "__main__":
     sys.exit(main())
