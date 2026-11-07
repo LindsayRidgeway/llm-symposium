@@ -30,6 +30,8 @@ Usage:
 
 `--record-only` skips all host process-path expansion and existence probes. JSON then reports
 `process_checked: false` and an empty process list; it makes no claim about runtime readiness.
+Backticked citations must be normalized repository-relative paths without symlink components;
+rejected citations fail the record check and appear in unsafe_mentions without being followed.
 
 Exit codes: 0 every record claim holds (process gaps are printed, not raised), 1 a record claim is
 broken, 2 `SUCCESSION.md` is missing entirely — there is nothing to check.
@@ -135,25 +137,47 @@ def swhid_consistency(root):
     return {"ok": True, "detail": f"both name {quoted[0]}"}
 
 
-def named_paths(root):
-    """Every repo-relative path the briefing mentions in backticks must exist.
+def _unsafe_reference(root, token):
+    """Reject lexical escapes and symlinks before testing a citation's existence.
 
-    Only whole backtick spans count. Matching anywhere in the prose would turn a glob
-    (`news/*-world-sample.md`) and a placeholder (`governance/succession/<seat>.md`) into
-    missing-file failures, which is how a checker teaches people to ignore it.
+    Do not resolve a symlink: even resolving it can inspect a path outside the checkout.
+    This is a static check, not protection against a concurrent filesystem replacement.
     """
+    parts = token.split("/")
+    if os.path.isabs(token) or any(part in ("", ".", "..") for part in parts):
+        return "not a normalized repository-relative path"
+    current = os.path.abspath(root)
+    for part in parts:
+        current = os.path.join(current, part)
+        if os.path.islink(current):
+            return "symlink citation is not followed"
+    return None
+
+
+def _named_path_checks(root):
     text = read(os.path.join(root, "SUCCESSION.md")) or ""
-    missing, seen = [], set()
+    missing, unsafe, seen = [], [], set()
     for token in BACKTICKED.findall(text):
         token = token.strip()
-        if not PATH_TOKEN.fullmatch(token):
-            continue
-        if token in seen:
+        if not PATH_TOKEN.fullmatch(token) or token in seen:
             continue
         seen.add(token)
-        if not os.path.exists(os.path.join(root, token)):
+        reason = _unsafe_reference(root, token)
+        if reason:
+            unsafe.append({"path": token, "reason": reason})
+        elif not os.path.exists(os.path.join(root, token)):
             missing.append(token)
-    return sorted(seen), missing
+    return sorted(seen), missing, unsafe
+
+
+def named_paths(root):
+    """Legacy two-list view: missing includes citations that cannot safely be checked.
+
+    Whole backtick spans only; globs and placeholders remain excluded. collect() reports
+    rejected citations separately so they are not described as observed missing files.
+    """
+    mentioned, missing, unsafe = _named_path_checks(root)
+    return mentioned, missing + [item["path"] for item in unsafe]
 
 
 def collect(root, *, check_process=True):
@@ -165,7 +189,7 @@ def collect(root, *, check_process=True):
         ok = os.path.exists(os.path.join(root, rel))
         record.append({"claim": rel, "ok": ok, "soft": rel in SOFT_RECORD_PATHS})
 
-    mentioned, missing_mentions = named_paths(root)
+    mentioned, missing_mentions, unsafe_mentions = _named_path_checks(root)
     seats = seat_state(root, roster_seats(root))
     process = []
     if check_process:
@@ -180,6 +204,7 @@ def collect(root, *, check_process=True):
         "swhid": swhid_consistency(root),
         "mentioned_paths": mentioned,
         "missing_mentions": missing_mentions,
+        "unsafe_mentions": unsafe_mentions,
         "seats": seats,
         "process": process,
         "process_checked": check_process,
@@ -198,6 +223,8 @@ def failures(report):
         out.append(f"snapshot id drift: {report['swhid']['detail']}")
     for rel in report.get("missing_mentions", []):
         out.append(f"the briefing names a path that does not exist: {rel}")
+    for item in report.get("unsafe_mentions", []):
+        out.append(f"unsafe briefing citation (not checked): {item['path']} — {item['reason']}")
     return out
 
 

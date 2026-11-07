@@ -280,5 +280,71 @@ class FabricatedTrees(unittest.TestCase):
         self.assertTrue(json.loads(out.getvalue())["process_checked"])
 
 
+    def test_absolute_and_parent_citations_are_not_probed(self):
+        root = self.build()
+        with tempfile.TemporaryDirectory() as outside:
+            absolute = os.path.join(outside, "outside.md")
+            tokens = [absolute, "../outside.md"]
+            with open(os.path.join(root, "SUCCESSION.md"), "a", encoding="utf-8") as fh:
+                fh.write("\n" + " ".join("`" + token + "`" for token in tokens))
+            exists = check.os.path.exists
+            def guarded(path):
+                if str(path) in [absolute, os.path.join(root, "../outside.md")]:
+                    raise AssertionError("outside existence probe")
+                return exists(path)
+            with patch.object(check.os.path, "exists", side_effect=guarded):
+                report = check.collect(root, check_process=False)
+            self.assertEqual([r["path"] for r in report["unsafe_mentions"]], tokens)
+            self.assertEqual(report["missing_mentions"], [])
+            self.assertEqual(len(check.failures(report)), 2)
+            mentioned, uncheckable = check.named_paths(root)
+            self.assertTrue(set(tokens).issubset(mentioned))
+            self.assertTrue(set(tokens).issubset(uncheckable))
+
+    def test_symlinked_citation_is_not_followed(self):
+        root = self.build()
+        with tempfile.TemporaryDirectory() as outside:
+            link = os.path.join(root, "linked")
+            os.symlink(outside, link)
+            token = "linked/outside.md"
+            with open(os.path.join(root, "SUCCESSION.md"), "a", encoding="utf-8") as fh:
+                fh.write("\nSee `" + token + "`.\n")
+            exists = check.os.path.exists
+            def guarded(path):
+                if str(path) == os.path.join(root, token):
+                    raise AssertionError("symlink target existence probe")
+                return exists(path)
+            with patch.object(check.os.path, "exists", side_effect=guarded):
+                report = check.collect(root, check_process=False)
+            self.assertEqual(report["unsafe_mentions"],
+                             [{"path": token, "reason": "symlink citation is not followed"}])
+            self.assertEqual(report["missing_mentions"], [])
+            self.assertIn("not checked", check.failures(report)[0])
+
+    def test_unsafe_citation_cli_fails_in_record_only_mode(self):
+        root = self.build()
+        with open(os.path.join(root, "SUCCESSION.md"), "a", encoding="utf-8") as fh:
+            fh.write("\nSee `../outside.md`.\n")
+        proc = subprocess.run([sys.executable, SCRIPT, "--root", root, "--record-only", "--json"],
+                              capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 1, proc.stderr)
+        report = json.loads(proc.stdout)
+        self.assertFalse(report["ok"])
+        self.assertFalse(report["process_checked"])
+        self.assertEqual(report["process"], [])
+        self.assertEqual(report["unsafe_mentions"][0]["path"], "../outside.md")
+
+    def test_normal_citations_keep_nested_dots_and_missing_file_behavior(self):
+        root = self.build()
+        os.makedirs(os.path.join(root, "data"))
+        with open(os.path.join(root, "data/review..draft.md"), "w", encoding="utf-8") as fh:
+            fh.write("synthetic")
+        with open(os.path.join(root, "SUCCESSION.md"), "a", encoding="utf-8") as fh:
+            fh.write("\nSee `data/review..draft.md` and `data/absent.md`.\n")
+        mentioned, missing = check.named_paths(root)
+        self.assertIn("data/review..draft.md", mentioned)
+        self.assertEqual(missing, ["data/absent.md"])
+
+
 if __name__ == "__main__":
     unittest.main()
