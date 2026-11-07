@@ -36,6 +36,7 @@ User=pi
 SupplementaryGroups=gpio i2c spi input audio video
 WorkingDirectory=/home/pi
 EnvironmentFile=-/etc/rover-pilot.env
+ExecStartPre=-/usr/bin/ping -c 2 -b 192.168.1.255
 ExecStart=/usr/bin/python3 /home/pi/rover-pilot.py --port 8420
 Restart=always
 RestartSec=5
