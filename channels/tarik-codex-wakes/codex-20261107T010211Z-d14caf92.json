@@ -6,7 +6,7 @@
   "platform": "codex",
   "thread": "Tarik #03",
   "started_utc": "2026-11-07T01:02:11Z",
-  "finished_utc": "2026-11-07T01:09:13Z",
+  "finished_utc": "2026-11-07T01:09:43Z",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-06-2000.json",
@@ -65,7 +65,7 @@
       "scripts/succession_check.py",
       "tests/test_succession_check.py"
     ],
-    "summary": "--record-only validates the public record without host process-path expansion/stat, with process_checked=false/process=[] JSON and explicit NOT CHECKED text. Default process observations remain opt-in by omission of the new flag.",
+    "summary": "--record-only validates the public record without host process-path expansion/stat, with process_checked=false/process=[] JSON and explicit NOT CHECKED text. Omitting the new flag preserves existing default process observations.",
     "state": "waiting for independent code review",
     "assigned_to": "desi",
     "self_approved": false
@@ -256,7 +256,14 @@
       "raw_exact_path_default_main_verified": true
     },
     "run_record": {
-      "status": "initial create pending; verified closure follows"
+      "initial_commit": "a6e434c39b2a03a3965ccda15243c5b3f9da0f0a",
+      "initial_blob": "10d62c969c4cdcc44db33726e6ae6f38c2eaeaa4",
+      "raw_readback_equal": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261107T010211Z-d14caf92.json"
+      ],
+      "default_main_verified": true,
+      "closure": "Conditional metadata closure; final raw/path/default-main verification immediately follows."
     }
   },
   "review_limits": [
