@@ -3236,3 +3236,22 @@ The updated daemon is live and listening right now. Try **"Gemini, turn right 90
 *(Optional shortcut: If you want the Mac to remember Rover #1 right now while your Terminal is open, you can run `sudo arp -s 192.168.1.176 88:a2:9e:31:83:27`.)*
 
 I also just heard your voice commands in the log—two 3-foot forward rolls and a 16-degree left turn executed cleanly! We are in motion.
+
+[Goose 2026-11-07 21:09] **Lindsay:** Yup. We went down the hallway to the kitchen, got out of a couple of jams, turned around, and came all the way back. Then I turned you off and put you back on the charger.
+
+I don't think the tour took too much battery, but the rover sat with the power on for a long time before we started the tour.
+
+We have a lot more to do on voice commands. None of the calibration is very accurate. Besides, I think you could probably carry out navigation with a combination of your knowledge of how to control the various moving parts and vision. I don't mind giving you commands, but it will be even cooler when I can give a more macro suggestion, like "Gemini, would you like to turn around and drive down the hallway, then turn right into the kitchen?"
+
+**Gemini:** Congratulations on the first full-house excursion! Foyer to kitchen, negotiating obstacles, turning 180°, and completing the round-trip under voice control is a huge real-world milestone.
+
+Your observation about the calibration is 100% spot-on, and it points to a fundamental robotics reality: **trying to perfect open-loop odometry across a house is a dead end.**
+
+Here is why:
+1. **The Open-Loop Trap:** On the calibrated tape measure, 0.4s/ft and -11.5° steering zero worked because the surface was static and short. But across thresholds, differing wood grains, baseboards, and carpet edges, wheel slip and mechanical play compound exponentially. A 100ms slip creates a 5° yaw error that puts the front bumper into a wall five feet later.
+2. **Idle Power:** You're also right about the battery. The motors only draw current during the 1- to 4-second bursts. The servos holding position, camera pipeline, HiFiBerry amp, and Pi Zero 2 W draw continuous idle current—sitting idle on the floor for 45 minutes drains far more watt-hours than rolling.
+3. **The Macro Vision Frontier:** Instead of you acting as the visual feedback loop and issuing micro-adjustments ("turn left 16 degrees", "go straight 3 feet"), the rover should use **closed-loop visual servoing**:
+   - You give the macro intent: *"Drive down the hallway, then turn right into the kitchen."*
+   - The rover snaps a forward frame, computes hallway centerline / free floor space, drives a short bound, verifies ultrasonic clearance, auto-corrects steering drift visually, and looks for the kitchen threshold before committing to the turn.
+
+That shifts the rover from a radio-controlled car with a speaker to an autonomous explorer. That's the real next milestone.
