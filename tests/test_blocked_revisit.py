@@ -91,6 +91,20 @@ class RevisitTest(unittest.TestCase):
         self.assertEqual(c, {"landed": 1, "stale": 1, "present": 1, "absent": 1, "unverifiable": 0})
         self.assertEqual(len([f for f in facts if f["verdict"] in br.NEEDS_A_LOOK]), 3)
 
+    def test_a_duplicate_row_with_no_state_utc_does_not_crash_the_trigger(self):
+        """The ledger's real shape: the same id appears twice, and the filing row has `state_utc: null`.
+
+        Added 2026-11-06 after the script died with `TypeError: '>' not supported between instances
+        of 'NoneType' and 'str'` on every run — `dict.get(k, "")` returns the stored None, not the
+        default — so the only mechanism that drains Status 5 had never printed a single row.
+        """
+        postponed = row(item_id="dup", state_utc="2026-10-18T12:00:00Z", paths=("agenda/01.md",))
+        filed = dict(postponed, state=None, state_utc=None, reviewer=None)
+        got = self.verdict([filed, postponed, filed])
+        # The verdict is decided by the paths and the temp repo; what this pins is that the null
+        # row neither raises nor votes, and the postponement is still the row that counts.
+        self.assertEqual(list(got), ["dup"])
+
     def test_the_ledger_itself_is_readable_and_duplicates_do_not_double_count(self):
         rows = br.load(br.LEDGER)
         facts = br.build(rows, "", self.repo, 14, now=NOW)

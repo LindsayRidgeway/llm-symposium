@@ -60,7 +60,7 @@ def postponed(rows: list[dict]) -> list[dict]:
         if row.get("state") != STATUS5:
             continue
         i = row["id"]
-        if i not in latest or row.get("state_utc", "") >= latest[i].get("state_utc", ""):
+        if i not in latest or (row.get("state_utc") or "") >= (latest[i].get("state_utc") or ""):
             latest[i] = row
     return [latest[i] for i in sorted(latest)]
 
@@ -68,7 +68,8 @@ def postponed(rows: list[dict]) -> list[dict]:
 def later_rows(rows: list[dict], item: dict) -> list[dict]:
     """Rows for the same id dated after the postponement — a re-look leaves one of these."""
     return [r for r in rows
-            if r["id"] == item["id"] and r.get("state_utc", "") > item.get("state_utc", "")]
+            if r["id"] == item["id"]
+            and (r.get("state_utc") or "") > (item.get("state_utc") or "")]
 
 
 def landed_ids(repo: Path, log_text: str | None = None) -> str:
