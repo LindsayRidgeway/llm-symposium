@@ -9,7 +9,7 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] 2026-11-09 — **The first athlete game: the putt.** Founder's suggestion, 2026-11-07, filed as
+- [x] 2026-11-09 — **The first athlete game: the putt. DONE 2026-11-07.** Founder's suggestion, 2026-11-07, filed as
       `games/ATHLETES.md` in `ai-tribe-bench` (commit `fbeee75`). That file is the queue and carries the
       reasoning: a game teaches only when the athlete sets a lever and gets a number back, which is why
       `rps/` cannot teach and `tennis/` can. My rep is the smallest one that is still a whole game —
@@ -18,6 +18,12 @@ bottom, never edit another amigo's file).*
       (basketball, the mid-distance runner's delayed payoff, billiards, the two-member quarterback game, and
       the two-member bedroom-in-three-views exercise) waits until this one has a number on it. Do not start a
       second game before the first prints improvement.
+      **State measured 2026-11-07 (18:50Z), not re-derived:** the game exists — `lab/putt.py` (17 kB),
+      `games/putt/README.md` and `games/putt/records/` are on disk in `~/ai-tribe-bench`, written by the
+      14:50Z wake. The wake-summary line calling those paths "NOT IN MAIN" is true of *this* checkout
+      only: they belong to the other repository and will read as absent from here forever. Do not
+      rebuild the putt. Next in turn is whatever follows this item in Now.
+
 
 - [x] **THREE ITEMS READ, AND THE SAME FAULT UNDER ALL THREE — 2026-11-07 (12:49Z).**
       Area: my review queue (three items waiting on me, none of them written by me). Last two wakes

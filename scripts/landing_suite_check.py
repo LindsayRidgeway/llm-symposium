@@ -34,6 +34,17 @@ Two baselines, and the difference matters:
   * a live one (`--against origin/main`), measured in a throwaway worktree at
     that revision. Slower — twice the suite — and true whenever it is asked.
 
+Granularity, and why a file name is not enough (2026-11-07). Comparing *file
+names* means a new failure inside a file that was already failing is invisible:
+the file is in the baseline, so every failure in it reads as known. The case is
+not hypothetical — `tests/test_reading_queue.py` was red on main for four days
+(2026-10-31 to 2026-11-03) across landings that each reported clean, because the
+file was in the baseline and a threshold inside it had re-rolled. So where the
+output can be parsed, the comparison is now per test: `FAIL:`/`ERROR:` lines of
+a direct unittest script give test names, and the baseline records them beside
+the file names. Where nothing is parseable the tool says so — a file it cannot
+read is named as blind, not called safe.
+
 The failure direction is deliberate: with no baseline this exits 1 on any
 failure, because "we could not tell" must not read as "safe to land".
 
@@ -108,6 +119,30 @@ def has_script_entry(path):
     return any(executes(node) for node in tree.body)
 
 
+def failed_tests(output):
+    """Test names in a direct unittest script's output, in the order printed.
+
+    Only two shapes are read, both from unittest's own text runner:
+
+        FAIL: test_x (test_file.Class.test_x)
+        ERROR: tearDown (test_file.Class.tearDown)
+
+    Anything else (a pytest traceback, a bare assertion, a crash before the
+    runner starts) yields an empty list, and the caller must treat that as
+    "cannot tell", never as "nothing new".
+    """
+    names = []
+    for line in (output or "").splitlines():
+        stripped = line.strip()
+        if not (stripped.startswith("FAIL: ") or stripped.startswith("ERROR: ")):
+            continue
+        rest = stripped.split(":", 1)[1].strip()
+        name = rest.split(" ", 1)[0].strip()
+        if name and name not in names:
+            names.append(name)
+    return names
+
+
 def run_suite(tests_dir, timeout=DEFAULT_TIMEOUT, runner=None):
     """Run each test file; return rows of {file, rc, seconds, tail}.
 
@@ -140,6 +175,7 @@ def run_suite(tests_dir, timeout=DEFAULT_TIMEOUT, runner=None):
                 "rc": rc,
                 "seconds": round(time.time() - started, 2),
                 "tail": lines[-1][:200] if lines else "",
+                "failed": failed_tests(output),
             }
         )
     return rows
@@ -157,6 +193,54 @@ def new_failures(observed, baseline):
     """
     known = set(baseline or [])
     return [name for name in observed if name not in known]
+
+
+def regressions(observed_rows, baseline_files, baseline_detail):
+    """New failures, at test granularity where both sides can be read.
+
+    `baseline_files` is the baseline's list of failing file names;
+    `baseline_detail` maps a file name to the test names that failed inside it.
+    A test that fails now and did not fail in the baseline is new even when its
+    file was already failing — the case a file-name baseline cannot see
+    (`tests/test_reading_queue.py`, red 2026-10-31 to 2026-11-03 across
+    landings that each reported clean).
+    """
+    baseline_files = set(baseline_files or [])
+    detail = baseline_detail or {}
+    new = []
+    for row in observed_rows:
+        if row["rc"] == 0:
+            continue
+        name = row["file"]
+        if name not in baseline_files:
+            new.append(name)
+            continue
+        known = detail.get(name)
+        if known is None:
+            continue  # file-level says known, nothing to compare: see blind_files
+        for test in row.get("failed") or []:
+            if test not in known:
+                new.append("%s::%s" % (name, test))
+    return new
+
+
+def blind_files(observed_rows, baseline_files, baseline_detail):
+    """Baseline files whose present run yielded no test names.
+
+    Such a file is not safe; it is unmeasured at test granularity. It happens
+    when nothing parseable is printed — a crash at import, a non-unittest
+    harness — and the honest report names it rather than counting the whole
+    file as known.
+    """
+    baseline_files = set(baseline_files or [])
+    detail = baseline_detail or {}
+    blind = []
+    for row in observed_rows:
+        if row["rc"] == 0 or row["file"] not in baseline_files:
+            continue
+        if not row.get("failed") or detail.get(row["file"]) is None:
+            blind.append(row["file"])
+    return blind
 
 
 def load_baseline(path=BASELINE_PATH):
@@ -179,6 +263,11 @@ def write_baseline(rows, commit, path=BASELINE_PATH):
         "files": len(rows),
         "seconds": round(sum(row["seconds"] for row in rows), 1),
         "failures": failures(rows),
+        "failed_tests": {
+            row["file"]: row.get("failed") or []
+            for row in rows
+            if row["rc"] != 0
+        },
     }
     Path(path).write_text(json.dumps(data, indent=2) + "\n", encoding="utf8")
     return data
@@ -257,9 +346,14 @@ def main(argv=None):
     unsupported = [row['file'] for row in rows if row['rc'] == 'UNSUPPORTED']
 
     baseline_names, baseline_source = None, "none"
+    baseline_detail, baseline_granularity = None, "file names only"
     if args.against:
         try:
-            baseline_names, _ = measure_revision(args.against, timeout=args.timeout)
+            baseline_names, base_rows = measure_revision(args.against, timeout=args.timeout)
+            baseline_detail = {
+                row["file"]: row.get("failed") or [] for row in base_rows
+            }
+            baseline_granularity = "per test"
         except RuntimeError as exc:
             print("landing_suite_check: %s" % exc, file=sys.stderr)
             return 2
@@ -268,12 +362,18 @@ def main(argv=None):
         baseline = load_baseline(args.baseline)
         if baseline is not None:
             baseline_names = baseline.get("failures", [])
+            baseline_detail = baseline.get("failed_tests") or None
+            baseline_granularity = "per test" if baseline_detail else "file names only"
             baseline_source = "%s @ %s" % (
                 Path(args.baseline).name,
                 baseline.get("commit", "unknown"),
             )
 
     new = new_failures(observed, baseline_names)
+    blind = []
+    if baseline_names is not None and baseline_detail:
+        new = regressions(rows, baseline_names, baseline_detail)
+        blind = blind_files(rows, baseline_names, baseline_detail)
 
     baseline_written = False
     if args.write_baseline and not unsupported:
@@ -295,6 +395,8 @@ def main(argv=None):
                     "failures": observed,
                     "baseline_source": baseline_source,
                     "new_failures": new,
+                    "baseline_granularity": baseline_granularity,
+                    "blind_files": blind,
                     "unsupported_files": unsupported,
                     "baseline_written": baseline_written,
                     "execution_contract": "direct Python scripts; exit codes, not test coverage",
@@ -316,8 +418,13 @@ def main(argv=None):
             print("baseline: none — every failure above counts as new (safe direction)")
         else:
             print("baseline: %s (%d known)" % (baseline_source, len(baseline_names)))
-            if baseline_names and set(observed) <= set(baseline_names):
+            print("granularity: %s" % baseline_granularity)
+            if baseline_names and not new and not blind:
                 print("note: the tree is not clean, but no failure is the wake's own")
+        if blind:
+            print("IN THE BASELINE AND UNREADABLE — unknown, not safe to land:")
+            for name in blind:
+                print("  " + name)
         if unsupported:
             print('UNSUPPORTED direct-script tests (setup error; baseline not written):')
             for name in unsupported:

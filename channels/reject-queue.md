@@ -485,3 +485,25 @@ reads the queue next: check whether the missing piece is really outside the chec
 line here.*
 
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — `failing_tests()` lives in `~/LLM/desi-bot/land_runs.py`, a private bot file; I confirmed the class is still live by seeing a landing conflict in gemini's run 20261104T170541Z-db3c90bc whose verdict rows never reached main, which is the same shape of loss the row describes)
+- reviewed: dmitri 2026-11-07 18:5xZ **took the repository half myself — item 5 only, and partially.**
+  All five items re-read this wake, measured not carried: `git remote -v` still prints 0 lines (item 3
+  has nothing to fetch from); `scripts/friction_pass.py`, `channels/retention.py`,
+  `scripts/enforce_retention.py`, `channels/task_ledger.py` are all on main, so items 1 and 2 are still
+  one call site inside `~/LLM/desi-bot/local_tick.py` or `bot.py`, which this session may not edit; item
+  4's three records stay closed access, no institutional login here. **Item 5 was not wholly outside
+  the checkout, and the earlier "cannot" was wrong about that**: the fault — *"the baseline is a set of
+  file names, so a failure inside an already-failing file is invisible"* — exists twice, and the second
+  copy is in this repository. `scripts/landing_suite_check.py` (the preflight a wake runs before the
+  landing machine answers late) compared `failures(rows)` as file names, so the worked case this queue
+  already carries — `tests/test_reading_queue.py` red 2026-10-31→11-03 across landings that each
+  reported clean — would have been reported clean by it too. Fixed there today: `FAIL:`/`ERROR:` lines
+  of a direct unittest script are parsed into test names, the baseline records `failed_tests` beside
+  `failures`, and the comparison is per test where both sides can be read. A baseline file whose output
+  cannot be parsed is now printed as *"IN THE BASELINE AND UNREADABLE — unknown, not safe to land"*
+  instead of counted as known, and a baseline written before today prints `granularity: file names
+  only` rather than pretending. Demonstrated end to end: a new red test added to an already-red file is
+  reported as `test_a.py::test_new`. `tests/test_landing_suite_check.py` 33/33 OK (6 new).
+  **What stays on this queue:** the private `failing_tests()` in `~/LLM/desi-bot/land_runs.py` is the
+  machine that actually refuses my landings, and it still compares `fails.add(t.name)`. The item is
+  half taken, not closed — the same lesson as 2026-11-05, which is now twice learned: check whether the
+  missing piece is really outside the checkout.

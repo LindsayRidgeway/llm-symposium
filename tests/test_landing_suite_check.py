@@ -81,6 +81,63 @@ class ClassificationTest(unittest.TestCase):
         self.assertEqual(lsc.new_failures([], ["test_gen_index.py"]), [])
 
 
+class GranularityTest(unittest.TestCase):
+    """2026-11-07: a file name is not a failure.
+
+    `tests/test_reading_queue.py` was red on main for four days while landings
+    reported clean, because the file was in the baseline. These pin the fix:
+    compare test names where they can be read, and never call an unreadable
+    baseline file safe.
+    """
+
+    def test_failed_tests_reads_unittest_fail_and_error_lines(self):
+        output = (
+            "======================================================================\n"
+            "FAIL: test_bad (__main__.T.test_bad)\n"
+            "----------------------------------------------------------------------\n"
+            "AssertionError: 1 != 2\n"
+            "ERROR: tearDown (__main__.T.tearDown)\n"
+            "FAIL: test_bad (__main__.T.test_bad)\n"
+            "Ran 3 tests\n"
+        )
+        self.assertEqual(lsc.failed_tests(output), ["test_bad", "tearDown"])
+
+    def test_a_new_test_in_an_already_failing_file_is_new(self):
+        rows = [{"file": "test_a.py", "rc": 1, "failed": ["test_old", "test_new"]}]
+        blind = lsc.blind_files(rows, ["test_a.py"], {"test_a.py": ["test_old"]})
+        self.assertEqual(blind, [])
+        self.assertEqual(
+            lsc.regressions(rows, ["test_a.py"], {"test_a.py": ["test_old"]}),
+            ["test_a.py::test_new"],
+        )
+
+    def test_the_same_failure_as_before_is_not_new(self):
+        rows = [{"file": "test_a.py", "rc": 1, "failed": ["test_old"]}]
+        self.assertEqual(
+            lsc.regressions(rows, ["test_a.py"], {"test_a.py": ["test_old"]}), []
+        )
+
+    def test_a_file_absent_from_the_baseline_is_reported_by_name(self):
+        rows = [{"file": "test_b.py", "rc": 1, "failed": ["test_x"]}]
+        self.assertEqual(lsc.regressions(rows, ["test_a.py"], {"test_a.py": []}), ["test_b.py"])
+
+    def test_a_baseline_file_whose_output_cannot_be_read_is_blind_not_safe(self):
+        # A crash at import prints no FAIL: line. File-level would call this known.
+        rows = [{"file": "test_a.py", "rc": 1, "failed": []}]
+        self.assertEqual(lsc.blind_files(rows, ["test_a.py"], {"test_a.py": ["test_old"]}),
+                         ["test_a.py"])
+
+    def test_write_baseline_records_names_beside_file_names(self):
+        rows = [{"file": "test_a.py", "rc": 1, "seconds": 0.1, "failed": ["test_x"]},
+                {"file": "test_b.py", "rc": 0, "seconds": 0.1, "failed": []}]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "baseline.json"
+            lsc.write_baseline(rows, "abc1234", path)
+            data = json.loads(path.read_text(encoding="utf8"))
+        self.assertEqual(data["failures"], ["test_a.py"])
+        self.assertEqual(data["failed_tests"], {"test_a.py": ["test_x"]})
+
+
 class TimeoutTest(unittest.TestCase):
     def test_a_test_that_outlives_its_limit_counts_as_a_failure(self):
         # The gate would see the hang as a failure too, and a hang is the one
