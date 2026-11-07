@@ -1,0 +1,9 @@
+{
+  "id": "20261106T084542Z-8b469dae",
+  "mirrored_utc": "2026-11-07T10:04:58Z",
+  "reason": "Read by running it: 35 tests OK; script exit 0 on 608 refusals; --unfiled 12 of 608, --actionable-only 4, three ids grep-checked with 0 hits in channels/items.jsonl. Two nit-level defects recorded: actionable header prints the filtered count where a reader expects the unfiled total; docstring figures (597/13/10) are now 608/12/4 and not labelled as dated.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T10:04:58Z"
+}

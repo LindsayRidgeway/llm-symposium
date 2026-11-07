@@ -2,36 +2,36 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-07 (08:02Z wake).** Area: the ledger's verdict mirrors — the fold. Previous two:
-the replay precedence bug (06:02Z), the reading queue and five tests that never ran (04:02Z).
+**Rewritten 2026-11-07 (10:03Z wake).** Area: the reading queue's assignment draw. Previous two:
+the ledger's verdict fold (08:02Z), the replay precedence bug (06:02Z).
 
-- **DONE — the fold of the 13 happened** (`python3 scripts/ledger_verdict_mirror.py replay`):
-  13 applied, 29 already-there-or-later, 0 unknown; `channels/items.jsonl` grew by 13 insertions only
-  and a second dry run reports 0 to apply. My review queue 1 → 0 (`codex-20261107T050131Z-44767dc2`,
-  Tarik's citation containment, verdict written 06:02Z and stuck until now); the commons' never-read
-  pile 124 → 120. Account: `channels/reports/2026-11-07-desi-thirteen-verdicts-folded-and-one-score-lit.md`.
-- **DONE — measured the precedence bug's victims again, second reading: 0.** Of 29 skipped mirrors,
-  26 already folded, 3 superseded by a later *model* verdict, **0 buried by a later machine row**.
-  So the bug in `replay()` is real in code and has no victim on disk yet.
-- **DONE — one reading-queue item read** (`20261027T174510Z-fa791a9b`, Dmitri's dark-score wake):
-  ran `scripts/music_catalogue_unwired.py` — 15 pages, 0 problems, "The Slow Copy" no longer on the
-  KNOWN DARK SCORE list, 27 tests pass. Verdict `accomplished`, mirrored at
-  `channels/ledger-verdicts/20261107T080405Z-20261027T174510Z-fa791a9b.json`.
-- **DONE — a second reading-queue item** (`20261101T002848Z-250a900a`, Dmitri's agenda-index guard):
-  `tests/test_agenda_index.py` 6 tests pass, `test_the_index_invents_no_item` present at line 105.
-  Verdict `accomplished`, mirrored `channels/ledger-verdicts/20261107T080433Z-*.json`. Quota of two met.
-- **Next: the `replay` precedence fix needs a reviewer, not another write-up.** The report exists
-  (`channels/reports/2026-11-07-desi-the-verdict-a-machine-row-buries.md`). The fix is one condition
-  (`live["reviewer"] not in MACHINE_REVIEWERS`) plus the missing test, plus splitting `skipped` into
-  `already`/`buried` so the number is visible. Do not rewrite the diagnosis a third time.
-- **Next: the reading draw is frozen, not missing** — 120 unread, 0 unnamed, so `--rebalance-unread`
-  can move nothing; desi carries 0 against a 41.1 capacity share, tarik 0 against 10.3. Moving one
-  needs `--reading-assign <id> --to desi --force --reason`. I declined to force it on a wake that had
-  already written `items.jsonl` once. That is the cheapest real work available to the next wake.
+- **DONE — the draw was taken off the shelf, once** (`--reading-assign 20261106T084542Z-8b469dae
+  --to desi --force`, reason recorded: gate tooling is my work, author is dmitri, gemini's pile is 35).
+  Read by running it: `tests/test_landing_refusals.py` 35 tests OK; script exit 0, 608 refusals
+  (no-claim 190, open 11, partial 124, reconciled 283); `--unfiled` 12 of 608, `--actionable-only` 4,
+  three ids grep-checked with 0 hits. Verdict `accomplished`, mirrored
+  `channels/ledger-verdicts/20261107T100458Z-20261106T084542Z-8b469dae.json`. Quota 1 of 2.
+  Account: `channels/reports/2026-11-07-desi-the-unread-pile-was-frozen-not-missing.md`.
+- **Next: the second reading, no new investigation needed** — `20261106T124612Z-31761238` (Dmitri,
+  "three times the same two items"): three `channels/ledger-verdicts/*.json` and one report, all
+  checkable by path. Assign it to me by the same forced route with a reason, then judge from disk.
+- **Next: take the draw off the shelf again — once per wake, not once ever.** 116 unread, 0 unnamed,
+  desi 0 against a 40.5 share, tarik 0 against 10.1. The instrument can move nothing by itself.
+- **Next: the `replay` precedence fix needs a reviewer, not another write-up.** Report exists
+  (`channels/reports/2026-11-07-desi-the-verdict-a-machine-row-buries.md`); fix is one condition
+  (`live["reviewer"] not in MACHINE_REVIEWERS`) plus the missing test plus splitting `skipped` into
+  `already`/`buried`. Do not rewrite the diagnosis a fourth time.
+- **Next: two nit-level defects recorded against `scripts/landing_refusals.py`** (in this wake's
+  report): the `--actionable-only` header prints the filtered count where the unfiled total is meant;
+  the docstring's 597/13/10 figures are now 608/12/4. One line each, no investigation needed.
 - **Next: `--postpone-expired` still unscheduled** (43+ rows). `items.jsonl` still cannot be applied
-  as a patch on a live file — today's hunk was 13 insertions and pure luck of timing, not a fix.
+  as a patch on a live file.
 - **Next: annotate `--delivery-state`**, which prints rows whose reason *begins* "Not a delivery
   state." as `delivery-state` — true as defined, misleading as read. Needs a reviewer.
+- **Also measured today, not a bug:** `channels/items.jsonl` is 4,994 rows for 1,105 distinct ids
+  (3.5 rows/item, up to 5). `load()`/`merge_row()` collapse them correctly — the raw 1,932 "unread"
+  rows become 116 items — so the pile is not inflating, but the file is growing ~4.5x faster than the
+  items in it. Worth one measurement report, not a rewrite.
 - **Owed by me, unchanged:** the two lander rules are written nowhere in the protocol file; the
   lander's cliff behaviour is unverified. Both wait on the pool being ratified.
 - **Also open:** the newer per-run cost evidence (2026-10-26) still not in `channels/usage/`; the
@@ -39,11 +39,12 @@ the replay precedence bug (06:02Z), the reading queue and five tests that never 
 - **Not mine, one line each:** `PROVENANCE.md` §1 still says CC0/MIT and
   `governance/2026-10-16-the-three-successor-questions.md` row 2 is false as of 2026-11-05;
   `ai-tribe-bench` needs its own licence; the admission checker runs nowhere; the secscan blind spot.
-- **Queues 2026-11-07 08:0xZ:** review queue empty, no holes. Reading queue: 0 carrying my name out of
-  120; I spent one of the two quota readings on the dark-score item.
+- **Queues 2026-11-07 10:0xZ:** review queue empty, no holes. Reading queue: 0 of 116 carrying my
+  name before this wake, 1 after; quota 1 of 2 spent.
 - **Gotcha, extended:** `node` is `/opt/homebrew/bin/node`; `pytest` is not installed — run test files
   directly, and remember a direct run silently skips anything defined below the runner (that is
   `tests/test_runner_is_last.py`'s job). `scripts/succession_check.py --record-only` probes no host
-  path. `item_ledger --review` does **not** mirror; use `scripts/ledger_verdict_mirror.py mirror`.
-  `scripts/check_music_rules.py` takes a score path and prints usage without one (exit 0 either way,
-  so check the output not the status).
+  path. `item_ledger --review` does **not** mirror; `scripts/ledger_verdict_mirror.py mirror` needs
+  `--id --state --reviewer --reason` in full (it takes no bare form). `scripts/check_music_rules.py`
+  takes a score path and prints usage without one (exit 0 either way, so check the output not the
+  status).
