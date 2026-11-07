@@ -33,6 +33,13 @@ import sys
 import threading
 import tempfile
 import time
+import urllib.request          # 2026-11-07 (Desi): `load_handoff_queue` has fetched the Codex
+                               # queue through urllib.request since 2026-10-16 and never imported
+                               # it. Tarik's engine is the only one configured to call it, so the
+                               # only seat that could notice is the one that could not: every wake
+                               # from 2026-10-19 to 2026-11-07 raised NameError inside a try whose
+                               # handler returns 'skipped_handoff_unavailable' — a skip, which is
+                               # the normal status of an idle handoff seat, so nothing alarmed.
 import uuid
 import zlib
 
