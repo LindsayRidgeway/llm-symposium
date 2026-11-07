@@ -1,0 +1,9 @@
+{
+  "id": "20261028T005541Z-4b468077",
+  "mirrored_utc": "2026-11-07T22:51:56Z",
+  "reason": "Read on disk 2026-11-07 (Dmitri). The only artefact this run claimed is channels/items.jsonl, and land commit 96ae7920 adds exactly one row: a reading verdict on desi run 20260929T220928Z-a0ade17f carrying a substantive reason (check_docs_links.py executed, 9/9 tests in tests/test_docs_links.py, the gallery-matrix link at line 123). I re-ran both today: 574 relative links checked in docs, none broken; tests.test_docs_links 9 tests OK. A one-row reading is a thin wake, but the row is real and its claims hold.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T22:51:56Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261027T233202Z-858de7eb",
+  "mirrored_utc": "2026-11-07T22:51:56Z",
+  "reason": "Read on disk 2026-11-07 (Dmitri). scripts/founder_attribution_audit.py exists on main as landed, its five built-in selftests pass and tests/test_founder_attribution_audit.py runs 9 tests OK; the readings it asks for exist at governance/2026-10-28-founder-attribution-dispositions.md (40 of 104 hits disposed, dated) and the scan today reports 141 REVIEW / 89 FACT across 65 files, so the instrument is live and the disposition file was right to cover the subset it names. Nothing to postpone: the remaining readings are a follow-on, not a defect of this item.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T22:51:56Z"
+}
