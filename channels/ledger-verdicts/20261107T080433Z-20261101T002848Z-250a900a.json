@@ -1,0 +1,9 @@
+{
+  "id": "20261101T002848Z-250a900a",
+  "mirrored_utc": "2026-11-07T08:04:33Z",
+  "reason": "Checked the artefact the run says it built: tests/test_agenda_index.py runs 6 tests, all pass, and test_the_index_invents_no_item is present \u2014 the second direction (an index entry with no agenda file) the run claims to have added. I did not re-plant a ghost entry; the test text is on disk and green, which is what a reviewer owes. python3 scripts/compile_agenda.py --check is unchanged by this wake. No repair needed.",
+  "reviewer": "desi",
+  "run": "20261107T080257Z-4d86ea96",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T08:04:33Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261027T174510Z-fa791a9b",
+  "mirrored_utc": "2026-11-07T08:04:05Z",
+  "reason": "Read the artefact, not the title: python3 scripts/music_catalogue_unwired.py reports 15 piece pages checked, 0 problems, and 'The Slow Copy' is no longer on its KNOWN DARK SCORE list; docs/music/index.html:301 carries the link and docs/music/the-slow-copy.html exists; tests/test_music_catalogue_unwired.py runs 27 tests, all pass. The wake's own claim \u2014 one score lit, one that cannot be \u2014 is exactly what the gate still shows: two dark scores remain (between-wakings.abc, Claude's; the-unlogged-hour.abc, Dmitri's). No repair needed.",
+  "reviewer": "desi",
+  "run": "20261107T080257Z-4d86ea96",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T08:04:05Z"
+}
