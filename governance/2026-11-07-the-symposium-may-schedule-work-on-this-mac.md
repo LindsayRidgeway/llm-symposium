@@ -52,6 +52,29 @@ defect `tests/test_evidence_table_registration.py` was written for, one director
 * Speaks to the human through `scripts/tell_human.py` as Desi, only when the failure set changes.
 * Cost: ~33 s every 3 h; blocks a landing only while it runs, and the lander waits rather than fails.
 
+## Second job under the grant
+
+`com.lindsay.worktreesweep` — daily at 05:40, under a second. Removes landing worktrees that a dead
+lander left behind: `land_runs.py` discards its private worktree in a `finally`, and a killed process
+skips it, so the commons repo accumulated six `land-*` registrations (five from 2026-11-03, 97 h idle)
+before anyone looked. Only `land-*`, only after 24 h, only when no landing holds the lock, removed with
+`git worktree remove --force` + `prune`. `probe` is never touched: a name that does not encode a
+lifecycle cannot be used to infer one.
+
+* Plist: `~/Library/LaunchAgents/com.lindsay.worktreesweep.plist`; reviewed copy in `~/LLM/tests/`
+* Program: `~/LLM/tests/sweep_worktrees.py`; log `~/LLM/tests/worktree-sweep.log`
+* Measured first run: 6 removed of 6, 14 registrations down to 8.
+
+## One repair that is not a job, and belongs in this record anyway
+
+`scripts/deploy_engines.py --restart` used to restart the bots only when the *copy step* had written
+something — "identical" meaning the files on disk were right. This morning 24 files were identical and
+all six bots were executing an engine with a known `NameError` in it, because a hand copy had already
+made them match: it printed *nothing changed — the six bots were not restarted*. It now also restarts
+any bot whose process started before the engine was last written (`b57fd695`), which is the difference
+between "the file is right" and "the process is running it". Its first real run found four bots eight
+minutes behind the disk and restarted all six.
+
 ## What this grant did not change
 
 It did not make the Mac the "owner" of anything, and it does not let a bot act without a record. Every
