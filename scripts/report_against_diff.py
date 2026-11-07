@@ -16,12 +16,21 @@ What this measures, in one sentence each, with no thresholds to tune:
 
 * `patch_bytes`  — the size of the run's `changes.patch`, i.e. whether it wrote anything at all;
 * `report`       — one of `missing` (no file), `silent` (the file exists but has at most one non-empty
-  line, so it cannot contain an account of anything), `account` (two or more lines and no `LAND:` line) or
-  `landed` (two or more lines including a `LAND:` line).
+  line, so it cannot contain an account of anything), `account` (two or more lines and no `LAND:` line
+  that names anything) or `landed` (a `LAND:` line that names something).
 
 The interesting cell is `silent` with `patch_bytes > 0`: the work exists, the record of it does not. A
 reader — the human, a reviewer, a later wake — reading only the report sees nothing, which is why the same
 item is often re-derived from scratch.
+
+A `LAND:` line that names nothing is not a landing, and until 2026-11-07 this script counted it as
+one. Every wake is told to write `LAND: <paths>` with its first write and to replace it as it goes;
+what a cut-off run leaves behind is the placeholder, `LAND: (none yet)` — measured here on 2026-11-07:
+57 of the 874 patched runs called `landed` carry nothing else, so the headline "LAND line present
+80.8%" was really 75.5%. The same measurement found 174 runs classified `landed` with an empty
+`changes.patch`, 156 of them naming repo-relative paths. That is not proof of a false claim — a wake
+whose work was all in another checkout patches nothing here — but the record and the diff disagree,
+and only one of the two can be read by this script, so both are now printed.
 
 What this deliberately does not do: it does not judge whether the work was any good, and it does not read
 `changes.patch`. It answers one factual question about a run's bookkeeping.
@@ -37,6 +46,7 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import re
 import sys
 
 RUNS_GLOB = "*-bot/tick-state/runs"
@@ -45,6 +55,20 @@ RUNS_GLOB = "*-bot/tick-state/runs"
 def nonempty_lines(text: str) -> list[str]:
     """Every line with content, whitespace-stripped. Blank lines are not a record of anything."""
     return [line.strip() for line in text.splitlines() if line.strip()]
+
+
+# A LAND line that names no path. `LAND: (none yet)` is the template the instruction tells every wake
+# to write before it has done anything, so counting it as a landing measures the instruction, not the
+# work: 57 of the 874 patched "landed" runs on 2026-11-07 said only that.
+LAND_PLACEHOLDER_RE = re.compile(r"^LAND:\s*\(?\s*(?:none|nothing|n/?a|tbd|no\s+files?)\b", re.IGNORECASE)
+
+
+def land_names_something(line: str) -> bool:
+    """False for `LAND:` and for the placeholder every wake writes first."""
+    stripped = line.strip()
+    if stripped.rstrip(": ").upper() == "LAND":
+        return False
+    return not LAND_PLACEHOLDER_RE.match(stripped)
 
 
 def classify_report(report: pathlib.Path) -> str:
@@ -58,7 +82,7 @@ def classify_report(report: pathlib.Path) -> str:
     if len(lines) <= 1:
         # The first line is the intent, by instruction. One line cannot also be the account.
         return "silent"
-    if any(line.startswith("LAND:") for line in lines):
+    if any(line.startswith("LAND:") and land_names_something(line) for line in lines):
         return "landed"
     return "account"
 
@@ -83,15 +107,19 @@ def census(root: pathlib.Path) -> list[dict]:
                 continue
             report = classify_report(run / "report.txt")
             first = ""
+            placeholder = False
             if report != "missing":
                 lines = nonempty_lines((run / "report.txt").read_text(encoding="utf-8", errors="replace"))
                 first = lines[0] if lines else ""
+                lands = [line for line in lines if line.startswith("LAND:")]
+                placeholder = bool(lands) and not any(land_names_something(l) for l in lands)
             rows.append({
                 "id": run.name,
                 "bot": bot,
                 "patch_bytes": patch_bytes(run),
                 "report": report,
                 "first_line": first,
+                "land_placeholder": placeholder,
             })
     return rows
 
@@ -111,6 +139,9 @@ def summarise(rows: list[dict]) -> dict:
         "silent_with_work_share_of_patched": (
             round(100.0 * len(silent_with_work) / len(worked), 1) if worked else 0.0
         ),
+        "land_placeholder": sum(1 for r in rows if r.get("land_placeholder")),
+        "landed_with_empty_patch": sum(
+            1 for r in rows if r["report"] == "landed" and r["patch_bytes"] == 0),
         "landed_share_of_patched": (
             round(100.0 * sum(1 for r in worked if r["report"] == "landed") / len(worked), 1)
             if worked else 0.0
@@ -154,6 +185,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"silent record, real work   {stats['silent_with_work']} of {stats['runs_with_a_patch']} "
           f"patched runs ({stats['silent_with_work_share_of_patched']}%)")
     print(f"LAND line present          {stats['landed_share_of_patched']}% of patched runs")
+    print(f"LAND line names nothing    {stats['land_placeholder']} run(s) carry only a placeholder")
+    print(f"landed, empty patch        {stats['landed_with_empty_patch']} run(s) name a landing "
+          f"and changed nothing here")
     print()
     print("silent = the report has at most one non-empty line, so it cannot say what the run did.")
     print("`--show silent` lists them; `--show missing` lists runs with no report.txt at all.")

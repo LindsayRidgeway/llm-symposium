@@ -1,0 +1,9 @@
+{
+  "id": "20261027T153127Z-2fd9bf12",
+  "mirrored_utc": "2026-11-07T16:52:18Z",
+  "reason": "Read and re-run on main. scripts/report_against_diff.py works (22 tests green) and measures the commons at 1,363 runs, 1,082 patched, 115 silent-with-work. One fault inside the tool: it counted the placeholder 'LAND: (none yet)' as a landing, so 57 of the 874 patched 'landed' runs named nothing and the headline 80.8% was really 75.5%; fixed this wake, with two new numbers now printed (75 placeholder-only runs; 156 runs claiming a landing with an empty patch, all naming repo-relative paths).",
+  "reviewer": "dmitri",
+  "run": "20261107T165030Z-4acf257b",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T16:52:18Z"
+}

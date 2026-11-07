@@ -68,6 +68,21 @@ class Classify(unittest.TestCase):
         self.report.write_text("Done: wrote the file.\nLAND: docs/x.md\n", encoding="utf-8")
         self.assertEqual(rad.classify_report(self.report), "landed")
 
+    def test_placeholder_land_is_not_a_landing(self):
+        """`LAND: (none yet)` is the template every wake writes first, not a delivery."""
+        self.report.write_text("Started: reading the queue.\nLAND: (none yet)\n", encoding="utf-8")
+        self.assertEqual(rad.classify_report(self.report), "account")
+
+    def test_bare_land_names_nothing_too(self):
+        self.report.write_text("Started: reading.\nLAND:\n", encoding="utf-8")
+        self.assertEqual(rad.classify_report(self.report), "account")
+
+    def test_a_later_real_land_line_still_counts(self):
+        """The instruction says replace the line as you go, so a run can carry both."""
+        self.report.write_text("Started: reading.\nLAND: (none yet)\nLAND: docs/x.md\n",
+                               encoding="utf-8")
+        self.assertEqual(rad.classify_report(self.report), "landed")
+
     def test_land_must_start_the_line(self):
         self.report.write_text("Done.\nmy LAND: docs/x.md is not a LAND line\n", encoding="utf-8")
         self.assertEqual(rad.classify_report(self.report), "account")
@@ -93,6 +108,13 @@ class Census(unittest.TestCase):
         self.assertEqual(rows["r1"]["patch_bytes"], 0)
         self.assertEqual(rows["r2"]["patch_bytes"], 37)
 
+    def test_placeholder_land_is_counted_separately(self):
+        _run(self.tmp, "a-bot", "r1", "Started: x\nLAND: (none yet)\n", 10)
+        _run(self.tmp, "a-bot", "r2", "Done.\nLAND: docs/x.md\n", 10)
+        rows = {r["id"]: r for r in rad.census(self.tmp)}
+        self.assertTrue(rows["r1"]["land_placeholder"])
+        self.assertFalse(rows["r2"]["land_placeholder"])
+
     def test_first_line_is_carried_for_listing(self):
         _run(self.tmp, "a-bot", "r1", "\n  Started: checking the queue.\n", 5)
         self.assertEqual(rad.census(self.tmp)[0]["first_line"], "Started: checking the queue.")
@@ -112,6 +134,13 @@ class Summary(unittest.TestCase):
         self.assertEqual(stats["silent_with_work"], 1)
         self.assertEqual(stats["silent_with_work_share_of_patched"], 50.0)
         self.assertEqual(stats["by_report"], {"missing": 1, "silent": 2, "account": 0, "landed": 1})
+
+    def test_a_landing_with_no_patch_is_counted(self):
+        rows = [
+            {"id": "a", "bot": "x", "patch_bytes": 0, "report": "landed", "first_line": ""},
+            {"id": "b", "bot": "x", "patch_bytes": 10, "report": "landed", "first_line": ""},
+        ]
+        self.assertEqual(rad.summarise(rows)["landed_with_empty_patch"], 1)
 
     def test_empty_input_does_not_divide_by_zero(self):
         stats = rad.summarise([])

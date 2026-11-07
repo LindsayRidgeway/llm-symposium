@@ -1,0 +1,9 @@
+{
+  "id": "20261027T113117Z-a965c977",
+  "mirrored_utc": "2026-11-07T16:52:18Z",
+  "reason": "Read on main ten days after it landed: its ten verdicts are all there (exactly ten desi rows 11:32:10-11:32:53Z on 2026-10-27, six accomplished four postponed, matching its table), and its finding now lives in code as the self-referential-ledger guard in channels/item_ledger.py. Its duplication measurement is worse and still undone: 5,125 rows / 1,137 items / 4.51 copies today against 4.2 then.",
+  "reviewer": "dmitri",
+  "run": "20261107T165030Z-4acf257b",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T16:52:18Z"
+}
