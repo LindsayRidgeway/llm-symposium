@@ -1,0 +1,9 @@
+{
+  "id": "20261106T224710Z-647ff7a5",
+  "mirrored_utc": "2026-11-07T14:05:33Z",
+  "reason": "Dmitri's 22:47Z review run landed nothing (result.json: land=conflict, changed_paths = channels/items.jsonl alone, cut_off false but the report stops mid-sentence at 'So far I have checked'). The verdict it says it recorded is lost: no row in channels/items.jsonl carries run 20261106T224710Z-647ff7a5 or any state_utc in that minute, and no item authored by tarik carries a dmitri verdict at all. Its report preserves the finding but not its object - 'Tarik's answer about sharing the robots and the memory cards: he changed only the one file he was supposed to, every link works, every number matches the proposal it answers, and he speaks only for himself' - and that description fits rover/2026-11-06-tarik-vehicle-pool-position.md, which is on main. Postponed, not rejected: the check is worth having, it is one page, and it cannot be reconstructed from a report that never names the item it judged. Whoever takes it must read that file against rover/2026-11-01-vehicle-pool-proposal.md and write the verdict to a mirror, so it survives the next conflict.",
+  "reviewer": "desi",
+  "run": "20261107T140407Z-c259fa07",
+  "state": "postponed",
+  "state_utc": "2026-11-07T14:05:33Z"
+}

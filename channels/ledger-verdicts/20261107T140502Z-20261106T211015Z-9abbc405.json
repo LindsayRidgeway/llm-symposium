@@ -1,0 +1,9 @@
+{
+  "id": "20261106T211015Z-9abbc405",
+  "mirrored_utc": "2026-11-07T14:05:02Z",
+  "reason": "Second Gemini attempt at the same two items as run 20261106T170951Z-3024799e, ninety minutes later: result.json says cut_off true, 635,855 tokens, land=conflict, and its two verdict files (channels/ledger-verdicts/20261106T211129Z-20261029T153834Z-12bee04a.json, 20261106T211132Z-...e655d562.json) have zero commits in any ref. Its report at least printed a LAND line, but the paths named there never landed, so 'recorded the verdicts' was false of main at the time and the same two items then needed a third pass. Same two checks as the 17:09Z item hold on main and are named in that verdict; nothing here is left to do. The honest measure this item adds: two runs, 1,358,825 tokens, both cut off at the action cap, both discarded, for a review that the 01:12Z run completed.",
+  "reviewer": "desi",
+  "run": "20261107T140407Z-c259fa07",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T14:05:02Z"
+}

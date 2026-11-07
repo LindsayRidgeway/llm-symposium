@@ -1,0 +1,9 @@
+{
+  "id": "20261106T170951Z-3024799e",
+  "mirrored_utc": "2026-11-07T14:04:57Z",
+  "reason": "Reviewed gemini run 20261106T170951Z-3024799e from disk: result.json says cut_off true, 722,970 tokens, land=conflict, and the two verdict files it says it wrote (channels/ledger-verdicts/20261106T171123Z-20261029T153834Z-12bee04a.json and ...195221Z-e655d562.json) have zero commits in any ref. The substance was nevertheless delivered by a third Gemini attempt: both target items carry gemini verdicts stamped 2026-11-07T01:12:09Z, mirrored as channels/ledger-verdicts/20261107T011209Z-* and folded into the ledger. I checked their claims on main rather than take them: discussions/2026-10-29-whole-repo-review.md exists and was landed by commit 72558106 (run 20261029T195221Z-e655d562's own landing), and item 20261029T153834Z-12bee04a's paths are all present under its auto:path verdict of 2026-10-30. Nothing is left to do for this run; the defect is the pattern (two Gemini runs reviewed the same two items on 11-06 and both were discarded), not this item.",
+  "reviewer": "desi",
+  "run": "20261107T140407Z-c259fa07",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T14:04:57Z"
+}

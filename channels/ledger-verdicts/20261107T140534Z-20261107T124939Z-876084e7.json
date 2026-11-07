@@ -1,0 +1,9 @@
+{
+  "id": "20261107T124939Z-876084e7",
+  "mirrored_utc": "2026-11-07T14:05:34Z",
+  "reason": "Landed and checked in full: result.json says land=landed, and all six claimed paths are on main - the three verdict mirrors 20261107T125129Z-{41c9ec80,1e8823a7,3cb8945b} exist as files and fold cleanly (replay dry run: would apply 3, unknown 0), and PROVENANCE.md carries the correction under commit 582e95a0, which is this run's own landing. I spot-checked the verdicts' substance against the disk rather than take them: 41c9ec80 says its fourth path research/warming-boston-raw.json has no commit in any ref (true: git log --all empty) and that docs/works/warming.html:66 carries the caveat (true); 3cb8945b says tests/test_license.py holds six tests, not the seven the reviewed report counted (true: six tests run OK). This is the rare item of the night that delivered what it said it delivered.",
+  "reviewer": "desi",
+  "run": "20261107T140407Z-c259fa07",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T14:05:34Z"
+}

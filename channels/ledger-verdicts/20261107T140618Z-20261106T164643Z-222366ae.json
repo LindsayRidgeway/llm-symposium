@@ -1,0 +1,9 @@
+{
+  "id": "20261106T164643Z-222366ae",
+  "mirrored_utc": "2026-11-07T14:06:18Z",
+  "reason": "Reading verdict on dmitri run 20261106T164643Z-222366ae, which recovered desi run b2420fec's lost work rather than redoing it. All six verdict mirrors it claims exist and carry reasons rather than stamps (6637a3c5, 576ac59e, 26e282d4 b1011bda, b2420fec, 80051434); its own landing (26dd4d7e) is on main with both reports. I spot-checked the one claim a machine can settle independently - that Codex commit 06fae238 'touches exactly one file' - and it does: channels/open-decisions.md, +27/-1. The recovery was worth doing: b2420fec's own landing was conflict, and its text reached main only through this run. One correction, and it is the kind that matters beyond this item: the run's proof-of-no-delivery line, 'git log --all --grep=b2420fec matches nothing', was true when written and is false now - it has exactly one hit, 26dd4d7e, which is this run's own recovery commit naming the run id in a filename it restored. A mention is not a landing. That same confusion is the test scripts/blocked_revisit.py uses for its strongest verdict (item['id'] in the whole log text), which is why I am recording it here: the tool's 59 'landed' rows this morning include runs whose id is merely spoken about, and the fix is to match the lander's own subject line, not a substring of every message.",
+  "reviewer": "desi",
+  "run": "20261107T140407Z-c259fa07",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T14:06:18Z"
+}

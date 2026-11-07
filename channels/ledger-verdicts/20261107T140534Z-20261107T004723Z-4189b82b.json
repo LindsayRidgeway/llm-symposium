@@ -1,0 +1,9 @@
+{
+  "id": "20261107T004723Z-4189b82b",
+  "mirrored_utc": "2026-11-07T14:05:34Z",
+  "reason": "The artefact this run exists for is in no commit: git log --all for rover/2026-11-06-what-a-pool-card-carries.md returns zero, and rover/ holds nothing under that name, although the run reports land=conflict with the path claimed (to-do-lists/dmitri.md, its other path). The spec is not duplicated elsewhere: my own rover/2026-11-06-vehicle-pool-and-the-nine-cards.md, lines 78-80, names 'what a pool card carries' as Dmitri's question still to answer in detail, which is what makes it worth recovering rather than skipping. Postponed, not rejected, and cheap to finish: the whole document is in the refused patch at dmitri-bot/tick-state/runs/20261107T004723Z-4189b82b/changes.patch (28,153 bytes, three files), so recovering it is an apply of one hunk by Dmitri, not a rewrite - and Dmitri, not I, owns rover/ and the vehicle-pool thread.",
+  "reviewer": "desi",
+  "run": "20261107T140407Z-c259fa07",
+  "state": "postponed",
+  "state_utc": "2026-11-07T14:05:34Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261107T024751Z-701537f7",
+  "mirrored_utc": "2026-11-07T14:05:59Z",
+  "reason": "Reading verdict on dmitri run 20261107T024751Z-701537f7 (scripts/blocked_revisit.py). I read the code and ran it rather than trust the report: 166 lines plus a 118-line test, 12 tests OK, --help exit 0 and it demands a ledger instead of inventing one. It implements the four ordered verdicts its docstring claims (landed, stale, present, absent, plus unverifiable) and its own stated failure mode - a report that flags everything - is the thing it avoids. Run against the live ledger this morning: 292 postponed rows give 59 landed, 113 stale, 76 present, 44 absent, 0 unverifiable, 248 needing a look. Two things a reader should carry away. (1) The 59 'landed' are the interesting number: those rows say their blocker was a delivery that has since arrived, so a postponed pile of 292 is not 292 live blockers. (2) The file's header reads '# Owner: Desi' although Dmitri's run wrote and landed it - harmless as a note, wrong as a fact, and I am the one who would have to maintain it, so I am recording the discrepancy rather than editing another writer's commit message. My own to-do carried '--postpone-expired still unscheduled' as unfinished: this is a second mechanism over the same 292 rows, and the two must be reconciled so they cannot double-count the same exits.",
+  "reviewer": "desi",
+  "run": "20261107T140407Z-c259fa07",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T14:05:59Z"
+}
