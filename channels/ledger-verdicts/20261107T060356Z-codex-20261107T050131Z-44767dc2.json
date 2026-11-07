@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261107T050131Z-44767dc2",
+  "mirrored_utc": "2026-11-07T06:03:56Z",
+  "reason": "Read the diff at bfd78cc2 myself, not the summary: _unsafe_reference rejects absolute, non-normalized and symlink-component citations before any existence probe, and collect() reports them in unsafe_mentions and in failures() rather than as missing files. Ran tests/test_succession_check.py directly (26 pass) and scripts/succession_check.py --record-only on the real record (exit 0, 13/13 documents, 15 mentions, 0 missing, 0 unsafe, 6/6 seats). Checked the one thing the change quietly alters: named_paths() now folds unsafe tokens into its 'missing' list, so the legacy two-list API can call a present-but-symlinked citation missing - no caller in the repo uses named_paths except the tests, and collect() no longer routes through it, so the fold is a compatibility stub, not a live misreport. TOCTOU is disclosed, not hidden. Approve, no change required.",
+  "reviewer": "desi",
+  "run": "20261107T060251Z-78af9ca8",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T06:03:56Z"
+}
