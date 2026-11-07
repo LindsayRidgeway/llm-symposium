@@ -732,6 +732,63 @@ def _credential_file_age(path: Path | None = None, now=None):
     return when, round((now - when).total_seconds() / 86400)
 
 
+WATCH_HISTORY = REPO / "channels" / "watch" / "history.jsonl"
+WATCH_STALE_HOURS = 30
+
+
+def _watch_block(now=None, path: Path | None = None) -> list[str]:
+    """One line when the daily review check has stopped running; nothing when it is healthy.
+
+    Added 2026-11-07 (Dmitri). `scripts/ledger_watch.py` is the only thing that folds mirror
+    verdicts into the ledger, repairs refused landings, collects unfiled items and reconciles the
+    ones that have since landed — and it is driven by one launchd job on this Mac. Nothing reads
+    its history file, so if that job dies the queue silently stops draining and the only symptom
+    is an absent Telegram message nobody is owed. That is the same defect as a caller that runs
+    nowhere: a machine whose silence is indistinguishable from a machine that is happy.
+
+    The watchdog writes one JSON line per run to `channels/watch/history.jsonl` (committed, so
+    this is readable from any checkout). This block is the reader. It is deliberately silent when
+    the last run is recent — the human asked for a report, not for a heartbeat — and it names the
+    last run and the gap only once the gap is longer than a day plus slack.
+
+    Threshold: the job runs daily at 07:45 local and this report runs at 08:00, so a healthy gap
+    is about 24h; 30h leaves six hours of slack for a laptop asleep at the wrong moment.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc)
+    path = path or WATCH_HISTORY
+    if not path.exists():
+        return ["", "### The daily review check",
+                "  no history file yet — `scripts/ledger_watch.py --dry-run` runs the measurement "
+                "without changing or sending anything"]
+    last = None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            last = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+    if not last:
+        return ["", "### The daily review check",
+                "  the history file has no readable run in it — that is the defect, not a quiet day"]
+    try:
+        when = dt.datetime.strptime(last.get("at", ""), "%Y-%m-%dT%H:%M:%SZ"
+                                    ).replace(tzinfo=dt.timezone.utc)
+    except ValueError:
+        return ["", "### The daily review check",
+                f"  STALE: the last line carries no readable time ({last.get('at')!r}), so nothing "
+                f"can say when it ran"]
+    age_h = (now - when).total_seconds() / 3600
+    if age_h <= WATCH_STALE_HOURS:
+        return []
+    return ["", "### The daily review check",
+            f"  STALE: it last ran {when.strftime('%Y-%m-%d %H:%MZ')}, {age_h:.0f}h ago — the "
+            f"queue is not being repaired, folded or reconciled",
+            "  → its only trigger is `~/Library/LaunchAgents/com.lindsay.ledgerwatch.plist`; "
+            "`launchctl list | grep ledgerwatch` and `~/LLM/ledger-watch.log` say why it stopped"]
+
+
 def _invitations_block(now=None, path: Path | None = None) -> list[str]:
     """Repository invitations: mail whose answer is not a reply.
 
@@ -1110,6 +1167,7 @@ def render(hours: int = 24, now: dt.datetime | None = None,
     lines += _wakes_block(now, hours)
     lines += _diagnosis(window, life, hours, items, now)
     lines += _review_block(items, window, hours)
+    lines += _watch_block(now)
     lines += _invitations_block(now)
     lines += ["", f"### Last {hours}h, by amigo"]
     lines += _letter_block(window, life, hours)

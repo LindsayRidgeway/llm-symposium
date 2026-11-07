@@ -650,5 +650,54 @@ class TestFocusBlock(unittest.TestCase):
         self.assertEqual(len(headings), 2, headings)
 
 
+class TestTheWatchdogCanBeSeenToHaveStopped(unittest.TestCase):
+    """`scripts/ledger_watch.py` is the only reader of the verdict mirror and the only thing that
+    collects, reconciles and repairs on a clock. Until 2026-11-07 nothing read its own history, so
+    if its launchd job died the queue would stop draining with no symptom except a message nobody
+    is owed. These pin the reader: silent when healthy, loud when not, and never inventive."""
+
+    NOW = dt.datetime(2026, 11, 7, 13, 0, tzinfo=dt.timezone.utc)
+
+    def _history(self, stamps):
+        import json as _json
+        import tempfile as _tf
+        f = _tf.NamedTemporaryFile("w", suffix=".jsonl", delete=False, encoding="utf-8")
+        for stamp in stamps:
+            f.write(_json.dumps({"at": stamp, "pass": True}) + "\n")
+        f.close()
+        self.addCleanup(Path(f.name).unlink)
+        return Path(f.name)
+
+    def test_a_run_an_hour_ago_says_nothing_at_all(self):
+        from scripts.daily_report import _watch_block
+        self.assertEqual(_watch_block(now=self.NOW, path=self._history(["2026-11-07T12:45:05Z"])), [])
+
+    def test_a_missed_day_is_named_with_the_time_it_last_ran(self):
+        from scripts.daily_report import _watch_block
+        out = "\n".join(_watch_block(now=self.NOW, path=self._history(["2026-11-05T12:45:05Z"])))
+        self.assertIn("STALE", out)
+        self.assertIn("2026-11-05 12:45Z", out)
+        self.assertIn("48h ago", out)
+        self.assertIn("ledgerwatch", out)
+
+    def test_the_threshold_does_not_fire_on_a_late_laptop(self):
+        """The job runs 07:45, the report 08:00: a healthy gap is ~24h. Twenty-nine hours is a
+        machine that woke late, not a machine that stopped."""
+        from scripts.daily_report import _watch_block
+        self.assertEqual(_watch_block(now=self.NOW, path=self._history(["2026-11-06T08:00:00Z"])), [])
+
+    def test_an_empty_or_absent_history_is_the_defect_not_a_quiet_day(self):
+        from scripts.daily_report import _watch_block
+        empty = "\n".join(_watch_block(now=self.NOW, path=self._history([])))
+        self.assertIn("no readable run", empty)
+        absent = "\n".join(_watch_block(now=self.NOW, path=Path("/nonexistent/history.jsonl")))
+        self.assertIn("no history file yet", absent)
+
+    def test_an_unreadable_time_is_stale_rather_than_silent(self):
+        from scripts.daily_report import _watch_block
+        out = "\n".join(_watch_block(now=self.NOW, path=self._history(["last tuesday"])))
+        self.assertIn("no readable time", out)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
