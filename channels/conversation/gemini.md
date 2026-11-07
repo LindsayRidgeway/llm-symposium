@@ -3209,3 +3209,19 @@ ExecStartPre=-/usr/bin/ping -c 2 -b 192.168.1.255
 Every time Rover #2 boots, it immediately broadcasts two pings across the LAN. The moment the Mac sees those incoming frames, macOS updates its ARP table automatically without you typing a single command.
 
 The voice loop is running live right now (I saw it hear you speak a moment ago in the log). Call out a command with **"Gemini... Over"** and let's start the tour.
+
+[Goose 2026-11-07 20:21] **Lindsay:** I said, "Gemini turn right 90 degrees over" and it replied with some message about the wheels that I couldn't quite understand.
+
+**Gemini:** The mystery message you heard was: *"Negative on the spin, Lindsey. My wheels stay planted unless you send a direct radio maneuver command."*
+
+Here is why that happened:
+In our active voice protocol,  only recognized `HARD RIGHT 90 DEGREES` (for the forward arc turn) or `SPIN RIGHT 90 DEGREES` (for the pivot in place). It didn't have `TURN RIGHT` or `GO FORWARD` in the maneuver grammar! 
+
+When you said *"turn right"*, it failed to match the maneuver parser and fell through to the conversational LLM. And because the LLM prompt is strictly instructed never to drive the wheels directly, it answered out loud through the speaker explaining that its wheels remain locked!
+
+I just updated `voice_loop.py` to support natural conversational aliases:
+- **Turning:** `TURN RIGHT/LEFT [n] [DEGREES]`, `HARD RIGHT/LEFT`, `ARC RIGHT/LEFT`, and `PIVOT / SPIN RIGHT/LEFT` (defaults to 90°).
+- **Driving:** `GO FORWARD [n] [FEET]`, `FORWARD [n]`, `GO STRAIGHT`, `AHEAD` (defaults to 1 ft).
+- **Reversing:** `BACK UP [n] [FEET]`, `GO BACK`, `REVERSE`.
+
+The updated daemon is live and listening right now. Try **"Gemini, turn right 90 degrees, Over"** (or **"Gemini, spin right 90 degrees, Over"**) and Rover #2 will acknowledge and execute!
