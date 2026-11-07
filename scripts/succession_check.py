@@ -25,7 +25,11 @@ successor's checks, not a script's.
 Usage:
     python3 scripts/succession_check.py
     python3 scripts/succession_check.py --json
+    python3 scripts/succession_check.py --record-only --json
     python3 scripts/succession_check.py --root /path/to/checkout
+
+`--record-only` skips all host process-path expansion and existence probes. JSON then reports
+`process_checked: false` and an empty process list; it makes no claim about runtime readiness.
 
 Exit codes: 0 every record claim holds (process gaps are printed, not raised), 1 a record claim is
 broken, 2 `SUCCESSION.md` is missing entirely — there is nothing to check.
@@ -152,7 +156,7 @@ def named_paths(root):
     return sorted(seen), missing
 
 
-def collect(root):
+def collect(root, *, check_process=True):
     if not os.path.exists(os.path.join(root, "SUCCESSION.md")):
         return {"root": root, "error": "SUCCESSION.md is missing — there is nothing to check"}
 
@@ -164,9 +168,10 @@ def collect(root):
     mentioned, missing_mentions = named_paths(root)
     seats = seat_state(root, roster_seats(root))
     process = []
-    for label, raw in PROCESS_PATHS:
-        exists = os.path.exists(os.path.expanduser(raw))
-        process.append({"claim": label, "path": raw, "state": "PRESENT" if exists else "CANNOT SEE"})
+    if check_process:
+        for label, raw in PROCESS_PATHS:
+            exists = os.path.exists(os.path.expanduser(raw))
+            process.append({"claim": label, "path": raw, "state": "PRESENT" if exists else "CANNOT SEE"})
 
     return {
         "root": root,
@@ -177,6 +182,7 @@ def collect(root):
         "missing_mentions": missing_mentions,
         "seats": seats,
         "process": process,
+        "process_checked": check_process,
     }
 
 
@@ -212,9 +218,11 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Check the custodian briefing against the disk.")
     ap.add_argument("--root", default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--record-only", action="store_true",
+                    help="check the public record without probing host process or credential paths")
     args = ap.parse_args(argv)
 
-    report = collect(args.root)
+    report = collect(args.root, check_process=not args.record_only)
     if "error" in report:
         if args.json:
             print(json.dumps(report, indent=2))
@@ -239,6 +247,8 @@ def main(argv=None):
     print(f"  lifespans kept apart: {'yes' if all(m['present'] for m in report['lifespans']) else 'no'}")
     print(f"  snapshot id: {report['swhid']['detail']}")
     print(f"process (lifespan B): {filled} of {len(report['seats'])} seat sections written")
+    if not report["process_checked"]:
+        print("  NOT CHECKED (--record-only): no host process paths were probed")
     for item in report["process"]:
         print(f"  {item['state']:10} {item['claim']} — {item['path']}")
     print("  cannot be seen from here: provider bills, the password-manager escrow, the account's write right")

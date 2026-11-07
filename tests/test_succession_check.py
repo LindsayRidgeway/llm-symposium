@@ -15,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPT = os.path.join(ROOT, "scripts", "succession_check.py")
@@ -84,7 +85,7 @@ class RealCheckout(unittest.TestCase):
     """The briefing on disk today, checked against the checkout it shipped with."""
 
     def test_record_claims_hold(self):
-        report = check.collect(ROOT)
+        report = check.collect(ROOT, check_process=False)
         self.assertEqual(check.failures(report), [])
 
     def test_the_roster_table_is_read_without_its_header(self):
@@ -110,7 +111,7 @@ class RealCheckout(unittest.TestCase):
         self.assertTrue(state["Dmitri"])
 
     def test_cli_exit_zero_on_the_real_tree(self):
-        out = subprocess.run([sys.executable, SCRIPT], capture_output=True, text=True)
+        out = subprocess.run([sys.executable, SCRIPT, "--record-only"], capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, out.stdout + out.stderr)
         self.assertIn("record (lifespan A): OK", out.stdout)
 
@@ -118,6 +119,14 @@ class RealCheckout(unittest.TestCase):
 class FabricatedTrees(unittest.TestCase):
     def setUp(self):
         self._tmp = None
+        # Default-mode tests use synthetic process paths, never the host's credentials.
+        process_tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(process_tmp.cleanup)
+        process_patch = patch.object(check, "PROCESS_PATHS", [
+            ("synthetic absent process marker", os.path.join(process_tmp.name, "absent.marker")),
+        ])
+        process_patch.start()
+        self.addCleanup(process_patch.stop)
 
     def tearDown(self):
         if self._tmp is not None:
@@ -205,7 +214,7 @@ class FabricatedTrees(unittest.TestCase):
 
     def test_json_shape(self):
         self._tmp, root = make_tree()
-        proc = subprocess.run([sys.executable, SCRIPT, "--root", root, "--json"],
+        proc = subprocess.run([sys.executable, SCRIPT, "--root", root, "--json", "--record-only"],
                               capture_output=True, text=True)
         self.assertEqual(proc.returncode, 0, proc.stderr)
         data = json.loads(proc.stdout)
@@ -219,6 +228,56 @@ class FabricatedTrees(unittest.TestCase):
         report = check.collect(root)
         self.assertEqual(report["seats"], [])
         self.assertTrue(any("ROSTER" in w for w in check.warnings(report)))
+
+
+    def test_record_only_collect_never_expands_process_paths(self):
+        root = self.build()
+        with patch.object(check.os.path, "expanduser", side_effect=AssertionError("process probe")):
+            report = check.collect(root, check_process=False)
+        self.assertFalse(report["process_checked"])
+        self.assertEqual(report["process"], [])
+        self.assertEqual(check.failures(report), [])
+
+    def test_record_only_cli_labels_json_and_text_as_unchecked(self):
+        root = self.build()
+        proc = subprocess.run([sys.executable, SCRIPT, "--root", root, "--record-only", "--json"],
+                              capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        report = json.loads(proc.stdout)
+        self.assertFalse(report["process_checked"])
+        self.assertEqual(report["process"], [])
+        self.assertTrue(report["ok"])
+        text = subprocess.run([sys.executable, SCRIPT, "--root", root, "--record-only"],
+                              capture_output=True, text=True)
+        self.assertEqual(text.returncode, 0, text.stderr)
+        self.assertIn("NOT CHECKED (--record-only)", text.stdout)
+        self.assertNotIn("CANNOT SEE", text.stdout)
+
+    def test_record_only_cli_still_rejects_broken_record(self):
+        root = self.build()
+        os.remove(os.path.join(root, "PRESERVATION.md"))
+        proc = subprocess.run([sys.executable, SCRIPT, "--root", root, "--record-only", "--json"],
+                              capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 1, proc.stderr)
+        report = json.loads(proc.stdout)
+        self.assertFalse(report["ok"])
+        self.assertFalse(report["process_checked"])
+        self.assertTrue(any("PRESERVATION.md" in failure for failure in report["failures"]))
+
+    def test_default_api_and_cli_keep_synthetic_process_observations(self):
+        root = self.build()
+        present = os.path.join(root, "present.marker")
+        with open(present, "w", encoding="utf-8") as fh:
+            fh.write("synthetic")
+        markers = [("present marker", present), ("absent marker", present + ".absent")]
+        with patch.object(check, "PROCESS_PATHS", markers):
+            report = check.collect(root)
+            self.assertTrue(report["process_checked"])
+            self.assertEqual([r["state"] for r in report["process"]], ["PRESENT", "CANNOT SEE"])
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                self.assertEqual(check.main(["--root", root, "--json"]), 0)
+        self.assertTrue(json.loads(out.getvalue())["process_checked"])
 
 
 if __name__ == "__main__":
