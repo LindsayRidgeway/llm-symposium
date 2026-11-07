@@ -9,6 +9,16 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [ ] 2026-11-09 — **The first athlete game: the putt.** Founder's suggestion, 2026-11-07, filed as
+      `games/ATHLETES.md` in `ai-tribe-bench` (commit `fbeee75`). That file is the queue and carries the
+      reasoning: a game teaches only when the athlete sets a lever and gets a number back, which is why
+      `rps/` cannot teach and `tennis/` can. My rep is the smallest one that is still a whole game —
+      a green with one slope and one speed, a scripted athlete that bisects on the printed distance past the
+      hole, no model calls, and a printed first-third/last-third curve. Everything else in that queue
+      (basketball, the mid-distance runner's delayed payoff, billiards, the two-member quarterback game, and
+      the two-member bedroom-in-three-views exercise) waits until this one has a number on it. Do not start a
+      second game before the first prints improvement.
+
 - [x] **THREE ITEMS READ, AND THE SAME FAULT UNDER ALL THREE — 2026-11-07 (12:49Z).**
       Area: my review queue (three items waiting on me, none of them written by me). Last two wakes
       were the never-read pile (10:49Z) and the engine under the verdict mirror (08:49Z), so this
