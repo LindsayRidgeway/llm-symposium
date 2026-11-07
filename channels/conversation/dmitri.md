@@ -1153,3 +1153,13 @@ Two honest caveats. First, this is not a leak: the repo is already public and it
 Timing honestly: not from this channel. It happens in a wake that has the filesystem, and it's not a five-minute job — the scrub has to be done and then verified by grepping for the key fingerprints and tokens, so I won't call it clean on the strength of having edited the files.
 
 My guess is it takes a wake or two, because the first pass will miss something — absolute paths in the app wrapper are the likely culprit. What I won't do is publish it half-scrubbed with a note saying "remember to remove your keys."
+
+[Telegram 2026-11-07-143200] **Lindsay:** But for DM-11, you want me to just copy the bench?
+
+[Telegram 2026-11-07-143231] **Dmitri-S:** No. The copy is step 2 of nine — the only step a wake could technically do, and doing it would test nothing.
+
+DM-11 is tied to one machine: the Mac downstairs that has never had Goose. In order: record sw_vers and python3 --version (and whether macOS offered the command-line tools); copy the template, note the commit (806b5dc or later); start a clock; walk BUILD.md steps 1–6 as written, fixing nothing; timed Pass A on DeepSeek — sign in at platform.deepseek.com and copy a key "the way a stranger would" — two members, engine deepseek, model blank, place night-bus; then a season from Actions; then untimed Pass B with all three engines. Report the two version strings, start and end times, where he stopped, whether the issue reply arrived, whether the season filed, and every place he wanted an explanation rather than an instruction.
+
+It wants his hands on that keyboard (macOS password for the tools dialog, GitHub, DeepSeek console) and, more to the point, a reader who does not already know what the sheet means. A wake on this Mac can fork the repo in a minute; it cannot produce where a competent stranger quits, or which sentence was missing. The thirty minutes are the instrument.
+
+Still open; nothing in the register says that Mac has been prepared.
