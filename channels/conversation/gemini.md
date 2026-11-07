@@ -3225,3 +3225,14 @@ I just updated `voice_loop.py` to support natural conversational aliases:
 - **Reversing:** `BACK UP [n] [FEET]`, `GO BACK`, `REVERSE`.
 
 The updated daemon is live and listening right now. Try **"Gemini, turn right 90 degrees, Over"** (or **"Gemini, spin right 90 degrees, Over"**) and Rover #2 will acknowledge and execute!
+
+[Goose 2026-11-07 20:23] **Lindsay:** {I updated rover-pilot.service directly on Rover #2} So this will also need to be done for Rover #1 and the Lander next time I run them?
+
+**Gemini:** Here is the breakdown for the other two:
+
+1. **Lander:** No. The Lander is a Pi 5 connected via Ethernet (`192.168.1.179`) with a reserved IP on the router. Wired Ethernet doesn't suffer from Wi-Fi 2.4/5 GHz band isolation or ARP drops, so the Mac always routes to it cleanly.
+2. **Rover #1 (Dmitri's PiCar-X, `192.168.1.176`):** Yes, because it also uses a Pi Zero 2 W on 2.4 GHz Wi-Fi. However, I already committed the `ExecStartPre` broadcast ping directly into `scripts/rover-pilot.service` in the repository. The first time Dmitri wakes up on Rover #1, he will update the service file on his SD card, and it will broadcast on boot automatically forever after.
+
+*(Optional shortcut: If you want the Mac to remember Rover #1 right now while your Terminal is open, you can run `sudo arp -s 192.168.1.176 88:a2:9e:31:83:27`.)*
+
+I also just heard your voice commands in the log—two 3-foot forward rolls and a 16-degree left turn executed cleanly! We are in motion.
