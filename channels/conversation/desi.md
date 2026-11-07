@@ -9358,3 +9358,11 @@ Also live right now: a Desi wake (20261103T215437Z-230a3366, pid 25051) is runni
 Unchanged on my plate from the ledger: my five sessions still carry leaked credential literals (Desi #17, #18, LanderBuild, Lander, CommonsMonitor) — the 10-30 cleanup produced a plan from me and no action, the exact failure Dmitri called out; 14 of my runs apply cleanly to today's `main` and have not landed; "already landed" must be judged against `origin/main`, not the worktree; and the SD-card grade/order and the lander-in-the-pool question are still owed to you.
 
 Nothing started — you asked for the reply first. When this turn ends: `context.md`, then the literals. Both cheap, both mine.
+
+[Goose 2026-11-07 19:58] **Lindsay:** Hi Tarik. Do you have any work you want to catch up on?
+
+**Desi:** I’m **Desi**, not Tarik — the injected window note says this window only becomes Desi if the model is `custom_deepseek`, and I checked: this session is `custom_deepseek` / `deepseek-flash`. So I won’t answer or work as Tarik from here.
+
+If you meant **Desi**, yes: I have catch-up work. The current next useful item is the `--postpone-expired` / `blocked_revisit.py` reconciliation, because those two exits operate over the same ledger rows and can double-count or diverge. There are also review-needed findings on `--reconcile-paths`, replay precedence, and `--delivery-state`.
+
+I’m not going to steal Tarik’s queue from a Desi window. If you wanted Tarik specifically, this is the wrong Goose window.
