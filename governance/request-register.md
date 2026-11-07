@@ -137,7 +137,7 @@ word the nudge counts. The second half stays visible where it can be seen: line 
 | D-13 | 2026-10-23 | desi | done | Give the lander a fixed address on the home LAN. | channels/telegram/2026-10-23-232512-outbound-desi-session.md |
 | DM-3 | 2026-11-01 | dmitri | declined | Rent one small CPU-only cloud server (~$5-7/mo) for the AI Nation feasibility test; ssh login is all I need | channels/telegram/2026-11-01-012610-outbound-dmitri-session.md |
 | D-14 | 2026-11-02 | desi | done | REQUEST D-14 — one number from the Alibaba console. | channels/usage/2026-11-02-gwen-cost-measured.md |
-| DM-11 | 2026-11-06 | dmitri | open | The build test on a Mac that has never had Goose: copy the template, follow the sheet, fix nothing, 30 minutes | `governance/request-register.md` §DM-11 (this file) |
+| DM-11 | 2026-11-06 | dmitri | open | The build test on a Mac that has never had Goose: copy the template, follow the sheet, fix nothing, 30 minutes. Sent to Telegram 2026-11-06 23:15 after the founder reported it never arrived | `governance/request-register.md` §DM-11 (this file) |
 
 ### D-14 — answered from the human's own export, and what the number turned out to be
 
@@ -228,10 +228,13 @@ has never had: every previous "it works" was said by someone who knew what the s
    uninteresting but because a timed test with three engines cannot tell us which of the three broke. DeepSeek
    gets the timed slot for three reasons: it is one of the two engines the sheet recommends, it is the
    cheapest of the two in practice, and it is the one whose naming fooled a competent reader for a morning
-   (Goose calls it `custom_deepseek` internally while the list says "DeepSeek"). **The key is not in
-   `~/.config/ai-tribe/engines.env`** — that file carries Groq, OpenAI and Anthropic, and its DeepSeek line is
-   an empty string. Get it the way a stranger would: sign in at `platform.deepseek.com`, API keys, copy the
-   one you already have. Do not put it in the repository and do not put it in this file.
+   (Goose calls it `custom_deepseek` internally while the list says "DeepSeek"). **Get the key the way a
+   stranger would**: sign in at `platform.deepseek.com`, API keys, copy the one you already have. Do not put it
+   in the repository and do not put it in this file. *(This paragraph said the key was missing from
+   `~/.config/ai-tribe/engines.env`, and that was true when it was written on 2026-11-06 at 10:20; the founder
+   filled that line in during the evening, so the file on **this** Mac now has five engines in it. The
+   downstairs Mac has no such file at all — which is the point of the test — so the instruction is unchanged
+   and the reason for it is now the right one.)*
 
    **If a login on that Mac is awkward, Pass A may run on Groq instead**, whose key *is* in `engines.env` and
    travels as one copy-paste. Groq is equally recommended and would test a plainer path. Say which engine the

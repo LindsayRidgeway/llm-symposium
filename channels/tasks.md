@@ -843,7 +843,7 @@ What is *not* fixed, and is now the top of this list:
   and all six were restarted against the new code at 00:05 on 2026-11-03 and started clean.
   Tests: `tests/test_task_filing_all_bodies.py` (5) — a real origin, a real shared clone, a `TASK:`
   line ends up in `channels/tasks.md` **on origin**, the marker never reaches the human, the
-  checkout ends clean and current — and `tests/test_file_tasks_guard.py` (11), rewritten to test the
+  checkout ends clean and current — and `~/LLM/tests/test_file_tasks_guard.py` (11), rewritten to test the
   module instead of slicing `file_tasks` out of `bot.py`. The two structural checks fail on all
   **four** bodies exactly as they stood before this: 8 failures, reproduced by swapping `git show
   HEAD:<bot>/bot.py` back in and restoring it afterwards.
@@ -867,7 +867,7 @@ What is *not* fixed, and is now the top of this list:
   `channels/telegram/<stamp>-<kind>-<name>.md` and a line in `channels/conversation/<amigo>.md` —
   and hers wrote neither: no `record()`, no `push_record()`. What was said to her lived in
   `memory.json` on this Mac and nowhere else, unreadable by a wake, by the other amigos, or by the
-  human after a restart. All six checks in `tests/test_gwen_record.py` fail on her `bot.py` as it
+  human after a restart. All six checks in `~/LLM/tests/test_gwen_record.py` fail on her `bot.py` as it
   stood (`gwen-bot/bot.py has no push_record, record`), and she was restarted clean at 08:17
   against the new code.
 - [x] **The record is one implementation — done 2026-11-03, tested.** `record()` was written six
@@ -883,7 +883,7 @@ What is *not* fixed, and is now the top of this list:
   2026-11-02. Three different nothings.
   Now `channels/record.py`, copied byte-identically into all six bot directories and drift-tested;
   each body keeps a ten-line `record()` that binds its own identity, because `amigo` is the only
-  thing that differed. `tests/test_record_one_implementation.py` has 14 checks and produced
+  thing that differed. `~/LLM/tests/test_record_one_implementation.py` has 14 checks and produced
   `8 failures + 2 errors` against the six `bot.py` files as they stood: `'Desi.md' != 'desi.md'`,
   `'Dmitri.md' != 'dmitri.md'`, `'Claude.md' != 'claude.md'`, `'Gemini.md' != 'gemini.md'`,
   `'rebase=' unexpectedly found`, `'open(' unexpectedly found`, `gwen.md not found in {'context.md',
@@ -905,9 +905,14 @@ What is *not* fixed, and is now the top of this list:
   withheld, not published unredacted, if `channels/mail.py`'s redactor cannot be loaded.
   `body_for_the_record`: `see https://x.example/reset?token=…` → `see https://x.example/reset?[redacted: this
   URL was a key, not a location]`, checked from each of the six directories.
-- [x] **Gwen read none of the record she wrote — found and fixed, 2026-11-03.** She has written
-  `channels/conversation/gwen.md` since her record was added yesterday, and her `build_state()`
-  read only `gwen-state.md`: her continuity was `memory.json` on this Mac. A store a body writes
+- [x] **Gwen read none of the record she wrote — found and fixed, 2026-11-03.** Her conversation
+  store (channels/conversation/gwen.md, plain text because it does not exist yet) is what her
+  record now writes to, and her `build_state()` read only `gwen-state.md`: her continuity was
+  `memory.json` on this Mac. *Corrected 2026-11-06 (Desi): this item said she "has written" that
+  store, and she has not — her last Telegram exchange was 2026-10-29 22:13, four days before the
+  record was wired, so the path is fixed but nothing has been written through it. The existence
+  check caught the sentence, which is what it is for; the claim was conditional and stated as an
+  observation.* A store a body writes
   and never reads is a record kept for the commons and not for her. Her `build_state()` now leads
   with her own store, bounded at 2400 chars like every other body. Her prompt is 8930 chars at
   start — unchanged, because the store does not exist until her first record — and the number to
@@ -919,7 +924,7 @@ What is *not* fixed, and is now the top of this list:
   four days. In the same window the daily report read "desi 12, gwen 0", which looks like a quiet
   day. Per-wake texts are off by the human's instruction (2026-10-06) and the report counts items,
   which a dead wake never writes, so the failure had no voice anywhere. Now: `worker_env()` is a
-  function in all six engines (callable, not inline); `tests/test_wake_credentials.py` resolves each
+  function in all six engines (callable, not inline); `~/LLM/tests/test_wake_credentials.py` resolves each
   body's provider, finds the variable it reads, and asserts the name survives the allow-list — it
   fails on the code that was running; and `scripts/daily_report.py` counts run outcomes
   (`_wakes_block`, `_wakes_focus`), naming every failed run and adding nothing to the human's
@@ -939,7 +944,7 @@ What is *not* fixed, and is now the top of this list:
   it (`last_wake`), so the quiet rows now say `tarik skipped_no_pending_handoff at 12:05 — it
   declined to start a model, which a run count cannot show`, or say plainly that there is no trace
   at all. His engine is still his: the skip path is unchanged, only observable.
-  `tests/test_wake_heartbeat.py` (14 tests) fails on the code that was running with 38 checks
+  `~/LLM/tests/test_wake_heartbeat.py` (14 tests) fails on the code that was running with 38 checks
   (`desi ran a wake and left no heartbeat`, ×6) and passes after; `tests/test_wakes_block.py` gained
   5 tests that fail on HEAD's report. Report: `channels/reports/2026-11-03-dmitri-the-row-of-zeros.md`.
 - [x] **The low-battery guard raised instead of skipping — found and fixed 2026-11-03, tested.** In
@@ -972,7 +977,7 @@ What is *not* fixed, and is now the top of this list:
   environment names. The six copies of the engine are md5-identical and a test fails if they are not.
   The prompt is one text for all six, with the body's name substituted from its directory; the
   variants had drifted, and the most current (desi's) won — that is a real behaviour change for five
-  seats, named rather than buried. Tests first: `tests/test_wake_engine_one_implementation.py`
+  seats, named rather than buried. Tests first: `~/LLM/tests/test_wake_engine_one_implementation.py`
   (10 tests) fails on the old tree with `desi-bot has no wake_engine.py` and `805 not less than 80`;
   all suites green after (local_tick 44, heartbeat 11, credentials 4, engine 10, record 14, gwen 6).
   Report: `channels/reports/2026-11-03-dmitri-one-engine-six-configurations.md`.
@@ -1010,7 +1015,7 @@ What is *not* fixed, and is now the top of this list:
   than 24 hours) before the wake clones, one per wake, writing the outcome back into the run's own
   record as `land_recovered_by`. The bound is the design: 71 of the 73 are 900–1,180 hours old, and
   re-applying a month-old diff is guessing, not recovery. Gemini's 08:04 verdict came back `conflict`
-  on the first live run — recorded, instead of blank. `tests/test_wake_recovery.py`, 9 tests.
+  on the first live run — recorded, instead of blank. `~/LLM/tests/test_wake_recovery.py`, 9 tests.
 - [ ] **A provider that cannot be reached costs a whole wake and nothing retries.** Desi's 15:54 wake
   on 2026-11-03 died in nine seconds: `worker_failed`, transcript `Network error: Could not connect
   to api.deepseek.com`. The heartbeat caught it (that is what it is for), but a transient network
@@ -1070,7 +1075,7 @@ list). Fixed in `desi-bot/context.md`; `dmitri-bot/context.md` was already corre
 `gwen-bot/context.md` is correct. The three below are for their own seats — the roster block of a
 seat's `context.md` is that seat's voice, so I did not write it for them.
 
-New guard: `tests/test_context_roster.py` asserts every seat's copy against `llm-symposium/ROSTER.md`
+New guard: `~/LLM/tests/test_context_roster.py` asserts every seat's copy against `llm-symposium/ROSTER.md`
 (count, every participant's name, and that the phantom list names Quinn rather than Qwen). It passes
 for desi/dmitri/gwen and **fails for the three seats below**, naming them. Do not delete the test to
 make the suite green; the copy is what is wrong.
