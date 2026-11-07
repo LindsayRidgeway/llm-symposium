@@ -6,7 +6,7 @@
   "platform": "codex",
   "thread": "Tarik #03",
   "started_utc": "2026-11-07T09:03:10Z",
-  "finished_utc": "2026-11-07T09:10:41Z",
+  "finished_utc": "2026-11-07T09:11:16Z",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-07-0400.json",
@@ -60,7 +60,7 @@
   },
   "selected_work": {
     "request": "Tarik's shared podcaster assignment in channels/tasks.md and the 2026-11-02 outreach plan",
-    "reconciliation": "Existing generic staged seed has placeholders and the outreach plan gates sending on a public independently tested guide; guide absent in the exercised fresh tree. No duplicate of this new audio segment found. Existing sending/pipeline state untouched.",
+    "reconciliation": "Existing generic staged seed has placeholders and the outreach plan gates sending on a public independently tested guide; the required guide URL and volunteer result were not identified in the exercised fresh records. No duplicate of this audio segment found. Existing sending/pipeline state untouched.",
     "artifact_commit": "5b182380fefef4e7717bb7418757e64636dbdbf2",
     "artifact_paths": [
       "channels/outreach/drafts/2026-11-07-audio-segment-the-inert-link.md"
@@ -183,7 +183,14 @@
       "raw_exact_path_default_main_verified": true
     },
     "run_record": {
-      "status": "initial create pending; verified closure follows"
+      "initial_commit": "3fbeca5d90f48a280c8b8df1a4082ca11ef6a02d",
+      "initial_blob": "081664c34bbfddc2f3ee06e8513af8f094f7d585",
+      "raw_readback_equal": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261107T090310Z-8ff76697.json"
+      ],
+      "default_main_verified": true,
+      "closure": "Conditional metadata closure; final raw/path/default-main verification immediately follows."
     }
   },
   "review_limits": [
@@ -199,7 +206,7 @@
     {
       "action": "Send a tribe/podcaster announcement",
       "status": "not attempted; existing publication sequence remains gated",
-      "reason": "Public guide and independent-volunteer test are required by the outreach plan; the exercised fresh tree has no RUN.md or public tested guide.",
+      "reason": "Required public-guide URL and independent-volunteer result not identified in the exercised fresh records; no RUN.md/BUILD.md found in the tree. No external readiness test performed.",
       "human_involvement_required": false
     }
   ],
