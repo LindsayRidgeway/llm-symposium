@@ -23,9 +23,29 @@ has changed.
     python3 scripts/blocked_revisit.py --stale-days 14 # age the "nobody re-looked" line
     python3 scripts/blocked_revisit.py --json          # the same facts, for another tool
 
+Recounted 2026-11-07, after the "landed" test was repaired: 292 items sit in Status 5, and **47**
+have a landing commit whose subject names them. The same pile read as **61** landed under the old
+test, and the **14** between those numbers are what the old test was actually measuring — every one
+of them is an id that appears in a *body* or a *path list* rather than a lander's subject:
+
+  * a verdict file named for the item (`channels/ledger-verdicts/...-20261107T004723Z-4189b82b.json`)
+    listed among the paths another run's lander carried — the item was *reviewed*, not landed;
+  * `review(wake): Tarik reads 20261022T091715Z-3ab0f188` — a review subject naming the item;
+  * a report body quoting the id;
+  * `Publish the exact recovered original RT4 guard/test pair on an unmerged review branch. Original
+    run 20260930T165900Z-24cb3cd6` — a commit that says in its own subject that the branch is
+    unmerged, counted as a landing.
+
+The cost of being strict is a false negative: a landing written with some future subject shape would
+be missed. Measured over 582 `land(wake)` commits, the shape has only ever had two forms, and both
+are in `LANDER_SUBJECT`; the miss-and-recount is one line when a third appears.
+
 Four verdicts, in this order, and the first that applies wins:
 
-  landed        the run id now appears in a landing commit on main — the blocker has gone; re-look
+  landed        a landing commit on main *names* the run id in its subject — the blocker is gone;
+                re-look. A commit that merely mentions the id in its body does not count (fixed
+                2026-11-07: the first version was a substring search over the whole log, so a
+                recovery commit that quoted an id in a restored filename marked that run landed)
   stale         postponed longer than --stale-days ago with no later row for the same id
   present       every repo path the item names exists now — weak evidence: a *modified* file exists
                 whether or not the change landed, so this says "look", not "done"
@@ -40,6 +60,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -47,6 +68,13 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "channels" / "items.jsonl"
 STATUS5 = "postponed"
+
+# The two shapes the landing machine writes, and the only two in this repository's history:
+#   land(wake): work from run <id>
+#   land(wake): Codex work from run codex-<id>
+# 582 of 582 land(wake) commits on 2026-11-07 carry the id this way. Matched against the *subject*,
+# anchored at both ends, so a body that quotes a lander cannot make anything look landed.
+LANDER_SUBJECT = re.compile(r"^land\(wake\): (?:Codex )?work from run (?P<id>\S+)$")
 
 
 def load(path: Path) -> list[dict]:
@@ -72,26 +100,57 @@ def later_rows(rows: list[dict], item: dict) -> list[dict]:
             and (r.get("state_utc") or "") > (item.get("state_utc") or "")]
 
 
-def landed_ids(repo: Path, log_text: str | None = None) -> str:
-    """The whole git log as text; a landing commit names the run id it carries."""
+def landing_log(repo: Path, log_text: str | None = None) -> str:
+    """Subjects of the landing commits on main, one per line.
+
+    Subjects only, and main only. The verdict this feeds is "the run's work reached main", and
+    neither of the two things this used to accept is that: an id quoted in a *body* (measured
+    2026-11-07 — `git log --all --grep=b2420fec` had exactly one hit, 26dd4d7e, the lander for a
+    *different* run, because a restored filename in its body contained b2420fec; under the old
+    substring test that run read as landed without having landed), and a lander sitting on a draft
+    branch rather than main.
+    """
     if log_text is not None:
         return log_text
+    refs = ["main", "origin/main", "HEAD"]
+    ref = "HEAD"
+    for candidate in refs:
+        ok = subprocess.run(["git", "-C", str(repo), "rev-parse", "--verify", "--quiet", candidate],
+                            capture_output=True, text=True, check=False)
+        if ok.returncode == 0 and ok.stdout.strip():
+            ref = candidate
+            break
     try:
-        return subprocess.run(["git", "-C", str(repo), "log", "--all", "--format=%s%n%b"],
+        return subprocess.run(["git", "-C", str(repo), "log", ref, "--format=%s"],
                               capture_output=True, text=True, check=False).stdout
     except OSError:
         return ""
+
+
+def landed_run_ids(log_text: str) -> set[str]:
+    """Every run id a landing commit says it carried, with the `codex-` prefix normalised away.
+
+    The prefix is a naming convention, not part of the id: the ledger stores some runs as
+    `codex-2026...` and some committers write the bare form, so comparing one form to one form
+    would miss real landings. Normalising both sides is the only place this can go wrong once.
+    """
+    ids: set[str] = set()
+    for line in log_text.splitlines():
+        match = LANDER_SUBJECT.match(line.strip())
+        if match:
+            ids.add(match.group("id").removeprefix("codex-"))
+    return ids
 
 
 def repo_paths(item: dict) -> list[str]:
     return [p for p in item.get("paths", []) if p and not p.startswith(("http://", "https://"))]
 
 
-def classify(item: dict, rows: list[dict], log_text: str, repo: Path, stale_days: int,
+def classify(item: dict, rows: list[dict], landed: set[str], repo: Path, stale_days: int,
              now: dt.datetime) -> tuple[str, str]:
     """(verdict, one line of why). The first verdict that applies wins; order is the rule."""
-    if item["id"] in log_text:
-        return "landed", "its run id now appears in a landing commit on main"
+    if item["id"].removeprefix("codex-") in landed:
+        return "landed", "a landing commit on main names this run id — the blocker is gone"
     try:
         when = dt.datetime.strptime(item["state_utc"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
     except (KeyError, ValueError):
@@ -117,9 +176,10 @@ NEEDS_A_LOOK = {"landed", "stale", "present"}
 def build(rows: list[dict], log_text: str, repo: Path, stale_days: int,
           now: dt.datetime | None = None) -> list[dict]:
     now = now or dt.datetime.now(dt.timezone.utc)
+    landed = landed_run_ids(log_text)
     out = []
     for item in postponed(rows):
-        verdict, why = classify(item, rows, log_text, repo, stale_days, now)
+        verdict, why = classify(item, rows, landed, repo, stale_days, now)
         out.append({"id": item["id"], "verdict": verdict, "why": why,
                     "postponed_utc": item.get("state_utc", ""),
                     "amigo": item.get("amigo", "?"), "reviewer": item.get("reviewer", "?"),
@@ -138,7 +198,7 @@ def main() -> int:
 
     rows = load(Path(a.ledger))
     repo = Path(a.repo)
-    facts = build(rows, landed_ids(repo), repo, a.stale_days)
+    facts = build(rows, landing_log(repo), repo, a.stale_days)
 
     if a.json:
         print(json.dumps({"items": facts, "counts": counts(facts)}, indent=1))

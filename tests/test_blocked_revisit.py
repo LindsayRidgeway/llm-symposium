@@ -8,6 +8,7 @@ useless as one that says it for nothing.
 """
 import datetime as dt
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -45,6 +46,53 @@ class RevisitTest(unittest.TestCase):
         rows = [row(paths=["gone.md"], state_utc="2026-09-01T00:00:00Z")]
         log = "land(wake): work from run r1\n"
         self.assertEqual(self.verdict(rows, log), {"r1": "landed"})
+
+    def test_a_body_that_mentions_the_id_does_not_make_it_landed(self):
+        """The defect this pins, measured on 2026-11-07.
+
+        The first version of this script asked `if item["id"] in log_text` over the whole log, so
+        any commit that merely *named* a run id marked that run landed. There was one live case:
+        `26dd4d7e` is the lander for run 222366ae, and its body carried `b2420fec` inside a
+        restored filename — so b2420fec read as landed without having landed, and the docstring's
+        "0 have landed since" was true only because it had been written before that commit.
+        """
+        rows = [row(item_id="b2420fec", paths=["gone.md"], state_utc="2026-10-18T00:00:00Z")]
+        log = "land(wake): work from run 222366ae\nrecovered: channels/x-b2420fec.md\n"
+        self.assertEqual(self.verdict(rows, log), {"b2420fec": "absent"})
+
+    def test_only_a_lander_subject_that_names_the_run_counts(self):
+        """Only the ids a lander subject *carries* are landed; the shape is otherwise ignored."""
+        rows = [row(item_id="r2", paths=["gone.md"], state_utc="2026-10-18T00:00:00Z")]
+        log = "land(wake): work from run r2\n"
+        self.assertEqual(self.verdict(rows, log), {"r2": "landed"})
+        # A near-miss subject is not a lander: `chore(wake): close verified run ...` records a
+        # verification, not a landing, and says nothing about whether the work is on main.
+        self.assertEqual(self.verdict(rows, "chore(wake): close verified bounded run r2\n"),
+                         {"r2": "absent"})
+
+    def test_the_codex_prefix_is_a_naming_convention_not_part_of_the_id(self):
+        rows = [row(item_id="20261107T090310Z-8ff76697", paths=["gone.md"],
+                    state_utc="2026-10-18T00:00:00Z")]
+        log = "land(wake): Codex work from run codex-20261107T090310Z-8ff76697\n"
+        self.assertEqual(self.verdict(rows, log), {"20261107T090310Z-8ff76697": "landed"})
+        # ...and the same run written the other way in the ledger still matches.
+        self.assertEqual(self.verdict([row(item_id="codex-20261107T090310Z-8ff76697",
+                                           paths=["gone.md"],
+                                           state_utc="2026-10-18T00:00:00Z")], log),
+                         {"codex-20261107T090310Z-8ff76697": "landed"})
+
+    def test_landing_log_reads_subjects_only_from_a_real_repository(self):
+        """`landing_log` must not depend on a body, and must not need `--all` to find landings."""
+        repo = self.repo
+        git = ["git", "-C", str(repo)]
+        for cmd in (["init", "-q"], ["config", "user.email", "t@example.com"],
+                    ["config", "user.name", "t"]):
+            subprocess.run(git + cmd, check=True, capture_output=True)
+        subprocess.run(git + ["commit", "-q", "--allow-empty", "-m",
+                              "land(wake): work from run 20261107T090310Z-8ff76697"], check=True)
+        subprocess.run(git + ["commit", "-q", "--allow-empty", "-m", "recovery: mention 20261107T010211Z-d14caf92"])
+        subjects = br.landing_log(repo)
+        self.assertEqual(br.landed_run_ids(subjects), {"20261107T090310Z-8ff76697"})
 
     def test_stale_names_the_items_nobody_came_back_to(self):
         rows = [row(paths=["gone.md"], state_utc="2026-09-01T00:00:00Z")]
@@ -86,7 +134,7 @@ class RevisitTest(unittest.TestCase):
                 row("stale-1", state_utc="2026-09-01T00:00:00Z", paths=["gone.md"]),
                 row("absent-1", state_utc="2026-10-18T00:00:00Z", paths=["gone.md"]),
                 row("present-1", state_utc="2026-10-18T00:00:00Z", paths=["there.md"])]
-        facts = br.build(rows, "landed-1", self.repo, 14, now=NOW)
+        facts = br.build(rows, "land(wake): work from run landed-1\n", self.repo, 14, now=NOW)
         c = br.counts(facts)
         self.assertEqual(c, {"landed": 1, "stale": 1, "present": 1, "absent": 1, "unverifiable": 0})
         self.assertEqual(len([f for f in facts if f["verdict"] in br.NEEDS_A_LOOK]), 3)
