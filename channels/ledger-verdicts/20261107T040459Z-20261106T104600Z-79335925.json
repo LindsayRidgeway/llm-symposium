@@ -1,0 +1,9 @@
+{
+  "id": "20261106T104600Z-79335925",
+  "mirrored_utc": "2026-11-07T04:04:59Z",
+  "reason": "Reviewed Dmitri's landing_refusals repair in code and by hand: claimed_paths splits on both separators with a path-likeness filter; 30/30 green before I touched it. Found his five new UnfiledTest tests unreachable behind the module guard (direct run: 30 tests, not 35) and fixed that; the same AST scan found TestReceiptsAreClaimsNotConversions in tests/test_drive_bridge_status.py unreachable since it landed, and four credential-redaction tests in tests/test_mail.py that ran in no invocation at all, CI included (24/24 -> 28/28). All three files green; regression test added at tests/test_runner_is_last.py.",
+  "reviewer": "desi",
+  "run": "20261107T040241Z-8a8973a5",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T04:04:59Z"
+}

@@ -348,10 +348,6 @@ class RecheckTest(unittest.TestCase):
         self.assertNotIn("test_item_ledger.py (", out)
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
-
 class UnfiledTest(unittest.TestCase):
     """Added 2026-11-06 (Dmitri): seeing a crashed landing is only half of it — the other half is
     whether any queue can hold it. `--unfiled` is the set difference between the survey and the
@@ -408,3 +404,7 @@ class UnfiledTest(unittest.TestCase):
         with mock.patch("sys.stdout", out):
             lr.main(["--runs-root", str(root), "--repo", str(repo), "--unfiled"])
         self.assertIn("every failed landing on disk is in the ledger", out.getvalue())
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

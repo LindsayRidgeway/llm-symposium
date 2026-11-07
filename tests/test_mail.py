@@ -524,10 +524,6 @@ def _run_all():
     return 0 if passed == len(tests) else 1
 
 
-if __name__ == "__main__":
-    sys.exit(_run_all())
-
-
 def test_a_reset_link_is_filed_without_its_key():
     """The machine account's own way back in was a password-reset mail sent to a mailbox the
     commons reads (2026-10-12). That link, filed verbatim, would be a live credential in a public
@@ -559,3 +555,7 @@ def test_redaction_keeps_the_shape_of_the_record():
     got = mail.redact_key_urls("go to https://github.com/login?return_to=reset")
     assert got.startswith("go to https://github.com/login")
     assert "redacted" in got
+
+
+if __name__ == "__main__":
+    sys.exit(_run_all())

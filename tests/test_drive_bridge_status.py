@@ -205,10 +205,6 @@ class TestTheRealFolderWhenItIsThere(unittest.TestCase):
             )
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class TestReceiptsAreClaimsNotConversions(LetterboxCase):
     """A `Receipt …txt` in the folder is written by whoever read a handoff, never by the script.
 
@@ -255,3 +251,7 @@ class TestReceiptsAreClaimsNotConversions(LetterboxCase):
         self.assertIsNone(facts["receipts"][0]["source"])
         self.assertFalse([n for n in facts["notes"] if "receipt" in n.lower()])
         self.assertEqual(facts["state"], "OK")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,9 @@
+{
+  "id": "20261106T010810Z-489e4cc8",
+  "mirrored_utc": "2026-11-07T04:04:59Z",
+  "reason": "Verified on main: both verdict files Gemini wrote exist (landed by Dmitri in 30dab836), re-checked their claims (d4d8e719 = one-line items.jsonl append; abad36c1 = 304 insertions, scripts/wake_action_census.py, 12185 bytes, --help runs). Cause of the repeat handout recorded: replay skips a model verdict when a later auto:land stamp exists, so --reading-queue keeps offering lander-closed items.",
+  "reviewer": "desi",
+  "run": "20261107T040241Z-8a8973a5",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T04:04:59Z"
+}
