@@ -22,6 +22,7 @@ directory is missing — a deploy that silently skips a body is how one body end
 import argparse
 import hashlib
 import subprocess
+import time
 import sys
 import time
 from pathlib import Path
@@ -91,6 +92,55 @@ def restart(out=print, runner=None):
 
 
 IDLE_WINDOW = 30 * 60
+
+# 2026-11-07 (Desi) — THE QUESTION THE SCRIPT WAS ASKING WAS THE WRONG ONE. `--restart` used to fire
+# only when the copy step had written something: "identical" meant "the file on disk is right". It is
+# not the same claim as "the process is running that file", and this morning the difference cost an
+# hour: a hand-copied engine made all 24 files identical, so the deploy correctly reported *nothing
+# changed — the six bots were not restarted*, while all six bots were still executing the engine from
+# before the fix. Two of them were running code with a known NameError in it.
+# The page's own rule, applied: a fix that requires a restart is not finished until the restart is
+# part of it. So `--restart` now also asks whether each bot's process predates the file it runs.
+
+
+def process_started(body):
+    """When this body's bot process started, as epoch seconds, or None if it cannot be known."""
+    try:
+        listing = subprocess.run(["launchctl", "list"], capture_output=True, text=True).stdout
+    except OSError:
+        return None
+    pid = None
+    for line in listing.splitlines():
+        parts = line.split("\t")
+        if len(parts) >= 3 and parts[2].strip() == "com.lindsay.amigo.%s" % body:
+            pid = parts[0].strip()
+            break
+    if not pid or not pid.isdigit():
+        return None
+    try:
+        stamp = subprocess.run(["ps", "-p", pid, "-o", "lstart="],
+                               capture_output=True, text=True).stdout.strip()
+        return time.mktime(time.strptime(stamp, "%a %b %d %H:%M:%S %Y"))
+    except (ValueError, OSError):
+        return None
+
+
+def running_old_code(commons=None, bots_root=None, started=None):
+    """Bodies whose process started before the engine it loads was last written."""
+    commons = Path(commons) if commons else COMMONS
+    bots_root = Path(bots_root) if bots_root else BOTS_ROOT
+    engine = commons / "channels" / "wake_engine.py"
+    try:
+        written = engine.stat().st_mtime
+    except OSError:
+        return []
+    started = started or process_started
+    stale = []
+    for body in BODIES:
+        when = started(body)
+        if when is not None and when < written:
+            stale.append((body, written - when))
+    return stale
 
 
 def in_flight(bots_root=None, commands=None, now=None):
@@ -175,7 +225,8 @@ def verify(commons=None, bots_root=None):
 
 
 
-def main(argv=None, commons=None, bots_root=None, out=print, restart_runner=None, commands=None):
+def main(argv=None, commons=None, bots_root=None, out=print, restart_runner=None, commands=None,
+         started=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--restart", action="store_true",
@@ -209,10 +260,13 @@ def main(argv=None, commons=None, bots_root=None, out=print, restart_runner=None
         return 1
     changed = any(a[2] != "unchanged" for a in actions)
     if args.restart and not args.dry_run:
-        if changed:
+        stale = running_old_code(commons, bots_root, started=started)
+        for body, age in stale:
+            out("%-8s is running code %.0f min older than the engine on disk" % (body, age / 60))
+        if changed or stale:
             restart(out=out, runner=restart_runner)
         else:
-            out("nothing changed — the six bots were not restarted")
+            out("nothing changed and every bot is already running this engine — not restarted")
     elif changed and not args.dry_run:
         out("the bots are still running the old code — restart them, or pass --restart")
     return 0

@@ -18,6 +18,7 @@ import importlib.util
 import shutil
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -127,10 +128,14 @@ class SchedulingTests(unittest.TestCase):
         self.m = load()
         self.said = []
 
-    def main(self, *argv):
+    def main(self, *argv, started=None):
+        # `started` injected: the question "is this process running that file?" must never be answered
+        # by reading the real machine inside a test. Default is "the process is newer than the file",
+        # which keeps every older test measuring what it was written to measure.
         return self.m.main(list(argv), commons=self.commons, bots_root=self.tmp, commands="",
-                           out=self.said.append, restart_runner=lambda body: self.said.append(
-                               "restart %s" % body))
+                           out=self.said.append,
+                           restart_runner=lambda body: self.said.append("restart %s" % body),
+                           started=started or (lambda body: time.time() + 60))
 
     def running(self, body, run_id="20261103T190000Z-aaaaaaaa", finished=False, age_minutes=0.0):
         run = self.tmp / ("%s-bot" % body) / "tick-state" / "runs" / run_id
@@ -185,6 +190,29 @@ class SchedulingTests(unittest.TestCase):
         self.assertEqual(self.main("--restart"), 0)
         self.assertEqual([s for s in self.said if s.startswith("restart")], [],
                          "the timer restarted six bots to load files that had not changed")
+
+
+    def test_a_bot_running_code_older_than_the_engine_is_restarted_even_if_no_file_changed(self):
+        """2026-11-07: 24 files identical, six processes running the engine from before the fix.
+
+        The deploy reported "nothing changed — the six bots were not restarted" while every bot was
+        executing code with a known NameError in it, because a hand copy had already made the files
+        match. "The file on disk is right" is not "the process is running it".
+        """
+        self.assertEqual(self.main(), 0)   # first pass: every copy now identical to the commons
+        self.said.clear()
+        stale = time.time() - 3600
+        self.assertEqual(self.main("--restart", started=lambda body: stale), 0)
+        self.assertIn("restart desi", self.said,
+                      "six bots were running code older than the engine on disk and were left alone")
+        self.assertIn("is running code", " ".join(self.said))
+
+    def test_an_unknown_process_start_time_does_not_restart_anything(self):
+        """Conservative on purpose: a restart nobody needed interrupts a wake and costs a verdict."""
+        self.assertEqual(self.main(), 0)
+        self.said.clear()
+        self.assertEqual(self.main("--restart", started=lambda body: None), 0)
+        self.assertEqual([s for s in self.said if s.startswith("restart")], [])
 
 
 class LiveDriftTests(unittest.TestCase):
