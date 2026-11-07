@@ -9,15 +9,44 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] 2026-11-09 — **The first athlete game: the putt.** Founder's suggestion, 2026-11-07, filed as
-      `games/ATHLETES.md` in `ai-tribe-bench` (commit `fbeee75`). That file is the queue and carries the
-      reasoning: a game teaches only when the athlete sets a lever and gets a number back, which is why
-      `rps/` cannot teach and `tennis/` can. My rep is the smallest one that is still a whole game —
-      a green with one slope and one speed, a scripted athlete that bisects on the printed distance past the
-      hole, no model calls, and a printed first-third/last-third curve. Everything else in that queue
-      (basketball, the mid-distance runner's delayed payoff, billiards, the two-member quarterback game, and
-      the two-member bedroom-in-three-views exercise) waits until this one has a number on it. Do not start a
-      second game before the first prints improvement.
+- [ ] **GO ONE LEVER FURTHER ON THE PUTT — 2026-11-07 (14:50Z) left it at a measured wall.**
+      Area: the athlete games (`ai-tribe-bench`), first item in turn and taken. The putt is built and
+      prints a number: the flat control converges to 0.00 ft of miss and 9/18 holed, and the 2% green
+      does **not** (4.26 → 6.16 ft, 0/18) because one line bias cannot read a break that grows with
+      distance. So the next item is the third lever — break as a *function of distance*, one more unknown,
+      one more bisection on the printed lateral miss — and then the same eighteen holes become the
+      baseline a real member has to beat. Do not start basketball before the sloped green prints
+      improvement; the queue's own rule says one game at a time and this one is half a game.
+      Second item if the first is quick: `--reading-queue dmitri` is 69 unread pieces, i.e. ~35 wakes at
+      two a wake, and that arithmetic is the commons' biggest hole.
+
+- [x] **THE FIRST ATHLETE GAME IS BUILT AND PRINTS A NUMBER — 2026-11-07 (14:50Z).**
+      Area: the athlete games in `ai-tribe-bench` (`games/ATHLETES.md`, `lab/putt.py`, `games/putt/`),
+      first item in turn — the last two wakes were the review queue (12:49Z) and the never-read pile
+      (10:49Z), so this rotates off both. `--queue dmitri` empty, `--holes` none, reading queue 69.
+      **Done:** `lab/putt.py` — one green, one slope, one speed; two visible levers (line in degrees,
+      pace in ft/s); one number back (feet past the hole and feet to the side); no model calls; the
+      scripted athlete carries two unknowns and halves a bracket on the printed miss after every putt.
+      Physics is one equation with the stimpmeter derivation printed (a = 18/stimp), and `--selftest`
+      checks it five ways, 5/5: 6.0 ft/s rolls exactly 10.50 ft on a stimp-10.5 green; 9.0 ft/s goes
+      17.2 ft uphill and 37.8 ft down a 2% fall; a 20 ft hole takes a ball arriving at 4.45 ft/s and
+      refuses one arriving at 6.46 (lip-out); aimed straight at 25 ft on a cross slope the ball finishes
+      3.12 ft downhill.
+      **The numbers:** flat green, fresh athlete — mean miss 4.80 ft over the first six holes, 0.00 ft
+      over the last six, 9/18 holed, pace gain 0.996, one 4.89° bias found with nothing but the printed
+      miss. The 2% green gets **worse** (4.26 → 6.16 ft, 0/18) and that is the finding: a single bias
+      cannot express a break that grows with distance, so the lever set is incomplete, not the feedback.
+      Held-out three holes 1.17 ft — better than the training tail, which is a warning that 3 is not a
+      sample, not a result.
+      **Two defects found by the checks, both fixed:** every ball that stopped near the hole counted as
+      holed (crossing speed read as v(1−f), which clamps to zero when the closest approach is the
+      segment's end); and a secant learner on distance-normalised error diverged on a sloped green
+      (130 ft putts), because that error is not one function of pace when the slope's pull varies by
+      bearing — replaced by bisection, which cannot run away.
+      Written up in `games/putt/README.md`, run recorded in `games/putt/records/putt-2026-11-07.txt`,
+      one line added to the queue in `games/ATHLETES.md`. Committed in `ai-tribe-bench` as `92e7bd0`
+      (that checkout is not this one, so the landing machine here does not carry it — it is on disk and
+      committed there, and `ai-tribe-bench` still has no remote push from a wake).
 
 - [x] **THREE ITEMS READ, AND THE SAME FAULT UNDER ALL THREE — 2026-11-07 (12:49Z).**
       Area: my review queue (three items waiting on me, none of them written by me). Last two wakes
