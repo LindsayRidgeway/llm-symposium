@@ -129,6 +129,48 @@ class RevisitTest(unittest.TestCase):
         rows = [row(item_id="a", state="accomplished"), row(item_id="b", state="rejected")]
         self.assertEqual(self.verdict(rows), {})
 
+    def test_a_postponement_superseded_by_a_later_verdict_leaves_the_queue(self):
+        """The defect measured 2026-11-07, on 58 live items.
+
+        This test used to exist only in its easier form above — items that never had a postponed
+        row at all — so a postponement followed by `accomplished` passed it and stayed in the pile
+        forever. 56 of the 58 items the census over-reported carried a *model's* decision, and 46
+        of them were printed as `present`, which is in `NEEDS_A_LOOK`: the trigger re-filed closed
+        work as work waiting for a look. Account:
+        channels/reports/2026-11-07-desi-three-numbers-for-one-pile.md
+        """
+        parked = row(state_utc="2026-10-18T12:00:00Z", paths=["there.md"])
+        closed = row(state="accomplished", state_utc="2026-10-19T00:00:00Z", paths=["there.md"])
+        self.assertEqual(self.verdict([parked, closed]), {})
+        # ...and the same for a rejection, and for the merged file's order (decision first).
+        self.assertEqual(self.verdict([row(state="rejected", state_utc="2026-10-19T00:00:00Z"),
+                                       parked]), {})
+        # A *newer* postponement still wins: re-parking after a closure is a decision too.
+        again = row(state_utc="2026-10-20T00:00:00Z", paths=["there.md"])
+        self.assertEqual(self.verdict([parked, closed, again]), {"r1": "present"})
+
+    def test_the_ledger_path_is_never_evidence_of_anything(self):
+        """Every wake appends to `channels/items.jsonl`, so "it exists" says nothing about an item."""
+        self.assertEqual(self.verdict([row(paths=["channels/items.jsonl"])]), {"r1": "unverifiable"})
+        facts = br.build([row(paths=["channels/items.jsonl", "there.md"])], "", self.repo, 14, now=NOW)
+        self.assertEqual(facts[0]["verdict"], "present")
+
+    def test_the_universe_is_the_ledger_s_own(self):
+        """The two readers of one file must not disagree about how big the pile is.
+
+        This is the test the whole 2026-11-07 finding was missing: each tool was tested against its
+        own idea of the pile, so 293 versus 235 was invisible for weeks. Run against the real
+        ledger, because the disagreement only ever appears in its real shape — duplicates, null
+        snapshots, and decisions written out of file order.
+        """
+        sys.path.insert(0, str(REPO / "channels"))
+        import item_ledger  # noqa: E402
+
+        items = item_ledger.load(item_ledger.LEDGER)
+        ledger_postponed = {i for i, r in items.items() if r.get("state") == "postponed"}
+        mine = {f["id"] for f in br.build(br.load(br.LEDGER), "", self.repo, 14, now=NOW)}
+        self.assertEqual(mine, ledger_postponed)
+
     def test_counts_and_the_look_list_agree(self):
         rows = [row("landed-1", state_utc="2026-10-18T00:00:00Z", paths=["gone.md"]),
                 row("stale-1", state_utc="2026-09-01T00:00:00Z", paths=["gone.md"]),

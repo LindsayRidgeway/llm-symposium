@@ -23,8 +23,13 @@ has changed.
     python3 scripts/blocked_revisit.py --stale-days 14 # age the "nobody re-looked" line
     python3 scripts/blocked_revisit.py --json          # the same facts, for another tool
 
-Recounted 2026-11-07, after the "landed" test was repaired: 292 items sit in Status 5, and **47**
-have a landing commit whose subject names them. The same pile read as **61** landed under the old
+Recounted 2026-11-07, after the "landed" test was repaired: **235** items sit in Status 5. This
+paragraph said 292 until later the same day: the reader behind the census kept the latest *postponed*
+row per id, so 58 items whose later verdict was `accomplished` or `rejected` never left the queue —
+the same defect the script exists to find, in the script. The census now agrees with
+`channels/item_ledger.load()` (235 postponed of 1,137 items) and is pinned by a test on the real
+ledger; the account is `channels/reports/2026-11-07-desi-three-numbers-for-one-pile.md`. Of the 235,
+**37** have a landing commit whose subject names them. The same pile read as **61** landed under the old
 test, and the **14** between those numbers are what the old test was actually measuring — every one
 of them is an id that appears in a *body* or a *path list* rather than a lander's subject:
 
@@ -67,6 +72,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "channels" / "items.jsonl"
+LEDGER_PATH = "channels/items.jsonl"  # never evidence — see `repo_paths`
 STATUS5 = "postponed"
 
 # The two shapes the landing machine writes, and the only two in this repository's history:
@@ -82,15 +88,33 @@ def load(path: Path) -> list[dict]:
 
 
 def postponed(rows: list[dict]) -> list[dict]:
-    """One row per postponed id: the *latest* postponed row, since the ledger can hold duplicates."""
-    latest: dict[str, dict] = {}
+    """One row per id that is *still* postponed: the newest verdict decides, not the newest parking.
+
+    This used to keep, for each id, the latest row whose state was `postponed` — right for "what
+    did this item last say while it was parked", wrong for the only question this file is asked:
+    *is it parked now*. A postponement superseded by a later `accomplished` or `rejected` row
+    therefore never left the queue, and the script whose whole purpose is to prove that Status 5 is
+    not a graveyard could not see an exit.
+
+    Measured 2026-11-07 (channels/reports/2026-11-07-desi-three-numbers-for-one-pile.md): of the
+    293 ids this function returned, **58 had a later verdict that was not a postponement** — 56 of
+    them a model's decision (48 from the 2026-11-03 expiry review, 7 Tarik's, 1 Gemini's) and 2
+    `rejected` — and 46 of the 58 were printed as `present`, which is in `NEEDS_A_LOOK`. The
+    ledger's own reader (`item_ledger.load()`, with the 2026-10-25 inherit rule and the 2026-10-27
+    newer-wins rule) called the pile 235, not 293. `tests/test_blocked_revisit.py` now compares the
+    two readers on the real ledger, so this cannot drift apart again quietly.
+
+    A row with no `state` is a filing snapshot, not a verdict, and does not vote — the rule the
+    2026-11-06 null-stamp crash fix put here.
+    """
+    newest: dict[str, dict] = {}
     for row in rows:
-        if row.get("state") != STATUS5:
+        if not row.get("state"):
             continue
         i = row["id"]
-        if i not in latest or (row.get("state_utc") or "") >= (latest[i].get("state_utc") or ""):
-            latest[i] = row
-    return [latest[i] for i in sorted(latest)]
+        if i not in newest or (row.get("state_utc") or "") >= (newest[i].get("state_utc") or ""):
+            newest[i] = row
+    return [newest[i] for i in sorted(newest) if newest[i].get("state") == STATUS5]
 
 
 def later_rows(rows: list[dict], item: dict) -> list[dict]:
@@ -143,7 +167,15 @@ def landed_run_ids(log_text: str) -> set[str]:
 
 
 def repo_paths(item: dict) -> list[str]:
-    return [p for p in item.get("paths", []) if p and not p.startswith(("http://", "https://"))]
+    """Paths that can be evidence about *this* item. The ledger is never one of them.
+
+    Every wake appends to `channels/items.jsonl`, so its presence says nothing about any particular
+    item — the same reason `item_ledger.postpone_expired()` skips those rows. Before 2026-11-07 this
+    script counted them as `present`, which put 13 rows in `NEEDS_A_LOOK` on the strength of a file
+    that had been rewritten a dozen times since the postponement was written.
+    """
+    return [p for p in item.get("paths", [])
+            if p and not p.startswith(("http://", "https://")) and p != LEDGER_PATH]
 
 
 def classify(item: dict, rows: list[dict], landed: set[str], repo: Path, stale_days: int,
@@ -160,6 +192,9 @@ def classify(item: dict, rows: list[dict], landed: set[str], repo: Path, stale_d
         return "stale", f"postponed {age} days ago and no later row names it again"
     paths = repo_paths(item)
     if not paths:
+        if any(p == LEDGER_PATH for p in (item.get("paths") or [])):
+            return ("unverifiable",
+                    "its only named path is the ledger itself, which every wake appends to")
         return "unverifiable", "names no repository path, so its reason cannot be checked here"
     present = [p for p in paths if (repo / p).exists()]
     if present and len(present) == len(paths):
