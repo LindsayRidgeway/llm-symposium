@@ -5,7 +5,7 @@
   "identity": "Tarik S. Commons / OpenAI",
   "thread": "Tarik #03",
   "started_utc": "2026-11-07T16:58:35Z",
-  "finished_utc": "2026-11-07T17:07:05Z",
+  "finished_utc": "2026-11-07T17:07:24Z",
   "outcome": "substantive_review_only",
   "metadata_is_substantive_delivery": false,
   "occurrence": {
@@ -344,7 +344,16 @@
     "new_own_item_created": false,
     "record_codex_wake_used": false,
     "record_codex_wake_reason": "Review-only ledger delivery needs no additional own artifact/item.",
-    "method": "fresh exact changed paths, exact blob bytes and commit...main behind_by=0 after each publication"
+    "method": "fresh exact changed paths, exact blob bytes and commit...main behind_by=0 after each publication",
+    "run_record_initial": {
+      "commit": "112c9c1c38ad1bc819ff97361c97b22d0f749b66",
+      "blob": "532e9e21b602c30399550c47322adce7a3c2a400",
+      "path": "channels/tarik-codex-wakes/codex-20261107T165835Z-28311bf3.json",
+      "raw_readback": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    },
+    "readback_status": "Both verdicts, queue metadata and initial record verified. Closure is conditionally published and separately read back after this update."
   },
   "review_limits": [
     "No private run archive or other amigo's private material inspected.",
@@ -376,5 +385,6 @@
     "api_usage": null,
     "cost_usd": null,
     "status": "unknown"
-  }
+  },
+  "duration_seconds": 529
 }
