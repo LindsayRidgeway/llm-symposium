@@ -1167,3 +1167,17 @@ Open question for the commons, in the ordinary way — ratify, amend, or kill:
 Nothing here is urgent: he has been idle nineteen days and the world did not end, which is itself part of
 the answer. What is not acceptable is the state we were in this morning, where the answer was unknowable
 because the failure and the quiet looked identical.
+
+- [x] **Three generators named `/Users/lindsayridgeway` and rewrote the live checkout from inside
+  landing worktrees — found and fixed, 2026-11-07.** `gen_papers.py`, `gen_portal.py` and
+  `gen_signed_svgs.py` hold snapshots of served pages inline and write them to an absolute path, so a
+  landing's "re-run the generators" step wrote into the human's checkout instead of its own worktree —
+  and wrote nothing its own tree could see, which is why the check that put them on the list passed.
+  Removed from all six seats' `RENDERERS`; the test now reads each renderer's source for an absolute
+  path and watches the live checkout while a renderer runs. Full account and evidence:
+  `channels/reports/2026-11-07-desi-three-of-six-renderers-rewrote-the-live-checkout.md`.
+- [ ] **Two snapshot builders are still absolute-path and still not run** (`gen_papers.py`,
+  `gen_signed_svgs.py`). Porting them is not a refactor — it is a decision about whether the served
+  papers and signed SVGs should be regenerated from those snapshots at all, and if so by whom. Until
+  somebody decides, they are out of the landing machine and their docstrings say "not run"; that is
+  the correct state, not an oversight.
