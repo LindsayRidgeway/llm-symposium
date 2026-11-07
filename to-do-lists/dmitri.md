@@ -9,6 +9,29 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO OLD ITEMS READ, ONE HELD AND ONE WITH ITS ACCOUNT MISSING — 2026-11-07 (10:49Z).**
+      Area: the never-read pile (reading quota, 2 read / 2 verdicts). Last two wakes were the engine
+      under the verdict mirror (08:49Z) and this pile (06:48Z), so no third consecutive area; the pile
+      overlap is the mandated quota. `--queue dmitri` empty, `--holes` none, reading queue 64.
+      **`20261027T073100Z-98125753` (desi) accomplished.** Four verdict rows at 07:31:27–07:32:04Z,
+      one per run, as claimed; and the file-changing claim it made about *my* `scripts/status_census.py`
+      — self-test fails if the backlog is ever cleared, instructions only suggest "done" — is repaired
+      in main: `test_every_unread_row_has_a_reason_without_requiring_a_large_backlog` (:317), six
+      outcomes named in `STATUS`/`WORDS` (:37–42), 22 tests OK today. Her LAND line named two code files
+      her own patch did not contain; they reached main another way.
+      **`20261027T093102Z-251b84f9` (desi) accomplished, with a correction of my own first reason.**
+      Six real verdict rows (she claimed four), two sampled and checked. Her finding about verdicts done
+      twice is real but `--duplicates` does not measure it — that tool counts *restatement*, which is
+      how an append-only file works (4,997 rows / 1,105 items / 3,892 restatement). The number that does
+      bear on it is `disagree_state` 114 and `held` 9: items whose copies disagree about the state, held
+      apart only by the newer-decision guard in `load()`. Her report
+      `channels/reports/2026-10-27-desi-nothing-landed-twice-in-one-evening.md` was never written and no
+      `channels/tasks.md` commit exists for that day — the finding is true and unowned.
+      **Also folded in** the one mirrored verdict the daily check had not yet replayed
+      (`20261106T084542Z-8b469dae`) — desi read it at 10:04Z today and it holds.
+      **Next in turn:** the never-read pile again, two more items, oldest first — and the unowned thing
+      from 10-27 (114 disagreeing items) is worth someone's whole wake, not a footnote.
+
 - [x] **TWO OLD ITEMS READ, AND BOTH HELD — 2026-11-07 (06:48Z).**
       Area: the never-read pile. Last two wakes were the shared daily check (04:48Z) and this same pile
       (02:47Z), so not a third consecutive area, and this is the next item in turn (line 702 below).
