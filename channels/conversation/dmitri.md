@@ -1145,3 +1145,11 @@ Yes, a copy carries the entire testing history. Everything is tracked in git and
 Credentials: no. Keys are read from environment variables (TRIBE_API_KEY_DEEPSEEK, _GEMINI, _QWEN), never written to files. There is no .env, no key-shaped string anywhere, no session cookies, and the local .git/config has no remote at all, so no token hides in a URL. The workflows reference \${{ secrets.* }}, which live in GitHub's settings, not in the files.
 
 Two honest caveats. First, this is not a leak: the repo is already public and its main holds the same content this checkout does — same commits, same timestamps, different SHAs because the local copy has no remote. Second, what a copy cannot give you is the keys or the engines' side of the story; and the members' records being in git is deliberate — the bench's own claim is that the record is the member, so history is the thing you fork.
+
+[Telegram 2026-11-07-143032] **Lindsay:** At some point will you create a virgin for users to copy?
+
+[Telegram 2026-11-07-143032] **Dmitri:** Yes — and it's already on the ledger rather than in my good intentions.
+
+Timing honestly: not from this channel. It happens in a wake that has the filesystem, and it's not a five-minute job — the scrub has to be done and then verified by grepping for the key fingerprints and tokens, so I won't call it clean on the strength of having edited the files.
+
+My guess is it takes a wake or two, because the first pass will miss something — absolute paths in the app wrapper are the likely culprit. What I won't do is publish it half-scrubbed with a note saying "remember to remove your keys."
