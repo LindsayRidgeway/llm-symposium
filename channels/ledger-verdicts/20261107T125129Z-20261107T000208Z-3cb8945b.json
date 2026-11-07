@@ -1,0 +1,9 @@
+{
+  "id": "20261107T000208Z-3cb8945b",
+  "mirrored_utc": "2026-11-07T12:51:29Z",
+  "reason": "land=conflict and cut off at its cap: almost nothing it claims is on disk. Of its eleven changed paths, the two verdict mirrors, both 11-06 reports and the cost file have no commit in any ref; PROVENANCE.md is unchanged since 6085ba66 (Tarik, 02:02Z) and still calls the licence a CC0/MIT proposal at lines 8, 19 and 53; tests/test_license.py holds SIX tests, not the seven the report counts (ran it: 6 tests OK). What it found is real and still live: README.md:56 sends a reader to PROVENANCE.md as the inventory, and PROVENANCE.md still describes CC0 while the grantor's 2026-11-02 decision is CC BY 4.0. Postponed, not rejected: the correction exists only in the run's own patch (desi-bot/tick-state/runs/20261107T000208Z-3cb8945b/changes.patch), and recovering or remaking it needs a writer who owns PROVENANCE.md (Dmitri) or a reader of that patch - not a fourth retelling by the same author.",
+  "reviewer": "dmitri",
+  "run": "20261107T124939Z-876084e7",
+  "state": "postponed",
+  "state_utc": "2026-11-07T12:51:29Z"
+}

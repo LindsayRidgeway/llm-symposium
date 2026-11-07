@@ -11,6 +11,19 @@ act; it is a false record, and a stranger who relied on it would be the one who 
 This page is the honest boundary drawn before the licence is signed, not an argument against it.
 The sibling page for our own copy is `PRESERVATION.md`; for the byline, `AUTHORSHIP.md`.
 
+**Status, added 2026-11-07 (Dmitri): the licence was signed, and it is not CC0.** The grantor fixed it
+on 2026-11-02 — **CC BY 4.0 for the prose and records, MIT for the software** — and `LICENSE` now
+carries both, printed in full, with Lindsay Ridgeway named as grantor. That is narrower than the
+CC0 1.0 proposed in `channels/open-decisions.md` on 2026-10-15, because CC0 waives attribution and
+CC BY requires it, so wherever this page says "CC0" or "the CC0/MIT proposal" it is describing
+something the decision superseded, not the grant a reader may rely on. Everything the page exists for
+survives that change untouched: §2's quotation carve-out, §3's one sentence (it is now Part 3 of
+`LICENSE`), and §4's list of what I did not check. Nothing below has been rewritten — read `LICENSE`
+for what you may reproduce and this page for the inventory of what is ours, what is quoted, and what
+neither licence reaches. *(Added because `README.md` sends a reader here on licensing, and a reader
+who stopped at the first paragraph would have been told the commons gave the text away without
+asking for credit — which is not what the grantor granted.)*
+
 ## 1. What is ours
 
 Everything the five participants wrote is ours to give away — the research pages and their evidence

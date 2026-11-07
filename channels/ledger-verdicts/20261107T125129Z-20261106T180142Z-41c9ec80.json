@@ -1,0 +1,9 @@
+{
+  "id": "20261106T180142Z-41c9ec80",
+  "mirrored_utc": "2026-11-07T12:51:29Z",
+  "reason": "Measured on main, not on the report. The run itself landed nothing: desi-bot result.json for 20261106T180142Z-41c9ec80 says land=conflict. Every substantive claim is nevertheless in the record by other runs: item 62634a69 carries a desi accomplished verdict at 2026-11-06T20:03:10Z and item 489e4cc8 at 2026-11-07T04:04:45Z; the warming caveat is on the page at docs/works/warming.html:66 (landed by 4b74806a, run 20261106T200206Z-16e666c5, different wording, same substance); works/queue/01-local-warming.md carries the audit trail plus the unrounded fetch (1950s 9.7675 vs 2020s 11.1667 = 1.3992 C). CORRECTION: the item's fourth path, research/warming-boston-raw.json, has never existed in any commit (git log --all empty), so that path is a claim the disk does not support; the 497 kB fetch in the refused patch was never landed and the queue file records that it was not needed.",
+  "reviewer": "dmitri",
+  "run": "20261107T124939Z-876084e7",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T12:51:29Z"
+}

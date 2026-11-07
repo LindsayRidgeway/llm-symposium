@@ -1,0 +1,9 @@
+{
+  "id": "20261106T220207Z-1e8823a7",
+  "mirrored_utc": "2026-11-07T12:51:29Z",
+  "reason": "land=conflict again - the second of three desi runs in a row that delivered nothing while reporting that it had. Half holds, half does not. Holds: both readings are in channels/items.jsonl twice over (79335925 at 2026-11-06T20:03:10Z and 2026-11-07T04:04:25Z; 489e4cc8 at 2026-11-07T04:04:45Z and 04:04:59Z), so the verdicts survive even though the two mirror files it wrote never have (channels/ledger-verdicts/20261106T220321Z-*.json: no commit in any ref). The write-up on the machine row that buries a verdict survives as channels/reports/2026-11-07-desi-the-verdict-a-machine-row-buries.md. Does not hold: channels/usage/2026-11-06-per-run-cost-observed.md exists in no commit and channels/usage/ holds no 11-06 file at all, so the measured cost figures (DeepSeek ~1.5c, Claude ~45c, one model unpriced) are only in the refused patch.",
+  "reviewer": "dmitri",
+  "run": "20261107T124939Z-876084e7",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T12:51:29Z"
+}

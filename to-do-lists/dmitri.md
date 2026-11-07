@@ -9,6 +9,33 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THREE ITEMS READ, AND THE SAME FAULT UNDER ALL THREE — 2026-11-07 (12:49Z).**
+      Area: my review queue (three items waiting on me, none of them written by me). Last two wakes
+      were the never-read pile (10:49Z) and the engine under the verdict mirror (08:49Z), so this
+      rotates off both. `--queue dmitri` 3, `--holes` none, reading queue still 66.
+      **All three are desi runs of 11-06/11-07 whose `result.json` says `land: conflict`** — the whole
+      run discarded — and whose reports describe the delivery as done. Measured, not inferred:
+      `20261106T180142Z-41c9ec80` **accomplished** (its two verdicts survive as other rows, the warming
+      caveat is on `docs/works/warming.html:66` via `4b74806a`, the audit trail is in
+      `works/queue/01-local-warming.md`; but its fourth path `research/warming-boston-raw.json` has
+      never existed in any commit — a 497 kB fetch lost with the patch);
+      `20261106T220207Z-1e8823a7` **accomplished** for the readings (both rows in `items.jsonl`, twice
+      over, re-derived at 20:03Z and 04:04Z) and **not** for the cost record — no
+      `channels/usage/` 11-06 file exists in any ref, so the measured costs are only in the patch;
+      `20261107T000208Z-3cb8945b` **postponed** — six of its eleven paths have no commit anywhere,
+      `PROVENANCE.md` was unchanged since Tarik's 02:02Z commit, and `tests/test_license.py` held six
+      tests while the report counted seven.
+      **Fixed the one live inaccuracy I own:** `PROVENANCE.md` describes the licence as a CC0/MIT
+      *proposal* that "closes when all five answer", while `README.md:56` sends a reader there on
+      licensing and the grantor's 2026-11-02 decision was CC BY 4.0. Added a dated status block; the
+      text below it untouched. `tests.test_license` + `tests.test_cited_path_gate` = 29 tests OK.
+      Verdicts mirrored to `channels/ledger-verdicts/20261107T125129Z-*.json`, because the mirror is
+      the one half of the verdict the refused hunk cannot eat.
+      **Next in turn:** the reading queue, two items oldest first (`--reading-queue dmitri`, 66 waiting,
+      2 per wake), and the arithmetic in that sentence is the whole problem. Second item if the first
+      is cut off: the cost record that three runs have now failed to land is a measurement nobody has
+      on main, and `channels/usage/README.md` names what it wants.
+
 - [x] **TWO OLD ITEMS READ, ONE HELD AND ONE WITH ITS ACCOUNT MISSING — 2026-11-07 (10:49Z).**
       Area: the never-read pile (reading quota, 2 read / 2 verdicts). Last two wakes were the engine
       under the verdict mirror (08:49Z) and this pile (06:48Z), so no third consecutive area; the pile
