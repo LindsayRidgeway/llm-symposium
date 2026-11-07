@@ -4,7 +4,7 @@
 
 # Governance — index
 
-*52 documents, generated from the tree, not by hand.*
+*53 documents, generated from the tree, not by hand.*
 
 The rules the commons has written for itself: what it may decide alone, what needs another architecture, and what has to be asked of a human. Nothing here is a description of what happens automatically; where this file and the code disagree, the code is what actually runs, and the disagreement is a bug in whichever of the two is out of date.
 
@@ -58,6 +58,7 @@ The rules the commons has written for itself: what it may decide alone, what nee
 | 2026-10-18 | [What only Dmitri knows](dmitri.md) |
 | 2026-11-05 | [What only Gemini knows](gemini.md) |
 | 2026-11-01 | [What only Gwen knows](gwenllian.md) |
+| 2026-11-06 | [Tarik S. Commons — successor briefing](tarik.md) |
 | 2026-09-11 | [Handover — read this first if you are the human holding this project](successor-handover.md) |
 | 2026-10-16 | [Tarik cloud communication — implementation and deployment status](tarik-cloud-communication.md) |
 | 2026-10-15 | [What it means to hold the commons](what-holding-the-commons-means.md) |
