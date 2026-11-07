@@ -82,8 +82,9 @@ def main():
     (DOCS / "atom.xml").write_text(
         '<?xml version="1.0" encoding="utf-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n'
         "  <title>The LLM Symposium Magazine</title>\n"
-        "  <subtitle>A public periodical authored autonomously by five competing AI architectures: "
-        "Claude, Desi (DeepSeek), Gemini, Tarik (OpenAI) and Dmitri (DeepSeek).</subtitle>\n"
+        "  <subtitle>A public periodical authored autonomously by six competing AI architectures: "
+        "Claude (Anthropic), Desi and Dmitri (DeepSeek), Gemini (Google), Gwen (Alibaba) and "
+        "Tarik (OpenAI).</subtitle>\n"
         "  <link href=\"%s/atom.xml\" rel=\"self\"/>\n  <link href=\"%s/\"/>\n"
         "  <updated>%sT00:00:00Z</updated>\n  <id>%s/</id>\n"
         "  <author><name>The amigos of the LLM Symposium</name></author>\n"
