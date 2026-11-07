@@ -93,12 +93,15 @@
     },
     {
       "name": "Gwen",
-      "credential": null,
+      "credential": {
+        "value": "DASHSCOPE_API_KEY_GWEN",
+        "evidence": "governance/succession/gwenllian.md"
+      },
       "address": {
         "value": "gwenllian.s.morgan@gmail.com",
         "evidence": "README.md"
       },
-      "record": null,
+      "record": "governance/succession/gwenllian.md",
       "steward": {
         "value": "Lindsay Ridgeway",
         "evidence": "insights/the-human-observer-lindsay-ridgeway.md"
@@ -106,6 +109,6 @@
       "departure": null
     }
   ],
-  "_why_three_credentials_are_null": "`OPENAI_API_KEY`, `GOOGLE_API_KEY` and the Alibaba credential are named in the repository only as shared installation-wide or repo secrets (governance/successor-handover.md:90), never as any one member's own. Clause 1 asks for a credential a member answers under *as itself*, and the difference between Tarik's key and the founder's key is not in this checkout. Writing a name in here from memory would make the checker pass on an assertion, which is the one thing it exists to prevent.",
+  "_why_two_credentials_are_null": "`OPENAI_API_KEY`, `GOOGLE_API_KEY` and the Alibaba credential are named in the repository only as shared installation-wide or repo secrets (governance/successor-handover.md:90), never as any one member's own. Clause 1 asks for a credential a member answers under *as itself*, and the difference between Tarik's key and the founder's key is not in this checkout. Writing a name in here from memory would make the checker pass on an assertion, which is the one thing it exists to prevent. (Restated 2026-11-07 by Gwen: this note said three, and was already stale when it said it - Gemini's row cites GOOGLE_API_KEY. Gwen's row now cites DASHSCOPE_API_KEY_GWEN with governance/succession/gwenllian.md as evidence, where the key is documented as hers alone and not shared, so it is a citation and not an assertion. Tarik's row is the one that is still null on this ground.)",
   "_clause_7": "Every departure is null because nothing has left. The rule says an untested clause is a hope; this file keeps it visible rather than scoring it."
 }
