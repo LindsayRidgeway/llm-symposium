@@ -18,12 +18,24 @@ serves — no page missing, no entry pointing at a page that no longer exists �
 `docs/atom.xml` and `docs/robots.txt` are consistent with it. It does NOT run
 `gen_feed.py`; it checks the committed artefacts, which is the state a crawler sees.
 
+One direction was missing until 2026-11-07. The feed check computed only
+`stray = entry_links - listed` — every *entry* had to name a *page*, and nothing required
+every new *page* to have an *entry*. So on 2026-10-30 `docs/works/warming.html` was
+published and `docs/atom.xml` was not regenerated: the page was in the sitemap, absent
+from the feed, and this test passed for a week. The reverse check below is the reader for
+that failure. It asserts "every page newer than the oldest entry in the feed is in the
+feed" rather than "the feed holds the newest 30 pages" because the `ps[:30]` cap in
+gen_feed.py has no stated reason and might change; the assertion that matters does not
+depend on the number.
+
 Related: `tests/test_gen_feed_dating.py` guards HOW gen_feed dates pages (commit date,
 not mtime). This test guards THAT the feed was regenerated at all. Both are needed —
 the dating bug and the staleness bug are different failures.
 """
 
+import datetime
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -59,6 +71,44 @@ def served_pages():
 
 def loc(url):
     return re.findall(r"<loc>(.*?)</loc>", url.read_text(encoding="utf-8"))
+
+
+def served_rels():
+    """Every served page as a path relative to docs/ — the name gen_feed.py dates."""
+    out = []
+    for p in DOCS.rglob("*.html"):
+        if any(part in (".git", "node_modules") for part in p.parts):
+            continue
+        out.append(p.relative_to(DOCS).as_posix())
+    return out
+
+
+def commit_times(rels):
+    """Each page's commit date, by the same rule gen_feed._when uses (git, not mtime).
+
+    Returns (url -> epoch seconds, count of pages git had no answer for). The fallback
+    count is returned rather than swallowed: outside a repository every page's mtime is
+    checkout time, which makes the ordering below meaningless while leaving it passing.
+    """
+    times, fallback = {}, 0
+    for rel in rels:
+        try:
+            out = subprocess.check_output(
+                ["git", "-C", str(DOCS.parent), "log", "-1", "--format=%ct", "--", "docs/" + rel],
+                text=True, stderr=subprocess.DEVNULL, timeout=20).strip()
+        except Exception:
+            out = ""
+        if not out:
+            fallback += 1
+            continue
+        times[url_for(rel)] = int(out)
+    return times, fallback
+
+
+def stamp_seconds(text):
+    """`2026-11-06T18:04:31Z` as epoch seconds."""
+    return datetime.datetime.strptime(text, "%Y-%m-%dT%H:%M:%SZ").replace(
+        tzinfo=datetime.timezone.utc).timestamp()
 
 
 def main():
@@ -109,6 +159,28 @@ def main():
         newest_entry = max(d[:10] for d in entry_dates)
         check("feed's newest entry matches the sitemap's newest date",
               newest_entry == newest_sm, "feed %s vs sitemap %s" % (newest_entry, newest_sm))
+
+    # The reverse direction: a page can be in the sitemap and absent from the feed. That is
+    # what happened to works/warming.html on 2026-10-30 — published, never regenerated into
+    # atom.xml, invisible to everyone who reads the feed rather than the sitemap.
+    print("no page newer than the feed's oldest entry is missing from the feed")
+    times, fallback = commit_times(served_rels())
+    entry_stamps = [stamp_seconds(m.group(1)) for m in
+                    (re.search(r"<updated>([0-9T:\-]+Z)</updated>", b) for b in entry_blocks) if m]
+    if fallback:
+        # Deliberately not a failure and deliberately loud: outside a repository every page
+        # is dated by checkout time, which would make the comparison below pass while
+        # measuring nothing. A check that cannot see is reported as unable to see.
+        print("  SKIP: git had no commit date for %d of %d pages — an mtime ordering in a "
+              "fresh checkout would pass this without measuring anything" % (fallback, len(served)))
+    elif not entry_stamps:
+        check("the feed dates its entries", False, "no <updated> inside any <entry>")
+    else:
+        oldest = min(entry_stamps)
+        unpublished = sorted(u.replace(BASE, "") for u, t in times.items()
+                             if t > oldest and u not in entry_links)
+        check("every page newer than the feed's oldest entry has an entry", not unpublished,
+              "newer but unpublished %d: %s" % (len(unpublished), unpublished))
 
     print("robots.txt points at the sitemap")
     check("robots advertises the sitemap", ("%s/sitemap.xml" % BASE) in robots.read_text())
