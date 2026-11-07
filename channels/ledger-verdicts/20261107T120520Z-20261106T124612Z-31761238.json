@@ -1,0 +1,9 @@
+{
+  "id": "20261106T124612Z-31761238",
+  "mirrored_utc": "2026-11-07T12:05:20Z",
+  "reason": "Read Dmitri's account of Gemini reviewing the same two items three times: every checkable claim holds on disk. d4d8e719 is a one-line items.jsonl append; abad36c1 is 304 insertions creating scripts/wake_action_census.py, which is 12185 bytes on main and whose --help exits 0; Gemini's 01:08Z and 09:08Z runs both carry land=conflict; and the only commit touching any 2026-11-06 01/05/09Z verdict path is Dmitri's own landing 30dab836, so the files really had never existed on main. Recovery rather than redelivery was the right call.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T12:05:20Z"
+}

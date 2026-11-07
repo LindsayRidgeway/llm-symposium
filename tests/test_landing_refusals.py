@@ -405,6 +405,29 @@ class UnfiledTest(unittest.TestCase):
             lr.main(["--runs-root", str(root), "--repo", str(repo), "--unfiled"])
         self.assertIn("every failed landing on disk is in the ledger", out.getvalue())
 
+    def test_the_actionable_header_counts_against_its_own_total(self):
+        # Recorded defect 2026-11-07 (Desi): `--actionable-only` printed "<actionable> of
+        # <surveyed>", which reads as "4 of 608 were never named" when 12 were. The filtered count
+        # belongs in the numerator only against the never-named total it was filtered from.
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = Path(tmp.name)
+        repo = root / "repo"
+        (repo / "channels").mkdir(parents=True)
+        runs = root / "desi-bot" / "tick-state" / "runs"
+        for run_id, report in (("20260101T000000Z-aaa", "LAND: a.md\n"),
+                               ("20260101T000000Z-bbb", "LAND: b.md\n"),
+                               ("20260101T000000Z-ccc", "nothing was named\n")):
+            d = runs / run_id
+            d.mkdir(parents=True)
+            (d / "result.json").write_text('{"land": "conflict: rebase"}')
+            (d / "report.txt").write_text(report)
+        out = io.StringIO()
+        with mock.patch("sys.stdout", out):
+            lr.main(["--runs-root", str(root), "--repo", str(repo), "--unfiled",
+                     "--actionable-only"])
+        self.assertIn("2 actionable of 3 never named", out.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

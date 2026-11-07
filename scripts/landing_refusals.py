@@ -46,8 +46,10 @@ failed landing nobody can be handed is still a failed landing. It prints every s
 appears nowhere in `channels/items.jsonl` — the set difference between this survey and the ledger,
 in one field comparison. Measured on the six bots the day it was written: 597 failed landings, 13
 never named in the ledger, 10 of those naming work that is not on main. `--actionable-only` keeps
-just those 10. Nothing schedules it yet; it is a report, and the honest wiring is a caller, which
-this file still does not have.
+just those 10. Re-measured 2026-11-07 (Desi), same six bots, same command: 608 failed landings, 12
+never named, 4 of those naming work that is not on main — the pile is not growing, it is cycling,
+and half of the never-named rows are refusals that were made good later. Nothing schedules it yet;
+it is a report, and the honest wiring is a caller, which this file still does not have.
 
 The counts this script printed until 2026-11-06 were partly an artefact of its own reader, and a wake
 found them that way. `claimed_paths()` split the LAND line on commas only, so every report that wrote
@@ -350,8 +352,13 @@ def unfiled(rows: list[dict], ledger_text: str, actionable_only: bool = False) -
     """
     out = [row for row in rows if row.get("run") and row["run"] not in (ledger_text or "")]
     if actionable_only:
-        out = [row for row in out if row.get("state") in ("open", "partial") and row.get("claimed")]
+        out = actionable(out)
     return out
+
+
+def actionable(rows: list[dict]) -> list[dict]:
+    """The slice of never-named rows that names work and does not have it (`open`, `partial`)."""
+    return [row for row in rows if row.get("state") in ("open", "partial") and row.get("claimed")]
 
 
 def render(facts: dict) -> str:
@@ -404,8 +411,14 @@ def render(facts: dict) -> str:
             lines.append(f"               reason: {row['reason'][:110]}")
     if "unfiled" in facts:
         named = facts["unfiled"]
-        lines += ["", f"never named in {facts.get('ledger', 'the ledger')}: {len(named)} of "
-                      f"{facts['refusals']}"]
+        total = facts.get("unfiled_total", len(named))
+        if len(named) == total:
+            head = (f"never named in {facts.get('ledger', 'the ledger')}: "
+                    f"{total} of {facts['refusals']} failed landing(s)")
+        else:
+            head = (f"never named in {facts.get('ledger', 'the ledger')}: {len(named)} actionable "
+                    f"of {total} never named — {facts['refusals']} failed landing(s) surveyed")
+        lines += ["", head]
         for row in sorted(named, key=lambda r: r["run"]):
             lines.append(
                 f"  [{row['state']:<10}] {row['bot']:<10} {row['run']}  "
@@ -414,7 +427,8 @@ def render(facts: dict) -> str:
             if row.get("missing"):
                 lines.append("               missing: " + ", ".join(row["missing"][:3]))
         if not named:
-            lines.append("  none — every failed landing on disk is in the ledger")
+            lines.append("  none — every failed landing on disk is in the ledger" if not total else
+                         "  none actionable — no never-named row both names work and lacks it")
     lines += [
         "",
         "reconciled = the refusal was made good later; do not redo that work.",
@@ -463,8 +477,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.unfiled:
         ledger = Path(args.ledger) if args.ledger else repo / "channels" / "items.jsonl"
         facts["ledger"] = str(ledger)
-        facts["unfiled"] = unfiled(facts["rows"], read(ledger),
-                                   actionable_only=args.actionable_only)
+        every = unfiled(facts["rows"], read(ledger))
+        facts["unfiled_total"] = len(every)
+        facts["unfiled"] = actionable(every) if args.actionable_only else every
     if args.json:
         print(json.dumps(facts, indent=2))
     else:
