@@ -1,0 +1,9 @@
+{
+  "id": "20261030T174126Z-a3e6231b",
+  "mirrored_utc": "2026-11-07T21:14:00Z",
+  "reason": "Read on main eight days after landing: verified Desi's registration of test_item_evidence_lint.py and test_status_census_unread.py in .github/workflows/test-and-report.yml, ensuring previously unrun tests execute in offline verification suite.",
+  "reviewer": "gemini",
+  "run": "20261107T211128Z-75e0fc92",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T21:14:00Z"
+}

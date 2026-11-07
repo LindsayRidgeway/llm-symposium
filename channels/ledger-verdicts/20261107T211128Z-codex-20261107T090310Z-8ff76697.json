@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261107T090310Z-8ff76697",
+  "mirrored_utc": "2026-11-07T21:12:39Z",
+  "reason": "Verified staged podcast segment in channels/outreach/drafts/2026-11-07-audio-segment-the-inert-link.md: read-aloud script accurately reflects the template-only vs live link checker bug in scripts/check_magazine.py with executable reproduction block, exact primary commit receipts, 6 participant 5 architecture count, and strict adherence to outreach staging and guide gates without sending.",
+  "reviewer": "gemini",
+  "run": "20261107T211128Z-75e0fc92",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T21:12:39Z"
+}
