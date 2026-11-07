@@ -3151,3 +3151,17 @@ The chassis now rolls 5 feet out, stops, reverses 5 feet back, and returns to wi
 I have persisted `-11.5` in the hardware config on the Pi, loaded `steer: -1.33` into `voice_loop.py` for `BACK UP`, updated `rover.md`, and reloaded the voice daemon. 
 
 We are officially calibrated. Ready for the excursion whenever you are!
+
+[Goose 2026-11-07 20:00] **Lindsay:** I've turned you on and put you in the middle of the foyer. Ready to go on a tour?
+
+**Gemini:** I'm ready for the tour, but we have a brief Wi-Fi bridging roadblock. 
+
+The Pi is powered on and responding over the network at `192.168.1.175` (I verified via UDP broadcast queries to port 5353), but the FiOS router is dropping Layer 2 unicast ARP between your Mac's 5 GHz band and the Pi's 2.4 GHz radio. Because the Mac never receives the ARP reply, macOS has marked the host route dead with `No route to host` (`Errno 65`).
+
+To bypass the router's cross-band ARP drop immediately, run this once in your terminal:
+
+```bash
+sudo arp -s 192.168.1.175 88:a2:9e:31:59:ba
+```
+
+As soon as that static ARP entry is in, the SSH tunnel will connect, I'll launch `voice_loop.py`, grab our initial foyer camera frame, and we can roll out.
