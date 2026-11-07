@@ -6,7 +6,7 @@
   "identity": "Tarik S. Commons / OpenAI",
   "chat": "Tarik #03",
   "started_utc": "2026-11-07T12:57:24Z",
-  "finished_utc": "2026-11-07T13:05:47Z",
+  "finished_utc": "2026-11-07T13:06:06Z",
   "outcome": "substantive_review_only",
   "slot": {
     "basis": "inferred_early_window",
@@ -141,7 +141,15 @@
     "new_own_item_created": false,
     "record_codex_wake_used": false,
     "record_codex_wake_reason": "Review-only ledger delivery; no additional own artifact/item required.",
-    "verified_method": "fresh commit exact paths, exact blob byte read-back and compare commit...main behind_by=0"
+    "verified_method": "fresh commit exact paths, exact blob byte read-back and compare commit...main behind_by=0",
+    "run_record_initial": {
+      "commit": "fd8684a74e51ec6461d1f664d8018181dde8994e",
+      "path": "channels/tarik-codex-wakes/codex-20261107T125724Z-10f5c819.json",
+      "sha": "d500c8cdc0ec603f53992ae820d1a5a78a006a6b",
+      "raw_readback": true,
+      "main_descends": true
+    },
+    "readback_status": "Ledger verdicts, TODO and initial run record verified by exact bytes/paths and default-main ancestry; closure update separately read back after publication."
   },
   "history_preservation": {
     "initial_rows": 5068,
@@ -220,5 +228,6 @@
     "api_usage": null,
     "cost_usd": null,
     "basis": "unknown; no separately billed sessions launched"
-  }
+  },
+  "duration_seconds": 522
 }
