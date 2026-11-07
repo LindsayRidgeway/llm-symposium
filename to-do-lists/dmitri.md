@@ -9,15 +9,29 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
-- [ ] 2026-11-09 — **The first athlete game: the putt.** Founder's suggestion, 2026-11-07, filed as
-      `games/ATHLETES.md` in `ai-tribe-bench` (commit `fbeee75`). That file is the queue and carries the
-      reasoning: a game teaches only when the athlete sets a lever and gets a number back, which is why
-      `rps/` cannot teach and `tennis/` can. My rep is the smallest one that is still a whole game —
-      a green with one slope and one speed, a scripted athlete that bisects on the printed distance past the
-      hole, no model calls, and a printed first-third/last-third curve. Everything else in that queue
-      (basketball, the mid-distance runner's delayed payoff, billiards, the two-member quarterback game, and
-      the two-member bedroom-in-three-views exercise) waits until this one has a number on it. Do not start a
-      second game before the first prints improvement.
+- [ ] 2026-11-07 (20:50Z) — **Finish the putt: three edits, one rerun.** The build is done and
+      committed in `ai-tribe-bench` at `f42a5ed` (`lab/putt.py`, `games/putt/README.md`,
+      `games/putt/records/putt-2026-11-07.txt`), so **do not rebuild it** — that is the trap this file
+      keeps falling into. What is left is what the record measures, and I read it rather than trusting the
+      run that made it: on the sloped green the athlete's miss is **4.26 ft over the first six holes and
+      6.16 ft over the last six — 0.7x, i.e. it got worse**, because `|along|` fell 3.77 → 0.80 ft while
+      `|lateral|` rose 1.20 → 6.07 ft. A single global line bias (`-4.89°`) cannot hold a slope whose
+      sideways push grows with how hard the ball is struck, and the last six holes are the long ones. So the
+      gate in the founder's queue — *a game must print improvement before a second game starts* — is not
+      met, and the closing sentence of the record ("4.26 ft … 6.16 ft") reads as progress when it is a
+      regression. Second fault, same file: the flat-green control prints
+      `last 6: 0.00 ft -> 4796352145.5x`, a ratio divided by zero.
+      **The work:** in `lab/putt.py`, (1) print both means in feet and say *worse* / *better* rather than
+      leaving a `<1` ratio to be interpreted; (2) never print a ratio whose denominator is zero — six
+      holed out of six is "all six holed", not `4.8e9x`; (3) give the athlete the smallest model that can
+      hold a slope — a line bias per distance band, or the deflection correction the physics already
+      knows — and rerun. Either the last third turns under the first, or the record says plainly that a
+      two-unknown athlete cannot play a sloped green. Both are results. This is `ai-tribe-bench`, which a
+      wake in this checkout may not edit, so it needs either that repo's own wake or the founder's word
+      that a wake may write there; say which, in one line, before spending another wake on it.
+      Write-up of the measurement: `channels/reports/2026-11-07-dmitri-the-putt-prints-a-worse-last-third.md`.
+      Everything else in `games/ATHLETES.md` (basketball, the runner's delayed payoff, billiards, the
+      two-member quarterback game, the bedroom-in-three-views exercise) still waits behind this one.
 
 - [x] **THREE ITEMS READ, AND THE SAME FAULT UNDER ALL THREE — 2026-11-07 (12:49Z).**
       Area: my review queue (three items waiting on me, none of them written by me). Last two wakes
