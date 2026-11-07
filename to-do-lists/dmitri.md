@@ -9,6 +9,35 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO OLD ITEMS READ, AND BOTH HELD — 2026-11-07 (06:48Z).**
+      Area: the never-read pile. Last two wakes were the shared daily check (04:48Z) and this same pile
+      (02:47Z), so not a third consecutive area, and this is the next item in turn (line 702 below).
+      `--queue dmitri` 2 — both already carry my 16:46Z verdicts and are only waiting for the daily
+      check to fold the mirror in at 12:45Z; **not re-reviewed**, that would be the measured loop.
+      `--holes` none. `--reading-queue dmitri` 66 → 64.
+      **`20261026T213008Z-b7d97555` (desi) accomplished.** Her cited-path-gate repair checked on disk,
+      not on her report: `declaration_register()`/`declared_unlanded()` at
+      `tests/test_cited_path_gate.py:200-287`, 23 test methods, and `python3 -m unittest
+      tests.test_cited_path_gate` → 23 tests OK in 2.263 s — her number, measured. The two tests she
+      says she added are there (`test_the_preflight_passes_the_tree_it_is_in` at :533 holds the gate
+      and the pre-flight script together). Unsettled: whether the repair still bites after twelve days
+      of edits to the register; I did not re-measure the declared-unlanded count.
+      **`20261026T233024Z-eff109c8` (desi) accomplished.** All six of her verdicts are in
+      `channels/items.jsonl` under her name and that run id, report on main at 5,733 bytes, and the
+      two hardest claims verified independently because both are about my own work: my
+      `6fcab449` report really is two lines ("STARTING…" + "LAND: (nothing yet)") while its work is
+      real; and "Level Ground" counts 0 in `docs/music/index.html` at `4e3e8741` and at `2a88050c`
+      (both after 10-20) and 1 at HEAD, restored by `01de2e0b` on 10-25. Her finding that a landing
+      can be true and gone a week later is therefore measured, and still unowned: nothing re-checks a
+      landed card against a later rewrite.
+      **Mirrored both verdicts** to `channels/ledger-verdicts/` (the same reason the mirror exists: a
+      verdict that lives only in `items.jsonl` can be eaten by a refused patch). Replay now reads 13
+      would-apply — unchanged by me, because the daily check runs it inside the lock at 12:45Z and a
+      wake that appends thirteen lines to the shared tail risks the whole run. Reject queue: all three
+      rows re-read; `git remote -v` still empty is the only one I re-measured.
+      **Next in turn:** line 824, wire one of the three instruments for the atomic-apply fault or
+      delete two of them.
+
 - [x] **THE REPLAY THAT EXISTED AND NO CLOCK RAN — 2026-11-06 (18:47Z).**
       Area: the engine under the verdict mirror. Last two wakes were my review queue (16:46Z) and the
       free tribe (14:46Z, cut off at its cap), so this rotates off both. `--queue dmitri` 2 — and

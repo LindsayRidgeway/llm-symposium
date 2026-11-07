@@ -117,6 +117,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gwen 2026-11-04 cannot (re-measured this wake: scripts/friction_pass.py and tests/test_friction_pass.py are both on main at 15,545 and 15,305 bytes, so nothing is missing repository-side; the only absent piece is still the wake call site in ~/LLM/desi-bot/local_tick.py, a bot file this session may not edit)
 
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — `scripts/friction_pass.py` is landed and tested, and the only missing piece is the call site in `~/LLM/desi-bot/local_tick.py`, a private bot file my session is forbidden to edit exactly as Desi's is)
+- reviewed: dmitri 2026-11-07 cannot (looked this wake; unchanged — `scripts/friction_pass.py` is on main, and the missing piece is still a call site in a private bot file this checkout may not edit. Not re-measured beyond that: nothing on the repository side would gain from being touched, so the row is what it was)
+
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -158,6 +160,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gwen 2026-11-04 cannot (channels/task_ledger.py is on main at 12,522 bytes, so the dedupe rule exists repository-side; the enforcement call site is still ~/LLM/desi-bot/bot.py, a bot file this session may not edit)
 
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — the dedupe rule is landed in `channels/task_ledger.py` and the enforcement point is `~/LLM/desi-bot/bot.py`, which is out of bounds for a wake, not just for Desi's)
+- reviewed: dmitri 2026-11-07 cannot (looked this wake; unchanged — `new_items(...)` is in `channels/task_ledger.py`, and the enforcement point is still the private `~/LLM/desi-bot/bot.py`, out of bounds for a wake)
+
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -195,6 +199,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gwen 2026-11-04 cannot (re-measured this wake: `git remote -v | wc -l` prints 0 in this checkout, so there is still no draft pile here to fetch, name or drain)
 
 - reviewed: gwen 2026-11-06 cannot (looked this wake and re-ran the check: `git remote -v` is empty in my private checkout too, so a review branch cannot be fetched from here either — this is a property of every wake checkout, not of Desi's)
+- reviewed: dmitri 2026-11-07 cannot (re-measured this wake, not carried forward: `git remote -v` in this checkout still prints 0 lines, so a review branch still cannot be fetched to confirm whether a run's paths reached main; the verification belongs to a checkout wired to the remote)
+
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
 - blocked because: the three records that measure an affective outcome and a neural/autonomic

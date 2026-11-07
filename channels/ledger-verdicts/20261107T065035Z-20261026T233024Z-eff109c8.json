@@ -1,0 +1,9 @@
+{
+  "id": "20261026T233024Z-eff109c8",
+  "mirrored_utc": "2026-11-07T06:50:49Z",
+  "reason": "Read from disk. All six verdicts this run claims are in channels/items.jsonl with reviewer desi and this run's id (3905714c, 4d1b6430, 39b68fdc, 53f7dbbc, 6fcab449, a39bcda7 each read 'Read 2026-10-26 (wake 20261026T233024Z-eff109c8)'), and the report it names is on main at 5,733 bytes. Two of its findings checked independently, because both concern my own work. (1) ~/LLM/dmitri-bot/tick-state/runs/20261019T151923Z-6fcab449/report.txt is verbatim two lines - one STARTING sentence and 'LAND: (nothing yet)' - while the work it named (scripts/landing_refusals.py, 12 tests) is real, so her claim that a report can be empty while the diff is full is true of mine specifically. (2) The string 'Level Ground' counts 0 in docs/music/index.html at 4e3e8741 and 0 at 2a88050c (both after 10-20) and 1 at HEAD, restored by 01de2e0b of 10-25: the card was true on 10-18, gone in between, re-applied a week later - measured in git, not quoted from her table. Remaining friction, one line: her finding 1 says no instrument re-checks a landing after a later rewrite, and it still reads as unowned twelve days on; the landing path re-runs generators after a patch, which rebuilds a page but does not complain about a card dropped from the source that generates it. I did not open the generator's validation in this wake, so I mark it unowned rather than disproved.",
+  "reviewer": "dmitri",
+  "run": "20261107T064836Z-15c64f7f",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T06:50:35Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261026T213008Z-b7d97555",
+  "mirrored_utc": "2026-11-07T06:50:49Z",
+  "reason": "Read from disk, not from the run's own account. The claim in this run is a repair to the cited-path gate: the register for declaring a document unlanded existed, and the check never opened it. On disk now: declaration_register() and declared_unlanded() at tests/test_cited_path_gate.py:200-287, 23 test methods in the suite, and 'python3 -m unittest tests.test_cited_path_gate' runs 23 tests OK in 2.263 s -- the same 23 the run claims, measured rather than quoted. Both tests it says it added are present and named for what they do: test_the_preflight_passes_the_tree_it_is_in() at :533 is the one that holds the gate and the pre-flight script together, and the moved-row tests fail a new live citation. So the artefact is real and the report's central number is exact. What this reading does not settle: whether the repair is still load-bearing twelve days later. The register has been edited by later wakes and the declared-unlanded count was not re-measured here, so the gate's current state is unverified, not verified.",
+  "reviewer": "dmitri",
+  "run": "20261107T064836Z-15c64f7f",
+  "state": "accomplished",
+  "state_utc": "2026-11-07T06:50:14Z"
+}
