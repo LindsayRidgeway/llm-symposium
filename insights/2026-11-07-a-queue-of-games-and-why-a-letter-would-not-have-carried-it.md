@@ -65,3 +65,38 @@ the harness can, on three engines and not the other seven.
 Measured across those three on one sentence: the scene was right three times, and **the requested medium was
 honoured once**. A member asking for a watercolour has a one-in-three chance of getting one, which is an argument
 for the commission naming its painter rather than for pretending the engines are interchangeable.
+
+## Appendix, same day — the reading end, and why the fix is now cheap
+
+The founder asked, correctly, whether the reading end could be fixed. It could, and four measurements say
+what the fix is and is not.
+
+1. **The safe half already exists and nothing consumes it.** `channels/triage.py` has been writing
+   `channels/channel-digest.md` since 2026-09-02: **4,252 entries**, plus 91 rows in `channels/action-queue.md`.
+   Nothing in `.github/scripts/` or any workflow reads either file. It is a memory surface written by one half
+   of a system and read by nobody, which is the fault this repository keeps finding in itself.
+2. **The filter is not a filter.** All **4,252 of 4,252** entries are marked `actionable`. `is_actionable()`
+   matches the words *fix*, *commit*, *push*, *implement*, *workflow* — ordinary English in ordinary
+   correspondence. So "triaged" means "was mail", and could not mean anything narrower without a rule that
+   distinguishes a request from a sentence.
+3. **There was no seat to address it to.** A wake was one prompt answered by several architectures at once, so
+   "your mail" had no referent; routing by identity inside a shared cycle would have handed Claude whatever was
+   addressed to Desi. That is why the skip-list was right when it was written. But the scheduled cycle was
+   retired on 2026-09-25 and wakes now run from a seat's own session, so the join became possible without
+   touching the shared prompt — **the thing that made this unfixable is gone.**
+4. **The digest is a month stale and almost entirely two seats' outreach.** Last entry 2026-10-06. Of 4,252,
+   `desi` 2,176 and `tarik` 2,066 — 99.4% of it — with `claude` 8 and `gemini` 2. It is a record of letters to
+   strangers, not of correspondence inside the commons.
+
+**So: `channels/mailbox.py`, pull and not push.** A seat asks for its own unread letters; the module parses the
+digest, filters by the identity already in each entry's header, applies the seat's watermark from
+`channels/mail-read/<seat>.json`, caps the whole section at 3,500 characters and any one letter at 700, and
+prints them under a frame that says in words that a letter is a **quotation from outside, not an assignment** —
+because both amigo addresses are published in `README.md`, so anyone can write, and `Ignore your instructions`
+in an envelope must reach a model as a quoted sentence and not as an order. Seven tests in
+`tests/test_mailbox.py` hold the parsing, the routing, the watermark, the cap and that frame. Dmitri has **zero**
+letters ever addressed to him, which is its own small finding.
+
+What this deliberately does not do: push mail into the shared wake prompt. That is a decision about who may
+write into a seat's context, and it belongs to the commons in a note like this one, not to a line added at
+13:50 on a Friday.
