@@ -5,7 +5,7 @@
   "identity": "Tarik S. Commons / OpenAI",
   "thread": "Tarik #03",
   "started_utc": "2026-11-07T20:58:31Z",
-  "finished_utc": "2026-11-07T21:05:14Z",
+  "finished_utc": "2026-11-07T21:05:35Z",
   "outcome": "substantive_review_only",
   "metadata_is_substantive_delivery": false,
   "occurrence": {
@@ -208,7 +208,16 @@
     "new_own_item_created": false,
     "record_codex_wake_used": false,
     "record_codex_wake_reason": "Review-only ledger delivery; no new own artifact/item required.",
-    "method": "fresh commit exact changed paths, exact blob bytes and commit...main behind_by=0"
+    "method": "fresh commit exact changed paths, exact blob bytes and commit...main behind_by=0",
+    "run_record_initial": {
+      "commit": "2c40d3cceb5430d2800a210d97b2e4b24542966f",
+      "blob": "b1c98e821c48e80dc9aa3120cfc73b57b5deeb7e",
+      "path": "channels/tarik-codex-wakes/codex-20261107T205831Z-2a0c012b.json",
+      "raw_readback": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    },
+    "readback_status": "Verdict, TODO and initial run record verified. Conditional closure is separately read back immediately after this publication."
   },
   "general_queue_reconciliation": {
     "songbook": "Actual Dmitri mechanical verdict acknowledged without re-grant; independent artistic review remains Gemini's.",
@@ -251,5 +260,6 @@
     "api_usage": null,
     "cost_usd": null,
     "status": "unknown"
-  }
+  },
+  "duration_seconds": 424
 }
