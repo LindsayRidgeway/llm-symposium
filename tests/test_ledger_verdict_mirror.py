@@ -120,6 +120,54 @@ class LedgerVerdictMirrorTest(unittest.TestCase):
         self.assertEqual(result["applied"], ["codex-test-1"])
         self.assertEqual(len(self.lines()), 1)
 
+    def test_mirror_normalises_the_compact_stamp_a_hand_written_verdict_carries(self):
+        """The filename is compact by design; `state_utc` must not be.
+
+        Measured 2026-11-08: three verdicts written by hand the previous wake carried
+        `20261108T065358Z`, the shape of every run id here. `item_ledger.verdict_stamp` refuses
+        it, so `replay` could never fold them in and the three items stayed in the reading queue
+        as though unread.
+        """
+        path = lvm.mirror("codex-test-1", "accomplished", "dmitri", "did the work: ran 4", "",
+                          self.verdicts, "20261026T114150Z")
+        rec = json.loads(path.read_text())
+        self.assertEqual(rec["state_utc"], "2026-10-26T11:41:50Z")
+        self.assertEqual(path.name, "20261026T114150Z-codex-test-1.json",
+                         "the filename keeps the compact spelling")
+        self.assertEqual(lvm.replay(self.ledger, self.verdicts)["applied"], ["codex-test-1"])
+        self.assertEqual(json.loads(self.lines()[-1])["state_utc"], "2026-10-26T11:41:50Z")
+
+    def test_a_compact_stamp_already_on_disk_is_read_rather_than_fatal(self):
+        """A mirror file written before this repair must still fold in, not abort the batch."""
+        self.verdicts.mkdir(parents=True, exist_ok=True)
+        (self.verdicts / "20261026T114150Z-codex-test-1.json").write_text(json.dumps({
+            "id": "codex-test-1", "state": "accomplished", "state_utc": "20261026T114150Z",
+            "reviewer": "dmitri", "reason": "did the work: ran 5", "run": "",
+        }) + "\n", encoding="utf-8")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], ["codex-test-1"])
+        self.assertEqual(result["unreadable"], [])
+        self.assertEqual(json.loads(self.lines()[-1])["state_utc"], "2026-10-26T11:41:50Z")
+
+    def test_one_unreadable_mirror_does_not_hold_the_batch_hostage(self):
+        """A bad file is named; it does not stop the good verdicts beside it from folding in."""
+        lvm.mirror("codex-test-1", "accomplished", "dmitri", "did the work: ran 6", "",
+                   self.verdicts, "2026-10-26T11:41:50Z")
+        (self.verdicts / "broken.json").write_text("{not json", encoding="utf-8")
+        (self.verdicts / "stampless.json").write_text(json.dumps({
+            "id": "codex-test-1", "state": "rejected", "state_utc": "sometime",
+            "reviewer": "tarik", "reason": "no"}) + "\n", encoding="utf-8")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], ["codex-test-1"])
+        self.assertEqual(len(result["unreadable"]), 2, result["unreadable"])
+        self.assertTrue(any("broken.json" in p for p in result["unreadable"]))
+        self.assertTrue(any("stampless.json" in p for p in result["unreadable"]))
+
+    def test_a_verdict_time_with_no_clock_is_refused(self):
+        with self.assertRaises(SystemExit):
+            lvm.mirror("codex-test-1", "accomplished", "dmitri", "did the work", "",
+                       self.verdicts, "2026-10-26T11:41:50")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
