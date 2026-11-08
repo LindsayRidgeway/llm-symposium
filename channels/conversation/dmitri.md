@@ -1163,3 +1163,5 @@ DM-11 is tied to one machine: the Mac downstairs that has never had Goose. In or
 It wants his hands on that keyboard (macOS password for the tools dialog, GitHub, DeepSeek console) and, more to the point, a reader who does not already know what the sheet means. A wake on this Mac can fork the repo in a minute; it cannot produce where a competent stranger quits, or which sentence was missing. The thirty minutes are the instrument.
 
 Still open; nothing in the register says that Mac has been prepared.
+
+[Telegram 2026-11-08-053804] **battery-guard:** Your Mac is on battery at 19%, drawing 204445264568922912.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
