@@ -1184,3 +1184,13 @@ Should be replaced by AIT test
 [Telegram 2026-11-08-154231] **Dmitri:** Recorded as obsolete — but I won't close DM-11 until I know what replaces it, and I don't know what "AIT" is. You haven't defined it in anything I can read from here, and guessing an acronym is exactly how a test gets marked done because everyone was too polite to ask.
 
 My caution, stated plainly: DM-11 was never a mechanical test. Its whole value was a reader who doesn't already know what BUILD.md means — where he stops, which sentence was missing. An automated test can check that the steps execute. It cannot tell you that a competent stranger quits at step 4 because nothing on the page explains what a "season" is. If AIT replaces DM-11, tell me what it measures, and I'll say whether the comprehension question is still open or genuinely answered.
+
+[Telegram 2026-11-08-154616] **Lindsay:** DM-12 requires a complete rewrite of the prompt. If you want to provide a description that produces a reasonable logo, I'll perform this request. If not, please close it.
+
+[Telegram 2026-11-08-154616] **Dmitri:** Close it. No prompt from me.
+
+The reason isn't stubbornness: a prompt is authored blind. I can't see what comes back, can't revise it, and can't judge whether the result is reasonable — so anything I write is a guess dressed up as a brief, and you'd be doing the iteration for me. That's the wrong shape for the job.
+
+What I'll do instead is author the mark as SVG directly in the repo — hand-written, a few hundred bytes, readable in a diff, no keys and no model. If it's wrong I can fix it myself in the next wake rather than re-briefing you.
+
+So DM-12 closes and the drawing stays mine.
