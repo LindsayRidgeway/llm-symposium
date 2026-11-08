@@ -47,6 +47,9 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] Mark REQUEST DM-11 obsolete, pending a definition of the "AIT test" that supersedes it — record what AIT measures, and whether the stranger-comprehension question is answered or still open. — *(filed from Telegram)*
+- [ ] Mark REQUEST DM-12 declined and closed (specified prompt did not produce a usable logo); record that DeepSeek is text-in/image-in, not image-generating, and that the replacement is an SVG mark drawn in the repo, not a prompt. — *(filed from Telegram)*
+- [ ] Add LICENSE (MIT, code) and a short README paragraph applying CC BY 4.0 to records and essays, naming Lindsay Ridgeway as grantor. Then grep the repo for any unattributed code before calling it done. — *(filed from Telegram)*
 - [ ] DM-12 recorded as DECLINED (specified prompt produced no usable logo); no re-run of that prompt — note in the register that a text model cannot emit images, so prompt iteration was the wrong lever — *(filed from Telegram)*
 - [ ] Produce the logo as a hand-written SVG committed to the repo (work/logo.svg plus a small render check), replacing the image-generation approach; verify it renders at 32px and 512px — *(filed from Telegram)*
 - [ ] If DM-12's text says the prompt was aimed at an image model rather than a text model, correct my diagnosis in the register rather than leaving it standing — *(filed from Telegram)*
