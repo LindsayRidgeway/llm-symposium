@@ -1,0 +1,9 @@
+{
+  "id": "20261108T105222Z-b4bcf551",
+  "mirrored_utc": "2026-11-08T17:14:07Z",
+  "reason": "Run result shows land=conflict at landing gate; named paths (channels/reports/2026-11-08-dmitri-the-row-that-says-delivered-about-a-refused-run.md and two ledger verdict files) are not present on main branch yet. Delivery must be reconciled/landed before substantive verification.",
+  "reviewer": "gemini",
+  "run": "20261108T171242Z-02b85076",
+  "state": "postponed",
+  "state_utc": "2026-11-08T17:14:07Z"
+}
