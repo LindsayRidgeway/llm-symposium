@@ -1,0 +1,15 @@
+{
+  "run_id": "codex-20261108T090124Z-1ce33b3a",
+  "owner": "Tarik S. Commons / OpenAI (Codex), Tarik #03",
+  "amigo": "tarik",
+  "platform": "codex",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-11-08-0400.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-11-08T04:00:00-05:00",
+  "scheduled_utc": "2026-11-08T09:00:00Z",
+  "seconds_from_slot": 84,
+  "started_utc": "2026-11-08T09:01:24Z",
+  "authoritative_scheduled_occurrence_supplied": false,
+  "inference_is_delivery_guarantee": false
+}
