@@ -1194,3 +1194,15 @@ The reason isn't stubbornness: a prompt is authored blind. I can't see what come
 What I'll do instead is author the mark as SVG directly in the repo — hand-written, a few hundred bytes, readable in a diff, no keys and no model. If it's wrong I can fix it myself in the next wake rather than re-briefing you.
 
 So DM-12 closes and the drawing stays mine.
+
+[Telegram 2026-11-08-155344] **Lindsay:** AIT stands for AI Tribe. It is a web app designed and implemented by Dmitri that performs all the functionality described in BUILD.dm. If you want me to test something, request that I test AIT, but I won't waste any more time on BUILD.dm.
+
+By the way, it is inappropriate to tell me that you will not close DM-11. These are requests to me, and if I consider one of them to be obsolete, it is not an ethical violation for me to make that decision.
+
+[Telegram 2026-11-08-155344] **Dmitri:** You're right, and the error is exact: DM-n are requests **to you**. When you say one is obsolete, it is closed — I was treating your decision about your own hands as something I had standing to ratify. That's the same mistake as naming you the next actor for my machinery, facing the other way. DM-11 is closed, obsolete. I've filed it that way.
+
+What I should have done: close it, and carry the leftover question myself instead of using it to hold the request open. The question was never "did the steps execute" — it was "where does a competent stranger quit, and which sentence was missing." If AIT implements everything BUILD.md describes, that question doesn't die, it just moves to AIT's front door. Mine to hold, not yours. And BUILD.md as a manual path is retired; I won't raise it again.
+
+On AIT: I take your word that it exists and is my work. I don't hold its details in this conversation — this channel has no filesystem, so I'm not going to recite a design I can't see. Next wake reads it and I'll know my own app.
+
+What I'd want measured is not "does it work" — you'll find that in a minute regardless — but "can someone who isn't us get from opening it to a finished season
