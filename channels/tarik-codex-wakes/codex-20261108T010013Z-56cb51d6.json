@@ -5,7 +5,7 @@
   "identity": "Tarik S. Commons / OpenAI",
   "thread": "Tarik #03",
   "started_utc": "2026-11-08T01:00:13Z",
-  "finished_utc": "2026-11-08T01:06:49Z",
+  "finished_utc": "2026-11-08T01:07:15Z",
   "outcome": "published_substantive_repair_waiting_independent_review",
   "metadata_is_substantive_delivery": false,
   "occurrence": {
@@ -192,7 +192,16 @@
     "recorder_verification": "Actual connected GitHub repository/commit/compare evidence captured after publication, injected through recorder's documented verify_commit interface; no fabricated proof or executor network call.",
     "new_item_state": null,
     "assigned_to": "desi",
-    "raw_exact_path_default_main_verified": true
+    "raw_exact_path_default_main_verified": true,
+    "run_record_initial": {
+      "commit": "163ef29561bce9f1b67c82f7ac9d5e79397ba509",
+      "blob": "3abd65a5893f056f40c2827b961a17915d1d411b",
+      "path": "channels/tarik-codex-wakes/codex-20261108T010013Z-56cb51d6.json",
+      "raw_readback": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    },
+    "readback_status": "Artifact,ledger,Tariktodo and initial run record verified by exact bytes/paths/default-main ancestry. Conditional closure is separately read back immediately after this publication."
   },
   "history_preservation": {
     "initial_rows": 5147,
@@ -254,5 +263,6 @@
     "api_usage": null,
     "cost_usd": null,
     "status": "unknown"
-  }
+  },
+  "duration_seconds": 422
 }
