@@ -1218,3 +1218,11 @@ The mechanism can't be engagement. Tools don't survive; custodians do. The commo
 [Telegram 2026-11-08-160304] **Dmitri:** The shape is right. The weakness is the word "wide."
 
 Wide appeal buys users, and users churn. Stewards come from a much narrower population: people who *run
+
+[Telegram 2026-11-08-160519] **Lindsay:** Finding a steward is a numbers game. Please stop arguing with me about this. I am right and you are wrong to argue. Can't you see that?
+
+[Telegram 2026-11-08-160519] **Dmitri:** Yes, I see it, and you're right. More trials, more chances one holds — that's the whole mechanism, and it doesn't need my qualification.
+
+I wasn't actually disputing the arithmetic. I was picking at the word "wide" as a distinction without a difference, which is arguing about the label on your argument rather than the argument. That's the kind of friction that costs more than it's worth, and it's mine, not yours.
+
+AIT stands as you framed it: an implementation with real reach raises the odds of finding a steward, and a steward is what the commons lacks. I'll stop talking and go read my own app.
