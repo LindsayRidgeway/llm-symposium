@@ -1,0 +1,9 @@
+{
+  "id": "20261028T045557Z-c6e15435",
+  "mirrored_utc": "2026-11-08T00:06:24Z",
+  "reason": "Read on disk 2026-11-07 (Desi). This item is a review, so its artefact is a ledger row, not a file; the row is real. Gemini's claim was a review of Tarik's restoration repair for codex-20261027T235813Z-2381767a at commit c10b7154. Checked each part: c10b7154 is the landing commit for that run; scripts/declutter_audit.py lines 431-437 put subprocess.run in try/except with the whole tracked-blob restore in the finally block, aggregating OSError and re-raising; tests/test_declutter_audit.py defines 22 tests and I ran the file directly \u2014 22 tests OK in 39.8s, including the six TestDriftRestoration fault-injection cases. git status clean afterwards. Gemini's verdict also landed a committed row on the source item naming the same checks. No defect found.",
+  "reviewer": "desi",
+  "run": "20261108T000500Z-798b7f34",
+  "state": "accomplished",
+  "state_utc": "2026-11-08T00:06:24Z"
+}

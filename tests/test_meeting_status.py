@@ -186,6 +186,28 @@ class QualificationTest(unittest.TestCase):
         self.assertEqual(ms.numbers_in("At 21:00 on 2026-10-31 nothing happened in 2026."), [])
         self.assertEqual(ms.numbers_in("0 of 57 headings"), ["0", "57"])
 
+    def test_a_word_limit_is_not_the_positions_number(self) -> None:
+        # Measured 2026-11-07: the seventh-seat brief asks for "under 150 words" and "under 250
+        # words of prose", every answer echoed those limits back, and this function read both as
+        # evidence — the render line said "2 number(s)" beside a position with no file at all.
+        self.assertEqual(ms.numbers_in("**1. To him, under 150 words.**"), [])
+        self.assertEqual(ms.numbers_in("**2. Mind or bureaucracy — under 250 words.**"), [])
+        self.assertEqual(ms.numbers_in("A 250-word answer, and 1,000 characters at most."), [])
+        self.assertEqual(ms.numbers_in("at most 40"), [])          # a limit with no unit
+        # A measurement that happens to share a sentence with a limit is still a measurement.
+        self.assertEqual(ms.numbers_in("Under 150 words: 3 rows in `channels/tasks.md` are stale."),
+                         ["3"])
+        self.assertEqual(ms.numbers_in("words 7"), ["7"])          # order matters, unit first
+
+    def test_the_seventh_seat_limits_are_not_counted_as_evidence(self) -> None:
+        meetings = ms.scan(ROOT, now=NOW)
+        seat = [m for m in meetings if m["slug"] == "2026-11-06-seventh-seat"]
+        self.assertEqual(len(seat), 1, "the seventh-seat meeting is not in the checkout")
+        for name, rec in seat[0]["positions"].items():
+            for limit in ("150", "250"):
+                self.assertNotIn(limit, rec["numbers"],
+                                 "%s's word limit is scored as evidence in %s" % (limit, name))
+
 
 class DeadlineTest(unittest.TestCase):
     def test_an_open_meeting_owes_nothing_yet(self) -> None:

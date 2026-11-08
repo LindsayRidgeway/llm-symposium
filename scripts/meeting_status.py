@@ -58,6 +58,12 @@ FILE_RE = re.compile(
 NUM_RE = re.compile(r"(?<![\w.-])\d[\d,]*(?:\.\d+)?(?![\w.-])")
 DATE_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
 CLOCK_RE = re.compile(r"\b\d{1,2}:\d{2}\b")
+# A numeral that states a length rather than measuring anything: "150 words", "250-word prose",
+# "1,000 characters". The unit may be attached with a hyphen or a space, which is why both forms
+# are here. See `numbers_in` for the measured reason this exists.
+LIMIT_UNIT_RE = re.compile(r"\s*(?:-|\s)?(?:words?|characters?|chars)\b", re.I)
+LIMIT_BEFORE_RE = re.compile(r"(?:under|at most|up to|no more than|fewer than|max(?:imum)?|limit of)\s*$",
+                             re.I)
 CLOSES_RE = re.compile(r"^\*\*Closes:\*\*\s*(.+)$", re.M)
 OPENS_RE = re.compile(r"^\*\*Opened:\*\*\s*(.+)$", re.M)
 CONVENER_RE = re.compile(r"^\*\*Convener:\*\*\s*(.+)$", re.M)
@@ -75,16 +81,30 @@ def _strip_noise(text: str) -> str:
 
 
 def numbers_in(text: str) -> list[str]:
-    """The numerals a position contains, excluding dates, clock times and bare years.
+    """The numerals a position contains, excluding dates, clock times, bare years and length limits.
 
     A year is excluded because "2026" is in every sentence about a meeting and is not a number that
-    shows a defect is real. Everything else is kept, including small numbers, because "0 of 57" is
-    two numbers and the zero is the one that matters.
+    shows a defect is real. A *length limit* is excluded for the same reason, and the case is
+    measured rather than imagined: the seventh-seat brief of 2026-11-06 asks for "under 150 words"
+    and "under 250 words of prose", and both answers say so back — so on 2026-11-07 this function
+    scored a convener's own constraints as the position's two numbers, and the render line printed
+    "2 number(s)" beside a position whose evidence was a missing file. A brief's word count is the
+    brief's, not the writer's; it cannot show a defect is real.
+
+    Everything else is kept, including small numbers, because "0 of 57" is two numbers and the zero
+    is the one that matters. The cost of the exclusion is stated: a position that *measures* in
+    words ("the transcript runs to 1,200 words") loses that numeral too, and the tool's last line
+    already says it cannot tell a measurement from a digit — it now also cannot tell one from a
+    limit, so it does not pretend the limit is evidence.
     """
+    clean = _strip_noise(text)
     out: list[str] = []
-    for token in NUM_RE.findall(_strip_noise(text)):
+    for m in NUM_RE.finditer(clean):
+        token = m.group(0)
         probe = token.replace(",", "")
         if re.fullmatch(r"(?:19|20)\d\d", probe):
+            continue
+        if LIMIT_UNIT_RE.match(clean, m.end()) or LIMIT_BEFORE_RE.search(clean[max(0, m.start() - 24):m.start()]):
             continue
         out.append(token)
     return out
