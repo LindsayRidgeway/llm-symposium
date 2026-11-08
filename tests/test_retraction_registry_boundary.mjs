@@ -43,12 +43,19 @@ const baseEpmc = () => ({ found: true, types: ["Journal Article"] });
 // Render the whole report with one registry field replaced by the accusatory word.
 function render(patch) {
   const work = baseWork(), crossref = baseCrossref(), counts = baseCounts(), epmc = baseEpmc();
-  patch({ work, crossref, counts, epmc });
-  const model = page.buildModel({ doi: "10.1000/example", work, crossref, counts, epmc });
+  const input = { doi: "10.1000/example", work, crossref, counts, epmc };
+  patch(input);
+  const model = page.buildModel(input);
   return page.renderReport(model);
 }
 
 const FIELDS = {
+  "the queried DOI": p => p.doi = "10.1000/" + BAD,
+  "the queried publication year": p => p.work.publication_year = BAD,
+  "the retraction date parts": p => p.crossref["updated-by"][0].updated["date-parts"] = [[BAD, 1, 2]],
+  "the concern notice DOI": p => p.crossref["updated-by"].push({type:"expression-of-concern", DOI:"10.1000/" + BAD, updated:{"date-parts":[[2026,1,2]]}}),
+  "the concern date parts": p => p.crossref["updated-by"].push({type:"expression-of-concern", DOI:"10.1000/concern", updated:{"date-parts":[[BAD,1,2]]}}),
+  "the original-paper DOI offered by a notice": p => p.crossref["update-to"] = [{type:"retraction",DOI:"10.1000/" + BAD}],
   "the queried paper's title":              p => p.work.display_name = BAD,
   "the queried paper's venue":              p => p.work.primary_location.source.display_name = BAD,
   "the queried paper's publication date":   p => p.work.publication_date = BAD,
@@ -69,15 +76,7 @@ for (const [name, patch] of Object.entries(FIELDS)) {
 }
 
 check("every registry field accusatory at once still accuses nobody", () => {
-  const all = render(p => {
-    p.work.display_name = BAD; p.work.primary_location.source.display_name = BAD;
-    p.work.publication_date = BAD;
-    p.crossref["updated-by"][0].source = BAD; p.crossref["updated-by"][0].DOI = "10.1000/" + BAD;
-    p.epmc.types = [BAD];
-    p.counts.recent[0].display_name = BAD;
-    p.counts.recent[0].primary_location.source.display_name = BAD;
-    p.counts.recent[0].publication_date = BAD;
-  });
+  const all = render(p => Object.values(FIELDS).forEach(patch => patch(p)));
   assert.deepEqual(scanVoice(all), []);
 });
 
@@ -96,4 +95,20 @@ check("a registry title cannot smuggle a closing tag out of its quotation", () =
   assert(hostile.includes("&lt;/span&gt;"));
 });
 
+check("a hostile publication year is escaped inside its quotation", () => {
+  const html = render(p => p.work.publication_year = '</span><script>fraud</script>');
+  assert(html.includes('&lt;script&gt;fraud&lt;/script&gt;'));
+  assert(!html.includes('<script>fraud</script>'));
+  assert.deepEqual(scanVoice(html), []);
+});
+check("hostile Crossref date parts remain escaped", () => {
+  const html = render(p => p.crossref["updated-by"][0].updated["date-parts"] = [['</span><b>fraud</b>',1,2]]);
+  assert(html.includes('&lt;b&gt;fraud&lt;/b&gt;'));
+  assert(!html.includes('<b>fraud</b>'));
+  assert.deepEqual(scanVoice(html), []);
+});
+check("quoting an original DOI preserves its button target", () => {
+  const html = render(p => p.crossref["update-to"] = [{DOI:"10.1000/fraud",type:"retraction"}]);
+  assert(html.includes('<button data-doi="10.1000/fraud"><span data-publisher-quote>10.1000/fraud</span></button>'));
+});
 console.log(checks + " boundary checks passed; no registry requests");
