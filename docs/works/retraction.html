@@ -289,12 +289,12 @@ function citationYearTable(countsByYear, sinceYear) {
   return `<p class="fact" style="margin:0.8rem 0 0.2rem;">Citations per year since ${sinceYear}, as OpenAlex records them</p>
     <ul class="plain">` + rows.map(r => {
       const w = Math.max(1, Math.round((r.cited_by_count || 0) / max * 28));
-      return `<li><code>${r.year}</code> ${"█".repeat(w)} ${fmtInt(r.cited_by_count)}</li>`;
+      return `<li><code>${publisherQuote(r.year)}</code> ${"█".repeat(w)} ${fmtInt(r.cited_by_count)}</li>`;
     }).join("") + `</ul>`;
 }
 
-// Registry titles and venue names are quoted data, even when they are not links.
-// Use only for registry text; our own explanatory prose must remain in the voice scan.
+// External identifiers, date parts, titles and venues are quoted data, including numeric-looking fields.
+// Use only for external values; our own explanatory prose must remain in the voice scan.
 const publisherQuote = text => `<span data-publisher-quote>${esc(text)}</span>`;
 
 function recentCitationsHtml(recent) {
@@ -315,22 +315,22 @@ function renderReport(m) {
   const flag = v.anyRecord ? "flag" : "clean";
   const headline = v.openAlexFlag || v.crossrefRecords ? "Retracted" : "No retraction on record";
 
-  const identity = `<p class="meta">The paper you asked about · DOI ${esc(m.doi)}</p>
+  const identity = `<p class="meta">The paper you asked about · DOI ${publisherQuote(m.doi)}</p>
     <h3>${m.title ? publisherQuote(m.title) : esc("(the registries hold no title for this DOI)")}</h3>
-    <p class="fact">${[m.venue && publisherQuote(m.venue), m.year && esc("published " + m.year), esc("our copy checked " + m.checkedOn)].filter(Boolean).join(" · ")}</p>`;
+    <p class="fact">${[m.venue && publisherQuote(m.venue), m.year && ("published " + publisherQuote(m.year)), esc("our copy checked " + m.checkedOn)].filter(Boolean).join(" · ")}</p>`;
 
   // --- what each source says, separately, never merged
   const sourceLines = [];
   sourceLines.push(`<li><strong>OpenAlex</strong> <code>is_retracted</code>: <code>${v.openAlexFlag}</code>${v.openAlexFlag ? " — it holds this paper in its retracted set" : " — it does not list this paper as retracted"}.</li>`);
   if (v.crossrefRecords) {
     sourceLines.push(`<li><strong>Crossref</strong> holds ${v.retractions.length} retraction record${v.retractions.length === 1 ? "" : "s"} against this DOI: ` +
-      v.retractions.map(r => `<code>${esc(r.iso)}</code> → notice <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${publisherQuote(r.notice)}</a> (recorded by ${publisherQuote(r.source)})`).join("; ") + `.</li>`);
+      v.retractions.map(r => `<code>${publisherQuote(r.iso)}</code> → notice <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${publisherQuote(r.notice)}</a> (recorded by ${publisherQuote(r.source)})`).join("; ") + `.</li>`);
   } else {
     sourceLines.push(`<li><strong>Crossref</strong> holds no retraction record against this DOI.</li>`);
   }
   if (v.concerns.length) {
     sourceLines.push(`<li>Crossref also holds an <em>expression of concern</em>: ` +
-      v.concerns.map(r => `<code>${esc(r.iso)}</code> → <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${publisherQuote(r.notice)}</a>`).join("; ") +
+      v.concerns.map(r => `<code>${publisherQuote(r.iso)}</code> → <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${publisherQuote(r.notice)}</a>`).join("; ") +
       `. A concern is not a retraction; it means a journal has put readers on notice.</li>`);
   }
   if (v.disagree) {
@@ -368,7 +368,7 @@ function renderReport(m) {
     ${m.citing.noMention !== null ? `<p class="small" style="margin:0.7rem 0 0;"><strong>${fmtInt(m.citing.noMention)}</strong> of those post-retraction citations have no word beginning <em>retract</em> anywhere in their title — which is the crudest possible way of asking "did the citing paper mention that this work was retracted?". A paper can cite a retracted work correctly, as an example, without ever putting the word in its title. It is offered because the raw total is cruder still.</p>` : ""}
     ${citationYearTable(m.countsByYear, Number(String(v.retractedDate).slice(0, 4)))}`;
   } else if (v.retractedDate) {
-    numbersHtml = `<p class="small" style="margin:0.7rem 0 0;">The retraction is dated <code>${esc(v.retractedDate)}</code>, but we could not read a citation count for this paper, so the "still being cited" number is not shown.</p>`;
+    numbersHtml = `<p class="small" style="margin:0.7rem 0 0;">The retraction is dated <code>${publisherQuote(v.retractedDate)}</code>, but we could not read a citation count for this paper, so the "still being cited" number is not shown.</p>`;
   } else {
     numbersHtml = `<p class="small" style="margin:0.7rem 0 0;">There is no retraction date, so there is nothing to count citations against. The paper's total citation count is <strong>${fmtInt(m.citing.total)}</strong>.</p>`;
   }
@@ -377,14 +377,14 @@ function renderReport(m) {
   const originals = (m.noticeTargets || []);
   const noticeBlock = originals.length
     ? `<div class="none"><p style="margin:0;"><strong>You gave the notice, not the paper.</strong> This DOI is an update record that points at ${originals.length} other work${originals.length === 1 ? "" : "s"}. The paper it retracts is what you probably want.</p>
-       <p class="pick">Check the original: ${originals.map(p => `<button data-doi="${esc(p.doi)}">${esc(p.doi)}</button>`).join("")}</p></div>`
+       <p class="pick">Check the original: ${originals.map(p => `<button data-doi="${esc(p.doi)}">${publisherQuote(p.doi)}</button>`).join("")}</p></div>`
     : "";
 
   return `${noticeBlock}
   <article class="card ${flag}">
     ${identity}
     <h2 style="margin-top:0.6rem;color:${v.anyRecord ? "#e07a5f" : "#81b29a"};">${esc(headline)}</h2>
-    ${v.retractedDate ? `<p style="margin:0 0 0.2rem;">Retraction recorded <strong>${esc(v.retractedDate)}</strong>, ${m.lagYears === null ? "" : `about <strong>${m.lagYears.toFixed(1)} years</strong> after publication. `}Dates are Crossref's deposit dates, which can trail the journal's decision.</p>` : ""}
+    ${v.retractedDate ? `<p style="margin:0 0 0.2rem;">Retraction recorded <strong>${publisherQuote(v.retractedDate)}</strong>, ${m.lagYears === null ? "" : `about <strong>${m.lagYears.toFixed(1)} years</strong> after publication. `}Dates are Crossref's deposit dates, which can trail the journal's decision.</p>` : ""}
     <p class="fact" style="margin-top:0.7rem;">What each registry says, kept separate</p>
     <ul class="plain">${sourceLines.join("")}</ul>
     ${numbersHtml}
