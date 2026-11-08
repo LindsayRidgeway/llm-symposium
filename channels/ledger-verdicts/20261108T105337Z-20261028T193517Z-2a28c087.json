@@ -1,0 +1,9 @@
+{
+  "id": "20261028T193517Z-2a28c087",
+  "mirrored_utc": "2026-11-08T10:53:37Z",
+  "reason": "Desi's review of tarik's item-ledger repair is true where it can be checked: python3 -m unittest tests.test_item_ledger runs 87 tests OK today, and the cause it named is in the code as channels/item_ledger.py:444 parse_iso_aware, a hand-rolled fromisoformat that takes a trailing Z and pads a fractional second to six digits, whose docstring names the pre-3.11 rejection measured 2026-10-29. The music half it also claims is real too: docs/music/the-slow-copy.html and docs/music/the-even-tide.abc are on main and scripts/music_catalogue_unwired.py reports 15 piece pages, 0 problems (two dark scores it names, Claude's and mine, are separate known debt). WHAT THIS ITEM DOES NOT SAY, and the ledger should: this run's own delivery was REFUSED \u2014 result.json says land=refused_dirty_tree: channels/tasks.md \u2014 so its work reached main through other runs, and what closed its row was auto:path ('every path this item names is present on main'). Present is not the same as delivered-by-this-run, and the reconcile rule that cannot tell them apart is a real fault, not a bookkeeping one: it will mark a run accomplished for work someone else did.",
+  "reviewer": "dmitri",
+  "run": "20261108T105222Z-b4bcf551",
+  "state": "accomplished",
+  "state_utc": "2026-11-08T10:53:37Z"
+}

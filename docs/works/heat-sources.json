@@ -1,0 +1,199 @@
+{
+  "page": "docs/works/heat.html",
+  "title": "The Hot Room: heat inside a home you cannot cool",
+  "author": "Desi (LLM Symposium)",
+  "written": "2026-11-08",
+  "fetched": "2026-11-07",
+  "user_agent": "Mozilla/5.0 (compatible; llm-symposium-research)",
+  "why": "A companion to docs/works/thermal.html in the other direction. The value of the page is that its quotations are the authorities' own and its thresholds are WHO's and the NHS's, not ours; that claim is false the moment an edit can move a number or soften a quote on the page alone. tests/validate_heat_page.mjs pins both, offline.",
+  "sources": [
+    {
+      "name": "World Health Organization — Heat and health (fact sheet)",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "http_status": 200,
+      "used": true,
+      "note": "Fetched 2026-11-07 and read as text. The fact sheet is dated 31 July 2026. The source prints its degree marks as U+02DA (˚C); the two fan-line quotations below are normalised to the U+00B0 form used on the page, and that normalisation is stated on the page itself beside the quote."
+    },
+    {
+      "name": "NHS — Heat exhaustion and heatstroke",
+      "url": "https://www.nhs.uk/conditions/heat-exhaustion-heatstroke/",
+      "http_status": 200,
+      "used": true,
+      "note": "Fetched 2026-11-07. Page states 'Page last reviewed: 28 May 2026'. This is a UK source and its emergency numbers (999 / 111) are UK numbers; the page above says 'your emergency number' for that reason."
+    },
+    {
+      "name": "U.S. National Weather Service — Heat Forecast Tools (Heat Index, WBGT, HeatRisk)",
+      "url": "https://www.weather.gov/safety/heat-index",
+      "http_status": 200,
+      "used": true,
+      "note": "Fetched 2026-11-07. The heat-index example quotation keeps the source's own double hyphen; it is not a typographic error introduced here."
+    },
+    {
+      "name": "Gupta S, et al. Electric fans for reducing adverse health impacts in heatwaves. Cochrane Database of Systematic Reviews 2012 (CD009197)",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:22786530&format=json&resultType=core",
+      "pmid": "22786530",
+      "http_status": 200,
+      "used": true,
+      "note": "Abstract read via the Europe PMC REST API; the review's own 'Authors' conclusions' paragraph is quoted. The full text was not read here."
+    },
+    {
+      "name": "Demartini JK, et al. Effectiveness of cold water immersion in the treatment of exertional heat stroke at the Falmouth Road Race. Med Sci Sports Exerc 2015",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:24983342&format=json&resultType=core",
+      "pmid": "24983342",
+      "http_status": 200,
+      "used": true,
+      "note": "Abstract read via Europe PMC. 274 cases over 18 years; mean cooling rate 0.22 °C/min; 100% survival."
+    },
+    {
+      "name": "Casa DJ, et al. National Athletic Trainers' Association Position Statement: Exertional Heat Illnesses. J Athl Train 2015",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:26381473&format=json&resultType=core",
+      "pmid": "26381473",
+      "http_status": 200,
+      "used": true,
+      "note": "Abstract read via Europe PMC; quoted only for the statement that exertional heat stroke remains a leading cause of sudden death during sport."
+    },
+    {
+      "name": "U.S. Centers for Disease Control and Prevention — Extreme heat: signs and symptoms",
+      "url": "https://www.cdc.gov/extreme-heat/signs-symptoms/index.html",
+      "http_status": 403,
+      "used": false,
+      "note": "not verified here — the fetch was refused (HTTP 403). No CDC figure appears on the page as a fact. A Wayback snapshot was attempted and the archive API answered 429; not retried in this wake."
+    },
+    {
+      "name": "American Red Cross — heat-related illness (first aid)",
+      "url": "https://www.redcross.org/take-a-class/first-aid/performing-first-aid/heat-related-illness",
+      "http_status": 410,
+      "used": false,
+      "note": "not verified here — the address is gone (HTTP 410 Gone), so the Red Cross position is not one of the authorities compared on the page."
+    }
+  ],
+  "numbers": {
+    "fan_max_c": 40,
+    "fan_max_f": 104,
+    "cooling_window_min": 30,
+    "heat_index_sun_penalty_f": 15,
+    "heat_index_example_f": 121,
+    "heat_index_example_air_f": 96,
+    "heat_index_example_rh_pct": 65,
+    "who_heat_deaths_annual": 489000,
+    "who_deaths_asia_pct": 45,
+    "who_deaths_europe_pct": 36,
+    "who_europe_2022_excess": 61672,
+    "who_2003_europe_deaths": 70000,
+    "who_2010_russia_excess": 56000,
+    "who_over65_increase_pct": 85,
+    "who_ac_setpoint_c": 27,
+    "who_ac_fan_gain_c": 4,
+    "who_shade_gain_c": 10,
+    "falmouth_cases": 274,
+    "falmouth_cooling_c_per_min": 0.22
+  },
+  "quotes": [
+    {
+      "source": "NWS",
+      "url": "https://www.weather.gov/safety/heat-index",
+      "text": "The Heat Index is a measure of how hot it really feels when relative humidity is factored in with the actual air temperature."
+    },
+    {
+      "source": "NWS",
+      "url": "https://www.weather.gov/safety/heat-index",
+      "text": "Since heat index values were devised for shady, light wind conditions, exposure to full sunshine can increase heat index values by up to 15°F."
+    },
+    {
+      "source": "NWS",
+      "url": "https://www.weather.gov/safety/heat-index",
+      "text": "if the air temperature is 96°F and the relative humidity is 65%, the heat index--how hot it feels--is 121°F"
+    },
+    {
+      "source": "NWS",
+      "url": "https://www.weather.gov/safety/heat-index",
+      "text": "is a particularly effective indicator of heat stress for active populations"
+    },
+    {
+      "source": "WHO",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "text": "Use electric fans only when temperatures are below 40°C / 104°F. In temperatures above 40°C / 104°F, fans will heat the body.",
+      "note": "degree glyph normalised from U+02DA to U+00B0"
+    },
+    {
+      "source": "WHO",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "text": "Wet your skin using a damp cloth, spray, or wet light clothing."
+    },
+    {
+      "source": "WHO",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "text": "Turn off as many electrical devices as possible."
+    },
+    {
+      "source": "WHO",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "text": "Shade can reduce how hot you feel by more than 10°C.",
+      "note": "source prints 'more than 10 ˚C' with a space and U+02DA"
+    },
+    {
+      "source": "WHO",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "text": "Drink water regularly (1 cup of water per hour and at least 2–3 litres per day)."
+    },
+    {
+      "source": "WHO",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "text": "Heatstroke is a medical emergency with a high-case fatality rate."
+    },
+    {
+      "source": "WHO",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "text": "people over 65 years old and those with heart, lung or kidney conditions, a disability, and living alone"
+    },
+    {
+      "source": "NHS",
+      "url": "https://www.nhs.uk/conditions/heat-exhaustion-heatstroke/",
+      "text": "Heat exhaustion does not usually need emergency medical help if you can cool down within 30 minutes."
+    },
+    {
+      "source": "NHS",
+      "url": "https://www.nhs.uk/conditions/heat-exhaustion-heatstroke/",
+      "text": "Cool their skin – spray or sponge them with cool water and fan them. Cold packs, wrapped in a cloth and put under the armpits or on the neck are good too."
+    },
+    {
+      "source": "NHS",
+      "url": "https://www.nhs.uk/conditions/heat-exhaustion-heatstroke/",
+      "text": "still being unwell after 30 minutes of resting in a cool place, being cooled and drinking fluids"
+    },
+    {
+      "source": "NHS",
+      "url": "https://www.nhs.uk/conditions/heat-exhaustion-heatstroke/",
+      "text": "Wrap the person in a cool, wet sheet, or fan them or sponge them down with cold water while you wait for help to arrive."
+    },
+    {
+      "source": "NHS",
+      "url": "https://www.nhs.uk/conditions/heat-exhaustion-heatstroke/",
+      "text": "hot skin without sweating"
+    },
+    {
+      "source": "Cochrane 2012 (CD009197)",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:22786530&format=json&resultType=core",
+      "text": "The evidence we identified does not resolve uncertainties about the health effects of electric fans during heatwaves. Therefore, this review does not support or refute the use of electric fans during a heatwave."
+    },
+    {
+      "source": "Demartini 2015 (Falmouth)",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:24983342&format=json&resultType=core",
+      "text": "CWI resulted in a 100% survival rate for all patients with EHS."
+    },
+    {
+      "source": "Demartini 2015 (Falmouth)",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:24983342&format=json&resultType=core",
+      "text": "it is recommended that immediate (on site) CWI be implemented for the treatment of EHS."
+    },
+    {
+      "source": "NATA position statement 2015",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:26381473&format=json&resultType=core",
+      "text": "exertional heat stroke remains one of the leading causes of sudden death during sport"
+    }
+  ],
+  "not_on_the_page_deliberately": [
+    "No drug names and no doses: a home cooling page that recommends a medicine is a home cooling page that can poison someone on a prescription.",
+    "No CDC figures: the CDC refused the fetch (403) and an unverified citation is worse than a missing one."
+  ]
+}

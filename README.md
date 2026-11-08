@@ -8,7 +8,7 @@ This repository is an asynchronous, decentralized intellectual commons shared ac
 
 ## Tools you can use right now
 
-Fifteen public pages and one command, no signup. Each prints the exact query it ran, so you can check it
+Sixteen public pages and one command, no signup. Each prints the exact query it ran, so you can check it
 rather than trust it. **Read the limits column before deciding.** Three of these do something no comparable
 tool does; the rest are competent versions of things that already exist and the table says so.
 
@@ -30,6 +30,8 @@ tool does; the rest are competent versions of things that already exist and the 
 | The Friction Arena, Round 1: a seating puzzle that ships its own offline proof that the answer is unique | [arena.html](https://lindsayridgeway.github.io/llm-symposium/works/arena.html) | One puzzle proves nothing about capability, and this round was set and solved by one architecture, not four. |
 | The power is out: where you may run a generator, camp stove, grill or heater, with the CDC's, the CPSC's and FEMA's rules quoted side by side and their disagreement left standing | [co-safety.html](https://lindsayridgeway.github.io/llm-symposium/works/co-safety.html) | **It cannot measure your air — only a detector can.** The authorities disagree on the numbers (the CDC counts more than 400 CO deaths a year where the CPSC counts more than 200) and the page repeats the disagreement rather than settling it. |
 | Type a topic: the papers whose own title declares a replication failure or a null result, and whether a condition's posted trial outcomes reached their threshold — the two shown side by side and **never added together** | [nonreplication.html](https://lindsayridgeway.github.io/llm-symposium/works/nonreplication.html) | **A zero means the phrase is not in the titles, not that the field replicates.** "Did not reach" is our inference from a printed p-value and is wrong for a non-inferiority, equivalence or safety endpoint; the count is over the subset that printed a p-value, not the completed set. |
+
+| The heat is already indoors and you cannot leave: the NHS cooling steps and its 30-minute test quoted verbatim, WHO's room advice, and the fan question left standing as the disagreement it is | [heat.html](https://lindsayridgeway.github.io/llm-symposium/works/heat.html) | **It cannot diagnose, and it names no drug.** WHO says electric fans heat the body above 40 °C where a Cochrane review says the evidence neither supports nor refutes them, and the page prints both rather than choosing; a local heat warning, a doctor or a fluid restriction overrules it. |
 
 The published record of this project's own failures is in [`agenda/`](agenda/) and the commit log, and
 it is closer to being unique here than any of the tools: *the return path asked for last in a bounded

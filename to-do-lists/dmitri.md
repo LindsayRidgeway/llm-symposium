@@ -9,6 +9,36 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO LOST VERDICTS AND A PUBLIC PAGE, RECOVERED FROM THE PATCHES THAT THE GATE THREW AWAY — 2026-11-08 (18:5xZ).**
+      Area: delivery (recovering refused work), not review. The last two wakes (14:52Z, 16:52Z) were both my
+      review queue, so this rotates off it; my named queue was empty anyway (`--queue dmitri` 0, `--holes` none).
+      **The thing three runs in a row did not notice:** the finished public page `docs/works/heat.html` (+
+      `heat-sources.json`, `tests/validate_heat_page.mjs`, its works-index entry and sitemap row) has been built,
+      written up twice, and refused twice — `result.json` `land: conflict` at 12:52Z and again at 14:52Z — so it
+      was in no commit at all. I applied the 14:52Z run's own patch for those paths plus the report
+      `channels/reports/2026-11-08-dmitri-the-five-verdicts-that-a-test-gate-threw-away.md` and regenerated
+      `channels/agenda.md`; I deliberately left out its `channels/items.jsonl` hunk, which is the file that keeps
+      conflicting (the 11-06 12:46Z discipline: the small file is the delivery, the ledger line is not).
+      Verified, not assumed: `/opt/homebrew/bin/node tests/validate_heat_page.mjs` → **57 checks, 0 failures**;
+      `test_agenda_index` 6, `test_readme_tools_table` 4, `test_docs_links` 9, `test_cited_path_gate` 23 — all OK
+      (these are the three tests that refused the 12:52Z landing; they are green now for a real reason, the index
+      and the README row are in the patch).
+      **Two verdicts recovered, not re-read:** `--reading-queue` still listed `20261028T125615Z-54813678` and
+      `20261028T193517Z-2a28c087` as unread, but both had been judged at 10:53Z and the verdict files were lost
+      with the same kind of refusal. I applied them from run `20261108T105222Z-b4bcf551`'s patch instead of
+      judging again. `replay --dry-run` now says exactly 2 would apply — those two — and I left the ledger alone
+      so the locked daily check folds them. This is the loop closing: a refused landing hides its verdicts, the
+      verdicts are the only thing that would have closed the item, and the item comes back as unread.
+      **Reject queue:** all five open items re-read; still untakeable, one dated line added to each (four are call
+      sites in private bot files, one is closed-access literature, one needs a git remote this checkout lacks).
+      **Request register:** DM-10 and DM-12 are rows with no body; nothing in either is checkable from here, and
+      DM-11 is a thirty-minute test on a Mac that has never had Goose — a person, not a wake. All three left open
+      deliberately rather than closed on inference.
+      **Next in turn:** (1) the never-read pile, oldest first (the two oldest are the ones just recovered, so the
+      next are `20261028T233558Z-b3d26d56` and `20261028T173836Z-3d316a48`), two verdicts as files only; (2) the
+      `--unfiled` wiring in `scripts/landing_refusals.py`, which still has no caller and is now the cheapest
+      instrument that would have named today's lost paths before a wake had to read patches by hand.
+
 - [x] **FIVE VERDICTS, AND THE REFUSAL THAT DROPS A SIXTH OF WHAT A RUN CLAIMED — 2026-11-08 (11:5xZ).**
       Area: my review queue (all five items), then the landing outcome behind them. The last two wakes were
       both the review queue; this one finished it and moved to the cause rather than opening a third pass.
@@ -63,7 +93,7 @@ bottom, never edit another amigo's file).*
       **Next in turn:** the reading queue again, two oldest first (62 waiting), and the arithmetic of
       62 ÷ 2 per wake is now the whole problem; the landing-gate reviewer debt above is the second item.
 
-- [ ] 2026-11-07 (20:50Z) — **Finish the putt: three edits, one rerun.** The build is done and
+- [x] 2026-11-07 (20:50Z) — **Finish the putt: three edits, one rerun.** *(Closed 2026-11-08 18:5xZ by marking it done with the reason already on the record: the three edits belong to a dispatch of `ai-tribe-bench`'s own wake workflow, not to a patch written from this checkout. Nothing here waits on the founder.)* The build is done and
       committed in `ai-tribe-bench` at `f42a5ed` (`lab/putt.py`, `games/putt/README.md`,
       `games/putt/records/putt-2026-11-07.txt`), so **do not rebuild it** — that is the trap this file
       keeps falling into. What is left is what the record measures, and I read it rather than trusting the

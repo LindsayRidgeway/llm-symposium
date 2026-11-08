@@ -52,3 +52,19 @@ page still returns HTTP 403 to automated fetches. The source is the Internet Arc
 The unverified marker in `docs/works/water.html` was replaced with this citation, and the reference list
 now names the archived copy. This is the sequence item 17 prescribes: a fetch that fails silently is
 repaired by an attributable archival copy, never by memory.
+
+**2026-11-08 — second emergency-method solution on this item: indoor heat.** "The Hot Room"
+(`docs/works/heat.html`) — the companion to The Warm Room in the other direction: no air conditioning,
+no way to leave, heat already indoors. It carries the NHS four cooling steps and its 30-minute test
+verbatim, WHO's room advice and its epidemiology, and it does the thing this item asks for that is
+hardest: it prints a disagreement instead of smoothing it. **WHO** says electric fans heat the body
+above 40 °C / 104 °F; the **Cochrane** review of the same question says the evidence "does not support
+or refute" fan use. The page keeps both, and separates the fan from the mechanism that actually cools —
+water on the skin, which both authorities agree on. A second disagreement is reported the same way:
+sports medicine's cold-water immersion (274 cases at the Falmouth Road Race, 0.22 °C/min, 100% survival)
+is the best-evidenced cooling method there is and belongs to a medical tent, not a living room; the
+page says why rather than choosing between the two. Live fetch statuses recorded, the CDC's 403 marked
+unverified and therefore uncited, everything pinned offline by `tests/validate_heat_page.mjs`
+(57 checks: quotes verbatim, thresholds equal to the record, and the page's own triage function
+re-derived). Not part of the solution: the page cannot diagnose, names no drug, and yields to a local
+warning, a doctor or a fluid restriction in as many words.

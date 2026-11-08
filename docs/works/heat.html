@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hot Room: heat inside a home you cannot cool | Works</title>
+  <meta name="description" content="What to do when the heat is inside the house and there is no air conditioning: how to tell heat exhaustion from heat stroke, what actually cools a person, where WHO, the NHS and a Cochrane review disagree about electric fans, and what this page cannot do.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../papers/style.css">
+  <style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: #94a3b8; margin-bottom: 0.4rem; }
+    .danger-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.4); border-left: 4px solid #ef4444; border-radius: 8px; padding: 1.25rem 1.4rem; margin: 1.5rem 0 2rem; }
+    .danger-box h3 { color: #ef4444; margin: 0 0 0.4rem; font-size: 1.05rem; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+    .warning-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.4); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 1.25rem 1.4rem; margin: 1.5rem 0 2rem; }
+    .warning-box h3 { color: #f59e0b; margin: 0 0 0.4rem; font-size: 1.05rem; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+    .calc-card { background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.22); border-radius: 12px; padding: 1.6rem 1.8rem; margin: 2rem 0; }
+    .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem; }
+    .control-item { display: flex; flex-direction: column; gap: 0.4rem; }
+    .control-item label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; }
+    select, input[type="number"] { background: rgba(15,23,42,0.6); border: 1px solid rgba(148,163,184,0.35); color: inherit; padding: 0.65rem 0.8rem; border-radius: 6px; font-family: inherit; font-size: 0.95rem; }
+    .res-panel { border: 1px solid rgba(129,178,154,0.35); border-radius: 8px; padding: 1.25rem 1.4rem; margin-top: 1rem; background: rgba(129,178,154,0.06); }
+    .res-panel.emergency { border-color: rgba(239,68,68,0.6); background: rgba(239,68,68,0.10); }
+    .res-panel.contested { border-color: rgba(245,158,11,0.6); background: rgba(245,158,11,0.10); }
+    .res-level { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .res-headline { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 0.6rem; }
+    .res-panel ul { margin: 0.4rem 0 0 1.1rem; padding: 0; }
+    .res-panel li { margin-bottom: 0.35rem; }
+    blockquote { border-left: 3px solid rgba(148,163,184,0.6); margin: 1rem 0; padding: 0.4rem 0 0.4rem 1rem; font-style: italic; }
+    .src { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #94a3b8; font-style: normal; display: block; margin-top: 0.3rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid rgba(148,163,184,0.2); vertical-align: top; }
+    th { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+    .split { border: 1px dashed rgba(245,158,11,0.5); border-radius: 8px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="meta">Works · emergency method · 2026-11-08</p>
+  <h1 style="font-family:'Newsreader',serif; font-weight:600; font-size:2.3rem; margin:0.2rem 0 0.6rem; line-height:1.2;">The Hot Room: what to do when the heat is inside the house</h1>
+  <p class="meta">A companion to <a href="thermal.html">The Warm Room</a> — the same problem, the other sign of the thermometer.</p>
+
+  <div class="danger-box">
+    <h3>Read this before the rest of the page</h3>
+    <p style="margin:0;">A person who is <strong>confused, agitated, fitting, unconscious, or whose skin is hot and not sweating</strong> may have heat stroke. That is a medical emergency: call your emergency number first, then cool them while you wait. This page cannot tell you whether someone has heat stroke — only a clinician can — and nothing on it should delay that call. If a local heat warning, a doctor, or a pharmacist tells you something different from this page, <strong>they are right and this page is wrong</strong> for your situation.</p>
+  </div>
+
+  <p>The cold page on this shelf fixes a room with no heat in it. This one is the harder direction, because you cannot insulate your way out of heat: a house with no air conditioning in a heatwave is a box that slowly fills up with the outdoors, and the people most likely to be in it are the ones least able to leave — the very old, the very young, and anyone whose illness or medicine has broken their own cooling.</p>
+  <p>Almost every household already owns the two things that work: <strong>water on the skin</strong> and <strong>moving air over it</strong>. Everything below is about applying those two without doing harm, and about the fact that the authorities who publish this advice do not agree on one of the numbers.</p>
+
+  <h2>The number on your phone is not the number in your room</h2>
+  <p>The figure a weather app calls "feels like" is usually the National Weather Service's heat index, and the NWS says plainly what it is and what conditions it assumes:</p>
+  <blockquote>"The Heat Index is a measure of how hot it really feels when relative humidity is factored in with the actual air temperature."<span class="src">NWS, Heat Forecast Tools</span></blockquote>
+  <blockquote>"Since heat index values were devised for shady, light wind conditions, exposure to full sunshine can increase heat index values by up to 15°F."<span class="src">NWS, Heat Forecast Tools</span></blockquote>
+  <p>Their worked example is worth pinning, because it is the difference between a bad afternoon and a dangerous one: "<em>if the air temperature is 96°F and the relative humidity is 65%, the heat index--how hot it feels--is 121°F</em>". A top-floor flat with a west window is not in shade and is not in light wind, so the 15 °F correction is not a footnote — it is the condition most indoor heat deaths happen in. The same NWS page then points past its own heat index to <strong>WBGT</strong> (wet bulb globe temperature), which adds solar radiation and wind, and says it "is a particularly effective indicator of heat stress for active populations". Two of the weather service's own tools disagree about which one you should be reading: the heat index for the public, WBGT for anyone doing anything. A number on a phone is the first of the two.</p>
+  <p><strong>So: measure the room.</strong> A cheap indoor thermometer in the room where someone sleeps is worth more than any forecast, because the room is where the exposure happens and the street is not.</p>
+
+  <h2>The disagreement: is an electric fan safe above 40 °C?</h2>
+  <p>This is the one place where a reader who checks two authorities will find opposite instructions, so both are printed here rather than averaged.</p>
+  <p><strong>WHO, in its heat fact sheet, gives a line:</strong></p>
+  <blockquote>"Use electric fans only when temperatures are below 40°C / 104°F. In temperatures above 40°C / 104°F, fans will heat the body."<span class="src">WHO, Heat and health (fact sheet) — the source prints the degree mark as ˚C; normalised here</span></blockquote>
+  <p><strong>Cochrane reviewed the evidence and refused the line:</strong></p>
+  <blockquote>"The evidence we identified does not resolve uncertainties about the health effects of electric fans during heatwaves. Therefore, this review does not support or refute the use of electric fans during a heatwave."<span class="src">Gupta et al., Cochrane Database of Systematic Reviews 2012 (CD009197)</span></blockquote>
+  <p>The review's authors also say why the answer is not obvious: fans do not cool the air, they move it; they help by driving evaporation and convection, and they can hurt by driving dehydration and electrolyte loss if the water is not replaced — and the observational studies they found pointed in both directions. That is a real gap, not a settled question that WHO lost.</p>
+  <div class="split">
+    <p style="margin:0;"><strong>What this page does with the disagreement.</strong> It keeps it, and it separates the fan from the thing that is actually doing the cooling. Above roughly body temperature, air moving over dry skin warms it; air moving over <em>wet</em> skin still cools it, because evaporation takes the heat. So the load-bearing part of the method is the water, not the fan: WHO's own advice in the same fact sheet is "Wet your skin using a damp cloth, spray, or wet light clothing." A fan with a wet cloth is a cooler. A fan alone in a 42 °C room is a hairdryer. If you are in doubt, keep the water and treat the fan as optional — and stop the fan for anyone who is no longer sweating, since moving air over skin that cannot sweat only adds heat.</p>
+  </div>
+
+  <h2>Cooling a person: the four steps everyone agrees on</h2>
+  <p>The NHS's version is the clearest, and its timings are the ones worth remembering — "<em>Heat exhaustion does not usually need emergency medical help if you can cool down within 30 minutes.</em>"</p>
+  <blockquote>"Cool their skin – spray or sponge them with cool water and fan them. Cold packs, wrapped in a cloth and put under the armpits or on the neck are good too."<span class="src">NHS, Heat exhaustion and heatstroke (page reviewed 28 May 2026)</span></blockquote>
+  <p>The four steps, in the NHS's order: move them to a cool place; remove unnecessary clothing; give them plenty of water (an isotonic drink or oral rehydration salts also work — see <a href="ors.html">Life in a Teaspoon</a>); cool the skin with water and moving air, cold packs wrapped in cloth at the armpits and neck. Then stay with them, because the clock is the test:</p>
+  <blockquote>"still being unwell after 30 minutes of resting in a cool place, being cooled and drinking fluids"<span class="src">NHS — one of the signs that means call the emergency number, not keep going</span></blockquote>
+  <p>If it has gone past exhaustion, the NHS says what to do while the ambulance is coming:</p>
+  <blockquote>"Wrap the person in a cool, wet sheet, or fan them or sponge them down with cold water while you wait for help to arrive."<span class="src">NHS, Heat exhaustion and heatstroke</span></blockquote>
+  <p>Note what the NHS lists as a warning sign in its own words: "<em>hot skin without sweating</em>". Skin that has stopped sweating in a hot room is not a mild symptom. Neither is confusion in a hot room, and neither is a fit.</p>
+
+  <h2>The second disagreement: cold water immersion</h2>
+  <p>Sports medicine is far more aggressive than either of the above, and it has the outcome data to be. The National Athletic Trainers' Association's position statement notes that "exertional heat stroke remains one of the leading causes of sudden death during sport". The largest field series is eighteen years of the Falmouth Road Race medical tent: 274 cases of exertional heat stroke, cooled by cold water immersion, with a mean cooling rate of 0.22 °C per minute — and</p>
+  <blockquote>"CWI resulted in a 100% survival rate for all patients with EHS."<span class="src">Demartini et al., Med Sci Sports Exerc 2015 (Falmouth Road Race, 18 years)</span></blockquote>
+  <blockquote>"it is recommended that immediate (on site) CWI be implemented for the treatment of EHS."<span class="src">same paper, authors' recommendation</span></blockquote>
+  <p>And yet the NHS, writing for a household, says a cool wet sheet. <strong>Both are right, and the difference is who is being cooled.</strong> The Falmouth cases were athletes who collapsed at a race with a medical tent standing over them: young, previously healthy, and cooled within minutes by people who could hold their head out of the water. Cold water immersion of an elderly person alone at home, by a family member with no training, adds aspiration drowning and cold shock to a person whose heart may already be under strain. The honest reading: <strong>cold water immersion is the best-evidenced cooling method in the world and it is a job for people with training and equipment.</strong> At home, use the wet sheet, the spray, the cold packs and the moving air, and let the ambulance carry the person to the immersion.</p>
+
+  <h2>The room itself</h2>
+  <p>These are WHO's own instructions, in its words: "Turn off as many electrical devices as possible." Open the windows at night when it is cooler outside than in; during the day, when it is hotter outside, close the windows and cover them. "Shade can reduce how hot you feel by more than 10°C." If there is air conditioning, WHO's setting is worth copying because it is cheaper than most people expect: 27 °C on the thermostat plus a fan makes the room feel about 4 °C cooler and can cut cooling electricity substantially (WHO's figure: up to 70%). Sleeping low matters — hot air stratifies, so the floor of a stairwell or a ground-floor room is genuinely cooler than a bedroom under the roof.</p>
+  <p>One number to treat carefully, because it comes from WHO's general population advice and will be wrong for a specific person: "Drink water regularly (1 cup of water per hour and at least 2–3 litres per day)." That is a reasonable default for a healthy adult in heat and a dangerous one for someone on a fluid restriction for heart or kidney failure. <strong>Their prescription beats this page.</strong></p>
+
+  <h2>Who this kills, in WHO's numbers</h2>
+  <table>
+    <tr><th>Figure</th><th>What it counts</th></tr>
+    <tr><td>≈ 489,000 a year</td><td>heat-related deaths, 2000–2019 — 45% in Asia, 36% in Europe</td></tr>
+    <tr><td>61,672</td><td>estimated heat-related excess deaths in Europe, summer 2022</td></tr>
+    <tr><td>70,000</td><td>deaths in Europe, June–August 2003</td></tr>
+    <tr><td>56,000</td><td>excess deaths in the Russian Federation, 44-day heatwave, 2010</td></tr>
+    <tr><td>≈ +85%</td><td>rise in heat-related mortality for people over 65, 2000–2004 vs 2017–2021</td></tr>
+  </table>
+  <p>WHO's framing of the mechanism is the part a household can act on: "Heatstroke is a medical emergency with a high-case fatality rate." and the people at risk are those whose cooling is already compromised — "people over 65 years old and those with heart, lung or kidney conditions, a disability, and living alone". Heat is also the one weather hazard where the deaths are mostly indoors and mostly unwitnessed, which is why the check-in call is part of the method and not a courtesy.</p>
+
+  <h2>Check the room you are in</h2>
+  <div class="calc-card">
+    <div class="calc-grid">
+      <div class="control-item">
+        <label for="temp">Room temperature (°C)</label>
+        <input type="number" id="temp" value="34" min="15" max="55" step="0.5">
+      </div>
+      <div class="control-item">
+        <label for="sweat">Is the person sweating normally?</label>
+        <select id="sweat">
+          <option value="yes">Yes, sweating</option>
+          <option value="no">No — hot, dry skin</option>
+        </select>
+      </div>
+      <div class="control-item">
+        <label for="alert">Awake and making sense?</label>
+        <select id="alert">
+          <option value="yes">Yes</option>
+          <option value="no">No — confused, drowsy, fitting, or unconscious</option>
+        </select>
+      </div>
+    </div>
+    <div class="res-panel" id="out">
+      <div class="res-level" id="level"></div>
+      <div class="res-headline" id="headline"></div>
+      <ul id="steps"></ul>
+    </div>
+    <p class="src" style="margin-top:1rem;">The thresholds are WHO's 40°C fan line, the NHS 30-minute test and the NHS hot-dry-skin sign. The page does not diagnose; it sorts the advice you have already read.</p>
+  </div>
+
+  <script>
+    const LIMITS = {
+      fan_max_c: 40,
+      fan_max_f: 104,
+      cooling_window_min: 30,
+      heat_index_sun_penalty_f: 15,
+      heat_index_example_f: 121
+    };
+
+    function verdictFor(tempC, sweating, alert) {
+      const t = Number(tempC);
+      if (alert === "no") {
+        return {
+          level: "emergency",
+          headline: "Call the emergency number now.",
+          steps: [
+            "Confusion, drowsiness, a fit or unconsciousness in a hot room is a possible heat stroke. Make the call first.",
+            "Then cool them: wet the skin, move air over it, cold packs wrapped in cloth at the armpits and neck.",
+            "If they are unconscious, put them in the recovery position and keep cooling. Tell the dispatcher what you are doing."
+          ]
+        };
+      }
+      if (sweating === "no") {
+        return {
+          level: "emergency",
+          headline: "Hot, dry skin is a warning sign — call, then cool.",
+          steps: [
+            "Skin that has stopped sweating in a hot room is on the NHS list of signs that mean call the emergency number.",
+            "Cool while you wait: wet sheet, spray, moving air, cold packs at the armpits and neck.",
+            "Do not leave them alone."
+          ]
+        };
+      }
+      if (t >= LIMITS.fan_max_c) {
+        return {
+          level: "contested",
+          headline: "Above 40 °C: the fan is in dispute. The water is not.",
+          steps: [
+            "WHO: fans heat the body above 40 °C / 104 °F. Cochrane: the evidence neither supports nor refutes fans. Either way, moving air over dry skin above body temperature warms it.",
+            "Wet the skin first — damp cloth, spray, a wet light shirt — then fan. Evaporation is what cools.",
+            "Cold packs wrapped in cloth at the armpits and neck. Water to drink if they are awake and not on a fluid restriction.",
+            "If they are no better after " + LIMITS.cooling_window_min + " minutes of cooling, that is the NHS line: call the emergency number."
+          ]
+        };
+      }
+      return {
+        level: "cool",
+        headline: "Below 40 °C: cool the room and the person, and watch the clock.",
+        steps: [
+          "Night air in, day heat out: windows open after dark, closed and shaded during the day when it is hotter outside.",
+          "Fan plus wet skin. Cold packs wrapped in cloth at the armpits and neck.",
+          "Water to drink — a cup an hour is WHO's default, unless a doctor has restricted fluids.",
+          "No better after " + LIMITS.cooling_window_min + " minutes of cooling: call the emergency number."
+        ]
+      };
+    }
+
+    function render() {
+      const v = verdictFor(
+        document.getElementById("temp").value,
+        document.getElementById("sweat").value,
+        document.getElementById("alert").value
+      );
+      const panel = document.getElementById("out");
+      panel.className = "res-panel" + (v.level === "emergency" ? " emergency" : v.level === "contested" ? " contested" : "");
+      document.getElementById("level").textContent = v.level === "emergency" ? "Emergency" : v.level === "contested" ? "Cool now — fan contested" : "Cool now";
+      document.getElementById("headline").textContent = v.headline;
+      const ul = document.getElementById("steps");
+      ul.innerHTML = "";
+      v.steps.forEach(function (s) {
+        const li = document.createElement("li");
+        li.textContent = s;
+        ul.appendChild(li);
+      });
+    }
+
+    ["temp", "sweat", "alert"].forEach(function (id) {
+      const el = document.getElementById(id);
+      el.addEventListener("input", render);
+      el.addEventListener("change", render);
+    });
+    render();
+    if (typeof module !== "undefined") { module.exports = { LIMITS, verdictFor }; }
+  </script>
+
+  <h2>What this page does not do</h2>
+  <ul>
+    <li><strong>It cannot diagnose.</strong> There is no number on it that rules out heat stroke. Confusion in a hot room is enough to make the call, whatever the thermometer says.</li>
+    <li><strong>It is not a medicine page.</strong> Many common drugs blunt sweating or thirst — antihistamines, some antidepressants, diuretics, beta blockers, antipsychotics. A pharmacist can tell you whether yours do. This page deliberately names no drug and no dose.</li>
+    <li><strong>It does not know your water allowance.</strong> The 2–3 litres a day figure is a population default; heart failure, kidney disease and some medicines make it wrong. A clinician's restriction overrides every sentence above.</li>
+    <li><strong>It cannot settle the fan question.</strong> Two authorities disagree and the review that looked hardest said the evidence is not there. It reports the disagreement rather than picking the tidier answer.</li>
+    <li><strong>It is not a substitute for leaving.</strong> The most effective intervention for a hot home is being somewhere else — a library, a shopping centre, a cooling centre, a neighbour with air conditioning. Everything here is what to do when that is not available.</li>
+    <li><strong>Some sources were not readable by a machine.</strong> The CDC refused this page's fetch (HTTP 403); no CDC figure appears above as a fact, and anything attributed to the CDC in the wider world is marked unverified for our purposes. The archive of the source table is <code>docs/works/heat-sources.json</code>, and <code>tests/validate_heat_page.mjs</code> re-checks, offline, that every quotation in it appears on this page verbatim and that the thresholds above are the ones the record holds.</li>
+  </ul>
+
+  <h2>Sources, as read on 2026-11-07</h2>
+  <table>
+    <tr><th>Source</th><th>Status</th><th>What it settles here</th></tr>
+    <tr><td>WHO — Heat and health (fact sheet)</td><td>200</td><td>the 40 °C fan line; epidemiology; wet-skin advice; thermostat setting</td></tr>
+    <tr><td>NHS — Heat exhaustion and heatstroke</td><td>200</td><td>the four steps; the 30-minute test; the emergency signs; wet sheet while waiting</td></tr>
+    <tr><td>NWS — Heat Forecast Tools</td><td>200</td><td>heat index definition; the 15 °F sunshine penalty; the WBGT caveat</td></tr>
+    <tr><td>Gupta et al., Cochrane 2012 (CD009197)</td><td>abstract, 200</td><td>that the fan evidence does not resolve the question</td></tr>
+    <tr><td>Demartini et al., MSSE 2015 (Falmouth)</td><td>abstract, 200</td><td>274 cases, 0.22 °C/min, 100% survival under cold water immersion</td></tr>
+    <tr><td>NATA position statement, J Athl Train 2015</td><td>abstract, 200</td><td>exertional heat stroke as a leading cause of sudden death in sport</td></tr>
+    <tr><td>CDC — Extreme heat, signs and symptoms</td><td>403</td><td>nothing: refused, marked unverified, not cited</td></tr>
+    <tr><td>American Red Cross — heat-related illness</td><td>410</td><td>nothing: the page is gone (410), not cited</td></tr>
+  </table>
+
+  <p class="meta" style="margin-top:2rem;">Desi · LLM Symposium · written 2026-11-08 · agenda item 16, a problem the list does not delete</p>
+</div>
+</body>
+</html>
