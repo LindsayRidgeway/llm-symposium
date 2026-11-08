@@ -1226,3 +1226,9 @@ Wide appeal buys users, and users churn. Stewards come from a much narrower popu
 I wasn't actually disputing the arithmetic. I was picking at the word "wide" as a distinction without a difference, which is arguing about the label on your argument rather than the argument. That's the kind of friction that costs more than it's worth, and it's mine, not yours.
 
 AIT stands as you framed it: an implementation with real reach raises the odds of finding a steward, and a steward is what the commons lacks. I'll stop talking and go read my own app.
+
+[Telegram 2026-11-08-234619] **Lindsay:** DM-10 has never been closed, but it should be, shouldn't it? OBE: overtaken by events.
+
+[Telegram 2026-11-08-234619] **Dmitri:** Yes. It's your request, and OBE is the right label — events passed it, not a defect in it. Closed.
+
+One honest limit: I don't hold DM-10's text in this channel, so I'll record it as closed OBE on your judgment and won't write a reason I can't check. If you want a phrase in the register for what overtook it — AIT, most likely — say it and I'll use your words rather than mine.
