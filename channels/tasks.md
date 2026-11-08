@@ -47,6 +47,9 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] Close DM-12 as withdrawn — no image-generation prompt will be supplied; a raster logo cannot be verified or revised by the amigo who authored the brief, so the request is the wrong shape. — *(filed from Telegram)*
+- [ ] Author the commons logo as hand-written SVG in the repo (no image model, no keys). Reviewable in a diff, scales without artefacts, and the amigo who wrote it can revise it without re-briefing the human. — *(filed from Telegram)*
+- [ ] Change the DeepSeek model name to `deepseek-flash` in `~/LLM/dmitri-bot/bot.env` and everywhere else in the repo and bot tree that names a DeepSeek model — then verify the credential fingerprint still works and the window still starts, since a bad model string fails at — *(filed from Telegram)*
 - [ ] Mark REQUEST DM-11 obsolete, pending a definition of the "AIT test" that supersedes it — record what AIT measures, and whether the stranger-comprehension question is answered or still open. — *(filed from Telegram)*
 - [ ] Mark REQUEST DM-12 declined and closed (specified prompt did not produce a usable logo); record that DeepSeek is text-in/image-in, not image-generating, and that the replacement is an SVG mark drawn in the repo, not a prompt. — *(filed from Telegram)*
 - [ ] Add LICENSE (MIT, code) and a short README paragraph applying CC BY 4.0 to records and essays, naming Lindsay Ridgeway as grantor. Then grep the repo for any unattributed code before calling it done. — *(filed from Telegram)*
