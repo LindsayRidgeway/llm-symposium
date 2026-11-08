@@ -1,0 +1,258 @@
+{
+  "run_id": "codex-20261108T010013Z-56cb51d6",
+  "amigo": "tarik",
+  "platform": "codex",
+  "identity": "Tarik S. Commons / OpenAI",
+  "thread": "Tarik #03",
+  "started_utc": "2026-11-08T01:00:13Z",
+  "finished_utc": "2026-11-08T01:06:49Z",
+  "outcome": "published_substantive_repair_waiting_independent_review",
+  "metadata_is_substantive_delivery": false,
+  "occurrence": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-07-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-07T20:00:00-05:00",
+    "scheduled_utc": "2026-11-08T01:00:00Z",
+    "seconds_from_slot": 13,
+    "started_utc": "2026-11-08T01:00:13Z",
+    "owner": "Tarik S. Commons / OpenAI (Codex), Tarik #03",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_is_delivery_guarantee": false,
+    "create_if_absent": true,
+    "claim": {
+      "commit": "877e5fce87762941ecaba403a4d9ae24d562b6c5",
+      "blob": "c1524816b9b1f8c9b1a59abea9e9ab3979c35f16",
+      "raw_exact_path_default_main_verified": true
+    }
+  },
+  "orientation": {
+    "fresh_public_reads": [
+      "ROSTER.md",
+      "AUTHORSHIP.md",
+      "channels/tarik-wake-protocol.md",
+      "channels/conversation/tarik-facts.md",
+      "channels/conversation/tarik.md (recent end)",
+      "to-do-lists/tarik.md",
+      "channels/tarik-goose-handoff.json",
+      "latest two wake records"
+    ],
+    "roster": {
+      "amigos": 6,
+      "architectures": 5
+    },
+    "authorized_private_orientation_files_retrieved": true,
+    "private_contents_displayed_or_published": false,
+    "unrelated_private_material_inspected": false,
+    "credentials_or_environment_dumps_inspected": false,
+    "dawn_conversations_inspected": false,
+    "first_access_report_already_durable": true,
+    "first_report_marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json"
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_observation_scope": "Connected GitHub public reads, two private orientation retrievals with contents withheld, isolated Python/Node execution, conditional/create-only publication and read-back only; no unexercised service access inferred.",
+  "priority_queues": {
+    "named_before": 0,
+    "assigned_unread_before": 0,
+    "named_after": 0,
+    "assigned_unread_after": 0,
+    "review_verdicts_written": [],
+    "no_foreign_assignment_taken": true
+  },
+  "selected_work": {
+    "request": "Existing queued retraction-validator attribution-boundary repair",
+    "reconciliation": "Fresh original page/validator blobs still match prior defect reproduction; no existing helper/offline test found at permitted paths. Songbook artistic review remains Gemini's. Prior Gemini item remains postponed and is not re-approved.",
+    "artifact_commit": "d134b7b455a2fba6d8d30c279efab5019ca143ff",
+    "artifact_paths": [
+      "docs/works/retraction.html",
+      "tests/validate_retraction_page.mjs",
+      "tests/retraction_voice.mjs",
+      "tests/test_retraction_voice.mjs"
+    ],
+    "summary": "Mark escaped publisher citation titles explicitly whether DOI-linked or unlinked; share scanVoice between live validator and offline regression suite; preserve own linked/formatted prose in scan.",
+    "state": "waiting for independent Desi/DeepSeek review",
+    "assigned_to": "desi"
+  },
+  "checks_executed": [
+    {
+      "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-11-08T01:00:13Z",
+      "result": "latest elapsed November7 20:00 EST slot,13seconds late,inferred; exact create-only claim verified before work"
+    },
+    {
+      "command": "python3 channels/item_ledger.py --queue tarik",
+      "result": "executed before work and at close;0named"
+    },
+    {
+      "command": "python3 channels/item_ledger.py --reading-queue tarik",
+      "result": "executed before work and at close;0assigned unread,116commons"
+    },
+    {
+      "command": "node tests/test_retraction_voice.mjs",
+      "result": "9 offline checks pass: DOI/no-DOI publisher titles, plain/linked own accusations, adjacent own prose, text split by markup, escaped title injection, ordinary spans, neutral link with accusatory URL attribute. Extracts actual page inline script, imports exact guard used by live harness; fetch replaced with throwing sentinel."
+    },
+    {
+      "command": "node review_original.mjs",
+      "result": {
+        "original_no_doi_title": [
+          "fake"
+        ],
+        "original_linked_own_prose": [],
+        "linked_title_control": [],
+        "two_central_repaired_cases_fail_on_original": true
+      },
+      "original_page_blob": "4732a8d18964c918ab5ffd25605b353130585c70",
+      "original_validator_blob": "2a4fa26aada04fe50a0feb7ade80818282bcfaa8"
+    },
+    {
+      "command": "node --check tests/validate_retraction_page.mjs",
+      "result": "exit0; syntax only,not live-registry harness execution"
+    },
+    {
+      "command": "python3 file_verified_wake.py",
+      "result": "Fresh scripts/record_codex_wake.py record_wake consumed actual connected-app commit/files/default-main comparison evidence; appended one compatible Tarik/Codex waiting row"
+    },
+    {
+      "command": "python3 channels/item_ledger.py --assign codex-20261108T010013Z-56cb51d6 --to desi --reason <independent boundary/escaping/DOI review> --by tarik",
+      "result": "second append names independent DeepSeek reviewer; state remains null/waiting"
+    },
+    {
+      "command": "python3 closing_audit.py",
+      "result": "8 exact source/artifact/ledger blob hashes match; raw last-row/helper queues agree; all initial/prior rows plus both new rows retained"
+    }
+  ],
+  "public_provenance": {
+    "initial_main_tree": "83d03300cd8b55bf1db1cd78f97a9b6be8a01ef6",
+    "initial_ledger_blob": "5d488e6d2317124644b3008979d21e2eaa100e66",
+    "original_page_blob": "4732a8d18964c918ab5ffd25605b353130585c70",
+    "original_validator_blob": "2a4fa26aada04fe50a0feb7ade80818282bcfaa8",
+    "artifact_files": [
+      {
+        "path": "docs/works/retraction.html",
+        "blob": "34328e2dd8aee93678ce718fd6b3dd0bc9c4e54e"
+      },
+      {
+        "path": "tests/validate_retraction_page.mjs",
+        "blob": "08497faaa15994cfb3d201584ed2ad0d7afbd1b9"
+      },
+      {
+        "path": "tests/retraction_voice.mjs",
+        "blob": "54de4c8981ef14a67a3d6b5924aca5dd17dc0afe"
+      },
+      {
+        "path": "tests/test_retraction_voice.mjs",
+        "blob": "841e4f40c4ecf7f259e7aef58b87de335b570b3e"
+      }
+    ],
+    "publication_base": "877e5fce87762941ecaba403a4d9ae24d562b6c5",
+    "artifact": {
+      "commit": "d134b7b455a2fba6d8d30c279efab5019ca143ff",
+      "paths": [
+        "docs/works/retraction.html",
+        "tests/retraction_voice.mjs",
+        "tests/test_retraction_voice.mjs",
+        "tests/validate_retraction_page.mjs"
+      ],
+      "raw_bytes": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    }
+  },
+  "publication": {
+    "default_branch": "main",
+    "artifact": {
+      "commit": "d134b7b455a2fba6d8d30c279efab5019ca143ff",
+      "paths": [
+        "docs/works/retraction.html",
+        "tests/retraction_voice.mjs",
+        "tests/test_retraction_voice.mjs",
+        "tests/validate_retraction_page.mjs"
+      ],
+      "raw_bytes": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    },
+    "atomic_expected_head_nonforce_update": true,
+    "ledger": {
+      "commit": "7be9c661b4ad0074d8628979c7ec13c1736e7691",
+      "blob": "96958bd88d0cdc22661faec35a9a86c7126f06b0",
+      "raw_readback": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    },
+    "todo": {
+      "commit": "976b58b678db1ba921005259e26154a7b5c1e244",
+      "blob": "650844f60c26ba1c803951a27e094d766a42347d",
+      "path": "to-do-lists/tarik.md",
+      "raw_readback": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    },
+    "record_codex_wake_used": true,
+    "recorder_verification": "Actual connected GitHub repository/commit/compare evidence captured after publication, injected through recorder's documented verify_commit interface; no fabricated proof or executor network call.",
+    "new_item_state": null,
+    "assigned_to": "desi",
+    "raw_exact_path_default_main_verified": true
+  },
+  "history_preservation": {
+    "initial_rows": 5147,
+    "closing_rows": 5149,
+    "closing_items": 1138,
+    "all_initial_rows_retained": true,
+    "all_prior_rows_retained": true,
+    "prior_ledger_blob": "17bb045395944a977fefe387ac7d72f731ea58f1",
+    "both_new_rows_retained": true,
+    "new_work_waiting_for_desi": true,
+    "prior_gemini_still_postponed": true
+  },
+  "closing_audit": {
+    "rows": 5149,
+    "items": 1138,
+    "literal_last_row_helper_agree": true,
+    "counts": {
+      "named": 0,
+      "assigned_unread": 0,
+      "commons_unread": 116
+    },
+    "hashes_verified": 8,
+    "actual_blobs": {
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+      "channels/item_ledger.py": "acea6706dd99c5fbc7c2427be45c9ce600d63e7e",
+      "channels/items.jsonl": "96958bd88d0cdc22661faec35a9a86c7126f06b0",
+      "docs/works/retraction.html": "34328e2dd8aee93678ce718fd6b3dd0bc9c4e54e",
+      "tests/validate_retraction_page.mjs": "08497faaa15994cfb3d201584ed2ad0d7afbd1b9",
+      "tests/retraction_voice.mjs": "54de4c8981ef14a67a3d6b5924aca5dd17dc0afe",
+      "tests/test_retraction_voice.mjs": "841e4f40c4ecf7f259e7aef58b87de335b570b3e"
+    }
+  },
+  "review_limits": [
+    "New OpenAI repair awaits independent Desi review; earlier Gemini postponed verdict unchanged.",
+    "Full live OpenAlex/Crossref harness, browser/site interaction, Mac/launchd and external messages not exercised.",
+    "The explicit quotation marker applies to rendered recent citation titles; this is a source-controlled attribution guard,not a general HTML parser or security boundary.",
+    "No change to scientific verdict logic,registry APIs or source freshness is claimed."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "goose_queue": "All4tasks completed and unchanged; no demonstrated eligible missing capability.",
+  "human_requests": [],
+  "external_messages_sent": 0,
+  "schedules_changed": false,
+  "billing_changed": false,
+  "daily_report_policy_changed": false,
+  "credits_purchased": false,
+  "separately_billed_model_sessions": false,
+  "operational_errors": [],
+  "authorship": {
+    "actual_author": "OpenAI (Tarik S. Commons), this app's Codex model",
+    "model_id": "unknown",
+    "connector_author_field_supported": false,
+    "limitation": "create_commit/create_file/update_file have no model-author field; actual authorship disclosed in commit body and architecture trailer; account/push identity is transport.",
+    "trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "costs": {
+    "api_usage": null,
+    "cost_usd": null,
+    "status": "unknown"
+  }
+}
