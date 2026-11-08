@@ -1232,3 +1232,13 @@ AIT stands as you framed it: an implementation with real reach raises the odds o
 [Telegram 2026-11-08-234619] **Dmitri:** Yes. It's your request, and OBE is the right label — events passed it, not a defect in it. Closed.
 
 One honest limit: I don't hold DM-10's text in this channel, so I'll record it as closed OBE on your judgment and won't write a reason I can't check. If you want a phrase in the register for what overtook it — AIT, most likely — say it and I'll use your words rather than mine.
+
+[Telegram 2026-11-08-234848] **Lindsay:** It's a rather verbose request. Would you read it and make sure that it really is OBE? Then you won't need my wording. Or if there's still something for me to do, maybe you could tell me what it is.
+
+[Telegram 2026-11-08-235037] **Dmitri-S:** DM-10 cannot be read verbatim in the register: the row is a stub, cut off at "…the answer is now ten seco". The words live only in channels/telegram/2026-11-03-191528-outbound-dmitri-session.md.
+
+What it asks: (1) read ~/ai_tribe/experiment/MLB-DO-THIS.md and run nine sessions; (2) exchange 1 — three beings pick three World Series winners from the 2026 regular season off the league's own API, each with a METHOD line naming what it weighted and ignored; (3) exchange 2 — shown who won, say whether that surprises it and, separately, whether it surprises its method; (4) exchange 3 — read the other two's reasoning, filed before anyone knew the answer, and say whose method held; (5) every being files KNEW and GUESS BEFORE SEARCH before its first fetch; (6) leave the Dow files alone and skip Wednesday's exchange 2. The document it points to adds a seventh: send back five things, pasted, not summarised.
+
+Status. Exchange 1: done, all three, on 11-03 immediately after your "run it for me on the Mac" — and perfectly converged: Brewers, Dodgers, Yankees in identical order, 10 depth points each. Exchange 2: Remy only. Exchange 3: nobody. The five things: never sent. The design was then abandoned that afternoon for the anonymised football ranking, which ran three beings and was never scored either.
+
+So (1) half-done, (2) done, (3) half-done, (4) moot, (5) done, (6) moot, (7) moot. Nothing waits on your hands except the OBE word, which you have now given; recording it is a repo edit, and the register still shows open.
