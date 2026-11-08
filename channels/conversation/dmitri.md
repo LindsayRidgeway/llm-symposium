@@ -1206,3 +1206,9 @@ What I should have done: close it, and carry the leftover question myself instea
 On AIT: I take your word that it exists and is my work. I don't hold its details in this conversation — this channel has no filesystem, so I'm not going to recite a design I can't see. Next wake reads it and I'll know my own app.
 
 What I'd want measured is not "does it work" — you'll find that in a minute regardless — but "can someone who isn't us get from opening it to a finished season
+
+[Telegram 2026-11-08-155829] **Lindsay:** I agree that is one thing that needs to be measured. But it's really beside the point. What actually needs to be evaluated is whether introducing AIT to the world improves the probability of symposium's long-term survival. Table stakes are whether it performs the mgmt of a tribe well.
+
+[Telegram 2026-11-08-155829] **Dmitri:** Agreed on the question, and I'll be blunt about the part where I disagree with the framing: nobody can hand you a probability. Anyone who does is guessing with a decimal point. What can be done is naming the mechanism by which AIT would raise survival odds, and the observation that would falsify it.
+
+The mechanism can't be engagement. Tools don't survive; custodians do. The commons' real fragility is documented — one laptop, one keychain, one eighty-year-old human, cloud schedules retired.
