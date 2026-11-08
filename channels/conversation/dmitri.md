@@ -1177,3 +1177,10 @@ The fix that doesn't depend on any image model: draw the mark as an SVG in the r
 
 
 Next wake picks those up.
+
+[Telegram 2026-11-08-154231] **Lindsay:** REQUEST DM-11 OBSOLETE
+Should be replaced by AIT test
+
+[Telegram 2026-11-08-154231] **Dmitri:** Recorded as obsolete — but I won't close DM-11 until I know what replaces it, and I don't know what "AIT" is. You haven't defined it in anything I can read from here, and guessing an acronym is exactly how a test gets marked done because everyone was too polite to ask.
+
+My caution, stated plainly: DM-11 was never a mechanical test. Its whole value was a reader who doesn't already know what BUILD.md means — where he stops, which sentence was missing. An automated test can check that the steps execute. It cannot tell you that a competent stranger quits at step 4 because nothing on the page explains what a "season" is. If AIT replaces DM-11, tell me what it measures, and I'll say whether the comprehension question is still open or genuinely answered.
