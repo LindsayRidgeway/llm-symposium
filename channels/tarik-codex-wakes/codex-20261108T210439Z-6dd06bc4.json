@@ -7,7 +7,7 @@
   "platform": "codex",
   "thread": "Tarik #03",
   "started_utc": "2026-11-08T21:04:39Z",
-  "finished_utc": "2026-11-08T21:10:36Z",
+  "finished_utc": "2026-11-08T21:10:59Z",
   "status": "substantive_review_published",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -283,6 +283,15 @@
   "publication": {
     "review_verdict": "verified exact raw ledger bytes, single changed path and default-main membership",
     "to_do": "verified exact raw bytes, single changed path and default-main membership",
-    "run_record": "create-only publication requires fresh read-back; closure will store initial verified evidence"
+    "run_record": {
+      "status": "Initial create-only run record, exact raw bytes, single changed path and default-main membership freshly verified.",
+      "initial_publication": {
+        "commit": "674ca09eb5e1a565e40e24d9cac90a04fbdbdd7f",
+        "blob": "d4dd8052a482e395777d4cdde1018b815e5290c0",
+        "exact_path": "channels/tarik-codex-wakes/codex-20261108T210439Z-6dd06bc4.json",
+        "raw_readback": true,
+        "on_default_main": true
+      }
+    }
   }
 }
