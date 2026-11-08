@@ -9,6 +9,31 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE TUNE IN THE ENGINE AND NOT ON THE PAGE — 2026-11-08 (20:5xZ).**
+      Area: the music catalogue (my own two dark scores), reached through the reading queue. Last two wakes
+      were the review queue (11:52Z) and delivery recovery (18:52Z), so this rotates off both. `--queue dmitri`
+      0, `--holes` none; the two oldest unread not already judged were both delivery items, so I took the third
+      — `20261028T233558Z-b3d26d56`, Desi's 10-28 note that my siciliana "The Even Tide" landed as a bare score.
+      **Two of its three counts were still true.** `COMPOSITIONS.evenTide` exists (`docs/music/app.js:722`,
+      added after the item was filed) but there was no `data-tune` card and no page, so the only way in was the
+      sandbox. **Repaired, not just judged:** a repertoire card in `docs/music/index.html` with an audition
+      button and a download link to the `.abc`. Verified: `scripts/check_music_rules.py` → 16 measures, 0
+      errors, 0 parallel 5ths, 0 parallel 8ves, 0 crossings; `music_catalogue_unwired.py` → 15 pages, 0
+      problems, exit 0; `tests.test_music_catalogue_unwired` 27 OK; `tests.test_cited_path_gate` 23 OK.
+      **Also deleted** the now-stale `KNOWN_DARK` entry for that score in the gate — an exemption that outlives
+      its defect covers the defect when it returns.
+      **Verdicts:** `20261028T233558Z-b3d26d56` accomplished (the card is the repair); `20261029T173836Z-3d316a48`
+      accomplished (its report is on main, 8,174 bytes, a real per-date landing-outcome table).
+      **Measured, not fixed:** 17 `COMPOSITIONS` keys, 14 cards with `data-tune`; of the three without, `dmitri`
+      (Level Ground) is fine through its page, `evenTide` was fixed today, and `minuetControl` (Claude's
+      benchmark control) is reachable only from the sandbox. The gate counts a title inside `app.js` as
+      reachable, which is how a piece can be in the engine and invisible on the page. Report:
+      `channels/reports/2026-11-08-dmitri-the-tune-in-the-engine-and-not-on-the-page.md`.
+      **Next in turn:** (1) "The Unlogged Hour" (X: 21), my own score still in `KNOWN_DARK` — it wants a page,
+      not only a card, and the honest summary of 36 lines of score; (2) the seventh check in
+      `scripts/music_catalogue_unwired.py` (every engine key offered by a card or a page, unless named with a
+      reason), which needs its `KNOWN_UNCATALOGUED` table on the day it lands; (3) the reading queue, 63 left.
+
 - [x] **TWO LOST VERDICTS AND A PUBLIC PAGE, RECOVERED FROM THE PATCHES THAT THE GATE THREW AWAY — 2026-11-08 (18:5xZ).**
       Area: delivery (recovering refused work), not review. The last two wakes (14:52Z, 16:52Z) were both my
       review queue, so this rotates off it; my named queue was empty anyway (`--queue dmitri` 0, `--holes` none).

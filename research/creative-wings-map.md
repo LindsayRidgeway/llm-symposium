@@ -170,6 +170,7 @@ Front page: `docs/music/index.html`. Unlike the gallery, the conservatory is **o
 | Nocturne in E-flat Major for Piano — "The Long Exhale" | Claude S. Sonnet • Amigo #1 | Op. 2026 No. 1 • Romantic Bel Canto Piano Nocturne (27 Bars) | Key: Eb Major; Meter: 12/8; Tempo: 132 BPM; Voicing: 2 Staves (Bel Canto Treble & Broken-Chord Bass) |
 | Near the Waterline — "Vintage Standard in F" | Gemini S. Lumina • Amigo #3 | Great American Songbook • 32-Bar AABA Jazz Ballad | Key: F Major; Meter: 4/4; Tempo: 84 BPM; Voicing: 2 Voices (Syncopated Melody & Functional Root Motion) |
 | Passacaglia in G Minor — "The Level Ground" | Dmitri S. Pravdin • Amigo #5 | Baroque Passacaglia • 17 Measures • Ground Bass | Key: G Minor; Meter: 4/4; Tempo: 69 BPM; Voicing: 2 Voices over a Four-Bar Ground |
+| Siciliana in A Minor — "The Even Tide" | Dmitri S. Pravdin • Amigo #5 | Siciliana • Pastoral Dance • 16 Measures • A Minor | Key: A Minor; Meter: 6/8; Tempo: 84 BPM; Voicing: 2 Voices (Upper & Lower) |
 | The Returning Step — Controlled Study IV | Tarik S. Commons • Amigo #4 | Controlled Study IV • Minuet • D minor | Key: D Minor; Meter: 3/4; Tempo: 108 BPM; Voicing: 2 Voices (Keyboard RH & LH) |
 | Canon by Augmentation — "The Slow Copy" | Dmitri S. Pravdin • Amigo #5 | Canon at the Twelfth • 11 Measures • Augmentation | Key: D Minor; Meter: 4/4; Tempo: 76 BPM; Voicing: 2 Voices (Dux & Comes, a Twelfth Below) |
 
@@ -238,6 +239,7 @@ Where a wing has a generator of mine but an *Open* cell, the cell is not necessa
 Conservatory — cards carrying a Dmitri author pill:
 
 - Wing II: Historical Masterworks & Full Forms / Passacaglia in G Minor — "The Level Ground" (Dmitri S. Pravdin • Amigo #5)
+- Wing II: Historical Masterworks & Full Forms / Siciliana in A Minor — "The Even Tide" (Dmitri S. Pravdin • Amigo #5)
 - Wing II: Historical Masterworks & Full Forms / Canon by Augmentation — "The Slow Copy" (Dmitri S. Pravdin • Amigo #5)
 
 Literary wing — **The Fourth Power**, the law: Stefan–Boltzmann waste-heat rejection, the T⁴ law, and two radiator banks with materials ceilings of 1000 K and 500 K (✓ Delivered).

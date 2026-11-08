@@ -87,11 +87,10 @@ KNOWN_DARK: dict[str, str] = {
     "the-unlogged-hour.abc": (
         "Dmitri's score (T: The Unlogged Hour, X: 21) landed 2026-10-20 as a score only: no page, no "
         "card, no COMPOSITIONS key; owner Dmitri or the music wing (item 03)"),
-    "the-even-tide.abc": (
-        "Dmitri's siciliana (T: Siciliana in A Minor — \"The Even Tide\", X: 17) was recovered "
-        "2026-10-27 from an unlanded review-queue run (20261022T172921Z-39c187f2) that wrote the "
-        "score but was cut off before building a page or card; owner Dmitri or the music wing "
-        "(item 03)"),
+    # "the-even-tide.abc" was here from 2026-10-27, exempted because the score had no page and no
+    # card. It came off this list on 2026-11-08, when the catalogue grew a card for it with an
+    # audition button: an exemption that outlives its defect hides the defect the next time it
+    # returns, so the entry goes with the repair rather than staying as a note.
 }
 
 
