@@ -75,6 +75,12 @@ def mirror(item_id: str, state: str, reviewer: str, reason: str, run: str = "",
     if not reason.strip():
         raise SystemExit("a verdict needs a reason; the reason is the whole record")
     state_utc = state_utc or _utc()
+    canonical = _canonical_stamp(state_utc)
+    if canonical is None:
+        raise SystemExit(f"--state-utc must be an aware ISO timestamp, got {state_utc!r}")
+    # Written in the ledger's own form, not in whatever shape the caller typed: a mirror is an
+    # argument with the ledger, and two spellings of one instant compare wrong (2026-11-08).
+    state_utc = canonical
     verdicts.mkdir(parents=True, exist_ok=True)
     path = verdicts / f"{_stamp(state_utc)}-{item_id}.json"
     payload = {
@@ -90,6 +96,27 @@ def mirror(item_id: str, state: str, reviewer: str, reason: str, run: str = "",
     return path
 
 
+def _canonical_stamp(value) -> str | None:
+    """The ledger's own stamp form for `value`, or None if it is not an aware timestamp.
+
+    A verdict file is written by hand as often as by `mirror`, and the stem of its own filename
+    is a *compact* stamp (`20261108T065301Z`). Copy that stem into `--state-utc` and the file
+    looks right, sorts wrong and refuses to fold: measured 2026-11-08 on three verdicts from
+    run 20261108T065157Z-5f217af9, where `replay` died on the first of them with
+    `state_utc must be an aware ISO timestamp` and the other two were never reached. Every
+    verdict is compared and written in one form so that "older" cannot mean two things.
+    """
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        stamp = item_ledger.parse_iso_aware(value)
+    except (ValueError, TypeError):
+        return None
+    if stamp.tzinfo is None or stamp.utcoffset() is None:
+        return None
+    return stamp.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def _verdict_files(verdicts: Path) -> list[dict]:
     out = []
     if not verdicts.is_dir():
@@ -100,36 +127,59 @@ def _verdict_files(verdicts: Path) -> list[dict]:
         except (OSError, ValueError):
             continue
         if rec.get("id") and rec.get("state") in STATES and rec.get("state_utc"):
+            stamp = _canonical_stamp(rec["state_utc"])
+            if stamp is not None:
+                rec["state_utc"] = stamp
             rec["_path"] = str(path)
             out.append(rec)
-    return sorted(out, key=lambda r: r["state_utc"])
+    return sorted(out, key=lambda r: (r["state_utc"], r["_path"]))
 
 
 def replay(ledger: Path = DEFAULT_LEDGER, verdicts: Path = DEFAULT_VERDICTS,
            dry_run: bool = False) -> dict:
     """Fold mirrored verdicts into `ledger`. Idempotent, and never overwrites a later verdict."""
     current = item_ledger.load(ledger)
-    applied, skipped, unknown = [], [], []
+    applied, skipped, unknown, malformed = [], [], [], []
     for rec in _verdict_files(verdicts):
         live = current.get(rec["id"])
         if live is None:
             unknown.append(rec["id"])
             continue
-        live_utc = live.get("state_utc") or ""
+        try:
+            rec_stamp = item_ledger.verdict_stamp({"state": rec["state"],
+                                                   "state_utc": rec["state_utc"]})
+            live_stamp = item_ledger.verdict_stamp(live)
+        except ValueError as exc:
+            malformed.append((rec["id"], str(exc)))
+            continue
+        if not rec_stamp:
+            malformed.append((rec["id"], "state_utc is not an aware timestamp"))
+            continue
+        live_utc = live_stamp or (live.get("state_utc") or "")
         if live.get("state") == rec["state"] and live_utc == rec["state_utc"]:
             skipped.append(rec["id"])  # already folded in
             continue
-        if live.get("state") in STATES and live_utc > rec["state_utc"]:
+        if live_stamp and rec_stamp and live_stamp > rec_stamp:
             skipped.append(rec["id"])  # the ledger is ahead of this verdict; do not walk it back
             continue
         row = dict(live)
         row.update(state=rec["state"], state_utc=rec["state_utc"], reviewer=rec["reviewer"],
                    reason=rec["reason"], verdict_mirror=rec["_path"])
         if not dry_run:
-            item_ledger.append([row], ledger)
+            try:
+                item_ledger.append([row], ledger)
+            except ValueError as exc:
+                # One unreadable verdict must not take the readable ones with it. Before
+                # 2026-11-08 this exception escaped `replay`, so the first bad file in the
+                # directory (3 in it, the oldest from 2026-11-08T06:53Z) meant no verdict after
+                # it in name order could ever be folded, and the clock that runs `replay` daily
+                # died at that step instead of the run finishing and reporting it.
+                malformed.append((rec["id"], str(exc)))
+                continue
             current[rec["id"]] = row
         applied.append(rec["id"])
-    return {"applied": applied, "skipped": skipped, "unknown": unknown, "dry_run": dry_run}
+    return {"applied": applied, "skipped": skipped, "unknown": unknown,
+            "malformed": malformed, "dry_run": dry_run}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -159,11 +209,13 @@ def main(argv: list[str] | None = None) -> int:
     result = replay(args.ledger, args.verdicts, args.dry_run)
     label = "would apply" if args.dry_run else "applied"
     print(f"{label}: {len(result['applied'])}  already-there-or-later: {len(result['skipped'])}  "
-          f"unknown-id: {len(result['unknown'])}")
+          f"unknown-id: {len(result['unknown'])}  unreadable: {len(result['malformed'])}")
     for item_id in result["applied"]:
         print(f"  {label}: {item_id}")
     for item_id in result["unknown"]:
         print(f"  no such item in the ledger: {item_id}")
+    for item_id, why in result["malformed"]:
+        print(f"  unreadable verdict for {item_id}: {why}")
     return 0
 
 

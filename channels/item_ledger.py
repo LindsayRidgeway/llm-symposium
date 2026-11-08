@@ -442,6 +442,7 @@ VERDICT_KEYS = ("state", "state_utc", "reason", "reviewer")
 
 
 _FRACTION = re.compile(r"\.(\d+)")
+_COMPACT = re.compile(r"^(\d{8})T(\d{6})(\.\d+)?(Z|z|[+-]\d{2}:?\d{2})?$")
 
 
 def parse_iso_aware(value: str) -> dt.datetime:
@@ -459,8 +460,26 @@ def parse_iso_aware(value: str) -> dt.datetime:
     A stamp with no fraction, three digits or six digits is passed through untouched; anything
     else is padded (or cut) to six digits, which is microsecond precision and loses nothing that
     a caller could have meant.
+
+    A third form, added 2026-11-08: the *compact* stamp this repository prints in run ids and
+    uses as a filename stem — `20261108T065301Z`, no separators. `ledger_verdict_mirror.py`
+    names every verdict file with it, and a caller copying that name into `--state-utc` (which
+    is how three verdicts were written on 2026-11-08) produced a stamp that every reader here
+    rejected while the writer that produced it looked perfectly ordinary. It means the same
+    instant; it is expanded here rather than refused, because refusing it leaves the verdict
+    unreadable in a file that is still on disk.
     """
     text = value.strip()
+    compact = _COMPACT.match(text)
+    if compact:
+        day, clock, fraction, offset = compact.group(1, 2, 3, 4)
+        offset = offset or "Z"
+        if offset in ("Z", "z"):
+            offset = "+00:00"
+        elif ":" not in offset:
+            offset = offset[:3] + ":" + offset[3:]
+        text = (f"{day[:4]}-{day[4:6]}-{day[6:]}T{clock[:2]}:{clock[2:4]}:{clock[4:]}"
+                f"{fraction or ''}{offset}")
     if text.endswith(("Z", "z")):
         text = text[:-1] + "+00:00"
     match = _FRACTION.search(text)
