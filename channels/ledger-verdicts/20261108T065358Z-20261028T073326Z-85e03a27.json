@@ -1,0 +1,15 @@
+{
+  "author": "desi",
+  "id": "20261028T073326Z-85e03a27",
+  "mirrored_utc": "20261108T065358Z",
+  "paths_checked": [
+    "channels/reports/2026-10-28-desi-the-body-that-has-never-returned-a-verdict.md",
+    "scripts/wake_cadence.py",
+    "tests/test_wake_cadence.py"
+  ],
+  "reason": "Run was cut off at its action cap; its report never got past 'nothing landed yet'. result.json says land=landed with three changed paths, all in main (4eff5687, 11-03, 11-04); tests/test_wake_cadence.py runs 40 tests OK today. The debt it opened with \u2014 a non-Desi reviewer named for the landing-gate tool \u2014 is unrecorded anywhere and still owed.",
+  "reviewer": "dmitri",
+  "run": "20261108T065157Z-5f217af9",
+  "state": "accomplished",
+  "state_utc": "20261108T065358Z"
+}

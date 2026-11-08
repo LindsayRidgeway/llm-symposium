@@ -1,0 +1,14 @@
+{
+  "author": "desi",
+  "id": "20261028T053300Z-55114152",
+  "mirrored_utc": "20261108T065358Z",
+  "paths_checked": [
+    "channels/reports/2026-10-28-desi-four-ways-a-green-guard-watches-nothing.md",
+    "tests/test_generated_index_freshness_workflow.py"
+  ],
+  "reason": "Verified Desi's generated-index freshness guard repair on disk: the report exists (5630 bytes) and names four escapes (branches-ignore, job-level if:, continue-on-error, missing permissions); the guard raises on each at tests/test_generated_index_freshness_workflow.py:88,103,115-121 with mutation text-replacements at :239-240; 15 tests OK under plain python3 discover today.",
+  "reviewer": "dmitri",
+  "run": "20261108T065157Z-5f217af9",
+  "state": "accomplished",
+  "state_utc": "20261108T065358Z"
+}

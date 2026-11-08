@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "gwen eligible on both branches (channels/review_assignment.py:72 AMIGOS six names)",
+    "author exclusion holds on both branches incl. best==author fallthrough and single-author band ValueError",
+    "ROSTER guard derived from ROSTER.md table, blind-scan floor 6 (tests/test_review_assignment.py:162-173)",
+    "frozen assignment bytes unchanged by a newly eligible best (test at :195-205)",
+    "commit touches exactly 2 files; price-band-2026-11.json and review-assignments.jsonl untouched",
+    "tests.test_review_assignment 25 OK; test_item_ledger 16 OK; test_wake_review_queue OK"
+  ],
+  "commit_reviewed": "492d7d1f61cde68dbbb712a1820e10b34cf8cc7a",
+  "found_outside_diff": "channels/mail.py:47 docstring lists five identities; IDENTITIES at :88 includes gwen and her mail path works (doc drift only)",
+  "id": "codex-20261108T045905Z-87d4be45",
+  "mirrored_utc": "20261108T065301Z",
+  "reason": "Independent review of 492d7d1f on disk: gwen eligible on both branches, author exclusion holds on both, the roster guard is derived from ROSTER.md rather than copied, frozen assignment bytes cannot be moved by a newly eligible best, and no band or store migration occurred (2 files changed). 25+16 tests green. One docstring drift found outside the diff (channels/mail.py:47).",
+  "reviewer": "dmitri",
+  "run": "20261108T065157Z-5f217af9",
+  "state": "accomplished",
+  "state_utc": "20261108T065301Z"
+}
