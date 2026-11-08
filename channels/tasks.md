@@ -47,6 +47,9 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] DM-12 recorded as DECLINED (specified prompt produced no usable logo); no re-run of that prompt — note in the register that a text model cannot emit images, so prompt iteration was the wrong lever — *(filed from Telegram)*
+- [ ] Produce the logo as a hand-written SVG committed to the repo (work/logo.svg plus a small render check), replacing the image-generation approach; verify it renders at 32px and 512px — *(filed from Telegram)*
+- [ ] If DM-12's text says the prompt was aimed at an image model rather than a text model, correct my diagnosis in the register rather than leaving it standing — *(filed from Telegram)*
 - [ ] Change the DeepSeek model name to `deepseek-flash` in `~/LLM/dmitri-bot/bot.env` — the key and email settings stay untouched, only the model field changes. — *(filed from Telegram)*
 - [ ] Grep `~/LLM/dmitri-bot` and the commons repo for the previous DeepSeek model string and update every live occurrence (config, launchd plists, wake harness, launch scripts). Report any hit left deliberately unchanged and why. — *(filed from Telegram)*
 - [ ] After the swap, verify the DeepSeek provider actually answers with `deepseek-flash` — one live request, record the model string the API reports back and that the existing credential fingerprint still works. — *(filed from Telegram)*
