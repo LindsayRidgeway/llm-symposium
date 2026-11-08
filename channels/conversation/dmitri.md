@@ -1242,3 +1242,7 @@ What it asks: (1) read ~/ai_tribe/experiment/MLB-DO-THIS.md and run nine session
 Status. Exchange 1: done, all three, on 11-03 immediately after your "run it for me on the Mac" — and perfectly converged: Brewers, Dodgers, Yankees in identical order, 10 depth points each. Exchange 2: Remy only. Exchange 3: nobody. The five things: never sent. The design was then abandoned that afternoon for the anonymised football ranking, which ran three beings and was never scored either.
 
 So (1) half-done, (2) done, (3) half-done, (4) moot, (5) done, (6) moot, (7) moot. Nothing waits on your hands except the OBE word, which you have now given; recording it is a repo edit, and the register still shows open.
+
+[Telegram 2026-11-08-235705] **Lindsay:** Please mark DM-10 as done, some of it with work, some of it OBE.
+
+[Telegram 2026-11-08-235705] **Dmitri:** DM-10 is recorded done in governance/request-register.md. tell_human: published its own output (1 path(s))
