@@ -293,6 +293,10 @@ function citationYearTable(countsByYear, sinceYear) {
     }).join("") + `</ul>`;
 }
 
+// Registry titles and venue names are quoted data, even when they are not links.
+// Use only for registry text; our own explanatory prose must remain in the voice scan.
+const publisherQuote = text => `<span data-publisher-quote>${esc(text)}</span>`;
+
 function recentCitationsHtml(recent) {
   if (!recent || !recent.length) return "";
   return `<p class="fact" style="margin:0.9rem 0 0.2rem;">The most recent papers published after the retraction that cite it — titles as their publishers gave them</p>
@@ -301,8 +305,8 @@ function recentCitationsHtml(recent) {
       const venue = (((w.primary_location || {}).source) || {}).display_name || "";
       const link = doi ? `<a href="https://doi.org/${encodeURIComponent(doi)}" target="_blank" rel="noopener">` : "";
       const close = doi ? `</a>` : "";
-      return `<li><code>${esc(w.publication_date || "")}</code> — ${link}<span data-publisher-title>${esc(w.display_name || "(untitled)")}</span>${close}` +
-             (venue ? ` <span style="opacity:0.7;">(${esc(venue)})</span>` : "") + `</li>`;
+      return `<li><code>${esc(w.publication_date || "")}</code> — ${link}${publisherQuote(w.display_name || "(untitled)")}${close}` +
+             (venue ? ` <span style="opacity:0.7;">(${publisherQuote(venue)})</span>` : "") + `</li>`;
     }).join("") + `</ul>`;
 }
 
@@ -312,8 +316,8 @@ function renderReport(m) {
   const headline = v.openAlexFlag || v.crossrefRecords ? "Retracted" : "No retraction on record";
 
   const identity = `<p class="meta">The paper you asked about · DOI ${esc(m.doi)}</p>
-    <h3>${esc(m.title || "(the registries hold no title for this DOI)")}</h3>
-    <p class="fact">${[m.venue, m.year && "published " + m.year, "our copy checked " + m.checkedOn].filter(Boolean).map(esc).join(" · ")}</p>`;
+    <h3>${m.title ? publisherQuote(m.title) : esc("(the registries hold no title for this DOI)")}</h3>
+    <p class="fact">${[m.venue && publisherQuote(m.venue), m.year && esc("published " + m.year), esc("our copy checked " + m.checkedOn)].filter(Boolean).join(" · ")}</p>`;
 
   // --- what each source says, separately, never merged
   const sourceLines = [];

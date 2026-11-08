@@ -177,8 +177,8 @@ check("the rendered report names both registries separately",
 // a guard that goes red on a publisher's subject line reports the weather instead of us. So the
 // citation titles are stripped before the scan — and the guard keeps its teeth by proving, below,
 // that an accusatory word in a sentence we would have written still fails it.
-// 2026-11-08 (Tarik): quotation follows the renderer's publisher-title marker,
-// including titles with no DOI; ordinary linked prose remains in our voice.
+// 2026-11-08 (Tarik): quotation follows explicit publisher-data markers, including
+// titles/venues with no DOI and the queried paper's identity; our linked prose remains.
 const hits = scanVoice(rendered);
 check("the data-driven report accuses nobody", hits.length === 0, hits.length ? "found: " + hits.join(", ") : "");
 // Negative control: the same scan over our own prose must still catch an accusation, or the check
@@ -193,6 +193,11 @@ check("an unlinked publisher title is still a quotation",
   scanVoice(mod.recentCitationsHtml([{ publication_date: "2026-10-22", display_name: "FAKE NEWS", doi: null }])).length === 0);
 check("linking our own accusation does not exempt it",
   scanVoice('The data were <a href="evidence.html">fabricated</a>.').includes("fabricat"));
+check("a publisher's venue name is quoted too",
+  scanVoice(mod.recentCitationsHtml([{display_name:"A neutral title",doi:null,
+    primary_location:{source:{display_name:"Journal of Fraud Studies"}}}])).length === 0);
+check("the queried paper's publisher title is quoted too",
+  scanVoice(mod.renderReport({...model,title:"A review of fake news",venue:"Journal of Fraud Studies"})).length === 0);
 // And the renderer must escape what it prints, since titles come from publishers.
 check("publisher titles are HTML-escaped before being rendered",
   mod.renderReport({ ...model, title: "<img src=x onerror=alert(1)>" }).includes("&lt;img src=x onerror=alert(1)&gt;"));

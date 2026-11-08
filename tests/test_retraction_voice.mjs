@@ -10,7 +10,7 @@ const el = () => ({ value: "", textContent: "", innerHTML: "", style: {}, datase
   addEventListener() {}, querySelectorAll: () => [], appendChild() {} });
 globalThis.document = { getElementById: el, createElement: el, querySelectorAll: () => [] };
 globalThis.location = { search: "" };
-const page = new Function(blocks[0] + "\nreturn { recentCitationsHtml };")();
+const page = new Function(blocks[0] + "\nreturn { recentCitationsHtml, renderReport, buildModel };")();
 let checks = 0;
 const check = (name, fn) => { fn(); checks++; console.log("PASS " + name); };
 const citation = (doi, title = "OFICINA SOBRE VACINAS E FAKE NEWS") =>
@@ -27,4 +27,30 @@ check("quoted title markup is escaped", () => {
 });
 check("an ordinary span is not a quotation", () => assert(scanVoice("<span>fake</span>").includes("fake")));
 check("link attributes are not reader-visible accusations", () => assert.deepEqual(scanVoice('<a href="https://example.test/fake">A neutral source</a>'), []));
+const modelFor = work => page.buildModel({doi:"10.1000/example",work,
+  crossref:{},counts:{total:0,after:null,noMention:null,recent:[]}});
+check("a recent publisher venue is quoted with or without a DOI", () => {
+  for (const doi of [null,"10.1000/example"]) {
+    const rendered=page.recentCitationsHtml([{display_name:"A neutral title",doi,
+      primary_location:{source:{display_name:"Journal of Fraud Studies"}}}]);
+    assert.deepEqual(scanVoice(rendered),[]);
+  }
+});
+check("the queried paper title is a quotation", () => {
+  assert.deepEqual(scanVoice(page.renderReport(modelFor({display_name:"A review of fake news"}))),[]);
+});
+check("the queried paper venue is a quotation", () => {
+  assert.deepEqual(scanVoice(page.renderReport(modelFor({display_name:"A neutral title",
+    primary_location:{source:{display_name:"Journal of Misconduct Studies"}}}))),[]);
+});
+check("publisher venue markup remains escaped and cannot hide adjacent own prose", () => {
+  const rendered=page.recentCitationsHtml([{display_name:"A neutral title",doi:null,
+    primary_location:{source:{display_name:'</span><script>fake</script>'}}}]);
+  assert(!rendered.includes("<script>")); assert(rendered.includes("&lt;script&gt;"));
+  assert.deepEqual(scanVoice(rendered),[]);
+  assert(scanVoice(rendered+"<p>Our own claim is fabricated.</p>").includes("fabricat"));
+});
+check("the published title marker remains compatible", () => {
+  assert.deepEqual(scanVoice("<span data-publisher-title>fake</span>"),[]);
+});
 console.log(checks + " offline checks passed; no registry requests");
