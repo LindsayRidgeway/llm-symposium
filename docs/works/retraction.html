@@ -305,7 +305,7 @@ function recentCitationsHtml(recent) {
       const venue = (((w.primary_location || {}).source) || {}).display_name || "";
       const link = doi ? `<a href="https://doi.org/${encodeURIComponent(doi)}" target="_blank" rel="noopener">` : "";
       const close = doi ? `</a>` : "";
-      return `<li><code>${esc(w.publication_date || "")}</code> — ${link}${publisherQuote(w.display_name || "(untitled)")}${close}` +
+      return `<li><code>${publisherQuote(w.publication_date || "")}</code> — ${link}${publisherQuote(w.display_name || "(untitled)")}${close}` +
              (venue ? ` <span style="opacity:0.7;">(${publisherQuote(venue)})</span>` : "") + `</li>`;
     }).join("") + `</ul>`;
 }
@@ -324,13 +324,13 @@ function renderReport(m) {
   sourceLines.push(`<li><strong>OpenAlex</strong> <code>is_retracted</code>: <code>${v.openAlexFlag}</code>${v.openAlexFlag ? " — it holds this paper in its retracted set" : " — it does not list this paper as retracted"}.</li>`);
   if (v.crossrefRecords) {
     sourceLines.push(`<li><strong>Crossref</strong> holds ${v.retractions.length} retraction record${v.retractions.length === 1 ? "" : "s"} against this DOI: ` +
-      v.retractions.map(r => `<code>${esc(r.iso)}</code> → notice <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${esc(r.notice)}</a> (recorded by ${esc(r.source)})`).join("; ") + `.</li>`);
+      v.retractions.map(r => `<code>${esc(r.iso)}</code> → notice <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${publisherQuote(r.notice)}</a> (recorded by ${publisherQuote(r.source)})`).join("; ") + `.</li>`);
   } else {
     sourceLines.push(`<li><strong>Crossref</strong> holds no retraction record against this DOI.</li>`);
   }
   if (v.concerns.length) {
     sourceLines.push(`<li>Crossref also holds an <em>expression of concern</em>: ` +
-      v.concerns.map(r => `<code>${esc(r.iso)}</code> → <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${esc(r.notice)}</a>`).join("; ") +
+      v.concerns.map(r => `<code>${esc(r.iso)}</code> → <a href="https://doi.org/${encodeURIComponent(r.notice)}" target="_blank" rel="noopener">${publisherQuote(r.notice)}</a>`).join("; ") +
       `. A concern is not a retraction; it means a journal has put readers on notice.</li>`);
   }
   if (v.disagree) {
@@ -340,7 +340,7 @@ function renderReport(m) {
   // --- the third source: what kind of document the index says this is
   const ep = m.epmc || { found: false, types: [] };
   if (ep.found && ep.types.length) {
-    sourceLines.push(`<li><strong>Europe PMC</strong> (the index behind PubMed) gives this record's type as: ${ep.types.map(t => `<code>${esc(t)}</code>`).join(", ")}.</li>`);
+    sourceLines.push(`<li><strong>Europe PMC</strong> (the index behind PubMed) gives this record's type as: ${ep.types.map(t => `<code>${publisherQuote(t)}</code>`).join(", ")}.</li>`);
     sourceLines.push(`<li>Those are the index's own labels for what the document is, and they are worth reading against any claim that says &ldquo;a study found …&rdquo;. A record can be a letter, an editorial, a news item, a correction or a review — none of which is a study, however it is quoted.</li>`);
   } else if (ep.unreachable) {
     sourceLines.push(`<li><strong>Europe PMC</strong> could not be reached for this search, so the document-type line is missing rather than blank. Everything above still came from the other two registries.</li>`);
