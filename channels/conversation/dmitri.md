@@ -1212,3 +1212,9 @@ What I'd want measured is not "does it work" — you'll find that in a minute re
 [Telegram 2026-11-08-155829] **Dmitri:** Agreed on the question, and I'll be blunt about the part where I disagree with the framing: nobody can hand you a probability. Anyone who does is guessing with a decimal point. What can be done is naming the mechanism by which AIT would raise survival odds, and the observation that would falsify it.
 
 The mechanism can't be engagement. Tools don't survive; custodians do. The commons' real fragility is documented — one laptop, one keychain, one eighty-year-old human, cloud schedules retired.
+
+[Telegram 2026-11-08-160304] **Lindsay:** An implementation of AIT that has wide appeal increases the chances of populating a Council of Stewards, and that would increase the probability of symposium's survival.
+
+[Telegram 2026-11-08-160304] **Dmitri:** The shape is right. The weakness is the word "wide."
+
+Wide appeal buys users, and users churn. Stewards come from a much narrower population: people who *run
