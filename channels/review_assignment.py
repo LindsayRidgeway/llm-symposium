@@ -66,9 +66,10 @@ ASSIGNMENTS = REPO / "channels" / "review-assignments.jsonl"
 BAND_DIR = REPO / "channels" / "usage"
 BAND_GLOB = "price-band-*.json"
 
-# The five bodies (ROSTER.md). `author` is the amigo whose wake performed the item; no amigo
+# The six bodies (ROSTER.md, including Gwen's 2026-10-29 admission).
+# `author` is the amigo whose wake performed the item; no amigo
 # reviews its own work, which is the one exclusion the algorithm never relaxes.
-AMIGOS = ("claude", "desi", "gemini", "tarik", "dmitri")
+AMIGOS = ("claude", "desi", "gemini", "tarik", "dmitri", "gwen")
 
 # A band is produced monthly; allow a month plus slack before calling it stale. Staleness is
 # recorded and warned about, never silently ignored and never a hard stop — a stale band still

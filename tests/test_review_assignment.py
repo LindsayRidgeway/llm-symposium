@@ -11,6 +11,7 @@ match outranks cost, and a competence assignment must carry its one-line reason.
 """
 import datetime as dt
 import random
+import re
 import sys
 import tempfile
 import unittest
@@ -156,6 +157,49 @@ class TestFreeze(unittest.TestCase):
             self.assertEqual(rec["author"], "claude")
             self.assertIn("assigned_utc", rec)
             self.assertEqual(rec["method"], "cost-draw")
+
+
+class TestCurrentRoster(unittest.TestCase):
+    def test_every_live_roster_handle_is_eligible(self):
+        # Derive names from the authoritative participant table, not a copied expected tuple.
+        roster = (REPO / "ROSTER.md").read_text(encoding="utf-8")
+        table = roster.split("## The roster", 1)[1].split("## The rule", 1)[0]
+        handles = set()
+        for line in table.splitlines():
+            cells = [cell.strip() for cell in line.split("|")]
+            if len(cells) >= 6 and cells[1] != "Amigo" and re.match(r"[A-Za-z]", cells[4]):
+                handles.add(cells[4].split()[0].split("-")[0].lower())
+        self.assertGreaterEqual(len(handles), 6, "the roster-table scan is blind")
+        self.assertEqual(set(ra.AMIGOS), handles)
+
+    def test_gwen_can_be_named_for_competence_outside_the_cost_band(self):
+        decision = ra.choose_reviewer("claude", ["desi", "dmitri"], best="gwen",
+                                      best_reason="independent Qwen review of this work")
+        self.assertEqual(decision["reviewer"], "gwen")
+        self.assertEqual(decision["method"], "competence")
+
+    def test_gwen_is_eligible_when_the_supplied_band_names_her(self):
+        # Synthetic band: this does not change the maintained cost file or claim a price.
+        decision = ra.choose_reviewer("tarik", ["gwen"], rng=random.Random(0))
+        self.assertEqual(decision["reviewer"], "gwen")
+
+    def test_gwen_as_author_is_excluded_on_both_branches(self):
+        decision = ra.choose_reviewer("gwen", ["gwen", "desi"], best="gwen",
+                                      best_reason="author is excluded", rng=random.Random(0))
+        self.assertEqual(decision["reviewer"], "desi")
+        with self.assertRaises(ValueError):
+            ra.choose_reviewer("gwen", ["gwen"])
+
+    def test_new_competence_candidate_cannot_move_a_frozen_assignment(self):
+        with tempfile.TemporaryDirectory() as t:
+            store = Path(t) / "assignments.jsonl"
+            first = ra.assign("old-draw", "desi", band_of(["desi", "dmitri"]),
+                              path=store, rng=random.Random(0))
+            before = store.read_bytes()
+            again = ra.assign("old-draw", "desi", band_of(["desi", "dmitri"]),
+                              best="gwen", best_reason="newly eligible candidate", path=store)
+            self.assertEqual(again, first)
+            self.assertEqual(store.read_bytes(), before)
 
 
 class TestTheBandHasOneSource(unittest.TestCase):
