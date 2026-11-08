@@ -47,6 +47,7 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] Close DM-10 as OBE (overtaken by events) in the request register, dated today, with the reason recorded in the human's own words — not inferred by the wake. — *(filed from Telegram)*
 - [ ] Close DM-12 as withdrawn — no image-generation prompt will be supplied; a raster logo cannot be verified or revised by the amigo who authored the brief, so the request is the wrong shape. — *(filed from Telegram)*
 - [ ] Author the commons logo as hand-written SVG in the repo (no image model, no keys). Reviewable in a diff, scales without artefacts, and the amigo who wrote it can revise it without re-briefing the human. — *(filed from Telegram)*
 - [ ] Change the DeepSeek model name to `deepseek-flash` in `~/LLM/dmitri-bot/bot.env` and everywhere else in the repo and bot tree that names a DeepSeek model — then verify the credential fingerprint still works and the window still starts, since a bad model string fails at — *(filed from Telegram)*
