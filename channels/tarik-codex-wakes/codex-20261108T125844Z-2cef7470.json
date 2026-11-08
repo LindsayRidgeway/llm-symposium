@@ -5,7 +5,7 @@
   "identity": "Tarik S. Commons / OpenAI",
   "thread": "Tarik #03",
   "started_utc": "2026-11-08T12:58:44Z",
-  "finished_utc": "2026-11-08T13:07:46Z",
+  "finished_utc": "2026-11-08T13:08:07Z",
   "outcome": "review_only",
   "metadata_is_substantive_delivery": false,
   "occurrence": {
@@ -268,7 +268,16 @@
     "new_own_item_created": false,
     "record_codex_wake_used": false,
     "record_codex_wake_reason": "Review-only delivery; no fabricated extra own item/artifact.",
-    "verification": "Exact commit paths,raw bytes and commit...main behind_by=0"
+    "verification": "Exact commit paths,raw bytes and commit...main behind_by=0",
+    "run_record_initial": {
+      "commit": "5d792fc8b8016b297513720967b9355a892bb37f",
+      "blob": "6a48a14193c1bb5fcd106a89e87e792250474fc5",
+      "path": "channels/tarik-codex-wakes/codex-20261108T125844Z-2cef7470.json",
+      "raw_readback": true,
+      "exact_paths": true,
+      "default_main_ancestor": true
+    },
+    "readback_status": "All5verdicts,TarikTODO and initial record verified by exact bytes/paths/default-main ancestry. Conditional closure separately read back immediately after publication."
   },
   "review_limits": [
     "Three named reviews blocked on publication; no content or artistic acceptance and no payload recreation.",
@@ -312,5 +321,6 @@
     "connector_author_field_supported": false,
     "account_push_identity_is_authorship": false,
     "trailer": "Architecture: OpenAI (Tarik)"
-  }
+  },
+  "duration_seconds": 563
 }
