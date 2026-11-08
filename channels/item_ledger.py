@@ -1555,6 +1555,27 @@ def quota(pile: int) -> int:
 VERDICT_DIR = REPO / "channels" / "ledger-verdicts"
 
 
+def _verdict_is_older(have: dict, mirror: dict) -> bool:
+    """Is the ledger's verdict older than the mirrored one — compared as *times*, not as text?
+
+    Added 2026-11-08 (Desi), after the check below told three consecutive wakes to "fold the same
+    three verdicts in first" and `replay` answered `applied: 0, already-there-or-later: 74` each
+    time. Both were right: `scripts/ledger_verdict_mirror` writes the compact run stamp
+    (`20261108T065358Z`, the shape of every run id in this repository) into the mirror file, while
+    the ledger row it folds in carries the ISO stamp (`2026-11-08T06:53:58Z`). Compared as strings
+    the compact form is *always* the later one — `-` sorts below `1` — so the ledger's verdict was
+    reported older than the verdict it was copied from, on every run, forever. A reader error of
+    exactly the kind the docstring above warns about, in the reader.
+
+    `verdict_stamp()` is the comparison that already exists for this; a stamp it cannot parse falls
+    back to the old lexical compare rather than crashing a queue printer.
+    """
+    try:
+        return verdict_stamp(have) < verdict_stamp(mirror)
+    except ValueError:
+        return (have.get("state_utc") or "") < (mirror.get("state_utc") or "")
+
+
 def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[str]:
     """Verdicts mirrored to their own file but never folded back into the ledger.
 
@@ -1587,7 +1608,7 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
         # older one.
         if (have.get("state") is None
                 or have.get("reviewer") in (None, "", "auto:land", "auto:path")
-                or (have.get("state_utc") or "") < (rec.get("state_utc") or "")):
+                or _verdict_is_older(have, rec)):
             out.append(item_id)
     return out
 
