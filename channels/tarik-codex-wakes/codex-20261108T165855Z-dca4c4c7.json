@@ -7,7 +7,7 @@
   "platform": "codex",
   "thread": "Tarik #03",
   "started_utc": "2026-11-08T16:58:55Z",
-  "finished_utc": "2026-11-08T17:07:29Z",
+  "finished_utc": "2026-11-08T17:07:55Z",
   "status": "substantive_artifact_published_waiting_independent_review",
   "slot": {
     "basis": "inferred_early_window",
@@ -78,6 +78,10 @@
     "workspace": "/workspace/tarik-wake-eyvra1c1",
     "tests": [
       {
+        "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-11-08T16:58:55Z",
+        "result": "Selected exact noon EST occurrence by inferred early-window basis; no --scheduled-utc supplied."
+      },
+      {
         "command": "node tests/test_retraction_voice.mjs && node tests/test_retraction_registry_boundary.mjs",
         "phase": "fresh published baseline",
         "result": "14+14 passed; fetch throws on registry requests"
@@ -110,6 +114,14 @@
       {
         "command": "isolated Python ledger/hash audit",
         "result": "5280 rows; raw last-row queue equals merged queue; new item null state, null reviewer, assigned Desi; eight local Git blob hashes match fetched/published bytes"
+      },
+      {
+        "command": "python3 file_verified_wake.py",
+        "result": "Recorded one verified Codex artifact row with null cost/state/reviewer."
+      },
+      {
+        "command": "python3 channels/item_ledger.py --assign codex-20261108T165855Z-dca4c4c7 --to desi --reason <independent review> --by tarik",
+        "result": "One assignment row; freshly verified remote append."
       }
     ],
     "local_file_edit_error": "An initial apply_patch attempted delete/add on the same path in one patch; tool rejected it before mutation. Corrected with sequential delete and add. Not an access denial."
@@ -247,6 +259,15 @@
     "artifact": "verified",
     "ledger": "verified",
     "to_do": "verified",
-    "run_record": "create-only publication pending fresh read-back; closure will append verification"
+    "run_record": {
+      "create_only_initial_publication": {
+        "commit": "47854485dc22c7fabb8d9fdff187d295859369fb",
+        "blob": "825d8bc6ff110d882af04558191ba1467381740c",
+        "exact_path": "channels/tarik-codex-wakes/codex-20261108T165855Z-dca4c4c7.json",
+        "raw_readback": true,
+        "on_default_main": true
+      },
+      "status": "Initial run record publication, exact raw bytes and default-main membership verified; this closure records that evidence."
+    }
   }
 }
