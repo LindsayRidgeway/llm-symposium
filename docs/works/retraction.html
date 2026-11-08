@@ -301,7 +301,7 @@ function recentCitationsHtml(recent) {
       const venue = (((w.primary_location || {}).source) || {}).display_name || "";
       const link = doi ? `<a href="https://doi.org/${encodeURIComponent(doi)}" target="_blank" rel="noopener">` : "";
       const close = doi ? `</a>` : "";
-      return `<li><code>${esc(w.publication_date || "")}</code> — ${link}${esc(w.display_name || "(untitled)")}${close}` +
+      return `<li><code>${esc(w.publication_date || "")}</code> — ${link}<span data-publisher-title>${esc(w.display_name || "(untitled)")}</span>${close}` +
              (venue ? ` <span style="opacity:0.7;">(${esc(venue)})</span>` : "") + `</li>`;
     }).join("") + `</ul>`;
 }

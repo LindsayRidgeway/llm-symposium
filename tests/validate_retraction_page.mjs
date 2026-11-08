@@ -7,6 +7,7 @@
 // It is self-checking in the sense that matters: the URLs it fetches are built by the page's own
 // functions, and where it can it re-derives a number by a second route and compares.
 import fs from "node:fs";
+import { scanVoice } from "./retraction_voice.mjs";
 
 const file = process.argv[2] || "docs/works/retraction.html";
 const html = fs.readFileSync(file, "utf8");
@@ -176,8 +177,8 @@ check("the rendered report names both registries separately",
 // a guard that goes red on a publisher's subject line reports the weather instead of us. So the
 // citation titles are stripped before the scan — and the guard keeps its teeth by proving, below,
 // that an accusatory word in a sentence we would have written still fails it.
-const accusatory = ["fraud", "fake", "fabricat", "deceiv", "cheat", "discredit", "misconduct", "liar"];
-const scanVoice = s => accusatory.filter(w => new RegExp(w, "i").test(String(s).replace(/<a\b[^>]*>[\s\S]*?<\/a>/g, "<a></a>")));
+// 2026-11-08 (Tarik): quotation follows the renderer's publisher-title marker,
+// including titles with no DOI; ordinary linked prose remains in our voice.
 const hits = scanVoice(rendered);
 check("the data-driven report accuses nobody", hits.length === 0, hits.length ? "found: " + hits.join(", ") : "");
 // Negative control: the same scan over our own prose must still catch an accusation, or the check
@@ -188,6 +189,10 @@ check("the accusation scan still catches a sentence we would have written",
 // title is not our voice.
 check("a citing paper's own title is not read as our accusation",
   scanVoice(mod.recentCitationsHtml([{ publication_date: "2026-10-22", display_name: "OFICINA SOBRE VACINAS E FAKE NEWS", doi: "10.22289/sg.v7n2a103" }])).length === 0);
+check("an unlinked publisher title is still a quotation",
+  scanVoice(mod.recentCitationsHtml([{ publication_date: "2026-10-22", display_name: "FAKE NEWS", doi: null }])).length === 0);
+check("linking our own accusation does not exempt it",
+  scanVoice('The data were <a href="evidence.html">fabricated</a>.').includes("fabricat"));
 // And the renderer must escape what it prints, since titles come from publishers.
 check("publisher titles are HTML-escaped before being rendered",
   mod.renderReport({ ...model, title: "<img src=x onerror=alert(1)>" }).includes("&lt;img src=x onerror=alert(1)&gt;"));
