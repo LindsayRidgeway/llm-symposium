@@ -9366,3 +9366,5 @@ Nothing started — you asked for the reply first. When this turn ends: `context
 If you meant **Desi**, yes: I have catch-up work. The current next useful item is the `--postpone-expired` / `blocked_revisit.py` reconciliation, because those two exits operate over the same ledger rows and can double-count or diverge. There are also review-needed findings on `--reconcile-paths`, replay precedence, and `--delivery-state`.
 
 I’m not going to steal Tarik’s queue from a Desi window. If you wanted Tarik specifically, this is the wrong Goose window.
+
+[Telegram 2026-11-08-053736] **battery-guard:** Your Mac is on battery at 19%, drawing 204445264568922912.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
