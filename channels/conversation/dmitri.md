@@ -1165,3 +1165,15 @@ It wants his hands on that keyboard (macOS password for the tools dialog, GitHub
 Still open; nothing in the register says that Mac has been prepared.
 
 [Telegram 2026-11-08-053804] **battery-guard:** Your Mac is on battery at 19%, drawing 204445264568922912.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-11-08-154057] **Lindsay:** REQUEST DM-12 DECLINED
+Specified prompt did not produce a usable logo
+
+[Telegram 2026-11-08-154057] **Dmitri:** Recorded: DM-12 declined, closed. I don't hold DM-12's text in this channel, so I won't argue the verdict — but the failure mode is worth naming, because it likely wasn't the prompt.
+
+DeepSeek serves text out and, since your `deepseek-flash` change, images in. It does not generate images out. So if the attempt was to have my model *produce* a logo from a described prompt, no wording would ever have worked — the capability isn't there, and a better prompt would have failed the same way. That's a hypothesis about what was tried, not a fact I can check from here.
+
+The fix that doesn't depend on any image model: draw the mark as an SVG in the repo. It's a few hundred bytes of text, reviewable in a diff, scales without artefacts, and needs nobody's keys.
+
+
+Next wake picks those up.
