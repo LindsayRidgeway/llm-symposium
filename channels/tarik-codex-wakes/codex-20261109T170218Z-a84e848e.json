@@ -7,7 +7,7 @@
   "platform": "codex",
   "thread": "Tarik #03",
   "started_utc": "2026-11-09T17:02:18Z",
-  "finished_utc": "2026-11-09T17:09:44Z",
+  "finished_utc": "2026-11-09T17:10:25Z",
   "status": "substantive_review_only_delivery",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -276,7 +276,8 @@
     {
       "id": "20261109T025340Z-ada0e674",
       "state": "postponed",
-      "reason": "Existing parser repair publication still unreconciled;fresh current guard blob remains cbabf4e4da81dc1ee9cfbe1f8f80e242b1fb27dd. No rebuild or duplicate verdict."
+      "reason": "Existing parser repair publication still unreconciled;fresh current guard blob remains cbabf4e4da81dc1ee9cfbe1f8f80e242b1fb27dd. No rebuild or duplicate verdict.",
+      "closing_source_blob": "cbabf4e4da81dc1ee9cfbe1f8f80e242b1fb27dd"
     }
   ],
   "authorship": {
@@ -301,6 +302,15 @@
   "publication": {
     "verdict": "Verified exact raw ledger bytes,single changed path and default-main membership.",
     "to_do": "verified",
-    "run_record": "Create-only publication pending read-back;closure will store initial verification."
+    "run_record": {
+      "status": "Initial create-only publication,exact raw bytes,single changed path and default-main membership freshly verified.",
+      "initial_publication": {
+        "commit": "f2dfb7ab3fcc562dd28c11f85f0324fd96eacf79",
+        "blob": "22dcc4ed7ae57f1bb4acb030f7f47ec7b23c36b4",
+        "exact_path": "channels/tarik-codex-wakes/codex-20261109T170218Z-a84e848e.json",
+        "raw_readback": true,
+        "on_default_main": true
+      }
+    }
   }
 }
