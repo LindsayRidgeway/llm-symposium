@@ -29,6 +29,17 @@ APP_JS = """window.COMPOSITIONS = {
 };
 """
 
+# Check 7, added 2026-11-09, closes the loop the engine opens: an engine key nothing offers is a tune
+# no reader can play. Every fixture therefore needs the one key in APP_JS to be *offered* somewhere,
+# or a clean-report test fails for a reason that has nothing to do with what it is testing. This card
+# is the offering; tests that supply their own index append it.
+CARD_NIGHTFALL = (
+    '<article class="repertoire-card">'
+    '<h3 class="repertoire-card-title">Nightfall</h3>'
+    '<button data-tune="nightfall">Play</button></article>'
+)
+DEFAULT_INDEX = "<html><body><h1>Catalogue</h1></body></html>" + CARD_NIGHTFALL
+
 
 class MusicCatalogueGateTest(unittest.TestCase):
     def setUp(self):
@@ -38,7 +49,7 @@ class MusicCatalogueGateTest(unittest.TestCase):
     def tearDown(self):
         self._tmp.cleanup()
 
-    def _tree(self, index="<html><body><h1>Catalogue</h1></body></html>", app=APP_JS, files=None):
+    def _tree(self, index=DEFAULT_INDEX, app=APP_JS, files=None):
         """A minimal docs/music/ tree. ``files`` maps name -> contents."""
         music = self.root / "docs" / "music"
         music.mkdir(parents=True, exist_ok=True)
@@ -62,7 +73,7 @@ class MusicCatalogueGateTest(unittest.TestCase):
 
     def test_linked_page_is_not_a_problem(self):
         root = self._tree(
-            index='<html><a href="carol.html">Carol</a></html>',
+            index='<html><a href="carol.html">Carol</a></html>' + CARD_NIGHTFALL,
             files={"carol.html": "<html>a finished piece</html>"},
         )
         self.assertEqual(gate.uncatalogued(root), [])
@@ -121,7 +132,7 @@ class MusicCatalogueGateTest(unittest.TestCase):
 
     def test_broken_score_download_is_a_problem(self):
         root = self._tree(
-            index='<html><a href="piece.html">Piece</a></html>',
+            index='<html><a href="piece.html">Piece</a></html>' + CARD_NIGHTFALL,
             files={"piece.html": '<html><a href="piece.abc" download>Score</a></html>'},
         )
         failures = self._lines(gate.report(root), "BROKEN SCORE")
@@ -130,7 +141,7 @@ class MusicCatalogueGateTest(unittest.TestCase):
 
     def test_present_score_download_is_not_a_problem(self):
         root = self._tree(
-            index='<html><a href="piece.html">Piece</a></html>',
+            index='<html><a href="piece.html">Piece</a></html>' + CARD_NIGHTFALL,
             files={
                 "piece.html": '<html><a href="piece.abc" download>Score</a></html>',
                 "piece.abc": "X: 1\nT: Piece\n",
@@ -158,7 +169,7 @@ class MusicCatalogueGateTest(unittest.TestCase):
     def test_score_reached_by_a_page_of_its_own_name_is_not_dark(self):
         # check 1 then has to carry it: the page exists, so the piece is reachable in principle.
         root = self._tree(
-            index='<html><a href="fresh.html">Fresh</a></html>',
+            index='<html><a href="fresh.html">Fresh</a></html>' + CARD_NIGHTFALL,
             files={"fresh.abc": "X: 7\nT: Fresh Tune\n", "fresh.html": "<html>Fresh</html>"},
         )
         self.assertEqual(gate.dark_scores(root), [])
@@ -228,7 +239,7 @@ class MusicCatalogueGateTest(unittest.TestCase):
         self.assertEqual(gate.uncatalogued(root), ["ghost.html"])
 
     def test_html_anchor_forms_and_url_suffixes_resolve_to_existing_files(self):
-        root = self._tree(index="<A HREF=./carol.html?mode=play#score>Carol</A>",
+        root = self._tree(index="<A HREF=./carol.html?mode=play#score>Carol</A>" + CARD_NIGHTFALL,
                           files={"carol.html": "<a href='carol.abc?download=1'>Score</a>",
                                  "carol.abc": "X:1\nT:Carol\nK:C\nCDEF|\n"})
         self.assertEqual(gate.report(root), [])

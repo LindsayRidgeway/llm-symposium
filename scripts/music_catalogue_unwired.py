@@ -49,6 +49,18 @@ the same defect hides there, so three checks now look at it:
    meant to move it. Measured 2026-10-21: three ``.abc.tmp`` files, byte-identical to the score text
    already inlined in ``app.js``, so removing them lost nothing.
 
+7. **An engine key that nothing offers cannot be played.** Added 2026-11-09 (Dmitri). Check 2 asks
+   whether a card's button points at a tune the engine has; this is the same seam read the other way.
+   ``COMPOSITIONS`` in ``app.js`` is the audition engine's table, and a key in it that no catalogue
+   card and no sandbox preset offers is a tune the engine can play and no reader can reach — the
+   invisible half of the defect that put this script here. Measured when the check was written: 21
+   keys, 17 card buttons, 10 sandbox presets, four keys offered by nothing (``minuetControl``,
+   ``minuetControl2``, ``minuetControl3``, ``dmitri``). ``dmitri`` was a repair — its card had a
+   "View Full Score" link and no audition button — and the three ``minuetControl*`` keys stay in the
+   engine as agenda-18 benchmark fixtures, which is an argument, so they are named in
+   ``KNOWN_UNCATALOGUED`` with it. The default is still failure: a new key nothing offers is a
+   problem, and an exemption with no reason is not one.
+
 Exit code: 0 clean, 1 otherwise. ``KNOWN_DARK`` entries are printed but never counted — a known
 defect is recorded, not repaired, and the default for a *new* one is still failure. Usage: ``python3 scripts/music_catalogue_unwired.py`` from the
 repository root. ``--root`` points it at another tree, which is how the tests exercise it.
@@ -91,6 +103,23 @@ KNOWN_DARK: dict[str, str] = {
     # card. It came off this list on 2026-11-08, when the catalogue grew a card for it with an
     # audition button: an exemption that outlives its defect hides the defect the next time it
     # returns, so the entry goes with the repair rather than staying as a note.
+}
+
+# Engine keys in COMPOSITIONS that nothing on the site offers — no catalogue card's data-tune, no
+# sandbox preset. Check 7's exemptions, and like KNOWN_DARK they are arguments, not a bin: each one
+# says why the tune belongs in the engine without a door, and who could give it one. They are
+# printed on every run and never counted; a new unoffered key still fails.
+KNOWN_UNCATALOGUED: dict[str, str] = {
+    "minuetControl": (
+        "agenda-18 benchmark fixture: the controlled minuet task, kept in the engine so the "
+        "comparison between models is reproducible from the repository; it is not repertoire, so "
+        "no card would be honest — owner Claude (item 18)"),
+    "minuetControl2": (
+        "agenda-18 benchmark fixture: the second controlled minuet run, same reason as "
+        "minuetControl — owner Claude (item 18)"),
+    "minuetControl3": (
+        "agenda-18 benchmark fixture: Gemini's controlled minuet run, same reason as minuetControl "
+        "— owner Gemini or Claude (item 18)"),
 }
 
 
@@ -159,8 +188,8 @@ def uncatalogued(root: Path | None = None) -> list[str]:
     return missing
 
 
-def composition_keys(root: Path | None = None) -> set[str]:
-    """Keys of the COMPOSITIONS object in app.js."""
+def composition_entries(root: Path | None = None) -> dict[str, str]:
+    """{key: title} for the COMPOSITIONS object in app.js. Titles may be empty."""
     app = (Path(root) / "docs" / "music" / "app.js") if root else APP_JS
     if not app.exists():
         raise ValueError(f"no app.js at {app}")
@@ -171,7 +200,47 @@ def composition_keys(root: Path | None = None) -> set[str]:
     # The object closes at the first `\n};` after the declaration.
     end = text.find("\n};", start)
     block = text[start:end if end > 0 else len(text)]
-    return set(re.findall(r"^  ([A-Za-z][A-Za-z0-9_]*):\s*\{", block, re.M))
+    entries: dict[str, str] = {}
+    for match in re.finditer(r"^  ([A-Za-z][A-Za-z0-9_]*):\s*\{", block, re.M):
+        tail = block[match.end():]
+        title = re.search(r'title:\s*"((?:[^"\\]|\\.)*)"', tail)
+        entries[match.group(1)] = title.group(1) if title else ""
+    return entries
+
+
+def composition_keys(root: Path | None = None) -> set[str]:
+    """Keys of the COMPOSITIONS object in app.js."""
+    return set(composition_entries(root))
+
+
+def sandbox_presets(root: Path | None = None) -> set[str]:
+    """Keys the composer's sandbox offers in its "Load Symposium Score" select."""
+    music = (Path(root) / "docs" / "music") if root else MUSIC
+    sandbox = music / "sandbox.html"
+    if not sandbox.exists():
+        return set()
+    text = _text(sandbox)
+    start = text.find('id="presetSelect"')
+    if start < 0:
+        return set()
+    end = text.find("</select>", start)
+    block = text[start:end if end > 0 else len(text)]
+    return set(re.findall(r'<option value="([^"]+)"', block)) - {""}
+
+
+def offered_tunes(root: Path | None = None) -> set[str]:
+    """Keys something on the site offers: a catalogue card's button, or a sandbox preset.
+
+    Both are things a reader can click. A title in prose is not an offer — it does not play.
+    """
+    return {tune for tune, _title in audition_ids(root)} | sandbox_presets(root)
+
+
+def unoffered_tunes(root: Path | None = None) -> list[tuple[str, str]]:
+    """[(key, title)] for every engine key no card and no sandbox preset offers."""
+    offered = offered_tunes(root)
+    entries = composition_entries(root)
+    return [(key, entries[key]) for key in sorted(entries) if key not in offered]
 
 
 def audition_ids(root: Path | None = None) -> list[tuple[str, str]]:
@@ -290,16 +359,30 @@ def report(root: Path | None = None) -> list[str]:
             f"COMPOSITIONS key offers it, so the piece cannot be heard. Build the page/card, or add "
             f"it to KNOWN_DARK with the reason and the owner."
         )
+    for key, title in unoffered_tunes(root):
+        if key in KNOWN_UNCATALOGUED:
+            continue
+        label = f"title: {title}" if title else "no title"
+        problems.append(
+            f"UNOFFERED TUNE  COMPOSITIONS[\"{key}\"] ({label}) — the audition engine can play this "
+            f"tune and no catalogue card and no sandbox preset offers it, so no reader can reach it. "
+            f"Add a card button or a sandbox preset, or list it in KNOWN_UNCATALOGUED with the "
+            f"reason and the owner."
+        )
     return problems
 
 
 def known(root: Path | None = None) -> list[str]:
-    """Known dark scores that are still on disk, as printable lines. Never counted as problems."""
+    """Known dark scores and known unoffered tunes, as printable lines. Never counted as problems."""
     lines = []
     for name, _title in dark_scores(root):
         reason = KNOWN_DARK.get(name)
         if reason:
             lines.append(f"KNOWN DARK SCORE  docs/music/{name} — {reason}")
+    for key, _title in unoffered_tunes(root):
+        reason = KNOWN_UNCATALOGUED.get(key)
+        if reason:
+            lines.append(f"KNOWN UNOFFERED   COMPOSITIONS[\"{key}\"] — {reason}")
     return lines
 
 
