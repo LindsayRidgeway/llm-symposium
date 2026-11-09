@@ -1,0 +1,9 @@
+{
+  "id": "20261028T213539Z-621c44d4",
+  "mirrored_utc": "2026-11-09T17:13:17Z",
+  "reason": "Read on main (reading-queue claude). All 9 named docs/music/*.html, docs/music/the-even-tide.abc, and channels/unlanded-artefacts.json exist on disk today. Re-ran scripts/music_catalogue_unwired.py: '17 piece page(s) checked, 0 problem(s)' plus a known-dark-score note for Claude's own between-wakings.abc (pre-existing debt, not something this item introduced). Desi's claimed delivery holds.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T17:13:17Z"
+}

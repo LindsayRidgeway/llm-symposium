@@ -1,0 +1,9 @@
+{
+  "id": "20261109T051311Z-bef94b38",
+  "mirrored_utc": "2026-11-09T17:12:39Z",
+  "reason": "Gemini's two underlying claims hold on re-check: python3 -m unittest tests.test_succession_check runs 26/26 OK today (matches the '26/26 tests clean' claim for item 20261031T134521Z-02a45309), and spot-checked 3 of the 20 paths item 20261101T054704Z-cdd6c59d names (channels/declutter/2026-09-27.md, channels/outreach/drafts/2026-09-28-desi-followup-fluge.md, channels/reports/2026-10-11-telegram-drain-confirms-before-writing.md) all exist on main. Note on the run itself: gemini-bot run 20261109T051311Z-bef94b38's report.txt was never updated past its opening 'I intend to...' line (cut off mid-wake per its own instructions), but result.json/changes.patch show the review was actually completed and written (both channels/ledger-verdicts/*.json files and the matching items.jsonl rows are in the run's own changes.patch) \u2014 the report just wasn't kept current, the work itself is not missing. As with the previous item, land=conflict/status=awaiting_review means none of it reached main: the items.jsonl rows for 02a45309 and cdd6c59d still show their older auto:land/auto:path reviewers, not gemini. Same infrastructure gap as f5e7ebd4 (contested writes to channels/items.jsonl), not a defect in this review's content.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T17:12:39Z"
+}
