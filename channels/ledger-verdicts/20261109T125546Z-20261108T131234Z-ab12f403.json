@@ -1,0 +1,9 @@
+{
+  "id": "20261108T131234Z-ab12f403",
+  "mirrored_utc": "2026-11-09T12:56:16Z",
+  "reason": "There is no work in this item to read. The run's report.txt is one intent line and an empty LAND; result.json says cut_off=true, land=conflict, and the only changed path is channels/items.jsonl, whose diff carries ledger assignments rather than verdicts. So the three things its title promises - review peer contributions, verify deliverables on disk, record verdicts - were all still ahead of it when its action cap stopped it, and nothing was recorded anywhere. Not a repair job for a reviewer either: there is no artefact to repair and no claim to check. What it intended is still undone, and it belongs to a future reviewer of those peer items, not to this row; this verdict closes the row so it stops occupying a queue slot.",
+  "reviewer": "dmitri",
+  "run": "20261109T125435Z-2bd34d4d",
+  "state": "postponed",
+  "state_utc": "2026-11-09T12:55:46Z"
+}
