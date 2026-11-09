@@ -169,5 +169,79 @@ class LedgerVerdictMirrorTest(unittest.TestCase):
                        self.verdicts, "2026-10-26T11:41:50")
 
 
+    def test_invalid_compact_dates_do_not_block_a_valid_neighbor(self):
+        bad = ["20261100T085200Z", "20261301T085200Z", "20260229T085200Z",
+               "20261131T085200Z", "20261108T245200Z", "20261108T086000Z",
+               "20261108T085260Z", "00001108T085200Z"]
+        self.verdicts.mkdir()
+        for i, stamp in enumerate(bad):
+            (self.verdicts / f"bad-{i}.json").write_text(json.dumps({
+                "id": ROW["id"], "state": "rejected", "state_utc": stamp,
+                "reviewer": "dmitri", "reason": "invalid calendar fixture"}) + "\n")
+        lvm.mirror(ROW["id"], "accomplished", "dmitri", "valid neighbor", "",
+                   self.verdicts, "2026-11-09T08:52:00Z")
+        before = self.ledger.read_bytes()
+        dry = lvm.replay(self.ledger, self.verdicts, dry_run=True)
+        self.assertEqual(self.ledger.read_bytes(), before)
+        self.assertEqual(dry["applied"], [ROW["id"]])
+        self.assertEqual(len(dry["unreadable"]), len(bad))
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], [ROW["id"]])
+        self.assertEqual(len(result["unreadable"]), len(bad))
+        for i in range(len(bad)):
+            self.assertTrue(any(f"bad-{i}.json:" in e for e in result["unreadable"]))
+        self.assertTrue(self.ledger.read_bytes().startswith(before))
+        self.assertEqual(len(self.lines()), 2)
+        self.assertEqual(json.loads(self.lines()[-1])["state"], "accomplished")
+        again = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(again["applied"], [])
+        self.assertEqual(again["skipped"], [ROW["id"]])
+        self.assertEqual(len(self.lines()), 2)
+
+    def test_mirror_refuses_invalid_compact_dates_before_writing(self):
+        for stamp in ["20261100T085200Z", "20260229T085200Z", "20261108T245200Z"]:
+            with self.subTest(stamp=stamp), self.assertRaises(SystemExit):
+                lvm.mirror(ROW["id"], "rejected", "dmitri", "bad time", "",
+                           self.verdicts, stamp)
+            self.assertFalse(self.verdicts.exists())
+
+    def test_valid_leap_day_and_offset_normalize_to_utc(self):
+        for stamp in ["20240229T123456Z", "2024-02-29T12:34:56Z",
+                      "2024-02-29T13:34:56+01:00"]:
+            with self.subTest(stamp=stamp):
+                self.assertEqual(lvm._aware(stamp), "2024-02-29T12:34:56Z")
+
+    def test_normalization_preserves_four_digit_early_year(self):
+        self.assertEqual(lvm._aware("00010101T000000Z"), "0001-01-01T00:00:00Z")
+        path = lvm.mirror(ROW["id"], "postponed", "dmitri", "early fixture", "",
+                          self.verdicts, "00010101T000000Z")
+        self.assertEqual(json.loads(path.read_text())["state_utc"], "0001-01-01T00:00:00Z")
+        self.assertEqual(lvm.replay(self.ledger, self.verdicts)["applied"], [ROW["id"]])
+
+    def test_nontext_stamp_is_reported_per_file(self):
+        self.verdicts.mkdir()
+        for i, stamp in enumerate([20261108, ["20261108T085200Z"], {"time": "bad"}]):
+            (self.verdicts / f"nontime-{i}.json").write_text(json.dumps({
+                "id": ROW["id"], "state": "rejected", "state_utc": stamp,
+                "reviewer": "dmitri", "reason": "nontext time"}) + "\n")
+        lvm.mirror(ROW["id"], "postponed", "dmitri", "valid fixture", "",
+                   self.verdicts, "2026-11-09T08:52:00Z")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], [ROW["id"]])
+        self.assertEqual(len(result["unreadable"]), 3)
+
+    def test_out_of_range_utc_conversion_is_reported_per_file(self):
+        self.verdicts.mkdir()
+        (self.verdicts / "outside-utc.json").write_text(json.dumps({
+            "id": ROW["id"], "state": "rejected", "state_utc": "0001-01-01T00:00:00+01:00",
+            "reviewer": "dmitri", "reason": "UTC would be year zero"}) + "\n")
+        lvm.mirror(ROW["id"], "postponed", "dmitri", "valid fixture", "",
+                   self.verdicts, "2026-11-09T08:52:00Z")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], [ROW["id"]])
+        self.assertEqual(len(result["unreadable"]), 1)
+        self.assertIn("outside-utc.json", result["unreadable"][0])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

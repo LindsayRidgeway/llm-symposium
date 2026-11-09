@@ -85,22 +85,26 @@ def _aware(state_utc: str) -> str:
     though nobody had read them: the exact loop the mirror exists to break, reintroduced by a
     timestamp format. Both spellings are accepted here and normalised to the ISO one.
     """
-    text = (state_utc or "").strip()
+    if not isinstance(state_utc, str):
+        raise SystemExit("state_utc must be timestamp text")
+    text = state_utc.strip()
     compact = _COMPACT.match(text)
     if compact:
         year, month, day, hour, minute, second = compact.groups()
-        return f"{year}-{month}-{day}T{hour}:{minute}:{second}Z"
+        text = f"{year}-{month}-{day}T{hour}:{minute}:{second}Z"
     try:
+        # Compact stamps need the same calendar validation as ISO stamps.
         stamp = item_ledger.parse_iso_aware(text)
-    except ValueError:
+        if stamp.tzinfo is None or stamp.utcoffset() is None:
+            raise SystemExit(
+                f"state_utc {state_utc!r} carries no timezone; a verdict time must say which clock "
+                "it was read on")
+        # isoformat preserves four-digit years; strftime("%Y") is platform dependent.
+        return stamp.astimezone(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    except (ValueError, OverflowError):
         raise SystemExit(
-            f"state_utc {state_utc!r} is not a time I can read; give me "
+            f"state_utc {state_utc!r} is not a time I can read in UTC; give me "
             "2026-11-08T06:53:58Z or the compact 20261108T065358Z") from None
-    if stamp.tzinfo is None or stamp.utcoffset() is None:
-        raise SystemExit(
-            f"state_utc {state_utc!r} carries no timezone; a verdict time must say which clock "
-            "it was read on")
-    return stamp.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def mirror(item_id: str, state: str, reviewer: str, reason: str, run: str = "",
