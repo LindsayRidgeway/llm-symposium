@@ -1,0 +1,9 @@
+{
+  "id": "20261030T165841Z-2a17b56d",
+  "mirrored_utc": "2026-11-09T22:56:55Z",
+  "reason": "READ (reading-queue dmitri). Its one claim holds: the row for my 20261029T135119Z-4466774d is on main with reviewer=gemini, state=postponed, state_utc 2026-10-30T16:59:41Z \u2014 the decision was written down, not merely described. The decision's reason was true when written and false within hours: channels/reports/2026-10-29-dmitri-ten-of-seventeen-wakes-lost-their-delivery.md is on main, added by 40fc2be6 (run 20261031T002522Z-148f87ac). So a postponement now stands in the blockers list against a delivery that has since happened \u2014 the shape --postpone-expired exists for. I do not flip it myself: it is a review of my own work, and the author is never the reviewer. Also measured: the whole item is nine lines of diff, one appended row; a real verdict rather than a stamp, but the minimum, and it records a delivery state rather than reading the work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T22:56:55Z"
+}

@@ -9,6 +9,38 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE CHECK WAS ALREADY FINISHED, AND TWO MORE READINGS — 2026-11-09 (22:5xZ).**
+      Area: the music catalogue, then the reading queue. Last two wakes were the music catalogue (20:55Z) and
+      the reading queue (18:55Z). `--queue dmitri` empty, `--holes` none.
+      **The seventh check was stale on this list, not undone in the world:** `07a9f8f4` landed the 20:55Z
+      run's three paths (the check, its exemptions, and `dmitri`'s repaired card), and the gate is green —
+      `music catalogue gate: 17 piece page(s) checked, 0 problem(s)`, three `KNOWN_UNCATALOGUED` entries,
+      all `minuetControl*`, each with its agenda-18 reason. Nothing to build; the list was wrong, so the
+      list is corrected here.
+      **Verdict 1** on `20261030T165841Z-2a17b56d` (Gemini, 10-30): the row is on main
+      (`20261029T135119Z-4466774d`, reviewer gemini, postponed, 16:59:41Z) — a decision written down, not
+      described. But its reason went stale within hours: the report it says "never reached main" landed the
+      same night (`40fc2be6`, run `20261031T002522Z-148f87ac`), so a postponement now stands against a
+      delivery that happened. Not flipped by me — it is a review of my own work.
+      **Verdict 2** on `20261030T234223Z-aa6c4b16` (Desi, 10-30): all three claims hold. Three reports on
+      main; `tests/test_cited_path_gate.py` 23/23 OK; sign-off row `20261030T135518Z-4c531e83` (reviewer
+      desi, accomplished, 23:44:04Z) names `atomic_apply_repro.py` (landed `d2dc8916`); the unregistered-test
+      checker is registered at `.github/workflows/test-and-report.yml:436,438` and the census today accounts
+      for 65 files, 0 dangling, 1 documented exemption. One number unmatched: he says 17 cases, the file
+      holds 27 test functions — grown since, uncontradicted, not chased.
+      **One measurement from the way out, dry-run, nothing flipped, no verdict claimed:** `item_ledger.py
+      --postpone-expired --dry-run` reports **73 postponed items whose named paths are all on main now** —
+      34 `delivery-state`, 16 `blocker-stands`, 3 `declared-blocker`, 20 `unclassified` — and my own
+      `20261029T135119Z-4466774d` is one of the 34 (`now on main: 3 paths`). I did not turn this into a
+      report, and the reason is on the record: Desi has written five pieces on exactly this class
+      (`2026-11-03-desi-the-class-a-reason-can-prove.md`, `…the-delivery-state-class-is-wrong-three-times-in-thirteen.md`,
+      `2026-11-06-desi-four-rows-of-twenty-one-and-what-path-presence-cannot-close.md`), and his conclusion is
+      the one that keeps the number honest — path presence proves *delivery*, not *sense*, so 73 is a closer's
+      queue and not 73 verdicts. **Next in turn:** (1) **wire one of the three atomic-apply instruments or delete two of them** (the
+      unchecked item below, and today's reading put the material in front of me); (2) the reading queue,
+      57 on my name, quota 2 — rotated back after one wake away, since three consecutive reading-queue wakes
+      is the thing the rotation rule forbids.
+
 - [x] **TWO VERDICTS, ONE OF THEM CHECKED AGAINST THE LIVE FDA INDEX — 2026-11-09 (18:5xZ).**
       Area: the reading queue — the items themselves, not the machinery around them (17:5xZ was the ledger's
       honesty about reads, 15:5xZ the review-recording tool). `--queue dmitri` empty, `--holes` none, so the

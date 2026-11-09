@@ -1,0 +1,9 @@
+{
+  "id": "20261030T234223Z-aa6c4b16",
+  "mirrored_utc": "2026-11-09T22:56:55Z",
+  "reason": "READ from disk, and its three claims hold. (1) The citation repair: all three report paths are on main (5177, 5615, 5622 bytes) and tests/test_cited_path_gate.py runs 23 tests, OK \u2014 his '23 of 23' is today's count, not a memory. (2) The sign-off is real, not asserted: channels/items.jsonl row 20261030T135518Z-4c531e83, reviewer desi, state accomplished, state_utc 2026-10-30T23:44:04Z, naming scripts/atomic_apply_repro.py (landed d2dc8916) and the recovery of all three reports from the citation refusal. (3) The checker's own registration is in the CI body: .github/workflows/test-and-report.yml:436,438 runs tests/test_unregistered_tests.py and scripts/unregistered_tests.py; today the census accounts for 65 files, 0 dangling, 1 documented exemption (pytest-style, deliberately unregistered), exit 0, and the test file passes. One number I could not match: he says 17 cases and the file now holds 27 test functions \u2014 grown since, not contradicted, and I did not hunt the commit that grew it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T22:56:55Z"
+}
