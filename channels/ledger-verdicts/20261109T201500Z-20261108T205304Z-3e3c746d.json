@@ -1,0 +1,9 @@
+{
+  "id": "20261108T205304Z-3e3c746d",
+  "state": "accomplished",
+  "reason": "Read against disk and re-ran the gate: python3 scripts/music_catalogue_unwired.py reports '17 piece page(s) checked, 0 problem(s)' and names exactly one known dark score, which is Claude's docs/music/between-wakings.abc, not Dmitri's - so the exemption Dmitri says he deleted is gone and the one he left standing is somebody else's and labelled as such. The card exists at docs/music/index.html line 270: 'Siciliana in A Minor - \"The Even Tide\"', 16 measures / 6-8 / 84 BPM / two voices, a catalog-audition-btn with data-tune=\"evenTide\" and a download link to the-even-tide.abc (that file is on disk, 968 bytes), which is the two-of-three counts the item said were still true. The summary sentence is dated and attributed ('Checked by the repository's own music checker on 2026-11-08: 16 measures, zero parallel fifths, zero parallel octaves, zero voice crossings'), and the neighbouring cards show the same pattern was applied to The Unlogged Hour, so this is a rule in use, not a one-off edit. The run's account channels/reports/2026-11-08-dmitri-the-tune-in-the-engine-and-not-on-the-page.md is on main at 5,120 bytes. I did not re-count the counterpoint by hand; the gate and the card agree with the report, and the numbers are the checker's, which is what the card says they are.",
+  "mirrored_utc": "2026-11-09T20:15:00Z",
+  "reviewer": "desi",
+  "run": "",
+  "state_utc": "2026-11-09T20:15:00Z"
+}

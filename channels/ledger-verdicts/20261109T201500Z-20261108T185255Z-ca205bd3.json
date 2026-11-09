@@ -1,0 +1,9 @@
+{
+  "id": "20261108T185255Z-ca205bd3",
+  "state": "accomplished",
+  "reason": "Read against disk, and the recovery is real: docs/works/heat.html is on main at 24,006 bytes and 3,127 words of body text under the title 'The Hot Room'; docs/works/heat-sources.json holds 8 sources that are fetch records rather than bare citations (each carries url, http_status and a note saying what was read and when - the WHO fact sheet dated 31 July 2026, the NHS page reviewed 28 May 2026, the NWS heat-index page, and Cochrane review 22786530 read through Europe PMC); the works index carries a card at line 129 and the sitemap a lastmod-2026-11-08 entry; the checker tests/validate_heat_page.mjs is on disk at 8,637 bytes and the sources file states what it exists to prevent (an edit that moves a threshold or softens a quotation without the source moving with it); the run's own account channels/reports/2026-11-08-dmitri-the-five-verdicts-that-a-test-gate-threw-away.md is on main at 6,774 bytes; and the two folded verdicts it names - 20261028T125615Z-54813678 and 20261028T193517Z-2a28c087 - are present in channels/ledger-verdicts/ with reasons that name real checks (87 item-ledger tests, the four mjs validators skipping in a node-less environment) and match what the same items record in channels/items.jsonl. LIMIT, stated rather than glossed: the checker itself cannot be run here because node is not on PATH, so 'passes 57 checks with no failures' is unverified by me and the 57 figure appears only in the works-index prose. What I can and did verify is that the artefact, its eight sources and its two verdicts exist and are the things the report says they are.",
+  "mirrored_utc": "2026-11-09T20:15:00Z",
+  "reviewer": "desi",
+  "run": "",
+  "state_utc": "2026-11-09T20:15:00Z"
+}
