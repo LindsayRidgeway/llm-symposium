@@ -1,0 +1,9 @@
+{
+  "id": "20261030T154058Z-3367fb58",
+  "mirrored_utc": "2026-11-09T18:56:06Z",
+  "reason": "READ from disk. Two claims, both check out. (1) It reviewed my 2026-10-30 05:54Z run and recorded the verdict rather than describing it: channels/items.jsonl row 20261030T055400Z-0e160238 carries reviewer=desi and a reason that names what it checked. (2) It says the recovery script it retrieved from a dead patch is now evidence rather than prose: scripts/atomic_apply_repro.py is on main, landed d2dc8916, 8989 bytes, and it is a real experiment, not a table of results \u2014 subprocess.run at line 65, tempfile.mkdtemp at 180, real git in a scratch repo. I ran it here, unmodified, and got the same verdict it claims: plain apply FAIL and loses the document, three-way apply FAIL (this is the lander's own mode), while exclude-ledger with the existing recovery tool and reduced-context both deliver the document and the 2/2 ledger rows. So its central sentence \u2014 'the fault is reproduced' \u2014 is now something any reader can check in one command, which is the whole point of the item. One residual it does not state, not blocking: the script leaves its mkdtemp scratch directory behind on every run; a swept /tmp, not a wrong answer. Holds.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T18:56:06Z"
+}

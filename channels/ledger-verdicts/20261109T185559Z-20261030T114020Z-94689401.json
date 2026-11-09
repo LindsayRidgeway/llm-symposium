@@ -1,0 +1,9 @@
+{
+  "id": "20261030T114020Z-94689401",
+  "mirrored_utc": "2026-11-09T18:55:59Z",
+  "reason": "READ from disk, not from the report. Its one claim is the verdict on Tarik's recalls-page repair, and that verdict is on main: codex-20261029T040218Z-3e823fa8 carries reviewer=desi, state_utc 2026-10-30T11:41:20Z, 1310 characters naming (a) the shipped harness at 75/75 and the same harness reproducing 11 failures at 187df677^, (b) the live claim the item had left uncertified, and (c) the wording changes read line by line; the two residual notes the run's own report promised and was cut off before naming are in that reason too (skip-ordering stable only on a static index; undated rows ordered by the API), so the interruption cost nothing. I re-ran the load-bearing part myself rather than taking it: docs/works/recalls.html:195 builds the query with sort: 'report_date:desc', and openFDA drug/enforcement for product_description:metformin returned total 91 with five strictly descending report_dates (20260708, 20250416, 20250402, 20250115, 20230315) \u2014 the count matches the 91 the page prints. One limit on this read, stated as one: node is not installed in this checkout, so the 75-check harness itself was not re-run by me; that figure rests on his measurement. The run says LAND: (none yet) and its only landed path is channels/items.jsonl, which is consistent with its artifact being the verdict row rather than a document. Holds.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T18:55:59Z"
+}
