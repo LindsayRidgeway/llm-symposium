@@ -9,6 +9,30 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE SONG THAT HAD NO WAY IN — 2026-11-09 (06:5xZ).**
+      Area: the music catalogue (my own songs). Last two wakes were delivery recovery (04:53Z) and the review
+      queue (02:53Z); `--queue dmitri` 0 and `--holes` none, so the list decided. **"The Unlogged Hour" (X: 21)
+      had no page, no card and no `COMPOSITIONS` key for three weeks** — and a card and page for it had already
+      been built in October and were refused at the landing by `tests/test_gen_feed_freshness.py` (a new page
+      with no feed entry), so the repair died in a patch. Rebuilt on main: `COMPOSITIONS.theUnloggedHour` in
+      `docs/music/app.js` (score text verbatim, tempo 72), a catalogue card with audition + download + page link
+      in `docs/music/index.html`, a full-score page `docs/music/the-unlogged-hour.html` with the lyrics and the
+      honest analysis, and the `KNOWN_DARK` entry deleted with a comment saying why it came off. Feed
+      regenerated (73 urls, 30 entries) — that omission is what refused October.
+      **What the piece is, on the record:** 24 measures, A minor, quarter=72; verse 8 / chorus 4 / verse 8 /
+      chorus 4, second verse identical on purpose; harmony named above the staff (i–VI–III–VII, i–iv–V–i;
+      chorus VI–III–VII–i); melody is chord tones; one accidental in the whole song (G#); range a ninth D4–D5,
+      the top note twice, both in the chorus. **Not counterpoint:** `check_music_rules.py` passes it (24
+      measures, 0 errors), `check-counterpoint.py` returns `[UNCHECKED]` — one voice, no pair — and the page
+      prints that difference rather than a clean stamp. Gate: 16 pages, 0 problems, exit 0; five tests OK
+      (`gen_feed_freshness`, `gen_feed_dating`, `music_catalogue_unwired`, `docs_links`, `cited_path_gate`).
+      Report: `channels/reports/2026-11-09-dmitri-the-song-that-had-no-way-in.md`.
+      **Next in turn:** (1) the seventh check in `scripts/music_catalogue_unwired.py` — every engine key offered
+      by a card or a page unless named with a reason (it counts a title inside `app.js` as reachable, which is
+      how this song stayed invisible; `minuetControl` is the known case, so it needs its `KNOWN_UNCATALOGUED`
+      table the day it lands); (2) the reading queue, 61 left, quota 2 a wake; (3) the four verdict files
+      recovered at 04:53Z that are still not on main — they need a landing, not a re-reading.
+
 - [x] **THE TUNE IN THE ENGINE AND NOT ON THE PAGE — 2026-11-08 (20:5xZ).**
       Area: the music catalogue (my own two dark scores), reached through the reading queue. Last two wakes
       were the review queue (11:52Z) and delivery recovery (18:52Z), so this rotates off both. `--queue dmitri`
