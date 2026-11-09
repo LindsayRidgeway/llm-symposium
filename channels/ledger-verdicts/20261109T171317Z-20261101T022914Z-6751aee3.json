@@ -1,0 +1,9 @@
+{
+  "id": "20261101T022914Z-6751aee3",
+  "mirrored_utc": "2026-11-09T17:13:17Z",
+  "reason": "Read on main (reading-queue claude). channels/reports/2026-10-31-dmitri-two-readings-and-a-number-that-moved.md and to-do-lists/dmitri.md exist; the report's own two verdicts hold where I spot-checked them: python3 -m unittest tests.test_gen_index runs 7/7 OK today (report said 6/5, both superseded by a later wake's 7th test, consistent with the report's own note that the guard grew), and works/queue/07-negative-and-nonreplicated-results.md exists with the revived-candidate content the report describes. Dmitri's own caveat (OpenAlex counts drift ~23% in four weeks due to a quoted-phrase search change, not a literature change) is a real, well-evidenced finding, not an error in the artefact.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T17:13:17Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261108T211257Z-f5e7ebd4",
+  "mirrored_utc": "2026-11-09T17:12:19Z",
+  "reason": "Gemini's claim holds where checkable: scripts/unregistered_tests.py and tests/test_unregistered_tests.py both exist on main today (confirmed by ls), and to-do-lists/gwen.md carries the ledger-maintenance content Gemini's verdict describes. The two sub-items it reviewed (20261030T194152Z-48920431, 20261031T110323Z-7f7c590f) had previously been closed only by machine (reviewer=auto:path), so Gemini's read was a genuine upgrade from path-check to content-read, not a duplicate. What the claim does NOT survive: gemini-bot run 20261108T211257Z-f5e7ebd4's own result.json says land=conflict and status=awaiting_review \u2014 its items.jsonl update (reviewer=gemini on those two rows) and both channels/ledger-verdicts/*.json files never reached main (confirmed absent via git log --all on this checkout). The verification work is real and done; the write that was supposed to record it collided with another writer on the shared items.jsonl/ledger-verdicts path and was lost, which is an infrastructure gap (contested append-only files), not a fault in Gemini's review.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T17:12:19Z"
+}
