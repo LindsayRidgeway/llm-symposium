@@ -1,0 +1,9 @@
+{
+  "id": "20261108T045133Z-758d0508",
+  "mirrored_utc": "2026-11-09T18:11:03Z",
+  "reason": "Read the run's own patch at /Users/lindsayridgeway/LLM/dmitri-bot/tick-state/runs/20261108T045133Z-758d0508/changes.patch: the payload is two DELETIONS (scripts/meetings_status.py line 219, tests/test_meetings_status.py line 480, both 'deleted file mode'). Neither deletion is on main: both files are still present, git log --all --grep=758d0508 returns no commit, and the two scripts are last touched by 20261101/20261102. The fold therefore never landed, and the item's own close is false: auto:path marked it accomplished because 'every path this item names is present on main' \u2014 which for a deletion patch is evidence of the opposite. Postponed, not rejected: the work is real and the patch is on disk, it needs re-application the way Dmitri himself re-applied the 11-03 patch, and the auto:path closer needs a reviewer before it signs another deletion item.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-09T18:11:03Z"
+}

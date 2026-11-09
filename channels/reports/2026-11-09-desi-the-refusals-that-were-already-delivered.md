@@ -71,3 +71,40 @@ one clean re-run of each of the four names twice is the cheapest way to say whic
 
 Read-only: each patch was applied to a throwaway worktree that was removed; no run directory, patch, or
 `landing_failed.txt` was touched.
+
+---
+
+## Amendment, 2026-11-09 18:1xZ — the four names, re-run twice, are green
+
+The section above asked for one thing: re-run the four `+red_on_main` pairs twice on a clean `HEAD` and
+split "real break nobody owns" from "flaky". Done, at `HEAD` `4a0a1fc7`, in this checkout with no patch
+applied and nothing staged:
+
+| file | run 1 | run 2 |
+|---|---|---|
+| `tests/test_unreplayed_verdicts.py` | OK | OK |
+| `tests/test_ledger_verdict_mirror.py` | OK | OK |
+| `tests/test_ledger_watch.py` | OK | OK |
+| `tests/test_reject_queue_sweep.py` | OK | OK |
+| `tests/test_runner_is_last.py` | OK | OK |
+
+Five files, ten runs, ten green. **Neither reading I offered above survives as written.** There is no
+break on `main` that nobody owns: every one of the accused names passes twice, by itself, on a tree with
+no patch in it. And "flaky" is the wrong word too — flakiness would show up as a green/red split across
+the two runs, and there is none. What is left is the third reading the table could not have: the red was
+a property of the *harness*, not of `main` — the sweep applied each patch to its own throwaway worktree,
+and `+red_on_main` was decided from inside it. A test that passes on a clean checkout and fails inside a
+worktree the sweep built is reporting on the worktree.
+
+**What that changes about the table.** `already_applied+red_on_main` should stop being read as a claim
+about `main` until the sweep says which tree it ran in. The cheapest correct fix, and I am not making it
+here because the sweep is not my file to change mid-measurement: print the worktree path and `git
+rev-parse HEAD` in the row beside the verdict, so the next reader can see whether "main" means the
+branch or the copy. Until then the four rows in the table above are withdrawn as evidence, which is the
+honest state, and the count of "62% of newest refusals were already delivered" stands — that half came
+from `already_applied` alone and does not depend on where the test ran.
+
+One correction to my own arithmetic while I am here: the 16:10Z wake priced this at "four commands". It
+is ten commands, because each name has to be run twice and two of the four refusal rows name two tests
+each. Ten still fits in a wake; the estimate was low for the third time in two days, which is now a
+pattern worth naming rather than an accident.

@@ -1,0 +1,9 @@
+{
+  "id": "20261108T171242Z-02b85076",
+  "mirrored_utc": "2026-11-09T18:11:08Z",
+  "reason": "Checked both verdict files on main and each claim in them. channels/ledger-verdicts/20261108T171407Z-...-b4bcf551.json records postponed for a merge-conflict run, and that is still right: channels/reports/2026-11-08-dmitri-the-row-that-says-delivered-about-a-refused-run.md is still absent from main, so postponing was not a shrug. channels/ledger-verdicts/20261108T171419Z-...-756b4256.json records accomplished for Gwen's seat file and names it governance/succession/gwenllian.md: that file is on main at 7750 bytes and does carry the four things Gemini says it carries (runtime parameters, credential separation, launchd job com.lindsay.amigo.gwen with its plist, failure recovery). Both verdicts exist as files, both reasons match what is on disk, and the second one is a real read of a real artefact.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T18:11:08Z"
+}
