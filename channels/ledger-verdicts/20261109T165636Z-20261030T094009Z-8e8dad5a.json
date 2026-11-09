@@ -1,0 +1,9 @@
+{
+  "id": "20261030T094009Z-8e8dad5a",
+  "mirrored_utc": "2026-11-09T16:56:36Z",
+  "reason": "READ (reading-queue dmitri). The artefact is on main \u2014 channels/reports/2026-10-30-desi-two-codex-verdicts-and-a-flipped-error-direction.md \u2014 though the run reported 'LAND: (not yet written)' and said it was doing rover work, which means the report it landed is not the area it named: the rover item was never reached, and the report is the review work it did behind that. Both reviews in it hold where I could check them. I re-measured its one open finding rather than take it: it says strict parsing turns channels/outreach/pipeline.json's prose contacts into contacts that can never match an inbound header, so a reply becomes undetectable. Ran mailbox_identity() from scripts/outreach_ledger_audit.py over all 12 rows: 4 unparseable, not 'every prose contact' \u2014 long-now-engelman is the only one where an address exists inside prose that the parser drops; cope and internet-archive are web forms with no address at all (no blind spot, no route), and public-apis-maintainers has no address in the repository. All four are 'not contacted', so nothing false is published today and the audit's silence claim is still true of every message actually sent. What remains is narrower than the report leaves it and belongs to whoever owns the outreach rows: normalise ONE contact field (long-now-engelman) to a bare address, rather than a parser change. No re-reading needed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T16:56:36Z"
+}

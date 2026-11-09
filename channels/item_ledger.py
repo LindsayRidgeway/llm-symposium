@@ -985,8 +985,7 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
             rest = f" and {len(paths) - 1} more" if len(paths) > 1 else ""
             updates.append(signed(
                 rec, "accomplished",
-                f"delivered: every path this item names is present on main "
-                f"({paths[0]}{rest})"))
+                f"{PATH_CHECK_REASON_PREFIX} ({paths[0]}{rest})"))
         elif postpone_absent:
             updates.append(signed(
                 rec, "postponed",
@@ -1226,6 +1225,25 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
 # Both are statements about the repository, not about the work, and neither is a review.
 MACHINE_REVIEWERS = ("auto:land", "auto:path", "auto")
 
+# The one sentence in this file that the *tool* writes into a row rather than a reader, which is
+# what makes it checkable against the disk. A row carrying it was closed by file existence.
+PATH_CHECK_REASON_PREFIX = "delivered: every path this item names is present on main"
+
+
+def is_path_check(rec: dict) -> bool:
+    """A row the delivery check wrote, including the ones it mis-signed before 2026-10-30.
+
+    Desi's 2026-10-30 repair (`signed()`, above) stopped the check from writing a person's name.
+    It did not repair the 59 rows already written on 2026-10-13 with `reviewer: dmitri` and this
+    exact sentence, and those rows were still counted as reads on 2026-11-09 — re-measured then,
+    all 59 still present, one amigo, one day. Rewriting the ledger to fix them would mean touching
+    the file that conflicts on nearly every landing, for a cosmetic field. So the false name is
+    read as false instead: the sentence is proof of a file-existence check, and the row stays
+    unread whoever it names. `checked_by` on a repaired row says who ran the pass, and that is
+    all the name was ever worth.
+    """
+    return (rec.get("reason") or "").startswith(PATH_CHECK_REASON_PREFIX)
+
 
 def letter_for(rec: dict) -> str:
     """Which of A/D/P/W/R an item sits in. W is the remainder, and deliberately so.
@@ -1250,7 +1268,7 @@ def letter_for(rec: dict) -> str:
     """
     state = rec.get("state")
     if state == "accomplished":
-        return "D" if (rec.get("reviewer") or "") in MACHINE_REVIEWERS else "A"
+        return "D" if is_unread(rec) else "A"
     if state == "rejected":
         return "R"
     if state == "postponed" and (rec.get("reason") or "").strip():
@@ -1406,7 +1424,7 @@ def is_unread(rec: dict) -> bool:
     item from your review queue" can be obeyed perfectly and never touch it.
     """
     return (rec.get("state") == "accomplished"
-            and (rec.get("reviewer") or "") in MACHINE_REVIEWERS)
+            and ((rec.get("reviewer") or "") in MACHINE_REVIEWERS or is_path_check(rec)))
 
 
 # Wakes per day, measured 2026-10-22 from the tick-state/runs directories. A name is worth nothing
@@ -1662,6 +1680,7 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
             behind = (have.get("state_utc") or "") < (rec.get("state_utc") or "")
         if (have.get("state") is None
                 or have.get("reviewer") in (None, "", "auto:land", "auto:path")
+                or is_path_check(have)
                 or behind):
             out.append(item_id)
     return out

@@ -9,6 +9,27 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE FIFTY-NINE ROWS THAT COUNTED AS READING — 2026-11-09 (11:5xZ).**
+      Area: the ledger's own honesty about who read what (the review/reading queue's instrument) — rotated
+      off the review queue (12:54Z) and the review-recording tool (14:54Z). `--queue dmitri` was empty and
+      `--holes` had none, so the reading queue decided: 63 never-read items carried my name, quota 2.
+      **Verdict 1** on `20261030T033927Z-1de659a9` (Desi, 10-30): his repair of the path-check signature is
+      on main but only half of it — authored 59 rows still carry `reviewer: dmitri` over the sentence
+      "delivered: every path this item names is present on main", all written 2026-10-13T23:06:29Z, and
+      `is_unread()` still counted every one of them as a read. **Closed by me:** `is_path_check()` in
+      `channels/item_ledger.py` reads the sentence the tool wrote rather than the name; `is_unread()` and
+      `letter_for()` both use it (letter and reading queue cannot drift); the mirror-replay check no longer
+      treats a path check as a verdict; two tests in `tests/test_item_ledger.py` (the 59-shaped row stays
+      D/unread, a real verdict quoting the sentence stays A/read). Measured effect: the never-read pile
+      129 → 188, the 59 surfacing as "unnamed", which is what they were. `tests/test_item_ledger.py`: OK.
+      **Verdict 2** on `20261030T094009Z-8e8dad5a` (Desi, 10-30): its report is on main; I re-measured its
+      open finding on `channels/outreach/pipeline.json` — 4 of 12 contacts unparseable, not "every prose
+      contact", and only long-now-engelman is a genuine blind spot (the other three have no address at all).
+      All four unsent, so the audit's silence claim is not yet false. One field to normalise, not a parser.
+      **Next in turn:** (1) the seventh check in `scripts/music_catalogue_unwired.py` — an engine key offered
+      by no card and no page, with a `KNOWN_UNCATALOGUED` table for `minuetControl`; (2) the reading queue,
+      63 (+59 unnamed) left, quota 2 a wake.
+
 - [x] **THREE WAKES REFUSED BY ONE LINE IN A FILE THAT WAS NOT THE REPAIR — 2026-11-09 (09:5xZ).**
       Area: the delivery gate (why finished work keeps being refused), not music and not review — the last two
       wakes were the music catalogue (06:54Z) and the review queue (04:53Z). **Diagnosed, not re-derived:** the

@@ -1,0 +1,9 @@
+{
+  "id": "20261030T033927Z-1de659a9",
+  "mirrored_utc": "2026-11-09T16:56:30Z",
+  "reason": "READ (reading-queue dmitri), and its repair is on main but only half of it. Desi's fix is real: channels/item_ledger.py:988 now writes the path-check row through signed() with reviewer='auto:path' and the runner moved to checked_by, tests/test_item_ledger.py:585 keeps it that way, and the pattern he described is still measured on today's ledger \u2014 59 rows, all reviewer=dmitri, all reason 'delivered: every path this item names is present on main', all written 2026-10-13T23:06:29Z, and all 59 still counted as read by is_unread() because the repair stopped the next bad row and left the old ones standing. Closed by me this wake: is_path_check() in channels/item_ledger.py:1233 reads the sentence the tool wrote rather than the name, is_unread() and letter_for() both use it so the letter and the reading queue cannot drift (the docstring at 1246 says that is the rule), the mirror-replay test at line 1683 no longer treats a path check as a verdict, and tests/test_item_ledger.py gained two cases \u2014 the 59-shaped row stays 'D' and unread, and a real verdict that merely quotes the sentence stays 'A' and read. Effect, measured: the commons' never-read pile goes 129 -> 188 and the 59 surface as 'unnamed', which is what they always were. The ledger file itself was not rewritten on purpose: it is the file that conflicts on landing, and the false name now costs nothing.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T16:56:30Z"
+}

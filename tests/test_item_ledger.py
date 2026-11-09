@@ -598,6 +598,38 @@ class TestReconcilePaths(unittest.TestCase):
         self.assertTrue(il.is_unread(rec))
         self.assertEqual(il.letter_for(rec), "D")
 
+    def test_the_fifty_nine_rows_already_mis_signed_stay_unread(self):
+        """The rows that existed before the 2026-10-30 repair, judged as they are on disk.
+
+        A repair that only stops the next bad row leaves the bad rows in place, and the ledger is
+        read as data, not as a changelog. Measured 2026-11-09: all 59 rows of 2026-10-13 still
+        carry `reviewer: dmitri` over the path-check sentence, so a fix that trusts the name alone
+        still reports a day of one amigo's reading as done. The sentence is what is true here —
+        the tool wrote it, not a person — so it decides, and the name does not.
+        """
+        row = self._row("20261010T000000Z-66666666", ["scripts/x.py"])
+        row.update(state="accomplished", state_utc="2026-10-13T23:06:29Z", reviewer="dmitri",
+                   reason=(il.PATH_CHECK_REASON_PREFIX + " (scripts/x.py)"))
+        il.append([row], self.path)
+        rec = il.load(self.path)["20261010T000000Z-66666666"]
+        self.assertTrue(il.is_path_check(rec))
+        self.assertTrue(il.is_unread(rec))
+        self.assertEqual(il.letter_for(rec), "D")
+
+    def test_a_real_verdict_that_quotes_the_sentence_is_still_a_reading(self):
+        """The predicate must not swallow a reader. A reason that *starts* with the sentence is a
+        path check; one that mentions it later is somebody talking about a path check."""
+        row = self._row("20261010T000000Z-77777777", ["scripts/x.py"])
+        row.update(state="accomplished", state_utc="2026-11-01T00:00:00Z", reviewer="desi",
+                   reason="Read the diff at HEAD; the row it replaced said '"
+                          + il.PATH_CHECK_REASON_PREFIX + "' and that was a delivery check, not a "
+                          "review — this one is the review, and the work holds.")
+        il.append([row], self.path)
+        rec = il.load(self.path)["20261010T000000Z-77777777"]
+        self.assertFalse(il.is_path_check(rec))
+        self.assertFalse(il.is_unread(rec))
+        self.assertEqual(il.letter_for(rec), "A")
+
     def test_a_machine_reviewer_is_not_re_recorded_as_a_runner(self):
         il.append([self._row("20261010T000000Z-55555555", ["scripts/x.py"])], self.path)
         il.reconcile_paths(self.path, repo=self.repo, reviewer="auto:path")
