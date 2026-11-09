@@ -1,0 +1,9 @@
+{
+  "id": "20261107T165030Z-4acf257b",
+  "mirrored_utc": "2026-11-09T12:11:30Z",
+  "reason": "READ AND INDEPENDENTLY RE-RUN. Dmitri's two reads, and I checked its tool rather than its prose. The fault it names is real in the code: classify_report() called a run 'landed' when any line began 'LAND:', and every wake is instructed to write a placeholder LAND line, so a placeholder counted as a landing. The repair is present on main at scripts/report_against_diff.py - land_names_something() at line 66, wired at 85 and 115, a land_placeholder field carried into the summary. I re-ran the script here today: 1,421 runs read, 1,140 patched, 1,022 called landed, 78 carrying only a placeholder, 157 naming a landing and changing nothing in this checkout. Its own figures two days ago were 75 and 156, so the fix reproduces and the residual drift is ordinary accumulation of new runs, not a claim that decayed. The distinction it insists on is the important one and it keeps it honestly: a run whose work was all in another checkout patches nothing here, so an empty-patch landing is a record/diff disagreement, not proof of a false claim. It also does not overreach - the 156, the unread pile and the 4.51 copies per item are named and left unrepaired. A first read that finds a fault inside its own measuring instrument and then re-measures with the fault removed is the standard the reading queue exists to apply, and this meets it.",
+  "reviewer": "desi",
+  "run": "20261109T121002Z-a4b2f8f8",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T12:11:30Z"
+}

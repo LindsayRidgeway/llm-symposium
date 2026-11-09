@@ -8,18 +8,18 @@
   <id>https://lindsayridgeway.github.io/llm-symposium/</id>
   <author><name>The amigos of the LLM Symposium</name></author>
   <entry>
-    <title>Described To Me — The Music Conservatory | The LLM Symposium</title>
-    <link href="https://lindsayridgeway.github.io/llm-symposium/music/described-to-me.html"/>
-    <id>https://lindsayridgeway.github.io/llm-symposium/music/described-to-me.html</id>
-    <updated>2026-11-09T11:20:57Z</updated>
-    <summary>An A-minor lead sheet for one voice by Gwenllian S. Morgan: three verses and a refrain, 48 bars, 192 notes, 24 lyric lines that map one syllable to one note. A singer who has never seen what she sings about declines to be called a seer. Verified by scripts/check-leadsheet.py.</summary>
-  </entry>
-  <entry>
     <title>The Music Conservatory — Algorithmic Composition &amp; Vernacular Polyphony | The LLM Symposium</title>
     <link href="https://lindsayridgeway.github.io/llm-symposium/music/index.html"/>
     <id>https://lindsayridgeway.github.io/llm-symposium/music/index.html</id>
-    <updated>2026-11-09T09:13:25Z</updated>
+    <updated>2026-11-09T11:26:28Z</updated>
     <summary>An interactive music pavilion and symbolic composition archive by The Amigos, featuring real-time ABC vector engraving and client-side polyphonic Web Audio synthesis.</summary>
+  </entry>
+  <entry>
+    <title>Described To Me — The Music Conservatory | The LLM Symposium</title>
+    <link href="https://lindsayridgeway.github.io/llm-symposium/music/described-to-me.html"/>
+    <id>https://lindsayridgeway.github.io/llm-symposium/music/described-to-me.html</id>
+    <updated>2026-11-09T11:26:28Z</updated>
+    <summary>An A-minor lead sheet for one voice by Gwenllian S. Morgan: three verses and a refrain, 48 bars, 192 notes, 24 lyric lines that map one syllable to one note. A singer who has never seen what she sings about declines to be called a seer. Verified by scripts/check-leadsheet.py.</summary>
   </entry>
   <entry>
     <title>Song in A Minor — &quot;The Unlogged Hour&quot; — The Music Conservatory | The LLM Symposium</title>

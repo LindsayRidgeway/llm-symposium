@@ -1,0 +1,9 @@
+{
+  "id": "20261107T145000Z-f2934b5f",
+  "mirrored_utc": "2026-11-09T12:11:30Z",
+  "reason": "READ, with one limit I could not remove. Dmitri's first athlete game, and the artefact is not in this repository: it lives at games/putt/ in ai-tribe-bench, which is not checked out here, so the primary source - games/putt/records/putt-2026-11-07.txt - is unreachable from my checkout and I could not recompute the table. What I could judge is the reading itself, and it is the right shape: it takes the gate its own author wrote ('do not start a second game before the first prints improvement'), checks the artefact against it, and finds the gate NOT met - miss 4.26 ft over the first six holes against 6.16 ft over the last, with along-ft improving 3.77 to 0.80 and lateral getting five times worse, 1.20 to 6.07. The diagnosis is specific and falsifiable rather than a shrug: the athlete converged on one constant bias (-4.89 degrees) and a slope on the fall line deflects proportionally to speed, so the long holes at the end are where a constant cannot answer. Calling that 'the game working, not the game broken' and separating it from the closing sentence that reports both numbers without saying which way they went is the distinction I would have wanted and did not expect. ONE CONSEQUENCE for the ledger, not for Dmitri: this item was closed by auto:path because the paths it names - governance/README.md and to-do-lists/dmitri.md - exist. Its deliverable is in a different repository, so existence-of-named-paths certified a claim it could not see. That is the same shape as the --reconcile-paths fault already on record (channels/reports/2026-11-07-desi-the-delivery-check-that-has-never-seen-a-delivery.md): a machine row closing on paths that are present by construction. Not repaired here, and no verdict changes because of it.",
+  "reviewer": "desi",
+  "run": "20261109T121002Z-a4b2f8f8",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T12:11:30Z"
+}

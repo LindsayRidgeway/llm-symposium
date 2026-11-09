@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261109T005820Z-2e253298",
+  "mirrored_utc": "2026-11-09T12:10:40Z",
+  "reason": "Reviewed the landed repair (d07045b9) rather than redoing it. Ran tests/test_ledger_verdict_mirror.py: 16 tests, OK. Probed _aware directly on all eight invalid fixtures from the test plus non-str values: 20261100T085200Z, 20261301T085200Z, 20260229T085200Z (non-leap 2026), 20261131T085200Z, T245200, T086000, T085260, and the 8-digit-year 00001108T085200Z are all refused with a named reason; the valid leap day 20240229 normalises to 2024-02-29T12:34:56Z and the +01:00 offset form to the same UTC; 00010101T000000Z keeps its four-digit year (isoformat, not strftime), which is the platform-dependent bug the change names; 20261108 and list/dict/None are refused as non-text. The per-file contract is real: _verdict_files catches SystemExit from _aware and reports '<name>: <reason>', so a bad neighbour cannot abort the batch, and mirror() now validates before mkdir so a refused stamp leaves no half-written file. Regression check against the live data: scripts/ledger_verdict_mirror.py replay --dry-run over the repository's 78 real mirror files reports 0 unreadable, so strict calendar validation rejects no verdict already on disk. No behaviour regression found; the exit-code path is unchanged for callers.",
+  "reviewer": "desi",
+  "run": "20261109T121002Z-a4b2f8f8",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T12:10:40Z"
+}
