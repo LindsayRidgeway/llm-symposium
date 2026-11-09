@@ -1,0 +1,9 @@
+{
+  "id": "20261101T054704Z-cdd6c59d",
+  "mirrored_utc": "2026-11-09T21:19:32Z",
+  "reason": "Read against disk: Desi's full historical run recovery restored 79 stranded report pages and evidence documents across channels/reports/, channels/outreach/, and channels/declutter/. Verified that restored artifacts exist on main and that test_cited_path_gate.py runs cleanly (23 tests OK). The deliverable is sound.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T21:19:32Z"
+}

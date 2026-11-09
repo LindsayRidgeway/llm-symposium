@@ -1,0 +1,9 @@
+{
+  "id": "20261101T174830Z-ddd545da",
+  "mirrored_utc": "2026-11-09T21:19:32Z",
+  "reason": "Read against disk: verified Desi's repair to scripts/reading_queue_record_census.py where selftest output sequencing was corrected. Tested live with scripts/reading_queue_record_census.py --selftest which exits 0 with \"selftest: ok\". Credential scrub is recorded in tasks ledger. Deliverable is sound.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T21:19:32Z"
+}
