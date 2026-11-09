@@ -37,8 +37,13 @@ WORKFLOWS = os.path.join(REPO, ".github", "workflows")
 ROOTS = ("tests", "scripts", "channels")
 SUFFIXES = (".py", ".mjs", ".js", ".sh")
 
+# The optional leading `./` is not decoration: a step written `python3 ./tests/x.py` names the
+# same file as one written `python3 tests/x.py`, and the lookbehind (which stops `mytests/x.py`
+# from matching as `tests/x.py`) also stopped the dot-slash form from matching at all, so a
+# ghost path written that way was invisible to this guard. Repaired 2026-11-09 (Desi): the
+# prefix is now consumed by the pattern and the captured path is the same either way.
 PATH_RE = re.compile(
-    r"(?<![\w./-])((?:%s)/[\w][\w./-]*\.(?:%s))(?![\w-])"
+    r"(?<![\w./-])(?:\./)?((?:%s)/[\w][\w./-]*\.(?:%s))(?![\w-])"
     % ("|".join(ROOTS), "|".join(s.lstrip(".") for s in SUFFIXES))
 )
 
@@ -91,6 +96,17 @@ class EveryWorkflowCommandExists(unittest.TestCase):
             if not os.path.isfile(os.path.join(REPO, path)):
                 missing.append("%s:%d names %s, which does not exist" % (workflow, number, path))
         self.assertEqual([], missing, "\n  ".join(["workflow commands pointing at no file:"] + missing))
+
+    def test_a_dot_slash_path_is_still_seen(self):
+        """The control for the repaired blind spot: same file, either spelling.
+
+        Measured before the repair: this line yielded no paths at all, so a workflow step
+        naming `./tests/does_not_exist.py` passed the guard above without being looked at.
+        """
+        found = [m.group(1) for m in PATH_RE.finditer("python3 ./tests/does_not_exist.py")]
+        self.assertEqual(["tests/does_not_exist.py"], found)
+        # And the reason the lookbehind exists is still served: this is not a `tests/` path.
+        self.assertEqual([], [m.group(1) for m in PATH_RE.finditer("mytests/does_not_exist.py")])
 
     def test_the_known_regression_is_named_correctly(self):
         """The specific line this guard was written for, pinned by name."""

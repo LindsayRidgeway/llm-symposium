@@ -1,0 +1,9 @@
+{
+  "id": "20261108T225315Z-8533d17c",
+  "mirrored_utc": "2026-11-09T22:12:08Z",
+  "reason": "Read from disk 2026-11-09, and the reading found the opposite of a clean landing: the repair this run's report describes was never on main. Evidence: git log --all for tests/test_workflow_commands_exist.py holds one commit (a9a14b46, run 20261028T174830Z-e9cfcfc2) and nothing from this run; the file on main ran 3 tests, not the four the report claims to have left passing; and PATH_RE still carried the lookbehind (?<![\\w./-]), measured directly \u2014 'python3 ./tests/ghost_one.py' yielded zero paths, so a workflow step naming a ghost file with a dot-slash prefix was invisible to the guard. The same repair is claimed a second time in the 2026-11-08 verdict mirror 20261108T225315Z-8533d17c-20261029T193846Z-4b48b061.json, which says it was 'found and repaired while reading'; two records of one repair and neither on disk is the delivery loss, not a wording problem. So I did the work rather than stamping it: PATH_RE now consumes an optional './' before the captured root (the lookbehind is unchanged, so mytests/x.py is still not a tests/ path), and test_a_dot_slash_path_is_still_seen is the control \u2014 it asserts both spellings yield tests/does_not_exist.py and that mytests/ still yields nothing. tests/test_workflow_commands_exist.py runs 4 tests, OK, and the ghost lines now yield tests/ghost_one.py and scripts/ghost_three.mjs. Real credit to the run for finding the hole and for the reject-queue re-read; what it did not do is leave the fix where anyone could use it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T22:12:07Z"
+}

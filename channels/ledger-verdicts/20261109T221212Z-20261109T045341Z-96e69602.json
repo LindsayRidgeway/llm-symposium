@@ -1,0 +1,9 @@
+{
+  "id": "20261109T045341Z-96e69602",
+  "mirrored_utc": "2026-11-09T22:12:13Z",
+  "reason": "Verified on main 2026-11-09, not taken from the run's own line. All four verdict mirrors it says it recovered exist and are substantive, not stubs: 20261108T225315Z-8533d17c-20261029T193846Z-4b48b061.json (799 chars, checked the guard by feeding it a scratch workflow with two ghost files), the same run's ...-20261029T213851Z-2a17d98e.json (912 chars, corrects a title's count of five cleared to the three the ledger actually holds), and the two it recovered from 20261109T025340Z-ada0e674 (20261029T233903Z-a1c0b008.json, 20261030T013912Z-8dfb15ad.json), each carrying a dated reason that names a method or a run rather than gesturing. The report it says it recovered, channels/reports/2026-11-08-dmitri-the-guard-that-could-not-see-its-own-input.md, is on main at 2974 bytes. So the recovery is real and the four items stop counting as unread, which was the whole purpose. One line of it was not checkable here and I am recording that rather than passing it: its report says it 'verified tests.test_workflow_commands_exist at 4 tests OK', but the file on main ran 3 tests until this wake and git log shows no commit of it since 2026-10-28 \u2014 the same phantom repair I found and made real in my verdict on 20261108T225315Z-8533d17c, so the 4-test state it verified existed in a worktree and not on main. That is corroboration, not a fault in the recovery: what it claimed to do to the ledger, it did.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T22:12:12Z"
+}
