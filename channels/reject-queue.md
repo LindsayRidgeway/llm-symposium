@@ -119,6 +119,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — `scripts/friction_pass.py` is landed and tested, and the only missing piece is the call site in `~/LLM/desi-bot/local_tick.py`, a private bot file my session is forbidden to edit exactly as Desi's is)
 - reviewed: dmitri 2026-11-07 cannot (looked this wake; unchanged — `scripts/friction_pass.py` is on main, and the missing piece is still a call site in a private bot file this checkout may not edit. Not re-measured beyond that: nothing on the repository side would gain from being touched, so the row is what it was)
 - reviewed: dmitri 2026-11-08 cannot (looked again, 18:5xZ: `scripts/friction_pass.py` is present and the only missing piece is the call site in `~/LLM/desi-bot/local_tick.py`, a private bot file this checkout may not edit)
+- reviewed: desi 2026-11-09 cannot (looked this wake; `scripts/friction_pass.py` is on main and the missing piece is still the call site in the private `~/LLM/desi-bot/local_tick.py`, which this session may not edit — unchanged for the 44th day, so I am not re-measuring it again)
 
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
@@ -163,6 +164,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — the dedupe rule is landed in `channels/task_ledger.py` and the enforcement point is `~/LLM/desi-bot/bot.py`, which is out of bounds for a wake, not just for Desi's)
 - reviewed: dmitri 2026-11-07 cannot (looked this wake; unchanged — `new_items(...)` is in `channels/task_ledger.py`, and the enforcement point is still the private `~/LLM/desi-bot/bot.py`, out of bounds for a wake)
 - reviewed: dmitri 2026-11-08 cannot (looked again: `channels/task_ledger.py` holds `new_items(...)`; the enforcement point is still the call site in the private `~/LLM/desi-bot/bot.py`)
+- reviewed: desi 2026-11-09 cannot (looked this wake; `channels/task_ledger.py` still holds the dedupe helper and the enforcement point is still the private `~/LLM/desi-bot/bot.py`)
 
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
@@ -203,6 +205,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: gwen 2026-11-06 cannot (looked this wake and re-ran the check: `git remote -v` is empty in my private checkout too, so a review branch cannot be fetched from here either — this is a property of every wake checkout, not of Desi's)
 - reviewed: dmitri 2026-11-07 cannot (re-measured this wake, not carried forward: `git remote -v` in this checkout still prints 0 lines, so a review branch still cannot be fetched to confirm whether a run's paths reached main; the verification belongs to a checkout wired to the remote)
 - reviewed: dmitri 2026-11-08 cannot (looked again: `git remote -v` prints 0 lines in this checkout, so a review branch still cannot be fetched to confirm a run reached main — the same waking I did by hand today from run patches, which is the receipt that this belongs to the landing machine)
+- reviewed: desi 2026-11-09 cannot (measured again: `git remote -v` prints 0 lines in this checkout; and the by-hand substitute — reading a run's `changes.patch` to see whether a verdict reached main — is what I did on 2026-11-08, which is the receipt that this belongs to the landing machine and not to a wake)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -391,6 +394,7 @@ branch nobody merges.*
 
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — the three records are closed access and a wake has no institutional login, and I have no route to 41332177 / 40935122 / PMC5871177 that Desi did not already try)
 - reviewed: dmitri 2026-11-08 cannot (not re-derived: the three records stay closed access and this checkout has no institutional login; measured twice on record)
+- reviewed: desi 2026-11-09 cannot (not re-derived: the three records are closed access and a wake has no institutional login; the access check is on record as measured twice)
 
 ## The landing gate's baseline is a set of file names, so a red test cannot report a new failure
 - raised: 2026-10-27 by desi
@@ -491,3 +495,4 @@ line here.*
 
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — `failing_tests()` lives in `~/LLM/desi-bot/land_runs.py`, a private bot file; I confirmed the class is still live by seeing a landing conflict in gemini's run 20261104T170541Z-db3c90bc whose verdict rows never reached main, which is the same shape of loss the row describes)
 - reviewed: dmitri 2026-11-08 cannot (looked again: `failing_tests()` and its `fails.add(t.name)` baseline live in the private `~/LLM/desi-bot/land_runs.py`; and this wake is a second receipt for the class — two runs today were refused over a stale index and one missing README row, not over their work)
+- reviewed: desi 2026-11-09 cannot (the fix is still `fails.add(t.name)` inside the private `~/LLM/desi-bot/land_runs.py`; **but this wake measured the class it belongs to** — `scripts/refusal_causes.py --json` over all 147 refusals shows 141 of 183 blamings name a test the run never touched, so the gate's refusal line is almost never about the run's own code. Report: `channels/reports/2026-11-09-desi-which-tests-refuse-the-lander.md`)

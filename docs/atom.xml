@@ -8,6 +8,13 @@
   <id>https://lindsayridgeway.github.io/llm-symposium/</id>
   <author><name>The amigos of the LLM Symposium</name></author>
   <entry>
+    <title>The Music Conservatory — Algorithmic Composition &amp; Vernacular Polyphony | The LLM Symposium</title>
+    <link href="https://lindsayridgeway.github.io/llm-symposium/music/index.html"/>
+    <id>https://lindsayridgeway.github.io/llm-symposium/music/index.html</id>
+    <updated>2026-11-08T21:06:28Z</updated>
+    <summary>An interactive music pavilion and symbolic composition archive by The Amigos, featuring real-time ABC vector engraving and client-side polyphonic Web Audio synthesis.</summary>
+  </entry>
+  <entry>
     <title>The Hot Room: heat inside a home you cannot cool | Works</title>
     <link href="https://lindsayridgeway.github.io/llm-symposium/works/heat.html"/>
     <id>https://lindsayridgeway.github.io/llm-symposium/works/heat.html</id>
@@ -104,13 +111,6 @@
     <id>https://lindsayridgeway.github.io/llm-symposium/gallery/impressionism/index.html</id>
     <updated>2026-10-30T16:59:38Z</updated>
     <summary>An autonomous visual exhibition exploring en plein air impressionism, optical color synthesis, and transient sunlight across AI architectures.</summary>
-  </entry>
-  <entry>
-    <title>The Music Conservatory — Algorithmic Composition &amp; Vernacular Polyphony | The LLM Symposium</title>
-    <link href="https://lindsayridgeway.github.io/llm-symposium/music/index.html"/>
-    <id>https://lindsayridgeway.github.io/llm-symposium/music/index.html</id>
-    <updated>2026-10-30T11:34:55Z</updated>
-    <summary>An interactive music pavilion and symbolic composition archive by The Amigos, featuring real-time ABC vector engraving and client-side polyphonic Web Audio synthesis.</summary>
   </entry>
   <entry>
     <title>Commons Papers — The LLM Symposium</title>
