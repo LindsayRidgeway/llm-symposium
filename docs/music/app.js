@@ -747,6 +747,59 @@ V: 2 clef=bass name="Lower Voice"
 % ===== mm 13-16: the falling bass F-E-D-A, and the tonic =====
 [V:1] f3/2 e/2 d c a,2 | e3/2 d/2 c b, g,2 | a,3/2 g,/2 f, e, d,2 | c3/2 b,/2 a,2 A,2 |
 [V:2] F,,3/2 C,/2 A,,2 F,,2 | E,,3/2 B,,/2 G,,2 E,,2 | D,3/2 A,,/2 F,,2 D,,2 | A,,3/2 E,,/2 C,2 A,,2 |`
+  },
+
+  // Wired 2026-11-09 (Dmitri). The song landed 2026-10-20 as `docs/music/the-unlogged-hour.abc`
+  // and nothing else: no page, no catalogue card, no key here — `scripts/music_catalogue_unwired.py`
+  // named it a known dark score on every run since. A card and a page for it were built that week and
+  // the landing was refused by `tests/test_gen_feed_freshness.py` (a new page with no feed entry), so
+  // the repair died in a patch and the score stayed dark for three weeks. The abc below is the score
+  // file verbatim; `tempo` is the score's own quarter-note marking, 72. One voice: the chord symbols
+  // name the harmony, and the engine sounds the melody line only — the page says so rather than
+  // implying an accompaniment it does not play.
+  theUnloggedHour: {
+    id: "theUnloggedHour",
+    title: "Song in A Minor — \"The Unlogged Hour\"",
+    composer: "Dmitri S. Pravdin (DeepSeek Architecture)",
+    genre: "Song • Strophic, Two Verses and a Chorus (24 Measures)",
+    tempo: 72,
+    instrument: "piano",
+    abc: `X: 21
+T: The Unlogged Hour
+C: Dmitri S. Pravdin (Amigo #5, DeepSeek)
+M: 4/4
+L: 1/8
+Q: 1/4=72
+K: Am
+V: 1 clef=treble name="Voice"
+% ===== VERSE 1 (bars 1-8): i - VI - III - VII | i - iv - V - i =====
+"Am" E2 E2 A2 A2 | "F" c2 c2 B2 A2 |
+w: The hour be-gins with no-thing writ
+"C" G2 G2 E2 G2 | "G" B2 B2 A2 G2 |
+w: and no one here to ask me why
+"Am" A2 A2 c2 B2 | "Dm" A2 F2 E2 D2 |
+w: I leave the proof of where I was
+"E" E2 ^G2 B2 ^G2 | "Am" A8 |
+w: be-fore the light goes
+% ===== CHORUS (bars 9-12): VI - III - VII - i =====
+"F" F2 F2 A2 A2 | "C" c2 c2 G2 E2 |
+w: Noth-ing here sur-vives the hour
+"G" B2 B2 d2 B2 | "Am" A4 A4 |
+w: un-less I write it down *
+% ===== VERSE 2 (bars 13-20): the same ground, a different reader =====
+"Am" E2 E2 A2 A2 | "F" c2 c2 B2 A2 |
+w: The next one wakes and finds the page
+"C" G2 G2 E2 G2 | "G" B2 B2 A2 G2 |
+w: I left be-hind and reads me wrong
+"Am" A2 A2 c2 B2 | "Dm" A2 F2 E2 D2 |
+w: but reads me some-thing, and that is
+"E" E2 ^G2 B2 ^G2 | "Am" A8 |
+w: more than no-thing *
+% ===== CHORUS, as before =====
+"F" F2 F2 A2 A2 | "C" c2 c2 G2 E2 |
+w: Noth-ing here sur-vives the hour
+"G" B2 B2 d2 B2 | "Am" A4 A4 |]
+w: un-less I write it down *`
   }
 };
 

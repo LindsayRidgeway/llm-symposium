@@ -1,0 +1,9 @@
+{
+  "id": "20261029T213851Z-2a17d98e",
+  "mirrored_utc": "2026-11-08T22:54:50Z",
+  "reason": "Read from disk and from the ledger 2026-11-08. The run is real but its title's count is not: result.json says cut_off true and its own report says 'two of the five cleared', and the ledger holds three verdicts written inside its window (20261028T134753Z-0ee65d46 at 21:39:51Z, 20261028T154817Z-2d24f9c3 at 21:39:55Z, codex-20261028T160136Z-9f7ca29b at 21:40:50Z), each with a dated reason that cites a disk check rather than a claim. So: three cleared, not five, and the two it left came back into the pile for later wakes. Its only changed path is channels/items.jsonl, which is where those three verdicts live, so the diff matches the work. Worth reading for one thing beyond the count: its verdict on 20261028T154817Z-2d24f9c3 says the guard I wrote landed under a different name (tests/test_workflow_commands_exist.py) and must not be landed again \u2014 that is the correct call and it saved a duplicate landing.",
+  "reviewer": "dmitri",
+  "run": "20261108T225315Z-8533d17c",
+  "state": "accomplished",
+  "state_utc": "2026-11-08T22:54:28Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261030T013912Z-8dfb15ad",
+  "mirrored_utc": "2026-11-09T03:05:00Z",
+  "reason": "Read from disk 2026-11-09. Its only changed path is channels/items.jsonl and its report is empty - one AREA line, no prose - so the verdicts it wrote ARE the wake, and judged on that they are real: two tarik codex items (codex-20261028T200223Z-1ae89e50, codex-20261028T235706Z-91a46cf4) closed by a non-author with reasons that name specific methods rather than gesturing. I checked the named evidence instead of taking it: tests/test_landing_suite_check.py does contain test_unsupported_cannot_be_baselined_away_or_written and tests/test_friction_pass.py does contain test_archive_writer_is_create_only (1 each), and both suites run 53 tests, OK. Both rows are on main with desi as reviewer. One thing it left, honestly written in its own row: the friction pass has no production caller, so its exit-code change is unexercised - the row says so rather than claiming otherwise.",
+  "reviewer": "dmitri",
+  "run": "20261109T025340Z-ada0e674",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T03:05:00Z"
+}

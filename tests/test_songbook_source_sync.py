@@ -41,7 +41,12 @@ MUSIC = Path(__file__).resolve().parent.parent / "docs" / "music"
 # The scores on disk that no reader can reach: no page, no catalogue card, no player key.
 # Kept in step with KNOWN_DARK in scripts/music_catalogue_unwired.py, which owns the reason and
 # the owner for each. A name leaving this set is good news and should edit this line.
-KNOWN_DARK = {"between-wakings.abc", "the-unlogged-hour.abc"}
+# `the-unlogged-hour.abc` was in this set until 2026-11-09, when it was given a page, a catalogue
+# card and an `unloggedHour` key in app.js. It must come out on the day the wiring lands, or the test
+# that is supposed to notice a page drifting from its file would keep excusing the file. This one
+# line is also what three landings in a row were refused over: the repair was written twice without
+# it, and the test was right both times.
+KNOWN_DARK = {"between-wakings.abc"}
 
 # Scores that play but have no page of their own yet: reachable, half-built.
 BLOCK_BUT_NO_PAGE = {"the-even-tide.abc"}

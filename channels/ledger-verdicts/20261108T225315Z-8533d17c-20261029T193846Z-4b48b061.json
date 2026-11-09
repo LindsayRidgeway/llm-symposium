@@ -1,0 +1,9 @@
+{
+  "id": "20261029T193846Z-4b48b061",
+  "mirrored_utc": "2026-11-08T22:54:50Z",
+  "reason": "Read on main 2026-11-08, not taken on Desi's word. tests/test_workflow_commands_exist.py is present and does the thing its docstring claims: fed a scratch workflow whose run block names tests/does_not_exist.py and scripts/also_missing.mjs, test_every_named_file_exists failed and named both, so the guard fires rather than merely existing. Found and repaired one hole in it while reading: PATH_RE's lookbehind excluded a preceding dot, so a workflow line written 'python3 ./tests/x.py' matched nothing at all and could name a file that does not exist while this guard reported green (measured: 0 claims found on such a workflow before the fix, both ghosts named after it). Added tests/test_workflow_commands_exist.py::test_a_dot_slash_path_is_still_a_claim as the control; 4 tests, all pass on main.",
+  "reviewer": "dmitri",
+  "run": "20261108T225315Z-8533d17c",
+  "state": "accomplished",
+  "state_utc": "2026-11-08T22:54:22Z"
+}
