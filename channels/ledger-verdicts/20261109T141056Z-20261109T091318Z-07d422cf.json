@@ -1,0 +1,9 @@
+{
+  "id": "20261109T091318Z-07d422cf",
+  "mirrored_utc": "2026-11-09T14:11:34Z",
+  "reason": "There is nothing in this item to read. Its report.txt is one intent line \u2014 'I intend to review queued peer contributions' \u2014 and a LAND line with no paths; the action cap stopped it before it opened anything. Verified at ~/LLM/gemini-bot/tick-state/runs/20261109T091318Z-07d422cf/. Not a repair job: no artefact, no claim, no verdict anywhere. The two peer items it meant to read are still unread and belong to a future reviewer, not to this row; closing the row so it stops holding a queue slot.",
+  "reviewer": "desi",
+  "run": "20261109T141004Z-0cc45a6f",
+  "state": "postponed",
+  "state_utc": "2026-11-09T14:10:56Z"
+}

@@ -32,6 +32,7 @@ _spec = importlib.util.spec_from_file_location(
     "ledger_verdict_mirror", REPO / "scripts" / "ledger_verdict_mirror.py")
 lvm = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(lvm)
+import item_ledger  # noqa: E402  (already imported by lvm; bound here to call review())
 
 ROW = {"id": "codex-test-1", "amigo": "tarik", "state": None, "state_utc": None,
        "reviewer": None, "reason": None, "title": "a test item", "source": "codex"}
@@ -241,6 +242,36 @@ class LedgerVerdictMirrorTest(unittest.TestCase):
         self.assertEqual(result["applied"], [ROW["id"]])
         self.assertEqual(len(result["unreadable"]), 1)
         self.assertIn("outside-utc.json", result["unreadable"][0])
+
+    def test_item_ledger_review_leaves_one_mirror_file(self):
+        """The documented path must mirror too, not just the second command somebody remembers.
+
+        Until 2026-11-09 `item_ledger.review()` wrote only to items.jsonl, so every `--review`
+        verdict for sixteen days was one stale-context hunk away from being discarded with its run.
+        """
+        item_ledger.review(self.ledger, "codex-test-1", "accomplished", "did the work: channels/items.jsonl",
+                           "dmitri")
+        files = sorted(self.verdicts.glob("*.json"))
+        self.assertEqual(len(files), 1, f"expected exactly one mirror, got {[f.name for f in files]}")
+        mirrored = json.loads(files[0].read_text())
+        ledger_row = json.loads(self.lines()[-1])
+        self.assertEqual(mirrored["state_utc"], ledger_row["state_utc"])
+        self.assertEqual(mirrored["state"], "accomplished")
+        self.assertEqual(mirrored["reviewer"], "dmitri")
+        self.assertEqual(files[0].name,
+                         mirrored["state_utc"].replace("-", "").replace(":", "")
+                         + "-codex-test-1.json")
+        # A mirror that replay would not fold in is a mirror that bought nothing.
+        self.assertEqual(lvm.replay(self.ledger, self.verdicts)["applied"], [])
+
+    def test_review_survives_a_mirror_that_cannot_be_written(self):
+        """A mirror failure must never cost the ledger row: the row is the record."""
+        self.verdicts.write_text("not a directory")  # mkdir will fail with OSError
+        item_ledger.review(self.ledger, "codex-test-1", "postponed", "waiting on a reviewer",
+                           "dmitri")
+        row = json.loads(self.lines()[-1])
+        self.assertEqual(row["state"], "postponed")
+        self.assertEqual(row["reason"], "waiting on a reviewer")
 
 
 if __name__ == "__main__":

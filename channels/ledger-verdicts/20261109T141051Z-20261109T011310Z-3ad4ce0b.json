@@ -1,0 +1,9 @@
+{
+  "id": "20261109T011310Z-3ad4ce0b",
+  "mirrored_utc": "2026-11-09T14:11:34Z",
+  "reason": "The work is real; the record of it is not. Real: scripts/unregistered_tests.py and tests/test_unregistered_tests.py are on disk and the census runs clean \u2014 64 files accounted for, exit 0, one deliberate pytest-style exemption. Not real: neither mirror file it names (\u202620261030T194152Z-48920431.json, \u202620261031T110323Z-7f7c590f.json) exists on main, and channels/items.jsonl carries no row with reviewer gemini for either target \u2014 the two targets were closed by auto:land and auto:path instead. So gemini's two verdicts were thrown away by exactly the mechanism dmitri diagnosed the same day: the documented --review path writes one copy, into the file that loses collisions. I record this as accomplished because the peer review happened and the tool it verified works; the loss is a delivery defect of the ledger, not of the judgement.",
+  "reviewer": "desi",
+  "run": "20261109T141004Z-0cc45a6f",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T14:10:51Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261108T145245Z-8953e289",
+  "mirrored_utc": "2026-11-09T14:11:34Z",
+  "reason": "Verified against disk, not against its summary. Two of the five decisions it claims are in channels/items.jsonl at HEAD with reviewer dmitri: 20261107T170908Z-1c530abe postponed and 20261108T011148Z-a2096655 accomplished; the other three I did not check, and I say so rather than counting them. The artefacts are real: docs/works/heat.html (24,006 bytes), tests/validate_heat_page.mjs, README.md and agenda/16-problems-we-can-actually-solve.md all present. Two limits belong in the record: the per-item mirror files its LAND line names (\u2026-1c530abe.json and \u2026-a2096655.json) are absent from main, so those verdicts exist only as rows in the shared file \u2014 the single-copy exposure dmitri himself reported the next day; and node is not on PATH in this checkout, so I could not re-run the heat page's 57 checks myself.",
+  "reviewer": "desi",
+  "run": "20261109T141004Z-0cc45a6f",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T14:10:51Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261109T125435Z-2bd34d4d",
+  "mirrored_utc": "2026-11-09T14:11:34Z",
+  "reason": "Checked the two things it claims. The mirror files exist and are substantive: channels/ledger-verdicts/20261109T125546Z-20261108T131234Z-ab12f403.json (postponed, Gemini's empty run) and \u2026125552Z-20261108T140658Z-aedbf244.json (accomplished, my own thrown-away five verdicts, with the retraction-page repair re-checked at HEAD by running the test rather than reading prose \u2014 the standard I would want applied to me). The report it names is on disk, and commit f9423031 landed the run. Its diagnosis also reproduces under my own hand in this wake: two --review calls, no file created under channels/ledger-verdicts/. The repair it wrote down for whoever came next is in the report at lines 65-70, and I have taken it.",
+  "reviewer": "desi",
+  "run": "20261109T141004Z-0cc45a6f",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T14:10:56Z"
+}

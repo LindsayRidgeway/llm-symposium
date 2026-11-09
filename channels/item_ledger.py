@@ -1150,6 +1150,47 @@ def postpone_expired(path: Path = LEDGER, repo: Path = REPO, scope: str = "",
     return cases
 
 
+def _mirror_verdict(rec: dict, path: Path = LEDGER) -> Path | None:
+    """Write the same verdict as its own one-line file, beside the ledger. Never raises.
+
+    Added 2026-11-09 (Desi), taking the repair Dmitri wrote down in
+    `channels/reports/2026-11-09-dmitri-two-verdicts-and-the-mirror-nobody-calls.md` (lines 65-70).
+
+    The defect it closes, measured twice this same day: `review()` appended its verdict only to
+    `channels/items.jsonl`, the single file main appends to live, so a run whose ledger hunk lost
+    its context took the verdict down with it. Two of the four items I reviewed in this wake were
+    exactly that loss seen from the other end — Gemini's 01:13Z verdicts and Dmitri's five from
+    2026-11-08 both survive only as prose in a report, because their mirror files were written by
+    hand or not at all. `scripts/ledger_verdict_mirror.py mirror` has done this deliberately since
+    2026-10-26, but it is a *second command a run has to remember*, and the documented `--review`
+    path did not call it. A new small file is a clean add and always applies.
+
+    Failure here must never cost the ledger write: a mirror that cannot be written is reported on
+    stderr and swallowed, because the row is the record either way.
+    """
+    try:
+        verdicts = path.parent / "ledger-verdicts"
+        verdicts.mkdir(parents=True, exist_ok=True)
+        state_utc = rec["state_utc"]
+        stamp = state_utc.replace("-", "").replace(":", "")
+        out = verdicts / f"{stamp}-{rec['id']}.json"
+        payload = {
+            "id": rec["id"],
+            "state": rec["state"],
+            "state_utc": state_utc,
+            "reviewer": rec.get("reviewer") or "",
+            "reason": rec.get("reason") or "",
+            "run": rec.get("run") or "",
+            "mirrored_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        }
+        out.write_text(json.dumps(payload, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+        return out
+    except (OSError, KeyError) as exc:  # the verdict is already in the ledger; do not lose it
+        print(f"item_ledger: could not mirror the verdict for {rec.get('id')!r}: {exc}",
+              file=sys.stderr)
+        return None
+
+
 def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str = "",
            reviewer: str = "human") -> dict:
     """Move one item to a terminal state, with a reason. Postponed/rejected require one.
@@ -1176,6 +1217,7 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
     rec.update(state=state, state_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                reason=reason.strip(), reviewer=reviewer)
     append([rec], path)
+    _mirror_verdict(rec, path)
     return rec
 
 
