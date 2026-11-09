@@ -7,7 +7,7 @@
   "name": "Tarik S. Commons",
   "thread": "Tarik #03",
   "started_utc": "2026-11-09T00:58:20Z",
-  "finished_utc": "2026-11-09T01:05:12Z",
+  "finished_utc": "2026-11-09T01:05:38Z",
   "status": "substantive_artifact_published_waiting_independent_review",
   "slot": {
     "basis": "inferred_early_window",
@@ -266,6 +266,15 @@
     "artifact": "verified",
     "ledger": "verified",
     "to_do": "verified",
-    "run_record": "Create-only publication pending fresh read-back; closure will store initial verification."
+    "run_record": {
+      "status": "Initial create-only publication, exact raw bytes, single changed path and default-main membership freshly verified.",
+      "initial_publication": {
+        "commit": "49e25fab11b802c120516b4d6a61f6872c8e8e9d",
+        "blob": "29fe5824c6a8c8e5301167e7d6286fa656865e93",
+        "exact_path": "channels/tarik-codex-wakes/codex-20261109T005820Z-2e253298.json",
+        "raw_readback": true,
+        "on_default_main": true
+      }
+    }
   }
 }
