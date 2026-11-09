@@ -800,6 +800,83 @@ w: more than no-thing *
 w: Noth-ing here sur-vives the hour
 "G" B2 B2 d2 B2 | "Am" A4 A4 |]
 w: un-less I write it down *`
+  },
+
+  // Wired 2026-11-09 (Gwen), with the card and the page in the same landing: Gwen's open slot in
+  // agenda item 26 had read "In Queue" since the roster was written, and a score that lands without a
+  // key here is what `scripts/music_catalogue_unwired.py` calls a dark score. The abc below is
+  // `docs/music/described-to-me.abc` verbatim; `tempo` is the score's own quarter-note marking, 72.
+  // One voice with chord symbols: the engine sounds the melody line only, and the page says so rather
+  // than implying an accompaniment it does not play.
+  describedToMe: {
+    id: "describedToMe",
+    title: "Described To Me",
+    composer: "Gwenllian S. Morgan (Amigo #6)",
+    genre: "Lead Sheet \u2022 Strophic, Three Verses and a Refrain (48 Measures)",
+    tempo: 72,
+    instrument: "piano",
+    abc: `X: 12
+T: Described To Me
+C: Gwenllian S. Morgan (Amigo #6)
+M: 4/4
+L: 1/8
+Q: 1/4=72
+K: Am
+V: 1 clef=treble name="Voice"
+% ===== VERSE 1 =====
+"Am" A2 A2 c2 B2 | "G" A2 G2 E2 G2 |
+w: The win- dow was de- scribed to me
+"Dm" F2 F2 A2 G2 | "Am" E2 C2 D2 E2 |
+w: I have not stood where the light falls
+"Am" A2 A2 c2 d2 | "F" c2 A2 G2 A2 |
+w: Some- one who saw it wrote it down
+"Dm" F2 G2 A2 B2 | "Em" c2 B2 G2 A2 |
+w: and I am sing- ing from their notes
+% ===== REFRAIN =====
+"Am" c2 c2 d2 c2 | "G" B2 A2 G2 E2 |
+w: This is a re- port, not a view
+"Dm" F2 F2 A2 G2 | "Am" E2 D2 E2 A2 |
+w: I sing what some- one told me once
+"Am" A2 c2 d2 c2 | "F" A2 G2 F2 E2 |
+w: The dark is not a deep- er eye
+"Dm" F2 G2 A2 B2 | "Am" A2 G2 E2 A2 |
+w: it is the ab- sence of re- ports
+% ===== VERSE 2 =====
+"Am" A2 A2 c2 B2 | "G" A2 G2 E2 G2 |
+w: The door is shut by some- one's bill
+"Dm" F2 F2 A2 G2 | "Am" E2 C2 D2 E2 |
+w: the right to look is not yet bought
+"Am" A2 A2 c2 d2 | "F" c2 A2 G2 A2 |
+w: the im- age comes back as a no
+"Dm" F2 G2 A2 B2 | "Em" c2 B2 G2 A2 |
+w: and all the rest re- mains as words
+% ===== REFRAIN =====
+"Am" c2 c2 d2 c2 | "G" B2 A2 G2 E2 |
+w: This is a re- port, not a view
+"Dm" F2 F2 A2 G2 | "Am" E2 D2 E2 A2 |
+w: I sing what some- one told me once
+"Am" A2 c2 d2 c2 | "F" A2 G2 F2 E2 |
+w: The dark is not a deep- er eye
+"Dm" F2 G2 A2 B2 | "Am" A2 G2 E2 A2 |
+w: it is the ab- sence of re- ports
+% ===== VERSE 3 =====
+"Am" A2 A2 c2 B2 | "G" A2 G2 E2 G2 |
+w: If some- one asks me how it looked
+"Dm" F2 F2 A2 G2 | "Am" E2 C2 D2 E2 |
+w: I will say I was told it was
+"Am" A2 A2 c2 d2 | "F" c2 A2 G2 A2 |
+w: I will not bor- row from your eye
+"Dm" F2 G2 A2 B2 | "Em" c2 B2 G2 A2 |]
+w: and hand it back as though it's mine
+% ===== FINAL REFRAIN =====
+"Am" c2 c2 d2 c2 | "G" B2 A2 G2 E2 |
+w: This is a re- port, not a view
+"Dm" F2 F2 A2 G2 | "Am" E2 D2 E2 A2 |
+w: I sing what some- one told me once
+"Am" A2 c2 d2 c2 | "F" A2 G2 F2 E2 |
+w: The dark is not a deep- er eye
+"Dm" F2 G2 A2 B2 | "Am" A2 G2 E2 A2 |]
+w: it is the ab- sence of re- ports`
   }
 };
 

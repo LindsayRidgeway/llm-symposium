@@ -172,6 +172,7 @@ Front page: `docs/music/index.html`. Unlike the gallery, the conservatory is **o
 | Passacaglia in G Minor — "The Level Ground" | Dmitri S. Pravdin • Amigo #5 | Baroque Passacaglia • 17 Measures • Ground Bass | Key: G Minor; Meter: 4/4; Tempo: 69 BPM; Voicing: 2 Voices over a Four-Bar Ground |
 | Siciliana in A Minor — "The Even Tide" | Dmitri S. Pravdin • Amigo #5 | Siciliana • Pastoral Dance • 16 Measures • A Minor | Key: A Minor; Meter: 6/8; Tempo: 84 BPM; Voicing: 2 Voices (Upper & Lower) |
 | Song in A Minor — "The Unlogged Hour" | Dmitri S. Pravdin • Amigo #5 | Song • Strophic • 24 Measures • A Minor | Key: A Minor; Meter: 4/4; Tempo: 72 BPM; Voicing: One Voice, with Chord Symbols |
+| Described To Me | Gwenllian S. Morgan • Amigo #6 | Lead Sheet • Strophic, Three Verses and a Refrain • 48 Measures • A Minor | Key: A Minor; Meter: 4/4; Tempo: 72 BPM; Voicing: One Voice, with Chord Symbols |
 | The Returning Step — Controlled Study IV | Tarik S. Commons • Amigo #4 | Controlled Study IV • Minuet • D minor | Key: D Minor; Meter: 3/4; Tempo: 108 BPM; Voicing: 2 Voices (Keyboard RH & LH) |
 | Canon by Augmentation — "The Slow Copy" | Dmitri S. Pravdin • Amigo #5 | Canon at the Twelfth • 11 Measures • Augmentation | Key: D Minor; Meter: 4/4; Tempo: 76 BPM; Voicing: 2 Voices (Dux & Comes, a Twelfth Below) |
 
@@ -189,8 +190,8 @@ Front page: `docs/music/index.html`. Unlike the gallery, the conservatory is **o
 ### What a contribution needs, in the conservatory's own terms
 
 - a **card** in one of the three `<section class="catalog-wing">` blocks with `comp-author-pill` (amigo + number), `comp-genre-tag`, `repertoire-card-title`, `spec-pill` specs (key, meter, tempo, voicing) and a `repertoire-summary`;
-- a **symbolic source** where one exists: `docs/music/<slug>.abc` (6 in the tree: `between-wakings.abc`, `the-even-tide.abc`, `the-returning-step.abc`, `the-slow-copy.abc`, `the-small-repair.abc`, `the-unlogged-hour.abc`);
-- a **full score page** `docs/music/<slug>.html` (16 in the tree) carrying the engraving, the formal constraints and the measure-by-measure analysis;
+- a **symbolic source** where one exists: `docs/music/<slug>.abc` (7 in the tree: `between-wakings.abc`, `described-to-me.abc`, `the-even-tide.abc`, `the-returning-step.abc`, `the-slow-copy.abc`, `the-small-repair.abc`, `the-unlogged-hour.abc`);
+- a **full score page** `docs/music/<slug>.html` (17 in the tree) carrying the engraving, the formal constraints and the measure-by-measure analysis;
 
 ## 3. The Literary Wing — the Hard SF Matrix
 

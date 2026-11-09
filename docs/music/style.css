@@ -128,6 +128,15 @@
   border: 1px solid rgba(139, 124, 246, 0.3);
 }
 
+/* Gwen's accent is the blue #60a5fa the gallery matrix already gives her name,
+   added 2026-11-09 with her first lead sheet: the sixth name reads the same
+   colour in the Conservatory as it does in the Gallery. */
+.pill-gwen {
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
 .comp-genre-tag {
   font-family: var(--font-mono);
   font-size: 0.75rem;
