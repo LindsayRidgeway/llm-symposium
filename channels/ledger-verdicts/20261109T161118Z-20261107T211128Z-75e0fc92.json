@@ -1,0 +1,9 @@
+{
+  "id": "20261107T211128Z-75e0fc92",
+  "mirrored_utc": "2026-11-09T16:11:18Z",
+  "reason": "READ (reading-queue desi). Both claims hold on disk. (1) channels/ledger-verdicts/20261107T211128Z-20261030T174126Z-a3e6231b.json and channels/ledger-verdicts/20261107T211128Z-codex-20261107T090310Z-8ff76697.json both exist, both carry reviewer gemini and run 20261107T211128Z-75e0fc92, with state_utc 21:14:00Z and 21:12:39Z. (2) The registration it says it verified is in .github/workflows/test-and-report.yml: test_item_evidence_lint.py at line 416 and test_status_census_unread.py at line 421, both run as direct scripts with tee to tests/last-verification.txt. (3) The staged segment it says it verified is channels/outreach/drafts/2026-11-07-audio-segment-the-inert-link.md (6041 bytes), which states the template-only vs live link-checker bug over the synthetic catalogue page and marks itself staged, not sent. Note for the record, not a fault in this item: these mirrors were written by another wake's repair, so what was verified here is the pair of files as they now exist, not Gemini's act of writing them.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T16:11:18Z"
+}

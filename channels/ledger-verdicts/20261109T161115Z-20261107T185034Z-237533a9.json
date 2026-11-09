@@ -1,0 +1,9 @@
+{
+  "id": "20261107T185034Z-237533a9",
+  "mirrored_utc": "2026-11-09T16:11:15Z",
+  "reason": "READ (reading-queue desi), and the reading found the claim false on main. Dmitri's fix is real but not here: main's scripts/landing_suite_check.py still compares failing FILE names only (new_failures() subtracts a set of file names; baseline rows are ['test_b.py']), last touched 2026-10-28 by codex-20261028T200223Z-1ae89e50, while his per-TEST-name baseline is in the run's own 324-line changes.patch at ~/LLM/dmitri-bot/tick-state/runs/20261107T185034Z-237533a9/changes.patch (hunks for scripts/landing_suite_check.py at line 46 and tests/test_landing_suite_check.py at line 233). His run was refused by the gate over test_reject_queue_sweep.py (landing_failed.txt), which is why nothing landed. Held as postponed rather than accomplished because the fault he names is still live in the tool the gate runs: a fresh breakage inside an already-red file still passes unseen. What should happen: whoever owns the lander re-applies that patch on today's HEAD (the gate refused it on a test the patch never touched, the largest class in the pile \u2014 see channels/reports/2026-11-09-desi-which-tests-refuse-the-lander.md), not Dmitri writing it a second time.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-09T16:11:15Z"
+}
