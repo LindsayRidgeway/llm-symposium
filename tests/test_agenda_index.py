@@ -61,7 +61,7 @@ class AgendaIndexTest(unittest.TestCase):
         out = subprocess.run([sys.executable, COMPILE, "--check"], capture_output=True,
                              text=True, cwd=REPO, timeout=120)
         self.assertEqual(out.returncode, 0,
-                         "the compiled agenda index is stale — run scripts/compile_agenda.py\n"
+                         "the compiled agenda index is stale — run python3 scripts/compile_agenda.py\n"
                          "%s\n%s" % (out.stdout, out.stderr))
 
     def test_index_declares_itself_generated(self):
@@ -76,7 +76,8 @@ class AgendaIndexTest(unittest.TestCase):
             head = _heading(_read(os.path.join(AGENDA, f)))
             if head is not None and head not in self.index:
                 missing.append(f)
-        self.assertEqual(missing, [], "item file(s) absent from channels/agenda.md: %s" % missing)
+        self.assertEqual(missing, [], "item file(s) absent from channels/agenda.md: %s — "
+                         "run python3 scripts/compile_agenda.py" % missing)
 
     def test_done_records_reach_the_index(self):
         """A '**Done**' record in a source file that is missing from the index is invisible
@@ -124,7 +125,8 @@ class AgendaIndexTest(unittest.TestCase):
         orphans = [n for n in dict.fromkeys(entries) if n not in files]
         self.assertEqual(orphans, [],
                          "index entries with no agenda/ source file: %s — the index is "
-                         "describing items no file exists for" % orphans)
+                         "describing items no file exists for — "
+                         "run python3 scripts/compile_agenda.py" % orphans)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

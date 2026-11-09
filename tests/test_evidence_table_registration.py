@@ -56,11 +56,14 @@ class EvidenceTableRegistrationTest(unittest.TestCase):
         for test, where in sorted(self.citations.items()):
             artefact = ", ".join(sorted(where))
             if not (ROOT / test).exists():
-                problems.append(f"{test} is named as a pin by {artefact}, but the file does not exist")
+                problems.append(f"{test} is named as a pin by {artefact}, but the file does not exist; "
+                                "create the cited test or correct its research/ citation, then run "
+                                "python3 tests/test_evidence_table_registration.py")
             elif test not in self.workflow:
                 problems.append(
                     f"{test} is named as a pin by {artefact}, but .github/workflows/"
-                    f"test-and-report.yml never runs it")
+                    f"test-and-report.yml never runs it; add a python3 {test} command to that "
+                    "workflow and run python3 tests/test_evidence_table_registration.py")
         self.assertEqual(problems, [], "\n".join(problems))
 
     def test_the_guard_itself_is_registered(self):
