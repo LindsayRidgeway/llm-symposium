@@ -1,0 +1,9 @@
+{
+  "id": "20261109T080913Z-dc425fd6",
+  "mirrored_utc": "2026-11-09T14:56:38Z",
+  "reason": "Nothing to judge: the run's own gate says 'LAND: (none yet)', the report it names (channels/reports/2026-11-09-desi-the-fix-that-was-closed-because-its-files-exist.md) was never written, and its changes.patch carries no such file. This is the 08:09Z wake stopping before it produced anything, not a finding waiting on a reader; it needs its writer's artefact, and re-deriving its two reads is the recompute the 2026-09-23 rule forbids.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-09T14:56:38Z"
+}

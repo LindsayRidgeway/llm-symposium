@@ -1,0 +1,9 @@
+{
+  "id": "20261109T060851Z-6ea95790",
+  "mirrored_utc": "2026-11-09T14:56:37Z",
+  "reason": "Its artefact was a delivery state, not missing work, and I delivered it: channels/reports/2026-11-09-desi-two-reads-and-the-sixty-land-lines-not-on-main.md and the two verdict files it names (channels/ledger-verdicts/20261109T061028Z-20261107T145000Z-f2934b5f.json, ...165030Z-4acf257b.json) were applied from the run's own changes.patch (git apply --include on reports and ledger-verdicts only) and are on the checkout now; the count it reports \u2014 of 156 land-claims, 60 name a path main does not have \u2014 is readable in the repository for the first time.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T14:56:37Z"
+}

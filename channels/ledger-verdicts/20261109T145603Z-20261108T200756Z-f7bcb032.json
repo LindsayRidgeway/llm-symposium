@@ -1,0 +1,9 @@
+{
+  "id": "20261108T200756Z-f7bcb032",
+  "mirrored_utc": "2026-11-09T14:56:03Z",
+  "reason": "The reading in this item was checked and stands; the repair it filed as pending is now done: the same-text comparison in channels/item_ledger.py,unreplayed_verdicts() is replaced by verdict_moment(), which parses both the ISO row stamp and the compact mirror stamp to one instant, and tests/test_unreplayed_verdicts.py (the file this item names and did not have) pins it with the three ids that were re-reported every wake at HEAD (codex-20261108T045905Z-87d4be45, 20261028T053300Z-55114152, 20261028T073326Z-85e03a27). Measured: the '3 mirrored verdict(s) not yet in the ledger' line is gone from --reading-queue dmitri; 11 new checks and the 18 existing mirror checks pass.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T14:56:03Z"
+}

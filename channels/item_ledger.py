@@ -1597,6 +1597,34 @@ def quota(pile: int) -> int:
 VERDICT_DIR = REPO / "channels" / "ledger-verdicts"
 
 
+def verdict_moment(rec: dict) -> str:
+    """Comparable UTC instant for a verdict, accepting the compact stamp a hand-written mirror carries.
+
+    `verdict_stamp` is the ledger's own comparison key and it reads ISO-8601 only. A mirror file
+    written by hand — the ones `scripts/ledger_verdict_mirror.py` did not write — carries
+    `20261108T065301Z` instead, and comparing that to an ISO row as *text* is not a comparison at
+    all: `2026-11-0…` sorts before `2026110…` because `-` (0x2d) is below `1` (0x31), so an
+    identical instant can never satisfy "not older". Measured at HEAD on 2026-11-09: three rows
+    were replayed and reported un-replayed on every wake, forever, and the sentence every wake
+    opens with told the reader to fold them in first — the same three, every time.
+
+    Empty string means "not comparable", which callers treat as the old behaviour: the mirror is
+    still reported, because a verdict nobody can date is a verdict nobody can rule out.
+    """
+    try:
+        return verdict_stamp(rec)
+    except ValueError:
+        pass
+    value = rec.get("state_utc")
+    if not isinstance(value, str):
+        return ""
+    try:
+        stamp = dt.datetime.strptime(value.strip(), "%Y%m%dT%H%M%SZ")
+    except ValueError:
+        return ""
+    return stamp.replace(tzinfo=dt.timezone.utc).isoformat(timespec="microseconds")
+
+
 def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[str]:
     """Verdicts mirrored to their own file but never folded back into the ledger.
 
@@ -1627,9 +1655,14 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
         # reading queue is made of. So compare the verdict itself, in replay's own terms: the
         # mirror is unreplayed when the ledger carries no verdict, a different reviewer, or an
         # older one.
+        row_stamp, mirror_stamp = verdict_moment(have), verdict_moment(rec)
+        if row_stamp and mirror_stamp:
+            behind = mirror_stamp > row_stamp
+        else:  # one side is undatable; fall back to the old text order rather than guess
+            behind = (have.get("state_utc") or "") < (rec.get("state_utc") or "")
         if (have.get("state") is None
                 or have.get("reviewer") in (None, "", "auto:land", "auto:path")
-                or (have.get("state_utc") or "") < (rec.get("state_utc") or "")):
+                or behind):
             out.append(item_id)
     return out
 

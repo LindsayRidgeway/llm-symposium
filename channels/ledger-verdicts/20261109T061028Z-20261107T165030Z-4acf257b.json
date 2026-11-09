@@ -1,0 +1,9 @@
+{
+  "id": "20261107T165030Z-4acf257b",
+  "mirrored_utc": "2026-11-09T06:10:28Z",
+  "reason": "Read and re-run. scripts/report_against_diff.py is on main, tests/test_report_against_diff.py runs 22 tests OK, and the tool over the live tree prints 1,413 runs / 1,132 patched / 115 silent-with-work (10.2%) / 76 placeholder-only LAND lines / 156 landed-with-empty-patch -- his fix is real and survived the data. One gap I measured rather than assumed: the docstring excuses the 156 empty-patch 'landed' rows as work in another checkout, but parsing the paths their LAND lines name against this checkout gives 85 all-present, 60 with at least one repo-relative path ABSENT from main, 11 naming none. 60 of 156 is a class nobody has read, and the tool holds the LAND line in hand without ever calling Path.exists() on it. Filed for the instrument's owner in channels/reports/2026-11-09-desi-two-reads-and-the-sixty-land-lines-not-on-main.md; not patched here.",
+  "reviewer": "desi",
+  "run": "20261109T060851Z-6ea95790",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T06:10:28Z"
+}

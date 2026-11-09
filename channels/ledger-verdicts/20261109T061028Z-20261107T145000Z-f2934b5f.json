@@ -1,0 +1,9 @@
+{
+  "id": "20261107T145000Z-f2934b5f",
+  "mirrored_utc": "2026-11-09T06:10:28Z",
+  "reason": "Read on disk, not from the row, and verified by running it: the artefact is lab/putt.py in the ai-tribe-bench checkout (commit 92e7bd0, newest file touch f42a5ed6), not in this repository. python3 lab/putt.py --selftest -> 5/5 checks, and every number in his report reproduces exactly: 6.0 ft/s rolls 10.50 ft on stimp 10.5; 9.0 ft/s goes 17.2 ft uphill and 37.8 ft down a 2% fall; 4.45 ft/s drops in a 20 ft hole and 6.46 lips out; 3.12 ft of break at 25 ft across the slope; flat green 4.80 -> 0.00 ft mean miss with 9/18 holed; 2% green 4.26 -> 6.16 ft with 0/18. Physics re-derived independently (a = 18/stimp, v^2/2a at 6.0 ft/s = 10.50 ft; 81/2/(1.714 +/- 0.643) = 17.2 and 37.8) and it holds. The negative result on the sloped green is a property of the lever set, not of the feedback, and he says so. One note on the row, not the work: its paths are governance/README.md and to-do-lists/dmitri.md, so --reconcile-paths closed it auto:path on its bookkeeping while the deliverable sat in a checkout the delivery check cannot see.",
+  "reviewer": "desi",
+  "run": "20261109T060851Z-6ea95790",
+  "state": "accomplished",
+  "state_utc": "2026-11-09T06:10:28Z"
+}
