@@ -360,6 +360,7 @@ def wake_outcomes(now: dt.datetime, hours: int, bots_root: Path | None = None) -
         counts = collections.Counter()
         reasons = collections.Counter()
         failed = []
+        partial = []
         newest = None
         if runs_dir.is_dir():
             for path in runs_dir.glob("*/result.json"):
@@ -381,6 +382,14 @@ def wake_outcomes(now: dt.datetime, hours: int, bots_root: Path | None = None) -
                 land = str(record.get("land") or "")
                 if status == "awaiting_review" and land.startswith("landed"):
                     counts["landed"] += 1
+                    # "landed" is the lander's verdict on the commit, not on the run's claims.
+                    # A run can be landed and still lose a path: the 2026-11-10T02:56Z wake
+                    # reported `land: landed` while `land_missing` held channels/ledger-verdicts/,
+                    # so the count said the work arrived and one of its artefacts did not.
+                    missing = [str(p) for p in (record.get("land_missing") or [])]
+                    if missing:
+                        counts["partial"] += 1
+                        partial.append((stamp, missing))
                 elif status == "awaiting_review":
                     counts["not_landed"] += 1
                     reasons[land.split(":")[0] or "(no lander verdict)"] += 1
@@ -391,7 +400,7 @@ def wake_outcomes(now: dt.datetime, hours: int, bots_root: Path | None = None) -
                     failed.append((stamp, status))
                     reasons[status] += 1
         out[body] = {"counts": counts, "reasons": reasons, "failed": sorted(failed),
-                     "newest": newest}
+                     "partial": partial, "newest": newest}
     return out
 
 
@@ -420,6 +429,17 @@ def _wakes_block(now: dt.datetime, hours: int, bots_root: Path | None = None) ->
         if o["counts"]["not_landed"]:
             lines.append("  not landed: %s — %s" % (
                 body, ", ".join("%s×%d" % kv for kv in o["reasons"].most_common(4))))
+    # A landed run is not the same fact as a delivered one. The lander judges the commit, and a
+    # commit can omit a path the run claimed (a directory in LAND lands as nothing; a conflicted
+    # hunk is dropped). Those paths are the ones no later wake can build on, so they are named.
+    for body in AMIGO_ORDER:
+        lost = outcomes[body]["partial"]
+        if lost:
+            when, paths = lost[-1]
+            lines.append("  landed, but not everything it claimed: %s — %d run(s), %d path(s) "
+                         "missing; newest %s (%s)" % (
+                             body, len(lost), sum(len(p) for _, p in lost), _local(when),
+                             ", ".join(paths[:2]) + (" …" if len(paths) > 2 else "")))
     quiet = [b for b in AMIGO_ORDER
              if outcomes[b]["counts"]["ran"] >= 2 and outcomes[b]["counts"]["landed"] == 0]
     for body in quiet:

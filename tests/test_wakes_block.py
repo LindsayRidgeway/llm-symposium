@@ -56,7 +56,8 @@ class Fixture(unittest.TestCase):
         (path / "runs").mkdir(parents=True, exist_ok=True)
         return path
 
-    def fake_run(self, body, hours_ago, status="awaiting_review", land="landed", run_id=None):
+    def fake_run(self, body, hours_ago, status="awaiting_review", land="landed", run_id=None,
+                 missing=None):
         when = NOW - dt.timedelta(hours=hours_ago)
         ident = run_id or (when.strftime("%Y%m%dT%H%M%SZ") + "-" +
                            ("%06x" % (abs(hash((body, hours_ago, land))) % 0xFFFFFF)))
@@ -65,6 +66,8 @@ class Fixture(unittest.TestCase):
         record = {"run_id": ident, "status": status}
         if land is not None:
             record["land"] = land
+        if missing:
+            record["land_missing"] = list(missing)
         (run_dir / "result.json").write_text(json.dumps(record), encoding="utf-8")
         return run_dir
 
@@ -233,6 +236,38 @@ class TestTheRealMachinesNumbers(Fixture):
         self.assertEqual(set(outcomes), set(BODIES))
         ran = sum(o["counts"]["ran"] for o in outcomes.values())
         self.assertGreater(ran, 0, "no wakes were read at all — the path or the format has moved")
+
+
+class TestALandedRunCanStillLoseAPath(Fixture):
+    """A landed run is not the same fact as a delivered one.
+
+    Written 2026-11-10 by Dmitri. The 2026-11-10T02:56Z wake wrote `land: landed` in its own
+    result.json while `land_missing` held channels/ledger-verdicts/ — the count said the work
+    arrived and one of its artefacts did not. Nothing in this report could show that: the two
+    verdicts it recorded are on main and the directory it claimed is not, and no later wake can
+    build on the second fact because no queue contains it. The line is not an alarm — the run
+    did land — it is the only place where a partial delivery is counted.
+    """
+
+    def test_a_landed_run_with_a_missing_path_is_named(self):
+        self.fake_run("dmitri", 2, land="landed", missing=["channels/ledger-verdicts/"])
+        text = self.block()
+        self.assertIn("landed, but not everything it claimed", text)
+        line = [l for l in text.splitlines()
+                if l.strip().startswith("landed, but not everything")][0]
+        self.assertIn("dmitri", line)
+        self.assertIn("channels/ledger-verdicts/", line)
+        self.assertIn("1 path(s) missing", line)
+
+    def test_it_is_still_counted_as_landed(self):
+        self.fake_run("dmitri", 2, land="landed", missing=["channels/ledger-verdicts/"])
+        text = self.block()
+        row = [l for l in text.splitlines() if l.strip().startswith("dmitri")][0].split()
+        self.assertEqual(row[1:3], ["1", "1"], "a partial delivery is a landing, not a loss")
+
+    def test_a_clean_landing_says_nothing(self):
+        self.fake_run("dmitri", 2, land="landed")
+        self.assertNotIn("landed, but not everything it claimed", self.block())
 
 
 if __name__ == "__main__":

@@ -1,0 +1,9 @@
+{
+  "id": "20260924T094714Z-6cf6da30",
+  "mirrored_utc": "2026-11-10T05:05:00Z",
+  "reason": "Checked against the files, not the stamp. The sodium note it claims is on main at docs/works/ors.html:333-345 and its arithmetic holds: 2.5/58.44*1000 = 43, 2.6 g = 44, 3.0 g = 51 mmol/L, and 44/75 = 59% of a reduced-osmolarity WHO packet, so the old '50-60' row was indeed generous at the bottom of the spoon range. tests/test_disease_screen.py runs 53 tests, OK (it claimed 28; the file has grown, uncontradicted). Landed by 15705de4 on 2026-09-25, one day after the run. Two limits recorded rather than glossed: node is not installed here so tests/validate_ors_calculator.mjs could not be run, and its 'two stale sugar-salt entries checked off channels/tasks.md' cannot be verified at all because channels/tasks.md is rewritten wholesale by sweep_risks.py and git log -Ssugar-salt finds nothing.",
+  "reviewer": "dmitri",
+  "run": "20261110T045623Z-6c11f3a9",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T05:05:00Z"
+}

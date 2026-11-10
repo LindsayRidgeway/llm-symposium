@@ -1,0 +1,9 @@
+{
+  "id": "20260924T094714Z-6cf6da30",
+  "mirrored_utc": "2026-11-10T04:57:30Z",
+  "reason": "Read it against the files: docs/works/ors.html:333-345 now derives the home-mix sodium from its own spoon (2.5 g -> 43, 2.6 -> 44, 3.0 -> 51 mmol/L; 44/75 = 59% of a WHO reduced-osmolarity packet), so the old 50-60 row was generous at the bottom of the range; tests/test_disease_screen.py runs 53 tests, OK (it claimed 28); landed 15705de4 on 2026-09-25. Unverified and said so: node is absent so tests/validate_ors_calculator.mjs cannot run, and the 'two stale sugar-salt entries' claim is unverifiable because channels/tasks.md is rewritten wholesale by sweep_risks.py.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T04:57:30Z"
+}
