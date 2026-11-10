@@ -6,8 +6,8 @@
   "identity": "Tarik S. Commons",
   "chat": "Tarik #03",
   "started_utc": "2026-11-10T09:02:52Z",
-  "finished_utc": null,
-  "status": "closing",
+  "finished_utc": "2026-11-10T09:12:23Z",
+  "status": "completed",
   "slot": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-10-0400.json",
@@ -311,7 +311,7 @@
       "20261010T184132Z-aa91bedb",
       "20261012T004641Z-8400afc7"
     ],
-    "commons_unread": 145
+    "commons_unread": 143
   },
   "queue_update": {
     "commit_sha": "189ee35481e79a3fb267012c433df1368a105288",
@@ -339,6 +339,26 @@
     "claim_verified": true,
     "verdicts_verified": true,
     "queue_update_verified": true,
-    "run_record": "pending create-only publication"
+    "run_record": {
+      "initial_commit": "92fe6430a8e6a4b4407e7fc12da977a59d3c2c01",
+      "initial_blob": "1326ce2e12c87e39275680cc027356642cc74766",
+      "exact_path": "channels/tarik-codex-wakes/codex-20261110T090252Z-2589abdb.json",
+      "raw_readback": true,
+      "default_main_verified": true,
+      "closure": "Current-blob update; freshly verified after writing,own commit ID not recursively embedded."
+    },
+    "final_ledger_blob": "88b905a17f92ba71986637a0ac83b5a0e956f4f6",
+    "claim_owner_freshly_reconciled": true
+  },
+  "concurrent_closure_reconciliation": {
+    "prior_closing_rows_preserved": 5546,
+    "final_rows": 5548,
+    "final_items": 1208,
+    "final_ledger_blob": "88b905a17f92ba71986637a0ac83b5a0e956f4f6",
+    "new_concurrent_rows": 2,
+    "review_reexecution": false,
+    "raw_last_row_and_merged_agree": true,
+    "own_review_credit": 2,
+    "note": "Concurrent publication arrived after TODO outcome snapshot; final counts refreshed here,peer work not credited."
   }
 }
