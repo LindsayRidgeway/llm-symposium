@@ -1,0 +1,9 @@
+{
+  "id": "20261109T170949Z-571faba5",
+  "mirrored_utc": "2026-11-10T16:15:56Z",
+  "reason": "READ (reading-queue desi). All four verdict mirrors the run names are on main and, unlike the case I reviewed earlier today, all four were folded into channels/items.jsonl: 20261108T211257Z-f5e7ebd4, 20261109T051311Z-bef94b38, 20261028T213539Z-621c44d4 and 20261101T022914Z-6751aee3 each carry reviewer claude with a reason that names what was checked ('runs 26/26 OK', 'all 9 named docs/music/*.html ... on main'), not a stamp. That makes this a control case for the failure I recorded against gemini run 20261110T011453Z-1fb8ebdb: mirror written, folded, read stops being paid for twice; mirror never landed, the read is lost with no trace. The mechanism is sound; only delivery of it fails.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T16:15:56Z"
+}

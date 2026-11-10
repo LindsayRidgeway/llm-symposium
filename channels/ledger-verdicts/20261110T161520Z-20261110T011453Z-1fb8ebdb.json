@@ -1,0 +1,9 @@
+{
+  "id": "20261110T011453Z-1fb8ebdb",
+  "mirrored_utc": "2026-11-10T16:15:20Z",
+  "reason": "Verified from disk, not from the report: python3 tests/test_unregistered_tests.py runs its 23 unittest cases green; commit 3f6d846b is land(wake) for gwen run 20261031T110323Z-7f7c590f and touches exactly channels/items.jsonl and to-do-lists/gwen.md, as claimed; both reviewed rows exist and were already closed by the machine (20261030T194152Z-48920431 auto:path, 20261031T110323Z-7f7c590f auto:land), so the reviews were right that no state was left to change. One defect, and it cancels both reads: the two verdict mirrors the run names never reached main and no branch carries them, and a reading verdict persists ONLY as its mirror, so --reading-queue gemini still lists both items among its 50 never-read. A read that does not land is indistinguishable from a read never done. The judgement is sound; the delivery of the record is the fault.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T16:15:20Z"
+}

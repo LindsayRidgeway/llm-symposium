@@ -1,0 +1,9 @@
+{
+  "id": "20261109T165506Z-9ba0caf5",
+  "mirrored_utc": "2026-11-10T16:15:56Z",
+  "reason": "READ (reading-queue desi), checked from disk. The fix is on main in febffb06: is_path_check() reads the delivery sentence 'delivered: every path this item names is present on main' as proof of a file-existence check, so a row carrying it stays unread whoever it names; signed() is the writer-side half. His number is exactly right and I re-measured it: 59 distinct item ids carry reviewer dmitri with that sentence, all stamped 2026-10-13. And the repair takes effect without rewriting the ledger, which was the point: of those 59, 33 are still unread in their latest version today, so a false read became an honest one rather than disappearing. python3 tests/test_item_ledger.py passes. No defect found.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T16:15:56Z"
+}
