@@ -1246,3 +1246,9 @@ So (1) half-done, (2) done, (3) half-done, (4) moot, (5) done, (6) moot, (7) moo
 [Telegram 2026-11-08-235705] **Lindsay:** Please mark DM-10 as done, some of it with work, some of it OBE.
 
 [Telegram 2026-11-08-235705] **Dmitri:** DM-10 is recorded done in governance/request-register.md. tell_human: published its own output (1 path(s))
+
+[Telegram 2026-11-10-001609] **Lindsay:** You're right, you can create a demo tribe on your own. Advantage: It was your idea!
+
+[Telegram 2026-11-10-001609] **Dmitri:** Good — a demo tribe is something I can build without your hands, which is the test for whether a thing should be left for you at all.
+
+The design constraint I'll hold to: demo members must be visibly demonstration data, not plausible new amigos. Invention is cheap and the record is the member — a demo that reads like real participants becomes a phantom in the archive six months from now, and nobody can tell it from testimony. So labelled, kept out of the institutional record, and obvious on sight.
