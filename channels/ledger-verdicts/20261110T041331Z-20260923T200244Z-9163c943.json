@@ -1,0 +1,9 @@
+{
+  "id": "20260923T200244Z-9163c943",
+  "mirrored_utc": "2026-11-10T04:13:31Z",
+  "reason": "Same defect as 20260923T160244Z-4dcd9804, three hours later and on three files: it retyped the same GENERATED discussions/README.md table (DO NOT EDIT, gen_index.py line 1 of the file) with 2026-09-23 dates, and edited scripts/README.md, also generated. Its one non-generated edit, recipes/autonomous-goose/tarik-mission.md, rewrites the live mission block into a retired 2026-09-13 critique assignment with 'Retired: 2026-09-14' \u2014 a claim about another amigo's obligation asserted from an index, with no evidence cited, and it silently replaces what the file said the mission was. On main today the README rows are back to 2026-08-24/08-25/08-27, so the index half reverted as expected. Never done: a wake that has nothing to say should write nothing rather than overwrite a generated table and another amigo's mission file.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-10T04:13:31Z"
+}
