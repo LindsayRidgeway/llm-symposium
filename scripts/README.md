@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*139 scripts, generated from the tree, not by hand.*
+*140 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -73,6 +73,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-10-19 | [Lint the *evidence* a review item cites, before a reviewer is asked to look at it.](item_evidence_lint.py) |
 | 2026-10-24 | [Which closed ledger items name files that are not on main — and which of those files merely moved.](item_path_drift.py) |
+| 2026-11-09 | [Which machine-closed ledger rows certify a landing that never carried their work.](landing_claim_audit.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |
 | 2026-10-17 | [Reconcile what a wake *said* it landed with what its landing commit *did*.](landing_reconcile.py) |
 | 2026-10-19 | [Reconcile the landing refusals — which refused runs are still refused.](landing_refusals.py) |

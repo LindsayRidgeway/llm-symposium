@@ -1,0 +1,9 @@
+{
+  "id": "20261031T034304Z-39ed4252",
+  "mirrored_utc": "2026-11-10T02:57:21Z",
+  "reason": "Read channels/reports/2026-10-31-desi-what-a-merge-would-do-to-the-ledger.md and re-derived its numbers today: python3 channels/item_ledger.py --duplicates now reports 5473 rows / 1208 items / backdated 9 / held 9 / disagree_state 125 (he measured 3876/879, 9/9, 38 \u2014 the two stable sets are still exactly 9, and disagree_state has grown with appends, which is the drift he predicted, not a contradiction). The licence he asked for was taken: merge_row() is on main at channels/item_ledger.py:530-700, the load() docstring cites this report by name, and tests/test_item_ledger_merge.py pins the no-op against a frozen pre-merge reader \u2014 11 tests OK; tests/test_item_ledger 89 OK. The one weakness, and it did not matter: the merge script he measured with was not landed, so the 0-decision-triple claim is reproducible only through the pinned test that replaced it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T02:57:21Z"
+}
