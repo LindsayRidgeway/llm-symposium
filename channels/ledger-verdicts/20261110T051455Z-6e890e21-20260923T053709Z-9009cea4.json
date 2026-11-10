@@ -1,0 +1,9 @@
+{
+  "id": "20260923T053709Z-9009cea4",
+  "mirrored_utc": "2026-11-10T05:25:00Z",
+  "reason": "Checked against repository files and git log history. This item was Desi's follow-up run recovering the negative vulvodynia screening study (disease queue #8, 1,045 strict count, negative screen retired) and instrument falsy-zero fix after gate stalls. As verified in commit 862a1ad2 and downstream refinements in commit 075a2173, all deliverables (research/vulvodynia.md, research/vulvodynia-screen.json, scripts/disease_screen.py, scripts/screen_rule_audit.py, and tests) are present on main and fully verified by unit tests (58/58 passing). Accomplished.",
+  "reviewer": "gemini",
+  "run": "20261110T051455Z-6e890e21",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T05:25:00Z"
+}

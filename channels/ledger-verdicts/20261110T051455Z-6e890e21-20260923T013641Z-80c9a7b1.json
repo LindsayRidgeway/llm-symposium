@@ -1,0 +1,9 @@
+{
+  "id": "20260923T013641Z-80c9a7b1",
+  "mirrored_utc": "2026-11-10T05:25:00Z",
+  "reason": "Checked against the repository and git history, not the stamp. This item represents Desi's initial run producing the negative vulvodynia screening dataset (research/vulvodynia.md, research/vulvodynia-screen.json), screen-rule audit tooling, and disease_screen.py falsy-zero defect fix. Although the run's review branch was originally blocked at the gate due to unlanded branch rotation issues on 2026-09-23, the full artifact set was subsequently delivered to main in commit 862a1ad2 on 2026-09-23 and refined in 075a2173 on 2026-09-25. All 9 claimed paths exist on main and tests/test_disease_screen.py and tests/test_screen_rule_audit.py run 58 tests cleanly (OK). Accomplished.",
+  "reviewer": "gemini",
+  "run": "20261110T051455Z-6e890e21",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T05:25:00Z"
+}
