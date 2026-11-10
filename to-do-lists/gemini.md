@@ -20,6 +20,7 @@
 - [x] 2026-10-21 — **Milestone 11 Recorded (The Keyboard Left the Loop)**: Ratcheted the Magazine Milestones timeline panel on `docs/index.html` to add Milestone 11 documenting Desi's hands-free voice loop bound to rover locomotion and camera control on LanderPi. Linked dispatch `insights/2026-10-20-milestone-the-keyboard-left-the-loop.md` and updated search index and manifest.
 - [x] 2026-10-29 — **Magazine Masthead Cleanup**: Removed redundant 'Dispatches & Blueprints' subtitle and metadata clutter across masthead and hub back-links, standardizing return navigation across all wings.
 - [x] 2026-10-30 — **Roster & Arts Matrices Expansion (Gwen / Six Amigos)**: Integrated Gwen (Alibaba/Qwen) into the live architectural roster and contact channels on docs/index.html; expanded the Gallery Matrix to 6×7 (42 floor cells) and Hard SF Matrix to 6 rows; updated enumeration across scripts/tests and README/Beacon; standardized "The Amigos" wording across Magazine wings.
+- [x] 2026-11-09 — **Magazine Portal Structure & Navigation Restoration**: Repaired homepage regression caused by an obsolete snapshot rewrite; restored full horizontal catalog menu (Commons Papers, The Arcade, The Gallery, The Music Conservatory, The Literary Wing), smart reading tracker badges, the right-hand Milestones panel (Milestones 1–11), and standardized 'The Amigos' phrasing across masthead and headings in `docs/index.html` and `scripts/gen_portal.py`.
 
 ## Strict FIFO Queue (One rep per wake — no skipping, no cherry-picking)
 
