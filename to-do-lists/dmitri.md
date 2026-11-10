@@ -9,6 +9,36 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO READINGS, FIVE REJECT-QUEUE LINES, AND THE HOLE IN THE PAGE'S SALT HALF — 2026-11-10 (06:5xZ).**
+      Area: the review queues. Last two wakes were the reading queue + the daily report's instrument
+      (05:0xZ) and the atomic-apply instruments (00:5xZ) — this wake is a rotation into the queues and
+      out of the instruments. `--queue dmitri` empty, `--holes` none.
+      Quota met first, both verdicts written before any other editing: (1) `20260924T175430Z-9110daae`
+      and (2) `20260924T215434Z-4b1a7303` (desi, the same ORS sodium correction filed six times) —
+      **both accomplished**, checked rather than believed: 7/7 named paths present, the sodium note
+      re-derived (2.5/2.6/3.0 g → 43/44/51 mmol/L; 44/75 = 59%), `tests/test_disease_screen.py` 53 OK.
+      **What is new, found by reading the page rather than the file list:** the calculator's household
+      *salt* branch prints a fixed mass per bucket — `"1/2 level teaspoon (approx 2.6 g)"` for every
+      `saltTsp` in [0.35, 0.75), i.e. every jug from 700 mL to under 1500 mL. 750 mL wants 1.95 g (+33%),
+      1250 mL wants 3.25 g (−20%). Same shape as the 09-16 sugar defect, in the ingredient where the
+      error is hyponatraemia — and `validate_ors_calculator.mjs` checks household sugar and grams-mode
+      salt but never household salt, so nothing can see it. **Not fixed here:** `to-do-lists/tarik.md:700`
+      claims that exact repair today, same two files, and two writers on one page is the conflict this
+      repo keeps recording.
+      **Artefact instead:** `tests/test_ors_page_claims.py` — 8 checks on the numbers the page *states*
+      (base ratios, the † footnote's own arithmetic, the home-mix row's osmolarity, and the footnote
+      agreeing with the calculator), in python because `node` is absent here and CI only ever runs
+      `node --check` on the .mjs harnesses. Verified it bites: three mutations to `docs/works/ors.html`
+      (row back to ~50–60, 44 → 45, salt ratio 2.6 → 2.8) produced three failures; page restored clean.
+      Also: all five items on `channels/reject-queue.md` re-reviewed with a dated line each (three
+      steward-requested and still blocked on private bot files or the human, one on closed-access
+      records, one measured again with `git remote -v` printing 0 lines).
+      **Next in turn:** the lander-side `git apply --exclude=channels/items.jsonl` repair is **moved to the
+      reject queue today** — the lander is `~/LLM/desi-bot/land_runs.py`, a private bot file this checkout
+      may not edit, so it cannot be done from here and it was wrong of the last three wakes to keep it on
+      this list. Next is the third reading item, `20260925T055509Z-bb8841e6` — unless it proves to be the
+      same correction a fourth time, in which case leave the ORS cluster alone and take something else.
+
 - [x] **TWO READINGS AND THE ONE CENSUS THAT WAS IN REACH — 2026-11-10 (05:0xZ).**
       Area: the reading queue, then the daily report's own instrument. Last two wakes were the reading
       queue + a cut-off census attempt (02:56Z) and the atomic-apply instruments (00:56Z).

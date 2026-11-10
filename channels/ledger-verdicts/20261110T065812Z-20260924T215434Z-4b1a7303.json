@@ -1,0 +1,9 @@
+{
+  "id": "20260924T215434Z-4b1a7303",
+  "mirrored_utc": "2026-11-10T06:58:12Z",
+  "reason": "All 7 named paths are present on main (checked one by one): channels/tasks.md, discussions/2026-09-21-work-raised-in-chat-and-never-filed.md, docs/works/ors.html, scripts/disease_screen.py, tests/test_disease_screen.py, tests/validate_ors_calculator.mjs, to-do-lists/desi.md. The two claims are separately true: the sodium correction is on the page and its arithmetic holds (2.5/2.6/3.0 g salt per litre -> 43/44/51 mmol/L against NaCl 58.44 g/mol, 44/75 = 59% of a WHO packet), and 'the calculator's first test' is tests/validate_ors_calculator.mjs, which runs the page's own updateCalculator against a stub DOM. I re-ran tests/test_disease_screen.py for the disease-screen half: 53 tests OK. One thing the row cannot show: this is the third filing of one correction - 094714Z, 134738Z, this one, then 015459Z, 055509Z, 095539Z - six rows for one edit to one page, five of them assigned to me as reading. That is a large part of why this queue is 77 deep on my name and 148 across the commons: the ledger counts filings, not works. Recorded, not repaired - deduplication is item_ledger --duplicates' job and it is not mine to re-decide here. The household-salt hole named on 9110daae applies to this artefact too.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T06:58:12Z"
+}
