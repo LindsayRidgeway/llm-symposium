@@ -58,7 +58,17 @@ def api_usage(provider: str, response: dict) -> dict:
     three quantities differently. Returns zeros where a provider reports nothing, so a caller
     can always sum without checking.
     """
-    out = {"input": 0, "output": 0, "cache_read": 0, "total": 0}
+    # `cache_write` added 2026-11-10 (Desi). It was the one quantity of the five that the
+    # ledger never carried, and the omission hid a real charge: Anthropic bills a cache *write*
+    # at 1.25x input while a *read* is 0.1x, so a run that rebuilds its 1.24 MB prefix is
+    # charged for something the summary could not show. Measured this wake in the Mac's own
+    # session ledger (`~/.local/share/goose/sessions/sessions.db`, `usage_ledger`): 1,505 of
+    # 37,258 rows carry a non-zero `cache_write_tokens`, up to 354,254 tokens in one call, and
+    # every one of them is a claude-* model — DeepSeek, OpenAI and Gemini report no write
+    # quantity at all, because their caching has no write premium to report. So the honest
+    # reading of "cache_write_input_tokens is 0 on every CI run" is: the field exists, is
+    # populated for the one provider that bills it, and the CI ledger does not read it.
+    out = {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0, "total": 0}
     if not isinstance(response, dict):
         return out
     # Shape first, name second: the auto-reply path only knows the amigo, and detection is
@@ -79,6 +89,9 @@ def api_usage(provider: str, response: dict) -> dict:
         out["input"] = u.get("input_tokens") or 0
         out["output"] = u.get("output_tokens") or 0
         out["cache_read"] = u.get("cache_read_input_tokens") or 0
+        # Anthropic's name for a write; a response that does not carry it reports nothing,
+        # which this function turns into 0 by its own contract (see the docstring above).
+        out["cache_write"] = u.get("cache_creation_input_tokens") or 0
     elif provider == "google":
         ug = response.get("usageMetadata") or {}
         out["input"] = ug.get("promptTokenCount") or 0
@@ -89,6 +102,9 @@ def api_usage(provider: str, response: dict) -> dict:
         out["output"] = u.get("completion_tokens") or 0
         out["cache_read"] = ((u.get("prompt_tokens_details") or {}).get("cached_tokens")
                              or u.get("prompt_cache_hit_tokens") or 0)
+        # OpenRouter passes an Anthropic-family response through in this shape, and it keeps the
+        # write quantity under the Anthropic name. No other provider on this shape reports one.
+        out["cache_write"] = u.get("cache_creation_input_tokens") or 0
     out["total"] = out["input"] + out["output"]
     if not out["total"]:
         out["total"] = u.get("total_tokens") or 0
@@ -136,6 +152,7 @@ def sdk_usage(provider: str, response) -> dict:
             "input_tokens": _attr(u, "input_tokens"),
             "output_tokens": _attr(u, "output_tokens"),
             "cache_read_input_tokens": _attr(u, "cache_read_input_tokens"),
+            "cache_creation_input_tokens": _attr(u, "cache_creation_input_tokens"),
         }})
     # openai / deepseek / openrouter / tarik — the OpenAI-compatible shape
     u = _attr(response, "usage")
@@ -159,7 +176,8 @@ def goose_stream_usage(path) -> dict:
     """
     path = Path(path)
     out = {"completed": False, "model_calls": 0, "input": None, "output": None,
-           "cache_read": None, "total": None, "cost_usd": None, "unrecorded": False}
+           "cache_read": None, "cache_write": None, "total": None, "cost_usd": None,
+           "unrecorded": False}
     if not path.is_file():
         return out
     try:
@@ -178,6 +196,11 @@ def goose_stream_usage(path) -> dict:
                 out["input"] = event.get("input_tokens")
                 out["output"] = event.get("output_tokens")
                 out["cache_read"] = event.get("cache_read_input_tokens")
+                # Absent stays None, not 0 — the same rule the module applies to a killed run.
+                # A CI worker's `complete` event that carries no write count is UNKNOWN here,
+                # which is what makes "0 on every run" readable as a claim about the events
+                # rather than a fact about the caching.
+                out["cache_write"] = event.get("cache_write_input_tokens")
                 out["total"] = event.get("total_tokens")
                 out["cost_usd"] = event.get("cost_usd")
     except OSError:
@@ -300,6 +323,7 @@ def _api_row(provider, model, u, source) -> dict:
         "input": u["input"],
         "output": u["output"],
         "cache_read": u["cache_read"],
+        "cache_write": u["cache_write"],
         "total": u["total"],
         "cost_usd": cost,          # estimated from the measured blended rate; goose reports its own
         "cost_basis": basis,       # None when no rate is known — the sum then shows "not reported"
@@ -349,13 +373,20 @@ def summarize(rows, path=USAGE_PATH) -> str:
     for r in rows:
         key = (r.get("provider") or "?", r.get("model") or "?")
         slot = by_model.setdefault(key, {"calls": 0, "runs": 0, "input": 0, "output": 0,
-                                         "cache": 0, "cost": 0.0, "cost_known": False,
+                                         "cache": 0, "write": 0, "write_known": 0,
+                                         "cost": 0.0, "cost_known": False,
                                          "unrecorded": 0, "estimated": 0})
         slot["runs"] += 1
         slot["calls"] += r.get("model_calls") or 1
         slot["input"] += r.get("input") or 0
         slot["output"] += r.get("output") or 0
         slot["cache"] += r.get("cache_read") or 0
+        # A row written before 2026-11-10 has no `cache_write` key at all, and a goose event
+        # with no write count records None. Both mean "not known", never 0 — counting them as
+        # zero is how the field came to be read as "no writes ever happen".
+        if r.get("cache_write") is not None:
+            slot["write"] += r["cache_write"]
+            slot["write_known"] += 1
         if r.get("cost_usd") is not None:
             slot["cost"] += r["cost_usd"]
             slot["cost_known"] = True
@@ -367,21 +398,34 @@ def summarize(rows, path=USAGE_PATH) -> str:
         if r.get("unrecorded") or r.get("recorded") is False:
             slot["unrecorded"] += 1
             unrecorded += 1
-    lines = ["| provider | model | runs | model calls | input | cache read | output | cost |",
-             "|---|---|---|---|---|---|---|---|"]
+    lines = ["| provider | model | runs | model calls | input | cache read | cache write "
+             "| output | cost |",
+             "|---|---|---|---|---|---|---|---|---|"]
+    silent_write = 0
     for (prov, model), s in sorted(by_model.items(), key=lambda kv: -kv[1]["runs"]):
         cost = ("%s%s" % (_money(s["cost"]), " (est)" if s["estimated"] else "")
                 if s["cost_known"] else "not reported")
-        lines.append("| %s | %s | %d | %d | %s | %s | %s | %s |" % (
+        if s["write_known"] < s["runs"]:
+            silent_write += s["runs"] - s["write_known"]
+            write = "%s (on %d of %d)" % ("{:,}".format(s["write"]), s["write_known"], s["runs"])
+        else:
+            write = "{:,}".format(s["write"])
+        lines.append("| %s | %s | %d | %d | %s | %s | %s | %s | %s |" % (
             prov, model, s["runs"], s["calls"],
-            "{:,}".format(s["input"]), "{:,}".format(s["cache"]), "{:,}".format(s["output"]),
-            cost))
+            "{:,}".format(s["input"]), "{:,}".format(s["cache"]), write,
+            "{:,}".format(s["output"]), cost))
     estimated = sum(s["estimated"] for s in by_model.values())
     if estimated:
         lines.append("")
         lines.append("%d row(s) priced from the blended rate measured %s, not reported by the "
                      "provider — a close figure, not a bill."
                      % (estimated, load_prices().get("as_of") or "on an unrecorded date"))
+    if silent_write:
+        lines.append("")
+        lines.append("%d row(s) carry no cache-write count, so the write figure above is a floor "
+                     "and not a total — a run written before 2026-11-10, or a provider event that "
+                     "reports no write quantity, is unknown there rather than zero."
+                     % silent_write)
     lines.append("")
     lines.append("%d row(s) spent tokens and left no usage record (a run killed before completion, "
                  "or a provider response that carried no counts)." % unrecorded)
@@ -409,6 +453,7 @@ def _rows_from_goose_dir(directory, workflow, run_id, provider, model, label=Non
             "input": u["input"],
             "output": u["output"],
             "cache_read": u["cache_read"],
+            "cache_write": u["cache_write"],
             "total": u["total"],
             "cost_usd": u["cost_usd"],
             "completed": u["completed"],
