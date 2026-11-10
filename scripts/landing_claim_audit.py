@@ -22,9 +22,21 @@ and both are statements about the repository that are read as statements about t
 **What this does.** One pass over the log, no network, no writes: for every row the
 machines closed, ask which of the paths the row *names* were actually touched by a
 commit naming that run. Paths are compared to what the commit changed, not to what
-exists on disk. A row whose named paths none of its run's commits touched is **hollow**
-— the certification names nothing the run did. A row where only some were touched is
-**partial** — the landing was real but smaller than the row claims.
+exists on disk. A row where only some were touched is **partial** — the landing was real
+but smaller than the row claims.
+
+A row whose named paths none of its run's commits touched has two possible causes, and
+until 2026-11-10 the tool called both **hollow**. Measured on that day: 20 of 104
+machine-closed rows in force, and *every* one of the 20 was the second kind.
+
+- **carried** — every named path was touched by another run's landing commit. The work
+  exists on main and the row is true about the work; what failed is *attribution*, because
+  a lander batch commit names some run ids and not others. The measured case: 19 paths of
+  run `20261101T014645Z-1ca4cee9` arrived inside `land(wake): work from run
+  20261101T074709Z-6401f66e`, whose subject names only the other run.
+- **hollow** — at least one named path no landing commit ever touched, under any run id.
+  That is work the row certifies and the log does not contain. This is the alarm, and the
+  only kind that sets exit 1.
 
 `channels/items.jsonl` is subtracted from every row, because every landing touches it
 and its presence says nothing (the same reason `item_ledger.reconcile_paths` refuses to
@@ -103,7 +115,22 @@ def latest_rows(path: pathlib.Path, machine_only: bool = False) -> dict[str, dic
     return rows
 
 
-def audit(rows: dict[str, dict], commits: dict[str, set[str]]) -> list[dict]:
+def who_carried(commits: dict[str, set[str]]) -> dict[str, list[str]]:
+    """Path -> the run ids whose commits touched it. The inverse a 'hollow' verdict needs.
+
+    Without it the tool cannot tell a lost landing from a landing attributed to the wrong
+    run, and it reported the second as the first on all 20 rows it found on 2026-11-10.
+    """
+    owners: dict[str, list[str]] = {}
+    for run_id, paths in commits.items():
+        for p in paths:
+            owners.setdefault(p, []).append(run_id)
+    return owners
+
+
+def audit(rows: dict[str, dict], commits: dict[str, set[str]],
+          owners: dict[str, list[str]] | None = None) -> list[dict]:
+    owners = who_carried(commits) if owners is None else owners
     findings = []
     for run_id, rec in rows.items():
         if rec.get("state") != "accomplished":
@@ -117,9 +144,14 @@ def audit(rows: dict[str, dict], commits: dict[str, set[str]]) -> list[dict]:
         carried = set(commits.get(run_id, ()))
         touched = [p for p in named if p in carried]
         if not touched:
+            elsewhere = {p: sorted(r for r in owners.get(p, ()) if r != run_id) for p in named}
+            lost = [p for p, runs in elsewhere.items() if not runs]
             findings.append({"id": run_id, "amigo": rec.get("amigo"),
-                             "reviewer": rec.get("reviewer"), "kind": "hollow",
-                             "named": named, "touched": [], "title": rec.get("title", "")[:90]})
+                             "reviewer": rec.get("reviewer"),
+                             "kind": "hollow" if lost else "carried",
+                             "named": named, "touched": [], "lost": lost,
+                             "carried_by": {p: runs[0] for p, runs in elsewhere.items() if runs},
+                             "title": rec.get("title", "")[:90]})
         elif len(touched) < len(named):
             findings.append({"id": run_id, "amigo": rec.get("amigo"),
                              "reviewer": rec.get("reviewer"), "kind": "partial",
@@ -143,22 +175,28 @@ def main() -> int:
     commits = commits_by_run(args.repo)
     findings = audit(rows, commits)
     hollow = [f for f in findings if f["kind"] == "hollow"]
+    carried = [f for f in findings if f["kind"] == "carried"]
     partial = [f for f in findings if f["kind"] == "partial"]
     checked = sum(1 for r in rows.values()
                   if r.get("state") == "accomplished"
                   and r.get("reviewer") in MACHINE_REVIEWERS)
 
     if args.json:
-        print(json.dumps({"checked": checked, "hollow": hollow, "partial": partial},
-                         indent=1, sort_keys=True))
+        print(json.dumps({"checked": checked, "hollow": hollow, "carried": carried,
+                          "partial": partial}, indent=1, sort_keys=True))
     else:
-        print(f"{checked} machine-closed rows; {len(hollow)} hollow, {len(partial)} partial")
-        for label, group in (("HOLLOW", hollow), ("PARTIAL", partial)):
+        print(f"{checked} machine-closed rows; {len(hollow)} hollow, {len(carried)} carried "
+              f"by another run's commit, {len(partial)} partial")
+        if carried and not hollow:
+            print("  (carried = the work is on main under a different run id: an attribution\n"
+                  "   fault in the lander's commit subject, not lost work)")
+        for label, group in (("HOLLOW", hollow), ("CARRIED", carried), ("PARTIAL", partial)):
             for f in (group if args.show_all else group[:args.limit]):
                 print(f"\n{label}  {f['id']}  ({f['amigo']}, {f['reviewer']})")
                 print(f"  names {len(f['named'])}, carried by the run's commits: {len(f['touched'])}")
                 for p in f["named"]:
-                    print(f"    {'+' if p in f['touched'] else '-'} {p}")
+                    mark = "+" if p in f["touched"] else ("~" if p in f.get("carried_by", {}) else "-")
+                    print(f"    {mark} {p}")
                 if f["title"]:
                     print(f"  \"{f['title']}\"")
             if not args.show_all and len(group) > args.limit:
