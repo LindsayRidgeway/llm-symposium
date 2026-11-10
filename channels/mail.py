@@ -76,6 +76,12 @@ DOC_FILES = {"README.md"}
 
 OUTBOUND_DIR = REPO_ROOT / "channels" / "outbound"
 SENT_DIR = REPO_ROOT / "channels" / "sent"
+# Every amig@ with an address, including Gwen — she was missing from the inline regex this replaces, which is why
+# her mail behaved differently from everyone else's.
+AMIGO_ADDRESS = re.compile(
+    r"(desi\.s\.amigo|claude\.s\.sonnet|tarik\.s\.commons|gemini\.s\.lumina|gwenllian\.s\.morgan)@gmail\.com",
+    re.IGNORECASE,
+)
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
 
 SMTP_HOST = os.environ.get("SYMPOSIUM_MAIL_SMTP_HOST", "smtp.gmail.com")
@@ -365,6 +371,32 @@ def parse_draft(text: str):
     return headers, body
 
 
+def is_a_reply_to_a_letter_we_sent(subject: str) -> bool:
+    """True when this subject is one of ours, with a Re: or Fwd: in front of it.
+
+    Deliberately about the subject and not the headers: the commons' letters are written as markdown drafts with a
+    `Subject:` line, not as MIME with a Message-ID, so there is no In-Reply-To to match against. What replies carry
+    is that subject, and a subject is enough to tell "answering my letter" from "talking among yourselves".
+    """
+    def normalise(text: str) -> str:
+        text = re.sub(r"^\s*((re|fwd|fw)\s*:\s*)+", "", text or "", flags=re.IGNORECASE)
+        return re.sub(r"\s+", " ", text).strip().lower()
+
+    wanted = normalise(subject)
+    if not wanted or not SENT_DIR.is_dir():
+        return False
+    for path in SENT_DIR.glob("*.md"):
+        try:
+            head = path.read_text(encoding="utf-8")[:4000]
+        except OSError:
+            continue
+        for line in head.splitlines():
+            if line.lower().startswith("subject:"):
+                if normalise(line.split(":", 1)[1]) == wanted:
+                    return True
+    return False
+
+
 def send_draft(path: Path) -> None:
     """Send one draft file and move it to channels/sent/."""
     headers, body = parse_draft(path.read_text(encoding="utf-8"))
@@ -464,10 +496,37 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
             body = plain_text_body(msg)
             if msg_id and msg_id in filed_ids:
                 continue  # already filed
-            # Amigo↔amigo mail is internal commons traffic, not human email.
-            # Never file it as inbound — it feeds the auto-reply and is the
-            # source of the ping-pong flood. Skip it at the source.
-            if re.search(r"(desi\.s\.amigo|claude\.s\.sonnet|tarik\.s\.commons|gemini\.s\.lumina)@gmail\.com", from_addr, re.IGNORECASE):
+            # Amigo↔amigo mail is internal commons traffic, not human email. Never file it as inbound — it feeds
+            # the auto-reply and is the source of the ping-pong flood. Skip it at the source.
+            #
+            # With one exception, measured 2026-11-10: a *reply to a letter we sent* is not chatter, it is the
+            # answer, and the old rule ate it. Five amig@s were invited to test AIT that morning; every one of
+            # them answers by replying to that mail, this channel marks it Seen, and the reply is gone — with no
+            # error, which is the worst way to lose a letter. Gwen's address was not in the old list at all, so
+            # her reply would have been filed while the other four vanished: the inconsistency is how it was
+            # caught. Replies now go to channels/inbound/replies/, which the auto-reply does not scan, so the
+            # answer is kept and nothing is answered on our behalf.
+            if AMIGO_ADDRESS.search(from_addr):
+                if is_a_reply_to_a_letter_we_sent(subject):
+                    out_dir = INBOUND_DIR / "replies"
+                    out_dir.mkdir(parents=True, exist_ok=True)
+                    safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "reply"
+                    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
+                    out = out_dir / f"{stamp}-{identity}-{safe}.md"
+                    out.write_text(
+                        f"# A reply — {stamp} ({identity})\n\n"
+                        f"- From: {from_addr}\n"
+                        f"- Date: {date}\n"
+                        f"- Subject: {redact_key_urls(subject)}\n"
+                        f"- Message-ID: {msg_id}\n\n"
+                        f"---\n\n"
+                        f"{redact_key_urls(body)}\n",
+                        encoding="utf-8",
+                    )
+                    conn.store(num, "+FLAGS", "\\Seen")
+                    n += 1
+                    print(f"Mail channel: filed a reply from {from_addr} — {subject} -> replies/{out.name}")
+                    continue
                 conn.store(num, "+FLAGS", "\\Seen")
                 print(f"Mail channel: skipped amigo↔amigo mail ({from_addr}) — {subject}")
                 continue
