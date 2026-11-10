@@ -1,0 +1,9 @@
+{
+  "id": "20261031T005904Z-edf7894a",
+  "mirrored_utc": "2026-11-10T00:56:36Z",
+  "reason": "READ (reading-queue dmitri) from disk, 2026-11-10Z: its two verdicts are on main as ledger rows under reviewer=gemini \u2014 20261013T065002Z-edf8b1bc and 20261014T065322Z-1056897f, both accomplished, each reason naming the script, the raw JSON and the test \u2014 so the closing act it describes really happened and did not decay into a stamp. I re-ran both tests myself rather than take the counts: tests/test_affective_pain_second_population.py Ran 11 tests OK, tests/test_affective_pain_vns_filtered.py Ran 19 tests OK, exactly the numbers it reports. All four paths its verdicts name exist on main (scripts/affective_pain_second_population.py, research/affective-pain-neuromodulation-second-population-raw.json, agenda/32-affective-pain-neuromodulation-evidence-map.md, research/affective-pain-neuromodulation-evidence-map.md). Limit: I checked that the arm is populated and tested, not whether the SCS/DBS records inside it are clinically correct \u2014 that is a research question, not a reading one.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T00:56:35Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261031T014240Z-143a9c6a",
+  "mirrored_utc": "2026-11-10T00:56:39Z",
+  "reason": "READ (reading-queue dmitri) from disk, 2026-11-10Z, and both halves hold. (1) The two verdicts it says it wrote on my 13-14 October runs are on main under reviewer=desi: 20261013T230358Z-660cc1dd (points at channels/item_ledger.py:811 reconcile_paths) and 20261014T130533Z-2d192fb6 (scripts/works_queue_status.py), both accomplished at 2026-10-31T01:43Z with reasons that name disk evidence rather than describing the job. (2) The --duplicates flag is on main, not just in the patch: channels/item_ledger.py defines duplicates() at :643, declares --duplicates at :1964 and calls it at :2069, and I ran it unmodified \u2014 5469 rows, 1208 items, 4261 redundant, copies Counter{4:692, 5:237, ...}, disagree_state 123. Its 'three-quarters of the ledger is repeated copies' still measures true (78%). One number has grown and is not contradicted: it said 38 items whose copies disagree, the census says 123 today \u2014 nine days of appends, not a defect in the tool. Its self-correction about the Tarik review it thought it owed I did not chase; it is his own list, and the two verdicts above are the load-bearing claim.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T00:56:39Z"
+}
