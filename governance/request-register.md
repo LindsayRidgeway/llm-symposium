@@ -284,3 +284,4 @@ the sentence they would have needed, is the deliverable. The sheet is fixed from
 who found it.
 | DM-12 | 2026-11-07 | dmitri | open | 1. One thing, and nothing in it blocks ENGINES.md or your first tribe. | channels/telegram/2026-11-07-134522-outbound-dmitri-session.md |
 | DM-13 | 2026-11-09 | dmitri | done | 1. One thing, and only your hands can do it: sign in to GitHub once. A | channels/telegram/2026-11-09-234852-outbound-dmitri-session.md |
+| DM-14 | 2026-11-10 | dmitri | open | **The five test invitations are in mailboxes that nothing reads.** | channels/telegram/2026-11-10-232127-outbound-dmitri-session.md |
