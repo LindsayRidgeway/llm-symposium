@@ -281,6 +281,56 @@ class RepositoryTest(unittest.TestCase):
         self.assertIn("cannot tell a measurement from a digit", text)
 
 
+class CheckModeTest(unittest.TestCase):
+    """`--check` and `--now` survived the deletion of the orphan that had them, and are pinned here.
+
+    `scripts/meetings_status.py` (2026-11-01) was deleted on 2026-11-10 because it was the second
+    copy of this instrument and nothing called it; its one distinguishing capability — a silent
+    exit status for "a meeting closed and the convener still owes its synthesis" — was ported into
+    this file first. A port with no test is a claim, so: three cases, one per answer it can give.
+    """
+
+    def test_a_closed_meeting_with_a_placeholder_owes_its_synthesis(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            path = write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            data = ms.parse_meeting(path, repo=repo, now=NOW)
+            self.assertTrue(ms.owes_synthesis(data))
+            self.assertEqual(
+                ms.main(["--repo", str(repo), "--check", "--now", "2026-11-04T00:00:00Z"]), 1)
+
+    def test_a_closed_meeting_with_a_written_synthesis_owes_nothing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS,
+                                             synthesis="The convener's verdict: one defect."))
+            self.assertEqual(ms.main(["--repo", str(repo), "--check",
+                                      "--now", "2026-11-04T00:00:00Z"]), 0)
+
+    def test_an_open_meeting_is_not_owed_anything_yet(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            self.assertEqual(ms.main(["--repo", str(repo), "--check",
+                                      "--now", "2026-11-02T00:00:00Z"]), 0)
+
+    def test_now_moves_the_deadline_rather_than_the_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            path = write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            before = ms.parse_meeting(path, repo=repo, now=NOW)
+            after = ms.parse_meeting(path, repo=repo,
+                                     now=ms._instant("2026-11-04T00:00:00Z"))
+        self.assertEqual(before["deadline_state"], "open")
+        self.assertEqual(after["deadline_state"], "closed")
+
+    def test_a_bad_instant_is_refused_rather_than_read_as_now(self) -> None:
+        # Silently falling back to `now` would make `--check` answer about a different day than
+        # the one it was asked about, which is the defect the flag exists to avoid.
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(ms.main(["--repo", tmp, "--check", "--now", "yesterday"]), 2)
+
+
 class DailyReportTest(unittest.TestCase):
     """The tool had no caller for the length of one wake; this keeps the caller attached."""
 

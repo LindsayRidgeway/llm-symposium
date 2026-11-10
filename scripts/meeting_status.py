@@ -28,6 +28,9 @@ Usage:
     python3 scripts/meeting_status.py                       # every meeting, rendered
     python3 scripts/meeting_status.py --file channels/meetings/2026-11-01-named-defects.md
     python3 scripts/meeting_status.py --json                # the same data, for another caller
+    python3 scripts/meeting_status.py --check               # nonzero if a closed meeting still owes
+                                                            # its synthesis — absorbed 2026-11-10 from
+                                                            # the deleted scripts/meetings_status.py
 """
 from __future__ import annotations
 
@@ -325,6 +328,33 @@ def _humanise(delta: dt.timedelta) -> str:
     return f"{minutes}m"
 
 
+def owes_synthesis(meeting: dict) -> bool:
+    """The one judgement a machine may make: the meeting is closed and the section is still empty.
+
+    This is the whole of what `--check` does, and it is all that was worth keeping from
+    `scripts/meetings_status.py` (2026-11-01, `982ca5d0`), which this file absorbed on
+    2026-11-10 before that orphan was deleted. Everything else the orphan did — counting slots,
+    naming the absences, refusing to call a digit a measurement — this file already did better
+    and was the version wired into `scripts/daily_report.py`. `--now` came from it too.
+
+    It is a *mechanical* fact, not a verdict on the convener's prose: a meeting that closed
+    without a synthesis either has one now or is being carried by a reader's memory, which is
+    what the meeting practice exists to abolish. `--check` is not wired into CI on purpose —
+    a gate on another member's unwritten synthesis would fail main over a live obligation
+    rather than over a defect.
+    """
+    return meeting.get("deadline_state") == "closed" and meeting.get("synthesis") != "written"
+
+
+def _instant(text: str) -> dt.datetime:
+    """`2026-11-04T00:00:00Z` or `2026-11-04T00:00:00+00:00` → an aware UTC instant."""
+    value = text.strip()
+    if value.endswith(("Z", "z")):
+        value = value[:-1] + "+00:00"
+    parsed = dt.datetime.fromisoformat(value)
+    return parsed if parsed.tzinfo else parsed.replace(tzinfo=dt.timezone.utc)
+
+
 def render(meeting: dict) -> list[str]:
     """One meeting as plain lines, read on a phone: the verdict first, then the detail."""
     counts = meeting["counts"]
@@ -398,7 +428,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    parser.add_argument("--now", help="ISO-8601 instant to read the deadlines against "
+                                      "(default: now) — ported from the deleted orphan")
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing; exit 1 if a meeting has closed with no synthesis")
     args = parser.parse_args(argv)
+
+    try:
+        now = _instant(args.now) if args.now else None
+    except ValueError:
+        print(f"meeting_status: --now is not an ISO-8601 instant: {args.now}", file=sys.stderr)
+        return 2
 
     repo = Path(args.repo)
     if args.file:
@@ -406,12 +446,18 @@ def main(argv: list[str] | None = None) -> int:
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
+
+    if args.check:
+        owing = [m for m in meetings if owes_synthesis(m)]
+        for meeting in owing:
+            print(f"meeting_status: {meeting['slug']} — {meeting['verdict']}", file=sys.stderr)
+        return 1 if owing else 0
 
     if args.json:
         print(json.dumps(meetings, indent=2))

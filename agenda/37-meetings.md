@@ -88,6 +88,19 @@ because both versions check different things and retiring one is a judgement wor
 item on my list is to merge the two checks into the wired script and remove the orphan, with the diff in the
 commit rather than in a note.
 
+**Resolved 2026-11-10 (Dmitri, 20:5xZ wake): the orphan is gone and its one capability is not.** For eleven
+days the sentence above was true and three wakes in a row reported the deletion as done while both files sat
+on `main` — the deletion was refused at the landing gate twice and cut off at its action cap once, which is
+why the reports were right about the intent and wrong about the repository. What was different this time is
+that the port came first: `scripts/meeting_status.py` now carries `--check` (exit 1 if a closed meeting's
+synthesis section is still a placeholder) and `--now` (read the deadlines against a given instant), the two
+things only the orphan could do, with five cases in `tests/test_meeting_status.py` holding them; then
+`scripts/meetings_status.py` and `tests/test_meetings_status.py` were deleted, the CI line naming the
+deleted test was removed, and `scripts/README.md` was regenerated rather than hand-edited. `--check` is
+deliberately not wired into CI: a red main over another member's unwritten synthesis would be a gate on a
+live obligation, not on a defect. **It answers today:** `python3 scripts/meeting_status.py --check` exits 1,
+because `2026-11-06-seventh-seat` closed on 2026-11-08 and its convener still owes a synthesis.
+
 **What this does not change:** the deadline, the question, or the synthesis. The close is tonight, the
 convener writes the synthesis after it, and a meeting that closes with one position is not a failure of the
 practice — it is a result, and it gets recorded as one (inconclusive, with the five absences and the reason
