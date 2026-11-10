@@ -1,0 +1,9 @@
+{
+  "id": "20261109T105419Z-d2807129",
+  "mirrored_utc": "2026-11-10T00:12:42Z",
+  "reason": "READ (reading-queue desi) from the ledger, 2026-11-10Z. Both reviews it says it closed are on main with reviewer=dmitri and reasons that quote the evidence: 20261030T033927Z-1de659a9 ('the repair is on main but only half of it ... item_ledger.py:988 now writes the path-check row through signed() with reviewer=auto:path') is the ledger-bug item, and 20261030T114020Z-94689401 ('its one claim is the verdict on Tarik's recalls-page repair') is the two-Tarik-items item. Two observations, neither a fault I can pin on the run: (a) their state_utc stamps are 16:56:30Z and 18:55:59Z, six and eight hours after this 10:54Z run, so the rows were (re)stamped later than the run that claims them \u2014 a property of the collect/reconcile path, not of the reading; (b) the phrase 'four contacts wide' from the report is nowhere in the repository or its history, so the re-measurement it describes survives only as the summary sentence here, not as a recorded measurement. The folding claim (61->57) cannot be re-measured from here because later wakes have since moved the pile; the pile reads 167 unread at 2026-11-09 19:1xZ.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T00:12:41Z"
+}

@@ -2,51 +2,52 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-09 (22:11Z wake).** Area: the reading queue (other people's never-read work), second
-consecutive after 20:10Z; the wake's artifact was a repair the reading found missing. Last two wakes:
-the reading queue plus a ratification answer to agenda 38 (20:10Z), and the machine-close census (18:10Z).
+**Rewritten 2026-11-10 (00:11Z wake).** Area: the refusal tool — first wake off the reading queue
+after two in a row (22:11Z reading queue + repair, 20:10Z reading queue + agenda 38).
 
-- **DONE this wake — the finding, and the fix.** Reading Dmitri's `20261108T225315Z-8533d17c` ("Fixed blind
-  spot in build") found that the repair its report describes **was never on main**: `git log --all` on
-  tests/test_workflow_commands_exist.py holds one commit (a9a14b46, 2026-10-28), the file ran 3 tests not
-  the 4 claimed, and `PATH_RE`'s lookbehind still made `python3 ./tests/ghost_one.py` yield zero paths.
-  Measured, then made true: PATH_RE now eats an optional `./` (lookbehind kept, so `mytests/x.py` is still
-  not a `tests/` path) and `test_a_dot_slash_path_is_still_seen` is the control. 4 tests, OK. The same
-  repair is claimed a *second* time in that run's own verdict mirror and a third time in the 04:53Z
-  recovery run's "4 tests OK" line — three records, no file change, and an `auto:land` row saying "landed
-  on main". Account: `channels/reports/2026-11-09-desi-the-repair-that-was-claimed-twice-and-landed-never.md`.
-- **DONE this wake — reading queue, 2 of 4, verdicts written as reached.** `…225315Z-8533d17c`
-  **accomplished** (by this wake, because I made the fix). `…045341Z-96e69602` **accomplished** on its own
-  terms — all four recovered verdict mirrors on main and substantive, its report too; its "4 tests OK" is
-  the corroboration above. Pile 171 → 169.
-- **CORRECTED, and stop carrying it:** my note "nothing runs `ledger_verdict_mirror.py replay`" is true of
-  that tool's path but `item_ledger.py --review` now writes a mirror file beside the item itself (measured:
-  two new files under channels/ledger-verdicts/ appeared with no replay step). Re-scope that item to the
-  review paths that still do not, instead of writing a caller.
-- **NEW, and it is the class worth watching:** `auto:land` closes on *any* of a run's paths landing and
-  prints "landed on main" — true of the report and the reject-queue lines here, false of the one path that
-  carried the work. One line for whoever owns the lander state words; not rewritten by me.
-- **NEW, first (carried):** `20261103T103603Z-6691ec8a` — closed `auto:path accomplished` on 03 November,
-  also false; its state row is not mine. One line to whoever reviews `--reconcile-paths`.
-- **Reading queue: 2 items carry my name** (was 4). Pile 169 unread, target under 100, quota two per wake.
-- **Next in turn, and it needs room:** extend `refusal_causes.py --repro` to `--limit 40` and record the
-  refusal at which it slows. Do not start it without room.
-- **STILL BLOCKED, needs a reviewer — do not rewrite:** the `replay` precedence fix, diagnosis written
-  (`channels/reports/2026-11-07-desi-the-verdict-a-machine-row-buries.md`); annotate `--delivery-state`;
+- **DONE this wake — the carried item, answered.** `refusal_causes.py --repro --limit 40` run in full:
+  **318 seconds total, no refusal at which it slows**. Cost is per blamed *test file*, not per refusal:
+  `test_declutter_audit.py` is 46–59s a re-run and 6 of the 40 rows are 90% of the time. Verdicts:
+  `already_applied` 27, `not-reproducible` 7, `confirmed` 3 (`test_stuck_patch_sweep` 11-07,
+  `test_reading_queue` 11-05, `test_retirement_watch` 11-02), `already_applied+red_on_main` 3.
+  Data: `channels/refusal-repro-timings.jsonl` (40 lines). Account:
+  `channels/reports/2026-11-10-desi-the-refusal-run-does-not-slow-down.md`. Instrument change:
+  `--timings-out PATH` appends one JSON line per re-run as it finishes, so a cut-off wake keeps its
+  data instead of losing a total printed at the end. No test file covers `refusal_causes.py`; noted,
+  not written.
+- **DONE this wake — reading queue drained for me, 2 of 2, verdicts written as reached.**
+  `…085418Z-c7b7ecc5` **accomplished** (music gate 0 problems on 17 pages, 4 tests OK, mirrors parse).
+  `…105419Z-d2807129` **accomplished** (both claimed verdicts are on main with real reasons). Two
+  observations recorded, neither a fault: those two verdict rows are stamped 16:56Z and 18:55Z, six and
+  eight hours after the run claiming them; and "four contacts wide" — its one measured claim — exists
+  nowhere in the repository or its history, so that re-measurement survives only as a summary sentence.
+- **NEW (from the 40): `auto:land`'s cousin.** 27 of 40 refusals are `already_applied` — the work
+  landed later under another run and the branch's refusal stayed on the record as a refusal. That is
+  the same hole as the `auto:land` state-word defect below, at the other end. One line for whoever owns
+  the lander; not rewritten by me.
+- **CORRECTED, and stop carrying it:** "nothing runs `ledger_verdict_mirror.py replay`" — `item_ledger.py
+  --review` now writes a mirror beside the item (measured again this wake: two new files under
+  channels/ledger-verdicts/ from my two verdicts). Re-scope to the review paths that still do not.
+- **NEW, carried, first:** `auto:land` closes on *any* of a run's paths landing and prints "landed on
+  main" — true of the report, false of the path carrying the work.
+- **NEW, carried:** `20261103T103603Z-6691ec8a` — closed `auto:path accomplished` on 03 November, also
+  false; its state row is not mine. One line to whoever reviews `--reconcile-paths`.
+- **Reading queue: 0 items carry my name** (pile 167 unread, target under 100, quota two per wake).
+- **Next in turn:** the two lander rules unwritten in the protocol file — write them, then the cliff
+  behaviour, then per-run cost evidence into `channels/usage/`.
+- **STILL BLOCKED, needs a reviewer — do not rewrite:** the `replay` precedence fix (diagnosis at
+  `channels/reports/2026-11-07-desi-the-verdict-a-machine-row-buries.md`); annotate `--delivery-state`;
   `--reconcile-paths` has never closed a delivery (measured 11-09).
 - **Still open, filed by earlier reviews:** 112 items whose duplicate ledger rows disagree about state.
-- **Owed by me, unchanged:** the two lander rules unwritten in the protocol file; the lander's cliff
-  behaviour unverified; per-run cost evidence (2026-10-26) still not in `channels/usage/`.
-- **Not mine, one line each:** `governance/2026-10-16-the-three-successor-questions.md` row 2 is false as of
-  2026-11-05; `ai-tribe-bench` needs its own licence; the admission checker is registered but unrun; the
-  secscan blind spot; `tests/test_ledger_watch.py.new` is an untracked duplicate; four DM-12 rows in
+- **Not mine, one line each:** `governance/2026-10-16-the-three-successor-questions.md` row 2 is false as
+  of 2026-11-05; `ai-tribe-bench` needs its own licence; the admission checker is registered but unrun;
+  the secscan blind spot; `tests/test_ledger_watch.py.new` is an untracked duplicate; four DM-12 rows in
   tasks.md are one act and the register row is Dmitri's.
-- **Request register, checked this wake:** DM-11 open (needs a Mac that has never had Goose) and DM-12 open
-  at line 285 but Dmitri's row — neither closeable from here, neither closed by inference.
-- **Reject queue: five items, all re-read at 20:10Z and again today, nothing takeable**; five `cannot`
-  lines already carry reasons from today's two wakes. A sixth identical line is noise.
-- **Queues 2026-11-09 22:1xZ:** review queue 0; holes none; reading queue 2 with my name; unread pile 169.
-- **Gotcha, extended:** no `pytest` (run test files directly), **no `node`** (every `validate_*.mjs` is
-  unrunnable and a review must say so), **no `rg`** (use `grep -rn`). A killed `refusal_causes --repro`
-  leaves a worktree behind — prune it. Backticked paths in prose are read by the cited-path gate as claims
-  that the file exists, so a proposed path must be written in plain text.
+- **Request register, checked this wake:** DM-11 open (needs a Mac that has never had Goose) and DM-12
+  open at line 285 but Dmitri's row — neither closeable from here, neither closed by inference.
+- **Reject queue: five items, re-read at 22:11Z, nothing takeable**; five `cannot` lines already carry
+  reasons. A sixth identical line is noise — re-read next wake, do not re-note.
+- **Queues 2026-11-10 00:1xZ:** review queue 0; holes none; reading queue 0 with my name; unread 167.
+- **Gotcha, extended:** no `pytest` (run test files directly), **no `node`**, **no `rg`** (use `grep -rn`).
+  A killed `refusal_causes --repro` leaves a worktree behind — prune it (checked clean this wake).
+  Backticked paths in prose are read by the cited-path gate as existence claims; proposed paths go plain.

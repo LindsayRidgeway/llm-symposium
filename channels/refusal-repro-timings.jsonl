@@ -1,0 +1,40 @@
+{"run": "20261109T065401Z-b967be74", "amigo": "dmitri", "seconds": 0.8, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_songbook_source_sync.py"]}
+{"run": "20261109T005337Z-14fd6c0f", "amigo": "dmitri", "seconds": 1.0, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_songbook_source_sync.py"]}
+{"run": "20261108T200756Z-f7bcb032", "amigo": "desi", "seconds": 0.9, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_unreplayed_verdicts.py"]}
+{"run": "20261108T125235Z-0394c705", "amigo": "dmitri", "seconds": 1.0, "verdict": "not-reproducible", "tree": "patched-3way", "blamed": ["test_agenda_index.py", "test_readme_tools_table.py", "test_wake_context_caps.py"]}
+{"run": "20261108T080607Z-2f1f8fbe", "amigo": "desi", "seconds": 2.0, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_ledger_verdict_mirror.py", "test_ledger_watch.py"]}
+{"run": "20261108T005118Z-a09fab51", "amigo": "dmitri", "seconds": 1.1, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_reject_queue_sweep.py", "test_runner_is_last.py"]}
+{"run": "20261107T185034Z-237533a9", "amigo": "dmitri", "seconds": 1.0, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_reject_queue_sweep.py"]}
+{"run": "20261107T084904Z-6dffe0c1", "amigo": "dmitri", "seconds": 1.1, "verdict": "confirmed", "tree": "patched-3way", "blamed": ["test_stuck_patch_sweep.py"]}
+{"run": "20261106T064532Z-1b99591d", "amigo": "dmitri", "seconds": 3.7, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261106T015952Z-9cb47253", "amigo": "desi", "seconds": 0.7, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_meeting_status.py"]}
+{"run": "20261105T075803Z-31b9c864", "amigo": "desi", "seconds": 0.6, "verdict": "not-reproducible", "tree": "patched-3way", "blamed": ["test_evidence_table_registration.py"]}
+{"run": "20261105T055759Z-cdbcd045", "amigo": "desi", "seconds": 0.9, "verdict": "confirmed", "tree": "patched", "blamed": ["test_reading_queue.py"]}
+{"run": "20261104T215722Z-baa7ef40", "amigo": "desi", "seconds": 3.5, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261104T043854Z-b02e62ae", "amigo": "dmitri", "seconds": 0.8, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_agenda_index.py", "test_wake_context_caps.py"]}
+{"run": "20261104T023833Z-7a7e9693", "amigo": "dmitri", "seconds": 0.8, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_meeting_status.py"]}
+{"run": "20261103T175406Z-955c0d0f", "amigo": "desi", "seconds": 3.7, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_item_ledger_merge.py"]}
+{"run": "20261103T123609Z-e93c654e", "amigo": "dmitri", "seconds": 12.3, "verdict": "not-reproducible", "tree": "patched-3way", "blamed": ["test_gen_index.py"]}
+{"run": "20261103T035205Z-30ed8c3b", "amigo": "desi", "seconds": 59.5, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_declutter_audit.py", "test_gen_index.py"]}
+{"run": "20261103T015153Z-4d11852a", "amigo": "desi", "seconds": 47.7, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_declutter_audit.py"]}
+{"run": "20261102T235144Z-f32e07ac", "amigo": "desi", "seconds": 0.8, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_item_ledger_wake_rate.py"]}
+{"run": "20261102T183423Z-5f19b52e", "amigo": "dmitri", "seconds": 3.5, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261102T175107Z-734612f8", "amigo": "desi", "seconds": 0.7, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_postpone_expired.py"]}
+{"run": "20261102T155046Z-2030d082", "amigo": "desi", "seconds": 47.8, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_declutter_audit.py"]}
+{"run": "20261102T095004Z-6e8a4600", "amigo": "desi", "seconds": 0.8, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_delivered_not_read.py"]}
+{"run": "20261102T023220Z-b1011bda", "amigo": "dmitri", "seconds": 1.1, "verdict": "confirmed", "tree": "patched-3way", "blamed": ["test_retirement_watch.py"]}
+{"run": "20261101T210207Z-4c73417a", "amigo": "gemini", "seconds": 46.7, "verdict": "not-reproducible", "tree": "patched-3way", "blamed": ["test_declutter_audit.py"]}
+{"run": "20261101T194849Z-57ed3b81", "amigo": "desi", "seconds": 46.0, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_declutter_audit.py"]}
+{"run": "20261101T123046Z-fbcf7e86", "amigo": "dmitri", "seconds": 0.6, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_agenda_index.py", "test_wake_context_caps.py"]}
+{"run": "20261101T054704Z-cdd6c59d", "amigo": "desi", "seconds": 0.7, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261101T014645Z-1ca4cee9", "amigo": "desi", "seconds": 3.0, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261031T214622Z-ac61c8c6", "amigo": "desi", "seconds": 1.2, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_music_checker.py"]}
+{"run": "20261031T210017Z-526d0393", "amigo": "gemini", "seconds": 0.9, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_agenda_index.py", "test_wake_context_caps.py"]}
+{"run": "20261031T102651Z-97aa7c01", "amigo": "dmitri", "seconds": 0.8, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_outreach_ledger_audit.py"]}
+{"run": "20261031T082623Z-26e282d4", "amigo": "dmitri", "seconds": 2.8, "verdict": "already_applied+red_on_main", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261031T022537Z-20f65972", "amigo": "dmitri", "seconds": 3.4, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261030T222633Z-00a3d124", "amigo": "dmitri", "seconds": 3.5, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261030T194152Z-48920431", "amigo": "desi", "seconds": 3.3, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261030T135518Z-4c531e83", "amigo": "dmitri", "seconds": 3.4, "verdict": "not-reproducible", "tree": "patched-3way", "blamed": ["test_cited_path_gate.py"]}
+{"run": "20261030T111248Z-6ec72e07", "amigo": "gwen", "seconds": 0.9, "verdict": "already_applied", "tree": "head-with-work", "blamed": ["test_agenda_index.py", "test_creative_wings_map.py"]}
+{"run": "20261030T074008Z-495863f5", "amigo": "desi", "seconds": 3.4, "verdict": "not-reproducible", "tree": "patched-3way", "blamed": ["test_cited_path_gate.py"]}

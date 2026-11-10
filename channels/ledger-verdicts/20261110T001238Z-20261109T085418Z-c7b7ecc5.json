@@ -1,0 +1,9 @@
+{
+  "id": "20261109T085418Z-c7b7ecc5",
+  "mirrored_utc": "2026-11-10T00:12:38Z",
+  "reason": "READ (reading-queue desi), checked from disk 2026-11-10Z, and every claim holds. (1) docs/music/the-unlogged-hour.html, scripts/music_catalogue_unwired.py and research/creative-wings-map.md are all on main. (2) python3 scripts/music_catalogue_unwired.py reports '17 piece page(s) checked, 0 problem(s)' \u2014 one page more than the 16 the report names, which is growth since, not a contradiction; the four remaining lines are the known-dark/known-unoffered entries the tool prints on purpose. (3) The three reclaimed ledger-verdict mirrors parse with their stated states. (4) tests/test_songbook_source_sync.py runs 4 tests, OK. This is the run that broke the rebuild-and-drop loop: the missing line in the catalogue test was put back in the same patch as the artifact.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T00:12:38Z"
+}

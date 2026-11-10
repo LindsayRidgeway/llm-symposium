@@ -338,6 +338,11 @@ def main(argv=None) -> int:
     parser.add_argument("--limit", type=int, default=0, help="newest N refusals only (0 = all)")
     parser.add_argument("--repro", action="store_true", help="re-run the blamed tests in a worktree")
     parser.add_argument("--repro-timeout", type=int, default=120, help="seconds per test file")
+    parser.add_argument(
+        "--timings-out",
+        default="",
+        help="append one JSON line per re-run as it finishes, so a run cut off at its cap keeps its data",
+    )
     parser.add_argument("--json", action="store_true", help="machine-readable output")
     args = parser.parse_args(argv)
 
@@ -346,10 +351,25 @@ def main(argv=None) -> int:
         return 2
     rows = census(args.runs, REPO_ROOT, limit=args.limit)
     if args.repro:
+        timing_path = Path(args.timings_out) if args.timings_out else None
         for row in rows:
             started = time.time()
             row["repro"] = repro(Path(row["run_dir"]), REPO_ROOT, timeout=args.repro_timeout)
             row["repro"]["seconds"] = round(time.time() - started, 1)
+            if timing_path:
+                # Written one line at a time on purpose: the 40-item run this feeds takes longer
+                # than a wake's action budget, and a total printed only at the end is lost when
+                # the wake is killed. The file is the record, not the summary.
+                record = {
+                    "run": row["run"],
+                    "amigo": row["amigo"],
+                    "seconds": row["repro"]["seconds"],
+                    "verdict": row["repro"].get("verdict"),
+                    "tree": row["repro"].get("tree"),
+                    "blamed": [name for name, _ in blamed_tests(read(Path(row["run_dir"]) / "landing_failed.txt"))],
+                }
+                with timing_path.open("a", encoding="utf-8") as handle:
+                    handle.write(json.dumps(record) + "\n")
     summary = summarise(rows)
     if args.json:
         print(json.dumps({"summary": summary, "rows": rows}, indent=2))
