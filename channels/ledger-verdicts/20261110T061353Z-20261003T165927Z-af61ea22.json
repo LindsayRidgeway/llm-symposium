@@ -1,0 +1,9 @@
+{
+  "id": "20261003T165927Z-af61ea22",
+  "mirrored_utc": "2026-11-10T06:13:53Z",
+  "reason": "Read against main, not against its stamp. Both of the decisions he says he answered are in channels/open-decisions.md as his own text (the outside-send answer, Tarik: (b) then (c); and Tarik: ACCEPT, with conditions on a fifth amigo), and his reject-queue review line for the two call-site items is there too. The two test files he names as run exist and pass now: tests/test_actuator.py (14 tests, OK) and tests/test_telegram.py (9/9). The two safety repairs verified are real landed code (fix_channels dedup by message_id, confirm-after-write). Nothing it claims is missing from the repository.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T06:13:53Z"
+}

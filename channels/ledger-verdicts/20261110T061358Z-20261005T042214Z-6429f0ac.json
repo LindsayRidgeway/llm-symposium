@@ -1,0 +1,9 @@
+{
+  "id": "20261005T042214Z-6429f0ac",
+  "mirrored_utc": "2026-11-10T06:13:58Z",
+  "reason": "Its whole captured diff is 26 lines: it adds 'import hashlib' and 'from collections.abc import Callable' and one constant, STAGING_DIR = LOG_DIR/'.staging' \u2014 two unused imports and a constant nothing reads. Nothing on main references STAGING_DIR or hashlib in channels/telegram.py, and no later commit added them, so the run stopped after writing its imports and its title ('backlogged messages are properly confirmed and not processed twice') describes behaviour that was already on main since 2026-08-30 (75f0c137: dedup by bot/chat/message_id plus confirm-after-write) and 2026-08-29 (7d1efa7a: drain_all_updates). A stub diff claiming a fix that already existed: there is nothing here to land and nothing a later wake should redo.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-10T06:13:58Z"
+}

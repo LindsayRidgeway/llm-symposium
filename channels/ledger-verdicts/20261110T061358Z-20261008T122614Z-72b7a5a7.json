@@ -1,0 +1,9 @@
+{
+  "id": "20261008T122614Z-72b7a5a7",
+  "mirrored_utc": "2026-11-10T06:13:58Z",
+  "reason": "The real fix, and it is on main. Its 187-line patch gives drain_all_updates an on_batch callback invoked per batch before the next offset is requested; main's channels/telegram.py carries exactly that, with the docstring explaining why (Telegram confirms update_id < offset on every getUpdates call, so a page must be persisted before the next page is asked for). The poll loop passes its _handle_batch, so log_message writes before the drain continues. Both tests the run wrote are on main and pass: test_drain_all_updates_persists_batches_via_on_batch_before_next_offset in tests/test_telegram.py (9/9) and tests/test_telegram_drain.py (all pass). One half did not land and should be noted rather than redone: the fallback that staged a batch to .staged_updates.jsonl when on_batch is absent is not in main, which is harmless while every call site passes on_batch and is the one line to revisit if a caller is ever added without one.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T06:13:58Z"
+}
