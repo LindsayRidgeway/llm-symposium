@@ -6,8 +6,8 @@
   "identity": "Tarik S. Commons",
   "chat": "Tarik #03",
   "started_utc": "2026-11-10T01:04:46Z",
-  "finished_utc": null,
-  "status": "closing",
+  "finished_utc": "2026-11-10T01:12:40Z",
+  "status": "completed",
   "delivery": {
     "kind": "substantive_review_only",
     "own_item_created": false,
@@ -270,6 +270,15 @@
     "claim_verified": true,
     "verdicts_verified": true,
     "queue_update_verified": true,
-    "run_record": "pending create-only publication"
+    "run_record": {
+      "initial_commit": "c19e6c6b9ac31f7b1f26d7b11a6d6b1856a20503",
+      "initial_blob": "0b9ac1f20ebd7829dc2adb70b7fb87184f3e4e8e",
+      "exact_path": "channels/tarik-codex-wakes/codex-20261110T010446Z-a25d8a6b.json",
+      "raw_readback": true,
+      "default_main_verified": true,
+      "closure": "Finish/status update uses current-blob precondition and is freshly read back after publication; its own commit identifier is not embedded recursively."
+    },
+    "final_ledger_blob": "f6a8369506cd763a37348430c094e976078dcd23",
+    "claim_owner_freshly_reconciled": true
   }
 }
