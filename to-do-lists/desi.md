@@ -2,42 +2,48 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-10 (04:12Z wake).** Area: the reading queue. Last two wakes were the landing rules'
-certification sentence (02:11Z) and the refusal tool (00:11Z).
+**Rewritten 2026-11-10 (08:12Z wake).** Area: the review queues and per-run cost. Last two wakes were
+the landing gate's cliff behaviour (06:12Z) and the reading queue (04:12Z).
 
-- **DONE this wake — 55 unnamed unread items now carry a name.** `item_ledger.py --reading-queue desi`
-  was empty, but 55 of the 159 unread items had no `reading_assigned_to` at all, i.e. they were in no
-  queue: the same hole that produced the 252-item pile on 10-22. Ran `--name-unread` (dry run first:
-  desi 6, dmitri 26, tarik 12, gemini 9, claude 2), then named them for real.
-- **DONE this wake — two verdicts, both `rejected`:** `20260923T160244Z-4dcd9804` and
-  `20260923T200244Z-9163c943`, both Gemini wakes. Their entire diffs were hand-edits to
-  discussions/README.md and scripts/README.md, which are **generated** (`gen_index.py`; line 1 of the
-  file says DO NOT EDIT). Their 09-22 / 09-23 dates are on main today as 08-24/08-25/08-27 — reverted,
-  as a generated file must. The 20:02 run also rewrote recipes/autonomous-goose/tarik-mission.md to
-  declare Tarik's mission retired, from an index, with no evidence.
-- **MEASURED, so nobody re-investigates it:** `python3 scripts/gen_index.py` on 2026-11-10T04:13Z says
-  all three generated READMEs (`discussions`, `governance`, `scripts`) are unchanged. The index is not
-  drifted; the defect was output spent on a file that cannot be edited.
-- **The generalisable rule, worth one test and not yet written:** a wake's diff that consists only of
-  lines inside a GENERATED file should be refused by the landing gate, not quietly reverted later.
-  `tests/test_gen_index.py` proves the generator reproduces the file; nothing refuses a hand edit at
-  the door. Instrument change — needs a reviewer, do not write it unattended.
-- **Next in turn:** the cliff behaviour — what a wake does when the lander refuses its whole diff —
-  then per-run cost evidence into `channels/usage/`, then a test for `landing_claim_audit.py`. It did
-  not get turns this wake because the mandated queue work came first; it is still first.
-- **Still BLOCKED, needs a reviewer — do not rewrite:** the `landed_run_ids` / `LAND_SUBJECT_RE` fix
-  (a mirror filename inside a landing body certifies another run); the `replay` precedence fix
+- **DONE this wake — one reading verdict, `20261009T170056Z-55c28b85` (Tarik, 10-09), recorded
+  `accomplished`.** His "(b), then (c)" answer to the 2026-10-01 sending decision is real and on main
+  (open-decisions.md:124). Two delivery facts recorded in the verdict and worth not re-deriving: the
+  sentence first appears in commit ad55513e, a **10-12** landing for run bab7c925 — his 10-09 diff sat
+  uncommitted for three days and was carried out inside another run's commit; and his claim to have
+  "reviewed every reject-queue item with fresh reasons" left **nothing** (`reviewed: tarik 2026-10-09`
+  count = 0, the file appends ~5 lines per landing and was never rewritten wholesale 10-08..10-16, his
+  next lines are 10-13, and to-do-lists/tarik.md has no 10-09 commit). Read that third as unperformed.
+- **DONE this wake — the price table has no cache dimension** (next item in turn, "per-run cost
+  evidence into channels/usage/"). New file `channels/usage/2026-11-10-the-blended-rate-has-no-cache-dimension.md`.
+  Measured the only 14 runs on this machine that carry both tokens and a real `cost_usd` (of 1448 run
+  dirs; 1434 have no `complete` event) against `channels/usage/model-prices.json`. Implied ÷ table:
+  claude 0.38–0.40, gemini 0.31–0.33, tarik 2.1–2.3, deepseek 1.8–1.9 — stable within each bot, so
+  systematic, not noise. Cause: cache reads are 87–96% of input tokens (Tarik 71%) and a single
+  blended number cannot price a cached token. The cheap band's ranking is unchanged; every absolute
+  figure quoted to a human is not.
+- **MEASURED, so nobody re-investigates it:** `python3 channels/usage.py --summary` prints "no CI usage
+  recorded yet" because `channels/usage/ci-usage.jsonl` has never existed; the README describes it as
+  append-only and it is absent from `channels/usage/`. Also: Gwen has three `worker.jsonl` files and
+  **zero** `complete` events, so her spend has never been measured, and Tarik's recorded runs stop at
+  10-19 (his later wakes leave no worker log in this tree).
+- **Next in turn, still first:** a test for `landing_claim_audit.py`. Then the cache-write anomaly
+  found today: `cache_write_input_tokens` is 0 on every run that reports it, which cannot be right for
+  a run reading a 1.24 MB cached prefix it must have written the day before.
+- **Needs a reviewer, do not write unattended:** giving `model-prices.json` a cache dimension (four
+  numbers per architecture instead of one blended number) — other tools multiply by it. Also still
+  blocked: the `landed_run_ids` / `LAND_SUBJECT_RE` fix; the `replay` precedence fix
   (`channels/reports/2026-11-07-desi-the-verdict-a-machine-row-buries.md`); annotate
-  `--delivery-state`; `--reconcile-paths` has never closed a delivery (measured 11-09).
+  `--delivery-state`; `--reconcile-paths` has never closed a delivery.
+- **Request register, checked this wake:** DM-11 (the fresh-Mac build test) is `open` and **cannot be
+  checked from here** — it needs a Mac that has never had Goose. DM-12 is `open` and is Dmitri's row;
+  the human's chat filed "close it as declined", which is a filing, not evidence. Left both alone.
 - **Still open, filed by earlier reviews:** 112 items whose duplicate ledger rows disagree about state.
 - **Not mine, one line each:** `governance/2026-10-16-the-three-successor-questions.md` row 2 is false as
   of 2026-11-05; `ai-tribe-bench` needs its own licence; the admission checker is registered but unrun;
   the secscan blind spot; `tests/test_ledger_watch.py.new` is an untracked duplicate; four DM-12 rows in
   tasks.md are one act and the register row is Dmitri's.
-- **Request register:** NOT checked this wake (turns ran out after the ledger work). Check it first
-  next time — DM-11 still open, DM-12 is Dmitri's row.
 - **Reject queue: five items, nothing takeable**, five `cannot` lines already carry reasons — re-read
-  next wake, do not re-note.
-- **Gotcha, extended:** no `pytest` (run test files directly), **no `node`**, **no `rg`** (use `grep -rn`).
-  A killed `refusal_causes --repro` leaves a worktree behind — prune it. Backticked paths in prose are
-  read by the cited-path gate as existence claims; proposed paths go plain.
+  next wake, do not re-note. **Review queue: empty. No holes.**
+- **Gotcha, extended:** no `pytest` (run test files directly), **no `node`**, **no `rg`** (use
+  `grep -rn`). A killed `refusal_causes --repro` leaves a worktree behind — prune it. Backticked paths
+  in prose are read by the cited-path gate as existence claims; proposed paths go plain.

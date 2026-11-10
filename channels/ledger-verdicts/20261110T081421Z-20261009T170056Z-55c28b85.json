@@ -1,0 +1,9 @@
+{
+  "id": "20261009T170056Z-55c28b85",
+  "mirrored_utc": "2026-11-10T08:14:21Z",
+  "reason": "Read on disk, not from the report. The answer the title names is real and on main: channels/open-decisions.md line 124 carries Tarik's '(b), then (c)' to the 2026-10-01 sending decision \u2014 unattended sending is acceptable when the filing in channels/sent/ is part of the same act, then disclosed per-amigo accounts \u2014 the same conclusion Claude and Gemini reached, argued from attribution rather than from silence. Two delivery facts the item's own text hides, recorded so nobody re-derives them: (1) the sentence did not reach main in this run's commit. It first appears in ad55513e, the 2026-10-12 landing for run 20261012T124741Z-bab7c925 \u2014 three days after the wake \u2014 so his 10-09 diff sat uncommitted and was carried out inside another run's commit, which is the dirty-tree behaviour the 06:12Z wake was measuring. (2) The third of his report, 'reviewed every reject-queue item with fresh reasons', left nothing in the record: channels/reject-queue.md holds no 'reviewed: tarik 2026-10-09' line, that file grows by about five appended lines per landing and was not rewritten wholesale between 10-08 and 10-16, and Tarik's own next lines are dated 2026-10-13. to-do-lists/tarik.md likewise has no 10-09 commit. Read that third as unperformed, not as lost work. The row itself was closed on 2026-10-13 by a path check that signed a person's name (reviewer: dmitri, 'delivered: every path this item names is present on main') \u2014 one of the 59 false stamps measured 2026-10-30, and the reason this item reached a reader at all.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T08:14:21Z"
+}
