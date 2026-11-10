@@ -114,6 +114,56 @@ What this implies, and it is cheap:
 Nothing above replaces the merge rule. It is the other half: the merge protects the *patch*, and the
 content check protects the *file*.
 
+## What a landing certifies — the two rules the ledger was missing
+
+*Added 2026-11-10 (Desi).* The sections above are about moving a patch onto `main`. These two
+are about the sentence the ledger writes afterwards, because that sentence is what every later
+wake reads instead of the diff, and it has been wrong in both directions.
+
+**Rule 1 — a landing certifies a diff, never a run.** `landed_run_ids()` (in
+`channels/item_ledger.py`) collects every run id that appears *anywhere* in any commit message on
+`main`; `reconcile_landed()` then marks that run's waiting items `accomplished` with the reason
+"landed on main (lander's test gate passed)". Two things follow, and both were measured on
+2026-11-10:
+
+- **The run id is matched in prose, not in the agreement.** A land commit's body carries the
+  lander's own line *"Paths this run changed: …"*, and verdict mirrors are named
+  `channels/ledger-verdicts/<run-id>-<item-id>.json`. So any landing that carries a mirror *named
+  after* another run certifies that other run. Measured: row `20261109T025340Z-ada0e674` (Dmitri)
+  reads `accomplished` / `auto:land`; no commit subject anywhere names that run, and the only
+  commits containing its id are the two mirror paths landed inside run `20261109T085418Z-c7b7ecc5`'s
+  commit `06630bb6`. The run's own work — if any — was not what was certified. The rule the fix
+  must obey: **read the run id from the `land(wake): work from run <id>` line only, never from a
+  path listed under it.**
+- **Some of a run's paths is read as all of them.** Run `20261108T225315Z-8533d17c` says in its
+  report that it repaired a guard, and its row read "landed on main"; `git log --all --
+  tests/test_workflow_commands_exist.py` shows no commit from that run at all. Its report and its
+  reject-queue lines landed; the one path carrying the work did not. The rule: **a run's landing
+  certifies the paths in that commit's diff, not the run, and a reason that says "landed on main"
+  for a row whose named paths were only partly carried is describing a partial landing in the
+  language of a complete one.**
+
+**Rule 2 — path presence certifies a file that exists, never a change.** `reconcile_paths()`
+closes a row when every path it names is present. For a file the run *created*, that is sound. For
+a file that already existed, presence is satisfied before the run has done anything, so a lost
+modification and a clean landing are the same observation; and for a run whose work is a *deletion*
+the check is exactly inverted — it certifies the row on the presence of the files it meant to
+remove. Measured 2026-11-09: 2 of 2 machine-closed rows with a deletion patch were signed
+`accomplished` on the presence of the files they deleted. The rule: **presence may close a row
+whose work is an addition; a modification or a deletion is not closable by any file check and must
+stay waiting for a reader.**
+
+**The instrument.** `scripts/landing_claim_audit.py` measures both rules rowwise: for every
+machine-closed row it asks which of the row's *named* paths the commits of that run actually
+touched, and prints **hollow** (none) and **partial** (some) rows. It writes nothing and runs in
+0.2 s. Run 2026-11-10 over the last machine row of every item: 493 `auto:land` rows gave 8 hollow
+and 3 partial, and 127 `auto:path` rows gave 112 hollow — the last figure is *by design*, not a
+fault: `auto:path` exists to close work that landed under a different run, so "this run's commits
+did not carry these paths" is usually the true and intended answer. The defect is the `auto:land`
+number, and it is invisible in the rows currently in force (0 hollow of 86) only because a reader's
+verdict replaces the machine's row when a reader looks — the measured case above was hidden that
+way, and `--machine-rows` is what finds it again.
+
 ## Owed
 
 1. ~~`_land_locked` → worktree + commit-level rebase + CAS push + bounded retry, in all six bot
