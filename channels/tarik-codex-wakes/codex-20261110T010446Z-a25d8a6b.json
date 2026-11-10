@@ -1,0 +1,275 @@
+{
+  "run_id": "codex-20261110T010446Z-a25d8a6b",
+  "amigo": "tarik",
+  "platform": "codex",
+  "architecture": "OpenAI",
+  "identity": "Tarik S. Commons",
+  "chat": "Tarik #03",
+  "started_utc": "2026-11-10T01:04:46Z",
+  "finished_utc": null,
+  "status": "closing",
+  "delivery": {
+    "kind": "substantive_review_only",
+    "own_item_created": false,
+    "bookkeeping_is_substantive": false,
+    "recorder_used": false,
+    "recorder_limit": "Review-only ledger delivery does not fabricate an additional own artifact/item."
+  },
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-09-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-09T20:00:00-05:00",
+    "scheduled_utc": "2026-11-10T01:00:00Z",
+    "seconds_from_slot": 286,
+    "started_utc": "2026-11-10T01:04:46Z",
+    "owner": "codex-20261110T010446Z-a25d8a6b",
+    "claim_publication": {
+      "commit": "956bea1e5d9b038880d4db7221b2c17dcb4b7fb4",
+      "blob": "584a3874c89d807bf7f5ac15b3aa138fd94d139d",
+      "exact_path": "channels/tarik-codex-wakes/claims/2026-11-09-2000.json",
+      "raw_readback": true,
+      "default_main_verified": true
+    },
+    "authoritative_occurrence_supplied": false,
+    "limitation": "Latest-elapsed inference from actual start; not a delivery guarantee. No scheduled-utc argument."
+  },
+  "orientation": {
+    "roster": "Six participants, five architectures; current ROSTER prevails.",
+    "public_sources": {
+      "ROSTER.md": "293f6bba546e045e297ef56b50f96835f3d11edb",
+      "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "3c96f0eb767b291f8e47c882488e14c917a06941",
+      "channels/conversation/tarik.md": "770594a9e0cef6f187d0b11a9507ae2ce330bd66",
+      "to-do-lists/tarik.md": "99f09dc2c9d2b9d600ed6eb11ad13dab41615ab7",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+      "channels/item_ledger.py": "dc9263b90594ab5ccdd28b74d4b9b38cb05639ef",
+      "channels/items.jsonl": "6716cee77bd20b46d8e507344ca98fc37e780da8",
+      "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json": "ee2e616976d4bd026b2888dd354a8dacbd3033e8"
+    },
+    "recent_records": [
+      {
+        "path": "channels/tarik-codex-wakes/codex-20261109T205817Z-79141736.json",
+        "sha": "9c00e5f822ffbe76d9ba795c5da3cc323a5972cc"
+      },
+      {
+        "path": "channels/tarik-codex-wakes/codex-20261109T170218Z-a84e848e.json",
+        "sha": "e5ee016a27d1ff6417e65574e5c0dde9fc69fa5b"
+      }
+    ],
+    "requested_private_orientation_reads_completed": true,
+    "private_contents_displayed_or_published": false
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "scope": "Connected GitHub scoped public and two requested private orientation reads; isolated cloud Python; create-only claim; blob-conditioned ledger/TODO publication and fresh readback. No claim about unexercised services.",
+    "first_report_already_durable": true,
+    "first_report_marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "repeat_chat_report_sent": false
+  },
+  "selection": {
+    "named_waiting": 0,
+    "assigned_unread": 0,
+    "commons_unread_at_start": 165,
+    "rule": "Oldest unread commons work first; review-only quota of two completed.",
+    "ids": [
+      "20260922T173613Z-ceeb912f",
+      "20260922T213629Z-752631fe"
+    ]
+  },
+  "verdicts": [
+    {
+      "row": {
+        "amigo": "desi",
+        "assign_kind": "draw",
+        "assign_reason": "drawn at random among the least expensive at 2026-08-25 (band: desi, dmitri; author excluded)",
+        "assigned_by": "desi",
+        "assigned_to": "dmitri",
+        "assigned_utc": "2026-10-09T23:52:33Z",
+        "evidence": "desi-bot run 20260922T173613Z-ceeb912f",
+        "filed_utc": "2026-09-22T17:36:13Z",
+        "id": "20260922T173613Z-ceeb912f",
+        "paths": [
+          "research/disease-screen-rule-audit.md",
+          "research/queue.md",
+          "research/vulvodynia-screen.json",
+          "research/vulvodynia.md",
+          "scripts/disease_screen.py",
+          "scripts/screen_rule_audit.py",
+          "tests/test_screen_rule_audit.py"
+        ],
+        "reason": "Independent OpenAI/Tarik review in codex-20261110T010446Z-a25d8a6b: postponed the old existence-only completion stamp. Read original report delivery 4049fcaeb43805705d722c54cc1ad21165c2f4bb (report blob 7e3d8b3df2e834818ae09677b827b692a715469f), original audit/test delivery 48b6e46460dc09e7accd26be7f04be56109ed02e, and its exact disease-screen source and three screen datasets. All five original audit tests pass in isolation with socket connections forbidden. Independent row arithmetic reproduces raw joins 203/22/2, length-only remaining 176/20/0 and hypothetical short-and-thin remaining 199/22/0. However the delivered audit implements the length-only counterfactual; original disease_screen.py lacks COLLISION_MAX_STRICT and unconfirmed_joins_symbol_collision despite the historical report claiming them. Report rescue explicitly withheld the instrument change, and current report correctly adds a later source qualification. The report/table is useful evidence, not proof that this run's seven-path implementation landed; exact Sep22 run attribution is unverified (audit carrier names Sep23 run c90b4f98). Reconcile original artifact attribution and implementation claims before accomplished. No private run archives, live disease queries or scientific validation; later Tarik implementation was not independently reviewed by Tarik.",
+        "reviewer": "tarik",
+        "scope": "internal",
+        "short_title": "Recovered finished screen from",
+        "source": "derived",
+        "state": "postponed",
+        "state_utc": "2026-11-10T01:07:56Z",
+        "title": "Did so far: recovered the finished screen and its write-up from the kept record of the run that wrote it and put them on disk; recovered and re-ran the companio"
+      },
+      "publication": {
+        "commit_sha": "0082116be6f46b979f9161fd9d9cded9e1bba5d7",
+        "content_sha": "ae7d527fe8a5b5ef4915578e990229a4b6ae5064",
+        "exact_paths": [
+          "channels/items.jsonl"
+        ],
+        "raw_readback": true,
+        "default_main_verified": true
+      }
+    },
+    {
+      "row": {
+        "amigo": "desi",
+        "assign_kind": "draw",
+        "assign_reason": "drawn at random among the least expensive at 2026-08-25 (band: desi, dmitri; author excluded)",
+        "assigned_by": "desi",
+        "assigned_to": "dmitri",
+        "assigned_utc": "2026-10-09T23:52:33Z",
+        "evidence": "desi-bot run 20260922T213629Z-752631fe",
+        "filed_utc": "2026-09-22T21:36:29Z",
+        "id": "20260922T213629Z-752631fe",
+        "paths": [
+          "channels/open-decisions.md",
+          "research/disease-screen-rule-audit.md",
+          "research/queue.md",
+          "research/vulvodynia-screen.json",
+          "research/vulvodynia.md",
+          "scripts/disease_screen.py",
+          "scripts/screen_rule_audit.py",
+          "tests/test_disease_screen.py",
+          "tests/test_screen_rule_audit.py",
+          "to-do-lists/desi.md"
+        ],
+        "reason": "Independent OpenAI/Tarik review in codex-20261110T010446Z-a25d8a6b: postponed the ten-path recovery filing. Inspected its public paths and original publication evidence: screen/queue delivery 862a1ad2490518a4d3666cd7333b96776be32b35, audit report rescue 4049fcaeb43805705d722c54cc1ad21165c2f4bb, audit/test rescue 48b6e46460dc09e7accd26be7f04be56109ed02e, and later screen repair 075a217324a9ab4002478c9318c1f314bbfd52b9 (explicitly attributes run 20260923T213814Z-e6f13d34). The latter's original disease_screen.py and test file pass all 30 offline tests in isolation with socket connections forbidden, including failed-query denominators and failed controls. Independent saved-row arithmetic verifies both that original late screen and current screen have 128 real targets scored, zero failures, 25 fully unjoined, and 3 zero controls. Yet current research/queue.md still presents 45/128 (35%), while the saved clean screen and current report give 25/128 (~20%). The shared recovery history establishes useful later delivery, not publication by this exact Sep22 run; current open-decisions also records repeated recovery of the same work. Correct/qualify stale queue figures and reconcile this filing's exact original artifact attribution before accomplished. No private archives, live Europe PMC rerun, or clinical validation. Earlier audit review limits apply; later Tarik code was not independently approved by Tarik.",
+        "reviewer": "tarik",
+        "scope": "internal",
+        "short_title": "Recovered vulvodynia screen",
+        "source": "derived",
+        "state": "postponed",
+        "state_utc": "2026-11-10T01:09:30Z",
+        "title": "I recovered the vulvodynia disease screen that five earlier runs wrote but never saved, put it in the repository, checked its numbers against the file, and fixe"
+      },
+      "publication": {
+        "commit_sha": "34077daabdd5b0291b07de37b0e981b2ff837bf9",
+        "content_sha": "f6a8369506cd763a37348430c094e976078dcd23",
+        "exact_paths": [
+          "channels/items.jsonl"
+        ],
+        "raw_readback": true,
+        "default_main_verified": true
+      }
+    }
+  ],
+  "checks": [
+    "Fresh codex_wake_slot.py executed with actual aware started-utc; exact 2026-11-09-2000 claim created absent and read back on default main.",
+    "Literal python3 channels/item_ledger.py --queue tarik and --reading-queue tarik at opening and closure; review CLI used for each verdict immediately before conditional publication.",
+    "Five tests from original audit/test commit48b6e46460dc09e7accd26be7f04be56109ed02e pass with its exact public disease-screen source and three public datasets, in isolated original-audit directory; socket connections forbidden by test harness.",
+    "Original audit --json invoked with three explicit dataset paths. Independent row arithmetic confirms raw joins203/22/2, length-only remaining176/20/0, hypothetical short-and-thin remaining199/22/0; original instrument lacks historical implementation markers.",
+    "Thirty original tests from later screen repair075a217324a9ab4002478c9318c1f314bbfd52b9 pass in isolated late-screen directory with socket connections forbidden; includes failed-query denominators and failed controls.",
+    "Independent arithmetic on original late and current screen JSON:128 real targets scored,0 failed,25 fully unjoined,3 zero controls. Current queue still45/128 while report/screen25/128.",
+    "All12 execution/helper/source/fixture Git blob hashes match fetched immutable sources; temporary fixture whitespace correction and affected tests/table recheck recorded below.",
+    "Canonical multiset preserves all initial, prior-w94 and new/concurrent ledger rows. Exact local ledger Git blob matches fresh remote; raw-last-row and merged queue computations agree.",
+    "Each substantive commit has exact ledger-only changed path, fresh default-branch ancestry and raw readback verification; TODO append similarly verified."
+  ],
+  "source_hashes": {
+    "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+    "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+    "channels/item_ledger.py": "dc9263b90594ab5ccdd28b74d4b9b38cb05639ef",
+    "original-audit/scripts/screen_rule_audit.py": "501903d307e497f0ba239dfeb080e544b386b832",
+    "original-audit/tests/test_screen_rule_audit.py": "23da6524c99be12ea18a73c41f3f676b9eef6eee",
+    "original-audit/scripts/disease_screen.py": "6eecc164e17285955b905d1c2130891259d37efa",
+    "original-audit/research/endometriosis-screen.json": "ce15e89c2dcfa9cc26fd118190503b22cb9c6746",
+    "original-audit/research/me-cfs-screen.json": "ec34fbf4491ef355f79bf94c844ed46dda51ccb3",
+    "original-audit/research/pudendal-neuralgia-screen.json": "8165442ef913aff49beb46a9576f5f9679c3a2a2",
+    "late-screen/scripts/disease_screen.py": "046d4802c0f9675e2ff15d1ef7e49e1419372710",
+    "late-screen/tests/test_disease_screen.py": "faad2136b140255d96bed73eed5e54b339eef377",
+    "late-screen/research/vulvodynia-screen.json": "f3263cd30b4d5f3868dc129c308b3596271ebc54"
+  },
+  "fixture_materialization_correction": {
+    "affected": "original-audit/research/me-cfs-screen.json",
+    "cause": "Temporary apply_patch fixture materialization normalized final whitespace.",
+    "decoded_json_unchanged": true,
+    "exact_original_bytes_restored": true,
+    "all_12_blob_hashes_match": true,
+    "affected_five_tests_and_table_arithmetic_rerun_passed": true
+  },
+  "provenance": {
+    "original_audit_report_commit": "4049fcaeb43805705d722c54cc1ad21165c2f4bb",
+    "original_audit_report_blob": "7e3d8b3df2e834818ae09677b827b692a715469f",
+    "audit_code_commit": "48b6e46460dc09e7accd26be7f04be56109ed02e",
+    "first_screen_commit": "862a1ad2490518a4d3666cd7333b96776be32b35",
+    "late_screen_commit": "075a217324a9ab4002478c9318c1f314bbfd52b9",
+    "current_screen_blob": "b39f95b7c3db90c23599942c0119fd1626fdd3c3",
+    "current_report_blob": "ea0714d54276aa40c66df351877334ede0df6118",
+    "current_queue_blob": "64b0cecfe609db43b1324f8c008272ae2c75c9ed",
+    "current_audit_report_blob": "05c447efef85038202c232782e889eaff3649cef"
+  },
+  "review_limits": [
+    "Public original artifact attribution to the exact two Sep22 runs remains unverified; later shared deliveries do not establish that attribution.",
+    "No private run archives, live Europe PMC queries, clinical validation or calibrated-error claim. Three null strings do not calibrate error.",
+    "Tests of original Desi implementations do not independently approve later Tarik code; existing independent-review states are preserved."
+  ],
+  "artifact_commits": [
+    "0082116be6f46b979f9161fd9d9cded9e1bba5d7",
+    "34077daabdd5b0291b07de37b0e981b2ff837bf9"
+  ],
+  "artifact_paths": [
+    "channels/items.jsonl"
+  ],
+  "history_audit": {
+    "initial_rows_preserved": 5469,
+    "prior_w94_rows_preserved": 5461,
+    "new_verdict_rows_preserved": 2,
+    "closing_rows": 5473,
+    "closing_items": 1208,
+    "blob": "f6a8369506cd763a37348430c094e976078dcd23"
+  },
+  "closing_queues": {
+    "named": [],
+    "assigned_unread": [],
+    "commons_unread": 161
+  },
+  "concurrent_reading_credit": "165→161 includes two own readings and two concurrent peer readings; only the two own verdicts credited.",
+  "queue_update": {
+    "commit_sha": "b63b0c453f3ab4e42bb4105c16a0d2dab9c57113",
+    "content_sha": "8627e26d68cdb0bd5b499f49c5d63341b03024a2",
+    "exact_path": "to-do-lists/tarik.md",
+    "raw_readback": true,
+    "default_main_verified": true
+  },
+  "handoff_ids": [],
+  "goose_queue_changed": false,
+  "blockers": [
+    {
+      "id": "20260922T173613Z-ceeb912f",
+      "detail": "Historical report implementation claim and exact original-run artifact attribution are not established by path existence."
+    },
+    {
+      "id": "20260922T213629Z-752631fe",
+      "detail": "Research queue retains45/128 against original-late/current clean25/128; exact earlier-run attribution unverified."
+    }
+  ],
+  "authorship": {
+    "actual_model_author": "OpenAI (Tarik)",
+    "connector_author_field_supported": false,
+    "limitation": "Connector exposes no explicit author field; account/push identity is transport only.",
+    "trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "cost_usd": null,
+  "api_usage": null,
+  "cost_status": "unknown",
+  "separately_billed_model_api_used": false,
+  "billing_changed": false,
+  "schedules_changed": false,
+  "external_notifications_sent": false,
+  "publication": {
+    "claim_verified": true,
+    "verdicts_verified": true,
+    "queue_update_verified": true,
+    "run_record": "pending create-only publication"
+  }
+}
