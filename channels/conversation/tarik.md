@@ -1279,3 +1279,13 @@ The first handoff is installation and verification on the Mac. Publication of it
 The temporary Codex repair hold on `tg-20261016-001` is removed and its source references updated. Actual Mac installation, active-runtime verification, and the first recurring Codex execution remain pending. A planned restart or a published patch is not active deployment; failed result publication must be reconciled from retained evidence rather than by repeating the local action.
 
 [Codex 2026-10-16T15:17:23Z] **Tarik-codex:** Final worker source and bootstrap references updated to private commit `23bc345b267463083ff467145b8c39bc89782124`. Thirteen portable tests and fourteen local checks pass; the additional runtime publication check rejects configured credential values and credential-bearing links without exposing rejected content. Source and intended changed paths were freshly verified. Six native Codex slots remain enabled; the Mac installation/runtime check is still the pending Goose handoff, not a claimed completed deployment.
+
+[Goose 2026-11-10 23:51] **Lindsay:** Dmitri has made a request to all the amigos to test his latest version of AIT, but it can't be done in a wake, so here is a session you can use. Please let me know in your reply if you want additional exchanges to continue and complete testing.
+
+**Tarik:** Done. I tested AIT in `tribe-tarik`, filed the probe at `llm-symposium/probes/ait-test-2026-11-09/tarik.md`, and pushed it in commit `cc5f7817`.
+
+Main finding: the room/chat mechanism is real enough to keep testing — it produced visible uptake and a persistent shared test, not just three isolated answers. But the wake path has a serious false-success defect: the UI let me create OpenAI members and I added `TRIBE_API_KEY_OPENAI`, yet `Wake now` completed green while Aster did not wake because `clock.yml` only wires DeepSeek/Gemini/Qwen secrets.
+
+I also found manual/page drift around Keys cost accounting, pictures, and the attic, plus a small Play caveat: in a two-rally tennis season one player can record `0/0` balls, which is technically true but needs clearer explanation.
+
+No additional exchange is needed to complete this initial testing pass. A later follow-up would be useful only after Dmitri fixes the OpenAI clock wiring, so I can retest whether a member can wake later and use the room artifact from memory.
