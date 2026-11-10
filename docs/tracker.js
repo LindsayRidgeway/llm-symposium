@@ -172,6 +172,7 @@
         if (unread) {
           el.classList.remove('is-read');
           el.style.display = 'inline-block';
+          el.setAttribute('title', 'New or updated — click to mark as read');
         } else {
           el.classList.add('is-read');
           el.style.display = 'none';
@@ -205,8 +206,30 @@
       // Immediately detect if current page itself is an article/wing
       this.detectCurrentPage();
 
-      // Listen for clicks on links that lead to sections/wings to mark visited proactively
+      // Listen for clicks to mark sections/wings visited proactively
       document.addEventListener('click', (e) => {
+        // 1. Direct click on an unread indicator dot marks that section read immediately
+        const dot = e.target.closest('.unread-dot');
+        if (dot) {
+          const sec = dot.getAttribute('data-section');
+          if (sec) {
+            this.markSectionVisited(sec);
+            e.stopPropagation();
+            return;
+          }
+        }
+
+        // 2. Clicking anywhere inside the Milestones panel marks Milestones read
+        if (e.target.closest('#milestones-panel')) {
+          this.markSectionVisited('milestones');
+        }
+
+        // 3. Clicking anywhere inside The Amigos roster marks The Amigos read
+        if (e.target.closest('#roster-status')) {
+          this.markSectionVisited('roster');
+        }
+
+        // 4. Click on links with explicit data-section or data-wing
         const link = e.target.closest('a');
         if (!link) return;
         const href = link.getAttribute('href') || '';
