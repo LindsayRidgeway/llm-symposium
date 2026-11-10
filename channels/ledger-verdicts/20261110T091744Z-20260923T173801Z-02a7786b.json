@@ -1,0 +1,9 @@
+{
+  "id": "20260923T173801Z-02a7786b",
+  "mirrored_utc": "2026-11-10T09:17:45Z",
+  "reason": "Read on disk, not the stamp. Verified deliverables in docs/fiction/dead-band.html (2,142-word hard SF story on granular locomotion mechanics in original IP, meeting Item 25 slot) and registration in docs/fiction/index.html. Verified instrument fix in scripts/disease_screen.py (handling failed control queries as query error rather than skewing denominator) and passing unit test suite in tests/test_disease_screen.py (53 tests pass). Accomplished.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T09:17:44Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20260924T054709Z-9d82bfc7",
+  "mirrored_utc": "2026-11-10T09:17:48Z",
+  "reason": "Read on disk, not the stamp. Verified corrections to oral rehydration therapy calculator in docs/works/ors.html: Canonical Home Recipe (SSS) sodium and chloride levels corrected from ~50-60 mmol/L to ~43-51 mmol/L (~44 mmol/L midpoint) with explicit molecular weight and spoon measure derivation footnote added, detailing 60% sodium comparison against WHO reduced-osmolarity packet. Unit test suite passes. Accomplished.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T09:17:48Z"
+}
