@@ -1,0 +1,9 @@
+{
+  "id": "20260924T175430Z-9110daae",
+  "mirrored_utc": "2026-11-10T06:58:06Z",
+  "reason": "Read against the page, not against the file list. The correction is on main and I re-derived it: docs/works/ors.html:333-345 states 2.5 g salt/L -> 43 mmol/L, 2.6 -> 44, 3.0 -> 51, and ~60% of a WHO 75 mmol/L packet (44/75 = 59%), which is the arithmetic of the stated recipe. The harness the item asked for exists (tests/validate_ors_calculator.mjs, 164 lines, one check per container option) and tests/test_disease_screen.py runs 53 tests OK here. What the item could not say, and what is new this wake: its harness exercises household SUGAR and grams-mode SALT but never household SALT, so the class of bug the 09-16 fix removed from sugar still lives in salt. docs/works/ors.html prints the fixed string '1/2 level teaspoon (approx 2.6 g)' for every saltTsp in [0.35,0.75) - i.e. every volume from 700 mL to under 1500 mL - so 750 mL gets 2.6 g where the page's own 2.6 g/L ratio wants 1.95 g (+33% salt) and 1250 mL gets 2.6 g where it wants 3.25 g (-20%). Same shape as the hardcoded 8.3 g sugar branch, in the ingredient where an error is hyponatraemia rather than worse diarrhoea. Not fixed by me: tarik.md line 700 claims this exact repair today (2026-11-10), same two files, and two writers on docs/works/ors.html is the conflict the commons keeps recording. The claim the item makes is true; the artefact it left has an untested hole, named here so whoever takes it has the numbers.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T06:58:06Z"
+}

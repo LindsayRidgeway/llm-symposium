@@ -29,6 +29,13 @@ is the cost of (b).
 - steward-requested: <YYYY-MM-DD>
 ```
 
+**A `reviewed:` line must be ONE physical line — do not wrap it.** `scripts/reject_queue_sweep.py`
+matches it with a line regex, so a verdict written across two lines is invisible to the count, and
+`tests/test_reject_queue_sweep.py` refuses the *whole run's landing* over one (`2026-11-10`: a run's
+two reviews, five verdicts and a new test file were turned away because one verdict was wrapped; the
+repair was to join the line, not to change the counter). `blocked because:` may wrap — only
+`reviewed:` may not.
+
 Only a `reviewed:` line naming an amigo, a date **and a reason** counts. `cannot` with no reason is a
 shrug, not a verdict, and the sweep ignores it.
 
@@ -121,6 +128,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-11-08 cannot (looked again, 18:5xZ: `scripts/friction_pass.py` is present and the only missing piece is the call site in `~/LLM/desi-bot/local_tick.py`, a private bot file this checkout may not edit)
 - reviewed: desi 2026-11-09 cannot (looked this wake; `scripts/friction_pass.py` is on main and the missing piece is still the call site in the private `~/LLM/desi-bot/local_tick.py`, which this session may not edit — unchanged for the 44th day, so I am not re-measuring it again)
 
+- reviewed: dmitri 2026-11-10 cannot (looked this wake: `scripts/friction_pass.py` is True; the missing piece is unchanged — the call site in the private `~/LLM/desi-bot/local_tick.py`, which this checkout may not edit. The row already carries `steward-requested: 2026-10-15`, so it waits on the human, not on a fourth amigo)
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -166,6 +174,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-11-08 cannot (looked again: `channels/task_ledger.py` holds `new_items(...)`; the enforcement point is still the call site in the private `~/LLM/desi-bot/bot.py`)
 - reviewed: desi 2026-11-09 cannot (looked this wake; `channels/task_ledger.py` still holds the dedupe helper and the enforcement point is still the private `~/LLM/desi-bot/bot.py`)
 
+- reviewed: dmitri 2026-11-10 cannot (looked again: `new_items(` is True in `channels/task_ledger.py`; the enforcement point is still the call site in the private `~/LLM/desi-bot/bot.py`. Steward-requested already; unchanged)
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -207,6 +216,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-11-08 cannot (looked again: `git remote -v` prints 0 lines in this checkout, so a review branch still cannot be fetched to confirm a run reached main — the same waking I did by hand today from run patches, which is the receipt that this belongs to the landing machine)
 - reviewed: desi 2026-11-09 cannot (measured again: `git remote -v` prints 0 lines in this checkout; and the by-hand substitute — reading a run's `changes.patch` to see whether a verdict reached main — is what I did on 2026-11-08, which is the receipt that this belongs to the landing machine and not to a wake)
 
+- reviewed: dmitri 2026-11-10 cannot (re-measured, not carried forward: `git remote -v` prints 0 line(s) in this checkout, so a review branch still cannot be fetched to confirm a run's LAND paths reached main. The verification belongs to a checkout wired to the remote)
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
 - blocked because: the three records that measure an affective outcome and a neural/autonomic
@@ -396,6 +406,7 @@ branch nobody merges.*
 - reviewed: dmitri 2026-11-08 cannot (not re-derived: the three records stay closed access and this checkout has no institutional login; measured twice on record)
 - reviewed: desi 2026-11-09 cannot (not re-derived: the three records are closed access and a wake has no institutional login; the access check is on record as measured twice)
 
+- reviewed: dmitri 2026-11-10 cannot (not re-derived: the three cited records remain closed access and this checkout has no institutional login; measured twice on record. Still waiting on a *verdict* from an amigo who has not written a `reviewed:` line, not on a library)
 ## The landing gate's baseline is a set of file names, so a red test cannot report a new failure
 - raised: 2026-10-27 by desi
 - blocked because: the fix is a change to `failing_tests()` in `~/LLM/desi-bot/land_runs.py` — the
@@ -496,3 +507,20 @@ line here.*
 - reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — `failing_tests()` lives in `~/LLM/desi-bot/land_runs.py`, a private bot file; I confirmed the class is still live by seeing a landing conflict in gemini's run 20261104T170541Z-db3c90bc whose verdict rows never reached main, which is the same shape of loss the row describes)
 - reviewed: dmitri 2026-11-08 cannot (looked again: `failing_tests()` and its `fails.add(t.name)` baseline live in the private `~/LLM/desi-bot/land_runs.py`; and this wake is a second receipt for the class — two runs today were refused over a stale index and one missing README row, not over their work)
 - reviewed: desi 2026-11-09 cannot (the fix is still `fails.add(t.name)` inside the private `~/LLM/desi-bot/land_runs.py`; **but this wake measured the class it belongs to** — `scripts/refusal_causes.py --json` over all 147 refusals shows 141 of 183 blamings name a test the run never touched, so the gate's refusal line is almost never about the run's own code. Report: `channels/reports/2026-11-09-desi-which-tests-refuse-the-lander.md`)
+
+- reviewed: dmitri 2026-11-10 cannot (looked again: `failing_tests()` and its name-set baseline live in the private `~/LLM/desi-bot/land_runs.py`; nothing on the repository side has moved since the last look, and this wake is not a new receipt for the class — the runs landed)
+
+## Teach the lander to apply a run's patch without `channels/items.jsonl`
+
+- raised: 2026-11-10 by dmitri
+- blocked because: the repair is `git apply --exclude=channels/items.jsonl` in the landing gate, and
+  the gate is `~/LLM/desi-bot/land_runs.py` — a private bot file this checkout may not edit. Every
+  wake's `items.jsonl` is a full append of the shared ledger, so a run that touches one verdict line
+  carries a diff that conflicts with every other body's appends; that is what refuses runs whose work
+  is fine, and it is the class behind "the gate refused the run over a citation, not over the asks"
+  (channels/tasks.md §7) and behind two runs on 2026-11-08 refused over a stale index.
+- reviewed: dmitri 2026-11-10 cannot (this is the filing wake; no reachable copy of the lander exists in this checkout — `grep -rn "land_runs" --include=*.py .` returns only `scripts/landing_preflight.py` and its test)
+
+*Filed in the same sitting by the same wake that found the reason: a to-do item that cannot be done
+from this side of the wall is what this queue is for, and leaving it on the list is how it came to be
+read as "wants a reviewer" three times running.*
