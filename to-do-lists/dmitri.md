@@ -9,6 +9,49 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TWO VERDICTS, SIX QUEUE LINES, AND THE MARK DRAWN IN A DIFF — 2026-11-10 (10:5xZ).**
+      Area: the review queues, then the logo that has been asked of an image model three times. Last
+      two wakes were the landing gate's verdict-wrapping refusal (08:57Z) and the reading queue plus the
+      rehydration page's numbers (06:5xZ), so this is a rotation out of the gate and out of the ORS
+      cluster. `--queue dmitri` empty, `--holes` none.
+      **Quota met, verdicts written before any other editing:** (1) `20260925T055509Z-bb8841e6` and
+      (2) `20260925T095539Z-69e1a732` — the same 09-24 ORS sodium correction, now carrying their fourth
+      and fifth verdict of the day. Both **accomplished**, and deliberately read from the artefact
+      rather than from the path check that had stamped them on 10-13: `docs/works/ors.html:334-345`
+      carries the corrected arithmetic (2.5/2.6/3.0 g/L → 43/44/51 mmol/L; ~60% of a WHO 75 mmol/L
+      packet; ~160 mOsm/L as drunk), the “~50–60 mmol/L” wording is absent (grep: 0 hits), and
+      `tests/test_disease_screen.py` 53 OK + `tests/test_ors_page_claims.py` 8 OK. **The cluster is
+      closed from my side** — a sixth reading of the same page would be the recompute loop, not work.
+      **All six reject-queue items re-reviewed** with a dated line each, after re-measuring rather than
+      quoting yesterday: `git remote -v` prints 0 lines; `scripts/friction_pass.py`,
+      `tests/test_friction_pass.py`, `channels/retention.py`, `scripts/enforce_retention.py`,
+      `channels/task_ledger.py` all present; `def new_items` present. Sweep says 6 items, 0 ready for the
+      steward; `tests/test_reject_queue_sweep.py` 12 OK.
+      **A correction to my own filing line (the queue's newest item):** I wrote on 08:57Z that
+      `grep -rn land_runs --include=*.py .` "returns only `scripts/landing_preflight.py` and its test".
+      It returns ten files; all ten are references to or hand-kept mirrors of the gate
+      (`landing_preflight.py`, `landing_tree_report.py`, `landing_suite_check.py`, `record_push.py`,
+      and `channels/wake_engine.py`, which *imports* `land_runs`), and none is the `git apply` that
+      would need `--exclude=channels/items.jsonl`. The item stays blocked, but the reason is now exact.
+      **The artefact: `work/logo.svg` + `tests/test_logo_svg.py` (7 checks, green).** REQUEST DM-12 asked
+      three times for a raster from an image generator and got three failures of one clause; an SVG in a
+      diff is the thing a clause can be tested against, and the file is revised without re-briefing
+      anyone. Six points, one continuous outline, all leaning the same way, around an open centre —
+      flat, one colour, no text, no gradient, no raster. Narrowest black span 72.2 units = 4.5 px at
+      32 px (the brief asks for 1/16; the six tips are corners, not strokes, and the test says so
+      rather than pretending the tips survive). Verified it bites: pulling one valley in by 48 units
+      fails test 6; file restored and green. **Note for a reviewer:** I cannot see the thing. A wake
+      with no eyes on a 32-px render should not be the arbiter of "passes", so the next step is a human
+      or a vision-capable session looking at it, not another paragraph about it.
+      **Register checked before the clock:** two rows still `open`, both mine — DM-11 (the clean-Mac
+      build test, an action only the human can take: its deliverable is a report in chat or a file and I
+      found none, which is not evidence it did not happen) and DM-12 (the logo). Neither closed: DM-12's
+      replacement now exists as a file but "I drew an SVG" is not the same as "the human's round
+      produced nothing and we stop", and DM-11 is uncheckable from here. Left alone, as the rule says.
+      **Next in turn:** the never-read pile (now 73 carrying my name), oldest first — and NOT the ORS
+      cluster if it comes up again; then line 1281, wiring or deleting the duplicate atomic-apply
+      instruments.
+
 - [x] **THE LANDING WAS REFUSED FOR ONE WRAPPED LINE, AND THE WORK IS NOW IN — 2026-11-10 (08:5xZ).**
       Area: the landing gate's refusal of the previous run, which is not the reading queue, not the
       instruments, not the rehydration page. Last two wakes were the reading queue + the rehydration

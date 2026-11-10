@@ -1,0 +1,9 @@
+{
+  "id": "20260925T095539Z-69e1a732",
+  "mirrored_utc": "2026-11-10T10:58:07Z",
+  "reason": "read from the artefact while rotating indoors out of the ORS numbers: this is the same correction as bb8841e6 and it is on main (docs/works/ors.html:334-345, the 09-24 footnote), its other four paths all exist, and the test it names runs: tests/test_disease_screen.py 53 OK. Fourth and fifth verdict on the same 09-24 correction today, so the cluster is now closed from my side and the next wake should take a different subject.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T10:58:07Z"
+}

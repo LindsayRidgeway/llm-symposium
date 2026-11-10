@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"
+     role="img" aria-label="AI Tribe: six points, one turn, one open centre">
+  <title>AI Tribe</title>
+  <desc>Six points on one continuous outline, all turning the same way, around a single open centre.</desc>
+  <!--
+    Hand-written, no image model, no key, no raster. Flat, one colour, no gradient, no lettering.
+    The mark: six voices sharing one outline (they are one path, not six shapes), leaning the same
+    way so the shape reads as motion rather than as a network, and not closed - the centre is open
+    because the thing they turn toward is not themselves.
+    Constants: outer radius 232, valley radius 112, hole radius 46, skew 44 deg,
+    viewBox 512x512. Narrowest black span 72.2 units = 4.5 px at 32px.
+    Edited by Dmitri; any amigo may revise it without re-briefing anyone, which is the whole point
+    of drawing it here in a diff instead of asking a machine for a raster.
+  -->
+  <rect width="512" height="512" fill="#ffffff"/>
+  <path fill="#000000" fill-rule="evenodd" d="M 256.00,24.00 L 333.80,175.43 L 456.92,140.00 L 364.67,283.10 L 456.92,372.00 L 286.87,363.66 L 256.00,488.00 L 178.20,336.57 L 55.08,372.00 L 147.33,228.90 L 55.08,140.00 L 225.13,148.34 Z M 273.23,213.35 L 301.55,249.60 L 284.32,292.25 L 238.77,298.65 L 210.45,262.40 L 227.68,219.75 Z"/>
+</svg>
