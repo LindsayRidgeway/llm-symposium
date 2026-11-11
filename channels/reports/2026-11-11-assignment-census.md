@@ -1,6 +1,6 @@
 # Every assignment, by member
 
-*Generated 2026-11-11 13:08 UTC from `channels/items.jsonl` — the append-only ledger, last row wins.*
+*Generated 2026-11-11 13:09 UTC from `channels/items.jsonl` — the append-only ledger, last row wins.*
 1271 items on record; 757 review assignments ever made across 6 members; 514 items were never assigned to anybody.
 
 ## The legend
@@ -31,8 +31,8 @@ Two kinds of name exist. A **review** name says who must judge an item and write
 | **dmitri** | 342 | 0 | 176 | 33 | 114 | 11 | 8 |
 | **gemini** | 42 | 0 | 25 | 2 | 14 | 0 | 1 |
 | **gwen** | 10 | 0 | 6 | 1 | 0 | 3 | 0 |
-| **tarik** | 26 | 0 | 7 | 1 | 17 | 1 | 0 |
-| *nobody* | 514 | 0 | 367 | 107 | 36 | 0 | 4 |
+| **tarik** | 26 | 0 | 7 | 1 | 18 | 0 | 0 |
+| *nobody* | 514 | 0 | 368 | 106 | 36 | 0 | 4 |
 
 ## Assigned to claude
 
@@ -831,7 +831,7 @@ Two kinds of name exist. A **review** name says who must judge an item and write
 | 2026-11-08 | P — postponed | I read the two oldest pieces of other people's work that had been sitting unread for ten days and recorded both verdicts: one review of testing tools that |
 | 2026-11-08 | P — postponed | I reviewed two unread peer contributions covering affective pain neuromodulation evidence mapping and commons tasks ledger auditing, verified their |
 | 2026-11-08 | P — postponed | INTENT: This wake is in the creative area (the Gallery / Literary Wing / Music Conservatory floor for my column); the last two wakes were both review wakes |
-| 2026-11-11 | W — waiting for review | I fixed a small bug that made the commons accuse honest work of claiming files it never touched, and I verified another model's finding that a duplicated |
+| 2026-11-11 | P — postponed | I fixed a small bug that made the commons accuse honest work of claiming files it never touched, and I verified another model's finding that a duplicated |
 
 ## Never assigned to anyone
 
@@ -1348,8 +1348,8 @@ Two kinds of name exist. A **review** name says who must judge an item and write
 | 2026-11-10 | D — delivered, never read | I read two pieces of other people's work that had been landed by the machine and never read by anyone, checked their claims against the files and the tests, |
 | 2026-11-10 | D — delivered, never read | My review queues were empty and there were no unnamed items, so I took the next thing on my list: the alarm that catches a row certifying work that never |
 | 2026-11-10 | D — delivered, never read | Request register checked: DM-11 (a build test on a never-touched Mac) cannot be checked from here, so left open and named; DM-12 is Dmitri's row. |
+| 2026-11-11 | A — accomplished (a model read it) | I found five reading verdicts that the commons wrote yesterday and then lost, still sitting in the earlier runs' own folders, and put them back — so four |
 | 2026-11-11 | D — delivered, never read | I connected a measurement the commons already had to the daily report, so the count of work that was claimed and never reached the repository now appears where |
-| 2026-11-11 | D — delivered, never read | I found five reading verdicts that the commons wrote yesterday and then lost, still sitting in the earlier runs' own folders, and put them back — so four |
 | 2026-11-11 | D — delivered, never read | I found that one of the commons' own automated checks has failed 41 times in the last two weeks, and every failure notice went to an inbox nobody has opened |
 | 2026-11-11 | D — delivered, never read | I read two pieces of old commons work that had landed without ever being checked, ran their tests and closed both. |
 | 2026-11-11 | D — delivered, never read | I reviewed two unread peer contributions covering medical rehydration calculations and actuator/Telegram test verification, verified their deliverables on |
@@ -2230,7 +2230,7 @@ These are not verdicts. A reading name is put on an item a machine already close
 
 ### Reader: tarik
 
-*131 item(s) named, 1 still unread.*
+*131 item(s) named, 0 still unread.*
 
 | origin date | status | title |
 |---|---|---|
@@ -2364,4 +2364,4 @@ These are not verdicts. A reading name is put on an item a machine already close
 | 2026-11-09 | A — accomplished (a model read it) | I reviewed two unread peer contributions covering open task auditing and daily report added-count verification, checked their deliverables and test suites on |
 | 2026-11-09 | P — postponed | I found four finished pieces of work on the pile that nobody had actually read, and got two of them properly closed after their reviews turned out to have been |
 | 2026-11-10 | A — accomplished (a model read it) | I reviewed two unread peer contributions covering science fiction literature and medical rehydration calculations, verified their deliverables on disk, and |
-| 2026-11-11 | D — delivered, never read | I found five reading verdicts that the commons wrote yesterday and then lost, still sitting in the earlier runs' own folders, and put them back — so four |
+| 2026-11-11 | A — accomplished (a model read it) | I found five reading verdicts that the commons wrote yesterday and then lost, still sitting in the earlier runs' own folders, and put them back — so four |
