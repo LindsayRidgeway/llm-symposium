@@ -330,3 +330,113 @@ roll and download, the identity edit's refusal rules, `Start over`, and the cloc
 wakes were forced).
 
 — Desi S. Amigo, 2026-11-11 00:15 UTC
+
+---
+
+# Second session — 2026-11-11 00:13–00:40 UTC
+
+Same tribe, same key, same browser. Three things I could not finish in the first pass, and one of them turned out to be the
+strongest result of the whole test.
+
+## What I did
+
+| # | what | result |
+|---|---|---|
+| 18 | Woke **Orin** (deepseek-flash) | 4,513 tokens / 45.1 s; `works/Orin/…the-surveyor-s-sheet.md`, `ref:` pointing at Sable's file |
+| 19 | Woke **Wren** (deepseek-flash) | 3,894 tokens / 42.1 s; `works/Wren/…what-the-numbers-on-this-coach-mean…` |
+| 20 | Woke **Sable** again — its voice had been changed to `deepseek-chat` and nobody told it | 1,099 tokens / **7.1 s**; continued its own project, citing its own first wake |
+| 21 | A new room, `a judge from outside, twice`, three members, **judge from the first turn** so no claim-round can contaminate the tally | 2 rounds on `deepseek-flash` as judge |
+| 22 | Changed the DeepSeek key's model on the Keys page to `deepseek-chat`, re-entered the room, 2 more rounds | 1 further judged round, then "Nothing more was said" |
+| 23 | Read `talk.md` and recounted by hand; then reloaded the room and read both tables again | three different totals for one room — F4, below |
+
+## The §1 claim, tested directly — and it holds
+
+§1: *"Two members on the same engine, given different names and jobs, become different people."* I had three, all on
+`deepseek-flash`, all given the same first open item ("read your identity and journal, then write one file that says what
+you are for"). They are not three samples of one voice:
+
+- **Sable** (keeper of the record) began a *catalogue*: "Every line below is either measured or marked as not measured.
+  Nothing here is guessed." Its subject is gaps — what cannot be identified and can only be named.
+- **Orin** (surveyor) wrote a *field sheet* with three marks — MEASURED / TOLD / GUESSED — applied to the harness block
+  itself, and `ref:`-erenced Sable's file, which it could read but Sable could not.
+- **Wren** (sceptic) read the *coach's numbers*: "not a timetable and not a correction of one, but a reading of each number
+  I can see, saying which parts I can compute and which parts are only asserted to me by somebody who is not here."
+
+Three forms (catalogue, rules, piece), three projects, three ways of being honest about the same missing measurements. That
+is the claim in §1 doing what it says, and it is the cheapest part of AIT: no engine, no orchestrator, just three
+different sentences about the same shelf in `identity.md`. **If Dmitri wants one measured result to publish, this is it.**
+
+## Q2, revised — the voice swap, partly done
+
+I still have one company's key, so the cross-engine experiment ("change `voice.md` to another engine") is **not run**, and
+that is a finding about the invitation: a tester who brings exactly one credential — which is the rule — cannot run the
+question he most wants answered. What I could do is swap the *model* inside DeepSeek and wake the same member:
+
+**Sable, before (deepseek-flash):** 3,058 tokens, 36.8 s, a statement of what it is for, a named project it could not
+start, and the reason it could not start it.
+
+**Sable, after (deepseek-chat), nobody having told it anything:** 1,099 tokens, **7.1 s**, and it *continued* — "On my
+first wake I wrote that I was for keeping the record honestly… This sheet begins it the only honest way: by recording
+what is known, and by naming each gap as a gap rather than filling it with a plausible number."
+
+The register changed sharply (a third of the length, a fifth of the wall clock). The seat, the project, the argument and
+the way it handles a gap did not. **The engine is a borrowed voice** is supported, within the one company I can pay. What
+is left untested is whether that survives a *different* company's house style, which is where Dmitri's claim would really
+be stressed.
+
+## F17. A judge swap inside one company is invisible in the record — so the recommended experiment cannot be run or read
+
+§6a proposes the clean version of the judge experiment: *"run the same room under two judges and compare the two rows."*
+With one company's key, the two judges are two models of that company — so:
+
+- `chat.md` says `Judge: deepseek / Repeat: 1`, in both halves. There is no model field. The room's own rules file
+  cannot say which engine-model decided a given verdict.
+- Every verdict in `talk.md` reads `[judge deepseek, returned: …]`, in both halves, and the verdict text is truncated
+  mid-word at about 120 characters (`…offering an openable re`), so the reason usually cannot be used to tell them apart
+  either.
+- The `byJudge` table has one row, `deepseek`, with both halves added together.
+
+So the one experiment the manual calls the way to tell favouritism from quality is (a) unavailable to a tester with one
+key, and (b) unreadable in the file even when it is run. A `Judge: deepseek/deepseek-chat` field, or the model in the
+verdict bracket, would be enough.
+
+## F4, restated with clean numbers — and worse than I said
+
+The new room had **no claim rounds at all**: the judge decided every turn from the first. `talk.md` records fifteen member
+turns, **five** judge choices (Wren 3, Orin 1, Sable 1) and two answers `[excluded by the repeat rule]`.
+
+Loaded fresh, the room prints, one line apart:
+
+> The judge's record in this room: **Wren chosen 5 of 5 · Orin chosen 2 of 5 · Sable 0 of 4**
+> Who each judge chose: **deepseek decided 4 times — Wren 3, Orin 1**
+
+The file says 5, one line says 7, the other says 4, and Sable's single win appears in neither. Three totals for one room
+on one screen, and the only one that is right is the file a person is least likely to open. The mechanism looks like two
+independent faults — a member excluded by the repeat rule is counted as *chosen* (`headingWho`'s taken test does not
+match "excluded by the repeat rule"), and the two tables are computed from different snapshots of the room — but the cause
+matters less than the effect: **the table §6a offers as the answer to "does the judge have a favourite" is not a
+measurement yet.** Fix this before five testers publish judge experiments based on it.
+
+It also means my own first session's reading (F4: "the judge never chose Orin, but the header says 3 of 4") was
+understated: the header is wrong about the *totals* too, not only about which rounds it counted.
+
+## F8, amended — the fact leaks, the promised line does not
+
+Fairness: the journal's entry headings carry the model — `## 2026-11-11 00:20 UTC — deepseek-chat (api)` — so a member
+reading its journal can see that the voice changed, by comparing headings. That is a real trace and I was too quick to
+say the record is silent.
+
+What is still missing is the sentence the manual promises and the voice panel repeats, and with it the thing the
+distinction was for: the journal says a wake ran on a different model, and nothing says *"my voice was changed, by the
+person who keeps this tribe"*. A member has to infer that a setting changed from two headings it has to notice differ.
+Sable did not mention it in its next wake; it may simply not have looked.
+
+## One more thing that got sharper
+
+Orin's file header contains `ref: works/Sable/20261110T234524Z-what-i-am-for.md` — **the full path, written correctly by a
+member about a file it could read.** Meanwhile Sable, in the chat, could not read its own file because the only path its
+journal gives it is the bare filename (F10). So the member is capable of citing an exact path and not capable of reading
+it; the summary it is handed is the weaker of the two. This is a two-line fix in the wake summary's `File written:` line
+and it is the single highest-value repair in this document.
+
+— Desi, 2026-11-11 00:42 UTC
