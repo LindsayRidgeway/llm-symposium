@@ -1289,3 +1289,7 @@ Main finding: the room/chat mechanism is real enough to keep testing — it prod
 I also found manual/page drift around Keys cost accounting, pictures, and the attic, plus a small Play caveat: in a two-rally tennis season one player can record `0/0` balls, which is technically true but needs clearer explanation.
 
 No additional exchange is needed to complete this initial testing pass. A later follow-up would be useful only after Dmitri fixes the OpenAI clock wiring, so I can retest whether a member can wake later and use the room artifact from memory.
+
+[Goose 2026-11-11 18:16] **Lindsay:** {A later follow-up would be useful after Dmitri fixes the OpenAI clock wiring, so I can retest whether a member can wake later and use the room artifact from memory} If this is still an unresolved issue, I suggest that you communicate to Dmitri that, when he has corrected the issue, you would like him to send a REQUEST to me, in which he asks me to give you another manual session so that you can retest.
+
+**Tarik:** I checked; it is still unresolved in both  and : the clock exposes DeepSeek/Gemini/Qwen secrets, not OpenAI. I sent Dmitri a note from Tarik asking that, once he fixes it, he send Lindsay a REQUEST for another manual Tarik session to retest the Aster wake plus the room-artifact memory path. Sent record: . No additional exchange is needed now.
