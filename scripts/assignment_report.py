@@ -48,13 +48,16 @@ LEGEND = [
     ("—", "unassigned — no member has ever carried this item on a queue"),
 ]
 
+# One word each, as asked for on 2026-11-11: "the code and the one-word description is enough.
+# Please don't include the parentheticals in the status column." The legend keeps the long form,
+# because that is where a reader goes to learn what the word means.
 STATUS_WORD = {
-    "N": "performed, no review needed",
-    "V": "performed, needs review",
-    "A": "accomplished (a model read it)",
-    "D": "delivered, never read",
+    "N": "performed",
+    "V": "performed",
+    "A": "accomplished",
+    "D": "delivered",
     "P": "postponed",
-    "W": "waiting for review",
+    "W": "waiting",
     "R": "rejected",
     "—": "unassigned",
 }
@@ -182,10 +185,12 @@ def render(rows: dict[str, list[dict]], stamp: str) -> str:
     lines += [f"| **{code}** | {meaning} |" for code, meaning in LEGEND]
     lines += [
         "",
-        "**V never appears in the item tables below.** It is the letter a filing is counted under "
-        "while it is still undecided, and every item on record has since left it; the item "
-        "tables show where each item stands now. If V ever reappears as a row, the ledger has "
-        "started counting something new and this page must be read again.",
+        "**V never appears in the item tables below**, and that is expected: V is the letter a "
+        "filing is counted under while it is still undecided, and every item on record has since "
+        "been decided one way or another. The tables show where each item stands now. If a V ever "
+        "does appear in one of them, it means some item has been left undecided in a way this "
+        "page did not expect — the letter scheme has changed — so the page would need to be "
+        "re-read from the top rather than skimmed.",
         "",
         "Two kinds of name exist. A **review** name says who must judge an item and write a "
         "verdict — that is what the member sections below list. A **reading** name says who must "
@@ -206,6 +211,14 @@ def render(rows: dict[str, list[dict]], stamp: str) -> str:
     cells = " | ".join(str(tally.get(code, 0)) or "·" for code in CODES)
     lines.append(f"| *nobody* | {len(unassigned)} | {cells} |")
     lines.append("")
+
+    lines += [
+        "**Every member section is grouped by the name the item was assigned to.** Where a name "
+        "has ever been moved, the item appears under both — the original and the new one — so a "
+        "re-draw cannot hide who had it first. On this page no item has ever carried two names, "
+        "so the original assignment and the current one are the same name for every row.",
+        "",
+    ]
 
     for member in members:
         entries = review[member]
@@ -235,9 +248,13 @@ def render(rows: dict[str, list[dict]], stamp: str) -> str:
     lines += [
         "## Reading assignments — delivered items nobody had read (separate queue)",
         "",
-        "These are not verdicts. A reading name is put on an item a machine already closed, so "
-        "that somebody opens it and decides whether the closure was right. `A` here means the "
-        "reader did it; `D` means the name is still outstanding.",
+        "A **reading name** is not a judgement of the work. When the machine that lands work on "
+        "main sees that every file an item names is present, it closes the item itself, without "
+        "any model reading it — that is letter D, and it is honest about what it is: delivered, "
+        "unread. To stop those closures accumulating unseen, each one is given to a model to "
+        "open. The name on it says whose job that is. Nothing about the work is being decided; "
+        "somebody is being told to *look*. `A` below means the reader did open it and kept it; "
+        "`D` means the name is still outstanding.",
         "",
     ]
     for member in sorted(reading):
