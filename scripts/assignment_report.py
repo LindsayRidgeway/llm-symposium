@@ -110,44 +110,49 @@ def title_of(item: dict) -> str:
     return " ".join(text.split()).replace("|", "\\|")
 
 
+REPEAT_FIELDS = ("repeat", "repeat_rule", "rrule", "repeats")
+
+
+def is_repeating(item: dict) -> bool:
+    """True if a ledger row ever marked the item as repeating.
+
+    The marker does not exist on any ledger row today (measured 2026-11-11: no item in any list
+    carries one), so this is a note for the day one does rather than a description of the report.
+    The human asked for the notation; a page that quietly omitted a repeating item would be worse
+    than a page that shows an empty column.
+    """
+    return any(str(item.get(field) or "").strip() for field in REPEAT_FIELDS)
+
+
 def collect(rows: dict[str, list[dict]]) -> dict:
-    """member -> list of item rows; plus 'unassigned' and the two reading lists."""
+    """member -> list of items, ONE row per item, grouped by the name it is assigned to now.
+
+    "I only want each item to appear once in the report" (2026-11-11). So the grouping uses the
+    current assignment only, not every name the item has ever carried: an item that is re-drawn
+    moves to its new member and does not appear twice. Reading names are not used for grouping
+    either — an item whose only name is a reading name has no review assignment yet, and belongs
+    in the unassigned group with a note saying so.
+    """
     items = il.load()
     review: dict[str, list[dict]] = collections.defaultdict(list)
-    reading: dict[str, list[dict]] = collections.defaultdict(list)
-    assigned_ids: set[str] = set()
+    unassigned: list[dict] = []
     for item_id, item in items.items():
         history = rows.get(item_id, [])
-        date = significant_date(item, list(reversed(history)))
         entry = {
-            "id": item_id,
-            "date": date,
-            "status": il.letter_for(item),
-            "title": title_of(item),
-            "filed_by": item.get("amigo") or "?",
-        }
-        names = {r.get("assigned_to") for r in history if r.get("assigned_to")}
-        for name in sorted(names):
-            review[name].append(entry)
-            assigned_ids.add(item_id)
-        readers = {r.get("reading_assigned_to") for r in history
-                   if r.get("reading_assigned_to")}
-        for name in sorted(readers):
-            reading[name].append(entry)
-    unassigned = []
-    for item_id, item in items.items():
-        if item_id in assigned_ids:
-            continue
-        history = rows.get(item_id, [])
-        unassigned.append({
             "id": item_id,
             "date": significant_date(item, list(reversed(history))),
             "status": il.letter_for(item),
             "title": title_of(item),
             "filed_by": item.get("amigo") or "?",
-        })
-    return {"review": review, "reading": reading, "unassigned": unassigned,
-            "total": len(items)}
+            "repeating": is_repeating(item),
+            "reading_name": item.get("reading_assigned_to") or "",
+        }
+        name = (item.get("assigned_to") or "").strip()
+        if name:
+            review[name].append(entry)
+        else:
+            unassigned.append(entry)
+    return {"review": review, "unassigned": unassigned, "total": len(items)}
 
 
 def _sort(entries: list[dict]) -> list[dict]:
@@ -157,22 +162,23 @@ def _sort(entries: list[dict]) -> list[dict]:
 def _table(entries: list[dict]) -> list[str]:
     out = ["| origin date | status | title |", "|---|---|---|"]
     for e in _sort(entries):
-        out.append(f"| {e['date']} | {e['status']} — {STATUS_WORD.get(e['status'], '?')} "
+        date = f"{e['date']} (Repeating)" if e.get("repeating") else e["date"]
+        out.append(f"| {date} | {e['status']} — {STATUS_WORD.get(e['status'], '?')} "
                    f"| {e['title']} |")
     return out
 
 
 def render(rows: dict[str, list[dict]], stamp: str) -> str:
     data = collect(rows)
-    review, reading, unassigned = data["review"], data["reading"], data["unassigned"]
+    review, unassigned = data["review"], data["unassigned"]
     members = sorted(review)
     lines = [
         "# Every assignment, by member",
         "",
         f"*Generated {stamp} from `channels/items.jsonl` — the append-only ledger, last row wins.*",
-        f"{data['total']} items on record; {sum(len(v) for v in review.values())} review "
-        f"assignments ever made across {len(members)} members; "
-        f"{len(unassigned)} items were never assigned to anybody.",
+        f"{data['total']} items on record, each listed once. "
+        f"{sum(len(v) for v in review.values())} carry a review name across {len(members)} "
+        f"members; {len(unassigned)} have never been assigned for review by anybody.",
         "",
         "## The legend",
         "",
@@ -192,10 +198,12 @@ def render(rows: dict[str, list[dict]], stamp: str) -> str:
         "page did not expect — the letter scheme has changed — so the page would need to be "
         "re-read from the top rather than skimmed.",
         "",
-        "Two kinds of name exist. A **review** name says who must judge an item and write a "
-        "verdict — that is what the member sections below list. A **reading** name says who must "
-        "open an item a machine already closed; that is a queue, not a verdict, so it is kept in "
-        "its own section at the end rather than double-counting every item.",
+        "There are two kinds of name in the ledger, and only one of them is used here. A "
+        "**review** name says which member must judge the item and write a verdict; that is the "
+        "assignment this page is grouped by. A **reading** name is a different, smaller job — "
+        "who must *look* at an item the landing machine closed on its own without any model "
+        "having read it — and it is not shown, because it would put most items on the page "
+        "twice. Every item appears here exactly once, under its review name, or under nobody.",
         "",
         "## Counts, member by status",
         "",
@@ -213,10 +221,10 @@ def render(rows: dict[str, list[dict]], stamp: str) -> str:
     lines.append("")
 
     lines += [
-        "**Every member section is grouped by the name the item was assigned to.** Where a name "
-        "has ever been moved, the item appears under both — the original and the new one — so a "
-        "re-draw cannot hide who had it first. On this page no item has ever carried two names, "
-        "so the original assignment and the current one are the same name for every row.",
+        "**Every member section is grouped by the name the item is assigned to now.** An item "
+        "that is ever re-drawn moves to its new member and does not appear twice. Nothing is "
+        "lost by that: no item on record has ever been re-drawn, so for every row the name it "
+        "was first given and the name it carries today are the same name.",
         "",
     ]
 
@@ -234,40 +242,20 @@ def render(rows: dict[str, list[dict]], stamp: str) -> str:
         lines += _table(entries)
         lines.append("")
 
+    with_reader = sum(1 for e in unassigned if e.get("reading_name"))
     lines += [
-        "## Never assigned to anyone",
+        "## Never assigned for review",
         "",
-        f"*{len(unassigned)} item(s) that no member has ever carried on a queue — sorted by date, "
-        f"then status, then title. Most are items a machine closed at landing (letter D) or work "
-        f"from before names were drawn; every one of them was never reviewed by name.*",
+        f"*{len(unassigned)} item(s) that no member has ever been given to review — sorted by "
+        f"date, then status, then title. Most are items the landing machine closed on its own "
+        f"(letter D) or work from before names were drawn. {with_reader} of them do carry a "
+        f"reading name, which this page does not show, so 'never assigned' here means never "
+        f"assigned to* judge*, not never handed to anybody at all.*",
         "",
     ]
     lines += _table(unassigned)
     lines.append("")
 
-    lines += [
-        "## Reading assignments — delivered items nobody had read (separate queue)",
-        "",
-        "A **reading name** is not a judgement of the work. When the machine that lands work on "
-        "main sees that every file an item names is present, it closes the item itself, without "
-        "any model reading it — that is letter D, and it is honest about what it is: delivered, "
-        "unread. To stop those closures accumulating unseen, each one is given to a model to "
-        "open. The name on it says whose job that is. Nothing about the work is being decided; "
-        "somebody is being told to *look*. `A` below means the reader did open it and kept it; "
-        "`D` means the name is still outstanding.",
-        "",
-    ]
-    for member in sorted(reading):
-        entries = reading[member]
-        open_now = [e for e in entries if e["status"] == "D"]
-        lines += [
-            f"### Reader: {member}",
-            "",
-            f"*{len(entries)} item(s) named, {len(open_now)} still unread.*",
-            "",
-        ]
-        lines += _table(entries)
-        lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
 

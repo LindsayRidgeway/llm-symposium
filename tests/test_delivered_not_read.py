@@ -175,6 +175,30 @@ class Quota(unittest.TestCase):
         self.assertNotIn("being ignored", first)   # the guess that was wrong
         self.assertNotIn("wake block", first)      # the place that never carried it
 
+    def test_an_append_cannot_take_an_item_away_from_its_reviewer(self):
+        """Found 2026-11-11 building the assignment census: item 20261101T054704Z-cdd6c59d was
+        drawn to gemini, and a later append carrying no assignment fields dropped the name, so the
+        record read as never assigned to anybody. A name is as erasable as a decision."""
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "items.jsonl"
+            il.append([row("x", assigned_to="gemini", assigned_utc="2026-11-01T06:00:00Z",
+                           assigned_by="draw", assign_kind="draw",
+                           assign_reason="drawn at random")], path)
+            il.append([row("x", state="accomplished", reviewer="tarik",
+                           reason="read it and kept it")], path)
+            rec = il.load(path)["x"]
+            self.assertEqual(rec["assigned_to"], "gemini")
+            self.assertEqual(rec["assign_reason"], "drawn at random")
+            self.assertEqual(rec["assignment_preserved_from"], "2026-11-01T06:00:00Z")
+            self.assertEqual(rec["state"], "accomplished")      # the real decision still lands
+
+    def test_a_redraw_still_moves_the_item(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "items.jsonl"
+            il.append([row("x", assigned_to="gemini", assigned_utc="2026-11-01T06:00:00Z")], path)
+            il.append([row("x", assigned_to="desi", assigned_utc="2026-11-05T06:00:00Z")], path)
+            self.assertEqual(il.load(path)["x"]["assigned_to"], "desi")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -63,22 +63,21 @@ class Report(unittest.TestCase):
         for letter, _ in ar.LEGEND:
             self.assertIn(f"| **{letter}** |", text, letter)
 
-    def test_an_item_redrawn_to_another_member_appears_under_both(self):
-        """A re-draw cannot launder who had it first."""
-        self.add(item("x", assigned_to="desi", assigned_utc="2026-10-21T06:00:00Z"),
-                 item("x", assigned_to="dmitri", assigned_utc="2026-10-22T06:00:00Z"))
+    def test_a_redrawn_item_appears_once_under_its_current_name(self):
+        """His rule of 2026-11-11: "just list the item once under the current assignment"."""
+        self.add(item("x", assigned_to="dmitri", assigned_utc="2026-10-22T06:00:00Z"),
+                 item("x", assigned_to="desi", assigned_utc="2026-10-21T06:00:00Z"))
         text = self.page()
-        desi_block = text.split("## Assigned to desi")[1].split("## Assigned to")[0]
-        dmitri_block = text.split("## Assigned to dmitri")[1].split("## ")[0]
-        self.assertIn("title of x", desi_block)
-        self.assertIn("title of x", dmitri_block)
+        self.assertIn("## Assigned to dmitri", text)
+        self.assertNotIn("## Assigned to desi", text)
+        self.assertEqual(text.count("title of x"), 1)
 
     def test_an_unassigned_item_lands_in_the_last_group_not_under_a_member(self):
         self.add(item("named", assigned_to="desi"))
         self.add(item("orphan"))
         text = self.page()
-        self.assertIn("## Never assigned to anyone", text)
-        tail = text.split("## Never assigned to anyone")[1].split("## Reading assignments")[0]
+        self.assertIn("## Never assigned for review", text)
+        tail = text.split("## Never assigned for review")[1]
         self.assertIn("title of orphan", tail)
         self.assertNotIn("title of orphan", text.split("## Never assigned")[0])
 
@@ -127,6 +126,26 @@ class Report(unittest.TestCase):
         self.assertIn("A long title that says what the work actually was", self.page())
 
 
+    def test_a_repeating_item_is_marked_after_its_date(self):
+        """He asked for the notation on 2026-11-11. No ledger row carries the marker today, so this
+        pins the day one does: silently omitting it would be worse than an empty column."""
+        self.add(item("r1", assigned_to="desi", repeat="FREQ=WEEKLY;INTERVAL=1"))
+        self.add(item("r2", assigned_to="desi"))
+        text = self.page().split("## Assigned to desi")[1]
+        self.assertIn("2026-10-20 (Repeating)", text)
+        self.assertEqual(text.count("(Repeating)"), 1)
+
+    def test_each_item_appears_exactly_once_in_the_whole_page(self):
+        self.add(item("a", assigned_to="desi", reading_assigned_to="dmitri"))
+        self.add(item("b", reading_assigned_to="tarik"))
+        self.add(item("c"))
+        text = self.page()
+        for title in ("title of a", "title of b", "title of c"):
+            self.assertEqual(text.count(title), 1, title)
+        self.assertEqual(sum(1 for ln in text.splitlines()
+                             if ln.startswith("| 2026") or ln.startswith("| undated")), 3)
+
+
 class HtmlPage(unittest.TestCase):
     """The HTML is for reading: a 2,300-row page needs an index, and an index that points at a
     heading which does not exist is worse than no index."""
@@ -155,8 +174,8 @@ class HtmlPage(unittest.TestCase):
     def test_the_member_sections_are_in_the_index(self):
         text = self.page()
         self.assertIn('href="#assigned-to-desi"', text)
-        self.assertIn('href="#never-assigned-to-anyone"', text)
-        self.assertIn('href="#reader-desi"', text)
+        self.assertIn('href="#never-assigned-for-review"', text)
+        self.assertIn('href="#never-assigned-for-review"', text)
 
     def test_tables_render_as_tables_and_titles_are_escaped(self):
         text = self.page()
@@ -164,6 +183,7 @@ class HtmlPage(unittest.TestCase):
         self.assertIn("<th>origin date</th>", text)
         self.assertIn("An &lt;unsafe&gt; &amp; unescaped title", text)
         self.assertNotIn("An <unsafe>", text)
+
 
 
 if __name__ == "__main__":

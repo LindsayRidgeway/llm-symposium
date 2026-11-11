@@ -744,6 +744,17 @@ def _append_lock(path: Path):
 
 DECISION_FIELDS = ("state", "state_utc", "reason", "reviewer")
 
+# A name is as erasable as a decision, and was erased the same way (found 2026-11-11 while
+# building the assignment census): item 20261101T054704Z-cdd6c59d was drawn to gemini on 11-01 and
+# a later append carrying no assignment fields dropped the name, so a page reading the current
+# record said the item had never been assigned to anybody. One item in 1271 — and the count that
+# would have shown it, "items with a name in history" against "items with a name now", is exactly
+# the pair nobody was comparing. Same rule as silence-is-not-a-reversal: an append that says
+# nothing about who owns the item does not take it away from them.
+ASSIGN_FIELDS = ("assigned_to", "assigned_utc", "assigned_by", "assign_kind", "assign_reason",
+                 "reading_assigned_to", "reading_assigned_utc", "reading_assigned_by",
+                 "reading_assign_kind", "reading_assign_reason")
+
 
 def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
     """An append may add to an item; it may not un-decide it.
@@ -777,6 +788,17 @@ def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
             for field in DECISION_FIELDS:
                 rec[field] = old.get(field)
             rec["verdict_kept_from"] = old.get("state_utc")
+        elif old and (old.get("assigned_to") or old.get("reading_assigned_to")) \
+                and not (rec.get("assigned_to") or rec.get("reading_assigned_to")):
+            rec = dict(rec)
+            carried = []
+            for field in ASSIGN_FIELDS:
+                if old.get(field) and not rec.get(field):
+                    rec[field] = old.get(field)
+                    carried.append(field)
+            if carried:
+                rec["assignment_preserved_from"] = old.get("assigned_utc") \
+                    or old.get("reading_assigned_utc")
         out.append(rec)
         # Later records in this append see earlier decisions from the same batch.
         known[rec["id"]] = rec
