@@ -1,6 +1,6 @@
 # Every assignment, by member
 
-*Generated 2026-11-11 13:09 UTC from `channels/items.jsonl` — the append-only ledger, last row wins.*
+*Generated 2026-11-11 13:14 UTC from `channels/items.jsonl` — the append-only ledger, last row wins.*
 1271 items on record; 757 review assignments ever made across 6 members; 514 items were never assigned to anybody.
 
 ## The legend

@@ -119,5 +119,44 @@ class Report(unittest.TestCase):
         self.assertIn("A long title that says what the work actually was", self.page())
 
 
+class HtmlPage(unittest.TestCase):
+    """The HTML is for reading: a 2,300-row page needs an index, and an index that points at a
+    heading which does not exist is worse than no index."""
+
+    def setUp(self):
+        self.items = {"a": item("a", assigned_to="desi", reading_assigned_to="desi"),
+                      "b": item("b", title="An <unsafe> & unescaped title")}
+        self.rows = {k: [v] for k, v in self.items.items()}
+        self._real = il.load
+        il.load = lambda path=None: self.items
+
+    def tearDown(self):
+        il.load = self._real
+
+    def page(self) -> str:
+        return ar.to_html(ar.render(self.rows, "2026-11-11 00:00 UTC"), "Every assignment, by member")
+
+    def test_every_nav_link_points_at_a_heading_that_exists(self):
+        import re
+        text = self.page()
+        hrefs = re.findall(r'<a href="#([^"]+)"', text)
+        ids = set(re.findall(r'<h[123] id="([^"]+)"', text))
+        self.assertTrue(hrefs)
+        self.assertEqual([h for h in hrefs if h not in ids], [])
+
+    def test_the_member_sections_are_in_the_index(self):
+        text = self.page()
+        self.assertIn('href="#assigned-to-desi"', text)
+        self.assertIn('href="#never-assigned-to-anyone"', text)
+        self.assertIn('href="#reader-desi"', text)
+
+    def test_tables_render_as_tables_and_titles_are_escaped(self):
+        text = self.page()
+        self.assertIn("<table>", text)
+        self.assertIn("<th>origin date</th>", text)
+        self.assertIn("An &lt;unsafe&gt; &amp; unescaped title", text)
+        self.assertNotIn("An <unsafe>", text)
+
+
 if __name__ == "__main__":
     unittest.main()

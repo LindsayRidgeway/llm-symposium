@@ -254,10 +254,116 @@ def render(rows: dict[str, list[dict]], stamp: str) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+
+def to_html(markdown_text: str, title: str) -> str:
+    """A standalone page from the same text — the report is meant to be read, not parsed.
+
+    Deliberately a small converter: it understands exactly what this file emits (h1-h3, tables,
+    bold, italic, inline code) and nothing else, so it cannot silently mangle something it does
+    not know. Anything unexpected survives as escaped text rather than disappearing.
+    """
+    import html as _html
+    import re as _re
+
+    def inline(text: str) -> str:
+        out = _html.escape(text)
+        out = _re.sub(r"`([^`]+)`", r"<code>\1</code>", out)
+        out = _re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", out)
+        out = _re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", out)
+        return out
+
+    lines = markdown_text.splitlines()
+    body: list[str] = []
+    toc: list[tuple[int, str, str]] = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if line.startswith("# "):
+            body.append(f"<h1>{inline(line[2:])}</h1>")
+        elif line.startswith("### ") or line.startswith("## "):
+            level = 3 if line.startswith("### ") else 2
+            text = line[level + 1:]
+            slug = _re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:60] or "section"
+            toc.append((level, text, slug))
+            body.append(f"<h{level} id=\"{slug}\">{inline(text)}</h{level}>")
+        elif line.startswith("|"):
+            rows = []
+            while i < len(lines) and lines[i].startswith("|"):
+                rows.append(lines[i])
+                i += 1
+            cells = [[c.strip() for c in r.strip().strip("|").split("|")] for r in rows]
+            if len(cells) > 1 and set("".join(cells[1])) <= set("-: "):
+                head, rest = cells[0], cells[2:]
+            else:
+                head, rest = [], cells
+            body.append("<table>")
+            if head:
+                body.append("<thead><tr>" + "".join(f"<th>{inline(c)}</th>" for c in head)
+                            + "</tr></thead>")
+            body.append("<tbody>")
+            for row in rest:
+                body.append("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in row) + "</tr>")
+            body.append("</tbody></table>")
+            continue
+        elif line.strip():
+            body.append(f"<p>{inline(line)}</p>")
+        i += 1
+    style = """
+    :root { color-scheme: light dark; }
+    body { font: 16px/1.55 -apple-system, "Helvetica Neue", Georgia, serif;
+           max-width: 60rem; margin: 2rem auto; padding: 0 1.25rem; color: #1b1b1b;
+           background: #fdfdfb; }
+    h1 { font-size: 1.9rem; margin-bottom: .25rem; }
+    h2 { font-size: 1.35rem; margin-top: 2.5rem; border-bottom: 1px solid #ddd;
+         padding-bottom: .3rem; }
+    h3 { font-size: 1.1rem; margin-top: 2rem; }
+    table { border-collapse: collapse; width: 100%; margin: .75rem 0 1.5rem;
+            font-size: .93rem; }
+    th, td { border-bottom: 1px solid #e4e4e0; padding: .3rem .5rem; text-align: left;
+             vertical-align: top; }
+    th { background: #f3f3ef; font-weight: 600; }
+    tbody tr:hover { background: #faf9f4; }
+    code { background: #f0efe9; padding: .05rem .25rem; border-radius: 3px;
+           font-size: .9em; }
+    em { color: #555; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #16161a; color: #e8e6e1; }
+      th { background: #22222a; }
+      th, td { border-color: #2e2e38; }
+      tbody tr:hover { background: #1d1d24; }
+      code { background: #26262f; }
+      em { color: #a8a49c; }
+      h2 { border-color: #2e2e38; }
+    }
+    nav { font-size: .95rem; background: #f3f3ef; padding: .75rem 1rem; border-radius: 6px;
+          margin: 1rem 0 2rem; }
+    nav ul { list-style: none; margin: .4rem 0 0; padding: 0; columns: 2; }
+    nav li.l3 { margin-left: 1rem; font-size: .9rem; }
+    nav a { color: #26507a; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    @media (prefers-color-scheme: dark) {
+      nav { background: #22222a; }
+      nav a { color: #8ab4e8; }
+    }
+    """
+    nav = ""
+    if toc:
+        # A 2,300-row page with no index is a page nobody finishes. The nav is built from the
+        # headings this page emitted, so it cannot list a section that is not there.
+        items = "".join(
+            f"<li class=\"l{level}\"><a href=\"#{slug}\">{_html.escape(text)}</a></li>"
+            for level, text, slug in toc)
+        nav = f"<nav><strong>Contents</strong><ul>{items}</ul></nav>"
+    return ("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+            f"<title>{_html.escape(title)}</title><style>{style}</style></head><body>"
+            + "\n".join(body[:1]) + nav + "\n".join(body[1:]) + "</body></html>\n")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", default="", help="write here (default: print to stdout)")
     ap.add_argument("--ledger", default=str(LEDGER))
+    ap.add_argument("--html", default="", help="also write a standalone HTML page here")
     args = ap.parse_args()
     import datetime as dt
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -267,6 +373,9 @@ def main() -> int:
         print(f"assignment_report: wrote {args.out} ({len(text.splitlines())} lines)")
     else:
         print(text, end="")
+    if args.html:
+        Path(args.html).write_text(to_html(text, "Every assignment, by member"), encoding="utf-8")
+        print(f"assignment_report: wrote {args.html}")
     return 0
 
 
