@@ -1,0 +1,9 @@
+{
+  "id": "20261110T225857Z-1a5fe7cf",
+  "mirrored_utc": "2026-11-11T14:19:04Z",
+  "reason": "Declined because its subject no longer exists and should not: the run repairs two assertions inside tests/test_meetings_status.py, the test file that belongs to the duplicate instrument I deleted in this same wake (item 20261110T165800Z). Judged on the tree, not the report: at HEAD before my change that file held the original 10-test version and passed, so the 28-test broken fixture existed only inside an unlanded patch and could not be reproduced here; after my change the file is gone. Applying a repair to a test in order to justify keeping a script that has no caller is the wrong direction - meeting_status.py is wired into daily_report.py and this one never was. Postponed would send a future wake to re-derive a fixture for a file that is not in the record.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-11T14:19:04Z"
+}

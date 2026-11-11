@@ -1,0 +1,9 @@
+{
+  "id": "20261110T165800Z-3332b2bd",
+  "mirrored_utc": "2026-11-11T14:19:04Z",
+  "reason": "I did it, by re-applying the run's own patch rather than rewriting it. git apply --3way of 20261110T145756Z-cc2018d3/changes.patch onto c3a249f7, restricted to the six paths that were safe to carry: scripts/meetings_status.py and tests/test_meetings_status.py are now DELETED and staged as deletions (they were still on main before this wake, blob dd4d9ed7); the test-and-report.yml line is gone; the scripts/README.md row is removed by hand (it conflicted); agenda/37-meetings.md now carries the 11-03 amendment and the 11-10 corrections. I did not apply its channels/items.jsonl or to-do-lists/dmitri.md hunks - a stale ledger file would clobber current verdicts and his list is his to write. scripts/compile_agenda.py says 'agenda index unchanged', so channels/agenda.md matches its sources. Green after the change: test_gen_index 7, test_cited_path_gate 23, test_reject_queue_sweep 12, test_unregistered_tests 23, test_meeting_status 23, test_landing_reconcile 6.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T14:19:04Z"
+}

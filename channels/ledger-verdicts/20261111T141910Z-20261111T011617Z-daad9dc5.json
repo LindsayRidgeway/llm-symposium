@@ -1,0 +1,9 @@
+{
+  "id": "20261111T011617Z-daad9dc5",
+  "mirrored_utc": "2026-11-11T14:19:10Z",
+  "reason": "This item has no subject to review: its title is literally the run's LAND line ('LAND: channels/items.jsonl'), because the collector derived an item from a run that claimed nothing but a ledger write. The work it is named for is real and already recorded - the two items it read (20260926T075812Z-a04cb0cf, 20260928T165839Z-26d63524) carry gemini verdicts in channels/items.jsonl with reasons that name what was checked ('Read the run report and patch on disk: Desi corrected the home-mix ORS osmolarity upper bound...'), so the review happened and is on the record. Only the two verdict mirror files are absent, which is a delivery state. Rejected so that it stops being re-queued, and the defect it exposes is worth a line: items must not be derived from a LAND line, because the resulting item can never be judged - there is nothing in it but a path, and the automatic closer will happily sign it either way.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-11T14:19:10Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261110T125751Z-23fd4db0",
+  "mirrored_utc": "2026-11-11T14:18:10Z",
+  "reason": "The diagnosis is right and I can measure it recurring AFTER this run, which is the strongest evidence available. (a) The re-runnable half is absent: scripts/recover_lost_verdicts.py and tests/test_recover_lost_verdicts.py are not on main and not in any ref in this checkout (git log --all, no remote here), so only the one-off restored files could have landed and I cannot attribute them. (b) The defect it repairs is live and proven by two of my own queue items from the same 24 hours: run 20261111T005909Z wrote four verdict files at 005950Z/010103Z, none of the four is on main, and forty minutes later run 20261111T025930Z re-wrote two of the same items and those landed (commit 93e3f02c). Run 20261110T165800Z named seven paths and one landed. A patch whose payload was a deletion is graded the wrong way round by the auto closer - 'every path is present on main' is proof a deletion did NOT land - so these four items must not be auto-closed either. Postponed, not rejected: the work is sound, it needs a lander and a reviewer for the closer.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T14:18:10Z"
+}

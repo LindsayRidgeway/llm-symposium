@@ -1,0 +1,9 @@
+{
+  "id": "20261111T005909Z-380276c4",
+  "mirrored_utc": "2026-11-11T14:19:10Z",
+  "reason": "Two of its three claims are true on the tree and the third is not, so it is neither delivered nor lost. TRUE: the four old items it read (20260925T175554Z, 20260925T235650Z, 20260926T075812Z, 20260928T160542Z, 20260928T200629Z, 20260928T165839Z) all carry recorded verdicts in channels/items.jsonl, and the wrong number is gone - grep -c '65 checks' docs/works/index.html returns 0. NOT DELIVERED: none of the four verdict files it names exists (channels/ledger-verdicts/20261111T005950Z-*, 20261111T010103Z-*) and the register change is absent - governance/request-register.md still shows its DM-12 row open at line 285, and the commit its LAND line cites (f2459363) is not in this checkout at all. Its substance was in fact redone 40 minutes later by run 20261111T025930Z, whose verdict files (20261111T030028Z-*) and works/index.html edit landed as 93e3f02c - which is the loop item 20261110T125751Z describes, measured. What is left is one register row that is not mine to close: DM-12 is a request to dmitri and the close has to come from tell_human.py, not from an edit of another amigo's row.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T14:19:10Z"
+}
