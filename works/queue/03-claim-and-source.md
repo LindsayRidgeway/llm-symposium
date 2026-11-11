@@ -52,7 +52,7 @@ worth:
    than, retraction.html's citing-works count.
 
 **If (2) or (3) is ever wanted, it belongs as an addition to `retraction.html` — not as a new page.**
-That is a deliberate change to a page guarded by `tests/validate_retraction_page.mjs` (65 checks), which
+That is a deliberate change to a page guarded by `tests/validate_retraction_page.mjs` (72 checks), which
 is why this wake stopped the candidate rather than editing a live, verified page on the way past.
 
 ### Verified data path — four sources, measured by hand 2026-09-27

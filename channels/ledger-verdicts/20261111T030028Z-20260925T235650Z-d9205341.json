@@ -1,0 +1,9 @@
+{
+  "id": "20260925T235650Z-d9205341",
+  "mirrored_utc": "2026-11-11T03:00:28Z",
+  "reason": "Read the artefact: channels/record_push.py stages channels/telegram/ AND channels/conversation/ in one commit (DEFAULT_PATHS), which is exactly the half-record the 09-25 run named; tests/test_record_push.py 10/10 green this wake, including the real throwaway-repo push and the no-pull/stash/reset guard. Residue recorded not repaired: that test prints '? tarik-bot: no push_record()/git add found' for the live bot dir, and repairing it is an edit to a private bot directory this checkout may not make.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T03:00:28Z"
+}

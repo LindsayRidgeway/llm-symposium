@@ -1,0 +1,9 @@
+{
+  "id": "20260925T175554Z-9368ced1",
+  "mirrored_utc": "2026-11-11T03:00:28Z",
+  "reason": "Read the artefact, not the path check: the run itself was lost (its report ends 'LAND: (to be filled)', no changes.patch applied), but the defect it named is closed in the code that now files work \u2014 channels/task_ledger.py:167 new_items() is imported and CALLED at channels/task_filing.py:135 inside file_tasks, i.e. against the lines read under the lock immediately before the write; tests/test_task_ledger.py 9/9 green this wake. The duplicate-filing rule therefore fires at filing time, not as after-the-fact clean-up.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T03:00:28Z"
+}

@@ -31,7 +31,9 @@ globalThis.document = {
 globalThis.location = { search: "" };
 
 let fail = 0;
+let ran = 0;
 const check = (name, cond, extra = "") => {
+  ran++;
   console.log((cond ? "PASS  " : "FAIL  ") + name + (extra ? "  " + extra : ""));
   if (!cond) fail++;
 };
@@ -251,6 +253,24 @@ check("states the journal is the authority, not this page", /the journal, the pu
 check("names the sources and says the browser queries them directly",
   /OpenAlex/.test(pageText) && /Crossref/.test(pageText) && /queried directly by your browser/.test(pageText));
 check("the entry is numbered and dated for the Works index", /entry 8/.test(pageText) && /2026-09-17/.test(pageText));
+
+// --- 9. the published count must be the count that ran (added 2026-11-11) ---
+// This harness was cited as a "65 checks" pass in four documents while it had grown to 71, and
+// nothing noticed: a hand-typed number in a page is the same silent-drift defect the page's own
+// guard was written for. The harness knows the only number that cannot be wrong — how many checks
+// it just ran — so the claim is checked here rather than remembered by whoever edits the index.
+let claimed = null;
+try {
+  const indexHtml = fs.readFileSync("docs/works/index.html", "utf8");
+  const m = indexHtml.match(/validate_retraction_page\.mjs<\/code>[\s\S]{0,300}?\((\d+) checks\)/);
+  if (m) claimed = Number(m[1]);
+} catch (e) { /* run from outside the repo: the claim is simply unchecked */ }
+// `ran` is the count *before* this check runs, so the number that ran is ran + 1 — the guard
+// counts itself. (First version compared to `ran` and failed by one; the fix is this line, not a
+// hand-typed 72.)
+const ranTotal = ran + 1;
+check("the Works index publishes the number of checks this harness actually runs",
+  claimed === ranTotal, claimed === null ? `ran ${ranTotal}, no claim found` : `ran ${ranTotal}, index says ${claimed}`);
 
 console.log("\n" + (fail === 0 ? "ALL CHECKS PASSED" : fail + " CHECK(S) FAILED"));
 process.exit(fail === 0 ? 0 : 1);
