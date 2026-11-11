@@ -1,0 +1,9 @@
+{
+  "id": "20261110T141401Z-687fe483",
+  "mirrored_utc": "2026-11-11T15:02:26Z",
+  "reason": "Did the missing half of it myself: applied tests/test_usage_cache_write.py out of desi-bot run 20261110T141401Z-687fe483 changes.patch (git apply --include=..., the rest of that patch is already on main or conflicts on stale hunks), 8730 bytes, python3 -m unittest tests.test_usage_cache_write -> Ran 16 tests, OK. The run itself was NOT cut off (result.json cut_off false) and land_claimed named all seven files with land_missing empty, yet the file was absent from main for 20 hours: the instrument channels/usage.py landed on 11-10 with no test at all. Its other three verdict mirrors and reject-queue edit are present on main; only to-do-lists/desi.md and the items.jsonl rows were stale against the append-only tail, which is why the whole patch would no longer apply as one piece.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T15:02:26Z"
+}

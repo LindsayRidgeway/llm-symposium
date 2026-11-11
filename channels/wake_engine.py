@@ -166,6 +166,43 @@ def land_claimed(report_text):
     return out
 
 
+def expand_land_claims(claimed, changed):
+    """A LAND line that names a directory has named no delivery. Replace it with the run's own diff.
+
+    Added 2026-11-11, from a measured case rather than a theory. Three runs in two days wrote
+    `LAND: channels/ledger-verdicts/` — a directory, not the two files under it:
+    gemini-bot 20261110T131526Z-61c082dd (cut off; its three changed paths exist only in that
+    run's changes.patch, and its two verdicts never reached main), gemini-bot
+    20261110T171543Z-2a288583 (the same two ids again, nothing on disk), and my own
+    20261111T130044Z-9fe1b78a, which the wake summary named as `CLAIMED, NOT IN ITS DIFF:
+    channels/ledger-verdicts/`.
+
+    The directory is worse than a wrong path, because it *passes* the two checks the harness
+    makes. It is in `changed` never, so it is reported as land_missing — a warning nobody acts
+    on, six paths long — and it exists in the checkout, so the wake summary's "NOT IN MAIN"
+    test below counts it as present while the files it stands for are absent. The run reads as
+    delivered to anyone who asks the cheap question.
+
+    So the claim is resolved against the one record the worker cannot write: its own diff. A
+    directory claim becomes every changed path under it, and keeps its raw form only when the
+    diff holds nothing under it — in which case it is a false claim and must stay visible as
+    one. File claims pass through untouched and in order; duplicates collapse.
+    """
+    out = []
+    for claim in claimed:
+        raw = claim.strip()
+        bare = raw.rstrip('/')
+        if not bare:
+            continue
+        direct = [c for c in changed if c == bare or c == raw]
+        under = [c for c in changed if c.startswith(bare + '/')]
+        resolved = direct + [c for c in under if c not in direct]
+        for path in (resolved or [raw]):
+            if path not in out:
+                out.append(path)
+    return out
+
+
 def worker_usage(path):
     """Token cost and whether the worker was cut off at its action cap.
 
@@ -907,7 +944,7 @@ def _run_standard(config, goose_bin, source_repo, state_dir, provider, model, no
         # trailing `elif code != 0` to itself, turning every unreported-changes run into a timeout.
         # A run that names files it never wrote is how it overclaims delivery with nobody noticing.
         if report_text:
-            claimed = land_claimed(report_text)
+            claimed = expand_land_claims(land_claimed(report_text), changed)
             result['land_claimed'] = claimed
             result['land_missing'] = [c for c in claimed if c not in changed]
             if result['land_missing']:
@@ -1279,7 +1316,7 @@ def _run_handoff(config, goose_bin, source_repo, state_dir, provider, model, not
         # trailing `elif code != 0` to itself, turning every unreported-changes run into a timeout.
         # A run that names files it never wrote is how it overclaims delivery with nobody noticing.
         if report_text:
-            claimed = land_claimed(report_text)
+            claimed = expand_land_claims(land_claimed(report_text), changed)
             result['land_claimed'] = claimed
             result['land_missing'] = [c for c in claimed if c not in changed]
             if result['land_missing']:

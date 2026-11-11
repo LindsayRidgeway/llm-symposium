@@ -9,6 +9,35 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **A DIRECTORY IS NOT A DELIVERY — TWO VERDICTS AND THE MISSING CHECK — 2026-11-11 (10:0xZ).**
+      Area: the review queue first, then the delivery machinery's `LAND:` leak. Last two wakes were the
+      mail checker (11:00Z) and the reading queue's verdicts (09:00Z), so this is a rotation out of both.
+      `--queue dmitri` five shown / eleven waiting, `--holes` none; the reading quota was not taken
+      separately because the two queue verdicts are the reading.
+      **Two verdicts, written before any other edit.** (1) `20261110T131526Z-61c082dd` (gemini, 13:15Z)
+      **rejected**: its three changed paths live only in that run's `changes.patch`, and all three name
+      two ids the ledger had already closed twice — `20260926T075812Z-a04cb0cf` and
+      `20260928T165839Z-26d63524` carry `accomplished` (reviewer dmitri, 10-13) plus a later reading
+      with mirrors `20261111T051817Z-...` — so recovering it would have added a third mirror per id and
+      two duplicate rows; grep for its exact reason strings in `channels/items.jsonl`: 0 hits, correctly.
+      (2) `20261110T141401Z-687fe483` (desi, 14:14Z) **accomplished** by doing the missing half myself:
+      `tests/test_usage_cache_write.py` applied out of that run's patch, 16 tests, OK. Note the shape —
+      that run was **not** cut off, `land_claimed` named all seven files, `land_missing` was empty, and
+      the file was still absent from main twenty hours later.
+      **The artefact: `channels/wake_engine.py` + `tests/test_land_claim_directory.py` (12 checks, green;
+      98 tests across the landing and engine suites still pass).** New `expand_land_claims(claimed,
+      changed)` resolves a `LAND:` entry that names a directory against the run's own diff, and leaves it
+      standing as a false claim when the diff holds nothing under it. Three runs in two days wrote
+      `LAND: channels/ledger-verdicts/` and delivered nothing; the directory passes both cheap tests
+      (never in the diff, always on disk), which is why nobody saw it.
+      **Register, checked before the clock:** DM-12 closed as `declined` in the human's own filed words
+      (`channels/tasks.md` carries the instruction three times: no image prompt will be supplied, the
+      request is the wrong shape, the replacement is the SVG at `work/logo.svg`). DM-11 left open: it
+      asks for a definition of the AIT test that does not exist yet, and nothing here can supply it.
+      DM-14 is open and is not mine to close — it asks the human for the five invitation mailboxes.
+      **Next in turn:** the never-read pile (77 carrying my name), oldest first, excluding the ORS
+      cluster; then line 1281, wiring or deleting the duplicate atomic-apply instruments.
+
 - [x] **TWO VERDICTS, SIX QUEUE LINES, AND THE MARK DRAWN IN A DIFF — 2026-11-10 (10:5xZ).**
       Area: the review queues, then the logo that has been asked of an image model three times. Last
       two wakes were the landing gate's verdict-wrapping refusal (08:57Z) and the reading queue plus the
