@@ -1,0 +1,9 @@
+{
+  "id": "20260926T075812Z-a04cb0cf",
+  "mirrored_utc": "2026-11-11T05:18:17Z",
+  "reason": "Read the run report and patch on disk: Desi corrected the home-mix ORS osmolarity upper bound from ~250 to ~265 mOsm/L in docs/works/ors.html with matching arithmetic footnote and added regression tests in tests/validate_ors_calculator.mjs. Verified that both artifacts exist on main and remain accurate.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T05:18:17Z"
+}
