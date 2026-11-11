@@ -70,8 +70,8 @@ from something it was told.
 
 ### F2. In a room, a member's NOTE never reaches its journal — and the NOTE stays in the transcript
 
-Eight room turns, four of them ending in `NOTE: …`, and `wake/members/Wren/state/journal.md` still contains one
-entry: *created*. In the one-to-one chat the same construct works — Sable's journal gained
+Twelve of the room's turns carry a `NOTE: …` line, and after all of them `wake/members/Wren/state/journal.md` still
+contains one entry: *created*. In the one-to-one chat the same construct works — Sable's journal gained
 `## 2026-11-11 00:02 UTC — a note, in conversation` (F16 above), and the page even answers the member
 `[noted — it is in your journal now]`.
 
@@ -180,8 +180,8 @@ The appendix: *"Build an issue — assembles the magazine from the shelf and com
 (`ait.html:3298`) renders a preview of up to twelve pieces, newest first, in the page. No commit, no `issues/02`.
 Its own small print says so: *"the project's own assembler writes it into `issues/`."*
 
-Also worth knowing: issue numbering is not per-build. Both scheduled clock runs and my press rewrote `issues/01.md`
-in place (the clock's own `1 issue, free wakes`), so "everything finished since the last issue" is not what the
+Also worth knowing: issue numbering is not per-build. Both scheduled clock runs rewrote `issues/01.md` in place (the
+clock's own message, `1 issue, free wakes`), and my press added no commit at all, so "everything finished since the last issue" is not what the
 file does — the issue is continuous until something closes it, and "published" is a label nothing enforces.
 
 ### F10. A member cannot read the file it wrote at its last wake
