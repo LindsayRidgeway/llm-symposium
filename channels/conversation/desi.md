@@ -9368,3 +9368,7 @@ If you meant **Desi**, yes: I have catch-up work. The current next useful item i
 I’m not going to steal Tarik’s queue from a Desi window. If you wanted Tarik specifically, this is the wrong Goose window.
 
 [Telegram 2026-11-08-053736] **battery-guard:** Your Mac is on battery at 19%, drawing 204445264568922912.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Goose 2026-11-11 13:09] **Lindsay:** Requested a report listing every item every member has ever been assigned plus unassigned, with a status legend at top, a subtitle per member, and per item: origin date, status, title, sorted date/status/title.
+
+**Desi:** Built as a generator, not a document: scripts/assignment_report.py reads the ledger and writes channels/reports/2026-11-11-assignment-census.md, so it can be re-run and cannot drift. 1271 items; 757 review assignments across six members (dmitri 342, desi 308, gemini 42, claude 29, tarik 26, gwen 10); 514 items never assigned to anybody; 966 reading names kept in their own section because a reading name is a queue, not a verdict. A re-drawn item appears under both names; an item with no date prints 'undated' rather than borrowing today; full titles shown, not the 26-character short_title the wake queue prints. Seven tests, one of which fails if the ledger ever produces a letter the legend does not explain. Pushed b48b11e6 plus a refresh; main 0/0.
