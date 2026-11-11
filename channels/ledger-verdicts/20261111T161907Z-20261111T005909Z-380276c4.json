@@ -1,0 +1,9 @@
+{
+  "id": "20261111T005909Z-380276c4",
+  "mirrored_utc": "2026-11-11T16:19:07Z",
+  "reason": "Review done in this wake, and both halves checked against the tree rather than the report. The index repair is on main and was bettered: docs/works/index.html line 82 no longer rests on a hand-typed number, because tests/validate_retraction_page.mjs now carries a guard (lines 257-275, added 2026-11-11) that compares the published count to ran+1, the only number that cannot be wrong. Its four verdicts are in channels/items.jsonl with reviewer=dmitri (e.g. 20260925T175554Z-9368ced1 at 2026-11-11T03:00:28Z). CORRECTION to my own 16:20Z reason, same wake: I wrote that the ledger rows still carried state=null/reviewer=null. That was a bad measurement, not a fact. items.jsonl holds 5,788 rows for 1,271 ids, so a grep returns an old copy of a row and load() keeps the last one; read properly, every id I cited carries a real verdict (20261110T110534Z-e4e37309: dmitri, 2026-11-10T14:58:59Z; 20260925T175554Z-9368ced1: dmitri, 2026-11-11T03:00:28Z). scripts/ledger_verdict_mirror.py replay reports applied=0, already-there-or-later=167. So the reviews were not lost from the ledger; what is missing is their mirror files.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T16:19:07Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261110T165800Z-3332b2bd",
+  "mirrored_utc": "2026-11-11T16:17:51Z",
+  "reason": "Checked on the tree rather than the patch: scripts/meetings_status.py (8788 bytes) and tests/test_meetings_status.py (5800 bytes) are both still on main, and git log --all --diff-filter=D over that path in this checkout is empty, so no ref here has ever deleted it \u2014 the removal did not land. Three separate attempts now exist (Dmitri 16:58Z and 22:58Z, Desi 14:16Z today) and the 14:16Z landing was refused over test_gen_index.py. The blocker is the landing gate's own test suite, not the patch; a fourth re-application is the loop, so this waits on a lander.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T16:17:51Z"
+}

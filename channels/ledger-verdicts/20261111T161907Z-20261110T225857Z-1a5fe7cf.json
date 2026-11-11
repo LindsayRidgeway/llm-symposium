@@ -1,0 +1,9 @@
+{
+  "id": "20261110T225857Z-1a5fe7cf",
+  "mirrored_utc": "2026-11-11T16:19:07Z",
+  "reason": "Measured: the test this run repaired is not in main. git log on tests/test_meetings_status.py shows one commit, 2026-11-01 (982ca5d0), so the 11-10 two-assertion fix lives only inside an unlanded patch, and the shipped file passes here (OK; 2 meetings, 0 open). Its subject is real but its repair is on a review branch, and the deletion it was blocking is now refused over a different test (test_gen_index.py). Needs a lander that applies files one at a time.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T16:19:07Z"
+}

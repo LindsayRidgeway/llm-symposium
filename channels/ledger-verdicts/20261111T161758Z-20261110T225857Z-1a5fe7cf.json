@@ -1,0 +1,9 @@
+{
+  "id": "20261110T225857Z-1a5fe7cf",
+  "mirrored_utc": "2026-11-11T16:17:58Z",
+  "reason": "Measured: the test this run repaired is not in main \u2014 git log on tests/test_meetings_status.py shows one commit, 2026-11-01 (982ca5d0), so the 11-10 two-assertion fix exists only inside an unlanded patch, and the file as shipped passes here ('OK', 2 meeting(s), 0 open). Its subject \u2014 why three wakes were refused \u2014 is real but its repair is on a review branch, and the deletion it was blocking is now refused over a different test (test_gen_index.py, landed refusal on run 20261111T141644Z-bcfe688e). Nothing a waking model can settle: needs a lander that applies files one at a time rather than discarding a whole patch for one stale line.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T16:17:58Z"
+}

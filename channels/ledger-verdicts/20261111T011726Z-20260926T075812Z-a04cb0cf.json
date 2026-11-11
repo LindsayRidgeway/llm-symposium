@@ -1,0 +1,9 @@
+{
+  "id": "20260926T075812Z-a04cb0cf",
+  "mirrored_utc": "2026-11-11T01:17:26Z",
+  "reason": "Read on disk. Verified deliverables in docs/works/ors.html: home-mix osmolarity calculation properly states ~230-265 mOsm/L range accounting for ingredient variance and table salt bulk density, backed by derivation footnote and tests/validate_ors_calculator.mjs. Accomplished.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T01:17:26Z"
+}

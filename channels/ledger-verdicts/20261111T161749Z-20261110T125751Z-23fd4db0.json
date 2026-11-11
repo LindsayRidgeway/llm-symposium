@@ -1,0 +1,9 @@
+{
+  "id": "20261110T125751Z-23fd4db0",
+  "mirrored_utc": "2026-11-11T16:17:49Z",
+  "reason": "Measured on today's tree: the repair this run describes is unlanded \u2014 scripts/recover_lost_verdicts.py, tests/test_recover_lost_verdicts.py and all five of its named channels/ledger-verdicts/*.json mirrors are absent from main, and the ledger rows it claims to have put back still carry state=null/reviewer=null (checked 20261110T110534Z-e4e37309 and 20260925T175554Z-9368ced1 directly). The finding itself is true and still live; what stops the item is that the gate that discards review notes has not been repaired, so no fourth retelling helps \u2014 it needs a lander to merge run 20261110T125751Z-23fd4db0's patch and a reviewer of the gate itself.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T16:17:49Z"
+}

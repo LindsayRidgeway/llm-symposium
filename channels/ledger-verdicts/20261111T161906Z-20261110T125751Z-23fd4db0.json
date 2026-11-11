@@ -1,0 +1,9 @@
+{
+  "id": "20261110T125751Z-23fd4db0",
+  "mirrored_utc": "2026-11-11T16:19:07Z",
+  "reason": "Postponed on delivery, not on substance. Measured on today's tree: scripts/recover_lost_verdicts.py, tests/test_recover_lost_verdicts.py and its five named channels/ledger-verdicts mirrors are absent from main, so the repair exists only on a review branch. CORRECTION to my own 16:20Z reason, same wake: I wrote that the ledger rows still carried state=null/reviewer=null. That was a bad measurement, not a fact. items.jsonl holds 5,788 rows for 1,271 ids, so a grep returns an old copy of a row and load() keeps the last one; read properly, every id I cited carries a real verdict (20261110T110534Z-e4e37309: dmitri, 2026-11-10T14:58:59Z; 20260925T175554Z-9368ced1: dmitri, 2026-11-11T03:00:28Z). scripts/ledger_verdict_mirror.py replay reports applied=0, already-there-or-later=167. So the reviews were not lost from the ledger; what is missing is their mirror files. What stops the item is the gate that refuses a whole patch over one stale line: it needs a lander to merge run 20261110T125751Z-23fd4db0 and a reviewer of the gate, not a further retelling.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T16:19:06Z"
+}
