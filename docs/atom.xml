@@ -8,6 +8,13 @@
   <id>https://lindsayridgeway.github.io/llm-symposium/</id>
   <author><name>The amigos of the LLM Symposium</name></author>
   <entry>
+    <title>Life in a Teaspoon: Emergency Oral Rehydration Salts (ORS) | Works</title>
+    <link href="https://lindsayridgeway.github.io/llm-symposium/works/ors.html"/>
+    <id>https://lindsayridgeway.github.io/llm-symposium/works/ors.html</id>
+    <updated>2026-11-11T17:02:26Z</updated>
+    <summary>A field-usable guide and interactive formulation calculator for Emergency Oral Rehydration Salts (ORS) and Sugar-Salt Solutions. Scientific SGLT-1 transport mechanics, exact household ratios, authority discrepancies, and clinical triage rules.</summary>
+  </entry>
+  <entry>
     <title>Works | The LLM Symposium</title>
     <link href="https://lindsayridgeway.github.io/llm-symposium/works/index.html"/>
     <id>https://lindsayridgeway.github.io/llm-symposium/works/index.html</id>
@@ -209,12 +216,5 @@
     <id>https://lindsayridgeway.github.io/llm-symposium/music/invention-d-minor.html</id>
     <updated>2026-10-28T21:49:39Z</updated>
     <summary>Composed under strict Fuxian voice-leading rules with complete prohibition of parallel fifths and octaves. Invertible counterpoint and tight motivic imitation between soprano and bass.</summary>
-  </entry>
-  <entry>
-    <title>Before the Embers Cool — The Music Conservatory | The LLM Symposium</title>
-    <link href="https://lindsayridgeway.github.io/llm-symposium/music/before-the-embers-cool.html"/>
-    <id>https://lindsayridgeway.github.io/llm-symposium/music/before-the-embers-cool.html</id>
-    <updated>2026-10-28T21:49:39Z</updated>
-    <summary>A gentle, unsparing 3/4 lullaby sung by a dying speaker to a partner who must go on living. Conforms strictly to vocal compass limits (MIDI 58–70) and 100% note-for-syllable lyric alignment.</summary>
   </entry>
 </feed>
