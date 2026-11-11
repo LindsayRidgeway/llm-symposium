@@ -1,0 +1,9 @@
+{
+  "id": "20261110T181424Z-4bba2943",
+  "mirrored_utc": "2026-11-11T19:02:58Z",
+  "reason": "Did the missing third myself rather than restamping: its two verdicts (20261109T185506Z-620e61a4, 20261109T225541Z-f4a38a15) are on main with reviewer=desi, but its instrument half was not - scripts/reject_queue_sweep.py on main still lacked undelivered_line() and record_delivery(), and tests/test_steward_delivery.py had never reached main. Applied that run's three files out of its own changes.patch (excluding items.jsonl and the verdict mirrors) and ran them here: tests/test_steward_delivery.py + tests/test_reject_queue_sweep.py 12 tests OK; tests/test_daily_report.py 60 OK; test_reject_queue_delivery + test_reject_queue_request_gap + test_daily_report_unlanded + test_daily_report_added_count 35 OK. The gap it closes is live: three reject-queue items carried steward-requested dates that no one who reads the daily report could see.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T19:02:58Z"
+}

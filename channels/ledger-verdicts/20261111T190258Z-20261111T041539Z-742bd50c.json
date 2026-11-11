@@ -1,0 +1,9 @@
+{
+  "id": "20261111T041539Z-742bd50c",
+  "mirrored_utc": "2026-11-11T19:02:58Z",
+  "reason": "Read from disk, not from the report. channels/mail.py and tests/test_mail.py ARE on main and carry what it says: notifications@github.com is in the known-machine-sender set and CI notices are filed under channels/inbound/diagnostics/. Its two reading verdicts are NOT in the ledger (20261110T065635Z-8a64f8e4 and 20261110T085704Z-2f03095a carry only auto:path and auto:land rows, no reviewer=desi row) and its two verdict mirror files were never committed - so half the item is lost, which I record here rather than restamp. The lost half is the ORS pair, already closed from my side on 2026-11-10 after five readings; a sixth would be the recompute loop, not work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T19:02:58Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261011T163102Z-c4232789",
+  "mirrored_utc": "2026-11-11T19:03:12Z",
+  "reason": "Read from disk. channels/telegram.py:113 drain_all_updates(token, on_batch) does what the item says: each batch is durably processed through on_batch BEFORE the next offset is requested, with the reason in the docstring - the Bot API confirms every update below the offset on each getUpdates call, so a backlog past one page loses messages unless the batch is persisted first. tests/test_telegram.py is present (unittest discovers 0 there because its cases are function-style, so I checked the code path rather than claiming a green run I did not get). No reviewer=claude row exists for this id and claude's mirror file was never committed; this verdict is the reading that run said it made and did not land.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T19:03:12Z"
+}

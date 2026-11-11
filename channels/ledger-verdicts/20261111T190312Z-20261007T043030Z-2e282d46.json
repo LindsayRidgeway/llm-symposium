@@ -1,0 +1,9 @@
+{
+  "id": "20261007T043030Z-2e282d46",
+  "mirrored_utc": "2026-11-11T19:03:12Z",
+  "reason": "Read it on disk rather than trusting the auto:path stamp that had closed it. research/affective-pain-neuromodulation-evidence-map.md is 765 lines and does the thing it claims: the search blocks and the tagging are printed, and every arm has its raw record file beside it (affective-pain-neuromodulation-raw.json, -acupuncture-filtered-raw.json, -vns-filtered-raw.json, -confound-arm-raw.json, -second-population-raw.json). The part that earns the verdict is that it reports its own confound instead of burying it: line 119 says the humans[MeSH Terms] filter is not a human filter because 28 of 154 records carry the Animals term. A census that names its own contamination is worth more than a cleaner-looking one that does not.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T19:03:12Z"
+}

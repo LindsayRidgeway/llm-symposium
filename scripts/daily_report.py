@@ -1128,6 +1128,77 @@ def _joined_counts(counter: dict) -> str:
     return " · ".join(parts)
 
 
+STEWARD_LIMIT = 3
+
+
+def _steward_module():
+    """The reject-queue sweep, loaded for its parser rather than re-implemented here."""
+    try:
+        scripts = str(REPO / "scripts")
+        if scripts not in sys.path:
+            sys.path.insert(0, scripts)
+        import reject_queue_sweep                                   # noqa: PLC0415
+        return reject_queue_sweep
+    except Exception as exc:                                        # noqa: BLE001
+        print(f"daily_report: reject queue unreadable ({type(exc).__name__}: {exc})")
+        return None
+
+
+def _steward_waiting(module=None) -> list:
+    """Requests the human has been asked about and never told about.
+
+    Added 2026-11-10 (Desi). Three items were stamped `steward-requested: 2026-10-15` and the
+    sweep reported, correctly, that no delivery was on record for them — for 26 days, to run
+    stdout. He reads one counted report a day and does not read the repository, so a gap that is
+    only visible in a run's log is a gap nobody who can close it can see.
+    """
+    module = module or _steward_module()
+    if module is None:
+        return []
+    try:
+        text = (REPO / "channels" / "reject-queue.md").read_text(encoding="utf-8")
+        return module.undelivered(module.parse(text))
+    except Exception as exc:                                        # noqa: BLE001
+        print(f"daily_report: reject queue unreadable ({type(exc).__name__}: {exc})")
+        return []
+
+
+def _steward_line() -> str:
+    module = _steward_module()
+    if module is None:
+        return ""
+    return module.undelivered_line(_steward_waiting(module), limit=STEWARD_LIMIT)
+
+
+def _steward_block(limit: int = 4) -> list[str]:
+    waiting = _steward_waiting()
+    if not waiting:
+        return []
+    out = ["", f"### Waiting on your judgement ({len(waiting)}, none delivered)"]
+    for i in waiting[:limit]:
+        out.append(f"- {i['title']} — asked {i['requested']}")
+    if len(waiting) > limit:
+        out.append(f"- … and {len(waiting) - limit} more in channels/reject-queue.md")
+    return out
+
+
+def _record_steward_delivery(channel: str, limit: int = STEWARD_LIMIT) -> None:
+    """Only a real send writes this line, and it names the channel it went by."""
+    module = _steward_module()
+    if module is None:
+        return
+    waiting = _steward_waiting(module)
+    if not waiting:
+        return
+    queue = REPO / "channels" / "reject-queue.md"
+    try:
+        module.record_delivery(queue, {i["title"] for i in waiting[:limit]}, channel)
+        print(f"daily_report: recorded delivery of {len(waiting[:limit])} reject-queue request(s) "
+              f"via {channel}")
+    except Exception as exc:                                        # noqa: BLE001
+        print(f"daily_report: delivery record not written ({type(exc).__name__}: {exc})")
+
+
 def render_focus(hours: int = 24, now: dt.datetime | None = None,
                  items: dict[str, dict] | None = None) -> str:
     """The two questions the human asked on 2026-10-14, and nothing else.
@@ -1191,6 +1262,9 @@ def render_focus(hours: int = 24, now: dt.datetime | None = None,
         who = collections.Counter(r.get("reviewer") for r in hits)
         out.append(f"    {label:<13} " + _joined_counts(who) + f"   total {len(hits)}")
     out += _wakes_focus(now, hours)
+    line = _steward_line()
+    if line:
+        out += ["", line]
     return "\n".join(out)
 
 
@@ -1248,6 +1322,7 @@ def render(hours: int = 24, now: dt.datetime | None = None,
     lines += _inputs_block(now, hours)
     lines += _added_block(hours, now)
     lines += _meetings_block(hours, now)
+    lines += _steward_block()
     lines += [
         "",
         f"### Titles added in the last {hours}h",
@@ -1353,6 +1428,8 @@ def main() -> int:
         capture_output=True, text=True, timeout=120,
     )
     print(r.stdout.strip() or r.stderr.strip())
+    if r.returncode == 0:
+        _record_steward_delivery("daily report via tell_human, telegram")
     print(f"daily_report: recorded {out.relative_to(REPO)} ({len(text)} chars, sent {len(sent)})")
     _commit_own_outputs([out, ledger],
                         "report(daily): the day's counts, sent")

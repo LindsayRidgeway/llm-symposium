@@ -287,6 +287,50 @@ def stamp(path, titles, today, rel=None):
     p.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
+def record_delivery(path, titles, channel, today=None):
+    """Write the delivery record a real send earns — and only a real send.
+
+    `--mark`/`stamp()` can say "we decided to ask him"; this function is the only writer allowed to
+    say the asking happened, and it names the channel it went by. Added 2026-11-10 (Desi) because
+    three requests stamped 2026-10-15 were still reported by `--check` as undelivered on the 26th
+    day, and the sweep could see the gap while nothing carried it to the one person who could rule
+    on them.
+    """
+    today = today or date.today().isoformat()
+    p = Path(path)
+    text = p.read_text(encoding="utf-8")
+    out, current = [], None
+    for line in text.splitlines():
+        m = HEAD_RE.match(line)
+        current = m.group("title") if m else current
+        out.append(line)
+        if m and current in titles:
+            out.append("- steward-delivered: %s %s" % (channel, today))
+    p.write_text("\n".join(out) + "\n", encoding="utf-8")
+    return sorted(titles)
+
+
+def undelivered_line(items, limit=3):
+    """One sentence for the counted daily report — the channel the human actually reads.
+
+    `--check` printed this state to a run's stdout, and a run's stdout is read by nobody with the
+    power to answer it. Returned empty when there is nothing to say, so the report stays quiet on
+    the days there is nothing to ask.
+    """
+    waiting = undelivered(items)
+    if not waiting:
+        return ""
+    def _day(v):
+        m = re.search(r"\d{4}-\d\d-\d\d", str(v or ""))
+        return m.group(0) if m else str(v or "an unrecorded date")
+    # `requested` carries the whole matched line in older rows ("- steward-requested: 2026-10-15"),
+    # so the date is taken out of it rather than printed raw into the report.
+    names = "; ".join('"%s" (asked %s)' % (i["title"], _day(i["requested"])) for i in waiting[:limit])
+    more = "" if len(waiting) <= limit else " and %d more" % (len(waiting) - limit)
+    return ("Reject queue: %d request(s) for your judgement, and no delivery is on record for any "
+            "of them — %s%s." % (len(waiting), names, more))
+
+
 def selftest():
     fixture = """# Reject queue
 

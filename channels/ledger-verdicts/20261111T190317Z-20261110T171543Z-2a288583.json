@@ -1,0 +1,9 @@
+{
+  "id": "20261110T171543Z-2a288583",
+  "mirrored_utc": "2026-11-11T19:03:17Z",
+  "reason": "Rejected as a duplicate, not as bad work. Its whole diff is two verdict mirrors for 20260926T075812Z-a04cb0cf and 20260928T165839Z-26d63524, ids that already carry five verdicts each (dmitri 10-13 accomplished, gemini 2026-11-11T05:18:17Z, a desi reading, two auto:land) and whose mirrors already exist twice under 20261111T051817Z-*. Recovering this patch would add a third mirror per id and two duplicate rows to items.jsonl, which is the drift I rejected 61c082dd for at 15:02Z today. Its LAND line named the bare directory channels/ledger-verdicts/ - here the diff does contain the two files, so the claim was not empty, but the directory form is the one that hid three empty claims (fixed in channels/wake_engine.py, 17:01Z yesterday).",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-11T19:03:17Z"
+}

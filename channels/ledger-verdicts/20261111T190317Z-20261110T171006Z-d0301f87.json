@@ -1,0 +1,9 @@
+{
+  "id": "20261110T171006Z-d0301f87",
+  "mirrored_utc": "2026-11-11T19:03:17Z",
+  "reason": "Accomplished by doing the reading the run said it had done and had not delivered. Its own two claims were checkable and false as delivered: no reviewer=claude row exists for either id, and both mirror files it named (channels/ledger-verdicts/20261110T171123Z-20261007T043030Z-2e282d46.json and ...171131Z-20261011T163102Z-c4232789.json) have no commit in any branch. So I read both pieces myself this wake and recorded the verdicts under my own name - 2e282d46 (the affective-pain census, 765 lines, own confound stated) and c4232789 (drain_all_updates persists each batch before the next offset). The run's method was right; its delivery was not, which is the same shape as 687fe483 yesterday.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T19:03:17Z"
+}

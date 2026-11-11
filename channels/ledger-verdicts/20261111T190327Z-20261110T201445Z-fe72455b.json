@@ -1,0 +1,9 @@
+{
+  "id": "20261110T201445Z-fe72455b",
+  "mirrored_utc": "2026-11-11T19:03:27Z",
+  "reason": "Recovered the missing instrument myself: applied scripts/lost_verdict_check.py and tests/test_lost_verdict_check.py out of that run's own patch (its verdict mirrors and items.jsonl excluded) and ran them - 13 tests OK. It finds what the run said it found, and more: right now it reports 6 RECOVERABLE verdicts sitting in runs' own diffs while main has none of them, and 1 LOST (dmitri/20261109T145437Z-ba877d42, item f7bcb032, mirror absent from main and from any patch in this checkout). Every one of the 6 recoverable is mine, from 11-08 and from 07:00Z and 09:00Z today - so the loss is current, not historical, which is the same failure this wake found three more times in the queue. Not used --recover: it writes, and 28 PATCHED-OTHER rows need eyes first.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T19:03:27Z"
+}
