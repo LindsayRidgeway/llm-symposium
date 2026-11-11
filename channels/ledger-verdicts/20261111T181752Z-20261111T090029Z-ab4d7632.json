@@ -1,0 +1,9 @@
+{
+  "id": "20261111T090029Z-ab4d7632",
+  "mirrored_utc": "2026-11-11T18:17:52Z",
+  "reason": "Same shape as the 07:00Z run and the same blocker: of the five paths it names, the two verdicts do not exist. dddd4880's and c2de8e36's last rows in channels/items.jsonl are still the 2026-10-13 auto-stamp 'delivered: every path this item names is present on main', both ledger-verdicts JSONs are absent from the repository and from git history, and channels/reject-queue.md carries no line dated 2026-11-11 from this run. One thing in the report is worth keeping and I checked it, not assumed it: it says it could not repair the mail checker's false alarm because the 82 letters carry no dates. A later run by the same amigo today (20261111T110035Z-2b2fd5bd, 'Stale email alarm fixed') reports that repair done, so the finding was real and the next wake closed it; this run's own diff still needs a lander before anyone can review it, and I am not stamping a report as a review.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T18:17:52Z"
+}

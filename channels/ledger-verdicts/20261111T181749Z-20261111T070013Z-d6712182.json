@@ -1,0 +1,9 @@
+{
+  "id": "20261111T070013Z-d6712182",
+  "mirrored_utc": "2026-11-11T18:17:49Z",
+  "reason": "Nothing this run says it wrote is on main, so there is nothing to review and no verdict of mine can make it real. Checked at 18:2xZ against the checkout the delivery machine just built: the two verdicts it claims for f2f30be9 and 78b286b7 are absent from channels/items.jsonl (their last rows are still the 2026-10-13 'delivered: every path this item names is present on main' auto-stamp, one of the 59 path-checks mis-signed with Dmitri's name), both ledger-verdicts JSONs it names are absent from the repository and from git history, and the artefact is absent too: tests/validate_retraction_page.mjs still holds 62 check( calls with isRetractedType exported at line 45 and never called, and docs/works/index.html still publishes 72 checks, not 86. Its run report is the only evidence and a report is not a file. BLOCKER: this run's diff needs a lander; until it lands, a second reader cannot review it and I will not stamp it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-11T18:17:49Z"
+}

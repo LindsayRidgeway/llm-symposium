@@ -1,0 +1,9 @@
+{
+  "id": "20261111T091624Z-88a85af1",
+  "mirrored_utc": "2026-11-11T18:17:59Z",
+  "reason": "The two verdicts this run claims are in the ledger and they are real reads, not stamps: channels/items.jsonl rows 5783-5784 carry reviewer gemini at 2026-11-11T13:17:5xZ for 20261008T103435Z-67a6a565 and 20261008T183521Z-ec648ed9, each naming a specific repair and the files it touched. I checked the second one against the disk rather than its own account: channels/mail.py's AUTOMATED_SENDER_RE (line 121) carries no-?reply and do-?not-?reply, and tests/test_auto_reply.py exists at 7,380 bytes, so the fix 'no-reply' addresses are caught is present, not merely described. The first names a stale index reddening the suite and repairs to channels/risks.md and scripts/README.md; both files are on main and risks.md was landed today. One reporting slip worth naming so the next reader is not misled: the run's LAND line names only channels/item_ledger.py, while the deliverable was two rows appended to channels/items.jsonl - the verdicts travelled, the manifest did not describe them. ACCEPTED.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T18:17:59Z"
+}

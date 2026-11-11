@@ -69,6 +69,14 @@ from email.parser import BytesParser
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+
+# Run as a script — which is how the runner runs it, `python3 channels/mail.py` — Python puts
+# channels/ at sys.path[0], not the repository root. Everything imported below by dotted name
+# (`channels.triage`) then fails, and the fetch loop's except catches that as a one-line
+# "triage failed": triage was silently off in exactly the mode the channel is used in. This is
+# the fix that belongs at module level, where it covers every dotted import, not only that one.
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 # Not drafts: the outbox is a data directory that also carries its own explanation. Every run
 # otherwise logged `FAILED README.md: malformed header line` (2026-10-08) — noise in the one log
 # line a human reads to find out whether mail actually left.
@@ -118,9 +126,24 @@ HEADER_RE = re.compile(r"^([A-Za-z0-9_-]+):\s*(.*)$")
 # Exception: delivery-failure notices (bounces) are telemetry, not noise —
 # they tell the commons whether its outbound mail actually arrived. They are
 # filed under channels/inbound/diagnostics/ instead of skipped.
+#
+# Second exception, added 2026-11-11: repository notifications from GitHub
+# (notifications@github.com — issue, pull-request and workflow mail). Until this
+# line they matched nothing here and so were filed as *human* inbound mail, which
+# is worse than being skipped: the one folder that is supposed to hold people
+# filled with a robot's subject lines. They are machine mail and they are also
+# the only record of a run that failed on the far side, so they are keyed as
+# automated and filed under diagnostics rather than dropped.
 AUTOMATED_SENDER_RE = re.compile(
     r"(noreply|no-?reply|donotreply|do-?not-?reply|mailer-?daemon|"
-    r"postmaster|bounce|accounts\.google\.com)",
+    r"postmaster|bounce|accounts\.google\.com|notifications@github\.com)",
+    re.IGNORECASE,
+)
+# Anchored on the sender address, not the display name: "GitHub
+# <notifications@github.com>" matches, "notifications@github.com.example.net"
+# does not, because the address has to end there.
+REPO_NOTIFICATION_RE = re.compile(
+    r"notifications@github\.com(?![\w.-])",
     re.IGNORECASE,
 )
 DELIVERY_FAILURE_RE = re.compile(
@@ -251,6 +274,54 @@ def is_automated(from_addr: str) -> bool:
 def is_delivery_failure(from_addr: str, subject: str) -> bool:
     """True for undeliverable/bounce notices — telemetry, filed not skipped."""
     return bool(DELIVERY_FAILURE_RE.search(from_addr + " " + subject))
+
+
+def is_repo_notification(from_addr: str) -> bool:
+    """True for GitHub repository notifications — machine mail, but kept as telemetry.
+
+    2026-11-11: this sender matched nothing in AUTOMATED_SENDER_RE, so its mail was filed in
+    channels/inbound/ alongside letters from people, and the folder that exists to hold humans
+    held a robot. Keying it as automated without routing it would trade one fault for another —
+    the mail would be dropped, and a failed-workflow notice is the only record a wake gets that
+    something ran on the far side and did not finish. Filed under diagnostics, dropped nowhere.
+    """
+    return bool(REPO_NOTIFICATION_RE.search(from_addr))
+
+
+def _file_diagnostic(
+    *,
+    identity: str,
+    heading: str,
+    from_addr: str,
+    date: str,
+    subject: str,
+    body: str,
+    msg_id: str,
+    fallback: str,
+) -> Path:
+    """Write one telemetry message to channels/inbound/diagnostics/ and return its path.
+
+    Two callers now (delivery failures, repository notifications) and the same three
+    properties each time: the body is redacted of key-bearing URLs before it is stored, the
+    file is named from the subject so it can be found without opening it, and nothing here
+    raises — telemetry that breaks the fetch is not telemetry.
+    """
+    out_dir = INBOUND_DIR / "diagnostics"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or fallback
+    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
+    out = out_dir / f"{stamp}-{identity}-{safe}.md"
+    out.write_text(
+        f"# {heading} — {stamp} ({identity})\n\n"
+        f"- From: {from_addr}\n"
+        f"- Date: {date}\n"
+        f"- Subject: {redact_key_urls(subject)}\n"
+        f"- Message-ID: {msg_id}\n\n"
+        f"---\n\n"
+        f"{redact_key_urls(body)}\n",
+        encoding="utf-8",
+    )
+    return out
 
 
 def decode_subject(value: str) -> str:
@@ -533,24 +604,37 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
             if is_automated(from_addr):
                 if is_delivery_failure(from_addr, subject):
                     # Telemetry: file it so the commons can see its mail failed.
-                    out_dir = INBOUND_DIR / "diagnostics"
-                    out_dir.mkdir(parents=True, exist_ok=True)
-                    safe = re.sub(r"[^A-Za-z0-9._-]+", "-", subject)[:60].strip("-") or "bounce"
-                    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
-                    out = out_dir / f"{stamp}-{identity}-{safe}.md"
-                    out.write_text(
-                        f"# Delivery failure — {stamp} ({identity})\n\n"
-                        f"- From: {from_addr}\n"
-                        f"- Date: {date}\n"
-                        f"- Subject: {redact_key_urls(subject)}\n"
-                        f"- Message-ID: {msg_id}\n\n"
-                        f"---\n\n"
-                        f"{redact_key_urls(body)}\n",
-                        encoding="utf-8",
+                    out = _file_diagnostic(
+                        identity=identity,
+                        heading="Delivery failure",
+                        from_addr=from_addr,
+                        date=date,
+                        subject=subject,
+                        body=body,
+                        msg_id=msg_id,
+                        fallback="bounce",
                     )
                     conn.store(num, "+FLAGS", "\\Seen")
                     n += 1
                     print(f"Mail channel: delivery failure filed {out.name}")
+                    continue
+                if is_repo_notification(from_addr):
+                    # Telemetry too, and the reason it is filed instead of skipped: a workflow
+                    # that failed on the far side leaves exactly one trace here, and the trace
+                    # is this message. Dropping it silently is how a red build stays unnoticed.
+                    out = _file_diagnostic(
+                        identity=identity,
+                        heading="Repository notification",
+                        from_addr=from_addr,
+                        date=date,
+                        subject=subject,
+                        body=body,
+                        msg_id=msg_id,
+                        fallback="repo-notification",
+                    )
+                    conn.store(num, "+FLAGS", "\\Seen")
+                    n += 1
+                    print(f"Mail channel: repository notification filed {out.name}")
                     continue
                 if security_alarm(subject):
                     # A machine sender is normally dropped unread — but an account-security
@@ -577,6 +661,8 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
                 encoding="utf-8",
             )
             try:
+                # Works because the module-level bootstrap below put the repository root back on
+                # sys.path; without it this import fails in the mode the runner uses.
                 from channels.triage import process_inbound
                 process_inbound("mail", identity, from_addr, out.relative_to(REPO_ROOT).as_posix(), body, subject)
             except Exception as triage_e:  # noqa: BLE001 — mail logging must not fail
