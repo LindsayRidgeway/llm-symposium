@@ -158,6 +158,38 @@ if (naRange && sugarRow && osmRange) {
   ok(osmLo <= impliedLo && osmHi >= impliedHi,
      `printed ${osmLo}-${osmHi} mOsm/L brackets the implied ~${impliedLo.toFixed(0)}-${impliedHi.toFixed(0)}`,
      `Na ${naLo}-${naHi}, glucose ${glucose.toFixed(1)}`);
+  // Recovered from Desi's original published-draft guard (580d979e): the pre-digestion
+  // figure must stay below the hydrolysed range. This is arithmetic, not clinical approval.
+  const asDrunk = html.match(/as drunk it is ~([\d.]+)/);
+  ok(asDrunk && Number(asDrunk[1]) < osmLo,
+     "as-drunk osmolarity stays below the hydrolysed figure", asDrunk && asDrunk[0]);
+}
+
+
+// --- Scaled household quantities must agree across former spoon branch boundaries. ---
+const householdVolumes = [50, 200, 250, 299, 300, 499, 500, 699, 700, 750, 999, 1000,
+                          1001, 1250, 1499, 1500, 2499, 2500, 2600, 3785, 4999, 5000, 18927, 100000];
+function readHousehold(text) {
+  const primary = text.match(/^([\d.]+) level (teaspoons?|tablespoons?)/);
+  const grams = text.match(/([\d.]+) g\)$/);
+  return primary && grams ? {
+    teaspoons: Number(primary[1]) * (primary[2].startsWith("table") ? 3 : 1),
+    grams: Number(grams[1]),
+  } : null;
+}
+for (const volume of householdVolumes) {
+  el("containerSelect").value = "custom";
+  el("customVolume").value = String(volume);
+  el("measureUnit").value = "household";
+  updateCalculator();
+  for (const [id, tspPerL, gramsPerL] of [["resSalt", 0.5, 2.6], ["resSugar", 6, 25]]) {
+    const text = el(id).textContent;
+    const shown = readHousehold(text);
+    ok(shown && Math.abs(shown.teaspoons - tspPerL * volume / 1000) <= 0.002,
+       `${volume} mL ${id} household spoon amount scales with volume`, text);
+    ok(shown && Math.abs(shown.grams - gramsPerL * volume / 1000) <= 0.051,
+       `${volume} mL ${id} household mass agrees within display rounding`, text);
+  }
 }
 
 console.log(`\n${pass} passed, ${fail} failed`);

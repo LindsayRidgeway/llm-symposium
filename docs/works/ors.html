@@ -591,42 +591,35 @@
         // Household spoon measurements
         // Salt: 0.5 tsp per 1000 mL
         const saltTsp = 0.5 * ratio;
-        let saltStr = "";
-        if (saltTsp < 0.15) {
-          saltStr = "1 small pinch (approx 1/8 level tsp / 0.5 g)";
-        } else if (saltTsp < 0.35) {
-          saltStr = "1/4 level teaspoon (approx 1.3 g)";
-        } else if (saltTsp < 0.75) {
-          saltStr = "1/2 level teaspoon (approx 2.6 g)";
-        } else if (saltTsp < 1.25) {
-          saltStr = "1 level teaspoon (approx 5.2 g)";
-        } else if (saltTsp < 2.5) {
-          saltStr = `${saltTsp.toFixed(1)} level teaspoons (~${saltGrams} g)`;
+        // Keep the scaled quantity; fixed spoon bands misdose custom volumes.
+        const spoonNumber = amount => Number(amount.toFixed(3)).toString();
+        let saltStr;
+        if (saltTsp < 2.5) {
+          saltStr = `${spoonNumber(saltTsp)} level teaspoons (~${saltGrams} g)`;
         } else {
-          const saltTbsp = (saltTsp / 3.0).toFixed(1);
-          saltStr = `${saltTbsp} level tablespoons (~${saltTsp.toFixed(0)} tsp / ${saltGrams} g)`;
+          saltStr = `${spoonNumber(saltTsp / 3)} level tablespoons (~${spoonNumber(saltTsp)} tsp / ${saltGrams} g)`;
         }
         resSalt.textContent = saltStr;
-        resSaltSub.textContent = "Level flat across measuring spoon with a knife. Never heap.";
+        resSaltSub.textContent = "Use marked measuring spoons. If you cannot measure this amount, use grams mode or a full 1 L batch. Never heap.";
 
         // Sugar: 6.0 tsp per 1000 mL
         const sugarTsp = 6.0 * ratio;
         let sugarStr = "";
         if (sugarTsp < 1.5) {
-          sugarStr = `${sugarTsp.toFixed(1)} level teaspoons (~${sugarGrams} g)`;
+          sugarStr = `${spoonNumber(sugarTsp)} level teaspoons (~${sugarGrams} g)`;
         } else if (sugarTsp < 3.0) {
           // 2026-09-16: this branch used to hardcode "2 level teaspoons (~8.3 g)" for every
           // amount from 1.5 to 3.0 tsp. The 250 mL cup scales to exactly 1.5 tsp, so the page
           // prescribed about a third too much sugar for that cup — on a page about emergency
           // rehydration, where excess sugar raises osmolarity and can worsen diarrhea. Print
           // the computed amount; accuracy outranks tidiness here.
-          sugarStr = `${sugarTsp.toFixed(1)} level teaspoons (~${sugarGrams} g)`;
+          sugarStr = `${spoonNumber(sugarTsp)} level teaspoons (~${sugarGrams} g)`;
         } else if (sugarTsp <= 6.0) {
           const tbsp = (sugarTsp / 3.0).toFixed(1);
-          sugarStr = `${sugarTsp.toFixed(0)} level teaspoons (~${tbsp} tbsp / ${sugarGrams} g)`;
+          sugarStr = `${spoonNumber(sugarTsp)} level teaspoons (~${tbsp} tbsp / ${sugarGrams} g)`;
         } else {
-          const tbsp = (sugarTsp / 3.0).toFixed(1);
-          sugarStr = `${tbsp} level tablespoons (~${sugarTsp.toFixed(0)} tsp / ${sugarGrams} g)`;
+          const tbsp = spoonNumber(sugarTsp / 3.0);
+          sugarStr = `${tbsp} level tablespoons (~${spoonNumber(sugarTsp)} tsp / ${sugarGrams} g)`;
         }
         resSugar.textContent = sugarStr;
         resSugarSub.textContent = "Level flat across spoon. 3 level teaspoons = 1 level tablespoon.";
