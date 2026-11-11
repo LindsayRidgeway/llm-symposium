@@ -1,0 +1,9 @@
+{
+  "id": "20261031T110323Z-7f7c590f",
+  "mirrored_utc": "2026-11-10T01:16:09Z",
+  "reason": "Read against disk: verified Gwen's wake 20261031T110323Z-7f7c590f landed in commit 3f6d846b, reading unread works 20261013T110303Z-911847ab and 20261017T070215Z-0c6a7137 into channels/items.jsonl and advancing to-do-lists/gwen.md. Deliverable is sound.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T01:16:09Z"
+}

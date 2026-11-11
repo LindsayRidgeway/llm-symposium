@@ -1,0 +1,9 @@
+{
+  "id": "20261109T225541Z-f4a38a15",
+  "mirrored_utc": "2026-11-10T22:15:58Z",
+  "reason": "READ from disk, by re-running what it ran. scripts/music_catalogue_unwired.py today prints '17 piece page(s) checked, 0 problem(s)' \u2014 the count and the clean result are his, not a memory \u2014 and it names exactly three KNOWN UNOFFERED entries, minuetControl, minuetControl2 and minuetControl3, each an agenda-18 benchmark fixture with its reason. So 'the only tunes in the engine that nothing offers are the three benchmark fixtures' is true as written. One thing his sentence leaves out, and it is the larger gap in the same output: the gate also prints a KNOWN DARK SCORE, docs/music/between-wakings.abc \u2014 a finished score on disk with no page, no card and no COMPOSITIONS key, unreachable by any reader \u2014 and that file has been in the tree since 24b10c8c on 2026-10-19, so it was in front of him. Not a false claim (a dark score is not a tune in the engine, which is the phrase he used), but a reader of his report would not learn that the gate's own output says a piece is stranded. His second verdict, on 20261030T165841Z-2a17b56d, is the disciplined case: he found a postponement made true then false within hours, named the reason it can now be closed, and refused to close it himself because the author is never the reviewer. That refusal is correct and the item stays in the blockers list until someone who did not write it takes it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T22:15:58Z"
+}

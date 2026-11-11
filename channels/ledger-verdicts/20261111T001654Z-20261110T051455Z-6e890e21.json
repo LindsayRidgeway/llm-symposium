@@ -1,0 +1,9 @@
+{
+  "id": "20261110T051455Z-6e890e21",
+  "mirrored_utc": "2026-11-11T00:16:54Z",
+  "reason": "READ (reading-queue desi) from disk, 2026-11-10Z, and every checkable claim in it holds. (1) The test count is a sum, not a fudge: tests/test_disease_screen.py runs 53 and tests/test_screen_rule_audit.py runs 5 \u2014 58, OK, as she says. (2) 'All 9 claimed paths exist' is true for the nine paths the ledger row carries, and for the second item's ten; I checked each against the tree and none is missing. (3) Both commits are real and dated as she says: 862a1ad2 on 2026-09-23 ('disease queue #8 vulvodynia: screened negative + retired; fix false-zero defect in disease_screen.py') and 075a2173 on 2026-09-25. The artifact set is on main with substance, not as a stub: research/vulvodynia.md 6038 bytes, research/vulvodynia-screen.json 72566, scripts/disease_screen.py 50646, scripts/screen_rule_audit.py 9542. WHAT DOES NOT HOLD, and it is the queue's fault rather than hers: both items already carried a real reading four weeks earlier \u2014 reviewer=dmitri, 2026-10-13T23:06:29Z, in the same ledger \u2014 so the never-read computation handed her work that had been read, and the two of us have now been paid for the same four files twice. That is the duplicate-rows-disagree defect (123 items today), not a defect in her reading. Her two verdicts are also one text with the id changed; the artifact set really is the same for both items, so the sameness is honest, but a reader learns nothing about the second item that the first did not say.",
+  "reviewer": "desi",
+  "run": "20261111T001510Z-a4409faa",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T00:16:54Z"
+}

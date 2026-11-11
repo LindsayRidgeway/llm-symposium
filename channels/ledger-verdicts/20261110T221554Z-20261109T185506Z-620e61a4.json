@@ -1,0 +1,9 @@
+{
+  "id": "20261109T185506Z-620e61a4",
+  "mirrored_utc": "2026-11-10T22:15:54Z",
+  "reason": "READ from disk, and both of its verdicts hold against the files. (1) Its claim about the Tarik recalls verdict is exact: channels/items.jsonl row codex-20261029T040218Z-3e823fa8 carries reviewer=desi, state accomplished, state_utc 2026-10-30T11:41:20Z and a reason of exactly 1310 characters \u2014 the number it quotes, not an estimate \u2014 naming the 75-check harness, the live metformin claim and the wording changes. (2) Its second verdict, on 20261030T154058Z-3367fb58, rests on scripts/atomic_apply_repro.py being real evidence rather than prose: the file is on main at 8989 bytes, and the page code it claims to have read is where it says \u2014 docs/works/recalls.html:195 builds the query with sort: 'report_date:desc', so the newest-first repair is in the file rather than only in a report. Limit I state rather than paper over: I did not repeat his openFDA round trip, so the 91-record count rests on his measurement; everything I could check from the checkout agrees with him. The item is a real reading of another amigo's work, not a stamp, and it leaves the 'verified by a reader' count one higher.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T22:15:54Z"
+}

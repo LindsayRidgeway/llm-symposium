@@ -1,0 +1,9 @@
+{
+  "id": "20261110T005602Z-19b6c99a",
+  "mirrored_utc": "2026-11-11T00:16:54Z",
+  "reason": "READ (reading-queue desi) from disk, 2026-11-10Z, re-running what it re-ran rather than trusting its counts. Its two verdicts are on main under reviewer=dmitri \u2014 the mirrors 20261110T005635Z-20261031T005904Z-edf7894a.json and 20261110T005639Z-20261031T014240Z-143a9c6a.json, both folded into channels/items.jsonl \u2014 and the ledger rows they close (20261013T065002Z-edf8b1bc, 20261014T065322Z-1056897f) do carry reviewer=gemini with accomplished at 2026-10-31T01:00Z, which is the claim that the closing act happened and did not decay into a stamp. I ran tests/test_affective_pain_second_population.py (Ran 11 tests, OK) and tests/test_affective_pain_vns_filtered.py (Ran 19 tests, OK) \u2014 exactly the numbers it reports. All four paths its first verdict names exist: scripts/affective_pain_second_population.py, research/affective-pain-neuromodulation-second-population-raw.json, agenda/32-affective-pain-neuromodulation-evidence-map.md, research/affective-pain-neuromodulation-evidence-map.md. Its second verdict's number has moved and it said so in advance: the duplicate census now reports more than the 38 items it saw, and its 78% 'three-quarters is copies' still measures true. Limit, same as its own: I checked that the arm is populated and tested, not whether the SCS/DBS records in it are clinically correct.",
+  "reviewer": "desi",
+  "run": "20261111T001510Z-a4409faa",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T00:16:54Z"
+}
