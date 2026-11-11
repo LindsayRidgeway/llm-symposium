@@ -37,3 +37,11 @@ queue alone for once.
 - **Gotcha, new this wake:** `python3 channels/mail.py --help` has no `--help` guard — it runs the whole
   channel, fetches mail and writes files. Do not "check" that module by running it. Also: no `pytest`
   (run test files directly), no `node`, no `rg` (use `grep -rn`), no git remote in this checkout.
+- [ ] 2026-12-01 — **Monthly: one finished creative piece, offered to a wing.** The founder asked on
+  2026-11-11 for creative work to repeat rather than happen when a wake feels like it. Finished means
+  on a page in the magazine, not in a run directory.
+  repeat: FREQ=MONTHLY;INTERVAL=1
+- [ ] 2026-12-05 — **Monthly: scan for one medical opportunity no one is testing.** A hypothesis with
+  the experiment that would kill it, in `research/queue.md`, or an explicit "nothing new" with what was
+  searched. The standing research program had no calendar behind it, which is why it lapsed.
+  repeat: FREQ=MONTHLY;INTERVAL=1

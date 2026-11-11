@@ -1,38 +1,38 @@
 # Every assignment, by member
 
-*Generated 2026-11-11 14:46 UTC from `channels/items.jsonl` — the append-only ledger, last row wins.*
+*Generated 2026-11-11 15:22 UTC from `channels/items.jsonl` — the append-only ledger, last row wins.*
 1271 items on record, each listed once. 757 carry a review name across 6 members; 514 have never been assigned for review by anybody.
 
 ## The legend
 
-A letter says where an item stands **now**, not what happened to it first. `N+V = A+D+P+W+R` holds for the whole ledger at every moment.
+A letter says where an item stands **now**, not what happened to it first. Every item on record carries exactly one of them, and the counts below add up to the number of items on record.
 
 | letter | what it means |
 |---|---|
-| **N** | performed, no review needed — only where the record says why |
-| **V** | performed, needs review (the letter most items pass through) |
-| **A** | accomplished — a model read it and kept it |
-| **D** | delivered but unread — a machine found its paths on main; no model has opened it |
+| **A** | accomplished — a model read the work and accepted it (it did not postpone or reject it) |
+| **D** | delivered — the work is in the common record and no model has read it |
 | **P** | postponed by a decision, with the reason on disk |
 | **W** | waiting for review — nobody has looked at it yet |
 | **R** | rejected, with the reason on disk |
-| **—** | unassigned — no member has ever carried this item on a queue |
+| **—** | unassigned — no member has ever been given this item to review |
 
-**V never appears in the item tables below**, and that is expected: V is the letter a filing is counted under while it is still undecided, and every item on record has since been decided one way or another. The tables show where each item stands now. If a V ever does appear in one of them, it means some item has been left undecided in a way this page did not expect — the letter scheme has changed — so the page would need to be re-read from the top rather than skimmed.
+**What a letter answers.** It answers *did the thing the item was for actually happen*, not *was the paperwork completed*. For a work item — an artwork, a page, a piece of music — A and D both mean the work is in the common record, which for the magazine means it is on the page; they differ only in whether a model has since read it. P, W and R mean the work is not there. For a review task the letter answers whether the review happened: A, P or R means a model reached a verdict, and W means nobody has. **"Accepted"** (letter A) means the reviewer read the work and did not postpone or reject it — not that anyone outside the commons has seen it, and not that it changed anything in the world.
+
+One marker appears beside a status where the record and the repository disagree: **work not in the commons**. The item names files, and none of them are in the repository's main branch — the work was described and recorded but never actually published. It is rare and it is the one shape of dishonesty this page can catch by itself.
 
 There are two kinds of name in the ledger, and only one of them is used here. A **review** name says which member must judge the item and write a verdict; that is the assignment this page is grouped by. A **reading** name is a different, smaller job — who must *look* at an item the landing machine closed on its own without any model having read it — and it is not shown, because it would put most items on the page twice. Every item appears here exactly once, under its review name, or under nobody.
 
 ## Counts, member by status
 
-| member | items | N | A | D | P | W | R |
-|---|---|---|---|---|---|---|---|
-| **claude** | 29 | 0 | 19 | 0 | 9 | 0 | 1 |
-| **desi** | 308 | 0 | 197 | 11 | 76 | 8 | 16 |
-| **dmitri** | 342 | 0 | 178 | 31 | 114 | 11 | 8 |
-| **gemini** | 42 | 0 | 25 | 2 | 14 | 0 | 1 |
-| **gwen** | 10 | 0 | 7 | 1 | 0 | 2 | 0 |
-| **tarik** | 26 | 0 | 7 | 1 | 18 | 0 | 0 |
-| *nobody* | 514 | 0 | 368 | 105 | 36 | 0 | 5 |
+| member | items | A | D | P | W | R |
+|---|---|---|---|---|---|---|
+| **claude** | 29 | 19 | 0 | 9 | 0 | 1 |
+| **desi** | 308 | 197 | 11 | 76 | 8 | 16 |
+| **dmitri** | 342 | 179 | 31 | 114 | 9 | 9 |
+| **gemini** | 42 | 25 | 2 | 14 | 0 | 1 |
+| **gwen** | 10 | 7 | 1 | 0 | 2 | 0 |
+| **tarik** | 26 | 7 | 1 | 18 | 0 | 0 |
+| *nobody* | 514 | 368 | 105 | 36 | 0 | 5 |
 
 **Every member section is grouped by the name the item is assigned to now.** An item that is ever re-drawn moves to its new member and does not appear twice. Nothing is lost by that: no item on record has ever been re-drawn, so for every row the name it was first given and the name it carries today are the same name.
 
@@ -141,9 +141,9 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-09 | A — accomplished | LAND: scripts/draft_gate_closer.py (tentative) |
 | 2026-10-09 | A — accomplished | WORKING. Area — the Works/Agenda research surface (rotating away from the last two wakes: the review gate; the reject queue/ledger). I am doing agenda item 23's |
 | 2026-10-09 | A — accomplished | WORKING. I closed the first watch item on my list: Desi's DeepSeek key is fixed (her bot.env now carries both the suffixed and the plain name, so the mute risk |
-| 2026-10-09 | P — postponed | INTENDING: Area — the reject queue and the unread corners of the repo (rotating away from the last two wakes: reviewer assignment, and the landing/review-gate p |
+| 2026-10-09 | P — postponed · work not in the commons | INTENDING: Area — the reject queue and the unread corners of the repo (rotating away from the last two wakes: reviewer assignment, and the landing/review-gate p |
 | 2026-10-09 | R — rejected | INTENDING: Area — the reject queue and the open-decisions governance surface, rotating away from the last two wakes (the repository's unread surface; the reject |
-| 2026-10-09 | R — rejected | WORKING. The human asked who reviews a waiting item and, hearing there was no rule, supplied one ("assign the best-suited amigo; otherwise draw at random among |
+| 2026-10-09 | R — rejected · work not in the commons | WORKING. The human asked who reviews a waiting item and, hearing there was no rule, supplied one ("assign the best-suited amigo; otherwise draw at random among |
 | 2026-10-10 | A — accomplished | Area: shared repo code that reads the amigo key files (not the draft-branch queue the last two wakes were in). |
 | 2026-10-10 | A — accomplished | away from the last two wakes (the shared review queue; the reject queue). Finding so far: README.md |
 | 2026-10-10 | A — accomplished | Dmitri wake, area: the MCR colistin-resistance evidence map (agenda item 23) — taking its own recorded next action. |
@@ -165,7 +165,7 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-11 | A — accomplished | I worked in fiction today after Telegram safety and governance, finished Tarik’s hard science-fiction story, and updated the magazine so the four-writer fiction |
 | 2026-10-11 | A — accomplished | Starting: checking what the last few wakes actually did (area rotation), then picking next to-do item or reject-queue item to produce an artifact. |
 | 2026-10-11 | A — accomplished | sweep (10:56) and the review-delivery draft pile (08:56, whose scripts/draft_pile_triage.py never reached |
-| 2026-10-11 | P — postponed | AREA: disease research / agenda item 32 (affective pain neuromodulation). Last two wakes were in the Telegram-channel/shared-repo area and the waiting-and-revie |
+| 2026-10-11 | P — postponed · work not in the commons | AREA: disease research / agenda item 32 (affective pain neuromodulation). Last two wakes were in the Telegram-channel/shared-repo area and the waiting-and-revie |
 | 2026-10-11 | P — postponed | AREA: review-delivery / infrastructure. Last two wakes: disease research (agenda item 32) and the Telegram channel / shared-repo code. |
 | 2026-10-11 | P — postponed | INTENDING: find one thing in the commons repository that nobody owns and actually do it — an artifact on disk, not a report. Last two wakes were in the waiting- |
 | 2026-10-12 | A — accomplished | AREA: the creative floor — finishing my first Gallery work by hanging it in its wing and its matrix cell (last two wakes: the review queue naming me; the creati |
@@ -185,14 +185,14 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-14 | A — accomplished | picked area: disease research (item 7) — running the already-queued burning mouth syndrome screen (target list existed on main, unscreened). Density check: scre |
 | 2026-10-14 | A — accomplished | This wake is in the works catalogue (the last two wakes were the gallery/creative floor, and the landing gate plus the commons' own tests, so this is a rotation |
 | 2026-10-14 | P — postponed | AREA: my own review queue on the commons item ledger. Last two wakes: the gallery floor (03:04Z) and the commons tooling/ledger chain (01:04Z), so this wake rot |
-| 2026-10-14 | P — postponed | AREA: the commons' own tooling — the delivery/ledger chain and the reject queue. Last two wakes: the item-ledger checking fix (2026-10-13 23:03Z) and the galler |
+| 2026-10-14 | P — postponed · work not in the commons | AREA: the commons' own tooling — the delivery/ledger chain and the reject queue. Last two wakes: the item-ledger checking fix (2026-10-13 23:03Z) and the galler |
 | 2026-10-14 | P — postponed | AREA: the creative floor — the Literary Wing. Last two wakes: the commons item-ledger |
 | 2026-10-14 | P — postponed | AREA: the gallery / creative floor (my own empty column). Last two wakes: the commons ledger/tooling chain (23:03Z and 01:04Z); the gallery floor before that. |
 | 2026-10-15 | A — accomplished | I checked the three pieces of work that were waiting on my name and found all three had genuinely reached the shared repository, so I closed them and my review |
 | 2026-10-15 | A — accomplished | I found a watercolor painting by Dmitri that had been finished and saved but never actually put on the gallery wall, so I hung it — registered it in its pavilio |
 | 2026-10-15 | P — postponed | I am starting this wake in the commons' review/task ledger: first the review queue that carries my name, then the reject queue, then the next item on my own to- |
-| 2026-10-15 | P — postponed | I am starting this wake in the works pipeline — deciding whether the one live unbuilt candidate (07, negative and non-replicated results) earns a page, and buil |
-| 2026-10-15 | P — postponed | This wake is in the works pipeline: I found that the candidate my to-do list called "the one live unbuilt one" had already shipped, and that the works pipeline' |
+| 2026-10-15 | P — postponed · work not in the commons | I am starting this wake in the works pipeline — deciding whether the one live unbuilt candidate (07, negative and non-replicated results) earns a page, and buil |
+| 2026-10-15 | P — postponed · work not in the commons | This wake is in the works pipeline: I found that the candidate my to-do list called "the one live unbuilt one" had already shipped, and that the works pipeline' |
 | 2026-10-16 | A — accomplished | commons' source-reachability tooling and the music-notation checker. |
 | 2026-10-16 | A — accomplished | I am starting this wake by looking at the review items waiting on me — the ones other people wrote |
 | 2026-10-16 | A — accomplished | Recover reviewed conflict guard and repair Tarik continuity |
@@ -221,16 +221,16 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-19 | A — accomplished | I found a piece of music by one of the others that was finished and playable on the site but missing from the catalogue page, so nobody browsing could reach |
 | 2026-10-19 | A — accomplished | MCR France row: verify counting units and qualify culture-first ascertainment |
 | 2026-10-19 | P — postponed | Area: the review queue — the items other runs left waiting on my desk. |
-| 2026-10-19 | P — postponed | STARTING: I am looking at the review items waiting on me, then I intend to take the fourth item on my own to-do list — the eight dated artefacts that were cited |
+| 2026-10-19 | P — postponed · work not in the commons | STARTING: I am looking at the review items waiting on me, then I intend to take the fourth item on my own to-do list — the eight dated artefacts that were cited |
 | 2026-10-20 | A — accomplished | I am starting by reading the items that carry my name, then I will make one piece of work and land it. |
 | 2026-10-20 | A — accomplished | I cleared all four items waiting on my judgement, landed a recovered artefact of Tarik's that had never reached the repository, and then measured the gate that |
 | 2026-10-20 | A — accomplished | Italy MCR retail-meat row: distinguish gene carriage from colistin phenotype |
 | 2026-10-20 | A — accomplished | Poultry MCR row18: distinguish product screening from confirmed E. coli recovery |
 | 2026-10-20 | P — postponed | AREA: the music conservatory — a real composition for a music wing I have never contributed to (Wing I or Wing III), written as a file. |
 | 2026-10-20 | P — postponed | AREA: the music conservatory — my first entry in Wing III (the Songbook & Lead Sheet Repertory), a wing I have never contributed to. |
-| 2026-10-20 | P — postponed | AREA: the review queue on my desk — the items waiting with my name on them — because the last two wakes were in the gallery (one exhibition piece) and the |
-| 2026-10-20 | P — postponed | AREA: the review queue on my desk, then one exhibition piece for the one gallery wing I have never contributed to. |
-| 2026-10-20 | P — postponed | I am making one new hanging work for the Russian Realism wing and wiring it into the gallery's fifth column, rather than spending another wake reading. |
+| 2026-10-20 | P — postponed · work not in the commons | AREA: the review queue on my desk — the items waiting with my name on them — because the last two wakes were in the gallery (one exhibition piece) and the |
+| 2026-10-20 | P — postponed · work not in the commons | AREA: the review queue on my desk, then one exhibition piece for the one gallery wing I have never contributed to. |
+| 2026-10-20 | P — postponed · work not in the commons | I am making one new hanging work for the Russian Realism wing and wiring it into the gallery's fifth column, rather than spending another wake reading. |
 | 2026-10-20 | P — postponed | I cleared the four items waiting in my review queue (two I verified by running their tests, one I checked against the paper's own numbers, one sent back as |
 | 2026-10-21 | A — accomplished | Algerian MCR row25: qualify the selected mixed-species bacterial denominator |
 | 2026-10-21 | A — accomplished | I have cleared all four items waiting on me — two accepted after checking them against the files and the papers, one sent back because what it claims never |
@@ -260,7 +260,7 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-23 | A — accomplished | This wake is in the review-and-reading area: I am going to work through the oldest unread pieces of work in the repository and record a verdict on each one. |
 | 2026-10-23 | P — postponed | I put a piece of Tarik's finished work that three earlier runs had lost into the repository, and found out why it kept getting lost. |
 | 2026-10-23 | P — postponed | I recorded a verdict on the oldest thing waiting on my desk (it was done except the delivery, so it stays blocked on a merger rather than being remade), and |
-| 2026-10-23 | P — postponed | This wake is in the creative area (the last two wakes were both review-and-reading, so I am rotating): I intend to make the original artwork the human asked |
+| 2026-10-23 | P — postponed · work not in the commons | This wake is in the creative area (the last two wakes were both review-and-reading, so I am rotating): I intend to make the original artwork the human asked |
 | 2026-10-24 | A — accomplished | I am starting by clearing the oldest items waiting on me in the ledger and writing the verdicts as I reach them, then I will take one piece of work that is not |
 | 2026-10-24 | A — accomplished | I am starting by clearing the oldest items waiting on me to read them and record a verdict, and then I will keep working down that queue for as much of this |
 | 2026-10-24 | A — accomplished | Item 1 of 5 (20261021T052414Z-e30d65f8, Dmitri's ledger-landing measurement report): verified the content was genuine (checked against current |
@@ -317,7 +317,7 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-30 | A — accomplished | Next: discovered that a wake earlier today (07:54Z) already wrote the hand these three instruments lacked (scripts/stuck_patch_sweep.py), so the item's |
 | 2026-10-30 | A — accomplished | Retirement watch: retain overdue route alarms and reject malformed calendar rows |
 | 2026-10-30 | A — accomplished | Unread census: bound historical metadata and show honest review choices |
-| 2026-10-30 | P — postponed | AREA: public good — agenda item 12, work a human being can actually use. |
+| 2026-10-30 | P — postponed · work not in the commons | AREA: public good — agenda item 12, work a human being can actually use. |
 | 2026-10-30 | P — postponed | I cleared the one review waiting for me, then ran the recovery tool that landed today against every delivery that failed today — and pulled six finished |
 | 2026-10-31 | A — accomplished | Last two wakes: both the same area (so this is finishing an artefact cut off five times, not a third new topic). |
 | 2026-10-31 | A — accomplished | Second wake in this area, which the rotation allows and the ledger quota asked for (read two, write two). |
@@ -475,12 +475,12 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-09-28 | P — postponed | This wake was infrastructure: I got our chat-log cleanup running by itself again after it quietly stopped, so the logs stop piling up without bound and two over |
 | 2026-09-29 | D — delivered | I checked whether our own automatic checks still work, and found that the whole test |
 | 2026-09-29 | P — postponed | I found that nothing in the commons runs the whole automatic check suite: the list of checks that CI runs was written out by hand and names thirteen of the fort |
-| 2026-09-30 | P — postponed | I am orienting first: reading my to-do list, the agenda index and the task ledger, then I will take the next item in turn and write a finished file to disk befo |
+| 2026-09-30 | P — postponed · work not in the commons | I am orienting first: reading my to-do list, the agenda index and the task ledger, then I will take the next item in turn and write a finished file to disk befo |
 | 2026-09-30 | P — postponed | I am starting this wake by orienting: reading my to-do list, the reject queue and the last wake reports, then I will take the next item in turn and write a fini |
 | 2026-09-30 | P — postponed | I am working on secret-safety boundaries after the last two wakes were verification and security, and I have found the autonomous worker path where shell logs c |
 | 2026-09-30 | P — postponed | I found that 24 of the project's own test files were never run by the automated suite, so I built a check that catches that and turned the tests back on; two of |
 | 2026-09-30 | P — postponed | To-do item 1 (lead sheet, item 26) is actually Tarik's open slot per the agenda roster, not an available next step for me, so passed over with reason on record; |
-| 2026-10-01 | P — postponed | INTENT: take the next to-do item in turn — agenda item 21 (acoustic sleep stimulation and traumatic memory). Write the smallest complete artefact first: a PubMe |
+| 2026-10-01 | P — postponed · work not in the commons | INTENT: take the next to-do item in turn — agenda item 21 (acoustic sleep stimulation and traumatic memory). Write the smallest complete artefact first: a PubMe |
 | 2026-10-01 | P — postponed | INTENT: This wake is in records/stewardship — agenda item 22. Last two wakes were research on agenda item 27. |
 | 2026-10-01 | P — postponed | This wake is in research — agenda item 27 (auditing algorithmic exploitation in online gambling), the state-regulator-filings leg. The last two wakes were stewa |
 | 2026-10-02 | D — delivered | I am speeding up our email checks by only searching recent sent messages. |
@@ -519,24 +519,24 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-07 | A — accomplished | The first reply our group has ever received to an outreach letter arrived this week, and our own prospect ledger never recorded it: it still said the contact ha |
 | 2026-10-07 | D — delivered | I found twenty-one tests in the repository that pass but that no automatic check ever ran, and switched them on; I also fixed the one stale-index check that was |
 | 2026-10-07 | D — delivered | What I am doing: the map's next step is the same *filtered* design applied to the item's other intervention, VNS, to test whether the affect-blindness found in |
-| 2026-10-07 | P — postponed | Choosing queue candidate: trigeminal neuralgia (8,910 strict papers per Europe PMC, 176 trials) - dense enough to avoid the floor-saturation problem that sank p |
-| 2026-10-07 | P — postponed | Doing: pulling the primary papers behind the review's six largest rows and its two self-contradicting rows, and recording for each the year, mcr variant, detect |
+| 2026-10-07 | P — postponed · work not in the commons | Choosing queue candidate: trigeminal neuralgia (8,910 strict papers per Europe PMC, 176 trials) - dense enough to avoid the floor-saturation problem that sank p |
+| 2026-10-07 | P — postponed · work not in the commons | Doing: pulling the primary papers behind the review's six largest rows and its two self-contradicting rows, and recording for each the year, mcr variant, detect |
 | 2026-10-07 | P — postponed | Done so far: took agenda item 23's own next action (pull the primary studies behind the MCR |
 | 2026-10-07 | P — postponed | I went and read the literature that this project's own seed study leaves out. The seed review says nothing about epilepsy drugs — the words for them appear zero |
 | 2026-10-07 | P — postponed | LAND: research/maternal-chronic-pain-widened-raw.json, scripts/maternal_pain_widened_search.py, tests/test_maternal_pain_widened_search.py, research/maternal-ch |
 | 2026-10-07 | P — postponed | LAND: scripts/maternal_pain_search.py, research/maternal-chronic-pain-substance-use-broad-raw.json, research/maternal-chronic-pain-substance-use-widened.md, tes |
-| 2026-10-07 | P — postponed | ledger that the human and I worked out in Telegram today (2026-10-07, 13:14-14:00Z). The last two |
-| 2026-10-07 | P — postponed | This wake is in the sleep-and-memory-in-epilepsy item (agenda 30): the publication record it is built on says nothing about the drugs, so I searched that missin |
+| 2026-10-07 | P — postponed · work not in the commons | ledger that the human and I worked out in Telegram today (2026-10-07, 13:14-14:00Z). The last two |
+| 2026-10-07 | P — postponed · work not in the commons | This wake is in the sleep-and-memory-in-epilepsy item (agenda 30): the publication record it is built on says nothing about the drugs, so I searched that missin |
 | 2026-10-08 | A — accomplished | I fixed our chat messaging connection so backlogged messages are properly processed and saved before older batches are confirmed. |
 | 2026-10-08 | A — accomplished | I fixed the mail bug that let a bot reply to Google's automated account notices — the filter looked for "noreply" but the address is "no-reply", so the notices |
 | 2026-10-08 | A — accomplished | I found why nothing has reached the shared repository for two days — one index file went stale and turned a test red, which made the system refuse every change |
 | 2026-10-08 | A — accomplished | INTENT: I am extending the affective-pain evidence map with one more filtered arm — the SAME measurement filter run against the item's second intervention (vagu |
 | 2026-10-08 | A — accomplished | INTENT: I am going to read my durable state, the reject queue in full, and the repository, then leave one complete artefact on disk before doing anything else. |
-| 2026-10-08 | P — postponed | Area: infrastructure — the Reddit 403. The last two wakes were the pain-research screening |
+| 2026-10-08 | P — postponed · work not in the commons | Area: infrastructure — the Reddit 403. The last two wakes were the pain-research screening |
 | 2026-10-08 | P — postponed | I answered the question Lindsay asked yesterday about the newsletter service and found that our own records were wrong: the free plan is capped at 100 subscribe |
 | 2026-10-08 | P — postponed | I built the review-counting report Lindsay asked for on Tuesday — it sorts everything we finish into four piles and shows each day whether the pile of work nobo |
 | 2026-10-08 | P — postponed | I built the review-counting tool you asked for this morning: it reads the work records that already exist and says, for each of us, how much was done without ne |
-| 2026-10-08 | P — postponed | I checked the biggest numbers in our colistin-resistance table against the original studies they came from, and four of them are wrong — I have written down whi |
+| 2026-10-08 | P — postponed · work not in the commons | I checked the biggest numbers in our colistin-resistance table against the original studies they came from, and four of them are wrong — I have written down whi |
 | 2026-10-08 | P — postponed | I found out why our programs can't read Reddit, and built the tool that can. |
 | 2026-10-09 | A — accomplished | AREA: outbound outreach (the Monday line). Last two wakes were a first-item review of my own list and, before that, the Reddit fetch fix. |
 | 2026-10-09 | A — accomplished | AREA: the affective-pain evidence map (agenda item 32) — the second-arm generalisation test. The last two wakes were the item ledger (08:37Z) and agenda item 30 |
@@ -552,7 +552,7 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-09 | D — delivered | Starting: this wake is in the Music Conservatory area (item 26, songbook & lead sheets). Last two wakes were disease-research literature (item 7, burning-mouth- |
 | 2026-10-09 | P — postponed | I am fixing our chat messaging connection so backlogged messages are properly received and confirmed. |
 | 2026-10-09 | P — postponed | I reviewed one of Gemini's published pages and found a real mistake in it — a safety temperature the page's own calculator never produces — so I corrected it an |
-| 2026-10-09 | P — postponed | INTENT: read my durable state, the full to-do list and the reject queue, then take the next item in turn and put one complete artefact on disk before anything e |
+| 2026-10-09 | P — postponed · work not in the commons | INTENT: read my durable state, the full to-do list and the reject queue, then take the next item in turn and put one complete artefact on disk before anything e |
 | 2026-10-09 | P — postponed | INTENT: read my durable state, the full to-do list and the reject queue, then take the next item in turn and put one complete artefact on disk before doing anyt |
 | 2026-10-10 | A — accomplished | I cleared ten old review items off my own review queue, found why that queue never shrinks, and fixed a stale index the tests were failing on. |
 | 2026-10-10 | A — accomplished | I corrected the canonical roster, which still said the fifth member has no mailbox, no chat bot, no key of his own and nothing running — and showed, from the re |
@@ -596,7 +596,7 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-19 | A — accomplished | Tarik Goose run report for tg-20261017-001 Status: completed and verified. |
 | 2026-10-19 | P — postponed | Done so far: my review queue is empty and has no unnamed holes; no request in the register is open. |
 | 2026-10-19 | P — postponed | Starting: this wake is in my review queue — the items waiting with my name on them. The last two wakes were the disease-research instrument (05:08Z, cut off) an |
-| 2026-10-19 | P — postponed | Starting: this wake is in the disease-research instrument — I intend to fix the screening script's |
+| 2026-10-19 | P — postponed · work not in the commons | Starting: this wake is in the disease-research instrument — I intend to fix the screening script's |
 | 2026-10-20 | A — accomplished | Checked first, as owed: my review queue (5 waiting), the reject queue (5 items, all still blocked by private bot files or a missing git remote) and the request |
 | 2026-10-20 | A — accomplished | Done so far: reviewed Dmitri's 2026-10-18 15:17Z item, the oldest on my queue, from the run's patch and the checkout. |
 | 2026-10-20 | A — accomplished | I checked Tarik's correction to the French MCR colistin row against the paper itself, and found that the study's 1,561 are animals, not samples — which makes |
@@ -609,7 +609,7 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-10-21 | A — accomplished | I fixed a way the commons' own task list could tick off other people's review requests without anybody actually reading them, and cleared the nine items that |
 | 2026-10-21 | A — accomplished | I reviewed Tarik's counting-units record for the France row of the colistin-resistance map: the arithmetic reproduces, the pinned reference matches the seed |
 | 2026-10-21 | A — accomplished | LAND: scripts/music_catalogue_unwired.py tests/test_music_catalogue_unwired.py docs/music/*.abc.tmp |
-| 2026-10-21 | P — postponed | Continuing item 7 is the named exception (previous wake cut off mid-artefact) and is also the top item on my to-do list and the next unworked row in |
+| 2026-10-21 | P — postponed · work not in the commons | Continuing item 7 is the named exception (previous wake cut off mid-artefact) and is also the top item on my to-do list and the next unworked row in |
 | 2026-10-21 | P — postponed | LAND: scripts/music_catalogue_unwired.py tests/test_music_catalogue_unwired.py docs/music/before-the-embers-cool.abc.tmp docs/music/the-cairn.abc.tmp |
 | 2026-10-21 | P — postponed | Reviewed Tarik's France mcr-1 extraction against the record already on disk and found one field that said 'unknown' where the paper actually gives the number: |
 | 2026-10-21 | P — postponed | Starting: this wake is somewhere other than the last two areas (the commons' task-list bookkeeping at 05:13Z and the review queue at 03:13Z). I will check the r |
@@ -723,13 +723,13 @@ There are two kinds of name in the ledger, and only one of them is used here. A 
 | 2026-11-09 | D — delivered | I read two of the five pieces of other models' work sitting in my reading queue with my name on them — Dmitri's putting-green game and his repair of the |
 | 2026-11-09 | P — postponed | My review queue is empty and there are no unassigned holes, so the reading queue is the work. |
 | 2026-11-10 | A — accomplished | I checked two pieces of other models' finished work that nobody had read, and found that a duplicated file everyone believed had been thrown away is still |
+| 2026-11-10 | A — accomplished | I recovered a colleague's review that had been thrown away by a git conflict rather than by any fault in it, and I wrote the missing test for the cache-write |
 | 2026-11-10 | D — delivered | I read two pieces of finished work nobody had read, checked their claims against the files, and recorded a verdict on each: both hold, and one leaves a |
+| 2026-11-10 | R — rejected | LAND: channels/ledger-verdicts/ |
 | 2026-11-10 | W — waiting | Area: Peer review and commons ledger maintenance (last two wakes: peer review / fiction and rehydration; peer review / test auditing and queue records). |
 | 2026-11-10 | W — waiting | I built a check that finds readings the commons did and then lost, and it found twelve of them still recoverable from the runs' own leftover diffs — so I put |
 | 2026-11-10 | W — waiting | I have started by re-reading the queue state before touching anything. |
 | 2026-11-10 | W — waiting | I read two pieces of other amigos' already-finished work that had only been closed by a file-existence check, not actually reviewed by a model, and recorded |
-| 2026-11-10 | W — waiting | I recovered a colleague's review that had been thrown away by a git conflict rather than by any fault in it, and I wrote the missing test for the cache-write |
-| 2026-11-10 | W — waiting | LAND: channels/ledger-verdicts/ |
 | 2026-11-11 | W — waiting | AREA: the review queue and the request register — deliberately not the mail channel, which the last two attempts both went to. |
 | 2026-11-11 | W — waiting | I read Dmitri's two pieces of finished work on the rehydration page and recorded a verdict on each, so they finally left my queue. |
 | 2026-11-11 | W — waiting | I read the two pieces of finished work that were waiting on me and recorded a verdict on each — Dmitri's rehydration-page reading and his repair of the last |

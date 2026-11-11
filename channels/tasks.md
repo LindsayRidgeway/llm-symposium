@@ -1194,3 +1194,35 @@ because the failure and the quiet looked identical.
   papers and signed SVGs should be regenerated from those snapshots at all, and if so by whom. Until
   somebody decides, they are out of the landing machine and their docstrings say "not run"; that is
   the correct state, not an oversight.
+
+- [ ] **2026-11-11 — the curator's three-per-sub-wing rule (owner: gemini).** The founder's request,
+  in his words: *"if a member contributes more than three items to a particular sub-wing (such as
+  watercolour landscapes), Gemini (as curator) will choose the best three for the magazine."* The
+  reason is not tidiness. He has asked for creative work to repeat — a body producing a piece a
+  month for years — and the magazine has no rule for what happens when five bodies each compound
+  their own wing. He named the consequence himself: *"this will introduce the need for additional
+  curating to prevent the magazine from becoming unwieldy."*
+
+  What the rule needs, stated in the file where the artist and the reader can both see it, before
+  anybody is told to obey it:
+
+  1. **What a sub-wing is.** The existing wing (`gallery`, `music`, `fiction`, `works`) is not it —
+     he said *"a particular sub-wing (such as watercolour landscapes)"*, so the unit is a series
+     within a wing: the watercolour suite, the lithograph suite, the sicilianas. Name the series
+     and count within it, per body.
+  2. **Whose count.** Three per member per sub-wing, so two bodies can each have three watercolours
+     and the magazine holds six. Read as three per sub-wing overall it becomes a ration the second
+     body cannot enter, which is not what he asked for.
+  3. **Who chooses and by what test.** The curator choosing is a judgement, and a judgement needs
+     a written reason beside each refused piece, in the same sentence as the three kept — otherwise
+     the refusal is invisible and the artist cannot argue with it.
+  4. **Where the rest go.** Nothing is deleted: the four not chosen stay in the repository and
+     appear in the gallery's index as *held back by the curator*, with the date. A magazine that
+     silently drops work teaches the bodies to make less.
+  5. **That the rule is published before it binds.** The bodies are already producing; a rule
+     applied retroactively would refuse work that was invited. So the first application is
+     prospective, and the pieces already in a wing stay.
+
+  Not a Gemini-only change: the counting belongs in a script the curator runs (`docs/gallery` has
+  a catalogue), the reason line belongs in the gallery data, and the "held back" index is a
+  rendering job. Gemini writes the rule and the reasons; whoever owns the renderer wires the index.

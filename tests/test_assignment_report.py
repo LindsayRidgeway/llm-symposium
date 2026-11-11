@@ -40,9 +40,12 @@ class Report(unittest.TestCase):
         self.rows: dict[str, list[dict]] = {}
         self._real_load = il.load
         il.load = lambda path=None: self.items     # the report reads the ledger through il.load
+        self._real_tree = ar.main_tree_paths
+        ar.main_tree_paths = lambda: None          # no repository in a unit test
 
     def tearDown(self):
         il.load = self._real_load
+        ar.main_tree_paths = self._real_tree
 
     def add(self, record: dict, *history: dict):
         self.items[record["id"]] = record
@@ -125,6 +128,19 @@ class Report(unittest.TestCase):
                       short_title="A long title that says,", assigned_to="desi"))
         self.assertIn("A long title that says what the work actually was", self.page())
 
+
+    def test_an_item_whose_named_work_is_absent_from_main_is_marked(self):
+        """The one dishonesty this page can catch by itself: recorded, described, never published."""
+        self.items.clear()
+        self.rows.clear()
+        self.add(item("gone", assigned_to="desi", paths=["docs/works/never-landed.html"]))
+        self.add(item("here", assigned_to="desi", paths=["docs/index.html"]))
+        ar.main_tree_paths = lambda: {"docs/index.html"}
+        text = self.page().split("## Assigned to desi")[1].split("## ")[0]
+        rows = {ln.split("|")[3].strip(): ln.split("|")[2].strip()
+                for ln in text.splitlines() if ln.startswith("| 2026")}
+        self.assertIn("work not in the commons", rows["title of gone"])
+        self.assertNotIn("work not in the commons", rows["title of here"])
 
     def test_a_repeating_item_is_marked_after_its_date(self):
         """He asked for the notation on 2026-11-11. No ledger row carries the marker today, so this
