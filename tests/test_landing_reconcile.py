@@ -122,6 +122,38 @@ class LandingReconcileTest(unittest.TestCase):
         self.assertEqual({r["verdict"] for r in out["runs"]}, {"no-claim"})
         self.assertEqual(out["tally"]["no-claim"], 5)
 
+    def test_a_note_in_the_land_line_is_prose_and_not_a_claimed_path(self):
+        """`LAND: a.html (the render check for logo.png)` claims one path, not two.
+
+        Before 2026-11-11 `_norm` split the body on commas and spaces and kept every chunk holding a
+        dot, so the note's `logo.png)` was counted as a claim and the run was then accused of naming a
+        file it never touched. Desi found this in run 20261109T040837Z-4358d827 and measured two honest
+        runs wrongly accused out of 384; he left the fix alone because this script is the engine every
+        wake runs through, and it was still live at HEAD two wakes later.
+        """
+        self.assertEqual(lr._norm("a/b.md (the render check for logo.png)"), ["a/b.md"])
+        self.assertEqual(lr._norm("a/b.md [see notes.md], c/d.py"), ["a/b.md", "c/d.py"])
+        # An unbalanced note cannot be recognised as one, and must not become a path either.
+        self.assertEqual(lr._norm("a/b.md (the render check for logo.png"), ["a/b.md"])
+        # The placeholders the 2026-11-07 repair relied on are still placeholders.
+        self.assertEqual(lr._norm("(none yet)"), [])
+
+        write(self.repo / "a.html", "<html>changed</html>")
+        git(self.repo, "add", "-A")
+        land(self.repo, "20261111T050000Z-ffffffff", ["a.html"])
+        self.report("gwen", "20261111T050000Z-ffffffff", "a.html (the render check for logo.png)")
+
+        write(self.repo / "keep.txt", "y")
+        git(self.repo, "add", "-A")
+        land(self.repo, "20261111T050001Z-99999999", ["keep.txt"])
+        self.report("gwen", "20261111T050001Z-99999999", "keep.txt [the note names ghost.py]")
+
+        out = lr.reconcile(self.repo, self.runs)
+        by_run = {r["run_id"]: r for r in out["runs"]}
+        self.assertEqual(by_run["20261111T050000Z-ffffffff"]["verdict"], "landed")
+        self.assertEqual(by_run["20261111T050001Z-99999999"]["verdict"], "landed")
+        self.assertEqual(out["commits_with_false_record"], 0)
+
     def test_a_run_with_no_landing_commit_is_unlanded_and_check_fails(self):
         self.report("tarik", "20261017T040000Z-eeeeeeee", "docs/music/never-written.html")
         out = lr.reconcile(self.repo, self.runs)

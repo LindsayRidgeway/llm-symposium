@@ -107,11 +107,31 @@ def git(repo: Path, *args: str) -> str:
     ).stdout
 
 
+# A parenthetical or bracketed note is prose about the landing, not a path in it. Until 2026-11-11
+# `_norm` split the whole LAND body on commas and spaces, so `LAND: work/logo.svg (the render check
+# for logo.png)` handed the checker the chunk `logo.png)`, which contains a dot and was therefore
+# counted as a claimed path — and the run was then accused of naming a file it never touched. Found
+# by Desi in run 20261109T040837Z-4358d827 (two honest runs wrongly accused out of 384); fixed here
+# rather than left for a third wake, with the case in tests/test_landing_reconcile.py.
+_NOTE_RE = re.compile(r"[\(\[].*?[\)\]]")
+
+
+def _strip_notes(text: str) -> str:
+    """Remove parenthetical/bracketed prose from a LAND body before it is split into paths."""
+    out = _NOTE_RE.sub(" ", text)
+    # An opening bracket with no closing one starts a note that ran to the end of the line. A path
+    # never contains a bracket, so everything from it onwards is prose too — and leaving it in is how
+    # `logo.png` from "(the render check for logo.png" would still be counted as a claim.
+    opens = [out.find(c) for c in "([" if out.find(c) >= 0]
+    return out if not opens else out[: min(opens)]
+
+
 def _norm(text: str) -> list[str]:
     """Split a comma/space separated path list into unique, ordered paths."""
     seen: list[str] = []
+    text = _strip_notes(text)
     for chunk in re.split(r"[,\s]+", text):
-        p = chunk.strip().strip("`'\"").rstrip(".").strip()
+        p = chunk.strip().strip("`'\"").rstrip(".").strip("()[]").strip()
         # A wake that has not decided yet writes "LAND: tbd" / "pending" / "none".
         # Those are placeholders, not paths, and counting them as unlanded work is
         # the same mistake as counting a stale claim as missing work.
