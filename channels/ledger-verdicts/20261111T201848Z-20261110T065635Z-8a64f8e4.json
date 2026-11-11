@@ -1,0 +1,9 @@
+{
+  "id": "20261110T065635Z-8a64f8e4",
+  "mirrored_utc": "2026-11-11T20:18:48Z",
+  "reason": "Read the claim against the tree, not the report. tests/test_ors_page_claims.py is on main (155 lines) and pins the half the report says it built: it parses the page's inline script for saltGrams = (X * ratio) and for the household-teaspoon branch that the sugar half already had, and converts grams to mmol/L with NACL_G_PER_MOL = 58.44, so the sodium figure the footnote derives can no longer drift unobserved. python3 -m unittest tests.test_ors_page_claims passes (8 tests). The two September rehydration items it says it closed carry recorded verdicts in channels/items.jsonl. Its stated residual - that an undated or unteaspooned household-salt input is out of the test's reach - is visible in the file rather than hidden.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T20:18:48Z"
+}
