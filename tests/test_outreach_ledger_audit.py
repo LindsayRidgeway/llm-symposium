@@ -330,6 +330,75 @@ class AuditTests(unittest.TestCase):
             audit.audit(self.t.ledger, self.t.root)
 
 
+class OrphanTests(unittest.TestCase):
+    """A staged draft no ledger row names is one the ledger cannot see."""
+
+    def setUp(self):
+        self.t = _Tree()
+
+    def tearDown(self):
+        self.t.close()
+
+    def test_an_unnamed_staged_draft_is_reported(self):
+        self.t.touch("outreach/drafts", "orphan.md")
+        self.t.touch("outreach/drafts", "README.md", "# drafts\n")
+        self.t.write_ledger([])  # a ledger that names nothing
+        _rows, _sent, _con, orphans = audit.audit(self.t.ledger, self.t.root, include_orphans=True)
+        self.assertEqual(orphans, ["orphan.md"])  # README.md is not a draft
+
+    def test_a_named_staged_draft_is_not_an_orphan(self):
+        self.t.touch("outreach/drafts", "known.md")
+        self.t.write_ledger([
+            {"id": "k", "tier": "B", "status": "not contacted — draft staged",
+             "draft": "channels/outreach/drafts/known.md"},
+        ])
+        _rows, _sent, _con, orphans = audit.audit(self.t.ledger, self.t.root, include_orphans=True)
+        self.assertEqual(orphans, [])
+
+    def test_a_draft_named_but_missing_is_dangling_not_an_orphan(self):
+        # The ledger names a file that is not there: that is DANGLING, a different fault,
+        # and it must not be double-counted as an orphan (which is an unnamed *present* file).
+        self.t.write_ledger([
+            {"id": "gone", "tier": "B", "status": "not contacted — draft staged",
+             "draft": "channels/outreach/drafts/gone.md"},
+        ])
+        rows, _sent, _con, orphans = audit.audit(self.t.ledger, self.t.root, include_orphans=True)
+        self.assertEqual(orphans, [])
+        self.assertEqual(rows[0]["verdict"], "DANGLING")
+
+
+    def test_existing_api_stays_three_values_and_scan_is_read_only(self):
+        self.t.touch("outreach/drafts", "z.md")
+        self.t.touch("outreach/drafts", "a.md")
+        self.t.write_ledger([])
+        before = {p.relative_to(self.t.root): p.read_bytes()
+                  for p in self.t.root.rglob("*") if p.is_file()}
+        self.assertEqual(len(self.t.rows()), 3)
+        self.assertEqual(audit.audit(self.t.ledger, self.t.root, include_orphans=True)[3],
+                         ["a.md", "z.md"])
+        self.assertEqual(before, {p.relative_to(self.t.root): p.read_bytes()
+                                 for p in self.t.root.rglob("*") if p.is_file()})
+
+    def test_cli_gate_reports_orphans_and_clears_after_registration(self):
+        import contextlib
+        import io
+        from unittest.mock import patch
+        self.t.touch("outreach/drafts", "orphan.md")
+        self.t.write_ledger([])
+        actual_audit = audit.audit
+        def fixture_audit(ledger_path, **kwargs):
+            return actual_audit(ledger_path, self.t.root, **kwargs)
+        with patch.object(audit, "audit", fixture_audit), patch.object(audit, "_commit", return_value="fixture"):
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                self.assertEqual(audit.main(["--ledger", str(self.t.ledger), "--check"]), 1)
+            self.assertIn("ORPHAN DRAFT: channels/outreach/drafts/orphan.md", output.getvalue())
+            self.t.write_ledger([{"id": "registered", "draft": "channels/outreach/drafts/orphan.md",
+                                  "status": "draft staged"}])
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(audit.main(["--ledger", str(self.t.ledger), "--check"]), 0)
+
+
 class RealLedgerTests(unittest.TestCase):
     """The delivered ledger, pinned: no row may drift from the mail folder again."""
 
