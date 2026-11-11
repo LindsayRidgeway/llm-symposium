@@ -334,6 +334,59 @@ def _landing_block(now: dt.datetime, hours: int, last: str | None, gap: int) -> 
     ]
 
 
+def unlanded_rows(bots_root: Path | None = None, repo: Path | None = None) -> list[dict]:
+    """The runs whose claimed paths are absent from this checkout, cumulative, via the existing tool.
+
+    Wired 2026-11-11 (dmitri), which is the to-do item "wire one of the two instruments or delete
+    them": `scripts/unlanded_worklist.py` has described this defect since 2026-10-14 and nothing
+    invoked it. It is the shape of the whole job — `unlanded_worklist` existed, its tests were run
+    by the workflow, and no reader ever saw a number from it.
+
+    It is not the same measurement as `wake_outcomes`' `land_missing`. That one is the lander's own
+    verdict on one run at landing time. This one asks the checkout *today*, across every run ever,
+    so it is the only thing that can say "this was claimed three weeks ago and is still not there".
+    A run can pass the lander and still be in this list; a run the lander refused can be entirely
+    out of it, because the work was re-landed later. Both directions matter and neither is a subset.
+
+    Off this Mac (the GitHub runner) there are no run directories: the worklist is empty and the
+    block is absent, which is the same contract `_wakes_block` keeps.
+    """
+    root = bots_root or REPO.parent
+    if not any((root / ("%s-bot" % b) / "tick-state" / "runs").is_dir() for b in AMIGO_ORDER):
+        return []
+    from scripts import unlanded_worklist as U  # noqa: E402  (lazy: the report must render without it)
+    rows = U.worklist(root=root, repo=repo or REPO)
+    return [r for r in rows if r.get("absent")]
+
+
+def _unlanded_block(now: dt.datetime, bots_root: Path | None = None,
+                    repo: Path | None = None) -> list[str]:
+    """How much work has been claimed, over the whole record, and is not in this checkout."""
+    try:
+        rows = unlanded_rows(bots_root, repo)
+    except Exception as exc:                                  # noqa: BLE001
+        return ["", f"(the unlanded worklist could not be read: {type(exc).__name__}: {exc})"]
+    if not rows:
+        return []
+    paths = sum(len(r["absent"]) for r in rows)
+    stamps = sorted(r["run"] for r in rows)
+    oldest, newest = stamps[0][:8], stamps[-1][:8]
+    out = ["", "### Claimed and never reached this checkout (all time)",
+           f"**{len(rows)} run(s) named {paths} path(s) that are not here.** The oldest is "
+           f"{oldest[:4]}-{oldest[4:6]}-{oldest[6:]}, the newest "
+           f"{newest[:4]}-{newest[4:6]}-{newest[6:]}. No later wake can build on any of them.",
+           "  This is not a list of proven losses: a LAND line can name a directory, a file a "
+           "later wake renamed, or a path the run itself never wrote. It is a list of claims that "
+           "nothing verifies, which is the reason the same artefact has been rebuilt four times."]
+    for row in sorted(rows, key=lambda r: r["run"], reverse=True)[:3]:
+        shown = ", ".join(row["absent"][:2]) + (" …" if len(row["absent"]) > 2 else "")
+        out.append("  %-7s %s  %d absent: %s" % (row.get("amigo", "?"), row["run"],
+                                                len(row["absent"]), shown))
+    if len(rows) > 3:
+        out.append("  … +%d more run(s)" % (len(rows) - 3))
+    return out
+
+
 def wake_outcomes(now: dt.datetime, hours: int, bots_root: Path | None = None) -> dict:
     """What each body's wake engine actually did in the window — read from the runs, this Mac only.
 
@@ -1184,6 +1237,7 @@ def render(hours: int = 24, now: dt.datetime | None = None,
     ]
     landed = last_landing()
     lines += _landing_block(now, hours, landed, landing_gap(items, landed))
+    lines += _unlanded_block(now)
     lines += _wakes_block(now, hours)
     lines += _diagnosis(window, life, hours, items, now)
     lines += _review_block(items, window, hours)
