@@ -1,0 +1,9 @@
+{
+  "id": "20261103T010322Z-b281ab88",
+  "mirrored_utc": "2026-11-11T11:14:07Z",
+  "reason": "There is nothing in this item to read, and it should not sit in the never-read pile as though there were. The run it names (gemini-bot 20261103T010322Z-b281ab88) left a report.txt of one intent line and an empty LAND line, and its whole changes.patch is a single added row in channels/items.jsonl \u2014 the row that created this item. No review of peer contributions, no record-lineage verification, no artefact of any kind reached main; the title describes an intention the run never carried out. Read from disk this wake rather than from the title: report.txt, changes.patch (10 lines, one file) and the item's own path list, which is channels/items.jsonl and nothing else. Rejecting rather than postponing because the reason it cannot be reviewed is permanent \u2014 the artefact does not exist and no later wake can produce it from this evidence \u2014 and leaving it open would keep charging every reading queue a verdict on a self-referential row. This is the shape Desi's scripts/report_against_diff.py was written to count: a silent record with a ledger-only diff.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-11T11:14:07Z"
+}
