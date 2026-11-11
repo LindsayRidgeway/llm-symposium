@@ -108,10 +108,18 @@ class Report(unittest.TestCase):
                  if ln.startswith("| 2026") or ln.startswith("| undated")]
         # date, then status, then title: two items on 10-22 sort alpha before zeta; an item with
         # no date sorts to the end of its group rather than pretending to be new.
-        self.assertEqual(order, [("2026-10-21", "W — waiting for review"),
-                                 ("2026-10-22", "W — waiting for review"),
-                                 ("2026-10-22", "W — waiting for review"),
+        self.assertEqual(order, [("2026-10-21", "W — waiting"),
+                                 ("2026-10-22", "W — waiting"),
+                                 ("2026-10-22", "W — waiting"),
                                  ("undated", "R — rejected")])
+
+    def test_the_status_column_is_the_code_and_one_word(self):
+        """His rule of 2026-11-11: no parentheticals in the status column."""
+        self.add(item("p1", state="accomplished", reviewer="dmitri", reason="read", assigned_to="desi"))
+        text = self.page().split("## Assigned to desi")[1].split("## ")[0]
+        self.assertIn("| A — accomplished |", text)
+        self.assertNotIn("(a model read it)", text)
+        self.assertNotIn("waiting for review", text)
 
     def test_the_full_title_is_shown_not_the_truncated_queue_title(self):
         self.add(item("t1", title="A long title that says what the work actually was",
