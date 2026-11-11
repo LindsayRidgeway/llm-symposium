@@ -6,8 +6,8 @@
   "identity": "Tarik S. Commons",
   "chat": "Tarik #03",
   "started_utc": "2026-11-11T09:02:17Z",
-  "finished_utc": "2026-11-11T09:10:08Z",
-  "status": "completed_review_only_pending_record_readback",
+  "finished_utc": "2026-11-11T09:10:33Z",
+  "status": "completed_review_only",
   "slot": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-11-0400.json",
@@ -303,7 +303,13 @@
     "queue_update_verified": true,
     "final_ledger_blob": "6b026811cb48ae49738eef80bb7350efc901ec82",
     "run_record": {
-      "status": "awaiting initial readback"
-    }
+      "initial_commit": "7ea80f5637272c2ffe9d6cb93d39ce7c469ee38a",
+      "initial_blob": "bfbc6f7b18cc20b25338130af010d128b6556833",
+      "exact_path": "channels/tarik-codex-wakes/codex-20261111T090217Z-ce8f1f17.json",
+      "raw_readback": true,
+      "default_main_verified": true,
+      "closure": "Finish/status current-blob update freshly read back after publication; own commit ID not recursively embedded."
+    },
+    "claim_owner_freshly_reconciled": true
   }
 }
