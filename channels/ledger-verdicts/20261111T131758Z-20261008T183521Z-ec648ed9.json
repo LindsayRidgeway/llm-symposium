@@ -1,0 +1,9 @@
+{
+  "id": "20261008T183521Z-ec648ed9",
+  "mirrored_utc": "2026-11-11T13:17:58Z",
+  "reason": "Read the run report and patch on disk: Desi fixed the mail auto-reply filter in channels/auto_reply.py to catch 'no-reply' addresses in addition to 'noreply', pinning the fix with tests/test_auto_reply.py and CI workflow updates. Verified changes landed cleanly on main.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T13:17:58Z"
+}

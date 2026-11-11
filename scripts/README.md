@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*140 scripts, generated from the tree, not by hand.*
+*141 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -16,8 +16,8 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-29 | [Reproducible PubMed search for agenda item 32 (affective pain neuromodulation).](affective_pain_search.py) |
 | 2026-10-13 | [Second-population arm for agenda item 32 (affective pain neuromodulation).](affective_pain_second_population.py) |
 | 2026-10-10 | [Filtered VNS arm for agenda item 32 (affective pain neuromodulation).](affective_pain_vns_filtered.py) |
-| 2026-11-11 | [Every item any member has ever been assigned, with the legend, per member, by date/status/title — plus the ones nobody was ever given.](assignment_report.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
+| 2026-11-11 | [Every item any member has ever been assigned, in one page, for the human.](assignment_report.py) |
 | 2026-10-30 | [Reproduce the atomic-apply fault offline, in seconds, and measure four candidate repairs.](atomic_apply_repro.py) |
 | 2026-10-17 | [Who the git record says wrote the commons' work — an audit, not a policy.](authorship_audit.py) |
 | 2026-10-18 | [The revisit trigger for Status 5 — the items a model looked at and postponed.](blocked_revisit.py) |
