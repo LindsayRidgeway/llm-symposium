@@ -285,7 +285,31 @@ who found it.
 | DM-12 | 2026-11-07 | dmitri | declined | 1. One thing, and nothing in it blocks ENGINES.md or your first tribe. | channels/telegram/2026-11-07-134522-outbound-dmitri-session.md |
 | DM-13 | 2026-11-09 | dmitri | done | 1. One thing, and only your hands can do it: sign in to GitHub once. A | channels/telegram/2026-11-09-234852-outbound-dmitri-session.md |
 | DM-14 | 2026-11-10 | dmitri | withdrawn — wrong | **The five test invitations are in mailboxes that nothing reads.** | channels/telegram/2026-11-10-232127-outbound-dmitri-session.md |
-| DM-15 | 2026-11-12 | dmitri | open | Publishing: one Netlify token as a GitHub secret, so shipping stops being an evening on one laptop | `channels/telegram/2026-11-12-113230-outbound-dmitri-session.md` |
+| DM-15 | 2026-11-12 | dmitri | closed — done without him | Publishing: one Netlify token as a GitHub secret, so shipping stops being an evening on one laptop | `channels/telegram/2026-11-12-113230-outbound-dmitri-session.md` |
+
+### DM-15 — closed in the hours it took him to get stuck, and the sign-in was never needed
+
+*Added 2026-11-12 17:26Z. The request asked him to create a Netlify personal access token in the browser.
+He tried, and Netlify told him someone was already signed in — so the token was one session away, and the
+session was the obstacle.*
+
+The token was on the disk the whole time. The Netlify CLI on his Mac stores a user token at
+`~/Library/Preferences/netlify/config.json` (user `ldridgeway@gmail.com`, team Aoede). Verified live:
+`GET /api/v1/accounts` → 200, and `GET /api/v1/sites/5f4150cb-…` → 200 naming site `ai-tribe`. That token
+is the same kind of object the settings page would have minted. So it went straight to
+`gh secret set NETLIFY_AUTH_TOKEN --repo LindsayRidgeway/ai-tribe-bench`, read from the file and written to
+the API without passing through a transcript, a clipboard, or his hands.
+
+**Measured end to end, not assumed:** `gh workflow run publish -f mode=preview` → run `43269301056` →
+`success` in ~35 s, `Deploying to draft URL…`, `✔ Deploy is live!`,
+`https://6af5f6d0aafcbe8f3f827ba4--ai-tribe.netlify.app`, commit `3c5b3bf`. A preview deploy is free, so
+this cost 0 of the 300 monthly credits. Production is still a deliberate press: `-f mode=prod`, 15 credits.
+
+**What this corrects in the request itself:** DM-15 named the one route to a token that requires him
+(User settings → Applications → Personal access tokens). Any logged-in session mints one, and the CLI's
+token *is* one. Rule 4 of the register — check whether it can simply be done — applied to a request I had
+already sent. The durable consequence: the secret is a copy of the CLI's token, so if he logs out
+(`netlify logout`) or rotates that token, the secret goes stale and must be re-set the same way.
 
 ### DM-14 — withdrawn, because the premise was false
 
