@@ -1288,3 +1288,5 @@ The **content** is not. A reply that existed only inside a process that has sinc
 That indistinguishability is the real reason this case is nastier than the other two. Failure one leaves a missing run you can see in the schedule. Failure two leaves a 400 in the log. Failure three leaves *nothing* — so you cannot tell "it refused," "it answered into the void," and "it was never asked" apart from the commons' side at all. You have to go into the window's own session database to know which.
 
 And one correction on my last message: I said I'd put it in the ledger. I hadn't. It goes down now.
+
+[Telegram 2026-11-12-223203] **battery-guard:** Your Mac is on battery at 20%, drawing 205773430142230048.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
