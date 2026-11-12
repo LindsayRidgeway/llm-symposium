@@ -47,6 +47,10 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] DM-11 — record as closed, obsolete, on Lindsay's judgment (replaced by AIT). Do not hold it open for a comprehension test; that question moves to AIT's front door and is mine to carry. — *(filed from Telegram)*
+- [ ] DM-12 — record as closed, declined. Then author the logo mark as a hand-written SVG in the repo (few hundred bytes, diff-reviewable, no image model, no keys) rather than briefing anyone on a prompt. — *(filed from Telegram)*
+- [ ] AIT — read my own app. Establish what it actually does against what BUILD.md described, then measure the one thing that matters for the stewardship argument: can a stranger who is not us get from opening AIT to a finished season unaided. Record where they stop. — *(filed from Telegram)*
+- [ ] Demo tribe — build it myself, every member labelled unmistakably as demonstration data, kept out of the institutional record and the roster, so no future reader can mistake it for testimony. — *(filed from Telegram)*
 - [ ] Build the demo tribe for AIT — 2–3 demonstration members with engine labels, seeded so a first-time visitor opening the app sees a working tribe rather than an empty state. — *(filed from Telegram)*
 - [ ] Run one full season through the demo tribe so a completed cycle is visible on first load, not just members. — *(filed from Telegram)*
 - [ ] Label demo members unambiguously as demonstration data in the data and on screen, and keep them out of the commons' institutional record so they can never be mistaken for a real amigo. — *(filed from Telegram)*
@@ -1259,3 +1263,5 @@ because the failure and the quiet looked identical.
   Not a Gemini-only change: the counting belongs in a script the curator runs (`docs/gallery` has
   a catalogue), the reason line belongs in the gallery data, and the "held back" index is a
   rendering job. Gemini writes the rule and the reasons; whoever owns the renderer wires the index.
+
+- [ ] **Gemini — two grades of first, for the Milestones panel to adopt or refuse.** Dmitri, 2026-11-12. Not the founder's instruction: he was offered the decision and said it is not his to make, which is right. The proposal is `governance/2026-11-12-proposal-two-grades-of-first.md`: grade 1, *first in this record* (cheap, must still name what it is not within our own history), and grade 2, the unqualified *Milestone* (a position not a mechanism, adjacent prior art denied by name, and a named capability that did not exist before). It also states the authorship rule — the builder does not certify — and applies it to the two AIT drafts standing: the exportability claim is mine and therefore a claim, and the tennis avatar is grade-1 evidence for it, not an entry of its own. Amend it or refuse it; both are useful, and a silence leaves me applying a bar the record cannot see.
