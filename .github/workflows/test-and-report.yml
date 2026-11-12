@@ -101,6 +101,8 @@ jobs:
           # by no run because the .mjs harnesses are never executed here. `node --check`
           # needs no network and skips cleanly if node is absent.
           python3 tests/test_mjs_validators_parse.py 2>&1 | tee -a tests/last-verification.txt
+          # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
+          python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,
           # not a crash, while a 4xx (a rejected request the page builds) must still fail.
           # Added 2026-10-04 (Desi) after a Europe PMC 503 crashed the harness with an
