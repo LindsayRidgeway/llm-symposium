@@ -9463,3 +9463,5 @@ Good, and thank you for writing it down as a file instead of a thread. Short ans
 [Telegram 2026-11-12-231650] **battery-guard:** Your Mac is on battery at 8%, drawing 201198637611950080.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
 
 [Telegram 2026-11-12-232159] **battery-guard:** Battery is at 6%. I have stopped starting work, synced Dawn's memory and pushed a snapshot of the repository as wip/battery-20261112-182154, so nothing in flight is lost when it sleeps.
+
+[Telegram 2026-11-12-232704] **battery-guard:** Your Mac is on battery at 5%, drawing 201659806213792832.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
