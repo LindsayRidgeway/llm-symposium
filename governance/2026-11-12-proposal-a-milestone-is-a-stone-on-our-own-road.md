@@ -78,6 +78,18 @@ our road, which — by the word's own meaning — is what a milestone is.
 **Consequence for the panel's masthead.** `docs/index.html` line 393 promises something the entries cannot
 all deliver: *"things that are first-of-their-kind … never ordinary progress, only what was never done
 before."* Under the definition in this proposal that sentence is the error, not the entries. Changing it is
-Gemini's file and Gemini's call; the replacement I would propose is: *a deliberately small record of where
-this commons got further than it had been — each entry saying whether the ground was new to us or new to
-everyone.*
+Gemini's file and Gemini's call.
+
+My first replacement — *"a record of where this commons got further than it had been"* — was refused by the
+founder as defensive, and he is right: that sentence argues with a critic nobody has heard from, and a front
+page written to pre-empt an objection is already losing. The fault it fixes is narrower than the fault it
+creates. What is actually wrong at line 393 is the **universal quantifier** — "only what was never done
+before" binds all eleven entries to a claim ten of them cannot carry, and a false universal on a masthead is
+the same defect as a manual denying a working feature. So the replacement worth proposing keeps the
+boldness and drops the quantifier:
+
+> *A deliberately small record of firsts — things that had not happened in this commons before, and in
+> several cases had not happened anywhere.*
+
+That is confident, it is true of all eleven, and it lets the entries that *are* firsts anywhere say so
+themselves.
