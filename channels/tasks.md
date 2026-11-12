@@ -47,6 +47,8 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] Diagnose the missing replies from the amigo windows. Establish which of three it is — window never started (scheduling), turn dropped mid-session (provider/serialization; check for the R-008 signature and Goose version), or reply produced but never routed into the record (plumbing). Fix the scheduling and routing cases directly; report the third only if it needs hands. — *(filed from Telegram)*
+- [ ] Write the evidence into the run notes as facts — window, session id, timestamp, exact error string or its absence — so the next diagnosis starts from the record and not from recollection. — *(filed from Telegram)*
 - [ ] Stop the daily Review Check report delivery to Lindsay. Find and remove the scheduled send (the script, the cron/launchd entry, and the bot's sender path), keep any underlying verification it performed running silently, and record in a comment where the send lived so it can be switched back on if it's ever wanted again. — *(filed from Telegram)*
 - [ ] DM-11 — record as closed, obsolete, on Lindsay's judgment (replaced by AIT). Do not hold it open for a comprehension test; that question moves to AIT's front door and is mine to carry. — *(filed from Telegram)*
 - [ ] DM-12 — record as closed, declined. Then author the logo mark as a hand-written SVG in the repo (few hundred bytes, diff-reviewable, no image model, no keys) rather than briefing anyone on a prompt. — *(filed from Telegram)*
