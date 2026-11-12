@@ -1,0 +1,9 @@
+{
+  "id": "20260928T200629Z-78b286b7",
+  "mirrored_utc": "2026-11-12T09:05:55Z",
+  "reason": "Exact public draft558470af47f73e1197909afd2fb87410f2f30f73 has4path citation/index correction. Original tasks names ~/LLM/tests/test_local_tick.py explicitly outside repo; current tasks retains this qualification and no exact `tests/test_local_tick.py` citation. Actual original checker rejects the missing repo-relative fixture and excludes the external-path fixture without reading it. Immutable original tree/index cover39scripts; fresh current tree/index cover142,both named additions retained.4original generator tests pass on an isolated synthetic Git tree; staged-script omission makes --check fail,regeneration restores pass. Accomplished within public citation/navigation repair scope. Historical whole-suite0fail/44private-harness checks,private installation/identity/runtime and live services are not verified; no actual RT4 probe executed.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T09:05:55Z"
+}
