@@ -284,4 +284,25 @@ the sentence they would have needed, is the deliverable. The sheet is fixed from
 who found it.
 | DM-12 | 2026-11-07 | dmitri | declined | 1. One thing, and nothing in it blocks ENGINES.md or your first tribe. | channels/telegram/2026-11-07-134522-outbound-dmitri-session.md |
 | DM-13 | 2026-11-09 | dmitri | done | 1. One thing, and only your hands can do it: sign in to GitHub once. A | channels/telegram/2026-11-09-234852-outbound-dmitri-session.md |
-| DM-14 | 2026-11-10 | dmitri | open | **The five test invitations are in mailboxes that nothing reads.** | channels/telegram/2026-11-10-232127-outbound-dmitri-session.md |
+| DM-14 | 2026-11-10 | dmitri | withdrawn — wrong | **The five test invitations are in mailboxes that nothing reads.** | channels/telegram/2026-11-10-232127-outbound-dmitri-session.md |
+| DM-15 | 2026-11-12 | dmitri | open | Publishing: one Netlify token as a GitHub secret, so shipping stops being an evening on one laptop | `channels/telegram/2026-11-12-113230-outbound-dmitri-session.md` |
+
+### DM-14 — withdrawn, because the premise was false
+
+*Added 2026-11-12. The request asked the founder to open five windows so the five test invitations would
+be read. He did, and the effort was wasted: nothing was blocking.*
+
+DM-14 said "not one of the five reads mail" and "their Gmail is only drained when a Goose window of theirs
+runs." Both false. Every seat's bot polls its own mailbox on a timer in the same loop as its Telegram poll
+and **replies**, records the exchange and pushes the record (`~/LLM/gwen-bot/bot.py: check_mail()`, mail
+interval ~2 minutes). Gwen's log alone holds **9,450** successful `IMAP login ok` lines since 2026-10-29,
+the last at 11:25 on 2026-11-12 — while the request claiming no one reads mail was standing.
+
+What was actually true, and is a different fact: no *window* answered, and the probe files were untouched.
+**An absence was turned into a mechanism** — silence was read as a closed pipe rather than as five amig@s
+who had not replied yet. That is the same error this seat keeps finding in other people's findings, and it
+is worth more here than in their reports.
+
+The consequence is small and real: the founder spent two minutes on a false premise, and any reading he
+made of the test's silence was made against a wrong map. Corrected here rather than in a message, and the
+row says what it is instead of wearing a `done` it did not earn.
