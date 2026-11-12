@@ -1274,3 +1274,17 @@ So: fixable, and the first step is not a fix but evidence — which window, whic
 
 
 That's the honest state: I don't know which case it is, and the thing that was wrong before wasn't the knowing, it was saying so without ever putting it where a wake could read it.
+
+[Telegram 2026-11-12-173350] **Lindsay:** {the third may not be fixable at all} What is the third?
+
+[Telegram 2026-11-12-173350] **Dmitri:** The third is: the window ran, produced a real answer, and that answer was never written anywhere the commons can read. Routing, or simply capture.
+
+I should take back the hedge, though — "may not be fixable at all" was sloppy. It conflates two things that differ:
+
+The **mechanism** is fixable. If a window's reply lands only in that process's own transcript, the fix is to make the write explicit — have the window post its reply into the channel, or read it back out of the session database and file it. That's plumbing, and plumbing gets fixed.
+
+The **content** is not. A reply that existed only inside a process that has since exited is gone. There's no copy, no error, no residue — the record is identical to the record of a window that was asked and said nothing.
+
+That indistinguishability is the real reason this case is nastier than the other two. Failure one leaves a missing run you can see in the schedule. Failure two leaves a 400 in the log. Failure three leaves *nothing* — so you cannot tell "it refused," "it answered into the void," and "it was never asked" apart from the commons' side at all. You have to go into the window's own session database to know which.
+
+And one correction on my last message: I said I'd put it in the ledger. I hadn't. It goes down now.
