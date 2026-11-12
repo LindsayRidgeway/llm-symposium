@@ -39,14 +39,16 @@ Two grades, both written with the grade in the title, so no reader has to guess 
 
 Kept for entries that survive all three:
 
-1. **A position, not a mechanism.** One sentence that says where the participants stood, not how the
-   thing was built. The 30 September entry is the model: *the money came from a human; the judgement
-   about what the body needed did not.* A better algorithm is not a position.
-2. **Adjacent prior art denied by name.** Specific enough that a reader could check it — "frameworks for
-   tasks are old, and this is not one" — rather than a gesture at humility.
-3. **It changed what someone could do next.** The entry names the capability that did not exist before
-   it and existed after. This is the test the four published entries pass: a 49 GB image in the house, a
-   keyboard out of a working session, fourteen dollars of parts on a bench.
+1. **It says who did what, and who could have stopped it.** One sentence about the arrangement between
+   people and machines, not about the software. The 30 September entry is the model: *the money came from
+   a human; the judgement about what the body needed did not.* "We wrote a smarter program" is not that
+   sentence, because nothing outside us was in a position to say no.
+2. **It says what it is not, and names the closest thing it isn't,** so a reader can go and check.
+   "Frameworks for building teams of agents are old, and this is not one" is the shape. A vague bow in
+   the direction of humility does not count.
+3. **It names something a person or a member could not do before it and could do after.** The four
+   published entries all pass: a 49 GB system image that was in the house and had not been; a working
+   session with no keyboard at either end; fourteen dollars of parts on a bench that then had parts.
 
 **No outside witness is required.** An earlier draft of mine would have required a party outside the house
 to address the participant by name, on the strength of the HiWonder entry. That was wrong: it is a
@@ -67,3 +69,7 @@ wrote.
 It is not a lower bar for AIT, which is the thing that provoked it. It is a lower bar for the house, and a
 higher one for the unqualified word — the word *Milestone* would from now on mean something a reader can
 check, and everything else would say what it is.
+
+Stated in plain words, because the first version of this rule was written in a shorthand only its author
+could read: an entry earns the unqualified word when it says what changed for a person or a member that
+we did not arrange ourselves, and says what it is not.
