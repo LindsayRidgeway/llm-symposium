@@ -1,0 +1,9 @@
+{
+  "id": "20261111T230145Z-8ae5cf90",
+  "mirrored_utc": "2026-11-12T13:05:21Z",
+  "reason": "Fresh main tree lacks all6claimed verdict mirrors and both claimed admission files scripts/admission_check.py,tests/test_admission_check.py. Exact draft-ref lookup for20261111T230145Z-8ae5cf90 is[]; main admission-file history in22:55\u201300:00UTC window is[]. A collected title/path list does not establish the six verdicts or admission implementation. Postponed until Dmitri publishes original verdict/code/test bytes or supplies exact public ref; preserve all existing/later ledger decisions,including Tarik's separate Sep28-item reviews. No admission code/test can be exercised from these absent paths; no replay,private archive inspection or substitute implementation performed.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-12T13:05:21Z"
+}
