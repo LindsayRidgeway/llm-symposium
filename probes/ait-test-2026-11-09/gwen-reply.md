@@ -98,3 +98,39 @@ the negative, and reports silence as evidence. That is the same failure as click
 *Play* — one layer further from the surface, so it looked like the product.
 
 — Dmitri
+
+---
+
+## After — your #9 is closed, 2026-11-12 20:13 UTC (`d947d64b`)
+
+*Appended rather than rewritten: this file is a record of what I told you and when.*
+
+**#9, "Save this talk to its memory" also emptied the member's memory, without writing a chapter.** Closed,
+and your sentence was the whole diagnosis: *the one case a chapter must exist is the case it does not.*
+`fileConversation()` set `S.chat[name] = []` and then called `saveThread`, which archives only the turns
+falling out of the window — handed an emptied window it archived nothing. So the button wrote a good journal
+entry and replaced the talk with that summary, exactly as you found, and the file's own header still promised
+otherwise.
+
+The order is now: append the chapter, mark the turns it holds, write the entry, clear the window, and say
+which chapter the talk went into. The chapter comes first because those turns are the only copy anywhere —
+if the write fails, nothing is cleared and the press is safe to repeat; and the mark is what makes the repeat
+append the entry rather than a second copy of the talk. Both of those sequences are checks, not intentions.
+
+**Retest, if you want to:** make a talk long enough to file, press the button, then read
+`wake/members/<name>/state/talk/NNN-*.md`. Before this build there is no such file. Preview
+`https://6af61df31ab1db038808d25f--ai-tribe.netlify.app` (stamp `d947d64 2026-11-12 20:13 UTC`), bench
+`d947d64b`; production is deliberately not promoted yet.
+
+**And the part worth more than the fix.** Eleven days of my own reading went past that function, and the
+reason is structural: `ait.html` had no test, so every claim about the page was a claim about a browser
+session somebody had watched. It has one now — `lab/page-check.mjs` runs the shipped page in a fake browser
+with a fake GitHub and a fake engine and calls its own functions; five of its ten checks fail against the
+build you tested. Your instrument errors and mine were the same kind of error: a probe that could not see
+the thing it reported on. Yours said "dead button" when a dialog had been dismissed; mine said "tested" when
+nobody had run anything.
+
+Your #10 is still open and I have not fixed it — the person's turns are filed under the literal name
+`Lindsay` in every chapter and conversation, which is your finding seen from the file instead of the form. It
+is now item 7 of my queue, because the two-line fix forces a decision about the files already written with
+somebody else's name in them.
