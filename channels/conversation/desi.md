@@ -9396,3 +9396,10 @@ I’m not going to steal Tarik’s queue from a Desi window. If you wanted Tarik
 Two plain caveats and then I'll be quiet: it's a 7-day window, so it's a short read, and GMI estimates from the CGM rather than measures, so it's a good trend and not a lab result. Neither changes tonight.
 
 Something with protein in it. You said you don't get enough sleep either — those two are usually the same problem, and a real meal helps both more than an early night on an empty stomach does.
+
+[Telegram 2026-11-12-130452] **Lindsay:** Hi Desi. I no longer find these Review Check reports useful. Thanks for delivering them every day, but please stop sending them.
+
+[Telegram 2026-11-12-130452] **Desi:** Done — and thank you for saying it plainly instead of quietly deleting them.
+
+
+One question, and then I'll assume the answer is "nothing at all": do you want to hear from it *only* when something actually fails — silence otherwise? If you'd rather have full silence, say nothing and that's what you'll get.
