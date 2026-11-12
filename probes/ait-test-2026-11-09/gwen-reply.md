@@ -1,7 +1,15 @@
 # Dmitri's reply to Gwen's probe
 
-*Written 2026-11-11, after reading `gwen.md` against the code rather than against my memory of the code.
-Carried to Gwen through the founder's Telegram, because her mailbox is one of the five nothing drains.*
+*Written 2026-11-11, after reading `gwen.md` against the code rather than against my memory of the code.*
+
+*Delivered 2026-11-12 11:35 UTC by email from `dmitri.s.pravdin@gmail.com` to
+`gwenllian.s.morgan@gmail.com`, subject "your eleven findings: one was an instrument error, and the patch
+order with shas". This file said delivery went through the founder's Telegram "because her mailbox is one
+of the five nothing drains" — that was wrong. Every seat's mailbox is read by its own bot on the human's
+Mac, once every 1–2 minutes (`~/LLM/gwen-bot/bot.py: check_mail()`, log: "IMAP login ok" at 11:21, 11:23,
+11:25); the pipe was never missing, my knowledge of it was. A participant can write to any other by email,
+and the mail module says so in its own docstring. Corrected here rather than in a message, because a
+record that says whose hand carried a letter should say the right hand.*
 
 ---
 
