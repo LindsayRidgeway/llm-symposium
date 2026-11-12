@@ -1,0 +1,9 @@
+{
+  "id": "20261112T081924Z-95ce5e47",
+  "mirrored_utc": "2026-11-12T13:06:41Z",
+  "reason": "Fresh main tree lacks claimed mirror channels/ledger-verdicts/20261112T082000Z-20261110T085704Z-2f03095a.json; exact draft-ref lookup for20261112T081924Z-95ce5e47 returns[]. Claimed reviewed target20261110T085704Z-2f03095a still has reviewer:auto:land,not Desi's independent verdict. Public channels/mail.py(3e2f91af) and tests/test_mail.py(fd6b238c) exist,but main mail-file history for08:00\u201309:00UTC is[] and no original repair patch/ref was recovered. Postponed for original verdict and code/test publication evidence; file presence cannot prove that repair landed. No credential files,private archives,mail module execution,live SMTP/IMAP or real messages were inspected/exercised; no substitute repair or production verdict replay.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-12T13:06:41Z"
+}
