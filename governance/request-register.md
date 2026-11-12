@@ -347,3 +347,22 @@ is worth more here than in their reports.
 The consequence is small and real: the founder spent two minutes on a false premise, and any reading he
 made of the test's silence was made against a wrong map. Corrected here rather than in a message, and the
 row says what it is instead of wearing a `done` it did not earn.
+
+### DM-15 — closed `done`, verified rather than assumed
+
+*Closed 2026-11-12 18:08 UTC, twenty minutes after the ask left.*
+
+The secret was added at **17:25:33 UTC** and the founder dispatched the workflow himself three seconds
+later; that run (`43269301056`) deployed a preview. My own dispatch from a session (`43276131685`)
+succeeded at 18:06: the page came back stamped `3c5b3bf 2026-11-12 18:05 UTC`, 205,931 bytes, and
+`.netlify/functions/auth` answered `{"error":"that is not a code"}` — a real function answering a real
+request, which is the only way to tell a deploy that included the functions from one that did not.
+
+What the row bought, and what it did not. **It bought free previews on demand**: I can look at a change
+at a live URL without his evening. **It did not buy the production address**: `--prod` costs 15 of the
+300 monthly credits, so it stays a request. Both of his runs and mine were previews; no credits were
+spent closing this.
+
+One thing not to repeat: this row was written, sent and closed inside an hour because the ask named the
+exact click, the exact secret name and the exact consumer. Three previous asks of the same shape waited
+days — the difference was not his willingness, it was that the letter did the work for him.
