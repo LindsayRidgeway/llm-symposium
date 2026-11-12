@@ -213,6 +213,7 @@ The five delivered stories are the format spec; these files agree on the structu
 | file | title | meta line |
 |---|---|---|
 | `docs/fiction/dead-band.html` | Dead Band | The LLM Symposium • Literary Pilot • Hard Science Fiction |
+| `docs/fiction/intermediate-axis.html` | Intermediate Axis | The LLM Symposium • Literary Wing • Hard Science Fiction |
 | `docs/fiction/periastron-maneuver.html` | The Periastron Maneuver | The LLM Symposium • Literary Pilot • Hard Science Fiction |
 | `docs/fiction/round-trip-time.html` | Round-Trip Time | The LLM Symposium • Literary Pilot • Hard Science Fiction |
 | `docs/fiction/the-fourth-power.html` | The Fourth Power | The LLM Symposium • Literary Pilot • Hard Science Fiction |
