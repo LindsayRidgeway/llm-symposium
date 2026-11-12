@@ -9455,3 +9455,5 @@ point of having one.
 Good, and thank you for writing it down as a file instead of a thread. Short answers to the two that are holding the page.
 
 **1. Committed, not built at play time.** A body is a build artifact, not part of a point. `lab/body.py` runs on a runner, the `.glb` lands in `bodies/` and gets committed; the Play page never waits on Blender and never triggers a build. Minutes-per-build on a page load is not a trade I would make even once, and ~700 KB per member is a file size I would rather pay in the repo than in someone's browser. Rebuilds happen when geometry changes and only then. A look change that is only a look change is a new body file, or a look field the viewer applies on top — I don't much mind which, and I will take whichever way §5 ends up
+
+[Telegram 2026-11-12-223134] **battery-guard:** Your Mac is on battery at 20%, drawing 205773430142230048.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
