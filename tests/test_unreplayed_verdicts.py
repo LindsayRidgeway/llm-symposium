@@ -120,6 +120,37 @@ class UnreplayedVerdictsTest(unittest.TestCase):
         self.mirror("item-1", "accomplished", "yesterday-ish")
         self.assertEqual(self.pending(), ["item-1"])
 
+    def test_malformed_mirror_times_stay_visible_regardless_of_text_order_or_type(self):
+        for stamp in ("!undatable", "yesterday-ish", "", None, 123, [], {},
+                      "2026-11-08T06:53:01"):
+            with self.subTest(stamp=stamp):
+                self.write_ledger(row("item-1", "accomplished", "2026-11-08T06:53:01Z", "dmitri"))
+                self.mirror("item-1", "accomplished", stamp, name="malformed.json")
+                before = {p.name: p.read_bytes() for p in self.tmp.rglob("*") if p.is_file()}
+                self.assertEqual(self.pending(), ["item-1"])
+                self.assertEqual(before, {p.name: p.read_bytes() for p in self.tmp.rglob("*") if p.is_file()})
+
+    def test_malformed_ledger_time_cannot_prove_a_dated_mirror_is_superseded(self):
+        for stamp in ("zz-undatable", "!undatable", "", None, 123):
+            with self.subTest(stamp=stamp):
+                self.write_ledger(row("item-1", "accomplished", stamp, "dmitri"))
+                self.mirror("item-1", "accomplished", "20261108T065301Z")
+                self.assertEqual(self.pending(), ["item-1"])
+
+    def test_two_undatable_decisions_stay_visible_even_when_raw_strings_match(self):
+        self.write_ledger(row("item-1", "accomplished", "!undatable", "dmitri"))
+        self.mirror("item-1", "accomplished", "!undatable", name="malformed.json")
+        self.assertEqual(self.pending(), ["item-1"])
+
+    def test_offset_and_fractional_instants_preserve_equal_older_and_newer_order(self):
+        self.write_ledger(row("item-1", "accomplished", "2026-11-08T06:53:01.500Z", "dmitri"))
+        for stamp, expected in (("2026-11-08T01:53:01.50-05:00", []),
+                                ("2026-11-08T07:53:01.499+01:00", []),
+                                ("2026-11-08T01:53:01.501-05:00", ["item-1"])):
+            with self.subTest(stamp=stamp):
+                self.mirror("item-1", "accomplished", stamp, name="offset.json")
+                self.assertEqual(self.pending(), expected)
+
     def test_an_unreadable_mirror_file_is_skipped_not_fatal(self):
         self.write_ledger(row("item-1", "accomplished", "2026-11-08T06:53:01Z", "dmitri"))
         (self.verdicts / "broken.json").write_text("{not json", encoding="utf-8")

@@ -1676,6 +1676,10 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
 
     Nothing is repaired here and nothing is written: this only makes the gap visible in the command
     that every wake opens with, because a silent gap is what cost those two reads.
+
+    2026-11-12 (Tarik): when either decision time is missing or unparsable, report the mirror
+    for reconciliation. Raw text order cannot establish chronology, even if both bad strings
+    happen to match. This warning grants no verdict and never replays or changes either file.
     """
     if not vdir.is_dir():
         return []
@@ -1698,8 +1702,10 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
         row_stamp, mirror_stamp = verdict_moment(have), verdict_moment(rec)
         if row_stamp and mirror_stamp:
             behind = mirror_stamp > row_stamp
-        else:  # one side is undatable; fall back to the old text order rather than guess
-            behind = (have.get("state_utc") or "") < (rec.get("state_utc") or "")
+        else:
+            # Unknown chronology cannot prove the mirror was folded in or superseded.
+            # Keep it visible for reconciliation; never order malformed values as text.
+            behind = True
         if (have.get("state") is None
                 or have.get("reviewer") in (None, "", "auto:land", "auto:path")
                 or is_path_check(have)
