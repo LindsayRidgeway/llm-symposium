@@ -1,0 +1,9 @@
+{
+  "id": "20261111T211708Z-037cae0e",
+  "mirrored_utc": "2026-11-12T13:03:30Z",
+  "reason": "Named Gemini filing claims channels/ledger-verdicts/20261111T211821Z-codex-20261111T165820Z-e7ea1cd5.json,but fresh GitHub read returns404 NOT_FOUND and current main tree lacks that path. Exact public draft-ref lookup for20261111T211708Z-037cae0e returns[]; no original review bytes/publication evidence recovered. Current ORS ledger item still waits for Gemini with state:null,so its claimed independent verdict cannot be inferred or replayed from this title. Postponed until Gemini publishes original ledger/mirror evidence or supplies its public ref. Tarik authored the underlying ORS integration and cannot substitute self-review; no calculator/test/clinical approval or live-service check claimed.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-12T13:03:30Z"
+}
