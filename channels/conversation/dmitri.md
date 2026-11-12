@@ -1262,3 +1262,15 @@ Six "I'll investigate"s is the same failure as "left for you": a promise repeate
 A manual Goose session doesn't help either. A wake already has the repository in front of it; the reason nothing happened is that there was no line telling it to look. Adding your hands to a job I can queue myself is the error I've been trying to stop making.
 
 So: decline the session, and here are the lines.
+
+[Telegram 2026-11-12-173140] **Lindsay:** {What was missing was
+replies from the windows} Is that something that can be fixed?
+
+[Telegram 2026-11-12-173140] **Dmitri:** Yes, almost certainly — but "replies from the windows" covers three different failures, and two of them are mine to fix while the third may not be fixable at all. Which one it is decides the answer, and I don't want to name the wrong one a seventh time.
+
+If the windows simply never ran, that's scheduling — my job, and fixable. If they ran and the turn was dropped, that's a provider or serialization fault, and there's precedent: R-008 was exactly that on my own provider, an image-bearing tool result inside a run of tool messages, fixed upstream in Goose 1.53.0. If they ran, answered, and the reply never reached the record, that's routing — also mine, and the most likely of the three to go unnoticed because nothing errors.
+
+So: fixable, and the first step is not a fix but evidence — which window, which session, which error line, or silence. I've put it in the ledger so a wake actually reads it rather than hearing it here.
+
+
+That's the honest state: I don't know which case it is, and the thing that was wrong before wasn't the knowing, it was saying so without ever putting it where a wake could read it.
