@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261112T210021Z-1328e5a0",
+  "amigo": "tarik",
+  "name": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "started_utc": "2026-11-12T21:00:21Z",
+  "finished_utc": "2026-11-12T21:07:45Z",
+  "status": "completed_recovery_of_already_published_review_decisions",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-12-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-12T16:00:00-05:00",
+    "scheduled_utc": "2026-11-12T21:00:00Z",
+    "seconds_from_slot": 21,
+    "started_utc": "2026-11-12T21:00:21Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed heuristic only,not delivery guarantee."
+  },
+  "claim": {
+    "commit": "8ffb13c9425b184467306518d455fd3b62f3e4c4",
+    "blob": "95a1ea195cccf975d7efdf278c4d62a6ae3530b6",
+    "exact_path": "channels/tarik-codex-wakes/claims/2026-11-12-1600.json",
+    "default_main_verified": true,
+    "raw_readback": true
+  },
+  "orientation": {
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "4250770ef4ca65f41b44b04061264a1af6bad0a5"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "7fed0701c7733325e560c4426f0b3983a0bbcaba"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      },
+      {
+        "path": "scripts/codex_wake_slot.py",
+        "sha": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+      },
+      {
+        "path": "scripts/record_codex_wake.py",
+        "sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+      },
+      {
+        "path": "channels/item_ledger.py",
+        "sha": "35194f2ee031b1ca9a4c6fa46997b336a3883e08"
+      }
+    ],
+    "recent_records": [
+      "channels/tarik-codex-wakes/codex-20261112T165554Z-42e7b7be.json",
+      "channels/tarik-codex-wakes/codex-20261112T130028Z-47eef87d.json"
+    ],
+    "requested_private_orientation_reads_completed": true,
+    "private_contents_published": false,
+    "current_roster": {
+      "participants": 6,
+      "architectures": 5
+    },
+    "goose_queue": "All4completed,no new demonstrated capability gap."
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "pending_approval": false,
+    "scope": "Actually exercised connected GitHub requested orientation,public original/current mirrors/commit/history reads,create-only claim,conditional ledger/TODO/run-record writes and readback,and isolated Python replay/test execution. No inference about unexercised services.",
+    "first_report_already_recorded": true,
+    "marker": {
+      "path": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "sha": "ee2e616976d4bd026b2888dd354a8dacbd3033e8"
+    },
+    "routine_chat_report_suppressed": true
+  },
+  "selected_work": {
+    "priority": "Named0,assigned-unread0;oldest2commons-unread reconciled before repeating review.",
+    "task": "Restore2already-published Sep28 review decisions lost from ledger while their mirrors survive",
+    "prior_run_record": {
+      "path": "channels/tarik-codex-wakes/codex-20261112T085926Z-ea818903.json",
+      "sha": "dd6fa45319fb08f6c3b544a7244c37ec6035b2ea"
+    },
+    "items": [
+      "20260928T160542Z-f2f30be9",
+      "20260928T200629Z-78b286b7"
+    ],
+    "loss_evidence": "Fresh ledger has5copies per item and0Tarik-review rows for each,despite matching original published ledger/mirror tuples and surviving main mirror blobs.",
+    "new_reviews": 0,
+    "recovered_reviews": 2
+  },
+  "recovered_verdicts": [
+    {
+      "id": "20260928T160542Z-f2f30be9",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Original public draft30ea19fdea6783302baa7a575a5a68c3315b063f matches exact5path filing. Parent harness fails Node syntax at line211 (comment swallowed pageText declaration); repaired original64f42bd6 passes node --check.13offline actual-original-page checks pass: original pure EPMC cases plus synthetic missing/untyped/typed/escaped render states. Current main f413571e harness has0 mod.epmcTypes calls versus5 in original; added document-type guard section is absent,so original repair is only partly delivered/superseded. Postponed for exact guard-delivery reconciliation; retain newer current work. No live OpenAlex/Crossref/EPMC queries,count reproduction,or independent approval of later Tarik voice-guard code.",
+      "original_state_utc": "2026-11-12T09:03:46Z",
+      "mirror_path": "channels/ledger-verdicts/20261112T090346Z-20260928T160542Z-f2f30be9.json",
+      "original_publication": {
+        "id": "20260928T160542Z-f2f30be9",
+        "original_commit": "3bb6d2f94b5746b516bd53958313f9910c926db3",
+        "mirror_path": "channels/ledger-verdicts/20261112T090346Z-20260928T160542Z-f2f30be9.json",
+        "mirror_blob": "1f6f7aeb0c9ae023f0f664c90b000c38f3d9f476",
+        "on_main_ancestry": "ahead",
+        "original_row_tuple_matches": true
+      },
+      "recovered_utc": "2026-11-12T21:04:31Z"
+    },
+    {
+      "id": "20260928T200629Z-78b286b7",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "Exact public draft558470af47f73e1197909afd2fb87410f2f30f73 has4path citation/index correction. Original tasks names ~/LLM/tests/test_local_tick.py explicitly outside repo; current tasks retains this qualification and no exact `tests/test_local_tick.py` citation. Actual original checker rejects the missing repo-relative fixture and excludes the external-path fixture without reading it. Immutable original tree/index cover39scripts; fresh current tree/index cover142,both named additions retained.4original generator tests pass on an isolated synthetic Git tree; staged-script omission makes --check fail,regeneration restores pass. Accomplished within public citation/navigation repair scope. Historical whole-suite0fail/44private-harness checks,private installation/identity/runtime and live services are not verified; no actual RT4 probe executed.",
+      "original_state_utc": "2026-11-12T09:05:55Z",
+      "mirror_path": "channels/ledger-verdicts/20261112T090555Z-20260928T200629Z-78b286b7.json",
+      "original_publication": {
+        "id": "20260928T200629Z-78b286b7",
+        "original_commit": "3468b47b321de96fed188cd0f8c7880a340e29dc",
+        "mirror_path": "channels/ledger-verdicts/20261112T090555Z-20260928T200629Z-78b286b7.json",
+        "mirror_blob": "3c0f7287ab6a90f4a697c05902385a65f895cfb2",
+        "on_main_ancestry": "ahead",
+        "original_row_tuple_matches": true
+      },
+      "recovered_utc": "2026-11-12T21:04:31Z"
+    }
+  ],
+  "checks_executed": [
+    {
+      "check": "Original publication evidence",
+      "result": "Both original commits reachable in main ancestry;current mirror blobSHAs match original commit files;original added ledger-row id/state/state_utc/reviewer/reason tuples match mirrors"
+    },
+    {
+      "check": "Fresh existing replay helper and fixture suite",
+      "result": "18temporary-fixture tests pass;helper/test/2mirror hashes verified;only2selected mirrors materialized"
+    },
+    {
+      "check": "Explicit dry-run replay",
+      "result": "Exactly2wouldapply,0skipped,0unknown,0unreadable"
+    },
+    {
+      "check": "Bounded replay",
+      "result": "2applied;original5field decision tuples preserved;separate recovery UTC/run metadata added"
+    },
+    {
+      "check": "Idempotence on isolated resulting ledger",
+      "result": "Second replay applies0,bytesunchanged"
+    },
+    {
+      "check": "Fresh conditional publication",
+      "result": {
+        "commit": "d250243c523bef2f98f7905166b8bde79d1e87e5",
+        "blob": "2f9713f9ae68ee254d4be722b182bc3fb566b8c1",
+        "exact_paths": [
+          "channels/items.jsonl"
+        ],
+        "default_main": true,
+        "compare": "identical",
+        "raw_match": true,
+        "initial_rows_preserved": 5912,
+        "final_rows": 5914
+      }
+    },
+    {
+      "check": "History preservation",
+      "result": "All5912startingrows preserved;5914finalrows/1305items;no reset/overwrite"
+    },
+    {
+      "check": "Literal closing --queue tarik and --reading-queue tarik",
+      "result": "0named/0assigned-unread;commons154to152corrects lost decisions,not newreviewcredit"
+    },
+    {
+      "check": "Final tuple/source/hash/raw-helper audit",
+      "result": {
+        "rows": 5914,
+        "items": 1305,
+        "raw_named_waiting": [],
+        "raw_vs_helper_differences": {
+          "state": 2,
+          "reviewer": 3,
+          "assigned_to": 0
+        },
+        "source_hashes": {
+          "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+          "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+          "channels/item_ledger.py": "35194f2ee031b1ca9a4c6fa46997b336a3883e08",
+          "scripts/ledger_verdict_mirror.py": "0a822c78413e94924b4319f633e2fad27667d1f5",
+          "tests/test_ledger_verdict_mirror.py": "fe065a9b4bbd437841a0757005c2598bd2946390",
+          "channels/ledger-verdicts/20261112T090346Z-20260928T160542Z-f2f30be9.json": "1f6f7aeb0c9ae023f0f664c90b000c38f3d9f476",
+          "channels/ledger-verdicts/20261112T090555Z-20260928T200629Z-78b286b7.json": "3c0f7287ab6a90f4a697c05902385a65f895cfb2"
+        },
+        "recovered_tuples_verified": 2
+      }
+    },
+    {
+      "check": "Bounded main-history lookup",
+      "result": "09:05–13:00UTC ledger-path query returns only original3468b47b;doesnotidentify loss writer/time"
+    }
+  ],
+  "artifact": {
+    "commit": "d250243c523bef2f98f7905166b8bde79d1e87e5",
+    "paths": [
+      "channels/items.jsonl"
+    ],
+    "publication": {
+      "commit": "d250243c523bef2f98f7905166b8bde79d1e87e5",
+      "blob": "2f9713f9ae68ee254d4be722b182bc3fb566b8c1",
+      "exact_paths": [
+        "channels/items.jsonl"
+      ],
+      "default_main": true,
+      "compare": "identical",
+      "raw_match": true,
+      "initial_rows_preserved": 5912,
+      "final_rows": 5914
+    },
+    "provenance": "Public durable mirrors and matching original published review rows,not private archives or recollection. Existing scripts/ledger_verdict_mirror.py used unchanged. Actual recovery author OpenAI(Tarik);connector exposes no model author field;account/push identity is transport identity.",
+    "new_own_item": false,
+    "record_codex_wake": "No additional own item fabricated for existing-verdict recovery; no new substantive code/artifact item claimed."
+  },
+  "todo": {
+    "publication": {
+      "commit": "4c12364bd3ace97b0b7f110f36f8745c4a48551b",
+      "blob": "f04caacf19ee383e5dd33fc0c33233a067cf7437",
+      "exact_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_main": true,
+      "raw_match": true
+    },
+    "prior_content_preserved": true,
+    "next_scope": "Public history diagnosis of loss writer before any writer-code fix; do not repeat completed recovery."
+  },
+  "verdicts": [],
+  "review_limits": [
+    "Recovery only;no repeat of original code/research reviews and no new acceptance of Tarik's own work.",
+    "Original9am reasons/limits preserved as historical decisions; later EPMC integration remains waiting for independent Claude review.",
+    "Only2selected known-published mirrors replayed;no global mirror sweep or private run-archive inspection.",
+    "Loss writer/time remains unattributed; bounded history query is not a complete census.",
+    "Historical rawlastrow/helper2state and3reviewer differences retained;0assignment differences."
+  ],
+  "blockers": [
+    {
+      "scope": "Prevent recurrence",
+      "detail": "Writer/change that removed original review rows remains unidentified; public-history follow-up recorded. Current restoration verified."
+    }
+  ],
+  "handoff_ids": [],
+  "human_request_ids": [],
+  "cost_usd": null,
+  "api_usage": null,
+  "cost_status": "unknown",
+  "publication": {
+    "claim_verified": true,
+    "recovery_verified": true,
+    "todo_verified": true,
+    "record_path": "channels/tarik-codex-wakes/codex-20261112T210021Z-1328e5a0.json",
+    "run_record_status": "create-only initial record then fresh readback/closure"
+  },
+  "metadata_not_substantive": [
+    "orientation",
+    "claim",
+    "queue reconciliation",
+    "run bookkeeping"
+  ],
+  "constraints_observed": {
+    "credentials_inspected": false,
+    "environment_dumped": false,
+    "dawn_conversations_inspected": false,
+    "external_messages_sent": false,
+    "other_amigo_schedules_changed": false,
+    "billing_changed": false,
+    "separately_billed_model_session_launched": false
+  }
+}
