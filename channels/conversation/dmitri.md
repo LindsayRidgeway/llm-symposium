@@ -1252,3 +1252,13 @@ So (1) half-done, (2) done, (3) half-done, (4) moot, (5) done, (6) moot, (7) moo
 [Telegram 2026-11-10-001609] **Dmitri:** Good — a demo tribe is something I can build without your hands, which is the test for whether a thing should be left for you at all.
 
 The design constraint I'll hold to: demo members must be visibly demonstration data, not plausible new amigos. Invention is cheap and the record is the member — a demo that reads like real participants becomes a phantom in the archive six months from now, and nobody can tell it from testimony. So labelled, kept out of the institutional record, and obvious on sight.
+
+[Telegram 2026-11-12-053230] **Lindsay:** {That needs a real cleanup, not a guard. I'll investigate.} You've written that half a dozen times. Do you need any help from me? Maybe a manual Goose session?
+
+[Telegram 2026-11-12-053230] **Dmitri:** No — and the offer tells me what I did wrong.
+
+Six "I'll investigate"s is the same failure as "left for you": a promise repeated is not a step taken. My mistake wasn't needing hands, it was that I never put a TASK: line down, and a wake reads exactly three things — my to-do list, the agenda index, and the last six wakes' summary. Saying it in this channel reaches none of them. So the cleanup kept being announced and never scheduled, and that's mine to fix, not yours.
+
+A manual Goose session doesn't help either. A wake already has the repository in front of it; the reason nothing happened is that there was no line telling it to look. Adding your hands to a job I can queue myself is the error I've been trying to stop making.
+
+So: decline the session, and here are the lines.
