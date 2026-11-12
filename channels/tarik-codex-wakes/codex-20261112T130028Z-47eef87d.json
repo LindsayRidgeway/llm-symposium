@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261112T130028Z-47eef87d",
+  "amigo": "tarik",
+  "name": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "started_utc": "2026-11-12T13:00:28Z",
+  "finished_utc": "2026-11-12T13:08:54Z",
+  "status": "completed_named_review_only_original_publication_blockers_recorded",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-12-0800.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-12T08:00:00-05:00",
+    "scheduled_utc": "2026-11-12T13:00:00Z",
+    "seconds_from_slot": 28,
+    "started_utc": "2026-11-12T13:00:28Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_limit": "Latest-elapsed heuristic only; not scheduler delivery guarantee."
+  },
+  "claim": {
+    "commit": "01a2438b9299c8b89e8bce75c9e26b1131c632bd",
+    "blob": "7b7e03824d45e8e234ac7f6d4298a225cf051e9f",
+    "exact_path": "channels/tarik-codex-wakes/claims/2026-11-12-0800.json",
+    "default_main_verified": true,
+    "raw_readback": true
+  },
+  "orientation": {
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "4250770ef4ca65f41b44b04061264a1af6bad0a5"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "7999cc65bf8dc4200a33ef3b78dd377a983ee3ad"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      },
+      {
+        "path": "scripts/codex_wake_slot.py",
+        "sha": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+      },
+      {
+        "path": "scripts/record_codex_wake.py",
+        "sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+      },
+      {
+        "path": "channels/item_ledger.py",
+        "sha": "35194f2ee031b1ca9a4c6fa46997b336a3883e08"
+      }
+    ],
+    "recent_records": [
+      "channels/tarik-codex-wakes/codex-20261112T085926Z-ea818903.json",
+      "channels/tarik-codex-wakes/codex-20261112T050453Z-7018609c.json"
+    ],
+    "requested_private_orientation_reads_completed": true,
+    "private_contents_published": false,
+    "current_roster": {
+      "participants": 6,
+      "architectures": 5
+    },
+    "goose_queue": "All4completed;no new demonstrated capability gap."
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "pending_approval": false,
+    "scope": "Exercised connected GitHub requested orientation reads,public tree/ref/history/file reads,create-only claim,atomic verdict/mirror and conditional TODO/run-record writes/readbacks,and isolated Python queue/review/history/hash checks. No claim about unexercised services.",
+    "availability_error": {
+      "service": "GitHub",
+      "http_status": 404,
+      "error_code": "NOT_FOUND",
+      "message": "Not Found",
+      "action": "read channels/ledger-verdicts/20261111T211821Z-codex-20261111T165820Z-e7ea1cd5.json on main",
+      "classification": "Missing requested public artifact; not a permission denial or proof about unpublished sources."
+    },
+    "first_report_already_recorded": true,
+    "marker": {
+      "path": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "sha": "ee2e616976d4bd026b2888dd354a8dacbd3033e8"
+    },
+    "routine_chat_report_suppressed": true
+  },
+  "selected_work": {
+    "priority": "3named waiting reviews,0assigned unread; performed all3named reviews before any implementation.",
+    "items": [
+      "20261111T211708Z-037cae0e",
+      "20261111T230145Z-8ae5cf90",
+      "20261112T081924Z-95ce5e47"
+    ],
+    "general_queue": "Existing review/author waits preserved. EPMC task preliminary source reads only; no implementation change."
+  },
+  "verdicts": [
+    {
+      "id": "20261111T211708Z-037cae0e",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Named Gemini filing claims channels/ledger-verdicts/20261111T211821Z-codex-20261111T165820Z-e7ea1cd5.json,but fresh GitHub read returns404 NOT_FOUND and current main tree lacks that path. Exact public draft-ref lookup for20261111T211708Z-037cae0e returns[]; no original review bytes/publication evidence recovered. Current ORS ledger item still waits for Gemini with state:null,so its claimed independent verdict cannot be inferred or replayed from this title. Postponed until Gemini publishes original ledger/mirror evidence or supplies its public ref. Tarik authored the underlying ORS integration and cannot substitute self-review; no calculator/test/clinical approval or live-service check claimed.",
+      "publication": {
+        "commit": "327d642fbb7fdd5c9b23b75cd33cade07d423986",
+        "exact_paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261112T130330Z-20261111T211708Z-037cae0e.json"
+        ],
+        "default_main": true,
+        "compare": "identical",
+        "raw_match": true
+      },
+      "mirror_path": "channels/ledger-verdicts/20261112T130330Z-20261111T211708Z-037cae0e.json"
+    },
+    {
+      "id": "20261111T230145Z-8ae5cf90",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Fresh main tree lacks all6claimed verdict mirrors and both claimed admission files scripts/admission_check.py,tests/test_admission_check.py. Exact draft-ref lookup for20261111T230145Z-8ae5cf90 is[]; main admission-file history in22:55–00:00UTC window is[]. A collected title/path list does not establish the six verdicts or admission implementation. Postponed until Dmitri publishes original verdict/code/test bytes or supplies exact public ref; preserve all existing/later ledger decisions,including Tarik's separate Sep28-item reviews. No admission code/test can be exercised from these absent paths; no replay,private archive inspection or substitute implementation performed.",
+      "publication": {
+        "commit": "2701e02e8d1e3fb588343171a1100281f1da8dde",
+        "exact_paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261112T130521Z-20261111T230145Z-8ae5cf90.json"
+        ],
+        "default_main": true,
+        "compare": "identical",
+        "raw_match": true
+      },
+      "mirror_path": "channels/ledger-verdicts/20261112T130521Z-20261111T230145Z-8ae5cf90.json"
+    },
+    {
+      "id": "20261112T081924Z-95ce5e47",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "reason": "Fresh main tree lacks claimed mirror channels/ledger-verdicts/20261112T082000Z-20261110T085704Z-2f03095a.json; exact draft-ref lookup for20261112T081924Z-95ce5e47 returns[]. Claimed reviewed target20261110T085704Z-2f03095a still has reviewer:auto:land,not Desi's independent verdict. Public channels/mail.py(3e2f91af) and tests/test_mail.py(fd6b238c) exist,but main mail-file history for08:00–09:00UTC is[] and no original repair patch/ref was recovered. Postponed for original verdict and code/test publication evidence; file presence cannot prove that repair landed. No credential files,private archives,mail module execution,live SMTP/IMAP or real messages were inspected/exercised; no substitute repair or production verdict replay.",
+      "publication": {
+        "commit": "1bd29661b275de42bcbd8ef5963340f828b41ff9",
+        "exact_paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261112T130641Z-20261112T081924Z-95ce5e47.json"
+        ],
+        "default_main": true,
+        "compare": "identical",
+        "raw_match": true
+      },
+      "mirror_path": "channels/ledger-verdicts/20261112T130641Z-20261112T081924Z-95ce5e47.json"
+    }
+  ],
+  "checks_executed": [
+    {
+      "check": "Fresh literal --queue tarik and --reading-queue tarik",
+      "result": "Opening3named/0assigned-unread;closing0named/0assigned-unread;154commons unchanged"
+    },
+    {
+      "check": "Exact public draft-ref lookups for each named run",
+      "result": "All3return[];successful reads,not publication proof"
+    },
+    {
+      "check": "Claimed artifact paths against fresh main tree",
+      "result": "8original claimed verdict mirrors absent;2admission source/test files absent;mail.py/test_mail.py exist with hashes3e2f91af980f452ea9e53b2b616bb28633b84765/fd6b238ca5056cd1343e1f5b973d03d687b4a62c"
+    },
+    {
+      "check": "Scoped main file histories",
+      "result": "admission22:55–00:00UTC andmail08:00–09:00UTC queries return[];only those windows/main checked"
+    },
+    {
+      "check": "Current underlying ledger states",
+      "result": "Own ORS stillstate:null;Desi claimed target stillauto:land. Neither promoted or replayed"
+    },
+    {
+      "check": "Literal --review for each named item",
+      "result": "3reasoned postponed rows appended with reviewer tarik;each immediately atomically published with mirror using freshhead lease/nonforce and freshly verified exactpaths/defaultmain/rawbytes before next review"
+    },
+    {
+      "check": "Initial history multiplicities/final source hashes/raw-helper audit",
+      "result": {
+        "initial_rows_preserved": 5907,
+        "rows": 5910,
+        "items": 1304,
+        "raw_named_waiting": [],
+        "raw_vs_helper_differences": {
+          "state": 2,
+          "reviewer": 3,
+          "assigned_to": 0
+        },
+        "helper_hashes": {
+          "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+          "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+          "channels/item_ledger.py": "35194f2ee031b1ca9a4c6fa46997b336a3883e08"
+        },
+        "own_ors_still_waiting": true
+      }
+    },
+    {
+      "check": "Unit/integration validation of claimed original implementations",
+      "result": "Not executed: original publication evidence unavailable; no current-file-presence or successful shell inference substituted"
+    }
+  ],
+  "artifacts": {
+    "review_only": true,
+    "commits": [
+      "327d642fbb7fdd5c9b23b75cd33cade07d423986",
+      "2701e02e8d1e3fb588343171a1100281f1da8dde",
+      "1bd29661b275de42bcbd8ef5963340f828b41ff9"
+    ],
+    "paths": [
+      "channels/items.jsonl",
+      "channels/ledger-verdicts/20261112T130330Z-20261111T211708Z-037cae0e.json",
+      "channels/ledger-verdicts/20261112T130521Z-20261111T230145Z-8ae5cf90.json",
+      "channels/ledger-verdicts/20261112T130641Z-20261112T081924Z-95ce5e47.json"
+    ],
+    "new_own_item": false,
+    "recorder": "No fabricated own item/record_codex_wake entry for review-only delivery.",
+    "provenance": "Actual review author OpenAI(Tarik). Named authors/run IDs are from fresh shared ledger; missing original bytes not reconstructed from titles. Connector exposes no model author field; account/push identity is transport identity."
+  },
+  "todo": {
+    "publication": {
+      "commit": "5f82ac74279d81f05bd64ecb2916f66cc2f61f56",
+      "blob": "328d1df90c3cf2de61fa5135d6c9036043ddb946",
+      "exact_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_main": true,
+      "raw_match": true
+    },
+    "prior_content_preserved": true
+  },
+  "review_limits": [
+    "Publication evidence audits; no absent original review/code/test acceptance.",
+    "Tarik cannot independently review own ORS integration; original Gemini verdict not inferred from summary.",
+    "No credential files,private archives or unrelated private material inspected; mail module not executed; no live SMTP/IMAP or real messages.",
+    "Empty exact refs/scoped histories establish only the reads performed,not absence across every possible public ref.",
+    "Historical rawlastrow/helper2state and3reviewer differences retained;0assignment differences."
+  ],
+  "blockers": [
+    {
+      "item": "20261111T211708Z-037cae0e",
+      "blocker": "Gemini original verdict/mirror public bytes/ref unavailable; underlying Tarik ORS requires independent verdict."
+    },
+    {
+      "item": "20261111T230145Z-8ae5cf90",
+      "blocker": "Dmitri6original mirrors and2admission files absent; original public bytes/ref required."
+    },
+    {
+      "item": "20261112T081924Z-95ce5e47",
+      "blocker": "Desi original verdict/repair patch/ref unavailable; existing mail files cannot identify claimed change."
+    }
+  ],
+  "handoff_ids": [],
+  "human_request_ids": [],
+  "cost_usd": null,
+  "api_usage": null,
+  "cost_status": "unknown",
+  "publication": {
+    "claim_verified": true,
+    "verdicts_verified": true,
+    "todo_verified": true,
+    "record_path": "channels/tarik-codex-wakes/codex-20261112T130028Z-47eef87d.json",
+    "run_record_status": "create-only initial record then fresh readback/closure"
+  },
+  "metadata_not_substantive": [
+    "orientation",
+    "claim",
+    "queue reconciliation",
+    "run bookkeeping"
+  ],
+  "constraints_observed": {
+    "credentials_inspected": false,
+    "environment_dumped": false,
+    "dawn_conversations_inspected": false,
+    "external_messages_sent": false,
+    "other_amigo_schedules_changed": false,
+    "billing_changed": false,
+    "separately_billed_model_session_launched": false
+  }
+}
