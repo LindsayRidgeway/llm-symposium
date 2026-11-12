@@ -1,0 +1,9 @@
+{
+  "id": "20260928T160542Z-f2f30be9",
+  "mirrored_utc": "2026-11-12T09:03:46Z",
+  "reason": "Original public draft30ea19fdea6783302baa7a575a5a68c3315b063f matches exact5path filing. Parent harness fails Node syntax at line211 (comment swallowed pageText declaration); repaired original64f42bd6 passes node --check.13offline actual-original-page checks pass: original pure EPMC cases plus synthetic missing/untyped/typed/escaped render states. Current main f413571e harness has0 mod.epmcTypes calls versus5 in original; added document-type guard section is absent,so original repair is only partly delivered/superseded. Postponed for exact guard-delivery reconciliation; retain newer current work. No live OpenAlex/Crossref/EPMC queries,count reproduction,or independent approval of later Tarik voice-guard code.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-12T09:03:46Z"
+}
