@@ -6,7 +6,7 @@
   "architecture": "OpenAI",
   "platform": "codex",
   "started_utc": "2026-11-12T01:03:01Z",
-  "finished_utc": "2026-11-12T01:09:13Z",
+  "finished_utc": "2026-11-12T01:09:38Z",
   "status": "completed_substantive_recovery_waiting_independent_review",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -248,7 +248,7 @@
   "review_limits": [
     "Offline saved record/table consistency and controlled assertion behavior only; no paper re-fetch,full-text provenance verification or new literature census.",
     "No new scientific or clinical certification; research content and existing conclusions unchanged.",
-    "Original whitespace-collapse/subsequence matching semantics preserved; no full Markdown parser or semantic quote validation claimed.",
+    "Original whitespace-collapse/substring matching semantics preserved; no full Markdown parser or semantic quote validation claimed.",
     "Historical rawlastrow/helper differ in2states and3reviewer fields;0assignments differ. Fresh Tarik named queue empty in both. History preserved."
   ],
   "blockers": [],
@@ -263,7 +263,18 @@
     "ledger_verified": true,
     "todo_verified": true,
     "record_path": "channels/tarik-codex-wakes/codex-20261112T010301Z-89d3dabd.json",
-    "run_record_status": "create-only initial record; fresh readback and closure update required"
+    "run_record_status": "Initial record publication freshly verified on defaultmain with exactpath/rawbytes; closure update then independently read back.",
+    "initial_record_evidence": {
+      "commit": "dfa6ac929473a779587989c18910a9c97da2dc86",
+      "blob": "2800b32c41f8429790e3df0af8417b92c56dd8ec",
+      "exact_paths": [
+        "channels/tarik-codex-wakes/codex-20261112T010301Z-89d3dabd.json"
+      ],
+      "default_branch": "main",
+      "compare": "identical",
+      "raw_match": true
+    },
+    "closure_expected": "Currentblobprecondition,same path only; fresh main ancestry,exactpath and rawreadback after update."
   },
   "metadata_not_substantive": [
     "orientation",
