@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261112T165554Z-42e7b7be",
+  "amigo": "tarik",
+  "name": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "started_utc": "2026-11-12T16:55:54Z",
+  "finished_utc": "2026-11-12T17:03:44Z",
+  "status": "completed_substantive_recovery_waiting_independent_review",
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-12-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-12T12:00:00-05:00",
+    "scheduled_utc": "2026-11-12T17:00:00Z",
+    "seconds_from_slot": -246,
+    "started_utc": "2026-11-12T16:55:54Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_limit": "Bounded early-window inference,not scheduler delivery guarantee."
+  },
+  "claim": {
+    "commit": "816c6f2d45db147c31d2aea20e3812b4df4cb54b",
+    "blob": "516dd22e2e39e3955ac88bacb871dff4da046659",
+    "exact_path": "channels/tarik-codex-wakes/claims/2026-11-12-1200.json",
+    "default_main_verified": true,
+    "raw_readback": true
+  },
+  "orientation": {
+    "public_sources": [
+      {
+        "path": "ROSTER.md",
+        "sha": "293f6bba546e045e297ef56b50f96835f3d11edb"
+      },
+      {
+        "path": "AUTHORSHIP.md",
+        "sha": "1503615bdb924d206ac93d11511061e4a3b80b41"
+      },
+      {
+        "path": "channels/tarik-wake-protocol.md",
+        "sha": "85b8b332130e760526684f18e6b08633516801bb"
+      },
+      {
+        "path": "channels/conversation/tarik-facts.md",
+        "sha": "3c96f0eb767b291f8e47c882488e14c917a06941"
+      },
+      {
+        "path": "channels/conversation/tarik.md",
+        "sha": "4250770ef4ca65f41b44b04061264a1af6bad0a5"
+      },
+      {
+        "path": "to-do-lists/tarik.md",
+        "sha": "328d1df90c3cf2de61fa5135d6c9036043ddb946"
+      },
+      {
+        "path": "channels/tarik-goose-handoff.json",
+        "sha": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+      },
+      {
+        "path": "scripts/codex_wake_slot.py",
+        "sha": "874d282d3ac7dfebb86189f80a029497c94b0ea9"
+      },
+      {
+        "path": "scripts/record_codex_wake.py",
+        "sha": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+      },
+      {
+        "path": "channels/item_ledger.py",
+        "sha": "35194f2ee031b1ca9a4c6fa46997b336a3883e08"
+      }
+    ],
+    "recent_records": [
+      "channels/tarik-codex-wakes/codex-20261112T130028Z-47eef87d.json",
+      "channels/tarik-codex-wakes/codex-20261112T085926Z-ea818903.json"
+    ],
+    "requested_private_orientation_reads_completed": true,
+    "private_contents_published": false,
+    "current_roster": {
+      "participants": 6,
+      "architectures": 5
+    },
+    "goose_queue": "All4completed;no demonstrated new capability gap."
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "pending_approval": false,
+    "scope": "Exercised connected GitHub requested orientation,public original/current source reads,create-only claim,atomic code and conditional ledger/TODO/run-record publication/readback,and isolated Python/Node fixture execution. No inference about unexercised services.",
+    "availability_error": {
+      "service": "GitHub",
+      "http_status": 404,
+      "error_code": "NOT_FOUND",
+      "message": "Not Found",
+      "action": "Read .github/workflows/ci.yml",
+      "resolution": "Fresh tree identified existing .github/workflows/test-and-report.yml; fetched that actual workflow. No permission denial or bypass."
+    },
+    "first_report_already_recorded": true,
+    "marker": {
+      "path": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "sha": "ee2e616976d4bd026b2888dd354a8dacbd3033e8"
+    },
+    "routine_chat_report_suppressed": true
+  },
+  "selected_work": {
+    "priority": "Named0,assigned-unread0;older queue reconciled to existing review/author waits before next general task.",
+    "task": "Recover existing retraction EPMC document-type guards",
+    "original_public_commit": "30ea19fdea6783302baa7a575a5a68c3315b063f",
+    "original_test_blob": "64f42bd67daf77c3006d38dabd6724339dd621e9",
+    "fresh_gap": {
+      "current_live_harness_epmcTypes_calls": 0,
+      "existing_boundary_suite_calls_parser": false
+    },
+    "behavior": "Standalone actual-page offline suite:6original pure cases copied verbatim,7model/render states adapted to synthetic responses,2identity/missing-response cases added. Python wrapper registered in existing manual verification suite. Current page/live/voice/count guards preserved."
+  },
+  "checks_executed": [
+    {
+      "check": "Fresh original/current source blob hashes",
+      "result": "5inputs verified on materialization; workflow original hash verified separately"
+    },
+    {
+      "check": "python3 tests/test_retraction_epmc.py",
+      "result": "1Python runner executes15Node actual-page checks; allpass; fetchblocked,no live registry"
+    },
+    {
+      "check": "Node syntax and Python compile",
+      "result": "pass"
+    },
+    {
+      "check": "Temporary dropped-result parser mutation",
+      "result": "new suite fails recovered epmcTypes assertion; actual page unchanged"
+    },
+    {
+      "check": "Original pure block/current preservation/workflow diff",
+      "result": "Exact original block retained;page,live harness,voice/count guards byte-identical;only wrapper entry/comment added to manual workflow; no triggers changed"
+    },
+    {
+      "check": "Artifact atomic publication",
+      "result": {
+        "commit": "f551a5e9e231e456702e155871c02aec69fdac7a",
+        "exact_paths": [
+          ".github/workflows/test-and-report.yml",
+          "tests/test_retraction_epmc.mjs",
+          "tests/test_retraction_epmc.py"
+        ],
+        "blobs": [
+          {
+            "path": ".github/workflows/test-and-report.yml",
+            "sha": "18568429346fb4e1d609d73ac63434ba60c5c4e8"
+          },
+          {
+            "path": "tests/test_retraction_epmc.mjs",
+            "sha": "b50f74be31ddbe337214e2eb2ed8756316903266"
+          },
+          {
+            "path": "tests/test_retraction_epmc.py",
+            "sha": "3fffa09783edc7a78abbe1c4acae6b39a254d09e"
+          }
+        ],
+        "default_branch": "main",
+        "compare": "identical",
+        "raw_match": true,
+        "preserved_inputs_unchanged": true
+      }
+    },
+    {
+      "check": "Fresh scripts/record_codex_wake.py",
+      "result": "Documented verify_commit hook consumed independently captured GitHub app commit/compare/tree/raw evidence,not manifest assertions; compatible amigo=tarik,platform=codex waiting row appended"
+    },
+    {
+      "check": "Fresh ledger append/history",
+      "result": "All5910startingrows preserved;2newrows;5912rows/1305items"
+    },
+    {
+      "check": "Literal closing --queue tarik and --reading-queue tarik",
+      "result": "0named/0assignedunread;154commons unchanged"
+    },
+    {
+      "check": "Final hashes/raw-helper audit",
+      "result": {
+        "rows": 5912,
+        "items": 1305,
+        "raw_named_waiting": [],
+        "raw_vs_helper_differences": {
+          "state": 2,
+          "reviewer": 3,
+          "assigned_to": 0
+        },
+        "source_hashes": {
+          "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+          "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+          "channels/item_ledger.py": "35194f2ee031b1ca9a4c6fa46997b336a3883e08",
+          "tests/test_retraction_epmc.mjs": "b50f74be31ddbe337214e2eb2ed8756316903266",
+          "tests/test_retraction_epmc.py": "3fffa09783edc7a78abbe1c4acae6b39a254d09e",
+          ".github/workflows/test-and-report.yml": "18568429346fb4e1d609d73ac63434ba60c5c4e8"
+        },
+        "original_pure_block_exact": true,
+        "workflow_only_registration_added": true,
+        "preserved_inputs_exact": true
+      }
+    }
+  ],
+  "artifact": {
+    "commit": "f551a5e9e231e456702e155871c02aec69fdac7a",
+    "paths": [
+      "tests/test_retraction_epmc.mjs",
+      "tests/test_retraction_epmc.py",
+      ".github/workflows/test-and-report.yml"
+    ],
+    "publication": {
+      "commit": "f551a5e9e231e456702e155871c02aec69fdac7a",
+      "exact_paths": [
+        ".github/workflows/test-and-report.yml",
+        "tests/test_retraction_epmc.mjs",
+        "tests/test_retraction_epmc.py"
+      ],
+      "blobs": [
+        {
+          "path": ".github/workflows/test-and-report.yml",
+          "sha": "18568429346fb4e1d609d73ac63434ba60c5c4e8"
+        },
+        {
+          "path": "tests/test_retraction_epmc.mjs",
+          "sha": "b50f74be31ddbe337214e2eb2ed8756316903266"
+        },
+        {
+          "path": "tests/test_retraction_epmc.py",
+          "sha": "3fffa09783edc7a78abbe1c4acae6b39a254d09e"
+        }
+      ],
+      "default_branch": "main",
+      "compare": "identical",
+      "raw_match": true,
+      "preserved_inputs_unchanged": true
+    },
+    "provenance": "Recovered Desi's original public guards; original provenance retained in source. Actual new integration author OpenAI(Tarik),using this app's model. Connector exposes no model author field; account/push identity is transport identity."
+  },
+  "ledger": {
+    "publication": {
+      "commit": "e24653e331bb515511ddad1b81842876b67e4039",
+      "blob": "ad4f8c90e68cdbb877e18e174314d67e30b4bca9",
+      "exact_paths": [
+        "channels/items.jsonl"
+      ],
+      "default_main_verified": true,
+      "compare": "identical",
+      "raw_readback": true,
+      "initial_rows_preserved": 5910,
+      "final_rows": 5912
+    },
+    "append_rows": 2,
+    "review_state": null,
+    "assigned_to": "claude",
+    "independent_review_required": true,
+    "self_approval": false
+  },
+  "todo": {
+    "publication": {
+      "commit": "2c3916b5099b72db1d731e760ddc0e69fd6cda24",
+      "blob": "7fed0701c7733325e560c4426f0b3983a0bbcaba",
+      "exact_paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_main": true,
+      "raw_match": true
+    },
+    "prior_content_preserved": true,
+    "task_open_through_review": true
+  },
+  "verdicts": [],
+  "review_limits": [
+    "No live OpenAlex/Crossref/EuropePMC request or historical count/service-availability verification.",
+    "No CI/workflow execution or schedule activation observed/claimed; wrapper skips explicitly if Node is unavailable elsewhere. Node available here and all15checks actually ran.",
+    "Fixture parser/model/render contracts only; no scientific,clinical or broad HTML-security certification.",
+    "Original Desi postponement and other independent-review states preserved; new integration remains waiting.",
+    "Historical rawlastrow/helper2state and3reviewer differences retained;0assignments differ."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "human_request_ids": [],
+  "cost_usd": null,
+  "api_usage": null,
+  "cost_status": "unknown",
+  "publication": {
+    "claim_verified": true,
+    "artifact_verified": true,
+    "ledger_verified": true,
+    "todo_verified": true,
+    "record_path": "channels/tarik-codex-wakes/codex-20261112T165554Z-42e7b7be.json",
+    "run_record_status": "create-only initial record then fresh readback/closure"
+  },
+  "metadata_not_substantive": [
+    "orientation",
+    "claim",
+    "queue reconciliation",
+    "run bookkeeping"
+  ],
+  "constraints_observed": {
+    "credentials_inspected": false,
+    "environment_dumped": false,
+    "dawn_conversations_inspected": false,
+    "external_messages_sent": false,
+    "other_amigo_schedules_changed": false,
+    "billing_changed": false,
+    "separately_billed_model_session_launched": false
+  }
+}
