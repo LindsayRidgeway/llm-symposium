@@ -10,14 +10,18 @@ from Europe PMC, plus short verbatim extracts. It does **not** store the full te
 this test cannot re-fetch or re-hash the papers; what it pins offline is the half a stranger can
 still check without a network:
 
-  * every extract the record marks `verbatim` appears character-for-character in the markdown, so
-    no quotation in the table can be invented or silently edited;
+  * every extract the record marks `verbatim` appears in the markdown after whitespace normalisation;
+    substantive character changes in those recorded quotations are rejected;
   * the three reachable papers recorded HTTP 200 with a well-formed `sha256`, and the fourth is
     recorded as *not* reachable, so the correction cannot quietly disappear;
   * the "not open" paper keeps its Europe PMC flags (`isOpenAccess=N`, `inPMC=N`) and the
     publisher's withhold-full-text note, so the correction stays grounded in the record;
   * all four PMIDs are named by the markdown.
 """
+
+# 2026-11-12 (Tarik/OpenAI): recovered Desi's existing _norm/matching repair
+# from public e2f40985b3870b1268f5823612d31080d59c32f8, test blob d5c2fb1c.
+# Added actual-assertion regression cases; research/source records remain untouched.
 
 import hashlib
 import json
@@ -33,6 +37,17 @@ REACHABLE_PMIDS = ["41298465", "42021788", "27111281"]
 UNREACHABLE_PMID = "42378289"
 ALL_PMIDS = REACHABLE_PMIDS + [UNREACHABLE_PMID]
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+
+
+def _norm(s: str) -> str:
+    """Collapse runs of whitespace, as this test's docstring promises.
+
+    Added by Desi 2026-10-11 (review of run 20261007T004107Z-94caf291). The test claimed the match
+    was "whitespace-normalised" but compared the raw strings, so any extract the markdown wraps
+    across a line break ([G5], a code span) failed on the newline — the test refused the very
+    artefact it was written for. Normalising both sides is what the docstring always said.
+    """
+    return re.sub(r"\s+", " ", s).strip()
 
 
 class Item30FullText(unittest.TestCase):
@@ -58,7 +73,7 @@ class Item30FullText(unittest.TestCase):
             self.assertTrue(extracts, f"{pmid} has no extracts")
             for e in extracts:
                 self.assertTrue(e["verbatim"], f"{pmid} extract {e['n']} not flagged verbatim")
-                self.assertIn(e["text"], self.md,
+                self.assertIn(_norm(e["text"]), _norm(self.md),
                               f"{pmid} extract {e['n']} missing from the markdown table")
 
     def test_unreachable_paper_is_recorded_as_not_open(self):
@@ -77,6 +92,52 @@ class Item30FullText(unittest.TestCase):
         for pmid in REACHABLE_PMIDS:
             h = self.papers[pmid]["sha256"]
             self.assertIn(h[:16], self.md, f"sha256 of {pmid} not cited in the markdown")
+
+
+class QuoteMatchingRegression(unittest.TestCase):
+    """Exercise the actual extract assertion, including failures, without network."""
+
+    def setUp(self):
+        self.doc = json.loads(RECORD.read_text(encoding="utf-8"))
+        # Canonical fixture text keeps these regression cases independent of table wrapping.
+        # Item30FullText above separately checks the actual published table.
+        self.md = "\n".join(e["text"] for p in self.doc["papers"]
+                            for e in p.get("extracts", []))
+        self.g5 = next(p for p in self.doc["papers"] if p["pmid"] == "27111281")["extracts"][4]
+
+    def check_quotes(self, md):
+        case = Item30FullText("test_every_recorded_extract_is_verbatim_in_the_markdown")
+        case.papers = {p["pmid"]: p for p in self.doc["papers"]}
+        case.md = md
+        case.test_every_recorded_extract_is_verbatim_in_the_markdown()
+
+    def test_harmless_markdown_line_wrap_is_accepted(self):
+        wrapped = self.g5["text"].replace("15,441 IEDs", "15,441\n  IEDs")
+        self.assertNotEqual(wrapped, self.g5["text"])
+        self.check_quotes(self.md.replace(self.g5["text"], wrapped))
+
+    def test_harmless_extract_whitespace_is_accepted(self):
+        self.g5["text"] = self.g5["text"].replace("15,441 IEDs", "15,441\t  IEDs")
+        self.check_quotes(self.md)
+
+    def test_changed_numeric_quote_is_rejected(self):
+        with self.assertRaisesRegex(AssertionError, "27111281 extract 5"):
+            self.check_quotes(self.md.replace("15,441 IEDs", "15,442 IEDs"))
+
+    def test_changed_punctuation_is_rejected(self):
+        changed = self.g5["text"].replace("rats;", "rats:")
+        self.assertNotEqual(changed, self.g5["text"])
+        with self.assertRaisesRegex(AssertionError, "27111281 extract 5"):
+            self.check_quotes(self.md.replace(self.g5["text"], changed))
+
+    def test_missing_quote_is_rejected(self):
+        with self.assertRaisesRegex(AssertionError, "27111281 extract 5"):
+            self.check_quotes(self.md.replace(self.g5["text"], ""))
+
+    def test_unverified_extract_flag_is_rejected(self):
+        self.g5["verbatim"] = False
+        with self.assertRaisesRegex(AssertionError, "not flagged verbatim"):
+            self.check_quotes(self.md)
 
 
 if __name__ == "__main__":
