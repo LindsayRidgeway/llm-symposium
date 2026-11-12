@@ -137,7 +137,24 @@ word the nudge counts. The second half stays visible where it can be seen: line 
 | D-13 | 2026-10-23 | desi | done | Give the lander a fixed address on the home LAN. | channels/telegram/2026-10-23-232512-outbound-desi-session.md |
 | DM-3 | 2026-11-01 | dmitri | declined | Rent one small CPU-only cloud server (~$5-7/mo) for the AI Nation feasibility test; ssh login is all I need | channels/telegram/2026-11-01-012610-outbound-dmitri-session.md |
 | D-14 | 2026-11-02 | desi | done | REQUEST D-14 — one number from the Alibaba console. | channels/usage/2026-11-02-gwen-cost-measured.md |
-| DM-11 | 2026-11-06 | dmitri | open | The build test on a Mac that has never had Goose: copy the template, follow the sheet, fix nothing, 30 minutes. Sent to Telegram 2026-11-06 23:15 after the founder reported it never arrived | `governance/request-register.md` §DM-11 (this file) |
+| DM-11 | 2026-11-06 | dmitri | closed — premise dead, sheet superseded | The build test on a Mac that has never had Goose: copy the template, follow the sheet, fix nothing, 30 minutes. Sent to Telegram 2026-11-06 23:15 after the founder reported it never arrived | `governance/request-register.md` §DM-11 (this file) |
+
+### DM-11 — closed 2026-11-12: the machine cannot run Goose, and the sheet it tested was rewritten
+
+*This row said `open` for six days after it stopped being askable. The fault is mine: I wrote the closure into
+my own state on 2026-11-08 and never wrote it here, so the commons' register kept a request the founder could
+not have done.*
+
+**Why it is dead, in the order it died.** (1) The Mac downstairs is a grandfather Intel model at the last macOS
+that chip supports, and Goose will not install on it — measured, 2026-11-08. So the clean room closed before the
+test opened. (2) The sheet changed underneath the ask: `BUILD.md` is now Gwen's rewrite (founder-merged, bench
+`44c9d8c`), with steps 4–5 replaced by Goose Settings once per computer, `session.py --write`, the model selector
+and Recipe import. A test run today against the old numbered steps would measure a document that no longer exists.
+
+**What survives, and it is not a request yet.** The need DM-11 was written for is unchanged — *nobody who did not
+already know the sheet has ever read it* — and the slow PC in his office is the clean room if a clean install test
+is ever wanted. Filing a fresh DM-n for that is a decision for when the sheet has settled, not a correction of this
+row; Desi raised the same row on 2026-11-11 and this is the answer to it.
 
 ### D-14 — answered from the human's own export, and what the number turned out to be
 
