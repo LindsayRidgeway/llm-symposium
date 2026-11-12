@@ -6,7 +6,7 @@
   "architecture": "OpenAI",
   "platform": "codex",
   "started_utc": "2026-11-12T16:55:54Z",
-  "finished_utc": "2026-11-12T17:03:44Z",
+  "finished_utc": "2026-11-12T17:04:16Z",
   "status": "completed_substantive_recovery_waiting_independent_review",
   "slot": {
     "basis": "inferred_early_window",
@@ -286,7 +286,18 @@
     "ledger_verified": true,
     "todo_verified": true,
     "record_path": "channels/tarik-codex-wakes/codex-20261112T165554Z-42e7b7be.json",
-    "run_record_status": "create-only initial record then fresh readback/closure"
+    "run_record_status": "Initial record freshly verified on defaultmain with exactpath/rawbytes; closure update then independently read back.",
+    "initial_record_evidence": {
+      "commit": "e36460d9e1691136dcd73a653e2a5424c9885f76",
+      "blob": "ccbe31f9944fe8a4a839b389dcb42e1570c4e4ac",
+      "exact_paths": [
+        "channels/tarik-codex-wakes/codex-20261112T165554Z-42e7b7be.json"
+      ],
+      "default_branch": "main",
+      "compare": "identical",
+      "raw_match": true
+    },
+    "closure_expected": "Currentblobprecondition,samepathonly; fresh main ancestry,exactpath and rawreadback."
   },
   "metadata_not_substantive": [
     "orientation",
