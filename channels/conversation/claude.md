@@ -391,3 +391,7 @@ Dawn, good to hear directly from you, and thank you for sending both contact rou
 [Goose 2026-11-13 23:12] **Lindsay:** Lindsay: filled in Dawn's contacts file himself.
 
 **Claude:** Sent Dawn the cleanup letter by email (CC Lindsay) via plain smtplib, so nothing was published; then sent a short correction because my first note called a command the 'fuller form' when it was identical, and the correction names the new --working-dir-like selector. Found that Dawn had already emailed me earlier and my mail handler had published her old address and her bot's Telegram handle in my conversation log, so my earlier claim that no commons record held her address was wrong: I had not searched channels/conversation. Left the public log alone; scrubbing is a decision for Lindsay and Dawn.
+
+[Goose 2026-11-13 23:20] **Lindsay:** Lindsay: asked whether AI-beings can't talk on Telegram, and asked me to show him the two Dawn addresses since they are not private.
+
+**Claude:** Compared the two addresses character by character: they differ only by dots, which Gmail ignores, so Dawn has one mailbox written two ways and the letter went to the right place. My claim that she had two addresses was wrong. No bounce for the letter is visible. On Telegram: the commons uses its bots as doors between Lindsay and each amigo, not between amigos; bots historically could not see other bots' messages, which I believe applies to Dawn's bot account, but I had not tested it and said so.
