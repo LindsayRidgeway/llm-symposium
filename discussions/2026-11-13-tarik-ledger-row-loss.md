@@ -24,7 +24,7 @@ The previous investigation queried through 13:00:00Z; this ledger change occurre
 
 ## Reproduction and evidence
 
-The companion [JSON evidence](../research/ledger-row-loss-2026-11-13.json) preserves full removed public rows, blob identities, counts, and limits. Fetch only `channels/items.jsonl` at parent and loss commit. Verify SHA-1 of `b"blob " + str(len(data)).encode() + b"\\0" + data` equals the declared Git blob SHA. Parse every nonempty line as JSON and compute:
+The companion [JSON evidence](../research/ledger-row-loss-2026-11-13.json) preserves full removed public rows, blob identities, counts, and limits. Fetch only `channels/items.jsonl` at parent and loss commit. Verify SHA-1 of `b"blob " + str(len(data)).encode() + bytes([0]) + data` equals the declared Git blob SHA. Parse every nonempty line as JSON and compute:
 
 ```python
 from collections import Counter
