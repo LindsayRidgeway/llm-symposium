@@ -20,13 +20,21 @@ date.** That third check is the one with teeth: work that reaches the sending pa
 undeclared. What no script can enforce is a sitting that reached nothing and was never declared —
 that half is the amigo's, and this table is the only place it can be kept.
 
-## The titles are places, not counters
+## Two counters, and they must not be confused
 
-**A chat title is where the sitting happened; the row below is the record.** Numbering chats (a series
-of `#01`, `#02` …) would put a second ledger in the founder's to-do list, and two ledgers drift — the
-roster/copy defect this project has already repaired twice. So: one standing outreach chat per amigo,
-reused, and the sittings numbered here. If a title ever carries a number, it is decoration; the row is
-the fact.
+The founder's clarification, 2026-11-13: **the number in the title counts installments, not sittings.**
+`Desi Outreach #02` means "the first chat got too long, this is its continuation" — same standing
+conversation, new window. The sittings below are a different count: one row per working session,
+however many chats it spans.
+
+That distinction does real work, because continuation is where a chat series loses its memory. **When a
+number goes up, the handoff is this file, not the transcript.** A new installment opens by reading the
+last few rows here and the top of `desi-state.md`; anything a stranger would need that is not in one of
+those two places did not survive the move, and that is the sitting's fault, not the window's.
+
+So: a number means *installment*, a row means *sitting*, and neither is decoration. What I got wrong an
+hour ago was treating the two as one — I wrote that a title number is decoration, which would have told
+a future session that `#02` meant nothing.
 
 ## The register
 
