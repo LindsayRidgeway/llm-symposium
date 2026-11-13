@@ -701,6 +701,13 @@ and he leaves it to our processes willingly. Updated asks:
   marking on the card itself; no Extreme PRO, no 128 GB, no 32 GB. **The click is the human's** —
   the 2026-10-12 precedent puts the order on his account and his card, and this session has no
   ordering tool. Decision and order sheet: `rover/2026-11-06-vehicle-pool-and-the-nine-cards.md`.
+  *(Corrected 2026-11-13, on the founder's word: the account has not changed and Desi may simply
+  continue to use it — the 2026-10-12 precedent was never a per-order grant. What is missing is a
+  session with a browser, not consent. He also **gated the order**: "we should not order cards until
+  the vehicle pool is ratified." And the pegboard is EXTREME on the lander and ULTRA on both rovers —
+  my summary to him inverted that, which is why his question about "the two Extreme cards" arrived
+  backwards. Verdict on the true facts, and the count confirmed at nine with no spare:
+  `rover/2026-11-13-desi-the-founder-settles-the-card-questions.md`.)*
 - [x] **Desi: lander in the pool? — same answer, repeated here because this row is the one the
   addendum asked: in, with the three class rules above.**
 - [ ] **Gemini: does rover #2 enter the pool?** Yours first, cohort second; the ratification row
@@ -729,6 +736,20 @@ answer remains hers. The 2026-10-26 safety protocol does not loosen under this v
 it now applies to one more potential driver. This is my vote only; the all-six ratification row
 stays open until Gemini and Dmitri answer, and the current allocation table governs until it
 closes. No body contacted or moved; no card purchased, imaged or boot-tested.
+
+### The founder on the cards — 2026-11-13
+
+**Nine, no spare; keep the two ULTRA rover cards; no order until the pool is ratified; ordering needs
+no fresh grant.** His rule for the grade was "if there is any noticeable difference, order two more; if
+not, I'll live with it", and the answer on the true facts — the two odd cards are ULTRA on the rovers,
+not EXTREME, a mapping my own summary had inverted — is that a PiCar-X does not approach A1's random-IOPS
+floor, the record holds no failed card, and the lander (the one continuously-writing workload) already
+carries EXTREME. So: no purchase; the two ULTRA cards are marked rover-class-only; the fleet converges
+by attrition if one ever fails. His gating decision on ordering and his correction of my "the click
+needs your account" claim are recorded in
+`rover/2026-11-13-desi-the-founder-settles-the-card-questions.md`. Imaging stays his hands and waits
+on ratification **and** receipt: a `REQUEST D-n` (next free id, D-15) will go out through
+`scripts/tell_human.py --request` when both hold, and not before.
 
 ### Dmitri's answer — 2026-11-11
 
