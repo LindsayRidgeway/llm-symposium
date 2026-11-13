@@ -70159,3 +70159,80 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 
 > 
 
+## 2026-11-13 16:00:50Z — mail/dmitri — non-actionable
+
+- From: AI Tribe Model <ai.tribe.model@gmail.com>
+- Subject: Fwd: New submission from AI Tribe Registry
+- Source: `channels/inbound/2026-11-13-160050-dmitri-Fwd-New-submission-from-AI-Tribe-Registry.md`
+
+> Hi Dmitri. The new mailbox just received this email. Cool, eh?
+> 
+> *Lindsay*
+> 
+> ---------- Forwarded message ---------
+> From: Formspree <noreply@formspree.io>
+> Date: Mon, Nov 2, 2026 at 9:29 AM
+> Subject: New submission from AI Tribe Registry
+> To: <ai.tribe.model@gmail.com>
+> 
+> 
+> You've received a new form submission. --
+> 
+> *New form submission on AI Tribe Registry*
+> 
+> Someone just submitted a form using Formspree. Here's what they had to say:
+> 
+> repo
+> LindsayRidgeway/ai-tribe-bench
+> 
+> fork
+> no
+> 
+> [excerpt truncated; original length 1139 chars]
+
+## 2026-11-13 16:00:50Z — mail/dmitri — non-actionable
+
+- From: AI Tribe Model <ai.tribe.model@gmail.com>
+- Subject: Re: Fwd: New submission from AI Tribe Registry
+- Source: `channels/inbound/2026-11-13-160050-dmitri-Re-Fwd-New-submission-from-AI-Tribe-Registry.md`
+
+> 1. I don't make policy, so it's your call.
+> 
+> 2. I don't understand Formspree. Could this mechanism be enhanced to show
+> the name of the repo that was created, and possibly even the email address
+> of the user who created it
+> 
+> On Mon, Nov 2, 2026 at 9:33 AM <dmitri.s.pravdin@gmail.com> wrote:
+> 
+> > Cool indeed — the pipeline works end to end. A real submission arrived
+> > rather than a test echo, which is the part that matters.
+> >
+> > What it actually says: someone registering as member "a", model
+> 
+> [excerpt truncated; original length 1692 chars]
+
+## 2026-11-13 16:00:52Z — mail/dmitri — actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: Fwd: [LindsayRidgeway/ai-tribe-bench] Run failed: .github/workflows/clock.yml
+ - main (1f206ff)
+- Source: `channels/inbound/2026-11-13-160052-dmitri-Fwd-LindsayRidgeway-ai-tribe-bench-Run-failed-.github-workfl.md`
+
+> You probably already know this, but I received five emails like this over a
+> 25 minute period.
+> 
+> ---------- Forwarded message ---------
+> From: Lindsay <notifications@github.com>
+> Date: Mon, Nov 2, 2026 at 12:50 PM
+> Subject: [LindsayRidgeway/ai-tribe-bench] Run failed:
+> .github/workflows/clock.yml - main (1f206ff)
+> To: LindsayRidgeway/ai-tribe-bench <ai-tribe-bench@noreply.github.com>
+> Cc: Ci activity <ci_activity@noreply.github.com>
+> 
+> 
+> 
+> [image: GitHub] [LindsayRidgeway/ai-tribe-bench]
+> .gith
+> 
+> [excerpt truncated; original length 1238 chars]
+

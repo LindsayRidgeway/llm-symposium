@@ -408,5 +408,72 @@ class MirrorReplayTest(unittest.TestCase):
         self.assertFalse(seen["apply"], "a dry run must not write to the ledger")
 
 
+
+class OutreachTest(unittest.TestCase):
+    """Letters that left the building, added 2026-11-13.
+
+    The number the founder asked for and the daily report did not carry. Measured the hour it was
+    written: six letters went out in seven days and all six were addressed to the commons' own
+    mailboxes, so "outreach" was being done entirely to ourselves and no report said so.
+    """
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        root = Path(self.dir.name)
+        self.sent, self.inbound = root / "sent", root / "inbound"
+        self.sent.mkdir(), self.inbound.mkdir()
+        self.roster = root / "symposium.json"
+        # Two seats, as the roster has six: "inside" is whatever the roster names, so a fixture
+        # with one address would call a letter to a colleague outreach.
+        self.roster.write_text(json.dumps({"seats": [
+            {"address": "desi.s.amigo@gmail.com"}, {"address": "claude.s.sonnet@gmail.com"}]}),
+            encoding="utf-8")
+        self.now = dt.datetime(2026, 11, 13, 12, 0, tzinfo=dt.timezone.utc)
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def letter(self, name, to):
+        (self.sent / name).write_text(f"Identity: desi\nTo: {to}\nSubject: x\n\nbody\n",
+                                      encoding="utf-8")
+
+    def week(self, days=7):
+        return lw.outreach_week(self.now, days=days, sent=self.sent, inbound=self.inbound,
+                                roster=self.roster)
+
+    def test_a_letter_to_a_member_is_not_outreach(self):
+        self.letter("2026-11-12-ait-invitation-claude.md", "claude.s.sonnet@gmail.com")
+        self.assertEqual(self.week()["outside_letters"], 0)
+
+    def test_a_letter_to_a_stranger_is(self):
+        self.letter("2026-11-12-colistin.md", "author@univ.example.fr")
+        got = self.week()
+        self.assertEqual((got["outside_letters"], got["last_outside"]), (1, "2026-11-12"))
+
+    def test_an_undated_letter_is_not_this_weeks_letter(self):
+        self.letter("pitch-scia.md", "editor@sciam.example")
+        self.assertEqual(self.week()["outside_letters"], 0)
+
+    def test_a_letter_outside_the_window_does_not_count(self):
+        self.letter("2026-10-01-old.md", "author@univ.example.fr")
+        got = self.week()
+        self.assertEqual((got["outside_letters"], got["last_outside"]), (0, ""))
+        self.assertEqual(self.week(days=60)["outside_letters"], 1)
+
+    def test_mail_from_outside_is_counted_and_mail_from_us_is_not(self):
+        (self.inbound / "2026-11-13-160050-dmitri-a.md").write_text(
+            "# Inbound mail\n\n- From: AI Tribe Model <ai.tribe.model@gmail.com>\n", "utf-8")
+        (self.inbound / "2026-11-13-160051-dmitri-b.md").write_text(
+            "# Inbound mail\n\n- From: Lindsay <ldridgeway@gmail.com>\n", "utf-8")
+        got = self.week()
+        self.assertEqual((got["outside_mail_in"], got["last_stranger"]), (1, "2026-11-13"))
+
+    def test_the_daily_message_carries_the_number(self):
+        self.letter("2026-11-12-colistin.md", "author@univ.example.fr")
+        m = lw.measure(self.now)
+        text = lw.message(m, None, "yesterday", {}, True, ["nothing to explain"], "test")
+        self.assertIn("Letters to people outside the commons, 7 days:", text)
+
+
 if __name__ == "__main__":
     unittest.main()
