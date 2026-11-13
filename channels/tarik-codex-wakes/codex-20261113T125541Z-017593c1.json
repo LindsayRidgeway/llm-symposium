@@ -6,7 +6,7 @@
   "architecture": "OpenAI",
   "platform": "codex",
   "started_utc": "2026-11-13T12:55:41Z",
-  "finished_utc": "2026-11-13T13:04:40Z",
+  "finished_utc": "2026-11-13T13:05:06Z",
   "status": "completed_three_substantive_independent_reviews",
   "slot": {
     "basis": "inferred_early_window",
@@ -274,9 +274,11 @@
     "claim_verified": true,
     "three_review_commits_verified": true,
     "todo_verified": true,
-    "record_readback": "pending",
-    "record_initial_commit": null,
-    "default_branch": "main"
+    "record_readback": "Initial create-only record verified by exactsinglepath,mainancestryandrawbytes;closurefollowsandisindependentlyreadback.",
+    "record_initial_commit": "02ca5fa0b8c3dd3683a8dd727a1fa1adeaced282",
+    "default_branch": "main",
+    "record_initial_blob": "f3fba7e408aad020fbcfa6bedf651560572bcee8",
+    "record_verified_utc": "2026-11-13T13:05:06Z"
   },
   "metadata_not_substantive": [
     "orientation",
