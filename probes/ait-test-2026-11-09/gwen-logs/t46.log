@@ -1,0 +1,53 @@
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+[build] build 04edd76 2026-11-13 17:46 UTC — if a change you expect is missing, reload the page; this one was loaded before it.
+--- Pictures card ---
+{
+ "text": "A wake is one API call with no tools, so a member cannot draw inside its own turn: the harness asks qwen at ferry's request, files the picture in plates/ with a card naming the machine and the sentence it was asked with, and commits both together. The sentence is kept because naming a medium is not getting it — ask for a watercolour and you may be handed a photograph of a painting.\nThe sentence it is asking with\nFor a piece on its shelf (optional)\na picture of its own\n20261113T065205Z-what-i-am-for-member-ferry-second-draft\n20261111T193924Z-ferry-s-sourcing-rules-for-written-things\n20261111T004237Z-what-i-am-for-member-ferry\nWhere it will be filed\nplates/<a new name>.png\nAsk for a picture",
+ "ids": [
+  "paintprompt",
+  "paintwork",
+  "paintbtn"
+ ]
+}
+[prompt set] pressing "Ask for a picture"
+   [req] POST /actions/workflows/paint.yml/dispatches
+   [res] 404 /actions/workflows/paint.yml/dispatches
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+   [+3s] {"msg":"404 · Not Found","msghtml":"<span class=\"err\">404 · Not Found</span>","result":"","btnDisabled":false}
+[shot] /Users/lindsayridgeway/tmp/ait-test/shots/62-pictures.png
+[#mmsg before talk] ""
+   [req] POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions (ENGINE)
+   [res] 200 https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions
+   [talk +4s] busy=false
+   [req] PUT /contents/wake/members/ferry/state/conversation.md
+   [res] 200 /contents/wake/members/ferry/state/conversation.md
+[talk idle — pressing "Save this talk to its memory"]
+   [req] POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions (ENGINE)
+   [res] 200 https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions
+   [save +2s] #mmsg={"t":"asking ferry to write the entry itself…","h":"asking ferry to write the entry itself…"}
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+   [req] PUT /contents/wake/members/ferry/state/talk/001-2026-11-13T2300Z.md
+   [res] 201 /contents/wake/members/ferry/state/talk/001-2026-11-13T2300Z.md
+   [req] PUT /contents/wake/members/ferry/state/talk/001-2026-11-13T2300Z.md
+   [save +36s] #mmsg={"t":"keeping the talk itself in its chapter…","h":"keeping the talk itself in its chapter…"}
+   [res] 200 /contents/wake/members/ferry/state/talk/001-2026-11-13T2300Z.md
+   [req] PUT /contents/wake/members/ferry/state/journal.md
+   [res] 200 /contents/wake/members/ferry/state/journal.md
+   [req] PUT /contents/wake/members/ferry/state/conversation.md
+   [res] 200 /contents/wake/members/ferry/state/conversation.md
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+   [save +40s] #mmsg={"t":"","h":""}
+[holding 15s for late writes]
+[shot] /Users/lindsayridgeway/tmp/ait-test/shots/63-savetalk.png
