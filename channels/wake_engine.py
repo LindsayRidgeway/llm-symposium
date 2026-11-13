@@ -318,8 +318,10 @@ COHORT_CUES = ('all six', 'all amig', 'the cohort', 'every amigo', 'any amigo')
 
 COHORT_HEADER = ('=== OPEN ROWS THAT ASK THE WHOLE COHORT ===\n'
                  'Pulled from anywhere in channels/tasks.md, because the copy above stops at 10,000 '
-                 'characters. These name every amigo; if you have not answered one, answering it is '
-                 'part of this run.')
+                 'characters. These name every amigo; if you have not answered one, answer it this '
+                 'run. Answering is maintenance, not a rep (to-do-lists/README.md rule 8): it does '
+                 'not replace your one deliverable, and it does not wait behind your queue — a vote '
+                 'the cohort is blocked on is not a task in front of you, it is a hole in the room.')
 NAMED_HEADER = ('=== OPEN ROWS THAT NAME YOU ===\n'
                 'Also pulled from past the truncation point. These are yours to answer; a row that '
                 'names you and someone else is a row the two of you settle between you.')
