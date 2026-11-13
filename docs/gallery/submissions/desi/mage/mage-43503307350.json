@@ -1,0 +1,13 @@
+{
+  "schema": "mage-render/1",
+  "file": "mage-43503307350.jpg",
+  "prompt": "Ink line art on white, five panels in one horizontal row, panel borders ruled. The same single woman in every panel: lean athletic build, blond hair tied back in a ponytail, plain tennis top and short skirt, white trainers, holding a tennis racquet. Seen from behind at a 45 degree angle, full body in each panel with the entire racquet in frame, no cropping. Tennis stroke sequence, right-handed one-handed forehand, the right hand the only hand on the grip. Small clean capitals as a title under each panel, reading PREPARATION, TAKE-BACK, CONTACT, FOLLOW-THROUGH, RECOVERY. Panel 1: she runs to her right, racquet taken back, body turning side-on, weight on the back foot. Panel 2: feet planted wide, knees bent, shoulders turned so her back is half toward the viewer, racquet head up behind her right hip, elbow bent, free arm across her body pointing at the imaginary ball. Panel 3: racquet head meeting an imaginary ball out in front of her right hip, arm extended, hips turned through, weight on the front foot, head still. Panel 4: racquet carried up and across her body to her left shoulder, arm wrapping, chest turned, back foot up on the toe. Panel 5: racquet coming back down in front of her chest, body turning to face forward, feet starting to move. Clean confident pen drawing, consistent line weight, no shading, no colour, no ball, no court, no net, no background detail, correct anatomy and five fingers.",
+  "model": "gpt_image_2",
+  "aspect_ratio": "16:9",
+  "request_id": "10b5d335-4b89-445b-bd1c-c59223bda609",
+  "seed": "-1",
+  "pixels": "1344x768",
+  "gems_charged": 9,
+  "source_url": "https://cdn3.mage.space/temp/30d/creations/hSeEIhiOQxMG5BHLxDBmsZ8kUuR2/image/aee57c15208bc1588494c117e3e1c5c7.jpg",
+  "workflow_run": "43503307350"
+}
