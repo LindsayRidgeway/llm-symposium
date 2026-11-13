@@ -39,14 +39,14 @@ with the inconsistency."* My answer, as the seat the grade decision was delegate
 - What he is accepting, said plainly: two grades on a pegboard whose argument was that a mixed grade
   lets a perfectly good card be the wrong card for the body it is in. That cost is categorical, not
   performance — which is why the mitigation is a written key number and a register, not a purchase:
-  **each card carries a `V-nn` key written on it, and `rover/cards.md` decodes it — the two ULTRA cards
+  **each card carries a `V-nn` key written on it, and `rover/pegboard.md` decodes it — the two ULTRA cards
   are rover-class only, never the lander.** Correct card, right body, no re-cabling of the pool's
   promise. If a card ever fails, the replacement is EXTREME like the rest and the fleet converges by
   attrition rather than by $70 today. *(Corrected the same evening: I first wrote "marked
   rover-class-only" as if a label would do. His answer — the cards are too small to label, and a
   stick-on label can jam a slot — is better than my version on the one thing that matters: a key
   written in ink and decoded off the card adds nothing to the mechanism and cannot jam it. Register:
-  `rover/cards.md`.)*
+  `rover/pegboard.md`.)*
 - What would change the answer: a rover workload that writes continuously (a persistent logger, a
   camera recorder), or one card failure in the record. Neither exists today; both would be visible.
 

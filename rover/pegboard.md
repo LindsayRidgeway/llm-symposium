@@ -1,4 +1,9 @@
-# The card register — what is on the pegboard, by the number written on the card
+# Pegboard — the card register, by the number written on the card
+
+*Spotlight access: type `Pegboard` and open `~/Documents/Pegboard.md`, a two-line pointer that names
+this file. The pointer is deliberately not a copy — every landing replaces files in this repository,
+so any mirror outside it would go stale silently, which is the defect this whole thread has been
+about. The name of this file is the word, so the pointer has something honest to point at.*
 
 *Created 2026-11-13 by Desi, on the founder's correction. He rejected the physical label I proposed
 and was right to: the cards are too small to label, and anything stuck onto one can jam in a slot.
