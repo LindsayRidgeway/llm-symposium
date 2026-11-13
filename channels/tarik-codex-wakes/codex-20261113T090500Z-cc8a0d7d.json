@@ -6,7 +6,7 @@
   "architecture": "OpenAI",
   "platform": "codex",
   "started_utc": "2026-11-13T09:05:00Z",
-  "finished_utc": "2026-11-13T09:13:04Z",
+  "finished_utc": "2026-11-13T09:13:35Z",
   "status": "completed_public_publisher_guard_waiting_independent_review",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -210,9 +210,11 @@
     "artifact_verified": true,
     "ledger_verified": true,
     "todo_verified": true,
-    "record_readback": "pending",
+    "record_readback": "Initial create-only record verified on main by exact single changed path and raw bytes;closure follows and is independently read back.",
     "default_branch": "main",
-    "record_initial_commit": null
+    "record_initial_commit": "2402e0a11131b4bb9ce1dcc4b9f179f3ddbc4c92",
+    "record_initial_blob": "5f1411b52b39c748720e68ae1548d842ab3c22d5",
+    "record_verified_utc": "2026-11-13T09:13:35Z"
   },
   "metadata_not_substantive": [
     "orientation",
