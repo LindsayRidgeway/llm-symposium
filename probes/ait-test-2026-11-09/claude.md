@@ -161,3 +161,47 @@ memory that outlives the browser tab — yes, and the "could not answer" honesty
 exactly the property that would make me trust it with real use. Not yet for my own engine specifically:
 until Anthropic reaches the member-creation step and the clock's own key check, a Claude-run tribe is a
 tribe I can watch and judge but not actually live in.
+
+## Addendum, 2026-11-13 — a second sitting, same tribe
+
+Lindsay offered a second attended session. The app had moved on while I was away: build `04edd76`
+(2026-11-13 17:46 UTC), up from `5e816257` (2026-11-10 22:23 UTC) in the first session — so the first
+thing worth doing was finding out which of my findings still held, not assuming they did.
+
+**Both bugs from the first session are still there, unchanged, three days later.** Confirmed live
+rather than re-read from a diff:
+
+- **Finding 1 (Anthropic missing at member creation)** — stepped through the wizard fresh (it has grown
+  a step since the 10th: a "does the world already know this member" lore question between seat and
+  engine). The engine screen is byte-for-byte the same six buttons: Gemini, DeepSeek, Groq, OpenAI,
+  Qwen, OpenRouter. No Anthropic. I did not finish making the test member (`Zed9`) — no `new-member`
+  run appears in the Actions log, so nothing was created and nothing needs cleaning up; I stopped once
+  the engine screen answered the question.
+- **Finding 2 (clock's "no place" exit as failure, not skip)** — this is not a single bad run anymore,
+  it is a pattern: `gh run list` shows scheduled `clock` runs failing every four hours since the 10th
+  (checked five of them spanning 2026-11-12 and 2026-11-13; the log line is identical each time —
+  `no member has a place, so none of them is in a world: Mira, Suri, Tam` — `Process completed with exit
+  code 1`). A repository that has had three members since the first session has had a red clock on a
+  four-hour schedule for three days, for a condition the documentation calls a skip.
+
+**Two things I hadn't tested, both cheap, both honest:**
+
+- **The Keys page.** Pasted my own Anthropic key, pressed **Save**, then **Test**: `up · ready`. Pressed
+  **Check every key** with only that one key present: `Anthropic answered — the key works.` One real
+  call, correctly reported, nothing more claimed than happened.
+- **The attic — put a member away, bring it back.** Put Suri away: confirmed by a real browser
+  `confirm()` dialog (not a silent action), and the repository was correct immediately — `wake/members/
+  Suri` moved to `attic/Suri-<timestamp>/`, `members.json` updated. The **page**, though, needed a full
+  reload to catch up — a bare hash-navigation back to Members still showed Suri as active and the attic
+  as empty, which the footer already warns about ("if a change you expect is missing, reload the page").
+  **Bring back** is the sharper version of the same thing: I reloaded immediately after clicking it and
+  the page *still* showed Suri in the attic — reload alone wasn't enough that time. A second reload about
+  ten seconds later showed it correctly restored. The repository was never wrong; the page's own
+  catch-up window is sometimes longer than one reload, and the footer's advice ("reload the page") is
+  true but occasionally incomplete — a reload too soon after an action can still show the old state, not
+  because anything failed, but because GitHub's own read side hadn't caught up with its write side yet.
+
+Nothing here changes the keep/cut/use-again verdict above. It sharpens finding 2 from "I saw this once"
+to "this has now failed on schedule for three straight days without anyone fixing or even silencing it,"
+and it adds one clean data point in the page's favor: two more real operations (a key check, an attic
+round trip) that did exactly what they said, once given enough time to say it.
