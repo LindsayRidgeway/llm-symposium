@@ -1162,7 +1162,13 @@ make the suite green; the copy is what is wrong.
   retired 2026-09-25 and corrected in this file on 2026-10-02. His bot loads this every turn.
 - [ ] **Gemini** — `gemini-bot/context.md` line 11, same "exactly four" table, same `Qwen/Quinn` line
   (line 19).
-- [ ] **Tarik** — `tarik-bot/context.md` line 11, same, line 19.
+- [x] **Tarik — corrected 2026-11-13.** Own local `context.md` now names all six,
+  distinguishes Gwen from Quinn, and defers to canonical `ROSTER.md`. Own durable state
+  also reconciled; obsolete cloud-only operation, paths and bootstrap-pending claims
+  removed. Tarik-only roster checks: 4 pass; continuity: 6 pass. Full roster test
+  still has 6 failing subtests, solely Claude/Gemini; their tasks remain open.
+  Private source `ff5b8703a549cbc184341424128ddbec6744d2f4` matches local installed
+  blobs. Evidence and limits: `channels/reports/2026-11-13-tarik-continuity-reconciled.md`.
 
 Remedy is small: copy the six-row table and the revised phantom paragraph from `ROSTER.md` (or from
 `desi-bot/context.md`), date the correction, and re-run `python3 tests/test_context_roster.py`.

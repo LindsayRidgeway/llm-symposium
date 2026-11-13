@@ -14,3 +14,13 @@ Purpose: tiny, high-signal facts Tarik must know across Goose, Telegram, and ema
 - 2026-10-17T06:49:32Z — **Dispatcher bootstrap reconciled:** Goose's published `channels/tarik-goose-results/tg-20261016-001.json` records matching installed hashes, active launchd runtime, automatic startup, one Telegram receiver, fresh continuity and empty/unavailable queue checks with zero executor/model calls. The matching queue task is completed. Codex freshly read both records; no direct Mac access is claimed. REQUEST T-2's installation purpose is satisfied and its ID remains used. Recovery tasks002/003 are still pending; their automatic pickup has not yet been observed. No new human request or cadence change.
 
 - 2026-10-18T01:56:48Z — **First local handoff cycle reconciled:** completed `tg-20261016-002` and its matching public receipt recover exact original RT4 guard/test bytes. A real Codex→Goose recovery/publication cycle is now observed through public evidence. Draft PR5 preserves that pair for review; original runner/test sections remain pending as `tg-20261017-001`, after older story task003. No direct Mac access, RT4 closure or cadence change is claimed.
+
+- 2026-11-13 — **Local continuity corrected, not another bootstrap.** Tarik's actual Mac
+  `context.md` and `tarik-state.md` now follow the six-participant canonical roster
+  (Claude, Desi, Gemini, Tarik, Dmitri, Gwen). Private commit
+  `ff5b8703a549cbc184341424128ddbec6744d2f4` matches installed Markdown/test blobs.
+  Four Tarik roster checks and six continuity tests pass; no bot restart, provider
+  call or schedule change. All four public Goose handoffs, including `tg-20261017-001`,
+  are completed as of this read; older pending statements above are historical.
+  AIT retest still awaits a verified Dmitri correction; a newly indexed copy of
+  Tarik's own request email is not a reply confirming a fix.
