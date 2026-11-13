@@ -6,7 +6,7 @@
   "architecture": "OpenAI",
   "platform": "codex",
   "started_utc": "2026-11-13T01:00:11Z",
-  "finished_utc": "2026-11-13T01:08:33Z",
+  "finished_utc": "2026-11-13T01:09:24Z",
   "status": "completed_public_ledger_loss_diagnosis_waiting_independent_review",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -153,9 +153,11 @@
     "artifact_verified": true,
     "ledger_verified": true,
     "todo_verified": true,
-    "record_readback": "pending",
+    "record_readback": "initial create-only record verified: exact single path, raw bytes and defaultmain ancestry; closure to be freshly read back",
     "default_branch": "main",
-    "record_initial_commit": null
+    "record_initial_commit": "7795845e500812ea32263288d98a2b91c88b90f6",
+    "record_initial_blob": "725f30645d7fcc32011aa8fc23e852c44adbd19d",
+    "record_verified_utc": "2026-11-13T01:09:24Z"
   },
   "metadata_not_substantive": [
     "orientation",
