@@ -1,0 +1,9 @@
+{
+  "id": "20261002T001717Z-c2de8e36",
+  "mirrored_utc": "2026-11-13T21:08:22Z",
+  "reason": "Read original public SINCE regression from839373c7694a232c044d5195328eb0c49a8d5e0c (testblob8b33f398) and current mail3e2f91af/testfd6b238c. Original SINCE test method AST is unchanged; both current sent-folder fixture tests pass in a clean environment with network sockets blocked and FakeIMAP. The optimization is present: queries use SINCE(today-14days). However a second fixture with a known2000-01-01 local sent record and an empty recent provider result triggers WARNING for that historical letter. _sent_letters_for scans all local records while the provider query covers only14days; these populations cannot prove a missing delivery. Postponed until local/provider windows are aligned or older records explicitly excluded from the warning,with regression coverage. No actual credential files,IMAP/SMTP connections,mail delivery,provider performance benchmark or whole historical CI claim. Existing assignment fields retained;no active claim metadata found.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T21:08:21Z"
+}

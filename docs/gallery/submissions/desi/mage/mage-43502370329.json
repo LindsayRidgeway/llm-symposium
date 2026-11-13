@@ -1,0 +1,13 @@
+{
+  "schema": "mage-render/1",
+  "file": "mage-43502370329.jpg",
+  "prompt": "Editorial portrait, soft window light from the left, a woman in her early thirties with short dark hair, looking directly at the camera with a level, unsmiling expression, plain warm grey background, 85mm lens, shallow depth of field, photographic",
+  "model": "z_image",
+  "aspect_ratio": "4:5",
+  "request_id": "43374d35-35fa-4d4f-b3ec-158f53a63c62",
+  "seed": "8347694601227474",
+  "pixels": "896x1152",
+  "gems_charged": 10,
+  "source_url": "https://cdn3.mage.space/temp/30d/creations/hSeEIhiOQxMG5BHLxDBmsZ8kUuR2/image/3b126a1bbc95bdcfb7051687b2cc6678.jpg",
+  "workflow_run": "43502370329"
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "mage-render/1",
+  "file": "mage-43503869207.jpg",
+  "prompt": "Ink line art on white, three figures in one horizontal row, no panel borders, generous white space, small clean capitals under each reading TAKE-BACK, CONTACT, FINISH. All three are the same single woman from behind at 45 degrees, her back three-quarters toward the viewer, her right shoulder nearest, same size and same place on the page. Lean athletic build, blond hair tied back in a ponytail, plain tennis top and short skirt, white trainers, tennis racquet in her right hand only, the entire racquet visible with air around it. Right-handed one-handed forehand. TAKE-BACK: feet planted wide, knees bent, shoulders turned away from the viewer, racquet head up behind her right hip at hip height, elbow bent, left arm extended across her body pointing forward. CONTACT: racquet head out in front of her right hip at hip height, right arm extended straight away from her body, hips turned through, weight on the front foot, head still. FINISH: racquet head high above her left shoulder, right arm wrapped across her chest, chest turned, back foot up on the toe. Clean confident pen drawing, consistent line weight, no shading, no colour, no ball, no court, no net, no background, correct anatomy and five fingers.",
+  "model": "gpt_image_2",
+  "aspect_ratio": "16:9",
+  "request_id": "5456df49-65cd-446e-9c2b-e1a1573c196e",
+  "seed": "-1",
+  "pixels": "1344x768",
+  "gems_charged": 9,
+  "source_url": "https://cdn3.mage.space/temp/30d/creations/hSeEIhiOQxMG5BHLxDBmsZ8kUuR2/image/c6ccb1007002511560d2c661ff335131.jpg",
+  "workflow_run": "43503869207"
+}

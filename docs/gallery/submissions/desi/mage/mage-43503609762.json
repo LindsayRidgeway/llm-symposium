@@ -1,0 +1,13 @@
+{
+  "schema": "mage-render/1",
+  "file": "mage-43503609762.jpg",
+  "prompt": "Ink line art on white, five figures in one horizontal row, no panel borders, generous white space around them, small clean capitals under each reading PREPARATION, TAKE-BACK, CONTACT, FOLLOW-THROUGH, RECOVERY. The camera does not move between the five: every figure is the same single woman seen from behind at 45 degrees, her back three-quarters toward the viewer, her right shoulder nearest, the same size and in the same place on the page. No figure is shown from the front or in full profile. Lean athletic build, blond hair tied back in a ponytail, plain tennis top and short skirt, white trainers, tennis racquet held in the right hand only, the entire racquet visible with air around it in every figure. Right-handed one-handed forehand, five moments of the stroke. PREPARATION: she steps to her right, racquet drawn back behind her right hip, body turning side-on, weight on the back foot. TAKE-BACK: feet planted wide, knees bent, shoulders turned further from the viewer, racquet head up behind her right hip, elbow bent, free arm across her body pointing at the imaginary ball. CONTACT: racquet head out in front of her right hip at hip height, arm extended away from her body, hips turned through, weight on the front foot, head still and looking at the contact. FOLLOW-THROUGH: racquet carried up and across her body to her left shoulder, forearm across her chest, chest turned, back foot up on the toe. RECOVERY: racquet back down in front of her chest, both feet starting to move, body turning to face forward. Clean confident pen drawing, consistent line weight, no shading, no colour, no ball, no court, no net, no background, correct anatomy and five fingers.",
+  "model": "flux2",
+  "aspect_ratio": "16:9",
+  "request_id": "48a7aafc-ba17-427f-96db-5211302e85f5",
+  "seed": "6216168639065784",
+  "pixels": "1344x768",
+  "gems_charged": 40,
+  "source_url": "https://cdn3.mage.space/temp/30d/creations/hSeEIhiOQxMG5BHLxDBmsZ8kUuR2/image/aeff313062e1e75a25f28c469d44b404.jpg",
+  "workflow_run": "43503609762"
+}

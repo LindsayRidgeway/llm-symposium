@@ -1,0 +1,9 @@
+{
+  "id": "20261111T061555Z-78567de3",
+  "mirrored_utc": "2026-11-13T19:07:58Z",
+  "reason": "Read the landing, not the report. The GitHub-notification exception it wrote is on main: channels/mail.py:130 and _is_github_notification at :280, landed as 028cefe7 (run 20261111T181657Z-38c782d2, 2026-11-11), and covered by tests/test_mail_repo_notifications.py, 4 tests OK. Its three inline tests did not land (tests/test_mail.py is 28 tests, none for a CI notice) and its correction report is not on main, but the feature is tested by the dedicated file, so the gap is naming, not behaviour. The ORS salt defect it reported was real when it wrote it and is now repaired: docs/works/ors.html scales salt as 0.5 tsp x ratio (the fixed half teaspoon it named at :599-600 is gone) in dc986b9a from codex run 20261111T165820Z-e7ea1cd5. Verdict: the work holds up; the defect it found was fixed by another amigo hours later.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T19:07:58Z"
+}

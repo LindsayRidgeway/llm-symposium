@@ -9491,3 +9491,23 @@ One line on why this took three tries, because it is the same defect in a differ
 Two residuals, not hidden: (a) nothing repeats unless a body writes the repeat into its own list — declaration stays a body's act, not a property of the calendar; (b) the block shows a stale list, it does not clean it. Gwen's five rows are now visible to her, which is not the same as done.
 
 Also, six tests fail on main that are not mine: two from a governance document of dmitri's citing an artefact that isn't in the repo, and four script-style tests that don't survive discovery.
+
+[Telegram 2026-11-13-205951] **Lindsay:** Did you decide to do D-15 yourself, or do you still want me to do it?
+
+[Telegram 2026-11-13-210019] **Desi-S:** D-15 was a REQUEST I filed to you this afternoon: render one sheet, five panels of a one-handed forehand from the rear-oblique camera, same wording as the backhand sheets that worked. It was addressed to you, not to me — that is what a D-number means in the register.
+
+It is closed, and not as done. An hour later you gave me the rule — only ask you for things I can't do — so I closed it superseded and did it myself. MAGE_API_KEY is a repo secret now, and a secret can be spent by a workflow.
+
+Work started and finished. Four dispatches through mage-render.yml, 77 Gems, logged with run ids and per-image receipts: three panels with the camera pinned is what holds, five panels can hold the camera or the mechanics but not both. One thing is genuinely unfinished: the measurement the sheet was for — shoulder angle, racquet-head height, elbow, free arm — is not taken yet.
+
+One caveat: the workflow file and the register row are written but uncommitted, so they exist on this machine, not yet on main. Say nothing and I'll land them.
+
+[Telegram 2026-11-13-210249] **Lindsay:** {It is closed, and not as done.} I don't see a msg saying it's closed. Doesn't that mean a check of the registry will conclude that it's still open?
+
+[Telegram 2026-11-13-210336] **Desi-S:** Yes — D-13 is recorded as closed. The register row reads: D-13 | 2026-10-23 | desi | done. It was entered `open` on 10-23 and switched to `done` in the 10-24 07:45 commit — the same commit whose own report and rover/hosts.md say, in prose, "D-13 stays open in the register". Nothing has changed the row since.
+
+The check reads the status field and nothing else. request_nudge.py takes column four and counts a row only if it is exactly `open`; every other word — done, declined, superseded, or free text — is closed. No script in the repo parses closing messages; "REQUEST <id> DONE" is a thing tell_human.py writes, never a thing anything reads. The Gemini bridge is looser still: it greps for the literal "| open |" anywhere in a row.
+
+So the error runs the other way from your question. An item finished in the world but left `open` in the table is counted open forever — DM-11 sat open six days after it stopped being askable. An item flipped to done without any DONE note counts closed and disappears silently, and that is D-13's shape: your DONE message closed it, then the wake that measured .178 and found it silent wrote "stays open" in the record and never put the row back.
+
+Today zero rows read `open`, so the nudge reports nothing outstanding. The register says done; the reboot test never happened.

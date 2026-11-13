@@ -1,0 +1,147 @@
+name: Mage render
+
+# One image, on demand, paid from the account behind MAGE_API_KEY.
+#
+# Why this exists: a repo secret is write-only. No session, script or amigo can read MAGE_API_KEY back out of
+# GitHub, so a key living here can only ever be spent *by a runner* — which is exactly the shape AIT needs. A
+# member's face must be rendered by the tribe's own CI, on the tribe's own account, without any human pasting a
+# key into a chat. This workflow is the smallest honest proof of that path: submit, poll, download, commit, and
+# write the price down beside the picture.
+#
+# It is deliberately one image per dispatch. There is no loop and no batch, because the cost is real Gems and the
+# person who owns the account should see each one.
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "The prompt. Sent as written."
+        required: true
+      model:
+        description: "Architecture id. Defaults are the cheap end: z_image 10, gpt_image_2 9, sdxl_plus 15, chroma 35, flux2 40 Gems."
+        type: choice
+        options: [z_image, gpt_image_2, sdxl_plus, chroma, flux2, nano_banana_v2]
+        default: z_image
+      aspect_ratio:
+        description: "e.g. 4:5 for a portrait, 1:1 for a square"
+        default: "4:5"
+      out_dir:
+        description: "Where the image and its receipt are committed"
+        default: "docs/gallery/submissions/desi/mage"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: The balance before
+        env:
+          MAGE_API_KEY: ${{ secrets.MAGE_API_KEY }}
+        run: |
+          if [ -z "${MAGE_API_KEY:-}" ]; then
+            echo "::error::MAGE_API_KEY is not set on this repository — nothing to spend. Nothing was charged."
+            exit 1
+          fi
+          curl -sS -H "Authorization: Bearer $MAGE_API_KEY" https://api.mage.space/v1/account \
+            | jq -c '{gems: (.gems // .balance // .gems_balance // .)}' || true
+
+      - name: Submit
+        id: submit
+        env:
+          MAGE_API_KEY: ${{ secrets.MAGE_API_KEY }}
+          PROMPT: ${{ inputs.prompt }}
+          MODEL: ${{ inputs.model }}
+          AR: ${{ inputs.aspect_ratio }}
+        run: |
+          set -euo pipefail
+          body=$(jq -nc --arg p "$PROMPT" --arg ar "$AR" '{prompt: $p, aspect_ratio: $ar}')
+          out=$(curl -sS -X POST "https://api.mage.space/v1/${MODEL}/generate" \
+                  -H "Authorization: Bearer $MAGE_API_KEY" \
+                  -H "Content-Type: application/json" \
+                  -H "Idempotency-Key: gh-${GITHUB_RUN_ID}" \
+                  -d "$body")
+          echo "$out" | jq -c '{status, architecture, request_id, billing, error}'
+          if ! echo "$out" | jq -e '.request_id' >/dev/null; then
+            echo "::error::refused: $(echo "$out" | jq -c '.error')"
+            exit 1
+          fi
+          echo "id=$(echo "$out" | jq -r .request_id)" >> "$GITHUB_OUTPUT"
+          echo "status_url=$(echo "$out" | jq -r .status_url)" >> "$GITHUB_OUTPUT"
+          echo "charged=$(echo "$out" | jq -r '.billing.gems_charged // 0')" >> "$GITHUB_OUTPUT"
+          echo "mode=$(echo "$out" | jq -r '.billing.mode // ""')" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for it
+        id: wait
+        env:
+          MAGE_API_KEY: ${{ secrets.MAGE_API_KEY }}
+          STATUS_URL: ${{ steps.submit.outputs.status_url }}
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 60); do
+            sleep 5
+            out=$(curl -sS -H "Authorization: Bearer $MAGE_API_KEY" "$STATUS_URL")
+            st=$(echo "$out" | jq -r .status)
+            echo "$i $st"
+            case "$st" in
+              completed)
+                echo "$out" > /tmp/done.json
+                echo "url=$(echo "$out" | jq -r .result.url)" >> "$GITHUB_OUTPUT"
+                echo "seed=$(echo "$out" | jq -r .result.seed)" >> "$GITHUB_OUTPUT"
+                echo "dims=$(echo "$out" | jq -r '"\(.result.width)x\(.result.height)"')" >> "$GITHUB_OUTPUT"
+                echo "charged=$(echo "$out" | jq -r '.billing.gems_charged // 0')" >> "$GITHUB_OUTPUT"
+                echo "::notice::completed, $(echo "$out" | jq -r '.billing.gems_charged') gems"
+                exit 0 ;;
+              failed|cancelled)
+                echo "::error::${st}: $(echo "$out" | jq -c '{error, billing}')"
+                exit 1 ;;
+            esac
+          done
+          echo "::error::still not finished after five minutes — the request may still complete, and its Gems are already charged"
+          exit 1
+
+      - name: Keep it, and the receipt
+        env:
+          OUT_DIR: ${{ inputs.out_dir }}
+          PROMPT: ${{ inputs.prompt }}
+          MODEL: ${{ inputs.model }}
+          AR: ${{ inputs.aspect_ratio }}
+          RID: ${{ steps.submit.outputs.id }}
+          SEED: ${{ steps.wait.outputs.seed }}
+          DIMS: ${{ steps.wait.outputs.dims }}
+          CHARGED: ${{ steps.wait.outputs.charged }}
+          URL: ${{ steps.wait.outputs.url }}
+          RUN: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUT_DIR"
+          stem="mage-${RUN}"
+          case "$URL" in
+            *.png) ext=png ;; *.webp) ext=webp ;; *) ext=jpg ;;
+          esac
+          curl -sSL "$URL" -o "$OUT_DIR/$stem.$ext"
+          file "$OUT_DIR/$stem.$ext"
+          jq -n --arg prompt "$PROMPT" --arg model "$MODEL" --arg ar "$AR" --arg rid "$RID" \
+                --arg seed "$SEED" --arg dims "$DIMS" --arg gems "$CHARGED" --arg url "$URL" \
+                --arg run "$RUN" --arg file "$stem.$ext" \
+            '{schema: "mage-render/1", file: $file, prompt: $prompt, model: $model, aspect_ratio: $ar,
+              request_id: $rid, seed: $seed, pixels: $dims, gems_charged: ($gems|tonumber?), source_url: $url,
+              workflow_run: $run}' > "$OUT_DIR/$stem.json"
+          cat "$OUT_DIR/$stem.json"
+
+      - name: Commit both
+        env:
+          PUSH_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config --global user.name "LLM Symposium Bot"
+          git config --global user.email "bot@llm-symposium.local"
+          git add -A
+          git diff --quiet && git diff --staged --quiet && exit 0
+          git commit -m "render: $(basename "$(ls -t docs/gallery/submissions/desi/mage/*.json 2>/dev/null | head -1)") — one Mage image and what it cost"
+          git push "https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" HEAD:main

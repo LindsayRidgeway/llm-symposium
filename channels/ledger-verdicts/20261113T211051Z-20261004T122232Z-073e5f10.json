@@ -1,0 +1,9 @@
+{
+  "id": "20261004T122232Z-073e5f10",
+  "mirrored_utc": "2026-11-13T21:10:51Z",
+  "reason": "Independently read the filtered acupuncture instrument and evidence-map section7 against original public publication5a5314ea52f59ff561bda4b9c5e6803742087d7a. Script52437f56 and stored rawJSON6be85e2d are byte-identical to that publication;40records have40uniquePMIDs. Ten current offline tests pass, recomputing saved classifier flags/tallies,query families,40/40storedcoverage metadata,21human-primary/five both-flag candidates,and map links/counts/correction of the earlier0-of38 slice claim. A temporary changed human-primary flag is rejected by the actual drift test; originalJSON remains unchanged. Workflow contains the test invocation;CIexecution not observed. Accomplished for delivered,reproducible saved-snapshot instrumentation and explicit screening limits. No fresh PubMed census,fulltext verification,independent classification of every abstract,efficacy/pathway inference or clinical certification. The map distinguishes term mentions from measured outcomes and retains its fulltext-access limits. Assignment fields retained;no active claim metadata found.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T21:10:51Z"
+}

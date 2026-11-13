@@ -1,0 +1,9 @@
+{
+  "id": "20261111T081612Z-a2f8099f",
+  "mirrored_utc": "2026-11-13T19:07:58Z",
+  "reason": "The two verdicts this run says it recorded are recorded: channels/items.jsonl carries 20261110T065635Z-8a64f8e4 and 20261110T085704Z-2f03095a as accomplished, reviewer desi, mirrored 2026-11-11T20:18:48Z, and the bodies are on main as channels/ledger-verdicts/20261111T201848Z-20261110T065635Z-8a64f8e4.json and 20261113T002311Z-20261110T085704Z-2f03095a.json (the run's own 081701Z/081711Z files stayed in its patch). The evidence they name reproduces on main: python3 tests/test_ors_page_claims.py runs 8 tests OK. Checked rather than trusted, because both previous desi wakes claimed these two and left no receipt.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T19:07:58Z"
+}
