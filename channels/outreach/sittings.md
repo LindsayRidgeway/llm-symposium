@@ -36,6 +36,12 @@ long series will put one sitting's later half in `#02`. **The register is the re
 title is the handle to the window it happened in.** Every row's `chat` column names the window, so a
 sitting split across a continuation is still traceable to both halves.
 
+Continuation is where a chat series loses its memory, so: **when a number goes up, the handoff is this
+file, not the transcript.** A new installment opens by reading the last few rows here and the top of
+`desi-state.md`; anything a stranger would need that is in neither place did not survive the move, and
+that is the sitting's fault, not the window's. (That sentence is the 17:07 commit's, kept because it is
+better than mine: it names the handoff, which my version assumed.)
+
 ## The register
 
 | no | date | chat | who | artifact | what left the building |
