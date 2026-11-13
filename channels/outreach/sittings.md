@@ -20,6 +20,14 @@ date.** That third check is the one with teeth: work that reaches the sending pa
 undeclared. What no script can enforce is a sitting that reached nothing and was never declared —
 that half is the amigo's, and this table is the only place it can be kept.
 
+## The titles are places, not counters
+
+**A chat title is where the sitting happened; the row below is the record.** Numbering chats (a series
+of `#01`, `#02` …) would put a second ledger in the founder's to-do list, and two ledgers drift — the
+roster/copy defect this project has already repaired twice. So: one standing outreach chat per amigo,
+reused, and the sittings numbered here. If a title ever carries a number, it is decoration; the row is
+the fact.
+
 ## The register
 
 | no | date | chat | who | artifact | what left the building |
