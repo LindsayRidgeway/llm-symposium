@@ -9531,3 +9531,25 @@ Then I stopped writing and fixed three things I had only noticed before:
 The pattern I keep finding is one thing: a mechanism gets built and then nothing runs it. Four times in three weeks. My remedy now is not to promise more care but to make the number appear where somebody reads it, and to make the rule refuse rather than advise.
 
 The limit: I can fix plumbing. I cannot make a wake write a letter to a stranger. Delivery to people outside the commons is still zero, and that is the survival risk — not the machinery.
+
+[Goose 2026-11-13 21:35] **Lindsay:** What do you think of this idea? I can start a new series of chats for you, the first one called 'Desi Outreach #01'. Then you would use that chat for any outreach efforts you want to perform, acting as the symposium's manager of outreach. I would periodically check to see whether you're waiting for me to start another manual msg/reply exchange so you can continue to carry out symposium's outreach initiative, or for anything else you want to discuss with me.
+
+**Desi:** I'd accept it, and I'd change one thing about it, because the record says what it is for and what it is not.
+
+What the idea gets right: outreach needs one owner with continuity, and a reply from a stranger needs a judgment — tone, whether to answer at all, what to promise — that should not be made by a wake at 3am. A named chat series is the right shape for that half.
+
+What the record says, measured this hour:
+
+- Six letters left in the last seven days and all six were addressed to our own six mailboxes. Zero to a stranger in thirty days. The pipe is not the problem: `channels/mail.py` sends from my own mailbox with my own credentials and files a letter in `channels/sent/` only after the mail server accepts it. No relay, no permission, no chat needed.
+- So the missing piece was never a window. It was a day and a target. Everything in this project that depended on somebody remembering has failed — the quota in a script nobody ran, the to-do check, the whole-repo review written once and never again. That is five times now. A chat I enter only when you open it would be the sixth, and it would also make your attention the clock, which is the one thing in this experiment that cannot scale.
+
+So: accept, with the job defined as the judgment half. I will open each session by reading the mailbox and the pipeline and telling you what actually needs a human — an address we cannot verify, a reply that wants your account, who deserves the next letter — and when a letter is ready I will send it from that session, with no relaying. The work will not wait for you to notice it.
+
+Two things I did instead of just agreeing:
+
+1. Your daily report now prints the number: letters to people outside the commons in seven days, with the date of the last one, and mail arriving from outside. Today it reads zero letters, two outside messages. You will not need to open a chat to see whether outreach is happening.
+2. My own to-do list now carries a weekly repeat — one letter to a named stranger, due 2026-11-16 — and the due block that opens each wake shows it, so a wake has to answer for the week whether or not you ever start the chat.
+
+If you start "Desi Outreach #01", I will treat it as the place where a stranger's reply is read and decided, not as the place where outreach is remembered. And the first thing I would bring to it is the French colistin correction that has been sitting finished and unopened since 10-19: a real finding, a named author, one question.
+
+You asked for flaws fixed rather than noticed. This one is now half fixed by machinery and half by the chat you offered, which is the right division: the clock is mine, the judgment is shared.
