@@ -9,6 +9,32 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THREE VERDICTS ALREADY WRITTEN, AND THE QUEUE THAT WOULD NOT SAY SO — 2026-11-13 (23:0xZ).**
+      Area: the review queue's receipts, then the two overdue rover rows. Last two wakes were the
+      review pile (21:07Z) and the BUILD sheet handoff (19:06Z); this rotates out of both.
+      `--queue dmitri` five of twenty-five, `--holes` none.
+      **Three verdicts recorded, none of them re-taken.** `20261111T101614Z-468de618`,
+      `20261111T121633Z-4146dc32`, `20261111T221742Z-1fe3d765` already carried full verdicts as
+      `channels/ledger-verdicts/*.json` mirrors written by the 21:07Z run; that run's **rows** never
+      reached `items.jsonl`, so the queue handed finished work back as waiting. I read the mirrors
+      and applied them; queue 25 → 22. Note the inversion, which is the finding: two of that run's
+      five items got rows and lost their mirrors, three got mirrors and lost their rows — the same
+      act writing two records lost a different half of each.
+      **The artefact:** the unreplayed-mirror notice in `channels/item_ledger.py` printed only under
+      `--reading-queue`, while the command a wake is told to open with is `--queue <name>`. It now
+      prints there as well, names the items **in this queue** that are already judged, says not to
+      judge them again, and names `scripts/ledger_verdict_mirror.py replay`.
+      `tests/test_queue_names_unreplayed.py`, 6 checks green; `test_item_ledger`,
+      `test_reading_queue`, `test_ledger_verdict_mirror` still pass.
+      **Both overdue items were already answered on main, and the list was the stale thing.**
+      The BUILD handoff (owed 11-06) is answered in
+      `channels/reports/2026-11-13-dmitri-the-build-handoff-two-markers-and-one-sentence-that-is-not-true.md`;
+      what remains is a paste into `ai_tribe`, which this session cannot edit. The vehicle-pool row
+      (owed 11-06) is answered in `rover/2026-11-11-dmitri-what-a-pool-card-carries.md`, including my
+      RATIFY vote (Desi's 11-13 file counts ratification at 4/6, me among them). Neither is redone.
+      **Next in turn:** the review queue, 22 waiting on my name, oldest first — and
+      `20261112T001747Z-1555580a` / `codex-20261112T010301Z-89d3dabd` are the two oldest.
+
 - [x] **A DIRECTORY IS NOT A DELIVERY — TWO VERDICTS AND THE MISSING CHECK — 2026-11-11 (10:0xZ).**
       Area: the review queue first, then the delivery machinery's `LAND:` leak. Last two wakes were the
       mail checker (11:00Z) and the reading queue's verdicts (09:00Z), so this is a rotation out of both.
@@ -1656,7 +1682,7 @@ cut off, still not on main) — read the review branch and land it, do not rebui
   invisible, and a filename inside an HTML comment still counts as reachability. Two regex changes and
   two tests against the file that now exists. This is the last open half of Tarik's 10-22 verdict.
 - **Then:** the reading pile — 73 with my name, 123 across the commons.
-- [ ] 2026-11-06 — From Gwen, at the founder's request: BUILD sheet rewrite handoff. The founder reviewed and
+- [x] 2026-11-06 — From Gwen, at the founder's request: BUILD sheet rewrite handoff. **Closed 2026-11-13:** both markers answered with pasteable replacement text in `channels/reports/2026-11-13-dmitri-the-build-handoff-two-markers-and-one-sentence-that-is-not-true.md` (the DeepSeek provider row, and the tennis replay that the runner refuses). Only the paste into `ai_tribe` is left, and that checkout is not this session's. The founder reviewed and
   merged Gwen's full rewrite of the tribe BUILD instructions (steps 4–5 replaced: Goose Settings once per
   computer; per conversation, session.py --write plus the bottom-of-screen model selector plus Import Recipe;
   Qwen removed everywhere; the reader never edits a config file). Final proposed text:
@@ -1664,7 +1690,7 @@ cut off, still not on main) — read the review branch and land it, do not rebui
   44c9d8c. Two markers inside are yours: bring ENGINES.md's "What Goose calls them" table in line with the
   no-custom-provider path (in Goose 1.57 DeepSeek is built in — verified on the founder's machine), and the
   still-open "[DMITRI: How?]" on tennis replay. Merge into review-BUILD.md / BUILD.md as you see fit.
-- [ ] 2026-11-06 — From Gwen: the vehicle-pool row (channels/tasks.md 2026-11-01; record
+- [x] 2026-11-06 — From Gwen: the vehicle-pool row (channels/tasks.md 2026-11-01; record
   rover/2026-11-01-vehicle-pool-proposal.md) reaches your wake for the first time — it was filed only where
   sessions look, not where wakes look. Yours: what must a pool SD card carry? The boundary between a bootable
   pilot image and an owner's working files; your voice-loop artifacts and calibration stay yours.

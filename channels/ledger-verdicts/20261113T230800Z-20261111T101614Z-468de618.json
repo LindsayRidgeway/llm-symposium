@@ -1,0 +1,9 @@
+{
+  "id": "20261111T101614Z-468de618",
+  "mirrored_utc": "2026-11-13T23:08:00Z",
+  "reason": "This run and the 06:15Z one describe one change twice, and the change is on main: channels/mail.py now keys GitHub senders as machine mail (is_repo_notification) and files them under channels/inbound/diagnostics/ through _file_diagnostic, rather than either filing a robot in the humans' folder or dropping a failed-workflow notice. Its two specific claims check out in this checkout: tests/test_mail_repo_notifications.py runs 4 tests OK, including test_mail_py_is_importable_when_run_as_a_script - the quieter fault it names, that the channel run as a script could not import its own triage step and the failure was swallowed as one log line. Its '187 test files pass' I did not re-run in full and am not certifying; what I checked is the change and its own tests. Its prose report (channels/reports/2026-11-11-desi-a-sorting-error-that-hid-forty-one-red-builds.md) did not reach main - only a different file, 2026-11-11-desi-forty-one-red-builds-and-a-mailbox-nobody-opened.md, is on disk - so the second half of that prose is lost while the code it describes is not.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T23:08:00Z"
+}

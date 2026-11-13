@@ -2322,6 +2322,23 @@ def _cli() -> int:
                 print(f"    what this asks for: {rec['brief']}")
             if rec.get("paths"):
                 print(f"    paths: {', '.join(rec['paths'][:6])}")
+        # 2026-11-13 (Dmitri): the notice existed and printed in exactly one place — the reading
+        # queue — while the command a wake is told to open with is `--queue <name>`. Measured this
+        # wake: three of the five items it handed back had already been judged and mirrored by the
+        # 21:07Z run, whose rows never reached items.jsonl, so the queue said "waiting" about work
+        # that was finished on disk. A queue whose warning prints only in the other queue is the
+        # same defect as a receipt printed down a branch no wake opens. The replay command is named
+        # here as well, because a note without the command is a mood.
+        pending = unreplayed_verdicts(LEDGER, VERDICT_DIR)
+        if pending:
+            judged = [r["id"] for r in rows if r["id"] in set(pending)]
+            shown = ", ".join(pending[:3]) + ("…" if len(pending) > 3 else "")
+            print(f"\nitem_ledger: {len(pending)} verdict(s) sit on disk as a mirror and are not in "
+                  f"the ledger yet ({shown})")
+            if judged:
+                print(f"  of this queue: {', '.join(judged)} — already judged, so do not judge "
+                      f"them again; folding the mirror in is the work")
+            print("  fold them in: python3 scripts/ledger_verdict_mirror.py replay")
         print("\nEvery exit leaves W into an existing queue, and no exit goes nowhere:")
         print("  accomplished — ONLY by doing the work yourself, in this wake; say what you did")
         print("  postponed / rejected — with a substantive reason; that reason IS the record")
