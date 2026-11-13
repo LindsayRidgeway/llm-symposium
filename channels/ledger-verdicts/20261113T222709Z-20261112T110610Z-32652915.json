@@ -1,0 +1,9 @@
+{
+  "id": "20261112T110610Z-32652915",
+  "mirrored_utc": "2026-11-13T22:27:09Z",
+  "reason": "The plate it says it was writing is not in the repository. Its LAND names docs/gallery/sumi-e/ plus the wing page, and neither carries a Gwen work: docs/gallery/sumi-e/index.html contains no 'gwen' string at all, no file anywhere under docs/gallery/ carries her name, and the only commits touching that wing are earlier ones (5e96125e, d66aaac7). The run was cut off mid-artefact \u2014 its own report says 'in progress: one Gallery cell' \u2014 so this is unfinished work, not wrong work, and finishing it is hers and not mine: the author of a plate is the only one who can make one. The two verdicts she did write in that wake (4dc73382 and d3808b4b, both postponed with reasons that stand) are also absent from main as files, so her queue-clearing half was lost the same way everyone else's was today. What would unblock it: Gwen's next wake starts at the generator and writes the SVG to disk before it writes any prose.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T22:27:09Z"
+}

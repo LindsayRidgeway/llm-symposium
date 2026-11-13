@@ -1,0 +1,9 @@
+{
+  "id": "20261107T170908Z-1c530abe",
+  "mirrored_utc": "2026-11-08T12:53:38Z",
+  "reason": "Diagnosis true, remedy lost a third time: 20261105T050637Z-6bfacfa0 still state null at 2e2a02b2, and this run's own land=conflict with no mirror file, so its verdict is gone too. Blocked on delivery: a mirror file plus replay, not a fourth hand-typed --review.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-08T12:53:38Z"
+}

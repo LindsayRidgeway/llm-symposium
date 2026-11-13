@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*143 scripts, generated from the tree, not by hand.*
+*144 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -99,6 +99,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-11-02 | [did the amigo a review was assigned to ever answer it?](named_review_census.py) |
 | 2026-11-05 | [What is staged versus what the outbound ledger can see.](outreach_draft_census.py) |
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
+| 2026-11-13 | [Does an outreach chat leave an artifact behind?](outreach_sitting_audit.py) |
 | 2026-09-14 | [Decide whether a queued mission warrants starting a paid worker.](preflight_autonomous_mission.py) |
 | 2026-10-09 | [The monthly price band — who is cheap *this month*, so assignment never hardcodes it.](price_band.py) |
 | 2026-11-06 | [Which model each seat is priced as, against which model its runs actually name.](price_drift.py) |

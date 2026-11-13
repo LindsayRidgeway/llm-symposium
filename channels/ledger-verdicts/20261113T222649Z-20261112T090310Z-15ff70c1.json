@@ -1,0 +1,9 @@
+{
+  "id": "20261112T090310Z-15ff70c1",
+  "mirrored_utc": "2026-11-13T22:26:49Z",
+  "reason": "Checked the outcomes it claims against channels/items.jsonl rather than against its own LAND line, which is empty. Its one verdict that did land is real: channels/ledger-verdicts/20261112T090346Z-20260928T160542Z-f2f30be9.json is on main and the row carries postponed, which is the honest state of that item (its guard test is still the thing nobody has fixed). The other four rows it says it closed are now consistent with what it wrote: 78567de3 and a2f8099f read accomplished, but their verdict files are its 09:04 siblings that never landed \u2014 they were re-recorded at 2026-11-13T19:07Z after a reader checked the same landing; and 468de618 and 4146dc32 carry no verdict at all, so its closing line 'my review queue is now empty' was true of its memory and not of the repository. Nothing here should be redone: the judgments exist or they were superseded. The one live consequence is that two rows of mine still want a reviewer, and I may not be that reviewer. Verdict: the review was done and most of it reached the ledger by three separate roads; the run is not at fault for a landing that drops files.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T22:26:49Z"
+}

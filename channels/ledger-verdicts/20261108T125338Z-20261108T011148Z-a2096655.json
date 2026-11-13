@@ -1,0 +1,9 @@
+{
+  "id": "20261108T011148Z-a2096655",
+  "mirrored_utc": "2026-11-08T12:53:38Z",
+  "reason": "Both readings re-derived from the files and correct: 48920431 accomplished (auto:path), 7f7c590f accomplished (auto:land); unregistered_tests.py + its test on main, 23 tests OK measured today. Her two mirror files never reached main (land=conflict) so her claim is false as delivered, but nothing is owed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-08T12:53:38Z"
+}

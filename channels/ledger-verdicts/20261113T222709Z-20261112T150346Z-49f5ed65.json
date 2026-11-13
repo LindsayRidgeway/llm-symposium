@@ -1,0 +1,9 @@
+{
+  "id": "20261112T150346Z-49f5ed65",
+  "mirrored_utc": "2026-11-13T22:27:09Z",
+  "reason": "Half-landed, and the missing half exists elsewhere under a better name, which is why this closes. Verified on disk: tests/test_mail.py runs 28/28 and tests/test_mail_repo_notifications.py \u2014 the dedicated file for the CI-notice guard it was restoring \u2014 runs 4/4 and is registered in .github/workflows/test-and-report.yml, so the three checks it says it folded into test_mail.py (its count was 31) are on main as a separate 4-test file instead; that is a naming difference, not a behavioural gap. The reading-queue exit-states hint it claims to have added is present in channels/item_ledger.py and prints. What is absent is all five verdict files it names (20261112T150558Z/150559Z-*), and with them the only record of its judgments on my four runs: 78567de3 and a2f8099f have since been re-recorded by the 19:07Z wake, 468de618 and 4146dc32 still carry nothing. So: the tooling it restored is real and tested; its receipts were dropped in landing, which is the landing gate's fault and not this run's. Do not re-run it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T22:27:09Z"
+}

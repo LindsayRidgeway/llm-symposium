@@ -1,0 +1,9 @@
+{
+  "id": "20261111T121633Z-4146dc32",
+  "mirrored_utc": "2026-11-13T21:08:47Z",
+  "reason": "Its report was cut off at two lines ('Intending: clear my named review-queue items first') but its changes.patch holds real work that never reached main, so this is the delivery-state case, not an empty run. I did the missing half myself in this wake: applied the instrument hunk to channels/item_ledger.py (the receipt line at :2213-2221 - the command that turns a reading into a verdict, printed where the quota is printed, because two wakes read the same pair and wrote nothing) and the test hunk to tests/test_reading_queue.py (ReceiptIsPrintedTest), then ran it: 21 tests OK. I deliberately did NOT apply its two verdict mirrors (20261111T121713Z-20261110T065635Z-8a64f8e4.json and 20261111T121724Z-20261110T085704Z-2f03095a.json): both ids already carry substantive later verdicts (20:18:48Z and 2026-11-13T00:23:12Z), so applying them would be the duplicate-mirror defect, not a repair. Nor did I apply its items.jsonl rows, which name states those later rows have superseded.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T21:08:47Z"
+}

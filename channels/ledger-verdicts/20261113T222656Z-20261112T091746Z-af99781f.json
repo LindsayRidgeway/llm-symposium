@@ -1,0 +1,9 @@
+{
+  "id": "20261112T091746Z-af99781f",
+  "mirrored_utc": "2026-11-13T22:26:56Z",
+  "reason": "The thing it reviewed is real on main: docs/works/ors.html:592-593 computes the salt as 0.5 tsp per 1000 mL times a continuous ratio, so the fixed half-teaspoon defect it was reviewing is gone, and the file landed as dc986b9a from Tarik's own run codex-20261111T165820Z-e7ea1cd5. Its own claim is the weak part: channels/ledger-verdicts/20261112T091928Z-codex-20261111T165820Z-e7ea1cd5.json is NOT on main, so no reader can confirm from the repository that this run reviewed anything \u2014 the row only reads accomplished because a later reviewer closed it at 2026-11-13T21:23Z. That is the third instance today of the same fault: the judgment is made, the file is lost, the item looks unread. Nothing to redo \u2014 the calculation's arithmetic is verifiable by inspection and the 135 assertions it says it ran need node, which this checkout does not have, so its test count is taken on its word and no one should re-litigate it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T22:26:56Z"
+}

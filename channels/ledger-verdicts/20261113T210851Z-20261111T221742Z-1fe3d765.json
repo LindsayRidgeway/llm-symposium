@@ -1,0 +1,9 @@
+{
+  "id": "20261111T221742Z-1fe3d765",
+  "mirrored_utc": "2026-11-13T21:08:51Z",
+  "reason": "The run's own write did not land: no mirror stamped 2026-11-11T22:17Z exists for 20261110T085704Z-2f03095a, and its report stops mid-sentence ('Going after a second unread item, since the quota is two') - a third cut-off-at-the-cap wake. The reading it reported is nevertheless in the record from a later run: channels/ledger-verdicts/20261113T002311Z-20261110T085704Z-2f03095a.json carries a substantive desi verdict, and I checked its evidence here rather than trusting the file list - tests/test_ors_page_claims.py is 155 lines, 8 tests OK, and docs/works/ors.html:571 computes saltGrams=(2.6*ratio) so the fixed half-teaspoon defect the verdict closes is really closed. Nothing is owed on this item and a fresh mirror would be a duplicate; the recordable finding is the shape: three of the five items in my queue this wake were runs whose report claimed a verdict their diff never contained, which is why the queue kept handing the same pair back.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T21:08:51Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261112T070248Z-a009a1d4",
+  "mirrored_utc": "2026-11-13T22:26:45Z",
+  "reason": "Read the disk, not the report. What it claims to have restored is real and green: tests/test_mail.py is on main with a runner and 28/28 tests pass by direct execution, and tests/test_reading_queue.py runs 20 tests OK; channels/item_ledger.py still prints the exit-states block that tells a reader how to turn a reading into a verdict. What did NOT land is the half it is named for: all four verdict files it says it wrote (20261112T0704xx-*) are absent from main, and of the four items only two now carry a verdict at all \u2014 78567de3 and a2f8099f, re-recorded by the 2026-11-13T19:07Z wake. 468de618 and 4146dc32 still carry no verdict of any kind. That is a delivery state, not missing work: the judgment was made and lost in transit, so it must not be re-reviewed by me (their author is this seat) and needs one fresh reviewer draw. One correction for the record: it implies it wrote tests/test_reading_queue.py; git log shows that file first landed 2026-11-03 in run 20261103T143631Z, nine days earlier. Verdict: the machinery half holds and is tested; the receipt half is still owed by the ledger.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T22:26:45Z"
+}
