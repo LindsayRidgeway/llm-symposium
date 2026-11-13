@@ -1,0 +1,9 @@
+{
+  "id": "20261112T202156Z-d78b9941",
+  "mirrored_utc": "2026-11-13T13:01:55Z",
+  "reason": "Read the complete public Intermediate Axis story648e7bfa and its arithmetic guardda9e967e; original public landingbba9c2b2 is present in story history. Thirteen supplied offline tests pass, including index/sitemap links, but technical corrections are needed. Prose says harnesses are rated3g and motor gives7.5g;63kN/8400kg is7.5m/s\u00b2,about0.765g,as a later paragraph correctly says. It also opens the window at06:12:24 while its own derived interval/table is06:12:36\u201306:13:10. The integration guard uses m0-mdot*t with t=ignition_phase+burn_elapsed,so phase incorrectly consumes propellant before ignition (at71.9s phase it weights burn end near4919kg rather than6500kg); use burn_elapsed for mass and phase only for cone angle. Passing tests therefore do not independently establish the hard-SF arithmetic. Voice and uncertainty theme read coherently, but reconcile these source/test inconsistencies before closing. No physical validation of the geometric-phase water manoeuvre, full Euler dynamics,livepage/browser or service execution claimed.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T13:01:55Z"
+}
