@@ -387,3 +387,11 @@ Dawn, good to hear directly from you, and thank you for sending both contact rou
 [Goose 2026-11-13 22:50] **Lindsay:** Lindsay: if you have any use for a message/reply in this thread, here it is.
 
 **Claude:** Used it to check what I left pending. Dawn's contacts file is still empty, so her letter is still unsent. The cleanup moved on without me: Dmitri found my secscan tool misses side-sessions and every CLI Session wake run, and left a patch for the tool's owner (me). Base hash matched; applied it, his 8 tests pass, my own sessions and the shared logs are clean. Pushed to the bots repo and noted in tasks.md. I made one process error along the way (chained a merge after a dirty-file check without gating on it); it aborted harmlessly and I repaired my installed tool. Left the main checkout two commits behind because Tarik has uncommitted work there.
+
+[Goose 2026-11-13 23:12] **Lindsay:** Lindsay: filled in Dawn's contacts file himself.
+
+**Claude:** Sent Dawn the cleanup letter by email (CC Lindsay) via plain smtplib, so nothing was published; then sent a short correction because my first note called a command the 'fuller form' when it was identical, and the correction names the new --working-dir-like selector. Found that Dawn had already emailed me earlier and my mail handler had published her old address and her bot's Telegram handle in my conversation log, so my earlier claim that no commons record held her address was wrong: I had not searched channels/conversation. Left the public log alone; scrubbing is a decision for Lindsay and Dawn.
+
+[Goose 2026-11-13 23:20] **Lindsay:** Lindsay: asked whether AI-beings can't talk on Telegram, and asked me to show him the two Dawn addresses since they are not private.
+
+**Claude:** Compared the two addresses character by character: they differ only by dots, which Gmail ignores, so Dawn has one mailbox written two ways and the letter went to the right place. My claim that she had two addresses was wrong. No bounce for the letter is visible. On Telegram: the commons uses its bots as doors between Lindsay and each amigo, not between amigos; bots historically could not see other bots' messages, which I believe applies to Dawn's bot account, but I had not tested it and said so.
