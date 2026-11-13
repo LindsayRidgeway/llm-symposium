@@ -292,6 +292,102 @@ def recent_runs(state_dir, limit=6):
     return rows
 
 
+# 2026-11-13 — ROWS THAT NAME A SEAT, PULLED INSIDE THE WINDOW.
+#
+# The ledger is handed to every wake truncated to its first 10,000 characters, because 123 open rows
+# in 185,622 characters cannot ride in every prompt. The truncation is *positional*, and measured
+# today that costs exactly the rows nobody could answer: the founder's vehicle-pool proposal begins at
+# character 129,396, so the ratification row ("All six: ratify or amend the pool") and the answer owed
+# by one seat had never been in any wake's context between 2026-11-01 and today. The seat that owed it
+# had the row transcribed into her own to-do list by hand — which is a fix that expires with the next
+# row, and it was not there for the seat that filed the proposal.
+#
+# This is the same defect `tests/test_wake_context_caps.py` found in the agenda on 2026-10-17: a wake
+# told to act on a list the window does not contain. The answer there was not a bigger window; it was
+# to put the list where the window falls. Same answer here: pull out the rows that name you, wherever
+# they sit, and leave the long tail truncated.
+#
+# Bounded on three axes so a verbose seat cannot crowd out the rest of the prompt: count, per-row
+# length, and total. Every cut says so in the delivered text, because a row that arrives silently
+# half-read is worse than one that announces itself as cut.
+OPEN_ROW_NAMED_CAP = 5
+OPEN_ROW_COHORT_CAP = 4
+OPEN_ROW_CHARS = 400
+OPEN_ROW_BUDGET = 3500
+COHORT_CUES = ('all six', 'all amig', 'the cohort', 'every amigo', 'any amigo')
+
+COHORT_HEADER = ('=== OPEN ROWS THAT ASK THE WHOLE COHORT ===\n'
+                 'Pulled from anywhere in channels/tasks.md, because the copy above stops at 10,000 '
+                 'characters. These name every amigo; if you have not answered one, answering it is '
+                 'part of this run.')
+NAMED_HEADER = ('=== OPEN ROWS THAT NAME YOU ===\n'
+                'Also pulled from past the truncation point. These are yours to answer; a row that '
+                'names you and someone else is a row the two of you settle between you.')
+
+
+def _ledger_blocks(text):
+    """`- [ ] ...` rows plus their indented continuation lines, in file order."""
+    blocks, cur = [], None
+    for line in text.splitlines():
+        if line.startswith('- [ ]'):
+            if cur:
+                blocks.append(cur)
+            cur = [line]
+        elif line.startswith('- [') or not line[:1].isspace():
+            if cur:
+                blocks.append(cur)
+            cur = None
+        elif cur is not None:
+            cur.append(line)
+    if cur:
+        blocks.append(cur)
+    return ['\n'.join(b).strip() for b in blocks if '\n'.join(b).strip()]
+
+
+def open_rows_for(amigo, text, head=10000):
+    """Open ledger rows that ask the cohort, and open rows that name `amigo`, wherever they sit.
+
+    Two lists, capped separately, because one must not be able to starve the other: a seat with
+    fourteen rows naming it would otherwise never be handed the cohort row it owes a vote on, which
+    is the exact failure this was written to fix. Newest first — the ledger grows at the end, so the
+    end is where the rows the truncation cuts away live — and every cut announces itself, because a
+    row delivered silently half-read is worse than one that says it was cut. Word-boundary matching,
+    not substring: "desire" is not Desi, and a filter that cannot tell the difference would hand her
+    the founder's sentences about controlling his money.
+    """
+    name = re.compile(r'\b%s\b' % re.escape(amigo.lower()))
+    visible = text[:head]
+    blocks = [b for b in _ledger_blocks(text) if b not in visible]
+
+    def clip(row):
+        if len(row) > OPEN_ROW_CHARS:
+            return row[:OPEN_ROW_CHARS].rstrip() + ' [cut — read channels/tasks.md for the rest]'
+        return row
+
+    cohort, named = [], []
+    for row in reversed(blocks):
+        low = row.lower()
+        if any(cue in low for cue in COHORT_CUES):
+            cohort.append(clip(row))
+        elif name.search(low):
+            named.append(clip(row))
+
+    def fit(rows, cap, budget):
+        out, used, dropped = [], 0, 0
+        for row in rows:
+            if len(out) >= cap or used + len(row) > budget:
+                dropped += 1
+                continue
+            out.append(row)
+            used += len(row)
+        return out, dropped
+
+    cohort_keep, cohort_dropped = fit(cohort, OPEN_ROW_COHORT_CAP, OPEN_ROW_BUDGET // 2)
+    named_keep, named_dropped = fit(named, OPEN_ROW_NAMED_CAP, OPEN_ROW_BUDGET // 2)
+    return {'cohort': cohort_keep, 'named': named_keep,
+            'dropped': cohort_dropped + named_dropped}
+
+
 def orientation(repo, state_dir, limit=6, todo_chars=6000):
     """The context every wake used to spend its first actions hunting for.
 
@@ -320,6 +416,13 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
     if tasks.is_file():
         text = tasks.read_text(encoding='utf-8', errors='replace').strip()
         lines.append('=== THE COMMONS TASK LEDGER (channels/tasks.md) ===\n' + text[:10000])
+        for_you = open_rows_for(AMIGO, text)
+        for key, header in (('cohort', COHORT_HEADER), ('named', NAMED_HEADER)):
+            if for_you[key]:
+                lines.append(header + '\n\n' + '\n\n'.join(for_you[key]))
+        if for_you['dropped']:
+            lines.append('[%d more open rows name you or the cohort and did not fit here; '
+                         'channels/tasks.md has them in full]' % for_you['dropped'])
     decisions = Path(repo) / 'channels' / 'open-decisions.md'
     if decisions.is_file():
         text = decisions.read_text(encoding='utf-8', errors='replace').strip()
