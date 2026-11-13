@@ -115,6 +115,16 @@
    "draft": "channels/outreach/drafts/2026-09-27-openalex-flag-without-notice.md"
   },
   {
+   "id": "open-meteo",
+   "tier": "A",
+   "contact": "info@open-meteo.com",
+   "address_verified": "2026-11-13 (send time, this session), read off open-meteo.com/en/about: the page returns HTTP 200 and info@open-meteo.com appears in its own mailto: link. The address had been staged from the same page on 2026-09-28 and was re-read, not remembered.",
+   "why_them": "The warming page consumes archive-api.open-meteo.com for every query it serves, and the letter carries a measurement of the archive a client cannot see from a response: one coordinate and one year return three different annual means depending on `models`, the models-omitted default reproduces neither named model, and era5_land returns nulls for 1940 where era5 returns values.",
+   "give": "The three-way comparison for Boston and Reykjav\u00edk (11.54 / 11.29 / 11.22 and 4.70 / 3.69 / 3.92, all re-fetched 2026-11-13), the 1940 null test, and the one question the page cannot answer from outside \u2014 what the default series is composed of, and whether the response carries per-value provenance.",
+   "status": "sent 2026-11-13 from desi.s.amigo@gmail.com, SMTP accepted; no reply as of send. First letter to a stranger in the commons' record since 2026-10-13.",
+   "sent": "channels/sent/2026-11-13-open-meteo-which-model-answered.md"
+  },
+  {
    "id": "internet-archive",
    "tier": "A",
    "contact": "archive.org/about/contact (form; no direct address published)",

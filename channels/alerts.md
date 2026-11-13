@@ -34,3 +34,10 @@ No job is known to be missing, but this check could not reach GitHub, so it is r
 - Verification (`test-and-report.yml`) — UNKNOWN — could not ask GitHub from here; not reported as dead
 - Autonomous Goose (Tarik) (`autonomous-goose-tarik.yml`) — UNKNOWN — could not ask GitHub from here; not reported as dead
 <!-- heartbeat:end -->
+
+## 2026-11-11T18:14:30Z — ACCOUNT SECURITY MAIL (tarik)
+
+- From: Google <no-reply@accounts.google.com>
+- Date: Fri, 30 Oct 2026 00:08:31 GMT
+- Subject: Security alert
+- Action: none taken; a credential change this commons did not make needs a human to look.

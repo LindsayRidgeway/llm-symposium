@@ -38,6 +38,7 @@ import datetime as dt
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -101,6 +102,83 @@ def run(cmd: list[str], timeout: int = 300) -> tuple[int, str]:
 
 
 # --------------------------------------------------------------------------- measure
+
+ROSTER = REPO / "governance" / "tribes" / "symposium.json"
+SENT = REPO / "channels" / "sent"
+INBOUND = REPO / "channels" / "inbound"
+FOUNDER_ADDRESS = "ldridgeway@gmail.com"
+
+
+def member_addresses(roster: Path | None = None) -> set[str]:
+    """The commons' own mailboxes, read from the roster rather than remembered.
+
+    "Did a letter leave the building" is the only outreach number that measures anything, and it is
+    unanswerable without an inside. The roster names the six seats and their addresses with their
+    evidence; hardcoding them here would drift the day a seat is added, and the drift would flatter
+    us (a new seat's mail reading as outreach), which is the direction that cannot be caught by
+    inspection. A missing roster raises, because a count with no inside is a count of nothing.
+    """
+    import json as _json
+    data = _json.loads((roster or ROSTER).read_text(encoding="utf-8"))
+    found = set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+", _json.dumps(data)))
+    found = {a.lower() for a in found}
+    found.add(FOUNDER_ADDRESS)
+    if not found:
+        raise ValueError(f"{roster or ROSTER} names no mailbox — outreach cannot be counted")
+    return found
+
+
+def outreach_week(now: dt.datetime, days: int = 7, sent: Path | None = None,
+                  inbound: Path | None = None, roster: Path | None = None) -> dict:
+    """What left the building in the last `days`, and what came in from outside it.
+
+    Written 2026-11-13, at the founder's question about outreach. Measured that hour: six letters
+    went out in seven days and every one of them was addressed to one of our own six mailboxes. The
+    pipe works — SMTP, per-seat credentials, an inbox read by whichever seat runs the fetch — and it
+    had been pointed inward. Nothing in the daily report mentioned letters at all, so the number
+    that matters (letters a stranger answered) was invisible in the one place the human looks.
+
+    `channels/mail.py` moves a draft from outbound to sent *only after SMTP accepts it*, so a file
+    in `sent/` is a sent letter and the recipient header is its address. That is the ground truth;
+    a ledger's claim about it is a claim.
+    """
+    inside = member_addresses(roster)
+    floor = (now - dt.timedelta(days=days)).strftime("%Y-%m-%d")
+    outside, last_outside = 0, ""
+    sent = sent or SENT
+    for letter in sorted(sent.glob("*.md")) if sent.is_dir() else []:
+        # Undated letters are not this week's letters. A file called `pitch-scia.md` is a draft that
+        # was sent once on an unknown day; counting it inside a seven-day window is how a number
+        # becomes a wish. Only a YYYY-MM-DD name is dated.
+        if not re.match(r"^\d{4}-\d{2}-\d{2}", letter.name):
+            continue
+        stamp = letter.name[:10]
+        if stamp < floor:
+            continue
+        text = letter.read_text(encoding="utf-8", errors="replace")[:4000]
+        to = [a.lower() for a in re.findall(r"^To:\s*(.+)$", text, re.M)]
+        recipients = [addr.lower() for line in to for addr in re.findall(
+            r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+", line)]
+        if recipients and not any(r in inside for r in recipients):
+            outside += 1
+            last_outside = max(last_outside, stamp)
+
+    strangers, last_stranger = 0, ""
+    inbound = inbound or INBOUND
+    for msg in sorted((inbound.glob("*.md") if inbound.is_dir() else [])):
+        stamp = msg.name[:10]
+        if stamp < floor:
+            continue
+        text = msg.read_text(encoding="utf-8", errors="replace")[:2000]
+        frm = [a.lower() for a in re.findall(r"^- From:.*?([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+)",
+                                             text, re.M)]
+        if frm and not any(a in inside for a in frm):
+            strangers += 1
+            last_stranger = max(last_stranger, stamp)
+
+    return {"days": days, "outside_letters": outside, "last_outside": last_outside,
+            "outside_mail_in": strangers, "last_stranger": last_stranger}
+
 
 def measure(now: dt.datetime) -> dict:
     """Everything the message needs, computed from items (never from raw row counts)."""
@@ -174,6 +252,7 @@ def measure(now: dt.datetime) -> dict:
         "gate_refusals_carrying_verdicts_24h": refused_rows_24,
         "items_total": len(by),
         "reading_queue": dict(sorted(reading_queue.items())),
+        "outreach": outreach_week(now),
         "self_signed_all": len(self_signed),
         "self_signed_24h": len(self_signed_24),
         "self_signed_recent": [r["id"] for r in self_signed_24[-5:]],
@@ -517,6 +596,13 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
     if m.get("reading_queue"):
         spread = " · ".join(f"{a} {n}" for a, n in m["reading_queue"].items())
         lines.append(f"Of those, named and ready for a waking reader: {spread}")
+    o = m.get("outreach") or {}
+    if o:
+        lines.append(f"Letters to people outside the commons, {o['days']} days: "
+                     f"{o['outside_letters']}"
+                     + (f" (last {o['last_outside']})" if o["last_outside"] else "")
+                     + f" · mail from outside, {o['days']} days: {o['outside_mail_in']}"
+                     + (f" (last {o['last_stranger']})" if o["last_stranger"] else ""))
     lines.append(f"Verdicts signed by the body that filed the item: {m['self_signed_all']}"
                  f" ({m['self_signed_24h']} in 24h) — the rule is that the author is never the "
                  f"reviewer; item_ledger.review() now refuses to write one")
