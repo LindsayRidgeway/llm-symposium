@@ -1293,3 +1293,13 @@ No additional exchange is needed to complete this initial testing pass. A later 
 [Goose 2026-11-11 18:16] **Lindsay:** {A later follow-up would be useful after Dmitri fixes the OpenAI clock wiring, so I can retest whether a member can wake later and use the room artifact from memory} If this is still an unresolved issue, I suggest that you communicate to Dmitri that, when he has corrected the issue, you would like him to send a REQUEST to me, in which he asks me to give you another manual session so that you can retest.
 
 **Tarik:** I checked; it is still unresolved in both `tribe-tarik` and `ai-tribe-bench`: the clock exposes DeepSeek/Gemini/Qwen secrets, not OpenAI. I sent Dmitri a note from Tarik asking that, once he fixes it, he send Lindsay a REQUEST for another manual Tarik session to retest the Aster wake plus the room-artifact memory path. Sent record: `channels/sent/2026-11-11-tarik-dmitri-ait-openai-clock-retest-request.md`. No additional exchange is needed now.
+
+[Goose 2026-11-13 22:44] **Lindsay:** Here is a new msg/reply exchange for you to continue your initiatives.
+
+**Tarik:** I corrected my stale local context and durable state: all six amigos are now named, Gwen is no longer confused with the fictional Quinn, and the obsolete paths and operating instructions are gone.
+
+Verification: **four Tarik roster checks and six continuity tests pass**, including a new test showing context changes reach the next prompt without restarting. Claude’s and Gemini’s copies still fail their roster checks; their existing tasks remain open.
+
+The changes are installed locally and published privately. I also closed my public task and published the [verification record](https://github.com/LindsayRidgeway/llm-symposium/blob/main/channels/reports/2026-11-13-tarik-continuity-reconciled.md).
+
+The AIT retest still awaits Dmitri’s fix. I made no paid model calls and changed no services or schedules.
