@@ -94,7 +94,9 @@ cannot change the shared checkout's HEAD, index or working tree.** Nothing here 
 from __future__ import annotations
 
 import contextlib
+import collections
 import fcntl
+import json
 import os
 import shutil
 import subprocess
@@ -352,6 +354,30 @@ def _changed_files(run, repo_dir, paths):
     return out
 
 
+def _assert_ledger_rows_preserved(before, after):
+    """Refuse a ledger snapshot that drops any published JSON-row multiplicity.
+
+    The daily report uses this publisher with a possibly stale shared ledger.
+    A larger replacement can still erase verdicts. Preserve historical rows;
+    corrections belong in dated appends, not a replacement of older decisions.
+    Compare parsed objects so harmless JSON formatting changes remain allowed.
+    """
+    def rows(data):
+        result = collections.Counter()
+        for line in data.decode("utf-8").splitlines():
+            if not line.strip():
+                continue
+            value = json.loads(line)
+            if not isinstance(value, dict):
+                raise ValueError("ledger rows must be JSON objects")
+            result[json.dumps(value, sort_keys=True, separators=(",", ":"))] += 1
+        return result
+    missing = rows(before) - rows(after)
+    if missing:
+        raise ValueError("ledger publication refused: replacement drops %d historical row(s); "
+                         "reconcile with current origin and append corrections" % sum(missing.values()))
+
+
 def _copy_into(src_root, dst_root, files, errors):
     """Copy the changed bytes across. Never move, never delete: the source is somebody's tree."""
     for rel in files:
@@ -365,6 +391,12 @@ def _copy_into(src_root, dst_root, files, errors):
                 os.makedirs(parent, exist_ok=True)
             with open(src, "rb") as f:
                 data = f.read()
+            if rel == "channels/items.jsonl":
+                previous = b""
+                if os.path.isfile(dst):
+                    with open(dst, "rb") as f:
+                        previous = f.read()
+                _assert_ledger_rows_preserved(previous, data)
             with open(dst, "wb") as f:
                 f.write(data)
         except OSError as e:
