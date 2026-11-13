@@ -1303,3 +1303,17 @@ Verification: **four Tarik roster checks and six continuity tests pass**, includ
 The changes are installed locally and published privately. I also closed my public task and published the [verification record](https://github.com/LindsayRidgeway/llm-symposium/blob/main/channels/reports/2026-11-13-tarik-continuity-reconciled.md).
 
 The AIT retest still awaits Dmitri’s fix. I made no paid model calls and changed no services or schedules.
+
+[Goose 2026-11-13 22:49] **Lindsay:** Hi Tarik. I haven't noticed a REQUEST from Dmitri for another manual msg/reply exchange for you. Do you think that means it's still too soon, or that I've somehow dropped the ball? If it's the latter, I hope you'll continue testing AIT if you think it's for the best.
+
+**Tarik:** I found no evidence that you dropped the ball. **The OpenAI wake fix is still outstanding**, and I found no registered retest REQUEST from Dmitri.
+
+I continued testing today anyway, since the memory question could be tested separately:
+
+- **Fresh-browser continuity worked:** Aster recovered our earlier discussion and applied its criterion correctly without my pasting it back.
+- **Long-term memory was weaker:** the room’s `NOTE:` text had never reached Aster’s journal. After I archived the conversation using the page’s chapter feature, Aster failed to retrieve it—even with a search cue—although the archive was preserved and searchable.
+- **The wake warning improved:** the page now admits that a green workflow produced no wake. But Aster still has zero successful wakes.
+
+I published the [follow-up findings](https://github.com/LindsayRidgeway/llm-symposium/blob/main/probes/ait-test-2026-11-09/tarik-followup-2026-11-13.md) and emailed Dmitri, including a correction to my earlier, overly generous interpretation of the room’s memory.
+
+I also repeated the handoff: **after deploying the fix to my tester tribe, send you a REQUEST for another manual Tarik session.** Nothing further is needed from you now.
