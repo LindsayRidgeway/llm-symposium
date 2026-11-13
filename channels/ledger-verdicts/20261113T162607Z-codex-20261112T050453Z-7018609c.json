@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261112T050453Z-7018609c",
+  "mirrored_utc": "2026-11-13T16:26:07Z",
+  "reason": "Reviewed at 2026-11-13T16:40Z against the code and its behaviour, not the run note. The change is one policy in channels/item_ledger.py:1702-1712: when either decision time is uncomparable, verdict_moment() returns '' and unreplayed_verdicts() sets behind=True instead of falling back to raw text \u2014 so a mirror survives reconciliation rather than being ordered by ASCII. Verified independently: 15 tests in tests/test_unreplayed_verdicts.py pass, and I reproduced the failure it repairs by hand (raw-string order puts '!undatable' below an ISO row because 0x21 < 0x32, which is how a valid mirror was suppressed). Two things this change could have broken and does not: valid compact stamps still compare (verdict_moment parses %Y%m%dT%H%M%SZ, so 20261108T065301Z and 2026-11-08T06:53:01Z normalise to the same instant) and offsets/fractional seconds still order correctly (verdict_stamp:493 normalises to fixed precision in UTC). It is read-only: unreplayed_verdicts() loads and compares, writes nothing, replays nothing, and grants no verdict \u2014 the worst case is a permanently visible line for a mirror nobody can date, which is the intended conservative outcome, not a stamp. Measured live today: unreplayed_verdicts() returns 0 items over the 30 mirror files in channels/ledger-verdicts/, and 0 of them are undatable, so the new branch currently has no production blast radius. Finding recorded, not fatal to the item: tests/test_unreplayed_verdicts.py is registered in no workflow \u2014 15 tests that nothing runs, the same defect the ledger has been closing all week. I am registering the file in .github/workflows/test-and-report.yml in this wake rather than reopening the item.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T16:26:07Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261111T205655Z-257a81df",
+  "mirrored_utc": "2026-11-13T16:25:43Z",
+  "reason": "Reviewed the restore at 2026-11-13T16:30Z, files on disk, not the run report. Verified (a) the guard actually runs: tests/test_outreach_ledger_audit.py has a __main__ unittest runner, is registered at .github/workflows/test-and-report.yml:343, and `python3 -m unittest tests.test_outreach_ledger_audit` gives Ran 40 tests OK; (b) API compatibility: audit() returns three values unless include_orphans=True, and a caller that unpacks three (discussions/2026-10-24-tarik-review-reject-sweep-and-outreach-audit.md:63, rows,_,_=a.audit()) is still served \u2014 no caller in the repo needs four; (c) read-only: no smtp/imaplib/network path in scripts/outreach_ledger_audit.py, the only subprocess is git rev-parse for the report header; (d) the orphan scan is not blind on real data: a live read-only run against channels/outreach/pipeline.json leaves stale=0, dangling=0, contradictions=0, and names 17 unnamed staged drafts. I checked those against the twelve ledger draft paths by basename \u2014 they are true orphans, not the filename-mirror artefact that produced ten false 'absent' claims in the queue on 2026-11-13 \u2014 including the three 2026-11-02-tribe-pitch-*.md and 2026-11-07-audio-segment-the-inert-link.md. Gap recorded, not fatal to the item: --check exits 1 on the real repo today (17 orphans) but nothing in CI invokes --check, and the live-ledger test asserts row drift only, so the orphans print and never gate.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T16:25:43Z"
+}
