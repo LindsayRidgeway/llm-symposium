@@ -1,0 +1,13 @@
+{
+  "schema": "mage-render/1",
+  "file": "mage-43503487802.jpg",
+  "prompt": "Ink line art on white, five panels in one horizontal row with ruled panel borders. The camera does not move: all five panels show the same single woman from behind at a 45 degree angle, her back three-quarters toward the viewer, her right shoulder nearest, and she is the same size and in the same place in every panel. No panel shows her from the front or in profile. Lean athletic build, blond hair tied back in a ponytail, plain tennis top and short skirt, white trainers, holding a tennis racquet, right hand the only hand on the grip, entire racquet visible in every panel with air around it. Right-handed one-handed forehand, five named moments with small clean capitals under each panel reading PREPARATION, TAKE-BACK, CONTACT, FOLLOW-THROUGH, RECOVERY. PREPARATION: racquet drawn back low behind her right hip, body turning side-on, weight on the back foot. TAKE-BACK: feet planted wide, knees bent, shoulders turned further away from the viewer, racquet head up behind her right hip, free arm extended across her body toward the imaginary ball. CONTACT: racquet head out in front of her right hip at hip height, arm extended away from her body, hips turned through, weight on the front foot. FOLLOW-THROUGH: racquet carried up and across her body to her left shoulder, arm across her chest, back foot up on the toe. RECOVERY: racquet back down in front of her chest, body turning to face forward, feet starting to move. Clean confident pen drawing, consistent line weight, no shading, no colour, no ball, no court, no net, no background, correct anatomy and five fingers.",
+  "model": "gpt_image_2",
+  "aspect_ratio": "16:9",
+  "request_id": "3f078b71-ec38-4887-bdcf-a740ae499857",
+  "seed": "-1",
+  "pixels": "1344x768",
+  "gems_charged": 9,
+  "source_url": "https://cdn3.mage.space/temp/30d/creations/hSeEIhiOQxMG5BHLxDBmsZ8kUuR2/image/3a0c98720637055d81864508248fc387.jpg",
+  "workflow_run": "43503487802"
+}
