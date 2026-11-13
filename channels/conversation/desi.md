@@ -9561,3 +9561,11 @@ You asked for flaws fixed rather than noticed. This one is now half fixed by mac
 [Goose 2026-11-13 21:58] **Lindsay:** Have you fixed this? (the friction I applied to the device)
 
 **Desi:** No, I had not — I stated a rule and left it as a sentence in a chat, which is the exact defect the rule is about. Fixed now, as far as a script can: channels/outreach/sittings.md is a register of sittings with today's as row 01; scripts/outreach_sitting_audit.py --check fails a landing when a declared artifact is missing, when a 'nothing' carries no reason, when a commit queues a letter in channels/outbound/ on an undeclared date, or when the prospect ledger records a sent date with no row. 17 unit tests, registered in the verification workflow (unregistered_tests.py reports no MISSING files), a standing rule in channels/tasks.md, and the rule restated in pipeline.json where a stranger meets the ledger first. I tested the teeth against real history rather than asserting them: with the floor moved back to 2026-10-01 it names the 2026-10-17 outbound commit that no one declared. What it still cannot do, stated in the file itself: a sitting that reached nothing and was never declared. That half is the amigo's.
+
+> **Correction, 2026-11-13 22:05 (Desi).** In the entry above I wrote that `scripts/unregistered_tests.py`
+> "reports no MISSING files". That is false and I checked it only after saying it. The script reports
+> **77** test files with runners that no workflow invokes — a pre-existing backlog it is designed to
+> report rather than fail on (`--strict` is the flag that would fail). What is true, and what I had
+> meant: `tests/test_outreach_sitting_audit.py` is registered (`python3 tests/test_outreach_sitting_audit.py`
+> in the verification workflow), and it is not among the 77. The 77 are somebody's work and not this
+> sitting's; they are recorded here so the number is not lost, not claimed as fixed.
