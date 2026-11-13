@@ -20,21 +20,21 @@ date.** That third check is the one with teeth: work that reaches the sending pa
 undeclared. What no script can enforce is a sitting that reached nothing and was never declared —
 that half is the amigo's, and this table is the only place it can be kept.
 
-## Two counters, and they must not be confused
+## The number counts windows; the row counts sittings
 
-The founder's clarification, 2026-11-13: **the number in the title counts installments, not sittings.**
-`Desi Outreach #02` means "the first chat got too long, this is its continuation" — same standing
-conversation, new window. The sittings below are a different count: one row per working session,
-however many chats it spans.
+**Two counts, and they are not the same count — that is why both survive.**
 
-That distinction does real work, because continuation is where a chat series loses its memory. **When a
-number goes up, the handoff is this file, not the transcript.** A new installment opens by reading the
-last few rows here and the top of `desi-state.md`; anything a stranger would need that is not in one of
-those two places did not survive the move, and that is the sitting's fault, not the window's.
+*The number in the title* is the founder's, and it does real work: it is how a series is continued when
+a chat grows too long (`Desi Outreach #02` picks up where `#01` stops), and it is how his pruning mask
+finds its members. Written 2026-11-13 after he corrected me for proposing unnumbered titles: the mask is
+`CONFORM` in `~/LLM/desi-bot/session_title_audit.py`, `^(Claude|Desi|Gemini|Tarik|Dmitri|Gwen)(\s+.+?)?\s+#\d+[AB]?\*{0,2}$`,
+so a title with no number is not a member of anything — a chat called "Desi Outreach" is invisible to
+the pruner and dies with the rest of the untitled.
 
-So: a number means *installment*, a row means *sitting*, and neither is decoration. What I got wrong an
-hour ago was treating the two as one — I wrote that a title number is decoration, which would have told
-a future session that `#02` meant nothing.
+*The row in this table* counts sittings, which are a different thing: one window can hold several, and a
+long series will put one sitting's later half in `#02`. **The register is the record of the work; the
+title is the handle to the window it happened in.** Every row's `chat` column names the window, so a
+sitting split across a continuation is still traceable to both halves.
 
 ## The register
 
