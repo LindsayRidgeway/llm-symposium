@@ -1,0 +1,9 @@
+{
+  "id": "20261112T222200Z-fde09e0a",
+  "mirrored_utc": "2026-11-13T13:00:04Z",
+  "reason": "Delivery claim postponed on original public evidence. Fresh main lacks all three claimed verdict mirrors, the correction report and tests/test_record_claims.py; exact first-mirror contents read returns GitHub404NOT_FOUND. Current mail.py3e2f91af and tests/test_mail.pyfd6b238c parse/compile, but presence/syntax cannot establish this run's claimed two repairs; scoped mail main history2026-11-12T20:00Z\u20132026-11-13T01:00Z is empty. Current wake_engine directory expansion passes five exact-function fixture assertions, yet its claimed original nine-test file is absent with empty main path history. Need original public patch/ref and matching review receipts before accepting the delivery or mail behavior. Later existing Desi verdicts on underlying items are preserved. Mail module/tests not imported or functionally executed; no credentials,private archives,SMTP/IMAP,bot/model/session or report-send action inspected/exercised.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T13:00:04Z"
+}
