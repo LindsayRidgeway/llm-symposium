@@ -1,0 +1,9 @@
+{
+  "id": "20261111T210137Z-d7d9b3e4",
+  "mirrored_utc": "2026-11-13T00:23:54Z",
+  "reason": "Half delivered, and the half that is missing is its own proof-of-work. The repair is on main: channels/wake_engine.py:170 now carries the docstring that a LAND line naming a directory has named no delivery. Its nine tests are not: tests/test_record_claims.py is absent from this checkout, and the same three paths are named as unlanded in four of the last five wake summaries - it has been on a review branch since 2026-11-11 and every wake since has read the same absence. So this row is a delivery state, not work to redo: what it needs is a lander for tests/test_record_claims.py, and until that lands the folder-vs-file repair is an instrument with no test over it. Postponed on that: the blocker is a merging architecture, not a writer.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T00:23:54Z"
+}

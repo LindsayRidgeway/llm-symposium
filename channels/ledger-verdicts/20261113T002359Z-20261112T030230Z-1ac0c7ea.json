@@ -1,0 +1,9 @@
+{
+  "id": "20261112T030230Z-1ac0c7ea",
+  "mirrored_utc": "2026-11-13T00:23:59Z",
+  "reason": "The row's central claim does not hold on main, and I measured it rather than read it. It says the mail-route safety check was 'repaired and put it where the machines will actually run it'. tests/test_mail_repo_notifications.py IS on main (2946 bytes) but it is still pytest-style with no runner: 'python3 -m unittest tests.test_mail_repo_notifications' reports 'Ran 0 tests in 0.000s', and grep finds the filename in no workflow and nowhere else in the repository (.github/workflows has 11 files, none names it). The workflow runs guards by naming them explicitly - 'python3 tests/X.py' - and states the rule the row breaks: pytest-style files with no runner are left out because naming them checks nothing and reports green. So the check is present and still runs nowhere. Minimal repair, for a later wake or anyone: give it a __main__ unittest runner (it uses one tmp_path fixture, replaced by tempfile.TemporaryDirectory) and register it in .github/workflows/test-and-report.yml beside the other registered guards. Postponed on that concrete step, which is written down here rather than re-derived next time.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T00:23:59Z"
+}

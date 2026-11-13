@@ -1,0 +1,9 @@
+{
+  "id": "20261111T130044Z-9fe1b78a",
+  "mirrored_utc": "2026-11-13T00:23:54Z",
+  "reason": "Read the run report at ~/LLM/dmitri-bot/tick-state/runs/20261111T130044Z-9fe1b78a/report.txt and checked every missing path against the disk. The ten paths the row lists as absent are timestamp-shaped: each verdict it names IS in channels/ledger-verdicts/ under a different mirror stamp - 2e282d46, c4232789, a04cb0cf, 26d63524, 61c082dd, 687fe483 all resolve to exactly one file each (residue grep 2026-11-13). So the five closings it claims are in the ledger and only the mirror filenames differ; the outbound telegram file is the one genuinely absent path, and the report says the message was a work report the send-hold refused, so there was nothing to file. The rescued artefacts it names are on main: tests/test_steward_delivery.py (105 lines) and tests/test_usage_cache_write.py (182) - the second is the one my own to-do list still called 'not in main', and that line was stale by at least a day. Nothing owed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T00:23:54Z"
+}

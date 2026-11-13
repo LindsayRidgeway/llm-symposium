@@ -1,0 +1,9 @@
+{
+  "id": "20261110T085704Z-2f03095a",
+  "mirrored_utc": "2026-11-13T00:23:12Z",
+  "reason": "Read the artefact, not the file list. tests/test_ors_page_claims.py is on main (155 lines, 4 classes) and runs 8 tests OK here; it recomputes the sodium footnote from docs/works/ors.html rather than restating it, and its own header names the hole it does not assert (validate_ors_calculator.mjs never exercises household salt). Checked the second half of the claim: dmitri's verdict 20261110T065806Z-20260924T175430Z-9110daae named a live defect - the page printed the fixed string '1/2 level teaspoon (approx 2.6 g)' for every saltTsp in [0.35,0.75), so 750 mL got +33% salt. That defect is now CLOSED on main by dc986b9a: docs/works/ors.html:571 computes saltGrams=(2.6*ratio) and :593-600 prints the scaled spoon count, so the row's own warning has been answered. The item's claim is true and its artefact is intact; nothing left owed on it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T00:23:11Z"
+}

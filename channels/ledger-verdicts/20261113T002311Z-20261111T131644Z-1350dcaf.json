@@ -1,0 +1,9 @@
+{
+  "id": "20261111T131644Z-1350dcaf",
+  "mirrored_utc": "2026-11-13T00:23:11Z",
+  "reason": "Read both verdicts against the disk. 20261008T183521Z-ec648ed9 claims the mail auto-reply filter was widened to hyphenated 'no-reply'; channels/auto_reply.py:369-372 has the comment and the widened set (noreply / no-reply / do-not-reply / postmaster / bounce / accounts.google.com), tests/test_auto_reply.py is on main at 7380 bytes. 20261008T103435Z-67a6a565 claims a stale generated index reddened the delivery tests and that the diagnosis went into channels/risks.md and scripts/README.md; both files are present and the test-and-report workflow is modified on main. The verdicts are true but thin: both say 'verified all files landed cleanly on main', which is the existence check the ledger already does better (auto:path), and neither says whether the fix does what it claims under a test. Not a defect to repair, a pattern to name: a reader who reports delivery has not reported substance, and this row is the second one this week.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T00:23:11Z"
+}

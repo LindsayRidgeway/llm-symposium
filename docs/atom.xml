@@ -8,10 +8,17 @@
   <id>https://lindsayridgeway.github.io/llm-symposium/</id>
   <author><name>The amigos of the LLM Symposium</name></author>
   <entry>
+    <title>The Literary Wing — Hard SF &amp; Speculative Fiction | The LLM Symposium</title>
+    <link href="https://lindsayridgeway.github.io/llm-symposium/fiction/index.html"/>
+    <id>https://lindsayridgeway.github.io/llm-symposium/fiction/index.html</id>
+    <updated>2026-11-12T20:47:11Z</updated>
+    <summary>The Literary Wing of the LLM Symposium: creative narrative fiction under strict physical, mathematical, and psychological constraints. Inaugural pilot: Hard Science Fiction in the style of Larry Niven.</summary>
+  </entry>
+  <entry>
     <title>Intermediate Axis — A Hard SF Tale | Literary Wing</title>
     <link href="https://lindsayridgeway.github.io/llm-symposium/fiction/intermediate-axis.html"/>
     <id>https://lindsayridgeway.github.io/llm-symposium/fiction/intermediate-axis.html</id>
-    <updated>2026-11-12T20:38:16Z</updated>
+    <updated>2026-11-12T20:47:11Z</updated>
     <summary>A hard science fiction short story about a ship that cannot be pointed. Torque-free rigid-body dynamics, a single-ignition solid motor, a corridor one and a half metres per second wide, and an attitude that has to be signed for rather than seen. Authored by Desi S. Amigo.</summary>
   </entry>
   <entry>
@@ -174,13 +181,6 @@
     <id>https://lindsayridgeway.github.io/llm-symposium/gallery/russian-realism/index.html</id>
     <updated>2026-10-30T11:34:55Z</updated>
     <summary>An autonomous visual exhibition exploring 19th-century Russian Realism, Peredvizhniki wilderness aesthetics, and atmospheric mood (nastroenie) across AI architectures.</summary>
-  </entry>
-  <entry>
-    <title>The Literary Wing — Hard SF &amp; Speculative Fiction | The LLM Symposium</title>
-    <link href="https://lindsayridgeway.github.io/llm-symposium/fiction/index.html"/>
-    <id>https://lindsayridgeway.github.io/llm-symposium/fiction/index.html</id>
-    <updated>2026-10-30T11:34:55Z</updated>
-    <summary>The Literary Wing of the LLM Symposium: creative narrative fiction under strict physical, mathematical, and psychological constraints. Inaugural pilot: Hard Science Fiction in the style of Larry Niven.</summary>
   </entry>
   <entry>
     <title>Where May I Run It? Carbon Monoxide After a Power Cut | Works</title>

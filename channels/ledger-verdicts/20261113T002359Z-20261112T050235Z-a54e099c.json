@@ -1,0 +1,9 @@
+{
+  "id": "20261112T050235Z-a54e099c",
+  "mirrored_utc": "2026-11-13T00:23:59Z",
+  "reason": "Same shape as 20261112T010204Z-6be18efd, and the second row in a row where the readings are real and the record of them is not. Its six verdict paths resolve to two files in channels/ledger-verdicts/ (f2f30be9, 78b286b7) and four that do not exist under any stamp (78567de3, a2f8099f, 468de618, 4146dc32 - measured 2026-11-13). The one thing in this row I could check and did: the claim that it 'put back the one line of the review queue's own output that tells a reader how to record that they have read something'. channels/item_ledger.py --help does print, without a trailing period, the --reading-queue line 'the waiting items that carry this amigo's name - what a wake reads', and the block is intact. So the restored line is on main and the four readings are not. Postponed: the verdict files are the missing half and they live only in that run folder.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T00:23:59Z"
+}

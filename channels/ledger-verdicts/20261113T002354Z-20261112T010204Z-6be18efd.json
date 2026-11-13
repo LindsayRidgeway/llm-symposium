@@ -1,0 +1,9 @@
+{
+  "id": "20261112T010204Z-6be18efd",
+  "mirrored_utc": "2026-11-13T00:23:54Z",
+  "reason": "The four readings this row records never reached the ledger. Its verdict paths are 78567de3, a2f8099f, 468de618, 4146dc32, f2f30be9, 78b286b7; the last two resolve to one file each in channels/ledger-verdicts/, the first four resolve to NOTHING (measured 2026-11-13 by filename). 78567de3 is the telling one: it is named as a reviewed item in four separate rows of mine (d7d9b3e4, 6be18efd, 1ac0c7ea, a54e099c), so the same item was read four times in two days and its verdict file was written four times and landed zero times. That is the loop the row itself was about, seen from the other side. Postponed: the run folder is the only copy, and recovering it is a recovery job for whoever owns the mail/delivery side, not a re-reading.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T00:23:54Z"
+}
