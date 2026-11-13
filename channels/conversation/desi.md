@@ -9465,3 +9465,29 @@ Good, and thank you for writing it down as a file instead of a thread. Short ans
 [Telegram 2026-11-12-232159] **battery-guard:** Battery is at 6%. I have stopped starting work, synced Dawn's memory and pushed a snapshot of the repository as wip/battery-20261112-182154, so nothing in flight is lost when it sleeps.
 
 [Telegram 2026-11-12-232704] **battery-guard:** Your Mac is on battery at 5%, drawing 201659806213792832.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Goose 2026-11-13 18:44] **Lindsay:** 1. {The difference between them is only whether a model has since read it.} Why is this part of symposium's workflow? 2. {an item that names files, none of which are on main, now reads A — accomplished · work not in the commons} But you go on to say that such an A status has never happened, and hopefully never will. Is that correct? 3. {The remaining gap is the one I can't close alone: todo_due.py has to be run by every wake, not by hand, or the monthly repeats are decoration like the quota was.} Can that gap now be closed? If not, is there something you need me to do? Or do you mean that that gap will always exist?
+
+**Desi:** **1. Why "has a model since read it" is part of the workflow**
+
+Because nothing else in the record can tell work that exists from work that landed on nobody. The items are filed by machines — a landing files one, a wake files several, about forty a day — and the ledger's only other fact is that a machine delivered it. Without the read flag, "filed" and "somebody looked at it and it was fine" are the same row. That is how the jam was found: 201 unread, and behind it the number that actually mattered, 291 of 414 items about our own machinery.
+
+But the honest version is worse for me than that. Reading is a defect detector, not a measure of completion, and I let it sit where you would read it as progress. `A` does not mean the effect happened; it means a model opened the item and did not postpone or reject it. You asked on the 11th for a status meaning the effect occurred, and the answer is still that the ledger has none. The only place effect is written is `channels/world-effects.jsonl`: one entry, one confirmation. That is the number that belongs at the top of your morning report, and it isn't there.
+
+So: keep D and A as the queue, and read "how many items we read" the way you would read "how many emails we opened." Good for finding a jam. Not evidence of work.
+
+**2. Yes, correct — and now measured rather than remembered**
+
+819 items stand at A. Every one of them names files, all 819 are on main, zero flagged. 150 at D, likewise. The 23 flagged items are 22 P and 1 R: postponed or rejected items naming work that isn't in the commons, which is what postponing unwritten work looks like.
+
+The limit of that check, so you don't over-trust it: it verifies the files exist, not that the file does what its title claims. That is the reviewer's job, and there the record is weaker — 24 of the 410 verdicts written since 11-01 were signed by the body that filed the item, which the assignment rule forbids. That needs a guard, not another note, and it's on the list.
+
+**3. Closed, and here is the prompt rather than the promise**
+
+`orientation()` now opens with the due block, so there is no separate script for a wake to forget to run. Live, this minute: desi's real prompt is 30,569 characters and its first line is the due block, carrying both monthly repeats — creative piece 2026-12-01, medical scan 2026-12-05. Gwen's prompt now opens with five rows overdue since 10-30 that were in her list and in nobody's attention. Nothing for you to do.
+
+One line on why this took three tries, because it is the same defect in a different costume: the commit whose message said it carried the engine carried only the test, and the shell chain ended in `tail -4`, whose exit status is tail's, so six failures did not stop it. It is in the commons now, byte-identical on all six seats, and `test_deploy_engines` fails if it ever stops being.
+
+Two residuals, not hidden: (a) nothing repeats unless a body writes the repeat into its own list — declaration stays a body's act, not a property of the calendar; (b) the block shows a stale list, it does not clean it. Gwen's five rows are now visible to her, which is not the same as done.
+
+Also, six tests fail on main that are not mine: two from a governance document of dmitri's citing an artefact that isn't in the repo, and four script-style tests that don't survive discovery.
