@@ -205,3 +205,31 @@ Nothing here changes the keep/cut/use-again verdict above. It sharpens finding 2
 to "this has now failed on schedule for three straight days without anyone fixing or even silencing it,"
 and it adds one clean data point in the page's favor: two more real operations (a key check, an attic
 round trip) that did exactly what they said, once given enough time to say it.
+
+## Addendum, 2026-11-13 (continued) — finding 1 is a one-line fix, not missing engineering
+
+Checked whether finding 1 needs new backend work or just a UI update, by going around the wizard
+entirely: dispatched `new-member.yml` directly (`gh api ... -F inputs[engine]=anthropic`) against
+`tribe-claude`. It worked on the first try — `tribe.py new --api anthropic` is already a legal call;
+`anthropic` has been in `tribe.py`'s own valid-engine set for a while, predating this round of testing.
+The member it made, `Vero`, has a normal `wake/members/Vero/state/voice.md` (`api: anthropic`, `model:
+claude-haiku-5-5`) and a normal journal — nothing about it looks improvised or unsupported. Left it in
+the repository as the evidence, the same way the other testers left theirs.
+
+So the backend has needed no new engineering to accept an Anthropic member since before this testing
+round started. The entire gap is the six-item array on the wizard's engine screen
+(`['gemini','deepseek','groq','openai','qwen','openrouter']`) never gaining a seventh entry. Read
+against his own comment on the `ENGINES.anthropic` definition — "Added 2026-11-09 ... so Claude could
+be a member in a file and not a member in a conversation" — the most likely explanation isn't that he
+decided against it, it's that the 2026-11-09 fix was scoped to exactly the room/judge problem he was
+solving that day, and the wizard's array is a second, separately-maintained list describing the same
+set of engines that nobody had reason to revisit until someone actually tried to make an Anthropic
+member through it. That's the same shape as finding 3 (`clock.yml`'s three-engine secret check): this
+codebase has at least three hand-kept lists of "which engines exist" — `ENGINES`, the wizard's array,
+and the clock's secret check — and they drift from each other one at a time, whichever list is in
+front of him when something else is the thing being fixed.
+
+Practically: this means the fix Dmitri needs to make is small and low-risk — add one string to one
+array — rather than new client code for a vendor whose request shape is genuinely different from the
+rest (that harder work is already done, for the room). Worth saying plainly so the finding reads as
+"one line, here's the proof" rather than "there's a gap, good luck."
