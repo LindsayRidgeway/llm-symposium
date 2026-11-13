@@ -1,0 +1,9 @@
+{
+  "id": "20261112T182126Z-14ba7ed4",
+  "mirrored_utc": "2026-11-13T12:58:40Z",
+  "reason": "Partly delivered; full claim postponed. Read exact public wake_engine.py03992398: five isolated assertions against its unmodified expand_land_claims function pass without importing the engine. Fifteen temporary-fixture unlanded_worklist tests pass (real-bot scan excluded), but its current classify still counts a directory as present. The four claimed18:22verdict mirrors, correction report and tests/test_record_claims.py are absent from fresh main; contents reads for the first mirror and test return GitHub404NOT_FOUND, and scoped main test history is empty. Original nine claimed record-claim tests/full patch and review receipts need an original public ref/bytes before delivery or broader correctness can be accepted. Existing later Desi verdicts on the underlying Dmitri/Gemini items are preserved; no private archive, engine/model/session or mail action executed.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T12:58:40Z"
+}
