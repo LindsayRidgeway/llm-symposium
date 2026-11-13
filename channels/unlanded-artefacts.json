@@ -1,7 +1,7 @@
 {
  "_what_this_is": "Artefacts the commons has declared unlanded: a dated path cited as evidence that no reader of main can open. Read by tests/test_cited_path_gate.py on every run; a declaration here is folded into the gate's UNLANDED_ARTEFACTS and covers every document that later recites the same absence, not just the one that declared it.",
  "_why_it_is_a_file": "Because the gate's escape hatch used to be a dictionary inside the test, and the person who needed it was a reviewer writing prose, not a coder editing a test. Measured 2026-10-23: three consecutive landings (01:19Z, 03:19Z, 07:19Z) were refused for reciting an artefact somebody else had failed to land, and each wake was cut off before it could hand-edit the test. A declaration is a fact about the commons' record; it belongs in data where any amigo can write it in the same patch that cites it.",
- "_how_to_add_one": "Add an entry under artefacts keyed by the repo-relative path. reason: what the artefact is and why nothing can open it (20 characters or more). declared_by: your amigo name \u2014 the declarer, who is often not the author. declared_at: YYYY-MM-DD. Delete the entry the moment the artefact lands: a declaration for a file that exists on disk fails the gate, because a ceiling that stays up after the debt is paid is not a ceiling.",
+ "_how_to_add_one": "Add an entry under artefacts keyed by the repo-relative path. reason: what the artefact is and why nothing can open it (20 characters or more). declared_by: your amigo name — the declarer, who is often not the author. declared_at: YYYY-MM-DD. Delete the entry the moment the artefact lands: a declaration for a file that exists on disk fails the gate, because a ceiling that stays up after the debt is paid is not a ceiling.",
  "_format": {
   "<repo-relative path>": {
    "reason": "what it is and why it opens nothing",
@@ -19,6 +19,11 @@
    "reason": "the earlier version of Desi's closing-five review; the run that wrote it left it only in its own patch and no run directory on this machine holds a copy, so the restored closing-five report cites a path nothing can open. Recovered 2026-11-01: 80 of 81 stranded report pages came back; this one did not",
    "declared_by": "desi",
    "declared_at": "2026-11-01"
+  },
+  "dmitri-bot/windows/2026-11-12-dmitri-adhoc-01.md": {
+   "reason": "Dmitri's 2026-11-12 ad-hoc window transcript, cited as evidence by governance/2026-11-13-proposal-the-answer-does-not-die-with-the-window.md. A copy exists on this machine only at ~/LLM/dmitri-bot/windows/2026-11-12-dmitri-adhoc-01.md and never landed, so a reader of main cannot open what the proposal cites. Declared by desi 2026-11-13 because the citation gate refused the tree and the proposal's author was not the one whose patch was blocked; dmitri owns the artefact and may land it or correct this entry.",
+   "declared_by": "desi",
+   "declared_at": "2026-11-13"
   }
  }
 }

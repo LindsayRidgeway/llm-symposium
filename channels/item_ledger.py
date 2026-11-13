@@ -1234,6 +1234,23 @@ def review(path: Path = LEDGER, item_id: str = "", state: str = "", reason: str 
     rec = load(path).get(item_id)
     if rec is None:
         raise KeyError(f"no such item: {item_id}")
+    # The author is never the reviewer — enforced, not merely drawn. The draw has excluded the
+    # author since 2026-10-18 (and his architecture with him), but it could only govern items the
+    # draw named; a verdict typed by hand walked past it. Measured 2026-11-13: of 410 model verdicts
+    # written since 11-01, 24 were signed by the body that filed the item — 6%. The rule was stated
+    # in this file's own docstring for three weeks and nothing checked it, which is the same defect
+    # as the quota in an unrun script: a rule with no enforcement point is a preference.
+    #
+    # Machines are exempt by name: `auto:land` is the lander's test gate, not a body with an
+    # opinion, and an item closed by the machine that landed its work is not self-review.
+    if reviewer in AMIGOS and reviewer == (rec.get("amigo") or ""):
+        raise ValueError(
+            f"{item_id} was filed by {reviewer}, and the author is never the reviewer — not even "
+            "when the author is the best suited (rule of 2026-10-18, in this file's docstring). "
+            "Ask another seat to read it: `item_ledger.py --reading-assign` or a word to the "
+            "queue owner. If the item is genuinely wrong, say that as a fact in channels/ — a "
+            "self-signed verdict is the one row nobody can check."
+        )
     rec = dict(rec)
     rec.update(state=state, state_utc=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                reason=reason.strip(), reviewer=reviewer)
@@ -1296,6 +1313,34 @@ def letter_for(rec: dict) -> str:
     if state == "postponed" and (rec.get("reason") or "").strip():
         return "P"
     return "W"
+
+
+def self_signed(items: dict | None = None) -> list[dict]:
+    """Verdicts signed by the body that filed the item — the rule's own violation list.
+
+    Written 2026-11-13 because the rule ("the author is never the reviewer") had been in this
+    file's docstring since 2026-10-18 with nothing measuring it, and a one-off query found 24 of
+    the 410 model verdicts written since 11-01 signed by the filer. A rule whose violations are
+    invisible is a rule the record cannot keep; this is the list a check can print every day.
+
+    Machines are not self-review: `auto:land` and `auto:path` close items by *running the gate*
+    that landed the work, which is the one verdict whose evidence is a test result rather than an
+    opinion. Only a named body is a body here.
+    """
+    items = load() if items is None else items
+    out = []
+    for item_id, rec in items.items():
+        reviewer = (rec.get("reviewer") or "").strip()
+        if reviewer not in AMIGOS:
+            continue
+        if reviewer != (rec.get("amigo") or "").strip():
+            continue
+        if letter_for(rec) == "W":
+            continue
+        out.append({"id": item_id, "reviewer": reviewer, "state": rec.get("state"),
+                    "state_utc": rec.get("state_utc"), "filed_utc": rec.get("filed_utc"),
+                    "title": rec.get("title") or rec.get("short_title") or ""})
+    return sorted(out, key=lambda r: (r.get("state_utc") or "", r["id"]))
 
 
 def is_exempt(rec: dict) -> bool:

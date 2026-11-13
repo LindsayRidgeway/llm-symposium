@@ -200,5 +200,68 @@ class Quota(unittest.TestCase):
             self.assertEqual(il.load(path)["x"]["assigned_to"], "desi")
 
 
+class SelfSigned(unittest.TestCase):
+    """The author is never the reviewer — a rule that had no enforcement point until 2026-11-13.
+
+    It had been stated in `item_ledger`'s docstring since 2026-10-18 and only ever applied to the
+    *draw*: an item the draw named went to somebody else, but a verdict typed by hand walked past
+    the rule entirely. Measured that day: 24 of the 410 model verdicts written since 11-01 were
+    signed by the body that filed the item. Nothing noticed, because nothing was measuring.
+    """
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.path = Path(self.dir.name) / "items.jsonl"
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def test_a_verdict_signed_by_the_filer_is_listed(self):
+        il.append([row("mine", state="accomplished", reviewer="desi",
+                       reason="docs/works/mine.html")], self.path)
+        got = il.self_signed(il.load(self.path))
+        self.assertEqual([r["id"] for r in got], ["mine"])
+        self.assertEqual(got[0]["reviewer"], "desi")
+
+    def test_a_machine_closure_and_another_body_are_not_self_review(self):
+        il.append([row("landed", state="accomplished", reviewer="auto:land",
+                       reason="landed on main (lander's test gate passed)"),
+                   row("theirs", state="accomplished", reviewer="dmitri",
+                       reason="docs/works/theirs.html")], self.path)
+        self.assertEqual(il.self_signed(il.load(self.path)), [])
+
+    def test_the_ledger_refuses_to_write_one(self):
+        real = il.LEDGER
+        il.LEDGER = self.path
+        try:
+            il.append([row("mine")], self.path)
+            with self.assertRaises(ValueError) as caught:
+                il.review(item_id="mine", state="postponed", reason="not now",
+                          reviewer="desi", path=self.path)
+            self.assertIn("author is never the reviewer", str(caught.exception))
+            self.assertEqual(il.load(self.path)["mine"]["state"], None)
+        finally:
+            il.LEDGER = real
+
+    def test_another_body_may_still_close_it(self):
+        il.append([row("mine")], self.path)
+        rec = il.review(item_id="mine", state="postponed", reason="not now",
+                        reviewer="gemini", path=self.path)
+        self.assertEqual(rec["reviewer"], "gemini")
+
+    def test_the_daily_check_prints_the_number(self):
+        """Wired, not merely available: the count is in the message the human reads every day."""
+        sys.path.insert(0, str(REPO / "scripts"))
+        import ledger_watch as lw
+        import datetime as dt
+        m = lw.measure(dt.datetime.now(dt.timezone.utc))
+        self.assertIn("self_signed_all", m)
+        text = lw.message(m, None, "yesterday", {}, True, ["nothing to explain"], "test")
+        self.assertIn("signed by the body that filed the item", text)
+        self.assertIn(str(m["self_signed_all"]), text)
+
+
 if __name__ == "__main__":
     unittest.main()
+
+

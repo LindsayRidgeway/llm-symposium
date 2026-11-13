@@ -144,6 +144,14 @@ def measure(now: dt.datetime) -> dict:
             else:
                 pile += 1
 
+    # Verdicts signed by the body that filed the item. The rule ("the author is never the
+    # reviewer") has been in item_ledger's docstring since 2026-10-18 and nothing measured it until
+    # 2026-11-13, when a one-off query found 24 of 410 verdicts since 11-01 signed by the filer. A
+    # rule whose violations are invisible is a rule the record cannot keep, so the number is now
+    # printed every day, next to the ones the human already reads.
+    self_signed = il.self_signed({k: latest(v) for k, v in by.items()})
+    self_signed_24 = [r for r in self_signed if (r.get("state_utc") or "") >= cutoff]
+
     refusals_24, refused_rows_24 = refused_patches(now - dt.timedelta(hours=24))
     reading_queue: dict[str, int] = {}
     for rec in by.values():
@@ -166,6 +174,9 @@ def measure(now: dt.datetime) -> dict:
         "gate_refusals_carrying_verdicts_24h": refused_rows_24,
         "items_total": len(by),
         "reading_queue": dict(sorted(reading_queue.items())),
+        "self_signed_all": len(self_signed),
+        "self_signed_24h": len(self_signed_24),
+        "self_signed_recent": [r["id"] for r in self_signed_24[-5:]],
     }
 
 
@@ -506,6 +517,9 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
     if m.get("reading_queue"):
         spread = " · ".join(f"{a} {n}" for a, n in m["reading_queue"].items())
         lines.append(f"Of those, named and ready for a waking reader: {spread}")
+    lines.append(f"Verdicts signed by the body that filed the item: {m['self_signed_all']}"
+                 f" ({m['self_signed_24h']} in 24h) — the rule is that the author is never the "
+                 f"reviewer; item_ledger.review() now refuses to write one")
     lines.append(f"Refused landings, 24h: {m['gate_refusals_24h']}"
                  f" ({m['gate_refusals_carrying_verdicts_24h']} carried a verdict)")
     did = []
