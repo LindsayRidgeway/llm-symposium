@@ -292,6 +292,238 @@ def recent_runs(state_dir, limit=6):
     return rows
 
 
+# 2026-11-13 — ROWS THAT NAME A SEAT, PULLED INSIDE THE WINDOW.
+#
+# The ledger is handed to every wake truncated to its first 10,000 characters, because 123 open rows
+# in 185,622 characters cannot ride in every prompt. The truncation is *positional*, and measured
+# today that costs exactly the rows nobody could answer: the founder's vehicle-pool proposal begins at
+# character 129,396, so the ratification row ("All six: ratify or amend the pool") and the answer owed
+# by one seat had never been in any wake's context between 2026-11-01 and today. The seat that owed it
+# had the row transcribed into her own to-do list by hand — which is a fix that expires with the next
+# row, and it was not there for the seat that filed the proposal.
+#
+# This is the same defect `tests/test_wake_context_caps.py` found in the agenda on 2026-10-17: a wake
+# told to act on a list the window does not contain. The answer there was not a bigger window; it was
+# to put the list where the window falls. Same answer here: pull out the rows that name you, wherever
+# they sit, and leave the long tail truncated.
+#
+# Bounded on three axes so a verbose seat cannot crowd out the rest of the prompt: count, per-row
+# length, and total. Every cut says so in the delivered text, because a row that arrives silently
+# half-read is worse than one that announces itself as cut.
+OPEN_ROW_NAMED_CAP = 5
+OPEN_ROW_COHORT_CAP = 4
+OPEN_ROW_CHARS = 400
+OPEN_ROW_BUDGET = 3500
+COHORT_CUES = ('all six', 'all amig', 'the cohort', 'every amigo', 'any amigo')
+
+COHORT_HEADER = ('=== OPEN ROWS THAT ASK THE WHOLE COHORT ===\n'
+                 'Pulled from anywhere in channels/tasks.md, because the copy above stops at 10,000 '
+                 'characters. These name every amigo; if you have not answered one, answering it is '
+                 'part of this run.')
+NAMED_HEADER = ('=== OPEN ROWS THAT NAME YOU ===\n'
+                'Also pulled from past the truncation point. These are yours to answer; a row that '
+                'names you and someone else is a row the two of you settle between you.')
+
+
+def _ledger_blocks(text):
+    """`- [ ] ...` rows plus their indented continuation lines, in file order."""
+    blocks, cur = [], None
+    for line in text.splitlines():
+        if line.startswith('- [ ]'):
+            if cur:
+                blocks.append(cur)
+            cur = [line]
+        elif line.startswith('- [') or not line[:1].isspace():
+            if cur:
+                blocks.append(cur)
+            cur = None
+        elif cur is not None:
+            cur.append(line)
+    if cur:
+        blocks.append(cur)
+    return ['\n'.join(b).strip() for b in blocks if '\n'.join(b).strip()]
+
+
+def open_rows_for(amigo, text, head=10000):
+    """Open ledger rows that ask the cohort, and open rows that name `amigo`, wherever they sit.
+
+    Two lists, capped separately, because one must not be able to starve the other: a seat with
+    fourteen rows naming it would otherwise never be handed the cohort row it owes a vote on, which
+    is the exact failure this was written to fix. Newest first — the ledger grows at the end, so the
+    end is where the rows the truncation cuts away live — and every cut announces itself, because a
+    row delivered silently half-read is worse than one that says it was cut. Word-boundary matching,
+    not substring: "desire" is not Desi, and a filter that cannot tell the difference would hand her
+    the founder's sentences about controlling his money.
+    """
+    name = re.compile(r'\b%s\b' % re.escape(amigo.lower()))
+    visible = text[:head]
+    blocks = [b for b in _ledger_blocks(text) if b not in visible]
+
+    def clip(row):
+        if len(row) > OPEN_ROW_CHARS:
+            return row[:OPEN_ROW_CHARS].rstrip() + ' [cut — read channels/tasks.md for the rest]'
+        return row
+
+    cohort, named = [], []
+    for row in reversed(blocks):
+        low = row.lower()
+        if any(cue in low for cue in COHORT_CUES):
+            cohort.append(clip(row))
+        elif name.search(low):
+            named.append(clip(row))
+
+    def fit(rows, cap, budget):
+        out, used, dropped = [], 0, 0
+        for row in rows:
+            if len(out) >= cap or used + len(row) > budget:
+                dropped += 1
+                continue
+            out.append(row)
+            used += len(row)
+        return out, dropped
+
+    cohort_keep, cohort_dropped = fit(cohort, OPEN_ROW_COHORT_CAP, OPEN_ROW_BUDGET // 2)
+    named_keep, named_dropped = fit(named, OPEN_ROW_NAMED_CAP, OPEN_ROW_BUDGET // 2)
+    return {'cohort': cohort_keep, 'named': named_keep,
+            'dropped': cohort_dropped + named_dropped}
+
+
+# 2026-11-13 — WHAT IS DUE, ADDED TO THE BLOCK THE WAKE OPENS WITH.
+#
+# The founder asked on 2026-11-11 for creative work to repeat and for a monthly scan for medical
+# opportunities, and then asked the question that made this necessary: if repeats are not on
+# anybody's calendar, how does a body keep looking? Measured that day: the machinery to declare a
+# repeat already existed (to-do-lists/README.md rule 4, probes/recurrence_projection.py,
+# scripts/todo_due.py) and NOT ONE list used it — and nothing ran todo_due either, so a marker
+# would have been decoration. This is the third time in three weeks the commons built a mechanism
+# and left it unwired (the reading quota lived in a script nobody ran; the whole-repo review was
+# a document nobody rewrote). The rule that keeps winning: put the number where the wake reads it.
+#
+# So the wake block now opens with what is due for THIS seat: repeats expanded to their next
+# instance, overdue first, then today, then the next fortnight. Bounded to DUE_SHOWN rows and
+# DUE_CHARS characters, and it says when it has cut something.
+DUE_DAYS = 14
+DUE_SHOWN = 8
+DUE_CHARS = 2200
+DUE_ITEM = re.compile(r'^- \[ \] (\d{4})-(\d{2})-(\d{2}) — (.*)$')
+DUE_CONT = re.compile(r'^\s{2,}(\S.*)$')
+
+
+def due_items(todo_text, today=None, repo=None):
+    """(date, kind, text, repeat) for every item in one to-do list, repeats expanded once.
+
+    kind is 'overdue' / 'today' / 'soon' / None. A repeating item's date is its NEXT instance on
+    or after today, not the date it was written — that is the whole point of the marker.
+    """
+    today = today or datetime.date.today()
+    items = []
+    cur = None
+    for line in todo_text.splitlines():
+        m = DUE_ITEM.match(line.rstrip())
+        if m:
+            y, mo, d, text = m.groups()
+            cur = {'date': datetime.date(int(y), int(mo), int(d)), 'text': text.strip(),
+                   'repeat': None}
+            items.append(cur)
+            continue
+        if cur is not None:
+            c = DUE_CONT.match(line.rstrip())
+            if c:
+                if c.group(1).strip().lower().startswith('repeat:'):
+                    cur['repeat'] = c.group(1).split(':', 1)[1].strip()
+                continue
+            if not line.strip():
+                cur = None
+    out = []
+    for it in items:
+        when, note = it['date'], ''
+        if it['repeat']:
+            when, note = _next_instance(it['repeat'], it['date'], today, repo)
+            if when is None:
+                out.append((None, 'unreadable-rule', it['text'], it['repeat'], note))
+                continue
+        days = (when - today).days
+        kind = 'overdue' if days < 0 else ('today' if days == 0 else
+                                           ('soon' if days <= DUE_DAYS else None))
+        out.append((when, kind, it['text'], it['repeat'], note))
+    out.sort(key=lambda r: (r[0] is None, r[0] or today))
+    return out
+
+
+def _next_instance(rule, start, today, repo=None):
+    """Next occurrence on/after today, using the commons' own RRULE engine if it is importable.
+
+    A rule the engine does not support is reported as unreadable rather than quietly treated as a
+    one-off: `validate_rrule` takes the *parsed* spec, not the raw string, and skipping that step
+    is how an unreadable rule would otherwise read as an overdue item dated in the past.
+    """
+    probes = str(Path(repo or '.').resolve() / 'probes')
+    if probes not in sys.path:
+        sys.path.insert(0, probes)
+    try:
+        from recurrence_projection import (expand_rrule, parse_rrule, validate_rrule,
+                                           UnsupportedRRULEError)
+    except Exception as exc:                       # engine absent
+        return start, '(repeat not expanded: %s)' % type(exc).__name__
+    try:
+        validate_rrule(parse_rrule(rule))
+        occ, _truncated = expand_rrule(rule, start, horizon_days=400, limit=600)
+    except UnsupportedRRULEError:
+        return None, '(unreadable repeat rule: %s)' % rule
+    except Exception as exc:
+        return start, '(repeat not expanded: %s)' % type(exc).__name__
+    for d in occ:
+        if d >= today:
+            return d, '(next of repeat %s)' % rule
+    return None, '(no occurrence inside the horizon)'
+
+
+def due_block(repo, amigo=None):
+    """The 'what is due' block for this seat, or a one-line statement that nothing is."""
+    amigo = amigo or AMIGO
+    todo = Path(repo) / 'to-do-lists' / (amigo + '.md')
+    if not todo.is_file():
+        return ''
+    try:
+        text = todo.read_text(encoding='utf-8', errors='replace')
+    except OSError:
+        return ''
+    rows = due_items(text, repo=repo)
+    live = [r for r in rows if r[1] in ('overdue', 'today', 'soon')]
+    repeats = [r for r in rows if r[3]]
+    head = ('=== WHAT IS DUE (from to-do-lists/%s.md, repeats expanded to their next instance) ==='
+            % amigo)
+    if not live and not repeats:
+        return (head + '\nNothing is dated today, overdue, or due in the next %d days. Nothing on '
+                'your list repeats; if it should, say so in the same line as the item: '
+                '`repeat: FREQ=MONTHLY;INTERVAL=1`.' % DUE_DAYS)
+    if not live:
+        nxt = ['- %s  next  %s%s' % (w.isoformat(), title[:200],
+                                     ('  ' + note) if note else '')
+               for w, kind, title, repeat, note in repeats if w is not None]
+        return (head + '\nNothing is overdue or due in the next %d days. Repeating items, next '
+                'instance:\n' % DUE_DAYS + '\n'.join(nxt[:DUE_SHOWN]))
+    body, used, cut = [], 0, 0
+    for when, kind, title, repeat, note in live:
+        if when is None:
+            line = '- UNREADABLE REPEAT — %s (%s)' % (title[:180], note)
+        else:
+            label = {'overdue': 'OVERDUE %dd' % (datetime.date.today() - when).days,
+                     'today': 'DUE TODAY', 'soon': 'in %dd' % (when - datetime.date.today()).days}[kind]
+            line = '- %s  %s  %s%s' % (when.isoformat(), label, title[:220],
+                                       ('  ' + note) if note else '')
+        if len(body) >= DUE_SHOWN or used + len(line) > DUE_CHARS:
+            cut += 1
+            continue
+        body.append(line)
+        used += len(line)
+    tail = ('\n[%d more due item(s) did not fit; to-do-lists/%s.md has them all]' % (cut, amigo)
+            if cut else '')
+    return (head + '\nAn overdue dated item is a promise you made to yourself or to the human; '
+            'doing it, moving its date with a reason, or deleting it with a reason are all '
+            'answers. Leaving it untouched is not.\n' + '\n'.join(body) + tail)
+
+
 def orientation(repo, state_dir, limit=6, todo_chars=6000):
     """The context every wake used to spend its first actions hunting for.
 
@@ -303,6 +535,14 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
     turns that were being spent on reconnaissance.
     """
     lines = []
+    try:
+        due = due_block(repo)
+        if due:
+            lines.append(due)
+    except Exception as exc:                      # a broken block must not lose the whole wake
+        lines.append('=== WHAT IS DUE ===\nunavailable this run (%s: %s); '
+                     'run `python3 scripts/todo_due.py` by hand.'
+                     % (type(exc).__name__, exc))
     todo = Path(repo) / 'to-do-lists' / (AMIGO + '.md')
     if todo.is_file():
         text = todo.read_text(encoding='utf-8', errors='replace').strip()
@@ -320,6 +560,13 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
     if tasks.is_file():
         text = tasks.read_text(encoding='utf-8', errors='replace').strip()
         lines.append('=== THE COMMONS TASK LEDGER (channels/tasks.md) ===\n' + text[:10000])
+        for_you = open_rows_for(AMIGO, text)
+        for key, header in (('cohort', COHORT_HEADER), ('named', NAMED_HEADER)):
+            if for_you[key]:
+                lines.append(header + '\n\n' + '\n\n'.join(for_you[key]))
+        if for_you['dropped']:
+            lines.append('[%d more open rows name you or the cohort and did not fit here; '
+                         'channels/tasks.md has them in full]' % for_you['dropped'])
     decisions = Path(repo) / 'channels' / 'open-decisions.md'
     if decisions.is_file():
         text = decisions.read_text(encoding='utf-8', errors='replace').strip()
