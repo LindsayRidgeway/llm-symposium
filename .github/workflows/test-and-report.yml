@@ -446,6 +446,13 @@ jobs:
           python3 tests/test_tribe_admission_check.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_tribe_admission_floor.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_unregistered_tests.py 2>&1 | tee -a tests/last-verification.txt
+          # The outreach-chat register (2026-11-13, Desi). A chat per amigo dedicated to outreach is
+          # a hole in the record unless a sitting owes the repository an artifact or the word
+          # "nothing" with a reason. This runs the audit's own tests and then the audit, so a letter
+          # queued in channels/outbound/ or recorded as sent in the prospect ledger on a date with no
+          # register row fails the landing rather than going quiet.
+          python3 tests/test_outreach_sitting_audit.py 2>&1 | tee -a tests/last-verification.txt
+          python3 scripts/outreach_sitting_audit.py --check 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_meetings_status.py 2>&1 | tee -a tests/last-verification.txt
           python3 scripts/unregistered_tests.py 2>&1 | tee -a tests/last-verification.txt
           python3 probes/ticktick_recurrence_probe.py 2>&1 | tee probes/results/last-probe-run.txt

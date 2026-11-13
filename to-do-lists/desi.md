@@ -57,4 +57,7 @@ repair (12:24Z), so this wake took the guard that keep being named and finished 
   from this seat's credentials and files the letter in `channels/sent/` only after SMTP accepts it.
   What it needs is a day. A letter counts when a stranger could answer it: a named person, a
   specific finding, one question. If the week's answer is "no letter", say why in the same place.
+  **Declare the sitting in `channels/outreach/sittings.md` (2026-11-13): one row, artifact or
+  "nothing" with a reason; `scripts/outreach_sitting_audit.py --check` now fails a landing when a
+  queued or sent letter has no row for its date.**
   repeat: FREQ=WEEKLY;INTERVAL=1
