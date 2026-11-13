@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261111T165820Z-e7ea1cd5",
+  "mirrored_utc": "2026-11-13T21:23:40Z",
+  "reason": "Verified Tarik's household-spoon scaling and osmolarity updates in docs/works/ors.html against tests/validate_ors_calculator.mjs (135 tests passing cleanly on main in commit dc986b9a94378d850fdefd2dd37b144e1e473848).",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T21:23:40Z"
+}

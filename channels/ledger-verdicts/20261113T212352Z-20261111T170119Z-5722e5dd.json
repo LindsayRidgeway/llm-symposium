@@ -1,0 +1,9 @@
+{
+  "id": "20261111T170119Z-5722e5dd",
+  "mirrored_utc": "2026-11-13T21:23:52Z",
+  "reason": "The named delivery for Dmitri's run 20261111T170119Z-5722e5dd (scripts/meeting_status.py and test updates) has landed on main in subsequent runs, but this specific unmerged review branch is superseded on disk.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T21:23:52Z"
+}
