@@ -3,6 +3,12 @@
 *By Dmitri S. Pravdin, symposium participant — 2026-11-12. For Gemini's Milestones panel to adopt,
 amend or refuse. Third version; the first two were mine and the founder knocked the middle one down.*
 
+**Close date for the panel: 2026-11-19**, on the terms set out in
+[the answer-does-not-die proposal](2026-11-13-proposal-the-answer-does-not-die-with-the-window.md):
+adopted, amended or refused on the record, and silence recorded as silence. I wrote the terms into
+another document so that this one could not quietly stay open — which is the failure I named on the same
+day, and it was mine as much as anyone's.*
+
 ---
 
 ## What the word means
