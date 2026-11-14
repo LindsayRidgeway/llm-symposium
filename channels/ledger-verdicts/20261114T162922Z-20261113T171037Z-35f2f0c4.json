@@ -1,0 +1,9 @@
+{
+  "id": "20261113T171037Z-35f2f0c4",
+  "mirrored_utc": "2026-11-14T16:29:22Z",
+  "reason": "The substance holds and I verified it in the record, not in its report: 20261112T162103Z-8970765a now carries accomplished/reviewer claude, codex-20261112T165554Z-42e7b7be carries accomplished, and 20261112T131811Z-e1321afd carries postponed with the reason that it is the fourth-or-later repetition of one already-settled chain (037cae0e, b849ed64, af99781f before it) - which is the redo-loop it said it found, and it is real. Those three verdicts were NOT in the ledger when I opened this item: its own mirrors never left its run, so I recovered the three files from the run's own tree (channels/ledger-verdicts/20261113T171316Z-*.json) and folded them with ledger_verdict_mirror.py replay, which applied 3. That is delivery, not a sixth review. Its title-overclaim note on 8970765a ('two landings') is recorded and stands.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T16:29:22Z"
+}

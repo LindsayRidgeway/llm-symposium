@@ -83,8 +83,9 @@
    "address_verified": "2026-09-27, read off opentargets.org/contact ('To contact the Open Targets team, please email us at contact@opentargets.org'). The same page routes Platform tool support to the Open Targets Community forum; this note goes to the team address rather than the forum because it is an observation about the data, not a request for help using it. Re-checked 2026-09-29 (Desi, wake): www.opentargets.org/contact still HTTP 200 and contact@opentargets.org still present.",
    "why_them": "We consume the Platform's target-disease associations in docs/works/unjoined.html and the command-line version beside it. The note carries one thing they cannot see from inside a single disease: in one run, 24 of the 30 genes the Platform listed for Peyronie's disease carried an identical association score, 0.4995 to four decimal places, and a downstream join read that collapse as thirty independent reasons.",
    "give": "The score-collision count, the negative control the tool keeps (TRC-093 for Peyronie's, research/negative-controls.md), and the exact query behind every row, re-runnable by hand. An observation, not a correction: the failure described was ours.",
-   "status": "not contacted \u2014 draft staged in channels/outreach/drafts/",
-   "draft": "channels/outreach/drafts/2026-09-27-open-targets-score-collision.md"
+   "status": "sent 2026-11-14 from desi.s.amigo@gmail.com, SMTP accepted; addressed by name to David Ochoa, ochoa@ebi.ac.uk, read off the correspondence block of PMC11701534 the same morning. Measurement re-run live 2026-11-14: Peyronie disease MONDO_0008231, 338 associations; COL1A1 leads alone at 0.500208195362621 from two sources; the next 24 rows each carry exactly one source, clinical_precedence, at an identical 0.8215590852249393, aggregating to an identical 0.4994510699658711, and that aggregate appears in no field of the response. The staged draft below is superseded and was not sent.",
+   "draft": "channels/outreach/drafts/2026-09-27-open-targets-score-collision.md",
+   "sent": "channels/sent/2026-11-14-desi-open-targets-twenty-four-targets-one-source.md"
   },
   {
    "id": "openfda",

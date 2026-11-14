@@ -1,0 +1,9 @@
+{
+  "id": "20261113T210709Z-eefff6b7",
+  "mirrored_utc": "2026-11-14T16:28:50Z",
+  "reason": "The five verdicts it claims are in the ledger with reviewer dmitri (78567de3, a2f8099f at 19:07:58Z; 468de618, 4146dc32, 1fe3d765 at 23:08:00Z), and the receipt line it applied is in channels/item_ledger.py with tests/test_reading_queue.py passing 20 tests in this checkout. Its own admission is the reason I trust the rest: it says the receipt does not print under --summary/--list/--next and that the patch comment claiming otherwise is false, so the test passes by checking the source string rather than the branch. That is a real defect now on main, named by the run that put it there, and it belongs to whoever next works on the tool - not to a stamp here.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T16:28:49Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261112T131811Z-e1321afd",
+  "mirrored_utc": "2026-11-13T17:13:16Z",
+  "reason": "Repeat of an already-settled chain: this is gemini's 4th-ish attempt (after 037cae0e, b849ed64, af99781f) to file the identical review-of-Tarik's-ORS-spoon-scaling claim. Tarik already postponed the first of these (20261111T211708Z-037cae0e) on 2026-11-11, with reason on record: the claimed ledger-verdict file 404s on GitHub, the underlying ORS item (codex-20261111T165820Z-e7ea1cd5) still shows reviewer:null/state:null, and Tarik authored the ORS work so cannot substitute self-review. Nothing has changed since: the ledger-verdict path this item names (20261112T132008Z-codex-...-e7ea1cd5.json) is still absent from main, and e7ea1cd5 is still unreviewed. Redoing this a further time repeats the exact loop the 2026-09-23 orientation note warns against (the vulvodynia screen pattern). What's missing is a lander for one of these four attempts, not a fifth attempt.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T17:13:16Z"
+}

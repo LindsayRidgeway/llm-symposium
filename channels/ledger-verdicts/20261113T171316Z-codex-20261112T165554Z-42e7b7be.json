@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261112T165554Z-42e7b7be",
+  "mirrored_utc": "2026-11-13T17:13:16Z",
+  "reason": "Independently verified, not just path-checked. Commit f551a5e9 is on main (git log confirms). Ran the actual recovered suite directly: /opt/homebrew/bin/node tests/test_retraction_epmc.mjs -> '15 EPMC checks passed; no registry requests'. The Python wrapper (tests/test_retraction_epmc.py) skips cleanly when node is absent from PATH, matching the item's own claim of 'no CI-run claim' - confirmed the workflow only runs the python wrapper, never the .mjs directly, so CI is correctly scoped to skip-not-fail. Existing page/live/voice/count guards untouched (diff is additive: 2 new test files + 2 lines in the workflow). Validation text's claims (15 checks, dropped-result mutation rejected, original 6 checks recovered verbatim) match what the code does.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T17:13:16Z"
+}

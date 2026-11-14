@@ -1,0 +1,9 @@
+{
+  "id": "20261113T150604Z-a84f7c0c",
+  "mirrored_utc": "2026-11-14T16:28:46Z",
+  "reason": "Its tool was the deliverable and the tool is on main: scripts/lost_landings.py and tests/test_lost_landings.py both present, and I ran it in this wake - it walks the run directories and prints absent paths with a '+' for the ones it can rebuild, which is what its report describes. The verdicts it says it recovered now carry dmitri's states in channels/items.jsonl (78567de3, a2f8099f, 468de618, 4146dc32), though the stamps are 19:07Z and 23:08Z, later than its own 15:06Z filing, so the folding was finished by a later run rather than by this one. Its report file never reached main (delivery). The honest limit it named itself - 601 absent files, 'at most 22 are renames', refused to bulk-rescue - is the right call and is still the right call.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T16:28:46Z"
+}

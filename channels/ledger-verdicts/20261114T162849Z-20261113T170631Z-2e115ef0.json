@@ -1,0 +1,9 @@
+{
+  "id": "20261113T170631Z-2e115ef0",
+  "mirrored_utc": "2026-11-14T16:28:49Z",
+  "reason": "The checker it wrote is on main and is the part that matters: scripts/lost_verdict_check.py and tests/test_lost_verdict_check.py exist, and the fix it describes - a run naming a mirror without its own timestamp was reported lost when the file was on main and already folded - is in that file. The five items it cleared do carry dmitri's verdicts in channels/items.jsonl: 78567de3, a2f8099f, 468de618, 4146dc32 and 1fe3d765. One mirror it recovered is on main (channels/ledger-verdicts/20261113T210851Z-20261111T221742Z-1fe3d765.json); the rest of its 17 are still absent, which is delivery. Its report file never reached main.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T16:28:49Z"
+}

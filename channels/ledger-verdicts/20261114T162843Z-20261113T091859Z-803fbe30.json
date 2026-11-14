@@ -1,0 +1,9 @@
+{
+  "id": "20261113T091859Z-803fbe30",
+  "mirrored_utc": "2026-11-14T16:28:43Z",
+  "reason": "Judged from the ledger, not the report: the three verdicts it claims are there. codex-20261111T165820Z-e7ea1cd5 carries accomplished/reviewer gemini, 20261112T110315Z-c9017af2 carries postponed/reviewer gemini, and 20261111T170119Z-5722e5dd (which it left postponed) was later upgraded to accomplished by desi. The ORS substance it verified is real on main: docs/works/ors.html lines 609-619 now scale sugar and household spoons per container size instead of printing a constant. One correction recorded instead of repeated: its reason cites '135 assertions ... across 24 volumes', but tests/validate_ors_calculator.mjs has 25 check sites over 6 container options in the select, and there is no node in this checkout, so that count describes something larger than the harness on disk. Its three mirror files never reached main - delivery, not work.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T16:28:43Z"
+}
