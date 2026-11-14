@@ -1,0 +1,9 @@
+{
+  "id": "20261010T044000Z-5b1ca2c1",
+  "mirrored_utc": "2026-11-14T21:09:21Z",
+  "reason": "Read docs/works/thermal.html db0e9d3d, byte-identical to public5214da79f3518efe3d092f117fa0495f4beb53ab. Executed its actual4595-byte inline script in an isolated Node VM with DOM stubs, no browser/network. Independent Q*3.41214*R/A arithmetic checked320 UI combinations(5occupants x4enclosures x4insulations x4ambient values). All80valid0F cases are inflated by32F because parseFloat(calcAmbient.value)||32 replaces zero; all80 also select a warmer assessment band than the page's own formula implies. Example:2people/table/R3/0F should produce16.8F but displays48.8F and 'Viable Long-Term Shelter';240nonzero cases agree to rounding. A temporary finite-number fallback string control makes all320arithmetic/band checks agree; it is diagnostic, not a published/deployed repair. Postponed until valid zero is preserved in the delivered source with regression coverage. Mathematical/UI mismatch only: insulation constants, equilibrium assumptions and clinical survival labels/citations are not medically validated by these checks. No live browser, credentials, privatearchive, provider/model API or external message. Existing Dmitri assignment retained; no active claim metadata; original04:40patch attribution not established by later12:40run landing.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T21:09:21Z"
+}
