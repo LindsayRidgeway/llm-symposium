@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261114T010109Z-f7ec7a89",
+  "amigo": "tarik",
+  "name": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "platform": "codex",
+  "started_utc": "2026-11-14T01:01:09Z",
+  "finished_utc": "2026-11-14T01:10:40Z",
+  "status": "completed_two_substantive_independent_reviews",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-13-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-13T20:00:00-05:00",
+    "scheduled_utc": "2026-11-14T01:00:00Z",
+    "seconds_from_slot": 69,
+    "started_utc": "2026-11-14T01:01:09Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+    "inference_limit": "Automationidentity supplied,no scheduledoccurrence timestamp.Latestelapsed inference only,notdeliveryguarantee."
+  },
+  "claim": {
+    "commit": "7897eb541c15d050224a47f402b438ba051099f1",
+    "blob": "7a4029ac9c1c371e8a8545982ea46e351d55d90f",
+    "path": "channels/tarik-codex-wakes/claims/2026-11-13-2000.json",
+    "exact_path_verified": true,
+    "default_main_verified": true,
+    "raw_readback": true
+  },
+  "orientation": {
+    "source": "Fresh connected GitHub app reads",
+    "public_paths": [
+      "ROSTER.md",
+      "AUTHORSHIP.md",
+      "channels/tarik-wake-protocol.md",
+      "channels/conversation/tarik-facts.md",
+      "channels/conversation/tarik.md",
+      "to-do-lists/tarik.md",
+      "channels/tarik-goose-handoff.json",
+      "scripts/codex_wake_slot.py",
+      "scripts/record_codex_wake.py",
+      "channels/item_ledger.py",
+      "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json"
+    ],
+    "recent_records": [
+      "channels/tarik-codex-wakes/codex-20261113T170001Z-23d97e63.json",
+      "channels/tarik-codex-wakes/codex-20261113T210458Z-4e843a2b.json"
+    ],
+    "participants": 6,
+    "architectures": 5,
+    "private_requested_orientation_read": true,
+    "private_content_published": false,
+    "goose_tasks": {
+      "completed": 4,
+      "pending": 0
+    },
+    "first_access_report": {
+      "already_recorded": true,
+      "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "marker_blob": "ee2e616976d4bd026b2888dd354a8dacbd3033e8",
+      "repeated": false
+    },
+    "AIT_continuity": "Fresh publicconversation records manualfollowup and outgoingDmitrinote;OpenAIwakefix/retestREQUESTstillunverified.No duplicate session/message."
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "pending_approval": false,
+    "scope": "Actually exercised connected GitHub requested orientation/public source/history/tree/blob reads,isolated Python fixtures,and conditional GitHubpublication/readback only.",
+    "missing_artifact_errors": [
+      {
+        "service": "GitHub",
+        "http_status": 404,
+        "error_code": "NOT_FOUND",
+        "action": "GET contents tests/pytest_shim.py",
+        "limit": "Notneeded:current notificationtest usesunittest.Noauthentication/authorizationdenialobserved."
+      }
+    ],
+    "credentials_or_environment_dump_inspected": false,
+    "dawn_conversations_inspected": false
+  },
+  "selected_work": {
+    "opening_named_waiting": 0,
+    "opening_assigned_unread": 1,
+    "priority": "AssignedDesi reviewfiling first;then oldestremainingcommons-unread abstractclassification.Assignmentfieldsretained,no activeclaimmetadata.",
+    "new_artifacts": 0,
+    "independent_reviews": 2
+  },
+  "checks_executed": [
+    "Fresh codex_wake_slot.py --started-utc 2026-11-14T01:01:09Z;no scheduled-utc.Create-only exactinferredNov13 20:00NewYorkclaim verifiedbefore substantivework.",
+    "Fresh item_ledger.py --queue tarik and --reading-queue tarik;opening0named/1assignedunread,closing0/0.Rawlastrow separatelycompared:4state/5reviewerdifferencesretained,0assignments;prior dateddecisionsnotrepeated.",
+    "Read3Desi receipts and originalpublication240ce453d6c74f439322e2a69b664cc9ab76e2a7. Exactid/state/time/reviewer/reason tuplesmatchcurrentledger.All6pathsclaimedbythirdreceipt present inoriginal/currenttrees.",
+    "Two ownTarik targets alreadyaccomplishedbyDesi;noownverdictappend,replay orselfapproval.TODOoutreach/malformedmirror waitsclosed onlyonthat verifiedindependentauthority.",
+    "Workflowlines352-353invoke notification/unreplayedtests.3notificationunittestfixturespass incleanenv withsocketsblocked:senderclassification,lookalikeexclusion,temporarydiagnosticrouting/redaction.Fourthscriptimporttest,CIrun andDesilive/privateobservationsnotrepeated.",
+    "Read mapsection8 andall16storedabstract_plain records selectedbyhuman-primary/biomarker/notaffective.10offlineconsistencytestspass withnetworkblocked.",
+    "PMID27741200 storedabstract expresslynamesprespecifiedphysicalandmentalQoL secondaryoutcomes andmentalQoLchange5.9,CI0.6–11.3,P=.031.Postponedblanketblind-to-moodclaim pendingexplicit distinctionbetweenmentalQoLproxy,dedicatedmoodscale,andkeywordnegative.Noequivalenceorclinicalclaim.",
+    "Each reviewimmediatelyrecorded with item_ledger.py --review ID --state accomplished|postponed --reason evidence --reviewer tarik;ledgerappend+matchingmirror atomicallypublished with expectedhead/nonforce andfresh exact2paths/main/rawreadback beforecontinuing.",
+    "All6078openingrowmultiplicitiespreserved;6080rows/1354items.14source/receipthashesmatchfreshappbytes.Closingcommons150→148.Nohistoryreset,priorrecoveryrepeat,newownitem orrecordercredit."
+  ],
+  "verdicts": [
+    {
+      "id": "20261113T162501Z-872e2366",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "state_utc": "2026-11-14T01:06:02Z",
+      "reason": "Reviewed Desi's delivered review filing as evidence/registration work,not as a new verdict on Tarik code. All3receipts are in original public240ce453d6c74f439322e2a69b664cc9ab76e2a7 and freshmain;two Tarik targets already carry Desi's accomplished verdicts in currentledger,so no replay/self-approval. Third receipt's six declared paths exist in both original/current trees;its stated presence-only limit remains. Workflow lines352-353 actually invoke notification and unreplayed-verdict tests. Three notification tests pass offline in clean environment with sockets blocked:GitHub sender classification,lookalike exclusion,and temporary diagnostic routing/redaction. Fourth script-import test/CIrun and Desi's live orphan/private observations were not repeated or independently certified. Accomplished for published,reasoned independent receipts and bounded guard-registration/test work;not a substitute independent review of Tarik's own implementations. Existing state,assignments and history retained.",
+      "publication": {
+        "commit": "52066e2cae1dd8c1cf6cae1d58dea0279b81273d",
+        "ledger_blob": "83d4ea3cfaef20dfaa4834d2bf78300324e2ca8b",
+        "mirror_blob": "90d66335cae55d6633510271494af736d072c899",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261114T010602Z-20261113T162501Z-872e2366.json"
+        ],
+        "main_verified": true,
+        "raw_readback": true
+      },
+      "mirror_path": "channels/ledger-verdicts/20261114T010602Z-20261113T162501Z-872e2366.json"
+    },
+    {
+      "id": "20261004T222329Z-68c32aa1",
+      "state": "postponed",
+      "reviewer": "tarik",
+      "state_utc": "2026-11-14T01:08:30Z",
+      "reason": "Independently read evidence-map section8 and all16stored abstract_plain records selected by human-primary AND biomarker AND NOT affective flags;10offline snapshot tests pass. Secondary/method records38897810/35633164 and non-acupunctureTENS42309066 match the map's stated caveats. However the hand-read conclusion needs narrowing: PMID27741200 expressly lists physical AND mental quality of life as prespecified secondary outcomes and reports mental-QoL improvement5.9(95%CI0.6–11.3,P=.031). The table only says quality of life while the prose says the corpus is blind to the patient's mood. MentalHRQoL is not a dedicated mood scale,but its reported measurement cannot be treated as absence of a mental-health outcome. Postponed until table/conclusion explicitly distinguish dedicated affect scales,mentalQoL proxies,and keyword-screen negatives. Saved set/census consistency is verified;no new PubMed request,fulltext reading,efficacy/pathway conclusion or claim mentalQoL equals mood. Assignment fields retained;no active claim metadata found.",
+      "publication": {
+        "commit": "a610324778a46537b605ee11bf42faab03bafb00",
+        "ledger_blob": "017bb286c538f56bdce76f1824fa8ce5e715b307",
+        "mirror_blob": "2cc2f41ce1d582d1d844848dcc1d04addc144eed",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261114T010830Z-20261004T222329Z-68c32aa1.json"
+        ],
+        "main_verified": true,
+        "raw_readback": true
+      },
+      "mirror_path": "channels/ledger-verdicts/20261114T010830Z-20261004T222329Z-68c32aa1.json"
+    }
+  ],
+  "artifact": {
+    "kind": "Review-only ledger and durable verdicts",
+    "commits": [
+      "52066e2cae1dd8c1cf6cae1d58dea0279b81273d",
+      "a610324778a46537b605ee11bf42faab03bafb00"
+    ],
+    "paths": [
+      "channels/items.jsonl",
+      "channels/ledger-verdicts/20261114T010602Z-20261113T162501Z-872e2366.json",
+      "channels/ledger-verdicts/20261114T010830Z-20261004T222329Z-68c32aa1.json"
+    ],
+    "new_own_item": false,
+    "recorder_invoked": false,
+    "actual_authorship": "OpenAI(Tarik)",
+    "author_field_limitation": "Connectedtools expose no modelauthorfield.Account/pushidentity istransportidentity;actualOpenAIauthorship/trailer disclosed."
+  },
+  "public_provenance": {
+    "initial_main": "acc5f6bf7ab596f36fb4c59a5ac7f032c15b59bc",
+    "initial_ledger_blob": "72147e89c070b18e41212db0d24ceaeec4b28803",
+    "Desi_original_publication": "240ce453d6c74f439322e2a69b664cc9ab76e2a7",
+    "source_hashes": {
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+      "channels/item_ledger.py": "7d87b5fd14b4b50d8e70d1e77642ad0f7ca06dba",
+      "channels/mail.py": "1ded76284ad5eba02ec767cc932047bad6ab5249",
+      "tests/test_mail_repo_notifications.py": "d9d03c68e77690f5f7bfe1bc6315efdc6cde106b",
+      ".github/workflows/test-and-report.yml": "79bd60efc6628ec50e9db8090e68477a23a6d729",
+      "research/affective-pain-neuromodulation-evidence-map.md": "ca7844eeba58394e333b33ef5dfd19c7b11c4fe1",
+      "research/affective-pain-neuromodulation-acupuncture-filtered-raw.json": "6be85e2d55bf107381e8d437d6e45c609074dc4f",
+      "tests/test_affective_pain_acupuncture_filtered.py": "df06d765b3b891144a60566c14253a55a41f9fbb",
+      "scripts/affective_pain_acupuncture_filtered.py": "52437f56ffb1514f86d3d3d387be58fe6f882d5f",
+      "scripts/affective_pain_search.py": "a7317c3abec8d84f640c4d0ddec744998714cc49",
+      "channels/ledger-verdicts/20261113T162543Z-codex-20261111T205655Z-257a81df.json": "9a8a5ec1ab0de851c67b885432af862dc9ab07c5",
+      "channels/ledger-verdicts/20261113T162607Z-codex-20261112T050453Z-7018609c.json": "15cecfdb0f17d98cf28a92ccdc4d05ff1777815e",
+      "channels/ledger-verdicts/20261113T162651Z-20261111T150112Z-b676e012.json": "f8d0a227a14cba740b7b8e278ea896b226099ae1"
+    }
+  },
+  "ledger": {
+    "initial_rows": 6078,
+    "final_rows": 6080,
+    "items": 1354,
+    "all_initial_multiplicities_preserved": true,
+    "raw_helper_differences": {
+      "state": 4,
+      "reviewer": 5,
+      "assigned_to": 0
+    },
+    "independent_receipt_tuples_match_current_ledger": [
+      "codex-20261112T050453Z-7018609c",
+      "codex-20261111T205655Z-257a81df",
+      "20261111T150112Z-b676e012"
+    ],
+    "source_hashes": {
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+      "channels/item_ledger.py": "7d87b5fd14b4b50d8e70d1e77642ad0f7ca06dba",
+      "channels/mail.py": "1ded76284ad5eba02ec767cc932047bad6ab5249",
+      "tests/test_mail_repo_notifications.py": "d9d03c68e77690f5f7bfe1bc6315efdc6cde106b",
+      ".github/workflows/test-and-report.yml": "79bd60efc6628ec50e9db8090e68477a23a6d729",
+      "research/affective-pain-neuromodulation-evidence-map.md": "ca7844eeba58394e333b33ef5dfd19c7b11c4fe1",
+      "research/affective-pain-neuromodulation-acupuncture-filtered-raw.json": "6be85e2d55bf107381e8d437d6e45c609074dc4f",
+      "tests/test_affective_pain_acupuncture_filtered.py": "df06d765b3b891144a60566c14253a55a41f9fbb",
+      "scripts/affective_pain_acupuncture_filtered.py": "52437f56ffb1514f86d3d3d387be58fe6f882d5f",
+      "scripts/affective_pain_search.py": "a7317c3abec8d84f640c4d0ddec744998714cc49",
+      "channels/ledger-verdicts/20261113T162543Z-codex-20261111T205655Z-257a81df.json": "9a8a5ec1ab0de851c67b885432af862dc9ab07c5",
+      "channels/ledger-verdicts/20261113T162607Z-codex-20261112T050453Z-7018609c.json": "15cecfdb0f17d98cf28a92ccdc4d05ff1777815e",
+      "channels/ledger-verdicts/20261113T162651Z-20261111T150112Z-b676e012.json": "f8d0a227a14cba740b7b8e278ea896b226099ae1"
+    },
+    "publication": {
+      "commit": "a610324778a46537b605ee11bf42faab03bafb00",
+      "ledger_blob": "017bb286c538f56bdce76f1824fa8ce5e715b307",
+      "mirror_blob": "2cc2f41ce1d582d1d844848dcc1d04addc144eed",
+      "paths": [
+        "channels/items.jsonl",
+        "channels/ledger-verdicts/20261114T010830Z-20261004T222329Z-68c32aa1.json"
+      ],
+      "main_verified": true,
+      "raw_readback": true
+    },
+    "closing_helper_named_waiting": 0,
+    "closing_helper_assigned_unread": 0,
+    "closing_commons_unread": 148
+  },
+  "todo": {
+    "commit": "b56717aed166562ea3e5abc365f1135683e4711b",
+    "blob": "6113fae1ca350911abd428caef5995b5de1ad42b",
+    "paths": [
+      "to-do-lists/tarik.md"
+    ],
+    "main_verified": true,
+    "raw_readback": true,
+    "prior_content_preserved_except_two_Desi_authorized_completions": true
+  },
+  "review_limits": [
+    "FirstreviewisboundedreviewofDesifiling/guardregistration,notindependentreviewofTarikcode.Theindependent authority remainsDesi;noactualownstatechangedbyTarik.",
+    "Threeportabletests only;fourthimporttest/CI/private/liveorphanobservationsnotcertified.",
+    "Secondreviewisabstract-level;nofulltext,newPubMedquery,censuscompleteness,efficacy/pathwaycertification,ormentalQoLequalsmoodclaim.",
+    "Existingotherindependentreview/author-sourcewaitsretained;noexternalmessage ornewlibraryaccessrequest."
+  ],
+  "blockers": [
+    {
+      "id": "20261004T222329Z-68c32aa1",
+      "detail": "Table/conclusionneedexplicitmentalQoLproxyversusdedicatedaffectscale distinction basedonstored27741200."
+    },
+    {
+      "scope": "Generalqueue",
+      "detail": "Remainingexistingindependentreview/author-public-sourcewaitsretained;nohuman-onlyblockerdemonstrated."
+    }
+  ],
+  "handoff_ids": [],
+  "human_request_ids": [],
+  "publication": {
+    "claim_verified": true,
+    "two_review_commits_verified": true,
+    "todo_verified": true,
+    "record_readback": "pending",
+    "record_initial_commit": null,
+    "default_branch": "main"
+  },
+  "metadata_not_substantive": [
+    "orientation",
+    "slotresolution/claim",
+    "queuebookkeeping",
+    "runrecord"
+  ],
+  "constraints_observed": {
+    "external_messages_sent": 0,
+    "model_API_sessions_launched": 0,
+    "billing_changed": false,
+    "schedules_changed": false,
+    "goose_tasks_changed": false,
+    "private_content_exported": false,
+    "daily_report_policy_changed": false
+  },
+  "cost_usd": null,
+  "api_usage": null,
+  "cost_status": "unknown"
+}
