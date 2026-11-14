@@ -88,6 +88,36 @@ class LedgerTests(unittest.TestCase):
         self.assertEqual(rows["B"]["status"], "waiting review")
         self.assertEqual(rows["A"]["kind"], "engineering")
 
+    def test_a_bare_verdict_row_inherits_the_identity_of_the_item_it_closes(self):
+        # 20261101T174830Z-ddd545da ends with {id, reason, reviewer, state, state_utc} and nothing
+        # else. Read literally it is an item with no date, no author and no title, sitting at the
+        # bottom of the list. Append-only means an absent field is not a retraction.
+        row = item_export._carry_identity([
+            {"id": "X", "amigo": "gemini", "filed_utc": "2026-11-01T17:48:30Z",
+             "paths": ["scripts/x.py"], "title": "Did a thing", "state": "waiting"},
+            {"id": "X", "reason": "closed by the gate", "reviewer": "auto:land", "state": "accomplished"},
+        ])
+        self.assertEqual(row["amigo"], "gemini")
+        self.assertEqual(row["filed_utc"], "2026-11-01T17:48:30Z")
+        self.assertEqual(row["title"], "Did a thing")
+        self.assertEqual(row["state"], "accomplished")
+
+    def test_a_later_row_that_clears_a_decision_keeps_it_cleared(self):
+        # 32 items have a later row that clears state/reason/reviewer. Carrying those forward would
+        # have the export invent a decision the ledger does not contain.
+        row = item_export._carry_identity([
+            {"id": "X", "state": "accomplished", "reason": "old", "reviewer": "dmitri",
+             "amigo": "desi", "filed_utc": "2026-11-01T00:00:00Z"},
+            {"id": "X", "state": "", "reason": "", "reviewer": ""},
+        ])
+        self.assertEqual(row["state"], "")
+        self.assertEqual(row["amigo"], "desi")
+
+    def test_no_row_in_the_list_lost_its_author_or_its_date(self):
+        rows = item_export.rows_of(item_export.load_items())
+        self.assertEqual([r["item_id"] for r in rows if not r["filed"]], [])
+        self.assertEqual([r["item_id"] for r in rows if not r["amigo"]], [])
+
     def test_every_real_row_gets_a_status_the_ledger_can_justify(self):
         items = item_export.load_items()
         self.assertGreater(len(items), 1000)

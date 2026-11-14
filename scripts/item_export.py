@@ -92,7 +92,7 @@ def title_of(rec, limit=150):
 
 
 def load_items():
-    latest = {}
+    rows = collections.defaultdict(list)
     with open(LEDGER, encoding="utf-8") as fh:
         for line in fh:
             try:
@@ -100,8 +100,32 @@ def load_items():
             except json.JSONDecodeError:
                 continue
             if rec.get("id"):
-                latest[rec["id"]] = rec      # append-only: the last row for an id is its state
+                rows[rec["id"]].append(rec)
+    latest = {i: _carry_identity(rs) for i, rs in rows.items()}
     return sorted(latest.values(), key=lambda r: r.get("filed_utc") or "", reverse=True)
+
+
+# The last row for an id is its *state*, and sometimes that is all the row is: one item in the ledger
+# ends with a bare verdict — `{id, reason, reviewer, state, state_utc}` — which carries no amigo, no
+# date, no paths and no title. Read literally, that item appears in this list with three blank columns
+# at the very bottom, dated nowhere, filed by nobody. The ledger is append-only, so a field missing
+# from a later row is not a retraction of it; only these four are carried forward, because they say
+# *what the item is* rather than *what was decided about it*. State, reason and reviewer are read from
+# the last row alone — 32 items have a later row that clears them, and a carry-forward there would be
+# the export inventing a decision.
+IDENTITY = ("amigo", "filed_utc", "paths", "scope", "source", "title", "short_title")
+
+
+def _carry_identity(rows):
+    last = dict(rows[-1])
+    for field in IDENTITY:
+        if last.get(field):
+            continue
+        for earlier in reversed(rows[:-1]):
+            if earlier.get(field):
+                last[field] = earlier[field]
+                break
+    return last
 
 
 def rows_of(items):
