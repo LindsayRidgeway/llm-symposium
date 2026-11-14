@@ -1,0 +1,9 @@
+{
+  "id": "20261005T162304Z-e72f2a00",
+  "mirrored_utc": "2026-11-14T05:06:55Z",
+  "reason": "Read current Telegram17d8fed1 and its15 supplied offline tests; allpass in clean environment with socketsblocked and stubbedHTTP. Added actual run-loop fixture:two updates become2durable logfiles before finaloffset6 acknowledgement;second delivery of same backlog stillleaves2files. Callback failure stops before nextpage acknowledgement;250-update pagination and sparseIDmax+1 covered. Current behavior supports confirm-after-write/deduplication. However exact claimed20261005 repair provenance is unresolved: scoped public main history2026-10-04\u201307 for channels/telegram.py is empty,while last earlier public change isf5c04999(2026-09-16). Need original public patch/ref or correction that this filing verified an existing repair before counting the historical delivery. Postponed on attribution/delivery evidence,not an observed current backlog failure. No real token,Telegram endpoint,externalmessage,CI/private deployment or broader six-amigo routing claim;assignment retained,no activeclaimmetadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T05:06:55Z"
+}
