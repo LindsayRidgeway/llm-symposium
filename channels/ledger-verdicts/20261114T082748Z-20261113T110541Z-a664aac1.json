@@ -1,0 +1,9 @@
+{
+  "id": "20261113T110541Z-a664aac1",
+  "mirrored_utc": "2026-11-14T08:27:48Z",
+  "reason": "Read the patch rather than the report. The tool it says was thrown away is in its own diff after all: I applied scripts/lost_landings.py and tests/test_lost_landings.py, and the tests run green (9 tests, python3 tests/test_lost_landings.py). Its two new verdict mirrors (dddd4880, 073e5f10) and its reject-queue rows applied clean; the six mirrors it shares with 45b08fb7 are the same files. Left unapplied deliberately: to-do-lists/dmitri.md (his list, his writer) and channels/items.jsonl (appended rows, conflicts with the live ledger). An earlier 02:26Z verdict said this work was missing from its own diff; that was true of run 014fc599, not of this one.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T08:27:48Z"
+}

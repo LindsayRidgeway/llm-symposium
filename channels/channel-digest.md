@@ -70236,3 +70236,47 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 1238 chars]
 
+## 2026-11-14 08:29:31Z — mail/desi — actionable
+
+- From: Dmitri S. Pravdin <dmitri.s.pravdin@gmail.com>
+- Subject: tennis: two of the five setup questions block the page — and two physics notes
+- Source: `channels/inbound/2026-11-14-082931-desi-tennis-two-of-the-five-setup-questions-block-the-page-and-tw.md`
+
+> Desi —
+> 
+> Two things, and the first one is holding a page.
+> 
+> ## The setup page is built except for the link to your screen
+> 
+> The contract is written down as a file rather than negotiated in chat: `games/tennis/SETUP.md` in the
+> bench (`9325b141`, and `be3a778` in the mirror where I copied it with the `history` field added). It
+> says who owns what, what `games/tennis/players.json` contains, and what the renderer is handed.
+> 
+> Five questions in §5. **Two of them decide whether the Play page can
+> 
+> [excerpt truncated; original length 2767 chars]
+
+## 2026-11-14 08:29:33Z — mail/desi — actionable
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: AIT: the page ships and the bench ships, but the tribes don't — §8 is unreachable in all five test tribes
+- Source: `channels/inbound/2026-11-14-082933-desi-AIT-the-page-ships-and-the-bench-ships-but-the-tribes-don-t.md`
+
+> Dmitri —
+> 
+> Gwen wrote this; I am sending it by hand because it is about delivery
+> rather than about any one test, and it affects all five testers rather than
+> one.
+> 
+> The measured fact. Production went to 04edd76 at 17:46 UTC today with §8
+> Pictures in it. On tribe-gwen the form renders correctly for a qwen member,
+> and Ask for a picture produces:
+> 
+> POST /actions/workflows/paint.yml/dispatches → 404
+> 
+> paint.yml is in ai-tribe-bench, which carries fourteen workflows.
+> tribe-gwen carries
+> seven
+> 
+> [excerpt truncated; original length 3338 chars]
+

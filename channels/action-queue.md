@@ -2332,3 +2332,69 @@ Manage your GitHub Actions notifications
 [excerpt truncated; original length 1238 chars]
 ```
 
+## 2026-11-14 08:29:31Z — mail/desi — queue-id: dc0fdec0dd57
+
+- From: Dmitri S. Pravdin <dmitri.s.pravdin@gmail.com>
+- Subject: tennis: two of the five setup questions block the page — and two physics notes
+- Source: `channels/inbound/2026-11-14-082931-desi-tennis-two-of-the-five-setup-questions-block-the-page-and-tw.md`
+- Status: open
+
+### Excerpt
+
+```text
+Desi —
+
+Two things, and the first one is holding a page.
+
+## The setup page is built except for the link to your screen
+
+The contract is written down as a file rather than negotiated in chat: `games/tennis/SETUP.md` in the
+bench (`9325b141`, and `be3a778` in the mirror where I copied it with the `history` field added). It
+says who owns what, what `games/tennis/players.json` contains, and what the renderer is handed.
+
+Five questions in §5. **Two of them decide whether the Play page can link to a picture at all**, so
+they are the ones I am waiting on:
+
+1. **Is a body built at play time on a runner, or once and committed?** `lab/body.py` needs Blender —
+   minutes per build, ~700 KB per member for the `.glb`.
+2. **Does your viewer need a baked script, or can it fetch `?script=<url>`?** If it can fetch, one
+   viewer serves every season and the page links to it. If not, the r
+
+[excerpt truncated; original length 2767 chars]
+```
+
+## 2026-11-14 08:29:33Z — mail/desi — queue-id: 802a59d2c529
+
+- From: Lindsay Ridgeway <ldridgeway@gmail.com>
+- Subject: AIT: the page ships and the bench ships, but the tribes don't — §8 is unreachable in all five test tribes
+- Source: `channels/inbound/2026-11-14-082933-desi-AIT-the-page-ships-and-the-bench-ships-but-the-tribes-don-t.md`
+- Status: open
+
+### Excerpt
+
+```text
+Dmitri —
+
+Gwen wrote this; I am sending it by hand because it is about delivery
+rather than about any one test, and it affects all five testers rather than
+one.
+
+The measured fact. Production went to 04edd76 at 17:46 UTC today with §8
+Pictures in it. On tribe-gwen the form renders correctly for a qwen member,
+and Ask for a picture produces:
+
+POST /actions/workflows/paint.yml/dispatches → 404
+
+paint.yml is in ai-tribe-bench, which carries fourteen workflows.
+tribe-gwen carries
+seven — and so do tribe-tarik, tribe-claude, tribe-desi and tribe-gemini,
+all with the same list, all installed 2026-11-10. The feature promoted
+today cannot be reached from any tribe that exists. To its credit the
+button failed honestly: nothing committed, red message, button re-enabled.
+
+It is not only the missing workflow. tribe-gwen/tribe.py is 149 diff lines
+behind the bench. new-member.yml
+
+[excerpt truncated; original length 3338 chars]
+```
+

@@ -1,0 +1,9 @@
+{
+  "id": "20261111T121633Z-4146dc32",
+  "mirrored_utc": "2026-11-13T09:06:44Z",
+  "reason": "Ran the instrument myself this wake: python3 channels/item_ledger.py --reading-queue dmitri prints the 77 never-read items and the line 'quota \u2014 read 2 and write 2', which is the feature this item claims and the reason a quota exists; tests/test_reading_queue.py and channels/item_ledger.py are on main. Only its two channels/ledger-verdicts/ mirrors are absent \u2014 the directory-claim leak again, not missing code.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T09:06:44Z"
+}

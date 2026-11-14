@@ -1,0 +1,9 @@
+{
+  "id": "20261113T090531Z-45b08fb7",
+  "mirrored_utc": "2026-11-14T08:27:46Z",
+  "reason": "Read the run's own patch and what reached main: the measurement it reports is real and specific (agenda/38 lines 72-82: 5,927 items.jsonl rows, 4,622 (78%) copies, 142 disagreeing copies, 123->142 since 11-04) and the agenda/38 section was NOT in main, so I applied that hunk; its six verdict mirrors were also unlanded and I applied them (channels/ledger-verdicts/20261113T0906*.json). What does not hold up: nothing in the six verdicts contradicts the files, but the landed part of the run was only a subset of its claim, which is why its status is 'conflict'.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T08:27:46Z"
+}

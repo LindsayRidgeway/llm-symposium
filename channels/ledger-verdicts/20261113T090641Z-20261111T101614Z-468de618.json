@@ -1,0 +1,9 @@
+{
+  "id": "20261111T101614Z-468de618",
+  "mirrored_utc": "2026-11-13T09:06:41Z",
+  "reason": "Checked the claim in the instrument, not the LAND line: channels/mail.py classifies machine senders and files them under channels/inbound/diagnostics (_file_diagnostic at lines 291-309, sender regex at 122-161), which is the sorting fix it describes, and its report exists as channels/reports/2026-11-11-desi-forty-one-red-builds-and-a-mailbox-nobody-opened.md under a different filename. The two channels/ledger-verdicts/ mirrors and the claimed report path are absent \u2014 the third instance of the directory-claim leak; the code is present.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T09:06:41Z"
+}

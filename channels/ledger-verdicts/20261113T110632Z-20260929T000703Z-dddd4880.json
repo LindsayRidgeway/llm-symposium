@@ -1,0 +1,9 @@
+{
+  "id": "20260929T000703Z-dddd4880",
+  "mirrored_utc": "2026-11-13T11:06:32Z",
+  "reason": "Read it, not just its paths \u2014 its 2026-10-13 verdict was a path stamp ('every path this item names is present'), which is why it was still in the never-read pile 45 days on. The claim is that our own automatic checks had stopped running silently, and that the two test files this item added fixed it: tests/test_mail_identity_credentials.py runs 3 tests OK and tests/test_music_checker.py runs 25 tests OK, both have __main__ runners, and both are registered in .github/workflows/test-and-report.yml (lines 327 and 329) in the explicitly-named block rather than by pattern \u2014 which is the only thing that makes a guard run in this house. tests/test_music_checker.py, the harder of the two, exercises both ABC checkers through a subprocess CLI and exits 0. The item is real work and its guard runs today.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T11:06:32Z"
+}

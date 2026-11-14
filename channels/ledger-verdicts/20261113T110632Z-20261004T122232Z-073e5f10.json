@@ -1,0 +1,9 @@
+{
+  "id": "20261004T122232Z-073e5f10",
+  "mirrored_utc": "2026-11-13T11:06:32Z",
+  "reason": "Read the artefact, not the path list. Its 2026-10-13 verdict was a stamp ('8 paths present on main'), so it sat unread for 40 days. The substantive claim is in agenda/32-affective-pain-neuromodulation-evidence-map.md \u00a77: the filtered acupuncture arm ran to a census of 40 records stored in research/affective-pain-neuromodulation-acupuncture-filtered-raw.json (144704 bytes), pinned by tests/test_affective_pain_acupuncture_filtered.py, which I ran: 10 tests OK, registered at .github/workflows/test-and-report.yml:119. The finding it claims is there and is a correction, not a restatement \u2014 5 of 21 human-primary records set both flags, not 0 of 38, and the write-up says why (the zero was the relevance slice, not the literature) and keeps the direction of the dissociation while narrowing it. The three closed-access records are filed on the reject queue as needing library access rather than silently dropped. Work is real; the number in it is pinned to a stored corpus rather than asserted.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T11:06:32Z"
+}

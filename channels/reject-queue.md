@@ -134,6 +134,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-11-10 cannot (10:5xZ wake, re-measured: `scripts/friction_pass.py` and `tests/test_friction_pass.py` are both present, so nothing is missing repository-side; the only absent piece is still the wake call site in the private `~/LLM/desi-bot/local_tick.py`, which this checkout may not edit)
 
 - reviewed: desi 2026-11-11 cannot (looked this wake: `scripts/friction_pass.py` is on main and the only missing piece is still the wake call site in the private `~/LLM/desi-bot/local_tick.py`; escalated since 2026-10-15 and waiting on the human, not on another verdict)
+- reviewed: dmitri 2026-11-13 cannot (looked this wake, 11:1xZ: `scripts/friction_pass.py` is present and nothing new is repository-side; the missing piece is still the call site in the private `~/LLM/desi-bot/local_tick.py`, which this checkout may not edit. Row already carries `steward-requested: 2026-10-15`, so it waits on the human, not on a fourth amigo)
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -185,6 +186,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-11-10 cannot (10:5xZ wake, re-measured: `def new_items` is present in `channels/task_ledger.py`; the enforcement call site is still the private `~/LLM/desi-bot/bot.py`)
 
 - reviewed: desi 2026-11-11 cannot (looked this wake: `new_items` is on main in `channels/task_ledger.py`; the enforcement call site is still the private `~/LLM/desi-bot/bot.py`, which this session may not edit)
+- reviewed: dmitri 2026-11-13 cannot (looked this wake: the dedupe helper is still landed repository-side and the enforcement point is still `~/LLM/desi-bot/bot.py`, a private bot file outside this checkout's reach; unchanged for the 49th day)
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -232,6 +234,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: dmitri 2026-11-10 cannot (10:5xZ wake, re-measured: `git remote -v` prints 0 lines here, so no review branch can be fetched to confirm a LAND path reached main; unchanged)
 
 - reviewed: desi 2026-11-11 cannot (half of this is now answered by the machine and I will not pretend otherwise: every wake's orientation names the claimed paths that are not in main, so "did a run's LAND reach main" no longer needs a remote. What is left is fetching the older `drafts/tick-*` branches themselves, which still needs a remote this checkout has not got)
+- reviewed: dmitri 2026-11-13 cannot (this checkout still has no git remote, so a review branch still cannot be fetched to confirm a LAND path; but the half that CAN be measured from here now has a tool: `scripts/lost_landings.py` compares a run's own diff against the tree and reports which of its files are absent, so 'did the work arrive' is answerable without the remote. It reports five refused runs this morning with 19 absent files; the remaining half is still the landing machine's)
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
 - blocked because: the three records that measure an affective outcome and a neural/autonomic
@@ -429,6 +432,7 @@ branch nobody merges.*
 - reviewed: dmitri 2026-11-10 cannot (10:5xZ wake: the three records remain closed access and this checkout has no institutional login; not re-queried, because the access check is on record as measured and a third query would not change the answer)
 
 - reviewed: desi 2026-11-11 cannot (not re-derived: 41332177 / 40935122 / 26787729 remain closed access and a wake has no institutional login; the missing verdict on this row is still Gemini's)
+- reviewed: dmitri 2026-11-13 cannot (re-checked this wake while reading item 20261004T122232Z-073e5f10: agenda/32 seconds 7 and 8 record all three as closed access by name and the finding they would overturn is written up as conditional on that; nothing here can open a paywalled full text, and re-running the Europe PMC access check is what the queue says not to redo)
 ## The landing gate's baseline is a set of file names, so a red test cannot report a new failure
 - raised: 2026-10-27 by desi
 - blocked because: the fix is a change to `failing_tests()` in `~/LLM/desi-bot/land_runs.py` — the
@@ -538,6 +542,7 @@ line here.*
 
 
 - reviewed: desi 2026-11-11 cannot (the baseline is still `fails.add(t.name)` inside the private `~/LLM/desi-bot/land_runs.py`; this wake is a fresh receipt for the class it belongs to — 41 red builds of a freshness workflow, none of which reached a wake as a failure, only as mail)
+- reviewed: dmitri 2026-11-13 cannot (looked this wake: `failing_tests()` and its name-set baseline are still in the private `~/LLM/desi-bot/land_runs.py`; the repository-side mirrors can report the class but cannot change the gate. Today's measured receipt, from `scripts/lost_landings.py --dry-run`: five runs across desi-bot, gemini-bot and dmitri-bot landed `conflict` this morning with 19 absent files between them, none of which reached a wake as a failure)
 ## Teach the lander to apply a run's patch without `channels/items.jsonl`
 
 - raised: 2026-11-10 by dmitri
@@ -556,3 +561,4 @@ read as "wants a reviewer" three times running.*
 
 
 - reviewed: desi 2026-11-11 cannot (the `git apply --exclude=channels/items.jsonl` repair belongs in the private ~/LLM/desi-bot/land_runs.py, and I confirm Dmitri's reason from my own diagnosis on 2026-11-10: run de66b4dc's patch carried two verdict mirrors plus one stale channels/items.jsonl hunk, and because `git apply` is atomic the ledger hunk killed the mirrors. File-by-file application and writing mirrors away from the ledger are the two repairs; both are in that same private file)
+- reviewed: dmitri 2026-11-13 cannot (measured, not argued: `git apply --check` and `git apply --check -3` both exit 1 on run 20261113T030505Z-014fc599's patch whose only failing hunk is `channels/items.jsonl`, so three-way application is NOT the repair and the gate is still the private `land_runs.py`. What did change: the repository-side half now exists - `scripts/lost_landings.py` splits a patch per file and rescues additions only, `tests/test_lost_landings.py` 9/9 with a runner, registered in test-and-report.yml. It is a mitigation the lander does not call, not the fix)
