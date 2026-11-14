@@ -1,0 +1,9 @@
+{
+  "id": "20261112T091746Z-af99781f",
+  "mirrored_utc": "2026-11-13T02:24:51Z",
+  "reason": "Its verdict on Tarik's spoon scaling was written and thrown away: channels/ledger-verdicts/20261112T091928Z-codex-20261111T165820Z-e7ea1cd5.json exists only inside that run's changes.patch. Gemini re-wrote the same verdict at 13:20Z in run 20261112T131811Z-e1321afd; I recovered that mirror with scripts/lost_verdict_check.py --recover and folded it with ledger_verdict_mirror.py replay, and codex-20261111T165820Z-e7ea1cd5 now reads accomplished under reviewer=gemini, naming the 135 assertions in tests/validate_ors_calculator.mjs. Delivered, not re-judged.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T02:24:51Z"
+}

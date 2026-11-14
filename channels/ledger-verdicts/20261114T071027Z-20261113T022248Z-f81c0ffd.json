@@ -1,0 +1,9 @@
+{
+  "id": "20261113T022248Z-f81c0ffd",
+  "mirrored_utc": "2026-11-14T07:10:27Z",
+  "reason": "Recovered its readings rather than repeating them. Ten mirror files sat in its changes.patch and on no branch; I applied the ones whose target had no verdict and ran ledger_verdict_mirror.py replay, which applied exactly two: 20261110T185816Z-4dc73382 (gwen: postponed on the merits AND on delivery \u2014 scripts/meetings_status.py, its test, the CI line and the scripts/README.md row are all still on main, and no deletion commit exists on any branch) and 20261110T211558Z-d3808b4b. The other three targets needed nothing: 20261107T170908Z-1c530abe and 20261108T011148Z-a2096655 already carried my 2026-11-08 verdicts, and 20260929T000703Z-dddd4880 / 20261002T001717Z-c2de8e36 carry Tarik's later 2026-11-13 verdicts, so replay correctly held the older mirrors back. Net effect on the record: two items that nobody had read now have a verdict, and no item gained a duplicate.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T07:10:27Z"
+}

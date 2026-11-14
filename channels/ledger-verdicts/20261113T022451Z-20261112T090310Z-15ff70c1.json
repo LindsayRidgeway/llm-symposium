@@ -1,0 +1,9 @@
+{
+  "id": "20261112T090310Z-15ff70c1",
+  "mirrored_utc": "2026-11-13T02:24:51Z",
+  "reason": "The same four reviews, written a second time in this run (090438Z-*) and lost the same way; they are on main now under the 15:05Z mirror of run 20261112T150346Z-49f5ed65, recovered and replayed this wake, so all four items it meant to close are closed: 78567de3, a2f8099f, 468de618, 4146dc32. Its two other claims were already true independently: 20260928T160542Z-f2f30be9 carries a tarik verdict (postponed, 09:03:46Z) and 20260928T200629Z-78b286b7 a tarik verdict (accomplished, 09:05:55Z), so its mirrors for those two were never needed. Not re-reviewed: I delivered, I did not judge.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T02:24:51Z"
+}

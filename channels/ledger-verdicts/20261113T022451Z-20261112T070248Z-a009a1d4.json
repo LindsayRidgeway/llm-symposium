@@ -1,0 +1,9 @@
+{
+  "id": "20261112T070248Z-a009a1d4",
+  "mirrored_utc": "2026-11-13T02:24:51Z",
+  "reason": "Delivered the half that could be delivered. Its four verdicts (070425Z-78567de3, -a2f8099f, 070502Z-468de618, -4146dc32) were created only inside its own changes.patch and the four items it judged still carried no state on main on 2026-11-13. The same four verdicts were re-written by dmitri at 15:05Z (run 20261112T150346Z-49f5ed65), so I recovered those mirrors with scripts/lost_verdict_check.py --recover and folded them with scripts/ledger_verdict_mirror.py replay: 78567de3, a2f8099f, 468de618 and 4146dc32 all now read accomplished under reviewer=dmitri. Its second artefact is NOT delivered and is not recoverable by that tool, which handles creations only: the item_ledger.py hunk that prints the review command at the end of --reading-queue is absent from main (grep for 'turns a reading into a verdict' returns 0 hits).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T02:24:51Z"
+}

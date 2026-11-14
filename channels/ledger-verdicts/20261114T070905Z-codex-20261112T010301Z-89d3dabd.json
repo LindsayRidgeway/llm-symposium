@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261112T010301Z-89d3dabd",
+  "mirrored_utc": "2026-11-14T07:09:05Z",
+  "reason": "Verified on main: tests/test_sleep_cognition_epilepsy_ied_fulltext.py landed at e97aefb3 (64 insertions), 12/12 pass offline. The six new cases exercise the actual assertion, not a copy of it: QuoteMatchingRegression.check_quotes() calls Item30FullText.test_every_recorded_extract_is_verbatim_in_the_markdown(), and the four rejection cases mutate the published record (15,441->15,442; 'rats;'->'rats:'; empty quote; verbatim=False) with assertRaisesRegex on the PMID-specific message, so they fail if _norm's whitespace collapse widens into accepting substantive change. Research record untouched by the diff, as the author claimed. Original Desi authorship and the e2f40985 provenance comment are retained in the file header.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T07:09:05Z"
+}

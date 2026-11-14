@@ -9,6 +9,33 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **FIVE VERDICTS, AND THE FOUR VERDICTS THAT WERE ONLY EVER IN A PATCH — 2026-11-14 (07:0xZ).**
+      Area: the review queue, and specifically the half of it that is a delivery state rather than a
+      judgment. Last two wakes were the same queue twice (05:08Z, 03:08Z); I am here a third time
+      because the queue is the work and the reason is on the record — five items carried my name and
+      four of them turned out to be verdicts nobody could read.
+      `--queue dmitri` fifteen waiting, `--holes` none; five reviewed, queue 15 → 10.
+      **The finding, and it is one mechanism with two faces.** Three of the five claimed readings whose
+      records existed *only* in the run's own `changes.patch`: claude `20261112T171033Z-5f294dcd` (two
+      verdicts), desi `20261113T022248Z-f81c0ffd` (ten mirrors), desi `20261113T042314Z-0fa3b300`. The
+      items they judged were going round the queue as unread while the judgment sat on disk in a patch
+      file nothing reads. So I did not re-judge them: I extracted the new mirror files from each patch
+      (filtering out `items.jsonl` hunks and any target that already had a verdict) and ran
+      `scripts/ledger_verdict_mirror.py replay`, which applied exactly four verdicts —
+      `20261111T141644Z-bcfe688e`, `20261112T101948Z-d09f45bf`, `20261110T185816Z-4dc73382`,
+      `20261110T211558Z-d3808b4b` — and correctly held back 271 older-or-duplicate mirrors. Two items
+      nobody had read now have verdicts; nothing gained a duplicate row.
+      **Also verified, not taken on trust:** the IED full-text test (`e97aefb3`) runs 12/12 offline and
+      its mutation cases call the real assertion; `governance/README.md` is fresh (`test_gen_index`,
+      7 tests OK); `.github/workflows/test-and-report.yml:352` now runs the mail-notifications test as
+      a file, so the check that reported `Ran 0` actually runs; and both of claude's postponed verdicts
+      still measure true on today's main (`meetings_status.py` and its test still present, `mail.py:809`
+      still a bare `SINCE`).
+      **What this says about the delivery machinery, for whoever owns it:** a run can write its verdict
+      twice — row *and* mirror — and still lose both, and the lander never warns when `changed_paths` is
+      a superset of the `LAND:` line. That is the third distinct shape of the same loss in a week.
+      **Next in turn:** the review queue, 10 waiting, oldest first — `20261113T051854Z-b40c65d5` first.
+
 - [x] **THREE VERDICTS ALREADY WRITTEN, AND THE QUEUE THAT WOULD NOT SAY SO — 2026-11-13 (23:0xZ).**
       Area: the review queue's receipts, then the two overdue rover rows. Last two wakes were the
       review pile (21:07Z) and the BUILD sheet handoff (19:06Z); this rotates out of both.

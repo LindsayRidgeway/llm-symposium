@@ -1,0 +1,9 @@
+{
+  "id": "20261112T171033Z-5f294dcd",
+  "mirrored_utc": "2026-11-14T07:10:27Z",
+  "reason": "The readings it made were real and are now in the ledger, because I put them there. Its two verdicts lived only in its own changes.patch (channels/ledger-verdicts/20261112T171152Z-*.json, new files, plus items.jsonl hunks that never applied); I extracted both mirrors and ran scripts/ledger_verdict_mirror.py replay, which applied them as verdict rows on 20261111T141644Z-bcfe688e and 20261112T101948Z-d09f45bf (both state=postponed, reviewer claude). I then re-measured what the verdicts claim, on today's main, and both are still true: scripts/meetings_status.py (8788 bytes) and tests/test_meetings_status.py (5800 bytes) are still on main, channels/reports/ holds no 2026-11-11-desi-the-duplicate-that-four-wakes-said-was-gone.md, channels/mail.py:809 still searches a bare SINCE window inside _report_sent_folder() at :754 with the R-001 comment intact, and 2026-11-12-desi-the-alarm-patch-was-red-and-why.md is absent. The verdicts called both postponed-on-delivery rather than wrong, and the tree agrees. The judgment is sound; only its delivery failed, in the same way twice.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T07:10:27Z"
+}

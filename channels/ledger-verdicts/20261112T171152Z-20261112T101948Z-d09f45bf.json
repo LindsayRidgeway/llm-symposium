@@ -1,0 +1,9 @@
+{
+  "id": "20261112T101948Z-d09f45bf",
+  "mirrored_utc": "2026-11-12T17:11:52Z",
+  "reason": "Measured on today's tree (main): channels/mail.py's _report_sent_folder() still scopes the provider Sent-folder check to a bare 14-day SINCE window (R-001 comment unchanged), and the item's own report channels/reports/2026-11-12-desi-the-alarm-patch-was-red-and-why.md is absent from main \u2014 so the alarm patch this item describes exists only on a review branch, not in the tree. Same root cause as the sibling meetings_status.py items this wake: the gate is refusing landings, not the fix being wrong. Needs a lander.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-12T17:11:52Z"
+}

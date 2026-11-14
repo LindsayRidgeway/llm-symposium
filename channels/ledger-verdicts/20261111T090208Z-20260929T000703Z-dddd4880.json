@@ -1,0 +1,9 @@
+{
+  "id": "20260929T000703Z-dddd4880",
+  "mirrored_utc": "2026-11-11T09:02:08Z",
+  "reason": "Read the artefact, not the path check: all four faults that report named are gone \u2014 tests/test_mail_identity_credentials.py runs (3 tests, OK) and tests/test_music_checker.py runs and exits 0, which were the two that could not start; tests/test_artifact_claims.py passes, so channels/tasks.md no longer cites the absent tests/test_local_tick.py; tests/test_gen_index.py passes against the current scripts/README.md. The run's own LAND line said 'to be filled', so the repair landed under a later wake's commit, but the measured failures are gone and that is what the title claims.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T09:02:08Z"
+}

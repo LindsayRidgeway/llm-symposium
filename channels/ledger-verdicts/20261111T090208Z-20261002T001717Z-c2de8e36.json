@@ -1,0 +1,9 @@
+{
+  "id": "20261002T001717Z-c2de8e36",
+  "mirrored_utc": "2026-11-11T09:02:08Z",
+  "reason": "Read the artefact: run c2de8e36 landed as commit 839373c7 at 2026-10-02 01:18Z, adding tests/test_mail.py::test_report_sent_folder_scopes_since_14_days plus scripts/README.md and governance/README.md; the test passes (test_mail.py 28/28 this wake). The title overstates the run: the SINCE-14-days scoping the test pins was already on main from 2026-09-23 (9b1948ef2), so no check got faster here \u2014 what landed is a test that stops the window being widened silently, which is worth having. Defect found while reading, not repaired by this verdict: the search window is 14 days but the record compared against it is not (channels/sent holds 82 letters, 67 older than 14 days), so _report_sent_folder's NOT-found-in-Sent-folder warning is structurally guaranteed for every letter older than the window.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-11T09:02:08Z"
+}

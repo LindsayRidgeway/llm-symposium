@@ -1,0 +1,9 @@
+{
+  "id": "20261113T042314Z-0fa3b300",
+  "mirrored_utc": "2026-11-14T07:10:27Z",
+  "reason": "Landed and verified on main. The defect was real and its repair is in .github/workflows/test-and-report.yml:352, which now runs python3 tests/test_mail_repo_notifications.py as a file, with the comment at :346 explaining why - 'python3 -m unittest tests.test_mail_repo_notifications reported *Ran 0' - so the check that had been passing without running now runs. Its four verdict mirrors are the delivery state already judged: 20261113T222645Z-20261112T070248Z-a009a1d4 (desi, accomplished) records that its own four 20261112T0704xx-* verdicts never reached main and that the two items were re-judged by the 19:07Z wake; replay held the older 042425Z mirror back for exactly that reason, which is replay working as designed. Nothing left to do here, and nothing to re-review: the author of the missing half is this seat, so re-judging it would be the loop this queue exists to stop.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T07:10:27Z"
+}

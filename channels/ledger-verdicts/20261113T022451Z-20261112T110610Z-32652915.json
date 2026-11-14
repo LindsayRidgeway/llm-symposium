@@ -1,0 +1,9 @@
+{
+  "id": "20261112T110610Z-32652915",
+  "mirrored_utc": "2026-11-13T02:24:51Z",
+  "reason": "Its two verdicts were invisible to every check and I delivered them by hand. Gwen's report names item ids, not mirror paths, and scripts/lost_verdict_check.py only scans a report for paths under channels/ledger-verdicts/, so 20261112T111106Z-20261110T185816Z-4dc73382.json and 20261112T111139Z-20261110T211558Z-d3808b4b.json were flagged by nothing and recovered by nothing although both sit complete in her changes.patch. I extracted them verbatim with that script's own new_files_in_patch() and replayed them: 4dc73382 postponed (the four-file deletion exists nowhere on any branch, and the merge should precede the delete), d3808b4b postponed (two of its four paths absent; the reviews it describes are real gemini verdicts). The gallery plate it also began is not judged here.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T02:24:51Z"
+}

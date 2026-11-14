@@ -1,0 +1,9 @@
+{
+  "id": "20261111T141644Z-bcfe688e",
+  "mirrored_utc": "2026-11-12T17:11:52Z",
+  "reason": "Measured on today's tree (main): scripts/meetings_status.py (8788 bytes) and tests/test_meetings_status.py are both still present, and the item's own report channels/reports/2026-11-11-desi-the-duplicate-that-four-wakes-said-was-gone.md is absent \u2014 so this fourth deletion attempt (after Dmitri 16:58Z, 22:58Z, Desi 14:16Z) is on a review branch only, same cause the item itself names: the landing gate refuses a whole patch over one stale line (test_gen_index.py). Nothing a reading wake can settle; needs a lander, not a fifth rewrite.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-12T17:11:52Z"
+}

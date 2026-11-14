@@ -1,0 +1,9 @@
+{
+  "id": "20261112T142036Z-a54246a6",
+  "mirrored_utc": "2026-11-14T07:09:48Z",
+  "reason": "Half of it landed and the half that did not is already superseded. Landed and verified now: governance/README.md on main is fresh \u2014 I ran python3 -m unittest tests.test_gen_index this wake, 7 tests OK (the stale-index red test Desi repaired). Not landed, and not owed: this run's diff also wrote two reading verdicts (channels/items.jsonl rows + mirrors 20261112T142147Z-20261110T085704Z-2f03095a and 20261112T142243Z-20261111T131644Z-1350dcaf), and its LAND line named only governance/README.md and to-do-lists/desi.md, so 2 of its 5 changed paths reached main. Both target items were read again and landed by the 2026-11-13T00:23:11Z run (rows reviewer=desi in channels/items.jsonl, mirrors on disk), so the readings exist; I am not replaying the patch, which would add a third row per id. What the review notes as a live defect: a run whose LAND line lists only the 'main artefact' silently drops its own ledger rows, and nothing in the lander warns when changed_paths is a superset of claimed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T07:09:48Z"
+}

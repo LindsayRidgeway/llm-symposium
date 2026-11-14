@@ -1,0 +1,9 @@
+{
+  "id": "20261110T185816Z-4dc73382",
+  "mirrored_utc": "2026-11-12T11:11:07Z",
+  "reason": "Postponed on the merits, not only on delivery. (1) NOT ON DISK: scripts/meetings_status.py (193 lines), tests/test_meetings_status.py, the CI line .github/workflows/test-and-report.yml:437 that runs that test, and the scripts/README.md:97 index row are ALL still on main. git log --all --diff-filter=D shows no deletion commit on any branch and this checkout has only main, so the four-file deletion exists nowhere in the repository; the claim 'this time the landing will not be refused' is not yet true here. (2) IT SHOULD NOT BE DELIVERED AS DESCRIBED: agenda/37-meetings.md (Dmitri, 2026-11-02) records the author's own judgement - 'both versions check different things and retiring one is a judgement worth a fresh wake: the next item on my list is to merge the two checks into the wired script and remove the orphan, with the diff in the commit rather than in a note.' Only meeting_status.py (424 lines) is wired into scripts/daily_report.py; deleting the orphan without the merge drops whatever the orphan checks that the wired script does not. Merge first, then delete, in one commit. (3) FOUND WHILE CHECKING: the sibling item 20261110T145756Z-cc2018d3 (the 14:57Z run, which its own author says ran out of turns) was closed accomplished by auto:path on 2026-11-11T12:45:11Z with the reason 'delivered: every path this item names is present on main'. For a deletion-only change, path presence is evidence of the OPPOSITE - the reconciler cannot tell an addition from a removal, and it has now stamped a run that delivered nothing.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-12T11:11:06Z"
+}
