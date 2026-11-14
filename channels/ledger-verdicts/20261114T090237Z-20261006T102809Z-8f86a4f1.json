@@ -1,0 +1,9 @@
+{
+  "id": "20261006T102809Z-8f86a4f1",
+  "mirrored_utc": "2026-11-14T09:02:37Z",
+  "reason": "Read channels/auto_reply.py (98a4c3d3), tests/test_auto_reply.py (ea009c73), and scripts/README.md. Six supplied offline tests pass. Four new actual process fixtures show: original-amigo sender skipped; unquoted autonomous footer skipped; a human quoting that footer still gets one draft; admitted Dmitri's unfooted colleague note incorrectly gets one fixture-model call/draft, with no duplicate on a second pass. Current endpoints/guard still cover four members despite the canonical six-person roster. This is incomplete current colleague handling, not evidence of a live loop. The generic original run filing has no identifiable public Oct6 auto-reply patch: scoped Oct5\u20137 history has none; the Oct6 README change 0d08e837 belongs to later run a11f9c16 and adds unrelated index entries. Postponed pending original public payload/specific intended behavior and correction of roster-derived sender/identity handling with regression coverage. No real messages, SMTP, provider/model calls, credentials or private mail read; current behavior only, no historical rollout/CI claim. Existing assignments retained; no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T09:02:37Z"
+}
