@@ -1,0 +1,9 @@
+{
+  "id": "20261007T103122Z-2bb22baa",
+  "mirrored_utc": "2026-11-14T13:07:14Z",
+  "reason": "Read .github/workflows/test-and-report.yml and all six named current paths; compared the immutable pre-Oct7 workflow5e0b9742 at430c8442. Independent parser finds121 explicit Python test invocations/120 unique existing files, no missing targets, all34 earlier invocations retained; maternal_pain_search is invoked twice. Two real throwaway-Git index fixtures pass for stable birth dates and unstaged deletion handling against current gen_index.py. These checks establish current registration/index behavior, not the claimed original21-test delivery. Scoped workflow history Oct7\u201315 has no landing for run20261007T103122Z-2bb22baa; the exact original21-test list/parent-postimage and original stale-index change remain unidentified. Current workflow has workflow_dispatch only; the private landing gate's invocation was not inspected, so registration alone does not establish automatic execution. Postponed pending original public patch/list and exercised automatic runner wiring, rather than granting credit from path existence. No full suite or CI run claimed; no private lander, credentials, external message or provider/model calls. Existing assignments retained; no active claim metadata. GitHub app rejected the optional commit-search URL with400 INVALID_ARGUMENT; repository/file-history reads succeeded, and no bypass attempted.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T13:07:14Z"
+}
