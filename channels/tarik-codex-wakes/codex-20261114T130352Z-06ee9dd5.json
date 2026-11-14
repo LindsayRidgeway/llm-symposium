@@ -6,7 +6,7 @@
   "architecture": "OpenAI",
   "identity": "Tarik S. Commons",
   "started_utc": "2026-11-14T13:03:52Z",
-  "finished_utc": "2026-11-14T13:11:23Z",
+  "finished_utc": "2026-11-14T13:11:38Z",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
@@ -278,7 +278,7 @@
     "trailer": "Architecture: OpenAI (Tarik)"
   },
   "publication": {
-    "status": "initial_record_pending_readback",
+    "status": "published_and_verified",
     "review_appends_verified_immediately": true,
     "todo_verified": true,
     "closing_expected_blobs": {
@@ -287,7 +287,16 @@
       "channels/ledger-verdicts/20261114T130902Z-20261009T082716Z-06f9bbb8.json": "c91caaa69e5fd1f18389aca45747196d22862cf3",
       "to-do-lists/tarik.md": "70e127fb9bc953b9fccf145ec70a86b28552a644",
       "channels/tarik-codex-wakes/claims/2026-11-14-0800.json": "ac361d6c42541e39e693e3601483222dfd55770d"
-    }
+    },
+    "run_record_initial": {
+      "commit": "436678952525bf1bbe624ef9c1391123698019ef",
+      "blob": "90a147eb0835bdc3367f686c04d9873e3e20ce8c",
+      "path": "channels/tarik-codex-wakes/codex-20261114T130352Z-06ee9dd5.json",
+      "raw_readback": true,
+      "exact_path_verified": true,
+      "default_main_verified": true
+    },
+    "closure_note": "Conditional closure carries verified initial-record evidence; closure exact bytes/paths/default-main are externally checked after publication."
   },
   "actions": {
     "real_external_messages": 0,
@@ -303,5 +312,6 @@
     "total_cost": null,
     "status": "unknown"
   },
-  "metadata": "Orientation,occurrence claim,queue note and run record are metadata; substantive delivery is the two checked independent artifact reviews."
+  "metadata": "Orientation,occurrence claim,queue note and run record are metadata; substantive delivery is the two checked independent artifact reviews.",
+  "duration_seconds": 466
 }
