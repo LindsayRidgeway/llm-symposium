@@ -507,6 +507,205 @@ def test_report_sent_folder_checks_only_each_mailbox_own_letters():
             assert "record has 1 sent letter(s) for 'claude'" in output
             assert "WARNING" not in output
 
+
+def _fake_imap(subjects, searches=None, logins=None):
+    """An IMAP4_SSL stand-in that answers a Sent-folder search with `subjects`.
+
+    The search reply is shaped like imaplib's, and that is the point: one byte string of
+    space-separated message numbers, and b"" when the folder holds nothing. The first version
+    answered with a *list* of numbers and with [] for an empty folder, so it crashed the reader
+    on exactly the case the repair is about and the crash was swallowed as "check unavailable".
+    """
+    import imaplib  # noqa: F401 — keeps the shape of the real module available to the patcher
+
+    class _Fake:
+        def __init__(self, *a, **k):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def login(self, u, p):
+            if logins is not None:
+                logins.append((u, p))
+            return "OK", []
+
+        def select(self, folder):
+            return "OK", []
+
+        def search(self, charset, *criteria):
+            if searches is not None:
+                searches.append((charset, criteria))
+            return "OK", [b" ".join(str(i + 1).encode() for i in range(len(subjects)))]
+
+        def fetch(self, num, *a):
+            subject = subjects[int(num) - 1]
+            return "OK", [(b"1", f"Subject: {subject}\r\n\r\n".encode("utf-8"))]
+
+    return _Fake
+
+
+def _one_desi_letter(td, name, subject):
+    sent = Path(td) / "channels" / "sent"
+    sent.mkdir(parents=True, exist_ok=True)
+    (sent / name).write_text(
+        f"Identity: desi\nTo: dest@example.com\nSubject: {subject}\n\nBody\n",
+        encoding="utf-8",
+    )
+    return sent
+
+
+def test_letter_date_reads_the_filename_prefix_only():
+    """The date used to scope the Sent-folder check is the one in the filename, and a name that
+    carries no usable date returns None instead of a guess."""
+    import datetime
+
+    assert mail.letter_date(Path("2026-08-29-desi-to-sciaan.md")) == datetime.date(2026, 8, 29)
+    assert mail.letter_date(Path("pitch-noema.md")) is None
+    assert mail.letter_date(Path("2026-13-45-letter.md")) is None, "an impossible date is not a date"
+
+
+def test_a_letter_older_than_the_search_window_is_not_reported_lost():
+    """The measured false alarm (2026-11-11): 67 of 82 letters in the record are older than the
+    14-day window the provider is searched over, so the check warned about all of them every run.
+    An old letter must be counted as unchecked, never as missing."""
+    import datetime
+    import tempfile
+    from unittest import mock
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
+            old = (datetime.date.today() - datetime.timedelta(days=60)).isoformat()
+            sent = _one_desi_letter(td, f"{old}-desi-to-someone.md", "An old pitch")
+
+            with mock.patch.object(mail, "SENT_DIR", sent), \
+                    mock.patch.object(mail.imaplib, "IMAP4_SSL", _fake_imap([])), \
+                    mock.patch("builtins.print") as printed:
+                mail._report_sent_folder()
+
+            output = "\n".join(str(c.args[0]) for c in printed.call_args_list if c.args)
+            assert "WARNING" not in output, output
+            assert "1 older than it (not checked)" in output, output
+
+
+def test_a_letter_inside_the_window_is_still_reported_lost():
+    """The repair must not silence the alarm it is repairing: a recent letter that the provider's
+    own Sent folder does not hold is exactly the silent drop the check exists to catch."""
+    import datetime
+    import tempfile
+    from unittest import mock
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
+            recent = datetime.date.today().isoformat()
+            name = f"{recent}-desi-to-someone.md"
+            sent = _one_desi_letter(td, name, "A recent pitch")
+
+            with mock.patch.object(mail, "SENT_DIR", sent), \
+                    mock.patch.object(mail.imaplib, "IMAP4_SSL", _fake_imap([])), \
+                    mock.patch("builtins.print") as printed:
+                mail._report_sent_folder()
+
+            output = "\n".join(str(c.args[0]) for c in printed.call_args_list if c.args)
+            assert "WARNING" in output, output
+            assert "1 letter(s) in record NOT found" in output, output
+            assert name in output, output
+
+
+def test_an_undated_letter_is_noted_not_accused():
+    """Two letters in the record carry no date in the filename. Their absence from a 14-day window
+    proves nothing, so they are reported as unplaceable rather than as lost."""
+    import tempfile
+    from unittest import mock
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
+            sent = _one_desi_letter(td, "pitch-noema.md", "An undated pitch")
+
+            with mock.patch.object(mail, "SENT_DIR", sent), \
+                    mock.patch.object(mail.imaplib, "IMAP4_SSL", _fake_imap([])), \
+                    mock.patch("builtins.print") as printed:
+                mail._report_sent_folder()
+
+            output = "\n".join(str(c.args[0]) for c in printed.call_args_list if c.args)
+            assert "WARNING" not in output, output
+            assert "1 undated record(s) absent from the window" in output, output
+            assert "not a lost-letter warning" in output, output
+
+
+def test_the_check_still_runs_when_every_letter_is_in_the_window():
+    """Guard against the repair becoming a no-op: a recent letter that IS in the provider's folder
+    is still counted, and the run says so."""
+    import datetime
+    import tempfile
+    from unittest import mock
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
+            recent = datetime.date.today().isoformat()
+            sent = _one_desi_letter(td, f"{recent}-desi-to-someone.md", "A recent pitch")
+
+            with mock.patch.object(mail, "SENT_DIR", sent), \
+                    mock.patch.object(mail.imaplib, "IMAP4_SSL", _fake_imap(["A recent pitch"])), \
+                    mock.patch("builtins.print") as printed:
+                mail._report_sent_folder()
+
+            output = "\n".join(str(c.args[0]) for c in printed.call_args_list if c.args)
+            assert "all 1 letter(s) in the window confirmed" in output, output
+            assert "WARNING" not in output, output
+
+
+def test_the_search_reply_is_read_in_every_shape_imaplib_sends():
+    """The crash this repair is about was an index into an empty reply. All the shapes a server
+    can send for "no messages" must read as no messages, because an empty Sent folder is a fact
+    the check has to report, not a reason to abandon the check."""
+    assert mail._search_numbers([]) == []
+    assert mail._search_numbers([None]) == []
+    assert mail._search_numbers([b""]) == []
+    assert mail._search_numbers([b"1 2 3"]) == [b"1", b"2", b"3"]
+
+
+def test_an_empty_search_reply_still_produces_the_missing_letter_warning():
+    """A reply with no message numbers must leave the check running. Before this repair the reply
+    raised IndexError, the whole check was abandoned as "unavailable", and a genuinely dropped
+    letter would have been reported as nothing at all."""
+    import datetime
+    import tempfile
+    from unittest import mock
+
+    class _EmptyReply(_fake_imap([])):
+        def search(self, charset, *criteria):
+            return "OK", []          # a shape imaplib does not document, and servers do send
+
+    with tempfile.TemporaryDirectory() as td:
+        with _clear():
+            os.environ["SYMPOSIUM_MAIL_USER_DESI"] = "desi.s.amigo@gmail.com"
+            os.environ["SYMPOSIUM_MAIL_APP_PASSWORD_DESI"] = "pw-desi"
+            recent = datetime.date.today().isoformat()
+            sent = _one_desi_letter(td, f"{recent}-desi-to-someone.md", "A recent pitch")
+
+            with mock.patch.object(mail, "SENT_DIR", sent), \
+                    mock.patch.object(mail.imaplib, "IMAP4_SSL", _EmptyReply), \
+                    mock.patch("builtins.print") as printed:
+                mail._report_sent_folder()
+
+            output = "\n".join(str(c.args[0]) for c in printed.call_args_list if c.args)
+            assert "unavailable" not in output, output
+            assert "WARNING" in output, output
+            assert "1 letter(s) in record NOT found" in output, output
+
+
 def _run_all():
     import traceback
 

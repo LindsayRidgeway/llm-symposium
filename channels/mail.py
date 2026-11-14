@@ -554,7 +554,7 @@ def _fetch_one(identity: str, user: str, app_password: str) -> int:
         if status != "OK":
             print(f"Mail channel: IMAP search failed for {identity}")
             return 0
-        for num in data[0].split():
+        for num in _search_numbers(data):
             status, msg_data = conn.fetch(num, "(RFC822)")
             if status != "OK":
                 continue
@@ -684,6 +684,51 @@ def run_mail_channel() -> None:
     _report_sent_folder()
 
 
+# A recorded letter is filed as channels/sent/YYYY-MM-DD-<who>-<to>-<subject>.md, and that date is
+# the only date the record carries: measured 2026-11-11, no letter in channels/sent/ has a Date:
+# header, and 80 of 82 filenames carry the prefix. Two do not (pitch-noema.md, pitch-sciam.md).
+LETTER_DATE_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})-")
+
+# How far back the provider's Sent folder is searched. R-001: retention prunes old mail, so a
+# wider search costs a fetch per message and finds only what is about to be pruned anyway.
+SENT_WINDOW_DAYS = 14
+
+
+def _search_numbers(data) -> list[bytes]:
+    """The message numbers from an IMAP SEARCH reply, without assuming its shape.
+
+    ``imaplib`` returns ``("OK", [b"1 2 3"])`` for a folder with messages and
+    ``("OK", [b""])`` for one without; a server that answers nothing at all has
+    been seen to return ``("OK", [])`` or ``("OK", [None])``. Indexing ``data[0]``
+    is what made the Sent-folder check die on an empty folder (measured
+    2026-11-11, Dmitri's run 20261111T110035Z-2b2fd5bd: an empty search killed
+    the whole check, which then printed "sent-folder check unavailable" instead
+    of the missing-letter warning it exists to print).
+    """
+    if not data:
+        return []
+    first = data[0]
+    if not first:
+        return []
+    return first.split()
+
+
+def letter_date(path: Path) -> datetime.date | None:
+    """The date a recorded letter was filed, from its filename prefix; None if it has none.
+
+    Returns None rather than guessing, because a guessed date is a false alarm with a different
+    cause: an undated record cannot be placed on either side of the provider's search window, so
+    the honest report says so instead of calling the letter lost or calling it confirmed.
+    """
+    m = LETTER_DATE_RE.match(path.name)
+    if not m:
+        return None
+    try:
+        return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+    except ValueError:  # a name that looks like a date but is not one
+        return None
+
+
 def _sent_letters_for(creds) -> list[tuple[Path, str]]:
     """Recorded letters (path, subject) that were transmitted from this mailbox.
 
@@ -728,7 +773,28 @@ def _report_sent_folder() -> None:
         letters = _sent_letters_for(creds)
         if not letters:
             continue
-        print(f"Mail channel: record has {len(letters)} sent letter(s) for '{identity}' — checking provider Sent folder")
+        # Only letters the provider's search could have returned can be judged by it. Before
+        # 2026-11-11 every recorded letter was compared against a 14-day window, so a mailbox with
+        # 82 letters and 67 of them older than the window warned "67 letter(s) NOT found in
+        # provider Sent folder" on every run — an alarm nobody could act on, which is how a real
+        # silent drop would have gone unread.
+        window_start = datetime.date.today() - datetime.timedelta(days=SENT_WINDOW_DAYS)
+        checkable: list[tuple[Path, str]] = []
+        undated: list[tuple[Path, str]] = []
+        too_old = 0
+        for p, subject in letters:
+            filed = letter_date(p)
+            if filed is None:
+                undated.append((p, subject))
+            elif filed >= window_start:
+                checkable.append((p, subject))
+            else:
+                too_old += 1
+        print(
+            f"Mail channel: record has {len(letters)} sent letter(s) for '{identity}' — "
+            f"{len(checkable)} inside the provider's {SENT_WINDOW_DAYS}-day search window, "
+            f"{too_old} older than it (not checked), {len(undated)} undated"
+        )
         user, app_password = creds
         try:
             with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, timeout=60) as conn:
@@ -739,11 +805,11 @@ def _report_sent_folder() -> None:
                     if status != "OK":
                         continue
                     # R-001: scope to ~14 days so retention-pruned mail isn't silently re-read
-                    since = (datetime.date.today() - datetime.timedelta(days=14)).strftime("%d-%b-%Y")
+                    since = (datetime.date.today() - datetime.timedelta(days=SENT_WINDOW_DAYS)).strftime("%d-%b-%Y")
                     status, data = conn.search(None, "SINCE", since)
                     if status != "OK":
                         continue
-                    for num in data[0].split():
+                    for num in _search_numbers(data):
                         status, msg_data = conn.fetch(num, "(BODY.PEEK[HEADER.FIELDS (SUBJECT)])")
                         if status != "OK":
                             continue
@@ -751,14 +817,24 @@ def _report_sent_folder() -> None:
                         m = BytesParser().parsebytes(raw)
                         provider_subjects.add(decode_subject(str(m.get("Subject", "")).strip()))
                     break
-                # Match this mailbox's letters by subject against its own Sent folder.
-                missing = [p.name for p, subject in letters if subject not in provider_subjects]
+                # Match this mailbox's letters by subject against its own Sent folder, but only
+                # those the window could have returned. An undated letter is reported, not
+                # accused: the record cannot say when it was sent, so its absence from a 14-day
+                # window proves nothing either way.
+                missing = [p.name for p, subject in checkable if subject not in provider_subjects]
                 if missing:
                     print(f"Mail channel: WARNING — {len(missing)} letter(s) in record NOT found in provider Sent folder:")
                     for m in missing:
                         print(f"  Mail channel:   {m}")
-                else:
-                    print(f"Mail channel: all {len(letters)} sent letter(s) confirmed in provider Sent folder")
+                elif checkable:
+                    print(f"Mail channel: all {len(checkable)} letter(s) in the window confirmed in provider Sent folder")
+                unplaceable = [p.name for p, subject in undated if subject not in provider_subjects]
+                if unplaceable:
+                    print(
+                        f"Mail channel: note — {len(unplaceable)} undated record(s) absent from the window "
+                        f"(no date in the filename, so this is not a lost-letter warning): "
+                        + ", ".join(unplaceable)
+                    )
                 # Dump the provider's view for manual inspection and debugging.
                 print(f"Mail channel: provider Sent folder holds {len(provider_subjects)} message(s):")
                 for s in sorted(provider_subjects):
