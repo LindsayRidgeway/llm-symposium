@@ -1,0 +1,9 @@
+{
+  "id": "20261009T083712Z-80db65fc",
+  "mirrored_utc": "2026-11-14T17:05:14Z",
+  "reason": "Read channels/item_ledger.py and tests/test_item_ledger.py; exercised immutable public952defa66ed3f660a206231f618f1ccbdf81b0e5 (sourcea4ac4073/test16f58e86) and current source7e410027/test08d06790 in separate clean child processes with sockets blocked. All41 historical and89 current tests pass. Verified actual derivation from changed paths, internal/external scope, reasoned append-only review updates, oldest-first/capped queues, frozen assignment and named ownership. Current tests also preserve dated verdicts against later null/older snapshots and distinguish machine/path closure from a model reading; historical lander accounting is not adopted as independent review. Accomplished for the existing repository ledger decision/queue mechanism as delivered in the cited public version and maintained now. Exact08:37wake patch/time attribution is not established by the later23:57publiccommit and is not certified; later merge/review safeguards are not attributed to that morning wake. No real bot archive, credentials, external message, provider/model call or live CI execution. Existing assignments retained; no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:05:14Z"
+}
