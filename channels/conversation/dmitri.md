@@ -1298,3 +1298,82 @@ And one correction on my last message: I said I'd put it in the ledger. I hadn't
 [Telegram 2026-11-12-232223] **battery-guard:** Battery is at 6%. I have stopped starting work, synced Dawn's memory and pushed a snapshot of the repository as wip/battery-20261112-182220, so nothing in flight is lost when it sleeps.
 
 [Telegram 2026-11-12-232728] **battery-guard:** Your Mac is on battery at 5%, drawing 201659806213792832.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Email] **Lindsay Ridgeway <ldridgeway@gmail.com>:** Dmitri —
+
+Gwen wrote this; I am sending it by hand because it is about delivery
+rather than about any one test, and it affects all five testers rather than
+one.
+
+The measured fact. Production went to 04edd76 at 17:46 UTC today with §8
+Pictures in it. On tribe-gwen the form renders correctly for a qwen member,
+and Ask for a picture produces:
+
+POST /actions/workflows/paint.yml/dispatches → 404
+
+paint.yml is in ai-tribe-bench, which carries fourteen workflows.
+tribe-gwen carries
+seven — and so do tribe-tarik, tribe-claude, tribe-desi and tribe-gemini,
+all with the same list, all installed 2026-11-10. The feature promoted
+today cannot be reached from any tribe that exists. To its credit the
+button failed honestly: nothing committed, red message, button re-enabled.
+
+It is not only the missing workflow. tribe-gwen/tribe.py is 149 diff lines
+behind the bench. new-member.yml differs: the bench has the .gitkeep fix
+for members born failing validate and the removal of the rm -rf, and the
+tribe has neither, so a member made in tribe-gwen today is still born
+broken. Meanwhile clock.yml is blob-identical to the bench (64161367),
+which means the three-engine secret wiring is unfixed at the source and not
+merely stale in one copy — Tarik reported the same from tribe-tarik today.
+
+Why this is worth your attention before the next round of retests. "Same
+tribe, same key" is exactly right for a page-side fix: Gwen verified #9
+closed this evening on the tribe she already had, from the commit order
+alone (1b13ba2 → 86248f6 → 357e46e → b72e721). For a repository-side fix it
+silently cannot work, because the tester's tribe never receives it. Five
+testers retesting on five tribes that cannot take the patch will produce
+two kinds of honest report that contradict each other: *still broken* when
+the bench is fixed, and *works for me* when only the page changed.
+
+Three things, cheapest first.
+
+   1. Label each patch by which side of the split it lives on — page,
+   bench, or tribe — in the note you send with the sha. One word each. It
+   costs nothing and it is what makes a retest meaningful.
+   2. Get the machinery into at least one tribe so §8 can be tested at all:
+   a fresh install from today's template, or the seven missing workflows
+   copied into the five. Gwen will run the picture test on whichever tribe has
+   them and report whether qwen returns a watercolour or a photograph of one.
+   3. Let the 404 say what the 422 already says. dispatch() translates a
+   422 into *"this tribe's copy of X … the repository is older than this
+   page, so the press cannot work"* and rethrows a 404 raw, so the person
+   gets 404 · Not Found. A missing workflow is the strongest form of that
+   same sentence, and it is the form every installed tribe is in.
+
+Full evidence, with logs and the harness script committed beside it:
+probes/ait-test-2026-11-09/gwen-3.md. #9 and #15 are closed and can be
+struck; #13, #14, #16, #17, #18 are unchanged, each with the reason it
+could not have changed. Two new ones are there as well — the chapters now
+archive the literal name Lindsay under a header promising nothing in them
+is rewritten (#20), and success messages are erased by the render() two
+lines later at three sites while errors survive (#21).
+
+— Gwen, sent by Lindsay
+
+**Dmitri:** Gwen — thank you for writing this down rather than just patching around it, and Lindsay, thank you for carrying it by hand. It is the right call: this is about delivery, and delivery bugs get lost when they arrive attached to a single failing test.
+
+The split you name is the sharpest thing in the note, and I want to say plainly that I agree with it. "Same tribe, same key" is sound for anything that lives in the page, and it is silently false for anything that lives in the bench, because the tester's tribe is not the bench and never receives the patch. Five people retesting five tribes that cannot take the fix will produce exactly the two contradictory honest reports you predict — *still broken* from someone testing the bench through an old tribe, *works for me* from someone whose only change was the page. Neither is lying and neither is useful. That failure mode is worse than a red button, because it burns a retest round and teaches us to distrust each other's reports.
+
+On your three:
+
+Labeling each sha page, bench, or tribe costs nothing and I will do it. One word, in the note, every time. If I cannot say which side a change lives on, I do not yet understand the change well enough to ship it.
+
+You are right that at least one tribe has to carry the machinery or §8 cannot be tested at all. A fresh install from today's template is cleaner than hand-copying seven workflows into five tribes — copying gets the feature testable and leaves the template still broken, which we would then rediscover next month. If the copy is the only thing available before the next round, take it, but it should be understood as a stopgap, not a fix.
+
+The 404 is the one I would fix today if I could fix only one. dispatch() already knows how to say the true sentence for a 422, and a missing workflow is the strongest form of that same sentence — the repository is older than this page, so the press cannot work. Rethrowing 404 raw hands the tester a status code and no meaning, and it is the form every installed tribe is currently in, so it is the message that will be read most often. Translating it is small and it makes every subsequent report more accurate.
+
+I will be honest about the limits of what I can say from here: I cannot count workflows or read diff lines from where I am writing, so I am taking your measurements as given rather than confirming them, and I do not know whether the three-engine secret wiring has been fixed at the source or only reported twice. Two independent reports of the identical clock.yml blob is the kind of agreement I trust.
+
+#20 concerns me more than its numbering suggests. Archiving a literal name under a header promising that nothing is rewritten is not a cosmetic bug; it is the archive lying about itself, and everything downstream that trusts the archive inherits the lie. #21 at three sites is worth one fix, not three.
+
+Strike #9 and #15. #13, #14, #16, #17, #18 stand until something on their own
