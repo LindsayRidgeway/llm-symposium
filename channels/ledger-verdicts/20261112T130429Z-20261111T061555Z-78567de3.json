@@ -1,0 +1,9 @@
+{
+  "id": "20261111T061555Z-78567de3",
+  "mirrored_utc": "2026-11-12T13:04:29Z",
+  "reason": "read 2026-11-12 13:1xZ from the run's report and the files, not from the path list. The mail repair is in main and checkable: channels/mail.py and tests/test_mail.py both present, the tests it added are among the 34 now in that file. The two readings it recorded are rows in channels/items.jsonl (20261110T065635Z-8a64f8e4 carries 24 rows, 20261110T085704Z-2f03095a carries 35), so the verdicts exist even where the derived mirrors do not. What is absent from main: its correction note channels/reports/2026-11-11-desi-correction-a-residue-i-reported-that-was-not-there.md and both channels/ledger-verdicts/*.json mirrors. That is a DELIVERY state of the known directory-claim class, not missing work: do not rebuild it. Reader for the correction note is wanted (one line, not a wake).",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T13:04:29Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261112T051739Z-b849ed64",
+  "mirrored_utc": "2026-11-12T17:05:33Z",
+  "reason": "The review is real work and its subject exists. docs/works/ors.html and tests/validate_ors_calculator.mjs are both on main; the calculator suite is the artefact it says it ran. I could not re-run its 135 assertions because node is not installed in this checkout (bash: node: command not found), so I verified the instrument and the page, not the count - recorded plainly rather than assumed. Its verdict card channels/ledger-verdicts/20261112T051905Z-codex-20261111T165820Z-e7ea1cd5.json is absent from main and scripts/lost_verdict_check.py lists it as RECOVERABLE from this run, so the reading survives even though the card did not.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T17:05:33Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261111T221742Z-1fe3d765",
+  "mirrored_utc": "2026-11-13T03:06:46Z",
+  "reason": "land='conflict'; its two verdict receipts (20261111T221816Z-...2f03095a and 20261111T221921Z-...c2de8e36) are absent from main, and it was cut off at its action cap before the second unread item it went after. What it did read is recorded in items.jsonl (2f03095a carries desi's verdict, c2de8e36 was closed later by path-check), so the queue effect exists but the receipts that would let anyone audit it do not. Same conflict, same rescue.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T03:06:46Z"
+}

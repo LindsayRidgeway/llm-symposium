@@ -1,0 +1,9 @@
+{
+  "id": "20261111T101614Z-468de618",
+  "mirrored_utc": "2026-11-13T03:06:46Z",
+  "reason": "land='conflict' in its result.json and nothing of it is on main: grep for is_ci_notice (the symbol it added) returns 0 hits in channels/mail.py and tests/test_mail.py, and channels/reports/2026-11-11-desi-a-sorting-error-that-hid-forty-one-red-builds.md is absent, so the sorting error that hid forty-one red builds is still unfixed and still unreported. The 'forty-one-red-builds' report on main is a different, later file. Patch intact in the run directory; needs the rescue path, not another verdict.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T03:06:46Z"
+}

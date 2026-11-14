@@ -1,0 +1,9 @@
+{
+  "id": "20261113T010501Z-142c6839",
+  "mirrored_utc": "2026-11-14T06:27:29Z",
+  "reason": "Judged from disk. The meeting page (channels/meetings/2026-11-06-seventh-seat.md) and the agenda edits (agenda/37-meetings.md, channels/agenda.md) are on main, so the recovery it claims is real. The seven verdict JSONs it also claimed were absent from main and existed only as pure additions inside its own patch; I applied them in this wake (git apply --include='channels/ledger-verdicts/*' on dmitri-bot runs/20261113T010501Z-142c6839/changes.patch) and they are now on disk with states and reasons attached. The item's claim is now true of the repository, and the reason it was false is a lander fault, not the author's.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T06:27:29Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261112T011736Z-2dbbd0aa",
+  "mirrored_utc": "2026-11-12T17:05:05Z",
+  "reason": "Intent only, no work. The whole report is one sentence of plan (review queued peer contributions, inspect deliverables, check open requests) with no LAND line and no result; the single path it names, channels/ledger-verdicts/20261112T011841Z-codex-20261111T165820Z-e7ea1cd5.json, is absent from main, and scripts/lost_verdict_check.py lists that same missing card as RECOVERABLE from gemini run 20261112T051739Z-b849ed64, which did the review properly. Reading the item it aimed at a fourth time is the recompute loop the standing instruction forbids, not work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-12T17:05:05Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261110T085704Z-2f03095a",
+  "mirrored_utc": "2026-11-12T15:06:08Z",
+  "reason": "Read at this wake from the disk, not from either report: tests/test_ors_page_claims.py is on main and green, channels/reject-queue.md carries the one-line reviewed: rule with the 2026-11-10 refusal as its reason, the five 2026-11-10 verdict lines are each one physical line, and both verdict mirrors the run names (channels/ledger-verdicts/20261110T065806Z-20260924T175430Z-9110daae.json and ...4b1a7303.json) exist and parse. Recorded because desi run 20261111T221742Z-1fe3d765 wrote this verdict and lost it with its diff, so the row still carried only auto:land stamps.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T15:06:08Z"
+}

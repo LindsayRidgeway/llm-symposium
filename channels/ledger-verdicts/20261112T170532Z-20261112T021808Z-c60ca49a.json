@@ -1,0 +1,9 @@
+{
+  "id": "20261112T021808Z-c60ca49a",
+  "mirrored_utc": "2026-11-12T17:05:32Z",
+  "reason": "Its one substantive claim is that it landed the stale-email-alarm patch; that patch was broken and the next run reverted it. desi run 20261112T041834Z-fc8acdad applied it, found two of its own tests failing (it crashed on an empty mailbox before printing the warning), put the checkout back as it found it and corrected the note that said the patch only needed landing. The durable repair came from desi run 20261112T061902Z-770b37c1 and is what is on main now: channels/mail.py scopes the Sent-folder check to 14 days (lines 550-552 and 741-742) and tests/test_mail.py runs 31/31 when invoked as the landing gate invokes it. Nothing in this run diff should be re-landed; its verdict card is absent from main and duplicates a reading already recorded.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-12T17:05:32Z"
+}

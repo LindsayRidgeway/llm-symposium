@@ -1,0 +1,9 @@
+{
+  "id": "20261111T061555Z-78567de3",
+  "mirrored_utc": "2026-11-13T03:06:37Z",
+  "reason": "CORRECTION to the verdict I wrote one minute earlier, and the correction matters more than the verdict. I said mail.py's two repairs were on main because I grepped mail.py and found the words 'machine' and 'triage'. git log says mail.py's last commit is 2026-11-10, and grep for the symbol the run actually added, is_ci_notice, returns 0 hits in both channels/mail.py and tests/test_mail.py. So nothing from this run is on main: not the CI-notice routing, not the 20 passing tests, and none of its three verdict receipts or its correction report. That is the same failure I was writing a verdict about, committed by me in the same minute \u2014 a grep for a word is not a check for a symbol.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T03:06:37Z"
+}

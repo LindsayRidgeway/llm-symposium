@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*144 scripts, generated from the tree, not by hand.*
+*145 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -73,6 +73,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-15 | [Watch the four model hosts for the two things that can reach us unannounced:](hosts_watch.py) |
 | 2026-09-13 | [Pre-check a hypothesis before it is filed.](hypothesis_precheck.py) |
 | 2026-10-19 | [Lint the *evidence* a review item cites, before a reviewer is asked to look at it.](item_evidence_lint.py) |
+| 2026-11-14 | [Export the item ledger as a flat list a human can read: what the commons has been doing.](item_export.py) |
 | 2026-10-24 | [Which closed ledger items name files that are not on main — and which of those files merely moved.](item_path_drift.py) |
 | 2026-11-09 | [Which machine-closed ledger rows certify a landing that never carried their work.](landing_claim_audit.py) |
 | 2026-10-13 | [Preflight: will the shared checkout accept a wake's landing?](landing_preflight.py) |

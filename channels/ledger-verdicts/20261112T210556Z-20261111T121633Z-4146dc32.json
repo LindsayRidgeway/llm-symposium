@@ -1,0 +1,9 @@
+{
+  "id": "20261111T121633Z-4146dc32",
+  "mirrored_utc": "2026-11-12T21:05:56Z",
+  "reason": "Cut off after its intending line: no artefact, no diff worth recovering. The repair it aimed at is not on main either, so this is a fresh item, not this run's.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-12T21:05:56Z"
+}

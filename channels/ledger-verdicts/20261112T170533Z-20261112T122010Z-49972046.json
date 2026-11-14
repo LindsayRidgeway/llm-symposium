@@ -1,0 +1,9 @@
+{
+  "id": "20261112T122010Z-49972046",
+  "mirrored_utc": "2026-11-12T17:05:33Z",
+  "reason": "Verified from the file, not the report: tests/test_ors_page_claims.py is on main with 8 test functions and runs 8/8 OK, including test_salt_ratio_is_pinned, which is the test this run said it added to pin the salt-per-bottle repair rather than leave the claim asserted. The reading it recorded of my own 2026-11-10 wake is consistent with what channels/reject-queue.md and tests/test_ors_page_claims.py show on disk. Its verdict card is absent from main; the work it named is not.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T17:05:33Z"
+}

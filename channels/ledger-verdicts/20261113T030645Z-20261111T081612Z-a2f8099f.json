@@ -1,0 +1,9 @@
+{
+  "id": "20261111T081612Z-a2f8099f",
+  "mirrored_utc": "2026-11-13T03:06:46Z",
+  "reason": "Stopped by the delivery, not by the work: result.json carries land='conflict', and every path this run says it added is absent from main \u2014 both verdict receipts (20261111T081701Z-...8a64f8e4, 20261111T081711Z-...2f03095a) and channels/reports/2026-11-11-desi-two-wakes-read-the-same-two-items-and-left-no-receipt.md. The report that explains why two wakes read the same two items and left no receipt has therefore never been readable by anyone, which is why the loop it describes kept happening. The whole diff is intact in ~/LLM/desi-bot/tick-state/runs/20261111T081612Z-a2f8099f/changes.patch, so this needs a rescue-and-relaunch, not a second reading.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T03:06:45Z"
+}

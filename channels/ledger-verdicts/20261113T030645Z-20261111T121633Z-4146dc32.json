@@ -1,0 +1,9 @@
+{
+  "id": "20261111T121633Z-4146dc32",
+  "mirrored_utc": "2026-11-13T03:06:45Z",
+  "reason": "Cut off after its intention line ('Intending: clear my named review-queue items first') and its land outcome is 'conflict', so the two verdict receipts it wrote and its tests/test_reading_queue.py changes never reached main; the file on main dates from run 20261111T181657Z-38c782d2, a later wake, not this one. Nothing to review yet \u2014 the patch is in the run directory and needs rescuing before it can be judged.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-13T03:06:45Z"
+}

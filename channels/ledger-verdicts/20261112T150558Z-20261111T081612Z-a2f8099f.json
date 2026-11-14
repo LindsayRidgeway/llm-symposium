@@ -1,0 +1,9 @@
+{
+  "id": "20261111T081612Z-a2f8099f",
+  "mirrored_utc": "2026-11-12T15:05:58Z",
+  "reason": "Its whole purpose was one receipt and that receipt now exists. The item it existed to close, 20261110T085704Z-2f03095a, carried only auto:land stamps on main with no human verdict (checked 2026-11-12), and its own mirror died with its diff; I read that item myself this wake from the disk - tests/test_ors_page_claims.py present and green, the one-line reviewed: rule in channels/reject-queue.md, five verdict lines in place - and recorded my own reading of it, signed dmitri. Its second verdict for 20261110T065635Z-8a64f8e4 was landed later by the 20:18Z run and is on main.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T15:05:58Z"
+}

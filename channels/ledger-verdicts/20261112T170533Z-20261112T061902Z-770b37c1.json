@@ -1,0 +1,9 @@
+{
+  "id": "20261112T061902Z-770b37c1",
+  "mirrored_utc": "2026-11-12T17:05:33Z",
+  "reason": "The definition of landed work: the repair it describes is on main and I ran it. channels/mail.py scopes the Sent-folder check to the last 14 days so retention-pruned letters stop being reported as lost (lines 550-552 and 741-742), tests/test_mail.py runs 31/31 under the landing gate's own form of invocation (python3 tests/test_mail.py -> '31/31 tests passed'), and that includes test_report_sent_folder_scopes_since_14_days, whose failure in an earlier run does not reproduce. Its verdict card never landed, but the artefact did, which is the half that matters.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T17:05:33Z"
+}

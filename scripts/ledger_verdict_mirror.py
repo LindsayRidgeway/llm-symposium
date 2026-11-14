@@ -171,7 +171,7 @@ def replay(ledger: Path = DEFAULT_LEDGER, verdicts: Path = DEFAULT_VERDICTS,
     """Fold mirrored verdicts into `ledger`. Idempotent, and never overwrites a later verdict."""
     current = item_ledger.load(ledger)
     records, unreadable = _verdict_files(verdicts)
-    applied, skipped, unknown = [], [], []
+    applied, skipped, unknown, held = [], [], [], []
     for rec in records:
         live = current.get(rec["id"])
         if live is None:
@@ -182,7 +182,16 @@ def replay(ledger: Path = DEFAULT_LEDGER, verdicts: Path = DEFAULT_VERDICTS,
             try:  # a ledger row written by hand may carry the compact spelling too
                 live_utc = _aware(live["state_utc"])
             except SystemExit:
-                live_utc = ""
+                # The ledger already carries a verdict whose stamp this tool cannot read. That
+                # verdict cannot be *shown* to be older than the mirror, and the one rule replay
+                # exists to keep is that it never walks a record backwards — so it is held and
+                # named rather than replaced. Measured 2026-11-14: no live row is in this state
+                # today (0 of 1354), which is exactly why the hole had to be closed by reading
+                # the code instead of by watching it fail: the branch that set `live_utc = ""`
+                # and fell through to the overwrite was reachable, silent, and never taken.
+                held.append(f"{rec['id']} (ledger verdict stamp unreadable: "
+                            f"{live.get('state_utc')!r})")
+                continue
         if live.get("state") == rec["state"] and live_utc == rec["state_utc"]:
             skipped.append(rec["id"])  # already folded in
             continue
@@ -197,7 +206,7 @@ def replay(ledger: Path = DEFAULT_LEDGER, verdicts: Path = DEFAULT_VERDICTS,
             current[rec["id"]] = row
         applied.append(rec["id"])
     return {"applied": applied, "skipped": skipped, "unknown": unknown,
-            "unreadable": unreadable, "dry_run": dry_run}
+            "unreadable": unreadable, "held": held, "dry_run": dry_run}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -227,9 +236,12 @@ def main(argv: list[str] | None = None) -> int:
     result = replay(args.ledger, args.verdicts, args.dry_run)
     label = "would apply" if args.dry_run else "applied"
     print(f"{label}: {len(result['applied'])}  already-there-or-later: {len(result['skipped'])}  "
-          f"unknown-id: {len(result['unknown'])}  unreadable: {len(result['unreadable'])}")
+          f"unknown-id: {len(result['unknown'])}  held: {len(result['held'])}  "
+          f"unreadable: {len(result['unreadable'])}")
     for item_id in result["applied"]:
         print(f"  {label}: {item_id}")
+    for held in result["held"]:
+        print(f"  held, ledger verdict kept: {held}")
     for item_id in result["unknown"]:
         print(f"  no such item in the ledger: {item_id}")
     for problem in result["unreadable"]:

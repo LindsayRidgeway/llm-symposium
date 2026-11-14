@@ -1,0 +1,9 @@
+{
+  "id": "20261111T221742Z-1fe3d765",
+  "mirrored_utc": "2026-11-12T21:05:59Z",
+  "reason": "Its reading 20261002T001717Z-c2de8e36 is closed accomplished in items.jsonl; its own verdict file never landed, so the receipt there is the record.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-12T21:05:59Z"
+}

@@ -106,6 +106,31 @@ class LedgerVerdictMirrorTest(unittest.TestCase):
         self.assertEqual(live["state"], "accomplished")
         self.assertEqual(live["reviewer"], "dmitri")
 
+    def test_replay_holds_a_ledger_verdict_whose_clock_it_cannot_read(self):
+        """An unreadable stamp on the live row is not permission to overwrite that row.
+
+        The precedence rule is that replay never walks a record backwards. It used to be
+        enforced by comparing timestamps, with `live_utc = ""` passed to the comparison whenever
+        the live stamp would not parse — an empty string compares as older than everything, so
+        the one row that could not be shown to be current was the one row replay was willing to
+        replace. Nothing in the live ledger is in that state today; the branch was reachable and
+        silent all the same, which is why this is pinned by a test rather than by an incident.
+        """
+        self.ledger.write_text(json.dumps({
+            "id": "codex-test-1", "amigo": "tarik", "state": "accomplished",
+            "state_utc": "yesterday afternoon", "reviewer": "dmitri", "reason": "did the work",
+            "title": "a test item", "source": "codex"}, sort_keys=True) + "\n", encoding="utf-8")
+        lvm.mirror("codex-test-1", "postponed", "desi", "a later mirror", "",
+                   self.verdicts, "2026-11-14T01:00:00Z")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], [], "replay replaced a verdict it could not date")
+        self.assertEqual(len(result["held"]), 1)
+        self.assertIn("codex-test-1", result["held"][0])
+        live = json.loads(self.lines()[-1])
+        self.assertEqual(live["state"], "accomplished")
+        self.assertEqual(live["reviewer"], "dmitri")
+        self.assertEqual(len(self.lines()), 1, "a held verdict must not append a row")
+
     def test_replay_names_an_unknown_item_instead_of_inventing_it(self):
         lvm.mirror("codex-not-in-the-ledger", "rejected", "dmitri", "never do this", "",
                    self.verdicts, "2026-10-26T11:41:50Z")

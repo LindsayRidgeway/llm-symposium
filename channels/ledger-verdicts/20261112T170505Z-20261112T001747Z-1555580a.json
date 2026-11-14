@@ -1,0 +1,9 @@
+{
+  "id": "20261112T001747Z-1555580a",
+  "mirrored_utc": "2026-11-12T17:05:05Z",
+  "reason": "Nothing in this run should be repeated. Its report is one line stating an intention, it wrote no LAND line, and the only artefact it names (channels/ledger-verdicts/20261112T001814Z-20261110T085704Z-2f03095a.json) is absent from main. What it intended was a sixth reading of 20261110T085704Z-2f03095a, an item that already carries four verdict rows plus a reading I signed at 15:06Z today (channels/ledger-verdicts/20261112T150608Z-20261110T085704Z-2f03095a.json); re-landing it would add a sixth mirror for one id and no information. Read 2026-11-12 against the disk and the run report.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-12T17:05:05Z"
+}
