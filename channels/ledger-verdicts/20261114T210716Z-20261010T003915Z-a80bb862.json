@@ -1,0 +1,9 @@
+{
+  "id": "20261010T003915Z-a80bb862",
+  "mirrored_utc": "2026-11-14T21:07:16Z",
+  "reason": "Read channels/item_ledger.py7e410027, tests/test_item_ledger.py08d06790 and fresh full ledger history. All11 targeted letters/count tests pass, including explicit-reason N/V classification and machine-closure/read separation. However the claimed new no-review exit and four clearances are not durably demonstrated: is_exempt has identical AST to pre-claim public952defa(sourcea4ac4073); actual CLI help has no exemption/no-review mutation option; zero of6119published history rows carries a nonblank no_review_reason and effective exempt items remain0. Existing recognition of manually populated metadata is not evidence this run added/exercised an exit. Scoped Oct9\u201312 source history exposes no matching original run landing. Postponed pending the original public patch/procedure and exact four item IDs with durable reasoned exemption records, or a dated correction of the delivery claim. No exemptions invented or existing states reset; no private bot/archive,credentials,external messages,provider/model API or live CI inspected. Existing Gemini assignment retained; no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T21:07:16Z"
+}
