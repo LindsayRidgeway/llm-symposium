@@ -1,0 +1,25 @@
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+[console.error] Failed to load resource: the server responded with a status of 404 ()
+   [console.error] Failed to load resource: the server responded with a status of 404 ()
+[build] build 04edd76 2026-11-13 17:46 UTC — if a change you expect is missing, reload the page; this one was loaded before it.
+[pressing "Ask for a picture"]
+   [req] POST /actions/workflows/paint.yml/dispatches
+   [res] 204 /actions/workflows/paint.yml/dispatches
+   [+3s] {"msg":"asked qwen on ferry's behalf…","result":"","btn":true}
+   [+6s] {"msg":"paint is queued…","result":"","btn":true}
+   [+9s] {"msg":"paint is in_progress…","result":"","btn":true}
+[reqfail] https://github.com/LindsayRidgeway/tribe-gwen/raw/main/plates/20261114T040808Z.png net::ERR_BLOCKED_BY_ORB
+   [+63s] {"msg":"the picture is in the record: plates/20261114T040808Z.png","result":"Painted by qwen (qwen-image-3.0) for ferry, 2026-11-14 04:08 UTC — the harness made the call; a wake has no tools and cannot. | The sentence it was asked with: a watercolour of a small harbour at night, one lamp on a quay, no lettering | 1,530,782 bytes. A medium named in the sentence is not a medium guaranteed: check the picture before you print it. | plates/20261114T040808Z.png — open the file in the repository","btn":false}
+--- final paint result ---
+{
+ "html": "<img src=\"https://github.com/LindsayRidgeway/tribe-gwen/raw/main/plates/20261114T040808Z.png\" alt=\"the picture ferry asked for\" loading=\"lazy\" style=\"max-width: 100%; border-radius: 6px; display: none;\" onerror=\"this.style.display='none'\">\n      <div class=\"prose\"><p>Painted by qwen (qwen-image-3.0) for ferry, 2026-11-14 04:08 UTC — the harness made the call; a wake has no tools and cannot.</p><p>The sentence it was asked with: a watercolour of a small harbour at night, one lamp on a quay, no lettering</p><p>1,530,782 bytes. A medium named in the sentence is not a medium guaranteed: check the picture before you print it.</p></div>\n      <p class=\"small muted\"><code>plates/20261114T040808Z.png</code> — <a href=\"https://github.com/LindsayRidgeway/tribe-gwen/blob/main/plates/20261114T040808Z.png\" target=\"_blank\" rel=\"noopener\">open the file in the repository</a></p>",
+ "img": [
+  {
+   "src": "https://github.com/LindsayRidgeway/tribe-gwen/raw/main/plates/20261114T040808Z.png",
+   "shown": false
+  }
+ ],
+ "msg": "the picture is in the record: plates/20261114T040808Z.png"
+}
+[shot] /Users/lindsayridgeway/tmp/ait-test/shots/64-picture.png
