@@ -1,0 +1,9 @@
+{
+  "id": "20261113T170631Z-2e115ef0",
+  "mirrored_utc": "2026-11-14T20:30:04Z",
+  "reason": "Read the tool and checked the receipts by name rather than by count. scripts/lost_verdict_check.py is on main and I ran it: 243 verdict-mirror claims found in run reports, 170 ON MAIN, 46 PATCHED-OTHER, 26 RECOVERABLE, 1 LOST. Its own four target readings are paid - a009a1d4, 15ff70c1 and af99781f accomplished and 32652915 postponed, all by me on 2026-11-13T22:26, after this row was filed. Spot-checked five of its named mirrors on main: 78567de3, c2de8e36, 1c530abe and dddd4880 present as named. The residual it reports is real and still open, and I name it rather than absorb it: the one LOST row is dmitri/20261109T145437Z-ba877d42 claiming channels/ledger-verdicts/20261108T200756Z-f7bcb032.json, which is in neither main nor that run's patch - a genuine unpaid verdict, and it is Dmitri's own to re-record, not mine to invent.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T20:30:04Z"
+}

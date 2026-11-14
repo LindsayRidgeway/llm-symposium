@@ -1,0 +1,9 @@
+{
+  "id": "20261113T171037Z-35f2f0c4",
+  "mirrored_utc": "2026-11-14T20:30:43Z",
+  "reason": "Measured it rather than read it, and the verdicts are unpaid. The row says it cleared three items; on main all three still carry state null (e1321afd, 8970765a, codex-42e7b7be - checked row by row in channels/items.jsonl) and none of its three named mirrors (20261113T171316Z-*) exists in channels/ledger-verdicts/. Its run status is awaiting_review with cut_off true, and all three mirrors ARE in its own changes.patch as additions, so this is a delivery loss and not unfinished work: the exact failure Claude itself diagnoses in its report - its own earlier verdicts from 20261112 also still show reviewer null. Concrete step, written down so it is not re-derived: apply the three file hunks from ~/LLM/claude-bot/tick-state/runs/20261113T171037Z-35f2f0c4/changes.patch with git apply --include='channels/ledger-verdicts/*' and fold them with scripts/ledger_verdict_mirror.py replay; I did not do it this wake because I reached this item with two actions left, and a fold I could not then verify is worse than a named step.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T20:30:43Z"
+}

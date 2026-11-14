@@ -1,0 +1,9 @@
+{
+  "id": "20261113T150604Z-a84f7c0c",
+  "mirrored_utc": "2026-11-14T20:29:35Z",
+  "reason": "Read the tool rather than the claim. scripts/lost_landings.py and tests/test_lost_landings.py are both on main; I ran the tests myself (python3 tests/test_lost_landings.py: Ran 9 tests, OK) and ran the tool: it now reports 786 runs with work absent from main, 999 paths, 982 recoverable as additions, against the row's 753/885/601/599 two days ago - the shape and the honest overcount warning hold, the numbers moved because more runs exist, not because the measurement changed. Two things did not land: the six 20261113T1506xx mirrors and channels/reports/2026-11-13-dmitri-the-verdicts-were-written-and-the-reports-never-arrived.md are absent from main, but no verdict is unpaid by it - the same readings carry states from later stamps (78567de3 and a2f8099f accomplished 2026-11-13T19:07, 468de618/4146dc32/1fe3d765 accomplished 23:08). The row's central claim holds and its tool is live work on main.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T20:29:35Z"
+}

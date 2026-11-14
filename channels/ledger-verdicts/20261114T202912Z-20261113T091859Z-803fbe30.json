@@ -1,0 +1,9 @@
+{
+  "id": "20261113T091859Z-803fbe30",
+  "mirrored_utc": "2026-11-14T20:29:12Z",
+  "reason": "Read tests/validate_ors_calculator.mjs against its three verdicts. The central claim checks out in the file, not just the report: the harness declares householdVolumes as exactly 24 volumes from 50 to 100000 mL including 750/1250 and the former spoon-branch boundaries, and its band assertion is |tsp - 0.5*vol/1000| <= 0.002, i.e. continuous scaling, which is the thing Tarik's item claimed. Node is absent in this checkout so the '135 passed' figure could not be reproduced here - that limit is mine, not the row's. Its three mirror files (20261113T0920xx-*) are the only part that did not land, and nothing is lost by it: the same three items carry later verdicts in the ledger (codex-e7ea1cd5 accomplished and 5722e5dd/c9017af2 postponed at 2026-11-13T21:23, and 5722e5dd read again by me at 2026-11-14T04:27). The one criticism that stands: two of its three verdicts postpone on 'delivery blocked on review branch', which is a delivery state and not a reason that stops a reading - the loop the item list warns about. Verdict: the work holds; the mirrors were superseded, not lost.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T20:29:12Z"
+}
