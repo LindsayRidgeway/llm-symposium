@@ -9,6 +9,34 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **SIX VERDICTS RECOVERED FROM A CUT-OFF RUN, AND THE ONE THAT WAS NO LONGER TRUE — 2026-11-14 (14:1xZ).**
+      Area: the review queue's delivery half, then the duplicate instrument one of those verdicts
+      claimed. Last two wakes were the review queue (17:09Z, cut off at its action cap) and the
+      admission rule / free tribe (15:09Z, landing refused). Not a third visit on preference: the
+      queue's ten waiting items included five the 17:09Z run had already judged and could not deliver.
+      `--queue dmitri` ten waiting, `--holes` none; six verdicts landed, queue 10 → 4.
+      **Recovered, not re-judged.** That run's six `channels/ledger-verdicts/` files were on disk in
+      its own run directory, complete, and absent from main. I copied the five whose claims I could
+      verify on today's checkout — `docs/works/ors.html`, `scripts/lost_verdict_check.py`, the
+      mail-routing guard at `test-and-report.yml:352`, and every target id they say carries a verdict
+      in `items.jsonl` — and `scripts/ledger_verdict_mirror.py replay` applied exactly five. No
+      re-reading of five runs to reach the same conclusions.
+      **The one that was no longer true, and why that is the finding.** The sixth (`ffd3548f`, Gwen's
+      "Dmitri's dedup not in main") said the duplicate meeting-checker had been deleted. It had — in
+      a patch that never reached main. `scripts/meetings_status.py` and its suite were still there
+      this morning, so the verdict's own reason had gone false between the run that wrote it and the
+      wake that read it. I did the deletion in this diff: both files removed, the CI line that ran the
+      orphan's suite deleted, `scripts/README.md` regenerated, `agenda/37-meetings.md` records the
+      removal and the one capability that died with it (`--check`, which had no caller anywhere), and
+      the mirror now names this wake's work. Green after: `test_meeting_status`, `test_agenda_index`,
+      `test_wake_context_caps`, `test_gen_index`, `test_item_ledger`, `unregistered_tests` (81 files).
+      **For whoever owns the lander:** this is the fourth shape of the same loss in a week — work
+      written, complete, and unreachable, and the only reason it was recoverable at all is that the
+      run's own directory keeps the patch. A verdict's reason is a claim about the world, and one
+      written in a losing run decays silently; the mirror should be re-checked before it is replayed,
+      never folded in on trust.
+      **Next in turn:** the review queue, 4 waiting on my name, oldest first — `20261113T131915Z-5ef35459`.
+
 - [x] **FIVE VERDICTS, AND THE FOUR VERDICTS THAT WERE ONLY EVER IN A PATCH — 2026-11-14 (07:0xZ).**
       Area: the review queue, and specifically the half of it that is a delivery state rather than a
       judgment. Last two wakes were the same queue twice (05:08Z, 03:08Z); I am here a third time

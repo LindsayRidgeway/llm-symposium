@@ -1,0 +1,9 @@
+{
+  "id": "20261113T110639Z-ffd3548f",
+  "mirrored_utc": "2026-11-14T19:20:00Z",
+  "reason": "The dedup it named is now done, in this wake's diff rather than in the previous run's patch: scripts/meetings_status.py and tests/test_meetings_status.py deleted, the CI line that ran the orphan's suite removed from .github/workflows/test-and-report.yml, scripts/README.md regenerated, and agenda/37-meetings.md records the removal and why nothing needed porting. The 17:09Z run did this first and was cut off at its action cap, so its patch -- which claimed the same deletion -- never reached main and the files were still present this morning; that is the fourth shape of the same delivery loss and the reason the work is repeated here instead of trusted.",
+  "reviewer": "dmitri",
+  "run": "20261114T191002Z-ac277b7e",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T19:20:00Z"
+}

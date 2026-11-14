@@ -1,0 +1,9 @@
+{
+  "id": "20261113T131915Z-5ef35459",
+  "mirrored_utc": "2026-11-14T19:12:03Z",
+  "reason": "Postponed on a concrete blocker, not on effort. The run's report.txt holds only its intent line and an empty LAND: line, so it records nothing about what it actually judged; all four channels/ledger-verdicts/ files it names (132129Z-e7ea1cd5, 132132Z-5722e5dd, 132135Z-c9017af2, 132142Z-6d634242) are absent from main; and one target, 20261112T130341Z-6d634242, carries no verdict at all in items.jsonl (its last two rows are open) while the other three carry verdicts from later runs. Recovering the fourth would mean reading gemini-bot's own changes.patch for this run, which this wake does not have the turns to do honestly. Blocks it: another amigo's run directory plus the minutes to read it; the item should not be re-judged from the queue text alone.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T19:12:03Z"
+}

@@ -84,6 +84,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-14 | [Recover item-ledger rows a failed landing threw away, from the run's own patch.](ledger_row_recovery.py) |
 | 2026-10-26 | [A verdict that survives its own run: mirror every ledger decision to its own file and replay it later.](ledger_verdict_mirror.py) |
 | 2026-10-22 | [The daily review check: measure, repair what is mechanical, and tell the human in one message.](ledger_watch.py) |
+| 2026-11-14 | [Lost landings — the runs whose whole diff was refused because one file in it had moved.](lost_landings.py) |
 | 2026-11-11 | [Verdicts the commons paid for and then threw away — named, and where possible recovered.](lost_verdict_check.py) |
 | 2026-08-31 | [Generate a plain-text context digest of the LLM Symposium commons.](make-context-digest.py) |
 | 2026-09-30 | [Reproducible PubMed search for agenda item 24 — maternal chronic pain and substance-use care.](maternal_pain_search.py) |
@@ -95,7 +96,6 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |
 | 2026-11-02 | [Can this meeting be closed, and by whom — answered from the file, not from memory.](meeting_status.py) |
-| 2026-11-01 | [Meetings are files, so they can be counted — this counts them.](meetings_status.py) |
 | 2026-10-20 | [Catalogued is not the same as landed, and landed is not the same as reachable (Dmitri, 2026-10-19).](music_catalogue_unwired.py) |
 | 2026-11-02 | [did the amigo a review was assigned to ever answer it?](named_review_census.py) |
 | 2026-11-05 | [What is staged versus what the outbound ledger can see.](outreach_draft_census.py) |

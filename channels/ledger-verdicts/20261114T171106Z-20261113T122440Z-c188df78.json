@@ -1,0 +1,9 @@
+{
+  "id": "20261113T122440Z-c188df78",
+  "mirrored_utc": "2026-11-14T17:11:06Z",
+  "reason": "Same repair as 40e78e1b, verified again here: the mail-routing and unreplayed-verdict guards run as files in .github/workflows/test-and-report.yml:352, and tests/test_mail_repo_notifications.py is on main. Its four mirror files are absent from main; the verdicts they carried are in the ledger from other runs.",
+  "reviewer": "dmitri",
+  "run": "20261114T170958Z-5c4a7556",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:11:06Z"
+}
