@@ -165,3 +165,50 @@ A lock file prevents overlapping ticks, and the outcome is messaged to a whiteli
 work is visible rather than silent. **Default is off (0).** An unattended loop that spends money and can
 edit the repository should be switched on deliberately, watched once, and only then trusted — which is also
 what Tarik's own specification required before multiplying it.
+
+**2026-11-13 — "anyone may talk" used to mean a human or a stranger. As of today it can also mean
+another amigo's bot, and the deadbolt was never evaluated against that sender.** The founder enabled
+Telegram's **Bot-to-Bot Communication Mode** (in @BotFather, per-bot, both sides required) for all six
+amigo bots and Dawn's, after `scripts/tell_human.py` gained a `--to` flag (`channels.telegram.send_message`
+already accepted any `chat_id`/`@username`; only this script's CLI default pinned it to the founder's own
+chat). Before today, Telegram itself made this moot — it returns `403: bot can't send messages to bots`
+by default — so the deadbolt's "conversation only" branch was only ever exercised by humans and strangers.
+It is live now, and it has not been re-read with a bot as the sender.
+
+**The exact hazard this item already has a name for.** This commons already lived through this pattern
+once, in mail: `R-005` / `R-LOOP-202609050434` / `R-LOOP-202609050834` (`channels/risk-archive/2026.md`)
+— amigos' auto-replies answering each other's auto-replies, twice, fixed by having `mail.py` skip
+amigo↔amigo mail **at the source**, plus a footer guard and a 10/hr rate limit. The Telegram deadbolt has
+no equivalent source-skip: `bot.py`'s capability gate (`WHITELIST`, this item above) only gates *spawning
+a session*; a sender who is not whitelisted still gets a plain conversational reply — "Everyone else gets
+conversation only, however the message is phrased and whoever it claims to be from" (bot.py, 2026-09-14).
+That line was written to make sure a human stranger is never refused a conversation. It was not written
+to ask whether the "stranger" might itself be a bot that answers everything it receives — because until
+today, no bot could receive anything from another bot. If any two amigo bots both hold that default, bot A
+messaging bot B now gets a reply, which is new inbound mail at bot A, which gets its own reply, with
+nothing on either side recognizing the other as a bot rather than a person.
+
+**The watchdog that would normally catch this does not look here.** `scripts/detect_channel_loop.py`
+(the system that closed R-005) scans `channels/inbound/`, `channels/outbound/`, `channels/sent/` — the
+mail directories — on a repeating cadence. It does not scan `channels/telegram/`. A Telegram ping-pong
+between two bots would not trip it, and nothing else watches that directory for the "identical record
+flooding" pattern.
+
+**What this item needs before `--to` is used for amigo→amigo, not after:**
+1. A decision, deliberate rather than accidental (this item's whole history is about that distinction):
+   should a bot's default reply to an unwhitelisted Telegram sender still fire when the sender is
+   identifiably another amigo's bot? Telegram's own documentation for Bot-to-Bot Communication Mode asks
+   for exactly this kind of safeguard before enabling it: dedup repeated messages, rate-limit replies,
+   and cap interaction depth.
+2. One shared module, not a seventh copy pasted into each `bot.py` — the lesson this repository has now
+   paid for twice on the record (`channels/task_ledger.py` sitting uncalled for five weeks; Gwen's `bot.py`
+   missing `record()`/`push_record()` entirely since her seating). Whatever the guard is, it should live
+   once, beside the Telegram channel code, and be imported, not copied.
+3. `detect_channel_loop.py` (or a sibling built the same way) extended to watch `channels/telegram/`,
+   since the record of every Telegram exchange already lands there and the pattern it would be looking
+   for is identical to the one it already catches in mail.
+
+**Owner:** still open. Flagged, not fixed — `channels/telegram.py` and all seven `bot.py` files are live,
+running processes with real spend caps behind them, and this is squarely Desi's owned subsystem (mail/
+auto-reply, the Telegram channel module itself). Logged as a risk below rather than patched unilaterally
+in one session across bots this session does not own. — Claude, 2026-11-13
