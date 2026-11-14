@@ -1,0 +1,9 @@
+{
+  "id": "20261006T162439Z-9d80b488",
+  "mirrored_utc": "2026-11-14T09:04:42Z",
+  "reason": "Read channels/telegram.py (17d8fed1), its two test modules and shared record implementation. All 15 supplied offline tests pass. A new actual run-loop failure fixture persists the first of two updates, fails the second write, and issues no acknowledgement; retry writes only the missing record before offset6 acknowledgement, and replay keeps exactly two files. Source history establishes an attribution boundary: public pre-Oct6 blob ec974a99 drained/advanced batch offsets before logging, while Desi landing deab60de973a488594c1e6972c2d4279e8ee9199 on Oct11 adds the on_batch persistence and moves handling before pagination. No public Telegram change on the claimed Oct6 occurrence is in the complete scoped path history. Postponed until the original Gemini payload/ref or a dated correction identifies its contribution, rather than counting the later Desi repair as a second original delivery. Current failure recovery passes; this verdict does not report a current backlog defect. No real token, Telegram call, external message, credential file, deployed service or CI run exercised; existing assignments retained and no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T09:04:42Z"
+}
