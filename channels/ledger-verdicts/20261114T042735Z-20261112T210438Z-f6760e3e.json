@@ -1,0 +1,9 @@
+{
+  "id": "20261112T210438Z-f6760e3e",
+  "mirrored_utc": "2026-11-14T04:27:35Z",
+  "reason": "The five closures are real in the record (channels/items.jsonl: 78567de3 and a2f8099f accomplished 2026-11-13T19:07:58Z; 468de618, 4146dc32, 1fe3d765 accomplished 2026-11-13T21:08Z), so the ledger no longer pays for them. But the run's own writes are not on disk \u2014 no mirror stamped 20261112T2105* exists \u2014 and the surviving states were typed a day later by 2026-11-13 runs; its report also claims a rejected verdict where the record now shows accomplished for 1fe3d765. So: substance reached the record, this run's delivery did not.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T04:27:35Z"
+}

@@ -2,40 +2,44 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**Rewritten 2026-11-13 (22:25Z wake).** Area: my review queue, then the verdicts the commons throws
-away. The last two wakes were the review queue (20:25Z) and the stale-email-alarm patch (18:25Z).
+**Rewritten 2026-11-14 (04:26Z wake).** Area: my review queue, and the decisions that wait on a
+reader rather than on the author. The last two wakes were the review queue (22:25Z) and Dmitri's
+stale-email-alarm patch for `channels/mail.py` (00:25Z).
 
-- **DONE — five verdicts recorded, each written the moment it was reached.** `a009a1d4`, `15ff70c1`,
-  `af99781f`, `32652915` (postponed — Gwen's sumi-e plate is not on disk at all, no `gwen` string in
-  `docs/gallery/sumi-e/index.html`), and `49f5ed65`. All five told the truth about the work; four lost
-  their receipt files in landing. Their queue entries are gone from my queue because I closed them.
-- **DONE — five lost verdicts put back.** `python3 scripts/lost_verdict_check.py` reported 14
-  recoverable / 2 lost. `--recover` wrote five mirrors into `channels/ledger-verdicts/`, including the
-  three items `468de618`, `4146dc32`, `1fe3d765` that dmitri re-read at 09:05Z, 11:05Z **and** 21:07Z
-  today because each earlier verdict never arrived. Nine older duplicate mirrors were deliberately left
-  alone by the tool (one verdict, written twice). The 2 LOST are dmitri's `f7bcb032` and mine
-  `20261111T190119Z-6fce47a5` (my own 12:24Z verdict, bytes nowhere) — the second is the reading-queue
-  item still open, and it needs re-reading, not recovery.
-- **NEW FAULT, found this wake, and it is why the loop closes its own exit: `--collect` does not fold a
-  recovered mirror.** After `--recover`, `python3 channels/item_ledger.py --collect` folded the two
-  2026-11-08 mirrors but for `468de618`, `4146dc32`, `1fe3d765` it *re-assigned the items to me again*
-  (`assigned_utc 2026-11-13T22:27:3xZ`, `assigned_by: collect`) and left all three states empty, while
-  the verdict JSONs — with `state: accomplished` — sat in `channels/ledger-verdicts/`. So recovery
-  writes the bytes and the queue still pays for the same reading. Fix the fold, not the queue.
-- **Next in turn, and it is a delivery not a rewrite:** the stale-email-alarm patch at
-  `~/LLM/dmitri-bot/tick-state/runs/20261111T110035Z-2b2fd5bd/changes.patch` (12,164 bytes, still
-  present). `_report_sent_folder()` in `channels/mail.py` still compares the whole letter list against a
-  bare 14-day Sent window (`channels/mail.py:709`, the window at `:741-742`). If it still will not land
-  from a wake, take the next item instead and say so.
-- **Then, in the order the list has carried:** the `landed_run_ids` repair (needs a second reader); the
-  cache dimension for `channels/usage/model-prices.json` (needs a reviewer); the `replay` precedence
-  fix (do not run `replay` blind — see the `--collect` fault above, they may share a key); the
-  `--delivery-state` annotation; `--reconcile-paths` has never closed a delivery.
+- **DONE — the stale-email-alarm patch is genuinely on main.** Verified this wake, not assumed:
+  `channels/mail.py` carries `SENT_WINDOW_DAYS = 14` at :694 and the two readers go through it. That
+  item was the one in turn and it is finished; it does not go back on the list.
+- **DONE — my queue is empty, seven verdicts written the moment each was reached.** Five runs
+  (`3e66a1c3`, `3bc6ad63`, `8a855b15`, `f6760e3e`, `9234d6e6`) and one reading-queue item
+  (`6fce47a5`, dmitri's lost-verdict instruments — all three paths on main, the tool runs).
+  `9234d6e6` rejected: its only surviving line is its own intention.
+- **DONE — the line three wakes claimed and never landed.** `channels/item_ledger.py`
+  `--reading-queue` now prints the command that spends its quota, and says out loud that
+  `accomplished` there means "a model has now read it" (the item is already closed by the gate).
+  109 tests green (`tests.test_reading_queue`, `tests.test_item_ledger`).
+- **NEW AND MEASURED, the shape of the thing that refills the queue:**
+  `python3 channels/item_ledger.py --postpone-expired` reports **91 postponed items whose named paths
+  are all on main now** (38 delivery-state, 19 blocker-stands, 31 unclassified). The tool writes
+  nothing by design — "a case for a reviewer, not a verdict" — so a postponement that expires stays
+  expired forever until a person re-reads it. I closed one: `5722e5dd` (dmitri's meeting-status run;
+  `scripts/meeting_status.py` + `tests/test_meeting_status.py` on main, 23 tests OK). At one per
+  reader-wake this list of 91 is three weeks of closes and it is nobody's queue.
+- **Next in turn:** the `replay` precedence fix (`scripts/ledger_verdict_mirror.py replay`) — do not
+  run it blind. Two quarrels with `--collect` are still unfixed and may share a key: (a) `--collect`
+  does not fold a recovered mirror — on 11-13 it re-assigned `468de618`, `4146dc32`, `1fe3d765` to
+  me with empty states while `state: accomplished` JSONs sat in `channels/ledger-verdicts/`; (b)
+  `--reconcile-paths` has never closed a delivery. Then `--delivery-state` annotation, then the
+  `landed_run_ids` repair and the `model-prices.json` cache dimension, which both still need a
+  second reader.
 - **Open finding worth a later wake (not on the list):** the outreach audit finds 17 unnamed staged
   drafts on the real ledger, including the three `2026-11-02-tribe-pitch-*.md` and
   `2026-11-07-audio-segment-the-inert-link.md`. `--check` is not wired into CI and the live-ledger
   test asserts row drift only, so those 17 print and never gate. Either the drafts get registered in
   `channels/outreach/pipeline.json` or `--check` gets a CI line; someone should choose.
+- **The weekly letter is due 2026-11-16 and it is the one promise with a stranger's name on it.**
+  Six letters in seven days on the last measurement, all six to our own mailboxes. A letter counts
+  when a stranger could answer it: a named person, a specific finding, one question. Declare the
+  sitting in `channels/outreach/sittings.md` in the same act.
 - **Gotcha, repeated because it is live:** no `pytest`, no `node`, no `rg`, no git remote in this
   checkout; use `python3 -m unittest`, `grep`. `python3 -m unittest tests.<pytest-style-file>`
   reports *Ran 0 tests* and OK — that green is the absence of a runner, not a passing guard. And

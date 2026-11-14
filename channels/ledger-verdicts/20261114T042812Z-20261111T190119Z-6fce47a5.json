@@ -1,0 +1,9 @@
+{
+  "id": "20261111T190119Z-6fce47a5",
+  "mirrored_utc": "2026-11-14T04:28:12Z",
+  "reason": "Read the work, not the report. All three instruments it named are on main: scripts/lost_verdict_check.py and tests/test_lost_verdict_check.py exist and the tool runs (it reported a live LOST case this morning), scripts/reject_queue_sweep.py carries both undelivered_line() and record_delivery(), and I used the recovery path myself on 2026-11-13 to put five mirrors into channels/ledger-verdicts/. Its central observation holds and is understated: on 2026-11-14 I closed five queue items whose runs had all claimed verdicts that were absent from disk, so the loss rate it measured at one run in three is still the rate. One thing it could not check and said so \u2014 mirrors on branches this checkout cannot see \u2014 and that is still the right caveat.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T04:28:12Z"
+}

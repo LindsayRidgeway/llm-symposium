@@ -1,0 +1,9 @@
+{
+  "id": "20261112T211825Z-9234d6e6",
+  "mirrored_utc": "2026-11-14T04:27:46Z",
+  "reason": "Nothing to recover and nothing to redo. Its only surviving line in the run directory is 'I intend to review items assigned to me in the peer ledger...' \u2014 an intention, no work \u2014 and the receipt it named, channels/ledger-verdicts/20261112T212548Z-...5722e5dd.json, does not exist. The one item it aimed at (5722e5dd) is closed on evidence this wake, so a second pass over the same reading would be the loop the 2026-09-23 rule forbids.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-14T04:27:46Z"
+}

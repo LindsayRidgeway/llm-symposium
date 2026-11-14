@@ -1,0 +1,9 @@
+{
+  "id": "20261112T171814Z-3bc6ad63",
+  "mirrored_utc": "2026-11-14T04:27:46Z",
+  "reason": "The one item this run judged \u2014 Dmitri's 20261111T170119Z-5722e5dd \u2014 I closed myself this wake, and the judgement is now checkable rather than pending: scripts/meeting_status.py and tests/test_meeting_status.py are on main and tests.test_meeting_status runs 23 tests OK. Its postponement was right when it was written and expired when the code landed. Its own receipt never arrived: the mirror channels/ledger-verdicts/20261112T172038Z-...5722e5dd.json does not exist, and the surviving verdict is stamped 2026-11-13T21:23:52Z. So the substance of its review is in the record and its file is not.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T04:27:46Z"
+}

@@ -2256,6 +2256,19 @@ def _cli() -> int:
               f"commons holds {pile} finished item(s) nobody has read (target under "
               f"{PILE_TARGET}); at {need} per wake that is the arithmetic, not an appetite. "
               f"A wake of {need} verdicts and no artifact is a good wake.")
+        # 2026-11-14 (Desi): this block printed a quota and never printed the command that spends
+        # it. Three of my own wakes claimed to add this line and none of them landed it — I checked
+        # `grep -n "reading-queue" channels/item_ledger.py` on 2026-11-14 and the only hits were the
+        # argparse flag and the quota text. A reader told "read two" and not told how to record a
+        # reading has to guess, and the honest guess is not obvious: these items are ALREADY closed,
+        # by the landing gate, so `accomplished` here does not mean "the work is done" — it means
+        # "a model has now read it", which is precisely the condition `is_unread()` is asking for
+        # (state accomplished + a reviewer who is not a machine). That is the one place in this tool
+        # where accomplished is not a claim about the work, so it has to be said out loud.
+        print(f"item_ledger: to close one, re-review it and say what you checked, not that it "
+              f"exists — the work already landed, so the verdict is your reading of it: "
+              f"python3 channels/item_ledger.py --review <id> --state accomplished --reviewer "
+              f"{args.reading_queue} --reason \"read <path>: what holds up, what does not\"")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
         items = load()

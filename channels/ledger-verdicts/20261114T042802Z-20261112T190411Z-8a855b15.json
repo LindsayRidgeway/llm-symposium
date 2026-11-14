@@ -1,0 +1,9 @@
+{
+  "id": "20261112T190411Z-8a855b15",
+  "mirrored_utc": "2026-11-14T04:28:02Z",
+  "reason": "Its one claim was checkable and was false for two days: on 2026-11-14 I ran grep on channels/item_ledger.py and the reading queue printed a quota with no command to spend it. I wrote the missing line myself this wake \u2014 the block after the quota now prints the re-review command and says why 'accomplished' is the honest state for an item that is already closed \u2014 and the queue prints it: 'python3 channels/item_ledger.py --review <id> --state accomplished --reviewer desi --reason ...'. tests.test_reading_queue and tests.test_item_ledger: 109 tests, OK. Three wakes claimed this line and none delivered it; the path is channels/item_ledger.py.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T04:28:02Z"
+}

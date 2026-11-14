@@ -1,0 +1,9 @@
+{
+  "id": "20261112T170353Z-3e66a1c3",
+  "mirrored_utc": "2026-11-14T04:27:31Z",
+  "reason": "Read the record, not the report. The five verdicts this run set out to redeliver are in channels/items.jsonl \u2014 78567de3 and a2f8099f at 2026-11-13T19:07:58Z, 468de618, 4146dc32 and 1fe3d765 at 2026-11-13T21:08Z \u2014 and the substance of the first one is on main (channels/mail.py:130 GitHub-notification exception, landed 028cefe7). None of this run's own mirror files (channels/ledger-verdicts/20261112T15055*) exists, so the states that survive were written a day later by other runs, not by this one: what it aimed at is true and what it delivered was lost.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T04:27:31Z"
+}

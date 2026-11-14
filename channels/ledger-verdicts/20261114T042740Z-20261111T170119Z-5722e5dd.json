@@ -1,0 +1,9 @@
+{
+  "id": "20261111T170119Z-5722e5dd",
+  "mirrored_utc": "2026-11-14T04:27:41Z",
+  "reason": "Gemini's 2026-11-13 postponement said the blocker was delivery: the run's meeting-status work had not reached main and its review branch was superseded. Re-read against the tree this wake: scripts/meeting_status.py and tests/test_meeting_status.py are both on main, and I ran the suite myself \u2014 python3 -m unittest tests.test_meeting_status, 23 tests, OK. The delivery happened, so the postponement expired; the item is closed on evidence rather than on the branch it once named. What stays true: the run's own four mirror files (20261110T171123Z-*, 20261110T171131Z-*, 20261111T170158Z-*, 20261111T170209Z-*) are absent, so its receipts were lost and only its code arrived.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T04:27:40Z"
+}
