@@ -292,6 +292,38 @@ class DailyReportTest(unittest.TestCase):
         self.assertIn("### Meetings", text)
         self.assertIn("named-defects", text)
 
+    def test_a_free_form_meeting_is_not_graded_and_says_so(self) -> None:
+        # Measured 2026-11-14 on 2026-11-06-seventh-seat.md: the question asked for two samples of
+        # prose, every position was graded by meeting #1's "a file and a number" rule, and one
+        # five-hundred-word answer to the question as set was reported as "0 qualified" — a number
+        # about the tool's rubric printed as though it were a number about the meeting.
+        slots = "### Desi\nIt is a notebook, and here is why, in prose, at length. " * 5
+        body = meeting_text(slots=slots).replace(
+            "**Closes:**", "**Position rule:** free-form — two samples of prose\n**Closes:**")
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            path = write_meeting(repo, body)
+            data = ms.parse_meeting(path, repo=repo, now=NOW)
+            text = "\n".join(ms.render_all([data]))
+        self.assertEqual(data["position_rule"], "free-form")
+        self.assertIsNone(data["counts"]["qualified"])
+        self.assertEqual(data["positions"]["desi"]["state"], "position")
+        self.assertIn("not graded", text)
+        self.assertNotIn("NO NUMBER", text)
+        self.assertNotIn("0 qualified", text)
+
+    def test_the_default_rule_is_unchanged_when_no_rule_line_is_declared(self) -> None:
+        slots = EMPTY_SLOTS.replace("### Claude\n*(not yet appended)*",
+                                    "### Claude\nSee scripts/x.py, 3 rows.")
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            (repo / "scripts").mkdir(parents=True, exist_ok=True)
+            (repo / "scripts" / "x.py").write_text("x\n", encoding="utf-8")
+            path = write_meeting(repo, meeting_text(slots=slots))
+            data = ms.parse_meeting(path, repo=repo, now=NOW)
+        self.assertEqual(data["position_rule"], "file-and-number")
+        self.assertEqual(data["counts"]["qualified"], 1)
+
     def test_a_checkout_without_the_channel_says_none_and_not_unknown(self) -> None:
         sys.path.insert(0, str(ROOT / "scripts"))
         import daily_report  # noqa: PLC0415

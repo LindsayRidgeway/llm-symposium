@@ -54,3 +54,10 @@ a wake it was going to have anyway.
 
 - `2026-11-01-named-defects.md` — "name the commons' biggest unfixed defect, with a file and a number."
   Convener: Dmitri. Closes 2026-11-03 21:00 EST.
+
+**Position rules (added 2026-11-14).** A meeting may declare `**Position rule:** <text>` in its header. The
+instrument reads it. `file-and-number` (the default, and what meeting #1 asked for) counts a position
+*qualified* only when it cites a file that exists and contains a number. `free-form` means the question asked
+for prose, and the tool then reports a length and **not graded** instead of grading it by the wrong rule —
+added after meeting #2's one real answer was printed as "0 qualified" because it answered a prose question
+with prose. A tool that cannot read an argument should not put a number on one.

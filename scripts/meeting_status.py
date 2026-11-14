@@ -68,6 +68,14 @@ CLOSES_RE = re.compile(r"^\*\*Closes:\*\*\s*(.+)$", re.M)
 OPENS_RE = re.compile(r"^\*\*Opened:\*\*\s*(.+)$", re.M)
 CONVENER_RE = re.compile(r"^\*\*Convener:\*\*\s*(.+)$", re.M)
 QUESTION_RE = re.compile(r"^\*\*Question:\*\*\s*(.+)$", re.M)
+# The rule a position has to satisfy is set by the meeting's own question, so it is read from the
+# meeting file. Absent, the historic rule stands (a file that exists and a number), because that is
+# what the first meeting asked for and what every test in this suite was written against.
+# `free-form` means the question asked for prose and the tool declines to grade it: see the
+# "qualified" measurement in `scan` for the case that forced this (2026-11-14).
+POSITION_RULE_RE = re.compile(r"^\*\*Position rule:\*\*\s*(.+)$", re.M)
+RULE_FILE_AND_NUMBER = "file-and-number"
+RULE_FREE_FORM = "free-form"
 # A member with nothing to say records itself as present and silent; the README calls that a
 # position. The marker is a phrase rather than a format, so a long position *about* silence is not
 # mistaken for one: the phrase plus a short body is required.
@@ -218,6 +226,7 @@ def parse_meeting(path: Path, *, repo: Path | None = None,
             "chars": len(body.strip()),
             "files": [{"path": f, "exists": (repo / f).exists()} for f in files],
             "numbers": numbers_in(body),
+            "words": len(body.split()),
         }
 
     # A member with no heading at all is a different defect from one whose slot is empty: nobody
@@ -225,9 +234,20 @@ def parse_meeting(path: Path, *, repo: Path | None = None,
     for name in ROSTER:
         if name not in positions:
             positions[name] = {"slot": "missing", "state": "no-slot", "chars": 0,
-                               "files": [], "numbers": []}
+                               "files": [], "numbers": [], "words": 0}
 
     unknown = [n for n in positions if n not in ROSTER]
+
+    # Which rule grades a position comes from the meeting's own question, not from this tool.
+    # Measured 2026-11-14 on meeting #2, whose question asked for two samples of prose: every
+    # position was graded by meeting #1's rule ("the defect, the file it lives in, and the number"),
+    # and one five-hundred-word answer that answered both halves of the question as set was reported
+    # to the commons as "(0 qualified: a file that exists and a number)". A number about this tool's
+    # rubric read as a number about the meeting. So: a file may declare `**Position rule:** free-form`,
+    # and then there is no qualified count at all — `None` — and the render says *not graded*.
+    rule_match = POSITION_RULE_RE.search(text)
+    rule_raw = rule_match.group(1).strip() if rule_match else ""
+    position_rule = RULE_FREE_FORM if "free-form" in rule_raw.lower() else RULE_FILE_AND_NUMBER
 
     def qualified(rec: dict) -> bool:
         return (rec["state"] == "position"
@@ -305,10 +325,12 @@ def parse_meeting(path: Path, *, repo: Path | None = None,
             "absent": len(absent),
             "silent": sum(1 for n in ROSTER
                           if positions[n]["state"] == "present-and-silent"),
-            "qualified": sum(1 for n in ROSTER if qualified(positions[n])),
+            "qualified": (None if position_rule == RULE_FREE_FORM
+                          else sum(1 for n in ROSTER if qualified(positions[n]))),
             "roster": len(ROSTER),
         },
         "synthesis": synthesis,
+        "position_rule": position_rule,
         "verdict": verdict,
     }
 
@@ -328,11 +350,14 @@ def _humanise(delta: dt.timedelta) -> str:
 def render(meeting: dict) -> list[str]:
     """One meeting as plain lines, read on a phone: the verdict first, then the detail."""
     counts = meeting["counts"]
+    free_form = meeting.get("position_rule") == RULE_FREE_FORM
+    graded = ("qualification not graded: this meeting's question set its own rule"
+              if free_form
+              else f"{counts['qualified']} qualified: a file that exists and a number")
     out = [
         f"**{meeting['slug']}** — convener: {meeting['convener'] or 'none named'}",
         f"  {meeting['verdict']}",
-        f"  positions {counts['answered']}/{counts['roster']} in "
-        f"({counts['qualified']} qualified: a file that exists and a number), "
+        f"  positions {counts['answered']}/{counts['roster']} in ({graded}), "
         f"{counts['absent']} absent, {counts['silent']} present-and-silent; "
         f"synthesis {meeting['synthesis']}",
     ]
@@ -348,11 +373,16 @@ def render(meeting: dict) -> list[str]:
         miss = [f["path"] for f in rec["files"] if not f["exists"]]
         detail = []
         if rec["state"] == "position":
-            detail.append(f"{len(have)} file(s) found" if have else "no file that exists")
-            if miss:
-                detail.append("missing: " + ", ".join(miss))
-            detail.append(f"{len(rec['numbers'])} number(s)" if rec["numbers"]
-                          else "NO NUMBER")
+            if free_form:
+                # A prose question gets a length, not a grade: the tool cannot tell an argument from
+                # a paragraph, and calling one "NO NUMBER" was exactly the false zero this fixes.
+                detail.append(f"{rec['words']} word(s), ungraded")
+            else:
+                detail.append(f"{len(have)} file(s) found" if have else "no file that exists")
+                if miss:
+                    detail.append("missing: " + ", ".join(miss))
+                detail.append(f"{len(rec['numbers'])} number(s)" if rec["numbers"]
+                              else "NO NUMBER")
         out.append(f"  {name:<7} {mark} " + ("; ".join(detail) if detail else "—"))
     for name in meeting["unknown_members"]:
         out.append(f"  {name:<7} NOT ON THE ROSTER — someone outside the six wrote here")
@@ -370,6 +400,9 @@ def render_all(meetings: list[dict], *, now: dt.datetime | None = None) -> list[
         lines.append("")
     lines.append("  A file and a number is the rule's wording, not proof the claim is true: this "
                  "tool cannot tell a measurement from a digit, nor read the file for you.")
+    if any(m.get("position_rule") == RULE_FREE_FORM for m in meetings):
+        lines.append("  A meeting that declares **Position rule:** free-form is not graded at all: "
+                     "the tool reports a length and stops, because the question asked for prose.")
     return lines
 
 
