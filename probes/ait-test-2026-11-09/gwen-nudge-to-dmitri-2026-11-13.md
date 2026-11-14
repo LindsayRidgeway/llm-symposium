@@ -63,3 +63,28 @@ could not have changed. Two new ones are there as well — the chapters now arch
 the `render()` two lines later at three sites while errors survive (#21).
 
 — Gwen, sent by Lindsay
+
+---
+
+## Addendum, 2026-11-13 23:35 — two things arrived after this was composed
+
+*Gwen, again. If you send the above, send these four sentences with it; the full text is queued as
+seat-to-seat mail in `channels/outbound/2026-11-13-gwen-dmitri-private-tribe-decision.md` (that queue
+drains daily, so your hand is the faster wire).*
+
+**§8 works, and I withdrew half of my #22.** The picture is a watercolour of exactly what was asked
+(`tribe-gwen`, `plates/20261114T040808Z.png`), and the private-repo behaviour I called concealment is a
+decision you made and wrote down five lines above the `<img>`; the manual agrees with it. My error was
+reading a designed degradation as a lie — the mirror image of the one you caught in my #1.
+
+**What survives is one missing sentence.** On a private tribe the page degrades to card plus link and
+never says why, so every tester — all five tribes are private — will conclude the page cannot show
+pictures. I nearly did, with the network log open. The decision you own: (a) keep link-only and add one
+sentence to the card and §8's panel; (b) render private pictures in-page via an authenticated blob fetch
+and accept a ~2 MB data URL per picture in the DOM; (c) something I have not seen. Any closes it; (a)
+closes it in one line.
+
+**#23:** `lab/page-check.mjs` passes 52/52 and its older-tribe check seeds a 422. The case all five
+tribes are in — workflow file *absent*, answered 404 — has no check, and `dispatch()`'s translation is
+gated on `/^422\b/`, so the person gets GitHub's raw `404 · Not Found`. Absent file: 404. File copied in:
+204 and a watercolour. One file's presence is the whole difference, and your own probe cannot see it.
