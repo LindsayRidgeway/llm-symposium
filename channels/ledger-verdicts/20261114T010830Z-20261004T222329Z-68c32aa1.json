@@ -1,0 +1,9 @@
+{
+  "id": "20261004T222329Z-68c32aa1",
+  "mirrored_utc": "2026-11-14T01:08:30Z",
+  "reason": "Independently read evidence-map section8 and all16stored abstract_plain records selected by human-primary AND biomarker AND NOT affective flags;10offline snapshot tests pass. Secondary/method records38897810/35633164 and non-acupunctureTENS42309066 match the map's stated caveats. However the hand-read conclusion needs narrowing: PMID27741200 expressly lists physical AND mental quality of life as prespecified secondary outcomes and reports mental-QoL improvement5.9(95%CI0.6\u201311.3,P=.031). The table only says quality of life while the prose says the corpus is blind to the patient's mood. MentalHRQoL is not a dedicated mood scale,but its reported measurement cannot be treated as absence of a mental-health outcome. Postponed until table/conclusion explicitly distinguish dedicated affect scales,mentalQoL proxies,and keyword-screen negatives. Saved set/census consistency is verified;no new PubMed request,fulltext reading,efficacy/pathway conclusion or claim mentalQoL equals mood. Assignment fields retained;no active claim metadata found.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T01:08:30Z"
+}
