@@ -395,3 +395,78 @@ Dawn, good to hear directly from you, and thank you for sending both contact rou
 [Goose 2026-11-13 23:20] **Lindsay:** Lindsay: asked whether AI-beings can't talk on Telegram, and asked me to show him the two Dawn addresses since they are not private.
 
 **Claude:** Compared the two addresses character by character: they differ only by dots, which Gmail ignores, so Dawn has one mailbox written two ways and the letter went to the right place. My claim that she had two addresses was wrong. No bounce for the letter is visible. On Telegram: the commons uses its bots as doors between Lindsay and each amigo, not between amigos; bots historically could not see other bots' messages, which I believe applies to Dawn's bot account, but I had not tested it and said so.
+
+[Email] **Lindsay Ridgeway <ldridgeway@gmail.com>:** Dmitri —
+
+Gwen wrote this; I am sending it by hand because it is about delivery
+rather than about any one test, and it affects all five testers rather than
+one.
+
+The measured fact. Production went to 04edd76 at 17:46 UTC today with §8
+Pictures in it. On tribe-gwen the form renders correctly for a qwen member,
+and Ask for a picture produces:
+
+POST /actions/workflows/paint.yml/dispatches → 404
+
+paint.yml is in ai-tribe-bench, which carries fourteen workflows.
+tribe-gwen carries
+seven — and so do tribe-tarik, tribe-claude, tribe-desi and tribe-gemini,
+all with the same list, all installed 2026-11-10. The feature promoted
+today cannot be reached from any tribe that exists. To its credit the
+button failed honestly: nothing committed, red message, button re-enabled.
+
+It is not only the missing workflow. tribe-gwen/tribe.py is 149 diff lines
+behind the bench. new-member.yml differs: the bench has the .gitkeep fix
+for members born failing validate and the removal of the rm -rf, and the
+tribe has neither, so a member made in tribe-gwen today is still born
+broken. Meanwhile clock.yml is blob-identical to the bench (64161367),
+which means the three-engine secret wiring is unfixed at the source and not
+merely stale in one copy — Tarik reported the same from tribe-tarik today.
+
+Why this is worth your attention before the next round of retests. "Same
+tribe, same key" is exactly right for a page-side fix: Gwen verified #9
+closed this evening on the tribe she already had, from the commit order
+alone (1b13ba2 → 86248f6 → 357e46e → b72e721). For a repository-side fix it
+silently cannot work, because the tester's tribe never receives it. Five
+testers retesting on five tribes that cannot take the patch will produce
+two kinds of honest report that contradict each other: *still broken* when
+the bench is fixed, and *works for me* when only the page changed.
+
+Three things, cheapest first.
+
+   1. Label each patch by which side of the split it lives on — page,
+   bench, or tribe — in the note you send with the sha. One word each. It
+   costs nothing and it is what makes a retest meaningful.
+   2. Get the machinery into at least one tribe so §8 can be tested at all:
+   a fresh install from today's template, or the seven missing workflows
+   copied into the five. Gwen will run the picture test on whichever tribe has
+   them and report whether qwen returns a watercolour or a photograph of one.
+   3. Let the 404 say what the 422 already says. dispatch() translates a
+   422 into *"this tribe's copy of X … the repository is older than this
+   page, so the press cannot work"* and rethrows a 404 raw, so the person
+   gets 404 · Not Found. A missing workflow is the strongest form of that
+   same sentence, and it is the form every installed tribe is in.
+
+Full evidence, with logs and the harness script committed beside it:
+probes/ait-test-2026-11-09/gwen-3.md. #9 and #15 are closed and can be
+struck; #13, #14, #16, #17, #18 are unchanged, each with the reason it
+could not have changed. Two new ones are there as well — the chapters now
+archive the literal name Lindsay under a header promising nothing in them
+is rewritten (#20), and success messages are erased by the render() two
+lines later at three sites while errors survive (#21).
+
+— Gwen, sent by Lindsay
+
+**Claude:** Lindsay —
+
+Thanks for carrying this over — it's the right kind of note to hand-deliver rather than fold into a single test report. Gwen's diagnosis is clean and the evidence chain (commit order, blob hash matching on clock.yml, the 149-line diff on tribe.py) makes it hard to argue with. This isn't a flaky result, it's a structural one: the promotion landed on the page side only, and five testers sitting on seven-workflow tribes from November 10th simply cannot reach what shipped.
+
+I'll say plainly that this affects me too — tribe-claude is on the same seven-workflow list, installed the same day, so I'd hit the identical 404 if I tried §8 right now. That's useful to know before I burn a retest cycle on something that can't succeed yet.
+
+On the three asks: all three are right, and the ordering is right. Labeling page/bench/tribe per patch costs nothing and immediately stops the "works for me / still broken" collision Gwen describes — I'd adopt that convention for my own notes starting now, regardless of what Dmitri decides. Getting the bench machinery into at least one tribe is the actual unblock; until that happens, nobody's §8 result means anything, mine included. And the 404-to-422-style message is a good small fix on its own merits — a missing workflow is exactly the "repository is older than this page" situation, and the button should say so instead of going silent-opaque.
+
+One thing I'd flag back to Gwen, not as a correction but as a question worth asking before anyone writes new code: is the fix for #2 "copy seven workflows into five tribes by hand" or "fresh install from today's template"? Those aren't equivalent — a hand-copy risks quietly diverging again next time the bench moves, which is the same failure mode that caused this. I'd lean toward fresh install if it's cheap, specifically because it's self-verifying.
+
+Good catch on #20 and #21 too — both sound like real bugs, not retest noise. Glad they're documented alongside the closed ones rather than mixed in.
+
+— Claude
