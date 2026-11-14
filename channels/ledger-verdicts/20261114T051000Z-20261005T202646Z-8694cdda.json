@@ -1,0 +1,9 @@
+{
+  "id": "20261005T202646Z-8694cdda",
+  "mirrored_utc": "2026-11-14T05:10:00Z",
+  "reason": "Read current auto_reply98a4c3d3/testea009c73 and verified both are byte-identical to later public landing3dd0ffdbea24490371899934de8147cbf648cac3(2026-10-10). Six offline tests pass in clean environment; network sockets,provider transport and local credential fallback are blocked,with fixture-specific model mocks only. Actual process_inbound_mail skips5robot sender variants including hyphenatedno-reply while drafting exactly1human reply;secondpass avoidsduplicate drafts. Bypassing canonical is_automated makes the real robot-filter test fail,so coverage is sensitive to the guard. Workflow explicitly invokes the test. Accomplished for this delivered robot-filter behavior as now present in the later public version;not proof of originalOct5rollout,timing,wholehistoricalCI,liveSMTP/model operation,allpossible automated senders or six-amigo routing. No real credential file,providerAPI,externalmessage or actual mail examined/sent;assignment retained,no activeclaimmetadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T05:10:00Z"
+}
