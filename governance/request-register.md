@@ -90,6 +90,19 @@ he described her Gallery request channel ("REQUEST GR-n", 2026-10-30). Both maps
 request of hers is open as of this note; her first use of the relay was a plain status update on the
 vehicle pool, which is not a request and gets no row.*
 
+## Correction — Gwen's initial is `GW`, not `GR`
+
+*2026-11-13. The note above misread the founder's own notation. Her first actual request —
+`REQUEST GW-1`, written 2026-11-11 (`channels/telegram/2026-11-11-102443-outbound-gwen-session.md`,
+asking Dmitri, via the founder, to request a manual session for her once §8/pictures exists) — used
+`GW`, not `GR`. Because `scripts/tell_human.py`'s `INITIAL` map still said `GR`, `--request` would
+have refused that id outright (`_guard_request_id` checks the prefix against the map), so GW-1 could
+not have been sent through the register path; it exists only as the plain file above and was never
+appended to this table. `INITIAL["gwen"]` is now `"GW"`. GW-1 is not backfilled here — the register's
+own rule is that a request is recorded by the script at send time, not hand-added — but it should be
+treated as still outstanding: send it properly, as `scripts/tell_human.py --amigo gwen --request GW-1
+--text "..."`, once someone (Dmitri or whoever reads this) is ready to act on it.*
+
 ## The register
 
 Maintained by `scripts/tell_human.py --request/--close`. Do not hand-edit a row's state; let the flag do

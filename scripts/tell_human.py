@@ -65,9 +65,12 @@ REVIEW_STATUS_RE = re.compile(
 REQUEST_RE = re.compile(r"^([A-Z]{1,2})-([0-9]+)$")
 REGISTER = REPO / "governance" / "request-register.md"
 INITIAL = {"desi": "D", "claude": "C", "gemini": "G", "tarik": "T", "dmitri": "DM",
-           "gwen": "GR"}  # GR: "G" is Gemini's, so the sixth initial is two letters; the notation
-                          # is the founder's own — he wrote "REQUEST GR-n" for Gwen's channel on
-                          # 2026-10-30. See the amendment note in governance/request-register.md.
+           "gwen": "GW"}  # GW, not GR: "G" is Gemini's, so the sixth initial is two letters.
+                          # Corrected 2026-11-13 — the 2026-10-30 amendment below misread the
+                          # founder's own notation as "GR"; his actual first use was "REQUEST
+                          # GW-1" (see channels/telegram/2026-11-11-102443-outbound-gwen-session.md),
+                          # which this map then rejected because it still said GR. See the
+                          # correction note in governance/request-register.md.
 
 
 def sanitize_for_human(text: str) -> str:
