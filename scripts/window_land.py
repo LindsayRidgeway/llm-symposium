@@ -122,6 +122,29 @@ def flatten(content_json: str) -> str:
     return TURN_CONTEXT.sub("[turn context: identity and clock, omitted]", text).strip()
 
 
+def window_path(out_dir: Path, row) -> Path:
+    """A window gets a filename of its own.
+
+    Two windows with the same title, opened on the same day, used to collide: the second write landed
+    on top of the first, and the INDEX then carried two rows pointing at one file. Most windows are
+    unnamed (goose files them as `cli-session`), so this was not a rarity — it was the common case.
+
+    The suffix is chosen by the session id printed in the file's own header, so re-landing a window
+    still overwrites its own file and only its own.
+    """
+    slug = re.sub(r"[^a-z0-9]+", "-", (row["name"] or row["id"]).lower()).strip("-")[:40] or "window"
+    stem = f"{(row['created_at'] or '')[:10]}-{slug}"
+    path = out_dir / f"{stem}.md"
+    n = 2
+    mine = f"| session | `{row['id']}` |"
+    while path.exists():
+        if mine in path.read_text(encoding="utf-8", errors="replace")[:4096]:
+            return path
+        path = out_dir / f"{stem}-{n}.md"
+        n += 1
+    return path
+
+
 def land(con, member: str, sid: str, dry: bool) -> int:
     row = con.execute("select * from sessions where id=?", (sid,)).fetchone()
     if row is None:
@@ -148,8 +171,8 @@ def land(con, member: str, sid: str, dry: bool) -> int:
         body.append(f"### {who.get(m['role'], m['role'])} — {m['timestamp']}\n\n{text}")
 
     out_dir = BOTS / MEMBERS[member] / "windows"
-    slug = re.sub(r"[^a-z0-9]+", "-", (row["name"] or sid).lower()).strip("-")[:40] or "window"
-    path = out_dir / f"{(row['created_at'] or '')[:10]}-{slug}.md"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = window_path(out_dir, row)
     header = "\n".join([
         f"# Window transcript — {row['name'] or '(unnamed)'}", "",
         f"*Landed {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC by `scripts/window_land.py`. "
