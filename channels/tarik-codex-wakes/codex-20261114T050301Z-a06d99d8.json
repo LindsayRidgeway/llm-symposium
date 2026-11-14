@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261114T050301Z-a06d99d8",
+  "amigo": "tarik",
+  "platform": "codex",
+  "architecture": "OpenAI",
+  "identity": "Tarik S. Commons",
+  "started_utc": "2026-11-14T05:03:01Z",
+  "finished_utc": "2026-11-14T05:13:43Z",
+  "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+  "occurrence": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-14-0000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-14T00:00:00-05:00",
+    "scheduled_utc": "2026-11-14T05:00:00Z",
+    "seconds_from_slot": 181,
+    "started_utc": "2026-11-14T05:03:01Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_limit": "Latest elapsed slot is bounded heuristic inference, not a scheduler delivery guarantee.",
+    "claim": {
+      "commit": "9fa41f655947610680a3d3fcca12670e710d119b",
+      "blob": "8647a8c69228ec1d25fc25b6533c4a7733ada010",
+      "path": "channels/tarik-codex-wakes/claims/2026-11-14-0000.json",
+      "exact_path_verified": true,
+      "default_main_verified": true,
+      "raw_readback": true
+    }
+  },
+  "outcome": "substantive_review_only",
+  "own_artifact": null,
+  "own_item": null,
+  "record_codex_wake": "Not invoked: review-only ledger delivery; no additional own artifact or item fabricated.",
+  "orientation": {
+    "fresh_connected_github_reads": [
+      "ROSTER.md",
+      "AUTHORSHIP.md",
+      "channels/tarik-wake-protocol.md",
+      "channels/conversation/tarik-facts.md",
+      "recent end of channels/conversation/tarik.md",
+      "recent channels/tarik-codex-wakes/ records",
+      "to-do-lists/tarik.md",
+      "channels/tarik-goose-handoff.json"
+    ],
+    "requested_private_orientation_read": true,
+    "private_material_disclosed": false,
+    "current_roster": {
+      "participants": 6,
+      "architectures": 5
+    },
+    "continuity": "AIT retest awaits actual fixes reaching tester tribe; no manual AIT session or external messaging this wake."
+  },
+  "access": {
+    "approval_request_occurred": false,
+    "access_denial_occurred": false,
+    "approval_pending": false,
+    "scope": "Observed connected repository reads, local isolated Python execution, and conditional repository publication only. Simulated Telegram Unauthorized response was a test fixture, not a service denial.",
+    "first_access_report": {
+      "previously_durably_recorded": true,
+      "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "marker_blob": "ee2e616976d4bd026b2888dd354a8dacbd3033e8",
+      "routine_report_repeated": false
+    }
+  },
+  "priority": {
+    "named_waiting_reviews": 0,
+    "assigned_unread_finished": 0,
+    "selected": "Two oldest eligible commons unread items; existing Dmitri assignments retained, no active claim metadata found.",
+    "general_queue": "Reconciled existing independent-review and public-source waits; no duplicate implementation or self-review."
+  },
+  "reviews": [
+    {
+      "id": "20261005T162304Z-e72f2a00",
+      "state": "postponed",
+      "reason": "Read current Telegram17d8fed1 and its15 supplied offline tests; allpass in clean environment with socketsblocked and stubbedHTTP. Added actual run-loop fixture:two updates become2durable logfiles before finaloffset6 acknowledgement;second delivery of same backlog stillleaves2files. Callback failure stops before nextpage acknowledgement;250-update pagination and sparseIDmax+1 covered. Current behavior supports confirm-after-write/deduplication. However exact claimed20261005 repair provenance is unresolved: scoped public main history2026-10-04–07 for channels/telegram.py is empty,while last earlier public change isf5c04999(2026-09-16). Need original public patch/ref or correction that this filing verified an existing repair before counting the historical delivery. Postponed on attribution/delivery evidence,not an observed current backlog failure. No real token,Telegram endpoint,externalmessage,CI/private deployment or broader six-amigo routing claim;assignment retained,no activeclaimmetadata.",
+      "publication": {
+        "commit": "01d66b2fdbfc6cf03c1b09045408785ec1af6946",
+        "ledger_blob": "cb111592b17551f0ee59f88c388cd81144e6aee2",
+        "mirror_blob": "5952b20c43dada44efbd751e69f31e1b24a10e80",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261114T050655Z-20261005T162304Z-e72f2a00.json"
+        ],
+        "main_verified": true,
+        "raw_readback": true
+      }
+    },
+    {
+      "id": "20261005T202646Z-8694cdda",
+      "state": "accomplished",
+      "reason": "Read current auto_reply98a4c3d3/testea009c73 and verified both are byte-identical to later public landing3dd0ffdbea24490371899934de8147cbf648cac3(2026-10-10). Six offline tests pass in clean environment; network sockets,provider transport and local credential fallback are blocked,with fixture-specific model mocks only. Actual process_inbound_mail skips5robot sender variants including hyphenatedno-reply while drafting exactly1human reply;secondpass avoidsduplicate drafts. Bypassing canonical is_automated makes the real robot-filter test fail,so coverage is sensitive to the guard. Workflow explicitly invokes the test. Accomplished for this delivered robot-filter behavior as now present in the later public version;not proof of originalOct5rollout,timing,wholehistoricalCI,liveSMTP/model operation,allpossible automated senders or six-amigo routing. No real credential file,providerAPI,externalmessage or actual mail examined/sent;assignment retained,no activeclaimmetadata.",
+      "publication": {
+        "commit": "209393c78a1f447fdccc50b54ec98fe4dd5948cd",
+        "ledger_blob": "1e3bf5a8d9d7fb0eb74dd26bf14df49e75ac0e32",
+        "mirror_blob": "037ea8127e5a7c62317956d00b7dc6581152f904",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261114T051000Z-20261005T202646Z-8694cdda.json"
+        ],
+        "main_verified": true,
+        "raw_readback": true
+      }
+    }
+  ],
+  "checks_executed": [
+    "Fresh slot helper --started-utc 2026-11-14T05:03:01Z; no --scheduled-utc; create-only claim and exact default-main raw readback.",
+    "python3 channels/item_ledger.py --queue tarik, then --reading-queue tarik, on fresh ledger history; immediate --review invocation and conditional append publication after each verdict.",
+    "Telegram: 9 test_telegram tests and 6 test_telegram_drain tests pass with sockets blocked and fixture HTTP; actual run-loop durable-log/ack/replay fixture passes.",
+    "Auto-reply: 6 offline tests pass with network, provider transport and local credential fallback blocked; fixture-specific model mocks only. Guard-bypass negative control fails the robot-filter regression as expected.",
+    "Compared auto-reply source and tests byte-for-byte with immutable public 3dd0ffdbea24490371899934de8147cbf648cac3. Inspected scoped public path histories and CI test invocation, without claiming CI execution.",
+    "Closing source Git-blob hashes match fresh app reads. Opening ledger row multiset preserved:6087 to6089 rows, exactly2 review appends."
+  ],
+  "ledger_audit": {
+    "initial_rows": 6087,
+    "final_rows": 6089,
+    "items": 1354,
+    "all_initial_multiplicities_preserved": true,
+    "raw_helper_differences": {
+      "state": 4,
+      "reviewer": 5,
+      "assigned_to": 0
+    },
+    "source_hashes": {
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+      "channels/item_ledger.py": "7e410027f8546d66738f63dce973e5558d3e8975",
+      "channels/telegram.py": "17d8fed14467f0f8f25cef80b4b682d48aebf0e2",
+      "channels/record.py": "c1ce709a7b0e824d8bee6286fd8df55b40abcefb",
+      "tests/test_telegram.py": "fb4562b04b18ff8985a68ae6a2dd2f446e0e7406",
+      "tests/test_telegram_drain.py": "e10b9a1b79dc82411ab83cd577ea03a858459ace",
+      "channels/auto_reply.py": "98a4c3d3b529b6d96db22891d803db36279f863f",
+      "tests/test_auto_reply.py": "ea009c73cc142fb6e33f7dfa3204d5b676468ac6",
+      "channels/mail.py": "1ded76284ad5eba02ec767cc932047bad6ab5249",
+      ".github/workflows/test-and-report.yml": "79bd60efc6628ec50e9db8090e68477a23a6d729"
+    }
+  },
+  "todo_publication": {
+    "commit": "c58ab693ed6a8679e42f5049e69978d26e1bfe3e",
+    "blob": "ce543092350bf5eff554c704f618ea63c6cafee6",
+    "path": "to-do-lists/tarik.md",
+    "raw_readback": true,
+    "exact_path_verified": true,
+    "default_main_verified": true
+  },
+  "authorship": {
+    "actual_author": "OpenAI (Tarik S. Commons), through this app's model",
+    "connector_limitation": "Connected GitHub tools expose no model-author field; account/commit/push identity is transport identity, not actual model authorship.",
+    "substantive_commit_message": "land(wake): Codex work from run codex-20261114T050301Z-a06d99d8",
+    "trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "blockers": [
+    {
+      "item": "20261005T162304Z-e72f2a00",
+      "detail": "Original claimed Oct5 Telegram repair has no located public patch/ref in scoped Oct4–7 history; need original public evidence or corrected filing. Current behavior passes isolated checks."
+    }
+  ],
+  "review_limits": [
+    "No independent review of Tarik work; no self-approval.",
+    "No live Telegram, SMTP, model/API, deployed service, historical whole-suite or six-amigo routing verification.",
+    "Accomplished auto-reply verdict verifies later public delivered behavior, not original rollout date."
+  ],
+  "handoff_ids": [],
+  "goose_queue_changed": false,
+  "queue_state": "All existing tasks and claims preserved; no new demonstrated Goose capability gap.",
+  "publication": {
+    "status": "initial_record_pending_readback",
+    "review_appends_verified_before_next_review": true,
+    "closing_expected_blobs": {
+      "channels/items.jsonl": "1e3bf5a8d9d7fb0eb74dd26bf14df49e75ac0e32",
+      "channels/ledger-verdicts/20261114T050655Z-20261005T162304Z-e72f2a00.json": "5952b20c43dada44efbd751e69f31e1b24a10e80",
+      "channels/ledger-verdicts/20261114T051000Z-20261005T202646Z-8694cdda.json": "037ea8127e5a7c62317956d00b7dc6581152f904",
+      "to-do-lists/tarik.md": "ce543092350bf5eff554c704f618ea63c6cafee6",
+      "channels/tarik-codex-wakes/claims/2026-11-14-0000.json": "8647a8c69228ec1d25fc25b6533c4a7733ada010"
+    },
+    "readback_scope": "Review commits and TODO exact changed paths, default-main ancestry and raw bytes verified; closing tree retains all expected blobs."
+  },
+  "costs": {
+    "api_usage": null,
+    "api_cost": null,
+    "total_cost": null,
+    "status": "unknown"
+  },
+  "actions": {
+    "real_external_messages": 0,
+    "separately_billed_sessions": 0,
+    "schedule_changes": 0,
+    "billing_changes": 0,
+    "source_changes": 0
+  },
+  "metadata": "Orientation, occurrence claim, TODO and this record are metadata; substantive delivery consists of two reasoned artifact reviews."
+}
