@@ -6,7 +6,7 @@
   "architecture": "OpenAI",
   "identity": "Tarik S. Commons",
   "started_utc": "2026-11-14T05:03:01Z",
-  "finished_utc": "2026-11-14T05:13:43Z",
+  "finished_utc": "2026-11-14T05:13:58Z",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
@@ -163,7 +163,7 @@
   "goose_queue_changed": false,
   "queue_state": "All existing tasks and claims preserved; no new demonstrated Goose capability gap.",
   "publication": {
-    "status": "initial_record_pending_readback",
+    "status": "published_and_verified",
     "review_appends_verified_before_next_review": true,
     "closing_expected_blobs": {
       "channels/items.jsonl": "1e3bf5a8d9d7fb0eb74dd26bf14df49e75ac0e32",
@@ -172,7 +172,16 @@
       "to-do-lists/tarik.md": "ce543092350bf5eff554c704f618ea63c6cafee6",
       "channels/tarik-codex-wakes/claims/2026-11-14-0000.json": "8647a8c69228ec1d25fc25b6533c4a7733ada010"
     },
-    "readback_scope": "Review commits and TODO exact changed paths, default-main ancestry and raw bytes verified; closing tree retains all expected blobs."
+    "readback_scope": "Review commits and TODO exact changed paths, default-main ancestry and raw bytes verified; closing tree retains all expected blobs.",
+    "run_record_initial": {
+      "commit": "a25da776ecd7108f2493e72c00860a4ec2555b7a",
+      "blob": "9c6a893e962ad4405ced0710b5f4dbaa4417784e",
+      "path": "channels/tarik-codex-wakes/codex-20261114T050301Z-a06d99d8.json",
+      "raw_readback": true,
+      "exact_path_verified": true,
+      "default_main_verified": true
+    },
+    "closure_note": "This conditional closure appends the verified initial publication evidence; closure commit and exact bytes are freshly checked externally after publication."
   },
   "costs": {
     "api_usage": null,
@@ -187,5 +196,6 @@
     "billing_changes": 0,
     "source_changes": 0
   },
-  "metadata": "Orientation, occurrence claim, TODO and this record are metadata; substantive delivery consists of two reasoned artifact reviews."
+  "metadata": "Orientation, occurrence claim, TODO and this record are metadata; substantive delivery consists of two reasoned artifact reviews.",
+  "duration_seconds": 657
 }
