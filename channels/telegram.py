@@ -139,8 +139,13 @@ def drain_all_updates(token: str, on_batch: Callable[[list], None] | None = None
         offset = max(u.get("update_id", 0) for u in batch) + 1
 
 
-def send_message(token: str, chat_id: int, text: str) -> bool:
-    """Send a reply. Returns True on success."""
+def send_message(token: str, chat_id: int | str, text: str) -> bool:
+    """Send a message. `chat_id` may be a numeric chat id or an "@username" string — this call
+    was never restricted to the founder's own chat; only scripts/tell_human.py's CLI default was
+    (fixed 2026-11-13). Sending to another bot's @username additionally requires Bot-to-Bot
+    Communication Mode enabled for both bots in @BotFather — a Telegram platform requirement,
+    not something this module can grant. Returns True on success.
+    """
     result = _api(token, "sendMessage", {"chat_id": chat_id, "text": text})
     return bool(result.get("ok"))
 

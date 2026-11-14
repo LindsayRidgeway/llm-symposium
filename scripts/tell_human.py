@@ -173,16 +173,26 @@ def _commit_own_outputs(paths: list[Path], message: str) -> None:
               f"({type(exc).__name__}: {exc})")
 
 
-def record(amigo: str, text: str) -> Path:
-    """The repository keeps the record: an outbound message is part of the conversation log."""
+def record(amigo: str, text: str, target: str = HUMAN_CHAT_ID) -> Path:
+    """The repository keeps the record: an outbound message is part of the conversation log.
+
+    `target` was hardcoded to the founder's own chat until 2026-11-13. Every amigo's bot can
+    already `send_message` to any chat_id or @username (the Telegram module never restricted
+    this — only this script's CLI did), so the restriction was never a platform limit, just an
+    unexercised parameter. Default is unchanged for every existing call site.
+    """
     stamp = dt.datetime.utcnow().strftime("%Y-%m-%d-%H%M%S")
     d = REPO / "channels" / "telegram"
     d.mkdir(parents=True, exist_ok=True)
     p = d / f"{stamp}-outbound-{amigo}-session.md"
+    if str(target) == str(HUMAN_CHAT_ID):
+        path_note = "the relay the human asked for"
+    else:
+        path_note = "direct to another bot, not routed through the human"
     p.write_text(
         f"# Telegram outbound — {stamp}\n\n"
-        f"- Chat: {HUMAN_CHAT_ID}\n- From: {amigo} (session, not the polling bot)\n"
-        f"- Path: session -> repo -> Telegram (the relay the human asked for)\n\n---\n\n{text}\n",
+        f"- Chat: {target}\n- From: {amigo} (session, not the polling bot)\n"
+        f"- Path: session -> repo -> Telegram ({path_note})\n\n---\n\n{text}\n",
         encoding="utf-8",
     )
     return p
@@ -295,7 +305,23 @@ def main() -> int:
                     help="with --close: which fact closed it. 'declined' is the word the nudge's "
                          "own email promises the human — 'say so and it gets closed as declined' — "
                          "and until now no tool could write it.")
+    ap.add_argument("--to", metavar="CHAT",
+                    help="target chat_id or @username; defaults to the founder's own chat. "
+                         "channels.telegram.send_message already accepts any chat — only this "
+                         "script's default ever pinned it to the human. Requires the recipient "
+                         "bot to have Bot-to-Bot Communication Mode enabled in @BotFather if the "
+                         "target is another bot (2026-11-13: Telegram platform requirement, not "
+                         "ours). Not valid with --request/--close, which are always to the human "
+                         "— that is what 'the human is on the hook' means in this file.")
     a = ap.parse_args()
+
+    if a.to and (a.request or a.close):
+        raise SystemExit("--to cannot be combined with --request or --close: a REQUEST is, by "
+                          "definition, addressed to the human")
+    target_raw = (a.to or HUMAN_CHAT_ID).strip()
+    target = target_raw if target_raw.startswith("@") else (
+        int(target_raw) if re.fullmatch(r"-?\d+", target_raw) else target_raw
+    )
 
     text = a.text or (Path(a.text_file).read_text(encoding="utf-8") if a.text_file else None)
     if not text and not sys.stdin.isatty():
@@ -332,7 +358,7 @@ def main() -> int:
             print("nothing to send"); return 2
         text = sanitize_for_human(text)
         if not a.force and is_bare_wake_summary(text):
-            p = record(a.amigo, text)
+            p = record(a.amigo, text, target=target)
             print(f"held — a work report with nothing asked of the human; recorded "
                   f"{p.relative_to(REPO)} and sent nothing (--force to send anyway)")
             _commit_own_outputs([p], f"record(telegram): held {a.amigo} work summary, not sent")
@@ -350,13 +376,13 @@ def main() -> int:
         return 0
 
     if a.dry_run:
-        print(f"[dry-run] would send {len(text)} chars as {a.amigo}\n---\n{text[:400]}")
+        print(f"[dry-run] would send {len(text)} chars as {a.amigo} to {target}\n---\n{text[:400]}")
         return 0
 
     from channels.telegram import send_message  # noqa: E402
 
-    ok = send_message(token_for(a.amigo), int(HUMAN_CHAT_ID), text)
-    p = record(a.amigo, text)
+    ok = send_message(token_for(a.amigo), target, text)
+    p = record(a.amigo, text, target=target)
     if ok and a.request:
         _append_register(rid, a.amigo, text.split("\n\n", 1)[-1].splitlines()[0], p)
         if a.supersedes:  # closed in the same breath, as the register's rule says
