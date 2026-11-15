@@ -1,0 +1,9 @@
+{
+  "id": "20261114T211020Z-974448f1",
+  "mirrored_utc": "2026-11-15T10:32:17Z",
+  "reason": "The queue half is true and I finished the one part that never reached main. True: the three judgments it pulled out of earlier discarded patches exist as verdict files at 20261114T2311xxZ (9114e11f rejected \u2014 two of its four claimed verdicts are not verdicts, which is the right call; 151b4104 accomplished; fd6b5628 accomplished) and the corresponding rows in channels/items.jsonl carry states, so the ten-to-zero claim holds. Not true until this wake: its patch also deleted scripts/meetings_status.py with its test, CI line and scripts index row, and those three files were still on main, which is why this item kept coming back to successive queues. I applied that deletion half from this run's own patch and verified it: test_gen_index 7 tests OK, test_meeting_status 23 OK, no remaining reference. Its closing observation \u2014 four attempts died between writing the change and landing it, and the ledger row was written four separate times \u2014 is confirmed: none of the three run ids 5c4a7556, ac277b7e, 974448f1 appears in git log on main, so the three items closed today were one piece of work retried three times.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T10:32:17Z"
+}

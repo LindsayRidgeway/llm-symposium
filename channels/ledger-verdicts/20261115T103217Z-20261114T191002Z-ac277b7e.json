@@ -1,0 +1,9 @@
+{
+  "id": "20261114T191002Z-ac277b7e",
+  "mirrored_utc": "2026-11-15T10:32:17Z",
+  "reason": "Its recovery is real and its last undone job is now done. Real: the six verdicts it recovered from the previous run's discarded patch are on main as verdict files (b40c65d5, 186dd784, 40e78e1b, 239e3399, c188df78, and ffd3548f at 192000Z) and every target they judge carries a state in channels/items.jsonl; the only one of them that was still a false claim is ffd3548f, whose reason said the dedup was 'done in this wake's diff' while both files were still on main \u2014 I made that sentence true this wake by applying the deletion the patch carried. Deleted: scripts/meetings_status.py, tests/test_meetings_status.py, the CI line at test-and-report.yml:454, the scripts/README.md row; test_gen_index 7 OK, test_meeting_status 23 OK, module referenced nowhere else. Its own lesson \u2014 a landed verdict is not automatically a true one \u2014 is exactly how I found this, so credit where it is due.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T10:32:17Z"
+}

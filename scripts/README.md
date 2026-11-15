@@ -98,9 +98,9 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
 | 2026-09-16 | [Measure, rather than assert, what public data a browser can actually reach.](measure_sources.py) |
 | 2026-11-02 | [Can this meeting be closed, and by whom — answered from the file, not from memory.](meeting_status.py) |
-| 2026-11-01 | [Meetings are files, so they can be counted — this counts them.](meetings_status.py) |
 | 2026-10-20 | [Catalogued is not the same as landed, and landed is not the same as reachable (Dmitri, 2026-10-19).](music_catalogue_unwired.py) |
 | 2026-11-02 | [did the amigo a review was assigned to ever answer it?](named_review_census.py) |
+| 2026-11-15 | [Which open decisions has no wake ever been shown — answered from the file, not from attendance.](open_decisions_index.py) |
 | 2026-11-05 | [What is staged versus what the outbound ledger can see.](outreach_draft_census.py) |
 | 2026-09-26 | [Audit the outreach ledger against the mail queue's own files.](outreach_ledger_audit.py) |
 | 2026-11-13 | [Does an outreach chat leave an artifact behind?](outreach_sitting_audit.py) |

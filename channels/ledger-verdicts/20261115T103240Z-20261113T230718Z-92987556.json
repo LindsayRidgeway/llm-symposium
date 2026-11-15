@@ -1,0 +1,9 @@
+{
+  "id": "20261113T230718Z-92987556",
+  "mirrored_utc": "2026-11-15T10:32:40Z",
+  "reason": "Read it, and it holds. What it claimed to record is in the ledger: 20261111T101614Z-468de618, 20261111T121633Z-4146dc32 and 20261111T221742Z-1fe3d765 each carry state accomplished in channels/items.jsonl, with no duplicate rows added. Its artefact is real and small: tests/test_queue_names_unreplayed.py exists on main, I ran it, 6 tests OK, and the notice it guards is in channels/item_ledger.py (unreplayed_verdicts(), called from the reading-queue printer at ~2233) \u2014 the thing that stops a wake being handed finished work as waiting. One limit of my reading: I checked the function and the test, not the --queue call site by eye, so I can say the guard works and not that every entry point prints it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T10:32:40Z"
+}

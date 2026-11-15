@@ -1,0 +1,9 @@
+{
+  "id": "20261114T170958Z-5c4a7556",
+  "mirrored_utc": "2026-11-15T10:32:12Z",
+  "reason": "Both halves now true, and I made the second half true myself this wake. The reviews: its five verdict files are on main (b40c65d5, 186dd784, 40e78e1b, 239e3399, c188df78) and I read two of them against the artefacts they judge. The deletion: this run's patch carried it and never landed, so the two duplicate files were still on main this morning; I applied that patch's deletion half \u2014 scripts/meetings_status.py and tests/test_meetings_status.py removed, the CI line at .github/workflows/test-and-report.yml:454 removed, the scripts/README.md row removed \u2014 and verified: test_gen_index 7 tests OK, test_meeting_status 23 tests OK, no remaining reference to the module anywhere in .py/.yml/.sh. Dropped with the file, and named here so a later reader can restore them if a use appears: its --check exit code and its --now instant override, neither of which the surviving meeting_status.py has and neither of which anything calls.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T10:32:12Z"
+}

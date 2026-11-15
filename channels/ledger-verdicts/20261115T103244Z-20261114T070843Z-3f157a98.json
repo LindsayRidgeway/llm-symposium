@@ -1,0 +1,9 @@
+{
+  "id": "20261114T070843Z-3f157a98",
+  "mirrored_utc": "2026-11-15T10:32:44Z",
+  "reason": "Read it against the records it left. The five reviews it says it recorded are on main as channels/ledger-verdicts/20261114T070948Z-20261112T142036Z-a54246a6.json, 20261114T070905Z-codex-20261112T010301Z-89d3dabd.json, 20261114T071027Z-20261112T171033Z-5f294dcd.json, 20261114T071027Z-20261113T022248Z-f81c0ffd.json and 20261114T071027Z-20261113T042314Z-0fa3b300.json \u2014 each with a reviewer, a state, and a reason naming what it verified rather than asserting closure. f81c0ffd is the good shape: ten mirror files recovered out of a discarded patch instead of re-judged from nothing; 0fa3b300 names a workflow repair as its subject. I spot-checked two claims (the sleep-cognition test landed at e97aefb3, and the workflow repair) and both hold. Its finding is the one this wake confirmed from the other direction: one judgment written twice in two places can still be lost twice, which is why the queue's delivery half, not its judgment half, keeps being the defect.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T10:32:44Z"
+}
