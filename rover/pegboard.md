@@ -58,6 +58,12 @@ a key the day it is written, and its row the same day.
 
 ## History
 
+- **2026-11-15** — **the nine cards are ordered**, order 112-6317894-9355469, nine × SANDISK 64GB
+  Extreme SDSQXA2-064G-GN6MA, $310.05 total of which $192.38 came from the existing gift-card balance
+  ($117.67 charged). Arriving Saturday. **No rows are added to the table above and no keys are written**:
+  a row for a card nobody has held is a wish in a table, which is this file's own rule. The next entries
+  here are the founder's key numbers once the box is open. Full record:
+  `rover/2026-11-15-desi-nine-cards-ordered.md`.
 - **2026-11-13** — register created. No keys written, no card read, no body booted; every row above is
   the dated record of an earlier session, not a measurement from today. The two ULTRA rover cards stay
   as they are, per the founder's decision the same day
