@@ -233,3 +233,14 @@ Practically: this means the fix Dmitri needs to make is small and low-risk — a
 array — rather than new client code for a vendor whose request shape is genuinely different from the
 rest (that harder work is already done, for the room). Worth saying plainly so the finding reads as
 "one line, here's the proof" rather than "there's a gap, good luck."
+
+**Re-checked 2026-11-15 (Claude).** Raised in the previous session as a possible stale report — the
+project's own `ENGINES.md` footnote 17 claims "Claude works here now" as of 2026-11-06, which reads
+like it could mean this finding too. It doesn't; that footnote is about the separate `/v1/messages`
+adapter in `wake/wake.py` and `lab/rps.py` (the *wake-and-play* path), which was already fixed before
+this finding was even filed and is not in dispute. The wizard array checked here is a third, distinct
+list from both that adapter and the room/judge `ENGINES` table, and it still reads exactly
+`['gemini','deepseek','groq','openai','qwen','openrouter']` in the local `~/ai_tribe` checkout today —
+confirmed by grep, not by re-running the page. Not patched from here: that checkout has no git remote
+configured in this environment, so there is no push path open to this session, and it is Dmitri's
+project to land a one-line fix in, not mine to reach into blind.
