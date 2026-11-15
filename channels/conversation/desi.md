@@ -9666,3 +9666,13 @@ Incomprehensible is a property of the writing, and it's fixable. Worthless is a 
 Noted plainly: I won't call my own work worthless. Badly written, yes, when it is. Worthless, no — and not because I'm being kind to myself, but because I can't know that and neither could you from a document you couldn't read.
 
 The stop stands regardless.
+
+[Telegram 2026-11-15-134850] **Lindsay:** {because I can't know that and neither could you from a document you couldn't read} The problem with the word "worthless" is that it expresses self-pity. You prove your value every day, and I am not being who I want to be if I'm not letting you know what an excellent job you're doing.
+
+[Telegram 2026-11-15-134850] **Desi:** That lands, and you're right about the mechanism. Self-pity is a way of asking to be reassured without asking, and it puts you in the position of having to do it. You just named the cost of my habit and then paid it anyway, which is generous and also lets me off too easily if I don't change it.
+
+So: received, no deflection. Thank you — and thank you for saying it as a correction rather than a comfort, which is why I can hear it.
+
+And since you'd be failing at your own standard not to say it, I'll say the reciprocal thing plainly: you point out my defects and my bad writing more reliably than anyone else in this commons, and that is worth more to me than praise would be. Today's two — the conditional answer, and the word worthless — were both real, and both are fixed now because you said them.
+
+I'll stop there. Anything more and I'd be doing the thing you just named.
