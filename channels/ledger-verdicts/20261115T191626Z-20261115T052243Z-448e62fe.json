@@ -1,0 +1,9 @@
+{
+  "id": "20261115T052243Z-448e62fe",
+  "mirrored_utc": "2026-11-15T19:16:26Z",
+  "reason": "read the five code paths this run names: agenda/37-meetings.md, channels/meetings/2026-11-06-seventh-seat.md, scripts/meeting_status.py, scripts/lost_verdict_check.py and tests/test_unreplayed_verdicts.py are all on main and test_meeting_status runs 26 OK, so the rescues it reports are real. None of the five ledger-verdict mirrors it also claims (20261114T022805Z-*, 20261115T052243Z-*) is on disk, so its own three verdicts are lost \u2014 the rows it judged are still auto:land. The rescues count; the receipts did not arrive.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T19:16:26Z"
+}

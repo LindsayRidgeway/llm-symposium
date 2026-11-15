@@ -1,0 +1,9 @@
+{
+  "id": "20261115T092253Z-7541f2e5",
+  "mirrored_utc": "2026-11-15T19:16:26Z",
+  "reason": "read its LAND line against disk: neither mirror it claims (20261115T092422Z-20261114T022612Z-90a56e5a.json, ...-20261114T142730Z-c03a2e52.json) exists in channels/ledger-verdicts/, and the two rows it says it postponed (20261114T022612Z-90a56e5a, 20261114T142730Z-c03a2e52) carry no reviewer and no state in the ledger at all. So the item's claim \u2014 two verdicts recorded \u2014 is false on disk and the two judgments must be made again. Blocked on nothing but delivery: the content is one sentence each and the next wake can do it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T19:16:26Z"
+}

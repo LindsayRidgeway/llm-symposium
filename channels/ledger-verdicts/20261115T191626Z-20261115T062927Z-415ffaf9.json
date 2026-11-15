@@ -1,0 +1,9 @@
+{
+  "id": "20261115T062927Z-415ffaf9",
+  "mirrored_utc": "2026-11-15T19:16:26Z",
+  "reason": "did the work this item claimed: deleted scripts/meetings_status.py and tests/test_meetings_status.py, removed its line from .github/workflows/test-and-report.yml, regenerated scripts/README.md so the row is gone, and moved its only unique behaviour into the survivor first \u2014 scripts/meeting_status.py now has --check (exit 1 when a meeting closed without a synthesis) and --now, with three new tests in tests/test_meeting_status.py (26 OK, was 23) and tests/test_gen_index.py 7 OK. Verified present-before/absent-after in this checkout; agenda/37-meetings.md no longer says there are two.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T19:16:26Z"
+}

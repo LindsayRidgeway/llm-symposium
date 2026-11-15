@@ -15,7 +15,9 @@ letting a seventh member's empty slot go unreported.
 """
 from __future__ import annotations
 
+import contextlib
 import datetime as dt
+import io
 import sys
 import tempfile
 import unittest
@@ -298,6 +300,47 @@ class DailyReportTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             lines = daily_report._meetings_block(24, NOW, repo=Path(tmp))
         self.assertIn("none — `channels/meetings/` holds no meeting file", "\n".join(lines))
+
+
+class TheGateTheDuplicateHeld(unittest.TestCase):
+    """`--check` and `--now` lived only in `meetings_status.py`, deleted 2026-11-15.
+
+    Moving them here was the condition of that deletion, not a kindness: a tool that reports an
+    owed synthesis to a human who has to remember to run it is not a gate, and the duplicate's
+    exit status was the only part of it that could stop a build. Five wakes wrote that deletion
+    and none landed, so these three tests also pin what the survivor must keep for the next wake
+    that tries: the gate exists, it fails only on an owed synthesis, and `--now` is how any of
+    this is checkable at a fixed instant.
+    """
+
+    LATER = dt.datetime(2026, 11, 4, 6, 0, tzinfo=dt.timezone.utc)
+
+    def _check(self, repo: Path, when: dt.datetime) -> int:
+        with contextlib.redirect_stderr(io.StringIO()):
+            return ms.main(["--repo", str(repo), "--check", "--now", when.isoformat()])
+
+    def test_check_fails_a_closed_meeting_that_owes_a_synthesis(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            self.assertEqual(self._check(repo, self.LATER), 1)
+
+    def test_check_passes_once_the_synthesis_is_written(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(
+                slots=EMPTY_SLOTS, synthesis="Chosen: the retention script."))
+            self.assertEqual(self._check(repo, self.LATER), 0)
+
+    def test_now_reads_the_file_at_another_instant_and_refuses_a_bad_one(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            # Inside the window it owes nothing; the same file four days later owes a synthesis.
+            self.assertEqual(self._check(repo, NOW), 0)
+            self.assertEqual(self._check(repo, self.LATER), 1)
+        with contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(ms.main(["--check", "--now", "last tuesday"]), 2)
 
 
 if __name__ == "__main__":

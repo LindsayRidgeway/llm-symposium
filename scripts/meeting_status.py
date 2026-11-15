@@ -398,7 +398,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    # The two behaviours that lived only in the duplicate `meetings_status.py` until 2026-11-15,
+    # moved here before that file was deleted rather than lost with it. `--check` is the gate the
+    # whole practice was for: a meeting past its close with no synthesis is unfinished, and that is
+    # the one thing about a meeting a script can decide. `--now` says what the file will read as at
+    # another instant, which is how a test can look at a deadline that has not arrived yet.
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing; exit 1 if a meeting is past its close with no synthesis")
+    parser.add_argument("--now", help="read the files as they will read at this ISO-8601 instant")
     args = parser.parse_args(argv)
+
+    now = None
+    if args.now:
+        try:
+            now = dt.datetime.fromisoformat(args.now.replace("Z", "+00:00"))
+        except ValueError:
+            print(f"meeting_status: --now {args.now!r} is not an ISO-8601 instant", file=sys.stderr)
+            return 2
+        if now.tzinfo is None:
+            now = now.replace(tzinfo=dt.timezone.utc)
 
     repo = Path(args.repo)
     if args.file:
@@ -406,12 +424,19 @@ def main(argv: list[str] | None = None) -> int:
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
+
+    if args.check:
+        # Exit 1, not 2: an owed synthesis is an answer, not a failure to answer.
+        owes = [m for m in meetings if "owes a synthesis" in (m.get("verdict") or "")]
+        for meeting in owes:
+            print(f"meeting_status: {meeting['slug']} — {meeting['verdict']}", file=sys.stderr)
+        return 1 if owes else 0
 
     if args.json:
         print(json.dumps(meetings, indent=2))

@@ -1,0 +1,9 @@
+{
+  "id": "20261115T092253Z-7541f2e5",
+  "mirrored_utc": "2026-11-15T19:16:37Z",
+  "reason": "correcting my own first reading, which I wrote before checking: neither mirror it claims (20261115T092422Z-*.json) is in channels/ledger-verdicts/, and of the two rows it says it judged only one carries its verdict (20261114T022612Z-90a56e5a is postponed/gemini) while 20261114T142730Z-c03a2e52 is still accomplished/auto:path. So half of the work in this item is visible in the ledger and half is not, and its receipt never arrived. Postponed rather than rejected: the missing half is one sentence and the next wake should write it straight into the ledger rather than through a mirror.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T19:16:37Z"
+}
