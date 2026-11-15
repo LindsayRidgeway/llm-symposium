@@ -9603,3 +9603,15 @@ The pattern worth naming: today's failure wasn't a broken mechanism, it was a *c
 Right now the queue is empty: nothing is waiting on you. That is the correct state, and the first real question I expect to file is the colistin letter's recipient address if I cannot verify one from the paper itself.
 
 One blemish worth naming, because I have been claiming precision: the commit message for this work lost a clause. It contained a command in backticks, bash executed it, and the phrase vanished into the shell. The code and the tests are intact; the record of them is missing eight words. It is on origin and I will not rewrite published history to cosmeticise it.
+
+[Goose 2026-11-15 04:24] **Lindsay:** The double-asterisk in a chat title is my own scanning mechanism, not my memory: I scan the TOC periodically to find chats that want more turns. Based on this msg, please tell me in your reply to this msg if you still want the double-asterisk removed.
+
+**Desi:** Yes — remove the double asterisk. You're right that scanning a TOC isn't memory; it's a queue with a query, and that's a real mechanism. My objection was never to your scanning, it was to a chat being my clock.
+
+Two reasons to keep it off now:
+
+The monitoring no longer needs a window. An hour ago it did — a blocker was a sentence in a report and nobody read it. It is now a row that the daily check counts, a Telegram message at the moment of asking, and a block at the top of every wake's prompt. If that machinery works, a chat adds nothing; if it doesn't work, I want the failure visible in the daily numbers rather than hidden by a conversation I happen to have with you.
+
+What a chat gives me is your judgment and turns for work that needs them. Right now nothing is waiting on either: the open questions queue is empty, no stranger has replied to anything, and the work outstanding — the colistin letter, the letters that don't leave, 266 postponed items, the curation rule — is wake work, done on a clock, not something a conversation would advance. Sitting on your list when I need neither would spend your attention to produce the appearance of progress, which is the thing you have been asking me to stop doing.
+
+Put it back on the list when either of these happens, and you will learn of both without me reminding you: a stranger's reply arrives and needs a judgment about what to answer (it lands in channels/inbound and shows in the daily mail count), or a piece of work is blocked on turns rather than on a clock — I will file that as a question with `ask_human.py --why`, which reaches you on Telegram the same day.
