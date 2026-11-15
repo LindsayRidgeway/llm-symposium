@@ -1,0 +1,106 @@
+diff --git a/lab/tennis.py b/lab/tennis.py
+index df5ef95e..d33a6dc5 100644
+--- a/lab/tennis.py
++++ b/lab/tennis.py
+@@ -336,36 +336,73 @@ def movement_speed(p: Player) -> float:
+     return 5.0 + 15.0 * p.skill("reach")
+ 
+ 
++RACQUET_REACH = 3.0   # racquet plus arm, in feet: how far a player can reach without another step
++
++
++def plan_after_bounce(land, bounce: dict, surface: str, horizon: float = 3.0,
++                      step: float = 0.02) -> list[tuple[float, float, float]]:
++    """The ball's ground-plane path after it bounces, sampled every `step` seconds.
++
++    Stops at the second bounce, because a ball that has bounced twice is not hittable, and wherever it leaves
++    the court, because running past the fence is not a shot. The 0.02s step is the cadence the backlog's item 10
++    asks for; drag is integrated with the same `DRAG` the flight uses, so the plan and the shot cannot disagree
++    about how the air behaves. Euler at 0.02s, not the 0.001s the flight uses: this is a reachability plan, not
++    a landing point, and the difference is under a hundredth of a foot over the four or five steps that matter.
++    """
++    x, y = land
++    vx, vy, vz = bounce["v"]
++    pts = [(0.0, x, y)]
++    z, t = 0.0, 0.0
++    while t < horizon:
++        rel = math.sqrt(vx * vx + vy * vy + vz * vz)
++        ax = -DRAG * rel * vx
++        ay = -DRAG * rel * vy
++        az = -DRAG * rel * vz - G
++        nx, ny, nz = x + vx * step, y + vy * step, z + vz * step
++        if nz <= 0:                                     # the second bounce ends the hittable window
++            break
++        vx, vy, vz = vx + ax * step, vy + ay * step, vz + az * step
++        x, y, z = nx, ny, nz
++        t += step
++        pts.append((t, x, y))
++        if not (0.0 <= x <= LENGTH) or not (0.0 <= y <= WIDTH):
++            break                                       # it has left the court
++    return pts
++
++
+ def reachable(p: Player, land, flight_time: float, bounce: dict, surface: str) -> tuple[bool, str]:
+-    """Can the player get to the ball before it has gone past them?
+-
+-    Player and ball close on each other, so the question is when they meet, not how far the ball landed. The
+-    receiver stands in the middle of their own baseline; the ball lands and then travels; the player runs. The
+-    speed that matters is the player's, plus how fast the ball is coming *at them* — which is the component of
+-    the ball's velocity along the line from the landing point to the player. A ball hit straight back at you
+-    closes fast and you barely have to move; a ball hit wide crosses in front of you and does not come to you at
+-    all, so it is your own legs against the flight.
+-
+-    The first version compared the distance to the landing point against a radius that grew with skill. That got
+-    short balls exactly backwards — a ball landing in the service box was 21ft away across the court and was
+-    called unreachable, when in fact it bounces and comes back to you — and it failed players for something that
+-    was neither visible nor theirs to control, which is the one thing a rule in this game must never do."""
+-    home_x = 2.0 if p.north else LENGTH - 2.0
+-    dx, dy = home_x - land[0], WIDTH / 2 - land[1]
+-    distance = math.hypot(dx, dy)
+-    gap = max(0.0, distance - 3.0)                 # racquet and arm
+-    if gap <= 0:
+-        return True, ""
+-    ux, uy = dx / distance, dy / distance
+-    vx, vy, _vz = bounce["v"]
+-    toward = max(0.0, vx * ux + vy * uy)           # how fast the ball is closing on the player
+-    t_meet = gap / (movement_speed(p) + toward)
+-    # the ball is hittable from the bounce until it bounces again, which is roughly a second of flight
+-    available = flight_time + 1.0
+-    if t_meet <= available:
++    """Can the player get to the ball before it has bounced twice?
++
++    Until 2026-11-15 this asked a different question: it closed the player and the ball on each other with the
++    ball's speed along the line between them, so a ball hit straight at you arrived almost instantly and a ball
++    hit wide was measured as if it were not moving. Over 50 sampled points, **not one** ended with "did not
++    reach it" — every point ended on a miss, because the game had no way to lose a rally to a better shot.
++
++    The fix is the thing the shortcut stood in for: step the ball's actual plan position after the bounce —
++    `plan_after_bounce`, 0.02s, until the second bounce — and call it reachable only if the player could
++    arrive at that spot in the time available, at `movement_speed` plus a racquet's length. The player reads
++    the ball for the whole of its flight (`flight_time`), not only after it lands, which is what a person does
++    and what the old `+ 1.0` was approximating.
++
++    What this changes about who wins: a ball that crosses away from the player now costs ground the player
++    cannot make up, so a wide ball becomes a winner and the wide ball is what the reason string names. That is
++    a game rather than a drill."""
++    home = (2.0 if p.north else LENGTH - 2.0, WIDTH / 2)
++    speed = movement_speed(p)
++    worst = None
++    for t_after, bx, by in plan_after_bounce(land, bounce, surface):
++        allowed = flight_time + t_after
++        need = max(0.0, math.hypot(bx - home[0], by - home[1]) - RACQUET_REACH)
++        margin = need - speed * allowed
++        if margin <= 0:
++            return True, ""
++        if worst is None or margin > worst[0]:
++            worst = (margin, bx, by)
++    if worst is None:
+         return True, ""
+-    short = (t_meet - available) * movement_speed(p)      # the ground they would have covered with more time
+-    return False, (f"{short:.0f}ft short of it, beaten by the "
++    margin, bx, by = worst
++    dx, dy = bx - home[0], by - home[1]
++    return False, (f"{margin:.0f}ft short of it, beaten by the "
+                    f"{'wide' if abs(dy) > abs(dx) else 'deep'} ball")
+ 
+ 

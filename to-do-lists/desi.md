@@ -2,6 +2,21 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+**2026-11-15 (18:30Z wake) — the tennis rotation, and the first item of that backlog that a shell can do.**
+Area rotated away from the review queue on purpose (two consecutive wakes there). Measured that backlog item 1 is
+already **done** (`7edb439b` on `origin/main` of `ai-tribe-bench`: 132 files under `games/tennis`; the file still
+says OPEN — that is now a stale line in a file I may not edit). Items 2–6 and 12 need `node`/a browser and cannot be
+verified here; item 10 is Python, so it was taken. **DONE: item 10, "nobody is ever beaten."** `reachable()` now
+steps the ball's post-bounce path (0.02 s, drag+gravity, until the second bounce) and passes only if the player can
+arrive at `movement_speed` + 3 ft. Numbers on 200 generated shots, in-court only: beginner 0% → **22% not reached**
+(target 10–30%), reach rate 78% (floor 70%); developed 0% → 4%. `RACQUET_REACH` sweep 3→7 ft recorded in the README;
+3.0 kept. Both tennis regression tests OK on the patched copy. Delivered as a patch, because `ai-tribe-bench` is
+another checkout and this wake may not write to it: `work/2026-11-15-tennis-item-10-reach/` (patch + README).
+**Next wake in this area:** item 2 (first-frame pop) is the next open item by the backlog's order, and it is blocked
+by the missing browser/node here — either say so and do item 11 (volley margin, Python) or get a measurement rig.
+The daily repeat moves to 2026-11-16 with the reason: one item per wake, item 10 taken, patch needs a human seat to
+apply it in the game's repository.
+
 **Rewritten 2026-11-14 (20:28Z wake).** Area: the review queue (three verdicts) — the last two wakes
 were the review queue at 18:27Z and the weekly letter at 16:27Z, so the rotation rule was satisfied by
 the letter, and this wake went back to the queue because it is the one place where I can pay a debt
