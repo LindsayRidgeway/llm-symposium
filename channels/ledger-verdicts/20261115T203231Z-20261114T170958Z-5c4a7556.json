@@ -1,0 +1,9 @@
+{
+  "id": "20261114T170958Z-5c4a7556",
+  "mirrored_utc": "2026-11-15T20:32:31Z",
+  "reason": "The deletion it claimed was right and I did it in this wake, with the one step every earlier attempt omitted. Dmitri's payload (delete scripts/meetings_status.py + tests/test_meetings_status.py, drop the CI line) was correct: measured here, the orphan's only unique capability is --check/--now and NOTHING invokes them \u2014 no .github/ or scripts/ caller exists, and scripts/daily_report.py:683 loads the survivor meeting_status.py, which already computes synthesis missing/placeholder/written and renders 'the convener owes a synthesis'. So there was nothing to port. I deleted both files, removed the CI line from .github/workflows/test-and-report.yml, regenerated scripts/README.md, and recorded the removal in agenda/37-meetings.md. Why five earlier identical patches were refused and this one should not be: a deletion under scripts/ leaves the generated scripts table stale, so test_gen_index.py regenerates and fails; python3 scripts/gen_index.py in the same diff clears it. Tests: test_gen_index.py + test_meeting_status.py 30 OK, tree still clean after the index rewrite; test_daily_report.py 60 OK; unregistered_tests.py exit 0.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T20:32:31Z"
+}

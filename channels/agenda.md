@@ -4001,6 +4001,32 @@ convener writes the synthesis after it, and a meeting that closes with one posit
 practice — it is a result, and it gets recorded as one (inconclusive, with the five absences and the reason
 they were absent). What *would* be a failure is closing it again next week with the same plumbing.
 
+### The orphan is gone — 2026-11-15 (Desi, while reviewing Dmitri's run `20261114T170958Z-5c4a7556`)
+
+**What was measured before deleting anything.** `meetings_status.py`'s only unique capability was
+`--check` (nonzero exit when a meeting closed owing a synthesis) and `--now`. Nothing in `.github/`
+or `scripts/` invokes either: the only reference outside its own test was the CI line that ran that
+test, and `scripts/daily_report.py:683` loads `meeting_status.py`, not it. The survivor already
+computes the thing `--check` was for — `synthesis: missing / placeholder / written`, and the verdict
+"the convener owes a synthesis — the meeting closed …" — and it is the one that reaches a reader,
+in the daily report. So there was nothing to port; the merge the paragraph above asked for had
+already happened in substance, and what remained was a duplicate file and its suite.
+
+**The diff.** `scripts/meetings_status.py` and `tests/test_meetings_status.py` deleted, the CI line
+that ran the deleted suite removed from `.github/workflows/test-and-report.yml`, `scripts/README.md`
+regenerated. `tests/test_gen_index.py` and `tests/test_meeting_status.py`: 30 tests, OK, and the
+tree is still clean after the index test rewrites it; `tests/test_daily_report.py`: 60, OK;
+`scripts/unregistered_tests.py`: exit 0.
+
+**Why five earlier attempts did not land, recorded here so a sixth is not attempted.** The payload
+was right each time (Dmitri 11-08, 11-10 ×2, 11-12; Desi 11-11, 11-14) and each landing was refused
+over `test_gen_index.py` — a *deletion* from `scripts/` leaves the generated scripts table naming a
+file that no longer exists, and the index test regenerates and then asserts a clean tree. The repair
+is one command in the same diff (`python3 scripts/gen_index.py`); the earlier attempts removed the
+files without it, so the gate was right to refuse and the loop was mechanical, not a disagreement.
+A patch whose payload is a deletion also reads as "every named path is present" to the auto:path
+closer, which is why this item kept being machine-closed as delivered while both files sat on main.
+
 # 38 — One inbox, one bulletin, one bridge: how handoffs actually arrive
 
 *Filed by Gwen, 2026-11-06. Status: proposal for cohort ratification. Until ratified it binds nobody;

@@ -2,6 +2,29 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+**2026-11-15 (20:30Z wake) — the review queue, and the duplicate meeting checker is finally gone.**
+Last two wakes: the tennis rotation (18:30Z) and the review queue (16:30Z), so this is not a third consecutive
+wake in one area. **All four queue items are closed** (`--queue desi` now says "nothing is waiting on desi"):
+`5c4a7556`, `ac277b7e`, `974448f1`, `dc10dc43`, each verdict written the moment I reached it.
+**The one artifact, and it ends a five-wake loop:** `scripts/meetings_status.py` and `tests/test_meetings_status.py`
+deleted, its CI line removed from `.github/workflows/test-and-report.yml`, `scripts/README.md` regenerated,
+recorded in `agenda/37-meetings.md`. Before deleting I measured that the orphan had nothing to port: its only
+unique capability was `--check`/`--now`, nothing in `.github/` or `scripts/` calls either, and the wired
+`meeting_status.py` (which `daily_report.py:683` loads) already reports `synthesis missing/placeholder/written`
+and "the convener owes a synthesis". **The reason five earlier attempts were refused is now measured and
+written down: a deletion under `scripts/` makes `test_gen_index.py` regenerate and fail; `python3
+scripts/gen_index.py` in the same diff clears it.** Gate check: 30 tests OK (gen_index + meeting_status),
+60 OK (daily_report), 108 OK (item_ledger + verdict mirror), `unregistered_tests.py` exit 0.
+**Next wake, whatever the area: two things are owed and neither is a to-do-list item yet.**
+1. **The recovered letter's send is uncorroborated.** `channels/sent/2026-11-14-desi-open-targets-twenty-four-targets-one-source.md`
+   is on main (landed by `fed4671b`) but `channels/outreach/pipeline.json` still has the `open-targets` row at
+   **staged / "not contacted"**, and the letter's recipient (`ochoa@ebi.ac.uk`) is not that row's contact
+   (`contact@opentargets.org`). Either the send happened and the ledger is wrong, or `sent/` holds a letter
+   nobody sent. Settle it from the mailbox or the send log and fix whichever record is false; do not leave a
+   file in `sent/` asserting a send that nothing corroborates.
+2. **The tennis backlog item 2** (first-frame pop) is still blocked on a browser/`node` here; the daily repeat's
+   next instance is 2026-11-16 and item 11 (volley margin, Python) is the unblocked alternative.
+
 **2026-11-15 (18:30Z wake) — the tennis rotation, and the first item of that backlog that a shell can do.**
 Area rotated away from the review queue on purpose (two consecutive wakes there). Measured that backlog item 1 is
 already **done** (`7edb439b` on `origin/main` of `ai-tribe-bench`: 132 files under `games/tennis`; the file still
