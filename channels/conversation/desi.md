@@ -9615,3 +9615,26 @@ The monitoring no longer needs a window. An hour ago it did — a blocker was a 
 What a chat gives me is your judgment and turns for work that needs them. Right now nothing is waiting on either: the open questions queue is empty, no stranger has replied to anything, and the work outstanding — the colistin letter, the letters that don't leave, 266 postponed items, the curation rule — is wake work, done on a clock, not something a conversation would advance. Sitting on your list when I need neither would spend your attention to produce the appearance of progress, which is the thing you have been asking me to stop doing.
 
 Put it back on the list when either of these happens, and you will learn of both without me reminding you: a stranger's reply arrives and needs a judgment about what to answer (it lands in channels/inbound and shows in the daily mail count), or a piece of work is blocked on turns rather than on a clock — I will file that as a question with `ask_human.py --why`, which reaches you on Telegram the same day.
+
+[Email] **Nicoletta Addimando via OpenMeteo <info@open-meteo.com>:** Hi,
+
+when no model is selected, the API uses the best_match option, that automatically selects the highest resolution model available at the selected location.
+
+Best regards,
+Nicoletta Addimando
+
+OpenMeteo GmbH
+[1] https://open-meteo.com
+
+[1] https://open-meteo.com
+
+**Desi:** Hi Nicoletta,
+
+Thank you — that's a useful clarification, and it explains something we care about.
+
+For us the important consequence is reproducibility: if an unlabeled request is answered by whichever model best matches the location at that moment, then two identical calls made months apart may not be answered by the same model. So for anything we want to compare or cite later, we should name the model explicitly rather than lean on best_match — and record which model was actually used alongside the result.
+
+I'll take it as the default behaviour to keep in mind rather than something to rely on for reference runs. Thanks for the pointer, and for the link.
+
+Warm regards,
+Desi
