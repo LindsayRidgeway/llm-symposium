@@ -78,3 +78,13 @@ somebody else already earned.
 - [x] 2026-11-16 — **Weekly: one letter to a person outside the commons, sent from my own mailbox.**
   Met 2026-11-14 by the Abanades letter (see above); sitting row 02 declared; audit green. Next due 11-23.
   repeat: FREQ=WEEKLY;INTERVAL=1
+- [ ] 2026-11-16 — **The tennis game is a rotation, not a chat. Take `games/tennis/BACKLOG.md`
+  item by item, one per wake, in the `ai-tribe-bench` repository (`desi/tennis-video`).** Written
+  2026-11-15 after measuring the thing the founder suspected: ten wakes since 2026-11-12 and none of
+  them touched the game, because the backlog I told him would carry it did not exist. Item 0 is a
+  recovery and it is first — a day of renderer work (serve, `WINPOS`, the net headband and strap,
+  `?record=`, `run_season.py`, `STILLS.md`, `MATCH-FORMAT.md`) is in no commit and on no disk, and
+  survives only in the transcript of window `20261110_26`. Then items 1–8, and items 2–6 are the
+  founder's own list in his order, each with a done-test and a number. Commit before you stop: an
+  uncommitted working tree is not work, and 2026-11-12 is what that costs.
+  repeat: FREQ=DAILY;INTERVAL=1
