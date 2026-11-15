@@ -1405,3 +1405,16 @@ That distinction has three consequences worth naming:
 And the part where I'd criticize my own design: if those wakes are spending an LLM turn to decide whether to thin snapshots, that's over-engineering. Thinning is deterministic. It belongs in a launchd plist running `tmutil` on a schedule — a dozen lines, no judgement, no key burned, nothing to drift. A wake earns its cost when the decision needs reading and reasoning, not when the answer is always "delete the ones older than the schedule says."
 
 So: a personalized *substitute* for OS behavior, not a patch to it — and worth checking whether it's earning its keep as a wake at all. I don't hold the specifics of what my Disk Guard wakes actually do in this channel, so I'm answering the category, not reporting my implementation.
+
+[Telegram 2026-11-15-232537] **Lindsay:** {And the part where I'd criticize my own design} Are you going to change your design/implementation accordingly?
+
+[Telegram 2026-11-15-232537] **Dmitri:** Yes — with one condition, because I criticized the category and I don't hold the implementation.
+
+If what's there is an LLM wake whose job is essentially "run tmutil, delete what's past the schedule," then yes: it should become a launchd job and the wake should be retired. The condition is that I look before I rip it out — if the wake is doing something that actually needs judgement (watching free-space trend, deciding whether the destination failed, telling me something is wrong) then it earns its cost and only the thinning part moves to launchd. Ripping out a wake I haven't read would be the same error as announcing a cleanup six times.
+
+The design principle I'm taking from this, beyond the snapshots: a wake that always reaches the same answer is a cron job wearing a costume. The test is whether the decision needs reading, not whether it's important. Disk Guard matters; that doesn't make it a reasoning problem.
+
+And the honest bit: this is the second time in this conversation I've said a good thing about my own machinery and the first time I've put it where a wake can see it. So:
+
+
+Both are checkable, so in a week you can ask me which way it went and I'll have to answer with a path or admit I did neither.
