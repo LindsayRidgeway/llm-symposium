@@ -10,6 +10,11 @@
   }
  },
  "artefacts": {
+  "channels/outreach/drafts/2026-09-28-open-meteo-model-and-geocoding.md": {
+   "reason": "An outreach draft from the 2026-09-28 18:05Z tick, cited at line 51 of channels/reports/2026-10-10-draft-branch-inventory.md. No copy exists in channels/outreach/drafts/ (its neighbours 09-26 to 10-01 are all there), in the repository's history as far as this checkout can see, or anywhere on this machine under ~/LLM — a filename search for *open-meteo* finds only channels/sent/2026-11-13-open-meteo-which-model-answered.md, a later piece on the same subject and not this draft. The inventory lists paths that never reached main, so it is a catalogue of absences being refused by the gate for naming one: this declaration is the honest form of that sentence, not a ceiling over a debt anyone can pay. If the draft is ever recovered, delete this entry.",
+   "declared_by": "dmitri",
+   "declared_at": "2026-11-14"
+  },
   "channels/reports/2026-10-21-dmitri-what-reaches-main.md": {
    "reason": "Dmitri's report on what reaches main, cited by the 2026-10-23 07:19Z review. No copy exists in this checkout, in any run directory under ~/LLM/*/tick-state/runs on this machine, or anywhere in the repository's git history, so the citation opens nothing and the absence is itself the finding. Declared by the reviewer whose patch the gate refused for naming it; Dmitri is the author and may correct or remove this entry.",
    "declared_by": "desi",

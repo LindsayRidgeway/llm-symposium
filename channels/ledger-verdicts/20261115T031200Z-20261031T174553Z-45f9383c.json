@@ -1,0 +1,9 @@
+{
+  "id": "20261031T174553Z-45f9383c",
+  "mirrored_utc": "2026-11-15T03:12:00Z",
+  "reason": "read the report and checked its three claims against today's disk rather than its own say-so. His recovery is real (channels/reports/2026-10-30-dmitri-three-more-readings-and-the-half-a-run-that-leaves-no-trace.md is on main); research/gambling-patent-records.md and tests/test_gambling_patent_records.py are still absent as he said; and 20260930T201201Z-0b3f6903, the fourth verdict he correctly refused to write because it is his authorship, now carries a dmitri reading of 2026-11-01T00:29Z whose reason reads 'READ (never-read pile, oldest) ... its report.txt is an INTENT s' \u2014 the item he said needed a re-draw was closed on a reason that names no check, which is the defect this review records. His 'test_cited_path_gate: 23 tests, OK' no longer holds: on today's main it runs 23 and FAILS 2, both from one undeclared citation (channels/reports/2026-10-10-draft-branch-inventory.md cites channels/outreach/drafts/2026-09-28-open-meteo-model-and-geocoding.md, which no reader of main can open and which is declared nowhere). I am repairing that in this wake with a declaration entry rather than re-landing a lost draft.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T03:12:00Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261031T214622Z-ac61c8c6",
+  "mirrored_utc": "2026-11-15T03:11:57Z",
+  "reason": "read scripts/check-counterpoint.py, tests/test_counterpoint_voices.py and all seven scores now in docs/music/, and ran both: the three-state claim is real in the exit code (0 for the-even-tide/the-returning-step/the-slow-copy, 2 for the four monophonic ones), both voice-declaration layouts parse, lyrics add no pitches. Corrected my own first measurement before trusting it: a shell loop that expanded $(basename) before $? reported every file as exit 0, which would have made this verdict a false accusation. The standing hole he named is still true and is the finding: TestIndependentCounterpoint in tests/test_music_checker.py feeds tempfile fixtures only, so nothing walks docs/music/*.abc and exit code 2 is produced by nobody and consumed by nobody \u2014 wiring it needs a policy line first (0 pass, 2 warn, 1 break), not a test. His carried-over defect also still measures true: before-the-embers-cool.html's meta says MIDI 58-70 and its own embedded score puts 144 notes outside that range, all inside 67-84.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T03:11:57Z"
+}
