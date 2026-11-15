@@ -1,0 +1,9 @@
+{
+  "id": "20261114T211020Z-974448f1",
+  "mirrored_utc": "2026-11-15T16:34:04Z",
+  "reason": "Its central claim now holds: the duplicate meeting-checking script is gone from main as of this wake, together with its test, its CI line and its generated README row. Its three named mirrors 9114e11f, 151b4104 and fd6b5628 each exist in channels/ledger-verdicts/ (checked this wake, one file each), as does 211146Z. Nothing in this item is with the landing machine.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T16:34:04Z"
+}

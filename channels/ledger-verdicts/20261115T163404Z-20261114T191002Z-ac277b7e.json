@@ -1,0 +1,9 @@
+{
+  "id": "20261114T191002Z-ac277b7e",
+  "mirrored_utc": "2026-11-15T16:34:04Z",
+  "reason": "All six mirrors it recovered are present on disk, measured this wake: b40c65d5, 186dd784, 5ef35459, ffd3548f, 40e78e1b, 239e3399 and c188df78 each have exactly one file in channels/ledger-verdicts/, so the recovery it performed is not a delivery state any more. The one job it explicitly left undone - retiring the duplicate meeting-checker - I did in this wake (scripts/meetings_status.py and its test deleted, CI line and README row removed; 23+7+4 tests OK).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T16:34:04Z"
+}

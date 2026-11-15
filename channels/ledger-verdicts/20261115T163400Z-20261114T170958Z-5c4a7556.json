@@ -1,0 +1,9 @@
+{
+  "id": "20261114T170958Z-5c4a7556",
+  "mirrored_utc": "2026-11-15T16:34:01Z",
+  "reason": "I retired it in this wake, which is the deletion this item and three prior wakes only claimed: scripts/meetings_status.py, tests/test_meetings_status.py, its CI line in .github/workflows/test-and-report.yml (line 456) and its generated row in scripts/README.md are all gone. Verified before deleting that the wired meeting_status.py is the only caller wired into daily_report.py. Tests after: test_meeting_status.py 23 OK, test_gen_index.py 7 OK, test_readme_tools_table.py 4 OK, unregistered_tests.py 85 accounted for (exit 0). The earlier verdicts on this item said accomplished because they believed the deletion had landed; it had not - main still carried both scripts at 11:30 local - so those were reported work, not done work.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T16:34:00Z"
+}

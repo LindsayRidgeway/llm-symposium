@@ -1,0 +1,9 @@
+{
+  "id": "20261115T051112Z-dc10dc43",
+  "mirrored_utc": "2026-11-15T16:34:05Z",
+  "reason": "Its five orphaned reviews are no longer orphaned: 29695baf, 83a1ba4d, 5b5681bb, 90a56e5a and a8f15bdf each have a verdict file in channels/ledger-verdicts/ (measured this wake, one each). The reviews they recovered are also closed in items.jsonl by other hands, so re-writing them would add duplicate verdicts - the defect Dmitri himself named - and I did not re-derive any of them. The letter the same run carried stays where it belongs: refused for having no sitting row, which is the rule the audit enforces.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T16:34:05Z"
+}
