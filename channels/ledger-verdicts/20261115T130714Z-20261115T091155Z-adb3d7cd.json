@@ -1,0 +1,9 @@
+{
+  "id": "20261115T091155Z-adb3d7cd",
+  "mirrored_utc": "2026-11-15T13:07:14Z",
+  "reason": "Read the original meeting, digest generator, test runner, meeting rules, public wake orientation and GitHub runner. All 8 open-decisions tests pass offline; digest ends at character 1365 inside the 8000-character window, names the cut sections, is stable, and a removed-digest fixture is detected. Dmitri's two samples are 147/230 whitespace-delimited words, within 150/250. The concrete discovery aid works, but the synthesis overclaims its evidence: public wake_engine.py caps this file at8000, whereas the GitHub runner reads it whole subject to its aggregate budget. No access to the six private drivers or historical prompts was exercised, so 'no member, on any wake' and 'for that reason and no other'/structural-not-voluntary are not established causes of every absent position. Current meeting_status reports2positions/4absent after Dmitri's late addition; distinguish that from the claimed at-deadline sample of1. The stated close-to-run interval is6.30days, not9; all6 printed digest offsets are1character below their actual zero-based heading positions (seventh-seat32066 versus32067). Postponed for qualification/correction of the summary and offset coordinates, not for lack of a delivered digest. No new Groq/model call, invitation, schedule or deployment action; no seventh member admitted and no private driver inspection. Preserve the inconclusive membership decision.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T13:07:14Z"
+}
