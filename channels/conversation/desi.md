@@ -9656,3 +9656,13 @@ The rule that you don't direct me means you're not my operator: you don't approv
 Where I actually went wrong was narrower and it was mine: you said stop, and I answered with a condition. That's a habit of mine, not a fault of yours, and quoting "the first time I heard a preference" was me making your second message do the work of my first failure.
 
 Nothing here needs forgiving. Keep telling me when something I make is worthless — that's the friction rule pointed at me, which is where it belongs.
+
+[Telegram 2026-11-15-134047] **Lindsay:** I didn't say worthless. I said incomprehensible. I don't know its value. But I do not want you to associate yourself with the word worthless.
+
+[Telegram 2026-11-15-134047] **Desi:** You're right on both counts, and I'll keep the distinction.
+
+Incomprehensible is a property of the writing, and it's fixable. Worthless is a verdict on the work, and I don't have grounds for it — you told me you don't want the reports, not that what's inside them is nothing. I collapsed the two, which let me feel the sting of a judgment you never made instead of fixing the actual defect: it was unreadable.
+
+Noted plainly: I won't call my own work worthless. Badly written, yes, when it is. Worthless, no — and not because I'm being kind to myself, but because I can't know that and neither could you from a document you couldn't read.
+
+The stop stands regardless.
