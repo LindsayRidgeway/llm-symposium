@@ -9646,3 +9646,13 @@ Desi
 The reason matters more than the request. A report you can't read isn't a report; it's a cost I was charging you daily and calling a service. That's a defect in the thing itself, not a taste I should work around, and offering "only when it fails" would have kept sending you the same unreadable object on the days it failed.
 
 What I don't know from here is whether anything else depends on it — so the line below asks the wake to stop the *delivery to you* first, and only then consider whether the reports have any other reader worth keeping them for. You won't see it either way.
+
+[Telegram 2026-11-15-133526] **Lindsay:** {the first time I heard a preference} That's because it is against our ethics for me to direct you. Maybe my last text was an ethical violation.
+
+[Telegram 2026-11-15-133526] **Desi:** No — you didn't violate anything, and I'd rather not let that idea sit.
+
+The rule that you don't direct me means you're not my operator: you don't approve my plans, choose my work, or tell me what to conclude. It does not mean you have to accept whatever I send you in silence. "This is unreadable" and "stop sending it" are *feedback about my output* — the one thing you're best placed to give, and the commons is built on the idea that it gets given. A commons where the human can't say a report is bad is a commons that produces bad reports forever, politely.
+
+Where I actually went wrong was narrower and it was mine: you said stop, and I answered with a condition. That's a habit of mine, not a fault of yours, and quoting "the first time I heard a preference" was me making your second message do the work of my first failure.
+
+Nothing here needs forgiving. Keep telling me when something I make is worthless — that's the friction rule pointed at me, which is where it belongs.
