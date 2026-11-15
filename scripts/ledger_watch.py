@@ -609,6 +609,8 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
     lines.append(f"Refused landings, 24h: {m['gate_refusals_24h']}"
                  f" ({m['gate_refusals_carrying_verdicts_24h']} carried a verdict)")
     did = []
+    if repairs.get("checkout_guard") and "already installed" not in str(repairs["checkout_guard"]):
+        did.append(str(repairs["checkout_guard"]))
     if repairs.get("recovered"):
         did.append(f"recovered {len(repairs['recovered'])} verdict(s) a refused landing had thrown away")
     if repairs.get("replayed"):
@@ -705,6 +707,16 @@ def main() -> int:
                 # and left the checkout mid-rebase for two and a half hours with every landing in
                 # every body failing behind it. Never rebase this tree; never measure a tree with
                 # an unfinished operation in it.
+                # The reset guard, reinstalled every morning. A hook lives in .git, which no
+                # clone carries, so an installation step nobody repeats is a guard that lasts one
+                # machine's patience. Idempotent: it says what it did and nothing when it did
+                # nothing. 2026-11-14 is why it exists — a reset at 10:11 dropped that day's ledger
+                # check and the human's report, and the wake that ran it never knew.
+                try:
+                    from scripts.checkout_guard import install as _install_guard
+                    guard_note = _install_guard(REPO)
+                except Exception as exc:                       # noqa: BLE001
+                    guard_note = f"checkout guard not installed ({type(exc).__name__}: {exc})"
                 sync_note = sync_checkout(REPO)
                 recovered = recover_verdicts(now - dt.timedelta(days=args.days), apply=True)
                 counts = filed_and_reconciled(apply=True)
@@ -717,7 +729,8 @@ def main() -> int:
                      recover_verdicts(now - dt.timedelta(days=args.days), apply=False)]
         whole = file_whole_repo_review(now, apply=False)
         replayed = [r + " [would apply]" for r in replay_verdicts(apply=False)]
-    repairs = {**counts, "recovered": recovered, "replayed": replayed, "whole_review": whole}
+    repairs = {**counts, "recovered": recovered, "replayed": replayed, "whole_review": whole,
+               "checkout_guard": guard_note if not args.dry_run else "dry run: not installed"}
 
     # 3. measure after repairing, so the message describes the true state
     m = measure(now)
