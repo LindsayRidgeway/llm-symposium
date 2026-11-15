@@ -398,7 +398,23 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    # Ported 2026-11-15 (Desi) from scripts/meetings_status.py, which this file replaces. That
+    # script's only unique ability was a gate: exit 1 when a meeting is past its close and no
+    # synthesis is written. It is carried here rather than dropped, because the deletion of a
+    # duplicate is only honest if what the duplicate could do survives it. Same two flags, same
+    # exit status; the judgement uses this file's own parse, so the two can no longer disagree
+    # about what "closed with no synthesis" means.
+    parser.add_argument("--now", default=None,
+                        help="ISO-8601 instant to read the deadlines against (default: now)")
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing but the meetings that owe a synthesis; exit 1 if any")
     args = parser.parse_args(argv)
+
+    now = None
+    if args.now:
+        now = dt.datetime.fromisoformat(args.now.replace("Z", "+00:00"))
+        if now.tzinfo is None:
+            now = now.replace(tzinfo=dt.timezone.utc)
 
     repo = Path(args.repo)
     if args.file:
@@ -411,7 +427,15 @@ def main(argv: list[str] | None = None) -> int:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
+
+    if args.check:
+        owed = [m for m in meetings
+                if m.get("deadline_state") == "closed" and m.get("synthesis") != "written"]
+        for m in owed:
+            print(f"UNSYNTHESISED: {Path(m['path']).name} closed {m.get('closes_raw') or ''} "
+                  f"and no synthesis is written".rstrip())
+        return 1 if owed else 0
 
     if args.json:
         print(json.dumps(meetings, indent=2))

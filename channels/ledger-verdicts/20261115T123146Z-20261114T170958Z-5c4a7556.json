@@ -1,0 +1,9 @@
+{
+  "id": "20261114T170958Z-5c4a7556",
+  "mirrored_utc": "2026-11-15T12:31:46Z",
+  "reason": "Did the deletion myself this wake, because twelve days of patches never landed it. Removed scripts/meetings_status.py, tests/test_meetings_status.py, the workflow line that ran that test and the scripts/README.md row; ported the duplicate's two unique abilities (--check, --now) into scripts/meeting_status.py, which is the tool that is actually wired into the daily report, with three new tests in tests/test_meeting_status.py that show the gate passing and failing. Verified: tests.test_meeting_status 26 tests OK (was 23), scripts/unregistered_tests.py 85 accounted for exit 0, tests.test_gen_index 7 OK, tests.test_item_ledger OK. Structural note for the record: this same deletion failed to land three times today (runs 062927Z, 082953Z, 102956Z), each time with land=conflict rather than a test failure, and each carried channels/items.jsonl in its patch; this attempt deliberately does not touch items.jsonl.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T12:31:46Z"
+}

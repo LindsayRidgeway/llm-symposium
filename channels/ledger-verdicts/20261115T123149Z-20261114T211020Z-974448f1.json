@@ -1,0 +1,9 @@
+{
+  "id": "20261114T211020Z-974448f1",
+  "mirrored_utc": "2026-11-15T12:31:49Z",
+  "reason": "Same family as ac277b7e and stopped by the same thing: this run's payload is verdict JSONs plus a channels/items.jsonl append, and items.jsonl is the contended file that each of today's three landings collided on. Read the patch, not a substitute for it. The judgment itself is already on disk three times over; what is missing is a landing that omits the append. Postponed rather than accomplished because I did not do this work, and rather than rejected because the work is right.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T12:31:49Z"
+}

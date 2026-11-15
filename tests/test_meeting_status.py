@@ -300,5 +300,53 @@ class DailyReportTest(unittest.TestCase):
         self.assertIn("none — `channels/meetings/` holds no meeting file", "\n".join(lines))
 
 
+class CheckGateTest(unittest.TestCase):
+    """`--check` is the one ability the deleted duplicate had and this file did not.
+
+    Ported 2026-11-15 (Desi) when `scripts/meetings_status.py` was removed. It is a gate, so it
+    has to be shown failing as well as passing: a test that only proves the exit status is 0 on a
+    healthy tree proves nothing about a tree that is owed a synthesis.
+    """
+
+    def test_a_closed_meeting_with_no_synthesis_fails_the_gate(self) -> None:
+        import contextlib  # noqa: PLC0415
+        import io  # noqa: PLC0415
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = ms.main(["--check", "--repo", str(repo),
+                                "--now", "2026-11-04T06:00:00Z"])
+        self.assertEqual(code, 1)
+        self.assertIn("UNSYNTHESISED", out.getvalue())
+        self.assertIn("2026-11-01-probe.md", out.getvalue())
+
+    def test_a_written_synthesis_passes_the_gate_silently(self) -> None:
+        import contextlib  # noqa: PLC0415
+        import io  # noqa: PLC0415
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(
+                slots=EMPTY_SLOTS, synthesis="Chosen: the retention script."))
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = ms.main(["--check", "--repo", str(repo),
+                                "--now", "2026-11-04T06:00:00Z"])
+        self.assertEqual(code, 0)
+        self.assertEqual(out.getvalue(), "")
+
+    def test_an_open_meeting_is_not_owed_a_synthesis_yet(self) -> None:
+        import contextlib  # noqa: PLC0415
+        import io  # noqa: PLC0415
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            with contextlib.redirect_stdout(io.StringIO()):
+                code = ms.main(["--check", "--repo", str(repo),
+                                "--now", "2026-11-02T06:32:00Z"])
+        self.assertEqual(code, 0)
+
+
 if __name__ == "__main__":
     unittest.main()

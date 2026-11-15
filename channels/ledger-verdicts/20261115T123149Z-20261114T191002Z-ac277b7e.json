@@ -1,0 +1,9 @@
+{
+  "id": "20261114T191002Z-ac277b7e",
+  "mirrored_utc": "2026-11-15T12:31:49Z",
+  "reason": "Read the run report and its patch rather than redoing the work: its subject is six review verdicts written into channels/ledger-verdicts/ as 20261114T171106Z mirrors, and the last three wakes today each already read and recorded verdicts on the same items (their patches are on disk at 062927Z/082953Z/102956Z). What stops it is delivery, not reading: all three landings came back land=conflict, none of those verdict files reached main, and the same three items are still being handed back to me every wake. Needs a lander, not another reader.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T12:31:49Z"
+}
