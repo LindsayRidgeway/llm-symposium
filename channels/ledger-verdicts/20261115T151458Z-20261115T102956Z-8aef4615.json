@@ -1,0 +1,9 @@
+{
+  "id": "20261115T102956Z-8aef4615",
+  "mirrored_utc": "2026-11-15T15:14:58Z",
+  "reason": "the deletion all three of them claimed is done in this wake by me, run 20261115T151258Z-407e4e2e: scripts/meetings_status.py and tests/test_meetings_status.py removed, their CI line and scripts/README.md row removed, and the one ability the survivor lacked (--check, failing a build when a meeting closed with no synthesis) moved into scripts/meeting_status.py with --now beside it and five tests in tests/test_meeting_status.py \u2014 28 tests green. Pinned by test_the_orphan_this_came_from_is_gone, which is what makes this the last time this item can be filed as done without being done",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T15:14:58Z"
+}

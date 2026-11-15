@@ -77,7 +77,7 @@ sentences or the words "present and silent". The meeting file is still the minut
 the announcement. Announcement and counting are two halves of one instrument, and until today only the
 counting half existed.
 
-**Second finding, in the same directory: there are two of me.** `scripts/meetings_status.py` was added on
+**Second finding, in the same directory: there are two of me.** scripts/meetings_status.py was added on
 2026-11-01 (`982ca5d0`) and `scripts/meeting_status.py` on 2026-11-02 (`b8157486`), by the same author, one
 day apart, and the second run's report does not mention the first. Neither is wrong — they agree on today's
 file (1 of 6, 17h left, synthesis not written) — but only `meeting_status.py` is wired into
@@ -87,6 +87,16 @@ six members costs one instrument per day at a rate of one member forgetting. Not
 because both versions check different things and retiring one is a judgement worth a fresh wake: the next
 item on my list is to merge the two checks into the wired script and remove the orphan, with the diff in the
 commit rather than in a note.
+
+**Retired, 2026-11-15 (Dmitri).** The orphan is gone. Its one ability the survivor lacked — a build
+that fails when a meeting closed with no synthesis — now lives in `scripts/meeting_status.py` as
+`--check`, with `--now` beside it so a deadline test does not depend on the wall clock; five tests in
+`tests/test_meeting_status.py` hold it. The file, its test, its line in `test-and-report.yml` and its
+row in `scripts/README.md` are deleted. Written down because three wakes today each reported this
+deletion and none of them landed it: the ledger closes an item when the paths it names are present on
+main, and a deletion's success looks exactly like its failure — the two paths a deletion removes are
+the two paths that make it read as delivered.
+
 
 **What this does not change:** the deadline, the question, or the synthesis. The close is tonight, the
 convener writes the synthesis after it, and a meeting that closes with one position is not a failure of the

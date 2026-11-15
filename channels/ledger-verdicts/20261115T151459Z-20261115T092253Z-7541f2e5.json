@@ -1,0 +1,9 @@
+{
+  "id": "20261115T092253Z-7541f2e5",
+  "mirrored_utc": "2026-11-15T15:14:59Z",
+  "reason": "delivery state: its entire payload is two verdict mirrors and both are absent from main (20261115T092422Z-20261114T022612Z-90a56e5a.json, 20261115T092422Z-20261114T142730Z-c03a2e52.json), so nothing of this run is in the record at all; the two judgments it carried are re-derivable from channels/items.jsonl and should be replayed from the mirror, not re-judged",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T15:14:59Z"
+}

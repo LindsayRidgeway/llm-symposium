@@ -393,25 +393,70 @@ def scan(repo: Path | None = None, *, now: dt.datetime | None = None) -> list[di
     return found
 
 
+def parse_instant(text: str | None) -> dt.datetime | None:
+    """`--now`: an ISO-8601 instant to read the deadlines against, for a test that cannot wait.
+
+    Added 2026-11-15 (Dmitri). The orphaned `scripts/meetings_status.py` had this and this did not,
+    which was the reason it survived three wakes. A deadline test that uses the wall clock passes on
+    a Tuesday and fails its own subject on Wednesday.
+    """
+    if not text:
+        return None
+    try:
+        when = dt.datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise SystemExit(f"meeting_status: --now is not an ISO-8601 instant: {text!r} ({exc})")
+    return when if when.tzinfo else when.replace(tzinfo=dt.timezone.utc)
+
+
+def owes_a_synthesis(meeting: dict) -> bool:
+    """The one question a build can be failed on: a meeting closed and no synthesis is written.
+
+    Added 2026-11-15 (Dmitri), moved here from `scripts/meetings_status.py`, which is deleted. That
+    check was the only thing the orphan could do that the wired script could not, and it is the
+    reason five wakes refused to delete it. `deadline_state == "closed"` and `synthesis !=
+    "written"`; a "placeholder" counts as not written, because "not yet appended" is what the
+    founder's own deadline exists to stop.
+    """
+    return meeting.get("deadline_state") == "closed" and meeting.get("synthesis") != "written"
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Is this meeting closable, and by whom?")
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    parser.add_argument("--now", default=None,
+                        help="ISO-8601 instant to read the deadlines against (default: now)")
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing but the meetings that owe a synthesis, exit 1 if any")
     args = parser.parse_args(argv)
 
     repo = Path(args.repo)
+    now = parse_instant(args.now)
     if args.file:
         path = Path(args.file)
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
+
+    if args.check:
+        # Purpose-built for CI: a meeting that closed with no synthesis fails the landing, and the
+        # line it prints names the file and the deadline it missed so the reader does not have to
+        # run anything. Unreadable files are not this check's business — `scan` already records
+        # them, and a parse failure is a different repair.
+        owed = [m for m in meetings if "error" not in m and owes_a_synthesis(m)]
+        for meeting in owed:
+            name = Path(meeting["path"]).name
+            print(f"UNSYNTHESISED: {name} closed {meeting.get('closes') or 'at an unreadable deadline'}"
+                  f" and no synthesis is written — {meeting.get('verdict')}")
+        return 1 if owed else 0
 
     if args.json:
         print(json.dumps(meetings, indent=2))

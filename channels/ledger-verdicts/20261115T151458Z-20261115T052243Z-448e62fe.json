@@ -1,0 +1,9 @@
+{
+  "id": "20261115T052243Z-448e62fe",
+  "mirrored_utc": "2026-11-15T15:14:58Z",
+  "reason": "delivery state, not missing work: five of the verdict mirrors it names are absent from main (channels/ledger-verdicts/20261114T022805Z-20261112T170353Z-3e66a1c3.json, .../20261114T022805Z-20261112T210438Z-f6760e3e.json and three 20261115T0524xxZ stamps), so the readings it recorded are not in the record; the code paths it names are present but four wakes repaired the same files this morning and none can be attributed. A mirror-only landing is the repair, and it is the review's finding, not its verdict",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T15:14:58Z"
+}

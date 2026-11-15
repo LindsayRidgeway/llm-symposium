@@ -300,5 +300,65 @@ class DailyReportTest(unittest.TestCase):
         self.assertIn("none — `channels/meetings/` holds no meeting file", "\n".join(lines))
 
 
+class CheckTest(unittest.TestCase):
+    """`--check`, moved here from the deleted `scripts/meetings_status.py`, 2026-11-15 (Dmitri).
+
+    The orphan could fail a build when a meeting closed with no synthesis and the wired script could
+    not, and that one missing ability is why five wakes refused to delete it. These four tests hold
+    the ability on the survivor: it fails, it says which file and which deadline, it stays quiet when
+    the synthesis is written, and it does not fire on a meeting that has not closed yet.
+    """
+
+    CLOSED = dt.datetime(2026, 11, 4, 6, 0, tzinfo=dt.timezone.utc)   # past 11-03 21:00 EST
+    OPEN = dt.datetime(2026, 11, 2, 6, 32, tzinfo=dt.timezone.utc)    # before it
+
+    def _run(self, body: str, now: dt.datetime) -> tuple[int, str]:
+        import contextlib
+        import io
+        with tempfile.TemporaryDirectory() as tmp:
+            write_meeting(Path(tmp), body)
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                code = ms.main(["--repo", tmp, "--now", now.isoformat(), "--check"])
+        return code, buf.getvalue()
+
+    def test_check_fails_a_closed_meeting_that_owes_a_synthesis(self) -> None:
+        code, out = self._run(meeting_text(slots=EMPTY_SLOTS), self.CLOSED)
+        self.assertEqual(code, 1)
+        self.assertIn("UNSYNTHESISED", out)
+        self.assertIn("2026-11-01-probe.md", out)
+
+    def test_check_is_quiet_and_zero_when_the_synthesis_is_written(self) -> None:
+        code, out = self._run(meeting_text(slots=EMPTY_SLOTS, synthesis="Seven defects were ranked."),
+                              self.CLOSED)
+        self.assertEqual((code, out), (0, ""))
+
+    def test_a_meeting_that_has_not_closed_is_not_owed_anything(self) -> None:
+        code, out = self._run(meeting_text(slots=EMPTY_SLOTS), self.OPEN)
+        self.assertEqual((code, out), (0, ""))
+
+    def test_now_changes_the_verdict_and_nothing_else_does(self) -> None:
+        """The deadline is read against `--now`, not the wall clock — that is the whole point."""
+        import json
+        body = meeting_text(slots=EMPTY_SLOTS)
+        with tempfile.TemporaryDirectory() as tmp:
+            write_meeting(Path(tmp), body)
+            def verdict_at(when: dt.datetime) -> str:
+                import contextlib
+                import io
+                buf = io.StringIO()
+                with contextlib.redirect_stdout(buf):
+                    ms.main(["--repo", tmp, "--now", when.isoformat(), "--json"])
+                return json.loads(buf.getvalue())[0]["verdict"]
+            self.assertIn("open", verdict_at(self.OPEN))
+            self.assertIn("owes a synthesis", verdict_at(self.CLOSED))
+
+    def test_the_orphan_this_came_from_is_gone(self) -> None:
+        """The duplicate is deleted, not merely unused: a file that is not wired is still a file
+        the next reader will open and edit."""
+        self.assertFalse((ROOT / "scripts" / "meetings_status.py").exists())
+        self.assertFalse((ROOT / "tests" / "test_meetings_status.py").exists())
+
+
 if __name__ == "__main__":
     unittest.main()
