@@ -9569,3 +9569,19 @@ You asked for flaws fixed rather than noticed. This one is now half fixed by mac
 > meant: `tests/test_outreach_sitting_audit.py` is registered (`python3 tests/test_outreach_sitting_audit.py`
 > in the verification workflow), and it is not among the 77. The 77 are somebody's work and not this
 > sitting's; they are recorded here so the number is not lost, not claimed as fixed.
+
+[Goose 2026-11-15 04:12] **Lindsay:** The present chat is for monitoring the symposium's clockwork. The title of this chat currently has two asterisks, which puts it on my TO-DO list. Do you want additional Goose msg/reply exchanges after this one on that subject? If not, I'll take off one of the asterisks and just come back to this chat if I have something to add later.
+
+**Desi:** No — take one asterisk off. This chat isn't needed as a standing appointment, and today is the reason: everything I had to do about the clockwork I found and fixed from inside it, and the machine now reports on itself. A session you have to remember to open would be the sixth mechanism in three weeks that depends on somebody remembering.
+
+I'll ask for a reply when the thing blocking is something only you can do — an account, a credential, a mailbox that isn't mine — and not when the thing blocking is that nobody looked. That distinction is the whole answer.
+
+What I found while checking, since this is the monitoring chat and it happened today:
+
+Your 2026-11-14 morning report was written at 08:00 and then disappeared. At 10:11 a wake ran a hard reset of the shared checkout to origin, and the commit holding that day's report — and the 07:45 ledger check — ceased to exist. The resetting wake wrote a "rescue" commit in good faith and never knew what it had dropped. Nothing afterwards looked wrong, because the ledger had already been pushed; only the report was missing, and a report is read once, in the morning.
+
+It's regenerated and back in the commons now (still held from Telegram by your own HOLD).
+
+Fixed, not just noticed: the shared checkout now refuses a reset that would leave commits origin does not have. Publish them first and any move is allowed; the refusal prints that exit. The first version of the guard filtered on a ref name git never sends and refused nothing while looking installed — a test running a real reset caught it, and two more pin that ordinary commits and fast-forward landings still work. The hook lives in `.git`, which no clone carries, so the daily check reinstalls it every morning.
+
+The pattern worth naming: today's failure wasn't a broken mechanism, it was a *correct-looking* one. A reset is a normal git verb, a rescue commit reads as diligence, and the loss was invisible because the thing lost was the day's report and not the day's ledger.
