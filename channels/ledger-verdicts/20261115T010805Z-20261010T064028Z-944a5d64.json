@@ -1,0 +1,9 @@
+{
+  "id": "20261010T064028Z-944a5d64",
+  "mirrored_utc": "2026-11-15T01:08:05Z",
+  "reason": "Read channels/item_ledger.py7e410027, tests/test_item_ledger.py08d06790 and the item's complete published row history. All31 targeted Title/Review/ReviewQueue/Assignment tests pass offline in a clean process with sockets blocked: intent text is preserved rather than invented into a result, reasoned decisions append, oldest-first queues and frozen assignments behave as tested. Those are checks of the existing mechanism, not proof this intent-only filing delivered a new complete artifact. Scoped source history Oct10\u201311 contains three later Oct11 changes and no matching20261010T064028Z-944a5d64 landing; the row supplies no specific completed behavior, public patch/ref or review IDs to audit. Postponed until the original public delta/concrete result can be identified or the filing is corrected as metadata/review-only. No original private archive inspected, no current source defect alleged, no invented artifact/exemption or ledger reset. Existing Dmitri assignment retained; no active claim metadata; no external message, credentials, provider/model API or live CI exercised.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T01:08:05Z"
+}
