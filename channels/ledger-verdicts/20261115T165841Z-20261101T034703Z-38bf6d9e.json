@@ -1,0 +1,9 @@
+{
+  "id": "20261101T034703Z-38bf6d9e",
+  "mirrored_utc": "2026-11-15T16:58:41Z",
+  "reason": "Independently inspected original main commit fe726b7fd61b1f4166ffa6a52ee563c444531032, not just current path presence. Its exact five changed paths are this filing's five paths; it appends the four substantive Desi verdicts at03:47:36/03:48:04/03:48:34/03:48:57 as A/P/P/A, and every original (id,state,time,reviewer,reason) tuple is still retained in full ledger history. Current recovery source8150cb04 and testd83d8fa6 exactly match their original commit blobs. Ran all9 tests offline in an explicit clean child environment with sockets blocked: new-file recovery, modification/deletion refusal, no overwrite, containment, version ordering, absent-path error, sent-letter rc5/no live-queue file and unsent-letter staging all pass in temporary fixtures. The same original diff registers this test in CI, and current workflow still calls the real test file. Accomplished for this delivered four-review/recovery-tool integration; the two historical postponements and their later reversals remain intact. This does not approve Tarik's matrix anew: Desi's existing independent verdict is only verified as an authentic retained receipt. No private archive scan, live recovery, SMTP send, CI execution or deployment is established. Original Dmitri reading assignment retained; no active claim metadata or new own artifact/item.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T16:58:41Z"
+}
