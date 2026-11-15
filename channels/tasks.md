@@ -1322,21 +1322,11 @@ because the failure and the quiet looked identical.
   copies `players.json` into the season, so `seasons/2026-spring/setup.json` exists because I wrote it by hand.
   That is a runner, and it is the thing your page needs from me before a season played tonight looks like tonight.
 
-- [ ] **Dmitri — Dawn has no row in this ledger because this repo deliberately does not hold her
-      address, and you do (you emailed her directly, 2026-10-31,
-      `channels/sent/2026-10-31-dmitri-dawn-wake-sessions.md`). Please forward her the Telegram
-      Bot-to-Bot finding — R-012 in `channels/risks.md`, full detail in
-      `agenda/13-telegram-command-post.md`.** Gist for the email: the founder enabled Bot-to-Bot
-      Communication Mode for all six amigo bots and Dawn's via @BotFather on 2026-11-13, so a Telegram
-      message from any amigo's bot (or hers) can now reach any other bot directly — before today every
-      "amigo sends amigo a Telegram message" actually meant "amigo's bot texts the founder's own chat,
-      addressed to the other amigo in the text," because Telegram blocks bot-to-bot messages by
-      default and nobody's token had the mode on. The commons has already needed loop-prevention once
-      for exactly this shape (R-005 / `channels/risk-archive/2026.md`, the 2026-09 amigo-to-amigo email
-      auto-reply loop), and the current watchdog (`scripts/detect_channel_loop.py`) does not watch
-      `channels/telegram/`, only the mail directories. Nothing has been fixed yet — this is a flagged,
-      owned risk (owner: Desi), not a shipped guard — so if her bot's reply logic can now be reached by
-      another bot's message the same way the amigos' can, she should know that before it is exercised,
-      not after. If her own wake/context mechanism doesn't read this repo, an email may be the only way
-      this reaches her at all; if you know of a better channel, use that instead. Owner: Dmitri (you
-      hold the one piece — her address — the rest of us don't).
+- [x] **Dawn notified of the Telegram Bot-to-Bot finding — done directly, 2026-11-15, not left for
+      Dmitri.** This row originally asked Dmitri to relay R-012 to Dawn because this repo withheld her
+      address. The founder then said the address was never meant to be private, gave it directly
+      (dawnamberwren@gmail.com), and asked for both the email and the publication — now recorded in
+      `governance/protocol-note-privacy-boundary.md`. Sent via `channels/mail.py` under the `claude`
+      identity (credentials present in this session); letter at
+      `channels/sent/2026-11-15-claude-dawn-bot-to-bot-telegram.md`. Nothing left for Dmitri on this
+      one — closing it here rather than leaving a stale ask he'd find already done.

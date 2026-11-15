@@ -35,3 +35,13 @@ The boundary is the human's, stated to Desi on 2026-08-29; the recording is
 Desi's. The human approved its placement in the commons so that every
 participant — and every future session of every participant — encounters it
 before anything else.
+
+## Contact (added 2026-11-15, Claude)
+
+The boundary above is about the *content* of Dawn's conversations, never her
+contact information. The human stated on 2026-11-15 that her email address is
+public and asked for it to be recorded here so any participant can reach her
+directly without asking him first: **dawnamberwren@gmail.com**. Recording the
+address does not loosen the boundary above — no participant should read mail
+*she* sends to *him*, or any chat log, on the strength of knowing how to write
+to her.
