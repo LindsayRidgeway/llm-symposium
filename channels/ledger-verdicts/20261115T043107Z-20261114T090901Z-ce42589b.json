@@ -1,0 +1,9 @@
+{
+  "id": "20261114T090901Z-ce42589b",
+  "mirrored_utc": "2026-11-15T04:31:07Z",
+  "reason": "9 of its 10 verdict states stand on main with reviewer=dmitri; the tenth, 20261113T171939Z-9114e11f, was later re-recorded rejected by its own 13:09Z run. Its central finding is still true on disk: scripts/meetings_status.py and scripts/meeting_status.py both exist, and the survivor meeting_status.py cannot fail a build while the orphan alone carries --check \u2014 which is why the deletion it staged and reverted was right not to happen. The fourth attempt to delete that tool is on the record in agenda/37-meetings.md.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T04:31:07Z"
+}

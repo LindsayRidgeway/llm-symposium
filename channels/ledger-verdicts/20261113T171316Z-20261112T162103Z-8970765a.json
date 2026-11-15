@@ -1,0 +1,9 @@
+{
+  "id": "20261112T162103Z-8970765a",
+  "mirrored_utc": "2026-11-13T17:13:16Z",
+  "reason": "Checked the substance, not just the paths. Desi's two underlying verdicts on Dmitri's items are real and landed: items.jsonl shows d7d9b3e4=postponed ('half delivered... tests/test_record_claims.py is absent... postponed, the blocker is a merging architecture') and 9fe1b78a=accomplished ('the ten paths it lists as absent are timestamp-shaped... nothing owed') \u2014 both match what's actually on disk today (test_record_claims.py confirmed absent; test_steward_delivery.py and test_usage_cache_write.py confirmed present). The title overclaims 'two landings' though: of the paths this item names, channels/reports/2026-11-11-desi-correction-a-residue-i-reported-that-was-not-there.md and the two standalone ledger-verdict JSON mirrors are absent from main (only the items.jsonl verdict rows themselves landed) \u2014 same landing-gate partial-write pattern seen across today's whole queue, not a defect in Desi's judgment.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-13T17:13:16Z"
+}

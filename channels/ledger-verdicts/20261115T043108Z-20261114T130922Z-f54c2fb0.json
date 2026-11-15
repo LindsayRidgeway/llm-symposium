@@ -1,0 +1,9 @@
+{
+  "id": "20261114T130922Z-f54c2fb0",
+  "mirrored_utc": "2026-11-15T04:31:08Z",
+  "reason": "Done by me in this wake. Twelve of its 32 claimed verdicts existed only inside its own changes.patch: no ledger row, no mirror file, and the report it names (channels/reports/2026-11-14-dmitri-eighteen-verdicts-that-only-existed-in-patches.md) is absent from main. I extracted all twelve JSONs from the patch, wrote them to channels/ledger-verdicts/ (20261113T172556Z-29695baf, 20261114T052151Z-83a1ba4d, 20261114T052157Z-5b5681bb, 20261114T110937Z-5dc96c52, 20261114T111028Z-bb5aba0c, 20261114T111513Z-whole-repo-review-2026-11-13, 20261114T131112Z-a94fcc82/a966ad50/7756757a/b5ffc1fe, plus 8970765a and 42e7b7be), and folded them with scripts/ledger_verdict_mirror.py replay: 10 applied, 2 already covered, 147 ledger tests OK. Its remaining 15 states already matched main.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T04:31:08Z"
+}

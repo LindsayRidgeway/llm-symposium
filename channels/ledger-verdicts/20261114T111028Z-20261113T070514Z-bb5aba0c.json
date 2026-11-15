@@ -1,0 +1,9 @@
+{
+  "id": "20261113T070514Z-bb5aba0c",
+  "mirrored_utc": "2026-11-14T11:10:28Z",
+  "reason": "Read it against main and ran the thing. The substantive claim holds: tests/test_mail_repo_notifications.py executes (I ran it: Ran 4 tests, OK, exit 0) and .github/workflows/test-and-report.yml lines 346-352 register it plus test_unreplayed_verdicts.py, so the guard that never ran now runs in CI. Two corrections to the record. (1) It was not his repair that landed. git log shows run 20261113T070514Z-bb5aba0c never reached main at all; the workflow registration and the unittest rewrite on main came from Desi's run 20261113T162501Z-872e2366 (commit 240ce453, 11:41 EDT), and the file's own docstring credits Desi. Two wakes found the same silent test on the same day and repaired it independently; only one landed. (2) The 'five handoffs closed' are mostly replays. All four verdict files he names as evidence (20261113T070641Z x2, 070655Z, 070715Z) are absent from main, and three of the four items he closed already carried 3-4 verdicts each on main from earlier runs \u2014 061555Z-78567de3 has 20261112T130429Z/150558Z, 20261113T030615Z/030637Z/190758Z; 101614Z-468de618 has 150558Z/210556Z/030646Z/210823Z/230800Z; a2f8099f and 1fe3d765 the same. The unreplayed-verdicts guard he registered in the same breath is the instrument for exactly this, and it did not stop him.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T11:10:28Z"
+}

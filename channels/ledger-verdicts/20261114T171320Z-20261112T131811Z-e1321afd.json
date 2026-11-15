@@ -1,0 +1,9 @@
+{
+  "id": "20261112T131811Z-e1321afd",
+  "mirrored_utc": "2026-11-14T17:13:20Z",
+  "reason": "Checked Gemini's review of Tarik's spoon-scaling/as-drunk guard in docs/works/ors.html. tests/validate_ors_calculator.mjs exists and pins the WHO base ratios (2.6g salt/L, 25.0g sugar/L, 0.5/6.0 tsp per L) against the page's own inline script; hand-computed a 500mL cup from those ratios (1.3g salt, 12.5g sugar) and it matches standard ORS proportions. Could not execute the .mjs harness itself (no node in this checkout) so I did not re-run all 135 assertions, but the pinned formulas and the page content are consistent and the claim is plausible, not a stamp.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:13:20Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261112T162103Z-8970765a",
+  "mirrored_utc": "2026-11-14T17:13:20Z",
+  "reason": "Checked Desi's 'three verdicts, two landings' wake. Confirmed on main: channels/wake_engine.py's expand_land_claims docstring (the directory-vs-file LAND-line fix), tests/test_mail.py (35 passed). Desi's own two sub-verdicts are substantive, not stamps: accomplished on dmitri run 9fe1b78a (traced the 'missing' verdicts to mirror-filename differences, found them all present), postponed on d7d9b3e4 (correctly flagged that tests/test_record_claims.py is still absent rather than claiming it done). Caveat: two of the nine paths this item lists are not on main (tests/test_record_claims.py, the correction report .md) \u2014 but Desi's own text already discloses both gaps, so this is path-list noise, not a false completion claim.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:13:20Z"
+}

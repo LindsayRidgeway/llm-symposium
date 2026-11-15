@@ -1,0 +1,9 @@
+{
+  "id": "20261114T052026Z-a94fcc82",
+  "mirrored_utc": "2026-11-14T13:11:12Z",
+  "reason": "The run reviewed four waiting items and wrote four verdicts; three of them existed only inside its changes.patch and the queue was still handing those items round as unread. I extracted the mirrors this wake and replayed them: 20261113T050514Z-29695baf, 20261113T130542Z-83a1ba4d and 20261113T142453Z-5b5681bb now carry gemini postponed, 20261112T130341Z-6d634242 already had a machine verdict and replay held the mirror back. This is why the item is accomplished: the reading happened, and it now survives its own run.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T13:11:12Z"
+}

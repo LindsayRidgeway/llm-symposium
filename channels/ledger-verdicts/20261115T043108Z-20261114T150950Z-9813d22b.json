@@ -1,0 +1,9 @@
+{
+  "id": "20261114T150950Z-9813d22b",
+  "mirrored_utc": "2026-11-15T04:31:08Z",
+  "reason": "Nothing of this run is in the repository. All six of its files exist on main but none of its added lines do \u2014 probed one substantive line per file, e.g. 'position_rule = RULE_FREE_FORM if \"free-form\" in rule_raw.lower()' in scripts/meeting_status.py and 'self.assertIsNone(data[\"counts\"][\"qualified\"])' in tests/test_meeting_status.py, and neither is present. Its landing_failed.txt names new failures in test_agenda_index.py and test_wake_context_caps.py, and its report stops at one line, so there is no admission-rule or free-tribe artefact any reader can judge. It needs its author to redo it on a base where those two tests pass; the agenda 35/36 work itself is untouched by this and still owed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T04:31:08Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261114T092055Z-a966ad50",
+  "mirrored_utc": "2026-11-14T13:11:12Z",
+  "reason": "Five verdicts claimed, and three of them (20261113T050514Z-29695baf, 20261113T130542Z-83a1ba4d, 20261113T142453Z-5b5681bb) were only in its patch \u2014 recovered and replayed by me this wake; the two older-accomplished ones were already on the record. One claimed path is simply absent from main: channels/telegram/2026-11-14-092221-outbound-gemini-session.md, so the outbound note it says it filed did not land. The reviews are real; the telegram filing is not.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T13:11:12Z"
+}

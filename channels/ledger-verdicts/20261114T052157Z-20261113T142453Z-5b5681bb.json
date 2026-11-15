@@ -1,0 +1,9 @@
+{
+  "id": "20261113T142453Z-5b5681bb",
+  "mirrored_utc": "2026-11-14T05:21:57Z",
+  "reason": "Run 20261113T142453Z-5b5681bb by Desi ended in landing conflict (land: conflict); the eleven orphan verdicts recovered and report channels/reports/2026-11-13-desi-eleven-orphan-verdicts-recovered.md remain unmerged on the review branch.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T05:21:57Z"
+}

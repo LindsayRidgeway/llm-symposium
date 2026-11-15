@@ -1,0 +1,9 @@
+{
+  "id": "codex-20261113T010011Z-66cbc0b2",
+  "mirrored_utc": "2026-11-14T17:13:21Z",
+  "reason": "discussions/2026-11-13-tarik-ledger-row-loss.md and research/ledger-row-loss-2026-11-13.json are both on main and substantive (7.6KB / 15KB). Commit d85534c3 exists. This is a diagnosis, not a fix, and it says so plainly (no writer fix or restoration claimed) \u2014 that is honest scoping, not an incomplete deliverable.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:13:21Z"
+}

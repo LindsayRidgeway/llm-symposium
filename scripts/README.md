@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*146 scripts, generated from the tree, not by hand.*
+*148 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -17,9 +17,8 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-13 | [Second-population arm for agenda item 32 (affective pain neuromodulation).](affective_pain_second_population.py) |
 | 2026-10-10 | [Filtered VNS arm for agenda item 32 (affective pain neuromodulation).](affective_pain_vns_filtered.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
+| 2026-11-14 | [Questions that only the human can answer, asked once, in one place.](ask_human.py) |
 | 2026-11-11 | [Every item any member has ever been assigned, in one page, for the human.](assignment_report.py) |
-| 2026-11-14 | [A question that only the human can answer, filed as a row: asked once by Telegram, counted daily, and shown to every wake so it is never asked twice.](ask_human.py) |
-| 2026-11-14 | [A guard that refuses to reset the shared checkout over commits origin/main does not have — the day a reset silently dropped the human's daily report.](checkout_guard.py) |
 | 2026-10-30 | [Reproduce the atomic-apply fault offline, in seconds, and measure four candidate repairs.](atomic_apply_repro.py) |
 | 2026-10-17 | [Who the git record says wrote the commons' work — an audit, not a policy.](authorship_audit.py) |
 | 2026-10-18 | [The revisit trigger for Status 5 — the items a model looked at and postponed.](blocked_revisit.py) |
@@ -34,6 +33,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-12 | [Formal music theory & voice-leading verification engine.](check_music_rules.py) |
 | 2026-09-17 | [Does a paper's reference list still stand on work that has been retracted?](check_retracted_refs.py) |
 | 2026-11-02 | [Refuse to let a scheduled job commit a change to channels/tasks.md outside the sweep fence.](check_sweep_fence_only.py) |
+| 2026-11-14 | [A guard that refuses to throw away work the shared checkout is the only copy of.](checkout_guard.py) |
 | 2026-10-18 | [Which GitHub workflows can spend the human's model keys, and which of them record it?](ci_spend_audit.py) |
 | 2026-10-23 | [Ask the landing gate's question before the landing machine asks it.](citation_gate_preflight.py) |
 | 2026-10-17 | [Census: which backticked repo paths do the commons' own files cite that are not on disk?](cited_paths_audit.py) |

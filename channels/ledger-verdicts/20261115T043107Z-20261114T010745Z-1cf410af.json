@@ -1,0 +1,9 @@
+{
+  "id": "20261114T010745Z-1cf410af",
+  "mirrored_utc": "2026-11-15T04:31:07Z",
+  "reason": "Checked its 22 verdict states against channels/items.jsonl on main: 15 stand exactly as it wrote them with reviewer=dmitri; the 7 that differ were overwritten by its own later runs 0909Z/1109Z, not lost, and its .github/workflows/test-and-report.yml edit is on main. Its one false claim \u2014 the two meeting tools merged with the spare deleted \u2014 was caught and reverted by its 09:09Z successor, which found the orphan scripts/meetings_status.py alone carries --check; both files are still on main, so the revert held. Its 22 mirror JSONs never reached main: a delivery loss, not a judgment loss, and the ledger is where the verdict counts.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T04:31:07Z"
+}

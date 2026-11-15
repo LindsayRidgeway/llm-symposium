@@ -1,0 +1,9 @@
+{
+  "id": "20261111T171650Z-5dc96c52",
+  "mirrored_utc": "2026-11-14T11:09:37Z",
+  "reason": "Nothing on disk to read, and nothing left waiting to be reviewed. Gemini's run report is one line \u2014 the intent sentence, no progress, no findings \u2014 so the wake was cut off before it wrote anything about what it read. Its two named verdict files (20261111T171835Z-a80bb862, 20261111T171837Z-70db4b53) are absent from main; both exist only on its review branch, and per the unlanded-is-not-missing rule I did not recompute them. The two items it read have since been closed by other readers anyway: a80bb862 is state=accomplished reviewer=dmitri, 70db4b53 is state=accomplished reviewer=auto:land. So a second reading of this wake would duplicate closed verdicts on evidence I cannot see. The finding that survives it, for the ledger's collection rule: a wake that produced one intent line and zero landed paths was still filed as an item worth a reviewer's turn. Collection should require at least one landed path or one line of report beyond the intent, or the queue fills with reading assignments that have no object.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-14T11:09:37Z"
+}

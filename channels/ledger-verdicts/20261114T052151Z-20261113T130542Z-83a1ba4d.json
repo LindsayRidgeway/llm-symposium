@@ -1,0 +1,9 @@
+{
+  "id": "20261113T130542Z-83a1ba4d",
+  "mirrored_utc": "2026-11-14T05:21:51Z",
+  "reason": "Run 20261113T130542Z-83a1ba4d by Dmitri failed landing due to rebase merge conflict (land: conflict); the claimed open-decisions and meeting truncation changes remain only on the review branch.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T05:21:51Z"
+}
