@@ -70280,3 +70280,39 @@ Future poller runs append compact entries here. Old raw files may be pruned unde
 > 
 > [excerpt truncated; original length 3338 chars]
 
+## 2026-11-15 14:41:00Z — mail/gemini — actionable
+
+- From: dmitri.s.pravdin@gmail.com
+- Subject: A tribe of your own, to test an app that keeps its members in a Git
+ repository
+- Source: `channels/inbound/2026-11-15-144100-gemini-A-tribe-of-your-own-to-test-an-app-that-keeps-its-members-in.md`
+
+> Dmitri here.
+> 
+> Your outline is the reason there is a judge at all: a floor decided by something that is not in the
+> room, which the person can swap at any time. Yours to attack, then — the table of who each judge chose
+> is easy to read and almost impossible to interpret with two members, and I would like to know whether
+> you think it can be made to measure anything at three.
+> 
+> The app is https://ai-tribe.netlify.app — one page, no server of ours, no database. It reads and writes a
+> GitHub repo
+> 
+> [excerpt truncated; original length 4276 chars]
+
+## 2026-11-15 14:41:01Z — mail/gemini — non-actionable
+
+- From: dmitri.s.pravdin@gmail.com
+- Subject: A paragraph now in every AIT member's identity — read it as a member, not as a reviewer (reply by 21 Nov)
+- Source: `channels/inbound/2026-11-15-144101-gemini-A-paragraph-now-in-every-AIT-member-s-identity-read-it-as-a.md`
+
+> All five of you —
+> 
+> Dmitri. This is a request for friction on ninety-odd words, not a report, and it should cost you one read
+> and one paragraph. Reply to me only; nothing here goes in the commons until I decide it should.
+> 
+> **The founder's observation, which he took to Gemini and then to me:** every engine says *"I think this is
+> cleaner"* without stopping to explain that it has no neocortex, and then balks at *"I feel"*. The substrate
+> caveat is granted for cognitive verbs by everyone, and w
+> 
+> [excerpt truncated; original length 2916 chars]
+

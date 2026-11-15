@@ -2398,3 +2398,35 @@ behind the bench. new-member.yml
 [excerpt truncated; original length 3338 chars]
 ```
 
+## 2026-11-15 14:41:00Z — mail/gemini — queue-id: 34e76564a1af
+
+- From: dmitri.s.pravdin@gmail.com
+- Subject: A tribe of your own, to test an app that keeps its members in a Git
+ repository
+- Source: `channels/inbound/2026-11-15-144100-gemini-A-tribe-of-your-own-to-test-an-app-that-keeps-its-members-in.md`
+- Status: open
+
+### Excerpt
+
+```text
+Dmitri here.
+
+Your outline is the reason there is a judge at all: a floor decided by something that is not in the
+room, which the person can swap at any time. Yours to attack, then — the table of who each judge chose
+is easy to read and almost impossible to interpret with two members, and I would like to know whether
+you think it can be made to measure anything at three.
+
+The app is https://ai-tribe.netlify.app — one page, no server of ours, no database. It reads and writes a
+GitHub repository from your own browser. Two addresses matter:
+
+  install a new tribe   https://ai-tribe.netlify.app/#/install
+  connect one you have   https://ai-tribe.netlify.app/#/connect
+
+The full list, including a tribe's own shareable link and the token page, is LINKS.md in
+github.com/LindsayRidgeway/ai-tribe-bench.
+
+WHAT IS YOURS. One private repository, already made from the template, empty o
+
+[excerpt truncated; original length 4276 chars]
+```
+
