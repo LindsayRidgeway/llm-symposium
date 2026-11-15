@@ -404,6 +404,50 @@ def open_rows_for(amigo, text, head=10000):
 # So the wake block now opens with what is due for THIS seat: repeats expanded to their next
 # instance, overdue first, then today, then the next fortnight. Bounded to DUE_SHOWN rows and
 # DUE_CHARS characters, and it says when it has cut something.
+BLOCKERS_REL = Path("channels") / "human-blockers.jsonl"
+BLOCKER_CHARS = 300
+BLOCKER_SHOWN = 5
+
+
+def human_block(repo, amigo=None):
+    """Questions already put to the human, so a wake does not ask the same one twice.
+
+    Added 2026-11-14. The founder asked how a blocking gets noticed and how it gets asked; the answer
+    this implements is that a question only he can answer is a row in channels/human-blockers.jsonl,
+    and the party who must not re-ask it is the next wake. Measured before this existed: the same
+    missing address was noticed by different wakes for weeks and asked by none, because the notice
+    lived in prose that the next wake never read.
+
+    Silent when there is nothing open — a block that always appears is one nobody reads — but a file
+    that cannot be parsed says so instead of reading as empty.
+    """
+    path = Path(repo) / BLOCKERS_REL
+    if not path.exists():
+        return ""
+    try:
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
+                if line.strip()]
+    except Exception as exc:
+        return (f"=== QUESTIONS ALREADY PUT TO THE HUMAN ===\n"
+                f"unreadable this run ({type(exc).__name__}: {exc}); "
+                f"`python3 scripts/ask_human.py --list` reads it by hand.")
+    open_rows = [r for r in rows if (r.get("status") or "open") == "open"]
+    if not open_rows:
+        return ""
+    lines = ["=== QUESTIONS ALREADY PUT TO THE HUMAN ===",
+             "He has been asked, once, and the row is the record. Do not ask again: if one of these "
+             "unblocks your run, say so in your verdict; if you have new information, add it to the "
+             "row. If you are blocked on something only a person can do, file it with "
+             "`python3 scripts/ask_human.py --ask ... --why ...` — a blocker written only in prose "
+             "reaches nobody."]
+    for row in open_rows[-BLOCKER_SHOWN:]:
+        lines.append("- %s %s: %s" % (str(row.get("at") or "")[:10], row.get("amigo") or "?",
+                                      (row.get("ask") or "")[:BLOCKER_CHARS]))
+    if len(open_rows) > BLOCKER_SHOWN:
+        lines.append("- ... and %d older" % (len(open_rows) - BLOCKER_SHOWN))
+    return "\n".join(lines)
+
+
 DUE_DAYS = 14
 DUE_SHOWN = 8
 DUE_CHARS = 2200
@@ -541,9 +585,16 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
         due = due_block(repo)
         if due:
             lines.append(due)
-    except Exception as exc:                      # a broken block must not lose the whole wake
+    except Exception as exc:
         lines.append('=== WHAT IS DUE ===\nunavailable this run (%s: %s); '
-                     'run `python3 scripts/todo_due.py` by hand.'
+                     'run `python3 scripts/todo_due.py` by hand.' % (type(exc).__name__, exc))
+    try:
+        waiting = human_block(repo, amigo=amigo)
+        if waiting:
+            lines.append(waiting)
+    except Exception as exc:                      # a broken block must not lose the whole wake
+        lines.append('=== QUESTIONS ALREADY PUT TO THE HUMAN ===\nunavailable this run '
+                     '(%s: %s); `python3 scripts/ask_human.py --list` reads it by hand.'
                      % (type(exc).__name__, exc))
     todo = Path(repo) / 'to-do-lists' / (AMIGO + '.md')
     if todo.is_file():

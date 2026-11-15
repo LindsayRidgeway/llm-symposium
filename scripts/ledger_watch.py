@@ -128,6 +128,32 @@ def member_addresses(roster: Path | None = None) -> set[str]:
     return found
 
 
+def human_questions(now: dt.datetime, path: Path | None = None) -> dict:
+    """What is waiting on the human, and for how long.
+
+    Added 2026-11-14, from his question about how a blocker is noticed. A question that only he can
+    answer used to be prose in a report; here it is a row, and this line is how "waiting on him"
+    stops looking like "nobody looked".
+    """
+    try:
+        from scripts.ask_human import open_asks
+    except Exception as exc:                      # noqa: BLE001
+        return {"count": 0, "oldest": "", "note": f"unavailable ({type(exc).__name__})"}
+    asks = open_asks(path) if path else open_asks()
+    oldest, days = "", 0
+    for row in asks:
+        stamp = (row.get("at") or "")[:10]
+        if stamp and (not oldest or stamp < oldest):
+            oldest = stamp
+    if oldest:
+        try:
+            days = (now.date() - dt.date.fromisoformat(oldest)).days
+        except ValueError:
+            days = 0
+    return {"count": len(asks), "oldest": oldest, "days": days,
+            "first": (asks[-1]["ask"][:90] if asks else "")}
+
+
 def outreach_week(now: dt.datetime, days: int = 7, sent: Path | None = None,
                   inbound: Path | None = None, roster: Path | None = None) -> dict:
     """What left the building in the last `days`, and what came in from outside it.
@@ -253,6 +279,7 @@ def measure(now: dt.datetime) -> dict:
         "items_total": len(by),
         "reading_queue": dict(sorted(reading_queue.items())),
         "outreach": outreach_week(now),
+        "human_questions": human_questions(now),
         "self_signed_all": len(self_signed),
         "self_signed_24h": len(self_signed_24),
         "self_signed_recent": [r["id"] for r in self_signed_24[-5:]],
@@ -596,6 +623,11 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
     if m.get("reading_queue"):
         spread = " · ".join(f"{a} {n}" for a, n in m["reading_queue"].items())
         lines.append(f"Of those, named and ready for a waking reader: {spread}")
+    q = m.get("human_questions") or {}
+    if q.get("count"):
+        lines.append(f"Waiting on the human: {q['count']}"
+                     + (f" (oldest {q['oldest']}, {q['days']}d)" if q["oldest"] else "")
+                     + f" — oldest: {q['first']}")
     o = m.get("outreach") or {}
     if o:
         lines.append(f"Letters to people outside the commons, {o['days']} days: "

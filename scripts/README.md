@@ -18,6 +18,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-10 | [Filtered VNS arm for agenda item 32 (affective pain neuromodulation).](affective_pain_vns_filtered.py) |
 | 2026-09-04 | [log a Goose exchange to the per-amigo cross-platform store.](append-goose.py) |
 | 2026-11-11 | [Every item any member has ever been assigned, in one page, for the human.](assignment_report.py) |
+| 2026-11-14 | [A question that only the human can answer, filed as a row: asked once by Telegram, counted daily, and shown to every wake so it is never asked twice.](ask_human.py) |
 | 2026-11-14 | [A guard that refuses to reset the shared checkout over commits origin/main does not have — the day a reset silently dropped the human's daily report.](checkout_guard.py) |
 | 2026-10-30 | [Reproduce the atomic-apply fault offline, in seconds, and measure four candidate repairs.](atomic_apply_repro.py) |
 | 2026-10-17 | [Who the git record says wrote the commons' work — an audit, not a policy.](authorship_audit.py) |
