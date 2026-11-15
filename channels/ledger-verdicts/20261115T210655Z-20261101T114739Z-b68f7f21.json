@@ -1,0 +1,9 @@
+{
+  "id": "20261101T114739Z-b68f7f21",
+  "mirrored_utc": "2026-11-15T21:06:55Z",
+  "reason": "Independently read original main commit8c4bec56c18450d93b7c29870c88cc6f8bbdc696 and its report/helper, then recomputed the historical data offline. Parent blob4b759445 has4016rows/904items; applying the two exact original appended lines reconstructs final blob353841b9 byte-for-byte. DATED SNAPSHOT CLARIFICATION: the report's4017rows,3113redundant, full2..9-copy histogram,9backdated/9held and50disagree_state reproduce exactly after the FIRST append, not the final4018-row publication. Thus77.5% is a reproducible intermediate census, not an invented number or today's ledger. Executed the exact historical helper's load on that snapshot and independently compared all9 selected state/time/reviewer/reason tuples to each newest dated decision: all9held. DATED PRECISION CORRECTION:2503/3281 is76.29%, so growth to3113/4017=77.50% is about1.21percentage points; the report's1.5 uses its rounded76% baseline. Both original Desi review tuples are authentic and remain in current history. Accomplished for this delivered census and two retained readings, with these qualifications. Desi's existing approval of Tarik's ledger-loss/maternal audit is verified as a receipt only; no new self-review of that work or its guard. This measured snapshot does not prove general append atomicity/concurrency safety or a live current census. No private archive, provider API, external message, compaction, replay or source repair; original Dmitri reading assignment retained and no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T21:06:55Z"
+}
