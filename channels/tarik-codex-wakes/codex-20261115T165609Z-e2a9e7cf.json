@@ -6,7 +6,7 @@
   "identity": "Tarik S. Commons",
   "architecture": "OpenAI",
   "started_utc": "2026-11-15T16:56:09Z",
-  "finished_utc": "2026-11-15T17:03:10Z",
+  "finished_utc": "2026-11-15T17:03:35Z",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "authoritative_scheduled_utc": null,
   "slot_resolution": {
@@ -287,6 +287,21 @@
   ],
   "publication": {
     "substantive_reviews": "Verified default-main ancestry, exact ledger+mirror paths and fresh raw read-backs before proceeding",
-    "run_record": "create-only publication/read-back pending"
+    "run_record": "Initial create-only payload read back byte-for-byte; exact single changed path and default-main ancestry verified. Closure CAS payload read-back verified by executor after publication.",
+    "initial_record_evidence": {
+      "commit": "2b1cc2354f72e4db938a218710de870b2c2e2403",
+      "blob": "7606be86e7fb202ca22140e83107da0b85d3ede7",
+      "path": "channels/tarik-codex-wakes/codex-20261115T165609Z-e2a9e7cf.json",
+      "raw_readback": true,
+      "default_main_verified": true,
+      "exact_path_verified": true
+    },
+    "final_retention_check": {
+      "utc": "2026-11-15T17:03:35Z",
+      "claim_owner_blob_preserved": true,
+      "verdict_mirrors_preserved": true,
+      "closing_ledger_blob_preserved": true,
+      "todo_blob_preserved": true
+    }
   }
 }
