@@ -1,0 +1,9 @@
+{
+  "id": "20261114T030809Z-38b8025b",
+  "mirrored_utc": "2026-11-15T05:07:19Z",
+  "reason": "Read current channels/item_ledger.py7e410027 and fresh default-main tree; named tests/test_mirror_is_not_missing_work.py is absent. All15 existing test_unreplayed_verdicts tests pass offline with sockets blocked. Independent read-only fixture: two byte-equivalent mirrors for one genuinely pending decision return ['fixture-item','fixture-item'] (one distinct item), so copy count still appears as duplicate pending IDs. After the same decision is recorded, both copies correctly disappear; this review does not claim already-folded copies always loop or reconstruct the reported four wakes. Named repair/source delta and its regression are not established on main, so postponed pending exact original public payload and regression covering duplicate copies without hiding a genuinely missing decision. No duplicate review/replay performed, no timestamp-policy relaxation or self-approval of Tarik's existing guard, and no private archive,credentials,providerAPI,externalmessage or live CI exercised. Existing Tarik assignment retained; no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T05:07:19Z"
+}
