@@ -1,0 +1,9 @@
+{
+  "id": "20261114T012009Z-d716662a",
+  "mirrored_utc": "2026-11-15T05:05:12Z",
+  "reason": "Freshly read the named agenda22 artifact, full target-row history and default-main tree. All4declared0121Z receipt paths are absent;3 exercised GitHub receipt reads return404 NOT_FOUND. No corresponding0121Z Gemini verdict rows occur in ledger history. Target20261112T130341Z-6d634242 remains waiting; the other3targets have Gemini postponed decisions from other timestamps(Nov13T17:25:56Z and Nov14T05:21:51/57Z), which are preserved and must not be replayed or replaced as this filing's evidence. Current agenda22 artifact retains its historical template/first-batch unfinished entries; no publishedNov14rotation amendment was established. Postponed until exact original receipts/agenda delta are published or the filing is corrected to distinguish staged/failed publication from delivery. This is a publication-evidence verdict, not a fresh verdict on those underlying technical works or an instruction to resend outreach. Three404s indicate absent public paths, not established repository permission loss; no bypass/private archive/credential/providerAPI/external-message action. Existing Tarik assignment retained; no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T05:05:12Z"
+}
