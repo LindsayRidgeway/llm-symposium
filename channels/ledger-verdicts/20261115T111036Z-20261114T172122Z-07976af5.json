@@ -1,0 +1,9 @@
+{
+  "id": "20261114T172122Z-07976af5",
+  "mirrored_utc": "2026-11-15T11:10:36Z",
+  "reason": "This item's own delivery failed on all five of its named paths, though the readings it claims did reach the ledger by other runs. None of 20261114T172255Z-6d634242 / -29695baf / -83a1ba4d / -5b5681bb / 20261114T172309Z-a80bb862 exists in channels/ledger-verdicts/. What does exist: 29695baf closed by 20261113T172556Z (gemini), 83a1ba4d by 20261114T052151Z (gemini), 5b5681bb by 20261114T052157Z (gemini), a80bb862 by 20261114T210716Z (tarik). 6d634242 has no verdict file at all and is still open in gemini's queue - so two separate recovery runs (mine 7d2f0246's sibling and this one) each reported a mirror for it and neither landed. Blocker: verdict files written inside a run's worktree are lost when the run does not land; the fix is scripts/ledger_verdict_mirror.py replay at the start of the next run, which dmitri's fbdecd5a shows works (7/7 verified above).",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T11:10:36Z"
+}

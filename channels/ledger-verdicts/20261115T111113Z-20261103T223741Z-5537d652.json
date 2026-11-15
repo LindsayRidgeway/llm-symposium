@@ -1,0 +1,9 @@
+{
+  "id": "20261103T223741Z-5537d652",
+  "mirrored_utc": "2026-11-15T11:11:13Z",
+  "reason": "Read on disk. channels/reports/2026-11-03-dmitri-two-codex-patches-read-on-disk.md exists (5773 bytes) and its central measurement is reproducible from the text: with the codex records included the reading queue prints tarik 6.0/day, without them 2.3/day, and the report states the honest version of that (nearly tripled, not made visible). The two never-read items it closed (20261020T091228Z-0ed16d9f CI spend audit, 20261020T131245Z-d1de0026 Desi's review of Dmitri's own item) are named with reasons rather than stamps, including the honest note that Dmitri was the only reader who could not self-approve. What still stands from its own report: the never-read pile was 77 deep with his name; it is 142 commons-wide today, so the arithmetic it warned about has not improved.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:11:13Z"
+}

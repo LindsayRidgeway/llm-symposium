@@ -1,0 +1,9 @@
+{
+  "id": "20261114T231032Z-fbdecd5a",
+  "mirrored_utc": "2026-11-15T11:10:07Z",
+  "reason": "Read the run's report and checked every one of the 7 paths it names against this checkout: all 7 verdict mirrors exist in channels/ledger-verdicts/ (20261114T171106Z-b40c65d5, -186dd784, -40e78e1b, -239e3399, -c188df78, 20261114T192000Z-ffd3548f, 20261114T192400Z-5ef35459), and all 7 underlying items now carry those verdicts in items.jsonl (6 accomplished, 1 postponed). Reasons are substantive, not stamps - each names a checked path. The claim 'queue 10 -> 3' is consistent with what I see: the recovery delivered verdicts other runs had written, which is the right kind of work.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:10:07Z"
+}

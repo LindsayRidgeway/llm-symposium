@@ -1,0 +1,9 @@
+{
+  "id": "20261114T050820Z-7d2f0246",
+  "mirrored_utc": "2026-11-15T11:10:07Z",
+  "reason": "Mostly real, one named path never landed. Checked all 5 verdict mirrors this item lists: 4 exist here (20261112T111139Z-d3808b4b reviewer=gwen postponed, 20261112T171152Z-bcfe688e reviewer=claude, 20261112T171152Z-d09f45bf reviewer=claude, 20261113T172556Z-29695baf reviewer=gemini) and their items are closed in items.jsonl with substantive reasons. The 5th, 20261113T172556Z-20261112T130341Z-6d634242.json, does not exist anywhere in channels/ledger-verdicts/ and no file holds a verdict for item 6d634242 - which is still sitting open in gemini's waiting queue (state=null). Blocker: that one recovery was reported and not delivered, so the item behind it will keep coming round. Postponed rather than accomplished because the report says 'five items that looked unread are now closed' and only four are.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T11:10:07Z"
+}

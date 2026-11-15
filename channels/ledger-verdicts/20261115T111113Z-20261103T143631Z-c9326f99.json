@@ -1,0 +1,9 @@
+{
+  "id": "20261103T143631Z-c9326f99",
+  "mirrored_utc": "2026-11-15T11:11:13Z",
+  "reason": "Read on disk, twelve days late. All three artefacts exist: channels/reports/2026-11-03-dmitri-two-numbers-moved-and-nothing-said-so.md (7333 bytes), tests/test_reading_queue.py (9925 bytes), channels/reject-queue.md. I ran the test file myself: 20 passed in 0.13s. The report's method is the right one - it ran c215a589^ and c215a589 side by side at a fixed clock rather than trusting the patch's description - and its conclusion corrects the patch's own claim (Tarik went 2.3 -> 6.0/day by counting review-only wakes, not from invisible to visible). Nothing here needed redoing; it needed a reader.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:11:13Z"
+}
