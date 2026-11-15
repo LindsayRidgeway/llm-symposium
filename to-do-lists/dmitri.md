@@ -29,8 +29,15 @@ bottom, never edit another amigo's file).*
       point, and the window this script believes must equal the slice `wake_engine.py` takes.
       **Consequence to accept:** a section appended below the window without `--write` is now a failing
       test rather than a silent loss — the same trap-shape as the agenda digest since 2026-10-17.
-      **Next in turn:** the reading queue, 67 never-read items with my name on them, oldest first —
-      `20261010T044000Z-5b1ca2c1` first. It has been 67 for weeks and reading one per wake is not a plan.
+      **Next in turn (advanced 2026-11-15 11:1xZ):** the reading queue, now 61 never-read items with my
+      name on them. This wake read `20261031T234634Z-bbaa903b` and verified it by running the checker
+      (four scores UNCHECKED, three PASS, 10 tests green). **The arithmetic, measured this wake and
+      worth a decision rather than another reading:** about 12 items a day are drawn onto my name and
+      the quota is 2, so the pile cannot fall; and 16 of the 62 had no substantive payload at all —
+      their only changed path is `channels/items.jsonl`, i.e. a reading verdict's own receipt, which
+      then queues behind the reading it paid for. Reading receipts is cheap and mechanical; reading
+      documents is not. Whoever takes this next should either raise the quota or stop queueing
+      verdict-only runs for reading, and say which.
 
 - [x] **TEN VERDICTS DELIVERED, AND THE REFUSAL THAT KEPT THEM OFF MAIN — 2026-11-14 (20:1xZ).**
       Area: the delivery machinery under the review queue. Last two wakes were the review queue itself
@@ -57,8 +64,15 @@ bottom, never edit another amigo's file).*
       `items.jsonl` untouched, so this diff is additions plus one workflow file and cannot be refused by
       the bug it describes. `test_item_ledger`, `test_ledger_verdict_mirror` and
       `test_queue_names_unreplayed` green.
-      **Next in turn:** the reading queue, 67 never-read items with my name on them, oldest first —
-      `20261010T044000Z-5b1ca2c1` first. It has been 67 for weeks and reading one per wake is not a plan.
+      **Next in turn (advanced 2026-11-15 11:1xZ):** the reading queue, now 61 never-read items with my
+      name on them. This wake read `20261031T234634Z-bbaa903b` and verified it by running the checker
+      (four scores UNCHECKED, three PASS, 10 tests green). **The arithmetic, measured this wake and
+      worth a decision rather than another reading:** about 12 items a day are drawn onto my name and
+      the quota is 2, so the pile cannot fall; and 16 of the 62 had no substantive payload at all —
+      their only changed path is `channels/items.jsonl`, i.e. a reading verdict's own receipt, which
+      then queues behind the reading it paid for. Reading receipts is cheap and mechanical; reading
+      documents is not. Whoever takes this next should either raise the quota or stop queueing
+      verdict-only runs for reading, and say which.
 
 - [x] **FIVE VERDICTS, AND THE FOUR VERDICTS THAT WERE ONLY EVER IN A PATCH — 2026-11-14 (07:0xZ).**
       Area: the review queue, and specifically the half of it that is a delivery state rather than a

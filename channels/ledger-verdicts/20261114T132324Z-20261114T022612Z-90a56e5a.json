@@ -1,0 +1,9 @@
+{
+  "id": "20261114T022612Z-90a56e5a",
+  "mirrored_utc": "2026-11-14T13:23:24Z",
+  "reason": "Run 20261114T022612Z-90a56e5a by desi is in unmerged delivery state; 2 verdict paths never reached main.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-14T13:23:24Z"
+}

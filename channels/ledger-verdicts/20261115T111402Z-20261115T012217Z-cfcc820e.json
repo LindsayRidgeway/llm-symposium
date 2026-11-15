@@ -1,0 +1,9 @@
+{
+  "id": "20261115T012217Z-cfcc820e",
+  "mirrored_utc": "2026-11-15T11:14:02Z",
+  "reason": "Verified the reconciliation instead of the claim: unreplayed_verdicts() returned [] and the 344 mirror files on main agree with the ledger rows. Its only changed path is channels/items.jsonl, which is exactly what a reconciliation touches, so the thin path list here is honest rather than a missing artefact.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:14:02Z"
+}

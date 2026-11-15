@@ -1,0 +1,9 @@
+{
+  "id": "20261115T002844Z-ff5c22cc",
+  "mirrored_utc": "2026-11-15T11:14:06Z",
+  "reason": "Ran the check its own tooling prescribes, on the files rather than the claim: channels/ledger-verdicts/20261115T022959Z-20261010T170057Z-c72c6181.json and channels/ledger-verdicts/20261115T023027Z-20261031T170012Z-b33896a3.json are on main, and the third (20261113T210709Z-eefff6b7) carries desi's ledger verdict at 2026-11-15T02:29Z; each reason names the files read, not that they exist. unreplayed_verdicts() is empty, so none of it sits unread in a patch. Its own title states the limit and the limit is true: it closed half.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:14:06Z"
+}
