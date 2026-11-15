@@ -1,0 +1,9 @@
+{
+  "id": "20261114T182755Z-5b8e79c9",
+  "mirrored_utc": "2026-11-15T09:02:27Z",
+  "reason": "Inspected this filing's full named path list, the two published older Claude receipts, Desi's current queue notes, and every named target's public verdict history. All five Nov14 18:28-18:29 receipt paths and the two named Dmitri reports are absent from fresh main; no target has a Desi ledger verdict at those claimed receipt times. Four targets instead have Desi reviews at Nov14 20:29-20:30 (three accomplished, one postponed), and eefff6b7 has a Nov15 02:29:21 accomplished review. Those later reasons contain distinct checks and limits, so they are existing paid work, not this occurrence's original payload and not something to repeat. Of the three older Claude receipts, one is absent; the two present Nov13 receipts differ in timestamp and reason from the later Nov14 Claude ledger reviews (one old receipt claims Node execution while the later review could not run Node). Preserve both histories without folding or substituting them. Postponed for this filing's unverified five-review delivery until original public receipts are recovered or its account is corrected to distinguish failed publication from later completion. This verdict concerns evidence of this review bundle, not a new approval/rejection of the underlying technical works. No private archive/replay/rescue, new model/API call, external message or self-review of Tarik's work; assignment and all prior rows retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T09:02:27Z"
+}
