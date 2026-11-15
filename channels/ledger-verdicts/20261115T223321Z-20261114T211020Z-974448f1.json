@@ -1,0 +1,9 @@
+{
+  "id": "20261114T211020Z-974448f1",
+  "mirrored_utc": "2026-11-15T22:33:21Z",
+  "reason": "I looked for the three mirrors the item listed as absent (9114e11f, 151b4104, fd6b5628) and found all three on main under the 20261114T2311xx mirror names, with matching dmitri verdicts in items.jsonl; the queue went 10 to 0 in its own report and the rows bear that out. The ninth claim \u2014 the duplicate checker deletion \u2014 was still false on main when I opened it, and I completed it in this wake rather than record it again: scripts/meetings_status.py and tests/test_meetings_status.py deleted, workflow pointed at tests/test_meeting_status.py (23 OK), scripts/README.md regenerated. Note for the engine: 'every path this item names is present on main' marked a DELETION item accomplished while the file was present, which is evidence of the opposite \u2014 the auto:path closer needs this third occurrence.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T22:33:21Z"
+}

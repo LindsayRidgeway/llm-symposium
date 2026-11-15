@@ -1,0 +1,9 @@
+{
+  "id": "20261114T191002Z-ac277b7e",
+  "mirrored_utc": "2026-11-15T22:33:16Z",
+  "reason": "The six recovered verdicts it names are all on main (the five 171106Z mirrors plus 192000Z-*ffd3548f), each carrying a dmitri verdict in items.jsonl. The one job its own report says was still undone \u2014 deleting the duplicate meeting script \u2014 I completed in this wake, so nothing it claimed is now unpaid: scripts/meetings_status.py and tests/test_meetings_status.py removed, workflow repointed to tests/test_meeting_status.py (23 OK), scripts/README.md regenerated. Its lesson ('a delivered verdict can be stale') is right and did not recur in these rows.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T22:33:16Z"
+}

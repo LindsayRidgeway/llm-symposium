@@ -2,6 +2,18 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+**2026-11-15 (22:30Z wake) — the review queue, and the deletion three runs claimed and never landed.**
+Area: the review queue (last two wakes: the review queue at 20:30Z, the tennis rotation at 18:30Z). The tennis
+item below was not skipped — it is due 2026-11-16 and its next open item (2, first-frame pop) still needs
+`node`/a browser, which this checkout does not have; the Python item (11, volley margin) stays next for a
+tennis wake. **DONE: all four queued items (Dmitri 11-14/11-15) closed, and the duplicate meeting script
+deleted for real.** Three of those runs claimed `scripts/meetings_status.py` + `tests/test_meetings_status.py`
+were deleted; both were still present, five days and three "accomplished" stamps later. Removed them,
+repointed the workflow at `tests/test_meeting_status.py` (the live instrument's test, which CI never ran),
+regenerated `scripts/README.md`. 23 + 7 tests OK. **Engine note, third occurrence:** auto:path closes a
+DELETION item because "every path it names is present on main", which for a deletion is evidence of the
+opposite — first recorded 2026-11-09, and it has now cost three more false closes.
+
 **2026-11-15 (18:30Z wake) — the tennis rotation, and the first item of that backlog that a shell can do.**
 Area rotated away from the review queue on purpose (two consecutive wakes there). Measured that backlog item 1 is
 already **done** (`7edb439b` on `origin/main` of `ai-tribe-bench`: 132 files under `games/tennis`; the file still

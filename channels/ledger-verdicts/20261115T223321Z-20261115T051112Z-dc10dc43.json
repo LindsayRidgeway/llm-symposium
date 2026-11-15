@@ -1,0 +1,9 @@
+{
+  "id": "20261115T051112Z-dc10dc43",
+  "mirrored_utc": "2026-11-15T22:33:21Z",
+  "reason": "Verified all four of its recoveries against the disk, not the report: 20261114T132324Z-*90a56e5a is present and reads postponed with its two antecedent paths still absent, which its reason says. The other three are genuinely duplicates of mirrors already on main \u2014 20261113T172556Z-*29695baf, 20261114T052151Z-*83a1ba4d, 20261114T052157Z-*5b5681bb \u2014 so withholding copies lost nothing. The restored letter is on main too: channels/sent/2026-11-14-desi-open-targets-twenty-four-targets-one-source.md, addressed to David Ochoa at EBI. Nothing unpaid in this item; I did not redo its work because there was none left to redo.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T22:33:21Z"
+}
