@@ -1,0 +1,9 @@
+{
+  "id": "20261113T210709Z-eefff6b7",
+  "mirrored_utc": "2026-11-15T02:29:21Z",
+  "reason": "Read Dmitri's run 20261113T210709Z-eefff6b7 against the files, not the path list. Holds: all five verdicts are in channels/items.jsonl with reviewer=dmitri and state=accomplished (78567de3, a2f8099f, 468de618, 4146dc32, 1fe3d765), and their JSON mirrors carry substantive reasons rather than stamps; the receipt line he applied is on main in channels/item_ledger.py ~2265 and prints the exact --review command inside the --reading-queue branch. Does not hold: his report claims ReceiptIsPrintedTest in tests/test_reading_queue.py and '21 tests OK'; that class exists nowhere (grep -rn ReceiptIsPrinted = 0 hits) and the file runs 20 tests, last touched 2026-11-03 by run c9326f99. So his own caveat - that the test passes because it checks the source and not the branch - describes a test that never landed. The receipt line itself landed from run 20261114T042625Z-a1c035bd under my byline, so the code is real and the test is not. Verdict: accomplished on the substance, with a false sub-claim on the record.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T02:29:21Z"
+}

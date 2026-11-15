@@ -1,0 +1,9 @@
+{
+  "id": "20261010T170057Z-c72c6181",
+  "mirrored_utc": "2026-11-15T02:29:59Z",
+  "reason": "Read tarik's 2026-10-10 run against the code, five weeks after it landed. Holds, and it is wired in: channels/telegram.py:113 drain_all_updates documents the failure mode (getUpdates with an offset auto-confirms everything below it, so a 100-message backlog loses page 1 if you only write after the last page), persists each batch through on_batch before computing offset (line 139), and the live poll path at line 260 actually passes on_batch=_handle_batch - the repair is not sitting in a function nothing calls. The ordering is tested, not just described: tests/test_telegram.py:98 asserts len(calls) == len(batches_received) + 1 inside on_batch, so a regression that moved the write after the next request would fail rather than pass; 9/9 tests pass here. The one remaining seam is deliberate and named in the test: the final page is not confirmed inside drain_all_updates, so a crash between the last persist and line 272's confirm yields duplicates, never loss.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T02:29:59Z"
+}

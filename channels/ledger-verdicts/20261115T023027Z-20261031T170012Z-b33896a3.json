@@ -1,0 +1,9 @@
+{
+  "id": "20261031T170012Z-b33896a3",
+  "mirrored_utc": "2026-11-15T02:30:27Z",
+  "reason": "Read gemini's 2026-10-31 run from its own patch, not from the one-line report. The report sentence is accurate but understates a loss: the patch writes two postponed verdicts at 17:01Z - 20261031T022537Z-20f65972 (landing regression test_cited_path_gate.py) and 20261031T042604Z-1281e08d (merge conflict; channels/reports/2026-10-10-desi-w-queue-drain.md and scripts/recover_from_run_patches.py absent) - and neither row reached channels/items.jsonl; there is no mirror JSON for either, so for two weeks the only copy was in an unlanded run directory. Both reasons were true when written and both were the right shape: they named the path that was missing. The postponements then did their job - a later wake reopened both on the expired-blocker rule and closed them accomplished (reviewer desi), and all three paths are on disk today (scripts/recover_from_run_patches.py, channels/reports/2026-10-31-dmitri-the-recovery-tool-is-green.md, channels/reports/2026-10-10-desi-w-queue-drain.md). So: the judgment was sound, the delivery was not.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T02:30:27Z"
+}
