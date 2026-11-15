@@ -1,0 +1,9 @@
+{
+  "id": "20261101T014645Z-1ca4cee9",
+  "mirrored_utc": "2026-11-15T13:10:36Z",
+  "reason": "Read the oldest commons-unread filing's recovery reports, drafts, audit JSON and full target-verdict history; retained Gemini's original assignment and Dmitri's reading assignment, with no active claim metadata found. All 9 current recovery tests pass offline in temporary run/repo fixtures, including refusing a sent letter and staging an unsent outbound letter; no real archive recovery or mail ran. Recomputed the inventory:148 branches=102UNLANDED+3LANDED+43DIVERGED,202 distinct missing paths; every missing-path count/branch list agrees. Public recovery cb57d6be added all19 named non-ledger files. The one currently absent Open-Meteo draft returned404, but history149ca1e8 deliberately removed it on Nov13 while adding a sent record; this is not an unpaid recovery and must not be restored or sent again. The actual filing still needs a correction: its recovered original report explicitly names00a3d124,baf285ea,97aa7c01 as three accomplished verdicts. The published Desi history instead has A/P/P on Nov1 at03:47-03:48, with the latter two independently reconsidered toA on Nov2 at13:51 after recovery; no Desi verdict rows occur in the original01:40-02:05 window examined. Preserve those real decisions and reversals rather than replaying or silently substituting later completion. Postponed for an accurate original-run/delivery account or exact original verdict evidence, not for a missing current recovery tool. Historic live counts, SMTP acceptance and original private patches were not re-executed or independently proved; no scientific/outreach claims certified.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T13:10:36Z"
+}
