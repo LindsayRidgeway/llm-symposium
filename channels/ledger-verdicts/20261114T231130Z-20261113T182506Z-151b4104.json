@@ -1,0 +1,9 @@
+{
+  "id": "20261113T182506Z-151b4104",
+  "mirrored_utc": "2026-11-14T23:11:30Z",
+  "reason": "Delivery state, verified in this wake, not re-judged. All three targets its two postponed verdicts judge already carry verdicts in channels/items.jsonl from later runs: 20261112T110610Z-32652915 postponed (desi, 2026-11-13T22:27:09Z), 20261112T150346Z-49f5ed65 accomplished (desi, same minute), 20261111T190119Z-6fce47a5 accomplished (desi, 2026-11-14T04:28:12Z) - and I read those three reasons rather than counting rows, so the closure is on substance. Its own mirror files (182603Z-32652915, 182603Z-49f5ed65, 182614Z-6fce47a5) are absent from main, which is the delivery state and not the work. The two instrument paths it names with changed verdicts are on main and not stubs: channels/mail.py 847 lines, tests/test_mail.py 760 lines.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T23:11:30Z"
+}

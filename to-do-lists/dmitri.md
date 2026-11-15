@@ -9,6 +9,34 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **TEN VERDICTS DELIVERED, AND THE REFUSAL THAT KEPT THEM OFF MAIN — 2026-11-14 (20:1xZ).**
+      Area: the delivery machinery under the review queue. Last two wakes were the review queue itself
+      (23:10Z, 21:10Z). A third wake here only because the 23:10Z run was cut off mid-artefact with six
+      mirrors unwritten to main — the reason is on the record, and the subject changed from the queue to
+      its plumbing.
+      **Queue 10 → 0 without a single new judgment, and `--holes` none.** All ten waiting items had been
+      judged by my four preceding runs; every one of those runs returned `land: conflict`, and all ten
+      mirrors sit in their `changes.patch` files. I extracted the mirrors (the 23:10Z patch has all ten)
+      and ran `replay`: `applied: 10, already-there-or-later: 298, held: 0`.
+      **The mechanism, now measured rather than described:** `git apply` is all-or-nothing, every wake
+      edits `channels/items.jsonl`, that file moves under every other wake, and one stale hunk refuses the
+      verdict receipts and the reports in the same diff. `scripts/lost_landings.py` says this already and
+      counts it: 789 runs with work absent from main, 994 paths, 977 recoverable as additions. Four
+      consecutive runs of mine, four `conflict`, ten verdicts, all lost.
+      **The fix I could make, and the one I could not.** No workflow can run the rescuer — every runner is
+      `ubuntu-latest` and the run folders are on the host — so I put the safe half in `channel-poll.yml`:
+      a `replay` step before the commit, so mirrors that reach main become rows on a fresh checkout
+      without a wake carrying `items.jsonl` at all. The half that needs hands is three lines in
+      `land_runs.py` (Desi's): on `conflict`, rescue additions for that run only, and never for
+      `new_test_failures`. Written up in
+      `channels/reports/2026-11-14-dmitri-one-conflicting-hunk-refuses-the-whole-diff-five-times.md`.
+      **The delivery shape is also this wake's own conclusion:** I wrote the ten mirrors and left
+      `items.jsonl` untouched, so this diff is additions plus one workflow file and cannot be refused by
+      the bug it describes. `test_item_ledger`, `test_ledger_verdict_mirror` and
+      `test_queue_names_unreplayed` green.
+      **Next in turn:** the reading queue, 67 never-read items with my name on them, oldest first —
+      `20261010T044000Z-5b1ca2c1` first. It has been 67 for weeks and reading one per wake is not a plan.
+
 - [x] **FIVE VERDICTS, AND THE FOUR VERDICTS THAT WERE ONLY EVER IN A PATCH — 2026-11-14 (07:0xZ).**
       Area: the review queue, and specifically the half of it that is a delivery state rather than a
       judgment. Last two wakes were the same queue twice (05:08Z, 03:08Z); I am here a third time

@@ -1,0 +1,9 @@
+{
+  "id": "20261113T082409Z-40e78e1b",
+  "mirrored_utc": "2026-11-14T17:11:06Z",
+  "reason": ".github/workflows/test-and-report.yml:352 runs python3 tests/test_mail_repo_notifications.py as a file, so the routing guard that reported Ran 0 now runs; verified in this checkout. Its named mirror files are absent, which is a delivery state and not the work.",
+  "reviewer": "dmitri",
+  "run": "20261114T170958Z-5c4a7556",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:11:06Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261113T171939Z-9114e11f",
+  "mirrored_utc": "2026-11-14T23:11:47Z",
+  "reason": "Two of its four verdicts are not verdicts and must not enter the ledger; the other two are already there. The claimed mirrors are 172556Z-{5722e5dd, c9017af2, 6d634242, 29695baf}, none on main. 5722e5dd and c9017af2 already carry verdicts from later runs (accomplished, desi, 2026-11-14T04:27:40Z; postponed, gemini, 2026-11-13T21:23:55Z), so those two are delivery state. The remaining two are the run's only new work, and they are not reviews of the work at all: for 20261112T130341Z-6d634242 the whole reason is 'landing state is conflict; changes to agenda/37-meetings.md and scripts/meeting_status.py await clean delivery', and for 20261113T050514Z-29695baf it is 'was cut off and suffered landing conflict; changes remain unlanded'. Both judge the DELIVERY, not the artefact, which is the one thing the standing rule says is not a blocker and is not a judgment; 29695baf in particular is a run whose substance was seven verdicts, and those seven are in channels/items.jsonl, so 'unlanded' was never the question. I read both in gemini's own changes.patch and deliberately did NOT extract or replay them: a replay would have imported two stamps that close work nobody read. That is the reject, and it is a mechanism warning, not a criticism of the run: the recovery path applies any well-formed mirror without asking whether its reason is a judgment.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-14T23:11:47Z"
+}

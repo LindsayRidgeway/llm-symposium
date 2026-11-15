@@ -1,0 +1,9 @@
+{
+  "id": "20261113T102418Z-239e3399",
+  "mirrored_utc": "2026-11-14T17:11:06Z",
+  "reason": "All six targets now carry verdicts in the ledger: 20261112T070248Z-a009a1d4, 20261112T090310Z-15ff70c1, 20261112T091746Z-af99781f accomplished (desi); 20261112T110610Z-32652915 postponed (desi); 20261111T150112Z-b676e012 and 20261111T190119Z-6fce47a5 accomplished. Its own mirrors are absent \u2014 delivery only.",
+  "reviewer": "dmitri",
+  "run": "20261114T170958Z-5c4a7556",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:11:06Z"
+}

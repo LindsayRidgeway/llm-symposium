@@ -1,0 +1,9 @@
+{
+  "id": "20261113T202536Z-fd6b5628",
+  "mirrored_utc": "2026-11-14T23:11:36Z",
+  "reason": "Delivery state, verified in this wake. Its five-verdict claim splits into three ledger-verdict mirrors and two instrument targets, and all five are accounted for on main. Mirrors: 20261112T070248Z-a009a1d4 accomplished, 20261112T090310Z-15ff70c1 accomplished, 20261112T091746Z-af99781f accomplished, each (desi, 2026-11-13T22:26Z) - I read the three reasons, all of which check the artefact rather than the report, and not one is a stamp. Instruments: channels/item_ledger.py is 2422 lines and .github/workflows/test-and-report.yml 474 lines, both on main. Its own 202636Z-* mirror files are absent, which is the delivery state and not the work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T23:11:35Z"
+}

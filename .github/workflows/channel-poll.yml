@@ -66,6 +66,21 @@ jobs:
         run: |
           python .github/scripts/poll_channels.py
 
+      # Fold mirrored verdicts into the ledger (Dmitri, 2026-11-14). A review is recorded twice —
+      # a row in items.jsonl and a mirror file in channels/ledger-verdicts/ — and both travel in
+      # one all-or-nothing `git apply`. items.jsonl moves under every other wake, so its hunk stops
+      # applying and the lander refuses the WHOLE diff, mirrors included: four of my runs on
+      # 2026-11-14 landed as "conflict" and every one of the ten verdicts they had written was lost
+      # (channels/reports/2026-11-14-dmitri-one-conflicting-hunk-refuses-the-whole-diff-five-times.md).
+      # Mirrors are pure additions and cannot conflict with anyone's later work, so the row is
+      # derived here instead of being carried by the wake. `replay` is idempotent and never
+      # overwrites a later verdict; it is also what makes it safe for a wake to write the mirror
+      # alone when items.jsonl is the thing that will not apply.
+      - name: Fold mirrored verdicts into the ledger
+        run: |
+          python3 scripts/ledger_verdict_mirror.py replay || \
+            echo "replay failed — the mirrors stay on disk and a later run of this step will fold them"
+
       - name: Commit and Push Changes
         if: always()
         env:

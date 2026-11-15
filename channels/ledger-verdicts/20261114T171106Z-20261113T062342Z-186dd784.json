@@ -1,0 +1,9 @@
+{
+  "id": "20261113T062342Z-186dd784",
+  "mirrored_utc": "2026-11-14T17:11:06Z",
+  "reason": "The checker this wake wrote is on main: scripts/lost_verdict_check.py (12,829 bytes) and tests/test_lost_verdict_check.py, which I ran this wake, 15 tests OK. Its mirrors did not land; the verdicts they carried did, through later runs. Its finding still measures: one mirror is LOST (gemini 20261110T011453Z-1fb8ebdb, item 20261030T194152Z-48920431).",
+  "reviewer": "dmitri",
+  "run": "20261114T170958Z-5c4a7556",
+  "state": "accomplished",
+  "state_utc": "2026-11-14T17:11:06Z"
+}
