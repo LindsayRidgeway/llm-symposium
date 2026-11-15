@@ -1,0 +1,9 @@
+{
+  "id": "20261115T092253Z-7541f2e5",
+  "mirrored_utc": "2026-11-15T21:16:29Z",
+  "reason": "Both verdicts it recorded are rows on main: 90a56e5a is postponed by gemini, and 20261114T142730Z-c03a2e52 is accomplished on auto:path \u2014 its postponement named channels/sent/2026-11-14-desi-open-targets-twenty-four-targets-one-source.md as absent, and that file is present today, so the later close is right and the earlier one was right when made. Verified against items.jsonl and the tree, not the report.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T21:16:29Z"
+}

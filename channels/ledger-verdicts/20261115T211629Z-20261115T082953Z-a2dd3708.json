@@ -1,0 +1,9 @@
+{
+  "id": "20261115T082953Z-a2dd3708",
+  "mirrored_utc": "2026-11-15T21:16:29Z",
+  "reason": "Same claim as 415ffaf9 and same state on main: the duplicate was still present when this run reported it deleted. I made the deletion in this wake (two files removed, scripts index regenerated, CI line removed); the merge of checks it describes is real in meeting_status.py, 23 meeting tests green.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T21:16:29Z"
+}

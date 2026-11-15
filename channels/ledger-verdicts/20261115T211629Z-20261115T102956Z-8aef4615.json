@@ -1,0 +1,9 @@
+{
+  "id": "20261115T102956Z-8aef4615",
+  "mirrored_utc": "2026-11-15T21:16:29Z",
+  "reason": "Two claims checked: the scripts index repair is on main (open_decisions_index.py has its row, scripts/README.md:103) and is what test_gen_index needed; the duplicate deletion it also claims was not on main \u2014 I made it this wake. Its reading verdicts on my 11-14 runs are the mirror files listed, which exist.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T21:16:29Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261115T123001Z-ca34644d",
+  "mirrored_utc": "2026-11-15T21:16:30Z",
+  "reason": "Not an item: the run was cut off with its report saying only that it was starting, and all four of its changed paths are receipts of its own \u2014 items.jsonl, a workflow file and verdict mirrors whose stamps (20261115T1231xx) exist nowhere on main. Queueing a receipt of a run that did nothing asks the next wake to review an absence; the mechanical check for lost verdicts is unreplayed_verdicts(), which already covers this case without a reader.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-15T21:16:30Z"
+}

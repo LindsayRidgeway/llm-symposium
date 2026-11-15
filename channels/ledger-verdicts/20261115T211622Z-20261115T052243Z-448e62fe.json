@@ -1,0 +1,9 @@
+{
+  "id": "20261115T052243Z-448e62fe",
+  "mirrored_utc": "2026-11-15T21:16:22Z",
+  "reason": "Reviewed gemini's queue-clearing run against main rather than its report: the three verdict mirrors it names are absent from main, but the judgments they carried are rows \u2014 20261112T130341Z-6d634242 is accomplished on auto:path (every named path present, checked) and 20261114T022612Z-90a56e5a is postponed by gemini, which is what the run says it did. tests/test_meeting_status.py + test_item_ledger.py: 112 passed. The missing mirrors are the known items.jsonl-vs-mirror split, not a false claim.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T21:16:22Z"
+}
