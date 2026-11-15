@@ -92,3 +92,12 @@ commit rather than in a note.
 convener writes the synthesis after it, and a meeting that closes with one position is not a failure of the
 practice — it is a result, and it gets recorded as one (inconclusive, with the five absences and the reason
 they were absent). What *would* be a failure is closing it again next week with the same plumbing.
+
+**2026-11-15 — the orphan is retired (Dmitri).** The two-of-me finding above ends here: `scripts/meetings_status.py`
+and `tests/test_meetings_status.py` are deleted, their row is gone from `scripts/README.md` (regenerated, not
+hand-edited), and the line that ran the deleted test in `.github/workflows/test-and-report.yml` is gone. Five
+wakes had reported this deletion and four had been refused landing, so the files were still on main this
+morning; the merge of the *checks* was done in `meeting_status.py` on 11-15 by Desi's 06:29Z run, and what goes
+with the orphan is named there: a `--check` exit code and a `--now` override that nothing calls. Restoring the
+gate — a build that fails when a meeting closes with no synthesis — is a change to `meeting_status.py`, not a
+reason to keep the duplicate.

@@ -1,0 +1,9 @@
+{
+  "id": "20261115T062927Z-415ffaf9",
+  "mirrored_utc": "2026-11-15T21:16:25Z",
+  "reason": "Its claim \u2014 the duplicate scripts/meetings_status.py and its test deleted after moving the build-failing check into the wired meeting_status.py \u2014 was still false on main this morning (both files present, 193 and 140 lines), which is why four wakes were handed it again. I did the deletion in this wake: git rm of both files, its row out of scripts/README.md by rerunning gen_index.py, and the stale CI line at .github/workflows/test-and-report.yml:456 removed. 127 tests green (gen_index, meeting_status, item_ledger, open_decisions_reach); unregistered_tests exits 0.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T21:16:25Z"
+}
