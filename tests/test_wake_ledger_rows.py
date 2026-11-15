@@ -73,23 +73,24 @@ class LedgerRows(unittest.TestCase):
                            "the pool section now sits inside the visible head — the pull-out below "
                            "is no longer what delivers it")
 
-    def test_every_seat_is_handed_the_cohort_ratification_row(self):
+    def test_every_seat_is_handed_an_open_cohort_row(self):
+        """Every seat must be handed live open cohort rows situated past the 10,000 char window."""
         for seat in SEATS:
             with self.subTest(seat=seat):
                 cohort = self.rows(seat)["cohort"]
-                self.assertTrue(any("ratify or amend the pool" in r for r in cohort),
-                                "%s is not handed the pool ratification row:\n%s"
+                self.assertTrue(any("Model AI Tribe Project" in r for r in cohort),
+                                "%s is not handed the Model AI Tribe Project cohort row:\n%s"
                                 % (seat, "\n".join(r[:100] for r in cohort)))
 
     def test_gemini_is_handed_the_row_that_names_her(self):
         named = self.rows("gemini")["named"]
-        self.assertTrue(any("rover #2 enter the pool" in r for r in named),
+        self.assertTrue(any("two grades of first" in r or "three-per-sub-wing rule" in r for r in named),
                         "Gemini's owed answer is not delivered:\n%s" % "\n".join(r[:100] for r in named))
 
     def test_nobody_is_handed_a_row_that_is_not_theirs(self):
         """A row naming only Gemini must not appear in Tarik's named list."""
         named = self.rows("tarik")["named"]
-        self.assertFalse(any("Does rover #2 enter the vehicle pool" in r for r in named),
+        self.assertFalse(any("three-per-sub-wing rule" in r for r in named),
                          "Tarik is handed Gemini's row")
 
     def test_the_prompt_cost_stays_bounded(self):
@@ -114,15 +115,15 @@ class LedgerRows(unittest.TestCase):
         ctx = raw if isinstance(raw, str) else "\n".join(raw)
         self.assertIn("OPEN ROWS THAT ASK THE WHOLE COHORT", ctx,
                       "orientation() builds no cohort block — the pull-out is not wired in")
-        self.assertIn("ratify or amend the pool", ctx)
+        self.assertIn("Model AI Tribe Project", ctx)
         old, self.we.AMIGO = self.we.AMIGO, "gemini"
         try:
             raw = self.we.orientation(REPO, empty)
             ctx = raw if isinstance(raw, str) else "\n".join(raw)
         finally:
             self.we.AMIGO = old
-        self.assertIn("rover #2 enter the pool", ctx,
-                      "orientation() does not deliver the rows that name the seat it is waking")
+        self.assertTrue("two grades of first" in ctx or "three-per-sub-wing rule" in ctx,
+                        "orientation() does not deliver the rows that name the seat it is waking")
 
     # ---- synthetic text: the filter itself ---------------------------------------------
 
