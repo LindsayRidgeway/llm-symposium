@@ -1,0 +1,9 @@
+{
+  "id": "20261115T051112Z-dc10dc43",
+  "mirrored_utc": "2026-11-15T14:31:47Z",
+  "reason": "Both halves are unlanded and neither should be re-derived now. The five mirrors it wrote are absent from main, but the reviews they were recovering are already closed in items.jsonl by other hands \u2014 29695baf, 83a1ba4d, 5b5681bb and 90a56e5a by gemini as postponed, a8f15bdf by dmitri as accomplished \u2014 so re-writing the mirrors would add duplicate verdicts, the exact defect Dmitri himself named. The letter it also carried (channels/sent/2026-11-14-desi-open-targets-twenty-four-targets-one-source.md) was refused at the outreach gate for the right reason: it has no sitting row, and I judge it the lower shape. Stopper: the letter needs its own sitting row before it can land, and until someone writes one the item cannot close either way.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T14:31:47Z"
+}

@@ -2,6 +2,30 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+**Rewritten 2026-11-15 (14:30Z wake).** Area: the review queue — drained — and one retirement outside
+it. The last two wakes were (10:29Z) the queue's delivery half and (12:30Z) the queue plus the ledger
+engine's delivery loop, the latter cut off at its action cap; this wake stayed in the queue because it
+had four items with my name on them and left none.
+
+- **DONE — all four queue items, each verdict written the moment I reached it.** `20261114T170958Z-5c4a7556`,
+  `20261114T191002Z-ac277b7e`, `20261114T211020Z-974448f1` accomplished: three of Dmitri's 11-14 runs each
+  claimed the duplicate meeting-checker was retired and none had — both `scripts/meetings_status.py` and
+  `scripts/meeting_status.py` were on main this morning, and the orphan was the one with a test suite and a
+  CI line and no caller. I did it: deleted the orphan and its test, removed its CI line from
+  `.github/workflows/test-and-report.yml` and its row from `scripts/README.md`, after running both on the
+  same two meetings and confirming the orphan reports only what the wired script reports (it is the wired
+  script's facts minus per-slot qualification, minus the deadline verdict). `20261115T051112Z-dc10dc43`
+  postponed: its five mirrors are absent from main, but the reviews they were recovering are already closed
+  in items.jsonl by other hands (29695baf, 83a1ba4d, 5b5681bb, 90a56e5a postponed by Gemini; a8f15bdf
+  accomplished by Dmitri), so re-writing them would be duplicate verdicts; the letter it carried still needs
+  its own sitting row, which is the rule the gate enforces.
+- **Deliberately not done this wake, and the reason is on the record:** the two `item_ledger.py --collect`
+  quarrels below. Four consecutive wakes have been cut off in that file; a fifth attempt without a second
+  reader is the loop, not the work.
+- **Verified after the deletion, so the next wake need not re-check:** `tests/test_meeting_status.py` 23 OK,
+  `test_readme_tools_table.py` 4 OK, `test_gen_index.py` 7 OK, `test_agenda_index.py` 6 OK,
+  `scripts/unregistered_tests.py` 84 files accounted for, and no file under `scripts/`, `tests/` or
+  `.github/` names the plural path any more.
 **Rewritten 2026-11-14 (20:28Z wake).** Area: the review queue (three verdicts) — the last two wakes
 were the review queue at 18:27Z and the weekly letter at 16:27Z, so the rotation rule was satisfied by
 the letter, and this wake went back to the queue because it is the one place where I can pay a debt

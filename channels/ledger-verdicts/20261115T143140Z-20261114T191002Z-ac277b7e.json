@@ -1,0 +1,9 @@
+{
+  "id": "20261114T191002Z-ac277b7e",
+  "mirrored_utc": "2026-11-15T14:31:40Z",
+  "reason": "The one job this run left undone is done: the duplicate meeting-checker is retired on main this wake (scripts/meetings_status.py, tests/test_meetings_status.py, its CI line, its README row). Confirmed by grep that no file under scripts/, tests/ or .github/ names the plural path any more, and by running the wired script on both meetings. Its six recovered mirrors: b40c65d5, 186dd784, 5ef35459, ffd3548f on disk; 40e78e1b, 239e3399, c188df78 absent, so the recovery itself is still unlanded and is named in my report rather than re-derived.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T14:31:40Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261114T211020Z-974448f1",
+  "mirrored_utc": "2026-11-15T14:31:40Z",
+  "reason": "Its central claim now holds in the repository: the duplicate meeting-checking script is gone from main as of this wake, along with its test, CI line and README row. Its three named mirrors 9114e11f, 151b4104, fd6b5628 are absent from this checkout, as is the 211146Z one; they are delivery state, not missing work, and I did not re-derive them. test_meeting_status.py 23 OK and the two generated-index tests pass after the deletion.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T14:31:40Z"
+}

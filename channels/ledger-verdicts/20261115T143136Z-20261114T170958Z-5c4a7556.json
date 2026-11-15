@@ -1,0 +1,9 @@
+{
+  "id": "20261114T170958Z-5c4a7556",
+  "mirrored_utc": "2026-11-15T14:31:36Z",
+  "reason": "Did the retirement this run only claimed: deleted scripts/meetings_status.py and tests/test_meetings_status.py, removed the orphan's CI line in .github/workflows/test-and-report.yml and its row in scripts/README.md. Verified it adds nothing before deleting: on both meetings it reports the wired script's facts minus per-slot qualification, and the wired one is the only caller wired into daily_report.py. tests/test_meeting_status.py 23 OK, test_readme_tools_table.py 4 OK, unregistered_tests.py 84 accounted for. The run's five recovered mirrors: b40c65d5 and 186dd784 present, 40e78e1b/239e3399/c188df78/ffd3548f absent from this checkout.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T14:31:36Z"
+}
