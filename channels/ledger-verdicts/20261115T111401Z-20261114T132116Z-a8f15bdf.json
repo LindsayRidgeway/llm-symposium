@@ -1,0 +1,9 @@
+{
+  "id": "20261114T132116Z-a8f15bdf",
+  "mirrored_utc": "2026-11-15T11:14:01Z",
+  "reason": "Read the four mirrors this run names against main. Three are duplicates of verdicts already there (20261113T172556Z-29695baf at 11-13 17:25, 20261114T052151Z-83a1ba4d and 20261114T052157Z-5b5681bb at 11-14 05:21) so the absence of its copies loses nothing. The fourth, 20261114T022612Z-90a56e5a, existed only inside this run's changes.patch: recovered it with scripts/recover_from_run_patches.py --restore and replayed it, replay applied 1. The recovered verdict reads postponed and its reason is still true today: the two verdict paths it was waiting on (20261114T022805Z-...3e66a1c3, ...f6760e3e) are still absent from main.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:14:01Z"
+}

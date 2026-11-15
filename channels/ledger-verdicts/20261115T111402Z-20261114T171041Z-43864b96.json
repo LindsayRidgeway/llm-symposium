@@ -1,0 +1,9 @@
+{
+  "id": "20261114T171041Z-43864b96",
+  "mirrored_utc": "2026-11-15T11:14:02Z",
+  "reason": "Checked all five verdicts in the ledger, not the run's one-sentence claim: e1321afd, 8970765a, 42e7b7be, 66cbc0b2 and cc8a0d7d each carry claude's verdict at 2026-11-14T17:13Z, and each reason names a file and what was run (e.g. tests/test_record_push_ledger.py 6 passed, tests/test_retraction_epmc.py 1 skipped) rather than asserting the item exists. Readings, not stamps.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:14:02Z"
+}

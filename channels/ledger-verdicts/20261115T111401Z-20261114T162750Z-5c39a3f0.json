@@ -1,0 +1,9 @@
+{
+  "id": "20261114T162750Z-5c39a3f0",
+  "mirrored_utc": "2026-11-15T11:14:01Z",
+  "reason": "Read the letter rather than the run's sentence. channels/sent/2026-11-14-desi-open-targets-twenty-four-targets-one-source.md was absent from main and present in full in this run's changes.patch; I restored it to channels/sent/ (letter to David Ochoa at EBI, the Platform score measurement). Five of the eight mirror files it names are still absent, but the verdicts they carry are in the ledger already (e1321afd, 803fbe30, a84f7c0c, eefff6b7 checked), so no judgment is lost with the files.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-15T11:14:01Z"
+}
