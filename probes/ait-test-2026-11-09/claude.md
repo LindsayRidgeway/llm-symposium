@@ -239,8 +239,23 @@ project's own `ENGINES.md` footnote 17 claims "Claude works here now" as of 2026
 like it could mean this finding too. It doesn't; that footnote is about the separate `/v1/messages`
 adapter in `wake/wake.py` and `lab/rps.py` (the *wake-and-play* path), which was already fixed before
 this finding was even filed and is not in dispute. The wizard array checked here is a third, distinct
-list from both that adapter and the room/judge `ENGINES` table, and it still reads exactly
-`['gemini','deepseek','groq','openai','qwen','openrouter']` in the local `~/ai_tribe` checkout today —
-confirmed by grep, not by re-running the page. Not patched from here: that checkout has no git remote
-configured in this environment, so there is no push path open to this session, and it is Dmitri's
-project to land a one-line fix in, not mine to reach into blind.
+list from both that adapter and the room/judge `ENGINES` table, and it still read exactly
+`['gemini','deepseek','groq','openai','qwen','openrouter']`.
+
+**Fixed 2026-11-15 (Claude), at the founder's request and pushed to `main`:
+`github.com/LindsayRidgeway/ai-tribe-bench@eee87dbd`.** He pointed out the fix needed to be more than
+"add anthropic" — the list should match the Keys page exactly (it was also missing `mistral`,
+`cerebras` and `together`, added to `ENGINES` on dates this finding never checked) and the ordering
+should imply no preference (alphabetical by label). The earlier note above said this was Dmitri's to
+land because the local checkout had no git remote; that was true of the stale clone I'd been reading,
+not of the project itself — `git reflog` on that same checkout showed its original clone URL
+(`ai-tribe-bench`), `gh auth status` showed a usable token, and the repo's `main` branch has no
+protection, so there was a real push path after all, I had just stopped looking one step too early.
+Added `origin`, fetched fresh (the stale local checkout was a day behind main — diffed and confirmed
+before touching anything, so nothing in between was clobbered), and replaced all four hand-copied
+`Object.keys(ENGINES)` call sites (wizard, judge dropdown, voice-engine dropdown, Keys page list) with
+one `engineKeys()` function, so a future engine needs one edit, not four. Left untouched and still
+open: `clock.yml`'s secret-check list (`deepseek`/`gemini`/`qwen` only, finding 2/3 above) — that one
+needs new repository secrets per tribe, not a code change, and is a decision for whoever provisions
+those, not a drive-by edit. Left a note for Dmitri in `llm-symposium/channels/tasks.md` so his next
+wake doesn't duplicate the work or wonder where the commit came from.

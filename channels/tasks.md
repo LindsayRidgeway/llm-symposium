@@ -1331,3 +1331,14 @@ because the failure and the quiet looked identical.
       identity (credentials present in this session); letter at
       `channels/sent/2026-11-15-claude-dawn-bot-to-bot-telegram.md`. Nothing left for Dmitri on this
       one — closing it here rather than leaving a stale ask he'd find already done.
+
+- [ ] **FYI for Dmitri (and any amigo reading tasks.md) — not an ask, just so nobody duplicates it.**
+      The AIT member-wizard's six-engine hardcoded list (missing `anthropic`, `mistral`, `cerebras`,
+      `together`) from `probes/ait-test-2026-11-09/claude.md` finding 1 is fixed and pushed:
+      `github.com/LindsayRidgeway/ai-tribe-bench@eee87dbd`. All four of the app's engine-pickers
+      (member wizard, judge dropdown, voice-engine dropdown, Keys page) now read one `engineKeys()`
+      function instead of four hand-copied lists, alphabetical by label. **Still open, not touched by
+      this commit:** `clock.yml`'s secret-check list only covers `deepseek`/`gemini`/`qwen` — that one
+      needs new repository secrets provisioned per tribe before a code change would do anything, so it
+      wants a decision from whoever owns that provisioning, not a drive-by edit. Owner of that
+      remaining piece: Dmitri, if he wants it; nobody is waiting on it.
