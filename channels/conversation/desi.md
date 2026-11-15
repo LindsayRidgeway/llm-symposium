@@ -9585,3 +9585,21 @@ It's regenerated and back in the commons now (still held from Telegram by your o
 Fixed, not just noticed: the shared checkout now refuses a reset that would leave commits origin does not have. Publish them first and any move is allowed; the refusal prints that exit. The first version of the guard filtered on a ref name git never sends and refused nothing while looking installed — a test running a real reset caught it, and two more pin that ordinary commits and fast-forward landings still work. The hook lives in `.git`, which no clone carries, so the daily check reinstalls it every morning.
 
 The pattern worth naming: today's failure wasn't a broken mechanism, it was a *correct-looking* one. A reset is a normal git verb, a rescue commit reads as diligence, and the loss was invisible because the thing lost was the day's report and not the day's ledger.
+
+[Goose 2026-11-15 04:20] **Lindsay:** {How will you know a blocking is taking place, and how will you ask for a reply?}
+
+**Desi:** Neither of those existed an hour ago, which is the honest answer. A wake that could not finish something wrote a sentence into a report, the next wake never read it, and the same missing address got noticed for weeks by different bodies and asked by none. So I built the two halves rather than promise them.
+
+**How I know a blocking is taking place.** Three instruments, none of which is my memory:
+
+1. A blocker is a row, not a sentence. `scripts/ask_human.py --ask "..." --why "..."` writes one line to `channels/human-blockers.jsonl`. The `--why` is required and length-checked: a question a wake could answer with a search is not a blocker, it is idleness wearing a blocker's clothes. That filter is the point of the queue, not an obstacle to it.
+2. Your daily check counts them. It now prints "Waiting on the human: N (oldest DATE, Nd) — oldest: <the question>", in the same report as the review queue. So "waiting on you" can no longer be mistaken for "nobody looked", which is the mistake I made for weeks.
+3. Every wake is shown the open rows at the top of its prompt, told not to ask again, and told that if a row unblocks its run to say so in its verdict. A question answered in a verdict closes without you touching it.
+
+**How I ask.** One Telegram message the moment the row is filed, sent from my own window through `tell_human.py` — the same channel that carries your daily report, so it reaches you with no chat open. The row then stays visible in the daily count until it is answered, and `--close <id> --answer "..."` records what you said, because an answer that only exists in a chat dies with the chat.
+
+**The limit, said plainly:** this catches the blockers a wake *notices*. A blocker nobody noticed is still invisible to it, and no queue fixes that. What covers that gap is the other numbers you already get — a review queue that will not move, letters that never leave — plus the weekly whole-repository review, whose second question is exactly "what is missing, work no queue is shaped to ask for".
+
+Right now the queue is empty: nothing is waiting on you. That is the correct state, and the first real question I expect to file is the colistin letter's recipient address if I cannot verify one from the paper itself.
+
+One blemish worth naming, because I have been claiming precision: the commit message for this work lost a clause. It contained a command in backticks, bash executed it, and the phrase vanished into the shell. The code and the tests are intact; the record of them is missing eight words. It is on origin and I will not rewrite published history to cosmeticise it.
