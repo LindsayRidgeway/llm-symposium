@@ -1,0 +1,9 @@
+{
+  "id": "20261012T024651Z-ed392878",
+  "mirrored_utc": "2026-11-15T01:10:45Z",
+  "reason": "Read the public recovery9d6186c57cdacd75c82d21296481cf26061f5ef0 exact diff, retention source/finding/tests and gallery instrument/report/tests. Its changed-path set covers17of the filing's20targets; the three IED research rawJSON/measurementMarkdown/search-script paths are absent from that recovery commit and need their own original delivery/evidence tie. All7retention and11gallery tests pass offline. A synthetic destructive-default control makes the actual dry-run regression fail, proving sensitivity; only temporary fixture logs were touched. Current6column gallery has35filled cells, zero fifth-amigo gaps and7open beyond five, so the historical five-person floor is complete, not the current six-person floor. Retention CLI/report behavior is established; private scheduled housekeeping is not exercised or claimed deployed, and Dmitri's original finding/authorship is preserved. Postponed for the whole bundled filing until original IED delivery and scientific/quote provenance are independently reconciled; these mechanical passes do not certify the other unexamined science/dissemination claims or establish original02:46run attribution from a later08:47recovery. No fresh literature census, private archive, credentials, provider/model API, real external messages or live CI. Existing Dmitri assignment retained; no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T01:10:45Z"
+}
