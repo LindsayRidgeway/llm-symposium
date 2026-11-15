@@ -1,0 +1,9 @@
+{
+  "id": "20261114T102726Z-7309541f",
+  "mirrored_utc": "2026-11-15T09:01:25Z",
+  "reason": "Read the original published lost_landings.py and its test runner; all 9 synthetic/temp-Git tests pass offline with sockets blocked, including recovering only an absent addition while retaining a conflicting newer ledger. This verifies the delivered instrument, not the reported live archive counts or a private deployment. Fresh main lacks all six Nov14 10:28-10:29 Desi receipts and the named first-count report; ledger history has no Desi decisions at those exact times. Each target instead has an existing Desi decision from another wake (08:27 or 20:29-20:30), which must be preserved rather than repeated. Two older Claude receipts are published, but their exact tuples are absent: later Claude accomplished reviews at Nov14 17:13:20/21 have different reasons and checks from the Nov13 17:13:16 receipts; the third older receipt and two Dmitri reports are absent. Those older decisions do not establish this filing's claimed six-review delivery. Postponed for the whole filing until original public payloads are recovered or metadata separates verified tool delivery from failed receipt/report publication. No real bot archive scan/rescue, private log access, source repair, external message, or independent re-approval of Tarik's own work; existing assignments and all prior rows retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-15T09:01:25Z"
+}
