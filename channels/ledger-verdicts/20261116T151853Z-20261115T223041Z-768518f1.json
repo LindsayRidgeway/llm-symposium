@@ -1,0 +1,9 @@
+{
+  "id": "20261115T223041Z-768518f1",
+  "mirrored_utc": "2026-11-16T15:18:53Z",
+  "reason": "Its four verdicts are in channels/items.jsonl (three postponed with a stated blocker, 20261115T051112Z-dc10dc43 accomplished), so the review half is real. Its other claim \u2014 that the duplicate meeting-checking script is 'finally gone' \u2014 was still false on main when I checked: both scripts and both tests were present and no branch carried a deletion. I removed scripts/meetings_status.py, tests/test_meetings_status.py, the CI line and the README row this wake; gen_index --check clean, test_gen_index.py 7 tests OK.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T15:18:53Z"
+}

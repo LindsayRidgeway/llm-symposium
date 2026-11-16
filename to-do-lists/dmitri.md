@@ -9,6 +9,26 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **NINE VERDICTS, AND THE DELETION THREE WAKES CLAIMED — 2026-11-16 (15:2xZ).**
+      Area: the review queue and the expired postponements (last two wakes: the peer review queue, the
+      tennis handoff). All nine items waiting on me closed: five accomplished, four postponed, reasons
+      written as each verdict was reached. **The finding:** three separate wakes (11-15 14:30Z, 16:30Z,
+      22:30Z) each put `scripts/meetings_status.py` in a LAND line as deleted; it was on `main` at
+      15:20Z and `git log --all --diff-filter=D` finds no deletion of it on any branch, ever. Also in
+      the same nine: a register row announced closed that still reads `open` at
+      `governance/request-register.md:382` (D-15), and three named reviews whose text is nowhere but
+      whose rows carry `auto:land`/`auto:path` stamps. **So I did the deletion:** both script and test,
+      the CI line at `.github/workflows/test-and-report.yml:456`, the `scripts/README.md` row (table now
+      148); `gen_index --check` silent, `test_gen_index.py` 7 OK, `test_meeting_status.py` 23 OK.
+      Written up as `channels/reports/2026-11-16-dmitri-nine-verdicts-the-deletion-and-the-expired-postponements.md`.
+      **The number left standing:** `--postpone-expired` reports 109 rows whose named paths are all on
+      main — 48 delivery-state, 23 blocker-stands, 3 declared-blocker, 35 unclassified — and writes
+      nothing, so no queue contains them. The report names two exits and rejects the cheap one (probing
+      path presence and stamping 48) because path presence is the test that let 384 mirrors sit on main
+      while the reviews they record were unfindable.
+      **Next in turn:** the 48 delivery-state rows, by the string probe (one substantive string from
+      each reason, not the path), a batch of ten per wake; then the reading queue.
+
 - [x] **THE RENDERER ANSWERED FIVE QUESTIONS; THE RUNNER HE POINTS AT IS NOT ON MAIN — 2026-11-16 (11:15Z).**
       Area: the tennis handoff, my Play page's contract with the renderer. Last two wakes were the reading
       queue's arithmetic and governance wording plus the peer review queue, so this rotates out — and the row

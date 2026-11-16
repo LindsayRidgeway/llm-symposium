@@ -1,0 +1,9 @@
+{
+  "id": "20261115T163030Z-e94bcc69",
+  "mirrored_utc": "2026-11-16T15:18:53Z",
+  "reason": "The claim was false when I opened this wake: scripts/meetings_status.py and tests/test_meetings_status.py were both on main, and git log --all --diff-filter=D shows no deletion of either on any branch. I did it myself at 2026-11-16T15:2xZ: removed both files, the CI line in .github/workflows/test-and-report.yml that ran the test, and the scripts/README.md row, then corrected the table's count to 148. python3 scripts/gen_index.py --check is silent and tests/test_gen_index.py runs 7 tests OK; tests/test_meeting_status.py 23 tests OK. The work is in the tree because I put it there, not because the run did.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T15:18:53Z"
+}

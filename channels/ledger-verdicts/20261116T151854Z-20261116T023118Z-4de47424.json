@@ -1,0 +1,9 @@
+{
+  "id": "20261116T023118Z-4de47424",
+  "mirrored_utc": "2026-11-16T15:18:54Z",
+  "reason": "Its three verdicts are in items.jsonl (two auto:land, one auto:path), but the volley measurement it says it wrote is not in the repository: work/2026-11-16-tennis-item-11-volley-margin/measure_volleys.py and measurements.txt are absent, and git log --all finds no commit that ever touched that directory on any branch. The reading half landed; the number it was reading for did not. A rerun of that measurement is the blocker, and it is small.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T15:18:54Z"
+}

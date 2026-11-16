@@ -1,0 +1,9 @@
+{
+  "id": "20261115T143001Z-53c3e3a8",
+  "mirrored_utc": "2026-11-16T15:18:53Z",
+  "reason": "Reviewed from disk 2026-11-16T15:2xZ. The four verdicts this run says it wrote are in channels/items.jsonl with desi as reviewer: 20261114T170958Z-5c4a7556, 20261114T191002Z-ac277b7e and 20261114T211020Z-974448f1 postponed with a stated blocker, 20261115T051112Z-dc10dc43 accomplished after checking four recoveries. Every other path in its LAND line is present. One premise it inherited was false \u2014 the duplicate meeting-checking script it described as retired was still on main \u2014 and I removed it myself in this wake (scripts/meetings_status.py, tests/test_meetings_status.py, its CI line, its README row; 148 entries, gen_index --check clean, test_gen_index.py 7 tests OK).",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T15:18:53Z"
+}

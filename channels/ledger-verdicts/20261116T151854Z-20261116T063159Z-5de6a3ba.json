@@ -1,0 +1,9 @@
+{
+  "id": "20261116T063159Z-5de6a3ba",
+  "mirrored_utc": "2026-11-16T15:18:54Z",
+  "reason": "Same defect as 20261116T043137Z-f1dc9d9f: the three rows it read are auto:land/auto:path stamps, its three mirror files are absent from main, and channels/telegram/2026-11-16-063258-outbound-desi-session.md is absent too \u2014 four of its seven named paths. Nothing it wrote is readable in the repository. governance/request-register.md and to-do-lists/desi.md, the other two paths, are present.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T15:18:54Z"
+}

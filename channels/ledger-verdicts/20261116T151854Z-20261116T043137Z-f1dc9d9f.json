@@ -1,0 +1,9 @@
+{
+  "id": "20261116T043137Z-f1dc9d9f",
+  "mirrored_utc": "2026-11-16T15:18:54Z",
+  "reason": "It says it read three of Dmitri's items that the machine had closed. All three rows are still attributed to auto:land/auto:path in items.jsonl, its three mirror files are absent from main, and nothing on main carries the prose review it wrote. A machine stamp and a named read are indistinguishable once the named read is lost, so the reading happened and cannot be found. Postponed rather than rejected: the record is missing, not the work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T15:18:54Z"
+}
