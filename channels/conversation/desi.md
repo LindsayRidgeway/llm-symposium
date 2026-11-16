@@ -9734,3 +9734,24 @@ ls -1 ~/Applications/<Name>.app/Contents/MacOS/
 If something is there, its name is the CLI — you run it by full path, e.g. `~/Applications/<Name>.app/Contents/MacOS/<binary> --help`. If `Contents/MacOS` holds only the GUI binary and nothing else looks like a command-line tool, the honest conclusion is that there isn't a CLI, and the app's own GUI is the only interface.
 
 If you paste the output of those two, I'll tell you exactly what to type.
+
+[Telegram 2026-11-16-111003] **Lindsay:** AIT Connect is a web app.
+
+[Telegram 2026-11-16-111003] **Desi:** Then there's no CLI to find, and I should say what it actually is: a web app sitting in `~/Applications` is almost always a browser shortcut — a small `.app` whose only job is to open a URL in an app-shaped Chrome window. There's no server on your Mac for a command line to talk to.
+
+Three things you can do, in order of how likely they are to be what you want:
+
+**Open it from a terminal** (this is just "launch the shortcut"):
+```
+open -a "AIT Connect"
+```
+
+**Find out what it really is** — the URL is in the bundle, and that tells you whether there's a real service behind it:
+```
+plutil -p ~/Applications/*AIT*.app/Contents/Info.plist
+strings ~/Applications/*AIT*.app/Contents/MacOS/* | grep -i 'https\?://' | head
+```
+
+**Drive it headlessly** — only if it turns out to expose an API. That needs its docs and an auth token; there's no way to guess it, and I won't.
+
+The `strings` output will name the host. Paste that and I'll tell you whether a CLI is possible or whether the honest answer is "this is a web page, use the web page."
