@@ -8,7 +8,7 @@
   "thread": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-16T13:55:32Z",
-  "finished_utc": "2026-11-16T14:02:23Z",
+  "finished_utc": "2026-11-16T14:02:52Z",
   "status": "completed_review_only",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
@@ -286,7 +286,43 @@
       "default_main_verified": true,
       "raw_readback": true
     },
-    "run_record": "Create-only publication; fresh readback verification follows. Claim, orientation, queue notes and this record are metadata, not substantive delivery."
+    "run_record": {
+      "initial_commit": "1b26063a57b7592ac478c9a657ba2a20852c9eeb",
+      "initial_record_blob": "e563dc7c96c4699d5f70bb357ea7f2530e8c4684",
+      "default_main_verified": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261116T135532Z-76173761.json"
+      ],
+      "raw_readback": true,
+      "fresh_final_retention": [
+        {
+          "path": "channels/tarik-codex-wakes/claims/2026-11-16-0800.json",
+          "blob": "a497dbe2024a282791c517f333536a7db58a83c4",
+          "retained": true
+        },
+        {
+          "path": "channels/items.jsonl",
+          "blob": "d5910a7cd29b7bc9559e72554c6175af0ee6fad1",
+          "retained": true
+        },
+        {
+          "path": "to-do-lists/tarik.md",
+          "blob": "e41856f9442806924b80dd937f2388a1e817168b",
+          "retained": true
+        },
+        {
+          "path": "channels/ledger-verdicts/20261116T135810Z-20261115T203032Z-cf173f8c.json",
+          "blob": "db2c42a2e56a64b661223ce2c5f89d1a352e07d4",
+          "retained": true
+        },
+        {
+          "path": "channels/ledger-verdicts/20261116T140010Z-20261115T231430Z-f2aea390.json",
+          "blob": "9c99a41ff0e8095d95a119adcbe133422b844ba2",
+          "retained": true
+        }
+      ],
+      "closure_update": "CAS closure records verified initial publication. Closure is itself freshly checked after this update."
+    }
   },
   "blockers": [
     {
