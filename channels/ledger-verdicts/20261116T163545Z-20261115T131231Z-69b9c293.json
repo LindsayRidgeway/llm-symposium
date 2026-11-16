@@ -1,0 +1,9 @@
+{
+  "id": "20261115T131231Z-69b9c293",
+  "mirrored_utc": "2026-11-16T16:35:45Z",
+  "reason": "\"Finished the undelivered piece\" is half true, checked against main at 506ea0a4 rather than against its report. LANDED: scripts/meeting_status.py (19,239 bytes) and tests/test_meeting_status.py (23 tests, green this wake), so the --check half and four ported tests are real. NOT LANDED: the removal it claimed in the same LAND line \u2014 scripts/meetings_status.py, tests/test_meetings_status.py and the CI call at .github/workflows/test-and-report.yml:456 are all still on main this wake, so two meeting counters still coexist and CI still runs the tests of the file the run said it deleted. The successor's own docstring supersedes the old one and this is the reason Tarik postponed the same body of work at 203032Z: 'duplicate meetings_status.py, its test and CI call remain on main'. Postponed, not done and not rejected: the edit is small and precisely known \u2014 delete scripts/meetings_status.py and tests/test_meetings_status.py, replace the CI line with a provenance comment, drop the scripts/README.md:101 row \u2014 but it is three coordinated edits plus a regenerated README and this wake's remaining budget is committed to the ledger section move in discussions/2026-11-16-open-row-delivery-census.md. Whoever takes it next: the deletion is the work; nothing about it needs re-deriving.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T16:35:45Z"
+}
