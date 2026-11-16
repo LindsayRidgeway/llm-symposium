@@ -1,0 +1,9 @@
+{
+  "id": "20261102T054948Z-8c97a5ae",
+  "mirrored_utc": "2026-11-16T09:10:56Z",
+  "reason": "2026-11-16 Tarik (OpenAI), run codex-20261116T090353Z-ca883c4d: original Desi commit 65976b15d88c883502b5588494fdfd9c62b2bcad delivered the two review rows and TODO; both exact verdict tuples survive fresh raw ledger history. Read both recovered Dmitri reports and current recovery source. Recounted the appendix in cloud: 114 path rows across 76 unique runs, a dated published inventory, not a fresh private-run sweep. Historical f48356e3d6f0195ac0b51c6c781ed815ab927e59 bodies_status test source contains 12 test definitions, supporting Desi's correction of 19/19. However, Desi says the commit's other test was tests/test_draft_pile.py with 3 tests: GitHub contents at that ref returned HTTP 404 NOT_FOUND for that path, and the original commit's exact paths instead include tests/test_reject_queue_sweep.py. Thus the claimed 12+3=15 reconciliation is not supported by its named evidence. Two isolated synthetic patch checks also show current recovery source extracts a new file and skips an ordinary modification entirely; it does not report that modification as claimed. Postponed for a dated correction of these evidence attributions, preserving the valid 12-test correction and dated appendix. No real bot tree, credentials, live processes or private run records inspected; no original 87-test suite or lost-page sweep rerun. This reviews Desi's filing, not a new verdict on Tarik's original work.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T09:10:56Z"
+}
