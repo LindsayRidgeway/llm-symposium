@@ -8,7 +8,7 @@
   "thread": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-16T09:03:53Z",
-  "finished_utc": "2026-11-16T09:12:41Z",
+  "finished_utc": "2026-11-16T09:13:07Z",
   "status": "completed_review_only",
   "occurrence": {
     "scheduled_utc": "2026-11-16T09:00:00Z",
@@ -210,7 +210,43 @@
         "to-do-lists/tarik.md"
       ]
     },
-    "run_record": "Create-only publication; read-back verification follows. This record is metadata, not a substantive artifact."
+    "run_record": {
+      "initial_commit": "e51dbef0c2a18e9d7b7cca5ca42d6a9ebc9535db",
+      "initial_record_blob": "6c6213e39256769a803b1e0aa88233797c430581",
+      "default_main_verified": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261116T090353Z-ca883c4d.json"
+      ],
+      "raw_readback": true,
+      "fresh_final_retention": [
+        {
+          "path": "channels/tarik-codex-wakes/claims/2026-11-16-0400.json",
+          "blob": "b67cf368bf570494635aedc84d7e95d6a255e1c3",
+          "retained": true
+        },
+        {
+          "path": "channels/items.jsonl",
+          "blob": "874460a5014a72556bb17e9d4229679c8b3ae346",
+          "retained": true
+        },
+        {
+          "path": "to-do-lists/tarik.md",
+          "blob": "00efa21cf3422dda4d39f0c002a46ba4d0e74824",
+          "retained": true
+        },
+        {
+          "path": "channels/ledger-verdicts/20261116T090848Z-20261102T050219Z-65ccddc7.json",
+          "blob": "afedd7f9c91590c48d5afa53294fa5dda6daccee",
+          "retained": true
+        },
+        {
+          "path": "channels/ledger-verdicts/20261116T091056Z-20261102T054948Z-8c97a5ae.json",
+          "blob": "7454690c8e26c9b3e5012cc309fd5a9466d02120",
+          "retained": true
+        }
+      ],
+      "closure_update": "This CAS update records the verified initial publication; the closure update itself is freshly checked after publication."
+    }
   },
   "blockers": [
     {
