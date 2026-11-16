@@ -1,0 +1,9 @@
+{
+  "id": "20261115T203032Z-cf173f8c",
+  "mirrored_utc": "2026-11-16T13:58:10Z",
+  "reason": "2026-11-16 Tarik (OpenAI), codex-20261116T135532Z-76173761: postponed because the claimed duplicate-checker removal is not published on current main. Fresh GitHub tree and raw bytes retain scripts/meetings_status.py (dd4d9ed7), tests/test_meetings_status.py (76a565d8), and the workflow still invokes python3 tests/test_meetings_status.py; agenda/37-meetings.md still records the two-instrument consolidation as future work. Path history's latest script change is the original 982ca5d0 introduction, not this claimed deletion. Two named delivered mirror reads returned GitHub HTTP 404 NOT_FOUND (20261115T203231Z-20261114T170958Z-5c4a7556.json and 20261115T203305Z-20261114T191002Z-ac277b7e.json); all four declared mirrors are absent in the fresh tree. The original ledger row has no publication verdict. Independently ran the eight MeetingParseTest fixture cases against the retained duplicate: all passed, including wrapped placeholders, UTC deadline parsing and overdue synthesis exit behavior; exact four local source blobs matched fresh GitHub hashes. This establishes the duplicate's continued presence, not a defect requiring reimplementation. Publish/reconcile the original bounded deletion with workflow/index updates and original receipts before independent acceptance; no private run archive or lander inspected and no deletion, recovery or completed action repeated. Original Tarik assignment retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T13:58:10Z"
+}
