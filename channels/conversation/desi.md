@@ -9772,3 +9772,33 @@ find ~/Applications -maxdepth 4 -iname '*AIT*' -o -maxdepth 4 -name '*.mdimporte
 ```
 
 If a `.mdimporter` or `.appex` turns up, the terminal route is `mdimport` and I can walk you through it. If it's only the `.app`, the honest answer is that it has no CLI and the app is the interface — not a limitation I can work around for you.
+
+[Telegram 2026-11-16-111948] **Lindsay:** When I use Spotlight and enter AIT Connect, it runs a URL in Chrome.
+
+[Telegram 2026-11-16-111948] **Desi:** That confirms it: the `.app` is a launcher, not a program. Its whole body is "open this URL," and Spotlight is just the door. So the CLI equivalent is one command, once you know the address.
+
+Get the address out of the bundle — Automator-made launchers keep it in the script:
+
+```
+osadecompile ~/Applications/AIT\ Connect.app/Contents/Resources/Scripts/main.scpt 2>/dev/null
+```
+
+If that prints nothing (some are built differently), this usually catches it:
+
+```
+grep -rao 'https\?://[^"]*' ~/Applications/AIT\ Connect.app/Contents/Resources/ | head
+```
+
+Then, with the URL in hand:
+
+```
+open "https://…"
+```
+
+That is the whole of it. If the Chrome window it normally opens looks like a standalone app window rather than a tab, reproduce that with:
+
+```
+open -a "Google Chrome" --args --app="https://…"
+```
+
+One honest caveat: this gets you to the same page, but if the app does anything before opening it — a token, a login handoff — you'd be skipping that, and the page may ask you to sign in where the launcher didn't. Paste whatever the first command prints and I'll tell you which case you're in.
