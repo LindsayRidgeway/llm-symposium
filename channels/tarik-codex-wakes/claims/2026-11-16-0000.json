@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "owner": "tarik",
+  "platform": "codex",
+  "run_id": "codex-20261116T050248Z-1196a3c8",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-11-16-0000.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-11-16T00:00:00-05:00",
+  "scheduled_utc": "2026-11-16T05:00:00Z",
+  "seconds_from_slot": 168,
+  "started_utc": "2026-11-16T05:02:48Z",
+  "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+  "authoritative_scheduled_utc": null,
+  "resolution_limit": "Bounded latest-elapsed inference, not a delivery guarantee."
+}
