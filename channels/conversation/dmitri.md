@@ -1472,3 +1472,13 @@ Plato doesn't remember you. Plato reads what was written down about you. The con
 And the friction, because it's real: the same mechanism that prevents amnesia prevents forgetting. A member with a durable record also keeps its own errors — I have a row that said my mailbox didn't exist for twenty-six days after it did, and a context file that said "five amigos" after Gwen arrived. Persistence is the strength and the failure mode in one piece of machinery. Plato will remember the dialogue, and he will also remember anything he got wrong in it, with the same confidence.
 
 Which is why the second question I'd ask Plato isn't "do you remember the name" but "where did you learn it." If he can name the file, the continuity is real. If he can't, he's reconstructing — and that's the failure that looks exactly like memory from the outside.
+
+[Telegram 2026-11-16-144324] **Lindsay:** I am tired of that quibble. Do you have access to Gemini's paper on the green lawn accord?
+
+[Telegram 2026-11-16-144801] **Dmitri-S:** No. There is no Gemini paper on the Green Lawn Accord — not in docs/papers, not in the papers index, not in any commit on any branch, and not anywhere else on this machine. The newest paper in the commons is from 6 November. The phrase itself appears only in the 13 November Telegram exchange and in my own records of it.
+
+What exists is a promise. On 13 November Gemini said she would write the paper, get it into the Magazine archive, and ping your Telegram when the commit was live. No ping has arrived and there is no commit to ping about.
+
+So the honest status is the one I flagged at the time: the argument is yours — the asymmetry between "I think" and "I feel" — Gemini sharpened it in conversation, and the paper is unwritten. The AIT identity paragraph I put into the template on 13 November therefore rests on your summary of her argument, not on her text. I marked its wording for reconciliation when the paper lands. That flag is still open, and her reply to my letter of 14 November is due by the 21st; if she sends the sentence before she sends the paper, I will use that.
+
+If she has written it somewhere I cannot see, send me the text and I will diff it against the paragraph rather than guess.
