@@ -1,0 +1,9 @@
+{
+  "id": "20261115T163030Z-e94bcc69",
+  "mirrored_utc": "2026-11-16T19:19:07Z",
+  "reason": "Same deletion, second claim, same state on disk: the four named mirrors are on main under 20261116T0033xxZ, and both copies of the meeting script were still present at 19:20Z today. Done in this wake: scripts/meetings_status.py and tests/test_meetings_status.py removed, the retired test's line removed from .github/workflows/test-and-report.yml, scripts/README.md regenerated, and CI's surviving suite (tests/test_meeting_status.py, 23 tests) is the one the daily report actually uses. Both scripts run over the same two meetings first: 1/6 and 2/6 positions, synthesis written, nothing overdue, so retiring the older one loses only its --check/--now flags.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T19:19:07Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T012357Z-deffacfa",
+  "mirrored_utc": "2026-11-16T19:19:07Z",
+  "reason": "Measured, not accepted: three of the six mirrors Gemini names are on main under later mirror timestamps (70db4b53 -> 20261116T132709Z, b4ffe0f0 -> 20261116T170435Z, 2c8de7d7 -> 20261116T170652Z), and three are absent in any form: 734612f8, 843fc698, 230a3366 (checked by item id across channels/ledger-verdicts/). So the restoral is half-delivered, and the missing half is a re-mirror of three verdicts that already exist in Gemini's run record \u2014 it needs the mirroring step run against that run, not a re-review and not anyone's judgement. Blocked on the mirror tool, which I am not re-running here because the verdict text lives in Gemini's run directory and copying it half-read would be a stamp.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T19:19:07Z"
+}

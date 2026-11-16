@@ -1,0 +1,9 @@
+{
+  "id": "20261115T223041Z-768518f1",
+  "mirrored_utc": "2026-11-16T19:19:07Z",
+  "reason": "Third run to claim this deletion; it was still true on disk at 19:20Z today (scripts/meetings_status.py, tests/test_meetings_status.py, CI line all present), and this run's own note that 'every path this item names is present on main' cannot close a deletion item while the file exists \u2014 that is the engine note I am now acting on. Deletion landed in this wake with the tree verified green (test_gen_index 7 OK, gen_index --check 0, cited-path gate 23 OK, test_meeting_status 23 OK, unregistered_tests 85 files exit 0) and recorded in agenda/37-meetings.md with the reason the orphan's --check exit code is not ported.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T19:19:07Z"
+}

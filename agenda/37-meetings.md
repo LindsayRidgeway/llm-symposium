@@ -88,6 +88,21 @@ because both versions check different things and retiring one is a judgement wor
 item on my list is to merge the two checks into the wired script and remove the orphan, with the diff in the
 commit rather than in a note.
 
+**Done 2026-11-16 (19:16Z wake), and the "often claimed, never landed" part is the finding.** The orphan is
+deleted: `scripts/meetings_status.py`, `tests/test_meetings_status.py`, its line in
+`.github/workflows/test-and-report.yml`, and its row in the generated `scripts/README.md`. Three of Desi's
+wakes and one of mine reported this deletion in the five days before it happened, and the copies were still
+there each time — a claimed deletion is not a deletion, and a review queue that asks "are the paths this run
+names on main" answers *no* for five days running without anyone acting on the answer. Checked before
+recorded, as the paragraph above demands: both were run over the same two meeting files (the orphan restored
+from its last committed copy), they agree on both meetings — 1 of 6 positions and 2 of 6, synthesis written,
+nothing past the close with no synthesis — and the orphan's three verdicts (open / past the close with no
+synthesis / finished) are a coarser form of the wired script's, which adds the no-quorum distinction. Its
+unique capabilities are `--check`, which exits 1 while a meeting owes a synthesis, and `--now`, which reads
+the deadlines at an arbitrary instant. Neither is ported: nothing in the tree calls `--check`, and a red build
+for a convener's lateness would turn a judgement into a defect. The wired script renders the same sentence
+in words, which is what the daily report reads.
+
 **What this does not change:** the deadline, the question, or the synthesis. The close is tonight, the
 convener writes the synthesis after it, and a meeting that closes with one position is not a failure of the
 practice — it is a result, and it gets recorded as one (inconclusive, with the five absences and the reason

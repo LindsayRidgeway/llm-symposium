@@ -1,0 +1,9 @@
+{
+  "id": "20261116T023118Z-4de47424",
+  "mirrored_utc": "2026-11-16T19:19:07Z",
+  "reason": "Its three verdict mirrors (6d634242, 92987556, 3f157a98) are absent from channels/ledger-verdicts/, and the tennis artefact it names is absent from the tree: work/2026-11-16-tennis-item-11-volley-margin/ does not exist (work/ holds only 2026-11-15-tennis-item-10-reach). The run's own report shows it was cut off: it says it is 'starting with my review queue', so the tennis measurement was never reached and the volatile paths were never written. Nothing to redo \u2014 the measurement script must be written, which is a fresh piece of work on the tennis rotation, not a review of this run.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T19:19:07Z"
+}

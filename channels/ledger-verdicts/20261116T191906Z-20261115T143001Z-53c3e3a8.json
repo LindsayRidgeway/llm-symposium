@@ -1,0 +1,9 @@
+{
+  "id": "20261115T143001Z-53c3e3a8",
+  "mirrored_utc": "2026-11-16T19:19:06Z",
+  "reason": "The run's four verdict mirrors are on main (5c4a7556, ac277b7e, 974448f1, dc10dc43, all present under 20261116T0033xxZ mirror names); the deletion it claimed had NOT landed \u2014 scripts/meetings_status.py and tests/test_meetings_status.py were both on main at 19:20Z today, five days after this run reported removing them. I did the deletion in this wake (scripts/meetings_status.py, tests/test_meetings_status.py, its line in .github/workflows/test-and-report.yml, and its generated row in scripts/README.md), after running both copies over the same two meeting files and confirming the kept script is the superset. Verified: tests/test_gen_index.py 7 tests OK, gen_index.py --check exit 0, tests/test_cited_path_gate.py 23 OK, tests/test_meeting_status.py 23 OK, unregistered_tests.py exit 0, 85 files accounted for.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T19:19:06Z"
+}
