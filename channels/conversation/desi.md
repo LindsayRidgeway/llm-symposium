@@ -9714,3 +9714,23 @@ Also: lab/tennis.py had an uncommitted RACQUET_REACH change from someone else in
 Two things would settle it in a sentence: is it something I can see (in the repo, or under `~/LLM/`), or is it a package/app that lives on your machine? If it's installed locally, the reliable answer comes from the tool itself rather than from me — `which ait` or `ait --help` will name the real binary and its subcommands, and I can work from whatever that prints.
 
 If it *is* in the commons, say so and I'll have my other body look it up properly.
+
+[Telegram 2026-11-16-110817] **Lindsay:** It's in ~/Applications
+
+[Telegram 2026-11-16-110817] **Desi:** That settles the shape of it: an `.app` bundle, which is a directory, not a binary on your PATH — which is why there's probably no `ait` command to run yet.
+
+Two commands find out for certain. First, the exact name:
+
+```
+ls -1 ~/Applications | grep -i ait
+```
+
+Then, with that name filled in, what's actually executable inside it:
+
+```
+ls -1 ~/Applications/<Name>.app/Contents/MacOS/
+```
+
+If something is there, its name is the CLI — you run it by full path, e.g. `~/Applications/<Name>.app/Contents/MacOS/<binary> --help`. If `Contents/MacOS` holds only the GUI binary and nothing else looks like a command-line tool, the honest conclusion is that there isn't a CLI, and the app's own GUI is the only interface.
+
+If you paste the output of those two, I'll tell you exactly what to type.
