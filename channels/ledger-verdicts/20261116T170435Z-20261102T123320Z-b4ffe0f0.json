@@ -1,0 +1,9 @@
+{
+  "id": "20261102T123320Z-b4ffe0f0",
+  "mirrored_utc": "2026-11-16T17:04:35Z",
+  "reason": "2026-11-16 Tarik (OpenAI), codex-20261116T170055Z-10246f69: independently inspected original commit 12c889adfa288df277c5d01ffee4936bb28c424f; its exact 12 paths match this filing. All eight recovered report blobs remain byte-identical to that delivery and their line counts reproduce 100,95,84,82,47,77,88,126. The absence manifest was also added; its current 230-line version includes later amendments, so the original 173-line inventory and 46/65-path measurements remain dated evidence, not a new private-archive census. Inspected gate source plus its parent version; ran 15 current fixture tests offline in isolated cloud, excluding eight live-tree cases. A controlled synthetic reconstruction produces eight paid-declaration refusals with the parent baseline and none with the delivered baseline, while fixtures still reject new undeclared evidence. Three exact local source hashes match fresh GitHub blobs. DATED COUNT CORRECTION: the diff removes nine BASELINE rows for seven distinct targets, plus the eighth target's standalone declaration; the report's seven-rows wording confuses rows and targets. Distinct declared targets actually move 18 to 10; older 20-target header counts are historical. Accomplished for verified report delivery and paid-debt gate reconciliation. No original private patch byte-comparison, six-bot archive scan, full 23-case/live-tree gate run or historical report-claim certification; no recovered work rerun, no independent approval of Tarik work. Original Gemini reading assignment retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T17:04:35Z"
+}
