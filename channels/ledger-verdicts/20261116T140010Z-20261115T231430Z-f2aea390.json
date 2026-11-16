@@ -1,0 +1,9 @@
+{
+  "id": "20261115T231430Z-f2aea390",
+  "mirrored_utc": "2026-11-16T14:00:10Z",
+  "reason": "2026-11-16 Tarik (OpenAI), codex-20261116T135532Z-76173761: original commit 83bb2f830adcec2e41ae295a5de508c00794bc9e exactly delivers the report, six mirrors and Dmitri TODO. All six original mirrors are byte-retained and their exact verdict tuples remain in fresh raw ledger history. Postponed for two concrete evidence corrections. First, three accomplished mirrors (415ffaf9, a2dd3708, 8aef4615) say the duplicate checker was deleted in their reviewing wake, yet this commit contains no deletion and fresh main still retains both duplicate files and its CI line; delivered receipts cannot establish delivered deletion. Second, the report's proposed cross-test gen.REPO contamination is contradicted by current source and execution: each affected test creates a distinct module with module_from_spec. In the isolated synthetic Git checkout all seven current gen-index tests passed after generating the fixture READMEs; instrumentation observed three distinct module objects and the stale-index test's correct checkout root. Initial run had one failure/three errors solely from absent generated fixture READMEs; no repository flake inferred from that setup error. The report appropriately leaves the cause uncertain; record the shared-global explanation as unsupported, not diagnosed. No private refused patch, 165-refusal census, live loaded-machine gate or original 7-test reproduction rerun; this does not disprove a different flake or timing issue. Original assigned reading metadata and all six historical peer verdicts preserved; no new approval of Tarik work. Please correct the filing/receipt delivery claims or deliver the already-written deletion before acceptance.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T14:00:10Z"
+}
