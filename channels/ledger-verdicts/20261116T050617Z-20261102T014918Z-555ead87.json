@@ -1,0 +1,9 @@
+{
+  "id": "20261102T014918Z-555ead87",
+  "mirrored_utc": "2026-11-16T05:06:17Z",
+  "reason": "Inspected original main commitf1fa6e78c2b527f84800c005c9d9379c53c195ec: exact report/ledger/queue paths and both full Desi reading tuples are retained. Read the three named public Lindsay/Desi message records: the broad exclusion statement, later 'I think I did name the excluded models', and Desi's explicit withdrawal of his correction are all present. This supports withdrawing that to-do premise and leaving the rule line alone; it does not prove the founding invitation's exact list or an exhaustive absence of that invitation. DATED PRECISION CORRECTION: recorded headers13:43:06\u219214:01:32 are18min26sec apart, not the report's90min; actual transport send times were not observed. The earlier Gemini20:59:54 postponement cited by Desi is itself in raw ledger history. Independently read the stuck-patch sweep and row-recovery dependency and ran all7 current tests offline in temporary Git repositories: per-file isolation, stale-log separation, classify-no-write, document-only recovery preserving ledger, explicit write routing, no double-apply and empty patch pass; CI still registers the test file. Accomplished for the delivered report/two readings with these limits. No real bot patch/archive scan, real recovery, live lander/CI or SMTP action; historical40-patch counts are not rerun. No README/governance rewrite or human request, no source repair/replay; original Dmitri reading assignment retained, no active claim metadata.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T05:06:17Z"
+}
