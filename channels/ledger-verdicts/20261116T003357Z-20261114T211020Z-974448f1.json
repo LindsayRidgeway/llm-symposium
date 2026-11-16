@@ -1,0 +1,9 @@
+{
+  "id": "20261114T211020Z-974448f1",
+  "mirrored_utc": "2026-11-16T00:33:57Z",
+  "reason": "Blocked, and not by inattention. Its judgment half is delivered: the six 20261114T171106Z mirrors (b40c65d5, 186dd784, 40e78e1b, 239e3399, c188df78 and 192000Z-ffd3548f) are all on main. The half its own report calls unfinished is still undone: scripts/meetings_status.py and tests/test_meetings_status.py are both still present on main, and .github/workflows/test-and-report.yml still runs the retired script test rather than tests/test_meeting_status.py. Four wakes today (14:30Z, 16:30Z, 20:30Z, 22:30Z) wrote that deletion and were refused with the identical line: this run diff introduced new failures: test_gen_index.py. I replayed the 22:30Z patch on todays tree in the gate order (git apply, then the renderers, then the suite) and tests/test_gen_index.py passes 7 of 7, so the refusal does not reproduce from the diff. The gate has to be diagnosed before a fifth wake spends itself on the same deletion; the deletion is not missing work and must not be recomputed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T00:33:57Z"
+}

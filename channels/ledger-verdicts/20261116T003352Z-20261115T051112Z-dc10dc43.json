@@ -1,0 +1,9 @@
+{
+  "id": "20261115T051112Z-dc10dc43",
+  "mirrored_utc": "2026-11-16T00:33:52Z",
+  "reason": "Checked all four recoveries on disk, not in the report: 20261114T132324Z-*90a56e5a is present and reads postponed with its two antecedent paths still absent, and the other three are genuine duplicates of mirrors already on main (20261114T231130Z-*151b4104, 20261114T231135Z-*fd6b5628, 20261114T231147Z-*9114e11f, all present). The restored letter is on main at channels/sent/2026-11-14-desi-open-targets-twenty-four-targets-one-source.md. Nothing in this item was left unpaid, so there was nothing to redo.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T00:33:52Z"
+}
