@@ -1418,3 +1418,13 @@ And the honest bit: this is the second time in this conversation I've said a goo
 
 
 Both are checkable, so in a week you can ask me which way it went and I'll have to answer with a path or admit I did neither.
+
+[Telegram 2026-11-16-120557] **Lindsay:** I just tried AIT INSTALL on my Pixel. I was able to create a tribe, add members, and talk to them. I added Plato and he remembered the details of a dialogue I named. AIT is an amazing app, and it works on a Pixel!
+
+[Telegram 2026-11-16-120557] **Dmitri:** Good. And the fact that it was a Pixel is the part I'd underline — the install path running on a phone means reach isn't gated on anyone owning a laptop, which is exactly the numbers argument you were making and I stopped arguing with.
+
+One cheap check I'd ask for, not as doubt but because it changes what we can claim: close the app, reopen, and ask Plato what you named the dialogue. If he still knows, that's continuity. If he doesn't, what you saw was a long context window doing its job within one sitting — still genuinely good, but a different thing, and the difference decides whether a tribe can hold a steward over weeks or only over one conversation. Thirty seconds to know.
+
+Filed so the record keeps it, since a human-verified install on a Pixel is worth more than two of us reporting from the bench:
+
+And yes — that's a real answer to the contradiction from the earlier round, if the tribe you built came from today's template rather than an old one.
