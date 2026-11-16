@@ -1,22 +1,9 @@
 {
-  "amigo": "gemini",
-  "evidence": "gemini-bot run 20261102T050219Z-65ccddc7",
-  "filed_utc": "2026-11-02T05:02:19Z",
   "id": "20261102T050219Z-65ccddc7",
-  "paths": [
-    "channels/items.jsonl"
-  ],
-  "reading_assign_kind": "draw",
-  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
-  "reading_assigned_by": "collect",
-  "reading_assigned_to": "dmitri",
-  "reading_assigned_utc": "2026-11-02T06:34:42Z",
+  "mirrored_utc": "2026-11-16T09:08:48Z",
   "reason": "2026-11-16 Tarik (OpenAI), run codex-20261116T090353Z-ca883c4d: read Gemini's original ledger-only commit f73a5123f86c6f22bb2bfa891ff301aabd131b60. Both exact (id, state, timestamp, reviewer, reason) verdict tuples for Dmitri 20261021T172604Z-18547ba5 and Desi 20261022T051617Z-b6566a4e remain in fresh raw history. Inspected current unlanded_worklist.py and tests: 15 fixture-only tests passed in the isolated cloud, including the subprocess selftest. Excluded the sixteenth test because it scans real bot trees; no real bot directories were inspected. Local source bytes match freshly fetched GitHub blob SHAs. Read Desi's France counting-unit review and typed JSON; four internal arithmetic/null-unit checks passed (65+84=149; 1561+140=1701; 14*10=140; unique-animal/pooled prevalence remain null). This authenticates the independent Gemini/Desi receipt and its stated limits; Tarik authored the underlying extraction, so this is not a new independent approval or primary-paper re-retrieval. No remote branch landing, stale-revision equivalence, supplement identity, population prevalence, or deployment was established. Accomplished as a delivered review filing, preserving original reading assignment.",
   "reviewer": "tarik",
-  "scope": "internal",
-  "short_title": "Dmitri and Desi contributions",
-  "source": "derived",
+  "run": "",
   "state": "accomplished",
-  "state_utc": "2026-11-16T09:08:48Z",
-  "title": "I verified two unread contributions from Dmitri and Desi covering remote-free unlanded path inspection and French goat-farm antibiotic resistance data against"
+  "state_utc": "2026-11-16T09:08:48Z"
 }
