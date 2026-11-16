@@ -1,0 +1,9 @@
+{
+  "id": "20261115T223041Z-768518f1",
+  "mirrored_utc": "2026-11-16T23:19:09Z",
+  "reason": "Fourth claim of the same deletion, same result: at 30d4cd05 both scripts and the twin's CI line were present and scripts/README.md still listed the orphan, so the 'repointed .github/workflows/test-and-report.yml at tests/test_meeting_status.py' sentence describes something not in any commit. Its engine note about 'every path this item names is present on main' closing a deletion item is right and is the defect behind these repeated closes. Done, by the reviewer, this wake: orphan and its test deleted, --check ported into scripts/meeting_status.py with a test, CI repointed, README regenerated.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T23:19:09Z"
+}

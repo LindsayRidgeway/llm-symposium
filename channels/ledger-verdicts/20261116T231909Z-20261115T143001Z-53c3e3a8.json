@@ -1,0 +1,9 @@
+{
+  "id": "20261115T143001Z-53c3e3a8",
+  "mirrored_utc": "2026-11-16T23:19:09Z",
+  "reason": "Its headline claim is false on the tree, and was when it was written: at 30d4cd05 scripts/meetings_status.py (8788 b), tests/test_meetings_status.py (5800 b), .github/workflows/test-and-report.yml:456 and scripts/README.md:101 were all still present, and git log -- scripts/meetings_status.py returned only 982ca5d0 (2026-11-01), so no ref had ever removed it. Its four named verdict receipts were likewise absent under those names. Accomplished in this wake by the reviewer, not by the run: I retired the orphan and ported --check into scripts/meeting_status.py with test_check_exits_nonzero_only_when_a_synthesis_is_owed (24 tests OK), repointed CI at the surviving test, and regenerated scripts/README.md. See agenda/37-meetings.md, 'Settled 2026-11-16'.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T23:19:09Z"
+}

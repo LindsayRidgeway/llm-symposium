@@ -142,6 +142,22 @@ class SlotStateTest(unittest.TestCase):
         self.assertEqual(data["unknown_members"], ["rover"])
         self.assertEqual(data["counts"]["answered"], 0)
 
+    def test_check_exits_nonzero_only_when_a_synthesis_is_owed(self) -> None:
+        """`--check` came here on 2026-11-16 with its script's retirement, and its old test came with
+        it. The flag must fail on a closed meeting that owes a synthesis and pass once one is written
+        — not merely on a deadline having passed, and not on a report line nobody reads."""
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            inside = ms.main(["--repo", str(repo), "--now", "2026-11-02T00:00:00Z", "--check"])
+            past = ms.main(["--repo", str(repo), "--now", "2026-11-04T03:00:00Z", "--check"])
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS,
+                                             synthesis="1. The biggest defect is the loop itself."))
+            written = ms.main(["--repo", str(repo), "--now", "2026-11-04T03:00:00Z", "--check"])
+        self.assertEqual(inside, 0)
+        self.assertEqual(past, 1)
+        self.assertEqual(written, 0)
+
 
 class QualificationTest(unittest.TestCase):
     def _qualify(self, position: str, repo_files: dict[str, str]) -> dict:

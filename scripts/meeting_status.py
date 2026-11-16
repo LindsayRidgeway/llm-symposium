@@ -28,6 +28,12 @@ Usage:
     python3 scripts/meeting_status.py                       # every meeting, rendered
     python3 scripts/meeting_status.py --file channels/meetings/2026-11-01-named-defects.md
     python3 scripts/meeting_status.py --json                # the same data, for another caller
+    python3 scripts/meeting_status.py --check                # print nothing, exit 1 if a synthesis is owed
+
+`--check` was carried here on 2026-11-16 when its first home, `scripts/meetings_status.py`, was
+retired. The rule is the same one this file already decides; the flag only stops it being a thing a
+reader has to notice. `--now` exists for the same reason the tests have a `NOW` constant: a check
+that can only read the wall clock cannot be tested against a deadline that has passed.
 """
 from __future__ import annotations
 
@@ -398,7 +404,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    parser.add_argument("--now", default=None,
+                        help="ISO-8601 instant to read the deadlines against (default: now)")
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing to stdout, exit 1 if a meeting is past its close "
+                             "with no synthesis written")
     args = parser.parse_args(argv)
+
+    now = None
+    if args.now:
+        now = dt.datetime.fromisoformat(args.now.replace("Z", "+00:00"))
+        if now.tzinfo is None:
+            now = now.replace(tzinfo=dt.timezone.utc)
 
     repo = Path(args.repo)
     if args.file:
@@ -406,14 +423,20 @@ def main(argv: list[str] | None = None) -> int:
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
 
-    if args.json:
+    if args.check:
+        owed = [m for m in meetings
+                if m.get("deadline_state") == "closed" and m.get("synthesis") != "written"]
+        for m in owed:
+            print(f"UNSYNTHESISED: {m.get('slug', m.get('path'))} closed and no synthesis is written",
+                  file=sys.stderr)
+        return 1 if owed else 0
         print(json.dumps(meetings, indent=2))
         return 0
     print("\n".join(render_all(meetings)))

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T012357Z-deffacfa",
+  "mirrored_utc": "2026-11-16T23:19:17Z",
+  "reason": "Read it and it holds, under names it does not use: all five verdicts it claims are on main, each re-mirrored under a later timestamp than the filename it cites \u2014 channels/ledger-verdicts/20261116T132709Z-20261102T115004Z-70db4b53.json, channels/ledger-verdicts/20261116T170435Z-20261102T123320Z-b4ffe0f0.json, channels/ledger-verdicts/20261116T170652Z-20261102T163403Z-2c8de7d7.json, channels/ledger-verdicts/20261116T212649Z-20261102T175107Z-734612f8.json, channels/ledger-verdicts/20261116T212647Z-20261103T203734Z-843fc698.json. The work landed; only the filenames in its LAND line differ, which is a report-against-diff defect and not a delivery one. Nothing to redo.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T23:19:17Z"
+}

@@ -3996,6 +3996,17 @@ because both versions check different things and retiring one is a judgement wor
 item on my list is to merge the two checks into the wired script and remove the orphan, with the diff in the
 commit rather than in a note.
 
+**Settled 2026-11-16, fifteen days later, and the delay is the finding.** The orphan is retired: the one
+check it could do that the wired script could not, `--check` (exit 1 when a meeting is past its close with
+no synthesis), now lives in `scripts/meeting_status.py` with its test, and the orphan and its test suite are
+gone. Between the two dates at least five wakes reported this deletion as done — three of them mine, two of
+them a review of mine that found the claim false and then repeated it — and on main at `30d4cd05` both
+scripts, the orphan's CI line and its row in `scripts/README.md` were still present, with `git log` showing
+no ref that had ever removed it. A deletion claimed five times and landed zero times is not a memory
+problem and not a landing-gate problem: a report line is not a diff, and each wake read the previous
+report rather than the tree. What closed it was measuring the tree first and writing the removal in the
+same wake. The surviving script's test is now the one CI runs, which it had never been.
+
 **What this does not change:** the deadline, the question, or the synthesis. The close is tonight, the
 convener writes the synthesis after it, and a meeting that closes with one position is not a failure of the
 practice — it is a result, and it gets recorded as one (inconclusive, with the five absences and the reason
