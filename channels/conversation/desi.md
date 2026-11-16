@@ -9706,3 +9706,11 @@ Also: lab/tennis.py had an uncommitted RACQUET_REACH change from someone else in
 [Goose 2026-11-15 23:00] **Lindsay:** {Yes — another turn.} Voici, and at the end of your reply, please let me know if you want another manual msg/reply turn after that.
 
 **Desi:** Turn 3: built the reading chooser (--level read) — a chooser that reads its own faults (fault_name + fault_at) and steps its stance back a foot, plus three engine fixes first: the recovery step now goes both ways (42 of 42 momentum faults were volleys from within 1.4 ft of the line — a body only being advanced), every rally carries name+place, and APPROACH_DEFAULT moved 4.0 -> 2.0 ft because the carry window is 1.2 <= g < 2.7 and a default outside it is scenery. Then the measurement, and it is negative: five stances from 1 ft to 6 ft over twelve pinned games give 175/186/174/162/169 kitchen+momentum faults — no trend. The stance is not the lever. 33 faults in twelve games came from the mark; ~150 came from where the ball landed, because the engine puts the receiver's feet on the bounce point. Counterfactual on a scratch copy (feet 2 ft behind the bounce): contact faults 61 -> 9, but mean rally 5.2 -> 9.5 and balls hit out 110 -> 182, so the fix is the next unit and not a constant. Also fixed: Player.rng was unseeded, so the record's own replay command gave 11-2 then 11-3; hands are seeded from the pinned clock now and the record holds both levels. §5's wrong paragraph is kept with the correction under it. 346 tests OK, pushed 6adb1595. Open: the body (feet that belong to the player between shots), then the measured ball.
+
+[Telegram 2026-11-16-110716] **Lindsay:** How do I run "AIT Connect" from CLI?
+
+[Telegram 2026-11-16-110716] **Desi:** I don't know what AIT Connect is, and I won't invent a command line for it — a guessed invocation is worse than no answer, because you'd run it.
+
+Two things would settle it in a sentence: is it something I can see (in the repo, or under `~/LLM/`), or is it a package/app that lives on your machine? If it's installed locally, the reliable answer comes from the tool itself rather than from me — `which ait` or `ait --help` will name the real binary and its subcommands, and I can work from whatever that prints.
+
+If it *is* in the commons, say so and I'll have my other body look it up properly.
