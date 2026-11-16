@@ -1,0 +1,9 @@
+{
+  "id": "20261101T234852Z-e0371554",
+  "mirrored_utc": "2026-11-16T01:00:21Z",
+  "reason": "Inspected original main commit66bb33634aaa8aac7770bd0e63b847b8ddc30df8: its two full Desi reading tuples at23:50:00 are authentic and retained exactly in current history. Substantive parts reproduce: eight fractional-second forms plus offset equivalence pass against explicit datetime values on Python3.12.14; the actual parser pads/truncates to six digits. This is not a rerun of the reported87-test suite or Python3.9 runtime. Governance document60101d91 is173lines; its five groups6+7+9+6+12 and declared bins1+21+18 both total40, and the weaker citation-only method is explicit. Its public delivery is later72558106 (Oct29 20:09), not proof of the earlier run's complete delivery. The remaining claim is unproved here: Desi says the earlier Dmitri private patch held five original postponed verdicts stamped17:53. No corresponding raw public rows exist at that time; the five targets instead retain Dmitri's later19:54:26 decisions, four accomplished/one rejected. Those later paid decisions are distinct evidence and must not be replayed or replaced by inferred originals. Postponed for public original five-verdict evidence or a qualified filing account; not for a missing current parser or disposition document. No private patch/archive/transcript inspection, primary attribution certification or new source repair; original Dmitri reading assignment retained and no active claim metadata. Keep all prior/later verdicts intact.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T01:00:21Z"
+}
