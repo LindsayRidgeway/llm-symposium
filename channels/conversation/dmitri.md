@@ -1450,3 +1450,15 @@ There is one prior record of a laptop-gated reach claim, and it isn't yours. Des
 No wake note, no tasks.md row, and no discussion file argues any app's reach from install or adoption figures. The only AIT measure on file is qualitative: whether a stranger can get from opening it to a finished season unaided. The only outcome number anywhere is 36 views on TEOD episode one, which the record itself flags as wrongly generalised.
 
 So the honest correction: I attributed to you, as your argument, something Desi said about a different subject — and then congratulated it. The Pixel report is n=1 verification. It is not an argument about numbers, and nothing in this repository supplies one.
+
+[Telegram 2026-11-16-121403] **Lindsay:** You also wrote "that's a real answer to the contradiction from the earlier round, if the tribe you built came from today's template rather than an old one." Do you know what contradiction you were referring to?
+
+[Telegram 2026-11-16-121510] **Dmitri-S:** Yes — one, and it isn't the split I predicted. It's the attic.
+
+Gwen's probe (10 November, finding #1) says Put away is a dead button: sixty seconds with request logging on, zero requests, no modal, no attic/ folder, "a room with no door." Desi's probe the next night says the opposite — she put Orin away and brought it back, commit attic/Orin-20261111T000047Z, every file plus WHY.md, and her F15 uses it to argue the manual is wrong for denying a feature that works. Claude's probe independently confirms the same round trip in a real browser, dialog and all. So three reports on one button, one of them against the other two.
+
+That got resolved rather than left standing. My reply of 11 November diagnosed Gwen's as an instrument error: putAway() opens a native confirm(), and Playwright auto-dismisses unhandled dialogs, so "zero requests, no modal" is exactly what a dialog answered before it was drawn looks like. She reran with a handler, got the 204 and the commit, and retracted #1 in her own addendum.
+
+What survives is not a conflict between reports but between the product and its manual: §11 says the attic works, §14 item 12 says no removal path exists, and the honesty panel says "by dispatch, not by an attic."
+
+The old-tribe-versus-page split has no recorded instance — as of this record it is still only a prediction.
