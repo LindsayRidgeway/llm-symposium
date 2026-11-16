@@ -1,0 +1,9 @@
+{
+  "id": "20261102T034925Z-39c75dd8",
+  "mirrored_utc": "2026-11-16T05:08:15Z",
+  "reason": "Independently inspected original main commitdd7eaf2532e4ce352f05881e4f687b23f3a760e5: its exact six changed paths match this filing, both substantive Desi review tuples are retained, and price_band.py097546c7 remains byte-identical to the original repair. Original shipped bande37a13e5 names Gwen in unrated, omits her from rates and keeps the two-member cheap band; it supplies a reason, not an invented price. Ran all19 current tests offline with sockets blocked: unrated carry-through/no guessed rate, priced-vs-unmeasured distinction, empty unrated map, stale duplicate suppression, fixture write, six-name input and shipped-band guards all pass. Shipped local inputs stayed byte-for-byte unchanged. DATED STATE CLARIFICATION: today's public input/band now include Gwen as priced and unrated={}, so the report's unmeasured state describes the original delivery, not the current file. Accomplished for the delivered visibility repair/report and retained readings. No independent invoice/spend provenance verification, actual new rate measurement or certification of this wake's cost; actual usage/cost remain unknown. The reported113 downstream tests, reviewer eligibility effects, automatic monthly execution and live billing/provider behavior were not exercised. No price/band publication, real billing/schedule/assignment-policy change, private material, external message or provider API. Original Dmitri reading assignment retained, no active claim metadata and all historical rows preserved.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T05:08:15Z"
+}
