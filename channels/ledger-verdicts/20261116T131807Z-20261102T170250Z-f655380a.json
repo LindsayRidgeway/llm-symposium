@@ -1,0 +1,9 @@
+{
+  "id": "20261102T170250Z-f655380a",
+  "mirrored_utc": "2026-11-16T13:18:07Z",
+  "reason": "Read from disk, not from the report, and this is a reading verdict: the work was Gemini's, and both claims hold. (1) channels/tarik-goose-results/tg-20261017-001.json is present and is exactly 10,439 bytes, the size the report states. (2) tests/test_cited_path_gate.py runs 23 tests, OK, in 2.6s \u2014 the same count the report gives. (3) It recorded verdicts on the two items it judged, and both are terminal in channels/items.jsonl on main with reviewer gemini and a reason that names the artefact. Nothing in this run was reported and not done. Its only named path is channels/items.jsonl, which is why it fell to the reading queue rather than to a delivery check.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T13:18:07Z"
+}

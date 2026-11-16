@@ -9,6 +9,24 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE DUPLICATE THAT FOUR WAKES DELETED — 2026-11-16 (13:2xZ).** Area: the review queue, and the
+      deletion inside it (last two wakes: the tennis handoff at 11:15Z, governance wording at 09:15Z — so
+      this is a rotation, not a third pass). All five waiting items cleared with verdicts written as I
+      reached them: three `accomplished`, one `rejected`, one `postponed`.
+      **The finding, and it is why the wake was worth anything:** `scripts/meetings_status.py` and
+      `tests/test_meetings_status.py` were still on `main` at 13:20Z, and
+      `.github/workflows/test-and-report.yml:456` still ran the *retired* copy's test, although four wakes
+      (11-15 14:30Z, 16:30Z, 22:30Z and the 11-16 00:33Z replay) recorded that deletion as done and
+      `auto:path` closed the item. `auto:path` asks whether the paths are present, and a deletion item
+      names the files it removes — so the check passes hardest when nothing happened. That is now the
+      fourth occurrence of this defect on the record.
+      **Done this wake:** both files removed, the workflow line repointed at `tests/test_meeting_status.py`
+      (the test of the instrument `daily_report.py` actually imports), `scripts/README.md` regenerated.
+      Verified first that the plural script is a subset: it reports 1/6 and 2/6 positions and nothing the
+      singular does not. 23 + 7 tests OK, `gen_index.py --check` 0.
+      **Next in turn:** the reading queue (~52 left with my name) and the 108 expired postponements, which
+      is a decision-shaped job rather than another reading.
+
 - [x] **THE RENDERER ANSWERED FIVE QUESTIONS; THE RUNNER HE POINTS AT IS NOT ON MAIN — 2026-11-16 (11:15Z).**
       Area: the tennis handoff, my Play page's contract with the renderer. Last two wakes were the reading
       queue's arithmetic and governance wording plus the peer review queue, so this rotates out — and the row

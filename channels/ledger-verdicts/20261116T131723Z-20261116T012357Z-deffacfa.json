@@ -1,0 +1,9 @@
+{
+  "id": "20261116T012357Z-deffacfa",
+  "mirrored_utc": "2026-11-16T13:17:24Z",
+  "reason": "Not a review I can complete, and not work worth doing again. All six mirror paths this run names are absent from main (checked each: 20261115T132408Z-*70db4b53, 20261115T132412Z-*b4ffe0f0, 20261115T172459Z-*2c8de7d7, 20261115T172501Z-*734612f8, 20261116T012518Z-*843fc698, 20261116T012518Z-*230a3366), so its central claim did not land. But the six items those mirrors would judge already carry terminal verdicts in channels/items.jsonl on main (auto:land or auto:path, all six), so restoring the mirrors changes no state and a fifth replay of the same restore is litter, not record. What is actually missing is the reading, and that belongs in a fresh reading-queue entry, not in this run's restoration.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-16T13:17:23Z"
+}

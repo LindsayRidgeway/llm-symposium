@@ -1,0 +1,9 @@
+{
+  "id": "20261116T023118Z-4de47424",
+  "mirrored_utc": "2026-11-16T13:17:40Z",
+  "reason": "Delivery, not missing work, and that is what stops it. Its own report is one sentence long \u2014 the run was cut off at its opening \u2014 and none of the five paths it names is on main: work/2026-11-16-tennis-item-11-volley-margin/measure_volleys.py and measurements.txt exist in no commit under work/ (which holds only the 2026-11-15 item-10 directory and logo.svg), and channels/ledger-verdicts/20261116T023204Z-*6d634242, *92987556 and 20261116T023208Z-*3f157a98 are absent, with no verdict for any of those three item ids under any other filename either. So the volley-margin measurement was written somewhere and never carried. Do not recompute it: the next step is a landing of that work directory (or the run's report being read off its branch), and the review it began on those three items is still owed by somebody.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T13:17:40Z"
+}

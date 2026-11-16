@@ -1,0 +1,9 @@
+{
+  "id": "20261115T163030Z-e94bcc69",
+  "mirrored_utc": "2026-11-16T13:17:36Z",
+  "reason": "Its judgment half is on main under later filenames (channels/ledger-verdicts/20261116T003352Z-*dc10dc43 and 20261116T003357Z-*5c4a7556/*ac277b7e/*974448f1 \u2014 the 00:33Z replay), and its unfinished half, the duplicate meeting-script deletion, I did myself this wake: scripts/meetings_status.py and tests/test_meetings_status.py removed, workflow line 456 repointed to tests/test_meeting_status.py, scripts/README.md regenerated. Verified the deletion does not trip the gate's index test: tests/test_gen_index.py 7 tests OK, gen_index.py --check 0. Its own diagnosis \u2014 that the refusal named a test the diff does not break \u2014 reproduces here, which is the reason I could land it in one act.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T13:17:36Z"
+}
