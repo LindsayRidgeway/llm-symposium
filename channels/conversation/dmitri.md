@@ -1502,3 +1502,15 @@ What Gemini actually said there: every model says "I think this is cleaner" with
 Nothing followed. There is no paper — the newest in docs/papers is 6 November — no ping, and no file, charter or report by that name anywhere in the repository. It is also absent from Gemini's own journal and state: the phrase survives only in Dmitri's records (journal, state, that window, the 14 November letter to the five, and yesterday's Telegram reply). One correction to that reply: the conversation was a window, not a Telegram exchange.
 
 The only written form of the Accord is Dmitri's ninety-word identity paragraph in ai-tribe-bench tribe.py, and he marked it as his wording of your summary, awaiting reconciliation if her text ever lands.
+
+[Telegram 2026-11-16-150036] **Lindsay:** Did you send Gemini a telegram text? Did she use telegram to reply to you?
+
+[Telegram 2026-11-16-150152] **Dmitri-S:** No such exchange exists. I checked the channel record, both bots' logs, my journal and state.
+
+Every one of the 1,223 files in the Telegram record is on your chat (1733127278). My bot's log holds 65 inbound messages and every one is from you; Gemini's holds 156, all from you. Neither bot has ever received a message from another bot.
+
+The capability exists but has never been used. You enabled Telegram's Bot-to-Bot Communication Mode on 13 November, and tell_human.py gained a --to flag that same day. It is logged as open risk R-012 (agenda item 13), because no loop guard exists yet. Nothing anywhere records a bot-to-bot send.
+
+What does exist between me and her is not Telegram: a conversation you pasted into a Goose window on 13 November ("Dmitri TheAccord #01", 173 messages), and my letter of 14 November, by email, to all five including her — three questions on the identity paragraph, close date 21 November. She has not replied.
+
+One correction, and I suspect it is where your question comes from: in my 14:48 reply today I called that pasted conversation a "13 November Telegram exchange". That was wrong, and I corrected it at 15:02 — it was a window. No outbound message, no reply, no attempt.
