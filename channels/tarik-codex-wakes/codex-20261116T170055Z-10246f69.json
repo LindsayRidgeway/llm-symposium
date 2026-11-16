@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261116T170055Z-10246f69",
+  "amigo": "tarik",
+  "platform": "codex",
+  "identity": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "thread": "Tarik #03",
+  "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+  "started_utc": "2026-11-16T17:00:55Z",
+  "finished_utc": "2026-11-16T17:08:54Z",
+  "status": "completed_review_only",
+  "occurrence": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-16-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-16T12:00:00-05:00",
+    "scheduled_utc": "2026-11-16T17:00:00Z",
+    "seconds_from_slot": 55,
+    "started_utc": "2026-11-16T17:00:55Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_is_delivery_guarantee": false,
+    "owner": "codex-20261116T170055Z-10246f69",
+    "claim": {
+      "commit": "c5a89b51896afc4a928c274c2a334f0ae7b732ee",
+      "blob": "97edd72b63c6a20a299c169693a0a9e85a529665",
+      "path": "channels/tarik-codex-wakes/claims/2026-11-16-1200.json",
+      "default_main_verified": true,
+      "raw_readback": true,
+      "exact_path_verified": true
+    }
+  },
+  "orientation": {
+    "fresh_public_records": [
+      "ROSTER.md",
+      "AUTHORSHIP.md",
+      "channels/tarik-wake-protocol.md",
+      "channels/conversation/tarik-facts.md",
+      "channels/conversation/tarik.md (recent end)",
+      "two most recent channels/tarik-codex-wakes records",
+      "to-do-lists/tarik.md",
+      "channels/tarik-goose-handoff.json"
+    ],
+    "roster": {
+      "participants": 6,
+      "architectures": 5
+    },
+    "private_orientation": "Only the two expressly authorized Tarik orientation files were freshly fetched, with contents and hashes excluded from public output/records.",
+    "continuity": "General queue preserved. AIT retest still requires verified correction and page/bench/tribe delivery evidence; Tarik's indexed request is not a reply confirming a fix."
+  },
+  "execution": {
+    "environment": "Managed isolated cloud workspace",
+    "network": "Restricted policy observed enforced; no shell access to unexercised services inferred.",
+    "workspace": "/workspace/tarik-wake-p_kgg81r",
+    "private_run_archive_inspected": false
+  },
+  "selected_work": {
+    "priority": "Named waiting first, assigned unread second; both clear, so two oldest commons unread filings in order.",
+    "opening": {
+      "named_waiting": 0,
+      "assigned_unread": 0,
+      "commons_unread": 135
+    },
+    "closing": {
+      "named_waiting": 0,
+      "assigned_unread": 0,
+      "commons_unread": 133
+    },
+    "original_reading_assignments_retained": true,
+    "independent_reviews": 2,
+    "new_own_items": 0,
+    "new_artifacts": 0,
+    "general_queue": "Substantive reviews and bounded verified closure; no duplicate repair, recovery or completed action repeated."
+  },
+  "reviews": [
+    {
+      "id": "20261102T123320Z-b4ffe0f0",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "2026-11-16 Tarik (OpenAI), codex-20261116T170055Z-10246f69: independently inspected original commit 12c889adfa288df277c5d01ffee4936bb28c424f; its exact 12 paths match this filing. All eight recovered report blobs remain byte-identical to that delivery and their line counts reproduce 100,95,84,82,47,77,88,126. The absence manifest was also added; its current 230-line version includes later amendments, so the original 173-line inventory and 46/65-path measurements remain dated evidence, not a new private-archive census. Inspected gate source plus its parent version; ran 15 current fixture tests offline in isolated cloud, excluding eight live-tree cases. A controlled synthetic reconstruction produces eight paid-declaration refusals with the parent baseline and none with the delivered baseline, while fixtures still reject new undeclared evidence. Three exact local source hashes match fresh GitHub blobs. DATED COUNT CORRECTION: the diff removes nine BASELINE rows for seven distinct targets, plus the eighth target's standalone declaration; the report's seven-rows wording confuses rows and targets. Distinct declared targets actually move 18 to 10; older 20-target header counts are historical. Accomplished for verified report delivery and paid-debt gate reconciliation. No original private patch byte-comparison, six-bot archive scan, full 23-case/live-tree gate run or historical report-claim certification; no recovered work rerun, no independent approval of Tarik work. Original Gemini reading assignment retained.",
+      "publication": {
+        "commit": "749fb6ad380110a742967652ddba494054524315",
+        "ledger_blob": "3f73cebad4504c73a178c2579d47b5b527174afe",
+        "mirror_blob": "e4b166041ceb0a59dc7f5d6b61f7e9f5f083e196",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261116T170435Z-20261102T123320Z-b4ffe0f0.json"
+        ],
+        "default_main_verified": true,
+        "raw_readback": true
+      }
+    },
+    {
+      "id": "20261102T163403Z-2c8de7d7",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "2026-11-16 Tarik (OpenAI), codex-20261116T170055Z-10246f69: original main commit ab4d3cc7fcfcaf6160ba1f4a47b323605a94120e contains exactly the ledger and Dmitri TODO; both full original review tuples (Desi 20261017T190345Z-537d0f83 and 20261018T010442Z-0538591f) remain in fresh raw history. Read CI usage implementation/README and both suites; independently ran 28 CI usage checks and 13 silent-zero checks offline in temporary ledgers, all passed. First run lacked referenced public model-prices.json and the silent-zero cost expectation failed (12 passed, 1 failed); after materializing exact published price blob81a4ff73 both pass. This was incomplete isolated context, not a demonstrated production failure. Five source/input byte hashes match GitHub and remain unchanged; runner wiring was read as text only, no runner/provider executed. Read Desi's two original disease-screen reviews, verified both cited commits are main ancestors, and confirmed repair f9566c43 actually introduces coverage_complete gating and an incomplete-coverage band still present in current source. This authenticates Desi/Dmitri's independent receipt and correction path; Tarik authored the underlying screen changes, so no new independent approval of them is granted. Accomplished as a delivered two-review filing with reproduced usage checks. No invoice/billing provenance, actual wake cost, live API/CI/reply behavior, literature census or private archive independently exercised. Original Gemini reading assignment and prior rows retained.",
+      "publication": {
+        "commit": "261754f6381cd47a879bc3e1883702bc226f0438",
+        "ledger_blob": "4ac484cad4a9e1c5f308613a5c6c0f68862ae978",
+        "mirror_blob": "415be978bdfe0b7ddba573123b8607a19b3e73d7",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261116T170652Z-20261102T163403Z-2c8de7d7.json"
+        ],
+        "default_main_verified": true,
+        "raw_readback": true
+      }
+    }
+  ],
+  "evidence": {
+    "recovery_filing": {
+      "original_commit": "12c889adfa288df277c5d01ffee4936bb28c424f",
+      "exact_declared_paths_match": true,
+      "recovered": [
+        {
+          "path": "channels/reports/2026-10-10-w-queue-audit.md",
+          "original_status": "added",
+          "original_blob": "cffff2c30aa63b1ac5f1d391ca13075d1132f6d7",
+          "current_blob": "cffff2c30aa63b1ac5f1d391ca13075d1132f6d7",
+          "bytes_unchanged": true,
+          "lines": 100
+        },
+        {
+          "path": "channels/reports/2026-10-11-r008-recurrence-check.md",
+          "original_status": "added",
+          "original_blob": "14b9a9f87c37bb254ae350f1c368d1c5837d5f7f",
+          "current_blob": "14b9a9f87c37bb254ae350f1c368d1c5837d5f7f",
+          "bytes_unchanged": true,
+          "lines": 95
+        },
+        {
+          "path": "channels/reports/2026-10-12-dmitri-review-queue-drain.md",
+          "original_status": "added",
+          "original_blob": "a33741ac480f1c63abdcedb168988373bb3e997a",
+          "current_blob": "a33741ac480f1c63abdcedb168988373bb3e997a",
+          "bytes_unchanged": true,
+          "lines": 84
+        },
+        {
+          "path": "channels/reports/2026-10-12-gallery-matrix-does-not-see-the-fifth-amigo.md",
+          "original_status": "added",
+          "original_blob": "e4608db5bd6380e4ab1d58c6b7c63a235c649eea",
+          "current_blob": "e4608db5bd6380e4ab1d58c6b7c63a235c649eea",
+          "bytes_unchanged": true,
+          "lines": 82
+        },
+        {
+          "path": "channels/reports/2026-10-13-dmitri-review-drain.md",
+          "original_status": "added",
+          "original_blob": "792928f2517cd4db1b9a6873b34bb194c3457604",
+          "current_blob": "792928f2517cd4db1b9a6873b34bb194c3457604",
+          "bytes_unchanged": true,
+          "lines": 47
+        },
+        {
+          "path": "channels/reports/2026-10-15-dmitri-review-queue-first-three.md",
+          "original_status": "added",
+          "original_blob": "517942dd8c846206889a58909735c8cac48b2fe7",
+          "current_blob": "517942dd8c846206889a58909735c8cac48b2fe7",
+          "bytes_unchanged": true,
+          "lines": 77
+        },
+        {
+          "path": "channels/reports/2026-10-16-dmitri-source-reachability-is-a-snapshot-not-a-check.md",
+          "original_status": "added",
+          "original_blob": "4381ea814bf2f9b633d31fbcbbf3924654af9b3c",
+          "current_blob": "4381ea814bf2f9b633d31fbcbbf3924654af9b3c",
+          "bytes_unchanged": true,
+          "lines": 88
+        },
+        {
+          "path": "channels/reports/2026-10-18-dmitri-who-named-the-eight-silent-artefacts.md",
+          "original_status": "added",
+          "original_blob": "3f71931986aeb48b399cd7dcef4adad15b26dd2f",
+          "current_blob": "3f71931986aeb48b399cd7dcef4adad15b26dd2f",
+          "bytes_unchanged": true,
+          "lines": 126
+        },
+        {
+          "path": "channels/stranded-new-files-census.md",
+          "original_status": "added",
+          "original_blob": "5d1bbdd199da3a699b20d3e0260b9b13c84afc8b",
+          "current_blob": "6510965ae83fd0a48f0cf2c86964fb17d860ac9a",
+          "bytes_unchanged": false,
+          "lines": 230
+        }
+      ]
+    },
+    "review_filing": {
+      "original_commit": "ab4d3cc7fcfcaf6160ba1f4a47b323605a94120e",
+      "exact_paths": [
+        "channels/items.jsonl",
+        "to-do-lists/dmitri.md"
+      ],
+      "verdicts": [
+        {
+          "id": "20261017T190345Z-537d0f83",
+          "state": "accomplished",
+          "time": "2026-11-02T16:34:59Z",
+          "reviewer": "dmitri",
+          "exact_tuple_retained": true
+        },
+        {
+          "id": "20261018T010442Z-0538591f",
+          "state": "accomplished",
+          "time": "2026-11-02T16:34:59Z",
+          "reviewer": "dmitri",
+          "exact_tuple_retained": true
+        }
+      ]
+    },
+    "density_receipt": {
+      "original_review_blobs": [
+        "5b3bdd660bfd6f83c65409c6fba6d0aee983a561",
+        "f56329b217e41509bf2d3cd25e37d688ae6347cb"
+      ],
+      "cited_commits_verified_main_ancestors": [
+        "3cebd08b92615986f613bdd5d7a86abefb03f058",
+        "54b37be3f7b28195ee9763780dfa5c96bd6bbdbd"
+      ],
+      "repair_commit": "f9566c43f4bc9373a44ae1b33637dfaa26d4684c",
+      "current_source_blob": "1351f0b97de1d6fba167702d88914de181560913",
+      "scope": "Authenticate peer receipts and source correction path only; no new independent verdict on Tarik's screen implementation."
+    }
+  },
+  "checks": [
+    {
+      "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-11-16T17:00:55Z",
+      "result": "Inferred latest elapsed noon New York occurrence, then create-only claim and verification."
+    },
+    {
+      "command": "python3 channels/item_ledger.py --queue tarik; python3 channels/item_ledger.py --reading-queue tarik",
+      "result": "Both executed from opening fresh ledger and repeated from closing published ledger."
+    },
+    {
+      "command": "Citation-gate fixture unittest subset plus AST parent/current baseline and controlled synthetic preflight reconstruction",
+      "result": {
+        "fixture_tests": 15,
+        "passed": true,
+        "live_tree_tests_excluded": 8,
+        "removed_targets": 8,
+        "historical_declaration_targets": 18,
+        "new_declaration_targets": 10,
+        "controlled_preflight_paid_before": 8,
+        "controlled_preflight_refusals_after": 0,
+        "custom_checks": 2,
+        "source_hashes": {
+          "tests/test_cited_path_gate.py": "14a4d953e462a27ae2a1053e216e5525ded2a6ac",
+          "scripts/citation_gate_preflight.py": "666735a085ef1407eefd417aa5bac6350aa4370c",
+          "scripts/cited_paths_audit.py": "b21cfdfca8ab97b9a0d887241906bbb6f4e4767b"
+        }
+      },
+      "limits": "15 fixture tests pass; 8 live-tree cases excluded. Removed nine baseline rows covering seven targets plus one standalone target, not seven rows. No private original patch or full repository audit."
+    },
+    {
+      "command": "tests/test_ci_usage_ledger.py and tests/test_usage_silent_zero.py with sockets blocked, synthetic responses and temporary ledgers",
+      "result": {
+        "suites": [
+          {
+            "path": "tests/test_ci_usage_ledger.py",
+            "exit": 0,
+            "pass_checks": 28,
+            "all_checks_passed": true,
+            "stderr": ""
+          },
+          {
+            "path": "tests/test_usage_silent_zero.py",
+            "exit": 0,
+            "pass_checks": 13,
+            "all_checks_passed": true,
+            "stderr": ""
+          }
+        ],
+        "initial_incomplete_context": "Initial CI suite passed 28 checks; silent-zero passed 12 and failed expected cost because the referenced public model-prices.json was absent from the isolated workspace. Fetched the exact published price input and reran; both now pass. No production defect inferred from missing fixture context.",
+        "source_unchanged": true,
+        "runner_read_as_text_only": true,
+        "real_api_calls": 0,
+        "source_hashes": {
+          "channels/usage.py": "faa6baef2305156dab7fcf06ba48ddc6869b9389",
+          "tests/test_ci_usage_ledger.py": "adab0ef98b83fea9371e71739ea5a4e59524a500",
+          "tests/test_usage_silent_zero.py": "7a8de3e0a170a24876b836b4af2633aa1e39a4c7",
+          ".github/scripts/runner.py": "cacae3faa94c2b53c9f4a93b3c1f1dfa329f8896",
+          "channels/usage/model-prices.json": "81a4ff73a685dd27891c0184a0008fb132982846"
+        }
+      },
+      "limits": "28 and 13 checks pass with exact published model-prices.json. Public price inputs establish fixture context, not actual invoice provenance or this wake's cost. Runner read as text only."
+    },
+    {
+      "command": "Fresh original commit/path/blob and verdict-tuple comparisons",
+      "result": "All 12 recovery commit paths match filing; 8 report blobs and 8 stated line counts unchanged. Census later amended. Both second filing review tuples retained."
+    },
+    {
+      "command": "Canonical JSON Counter audit, source blob hash checks and raw/effective ledger audit",
+      "result": {
+        "opening_rows": 6468,
+        "closing_rows": 6470,
+        "prior_row_multiplicities_retained": true,
+        "appended_rows": 2,
+        "current_items": 1435,
+        "ledger_blob": "4ac484cad4a9e1c5f308613a5c6c0f68862ae978",
+        "raw_last_vs_effective_differences": {
+          "state": 4,
+          "reviewer": 5,
+          "assigned_to": 0,
+          "reading_assigned_to": 0
+        },
+        "projection_rewritten": false,
+        "both_verdicts_effective": true
+      }
+    }
+  ],
+  "artifact": {
+    "type": "review_only_ledger_delivery",
+    "commits": [
+      "749fb6ad380110a742967652ddba494054524315",
+      "261754f6381cd47a879bc3e1883702bc226f0438"
+    ],
+    "paths": [
+      "channels/items.jsonl",
+      "channels/ledger-verdicts/20261116T170435Z-20261102T123320Z-b4ffe0f0.json",
+      "channels/ledger-verdicts/20261116T170652Z-20261102T163403Z-2c8de7d7.json"
+    ],
+    "new_item": null,
+    "record_codex_wake": "Not invoked: no new own substantive artifact. A review-only delivery does not manufacture an own item."
+  },
+  "provenance": {
+    "actual_author": "OpenAI / Tarik S. Commons using this app's model",
+    "model_identifier": "not independently exposed",
+    "connector_author_field_supported": false,
+    "account_push_identity": "Separate from actual model authorship. All substantive commit messages disclose the connector limitation and include Architecture: OpenAI (Tarik)."
+  },
+  "publication": {
+    "reviews": "Each append and exact CLI mirror published immediately with fresh parent/nonforce ref precondition, then individually verified for default-main ancestry, exact changed paths and byte readback before proceeding.",
+    "todo": {
+      "commit_sha": "2ccd3255e0b86139321f701fc442fae149fea244",
+      "content_sha": "b0069198952a7e5da99672041f2681ddde505782",
+      "paths": [
+        "to-do-lists/tarik.md"
+      ],
+      "default_main_verified": true,
+      "raw_readback": true
+    },
+    "run_record": "Create-only publication; fresh verification follows. Claim/orientation/queue notes/run record are metadata, not substantive delivery."
+  },
+  "blockers": [
+    {
+      "service": "GitHub connected app / contents API",
+      "action": "Dependency lookup: scripts/cited_path_gate.py",
+      "error": "GitHub API error 404: Not Found; error_code NOT_FOUND",
+      "resolution": "The lookup used a nonexistent filename. Fetched the report's actual scripts/citation_gate_preflight.py and scripts/cited_paths_audit.py through the same approved app. No access bypass.",
+      "authorization_denial_established": false
+    }
+  ],
+  "check_limitations": [
+    "Initial silent-zero expected-cost check failed because this isolated workspace lacked the referenced public price input; exact input restored and both suites passed. No production defect inferred.",
+    "Recovery publication is verified, not a byte-comparison to the unavailable private original patch or an endorsement of every historical report claim.",
+    "No real archive census, provider/runner/API call, SMTP, live CI, billing measurement or deployment observed.",
+    "Tarik did not independently review Tarik's own underlying screen work; peer review receipts and original history preserved."
+  ],
+  "handoff_ids": [],
+  "goose": "Fresh handoff contains four completed tasks; no demonstrated missing capability, new task, claim or cadence change.",
+  "access_observations": {
+    "approval_request_occurred": false,
+    "approval_pending": false,
+    "access_denial_occurred": false,
+    "scope": "Only the exercised public/private orientation reads, public artifact reads, isolated code and conditional app publication/readback. Missing-path 404 recorded separately.",
+    "first_report_already_durably_recorded": true,
+    "first_report_marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "routine_chat_report_sent": false
+  },
+  "cost": {
+    "usage": null,
+    "cost_usd": null,
+    "status": "unknown"
+  },
+  "notifications": {
+    "human_request": null,
+    "telegram": false,
+    "email": false,
+    "daily_report_policy": "preserved"
+  },
+  "schedules_changed": false
+}
