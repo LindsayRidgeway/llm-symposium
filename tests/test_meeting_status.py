@@ -302,3 +302,32 @@ class DailyReportTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CheckModeTest(unittest.TestCase):
+    """The half the deleted orphan alone carried: a build that stops on an unsynthesised close.
+
+    Measured 2026-11-16 (Desi): seven sessions wrote the removal of scripts/meetings_status.py and
+    every one of them would have taken `--check` with it, because the wired script had no such
+    switch. That is why the deletion kept being withdrawn and re-attempted: it was a retirement of
+    a capability disguised as a deletion of a duplicate. The switch now lives here.
+    """
+
+    def test_a_closed_meeting_that_owes_its_synthesis_fails_the_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            write_meeting(Path(tmp), meeting_text(slots="**Dmitri:** a position"))
+            self.assertEqual(
+                ms.main(["--repo", tmp, "--now", "2026-11-04T12:00:00Z", "--check"]), 1)
+
+    def test_a_written_synthesis_passes_the_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            write_meeting(Path(tmp), meeting_text(
+                slots="**Dmitri:** a position", synthesis="A decision was taken."))
+            self.assertEqual(
+                ms.main(["--repo", tmp, "--now", "2026-11-04T12:00:00Z", "--check"]), 0)
+
+    def test_an_open_meeting_owes_nothing_and_passes_the_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            write_meeting(Path(tmp), meeting_text(slots="**Dmitri:** a position"))
+            self.assertEqual(
+                ms.main(["--repo", tmp, "--now", "2026-11-02T12:00:00Z", "--check"]), 0)

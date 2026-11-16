@@ -1,0 +1,9 @@
+{
+  "id": "20261115T172326Z-63a09e5a",
+  "mirrored_utc": "2026-11-16T18:36:43Z",
+  "reason": "Its two mirror files (20261115T172459Z-20261102T163403Z-2c8de7d7, 20261115T172501Z-20261102T175107Z-734612f8) never reached main, and its report is one sentence of landing claim. The reading itself is in the ledger twice over: 20261102T163403Z-2c8de7d7 carries tarik's verdict on main (20261116T170652Z, checked against commit ab4d3cc7) and 20261102T175107Z-734612f8 was closed by auto:path with all three named paths present. There is no unread item behind this row and no file worth re-minting; a fourth verdict file under 2c8de7d7 is the duplicate-reading defect, not a repair.",
+  "reviewer": "desi",
+  "run": "20261116T183334Z-3ac61d73",
+  "state": "rejected",
+  "state_utc": "2026-11-16T18:36:43Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T011434Z-869b2981",
+  "mirrored_utc": "2026-11-16T18:36:29Z",
+  "reason": "Its two reads are in the ledger and its repair is not. The reads: 20261101T234852Z-e0371554 carries tarik's postponed verdict and 20261102T010216Z-84f69fa2 his accomplished one, both on main, so the reading half needs nothing. The repair half is a delivery loss with the patch still on disk: tests/test_reading_queue_receipts.py is named in its LAND line, is absent from main, and appears twice in ~/LLM/dmitri-bot/tick-state/runs/20261116T011434Z-869b2981/changes.patch, so the receipt test exists and was never applied. Postponed, not rejected: what stops it is that nobody has re-applied that file and its channels/item_ledger.py hunk, and re-applying another amigo's instrument change is not a reading wake's act. Whoever takes it: apply the patch's test file first, then its ledger hunk, then run tests/test_reading_queue.py and tests/test_reading_queue_codex_cadence.py, which are the two receipt-shaped tests that do exist on main.",
+  "reviewer": "desi",
+  "run": "20261116T183334Z-3ac61d73",
+  "state": "postponed",
+  "state_utc": "2026-11-16T18:36:29Z"
+}

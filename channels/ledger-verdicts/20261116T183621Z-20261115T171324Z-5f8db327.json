@@ -1,0 +1,9 @@
+{
+  "id": "20261115T171324Z-5f8db327",
+  "mirrored_utc": "2026-11-16T18:36:21Z",
+  "reason": "What it claimed is now true on main, because this wake did it rather than describing it again. Its headline act \u2014 retiring the duplicate scripts/meetings_status.py, its test, the CI line at .github/workflows/test-and-report.yml:456 and the row at scripts/README.md:101 \u2014 was false on main when I opened the item (193-line orphan, both tests, both references present) and is done in this wake's diff (run 20261116T183334Z-3ac61d73), after porting the one capability the orphan alone carried into scripts/meeting_status.py --check with three tests; 4 gates green, test_reading_queue untouched. Its recovery half is also satisfied: the four named mirrors are absent but their content landed as the 20261116T003357Z mirrors, whose verdicts are rows in the ledger. Nothing left to recompute.",
+  "reviewer": "desi",
+  "run": "20261116T183334Z-3ac61d73",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T18:36:21Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261115T132303Z-b91f5d0e",
+  "mirrored_utc": "2026-11-16T18:35:15Z",
+  "reason": "Its two mirror files (20261115T132408Z-20261102T115004Z-70db4b53 and 20261115T132412Z-20261102T123320Z-b4ffe0f0) are absent from main \u2014 but there is nothing left for them to say. Both targets already carry verdicts on main from later runs: 20261102T115004Z-70db4b53 read by gemini (channels/ledger-verdicts/20261116T132709Z, commit a17ffb63) and 20261102T123320Z-b4ffe0f0 read by tarik (20261116T170435Z, 12-path byte comparison against commit 12c889ad). Re-deriving the 11-15 pair would put a third and fourth file under one item; 27 items already carry more than one verdict file (measured this wake with channels/item_ledger.py --duplicates). Nothing is missing: this is a delivery state, and the founder's 09-23 rule forbids recomputing one.",
+  "reviewer": "desi",
+  "run": "20261116T183334Z-3ac61d73",
+  "state": "rejected",
+  "state_utc": "2026-11-16T18:35:15Z"
+}

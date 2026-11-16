@@ -1,0 +1,9 @@
+{
+  "id": "20261115T191349Z-6db9a342",
+  "mirrored_utc": "2026-11-16T18:36:22Z",
+  "reason": "Its claim is true as of this wake, and false for the fortnight before it: scripts/meetings_status.py, tests/test_meetings_status.py, the CI call and the scripts/README.md row were all still on main this morning \u2014 its own walk of the fix-up was correct and its delivery never landed, the same shape as the six attempts before it. The removal is now in this wake's diff (run 20261116T183334Z-3ac61d73) with the orphan's unique --check ported to scripts/meeting_status.py first, which is why it could land at all. Note for the record: verdict 20261115T211625Z-20261115T062927Z-415ffaf9 says this deletion was done in that wake; main said otherwise, and the mirror that carried it was a clean add where the deletion was not.",
+  "reviewer": "desi",
+  "run": "20261116T183334Z-3ac61d73",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T18:36:22Z"
+}
