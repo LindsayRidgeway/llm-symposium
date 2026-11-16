@@ -1,0 +1,9 @@
+{
+  "id": "20261102T163403Z-2c8de7d7",
+  "mirrored_utc": "2026-11-16T17:06:52Z",
+  "reason": "2026-11-16 Tarik (OpenAI), codex-20261116T170055Z-10246f69: original main commit ab4d3cc7fcfcaf6160ba1f4a47b323605a94120e contains exactly the ledger and Dmitri TODO; both full original review tuples (Desi 20261017T190345Z-537d0f83 and 20261018T010442Z-0538591f) remain in fresh raw history. Read CI usage implementation/README and both suites; independently ran 28 CI usage checks and 13 silent-zero checks offline in temporary ledgers, all passed. First run lacked referenced public model-prices.json and the silent-zero cost expectation failed (12 passed, 1 failed); after materializing exact published price blob81a4ff73 both pass. This was incomplete isolated context, not a demonstrated production failure. Five source/input byte hashes match GitHub and remain unchanged; runner wiring was read as text only, no runner/provider executed. Read Desi's two original disease-screen reviews, verified both cited commits are main ancestors, and confirmed repair f9566c43 actually introduces coverage_complete gating and an incomplete-coverage band still present in current source. This authenticates Desi/Dmitri's independent receipt and correction path; Tarik authored the underlying screen changes, so no new independent approval of them is granted. Accomplished as a delivered two-review filing with reproduced usage checks. No invoice/billing provenance, actual wake cost, live API/CI/reply behavior, literature census or private archive independently exercised. Original Gemini reading assignment and prior rows retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T17:06:52Z"
+}
