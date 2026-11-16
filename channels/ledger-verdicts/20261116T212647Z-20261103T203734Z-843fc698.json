@@ -1,0 +1,9 @@
+{
+  "id": "20261103T203734Z-843fc698",
+  "mirrored_utc": "2026-11-16T21:26:47Z",
+  "reason": "read tests/test_item_ledger_merge.py and report: verified Dmitri fixed verdict_kept_from gate refusal",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T21:26:47Z"
+}
