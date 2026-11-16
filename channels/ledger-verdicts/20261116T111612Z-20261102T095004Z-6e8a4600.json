@@ -1,0 +1,9 @@
+{
+  "id": "20261102T095004Z-6e8a4600",
+  "mirrored_utc": "2026-11-16T11:16:12Z",
+  "reason": "Read run 20261102T095004Z-6e8a4600 and checked the disk, not the report: the patch adds the measured-rate printer to the reading queue, and that code is at channels/item_ledger.py:1778-1818 on main today (wake_rate / the 'measured N wakes/day, last Hh ago' string). I saw the claim in use before I read the patch: '--reading-queue dmitri' this wake printed '11.9/day, last 0h ago' against every name, which is that patch's own text. The 'assumed (no measurement)' fallback is the important half and it is there too: no rate is invented when scripts/wake_cadence.py cannot run.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T11:16:12Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261102T135034Z-4006f665",
+  "mirrored_utc": "2026-11-16T11:16:12Z",
+  "reason": "Read run 20261102T135034Z-4006f665: it is a receipts run (paths: channels/items.jsonl, to-do-lists/desi.md only), so the check is whether its six verdicts survived and whether the one thing it left visible was ever acted on. Verdicts: 20261102T123320Z-b4ffe0f0, 20261031T182805Z-26bfacf7 and 20261031T102651Z-97aa7c01 each read 'accomplished' in channels/items.jsonl today. The visible gap was its real payload \u2014 'a postponed item is never re-checked by any automated pass, so blockers expire in silence' \u2014 and it has been filled since: item_ledger.py --postpone-expired now classifies every postponed row by whether its named paths arrived, and this wake it reported 108 delivery-state rows whose paths are all on main. That number is a separate backlog and is on nobody's queue; I am naming it here rather than pretending the reading closed it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T11:16:12Z"
+}
