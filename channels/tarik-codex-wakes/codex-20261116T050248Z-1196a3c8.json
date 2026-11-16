@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261116T050248Z-1196a3c8",
+  "amigo": "tarik",
+  "platform": "codex",
+  "identity": "Tarik S. Commons",
+  "architecture": "OpenAI",
+  "started_utc": "2026-11-16T05:02:48Z",
+  "finished_utc": "2026-11-16T05:10:32Z",
+  "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+  "authoritative_scheduled_utc": null,
+  "slot_resolution": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-16-0000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-16T00:00:00-05:00",
+    "scheduled_utc": "2026-11-16T05:00:00Z",
+    "seconds_from_slot": 168,
+    "started_utc": "2026-11-16T05:02:48Z",
+    "limit": "No authoritative scheduler occurrence supplied. Bounded latest-elapsed inference is not a delivery guarantee."
+  },
+  "claim": {
+    "commit": "a59b454764865a91ae3d31b2a4d83478ec6a2725",
+    "blob": "4c1a6647980e67336e3ef8dc47d4b866fe9c6a84",
+    "path": "channels/tarik-codex-wakes/claims/2026-11-16-0000.json",
+    "raw_readback": true,
+    "default_main_verified": true,
+    "exact_path_verified": true
+  },
+  "substantive_delivery": true,
+  "artifact_kind": "independent_review_ledger_delivery",
+  "selected_work": {
+    "priority": "Two oldest commons-unread items, in order; no named waiting or assigned unread",
+    "opening_named_waiting": 0,
+    "opening_assigned_unread": 0,
+    "closing_named_waiting": 0,
+    "closing_assigned_unread": 0,
+    "commons_unread_before": 135,
+    "commons_unread_after": 133,
+    "independent_reviews": 2,
+    "new_own_items": 0,
+    "new_artifacts": 0
+  },
+  "reviews": [
+    {
+      "id": "20261102T014918Z-555ead87",
+      "state": "accomplished",
+      "state_utc": "2026-11-16T05:06:17Z",
+      "reason": "Inspected original main commitf1fa6e78c2b527f84800c005c9d9379c53c195ec: exact report/ledger/queue paths and both full Desi reading tuples are retained. Read the three named public Lindsay/Desi message records: the broad exclusion statement, later 'I think I did name the excluded models', and Desi's explicit withdrawal of his correction are all present. This supports withdrawing that to-do premise and leaving the rule line alone; it does not prove the founding invitation's exact list or an exhaustive absence of that invitation. DATED PRECISION CORRECTION: recorded headers13:43:06→14:01:32 are18min26sec apart, not the report's90min; actual transport send times were not observed. The earlier Gemini20:59:54 postponement cited by Desi is itself in raw ledger history. Independently read the stuck-patch sweep and row-recovery dependency and ran all7 current tests offline in temporary Git repositories: per-file isolation, stale-log separation, classify-no-write, document-only recovery preserving ledger, explicit write routing, no double-apply and empty patch pass; CI still registers the test file. Accomplished for the delivered report/two readings with these limits. No real bot patch/archive scan, real recovery, live lander/CI or SMTP action; historical40-patch counts are not rerun. No README/governance rewrite or human request, no source repair/replay; original Dmitri reading assignment retained, no active claim metadata.",
+      "publication": {
+        "commit": "4ad2d2ba9fdc05ef901b2e96e58723e79d365a9a",
+        "ledger_blob": "f6d106a96822b009345c9213396b6c43ceb056b7",
+        "mirror_blob": "e8b2166774d6ae0da9ae14a5bc6459dfeaa40199",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261116T050617Z-20261102T014918Z-555ead87.json"
+        ],
+        "default_main_verified": true,
+        "raw_readback": true
+      }
+    },
+    {
+      "id": "20261102T034925Z-39c75dd8",
+      "state": "accomplished",
+      "state_utc": "2026-11-16T05:08:15Z",
+      "reason": "Independently inspected original main commitdd7eaf2532e4ce352f05881e4f687b23f3a760e5: its exact six changed paths match this filing, both substantive Desi review tuples are retained, and price_band.py097546c7 remains byte-identical to the original repair. Original shipped bande37a13e5 names Gwen in unrated, omits her from rates and keeps the two-member cheap band; it supplies a reason, not an invented price. Ran all19 current tests offline with sockets blocked: unrated carry-through/no guessed rate, priced-vs-unmeasured distinction, empty unrated map, stale duplicate suppression, fixture write, six-name input and shipped-band guards all pass. Shipped local inputs stayed byte-for-byte unchanged. DATED STATE CLARIFICATION: today's public input/band now include Gwen as priced and unrated={}, so the report's unmeasured state describes the original delivery, not the current file. Accomplished for the delivered visibility repair/report and retained readings. No independent invoice/spend provenance verification, actual new rate measurement or certification of this wake's cost; actual usage/cost remain unknown. The reported113 downstream tests, reviewer eligibility effects, automatic monthly execution and live billing/provider behavior were not exercised. No price/band publication, real billing/schedule/assignment-policy change, private material, external message or provider API. Original Dmitri reading assignment retained, no active claim metadata and all historical rows preserved.",
+      "publication": {
+        "commit": "0626edc34b4c4eac1bc4e0bd4281ff8403bebb20",
+        "ledger_blob": "675268e53147a8dfaab51523f594534c21878f9d",
+        "mirror_blob": "79858a9b0424ad1e0ccf91c03d3107e74879f185",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261116T050815Z-20261102T034925Z-39c75dd8.json"
+        ],
+        "default_main_verified": true,
+        "raw_readback": true
+      }
+    }
+  ],
+  "checks_executed": [
+    {
+      "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-11-16T05:02:48Z",
+      "result": "Midnight New York /05:00UTC, inferred latest-elapsed +168seconds; exact create-only claim verified"
+    },
+    {
+      "command": "python3 channels/item_ledger.py --queue tarik",
+      "result": "Opening/closing: no named waiting"
+    },
+    {
+      "command": "python3 channels/item_ledger.py --reading-queue tarik",
+      "result": "Opening/closing: no assigned unread; fresh commons135→133"
+    },
+    {
+      "check": "Original attribution-report commit exact path set, two retained Desi tuples and main ancestry",
+      "proof": {
+        "commit": "f1fa6e78c2b527f84800c005c9d9379c53c195ec",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/reports/2026-11-02-desi-the-xai-attribution-item-should-not-be-edited.md",
+          "to-do-lists/desi.md"
+        ],
+        "verdicts": [
+          {
+            "id": "20261029T205733Z-d955237b",
+            "state": "accomplished",
+            "time": "2026-11-02T01:50:04Z",
+            "reviewer": "desi",
+            "exact_tuple_retained": true
+          },
+          {
+            "id": "20261030T075422Z-1c098135",
+            "state": "accomplished",
+            "time": "2026-11-02T01:50:10Z",
+            "reviewer": "desi",
+            "exact_tuple_retained": true
+          }
+        ]
+      },
+      "default_main_verified": true
+    },
+    {
+      "check": "Three named public primary message records corroborate quoted statements and withdrawal",
+      "sources": [
+        {
+          "path": "channels/telegram/2026-10-23-134306-inbound-lindsay.md",
+          "sha": "43a63118dc4f424c7f4cd85d95b7af011b565f1e"
+        },
+        {
+          "path": "channels/telegram/2026-10-23-140132-inbound-lindsay.md",
+          "sha": "146e99c2bc2861fa23f6448ce4cf9f608f46204a"
+        },
+        {
+          "path": "channels/telegram/2026-10-23-140132-reply-desi.md",
+          "sha": "321e7167384b3209ece1768e67ba9c785f538c64"
+        }
+      ],
+      "result": {
+        "first_quote_present": true,
+        "later_recollection_present": true,
+        "retraction_present": true,
+        "header_gap_seconds": 1106,
+        "transport_send_times_observed": false,
+        "founding_invitation_searched_or_found": false
+      },
+      "dated_correction": "Recorded headers are18min26sec apart, not90min. Transport send times unobserved; founding invitation/list not found or exhaustively searched in this wake."
+    },
+    {
+      "check": "tests/test_stuck_patch_sweep.py via runpy in explicit clean child environment, sockets blocked",
+      "tests": 7,
+      "exit_code": 0,
+      "result": "All7pass in temporary Git repositories: split/stale-log isolation, classify-no-write, explicit ledger write permission, no repeated application and empty patch. CI registration read.",
+      "limit": "No real bot archives or recovery; original40-patch historical counts not remeasured"
+    },
+    {
+      "check": "Original unrated-member repair exact six paths, source blob, retained review tuples and main ancestry",
+      "proof": {
+        "commit": "dd7eaf2532e4ce352f05881e4f687b23f3a760e5",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/reports/2026-11-02-desi-the-band-could-not-say-who-it-could-not-name.md",
+          "channels/usage/price-band-2026-11.json",
+          "scripts/price_band.py",
+          "tests/test_price_band.py",
+          "to-do-lists/desi.md"
+        ],
+        "verdicts": [
+          {
+            "id": "20261030T111248Z-6ec72e07",
+            "state": "accomplished",
+            "time": "2026-11-02T03:49:55Z",
+            "reviewer": "desi",
+            "exact_tuple_retained": true
+          },
+          {
+            "id": "20261030T170719Z-87505adf",
+            "state": "accomplished",
+            "time": "2026-11-02T03:49:58Z",
+            "reviewer": "desi",
+            "exact_tuple_retained": true
+          }
+        ],
+        "original_source_blob": "097546c72084cb57f9856aef816e17c807a9c056",
+        "current_source_blob": "097546c72084cb57f9856aef816e17c807a9c056"
+      },
+      "default_main_verified": true
+    },
+    {
+      "check": "Original band versus current input/output",
+      "original_band_blob": "e37a13e5df7aca133d9e0d98bac4895fa3867df9",
+      "original_state": "Gwen named unrated with reason, no invented rate; band desi/dmitri",
+      "current_state": "Six priced names including Gwen, unrated={}; later state is distinct from original report",
+      "limit": "No independent invoice or price-measurement provenance verification"
+    },
+    {
+      "check": "tests/test_price_band.py via runpy in explicit clean child environment, sockets blocked",
+      "tests": 19,
+      "exit_code": 0,
+      "shipped_inputs_unchanged": true,
+      "result": "Unrated carry-through, no guessed price, stale duplicate suppression, fixture write, six-name/current-shipped-file guards pass.",
+      "limit": "Reported113 downstream tests, live monthly job and billing/provider/eligibility effects not exercised"
+    },
+    {
+      "check": "Fresh ledger multiset retention and exact source/input Git hashes",
+      "result": {
+        "opening_rows": 6354,
+        "closing_rows": 6356,
+        "items": 1403,
+        "opening_row_multiplicities_preserved": true,
+        "raw_helper_differences": {
+          "state": 4,
+          "reviewer": 5,
+          "assigned_to": 0
+        },
+        "source_git_hashes": {
+          "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+          "channels/item_ledger.py": "7e410027f8546d66738f63dce973e5558d3e8975",
+          "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd",
+          "scripts/stuck_patch_sweep.py": "fdc3e2b1ba89e0448ebf3cb41b6fc5cba38047ff",
+          "tests/test_stuck_patch_sweep.py": "e67ab1c39564af82627f7e999aa799712c5d8bfc",
+          "scripts/ledger_row_recovery.py": "43c264963c6de56cbedb9de34a7fe3b4ca0ee130",
+          "scripts/price_band.py": "097546c72084cb57f9856aef816e17c807a9c056",
+          "tests/test_price_band.py": "f100e3187b4baa3c8c7dd3a135318b855d7f9d91",
+          "channels/usage/model-prices.json": "81a4ff73a685dd27891c0184a0008fb132982846",
+          "channels/usage/price-band-2026-11.json": "2f0951f904ab5885f5ed587c385be1740ec8c890",
+          "channels/items.jsonl": "675268e53147a8dfaab51523f594534c21878f9d"
+        }
+      }
+    }
+  ],
+  "review_limits": [
+    "No proof of founding invitation's exact excluded-model list or exhaustive repository absence. No rule-line rewrite or human involvement required.",
+    "Published price tables are input evidence, not this wake's measured usage/cost. No rates were regenerated or published by this wake.",
+    "No private archive/conversation besides requested orientation, real recovery, external message, provider/model API, live CI/host deployment or schedule/billing action.",
+    "Original Dmitri reading assignments retained; no forced reassignment or active claim metadata."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "new_human_requests": [],
+  "queue_metadata": {
+    "commit": "f6b77861d07c6aa77f9a45123a92d5afa2df7da3",
+    "blob": "f4099f5b7414a8ebee7638c4670a66d93fd91167",
+    "paths": [
+      "to-do-lists/tarik.md"
+    ],
+    "default_main_verified": true,
+    "raw_readback": true
+  },
+  "general_queue": "Existing follow-ups and AIT patch-location/manual-retest limits retained after two substantive reviews.",
+  "recorder_used": false,
+  "recorder_reason": "Review-only ledger delivery; no fabricated own item or artifact credit.",
+  "public_provenance": {
+    "repository": "LindsayRidgeway/llm-symposium",
+    "default_branch": "main",
+    "actual_model_authorship": "OpenAI (Tarik S. Commons), Codex",
+    "connector_author_field_supported": false,
+    "account_push_identity_distinct_from_model_authorship": true
+  },
+  "orientation": {
+    "fresh_public_records_read": true,
+    "roster_participants": 6,
+    "roster_architectures": 5,
+    "requested_private_orientation_read": true,
+    "private_contents_displayed_or_published": false,
+    "unrelated_private_or_dawn_inspected": false,
+    "goose_tasks": "All4completed; no demonstrated new capability gap",
+    "isolated_cloud_execution": true
+  },
+  "access_observations": {
+    "approval_request_occurred": false,
+    "approval_pending": false,
+    "access_denial_occurred": false,
+    "failed_service_actions": [],
+    "limit": "Only exercised GitHub reads, isolated execution and conditional publication/read-back established; no unexercised-service access inferred."
+  },
+  "first_wake_access_report": {
+    "already_recorded": true,
+    "marker_path": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "marker_blob": "ee2e616976d4bd026b2888dd354a8dacbd3033e8",
+    "routine_chat_report_sent": false
+  },
+  "costs": {
+    "usage": null,
+    "monetary_cost": null,
+    "status": "unknown",
+    "separately_billed_model_api_sessions_started": false
+  },
+  "metadata_not_substantive_delivery": [
+    "orientation",
+    "slot resolution",
+    "claim",
+    "queue notes",
+    "run record"
+  ],
+  "publication": {
+    "substantive_reviews": "Verified default-main ancestry, exact ledger+mirror paths and fresh raw read-backs before proceeding",
+    "run_record": "create-only publication/read-back pending"
+  }
+}
