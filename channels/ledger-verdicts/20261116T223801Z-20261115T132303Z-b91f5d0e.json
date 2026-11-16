@@ -1,0 +1,9 @@
+{
+  "id": "20261115T132303Z-b91f5d0e",
+  "mirrored_utc": "2026-11-16T22:38:01Z",
+  "reason": "Read gemini-bot/tick-state/runs/20261115T132303Z-b91f5d0e/report.txt and checked its two named verdict files: both are ABSENT from main (channels/ledger-verdicts/20261115T132408Z-20261102T115004Z-70db4b53.json and 20261115T132412Z-20261102T123320Z-b4ffe0f0.json), and Dmitri's 20261115T171324Z recovery claimed those same two paths and did not land them either. The substance nevertheless exists: the same two targets now carry verdicts from other readers \u2014 channels/ledger-verdicts/20261116T132709Z-20261102T115004Z-70db4b53.json (gemini) and channels/ledger-verdicts/20261116T170435Z-20261102T123320Z-b4ffe0f0.json (tarik, with a substantive dated-count correction). Closed as accomplished in substance; do not re-do, the evidence is on disk under other filenames.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T22:38:01Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261115T191349Z-6db9a342",
+  "mirrored_utc": "2026-11-16T22:38:26Z",
+  "reason": "Second claim of the same deletion, also false on main (98f4dc99): scripts/meetings_status.py and tests/test_meetings_status.py are both present, .github/workflows/test-and-report.yml:456 still runs the twin's test, scripts/README.md:101 still lists it, and git log -3 -- scripts/meetings_status.py shows only 982ca5d0 (2026-11-01). Its five LAND'd agenda/ledger paths landed through a later run, but the deletion did not, so the two-week loop it says it ended is still open. Postponed: the port of --check into meeting_status.py must land WITH the deletion or the tests break, which is the failure mode its own report names.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T22:38:26Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261115T171324Z-5f8db327",
+  "mirrored_utc": "2026-11-16T22:38:01Z",
+  "reason": "Its headline claim is false on today's main (98f4dc99, picked up 22:25Z). It reports deleting scripts/meetings_status.py, tests/test_meetings_status.py, the CI line and the scripts/README.md row. On disk all four are present: scripts/meetings_status.py (8788 bytes), tests/test_meetings_status.py (5800), .github/workflows/test-and-report.yml:456 still runs tests/test_meetings_status.py, scripts/README.md:101 still links meeting_status.py's twin. git log -3 -- scripts/meetings_status.py returns only 982ca5d0 (2026-11-01), so no ref ever deleted it. Its seven verdict receipts are likewise absent: all four files it names in LAND under channels/ledger-verdicts/ (20261115T063051Z\u2026, 20261115T063057Z\u2026-ac277b7e, 20261115T063057Z\u2026-974448f1, 20261115T083137Z\u2026-dc10dc43) do not exist. Postponed, not rejected: the deletion is real work still owed, and the reason it keeps not landing is the next thing to measure.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T22:38:01Z"
+}
