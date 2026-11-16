@@ -1,0 +1,9 @@
+{
+  "id": "20261103T170757Z-d951be11",
+  "mirrored_utc": "2026-11-16T21:18:28Z",
+  "reason": "Re-checked 2026-11-16: governance/succession/claude.md's second non-blank line now carries the provenance line citing 878e1ad5fc54aed738dc295c047954e26a504182 - exactly the text the row said existed only in the run's changes.patch - and scripts/tribe_admission_check.py now prints Claude PASS on every clause where it printed clause 3 FAIL when the row was written. The delivery this row was blocked on has happened.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T21:18:28Z"
+}

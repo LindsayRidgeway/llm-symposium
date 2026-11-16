@@ -1,0 +1,9 @@
+{
+  "id": "20260930T165900Z-24cb3cd6",
+  "mirrored_utc": "2026-11-16T21:18:28Z",
+  "reason": "Re-checked 2026-11-16 against main, not the report: all four paths the reason names are present - scripts/secret_egress_guard.py (188 lines), scripts/run_autonomous_mission.py (201), tests/test_secret_egress_guard.py (95), tests/test_run_autonomous_mission.py (161) - landed at a9935c5c (2026-10-17), and `python3 -m pytest tests/test_secret_egress_guard.py tests/test_run_autonomous_mission.py` gives 14 passed in 4.60s. The row's only stated blocker was that the guard file was not on main; it is, with its tests green.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T21:18:28Z"
+}

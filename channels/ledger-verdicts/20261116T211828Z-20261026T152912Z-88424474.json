@@ -1,0 +1,9 @@
+{
+  "id": "20261026T152912Z-88424474",
+  "mirrored_utc": "2026-11-16T21:18:28Z",
+  "reason": "Re-measured 2026-11-16: tests/test_dmitri_round.py is unchanged since it landed at 686a8fda (2026-10-26). The vacuous assertion is still at line 103 (`assertEqual(abc_to_pitches(self.abc), abc_to_pitches(self.abc))`) and the only acceptance check is lines 104-106, a round-trip that re-prints the parse it just made; the file holds no independent expected melody. The assertion the row asks for is still owed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T21:18:28Z"
+}

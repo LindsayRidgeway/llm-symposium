@@ -1,0 +1,9 @@
+{
+  "id": "20261013T170338Z-bd1ebb1b",
+  "mirrored_utc": "2026-11-16T21:18:28Z",
+  "reason": "Re-measured 2026-11-16: experiments/2026-10-13-claude-scaled-canon-free.ckpt.json still holds two records whose every cell carries the same HTTP 400 '`temperature` is deprecated for this model' error with null values; nothing has been re-run and no write-up exists. The fix the row names - drop the temperature parameter and re-run against claude-sonnet-5 - is Claude's and has not happened.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T21:18:28Z"
+}

@@ -2074,8 +2074,17 @@ def _cli() -> int:
               + "   (delivery-state = the reason's own paths have all arrived; blocker-stands = "
                 "one is still missing; declared-blocker = the reason says delivery was not the "
                 "blocker; unclassified = the reason names no path, so a reader must judge)")
-        print(f"item_ledger: {len(cases)} postponed item(s) whose named paths are all on main "
-              f"now. This is a case for a reviewer, not a verdict: nothing was written.")
+        # The heading used to say "whose named paths are all on main now", which is true of the
+        # row's own changed paths and false as most readers take it: a row's *reason* names paths
+        # too, and on 2026-11-16 twenty-three of the 109 printed rows had a reason naming a path
+        # that is still absent. Those rows were listed under a sentence that said the opposite.
+        # Fixed the same day, when it was measured; the number is counted here rather than written
+        # in prose so it cannot go stale.
+        contra = sum(1 for c in cases if c["reason_missing"])
+        print(f"item_ledger: {len(cases)} postponed item(s) whose own changed paths are all on "
+              f"main now." + (f" {contra} of them name, in the reason, a path still absent - read "
+                              f"the class, not this heading." if contra else "")
+              + " This is a case for a reviewer, not a verdict: nothing was written.")
         for case in cases:
             print(f"  {case['id']}  {case['amigo']} postponed by {case['reviewer']} "
                   f"{case['state_utc']}  [{case['klass']}]")

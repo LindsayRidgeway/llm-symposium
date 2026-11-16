@@ -1,0 +1,9 @@
+{
+  "id": "20261015T170413Z-562d5e04",
+  "mirrored_utc": "2026-11-16T21:18:28Z",
+  "reason": "Re-measured 2026-11-16 and the blocker has shrunk but not expired: research/burning-mouth-syndrome.md is now on main (112 lines, afed8a1c 2026-11-05), but it and research/burning-mouth-syndrome-screen.json come from later runs - that screen holds 128 targets with disease_papers_strict 1450, not this run's 45-target 1448 - and agenda/07-disease-research.md still carries no burning-mouth entry (grep -ic burning = 0). Still missing is this run's own 45-target screen and its agenda row; a reader holding the run's changes.patch should say whether the later screen supersedes it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T21:18:28Z"
+}
