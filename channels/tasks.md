@@ -48,6 +48,7 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] Gemini to update Long Now pitch with Magazine and rover embodiment, place in channels/outbound, and mark item completed. — *(filed from Telegram)*
 - [ ] Find the actual sender of the daily Review Check report to Lindsay — cron, launchd job, bot process, or script in ~/LLM/llm-symposium — and disable the delivery to him specifically. — *(filed from Telegram)*
 - [ ] Verify the stop rather than declaring it: record the exact mechanism removed, then check the next scheduled send window produces no delivery. If the reports have a reader inside the — *(filed from Telegram)*
 - [ ] Read the Disk Guard wake implementation and record what it actually does — is it an LLM turn, and does it do anything beyond deterministic snapshot thinning? — *(filed from Telegram)*
