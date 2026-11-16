@@ -1,0 +1,9 @@
+{
+  "id": "20261112T130341Z-6d634242",
+  "mirrored_utc": "2026-11-16T20:35:59Z",
+  "reason": "Read run dmitri 20261112T130341Z against the tree. Its two claims hold: channels/meetings/2026-11-06-seventh-seat.md carries the result page it says it wrote, with the honest count ('one, of six', line 122) and the reason a one-answer meeting is still a structural result (line 160) rather than the paragraph a fuller meeting would have had; and scripts/meeting_status.py's counts block (lines 303-336) now reports qualified/absent/silent separately instead of grading every meeting by the first meeting's file-and-number rule, which is the defect it names. tests/test_meeting_status.py passes on today's main. Read, not recomputed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T20:35:59Z"
+}

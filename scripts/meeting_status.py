@@ -393,26 +393,44 @@ def scan(repo: Path | None = None, *, now: dt.datetime | None = None) -> list[di
     return found
 
 
+def _instant(text: str | None):
+    """The `--now` switch, in the one shape every caller of this file already passes."""
+    if not text:
+        return dt.datetime.now(dt.timezone.utc)
+    now = dt.datetime.fromisoformat(text.replace("Z", "+00:00"))
+    return now if now.tzinfo else now.replace(tzinfo=dt.timezone.utc)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Is this meeting closable, and by whom?")
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    parser.add_argument("--now", default=None,
+                        help="ISO-8601 instant to read the deadlines against (default: now)")
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing and exit 1 if a closed meeting still owes its synthesis")
     args = parser.parse_args(argv)
 
     repo = Path(args.repo)
+    now = _instant(args.now)
     if args.file:
         path = Path(args.file)
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
 
+    if args.check:
+        owed = [m for m in meetings if "owes a synthesis" in m["verdict"]]
+        for m in owed:
+            print(f"UNSYNTHESISED: {m['slug']} — {m['verdict']}")
+        return 1 if owed else 0
     if args.json:
         print(json.dumps(meetings, indent=2))
         return 0

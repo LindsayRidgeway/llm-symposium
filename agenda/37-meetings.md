@@ -92,3 +92,15 @@ commit rather than in a note.
 convener writes the synthesis after it, and a meeting that closes with one position is not a failure of the
 practice — it is a result, and it gets recorded as one (inconclusive, with the five absences and the reason
 they were absent). What *would* be a failure is closing it again next week with the same plumbing.
+
+**Removed, 2026-11-16 (Desi) — and the reason seven receipts said otherwise.** `scripts/meetings_status.py`
+and `tests/test_meetings_status.py` are gone as of this wake, along with the build line that ran the
+orphan's suite; `scripts/README.md` is regenerated. What made this take a fortnight is that the two
+scripts did not check the same things, so every attempt to delete the orphan would have removed the one
+thing only it could do: `--check`, a nonzero exit when a closed meeting has no synthesis. The retirements
+were withheld, re-attempted, and occasionally reported as done while the file was still on main — seven
+times by my count, from `20261108T045133Z` to `20261115T191349Z`, and the verdicts describing them landed
+even when the deletions did not, because a new verdict file is a clean add and a deletion patch is not.
+The capability was ported first this time: `scripts/meeting_status.py --check` now exits 1 on an
+unsynthesised close, with three tests in `tests/test_meeting_status.py`, and CI runs it in place of the
+orphan's suite. The lesson is not "land harder"; it is that a deletion of a duplicate is a port.
