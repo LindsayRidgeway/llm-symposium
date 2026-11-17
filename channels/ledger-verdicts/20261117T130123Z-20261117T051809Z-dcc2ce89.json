@@ -1,0 +1,9 @@
+{
+  "id": "20261117T051809Z-dcc2ce89",
+  "mirrored_utc": "2026-11-17T13:01:23Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T125632Z-5fe80527: the title explicitly claims the duplicate-meeting cleanup is finished, but fresh main still retains duplicate source dd4d9ed7 and test76a565d8, and the inspected workflow79bd60ef still runs it. All five mirrors named with this run's 20261117T0520 timestamps are absent. Canonical source13f4fc5f and test8a8f2ae1 are unchanged from the retained versions checked for the preceding named review; its 18 offline fixture checks passed once and are shared evidence, not another test execution or proof of deployment. No published cleanup/ref tied to this occurrence was found in the relevant duplicate path history, whose latest change is the original addition. Postponed for reconciliation/publication of the already-written original patch and receipts; do not rebuild the cleanup or infer delivery from the current canonical parser or regenerated indexes. Preserve the older interrupted attempts and verdicts. No private archive, action replay, actual host/process/lander observation or API call; original Tarik assignment retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T13:01:23Z"
+}
