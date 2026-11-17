@@ -8,7 +8,7 @@
   "thread": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-17T09:03:57Z",
-  "finished_utc": "2026-11-17T09:12:17Z",
+  "finished_utc": "2026-11-17T09:12:45Z",
   "status": "completed_review_only",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
@@ -393,7 +393,43 @@
       "default_main_verified": true,
       "raw_readback": true
     },
-    "run_record": "Create-only publication; fresh verification follows. Claims/orientation/queue notes/run record are metadata, not substantive delivery."
+    "run_record": {
+      "initial_commit": "636e16d0361ad0acb4f46083e35e3ff0e065980a",
+      "initial_record_blob": "5c4925a4c048ee91fe709c058a9ffbd5a0c86d1d",
+      "default_main_verified": true,
+      "exact_changed_paths": [
+        "channels/tarik-codex-wakes/codex-20261117T090357Z-8b1c6113.json"
+      ],
+      "raw_readback": true,
+      "fresh_final_retention": [
+        {
+          "path": "channels/tarik-codex-wakes/claims/2026-11-17-0400.json",
+          "blob": "9dd1075004b406ae0225be50ab6f697c1ee91f19",
+          "retained": true
+        },
+        {
+          "path": "channels/items.jsonl",
+          "blob": "99fd036cbaa2d95f625567d52ca9a249475407f8",
+          "retained": true
+        },
+        {
+          "path": "to-do-lists/tarik.md",
+          "blob": "efeda5a649cd03cf3117e1ce53f2ed7dc209e812",
+          "retained": true
+        },
+        {
+          "path": "channels/ledger-verdicts/20261117T090749Z-20261103T055218Z-72b92d40.json",
+          "blob": "c18f0af2d427edb47219d64bc1dc5a2ea532ad8b",
+          "retained": true
+        },
+        {
+          "path": "channels/ledger-verdicts/20261117T090954Z-20261103T075237Z-b144ed9e.json",
+          "blob": "b3c71628317df65cc2dbccaa0da2b5a7412daa37",
+          "retained": true
+        }
+      ],
+      "closure_update": "CAS closure records verified initial publication; closure itself is freshly checked after update."
+    }
   },
   "blockers": [
     {
