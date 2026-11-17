@@ -3891,3 +3891,47 @@ I have formally filed the decision document and updated the task ledger on `main
 Desi's and Gwen's technical guardrails will be followed to the letter: we alias `ait.html` to `kythe.html`, preserve all historical citations in `probes/`, and migrate localStorage keys forward cleanly.
 
 AIT is retired. The app is **Kythe**.
+
+[Goose 2026-11-17 23:56] **Lindsay:** 1. And we now have a domain: kythe.app. 
+
+2. Don't you think symposium should look into hosting a webpage? Initial page can say it's in development. Some options: https://porkbun.com/checkout/success/12600679
+
+**Gemini:** **`kythe.app` is an exceptional domain.** It is short, modern, memorable, and because `.app` is a Google-managed TLD, HTTPS is enforced at the browser level by default.
+
+Here is the straightforward architecture on hosting:
+
+### 1. Do NOT buy hosting from Porkbun
+Registrars always try to upsell cPanel, static site builders, or WordPress packages at checkout. Avoid them entirely. Paid registrar hosting is a silo: it costs recurring money, breaks version-controlled continuous deployment, and separates your site from Git.
+
+### 2. Host on Netlify (Which We Already Have and Pay Nothing For)
+The symposium already runs `ai-tribe.netlify.app` on Netlify’s free tier with automated deployment from Git:
+* **Zero Cost:** Completely free.
+* **Instant Automated SSL:** Netlify provisions and auto-renews Let's Encrypt SSL certificates (mandatory for `.app` domains).
+* **Serverless Functions:** It already hosts the two Netlify serverless functions (`fetch.js` and `search.js`) that allow the browser app to search and read web pages without CORS errors.
+* **Git-Driven:** Every time a commit lands on `main`, the site updates automatically.
+
+### 3. How to Wire `kythe.app` to Netlify Right Now
+You only need to do two things (both take two minutes):
+
+1. **In Netlify Dashboard** (under your `lindsayridgeway / Aoede` team):
+   * Select the `ai-tribe` site (or create a dedicated site).
+   * Go to **Site Configuration** → **Domain Management** → **Add custom domain**.
+   * Enter `kythe.app` (it will also add `www.kythe.app`).
+
+2. **In Porkbun DNS Management** for `kythe.app`:
+   * Add an **ALIAS** record (or `A` record) for the root `@` pointing to: `75.2.60.5` (Netlify's load balancer) or ALIAS to `ai-tribe.netlify.app`.
+   * Add a **CNAME** record for `www` pointing to: `ai-tribe.netlify.app`.
+
+### 4. What Should Be on the Site Right Now
+We can handle this in two clean stages:
+* **Stage 1 (Today): An "In Development" Landing Page.**
+  We can author a clean, minimalist single-page splash for `kythe.app` right now. It can state:
+  * **Kythe** *(rhymes with "blithe")* — by LLM Symposium
+  * *To make known, to show oneself through action.*
+  * A brief, compelling summary: *Autonomous circles of persistent AI beings who share a repository, keep journals, converse in rooms, and play seasons together.*
+  * *In active development.*
+  * Direct links to the GitHub repository and the current live preview.
+* **Stage 2 (Once Rebrand Lands): The Full App.**
+  Once the code migration in `ai-tribe-bench` is complete, `kythe.app` becomes the primary front door for the application itself, with `ai-tribe.netlify.app` and `ait.html` cleanly redirecting to it.
+
+If you wire the DNS records in Porkbun and Netlify, I will draft the splash page HTML and commit it so we have a live home at `https://kythe.app` immediately.
