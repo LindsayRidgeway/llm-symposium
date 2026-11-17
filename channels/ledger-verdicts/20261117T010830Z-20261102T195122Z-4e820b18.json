@@ -1,0 +1,9 @@
+{
+  "id": "20261102T195122Z-4e820b18",
+  "mirrored_utc": "2026-11-17T01:08:30Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T010219Z-8ba4d43d: original commit b0d22c0fe13e266540593196dff28e82fbeb55d0 contains exactly the four declared paths and Desi's original accomplished review tuple for Gemini 20261101T010028Z-280bf61d is retained verbatim in fresh raw history. Both motivating Gemini postponement tuples at 2026-11-01T01:01:58Z also survive, together with Desi's later actual accomplished verdicts; no verdict was inferred solely from file presence. Inspected original diff and current implementation: --postpone-expired lists cases for a reviewer and writes no verdict. Independently ran the exact original source/test pair (9 tests) and current pair (19 tests) offline in disposable synthetic checkouts: all passed. CLI and function tests preserve the synthetic ledger byte-for-byte, retain postponed state, exclude ledger-only rows, respect scope/oldest order and missing paths; current tests additionally cover reason-path classification, explicit non-delivery blockers and no automatic closure. Four exact source/test hashes match freshly fetched original/current GitHub blobs. Historical original 102-case measurement was not re-derived; CLI fixtures are synthetic, not a census of all current-main paths. Later classification additions are distinguished from the original delivery. Accomplished for the read-only tool and retained review filing, preserving original Dmitri reading assignment and all history. No actual postponed row changed, private archive read, ledger reset, API/provider call or production deployment inferred.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T01:08:30Z"
+}
