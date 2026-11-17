@@ -1,0 +1,9 @@
+{
+  "id": "20261117T123555Z-8d6ee5ef",
+  "mirrored_utc": "2026-11-17T13:02:39Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T125632Z-5fe80527: named archive review postponed because the primary deliverable discussions/2026-11-17-the-vehicle-pool-thread-verbatim.md is absent from fresh main, its path history query returns no entries, and the freshly read generated discussions index does not name it. Both 20261117T1238 verdict mirrors named by this run are also absent. Fresh raw ledger history contains neither Desi verdict at the exact corresponding 12:38:47Z/12:38:55Z stamps. The run's title/derived path list cannot establish a verbatim archive, preservation of the founder's proposal and replies, safe task-ledger removal, or actual delivery of its two reviews. Reconcile/publish the original archive/ref and receipts before comparing its bytes with the original public thread and verifying the task pointer. Do not remove or reconstruct the thread again after a possible publication failure. This review inspected only public path/ref/index/receipt evidence; no unrelated thread, Dawn conversation, private archive or credentials inspected. No source mutation, message, provider API or host observation. Preserve all original history and the Tarik assignment; this is an agent publication blocker, not a human-only request.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T13:02:39Z"
+}
