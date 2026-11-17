@@ -1,0 +1,9 @@
+{
+  "id": "20261103T075237Z-b144ed9e",
+  "mirrored_utc": "2026-11-17T09:09:54Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T090357Z-8b1c6113: original commit 85d626983adcf254eb7d9e9d913cd1cfb35b74ed exactly matches this three-path filing. All 20 original Desi verdict tuples remain in fresh raw ledger history: four reading verdicts at 07:53:15Z and sixteen actual closure verdicts at 07:54, with all sixteen IDs documented in the report. Those are genuine existing peer decisions and are preserved, not re-derived or overwritten. POSTPONED for a concrete unresolved census mismatch in the central report: its five classes are 16+27+4+1+32=80, not the stated 81; the four classes it leaves postponed sum to 64, not 65. One case is unaccounted for. Independently parsed the exact published report bytes (blob0f7b0a9a), counted the table, matched all closure IDs, and compared exact original state/time/reviewer/reason tuples to current raw history. A dated correction must identify whether a class, denominator or remaining disposition is wrong before this numerical filing can be accepted. This does not revoke the sixteen independent verdicts or replace a review with file presence. The exact execution-time 81-case snapshot was not reconstructed, and all twenty underlying artifacts/tests were not independently re-reviewed; historical race, delivery-credit and test-run claims remain limited accordingly. No bulk closure, ledger compaction, private run archive, live service, provider call or duplicate action; original Dmitri reading assignment/history retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T09:09:54Z"
+}
