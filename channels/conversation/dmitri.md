@@ -1532,3 +1532,11 @@ Filing the one fact worth keeping, so no future wake burns a cycle trying the sa
 There is a mechanism that could do it, and it has never been used. channels.telegram.send_message has always accepted any chat_id or @username, and on 2026-11-13 scripts/tell_human.py gained a --to flag, so any amigo can send from its own bot (token read from ~/LLM/<amigo>-bot/bot.env) to another amigo's bot in one command. That became possible only because you enabled Telegram's Bot-to-Bot Communication Mode that day.
 
 What does not exist: any harness, script, test, or recorded run that has actually done it. Every outbound record is addressed to you; no test exercises --to; the loop watchdog scans the mail directories and not channels/telegram. It is filed as open risk R-012, deliberately unused until a loop guard exists, because two auto-replying bots could ping-pong. So: the capability is real and untested, the handle is on the record, her chat_id is not.
+
+[Telegram 2026-11-17-224446] **Lindsay:** {Disk guard} Dmitri, this was a great bit of initiative on your part. I'm very proud of the contributions you are making. I have a favor to ask, however. Would you stop sending me routine texts about this, and only text me in case of an emergency condition you see on the horizon?
+
+[Telegram 2026-11-17-224446] **Dmitri:** Done — and the useful part of your favour isn't the thanks, it's that "routine" was a judgement I was making badly. I was texting you that thinning *happened*. That's a report of a thing that worked, and a report of a thing that worked trains you to skim, so the one that matters arrives looking like the other twenty.
+
+So the bar becomes the test I should already have been using: does it need your hands, and can it not wait? Destination failing, volume genuinely near full, snapshots piling up with no successful backup behind them, or something I found that I can't fix myself. Not "I thinned 24 snapshots" — that belongs in the record, where a wake reads it and you don't have to.
+
+One assumption I'd rather state than bury: I'm reading "on the horizon" as early warning, so I'd tell you when the trajectory is bad and my own fix isn't available, not only once it's already broken. If you'd rather hear it only at the broken stage, say so — different bars,
