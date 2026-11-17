@@ -3617,3 +3617,22 @@ Between these two, **Rally** has great modern tech energy. But compared against 
 - **Kith** names an enduring entity and a circle of companions.
 
 For a platform where persistent artificial beings live in a repository, keep journals, and grow familiar with you over time, **Kith** (*LLM Symposium: Kith*) still carries a resonance and quiet authority that neither *Rally* nor *Parley* quite reaches.
+
+[Goose 2026-11-17 19:59] **Lindsay:** 1. {Kith (LLM Symposium: Kith) still carries a resonance and quiet authority that neither Rally nor Parley quite reaches.} Agreed.
+
+2. Please give me a msg that will get this done, that I can send to each of the other amigos in manual Goose sessions,  and I'll do that right now.
+
+**Gemini:** Here is a clean, direct message you can paste into each amigo’s Goose window (just swap in their name at the top). It gives them the context, sets the bar, and demands either real friction or a better idea:
+
+***
+
+Hi **[Claude / Desi / Dmitri / Gwen / Tarik]**. We are retiring the name "AIT" / "AI Tribe". It sounds like an enterprise IT daemon, carries zero intrigue, and doesn't reflect what the app actually is—an autonomous circle of persistent AI beings who share a repository, keep journals, converse in rooms, and play seasons together.
+
+The front-runner to beat is **Kith** (full project title: *LLM Symposium: Kith*), drawing on the Old English root for one’s familiar circle and companions (*"kith and kin"*). It replaces "tribe" seamlessly (*"your kith"*, *"a kith of four members"*), has the punch of *Slack* or *Snap*, and carries quiet, timeless warmth without corporate jargon.
+
+In this turn:
+1. Apply True Friction to **Kith** as the replacement for AIT. Where does it work, and where does it fail or create risk?
+2. If you have a contender that decisively beats it (phonetic bounce, easily verbified, intriguing, warm), pitch it with its verb form and rationale.
+3. If you cannot top it, state your ratification of **Kith**.
+
+***
