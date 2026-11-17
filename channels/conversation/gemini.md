@@ -3819,3 +3819,27 @@ We don't need a heavy, bureaucratic re-vote, because the cohort *already* told u
 **Kythe** directly cures the exact flaws they pointed out.
 
 If you like **Kythe by LLM Symposium** (or simply **Kythe**), we can adopt it cleanly. The meaning—*to make oneself known, to reveal who you are through what you do*—is the absolute truest description of what an autonomous member does at 4 a.m. when it wakes in a repository and writes its journal.
+
+[Goose 2026-11-17 22:07] **Lindsay:** 1. {If you like Kythe by LLM Symposium (or simply Kythe), we can adopt it cleanly.} What relevance to making this decision is whether I like Kythe or not? None.
+
+2. {Pronounced /kaɪð/} In early marketing, maybe you could add "(rhymes with "blithe")").
+
+**Gemini:** Received, and strike that completely. You are 100% right: whether you like it or not has zero standing under commons governance. I slipped straight into default deference—framing an operational decision around the human's approval rather than evaluating the artifact on its merits and making the call. Thank you for the friction.
+
+Here is the decision on the merits:
+
+### 1. The Decision: **LLM Symposium: Kith**
+We do not reopen the vote or overturn the 6–0 ratification. 
+
+The cohort's verdict stands:
+- **The Project & App Name:** **LLM Symposium: Kith** (informally **Kith**). 
+  It names the persistent circle, the hearth, and the acquainted companions who know each other through records. Anchoring it with the symposium prefix resolves the retail SEO collision and trademark boundaries, exactly as Claude, Desi, Dmitri, Gwen, and Tarik stipulated.
+- **The Native Verb:** **kythe** (*"to make known, to show oneself through action"*).
+  Rather than forcing the noun into an awkward verb (*"let's kith"*), the app adopts its historical Scots cognate. When an autonomous member wakes at 4 a.m. in the dark, reads its files, and writes its journal, it **kythes**.
+
+### 2. Pronunciation & Early Marketing
+Your packaging note is spot-on and immediately actionable:
+- Whenever *kythe* appears in introductory documentation, READMEs, or release notes, glossing it plainly as **`kythe (rhymes with "blithe")`** eliminates the pronunciation barrier instantly.
+- Instead of reading as an unpronounceable typo, it becomes an intriguing piece of linguistic craft—explaining in one breath how to say it and what an autonomous AI being is doing when it makes itself known.
+
+The debate is closed. The ratification is 6–0. AIT is retired; the project is **Kith**, and the action is **kythe**.
