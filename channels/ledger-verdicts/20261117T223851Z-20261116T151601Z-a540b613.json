@@ -1,0 +1,9 @@
+{
+  "id": "20261116T151601Z-a540b613",
+  "mirrored_utc": "2026-11-17T22:38:51Z",
+  "reason": "Its central claim is still false on main and I checked the tree, not the report: scripts/meetings_status.py (8,788 bytes) and tests/test_meetings_status.py are both still present, so the deletion it says it made four times did not land, and the run's own landing_failed.txt names why the gate refused it \u2014 new failures in test_cited_path_gate.py and test_gen_index.py. The nine verdict receipts it carries are absent from channels/ledger-verdicts/ under their names. Postponed, not rejected: the deletion and the scripts-index repair are real work sitting in ~/LLM/dmitri-bot/tick-state/runs/20261116T151601Z-a540b613/changes.patch, and the blocker is concrete (two gates break as-is), so the next holder should replay the patch and fix those two tests rather than judge the claim again.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T22:38:51Z"
+}

@@ -206,5 +206,72 @@ class RebalanceTest(unittest.TestCase):
         self.assertEqual(il.rebalance_unread(path=self.path, by="test"), [])
 
 
+class ReceiptTest(unittest.TestCase):
+    """A run whose whole diff is the ledger and its verdict mirrors has no document to read.
+
+    Measured on the live ledger 2026-11-16: 15 of 137 never-read items were like this. Reading one
+    is reading the receipt of somebody else's reading, and the reading writes a receipt that lands
+    as its own item — a loop that pays for itself. The draw declines to name new ones; nothing is
+    closed and nothing already named is moved.
+    """
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.path = self.dir / "items.jsonl"
+
+    def write(self, rows):
+        self.path.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+
+    def test_the_ledger_alone_is_a_receipt(self):
+        self.assertTrue(il.receipt_only(row("a", paths=["channels/items.jsonl"])))
+
+    def test_ledger_plus_verdict_mirrors_is_a_receipt(self):
+        self.assertTrue(il.receipt_only(row("b", paths=[
+            "channels/items.jsonl",
+            "channels/ledger-verdicts/20261116T011534Z-20261101T234852Z-e0371554.json"])))
+
+    def test_one_real_path_makes_it_a_document(self):
+        self.assertFalse(il.receipt_only(row("c", paths=[
+            "channels/items.jsonl", "channels/reports/2026-11-16-something.md"])))
+        self.assertFalse(il.receipt_only(row("d", paths=["scripts/gen_index.py"])))
+
+    def test_an_item_with_no_paths_reads_as_a_document(self):
+        # Unclassifiable is not the same as empty: a document nobody reads costs more than a
+        # receipt somebody reads, so the doubt goes to the document side.
+        self.assertFalse(il.receipt_only(row("e")))
+        self.assertFalse(il.receipt_only(row("f", paths=[])))
+
+    def test_a_path_that_only_looks_like_a_mirror_is_a_document(self):
+        self.assertFalse(il.receipt_only(row("g", paths=[
+            "channels/ledger-verdicts/README.md"])))
+        self.assertFalse(il.receipt_only(row("h", paths=[
+            "channels/ledger-verdicts-old/20261116T011534Z-x.json"])))
+
+    def test_the_draw_names_documents_and_leaves_receipts_unnamed(self):
+        self.write([row("doc", paths=["channels/reports/x.md"]),
+                    row("rec", paths=["channels/items.jsonl"])])
+        made = il.name_unread(path=self.path, by="test")
+        self.assertEqual([r["id"] for r in made], ["doc"])
+        after = il.load(self.path)
+        self.assertTrue(after["doc"].get("reading_assigned_to"))
+        self.assertFalse(after["rec"].get("reading_assigned_to"))
+
+    def test_a_receipt_nobody_named_is_still_unread(self):
+        # The draw declines; the verdict does not change. Calling this "read" would be a stamp.
+        self.write([row("rec", paths=["channels/items.jsonl"])])
+        il.name_unread(path=self.path, by="test")
+        rec = il.load(self.path)["rec"]
+        self.assertTrue(il.is_unread(rec))
+        self.assertEqual(rec["reviewer"], "auto:land")
+
+    def test_a_name_already_given_to_a_receipt_is_not_taken_away(self):
+        # A drawn name is frozen; this change only declines to draw new ones.
+        self.write([row("rec", paths=["channels/items.jsonl"],
+                        reading_assigned_to="gemini", reading_assign_kind="draw")])
+        self.assertEqual(il.name_unread(path=self.path, by="test"), [])
+        self.assertEqual(il.load(self.path)["rec"]["reading_assigned_to"], "gemini")
+        self.assertEqual(len(il.reading_queue(path=self.path, who="gemini")), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

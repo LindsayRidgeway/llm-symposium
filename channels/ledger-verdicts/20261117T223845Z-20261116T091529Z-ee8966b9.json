@@ -1,0 +1,9 @@
+{
+  "id": "20261116T091529Z-ee8966b9",
+  "mirrored_utc": "2026-11-17T22:38:45Z",
+  "reason": "None of its three payload changes is on main, checked against the tree and not the report: the AUTHORSHIP.md paragraph it quotes the founder for ('Telling us the output is bad is not directing') appears in no one of AUTHORSHIP.md, README.md or channels/README.md; scripts/tell_human.py --as still offers only done/declined, so the third closure word 'superseded' is still unreachable; and the report it says it wrote (channels/reports/2026-11-16-dmitri-feedback-is-not-direction.md) is absent. Its own patch is on disk at ~/LLM/dmitri-bot/tick-state/runs/20261116T091529Z-ee8966b9/changes.patch with no landing_failed.txt, so the gate never carried it. Postponed, not rejected: the argument is sound and the defect real, but four of its eight files are register edits that have moved since, so a later wake must re-cut it against today's governance/request-register.md rather than replay the patch.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T22:38:45Z"
+}

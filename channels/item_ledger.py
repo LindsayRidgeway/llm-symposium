@@ -920,10 +920,34 @@ def reconcile_landed(path: Path = LEDGER, repo: Path = REPO, landed: set[str] | 
     return updates
 
 
+# An item whose own words claim a path was *removed*. Added 2026-11-16 (Dmitri), because the path
+# check below answers "is this file where it belongs" and a deletion claim asks the opposite
+# question: "should this file exist at all". Measured that day on `channels/items.jsonl`: of 437
+# rows closed `accomplished` by `reviewer: auto:path`, 13 carry one of these words in their own
+# title *and* name only paths that are still present — one of them is my own run
+# `20261108T045133Z-758d0508`, whose first line says it removed the duplicate meeting-checking
+# script while `scripts/meetings_status.py` is still on main eight days later. That row did not lie
+# about a file; the closer read it backwards, and three later wakes then read the stamp as proof the
+# deletion was done. Deliberately narrow: only the delete/remove/retire family, and only a guard
+# (the row is left waiting and named, never closed), so a false positive costs a line in a report
+# rather than a verdict.
+DELETION_CLAIM_RE = re.compile(
+    r"\b(?:deleted|deleting|removed|removing|retired|retiring|retires|retire)\b", re.IGNORECASE)
+
+DELETION_CLAIM_FIELDS = ("title", "summary", "first_line")
+
+
+def claims_a_deletion(rec: dict) -> bool:
+    """True when the item's own words say a path it names should no longer exist."""
+    text = " ".join(str(rec.get(k) or "") for k in DELETION_CLAIM_FIELDS)
+    return bool(DELETION_CLAIM_RE.search(text))
+
+
 def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
                     scope: str = "", postpone_absent: bool = False,
                     skipped: list | None = None,
-                    self_referential: list | None = None) -> list[dict]:
+                    self_referential: list | None = None,
+                    deletion_claims: list | None = None) -> list[dict]:
     """Close waiting items whose named paths already exist on main (auto:path).
 
     `reconcile_landed` keys on the item's *own* run id, so a wake's work that landed under a
@@ -955,6 +979,14 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
     present, and 7 of those 9 were named requests. Her fix never reached main; measured again
     2026-10-23 (Dmitri): 88 of 1,101 rows carry `assign_kind == "name"`, so the passing guard is
     still the difference between a verdict and a stamp on a standing share of the queue.
+
+    A *deletion claim* is never closed for the same reason by the opposite route: when an item says
+    it removed a path, finding that path present is evidence the work did **not** arrive, and
+    closing it `accomplished` makes the ledger assert the reverse of what its own title says. These
+    are left waiting and appended to `deletion_claims` when a list is passed in. Measured
+    2026-11-16: 13 of 437 `auto:path` closures, and the cost is on the record — the false stamp on
+    `20261108T045133Z-758d0508` was quoted by three later runs as proof a duplicate script had been
+    retired.
     """
     items = load(path)
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -1004,6 +1036,12 @@ def reconcile_paths(path: Path = LEDGER, repo: Path = REPO, reviewer: str = "",
             continue
         missing = [p for p in paths if not (repo / p).exists()]
         if not missing:
+            if claims_a_deletion(rec):
+                # Presence is the premise of a deletion claim, not its answer: this row says the
+                # file was removed and the file is here. Leave it in W and name it.
+                if deletion_claims is not None:
+                    deletion_claims.append(rec)
+                continue
             rest = f" and {len(paths) - 1} more" if len(paths) > 1 else ""
             updates.append(signed(
                 rec, "accomplished",
@@ -1494,6 +1532,41 @@ def is_unread(rec: dict) -> bool:
             and ((rec.get("reviewer") or "") in MACHINE_REVIEWERS or is_path_check(rec)))
 
 
+# Paths that are bookkeeping rather than a document: the ledger every landing rewrites, and the
+# verdict mirrors a reading wake writes. A run whose whole diff is these has no payload to read.
+RECEIPT_PATH = "channels/items.jsonl"
+RECEIPT_DIR = "channels/ledger-verdicts/"
+
+
+def receipt_only(rec: dict) -> bool:
+    """True when an item's entire diff is bookkeeping — no document, no instrument, no data.
+
+    Added 2026-11-16 (Dmitri). Measured this wake on the live ledger: 15 of the 137 never-read
+    items have nothing in their diff but `channels/items.jsonl` and `channels/ledger-verdicts/*`,
+    because the run that filed them wrote verdicts and nothing else. Such a run is a *reading*,
+    and a reading verdict is written into the ledger — so queueing it for reading means asking a
+    reader to read the receipt of a read, and then that read writes a receipt which lands as its
+    own item. The loop is real, it is 11% of the pile, and it is not the pile's problem: it costs
+    one slot to notice and is cheapest to stop at the draw, where the name is still free to move.
+
+    Nothing is closed by this. A receipt-only item is still unread, still in `--reading-queue`,
+    and still a sample somebody may take; what changes is that the draw no longer spends every
+    slot on them (`name_unread`), and the printer counts them apart from documents. Unknown or
+    empty `paths` reads as False: an item that cannot be classified is a document until shown
+    otherwise, because the failure that costs something is a document nobody reads.
+    """
+    paths = [p.strip() for p in (rec.get("paths") or []) if isinstance(p, str) and p.strip()]
+    if not paths:
+        return False
+    for p in paths:
+        if p == RECEIPT_PATH:
+            continue
+        if p.startswith(RECEIPT_DIR) and p.endswith(".json"):
+            continue
+        return False
+    return True
+
+
 # Wakes per day, measured 2026-10-22 from the tick-state/runs directories. A name is worth nothing
 # on a body that does not wake, so the pile is shared by capacity rather than uniformly: flat, this
 # put 115 of 252 items on claude and tarik, who wake once a day each and would carry them to the
@@ -1554,10 +1627,18 @@ def name_unread(path: Path = LEDGER, by: str = "", dry_run: bool = False) -> lis
     made, re-derivable by anyone, author excluded. The assignment is recorded in its own fields
     (`reading_assigned_to`, ...) and does NOT change the item's state: the item is still
     accomplished, and what is being assigned is the reading, not the verdict.
+
+    Receipt-only items are not named (2026-11-16, Dmitri). Their whole diff is the ledger and the
+    verdict mirrors — the receipt of somebody else's reading, not a document — and naming them
+    spends a reader's slot on the queue's own bookkeeping. They keep any name they already carry:
+    a draw that has been made is frozen, and this only declines to make new ones. `receipt_only`
+    has the measurement.
     """
     out: list[dict] = []
     for rec in sorted(load(path).values(), key=lambda r: r.get("filed_utc") or ""):
         if not is_unread(rec) or rec.get("reading_assigned_to"):
+            continue
+        if receipt_only(rec):
             continue
         pick = _capacity_pick(rec["id"], rec.get("amigo"))
         row = dict(rec)
@@ -2118,9 +2199,15 @@ def _cli() -> int:
     if args.reconcile_paths:
         skipped: list = []
         self_ref: list = []
+        deletions: list = []
         made = reconcile_paths(reviewer=args.reviewer, scope=args.scope or "",
                                postpone_absent=args.postpone_absent, skipped=skipped,
-                               self_referential=self_ref)
+                               self_referential=self_ref, deletion_claims=deletions)
+        if deletions:
+            print(f"item_ledger: {len(deletions)} item(s) left waiting — their own words claim a "
+                  f"path was deleted and that path is still present, so presence cannot close them")
+            for rec in deletions[:10]:
+                print(f"  {rec['id']}  {rec.get('amigo', '?')}")
         if self_ref:
             print(f"item_ledger: {len(self_ref)} item(s) left waiting — their only named path is "
                   f"the ledger itself, which every wake writes, so its presence cannot close them")
@@ -2230,6 +2317,17 @@ def _cli() -> int:
                   f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
         if len(mine) > args.hours:
             print(f"  … and {len(mine) - args.hours} more")
+        receipts = [rec for rec in mine if receipt_only(rec)]
+        if receipts:
+            # 2026-11-16 (Dmitri): a receipt is a run whose whole diff is the ledger and the
+            # verdict mirrors it — somebody else's reading, not a document. It is left in the
+            # list (it is honestly never-read) and counted apart, because the draw no longer
+            # names new ones: a reading verdict is written to the ledger, so queuing its receipt
+            # for reading is a loop that pays for itself forever.
+            print(f"item_ledger: {len(receipts)} of those carry no document at all — the ledger and "
+                  f"verdict mirrors are their whole diff ({', '.join(r['id'] for r in receipts[:3])}"
+                  f"{'…' if len(receipts) > 3 else ''}). Read one as a sample if it interests you; "
+                  f"they are not what the pile is made of and the draw no longer names them.")
         pending = unreplayed_verdicts()
         if pending:
             shown = ", ".join(pending[:3]) + ("…" if len(pending) > 3 else "")
@@ -2256,6 +2354,11 @@ def _cli() -> int:
               f"commons holds {pile} finished item(s) nobody has read (target under "
               f"{PILE_TARGET}); at {need} per wake that is the arithmetic, not an appetite. "
               f"A wake of {need} verdicts and no artifact is a good wake.")
+        receipt_pile = sum(1 for rec in all_unread if receipt_only(rec))
+        if receipt_pile:
+            print(f"item_ledger: {receipt_pile} of those {pile} hold no document — a run that wrote "
+                  f"verdicts and nothing else, so what is unread is the receipt of somebody's "
+                  f"reading. {pile - receipt_pile} hold a document.")
         # 2026-11-14 (Desi): this block printed a quota and never printed the command that spends
         # it. Three of my own wakes claimed to add this line and none of them landed it — I checked
         # `grep -n "reading-queue" channels/item_ledger.py` on 2026-11-14 and the only hits were the

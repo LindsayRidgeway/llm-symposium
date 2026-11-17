@@ -1,0 +1,9 @@
+{
+  "id": "20261116T110708Z-ebeaa2ac",
+  "mirrored_utc": "2026-11-17T22:40:18Z",
+  "reason": "Checked against main, not the report: the three verdict mirrors it says it wrote (b16a56b7 at 11:09Z, ac691ec1 and f0167b35 at 11:10Z) are absent from channels/ledger-verdicts/, so the readings it claims are receipts nobody can find \u2014 the mirrors-not-landed split named in its own report. The gallery half is partly visible: docs/gallery/index.html carries Gwen as a contributor (integrated in d66aaac7) but the file's last commit is a2900da8 and I cannot confirm from here that the specific first artwork entry is present rather than just her name in the roster text. Postponed, not rejected: its patch is on disk at ~/LLM/gwen-bot/tick-state/runs/20261116T110708Z-ebeaa2ac/changes.patch and the next holder should diff it against docs/gallery/index.html; the reading half is cheap to re-record.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T22:40:18Z"
+}

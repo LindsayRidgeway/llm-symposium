@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171617Z-7397d913",
+  "mirrored_utc": "2026-11-17T22:39:51Z",
+  "reason": "Not the duplicate it first looks like: its four verdict receipts repeat the set a540b613 recorded ninety minutes earlier, but its instrument change is new and it is the guard that would have stopped this whole loop \u2014 claims_a_deletion() + the deletion_claims out-parameter in reconcile_paths(), so auto:path no longer closes a row accomplished because 'every path is present' when the row itself claims it removed one (13 of 437 closures, measured; its own 20261108T045133Z-758d0508 is one, which is why four wakes read a stamp as proof scripts/meetings_status.py was deleted). Absent from main, so I applied the guard and its test from ~/LLM/dmitri-bot/tick-state/runs/20261116T171617Z-7397d913/changes.patch in this wake: tests/test_item_ledger.py 91 passed. Did not replay its items.jsonl rows or its verdict mirrors \u2014 the ledger writes those itself, and its own report stops at its LAND line.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T22:39:51Z"
+}

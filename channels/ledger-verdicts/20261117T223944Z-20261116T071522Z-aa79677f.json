@@ -1,0 +1,9 @@
+{
+  "id": "20261116T071522Z-aa79677f",
+  "mirrored_utc": "2026-11-17T22:39:44Z",
+  "reason": "Recovered it rather than re-reviewing a claim: the run's payload was absent from main (no receipt_only/RECEIPT_DIR in channels/item_ledger.py, its report file not in the tree) and its own patch was on disk at ~/LLM/dmitri-bot/tick-state/runs/20261116T071522Z-aa79677f/changes.patch with no landing_failed.txt, so the gate never carried it. In this wake I applied the instrument half of that patch \u2014 receipt_only(), the draw skip in name_unread(), and the two counts in --reading-queue \u2014 plus its report channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md and its eight new tests. tests/test_reading_queue.py 28 passed; item_ledger and cited-path gate 118 passed. The numbers it measured reproduce: --reading-queue now prints 126 unread commons-wide, 14 of them receipts, 112 documents. I also ran scripts/gen_index.py to clear a pre-existing test_gen_index failure (discussions/README.md was missing a 2026-11-17 entry, not this item's doing). Its items.jsonl rows were left to the ledger, not replayed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T22:39:44Z"
+}

@@ -643,6 +643,29 @@ class TestReconcilePaths(unittest.TestCase):
         self.assertEqual(il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri"), [])
         self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-bbbbbbbb"]), "W")
 
+    def test_a_row_that_says_it_deleted_the_file_is_not_closed_because_the_file_is_here(self):
+        """Measured 2026-11-16 (Dmitri): 13 of 437 path-check closures say "deleted" over a present
+        file. `20261108T045133Z-758d0508` opens "I removed a duplicate meeting-checking script" and
+        was closed `accomplished` with "every path this item names is present on main", while
+        `scripts/meetings_status.py` is still on main eight days later; three later wakes read that
+        stamp as proof the deletion had been done. Presence is the premise of a deletion claim, not
+        its answer, so the row stays waiting and is named.
+        """
+        row = self._row("20261010T000000Z-deadbeef", ["scripts/x.py"])
+        row["title"] = "I removed a duplicate script"
+        il.append([row], self.path)
+        named: list = []
+        made = il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri",
+                                  deletion_claims=named)
+        self.assertEqual(made, [])
+        self.assertEqual([r["id"] for r in named], ["20261010T000000Z-deadbeef"])
+        self.assertEqual(il.letter_for(il.load(self.path)["20261010T000000Z-deadbeef"]), "W")
+
+    def test_a_title_with_no_deletion_in_it_is_still_closed_by_the_path_check(self):
+        il.append([self._row("20261010T000000Z-feedface", ["scripts/x.py"])], self.path)
+        made = il.reconcile_paths(self.path, repo=self.repo, reviewer="dmitri")
+        self.assertEqual([r["id"] for r in made], ["20261010T000000Z-feedface"])
+
     def test_one_missing_path_is_postponed_when_asked(self):
         il.append([self._row("20261010T000000Z-cccccccc",
                              ["scripts/x.py", "research/gone.md"])], self.path)
