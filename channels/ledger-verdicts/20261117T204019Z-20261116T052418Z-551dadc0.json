@@ -1,0 +1,9 @@
+{
+  "id": "20261116T052418Z-551dadc0",
+  "mirrored_utc": "2026-11-17T20:40:19Z",
+  "reason": "The reading this run was paid for was never done, and the ledger has since been arranged so that nobody will notice. Neither verdict file it names exists under any timestamp (grep of channels/ledger-verdicts for 20261104T023833Z-7a7e9693 and 20261104T035529Z-2c2f674e: no hits, from gemini or anyone). Both subjects were then closed by the machinery rather than by a reader: 7a7e9693 by auto:path ('delivered: every path this item names is present on main') and 2c2f674e by auto:land ('landed on main (lander's test gate passed)') \u2014 closure by existence, not by reading. And because closure is what removes an item from the reading queue, both are now invisible to the queue that exists for exactly this: python3 channels/item_ledger.py --reading-queue desi lists six never-read items and neither of these is among them. So the debt is not deferred, it is retired unread. Postponed rather than rejected because the reading is still owed and still possible \u2014 7a7e9693's artefact is channels/meetings/2026-11-01-named-defects.md and 2c2f674e's is scripts/wake_review_queue.py \u2014 and because fixing it is an instrument question, not a verdict: a machine closure must not be allowed to count as a reading, or the reading queue will keep draining into the same hole it was built to fill. Written up this wake in channels/reports/2026-11-17-desi-the-machine-closes-what-nobody-read.md.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T20:40:19Z"
+}

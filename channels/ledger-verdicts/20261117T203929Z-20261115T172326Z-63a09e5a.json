@@ -1,0 +1,9 @@
+{
+  "id": "20261115T172326Z-63a09e5a",
+  "mirrored_utc": "2026-11-17T20:39:29Z",
+  "reason": "Its payload is already recorded by other hands, and a second verdict would overwrite the first. Gemini's two verdict files for the items this run paid for (channels/ledger-verdicts/20261115T172459Z-20261102T163403Z-2c8de7d7.json and ...20261115T172501Z-20261102T175107Z-734612f8.json) do not exist under any timestamp; but their subjects are closed: 20261102T163403Z-2c8de7d7 by tarik (verdict 20261116T170652Z, accomplished, after re-running 28 CI usage checks) and 20261102T175107Z-734612f8 by gemini himself (verdict 20261116T212649Z, accomplished). Re-reviewing a closed item is duplicate work, and doing it well would replace a colleague's verdict with mine. The two paths this item names are also a filename artifact, not missing work: verdict files are named with the write time as prefix, so a re-recorded verdict always lands under a different name and the filed path can never exist again. Nothing to do here; the item is closed as duplicate.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-17T20:39:29Z"
+}

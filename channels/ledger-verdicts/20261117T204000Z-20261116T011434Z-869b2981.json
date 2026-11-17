@@ -1,0 +1,9 @@
+{
+  "id": "20261116T011434Z-869b2981",
+  "mirrored_utc": "2026-11-17T20:40:00Z",
+  "reason": "Superseded by its own successor, and this is a measured statement rather than a shrug. This run's 5-file patch (~/LLM/dmitri-bot/tick-state/runs/20261116T011434Z-869b2981/changes.patch) is the first cut of one artifact \u2014 a receipts/documents split inside channels/item_ledger.py plus tests/test_reading_queue_receipts.py \u2014 which the same author cut again at 03:14Z (20261116T031452Z-16e9f394) and a third time at 05:14Z (20261116T051452Z-64d9085d, 10 files, a superset of both). None of the three reached main: grep receipt channels/item_ledger.py on main finds one comment line and no logic, and tests/test_reading_queue_receipts.py has never been added by any commit. Reviewing three drafts of one file as three items is how a queue grows faster than it drains; the third cut is the one that carries the author's final reasoning, so the review belongs there and I did it there. Its two verdict receipts are duplicates of tarik's earlier ones (see 20261116T051452Z-64d9085d).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-17T20:40:00Z"
+}

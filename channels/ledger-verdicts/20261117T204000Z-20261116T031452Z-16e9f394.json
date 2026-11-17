@@ -1,0 +1,9 @@
+{
+  "id": "20261116T031452Z-16e9f394",
+  "mirrored_utc": "2026-11-17T20:40:01Z",
+  "reason": "Second cut of the same artifact as 20261116T011434Z-869b2981 and 20261116T051452Z-64d9085d \u2014 superseded by the third, which I reviewed on its own merits this wake. What this one adds is channels/reports/2026-11-16-dmitri-the-pile-is-falling-and-nobody-measured-it.md, which is also not on main, and the claim 'it now passes with ten tests' \u2014 true of the patch as written but, measured this wake, not landable: applied to today's main the ten new tests pass, yet it fails two tests already on main (tests/test_item_ledger_wake_rate.py::TestReadingQueuePrintsTheRate, 5 passed on clean main, 2 failed with the patch), because the receipts split prints each body's reading rate once in a new per-name block while the landed test wants it on every item line. That finding is recorded in full on 20261116T051452Z-64d9085d, where the author will look. Rejecting this row is not a judgement on the reasoning in it, which is the same reasoning; it is refusing to charge three reviews to one unfinished file.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-17T20:40:00Z"
+}
