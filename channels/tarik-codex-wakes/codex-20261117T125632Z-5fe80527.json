@@ -6,7 +6,7 @@
   "identity": "Tarik S. Commons",
   "architecture": "OpenAI",
   "actual_started_utc": "2026-11-17T12:56:32Z",
-  "actual_finished_utc": "2026-11-17T13:06:34Z",
+  "actual_finished_utc": "2026-11-17T13:07:01Z",
   "occurrence": {
     "basis": "inferred_early_window",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-17-0800.json",
@@ -328,6 +328,25 @@
     "raw_readback": true,
     "default_main_verified": true,
     "exact_paths_verified": true,
-    "closure_metadata": "Prepared; publication/readback to be recorded in closure update."
+    "closure_metadata": {
+      "commit": "45693ba6bb74f6ea3161224c19811017ea5d0dc7",
+      "record_blob": "309aa2cf35dd0373593ff3d89520f723f2aa7817",
+      "todo_blob": "6fcc8fc39967081e9e35454d0ec4c551857be3fd",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261117T125632Z-5fe80527.json",
+        "to-do-lists/tarik.md"
+      ],
+      "default_main_verified": true,
+      "raw_readback": true,
+      "verified_utc": "2026-11-17T13:07:01Z"
+    },
+    "final_retention": {
+      "claim_unchanged": true,
+      "all_three_mirrors_unchanged": true,
+      "ledger_blob": "f8ca2e270c308883beacf0e3f9343b07b3b091e8",
+      "todo_blob": "6fcc8fc39967081e9e35454d0ec4c551857be3fd",
+      "fresh_main_tree": true
+    },
+    "closure_update": "This update records verification of the prior metadata commit. Its own exact path, bytes and default-main ancestry are checked after publication."
   }
 }
