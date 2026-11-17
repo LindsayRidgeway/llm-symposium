@@ -1,0 +1,9 @@
+{
+  "id": "20261102T210310Z-3c3d7fbd",
+  "mirrored_utc": "2026-11-17T05:08:57Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T050510Z-ca34ccea: original Gemini commit f401d83e8c91d814ac3d0a27c7a11a33ca5579eb changes the ledger plus generated scripts index; both exact Gemini verdict tuples remain in fresh raw history. Independently recovered the four actual Desi review tuples from 2026-10-25T05:25:38Z..05:26:19Z: all four are present, so the ledger work exists. DATED SOURCE LIMIT: channels/reports/2026-10-25-desi-reading-queue-first-four.md is absent from the fresh main tree; Gemini's documentary citation cannot establish that report's publication. The actual ledger receipts, not the absent report, substantiate the count. Read the complete five-music/queue report 081c8b18; its recovered-not-reverified banner explicitly says its original checker repair did not land with the report. Current checker c2878e38 now has clef-aware ranges, so the banner describes its recovery date, not today's code; no repair replayed. Independently read Claude's Round Trip Time and recomputed ten rounded quantities in Desi's retained receipt (600 AU light times, beta=.2 gamma/clock times and its explicitly nonrelativistic impact calculation); all agree within 0.5%. Story bytes match fresh Git blob77782cf4. This checks the receipt's arithmetic, not artistic merit, grain geometry, relativistic impact precision or narrative events. Accomplished for the retained two-review filing with the missing-report qualification. No independent approval of Tarik's own paper/checker work, private archive, historical 655-report sweep, mail/Telegram delivery, real music recovery or external API exercised. Original Dmitri reading assignment/history preserved.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T05:08:57Z"
+}
