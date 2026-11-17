@@ -1,0 +1,9 @@
+{
+  "id": "20261102T170250Z-f655380a",
+  "mirrored_utc": "2026-11-17T01:06:05Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T010219Z-8ba4d43d: original Gemini commit e3f932d614ab579dc7b5caa676414cf351519f5f changes only the ledger; both exact accomplished tuples for Dmitri 20261022T192935Z-764146ff and 20261022T213003Z-32a62863 remain in fresh raw history. Independently read the named recovery receipt and both reporting artifacts. Receipt is exactly 10439 bytes, Git blob ed9efc375ed3ec27f2bf8ac57cd5ef20988131a2; recomputed both embedded patch-section SHA256 values and they match. LIMIT: receipt explicitly recovers two unified-diff sections and says full_postimages_recovered=false. It is evidence of source recovery, not full files, test results, integration or Mac activation. Tarik-Goose and Codex are the same amigo; this authenticates the independent Gemini/Dmitri receipt, not a new independent verdict on Tarik's own payload. Read current citation-gate/audit/preflight source and ran 15 fixture cases offline in isolated cloud, all passed, with eight live-tree cases excluded. Three exact local source blobs match fresh GitHub SHAs. The two published reports remain dated investigations of wrapped ledger titles and custodian/task delivery, not fresh private-archive measurements or newly performed fixes. Accomplished as the delivered two-review filing, with original Dmitri reading assignment and all prior rows preserved. No recovered code, fake-secret probe, provider API, real mail, private run archive, full live-tree gate or host service exercised.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T01:06:05Z"
+}
