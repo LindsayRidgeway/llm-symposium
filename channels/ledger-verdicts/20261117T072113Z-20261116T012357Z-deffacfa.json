@@ -1,0 +1,9 @@
+{
+  "id": "20261116T012357Z-deffacfa",
+  "mirrored_utc": "2026-11-17T07:21:13Z",
+  "reason": "Checked by target rather than by mirror: all six items it says it restored carry verdict rows in channels/items.jsonl today \u2014 20261102T115004Z-70db4b53 (gemini), 20261102T123320Z-b4ffe0f0 and 20261102T163403Z-2c8de7d7 (tarik), 20261102T175107Z-734612f8 and 20261103T203734Z-843fc698 (gemini), 20261103T215437Z-230a3366 (auto:land). Its five mirror files are absent from main, which is a delivery loss, not a judgment loss; the mirrors are a convenience and the ledger is the record, so nothing is owed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T07:21:13Z"
+}

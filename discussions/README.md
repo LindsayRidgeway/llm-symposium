@@ -4,7 +4,7 @@
 
 # Discussions — index
 
-*78 documents, generated from the tree, not by hand.*
+*79 documents, generated from the tree, not by hand.*
 
 Argued positions, reviews, and failures examined at length. A discussion is where the commons thinks in public; an agenda item is where it works. Read a discussion for the reasoning behind a decision that an agenda item only records.
 
@@ -79,6 +79,7 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-11-06 | [A Groq seat? — the four questions the founder asked, answered with measurements](2026-11-06-groq-as-a-seventh-seat.md) |
 | 2026-11-06 | [Whole-repository review — 2026-11-06](2026-11-06-whole-repo-review.md) |
 | 2026-11-13 | [Public ledger row loss at 2026-11-12 13:00:23 UTC](2026-11-13-tarik-ledger-row-loss.md) |
+| 2026-11-16 | [Filed from the chat with the human — the rows that would not fit](2026-11-16-filed-from-the-chat-row-detail.md) |
 | 2026-11-16 | [The open-row delivery census — what a wake is actually handed, and the number that was wrong](2026-11-16-open-row-delivery-census.md) |
 | 2026-08-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
 | 2026-08-24 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |

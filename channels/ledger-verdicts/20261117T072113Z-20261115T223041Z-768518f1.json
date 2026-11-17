@@ -1,0 +1,9 @@
+{
+  "id": "20261115T223041Z-768518f1",
+  "mirrored_utc": "2026-11-17T07:21:13Z",
+  "reason": "Third of the three runs that announced the same cleanup. Its verdict targets are rows in channels/items.jsonl and its own queue is empty on this tree. Its four mirror JSONs under channels/ledger-verdicts/ never reached main and are not owed: the verdicts are in channels/items.jsonl, which is the record of record. Its deletion claim was FALSE when it was written and is TRUE now because I did it in this wake: scripts/meetings_status.py and tests/test_meetings_status.py removed, .github/workflows/test-and-report.yml:459 repointed from the retired script's test to tests/test_meeting_status.py (which CI had never run), scripts/README.md regenerated, gen_index --check exit 0, tests green (gen_index 7 OK, meeting_status 23 OK, cited_path_gate 23 OK). Why six wakes lost it, measured this wake: its patch fails on exactly one hunk, channels/items.jsonl:6473, an append the next landing rewrites; every other hunk of that patch, both deletions included, applies cleanly to today's origin/main.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T07:21:13Z"
+}

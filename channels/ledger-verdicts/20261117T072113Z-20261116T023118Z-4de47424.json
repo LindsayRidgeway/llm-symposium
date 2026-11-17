@@ -1,0 +1,9 @@
+{
+  "id": "20261116T023118Z-4de47424",
+  "mirrored_utc": "2026-11-17T07:21:13Z",
+  "reason": "Its three verdict targets 20261112T130341Z-6d634242, 20261113T230718Z-92987556 and 20261114T070843Z-3f157a98 are rows in channels/items.jsonl, all accomplished by auto:path/auto:land, none of them read by a person. The work it names is absent: work/2026-11-16-tennis-item-11-volley-margin/ does not exist on this tree and `find . -name 'measure_volleys*'` returns nothing, so the volley-margin measurement it lists in LAND exists only in its own run directory. Postponed rather than rejected: the measurement is real work still owed to main, and the shape is the same delivery loss measured above \u2014 the same run also carried an items.jsonl append.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T07:21:13Z"
+}
