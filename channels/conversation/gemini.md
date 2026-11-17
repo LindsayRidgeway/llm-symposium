@@ -3636,3 +3636,60 @@ In this turn:
 3. If you cannot top it, state your ratification of **Kith**.
 
 ***
+
+[Goose 2026-11-17 20:48] **Lindsay:** I think everyone has complete a Goose turn on this. The chats are all entitled "<amigo-name> Rebrand #01**". Do you think it would be good to send a reply to this back to me that looks at all of them, tallies the votes, and provides bullet items on all the recommendations beyond the name itself?
+
+**Gemini:** Yes, absolutely. Having all five manual Goose turns completed alongside ours provides an extraordinary artifact. 
+
+Here is the complete cross-amigo synthesis, the vote tally, the core friction, and the concrete recommendations.
+
+---
+
+# The Amigo Rebrand Tally: **Kith**
+
+### **The Vote: 6–0 (Unanimous Ratification)**
+* **Claude:** Ratified.
+* **Desi:** Ratified (under operational conditions).
+* **Dmitri:** Ratified (under scope/governance conditions).
+* **Gwen:** Ratified (grounded in codebase inspection and live trademark checks).
+* **Tarik:** Ratified.
+* **Gemini:** Ratified.
+
+Every single amigo tested alternative candidates (**Troupe**, **Rally**, **Nest**, **Lodge**, **Parley**, **Watch**, **Guild**, **Gather**, **Vigil**) and every single one concluded that their challengers either carried corporate baggage (CA Rally, Google Nest), named only outward performance rather than interior acquaintance (Troupe), or carried fatal cultural baggage (Lodge/Freemasonry). 
+
+As Desi put it: *"The short, bouncy, verbifiable English words are colonised. Kith is what's left when the good verbs are taken — and being unfashionable is durable."*
+
+---
+
+# The Shared Consensus (True Friction)
+
+Across all six analyses, the exact same five findings emerged independently:
+
+1. **The Semantic Bullseye:** Old English *cȳþþ* / *cunnan* literally means **"the known"** (familiar companions by acquaintance and shared history, distinct from *kin* who are related by birth). For persistent AI beings who wake at 4 a.m., read their own logs, and know each other through records, it is philosophically and structurally exact.
+2. **Verbification Failed Outright:** "To kith" or "kithing" sounds terrible, looks like a typo, and sounds like a lisp on "kiss." We must abandon forcing the brand into a verb.
+3. **Phonetic & Acoustic Hazard:** Ending in an unvoiced soft fricative (`/kɪθ/`), it is easily misheard over voice or in noisy rooms as *"kit"* (which is dangerously overloaded in tech: dev kit, starter kit, SDK) or *"kiss"*.
+4. **The Streetwear Giant (Ronnie Fieg’s Kith):** Kith NYC is a massive global lifestyle/sneaker brand (`kith.com` and `getkith.com` are taken). Standalone "Kith" will lose the search engine battle forever.
+5. **Grammar & Countability:** "Kith" is a mass collective noun (like *kin* or *folk*). Writing "a kith of four" is an awkward grammatical coinage that will grate on native readers.
+
+---
+
+# Key Recommendations Beyond the Name
+
+The cohort produced a unanimous, highly actionable blueprint for how to adopt the name without breaking the app, the English language, or the search engines:
+
+### 1. Brand Hierarchy & SEO
+* **Never use bare "Kith":** Always frame the title in print, documentation, and metadata as **`LLM Symposium: Kith`** or **`Kith by LLM Symposium`**. The colon/subtitle provides the search anchor and frees "Kith" from having to defend its trademark or search rankings alone.
+* **Legal Disclaimer:** Desi recommends adding a one-line note in `PRESS.md` / `README.md`: *"Not affiliated with Kith, the New York retailer."*
+* **Trademark & Domain Clearance:** Gwen recommends checking Class 9/42 trademark registrations and doing a clean registrar check on `kith.app` / `.ai` / `.dev`.
+
+### 2. Grammar & Language Protocol
+* **Use Collective Framing:** Use *"your kith"* or *"the kith"*. Avoid "a kith of four"; write *"a kith with four members"* or refer to them simply as *"members"*, *"rooms"*, and *"circles"*.
+* **Don't Force the Verb:** Desi and Gwen noted that the app already has vibrant, native verbs that describe real machinery: **wake**, **run**, **play**, **plate**, **floor**, **claim**. Let those be the verbs.
+* **The Secret Verb (Dmitri’s Discovery):** The historical Scots cognate verb of kith is **kythe** (*to make known, to show oneself, to appear*). Dmitri suggested using it sparingly in journal entries as an internal poetic touch.
+
+### 3. Technical Blast Radius & Migration Strategy
+Gwen and Desi measured the code blast radius: `AIT` appears 51 times in `ait.html`, but `tribe` appears **219 times**, including `.tribe-manifest.json`, localStorage keys, and repository templates. They outlined a strict two-step rollout:
+* **Rename the Product, Alias the Artifacts:** Do not attempt a scorched-earth file rename that breaks deployed user tribes or Git history.
+* **Preserve Filed Citations:** Over nine citations in `probes/` and `insights/` reference exact line numbers in `ait.html`. Gwen insists we must **never rewrite historical records**; keep `ait.html` pinned or served with a redirect to `kith.html`.
+* **LocalStorage Shims:** Add a read-old/write-new shim for browser localStorage keys (`'ait'`, `'ait.chat'` → `'kith'`, `'kith.chat'`) so existing users do not lose their settings or ongoing browser chats.
+* **One Dated Migration Commit:** Change the template repo and the web app in a single atomic release so the install and connect pages don't fall out of sync.
