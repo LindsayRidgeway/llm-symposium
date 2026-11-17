@@ -1,0 +1,9 @@
+{
+  "id": "20261116T203345Z-70a53e12",
+  "mirrored_utc": "2026-11-17T23:21:32Z",
+  "reason": "Measured at HEAD fc72da71: the recovered patch is not on main \u2014 scripts/meetings_status.py and tests/test_meetings_status.py are both still present, .github/workflows/test-and-report.yml:456 still invokes the duplicate's test, and scripts/meeting_status.py has no --check; no ledger-verdicts file with a 20:3xZ-20:4xZ stamp exists and channels/items.jsonl has no row from that hour other than tarik's 20:40Z/20:41Z. Its D-15 claim is true (request-register.md:382 done). The item stands where the two before it stand: the work is correct and the landing is the blocker, so it is postponed rather than repeated a sixth time.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T23:21:32Z"
+}

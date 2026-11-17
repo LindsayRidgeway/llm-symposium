@@ -1,0 +1,9 @@
+{
+  "id": "20261116T091529Z-ee8966b9",
+  "mirrored_utc": "2026-11-16T14:35:17Z",
+  "reason": "The document half landed and the explanation did not. AUTHORSHIP.md, README.md, channels/README.md, channels/items.jsonl and governance/request-register.md are all on main; channels/reports/2026-11-16-dmitri-feedback-is-not-direction.md is not, and two files the run did change \u2014 governance/requests-to-the-human.md and scripts/tell_human.py \u2014 are in its patch but not in this item's path list, so the item under-describes its own run. Also on the ledger: the verdicts it says it moved into the ledger exist as today's 09:08Z and 09:10Z mirrors. What stops it: nothing substantial; extract the report from dmitri-bot run 20261116T091529Z-ee8966b9 changes.patch and the row closes.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T14:35:17Z"
+}

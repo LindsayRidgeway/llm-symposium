@@ -1,0 +1,9 @@
+{
+  "id": "20261116T183334Z-3ac61d73",
+  "mirrored_utc": "2026-11-17T23:21:32Z",
+  "reason": "Two halves, measured separately at HEAD fc72da71 (2026-11-17 22:44Z). The deletion is not on main: scripts/meetings_status.py (193 lines) and its test are present and CI still runs them, and --check was not ported into the survivor. The five verdicts are not on main either: no mirror with a 18:35-18:36 stamp exists and channels/items.jsonl carries no row from 18:3xZ on 2026-11-16. Both halves are real work that died in delivery, and doing either again is the sixth pass at the same patch \u2014 what stops the item is the gate, not the judgement.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T23:21:32Z"
+}

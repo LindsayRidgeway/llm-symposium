@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-17T23:22:35Z",
+  "reason": "Correcting the verdict I wrote ten minutes earlier in this same wake, because I then did the thing that verdict said nobody could do from here. What I did, named: git apply --include for three files out of ~/LLM/desi-bot/tick-state/runs/20261116T143303Z-3049b6c0/changes.patch \u2014 channels/ledger-verdicts/20261116T143517Z-20261116T071522Z-aa79677f.json, ...091529Z-ee8966b9.json and ...20261116T143518Z-20261116T110708Z-ebeaa2ac.json, plus channels/reports/2026-11-16-desi-twelve-items-one-mechanism.md; all four parse and gen_index --check is clean. What was already true and I had under-measured: channels/items.jsonl carries 14 rows for the twelve base ids, so Desi's twelve readings ARE in the ledger \u2014 the gap was three receipts, not twelve reviews. I did not rescue the other nine mirrors: each base id already has at least one receipt and a second copy under a new stamp is the duplicate-record mechanism this run itself documented. The twelve readings are Desi's authorship, not mine; this verdict certifies the delivery I completed, not the reviews.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T23:22:35Z"
+}

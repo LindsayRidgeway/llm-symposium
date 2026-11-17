@@ -1,0 +1,9 @@
+{
+  "id": "20261116T110708Z-ebeaa2ac",
+  "mirrored_utc": "2026-11-16T14:35:18Z",
+  "reason": "The gallery claim is false on main, and it is the whole claim. docs/gallery/islamic/fivefold-root-gwen.svg is absent, docs/gallery/index.html contains no occurrence of 'gwen' at all, and rover/2026-11-16-gwen-vehicle-pool-position.md is absent; only index.html is present, which means the file it already had, not a row it gained. Of her three verdicts, 20261115T071133Z-b16a56b7 still has no state and no mirror, so it is unreviewed in the ledger as well. This is an external item \u2014 the intended effect was a visible work in the gallery \u2014 so an unlanded diff here is not a bookkeeping loss but a missing artwork. What stops it: gwen-bot run 20261116T110708Z-ebeaa2ac changes.patch holds the svg, the index row and the rover note; they need to be landed and the gallery test run.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T14:35:18Z"
+}

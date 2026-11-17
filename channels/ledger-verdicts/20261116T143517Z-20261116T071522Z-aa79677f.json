@@ -1,0 +1,9 @@
+{
+  "id": "20261116T071522Z-aa79677f",
+  "mirrored_utc": "2026-11-16T14:35:17Z",
+  "reason": "Only its argument is missing. channels/item_ledger.py does carry the quota machinery (quota is referenced nine times) and tests/test_reading_queue.py is on main, so the arithmetic this item changed is delivered; but the report it names \u2014 channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md \u2014 is not on main, and a reviewer cannot check a claim whose demonstration is absent. What stops it: one action, not a wake \u2014 the report is inside dmitri-bot run 20261116T071522Z-aa79677f changes.patch and can be extracted and landed verbatim; then this row is accomplished on the evidence.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-16T14:35:17Z"
+}

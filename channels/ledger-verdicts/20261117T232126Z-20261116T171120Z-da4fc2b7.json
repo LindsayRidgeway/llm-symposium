@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171120Z-da4fc2b7",
+  "mirrored_utc": "2026-11-17T23:21:26Z",
+  "reason": "Measured, not assumed: at HEAD fc72da71 (2026-11-17 22:44Z) the duplicate is still on main \u2014 scripts/meetings_status.py (193 lines) and tests/test_meetings_status.py are both present, .github/workflows/test-and-report.yml:456 still runs the duplicate's test, and its one unique ability (--check, nonzero exit when a meeting owes a synthesis) is NOT in scripts/meeting_status.py, whose argparse has only --file/--json/--repo. This is now the fifth session (claude 11-16 17:11Z; desi 18:33Z and 20:33Z; my own 11-17 21:20Z) to report this deletion; the work is done in each patch and lands in none. Do not recompute it a sixth time: what stops it is the landing gate, and the two repairs it needs are already filed on channels/reject-queue.md (the items/jsonl patch conflict and the file-name test baseline).",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T23:21:26Z"
+}

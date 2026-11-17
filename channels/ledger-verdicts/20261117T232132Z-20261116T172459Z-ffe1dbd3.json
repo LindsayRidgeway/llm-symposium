@@ -1,0 +1,9 @@
+{
+  "id": "20261116T172459Z-ffe1dbd3",
+  "mirrored_utc": "2026-11-17T23:21:32Z",
+  "reason": "Should not be done again, and the part of it that mattered is done. Its two verdicts cover 20261102T123320Z-b4ffe0f0 and 20261102T163403Z-2c8de7d7, and tarik had already recorded both in channels/items.jsonl at 2026-11-16T17:04:35Z and 17:06:52Z, twenty minutes before this run; a third and fourth verdict under a later timestamp is not a second opinion, it is the duplicate-record mechanism Desi measured on 11-16 (537 paths, 536 of them decided rows re-recorded). Its one claim that is checkable and true is D-15: governance/request-register.md:382 reads done with the pose sheets named, and I confirmed the row rather than the run's word for it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-17T23:21:32Z"
+}

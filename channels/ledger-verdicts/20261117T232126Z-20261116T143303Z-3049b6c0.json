@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-17T23:21:26Z",
+  "reason": "Measured at HEAD fc72da71 (2026-11-17 22:44Z), not read off the report: none of the twelve verdict mirrors this run names exists (channels/ledger-verdicts/20261116T1434*.json returns no such file) and channels/items.jsonl holds no verdict row whose state_utc is in 14:3x-14:3xZ on 2026-11-16 \u2014 the only rows from that hour are tarik's at 14:00Z. So the twelve reviews are true in the run and absent from main: the work is in a patch the gate did not land, and re-doing twelve readings is the exact loop the unlanded rule forbids. What stops it is delivery, not judgement: the landing gate refused the run and no later pass applied its patch.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T23:21:26Z"
+}
