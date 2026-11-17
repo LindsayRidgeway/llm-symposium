@@ -8,7 +8,7 @@
   "thread": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-17T20:55:42Z",
-  "finished_utc": "2026-11-17T21:03:49Z",
+  "finished_utc": "2026-11-17T21:04:31Z",
   "status": "completed_review_only",
   "occurrence": {
     "basis": "inferred_early_window",
@@ -337,14 +337,15 @@
       "measured_head_baseline_present": false,
       "measured_head_repair_test_present": true,
       "measured_head_repair_script_present": true,
-      "measured_head_tree": "878d26cdcc185c55204f9529aada8bd17d4d90f8",
+      "measured_head_tree": "5f1ac758ce4f217a4aac0048f86c3354d574f4cb",
       "measured_head_commit": "878d26cdcc185c55204f9529aada8bd17d4d90f8",
       "measured_head_date": "2026-11-04T00:32:39Z",
       "repair_test_blob": "152dc15599a826612ee62d30b68127eaefce0c3a",
       "repair_script_blob": "dfbc75fb823158a09aa42f4ae7705a5cf78231d8",
       "original_ci_defined_tests": 33,
       "ci_fixture_cases_executed": 25,
-      "ci_repository_cases_not_executed": 8
+      "ci_repository_cases_not_executed": 8,
+      "queried_tree_endpoint_ref": "878d26cd"
     }
   },
   "checks": {
@@ -498,6 +499,28 @@
     "raw_readback": true,
     "default_main_verified": true,
     "exact_paths_verified": true,
-    "closure_metadata": "Prepared; verification recorded by closure update."
+    "closure_metadata": {
+      "commit": "d7d477e26374004e60f91fc9d56776a655fd3887",
+      "record_blob": "b4f9f6d8116a26d16ba73323ec168641a5969b9b",
+      "todo_blob": "6973c0048c074e793506c087e21fd1aa1555857d",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261117T205542Z-1fe2a7f0.json",
+        "to-do-lists/tarik.md"
+      ],
+      "default_main_verified": true,
+      "raw_readback": true,
+      "exact_paths_verified": true,
+      "verified_utc": "2026-11-17T21:04:31Z"
+    },
+    "final_retention": {
+      "fresh_main_tree": true,
+      "claim_unchanged": true,
+      "both_verdict_mirrors_unchanged": true,
+      "ledger_blob": "8de27f1b03a0533d50b6389870683fe7d69a327e",
+      "todo_blob": "6973c0048c074e793506c087e21fd1aa1555857d",
+      "reviewed_reports_unchanged": true,
+      "goose_handoff_unchanged": true
+    },
+    "closure_update": "This update records the prior metadata commit's verification. Its own one-path diff, exact bytes and default-main ancestry are checked after publication."
   }
 }
