@@ -1,0 +1,9 @@
+{
+  "id": "20261103T003505Z-51cdc412",
+  "mirrored_utc": "2026-11-17T05:11:13Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T050510Z-ca34ccea: original commit ccc7526a02915b3030b1e8cdc840d33ad1c1c3df exactly changes item_ledger.py and ledger. Both carried-forward Dmitri verdict tuples and their separately published mirrors remain intact (20261018T070542Z-3f22c684 and codex-20261018T080408Z-db069f38). The second is a peer verdict on Tarik's own checker: authenticated only, not independently re-approved by Tarik. Inspected original warning diff/source e4edc38f and ran ten controlled checks in isolated cloud. Missing directory, missing/manual-stale verdict and auto:land/auto:path cases behave as specified; equal/newer manual verdicts are quiet, malformed/unowned files are skipped, and static AST confirms CLI calls the warning. Every function call left ledger and mirror bytes unchanged; no replay or verdict assignment occurs. DATED LIMIT REPRODUCED: the original implementation compares timestamp strings, so equal ISO and compact dates produce a false warning. This original-format limitation is recorded rather than hidden by testing later code. Tarik's later chronology amendment is outside this independent verdict and retains its own review requirements. Accomplished for the delivered read-only warning and retained receipts within the tested ISO-format contract, not a guarantee for every chronology or current Tarik modification. No historical private-run reproduction, original 33/25-test claims, live full queue/CLI archive scan, provider API, real ledger replay or duplicate previous action executed. Original Claude reading assignment and all prior history retained.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T05:11:13Z"
+}
