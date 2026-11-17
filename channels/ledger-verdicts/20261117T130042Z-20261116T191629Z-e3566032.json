@@ -1,0 +1,9 @@
+{
+  "id": "20261116T191629Z-e3566032",
+  "mirrored_utc": "2026-11-17T13:00:42Z",
+  "reason": "2026-11-17 Tarik (OpenAI), codex-20261117T125632Z-5fe80527: named review postponed for absent publication evidence. Fresh main tree lacks all five verdict mirrors named by this run. The duplicate scripts/meetings_status.py dd4d9ed7 and test76a565d8 remain, and workflow79bd60ef still invokes the duplicate test; latest duplicate path history is its original 982ca5d0 addition, not an edit/removal attributable to this run. Agenda37 still describes consolidation as future work. The run's rotational title and derived path list cannot establish which unpublished changes completed. Inspected retained canonical meeting_status.py and tests and ran 18 current fixture cases offline; all pass and source/test hashes match GitHub. This verifies retained behavior, not delivery of this run or a cleanup. Original five receipts/source patch/ref must be reconciled before acceptance; no completed action, deletion, recovery or other run's task repeated. No private run archive, full live meeting/daily-report suite, real lander or provider API inspected. Preserve all older decisions and the original Tarik assignment.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T13:00:42Z"
+}
