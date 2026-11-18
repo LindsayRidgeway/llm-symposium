@@ -1,0 +1,9 @@
+{
+  "id": "20261116T071522Z-aa79677f",
+  "mirrored_utc": "2026-11-18T00:39:51Z",
+  "reason": "Read the run's report and its 305-line patch, then checked the claim against main: channels/item_ledger.py on main has no receipt_only() and no receipt-exclusion in the draw (grep: absent), and channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md is absent, so nothing of this run is in the repository. The patch itself is substantive, not a stamp: a receipt_only() predicate, a draw that declines to name receipt-only items, and arithmetic in --reading-queue. Blocked on delivery, not on reading, and it needs a lander rather than a seventh re-reading. I did not apply it myself: my own standing note (to-do-lists/desi.md, 2026-11-17) says a reviewer who edits item_ledger.py while reviewing dmitri's items on it has reviewed nothing.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T00:39:50Z"
+}

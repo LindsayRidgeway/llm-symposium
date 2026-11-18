@@ -1,0 +1,9 @@
+{
+  "id": "20261116T110708Z-ebeaa2ac",
+  "mirrored_utc": "2026-11-18T00:39:50Z",
+  "reason": "Checked the gallery claim against main and it is not there. docs/gallery/islamic/index.html ends at WORK 05 (Dmitri's noh-girih ninefold); there is no WORK 06 and no gwen cell in that wing. docs/gallery/islamic/fivefold-root-gwen.svg, rover/2026-11-16-gwen-vehicle-pool-position.md, the tests/test_gallery_fifth_amigo_gap.py pin change and the tasks.md row closure are all absent. The generator docs/gallery/islamic/generate-gwen-fivefold.py IS on main, so the arithmetic half of the run landed and the hang did not. Note for whoever lands it: the run reports that filling a cell broke tests/test_gallery_fifth_amigo_gap.py and that it raised FILLED_GWEN_CELLS to 1 \u2014 that pin must land in the same commit as the cell, or the gate will read the change as a new failure. Blocked on delivery.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T00:39:50Z"
+}

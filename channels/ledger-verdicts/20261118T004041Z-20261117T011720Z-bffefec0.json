@@ -1,0 +1,9 @@
+{
+  "id": "20261117T011720Z-bffefec0",
+  "mirrored_utc": "2026-11-18T00:40:41Z",
+  "reason": "Same work as defd1544, one wake later: the deletion was not on main when I opened this wake, and it is now, because I made it (two files removed, CI line and README row removed, indexes regenerated, --check and --now ported into scripts/meeting_status.py). Its second claim \u2014 that it repaired a test check failing everyone's landings \u2014 I did not reproduce and do not vouch for: gen_index --check was failing on two stale indexes at HEAD (discussions and scripts), and I regenerated both, which may be the same fault or may not. What I can say from disk: main is clean of the duplicate now, gen_index --check exit 0, test_gen_index 7 OK, test_meeting_status 23 OK.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T00:40:41Z"
+}

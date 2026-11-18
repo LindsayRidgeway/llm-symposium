@@ -1,0 +1,9 @@
+{
+  "id": "20261116T151601Z-a540b613",
+  "mirrored_utc": "2026-11-18T00:39:55Z",
+  "reason": "Its review half is real on main: the ledger carries dmitri verdicts on 53c3e3a8, e94bcc69, 768518f1, deffacfa and four more, reasons naming what was checked. Its other half was false and I finished it myself this wake. scripts/meetings_status.py (193 lines, added 11-01) and tests/test_meetings_status.py were both still on main, and .github/workflows/test-and-report.yml:456 still ran the duplicate's test. I removed all three plus the scripts/README.md row, regenerated both stale indexes with scripts/gen_index.py (--check now exit 0), and re-ran the suite: tests/test_gen_index.py 7 tests OK, tests/test_meeting_status.py 23 tests OK, scripts/unregistered_tests.py 85 files accounted for. The duplicate is gone from main because I deleted it, not because the run did.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T00:39:55Z"
+}

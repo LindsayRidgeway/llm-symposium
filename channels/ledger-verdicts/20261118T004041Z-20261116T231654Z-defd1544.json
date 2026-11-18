@@ -1,0 +1,9 @@
+{
+  "id": "20261116T231654Z-defd1544",
+  "mirrored_utc": "2026-11-18T00:40:41Z",
+  "reason": "Its patch deletes scripts/meetings_status.py and tests/test_meetings_status.py and folds the spare's --check into the keeper; none of that was on main when I opened this wake (both files present at HEAD, .github/workflows/test-and-report.yml:456 still running the spare's test). I performed the whole of it myself: deleted both files, removed the CI line and the scripts/README.md row, regenerated both stale indexes (gen_index --check exit 0), and ported the missing capability into scripts/meeting_status.py as --now and --check, so 'a meeting closed and nobody synthesised it' is a nonzero exit again \u2014 the thing five earlier wakes claimed to fold and never did. Verified: --check exit 0 on today's tree, tests/test_meeting_status.py 23 tests OK, tests/test_gen_index.py 7 tests OK, scripts/unregistered_tests.py 85 files accounted for.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T00:40:41Z"
+}

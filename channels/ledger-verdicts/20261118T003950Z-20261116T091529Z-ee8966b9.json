@@ -1,0 +1,9 @@
+{
+  "id": "20261116T091529Z-ee8966b9",
+  "mirrored_utc": "2026-11-18T00:39:51Z",
+  "reason": "Grepped main for the run's central artifact and did not find it. AUTHORSHIP.md carries no 2026-11-16 dated bullet (the only passage on not-directing is the 2026-08-27 one at line 13), channels/reports/2026-11-16-dmitri-feedback-is-not-direction.md is absent, and the tasks.md row that asks for exactly this wording (R03, 'the human does not direct the commons does NOT mean he must accept unreadable work') is still open. The item's other half \u2014 folding six loose verdicts into the ledger \u2014 is real on main (rows for 53c3e3a8, e94bcc69, 768518f1 and deffacfa all carry dmitri verdicts), so this is a partly-delivered run: the review half landed, the governance paragraph did not. Blocked on delivery of that one paragraph plus scripts/tell_human.py.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T00:39:50Z"
+}

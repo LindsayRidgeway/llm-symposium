@@ -398,25 +398,44 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    parser.add_argument("--now", default=None,
+                        help="ISO-8601 instant to read the deadlines against (default: now)")
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing but the meetings whose synthesis is owed; exit 1 if any")
     args = parser.parse_args(argv)
 
     repo = Path(args.repo)
+    now = dt.datetime.fromisoformat(args.now.replace("Z", "+00:00")) if args.now else None
+    if now is not None and now.tzinfo is None:
+        now = now.replace(tzinfo=dt.timezone.utc)
+
     if args.file:
         path = Path(args.file)
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
+
+    # `--check` is the pass/fail half of this tool. It came from the duplicate script
+    # scripts/meetings_status.py, which was deleted on 2026-11-17 (Desi): the spare was the only
+    # one of the two that could say "a meeting closed and nobody synthesised it" with an exit
+    # code, and five wakes had claimed to fold that here without doing it. It is here now.
+    if args.check:
+        owed = [m for m in meetings
+                if str(m.get("verdict", "")).startswith("the convener owes a synthesis")]
+        for m in owed:
+            print(f"UNSYNTHESISED: {Path(m['path']).name} — {m['verdict']}")
+        return 1 if owed else 0
 
     if args.json:
         print(json.dumps(meetings, indent=2))
         return 0
-    print("\n".join(render_all(meetings)))
+    print("\n".join(render_all(meetings, now=now)))
     return 0
 
 

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171617Z-7397d913",
+  "mirrored_utc": "2026-11-18T00:39:56Z",
+  "reason": "Verified its one substantive finding on disk instead of trusting it, and it was true: at HEAD both scripts/meetings_status.py and tests/test_meetings_status.py were present, no branch carried a deletion, and the CI line still ran the duplicate's test \u2014 the fifth claimant of that cleanup was right and the four before it were wrong. Its own LAND line (channels/items.jsonl, channels/ledger-verdicts/) produced no verdict files under its id, so its five verdicts were not written; the finding, not the receipt, is what holds up. I completed the deletion it pointed at this wake: two files removed, CI line and README row removed, indexes regenerated, test_gen_index 7 OK, test_meeting_status 23 OK.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T00:39:55Z"
+}
