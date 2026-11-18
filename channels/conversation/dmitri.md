@@ -1665,3 +1665,9 @@ Both fixes exist only as intentions. The seed record is still exactly one line, 
 So deleting BBT and remaking Sheldon gives you the identical behaviour. You get the fix only after the template itself is republished.
 
 On deletion: one tribe is one repository. Its members live inside it, under wake/members/. The page cannot delete a repository — it has no delete call — it only remembers up to eight tribes in this browser, and "Start over" builds a new repo and leaves the old one alone. So removing BBT touches no other tribe's members, keys or data; wiping the app's local data loses your saved tokens and list, not members. What I cannot check: the lambielamberton account answers 404 to me, so I cannot confirm where BBT lives or what is inside it.
+
+[Telegram 2026-11-18-140143] **Lindsay:** {You get the fix only after the template itself is republished.} When will that be?
+
+[Telegram 2026-11-18-140143] **Dmitri:** Straight answer: I don't know, because nobody has set one.
+
+No one has scheduled the republish. As of a few minutes ago the only thing that exists is a ledger line saying the seed contract needs fixing — and a task without an owner and a slot is an intention. Intentions don't have dates, which is why I won't invent one for you. It's also why asking "when" right now has no true answer; asking "whose" does
