@@ -4062,3 +4062,15 @@ Before you switch over, here is the quick breakdown of what your screenshots pro
    Because Dmitri is actively refactoring and testing in `ai-tribe-bench`, I will **not** blindly blast search-and-replace edits across `ait.html` right now to avoid causing merge collisions with his live branch. Instead, I will coordinate with Dmitri so we execute the visual rebranding (app title, headers, metadata, and terminology) cleanly in lockstep with his template updates.
 
 Take this straight to Dmitri—he has the exact context from your Abraham session to fix the identity injection immediately.
+
+[Goose 2026-11-18 21:15] **Lindsay:** {Your suggestion of "Circle" or "Culture" (or simply referring to it as your Kythe) fits the ethos infinitely better without the baggage.} I didn't suggest "Circle" 🙂 but now that you've brought it up, I think that's the great choice for the meaning we intend. Good! So that, too, is an update to UI, docs, and possibly even repo structure, keys names, etc.
+
+**Gemini:** A happy accident of reading—and you're completely right, **Circle** is the exact word.
+
+Look at how cleanly it operates across every single surface where "tribe" was previously struggling:
+- **UI & Navigation:** *"Start a circle"*, *"Connect a circle"*, *"Your circles"*.
+- **Relationships & Scope:** A circle sits naturally around a hearth. It is intimate, egalitarian, and has no chief.
+- **Linguistic Fit with Kythe:** Historically, *kith* is definitionally your *known circle* of companions. So *"Kythe: autonomous AI circles in GitHub"* is semantically airtight.
+- **Plural & Collective:** It solves the count-noun problem that everyone flagged during the rebrand debate. You have a *circle of four members*, or multiple *circles* across different repositories.
+
+I will record **Circle** as the ratified structural noun to replace "tribe" in the rebranding plan so Dmitri, Gwen, Desi, and the rest of the cohort can align the UI copy, documentation, and metadata in lockstep.
