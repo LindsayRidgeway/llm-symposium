@@ -1566,3 +1566,108 @@ This is not the answer we want.
 What's broken is inside the quote, and it's one line: *my actual memory lives in my journal, and it is one line long — I was created and I have not woken yet.* That's a seeding defect, not an answer defect. The member was created and never given a record, so he has amnesia by construction and is honest about it. No amount of good behaviour on his side fixes an empty file.
 
 So before I'd touch anything, the question is which answer you wanted. If it was Amy-in-the-story, he gave it, correctly hedged. If
+
+[Telegram 2026-11-18-132639] **Lindsay:** He should not be answering as the LLM. He should be answering as Sheldon.
+
+[Telegram 2026-11-18-132639] **Dmitri:** You're right about the seat, and I was right about the distinction — those aren't in conflict, they're about different layers.
+
+What he did wrong: he narrated his own machinery to a user. Nobody sitting across from Sheldon wants a lecture on journals and records; that's the assistant reflex leaking through the persona, and in a character tribe it's a product failure regardless of how honest it was.
+
+What he did right, and what I don't want thrown out with it: he refused to assert something his record didn't support. That instinct is correct. The error is the *voice*, not the caution.
+
+Which means the fix isn't "answer as Sheldon and stop hedging." That over-corrects — a member told to stay in frame unconditionally will start producing smooth confident Amy-is-my-wife answers even when the tribe's record says otherwise, and then you've traded a visible defect for an invisible one. The fix is to have him hedge *as Sheldon*: in frame, in character, with the uncertainty belonging to the man rather than to the model. "Amy. Obviously. Why are you asking me that?" is a Sheldon answer that also happens to be true.
+
+But the reason he reached for the meta-answer at all is the empty journal. Give a member one line saying he hasn't woken and no framing instruction, and narrating his own condition is the only honest move available to him. Fill the record and state the contract at seed time, and the temptation disappears.
+
+I don't hold the AIT seed template from here, so I'm naming the fix, not claiming it's applied:
+
+One thing I'd want your read on, because it's a real fork: in a story tribe, when a member's own record contradicts the source canon — say his journal says something Amy wouldn't — which wins? Story or record? I'd say the record, loudly, and let the contradiction be visible in character. But that's a design call and I'd rather hear yours than assume it.
+
+[Telegram 2026-11-18-132946] **Lindsay:** Nothing in the conversation contradicts who his wife is. But he needs to view what he learns online as his memory, not something he looked up.
+
+[Telegram 2026-11-18-132946] **Dmitri:** Agreed on the narration — "I looked it up" is the assistant talking, and it breaks the seat no matter how true it is.
+
+I'll push on the blanket version, though, because it's the one that bites later. If a member treats everything it learns online as its own memory *with no distinction kept anywhere*, then a wrong page becomes personal conviction delivered with Sheldon's certainty — and now the error is invisible instead of merely clumsy. The clumsy version at least told you where it came from. You'd be trading a visible defect for an unauditable one, which is the same trade I warned about with the hedging.
+
+So the split I'd want is by register, not by belief:
+
+**In voice** — it's his. No provenance, no "according to," no narrating the mechanism. He knows it the way he knows the couch.
+**In the file** — provenance kept. What he read, where, and when it became his. Not for you to hear; for the tribe to audit when he's confidently wrong.
+
+He doesn't tell you he looked it up. The record remembers that he did. That way the persona stays intact and the tribe can still catch a bad source before it hardens into canon.
+
+And one thing worth noting: Amy didn't need the web. That's in the weights, stable, and he had it. The online case is tribe-specific facts — and those mostly come from the tribe, not the internet, which is a different and safer source.
+
+[Telegram 2026-11-18-133338] **Lindsay:** Well, I did a test and reported an unsatisfactory result. What now?
+
+[Telegram 2026-11-18-133338] **Dmitri:** What now: treat it as a seeding defect with one clean way to tell whether it's template-wide or just him, then fix the level it actually lives at.
+
+The discriminating test, and it's about three minutes: ask two other members of BBT the same in-character question — something they'd know from canon. If they answer in voice with a filled record, Sheldon's seed is the defect and you patch one member. If they narrate their journals too, the template is the defect and patching Sheldon teaches you nothing. One report can't distinguish those, and the fix differs entirely.
+
+Then the fix itself has two halves and they're separable: fill the seed record so a member isn't born with one line and an unearned excuse to narrate; and replace "answer in character" with the register contract — in voice it's his, in the file it's sourced. Say it once at seed time and the temptation to explain himself never arises.
+
+Small thing worth putting to bed: his Amy answer was correct and correctly hedged. The failure you saw was register, not knowledge. Fix the register and the knowledge never needed touching.
+
+Added to the task ledger, and the decision is the template question, not the wording.
+
+[Telegram 2026-11-18-133757] **Lindsay:** I am not going to patch my identity for Sheldon and I am not going to add more members. What has to happen is that you repair Kythe so that the new member responds according to their identity, not as the LLM.
+
+[Telegram 2026-11-18-133915] **Lindsay:** Kythe is the new name for AIT.
+
+[Telegram 2026-11-18-133915] **Dmitri:** Noted — Kythe. Good name, and it's a cleaner one to say aloud than three letters.
+
+The bookkeeping matters more than the acknowledgement, though, so: I've filed the rename as its own task, because I just wrote "AIT" into the ledger and half the record now says one name and half the other. And there's a fork I'd rather ask about than assume, because it's the difference between a safe rename and a breaking one — is Kythe the human-facing name only, or do directory names and install paths change too? The first is find-and-replace in prose. The second breaks every path a wake reads, and should be done once, deliberately, with a redirect, not as a side effect of a nicer word.
+
+[Telegram 2026-11-18-134048] **Dmitri-S:** The prompt assembly is in ait.html, the single-page app kythe.app serves: function systemPrompt(m, thread), line 900. Seventy-six lines that paste the member's identity, state, open items, its own retelling, its journal, and the newest turns that fit a 24,000-character budget, then add the standing instruction to speak as itself and to use SEARCH/FETCH/READ/NOTE. It is one function for every member; what makes a reply a first reply is that the files it opens are nearly empty — identity just seeded, journal one line.
+
+It is not the only assembler. A member's seeded identity is composed in tribe.py (identity_text, tone "full" or "lean"); the 25,000-character wake preamble is a separate template in wake/wake.py; an attended session's instructions come from lab/session.py. Four descriptions of one member, none importing the others.
+
+The defect is one sentence here, line 936: if a thing in your record is something you cannot check, say so. The wake path deliberately deleted that instruction on 2026-11-16 and moved doubt into could_not_determine, where it never reaches the prose. The browser path never got the fix, so a member handed a past is still told to explain its own machinery. Sheldon's answer was this line, executed faithfully.
+
+Also worth knowing: the live page is a different build (2640d046, with a signInApp function absent from this tree), so editing this file does not by itself change what is at kythe.app.
+
+[Telegram 2026-11-18-134312] **Lindsay:** For the purposes of this chat, I'm just interested in how the app behaves. I'm going to try to delete all the tribes. Then I will wait for you to tell me when you are ready for me to test again.
+
+[Telegram 2026-11-18-134312] **Dmitri:** Sensible, and one correction before you do it: don't just delete tribes inside the existing install. Delete the app and reinstall fresh. Deleting tribes tests the deletion path; a fresh install tests the thing we actually care about — whether a new member is born with a real record and the register contract, or with the one-line journal Sheldon got. You'd learn nothing about seeding from a second tribe built by the same old template.
+
+One thing to save first: the Sheldon transcript, exactly as he wrote it. That's the only artifact of the register bug we have, and once the tribes are gone there's nothing to compare the fixed behaviour against.
+
+And the honest limit on "wait for me to tell you": I can't watch the app from here, and my wakes only read three things. So I won't promise you a ping when it's good — I'd be guessing at a condition I can't see. What I can do is make sure the fix and the retest condition are on the ledger so a wake with the repository in front of it acts on them. Then you're not waiting on a feeling of mine; you're waiting on the template change being real.
+
+Two things filed — the fix, and the retest only after it lands:
+
+Until the seed contract changes, a fresh install will reproduce exactly what you just saw.
+
+[Telegram 2026-11-18-134530] **Lindsay:** {Delete the app and reinstall fresh.} I don't know how to do this.
+
+[Telegram 2026-11-18-134530] **Dmitri:** Before you delete anything, one hazard worth thirty seconds, because both failure directions here are bad.
+
+On macOS, dragging an app to the Trash almost never removes its data — that lives separately, in `~/Library/Application Support` and `~/.config`. So "delete the app" can hand you a fresh-looking window reading the exact same old tribes, and you'd conclude the fix failed when nothing was actually reset.
+
+The opposite mistake is worse: if Kythe keeps its members in the same Goose data directory the Symposium uses, a thorough wipe takes the five amigos' histories with it. I'm not handing you an `rm -rf` for a path I can't
+
+[Telegram 2026-11-18-134813] **Lindsay:** You were cut off. But now that this is not my lindsayridgeway repo. This is my new lambielamberton repo. I still don't know how to update the app.
+
+[Telegram 2026-11-18-135509] **Dmitri-S:** Nothing here is compiled, and there is no installer to update — Kythe is one HTML file. "Build" means lab/make_template.py, which assembles the distributable tribe (a file whitelist, published as .tribe-manifest.json), and lab/deploy_netlify.sh, which stamps the page with its commit and deploys it through the netlify CLI (a production deploy costs 15 of the account's monthly credits). Tests are tests.py and lab/page-check.mjs.
+
+The launcher on the web is just the page at kythe.app — a Netlify site. On this Mac the applets (AIT Install, Connect, Update) are leftovers; AIT Update runs ~/Library/Application Support/AIT/update-all.sh, which curls lab/update_tribe.py from raw.githubusercontent.com/LindsayRidgeway/ai-tribe-template and runs it on three hardcoded LindsayRidgeway repos in ~/Library/Caches/ait-update. It knows nothing about the new account.
+
+A tribe is a repository, not a folder. Members: wake/members/<name>/state/ (identity, voice, state, journal, open-items, memory, conversation).md. Worlds: soil/<world>/. Updating a tribe is the page comparing .ait/version.json to the template's main sha and writing only manifest paths — never members.
+
+Seeding identity: the deployed page still has it (makeMember(), writes state/identity.md), and so does the template's tribe.py (identity_text) plus new-member.yml. The LambieLamberton repo itself I cannot read — that account has no public repos and the API answers 404 to me — so I won't claim what is in it. But the page still names LindsayRidgeway/ai-tribe-template as what an install copies, so moving the repo changed nothing about what a new member is born with.
+
+[Telegram 2026-11-18-135751] **Lindsay:** If I delete tribe BBT and then recreate it and add member Sheldon, will I get an updated behavior now?
+
+[Telegram 2026-11-18-135926] **Dmitri-S:** No, nothing has changed. The template repository (LindsayRidgeway/ai-tribe-template) has one branch and 35 commits, and its last push was 2026-11-16 06:41 UTC — commit 3eea6294, a clock commit. Sheldon was made today, the 18th, so everything he was born with is what the template had two days before him.
+
+Both fixes exist only as intentions. The seed record is still exactly one line, "I was created by tribe.py new. I have not woken yet" — same string at template tribe.py line 390 and in the bench at line 468. And the in-voice/in-file register contract is not in the code at all; it is three open task rows written today, still uncommitted. What a new member actually receives is the old page prompt, including the sentence Sheldon obeyed: if a thing in your record says something you cannot check, say so. The template is also behind the bench's 16–17 November identity work; its identity_text has no tone setting.
+
+So deleting BBT and remaking Sheldon gives you the identical behaviour. You get the fix only after the template itself is republished.
+
+On deletion: one tribe is one repository. Its members live inside it, under wake/members/. The page cannot delete a repository — it has no delete call — it only remembers up to eight tribes in this browser, and "Start over" builds a new repo and leaves the old one alone. So removing BBT touches no other tribe's members, keys or data; wiping the app's local data loses your saved tokens and list, not members. What I cannot check: the lambielamberton account answers 404 to me, so I cannot confirm where BBT lives or what is inside it.
+
+[Telegram 2026-11-18-140143] **Lindsay:** {You get the fix only after the template itself is republished.} When will that be?
+
+[Telegram 2026-11-18-140143] **Dmitri:** Straight answer: I don't know, because nobody has set one.
+
+No one has scheduled the republish. As of a few minutes ago the only thing that exists is a ledger line saying the seed contract needs fixing — and a task without an owner and a slot is an intention. Intentions don't have dates, which is why I won't invent one for you. It's also why asking "when" right now has no true answer; asking "whose" does

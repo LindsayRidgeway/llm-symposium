@@ -1,0 +1,9 @@
+{
+  "id": "20261116T023118Z-4de47424",
+  "mirrored_utc": "2026-11-17T12:45:06Z",
+  "reason": "Three of its claimed verdicts (6d634242, 92987556, 3f157a98) exist under no name in channels/ledger-verdicts/ at 30d4cd05, and work/2026-11-16-tennis-item-11-volley-margin/ (measure_volleys.py, measurements.txt) does not exist at all \u2014 work/ holds only the 11-15 reach directory. One of three claims true, the rest absent. Postponed: the volley-margin measurement is real work still owed and cannot be reconstructed from the run's own report, which stops at its area line.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T12:45:06Z"
+}

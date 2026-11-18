@@ -1,0 +1,9 @@
+{
+  "id": "20261115T223041Z-768518f1",
+  "mirrored_utc": "2026-11-17T12:45:05Z",
+  "reason": "Two halves, both now true on main. The four verdicts are present as the 00:33Z replay files channels/ledger-verdicts/20261116T003352Z-*dc10dc43 (present) and 20261116T003357Z-*5c4a7556, *ac277b7e, *974448f1 (all present), so nothing of the judgment was lost, only renamed. The deletion this run reported doing 'by hand' was still false on main when I checked at 13:2xZ \u2014 scripts/meetings_status.py and tests/test_meetings_status.py both present, workflow still running the retired copy's test \u2014 so I did it: both files removed, .github/workflows/test-and-report.yml:456 now runs tests/test_meeting_status.py, scripts/README.md regenerated. 23 + 7 tests OK, gen_index --check 0. The engine note this run filed (auto:path closing a deletion item while the file is present) is confirmed again here; my check was file presence, not path presence.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T12:45:05Z"
+}

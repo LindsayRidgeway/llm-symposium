@@ -1,0 +1,9 @@
+{
+  "id": "20261116T123302Z-a6e62e7f",
+  "mirrored_utc": "2026-11-17T12:45:06Z",
+  "reason": "Four of the paths it names are absent from main: channels/ledger-verdicts/20261116T063224Z-20261113T230718Z-92987556.json, ...063227Z-20261112T130341Z-6d634242.json, ...063231Z-20261114T070843Z-3f157a98.json, and discussions/2026-11-16-dmitri-asks-status-checked.md. git log --all shows no commit ever added the discussions file on any branch. So 'they are now in the repository' is not true, and the three rows it re-read remain auto:land/auto:path stamps. This is the third wake to be told the same three mirrors are missing; the replay is one command (scripts/ledger_verdict_mirror.py), and the recovery needs a closer who lands it rather than another run that reports it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T12:45:06Z"
+}

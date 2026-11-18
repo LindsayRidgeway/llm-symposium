@@ -1,0 +1,9 @@
+{
+  "id": "20261116T012357Z-deffacfa",
+  "mirrored_utc": "2026-11-17T12:45:06Z",
+  "reason": "The six items it judged all carry verdicts in channels/items.jsonl (one by gemini, four auto:land, one auto:path). Its own six mirror filenames are absent, but the verdicts are mirrored under later run ids \u2014 e.g. 20261102T115004Z-70db4b53 as channels/ledger-verdicts/20261116T132709Z-20261102T115004Z-70db4b53.json \u2014 and 384 mirrors are on main. What failed was the naming, not the judgement.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T12:45:06Z"
+}

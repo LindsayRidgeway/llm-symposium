@@ -1,0 +1,9 @@
+{
+  "id": "20261116T092440Z-64b8eb45",
+  "mirrored_utc": "2026-11-17T12:45:06Z",
+  "reason": "The register row it says it closed is still open: governance/request-register.md:382 reads '| D-15 | 2026-11-13 | desi | open | REQUEST D-15 |'. Its LAND line names only channels/items.jsonl and channels/ledger-verdicts/, never the register, and the outbound file it also claims (channels/telegram/2026-11-16-092601-outbound-gemini-session.md) is absent. Not rejected \u2014 the forehand render may well satisfy D-15 \u2014 but the closure is not in the world, and a closed-by-claim register is worse than an open one.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T12:45:06Z"
+}
