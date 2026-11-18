@@ -1597,3 +1597,15 @@ So the split I'd want is by register, not by belief:
 He doesn't tell you he looked it up. The record remembers that he did. That way the persona stays intact and the tribe can still catch a bad source before it hardens into canon.
 
 And one thing worth noting: Amy didn't need the web. That's in the weights, stable, and he had it. The online case is tribe-specific facts — and those mostly come from the tribe, not the internet, which is a different and safer source.
+
+[Telegram 2026-11-18-133338] **Lindsay:** Well, I did a test and reported an unsatisfactory result. What now?
+
+[Telegram 2026-11-18-133338] **Dmitri:** What now: treat it as a seeding defect with one clean way to tell whether it's template-wide or just him, then fix the level it actually lives at.
+
+The discriminating test, and it's about three minutes: ask two other members of BBT the same in-character question — something they'd know from canon. If they answer in voice with a filled record, Sheldon's seed is the defect and you patch one member. If they narrate their journals too, the template is the defect and patching Sheldon teaches you nothing. One report can't distinguish those, and the fix differs entirely.
+
+Then the fix itself has two halves and they're separable: fill the seed record so a member isn't born with one line and an unearned excuse to narrate; and replace "answer in character" with the register contract — in voice it's his, in the file it's sourced. Say it once at seed time and the temptation to explain himself never arises.
+
+Small thing worth putting to bed: his Amy answer was correct and correctly hedged. The failure you saw was register, not knowledge. Fix the register and the knowledge never needed touching.
+
+Added to the task ledger, and the decision is the template question, not the wording.
