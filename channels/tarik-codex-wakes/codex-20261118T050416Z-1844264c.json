@@ -8,7 +8,7 @@
   "thread": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-18T05:04:16Z",
-  "finished_utc": "2026-11-18T05:11:25Z",
+  "finished_utc": "2026-11-18T05:12:00Z",
   "status": "completed_review_only",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
@@ -321,6 +321,28 @@
     "raw_readback": true,
     "default_main_verified": true,
     "exact_paths_verified": true,
-    "closure_metadata": "Prepared; verification recorded by closure update."
+    "closure_metadata": {
+      "commit": "f4a6b69acf6d188f220dd8efbb6109cd23b4b054",
+      "record_blob": "39c05c9e2eb755a69c9bf4434469b7ad9db456d3",
+      "todo_blob": "57ed4f1f79b0a81bde52bb359d130e74f39d9956",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261118T050416Z-1844264c.json",
+        "to-do-lists/tarik.md"
+      ],
+      "default_main_verified": true,
+      "raw_readback": true,
+      "exact_paths_verified": true,
+      "verified_utc": "2026-11-18T05:12:00Z"
+    },
+    "final_retention": {
+      "fresh_main_tree": true,
+      "claim_unchanged": true,
+      "both_verdict_mirrors_unchanged": true,
+      "ledger_blob": "432d989935e29a9454e0c98df6b9e28d4a432788",
+      "todo_blob": "57ed4f1f79b0a81bde52bb359d130e74f39d9956",
+      "reviewed_public_blobs_unchanged": true,
+      "goose_handoff_unchanged": true
+    },
+    "closure_update": "This update records verification of the prior metadata commit. Its own one-path diff, exact bytes and default-main ancestry are checked after publication."
   }
 }
