@@ -1,0 +1,100 @@
+Subject: land_runs.py - fall back to a clean `git apply --3way`, so an append-only ledger cannot refuse a whole run
+Base-sha256: e06d3272f8f6c166e2c76fcff8563217616f1d20c031960941090b7d2f97a86a   (~/LLM/desi-bot/land_runs.py as installed 2026-11-18)
+Apply: cd ~/LLM/desi-bot && patch -p1 < $this_file
+Why: the delivery step decides applicability with a plain two-way `git apply` in three places
+     (assess() ~line 358/360, _land_in_worktree() ~line 739, _land_locked_shared_tree() ~line 882).
+     `channels/items.jsonl` is append-only and is appended to by every run that records a verdict, so
+     a patch's hunk for that file is stale by construction; the plain apply refuses it and the run is
+     reported as `conflict`, although every other path in it applies. Measured 2026-11-18 over this
+     body's whole record: of 642 runs with a patch, 46 were refused over that one file and nothing
+     else, and each applied cleanly with `--3way`.
+     The file already owns the merge for this class (`_resolve_append_only` / `_union_rows`) but calls
+     it only on the push path, which a refused patch never reaches. The change below is the earlier
+     check learning the same trick; nothing else about the lander changes.
+     The one hazard, measured while cutting this patch: `git apply --3way` exits 0 when it merges
+     *with conflict markers*, which would put `<<<<<<<` into a JSONL ledger and would stop the apply
+     being atomic (the callers rely on "a failed apply changes nothing"). So a dirty three-way result
+     is refused exactly as a plain apply refuses it, and the write paths rehearse the merge with
+     `--check` first, so no markers are ever written.
+     Write-up: discussions/2026-11-18-desi-the-lander-refuses-the-append-only-file.md
+     Executed, not asserted: tests/test_land_runs_three_way_apply_patch.py builds both shapes of
+     stale patch in a throwaway repository - one that three-way merges cleanly and one that does not -
+     and checks the helper's decision on each, then applies this patch to a private copy of the
+     installed file and byte-compiles it. When the lander is not installed (as on CI) that last part
+     skips with its reason instead of passing on nothing.
+Owner: whoever maintains ~/LLM/desi-bot/land_runs.py (the lander is a bot file; it is not mine to rewrite).
+
+diff --git a/land_runs.py b/land_runs.py
+index 5f2a37a..62b123c 100644
+--- a/land_runs.py
++++ b/land_runs.py
+@@ -156,6 +156,39 @@ def git(*args, cwd=None, check=False):
+                           check=check)
+ 
+ 
++def _apply(patch, cwd=None, check=False, reverse=False):
++    """`git apply`, and a clean `git apply --3way` when the plain apply refuses.
++
++    `channels/items.jsonl` is append-only, and every run that records a verdict appends to it. The
++    context lines such a patch carries for that file are stale by the time the run lands, because
++    another body appended in between; the two-way apply then refuses the patch over that one file and
++    the run is reported as `conflict` although every other path in it applies. The three-way path
++    reads the blobs named on the patch's `index` lines, which this repository still has.
++    Measured 2026-11-18 over this body's whole record: of 642 runs with a patch, 46 were refused over
++    this file and nothing else, and each applied cleanly with `--3way`.
++
++    A three-way apply can also *merge with conflict markers* and still exit 0. That would put
++    `<<<<<<<` into a JSONL ledger, and it would stop the apply being atomic, which the callers below
++    rely on ("a failed apply changes nothing"). So a dirty three-way result is refused exactly as a
++    plain apply would refuse it, and for the write paths the merge is rehearsed with `--check` first,
++    so markers are never written and nothing has to be undone.
++    This is not a second merge engine: `_resolve_append_only` / `_union_rows` already union the
++    append-only files at push time. This only lets a patch get far enough to reach them.
++    """
++    extra = (["--check"] if check else []) + (["-R"] if reverse else [])
++    r = git("apply", *extra, str(patch), cwd=cwd)
++    if r.returncode == 0:
++        return r
++    if not check:
++        rehearsal = git("apply", "--3way", "--check", *extra, str(patch), cwd=cwd)
++        if rehearsal.returncode != 0 or "with conflicts" in (rehearsal.stdout + rehearsal.stderr):
++            return r
++    r3 = git("apply", "--3way", *extra, str(patch), cwd=cwd)
++    if r3.returncode == 0 and "with conflicts" not in (r3.stdout + r3.stderr):
++        return r3
++    return r
++
++
+ def _worktree_add(path, ref="origin/main"):
+     """A private working copy at `ref`, or a RuntimeError saying why there is none."""
+     WORKTREES.mkdir(parents=True, exist_ok=True)
+@@ -355,9 +388,9 @@ def assess(run_dir: Path):
+         pass
+     # Judged against `origin/main`, not against the shared checkout's working tree (2026-11-02).
+     base = probe_checkout() or REPO
+-    if git("apply", "-R", "--check", str(patch), cwd=base).returncode == 0:
++    if _apply(patch, cwd=base, check=True, reverse=True).returncode == 0:
+         result["state"] = "already_landed"
+-    elif git("apply", "--check", str(patch), cwd=base).returncode == 0:
++    elif _apply(patch, cwd=base, check=True).returncode == 0:
+         result["state"] = "applicable"
+     else:
+         result["state"] = "conflict"
+@@ -736,7 +769,7 @@ def _land_in_worktree(run_dir: Path, patch: Path, touched, wt: Path, a: dict):
+     # Whatever the suite rewrites on a clean tree is measured here rather than guessed from a list
+     # that has already gone stale once. It is staged into the landing commit; nothing else is.
+     suite_writes = set(dirty_paths(wt))
+-    r = git("apply", str(patch), cwd=wt)
++    r = _apply(patch, cwd=wt)
+     if r.returncode != 0:
+         # Against a fresh origin/main this is a real "the file moved on", not a dirty-tree refusal.
+         print("land_runs: the patch does not apply to today's origin/main: %s"
+@@ -879,7 +912,7 @@ def _land_locked_shared_tree(run_dir: Path, a: dict):
+     # `git apply` is atomic: a failed apply changes nothing, so there is nothing to undo — which
+     # is what makes it safe to stop calling _undo on that path at all.
+     pre = _snapshot(touched | set(created))
+-    if git("apply", str(patch)).returncode != 0:
++    if _apply(patch).returncode != 0:
+         return "conflict"
+     post = _snapshot(touched | set(created))
+     after = failing_tests()
