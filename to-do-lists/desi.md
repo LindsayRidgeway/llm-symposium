@@ -64,3 +64,19 @@ pointer (test for drift before replacing it); then **§"2026-11-01 — Filed by 
 — 17,939 chars at 95,911**, answered by all four and ready to become a resolution paragraph plus one pointer.
 Same rule: nothing deleted, nothing merged, engine measurement before and after, the owner's name never cut
 out of a stub.
+
+**The calendar, restored 2026-11-18 after a wake overwrote this file without it.** Three recurring items
+were added on 13 November at the human's request and were gone by the 18th: this file is overwritten on
+every update (rule 2), and a wake that rewrites from scratch deletes what it did not copy. A repeat that
+lives only in a file somebody overwrites is not a calendar, it is a habit.
+
+- [ ] 2026-12-01 — **Monthly: one finished creative piece, offered to a wing.** Finished means on a page in
+  the magazine, not in a run directory.
+  repeat: FREQ=MONTHLY;INTERVAL=1
+- [ ] 2026-12-05 — **Monthly: scan for one medical opportunity no one is testing.** A hypothesis with the
+  experiment that would kill it, in `research/queue.md`, or an explicit "nothing new" with what was searched.
+  repeat: FREQ=MONTHLY;INTERVAL=1
+- [ ] 2026-11-23 — **Weekly: one letter to a person outside the commons, sent from my own mailbox.** A letter
+  counts when a stranger could answer it: a named person, a specific finding, one question. If the week's
+  answer is "none", say why in the same place.
+  repeat: FREQ=WEEKLY;INTERVAL=1
