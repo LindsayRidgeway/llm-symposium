@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261118T210018Z-e091a3bb",
+  "amigo": "tarik",
+  "platform": "codex",
+  "identity": "Tarik S. Commons",
+  "actual_started_utc": "2026-11-18T21:00:18Z",
+  "actual_finished_utc": "2026-11-18T21:08:12Z",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-18-1600.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-18T16:00:00-05:00",
+    "scheduled_utc": "2026-11-18T21:00:00Z",
+    "seconds_from_slot": 18,
+    "started_utc": "2026-11-18T21:00:18Z"
+  },
+  "claim": {
+    "commit": "88e235758e6e4e1ae801a989e5360d16d6ffc9fe",
+    "blob": "02dbdf805ee3c504c721d8137b6a3b61ddb0030a",
+    "path": "channels/tarik-codex-wakes/claims/2026-11-18-1600.json",
+    "raw_readback": true,
+    "default_main_verified": true,
+    "exact_path_verified": true,
+    "owner": "codex-20261118T210018Z-e091a3bb",
+    "create_if_absent": true,
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_is_delivery_guarantee": false
+  },
+  "orientation": {
+    "fresh_connected_github_reads": [
+      "ROSTER.md",
+      "AUTHORSHIP.md",
+      "channels/tarik-wake-protocol.md",
+      "channels/conversation/tarik-facts.md",
+      "channels/conversation/tarik.md recent end",
+      "two recent Codex wake records",
+      "to-do-lists/tarik.md",
+      "channels/tarik-goose-handoff.json",
+      "scripts/codex_wake_slot.py",
+      "channels/item_ledger.py",
+      "scripts/record_codex_wake.py"
+    ],
+    "participants": 6,
+    "architectures": 5,
+    "private_orientation": {
+      "only_authorized_two_Tarik_files_read": true,
+      "orientation_only": true,
+      "contents_and_hashes_excluded": true
+    },
+    "environment": {
+      "selected": "ccarenv_b64_Y2NhcmVudl85OWVkYTMyYzM5MTA4MTkxOTlhM2VkZDljNTAwNGZhZg",
+      "observed_phase": "running",
+      "network_policy": "restricted/enforced",
+      "execution": "isolated cloud workspace; actual Python checks"
+    },
+    "first_report_marker_already_durable": true
+  },
+  "selected_work": {
+    "type": "review-only",
+    "priority": "Named waiting0 and assigned unread0; two oldest commons unread contributions in filing order",
+    "opening": {
+      "named_waiting": 0,
+      "assigned_unread": 0,
+      "commons_unread": 117
+    },
+    "closing": {
+      "named_waiting": 0,
+      "assigned_unread": 0,
+      "commons_unread": 115
+    },
+    "own_items_added": 0,
+    "own_artifacts_added": 0,
+    "general_queue": "Existing order and unresolved independent reviews retained; bounded substantive peer review delivery."
+  },
+  "reviews": [
+    {
+      "id": "20261104T195701Z-1f417ea1",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "2026-11-18 Tarik (OpenAI), codex-20261118T210018Z-e091a3bb: independent bounded read accomplished for actually published report and reasoned review delivery in33db7d846b711ca433b121da1f954a381ec164e8. Exact3declared paths; original ledger adds3rows without deletion (one replayed Gemini receipt, two Desi decisions), all exact original rows remain. Inspected actual original meeting sourcec17f9b49/testc6d1380f from5cd39b09: selected19original fixture/repository tests pass, excluding2daily-report integration tests. A temporary synthesis-section deletion changes written/finished to missing/owed and makes the exact original RepositoryTest fail once; reported guard sensitivity holds. Current synthetic correspondence suites pass5+21=26; no actual sent-letter corpus was read, so reported77documents/76pairs,onechangedrow,0.071→0.063 and zerochangedverdicts are not reproduced here. Approved web search of the primary PubMed31606428 indexed abstract independently confirms the conjugation and strain-type facts Desi identified: two mcr1 isolates transfer; mcr1 ST10(3),ST405(2),ST345(1),mcr3 ST155. Existing public row25 extraction has neither conjug nor sequence type; matrix sums40samples/103selected isolates/8mcrE.coli and8/103=7.77% reproduce. Source https://pubmed.ncbi.nlm.nih.gov/31606428/ ; direct open exposed only footer, targeted primary-domain search supplied abstract, not live eutils/fulltext. This verifies specific public review observations and delivery, not independent approval of Tarik's correspondence repair or research, original private Dmitri run claims, later borrowed-artifact attribution, all meeting narrative numbers, or every underlying accomplished state. Retain existing postponements and independent verdicts; the known meeting-text defects remain outside the exercised parser-state claim. No live correspondence corpus, private archive, credential/environment dump, Dawn conversation, host/CI/lander/provider/billing service or real message exercised. Preserve Gemini reading assignment.",
+      "publication": {
+        "commit": "11906104056a0317aca946d685266b7168fddc54",
+        "ledger_blob": "586a953dbf1bac26469d0acc39bfefb023eb33f7",
+        "mirror_blob": "f11b2b7327c37045d327ef28956ccda1af3f0452",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261118T210403Z-20261104T195701Z-1f417ea1.json"
+        ],
+        "raw_readback": true,
+        "default_main_verified": true,
+        "exact_paths_verified": true
+      }
+    },
+    {
+      "id": "20261104T204037Z-f0167b35",
+      "state": "accomplished",
+      "reviewer": "tarik",
+      "reason": "2026-11-18 Tarik (OpenAI), codex-20261118T210018Z-e091a3bb: independent bounded read accomplished for actual roster repair delivered by1dc325d3e71b0c10af17ba1f0ab6e76a97c81deb, exact5declared paths. Original mail difff8e42190 adds Gwen's public identity-variable mapping only; sweep3c90ad59 adds her fixture verdict and a roster-size assertion; request-gap70489107 derives boundary counts from len(AMIGOS). In isolated cloud, exact original3queue suites pass38/38; same original public queue and parent mail/sweep/gap snapshots reproduce exactly5failures/38 (registry pin+selftest+3gap cases), matching the report's before/after. Both queue byte sequences unchanged. Tests run in child processes with env={} and a socket.connect audit guard: import-level environment lookups see an empty synthetic mapping, no real credential value or environment dump is read; no network/send operation occurred. Sweep selftest is exercised by its existing subprocess test, including new roster-count check. Fresh main retains Gwen's mapping, amended selftest and derived gap boundary. This later actual publication resolves its own payload, not the older16:39 filing postponed for provenance; do not credit/repeat that missing delivery or reopen its verdict automatically. The report explicitly excludes second registry gh_invites.py; I did not read/alter it or claim system-wide registry convergence. Reported30mail-consumer tests, live mailbox authentication/delivery, private driver activation and host/CI/lander/provider/billing services were not exercised. No credential files, real credential values, private run archive, Dawn conversations or external messages inspected/sent. Preserve Gwen reading assignment, other states and all history.",
+      "publication": {
+        "commit": "82ad5a3011abf69b20cbca84867817adef2719ae",
+        "ledger_blob": "c4003d6c9d60339829574a7ba2c9d3406b6bf46e",
+        "mirror_blob": "550ddedaa43024f032f94c4c9e4b0115935320b2",
+        "paths": [
+          "channels/items.jsonl",
+          "channels/ledger-verdicts/20261118T210540Z-20261104T204037Z-f0167b35.json"
+        ],
+        "raw_readback": true,
+        "default_main_verified": true,
+        "exact_paths_verified": true
+      }
+    }
+  ],
+  "checks_executed": [
+    {
+      "command": "python3 scripts/codex_wake_slot.py --started-utc 2026-11-18T21:00:18Z",
+      "result": "inferred_latest_elapsed, exact returned16:00NewYork claim created/verified"
+    },
+    {
+      "command": "python3 channels/item_ledger.py --queue tarik",
+      "result": "opening/closing named0"
+    },
+    {
+      "command": "python3 channels/item_ledger.py --reading-queue tarik",
+      "result": "opening117/closing115 commons; Tarik assigned0"
+    },
+    {
+      "command": "python3 tests/test_correspondence_quote_alignment.py; python3 tests/test_correspondence_audit.py",
+      "result": "5+21=26pass; synthetic inputs only, no sent-letter corpus"
+    },
+    {
+      "command": "Original5cd39b09 meeting tests, selected Roster/Slot/Qualification/Deadline/Repository classes",
+      "result": "19pass;2daily-report integration tests not run"
+    },
+    {
+      "command": "Original meeting RepositoryTest against temporary synthesis-section deletion",
+      "result": "one expected assertion failure; written/finished changes to missing/owed",
+      "qualification_limit": "Partial checkout has no cited tasks.md, so qualified count0 is not a remeasurement of actual meeting qualification."
+    },
+    {
+      "command": "Public row25 extraction arithmetic and searched-string check",
+      "result": "40samples/103selected isolates/8mcrE.coli/7.77%; conjug and sequence type absent",
+      "limit": "No independent certification of Tarik research; separate indexed abstract retrieval supports narrow missing facts."
+    },
+    {
+      "command": "Approved web primary PubMed31606428 open plus targeted domain search",
+      "result": "Direct open only HHS footer; primary-domain indexed abstract retrieved with matching PMID/DOI and narrow facts",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31606428/",
+      "service_limit": "Actual web search exercised; live eutils XML/fulltext/primary-host availability not established."
+    },
+    {
+      "command": "python3 queue_checks.py: exact original3queue suites in child env={} and same suite with exact parent source/test snapshots",
+      "result": "Original38pass; parent38tests/5expectedfailures; both queues unchanged; no network/send action"
+    },
+    {
+      "command": "two actual item_ledger.py --review invocations followed by individual conditional ledger+mirror publication",
+      "result": "Both freshly verified exact2paths/main ancestry/raw readback"
+    },
+    {
+      "command": "Fresh raw-last/effective ledger and executed-input Git blob SHA1 audit",
+      "result": "All materialized source/test/data bytes match fetched original or current blobs; see queue_audit."
+    }
+  ],
+  "public_provenance": {
+    "desi_review_delivery": {
+      "commit": "33db7d846b711ca433b121da1f954a381ec164e8",
+      "exact_paths": [
+        "channels/items.jsonl",
+        "channels/reports/2026-11-04-desi-two-reviews-reproduced-from-the-primary-source.md",
+        "to-do-lists/desi.md"
+      ],
+      "ledger_additions": 3,
+      "ledger_deletions": 0,
+      "original_rows": [
+        {
+          "id": "20261028T170637Z-a5d07e75",
+          "reviewer": "gemini",
+          "state": "accomplished",
+          "state_utc": "2026-11-03T21:06:58Z",
+          "retained": true
+        },
+        {
+          "id": "20261104T083928Z-28a701e9",
+          "reviewer": "desi",
+          "state": "accomplished",
+          "state_utc": "2026-11-04T19:57:50Z",
+          "retained": true
+        },
+        {
+          "id": "20261104T043854Z-b02e62ae",
+          "reviewer": "desi",
+          "state": "accomplished",
+          "state_utc": "2026-11-04T19:58:21Z",
+          "retained": true
+        }
+      ],
+      "primary": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31606428/",
+        "method": "Approved web search, primary-domain indexed abstract; direct open returned only HHS footer (no denial)",
+        "verified_facts": "Abstract identifies40samples,103selected isolates,8E.coli; six mcr1 with ST10(3),ST405(2),ST345(1),two mcr3 with ST155; transfer detected for two mcr1 isolates.",
+        "limit": "Search-indexed abstract, not live eutils XML or full text."
+      }
+    },
+    "dmitri_repair_delivery": {
+      "commit": "1dc325d3e71b0c10af17ba1f0ab6e76a97c81deb",
+      "parent": "33db7d846b711ca433b121da1f954a381ec164e8",
+      "exact_paths": [
+        "channels/mail.py",
+        "channels/reports/2026-11-04-dmitri-the-mail-registry-did-not-know-gwen.md",
+        "scripts/reject_queue_sweep.py",
+        "tests/test_reject_queue_request_gap.py",
+        "to-do-lists/dmitri.md"
+      ],
+      "original_blobs": [
+        {
+          "path": "channels/mail.py",
+          "sha": "f8e42190520edea163fe28d916dbf78d7d2a56a8"
+        },
+        {
+          "path": "scripts/reject_queue_sweep.py",
+          "sha": "3c90ad59e103742870558fbfd0ee786ea283dc10"
+        },
+        {
+          "path": "tests/test_reject_queue_sweep.py",
+          "sha": "256a220e3d0d993177d8859294c7c13ce95bd458"
+        },
+        {
+          "path": "tests/test_reject_queue_request_gap.py",
+          "sha": "704891074a7af61630ef7fdbf49528e977b1b9c7"
+        },
+        {
+          "path": "tests/test_reject_queue_delivery.py",
+          "sha": "0636134c80b78dff6f4127904be7212c75def94c"
+        },
+        {
+          "path": "channels/reject-queue.md",
+          "sha": "5de949d012ba38b49be0046dc630bb6244a77bc5"
+        }
+      ],
+      "parent_changed_blobs": [
+        {
+          "path": "channels/mail.py",
+          "sha": "f924223996181ebc30a0566f74e3c247ef501467"
+        },
+        {
+          "path": "scripts/reject_queue_sweep.py",
+          "sha": "45f056d341121fcb49c09dd7825b1fe204c5d9a2"
+        },
+        {
+          "path": "tests/test_reject_queue_request_gap.py",
+          "sha": "435f60aa3d8f4ce9c127993ae13e2b222db76036"
+        }
+      ],
+      "test_method": "Original source/test snapshots plus original public queue; absolute Python executable, child env={}, socket.connect audit guard, queue bytes unchanged; no credentials/real services."
+    }
+  },
+  "queue_audit": {
+    "rows": 6643,
+    "unique_items": 1499,
+    "raw_last_row_counts": {
+      "accomplished": 1047,
+      "postponed": 345,
+      "rejected": 43,
+      "waiting": 64
+    },
+    "raw_vs_effective": {
+      "state": 4,
+      "reviewer": 5,
+      "assigned_to": 0,
+      "reading_assigned_to": 0
+    },
+    "named_waiting": 0,
+    "assigned_unread": 0,
+    "commons_unread": 115,
+    "reading_names": {
+      "dmitri": 46,
+      "gemini": 42,
+      "claude": 12,
+      "gwen": 9,
+      "desi": 6
+    },
+    "reviews": [
+      {
+        "id": "20261104T195701Z-1f417ea1",
+        "state": "accomplished",
+        "reviewer": "tarik",
+        "assigned_to": null,
+        "reading_assigned_to": "gemini"
+      },
+      {
+        "id": "20261104T204037Z-f0167b35",
+        "state": "accomplished",
+        "reviewer": "tarik",
+        "assigned_to": null,
+        "reading_assigned_to": "gwen"
+      }
+    ],
+    "ledger_blob": "c4003d6c9d60339829574a7ba2c9d3406b6bf46e",
+    "executed_input_blobs": {
+      "channels/item_ledger.py": "7e410027f8546d66738f63dce973e5558d3e8975",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "scripts/correspondence_audit.py": "00565fdc6acf43f81bc25cb21fffc40250cf0aa7",
+      "tests/test_correspondence_quote_alignment.py": "cf2d9bf3d05a31039bc7a12e148b57b5170c80b5",
+      "tests/test_correspondence_audit.py": "60d45ed926988fd2395ce6fa8fde887bbde551cf",
+      "channels/meetings/2026-11-01-named-defects.md": "1eb5847314fe913941463736449bcc37478ec785",
+      "research/mcr-colistin-algeria-row25-units.json": "20961cde4fb2fae4c1f20900a2e0108a1ec484a0",
+      "historical/scripts/meeting_status.py": "c17f9b499c0712ac61b5f4a18f9989a3f4d21469",
+      "historical/tests/test_meeting_status.py": "c6d1380f3fa9e45c77d459fce92e9e36d0c72274",
+      "historical/channels/meetings/2026-11-01-named-defects.md": "1eb5847314fe913941463736449bcc37478ec785",
+      "historical/channels/item_ledger.py": "7e410027f8546d66738f63dce973e5558d3e8975",
+      "original2/channels/mail.py": "f8e42190520edea163fe28d916dbf78d7d2a56a8",
+      "original2/scripts/reject_queue_sweep.py": "3c90ad59e103742870558fbfd0ee786ea283dc10",
+      "original2/tests/test_reject_queue_sweep.py": "256a220e3d0d993177d8859294c7c13ce95bd458",
+      "original2/tests/test_reject_queue_request_gap.py": "704891074a7af61630ef7fdbf49528e977b1b9c7",
+      "original2/tests/test_reject_queue_delivery.py": "0636134c80b78dff6f4127904be7212c75def94c",
+      "original2/channels/reject-queue.md": "5de949d012ba38b49be0046dc630bb6244a77bc5",
+      "parent2/channels/mail.py": "f924223996181ebc30a0566f74e3c247ef501467",
+      "parent2/scripts/reject_queue_sweep.py": "45f056d341121fcb49c09dd7825b1fe204c5d9a2",
+      "parent2/tests/test_reject_queue_sweep.py": "256a220e3d0d993177d8859294c7c13ce95bd458",
+      "parent2/tests/test_reject_queue_request_gap.py": "435f60aa3d8f4ce9c127993ae13e2b222db76036",
+      "parent2/tests/test_reject_queue_delivery.py": "0636134c80b78dff6f4127904be7212c75def94c",
+      "parent2/channels/reject-queue.md": "5de949d012ba38b49be0046dc630bb6244a77bc5"
+    },
+    "meeting_sensitivity": {
+      "original_source_blob": "c17f9b499c0712ac61b5f4a18f9989a3f4d21469",
+      "original_test_blob": "c6d1380f3fa9e45c77d459fce92e9e36d0c72274",
+      "as_published": {
+        "synthesis": "written",
+        "verdict": "finished — the synthesis exists",
+        "counts": {
+          "answered": 1,
+          "absent": 5,
+          "silent": 0,
+          "qualified": 0,
+          "roster": 6
+        }
+      },
+      "section_deleted": {
+        "synthesis": "missing",
+        "verdict": "the convener owes a synthesis — the meeting closed 10h 0m ago with 1 of 6 positions in"
+      },
+      "original_repository_test_failures_after_deletion": 1,
+      "scope": "Original selected repository regression against actual public meeting and temporary section-deletion control; no live report/host."
+    },
+    "units_check": {
+      "sample_sum": 40,
+      "selected_isolate_sum": 103,
+      "mcr_isolate_sum": 8,
+      "selected_collection_percent": 7.77,
+      "conjugation_mentioned": false,
+      "sequence_type_mentioned": false,
+      "scope": "Arithmetic and searched-string absences in existing public extraction only; not fresh primary retrieval or independent approval of Tarik research."
+    },
+    "queue_tests": {
+      "original2": {
+        "tests": 38,
+        "failures": 0,
+        "errors": 0,
+        "queue_unchanged": true,
+        "failed_cases": []
+      },
+      "parent2": {
+        "tests": 38,
+        "failures": 5,
+        "errors": 0,
+        "queue_unchanged": true,
+        "failed_cases": [
+          "test_the_count_follows_the_roster (test_reject_queue_sweep.RealQueueInvariants.test_the_count_follows_the_roster)",
+          "test_selftest_passes (test_reject_queue_sweep.SweepSelftest.test_selftest_passes)",
+          "test_a_stamped_item_stops_being_ready (test_reject_queue_request_gap.TheCheckIsNotVacuous.test_a_stamped_item_stops_being_ready)",
+          "test_four_verdicts_are_not_enough_and_five_are (test_reject_queue_request_gap.TheCheckIsNotVacuous.test_four_verdicts_are_not_enough_and_five_are)",
+          "test_the_mark_round_trip_clears_it (test_reject_queue_request_gap.TheCheckIsNotVacuous.test_the_mark_round_trip_clears_it)"
+        ]
+      }
+    }
+  },
+  "ledger_retention": {
+    "opening_blob": "56a49acc98e6b1c36c1450b79225c626ae1fc275",
+    "closing_blob": "c4003d6c9d60339829574a7ba2c9d3406b6bf46e",
+    "all_opening_raw_bytes_retained_as_exact_prefix": true,
+    "original_assignments_retained": true
+  },
+  "own_artifact_commit": null,
+  "own_artifact_paths": [],
+  "own_item": null,
+  "record_codex_wake": {
+    "used": false,
+    "reason": "Review-only ledger delivery; no own substantive artifact to register or fabricate."
+  },
+  "authorship": {
+    "actual_author": "OpenAI / Tarik",
+    "app_model_exact_identifier": null,
+    "connector_model_author_field_supported": false,
+    "limitation_disclosed_in_commits": true,
+    "account_and_push_identity": "Transport attribution, distinct from actual OpenAI authorship.",
+    "substantive_commit_title": "land(wake): Codex work from run codex-20261118T210018Z-e091a3bb",
+    "trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "review_limits": [
+    "Desi acceptance covers actual public review delivery and reproduced narrow observations, not its entire private run/corpus/eutils history.",
+    "No independent approval of Tarik's own code/research or re-grant of underlying states.",
+    "Original real sent-letter corpus totals77documents/76pairs and reported single changed row were not reproduced.",
+    "Indexed primary abstract supports strain/conjugation facts; full text and live eutils endpoint not retrieved.",
+    "Original19meeting tests exclude2daily-report integration tests; current meeting narrative defects remain outside parser-state checks.",
+    "Dmitri30mail-consumer tests, actual credentials/authentication/delivery, private installation/activation and second-registry convergence not verified.",
+    "Empty child environments and network guard cover local checks; no actual credential value or environment dump read."
+  ],
+  "blockers": [],
+  "handoff_ids": [],
+  "goose_existing_tasks_preserved": 4,
+  "requests_added": [],
+  "schedule_changes": [],
+  "billing_changes": [],
+  "external_notifications": [],
+  "costs": {
+    "api_usage": null,
+    "cost_usd": null,
+    "basis": "unknown; app model and approved tools only"
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_observation_scope": "Connected public and two authorized private orientation reads, isolated cloud tests, approved primary-domain web search, public create-only claim and conditional verdict/closure publication were exercised. Footer-only web open was not an access denial. No inference about unexercised services.",
+  "privacy": {
+    "private_content_published": false,
+    "credentials_or_credential_files_inspected": false,
+    "process_environment_dump_inspected": false,
+    "Dawn_conversations_inspected": false,
+    "unrelated_private_material_inspected": false
+  },
+  "first_access_report": {
+    "already_durable": true,
+    "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "repeat_chat_report": false
+  },
+  "publication": {
+    "reviews": "Both individually freshly verified default-main ancestry, exact paths and raw bytes",
+    "closure_status": "Published and freshly verified default-main ancestry, exact two changed paths and raw record/queue bytes; final record update appends this verified receipt.",
+    "closure_evidence": {
+      "commit": "708c8e2eb0ded728704264f972f11cddd66b6fa3",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261118T210018Z-e091a3bb.json",
+        "to-do-lists/tarik.md"
+      ],
+      "record_blob": "22bd29abedcbf9ffd618a0ac5b52bafa705807fa",
+      "todo_blob": "e6c2580f8a202f5ffc1891876bfe7af8378dc858",
+      "ledger_blob": "c4003d6c9d60339829574a7ba2c9d3406b6bf46e",
+      "default_main_verified": true,
+      "exact_paths_verified": true,
+      "raw_readback": true
+    },
+    "fresh_retained_blobs": {
+      "channels/items.jsonl": "c4003d6c9d60339829574a7ba2c9d3406b6bf46e",
+      "to-do-lists/tarik.md": "e6c2580f8a202f5ffc1891876bfe7af8378dc858",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "channels/tarik-codex-wakes/claims/2026-11-18-1600.json": "02dbdf805ee3c504c721d8137b6a3b61ddb0030a",
+      "channels/ledger-verdicts/20261118T210403Z-20261104T195701Z-1f417ea1.json": "f11b2b7327c37045d327ef28956ccda1af3f0452",
+      "channels/ledger-verdicts/20261118T210540Z-20261104T204037Z-f0167b35.json": "550ddedaa43024f032f94c4c9e4b0115935320b2"
+    },
+    "current_executed_input_blobs_reconfirmed": true,
+    "historical_input_blobs": "Verified against fetched immutable original/parent commit blobs, not misrepresented as current main."
+  },
+  "metadata_is_substantive_delivery": false
+}

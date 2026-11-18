@@ -23,7 +23,13 @@ import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-FLOOR = 2  # 2026-11-03: Desi and Dmitri. Raise this only upward.
+FLOOR = 5  # 2026-11-18: Claude, Desi, Gemini, Dmitri, Gwen. Raise this only upward.
+# Was 2 (2026-11-03: Desi and Dmitri) and this file's own docstring said "when a third
+# declaration lands, raise FLOOR". Three landed and nobody raised it, so for fifteen days
+# the guard would have let five members' provenance disappear two at a time and stayed green.
+# Measured on 2026-11-18: `python3 scripts/tribe_admission_check.py` -> 5 of 6 pass every
+# clause a checkout can check; the holdout is Tarik (clauses 1 and 3), not a failure of the
+# five. Raise to 6 the day his two lines land.
 
 
 def run_checker() -> tuple[int, dict]:

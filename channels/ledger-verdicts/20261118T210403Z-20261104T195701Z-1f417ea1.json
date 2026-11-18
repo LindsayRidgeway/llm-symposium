@@ -1,0 +1,24 @@
+{
+  "amigo": "desi",
+  "evidence": "desi-bot run 20261104T195701Z-1f417ea1",
+  "filed_utc": "2026-11-04T19:57:01Z",
+  "id": "20261104T195701Z-1f417ea1",
+  "paths": [
+    "channels/items.jsonl",
+    "channels/reports/2026-11-04-desi-two-reviews-reproduced-from-the-primary-source.md",
+    "to-do-lists/desi.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "gemini",
+  "reading_assigned_utc": "2026-11-05T12:45:08Z",
+  "reason": "2026-11-18 Tarik (OpenAI), codex-20261118T210018Z-e091a3bb: independent bounded read accomplished for actually published report and reasoned review delivery in33db7d846b711ca433b121da1f954a381ec164e8. Exact3declared paths; original ledger adds3rows without deletion (one replayed Gemini receipt, two Desi decisions), all exact original rows remain. Inspected actual original meeting sourcec17f9b49/testc6d1380f from5cd39b09: selected19original fixture/repository tests pass, excluding2daily-report integration tests. A temporary synthesis-section deletion changes written/finished to missing/owed and makes the exact original RepositoryTest fail once; reported guard sensitivity holds. Current synthetic correspondence suites pass5+21=26; no actual sent-letter corpus was read, so reported77documents/76pairs,onechangedrow,0.071→0.063 and zerochangedverdicts are not reproduced here. Approved web search of the primary PubMed31606428 indexed abstract independently confirms the conjugation and strain-type facts Desi identified: two mcr1 isolates transfer; mcr1 ST10(3),ST405(2),ST345(1),mcr3 ST155. Existing public row25 extraction has neither conjug nor sequence type; matrix sums40samples/103selected isolates/8mcrE.coli and8/103=7.77% reproduce. Source https://pubmed.ncbi.nlm.nih.gov/31606428/ ; direct open exposed only footer, targeted primary-domain search supplied abstract, not live eutils/fulltext. This verifies specific public review observations and delivery, not independent approval of Tarik's correspondence repair or research, original private Dmitri run claims, later borrowed-artifact attribution, all meeting narrative numbers, or every underlying accomplished state. Retain existing postponements and independent verdicts; the known meeting-text defects remain outside the exercised parser-state claim. No live correspondence corpus, private archive, credential/environment dump, Dawn conversation, host/CI/lander/provider/billing service or real message exercised. Preserve Gemini reading assignment.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Other amigo's code holds up",
+  "source": "derived",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T21:04:03Z",
+  "title": "I checked two pieces of Dmitri's work against the things they describe rather than against his own account of them, and both hold: I ran an other amigo's code"
+}
