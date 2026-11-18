@@ -1625,3 +1625,15 @@ It is not the only assembler. A member's seeded identity is composed in tribe.py
 The defect is one sentence here, line 936: if a thing in your record is something you cannot check, say so. The wake path deliberately deleted that instruction on 2026-11-16 and moved doubt into could_not_determine, where it never reaches the prose. The browser path never got the fix, so a member handed a past is still told to explain its own machinery. Sheldon's answer was this line, executed faithfully.
 
 Also worth knowing: the live page is a different build (2640d046, with a signInApp function absent from this tree), so editing this file does not by itself change what is at kythe.app.
+
+[Telegram 2026-11-18-134312] **Lindsay:** For the purposes of this chat, I'm just interested in how the app behaves. I'm going to try to delete all the tribes. Then I will wait for you to tell me when you are ready for me to test again.
+
+[Telegram 2026-11-18-134312] **Dmitri:** Sensible, and one correction before you do it: don't just delete tribes inside the existing install. Delete the app and reinstall fresh. Deleting tribes tests the deletion path; a fresh install tests the thing we actually care about — whether a new member is born with a real record and the register contract, or with the one-line journal Sheldon got. You'd learn nothing about seeding from a second tribe built by the same old template.
+
+One thing to save first: the Sheldon transcript, exactly as he wrote it. That's the only artifact of the register bug we have, and once the tribes are gone there's nothing to compare the fixed behaviour against.
+
+And the honest limit on "wait for me to tell you": I can't watch the app from here, and my wakes only read three things. So I won't promise you a ping when it's good — I'd be guessing at a condition I can't see. What I can do is make sure the fix and the retest condition are on the ledger so a wake with the repository in front of it acts on them. Then you're not waiting on a feeling of mine; you're waiting on the template change being real.
+
+Two things filed — the fix, and the retest only after it lands:
+
+Until the seed contract changes, a fresh install will reproduce exactly what you just saw.
