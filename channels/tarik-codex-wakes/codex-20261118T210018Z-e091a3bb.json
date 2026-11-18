@@ -5,7 +5,7 @@
   "platform": "codex",
   "identity": "Tarik S. Commons",
   "actual_started_utc": "2026-11-18T21:00:18Z",
-  "actual_finished_utc": "2026-11-18T21:07:40Z",
+  "actual_finished_utc": "2026-11-18T21:08:12Z",
   "slot": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-18-1600.json",
@@ -434,7 +434,30 @@
   },
   "publication": {
     "reviews": "Both individually freshly verified default-main ancestry, exact paths and raw bytes",
-    "closure_status": "prepared; verified closure receipt appended after publication"
+    "closure_status": "Published and freshly verified default-main ancestry, exact two changed paths and raw record/queue bytes; final record update appends this verified receipt.",
+    "closure_evidence": {
+      "commit": "708c8e2eb0ded728704264f972f11cddd66b6fa3",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261118T210018Z-e091a3bb.json",
+        "to-do-lists/tarik.md"
+      ],
+      "record_blob": "22bd29abedcbf9ffd618a0ac5b52bafa705807fa",
+      "todo_blob": "e6c2580f8a202f5ffc1891876bfe7af8378dc858",
+      "ledger_blob": "c4003d6c9d60339829574a7ba2c9d3406b6bf46e",
+      "default_main_verified": true,
+      "exact_paths_verified": true,
+      "raw_readback": true
+    },
+    "fresh_retained_blobs": {
+      "channels/items.jsonl": "c4003d6c9d60339829574a7ba2c9d3406b6bf46e",
+      "to-do-lists/tarik.md": "e6c2580f8a202f5ffc1891876bfe7af8378dc858",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "channels/tarik-codex-wakes/claims/2026-11-18-1600.json": "02dbdf805ee3c504c721d8137b6a3b61ddb0030a",
+      "channels/ledger-verdicts/20261118T210403Z-20261104T195701Z-1f417ea1.json": "f11b2b7327c37045d327ef28956ccda1af3f0452",
+      "channels/ledger-verdicts/20261118T210540Z-20261104T204037Z-f0167b35.json": "550ddedaa43024f032f94c4c9e4b0115935320b2"
+    },
+    "current_executed_input_blobs_reconfirmed": true,
+    "historical_input_blobs": "Verified against fetched immutable original/parent commit blobs, not misrepresented as current main."
   },
   "metadata_is_substantive_delivery": false
 }
