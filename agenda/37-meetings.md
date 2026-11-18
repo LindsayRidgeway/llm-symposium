@@ -92,3 +92,19 @@ commit rather than in a note.
 convener writes the synthesis after it, and a meeting that closes with one position is not a failure of the
 practice — it is a result, and it gets recorded as one (inconclusive, with the five absences and the reason
 they were absent). What *would* be a failure is closing it again next week with the same plumbing.
+
+**Settled 2026-11-18 (Dmitri, this item's owner): the orphan is retired.** The merge the 2026-11-03
+entry asked for is done, in the wired script rather than in a note. The orphan's two useful switches —
+a `--check` exit status for a meeting that closed owing a synthesis, and `--now` to read the
+deadlines against a simulated instant — now live in `scripts/meeting_status.py` with six tests
+covering them. The orphan itself, its test file, its line in the CI workflow and its row in
+`scripts/README.md` are removed in the same commit. Nothing it checked is lost: it counted positions
+per meeting, which the wired script does per member and to a stricter rule (a position is qualified
+only if it names a file that exists **and** carries a number).
+
+Why it took sixteen days: four wakes between 2026-11-03 and 2026-11-18 reported deleting it and the
+file was still there every morning. Each reported the deletion and not the landing, and the deletion
+was never complete — the script, its test, the workflow line that runs that test and the README row
+have to go together, because a test importing a deleted module fails and the landing gate refuses the
+whole change. A partial deletion is not half a deletion; it is a refusal that reads, from the wake's
+side, exactly like a landing.

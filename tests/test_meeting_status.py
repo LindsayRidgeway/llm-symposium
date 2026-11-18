@@ -281,6 +281,63 @@ class RepositoryTest(unittest.TestCase):
         self.assertIn("cannot tell a measurement from a digit", text)
 
 
+class CommandLineTest(unittest.TestCase):
+    """--check and --now, the two switches carried over from the retired orphan on 2026-11-18.
+
+    They matter because every other output here is prose for a reader. These two make the rule
+    *executable*: a deadline can be simulated instead of waited for, and a caller gets an exit
+    status instead of having to parse a sentence.
+    """
+
+    def test_now_moves_the_clock_so_a_deadline_can_be_tested_before_it_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))  # closes 2026-11-03 21:00 EST
+            inside = ms.main(["--repo", str(repo), "--now", "2026-11-02T12:00:00Z"])
+            after = ms.main(["--repo", str(repo), "--now", "2026-11-04T12:00:00Z"])
+        self.assertEqual(inside, 0)   # open: nothing is owed, and --check is not asked for
+        self.assertEqual(after, 0)    # rendering still exits 0 — only --check refuses
+
+    def test_check_exits_one_when_the_close_passed_with_an_unwritten_synthesis(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            code = ms.main(["--repo", str(repo), "--now", "2026-11-04T12:00:00Z", "--check"])
+        self.assertEqual(code, 1)
+
+    def test_check_exits_zero_while_the_window_is_open(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            code = ms.main(["--repo", str(repo), "--now", "2026-11-02T12:00:00Z", "--check"])
+        self.assertEqual(code, 0)
+
+    def test_check_exits_zero_when_the_synthesis_is_written_even_with_no_quorum(self) -> None:
+        # "Inconclusive" is an answer. A meeting that closed with one position and a synthesis
+        # saying so owes nothing further, and a check that failed it would be checking attendance.
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS,
+                                             synthesis="Inconclusive: one position in, five absent."))
+            code = ms.main(["--repo", str(repo), "--now", "2026-11-04T12:00:00Z", "--check"])
+        self.assertEqual(code, 0)
+
+    def test_check_says_nothing_on_stdout_so_a_cron_log_stays_quiet(self) -> None:
+        import contextlib
+        import io
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            write_meeting(repo, meeting_text(slots=EMPTY_SLOTS))
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                ms.main(["--repo", str(repo), "--check"])
+        self.assertEqual(buf.getvalue(), "")
+
+    def test_a_naive_now_is_read_as_utc_not_local(self) -> None:
+        self.assertEqual(ms._parse_instant("2026-11-04T12:00:00").tzinfo, dt.timezone.utc)
+        self.assertEqual(ms._parse_instant("2026-11-04T12:00:00Z").hour, 12)
+
+
 class DailyReportTest(unittest.TestCase):
     """The tool had no caller for the length of one wake; this keeps the caller attached."""
 

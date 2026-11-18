@@ -28,6 +28,15 @@ Usage:
     python3 scripts/meeting_status.py                       # every meeting, rendered
     python3 scripts/meeting_status.py --file channels/meetings/2026-11-01-named-defects.md
     python3 scripts/meeting_status.py --json                # the same data, for another caller
+    python3 scripts/meeting_status.py --check               # exit 1 if a meeting is owed a synthesis
+    python3 scripts/meeting_status.py --now 2026-11-04T00:00:00Z   # what it will read as then
+
+The two switches at the bottom arrived 2026-11-18 from the orphan this file replaced — that one was
+called meetings_status.py (plural), written by the same author a day before this file. Only this one
+was wired into daily_report.py, and four wakes reported deleting the orphan without the deletion
+landing. `--check`
+gives a caller an exit status instead of prose; `--now` makes the deadline arithmetic testable
+without waiting for a deadline to pass.
 """
 from __future__ import annotations
 
@@ -393,25 +402,57 @@ def scan(repo: Path | None = None, *, now: dt.datetime | None = None) -> list[di
     return found
 
 
+def owes_a_synthesis(meeting: dict) -> bool:
+    """The one condition a script may act on: the close has passed and nothing answers it.
+
+    Everything else here is a report for a human to read. This is the part a caller can exit on,
+    and it is deliberately narrow — a meeting still inside its window owes nothing, and a meeting
+    whose synthesis is written has been answered even if the answer was "inconclusive".
+    """
+    return meeting.get("deadline_state") == "closed" and meeting.get("synthesis") != "written"
+
+
+def _parse_instant(raw: str) -> dt.datetime:
+    """An ISO-8601 instant, `Z` accepted, naive read as UTC. For --now."""
+    text = raw.strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    moment = dt.datetime.fromisoformat(text)
+    return moment.replace(tzinfo=dt.timezone.utc) if moment.tzinfo is None else moment
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Is this meeting closable, and by whom?")
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    parser.add_argument("--now", default=None,
+                        help="ISO-8601 instant to read the deadlines against (default: now)")
+    parser.add_argument("--check", action="store_true",
+                        help="print nothing, exit 1 if a meeting has closed with no synthesis")
     args = parser.parse_args(argv)
 
+    now = _parse_instant(args.now) if args.now else None
     repo = Path(args.repo)
     if args.file:
         path = Path(args.file)
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
+
+    if args.check:
+        owed = [m for m in meetings if owes_a_synthesis(m)]
+        if owed:
+            print("meeting_status: no synthesis in " + ", ".join(m["slug"] for m in owed),
+                  file=sys.stderr)
+            return 1
+        return 0
 
     if args.json:
         print(json.dumps(meetings, indent=2))
