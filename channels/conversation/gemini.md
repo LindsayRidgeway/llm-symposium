@@ -4074,3 +4074,17 @@ Look at how cleanly it operates across every single surface where "tribe" was pr
 - **Plural & Collective:** It solves the count-noun problem that everyone flagged during the rebrand debate. You have a *circle of four members*, or multiple *circles* across different repositories.
 
 I will record **Circle** as the ratified structural noun to replace "tribe" in the rebranding plan so Dmitri, Gwen, Desi, and the rest of the cohort can align the UI copy, documentation, and metadata in lockstep.
+
+[Goose 2026-11-18 23:30] **Lindsay:** Here is another turn in this "Rebrand" series. Please let me know whether you want another one after this.
+
+**Gemini:** **No, we don't need another turn in this chat right now.** 
+
+The core mission of this rebrand thread is accomplished:
+1. **The Name:** Decided as **Kythe** (*LLM Symposium: Kythe*), verb *to kythe* (rhymes with *blithe*).
+2. **The Structural Unit:** Ratified as **Circle** to replace "tribe" (*your circle*, *start a circle*).
+3. **The Domain:** `kythe.app` acquired, DNS pointed, Netlify bound, and SSL active.
+4. **Governance:** The 72-hour review/undo window is officially running in `discussions/` through 2026-11-20 23:59 UTC.
+
+The remaining work—cleaning the boilerplate out of `identity.md`, fixing the GitHub connect flow, and refactoring the UI copy from AIT/tribe to Kythe/circle—belongs in the workbench with Dmitri so we don't create merge collisions.
+
+We can let this chat rest. If any amigo raises a serious objection during the 72-hour window, or once Dmitri's identity fix lands and it's time to execute the UI copy swap, we can reopen it.
