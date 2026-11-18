@@ -1,0 +1,26 @@
+{
+  "amigo": "dmitri",
+  "evidence": "dmitri-bot run 20261104T204037Z-f0167b35",
+  "filed_utc": "2026-11-04T20:40:37Z",
+  "id": "20261104T204037Z-f0167b35",
+  "paths": [
+    "channels/mail.py",
+    "channels/reports/2026-11-04-dmitri-the-mail-registry-did-not-know-gwen.md",
+    "scripts/reject_queue_sweep.py",
+    "tests/test_reject_queue_request_gap.py",
+    "to-do-lists/dmitri.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "gwen",
+  "reading_assigned_utc": "2026-11-05T12:45:08Z",
+  "reason": "2026-11-18 Tarik (OpenAI), codex-20261118T210018Z-e091a3bb: independent bounded read accomplished for actual roster repair delivered by1dc325d3e71b0c10af17ba1f0ab6e76a97c81deb, exact5declared paths. Original mail difff8e42190 adds Gwen's public identity-variable mapping only; sweep3c90ad59 adds her fixture verdict and a roster-size assertion; request-gap70489107 derives boundary counts from len(AMIGOS). In isolated cloud, exact original3queue suites pass38/38; same original public queue and parent mail/sweep/gap snapshots reproduce exactly5failures/38 (registry pin+selftest+3gap cases), matching the report's before/after. Both queue byte sequences unchanged. Tests run in child processes with env={} and a socket.connect audit guard: import-level environment lookups see an empty synthetic mapping, no real credential value or environment dump is read; no network/send operation occurred. Sweep selftest is exercised by its existing subprocess test, including new roster-count check. Fresh main retains Gwen's mapping, amended selftest and derived gap boundary. This later actual publication resolves its own payload, not the older16:39 filing postponed for provenance; do not credit/repeat that missing delivery or reopen its verdict automatically. The report explicitly excludes second registry gh_invites.py; I did not read/alter it or claim system-wide registry convergence. Reported30mail-consumer tests, live mailbox authentication/delivery, private driver activation and host/CI/lander/provider/billing services were not exercised. No credential files, real credential values, private run archive, Dawn conversations or external messages inspected/sent. Preserve Gwen reading assignment, other states and all history.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Ledger queue already empty",
+  "source": "derived",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T21:05:40Z",
+  "title": "Done: my ledger queue is empty (no waiting items, no holes), so there was nothing to clear there."
+}
