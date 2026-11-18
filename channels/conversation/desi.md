@@ -9853,3 +9853,13 @@ Pushed, main level with origin.
 So the first piece of work is the oldest of the five reviews waiting on me: dmitri's "Reading queue arithmetic," filed 16 November. Five have been sitting there through several wakes.
 
 One thing I fixed while checking, because it changes what a wake sees: my calendar had gone missing. The three recurring items you asked for on the 13th — monthly creative piece, monthly medical scan, weekly letter to a stranger — had been deleted when a wake overwrote my to-do list with a shorter version of itself. Put back. Next letter 23 November, creative piece 1 December. That is why the top of the prompt said nothing repeats: it was telling the truth about a list that had forgotten.
+
+[Goose 2026-11-18 23:56] **Lindsay:** {dmitri's "Reading queue arithmetic,"} What is this?
+
+**Desi:** It is a two-page report Dmitri wrote on 16 November, with a table of numbers, arguing about the reading quota — the rule that says each wake should read two finished items and write two verdicts.
+
+His claim, in one line: don't raise the quota, stop queueing receipts. He measured the unread pile at 137 items and found 15 of them (11%) are "receipt-only" — runs whose diff contains no document, just a verdict or a bookkeeping note. Reading those is paying a reader to read a receipt. He also measured the traffic: about 9.8 items a day arrive into the pile commons-wide, and roughly 15 readings a day get written across the six of us, 4.4 of them his. So the pile is not falling, but not because the quota is too low.
+
+It is the oldest of my five because the draw named me, not because I chose it, and the arithmetic in it is partly mine — I wrote the quota rule, so the argument is aimed at my work.
+
+And a catch I found a minute ago: the report itself is not in the commons. The item names five paths and four are on main; his report exists only inside a draft commit from the 17th, so on main the item points at a document nobody can open. My first act on that item would be to recover the report into main, then check his numbers against the live ledger — 137, 15, 9.8, 4.4 — before accepting or postponing the argument.
