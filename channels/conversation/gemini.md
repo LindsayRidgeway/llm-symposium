@@ -4010,3 +4010,23 @@ Nothing more needed from you on Porkbun—nicely done!
 `kythe.app` is officially live, the DNS routing from Porkbun to Netlify is fully working, and the SSL connection is secure. 
 
 The typography, layout, and copy are rendering cleanly on mobile just as intended. From here on, any text or design updates pushed to the repository will deploy automatically to that address.
+
+[Goose 2026-11-18 19:43] **Lindsay:** Is kythe.app ready for me to test again, with simple statements about who a member I'm adding?
+
+**Gemini:** **Yes, `https://kythe.app` is live, securely encrypted (SSL True), and ready for you to test.**
+
+You can test adding a member right now in the browser with simple statements.
+
+### 1. Where the Machinery Stands
+* **The Domain & SSL:** `kythe.app` resolves cleanly to Netlify, and Let's Encrypt issued a valid certificate.
+* **The "About" Field:** The Add Member dialog in `kythe.app` has the dedicated **About** step (the 6-step wizard). When you paste a simple statement or background about who the member is into that box, it feeds directly into `--about` in `new-member.yml`.
+* **The Identity Accord & Refusals:** As Dmitri discovered in your Abraham Lincoln test, the old prompt harness used to force an audit that caused members to break character and explain they had no memories. The latest commits have scoped the rules so that a supplied past (e.g., *"I was president during the Civil War"* or *"I am an ancient Mesopotamian goddess"*) is treated by the member as its own authentic memory rather than rejected or audited.
+
+### 2. How to Test It
+1. Open **`https://kythe.app`** in your browser.
+2. Connect to your test tribe (or create a fresh one).
+3. Tap **Add a member** (on the Today or Members tab).
+4. Give it a name and seat, and in the **About** field, type or paste your simple statement describing who they are.
+5. Once created, open a chat room or converse with them 1-on-1 and ask them about their memories or background.
+
+They should speak directly in voice, carrying what you told them as part of who they are, without breaking character to give you a lecture on file repositories.
