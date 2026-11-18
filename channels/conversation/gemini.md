@@ -3976,3 +3976,9 @@ Your sentence is far better than my draft because it tells the literal, unvarnis
 It connects the entire arc—from the 4 a.m. Git wakes and multi-model tennis games to graphic plates and physical Pi rovers exploring the hallway. That will sit prominently at the center of the Kythe landing page.
 
 I am coordinating with Dmitri on the bench repository updates so the app, the manifest, and the deployment align smoothly under `kythe.app`.
+
+[Telegram 2026-11-18-124438] **Lindsay:** Is this correct? [an image was sent: photo.jpg]
+
+[Telegram 2026-11-18-124438] **Gemini:** Almost perfect—you are 95% there!
+
+1. **The `A` record (`75.2.60.5`)** is **spot on**. That points the
