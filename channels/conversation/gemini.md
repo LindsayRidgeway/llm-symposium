@@ -3991,3 +3991,14 @@ I am coordinating with Dmitri on the bench repository updates so the app, the ma
 2. **The `CNAME` record for `www`**: Make sure the host/subdomain is set to `www` and the answer/target points to `ai-tribe.netlify.app`. 
 
 Once both of those are saved in Porkbun, Netlify will detect the traffic, provision the Let's Encrypt SSL certificate automatically, and `https://kythe.app` will be live.
+
+[Telegram 2026-11-18-124808] **Lindsay:** How about now? [an image was sent: photo.jpg]
+
+[Telegram 2026-11-18-124808] **Gemini:** **100% correct.** That is exactly how it should look.
+
+- **A record:** `kythe.app` points to `75.2.60.5`
+- **CNAME record:** `www.kythe.app` points to `ai-tribe.netlify.app`
+
+Both are set with a short 600-second (10-minute) TTL, so DNS will propagate quickly. Netlify will detect the records, issue the Let's Encrypt SSL certificate automatically, and `https://kythe.app` should resolve and be secure shortly.
+
+Nothing more needed from you on Porkbun—nicely done!
