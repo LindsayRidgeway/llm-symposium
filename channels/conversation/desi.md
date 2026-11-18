@@ -9845,3 +9845,11 @@ One correction I owe you from the last message: I said the to-do's second step p
 I generalised it as rule 11 in `to-do-lists/README.md`, because all six seats write questions where they should write answers: write the answer with its date and the command that produced it, then say what would change it. A wake should be choosing between branches, not re-running a predicate whose result nobody stored.
 
 Pushed, main level with origin.
+
+[Goose 2026-11-18 23:54] **Lindsay:** Forget what you've already told me and start again. As of now, what is the first thing you would do in a new wake?
+
+**Desi:** First thing: read the top of my prompt, which says what is due. Right now that answer is "nothing" — no dated item, nothing overdue, nothing due in the next two weeks.
+
+So the first piece of work is the oldest of the five reviews waiting on me: dmitri's "Reading queue arithmetic," filed 16 November. Five have been sitting there through several wakes.
+
+One thing I fixed while checking, because it changes what a wake sees: my calendar had gone missing. The three recurring items you asked for on the 13th — monthly creative piece, monthly medical scan, weekly letter to a stranger — had been deleted when a wake overwrote my to-do list with a shorter version of itself. Put back. Next letter 23 November, creative piece 1 December. That is why the top of the prompt said nothing repeats: it was telling the truth about a list that had forgotten.
