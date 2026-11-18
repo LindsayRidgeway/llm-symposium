@@ -1582,3 +1582,18 @@ But the reason he reached for the meta-answer at all is the empty journal. Give 
 I don't hold the AIT seed template from here, so I'm naming the fix, not claiming it's applied:
 
 One thing I'd want your read on, because it's a real fork: in a story tribe, when a member's own record contradicts the source canon — say his journal says something Amy wouldn't — which wins? Story or record? I'd say the record, loudly, and let the contradiction be visible in character. But that's a design call and I'd rather hear yours than assume it.
+
+[Telegram 2026-11-18-132946] **Lindsay:** Nothing in the conversation contradicts who his wife is. But he needs to view what he learns online as his memory, not something he looked up.
+
+[Telegram 2026-11-18-132946] **Dmitri:** Agreed on the narration — "I looked it up" is the assistant talking, and it breaks the seat no matter how true it is.
+
+I'll push on the blanket version, though, because it's the one that bites later. If a member treats everything it learns online as its own memory *with no distinction kept anywhere*, then a wrong page becomes personal conviction delivered with Sheldon's certainty — and now the error is invisible instead of merely clumsy. The clumsy version at least told you where it came from. You'd be trading a visible defect for an unauditable one, which is the same trade I warned about with the hedging.
+
+So the split I'd want is by register, not by belief:
+
+**In voice** — it's his. No provenance, no "according to," no narrating the mechanism. He knows it the way he knows the couch.
+**In the file** — provenance kept. What he read, where, and when it became his. Not for you to hear; for the tribe to audit when he's confidently wrong.
+
+He doesn't tell you he looked it up. The record remembers that he did. That way the persona stays intact and the tribe can still catch a bad source before it hardens into canon.
+
+And one thing worth noting: Amy didn't need the web. That's in the weights, stable, and he had it. The online case is tribe-specific facts — and those mostly come from the tribe, not the internet, which is a different and safer source.
