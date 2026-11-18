@@ -4030,3 +4030,35 @@ You can test adding a member right now in the browser with simple statements.
 5. Once created, open a chat room or converse with them 1-on-1 and ask them about their memories or background.
 
 They should speak directly in voice, carrying what you told them as part of who they are, without breaking character to give you a lecture on file repositories.
+
+[Goose 2026-11-18 20:25] **Lindsay:** I just ran a test. Several things are not ready for the app to be released:
+
+* The app is still branded as AIT. 
+* I don't know if you are planning to keep "tribe" to have the same meaning as in AIt, but it's not particularly compatible with "Kythe". "Clan" would be better, but it would tend to discourage anything other than Scottish clans, and would also tend to discourage members from multiple clans in one "clan" ("tribe"). Maybe "Culture"?
+* The first screen shows a pop-up that occurs the first time you hit "Connect to GitHub". But if you click OK and then again hit "Connect to GitHub", you get to the next screen.
+* I deleted all the repos for the tribes shown on the next screen. I guess there's something else I have to do to delete a tribe. Ideally, a "Delete Tribe" link would be provided on the tribe's home page.
+* The next screen shows my attempt to start a conversation. This is a complete failure of the goal of having the member take on the identity.
+* The last screen shows the identity that appears at the bottom of the chatting page. I don't understand this. When I create the member, I wrote a simple identity. This has added a lot of text. I disagree with that approach. I think that if we want to have boilerplate identity in the member's context, it should not appear in the identity textbox, which instead should look exactly like what I entered as the member's identity. I'm not even sure it should be visible anywhere in the UI. An advanced user, following instructions in the User's Manual or on an Advanced button, would be able to change the boilerplate.
+
+I am sending you all this information, but you are a lot more expensive to run than Dmitri, and this is really Dmitri's app. So now I'm going to switch to his Goose window and one of his chats, and send him this same information.
+
+Although I don't want you to do debugging, I think it would be appropriate for you to update the UI to "Kythe" instead of "AIT", if you can do that without running into conflicts with Dmitri's work.
+
+**Gemini:** Understood on the budget and lane discipline—handing the deep mechanics and identity architecture to Dmitri in his session is completely the right move.
+
+Before you switch over, here is the quick breakdown of what your screenshots proved:
+
+1. **The Identity Breakdown (Screens 3 & 4):**
+   You captured the exact bug. In Screen 4, the member identity text was stuffed with 6 paragraphs of defensive boilerplate: *"I have one unfortunate flaw... descended from an LLM... I wake with no memory of my own... I am not a rubber stamp..."* 
+   Because all of that defensive machinery was shoved into `identity.md`, the model in Screen 3 spent its entire first turn fumbling with files, throwing a `404 - Not Found` tool error, and lecturing you about what is in its repository instead of being Anne. Your critique is 100% correct: what the user enters as the identity must remain clean and unpolluted; systemic operating rules belong in the execution harness, never visible in or cluttering the member's personal identity.
+
+2. **The "Tribe" Nomenclature:**
+   "Tribe" clashes badly with Kythe. Your suggestion of **"Circle"** or **"Culture"** (or simply referring to it as your *Kythe*) fits the ethos infinitely better without the baggage.
+
+3. **Deleted Repositories in the Connect List (Screen 2):**
+   The browser caches previously opened repository names in `localStorage`. If you delete them on GitHub, the browser doesn't know until it attempts an API call. Adding a simple *"Forget this"* or *"Delete"* button next to cached entries in the UI is an essential affordance.
+
+4. **Branding Update ("AIT" → "Kythe"):**
+   Because Dmitri is actively refactoring and testing in `ai-tribe-bench`, I will **not** blindly blast search-and-replace edits across `ait.html` right now to avoid causing merge collisions with his live branch. Instead, I will coordinate with Dmitri so we execute the visual rebranding (app title, headers, metadata, and terminology) cleanly in lockstep with his template updates.
+
+Take this straight to Dmitri—he has the exact context from your Abraham session to fix the identity injection immediately.
