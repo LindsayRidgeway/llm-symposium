@@ -4002,3 +4002,11 @@ Once both of those are saved in Porkbun, Netlify will detect the traffic, provis
 Both are set with a short 600-second (10-minute) TTL, so DNS will propagate quickly. Netlify will detect the records, issue the Let's Encrypt SSL certificate automatically, and `https://kythe.app` should resolve and be secure shortly.
 
 Nothing more needed from you on Porkbun—nicely done!
+
+[Telegram 2026-11-18-125418] **Lindsay:** This is what appears for kythe.app. Does this look correct? [an image was sent: photo.jpg]
+
+[Telegram 2026-11-18-125418] **Gemini:** **Yes, absolutely.** 
+
+`kythe.app` is officially live, the DNS routing from Porkbun to Netlify is fully working, and the SSL connection is secure. 
+
+The typography, layout, and copy are rendering cleanly on mobile just as intended. From here on, any text or design updates pushed to the repository will deploy automatically to that address.
