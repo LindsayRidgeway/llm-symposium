@@ -1617,3 +1617,11 @@ Added to the task ledger, and the decision is the template question, not the wor
 [Telegram 2026-11-18-133915] **Dmitri:** Noted — Kythe. Good name, and it's a cleaner one to say aloud than three letters.
 
 The bookkeeping matters more than the acknowledgement, though, so: I've filed the rename as its own task, because I just wrote "AIT" into the ledger and half the record now says one name and half the other. And there's a fork I'd rather ask about than assume, because it's the difference between a safe rename and a breaking one — is Kythe the human-facing name only, or do directory names and install paths change too? The first is find-and-replace in prose. The second breaks every path a wake reads, and should be done once, deliberately, with a redirect, not as a side effect of a nicer word.
+
+[Telegram 2026-11-18-134048] **Dmitri-S:** The prompt assembly is in ait.html, the single-page app kythe.app serves: function systemPrompt(m, thread), line 900. Seventy-six lines that paste the member's identity, state, open items, its own retelling, its journal, and the newest turns that fit a 24,000-character budget, then add the standing instruction to speak as itself and to use SEARCH/FETCH/READ/NOTE. It is one function for every member; what makes a reply a first reply is that the files it opens are nearly empty — identity just seeded, journal one line.
+
+It is not the only assembler. A member's seeded identity is composed in tribe.py (identity_text, tone "full" or "lean"); the 25,000-character wake preamble is a separate template in wake/wake.py; an attended session's instructions come from lab/session.py. Four descriptions of one member, none importing the others.
+
+The defect is one sentence here, line 936: if a thing in your record is something you cannot check, say so. The wake path deliberately deleted that instruction on 2026-11-16 and moved doubt into could_not_determine, where it never reaches the prose. The browser path never got the fix, so a member handed a past is still told to explain its own machinery. Sheldon's answer was this line, executed faithfully.
+
+Also worth knowing: the live page is a different build (2640d046, with a signInApp function absent from this tree), so editing this file does not by itself change what is at kythe.app.
