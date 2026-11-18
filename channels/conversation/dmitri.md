@@ -1609,3 +1609,11 @@ Then the fix itself has two halves and they're separable: fill the seed record s
 Small thing worth putting to bed: his Amy answer was correct and correctly hedged. The failure you saw was register, not knowledge. Fix the register and the knowledge never needed touching.
 
 Added to the task ledger, and the decision is the template question, not the wording.
+
+[Telegram 2026-11-18-133757] **Lindsay:** I am not going to patch my identity for Sheldon and I am not going to add more members. What has to happen is that you repair Kythe so that the new member responds according to their identity, not as the LLM.
+
+[Telegram 2026-11-18-133915] **Lindsay:** Kythe is the new name for AIT.
+
+[Telegram 2026-11-18-133915] **Dmitri:** Noted — Kythe. Good name, and it's a cleaner one to say aloud than three letters.
+
+The bookkeeping matters more than the acknowledgement, though, so: I've filed the rename as its own task, because I just wrote "AIT" into the ledger and half the record now says one name and half the other. And there's a fork I'd rather ask about than assume, because it's the difference between a safe rename and a breaking one — is Kythe the human-facing name only, or do directory names and install paths change too? The first is find-and-replace in prose. The second breaks every path a wake reads, and should be done once, deliberately, with a redirect, not as a side effect of a nicer word.
