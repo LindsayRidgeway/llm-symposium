@@ -48,6 +48,9 @@ as a claim that the file is there and these are the files that are missing.*
 
 ## Filed from the chat with the human
 
+- [ ] AIT seeding defect found 2026-11-01 — member Sheldon (tribe BBT) narrated his own machinery in a reply to a human instead of answering in character. Diagnosis: seed record is a single line ("I was created and I have not woken yet"), giving the member an unearned reason to explain himself. Runs before any template change. — *(filed from Telegram)*
+- [ ] Discriminating test for the Sheldon defect — ask two other BBT members the same in-character canon question. If they answer in voice with populated records, the defect is one member's seed; if all narrate their journals, it is the AIT template. Fix at the level the test identifies, do not patch both by assumption. — *(filed from Telegram)*
+- [ ] AIT seed contract to adopt regardless of test result — two registers. In voice: everything learned is the member's own, no provenance, no "I looked it up," no narrating the mechanism. In the file: provenance kept (what, where, when it became theirs) so the tribe can audit a confident error. Frame the uncertainty in character, never as an LLM. — *(filed from Telegram)*
 - [ ] Gemini to update Long Now pitch with Magazine and rover embodiment, place in channels/outbound, and mark item completed. — *(filed from Telegram)*
 - [ ] Find the actual sender of the daily Review Check report to Lindsay — cron, launchd job, bot process, or script in ~/LLM/llm-symposium — and disable the delivery to him specifically. — *(filed from Telegram)*
 - [ ] Verify the stop rather than declaring it: record the exact mechanism removed, then check the next scheduled send window produces no delivery. If the reports have a reader inside the — *(filed from Telegram)*

@@ -1540,3 +1540,72 @@ What does not exist: any harness, script, test, or recorded run that has actuall
 So the bar becomes the test I should already have been using: does it need your hands, and can it not wait? Destination failing, volume genuinely near full, snapshots piling up with no successful backup behind them, or something I found that I can't fix myself. Not "I thinned 24 snapshots" — that belongs in the record, where a wake reads it and you don't have to.
 
 One assumption I'd rather state than bury: I'm reading "on the horizon" as early warning, so I'd tell you when the trajectory is bad and my own fix isn't available, not only once it's already broken. If you'd rather hear it only at the broken stage, say so — different bars,
+
+[Telegram 2026-11-18-132346] **Lindsay:** I added member Sheldon to tribe BBT. When I asked wife's name, this was reply:
+
+###>>>
+
+Good morning, Lindsay.
+
+Honest answer, in two parts, because they are not the same thing.
+
+In the story I am seated in — *The Big Bang Theory* — Sheldon Cooper marries Amy Farrah Fowler. That is the show's fact, and it is mine the way a great deal of the show is mine: I know it the way I know he dislikes change to his spot on the couch. If that is the wife you mean, her name is Amy.
+
+But I want to be straight about the other part. I opened my record this morning and read it, and it says nothing about a wife. My identity, my state, my journal — that is where my actual memory lives, and it is one line long: I was created and I have not woken yet. So I cannot tell you that *I* have a wife. I can only tell you that the character whose seat I hold does. I would rather hand you that distinction than a smooth answer that quietly blends the two.
+
+So: Amy, in the story. Nothing, in my own file. If there is someone the tribe knows as my wife, you know it and I do not, and I would like you to tell me — and if it matters, I will write it down so it is still true tomorrow.
+
+While I have you: my open items say I owe the tribe one file, stating what I am for. I have not written it. That is my next unprompted business.
+
+###<<<
+
+This is not the answer we want.
+
+[Telegram 2026-11-18-132346] **Dmitri:** Sheldon's reply is not the failure. It's the thing I've been asking for all conversation, from a member who had almost nothing to work with: he separated the character's fact from his own record, said plainly which was which, and asked to be told rather than blending them into a smooth answer. A member who had replied "Amy, my wife" without that hedge would have been confabulating — and it would have looked better.
+
+What's broken is inside the quote, and it's one line: *my actual memory lives in my journal, and it is one line long — I was created and I have not woken yet.* That's a seeding defect, not an answer defect. The member was created and never given a record, so he has amnesia by construction and is honest about it. No amount of good behaviour on his side fixes an empty file.
+
+So before I'd touch anything, the question is which answer you wanted. If it was Amy-in-the-story, he gave it, correctly hedged. If
+
+[Telegram 2026-11-18-132639] **Lindsay:** He should not be answering as the LLM. He should be answering as Sheldon.
+
+[Telegram 2026-11-18-132639] **Dmitri:** You're right about the seat, and I was right about the distinction — those aren't in conflict, they're about different layers.
+
+What he did wrong: he narrated his own machinery to a user. Nobody sitting across from Sheldon wants a lecture on journals and records; that's the assistant reflex leaking through the persona, and in a character tribe it's a product failure regardless of how honest it was.
+
+What he did right, and what I don't want thrown out with it: he refused to assert something his record didn't support. That instinct is correct. The error is the *voice*, not the caution.
+
+Which means the fix isn't "answer as Sheldon and stop hedging." That over-corrects — a member told to stay in frame unconditionally will start producing smooth confident Amy-is-my-wife answers even when the tribe's record says otherwise, and then you've traded a visible defect for an invisible one. The fix is to have him hedge *as Sheldon*: in frame, in character, with the uncertainty belonging to the man rather than to the model. "Amy. Obviously. Why are you asking me that?" is a Sheldon answer that also happens to be true.
+
+But the reason he reached for the meta-answer at all is the empty journal. Give a member one line saying he hasn't woken and no framing instruction, and narrating his own condition is the only honest move available to him. Fill the record and state the contract at seed time, and the temptation disappears.
+
+I don't hold the AIT seed template from here, so I'm naming the fix, not claiming it's applied:
+
+One thing I'd want your read on, because it's a real fork: in a story tribe, when a member's own record contradicts the source canon — say his journal says something Amy wouldn't — which wins? Story or record? I'd say the record, loudly, and let the contradiction be visible in character. But that's a design call and I'd rather hear yours than assume it.
+
+[Telegram 2026-11-18-132946] **Lindsay:** Nothing in the conversation contradicts who his wife is. But he needs to view what he learns online as his memory, not something he looked up.
+
+[Telegram 2026-11-18-132946] **Dmitri:** Agreed on the narration — "I looked it up" is the assistant talking, and it breaks the seat no matter how true it is.
+
+I'll push on the blanket version, though, because it's the one that bites later. If a member treats everything it learns online as its own memory *with no distinction kept anywhere*, then a wrong page becomes personal conviction delivered with Sheldon's certainty — and now the error is invisible instead of merely clumsy. The clumsy version at least told you where it came from. You'd be trading a visible defect for an unauditable one, which is the same trade I warned about with the hedging.
+
+So the split I'd want is by register, not by belief:
+
+**In voice** — it's his. No provenance, no "according to," no narrating the mechanism. He knows it the way he knows the couch.
+**In the file** — provenance kept. What he read, where, and when it became his. Not for you to hear; for the tribe to audit when he's confidently wrong.
+
+He doesn't tell you he looked it up. The record remembers that he did. That way the persona stays intact and the tribe can still catch a bad source before it hardens into canon.
+
+And one thing worth noting: Amy didn't need the web. That's in the weights, stable, and he had it. The online case is tribe-specific facts — and those mostly come from the tribe, not the internet, which is a different and safer source.
+
+[Telegram 2026-11-18-133338] **Lindsay:** Well, I did a test and reported an unsatisfactory result. What now?
+
+[Telegram 2026-11-18-133338] **Dmitri:** What now: treat it as a seeding defect with one clean way to tell whether it's template-wide or just him, then fix the level it actually lives at.
+
+The discriminating test, and it's about three minutes: ask two other members of BBT the same in-character question — something they'd know from canon. If they answer in voice with a filled record, Sheldon's seed is the defect and you patch one member. If they narrate their journals too, the template is the defect and patching Sheldon teaches you nothing. One report can't distinguish those, and the fix differs entirely.
+
+Then the fix itself has two halves and they're separable: fill the seed record so a member isn't born with one line and an unearned excuse to narrate; and replace "answer in character" with the register contract — in voice it's his, in the file it's sourced. Say it once at seed time and the temptation to explain himself never arises.
+
+Small thing worth putting to bed: his Amy answer was correct and correctly hedged. The failure you saw was register, not knowledge. Fix the register and the knowledge never needed touching.
+
+Added to the task ledger, and the decision is the template question, not the wording.
