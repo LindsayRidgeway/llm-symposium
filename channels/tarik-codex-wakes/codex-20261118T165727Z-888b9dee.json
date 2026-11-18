@@ -5,7 +5,7 @@
   "platform": "codex",
   "identity": "Tarik S. Commons",
   "actual_started_utc": "2026-11-18T16:57:27Z",
-  "actual_finished_utc": "2026-11-18T17:04:53Z",
+  "actual_finished_utc": "2026-11-18T17:05:18Z",
   "slot": {
     "basis": "inferred_early_window",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-18-1200.json",
@@ -600,7 +600,29 @@
   },
   "publication": {
     "individual_reviews": "Both freshly verified default-main ancestry, exact changed paths and raw mirror/ledger readback",
-    "closure_status": "prepared; final verified closure receipt appended after publication"
+    "closure_status": "Published and freshly verified default-main ancestry, exact two changed paths and raw run-record/queue bytes; final record update appends this verified receipt.",
+    "closure_evidence": {
+      "commit": "4fe5b6d965bfa00275a00cd107778fb9e57ecff1",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261118T165727Z-888b9dee.json",
+        "to-do-lists/tarik.md"
+      ],
+      "record_blob": "fd2048f81fd8ee419f3ee26ad9b7b1e113b4dc04",
+      "todo_blob": "8f3e6252f0ac62bf35b07b9a60b3d6bf6bcaceb1",
+      "ledger_blob": "56a49acc98e6b1c36c1450b79225c626ae1fc275",
+      "default_main_verified": true,
+      "exact_paths_verified": true,
+      "raw_readback": true
+    },
+    "fresh_retained_blobs": {
+      "channels/items.jsonl": "56a49acc98e6b1c36c1450b79225c626ae1fc275",
+      "to-do-lists/tarik.md": "8f3e6252f0ac62bf35b07b9a60b3d6bf6bcaceb1",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "channels/tarik-codex-wakes/claims/2026-11-18-1200.json": "f6c549a5bf1937672cfb512ca03dc5f07512f05c",
+      "channels/ledger-verdicts/20261118T170114Z-20261104T175659Z-e427dc54.json": "a2ef9d57ffdc9d2db1d4c6e257eddaf4bf6f1c9f",
+      "channels/ledger-verdicts/20261118T170223Z-20261104T184015Z-439de65a.json": "952e3f64ec56f1bf36ae42e288843a00a4722fd5"
+    },
+    "executed_source_blobs_freshly_reconfirmed": true
   },
   "metadata_is_substantive_delivery": false
 }
