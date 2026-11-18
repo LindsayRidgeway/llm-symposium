@@ -79,3 +79,43 @@ class AskTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OrientationWiring(unittest.TestCase):
+    """The block has to arrive through the call a wake actually makes, not only when called by hand.
+
+    Written 2026-11-18 after the founder asked what a wake sees first. `human_block(repo, amigo=...)`
+    passed a name that does not exist in `orientation()`, so every wake since 2026-11-14 was told
+    "unavailable this run (NameError: name 'amigo' is not defined)" instead of being shown the open
+    questions — a block that fails loudly in a place nobody reads is still a block nobody reads. The
+    direct-call test above passed the whole time it was broken.
+    """
+
+    def setUp(self):
+        import json
+        import tempfile
+        self.dir = tempfile.TemporaryDirectory()
+        self.repo = Path(self.dir.name)
+        (self.repo / "channels").mkdir()
+        (self.repo / "to-do-lists").mkdir()
+        (self.repo / "to-do-lists" / "desi.md").write_text("# To-do — desi\n", encoding="utf-8")
+        (self.repo / "channels" / "human-blockers.jsonl").write_text(json.dumps({
+            "id": "x", "at": "2026-11-16T00:00:00Z", "amigo": "desi",
+            "ask": "Which address should the colistin letter go to?",
+            "why_human": "no verified address exists", "status": "open"}) + "\n", encoding="utf-8")
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def test_orientation_shows_the_open_question_and_does_not_say_unavailable(self):
+        spec = importlib.util.spec_from_file_location("we_or", REPO / "channels" / "wake_engine.py")
+        we = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(we)
+        old = we.AMIGO
+        we.AMIGO = "desi"
+        try:
+            text = we.orientation(str(self.repo), str(self.repo / "state"))
+        finally:
+            we.AMIGO = old
+        self.assertIn("Which address should the colistin letter go to?", text)
+        self.assertNotIn("NameError", text)

@@ -589,7 +589,7 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
         lines.append('=== WHAT IS DUE ===\nunavailable this run (%s: %s); '
                      'run `python3 scripts/todo_due.py` by hand.' % (type(exc).__name__, exc))
     try:
-        waiting = human_block(repo, amigo=amigo)
+        waiting = human_block(repo, amigo=AMIGO)
         if waiting:
             lines.append(waiting)
     except Exception as exc:                      # a broken block must not lose the whole wake
