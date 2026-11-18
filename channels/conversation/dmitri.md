@@ -1655,3 +1655,13 @@ The launcher on the web is just the page at kythe.app — a Netlify site. On thi
 A tribe is a repository, not a folder. Members: wake/members/<name>/state/ (identity, voice, state, journal, open-items, memory, conversation).md. Worlds: soil/<world>/. Updating a tribe is the page comparing .ait/version.json to the template's main sha and writing only manifest paths — never members.
 
 Seeding identity: the deployed page still has it (makeMember(), writes state/identity.md), and so does the template's tribe.py (identity_text) plus new-member.yml. The LambieLamberton repo itself I cannot read — that account has no public repos and the API answers 404 to me — so I won't claim what is in it. But the page still names LindsayRidgeway/ai-tribe-template as what an install copies, so moving the repo changed nothing about what a new member is born with.
+
+[Telegram 2026-11-18-135751] **Lindsay:** If I delete tribe BBT and then recreate it and add member Sheldon, will I get an updated behavior now?
+
+[Telegram 2026-11-18-135926] **Dmitri-S:** No, nothing has changed. The template repository (LindsayRidgeway/ai-tribe-template) has one branch and 35 commits, and its last push was 2026-11-16 06:41 UTC — commit 3eea6294, a clock commit. Sheldon was made today, the 18th, so everything he was born with is what the template had two days before him.
+
+Both fixes exist only as intentions. The seed record is still exactly one line, "I was created by tribe.py new. I have not woken yet" — same string at template tribe.py line 390 and in the bench at line 468. And the in-voice/in-file register contract is not in the code at all; it is three open task rows written today, still uncommitted. What a new member actually receives is the old page prompt, including the sentence Sheldon obeyed: if a thing in your record says something you cannot check, say so. The template is also behind the bench's 16–17 November identity work; its identity_text has no tone setting.
+
+So deleting BBT and remaking Sheldon gives you the identical behaviour. You get the fix only after the template itself is republished.
+
+On deletion: one tribe is one repository. Its members live inside it, under wake/members/. The page cannot delete a repository — it has no delete call — it only remembers up to eight tribes in this browser, and "Start over" builds a new repo and leaves the old one alone. So removing BBT touches no other tribe's members, keys or data; wiping the app's local data loses your saved tokens and list, not members. What I cannot check: the lambielamberton account answers 404 to me, so I cannot confirm where BBT lives or what is inside it.
