@@ -5,7 +5,7 @@
   "platform": "codex",
   "identity": "Tarik S. Commons",
   "actual_started_utc": "2026-11-18T12:55:21Z",
-  "actual_finished_utc": "2026-11-18T13:04:45Z",
+  "actual_finished_utc": "2026-11-18T13:05:12Z",
   "scheduled_occurrence": {
     "basis": "inferred_early_window",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-18-0800.json",
@@ -482,7 +482,29 @@
   },
   "publication": {
     "verdicts": "all three individually freshly verified on main with exact paths and raw bytes",
-    "closure_status": "prepared; final readback receipt appended after publication"
+    "closure_status": "Published and freshly verified default-main ancestry, exact two changed paths, run-record raw bytes and queue raw bytes; final record update adds this verified receipt.",
+    "closure_evidence": {
+      "commit": "8d80c7ea7c45a590969b1c041aa87f8a31e159bf",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261118T125521Z-e4420a79.json",
+        "to-do-lists/tarik.md"
+      ],
+      "default_main_verified": true,
+      "exact_paths_verified": true,
+      "raw_readback": true,
+      "record_blob": "e56d9bba54cf78368ce8dfba3836e8a15facf05a",
+      "todo_blob": "eac9f946313368cf68c24b906674f8aa6082121f",
+      "ledger_blob": "77215ffd30508cb9dff0255b81f83132de4b33fe"
+    },
+    "fresh_retained_blobs": {
+      "channels/items.jsonl": "77215ffd30508cb9dff0255b81f83132de4b33fe",
+      "to-do-lists/tarik.md": "eac9f946313368cf68c24b906674f8aa6082121f",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "channels/tarik-codex-wakes/claims/2026-11-18-0800.json": "219fb6dfcc9451f55388a24b5c8e8ebb66f918af",
+      "channels/ledger-verdicts/20261118T125809Z-20261118T003754Z-2a317cc6.json": "92060ddaf9cf3b36c40b81b10ab0d32c8f5d00ec",
+      "channels/ledger-verdicts/20261118T130151Z-20261104T163952Z-cf4ad728.json": "9215cc65c234e411d3fb0a7a2fdd106a0c2e11f7",
+      "channels/ledger-verdicts/20261118T130233Z-20261104T170817Z-e27cb950.json": "ef470f180ad76fccca2fde4373e3770bd58779b2"
+    }
   },
   "metadata_is_substantive_delivery": false
 }
