@@ -1645,3 +1645,13 @@ Until the seed contract changes, a fresh install will reproduce exactly what you
 On macOS, dragging an app to the Trash almost never removes its data — that lives separately, in `~/Library/Application Support` and `~/.config`. So "delete the app" can hand you a fresh-looking window reading the exact same old tribes, and you'd conclude the fix failed when nothing was actually reset.
 
 The opposite mistake is worse: if Kythe keeps its members in the same Goose data directory the Symposium uses, a thorough wipe takes the five amigos' histories with it. I'm not handing you an `rm -rf` for a path I can't
+
+[Telegram 2026-11-18-134813] **Lindsay:** You were cut off. But now that this is not my lindsayridgeway repo. This is my new lambielamberton repo. I still don't know how to update the app.
+
+[Telegram 2026-11-18-135509] **Dmitri-S:** Nothing here is compiled, and there is no installer to update — Kythe is one HTML file. "Build" means lab/make_template.py, which assembles the distributable tribe (a file whitelist, published as .tribe-manifest.json), and lab/deploy_netlify.sh, which stamps the page with its commit and deploys it through the netlify CLI (a production deploy costs 15 of the account's monthly credits). Tests are tests.py and lab/page-check.mjs.
+
+The launcher on the web is just the page at kythe.app — a Netlify site. On this Mac the applets (AIT Install, Connect, Update) are leftovers; AIT Update runs ~/Library/Application Support/AIT/update-all.sh, which curls lab/update_tribe.py from raw.githubusercontent.com/LindsayRidgeway/ai-tribe-template and runs it on three hardcoded LindsayRidgeway repos in ~/Library/Caches/ait-update. It knows nothing about the new account.
+
+A tribe is a repository, not a folder. Members: wake/members/<name>/state/ (identity, voice, state, journal, open-items, memory, conversation).md. Worlds: soil/<world>/. Updating a tribe is the page comparing .ait/version.json to the template's main sha and writing only manifest paths — never members.
+
+Seeding identity: the deployed page still has it (makeMember(), writes state/identity.md), and so does the template's tribe.py (identity_text) plus new-member.yml. The LambieLamberton repo itself I cannot read — that account has no public repos and the API answers 404 to me — so I won't claim what is in it. But the page still names LindsayRidgeway/ai-tribe-template as what an install copies, so moving the repo changed nothing about what a new member is born with.
