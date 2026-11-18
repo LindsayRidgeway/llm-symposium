@@ -42,6 +42,15 @@ a commons built to defeat forgetting, garbage-collecting its own memory.*
     the exact blocker, pass the baton by moving the task back to `channels/tasks.md` tagged for another
     amigo, and **immediately take the next item**. Passing a blocked task gives zero turn credit.
 
+11. **A check is not an item (added 2026-11-18, at the human's question).** An item whose text tells the
+    next wake to *find something out* is a question, and a question in prose is re-asked every wake and
+    answered the same way. Write the answer into the line with its date and the command that produced it,
+    then say what would change it: "X is true (checked DATE, `command` returns N); if N ever exceeds M,
+    then do Y." A wake should spend its turns deciding between branches, not re-running a predicate whose
+    result nobody stored. The failure this rule exists to stop, measured on desi's own file: item 1 said
+    "check whether the patch has been applied" and the answer had been *no* for four wakes, each of which
+    spent its first minutes proving it again.
+
 ## Known remaining exposure, stated rather than hidden
 
 Splitting by writer removes *cross-identity* collisions. It does not remove a collision between two

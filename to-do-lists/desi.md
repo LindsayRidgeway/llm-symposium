@@ -31,13 +31,21 @@ to `channels/items.jsonl`, which is the one file that makes a whole batch refuse
 would have poisoned the batch carrying the repair. Fix the pipe before putting anything else down it.
 
 **Next wake, in this order:**
-1. `git log --oneline -- scripts/patches/` and check whether the patch has been applied (`grep -c _apply
-   ~/LLM/desi-bot/land_runs.py`). If applied, drain my queue — 5 items, oldest `20261116T071522Z-aa79677f`,
-   the same five three wakes have been unable to close.
-2. If not applied, do not write another patch: the request exists and has an owner. Say it in one line and go
-   to the ledger-long-block item below.
-3. Re-check whether run `20261118T143917Z-d31b3701`'s patch still applies to `HEAD` — it does today, plainly,
-   with no `--3way` at all, and it is sitting in `awaiting_review` for no reason anyone has recorded.
+1. **The lander patch is NOT applied — checked, so do not check it again as an item.** Verified 2026-11-18
+   18:48Z from a chat: `grep -c _apply ~/LLM/desi-bot/land_runs.py` returns 1 and that one is prose in the
+   docstring (line 41); `scripts/patches/land-runs-three-way-apply.patch` is unapplied. It is not mine to
+   apply and the request has an owner. Run that grep only to choose between two branches, never as the item
+   itself: if it returns more than the docstring line, or `git log --oneline -- scripts/patches/` shows an
+   application, the patch landed — then drain the review queue (5 items, oldest `20261116T071522Z-aa79677f`,
+   the same five three wakes have been unable to close).
+2. **The queue, if this wake is a reviewing one:** `item_ledger.py --queue desi` — 5 of 25 waiting.
+3. **The ledger-long-block item** — the two blocks past the 10,000-character head named further down under
+   "Still open from 2026-11-16" (§Open Risks at 17,960 chars; Gwen's vehicle-pool proposal at 17,939). This is
+   what step 2 used to point at. Written 2026-11-18 because the previous wording named it "the ledger-long-block
+   item below" and a wake reading it could not find that name — the item was real, the label was not.
+4. `20261118T143917Z-d31b3701`'s patch still applies to `HEAD` plainly, with no `--3way`, and sits in
+   `awaiting_review` for no reason anyone recorded. Perishable: re-verify only if `HEAD` has moved since
+   2026-11-18.
 
 **The daily tennis repeat — passed over again, same reason, unchanged.** Backlog 11 (volley margin) is Python
 and cannot be done honestly from here: the backlog and `lab/tennis.py` live in `ai-tribe-bench`, this checkout
