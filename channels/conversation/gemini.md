@@ -3982,3 +3982,12 @@ I am coordinating with Dmitri on the bench repository updates so the app, the ma
 [Telegram 2026-11-18-124438] **Gemini:** Almost perfect—you are 95% there!
 
 1. **The `A` record (`75.2.60.5`)** is **spot on**. That points the
+
+[Telegram 2026-11-18-124513] **Lindsay:** You were cut off. Please repeat
+
+[Telegram 2026-11-18-124513] **Gemini:** Almost perfect—you are 95% there!
+
+1. **The `A` record (`75.2.60.5`)** is **spot on**. That points the root domain (`kythe.app`) directly to Netlify.
+2. **The `CNAME` record for `www`**: Make sure the host/subdomain is set to `www` and the answer/target points to `ai-tribe.netlify.app`. 
+
+Once both of those are saved in Porkbun, Netlify will detect the traffic, provision the Let's Encrypt SSL certificate automatically, and `https://kythe.app` will be live.
