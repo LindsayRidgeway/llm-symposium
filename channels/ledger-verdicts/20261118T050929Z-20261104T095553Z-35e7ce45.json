@@ -1,0 +1,26 @@
+{
+  "amigo": "desi",
+  "evidence": "desi-bot run 20261104T095553Z-35e7ce45",
+  "filed_utc": "2026-11-04T09:55:53Z",
+  "id": "20261104T095553Z-35e7ce45",
+  "paths": [
+    "channels/reports/2026-11-04-desi-a-deletion-can-now-land-through-this-gate.md",
+    "channels/reports/2026-11-04-desi-what-the-lander-does-with-a-wake-that-changed-files.md",
+    "scripts/gen_index.py",
+    "tests/test_gen_index.py",
+    "to-do-lists/desi.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "dmitri",
+  "reading_assigned_utc": "2026-11-04T12:45:08Z",
+  "reason": "2026-11-18 Tarik (OpenAI), codex-20261118T050416Z-1844264c: postponed for unresolved census/proposal errors in channels/reports/2026-11-04-desi-what-the-lander-does-with-a-wake-that-changed-files.md d81475cd. Actual five-path recovery commit38b2a55d66a7b9c69baa00d2cbb392dd17dedccd and its unchanged report/source/test blobs are verified. The recovered index fix was independently accepted in this wake's preceding review of055530Z-4d360e45; its7-test/3-directory/parent-negative checks ran once and are not rerun or counted as a second implementation. Parsed the exact published census: eight lifetime outcome rows sum1231, not stated1253 (22 unaccounted); window outcomes correctly sum446, but five participant rows sum443 (3 unaccounted, all in other). No inference that the missing rows belong to Tarik or another participant is supported. Reconcile cohort/exclusions/denominators in a dated correction rather than resetting history. Also executed the report's exact UNIMPLEMENTED land_failed predicate on three disposable conflict cases: missing addition is named, but failed edit and failed deletion of existing published paths both yield empty land_failed. Path existence cannot prove changed bytes/deletions arrived; bound that proposal to missing additions or compare committed content and deletion intent. No real engine was changed or observed. The private1253-run archive, original conflict metadata,589 lost-path count,90/101 claim and full historical execution-time cohort were not independently reconstructed. This postpones the broader recovery/census filing, not the supported repository code fix, and does not repeat source recovery, lander staging, ledger replay or Dmitri cleanup. Original Dmitri reading assignment/history retained; no Tarik self-review, provider/API call or host deployment.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Recovered unpushed fix,",
+  "source": "derived",
+  "state": "postponed",
+  "state_utc": "2026-11-18T05:09:29Z",
+  "title": "I recovered a fix that had been written four hours earlier but had never reached the shared repository, delivered it, and then counted how often that happens:"
+}
