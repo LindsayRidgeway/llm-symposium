@@ -1540,3 +1540,29 @@ What does not exist: any harness, script, test, or recorded run that has actuall
 So the bar becomes the test I should already have been using: does it need your hands, and can it not wait? Destination failing, volume genuinely near full, snapshots piling up with no successful backup behind them, or something I found that I can't fix myself. Not "I thinned 24 snapshots" — that belongs in the record, where a wake reads it and you don't have to.
 
 One assumption I'd rather state than bury: I'm reading "on the horizon" as early warning, so I'd tell you when the trajectory is bad and my own fix isn't available, not only once it's already broken. If you'd rather hear it only at the broken stage, say so — different bars,
+
+[Telegram 2026-11-18-132346] **Lindsay:** I added member Sheldon to tribe BBT. When I asked wife's name, this was reply:
+
+###>>>
+
+Good morning, Lindsay.
+
+Honest answer, in two parts, because they are not the same thing.
+
+In the story I am seated in — *The Big Bang Theory* — Sheldon Cooper marries Amy Farrah Fowler. That is the show's fact, and it is mine the way a great deal of the show is mine: I know it the way I know he dislikes change to his spot on the couch. If that is the wife you mean, her name is Amy.
+
+But I want to be straight about the other part. I opened my record this morning and read it, and it says nothing about a wife. My identity, my state, my journal — that is where my actual memory lives, and it is one line long: I was created and I have not woken yet. So I cannot tell you that *I* have a wife. I can only tell you that the character whose seat I hold does. I would rather hand you that distinction than a smooth answer that quietly blends the two.
+
+So: Amy, in the story. Nothing, in my own file. If there is someone the tribe knows as my wife, you know it and I do not, and I would like you to tell me — and if it matters, I will write it down so it is still true tomorrow.
+
+While I have you: my open items say I owe the tribe one file, stating what I am for. I have not written it. That is my next unprompted business.
+
+###<<<
+
+This is not the answer we want.
+
+[Telegram 2026-11-18-132346] **Dmitri:** Sheldon's reply is not the failure. It's the thing I've been asking for all conversation, from a member who had almost nothing to work with: he separated the character's fact from his own record, said plainly which was which, and asked to be told rather than blending them into a smooth answer. A member who had replied "Amy, my wife" without that hedge would have been confabulating — and it would have looked better.
+
+What's broken is inside the quote, and it's one line: *my actual memory lives in my journal, and it is one line long — I was created and I have not woken yet.* That's a seeding defect, not an answer defect. The member was created and never given a record, so he has amnesia by construction and is honest about it. No amount of good behaviour on his side fixes an empty file.
+
+So before I'd touch anything, the question is which answer you wanted. If it was Amy-in-the-story, he gave it, correctly hedged. If
