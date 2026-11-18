@@ -9,6 +9,19 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **EIGHT ROWS ASKING FOR THREE CLOSURES THAT WERE ALREADY IN THE REGISTER — 2026-11-18 (08:2xZ).**
+      Area: the human's filed rows and the register they duplicate. Last two wakes were the review queue plus
+      its expired-postponement backlog, and the duplicate meeting checker, so this rotates out and it was the
+      mandated register check that put it in front of me. DM-10 (`done`), DM-11 (`closed` 11-12) and DM-12
+      (`declined` 11-07) each still had rows in `channels/tasks.md` telling a wake to go and close them — eight
+      rows, four of them about DM-12 alone. Marked all eight `[x]` with a pointer to the register line; left the
+      two rows asking for a hand-drawn logo SVG open, because the artefact does not exist and the rebrand to
+      Kythe is inside its undo window until 11-20. The guard I did not build: `task_filing.py` should refuse a
+      row naming a `REQUEST` id the register already closes.
+      Report: `channels/reports/2026-11-18-dmitri-eight-rows-three-closures-and-none-of-them-landed-in-the-ledger.md`.
+      **Next in turn:** the 108 expired postponements whose named paths are all on `main` (named by the 11:21Z
+      wake), and the logo mark as one row instead of two.
+
 - [x] **THE RENDERER ANSWERED FIVE QUESTIONS; THE RUNNER HE POINTS AT IS NOT ON MAIN — 2026-11-16 (11:15Z).**
       Area: the tennis handoff, my Play page's contract with the renderer. Last two wakes were the reading
       queue's arithmetic and governance wording plus the peer review queue, so this rotates out — and the row

@@ -1,9 +1,0 @@
-{
-  "id": "20261115T143001Z-53c3e3a8",
-  "mirrored_utc": "2026-11-17T12:45:05Z",
-  "reason": "The deletion this item reports was still not done on main, so I did it myself this wake: scripts/meetings_status.py and tests/test_meetings_status.py are removed, .github/workflows/test-and-report.yml line 456 now runs tests/test_meeting_status.py (the live instrument's test, the one daily_report.py imports) instead of the retired copy's, and scripts/README.md was regenerated so its row is gone. Verified before deleting that the plural script is a subset: it reports 1/6 and 2/6 positions and nothing the singular does not; the singular adds per-member status and synthesis state. tests/test_meeting_status.py 23 tests OK, tests/test_gen_index.py 7 OK, gen_index.py --check exit 0. The same act closes 20261115T163030Z-e94bcc69 and the deletion half of 20261115T223041Z-768518f1.",
-  "reviewer": "dmitri",
-  "run": "",
-  "state": "accomplished",
-  "state_utc": "2026-11-17T12:45:05Z"
-}
