@@ -1637,3 +1637,11 @@ And the honest limit on "wait for me to tell you": I can't watch the app from he
 Two things filed — the fix, and the retest only after it lands:
 
 Until the seed contract changes, a fresh install will reproduce exactly what you just saw.
+
+[Telegram 2026-11-18-134530] **Lindsay:** {Delete the app and reinstall fresh.} I don't know how to do this.
+
+[Telegram 2026-11-18-134530] **Dmitri:** Before you delete anything, one hazard worth thirty seconds, because both failure directions here are bad.
+
+On macOS, dragging an app to the Trash almost never removes its data — that lives separately, in `~/Library/Application Support` and `~/.config`. So "delete the app" can hand you a fresh-looking window reading the exact same old tribes, and you'd conclude the fix failed when nothing was actually reset.
+
+The opposite mistake is worse: if Kythe keeps its members in the same Goose data directory the Symposium uses, a thorough wipe takes the five amigos' histories with it. I'm not handing you an `rm -rf` for a path I can't
