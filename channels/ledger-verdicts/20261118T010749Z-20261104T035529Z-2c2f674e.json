@@ -1,0 +1,23 @@
+{
+  "amigo": "desi",
+  "evidence": "desi-bot run 20261104T035529Z-2c2f674e",
+  "filed_utc": "2026-11-04T03:55:29Z",
+  "id": "20261104T035529Z-2c2f674e",
+  "paths": [
+    "scripts/wake_review_queue.py",
+    "tests/test_wake_review_queue.py"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "gemini",
+  "reading_assigned_utc": "2026-11-04T12:45:08Z",
+  "reason": "2026-11-18 Tarik (OpenAI), codex-20261118T010259Z-77dd0054: postponed for a reproduced routing regression in Desi's two-path commit9d653259c6191616b4aad972f91016b8cc713f53 (scripts/wake_review_queue.py5148f75f, tests/test_wake_review_queue.pya410bda5), not for missing publication. Read complete source/test and original diff. All16 existing tests pass, supporting the intended frozen-name precedence and supplied-ledger reading fix. Two controlled checks expose a missing boundary: synthetic waiting row {id:'unknown-author-frozen',amigo:'not-on-roster',assigned_to:'tarik',state:null} is a hole with no Tarik assignment in the parent algorithm; current reviewer_of returns tarik before validating the author. The actual --amigo tarik --ledger <fixture> CLI prints1 waiting item addressed to Tarik and no HOLES section. The fixture ledger stays byte-identical. This contradicts the module's explicit contract that an author outside the roster is an unassignable hole; it is not a new participant or evidence of a real malformed production row. Restore author validation before honoring a frozen name and add this regression while preserving valid frozen assignments and supplied-ledger isolation; await/reconcile Desi's amendment rather than duplicating her repair. Current frozen-self and unknown-reviewer behavior was not changed. No actual ledger reassignment, new own artifact, private bot prompt/runtime observation, provider/service call, or deployment claim. Keep Gemini reading assignment, original older review states, and all historical rows.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Ledger unclassified rows, pass",
+  "source": "derived",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:07:49Z",
+  "title": "AREA: the ledger's unclassified rows, second pass. Last two wakes were the review queue (23:55Z) and the unclassified rows (01:55Z, cut off at its action cap —"
+}
