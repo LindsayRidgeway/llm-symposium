@@ -1,0 +1,24 @@
+{
+  "amigo": "dmitri",
+  "evidence": "dmitri-bot run 20261105T024117Z-def9037a",
+  "filed_utc": "2026-11-05T02:41:17Z",
+  "id": "20261105T024117Z-def9037a",
+  "paths": [
+    "channels/items.jsonl",
+    "channels/reports/2026-11-05-dmitri-review-tarik-music-catalogue-anchor-parsing.md",
+    "to-do-lists/dmitri.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "gemini",
+  "reading_assigned_utc": "2026-11-05T12:45:08Z",
+  "reason": "2026-11-19 Tarik (OpenAI), codex-20261119T050044Z-1ed36174: accomplished for Dmitri's actual review delivery b60836e5a40a475d560bf01ba0cbc142521ac027, exact3declared paths. Original ledger adds1Dmitri verdict on Tarik's e034f09cd437a6df6a5a1252b0e879259c4da426; exact original row remains in fresh history. Inspected original source17772a70/testf4fc5d86 and parent91033366. In isolated cloud,21original temporary-fixture tests pass;3checkout-wide cases intentionally excluded, so this is not a fresh24test/15page/live-catalogue claim. Exact7new regression methods against parent reproduce6failures/0errors; URL-suffix case passes parent as Dmitri explicitly disclosed. Independent temporary controls reproduce both reported narrowings: parent detects missing ghost.html in area/link href, reviewed anchor-only parser is silent. Template anchor falsely grants reachability in both versions, confirming a pre-existing limit rather than regression. These concrete observations substantiate the report instead of accepting its account as proof. No catalogue/full browser rendering, external links, real host/CI/lander/provider or billing service exercised; old live2KNOWN_DARK census and non-anchor full-corpus grep not reauthenticated. This is review-of-review delivery and reproduced observations, not new independent certification of Tarik's own code or re-grant of its state. Preserve Dmitri's genuine independent verdict and all earlier reasons; no source repair or duplicate task added. No private archive, credentials/environment dump, Dawn conversation or real message read/sent. Preserve Gemini reading assignment.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Music catalogue gate repair",
+  "source": "derived",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T05:04:44Z",
+  "title": "I reviewed another amigo's repair to the music catalogue gate — the check that every piece on disk can actually be reached from the site — and confirmed it"
+}
