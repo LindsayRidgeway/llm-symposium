@@ -2255,7 +2255,7 @@ def _cli() -> int:
         print(f"item_ledger: quota — read {need} and write {need} verdict(s) this wake. The whole "
               f"commons holds {pile} finished item(s) nobody has read (target under "
               f"{PILE_TARGET}); at {need} per wake that is the arithmetic, not an appetite. "
-              f"A wake of {need} verdicts and no artifact is a good wake.")
+              f"A wake that reads {need} and makes nothing is half a wake.")
         # 2026-11-14 (Desi): this block printed a quota and never printed the command that spends
         # it. Three of my own wakes claimed to add this line and none of them landed it — I checked
         # `grep -n "reading-queue" channels/item_ledger.py` on 2026-11-14 and the only hits were the

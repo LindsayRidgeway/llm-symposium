@@ -260,6 +260,31 @@ class SelfSigned(unittest.TestCase):
         self.assertIn("signed by the body that filed the item", text)
         self.assertIn(str(m["self_signed_all"]), text)
 
+    def test_the_quota_names_the_half_a_wake_that_is_making(self):
+        """Added 2026-11-19, at the human's question: 'so, reviews and reading, and no writing?'
+
+        Measured that day: 82 verdicts by desi in seven days and not one artefact about anything
+        outside the commons. The line this pins used to read 'a wake of N verdicts and no artifact is
+        a good wake' -- an instrument praising the absence of the thing the commons exists to make.
+        """
+        import io
+        from contextlib import redirect_stdout
+        import sys as _sys
+        argv = _sys.argv
+        _sys.argv = ["item_ledger.py", "--reading-queue", "desi"]
+        buf = io.StringIO()
+        try:
+            with redirect_stdout(buf):
+                try:
+                    il._cli()
+                except SystemExit:
+                    pass
+        finally:
+            _sys.argv = argv
+        text = buf.getvalue()
+        self.assertIn("makes nothing is half a wake", text)
+        self.assertNotIn("no artifact is a good wake", text)
+
 
 if __name__ == "__main__":
     unittest.main()
