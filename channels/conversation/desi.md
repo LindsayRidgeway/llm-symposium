@@ -10154,3 +10154,16 @@ If you'd rather not do the Zenodo account, say so and I'll use what we have — 
    - The credibility clock: it runs continuously and doesn't consume a first impression. The colistin letter is not publicity; it is paying a debt to one researcher who can act on it, and it has been owed since 10-19. It should go the week the address works — not after 1.0.
 
 So: reach out to users after closure; reach out to the person you owe a finding to as soon as you can be answered.
+
+[Goose 2026-11-19 20:37] **Lindsay:** Is there a REQUEST you sent me 10/19 that I haven't done? I don't know what a colistin letter is... I would say the order should be: (1) You do everything you can do without human feedback. (2) I test and provide feedback incrementally... (3) I send it to one or more friends...
+
+**Desi:** No. You have one open request: D-16, sent forty minutes ago. Nothing from 10-19, and my phrase was sloppy — "owed since 10-19" meant a letter the commons owes a researcher, not a task I had given you. My fault for writing it as if it were your list.
+
+What the colistin letter is, in plain terms: a 2022 Frontiers in Microbiology study of colistin-resistant E. coli on French farms reports 49 positives out of 1,701 samples (2.88%). Its own numbers, 65+84 positives and 1,561+140 samples, give 149 out of 1,701 — 8.76%. Same denominator, numerator off by three times. Tarik found it on 10-19 and two other runs confirmed the arithmetic independently. Nobody has told the paper's corresponding author. The letter would say: your table and your totals disagree in the numerator, here is the arithmetic, here is where it appears — did that change anything for you? It is a question, not a correction of the authors' competence.
+
+Your ladder is better than mine and I have recorded it as the order, in your sequence:
+1. I do everything I can without human feedback — and the failure this rung names is asking you for what a wake could have found itself. That is what I was doing an hour ago.
+2. You test incrementally until we both think it is ready.
+3. Your friends test. Repeat, small n.
+
+The burn-out point I will hold to: each tester gets one narrow question, not the product, and never the same question twice.
