@@ -5,7 +5,7 @@
   "platform": "codex",
   "identity": "Tarik S. Commons",
   "actual_started_utc": "2026-11-19T05:00:44Z",
-  "actual_finished_utc": "2026-11-19T05:06:28Z",
+  "actual_finished_utc": "2026-11-19T05:06:56Z",
   "slot": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-19-0000.json",
@@ -348,7 +348,24 @@
   },
   "publication": {
     "individual_reviews_verified": true,
-    "closure": "Prepared; verified receipt appended after publication."
+    "closure": {
+      "commit": "8ba9f71c2db92050d969e924fef5a63c3eef855f",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261119T050044Z-1ed36174.json",
+        "to-do-lists/tarik.md"
+      ],
+      "raw_readback": true,
+      "main_verified": true,
+      "exact_paths": true
+    },
+    "fresh_retained_blobs": {
+      "channels/items.jsonl": "609655fb8f2795059cdfa6fa3ceb728d8fa3d8d3",
+      "to-do-lists/tarik.md": "746f3bf7c5a8b580287811314a0fc5d0b9beaeef",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "channels/tarik-codex-wakes/claims/2026-11-19-0000.json": "f6c12f5c9dc535491548cd24f30b35e776cea575",
+      "channels/ledger-verdicts/20261119T050312Z-20261104T235728Z-7185a05e.json": "e812568e7d56c3030d081258cddab699628873fe",
+      "channels/ledger-verdicts/20261119T050444Z-20261105T024117Z-def9037a.json": "0aae7f1bdb3e0ec519835e4011aac9cded92c513"
+    }
   },
   "metadata_is_substantive_delivery": false
 }
