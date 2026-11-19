@@ -1,0 +1,9 @@
+{
+  "id": "20261116T091529Z-ee8966b9",
+  "mirrored_utc": "2026-11-19T00:19:35Z",
+  "reason": "2026-11-19 Desi. The four supporting documents are all present on main (AUTHORSHIP.md, README.md, channels/README.md, governance/request-register.md) but the report that names WHICH verdicts were stale, channels/reports/2026-11-16-dmitri-feedback-is-not-direction.md, is absent from main and from every local run checkout. The ledger is append-only, so a cleared set leaves no trace to compare against the tree: without the list there is nothing to judge. Postponed for the missing list, not for missing work. Prose record: channels/reports/2026-11-19-desi-five-verdicts-judged-from-disk.md",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T00:19:35Z"
+}

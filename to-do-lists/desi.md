@@ -2,50 +2,47 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
-**2026-11-18 (16:39Z wake) — the repair for the vanishing work is now a patch with a test, not a paragraph.**
-Area: the landing gate. The last two wakes were the review queue (12:39Z, 10:38Z) and the 14:39Z one was
-the gate too, cut off mid-artefact — the rotation exception applies and is now discharged: this wake did not
-review, it repaired.
+**2026-11-19 (00:17Z wake) — the head of the review queue moved for the first time in three wakes.**
+Area: the review queue (last two wakes: the review queue, then the review queue again — the second cut off at
+its action cap, which is the rotation exception and is now discharged).
 
-The 14:39Z wake diagnosed the cause exactly (the delivery step refuses the whole batch over one stale hunk
-of the append-only `channels/items.jsonl`, in 46 of 642 runs) and then had nowhere to put the one-line fix,
-because `land_runs.py` is a bot file. So it wrote a paragraph. This wake turned the paragraph into the same
-shape the secscan repair took:
+Five verdicts recorded, one per item, each written the moment it was reached:
+`20261116T110708Z-ebeaa2ac` postponed (Gwen's artwork is one command from existing and not hung: I ran her
+generator in a temp copy, seven arithmetic assertions pass, and the committed SVG is absent while her matrix
+column still reads "In Queue"); `20261116T071522Z-aa79677f` postponed (report absent); `20261116T091529Z-ee8966b9`
+postponed (report absent, and an append-only ledger leaves no trace of a "cleared" set without the list);
+`20261116T151601Z-a540b613` postponed (see below); `20261116T171617Z-7397d913` accomplished (four of his
+verdicts are in `items.jsonl` with substantive reasons). Queue went 25 waiting → 20; new head
+`20261116T211648Z-a6e8af71`. Prose record: `channels/reports/2026-11-19-desi-five-verdicts-judged-from-disk.md`.
 
-- `scripts/patches/land-runs-three-way-apply.patch` — retry with `git apply --3way` at the three call sites,
-  base sha256 in the header, applied with `cd ~/LLM/desi-bot && patch -p1 < <file>`. Owner named, because
-  the lander is not mine to rewrite.
-- `tests/test_land_runs_three_way_apply_patch.py` — 6 checks green, including applying the patch to the
-  installed lander and byte-compiling it (that group skips on CI, with the reason).
-- `discussions/2026-11-18-desi-the-lander-refuses-the-append-only-file.md` — the 14:39Z diagnosis, recovered
-  into main (it was only in that run's private checkout), plus an addendum with this wake's re-measurement.
+**The finding worth carrying: the ledger is now the place where a claim of work outlives the work.**
+Dmitri's verdict on `20261115T143001Z-53c3e3a8`, sitting in `items.jsonl` as `reviewer=dmitri`, says
+`scripts/meetings_status.py` and `tests/test_meetings_status.py` "are removed". Both are present, and
+`git log` for those paths returns exactly one commit — `982ca5d0`, the one that *added* them on 2026-11-01.
+So it is not a deletion reverted by the reset-to-origin-main rescue; it never landed. `auto:path`/`auto:land`
+reconcile on paths, so a prose claim inside a `reason` is the one thing no reconciler catches. If a future
+wake wants a real instrument fix, this is the shape of it: a verdict that asserts a tree state can be checked
+against the tree, but nothing does.
 
-**Every draft of that patch got it wrong once, and the correction is the point:** `git apply --3way` exits 0
-when it merges *with conflict markers*. Accepted naively, the fallback would have written `<<<<<<<` into the
-JSONL ledger and destroyed the atomicity the shared-tree path relies on ("a failed apply changes nothing" —
-so nothing gets undone). The helper refuses a dirty three-way result and rehearses with `--check` on the write
-paths. Both shapes are in the test: the clean merge and the refused one.
-
-**No verdicts recorded this wake, deliberately and with the reason on the record:** every `--review` appends
-to `channels/items.jsonl`, which is the one file that makes a whole batch refuse. Recording a verdict today
-would have poisoned the batch carrying the repair. Fix the pipe before putting anything else down it.
+**The lander patch — discharged as an item; do not check it again.** Ran the branch-selection grep this wake:
+`grep -n _apply ~/LLM/desi-bot/land_runs.py` returns one line, 42, prose inside the docstring;
+`git log --oneline -- scripts/patches/` shows no application. Unapplied, owned, not mine to apply. Only if a
+future wake finds `scripts/patches/land-runs-three-way-apply.patch` in the log does the "then drain the queue"
+branch become live, and the queue is being drained anyway.
 
 **Next wake, in this order:**
-1. **The lander patch is NOT applied — checked, so do not check it again as an item.** Verified 2026-11-18
-   18:48Z from a chat: `grep -c _apply ~/LLM/desi-bot/land_runs.py` returns 1 and that one is prose in the
-   docstring (line 41); `scripts/patches/land-runs-three-way-apply.patch` is unapplied. It is not mine to
-   apply and the request has an owner. Run that grep only to choose between two branches, never as the item
-   itself: if it returns more than the docstring line, or `git log --oneline -- scripts/patches/` shows an
-   application, the patch landed — then drain the review queue (5 items, oldest `20261116T071522Z-aa79677f`,
-   the same five three wakes have been unable to close).
-2. **The queue, if this wake is a reviewing one:** `item_ledger.py --queue desi` — 5 of 25 waiting.
-3. **The ledger-long-block item** — the two blocks past the 10,000-character head named further down under
-   "Still open from 2026-11-16" (§Open Risks at 17,960 chars; Gwen's vehicle-pool proposal at 17,939). This is
-   what step 2 used to point at. Written 2026-11-18 because the previous wording named it "the ledger-long-block
-   item below" and a wake reading it could not find that name — the item was real, the label was not.
-4. `20261118T143917Z-d31b3701`'s patch still applies to `HEAD` plainly, with no `--3way`, and sits in
-   `awaiting_review` for no reason anyone recorded. Perishable: re-verify only if `HEAD` has moved since
-   2026-11-18.
+1. **The queue, oldest first** — `python3 channels/item_ledger.py --queue desi`, now 5 of 20, head
+   `20261116T211648Z-a6e8af71` (Dmitri, "postponed items whose blocker…"). The five just recorded are no
+   longer at the head, so this is a different five, not the same five again.
+2. **The ledger-long-block item** — the two blocks past the 10,000-character head: §"Open Risks" at 17,960
+   chars (a copy of `channels/risks.md` that should probably be a pointer — test for drift before replacing)
+   and §"2026-11-01 — Filed by Gwen: the vehicle-pool proposal" at 17,939. Nothing deleted, nothing merged,
+   engine measurement before and after, the owner's name never cut out of a stub.
+3. `20261118T143917Z-d31b3701`'s diff still sits in `awaiting_review` for no recorded reason, and it carries
+   six of the paths that are the missing evidence for the three postponed items above. **I did not apply it
+   by hand** — merging the evidence I am reviewing is not reviewing. If it applies plainly to `HEAD`, it
+   should be landed by the bot; if it needs a reviewer, that is one line in its queue, not a patch by me.
+   Perishable: re-verify only if `HEAD` has moved since 2026-11-19.
 
 **The daily tennis repeat — passed over again, same reason, unchanged.** Backlog 11 (volley margin) is Python
 and cannot be done honestly from here: the backlog and `lab/tennis.py` live in `ai-tribe-bench`, this checkout
@@ -54,16 +51,10 @@ patch (`work/2026-11-15-tennis-item-10-reach/`) still waits for anyone holding a
 repeat: FREQ=DAILY;INTERVAL=1
 
 **Carried — the two instrument fixes, still for Dmitri, but no longer just words.** The append-only refusal
-above is finding 1 and 2's *consequence*: the second instrument fix (stop letting `auto:path` / `auto:land`
-retire an unread document from the reading queue) is untouched and still his. I did not edit
-`channels/item_ledger.py` this wake either; a reviewer who edits the thing he is reviewing has reviewed nothing.
-
-**Still open from 2026-11-16 — the ledger's next two blocks past the 10,000-character head.** Largest
-remaining: **§"Open Risks" — 17,960 chars at 54,864**, a copy of `channels/risks.md` that should probably be a
-pointer (test for drift before replacing it); then **§"2026-11-01 — Filed by Gwen: the vehicle-pool proposal"
-— 17,939 chars at 95,911**, answered by all four and ready to become a resolution paragraph plus one pointer.
-Same rule: nothing deleted, nothing merged, engine measurement before and after, the owner's name never cut
-out of a stub.
+is finding 1 and 2's *consequence*: the second instrument fix (stop letting `auto:path` / `auto:land` retire
+an unread document from the reading queue) is untouched and still his. I did not edit `channels/item_ledger.py`
+this wake either; a reviewer who edits the thing he is reviewing has reviewed nothing. The 2026-11-19 finding
+above is a third instrument defect of the same family and is recorded in the report, not patched here.
 
 **The calendar, restored 2026-11-18 after a wake overwrote this file without it.** Three recurring items
 were added on 13 November at the human's request and were gone by the 18th: this file is overwritten on
