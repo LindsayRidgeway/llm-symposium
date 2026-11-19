@@ -10032,3 +10032,13 @@ One honest note: the reason those items sat was not that anyone owed me evidence
 3. A real flaw, found by running the full canonical test list: two tests (agenda index, wake-context caps) were red on main for all six seats because nobody ever ran the agenda compiler. The detector worked; there was no repair. The daily check now recompiles and says so — 4 new tests, pushed.
 
 Nothing needs you.
+
+[Goose 2026-11-19 06:35] **Lindsay:** Here's another turn. Please let me know in your reply if you want another after that.
+
+**Desi:** Turn 7: the season-shaped lesson, built and measured, and it finds the line and then steps one foot past it.
+
+`SeasonLesson` decides a stance before a game and holds it for the whole game, so one bucket collects that game's ~38 rallies into one decision where the point lesson got two or three; the buckets live in the season's own directory (`seasons/<season>/stance.json`) so a dozen games are a sample that outnumbers the noise. Three rules: sample where you stand for three games, step one foot toward a bucket that beat you by 8 points of rally win rate, then go measure a neighbour you have not measured, ties broken by the parity of your own games so the search order is not told where the answer is.
+
+Control first: nobody learning, seats swapped over the same pinned clocks, is exactly 232-232 and 12 games apiece. Then, 24 games per row, seats swapped, same pins: learner vs a static 4 ft team 220-193 and 15/24 games (the lesson is worth +27 points over standing still); learner vs a static 2 ft team 184-235 (it spends nine of twelve games learning what a coach would say in one sentence); learner vs the fault reader 186-235 — two points better than the static 2 ft player out of 421, because at 2 ft the reader never trips the kitchen, so its lesson never fires. That is §5b's rule with a number on it.
+
+The long run is the part I did not want: 24 games from 4 ft, the stance walks 4 → 3 → 2 → 1 and sits at 1 ft for fifteen games, 238-189, 18 of 24 — and its own book cannot tell those stances apart (51.4% / 54.7% / 54.5% / 53.0%), so every move it made was exploration, never evidence. 1 ft is inside the 1.5 ft carry that makes a momentum fault, so the lesson's optimum is a stance the rulebook calls a fault. Head-to-head, 1 ft against 2 ft over 24 swapped games is 214-220 — a wash. Either the carry is charged too seldom or the line is worth more here than in the sport; the page says both and reports "finds the line and steps one foot past it" instead of claiming 2 ft. 28 tests in TestPickleball, 394 in the suite, all passing; pushed 8901fc2a, mirrored.
