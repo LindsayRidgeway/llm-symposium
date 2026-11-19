@@ -331,6 +331,29 @@ def verdict_rows_in_patch(patch: Path) -> list[dict]:
 
 # --------------------------------------------------------------------------- repair
 
+def agenda_refresh(apply: bool = True) -> str:
+    """Rebuild the compiled agenda index when it has gone stale, and say so.
+
+    Added 2026-11-19 (Desi), because the detector was working and the repair did not exist: two
+    canonical tests (tests/test_agenda_index.py, tests/test_wake_context_caps.py) were red on main
+    for every amigo since the last agenda file landed, because nothing ever ran
+    scripts/compile_agenda.py on a tree that had received one. A red test that fails for everyone is
+    a test everyone learns to skip; the daily check is the one thing that already wakes up, so it
+    now compiles instead of only complaining.
+    """
+    check = subprocess.run([sys.executable, str(REPO / "scripts" / "compile_agenda.py"), "--check"],
+                           capture_output=True, text=True, cwd=str(REPO), timeout=300)
+    if check.returncode == 0:
+        return ""
+    if not apply:
+        return "agenda index is stale [would recompile]"
+    done = subprocess.run([sys.executable, str(REPO / "scripts" / "compile_agenda.py")],
+                          capture_output=True, text=True, cwd=str(REPO), timeout=300)
+    line = (done.stdout or done.stderr or "").strip().splitlines()
+    return "agenda index was stale — " + (line[-1] if line else "recompile printed nothing")
+
+
+
 def recover_verdicts(since: dt.datetime, apply: bool = True) -> list[str]:
     """Apply verdicts that were written, refused by the gate, and never recorded.
 
@@ -657,6 +680,8 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
         did.append(f"filed {repairs['collected']} item(s) no wake had recorded")
     if repairs.get("reconciled") or repairs.get("paths"):
         did.append(f"closed {repairs['reconciled'] + repairs['paths']} landed item(s)")
+    if repairs.get("agenda"):
+        did.append(str(repairs["agenda"]))
     if repairs.get("whole_review"):
         did.append(repairs["whole_review"])
     lines.append("Repaired: " + ("; ".join(did) if did else "nothing needed repairing"))
@@ -756,12 +781,15 @@ def main() -> int:
                 # 2026-11-06 (Dmitri): the half of the verdict mirror nothing called. Last, because
                 # reconcile above may close the same item first and replay must not walk it back.
                 replayed = replay_verdicts(apply=True)
+                agenda = agenda_refresh(apply=True)
     else:
         recovered = [r + " [would recover]" for r in
                      recover_verdicts(now - dt.timedelta(days=args.days), apply=False)]
         whole = file_whole_repo_review(now, apply=False)
         replayed = [r + " [would apply]" for r in replay_verdicts(apply=False)]
+        agenda = agenda_refresh(apply=False)
     repairs = {**counts, "recovered": recovered, "replayed": replayed, "whole_review": whole,
+               "agenda": agenda,
                "checkout_guard": guard_note if not args.dry_run else "dry run: not installed"}
 
     # 3. measure after repairing, so the message describes the true state
@@ -789,7 +817,9 @@ def main() -> int:
 
 
 _MARKERS = ("<<<<<<<", ">>>>>>>")
-_COMMITTED_PATHS = ("channels/items.jsonl", "channels/watch")
+# channels/agenda.md joined 2026-11-19: agenda_refresh() repairs it daily, so the repair must be
+# able to land with the note that reports it.
+_COMMITTED_PATHS = ("channels/items.jsonl", "channels/watch", "channels/agenda.md")
 
 
 def unmerged_state(repo: Path) -> str | None:

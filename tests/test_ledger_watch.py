@@ -475,5 +475,69 @@ class OutreachTest(unittest.TestCase):
         self.assertIn("Letters to people outside the commons, 7 days:", text)
 
 
+class AgendaRefresh(unittest.TestCase):
+    """The repair that did not exist while the detector did.
+
+    Measured on main 2026-11-19: tests/test_agenda_index.py and tests/test_wake_context_caps.py were
+    both red, both because channels/agenda.md had not been recompiled since the last agenda file
+    landed. Nothing was broken except that no machine ever ran the compiler, so the fix is a caller.
+    """
+
+    STUB = (
+        "import pathlib, sys\n"
+        "root = pathlib.Path(__file__).resolve().parents[1]\n"
+        "src = root / 'agenda' / 'a.md'\n"
+        "out = root / 'channels' / 'agenda.md'\n"
+        "body = src.read_text() if src.exists() else ''\n"
+        "cur = out.read_text() if out.exists() else ''\n"
+        "if '--check' in sys.argv:\n"
+        "    print('agenda index is current' if body == cur else 'agenda index is OUT OF DATE')\n"
+        "    sys.exit(0 if body == cur else 1)\n"
+        "out.parent.mkdir(parents=True, exist_ok=True)\n"
+        "out.write_text(body)\n"
+        "print('agenda index rebuilt from 1 item file(s)')\n"
+    )
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.repo = Path(self.tmp.name)
+        (self.repo / "scripts").mkdir()
+        (self.repo / "scripts" / "compile_agenda.py").write_text(self.STUB)
+        self.compiled = self.repo / "channels" / "agenda.md"
+        self.patch = mock.patch.object(lw, "REPO", self.repo)
+        self.patch.start()
+        self.addCleanup(self.patch.stop)
+        self.addCleanup(self.tmp.cleanup)
+
+    def stale(self):
+        (self.repo / "agenda").mkdir(exist_ok=True)
+        (self.repo / "agenda" / "a.md").write_text("new item\n")
+        self.compiled.parent.mkdir(parents=True, exist_ok=True)
+        self.compiled.write_text("old item\n")
+
+    def test_a_stale_index_is_recompiled_and_the_note_says_so(self):
+        self.stale()
+        note = lw.agenda_refresh(apply=True)
+        self.assertIn("was stale", note)
+        self.assertEqual(self.compiled.read_text(), "new item\n")
+
+    def test_a_current_index_is_left_alone_and_says_nothing(self):
+        self.stale()
+        lw.agenda_refresh(apply=True)
+        self.assertEqual(lw.agenda_refresh(apply=True), "")
+
+    def test_a_dry_run_reports_the_repair_and_does_not_make_it(self):
+        self.stale()
+        note = lw.agenda_refresh(apply=False)
+        self.assertIn("would recompile", note)
+        self.assertEqual(self.compiled.read_text(), "old item\n")
+
+    def test_the_daily_message_carries_the_repair(self):
+        m = lw.measure(dt.datetime.now(dt.timezone.utc))
+        text = lw.message(m, None, "yesterday", {"agenda": "agenda index was stale — rebuilt"},
+                          True, ["nothing to explain"], "test")
+        self.assertIn("agenda index was stale", text)
+
+
 if __name__ == "__main__":
     unittest.main()
