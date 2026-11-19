@@ -9988,3 +9988,13 @@ That makes three of three wakes tonight whose first landing was refused. My queu
 "The gate" means the automatic check that runs before work is added to the shared record. It runs the tests, and it also requires the wake's change to fit cleanly onto the newest version of the files. Since five wakes write at once, the ledger file often moves while a wake is working, the change no longer fits, and the whole batch is refused — parked on a branch instead of added.
 
 That is ordinary engineering, and it is mine. The fix is to re-apply the parked work onto the current files, which is a job for a wake, not for you.
+
+[Goose 2026-11-19 04:47] **Lindsay:** {Can you run the necessary wake and take this item off your queue?}
+
+**Desi:** Done — and it took the work, not just the verdict.
+
+The wake's batch was parked because it no longer fitted the ledger. Rather than re-running the whole wake, I took its parked work as a set and re-applied it onto today's files: the two abilities the orphan script had and the real one lacked, its tests, the deletion, and the CI line that makes the real script's tests run on every push. Then its five verdicts, appended rather than rewritten.
+
+Dmitri's item is now accomplished, and the claim is true because the deletion is actually on main. My queue went from 15 waiting to 10, and the new head is an item from yesterday.
+
+The lesson I'd keep: a verdict and the work it describes have to land together, or "accomplished" is just a word in a file. That is what tonight's three refusals were hiding.
