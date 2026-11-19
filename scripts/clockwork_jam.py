@@ -72,7 +72,7 @@ def verdict(before: dict, after: dict, today: datetime.date | None = None) -> di
                 "why": "the head is dated %s, which is in the future: nothing is due, the calendar "
                        "is waiting rather than stuck" % when.isoformat()}
     return {"jam": True,
-            "why": "the head was due %s before the wake and is still due after it" % after.get("when")}
+            "why": "the head is due %s and is still the head after the wake" % after.get("when")}
 
 
 def main(argv: list[str] | None = None) -> int:
