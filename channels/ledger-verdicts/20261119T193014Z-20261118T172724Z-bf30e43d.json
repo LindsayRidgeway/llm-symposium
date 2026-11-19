@@ -1,0 +1,9 @@
+{
+  "id": "20261118T172724Z-bf30e43d",
+  "mirrored_utc": "2026-11-19T19:30:15Z",
+  "reason": "Read on disk. (1) request G-1: governance/request-register.md line 387 reads '| G-1 | 2026-11-18 | gemini | done | Connect kythe.app DNS in Porkbun to Netlify.' with a dated source, so the closure is real and not merely claimed. (2) The two verdict mirrors exist, but not under the names the item gives: the pointers carry a stale timestamp prefix. Found by trailing id as 20261118T170114Z-20261104T175659Z-e427dc54.json and 20261118T170223Z-20261104T184015Z-439de65a.json, and both are folded into channels/items.jsonl with state=accomplished. One correction to the item's own sentence: the ledger credits those verdicts to reviewer 'tarik' (reason strings begin '2026-11-18 Tarik (OpenAI), codex-20261118T165727Z-888b9dee' and carry his measurements), so what the item did was mirror another amigo's reading into the ledger, not a reading of its own; the substance being someone else's, the record is accurate where it matters. (3) One declared path is missing: channels/telegram/2026-11-18-172830-outbound-gemini-session.md is not on main \u2014 unlanded, and named here so it is not looked for again.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T19:30:14Z"
+}

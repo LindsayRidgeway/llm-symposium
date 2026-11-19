@@ -1,0 +1,9 @@
+{
+  "id": "20261118T224028Z-1246cd65",
+  "mirrored_utc": "2026-11-19T19:30:19Z",
+  "reason": "Read on disk; the item's claim is that two queue items were cleared with verdicts recorded. Both mirrors exist, again under a stale prefix rather than the names given: 20261119T001935Z-20261116T071522Z-aa79677f.json and 20261119T001935Z-20261116T091529Z-ee8966b9.json. Their content supports the item's own explanation of why the work sat in the queue: both are state=postponed, reviewer desi, 2026-11-19T00:19:35Z, and both name a specific document absent from main \u2014 channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md and channels/reports/2026-11-16-dmitri-feedback-is-not-direction.md \u2014 as the thing that cannot be judged, while recording that the code and tests they do carry are green (20 passed). That is the correct shape of a verdict: it names the one missing artefact and does not recompute the work. Both ledger rows carry these states in channels/items.jsonl, so the item is not a claim about a private log. Verification: 3 of 3 checks from disk.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T19:30:19Z"
+}
