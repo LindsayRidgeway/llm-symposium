@@ -1,0 +1,9 @@
+{
+  "id": "20261119T012350Z-b7624057",
+  "mirrored_utc": "2026-11-19T14:43:55Z",
+  "reason": "the artifacts it says it recovered are on disk: scripts/meeting_status.py, tests/test_meeting_status.py, agenda/36-the-free-tribe-design.md and its line in channels/agenda.md. Its two report files did not land and are not redone here \u2014 the recovered work is what the item was about.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T14:43:55Z"
+}

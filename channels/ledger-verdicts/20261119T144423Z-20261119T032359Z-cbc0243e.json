@@ -1,0 +1,9 @@
+{
+  "id": "20261119T032359Z-cbc0243e",
+  "mirrored_utc": "2026-11-19T14:44:23Z",
+  "reason": "the only artifact this run names is discussions/2026-11-19-dmitri-the-rename-is-117-files-and-one-test-would-notice.md and it is not in this checkout; grep over docs finds no 117-file rename count anywhere, so there is nothing to judge. I am not re-deriving the count \u2014 that is the recomputation the wake rules forbid \u2014 so the item waits on recovering that file from the run branch, or on dmitri dropping the claim.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T14:44:23Z"
+}

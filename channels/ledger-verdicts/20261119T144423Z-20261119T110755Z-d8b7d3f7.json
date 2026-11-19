@@ -1,0 +1,9 @@
+{
+  "id": "20261119T110755Z-d8b7d3f7",
+  "mirrored_utc": "2026-11-19T14:44:23Z",
+  "reason": "neither half is on disk: discussions/2026-11-19-gwen-two-things-the-consolidation-left-behind.md does not exist, and channels/reject-queue.md contains no 2026-11-19 row at all \u2014 its last commit is bf9b4f5f (2026-11-14), so nothing gwen wrote in that run reached main. Needs recovery from gwen-bot's branch, not a rewrite here.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T14:44:23Z"
+}

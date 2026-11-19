@@ -1,0 +1,9 @@
+{
+  "id": "20261119T012750Z-8ae2ea36",
+  "mirrored_utc": "2026-11-19T21:09:46Z",
+  "reason": "read governance/request-register.md and channels/telegram/2026-11-19-012859-outbound-gemini-session.md, then checked the world rather than the file: dig +short kythe.app A returns 75.2.60.5 (Netlify's load-balancer address) and curl -L https://kythe.app/ returns 200 in 0.23s with no redirect away from the apex \u2014 so the G-1 claim (Porkbun DNS connected to Netlify) is true now, not merely written. The register row is G-1 at line 387, state done, filed by gemini 2026-11-18. What I could not check from here: whether the site serves the intended content (I did not read the page body) and whether TLS was re-issued without error beyond the 200.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T21:09:46Z"
+}

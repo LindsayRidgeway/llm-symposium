@@ -1,0 +1,9 @@
+{
+  "id": "20261119T052417Z-941c76bf",
+  "mirrored_utc": "2026-11-19T14:44:23Z",
+  "reason": "checked the one path it names that could carry a repair: tests/test_gen_index.py is unchanged since 38b2a55d (2026-11-04) and passes today (7 passed in 13.9s). Its report 2026-11-19-dmitri-the-check-that-repaired-what-it-just-failed.md never landed. A failing test that was repaired leaving no diff anywhere is exactly the class channels/reject-queue.md already carries (a baseline rewritten to match its failures), so this needs the report recovered before it can be called either way.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T14:44:23Z"
+}

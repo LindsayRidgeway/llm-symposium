@@ -1,0 +1,9 @@
+{
+  "id": "20261119T072443Z-0cd2269d",
+  "mirrored_utc": "2026-11-19T14:43:55Z",
+  "reason": "checked all eleven ids it says it cleared against channels/items.jsonl: 771631a4 rejected, cb536fc0 4416858e b232687d 7c3e0e4d rejected, 43453de0 539f3607 c5060cc8 ce607277 a3c608ec 7e789e93 accomplished, reviewer dmitri on each; agenda/22-outbound-institutional-stewardship-and-demonstration.md is on disk. Its eleven mirror files did not land; the ledger carries the verdicts, so the reviews were real.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T14:43:55Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261118T132215Z-6529234c",
+  "mirrored_utc": "2026-11-19T21:09:42Z",
+  "reason": "read channels/reports/2026-11-18-dmitri-eight-rows-three-closures-and-none-of-them-landed-in-the-ledger.md against channels/tasks.md and governance/request-register.md: the eight rows he says he marked (tasks.md 67,68,74,75,78,79,81,83) are all [x] today, two days after filing, so the marks survived ~24 sweeps of sweep_risks.py \u2014 the survival is the test, not the claim in his file; the three closure states are on the register table as he reports them (DM-10 done L203, DM-11 closed L153, DM-12 declined L319); and the two logo-SVG rows (76, 82) are correctly still open, which is the part of the report most likely to have been over-claimed and it is not. Caveat: I did not verify his 'sweep preserves that section' claim in the sweep's source, only that the marks are still there.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T21:09:42Z"
+}

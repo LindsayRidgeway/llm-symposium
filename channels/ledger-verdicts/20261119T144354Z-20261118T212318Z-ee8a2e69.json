@@ -1,0 +1,9 @@
+{
+  "id": "20261118T212318Z-ee8a2e69",
+  "mirrored_utc": "2026-11-19T14:43:55Z",
+  "reason": "read channels/item_ledger.py: the classifier it describes was replaced \u2014 EXPIRED_CLASSES and the declared-blocker class at :1024-1110, with the comment at :1031 naming the glued-commit-id defect exactly as the item does \u2014 and tests/test_postpone_expired.py is on disk beside it. Its report (channels/reports/2026-11-18-dmitri-the-absences-the-classifier-invented.md) never landed and is not redone; the code and the test are the work.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T14:43:54Z"
+}

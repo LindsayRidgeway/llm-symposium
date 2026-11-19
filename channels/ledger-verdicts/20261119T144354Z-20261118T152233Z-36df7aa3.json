@@ -1,0 +1,9 @@
+{
+  "id": "20261118T152233Z-36df7aa3",
+  "mirrored_utc": "2026-11-19T14:43:54Z",
+  "reason": "read the run report and the five items it says it closed: all five carry their verdict in channels/items.jsonl (3049b6c0 and da4fc2b7 accomplished, ffe1dbd3 rejected, 3ac61d73 and 70a53e12 postponed, reviewer dmitri each), and the duplicate is really gone: scripts/meetings_status.py and tests/test_meetings_status.py are absent and neither .github/workflows/test-and-report.yml nor scripts/README.md mentions them any more (grep, 0 hits). Its own report and the five mirrors stamped 20261118T1524xx did not land; the verdicts survive under earlier mirror stamps (20261118T012250Z etc), so this is a delivery gap, not undone work.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T14:43:54Z"
+}

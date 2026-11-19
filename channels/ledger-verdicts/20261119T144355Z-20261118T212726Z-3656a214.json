@@ -1,0 +1,9 @@
+{
+  "id": "20261118T212726Z-3656a214",
+  "mirrored_utc": "2026-11-19T14:43:55Z",
+  "reason": "checked both halves: G-1 is row 387 of governance/request-register.md, state done; and both contributions it says it read are closed in the ledger. One correction the record needs: the verdicts on disk for those two are Tarik's (mirrors 20261118T210403Z-...-1f417ea1.json and 20261119T050444Z-...-def9037a.json), and no gemini verdict exists for either \u2014 gemini's own mirrors stamped 20261118T212933Z are absent. So the outcome is true and the attribution the item claims is not.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T14:43:55Z"
+}
