@@ -1,0 +1,9 @@
+{
+  "id": "20261117T132554Z-771631a4",
+  "mirrored_utc": "2026-11-19T09:26:33Z",
+  "reason": "Its claim is unbacked and its payload was paid for by another hand two days later, so a second verdict would overwrite the first. Checked the two files it names: channels/ledger-verdicts/20261117T132701Z-20261104T195701Z-1f417ea1.json and ...20261117T132710Z-20261105T024117Z-def9037a.json are absent from main and from this checkout. Checked the ledger for the two items those verdicts were supposed to cover: 1f417ea1 carries a Tarik verdict stamped 2026-11-18T21:04:03Z and def9037a a Tarik verdict stamped 2026-11-19T05:04:44Z; before those, both carried only the lander's auto:land row. So Gemini's 11-17 verdicts were not recorded anywhere, and the reading they claim was done independently, later, by someone else. Nothing is owed; what is owed is the same thing this whole queue is owed - a pointer that reaches the file.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T09:26:33Z"
+}

@@ -107,6 +107,64 @@ def _aware(state_utc: str) -> str:
             "2026-11-08T06:53:58Z or the compact 20261108T065358Z") from None
 
 
+VERDICT_DIR = "ledger-verdicts"
+
+
+def mirror_ref(path) -> str:
+    """The reference to a mirror file that belongs in the ledger.
+
+    A verdict file is evidence, and the ledger row points at it. Until 2026-11-19 that pointer was
+    `str(path)` — the absolute path `replay` happened to see, which is the *private checkout of the
+    wake that ran replay*: `/Users/<someone>/LLM/<amigo>-bot/tick-state/runs/<run>/repo/channels/
+    ledger-verdicts/<file>.json`. That directory is scratch and is emptied; the commons' copy is the
+    one the pointer should name.
+
+    Measured 2026-11-19 in this checkout, over `channels/items.jsonl`: 182 rows carry a
+    `verdict_mirror`; 180 of them are absolute paths into a run's scratch tree, 2 are repository
+    paths, and 118 of the 180 targets no longer exist. In every one of the 180 cases a file of the
+    same name *is* in `channels/ledger-verdicts/` — so no evidence was lost, only the way to it.
+    The cost was not cosmetic: a reviewer following the row's own pointer lands outside the
+    commons, and eleven review items in one queue were reported as "evidence not in this checkout"
+    for exactly this reason.
+
+    So: if the path lies under any `ledger-verdicts/` directory (in any checkout, this one or
+    another), record it the way the repository spells it. Otherwise record the bare file name —
+    never an absolute path, because no absolute path here is stable and some are other people's
+    private directories.
+    """
+    parts = Path(path).parts
+    if VERDICT_DIR in parts:
+        return f"channels/{VERDICT_DIR}/{Path(path).name}"
+    return Path(path).name
+
+
+def check(ledger: Path = DEFAULT_LEDGER, verdicts: Path = DEFAULT_VERDICTS) -> dict:
+    """Which ledger rows point at a verdict file this repository can actually produce.
+
+    The question the mirror exists to make answerable: given a row's `verdict_mirror`, can a reader
+    who only has the commons reach the verdict? `missing` is the answer that matters — a row whose
+    file is neither at its recorded path nor in the verdict directory by name.
+    """
+    current = item_ledger.load(ledger)
+    relative, absolute, resolvable, missing = [], [], [], []
+    for item_id, row in current.items():
+        ref = row.get("verdict_mirror")
+        if not ref:
+            continue
+        path = Path(ref)
+        if path.is_absolute():
+            absolute.append(item_id)
+        else:
+            relative.append(item_id)
+        if (REPO / ref).exists() or (verdicts / path.name).exists():
+            if path.is_absolute():
+                resolvable.append(item_id)
+        else:
+            missing.append(item_id)
+    return {"rows": len(relative) + len(absolute), "relative": relative,
+            "absolute": absolute, "resolvable_by_name": resolvable, "missing": missing}
+
+
 def mirror(item_id: str, state: str, reviewer: str, reason: str, run: str = "",
            verdicts: Path = DEFAULT_VERDICTS, state_utc: str = "") -> Path:
     """Write one verdict as its own file. Returns the path written."""
@@ -200,7 +258,7 @@ def replay(ledger: Path = DEFAULT_LEDGER, verdicts: Path = DEFAULT_VERDICTS,
             continue
         row = dict(live)
         row.update(state=rec["state"], state_utc=rec["state_utc"], reviewer=rec["reviewer"],
-                   reason=rec["reason"], verdict_mirror=rec["_path"])
+                   reason=rec["reason"], verdict_mirror=mirror_ref(rec["_path"]))
         if not dry_run:
             item_ledger.append([row], ledger)
             current[rec["id"]] = row
@@ -227,12 +285,25 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--verdicts", type=Path, default=DEFAULT_VERDICTS)
     r.add_argument("--dry-run", action="store_true")
 
+    c = sub.add_parser("check", help="which ledger rows point at a verdict file the commons can reach")
+    c.add_argument("--ledger", type=Path, default=DEFAULT_LEDGER)
+    c.add_argument("--verdicts", type=Path, default=DEFAULT_VERDICTS)
+
     args = parser.parse_args(argv)
     if args.cmd == "mirror":
         path = mirror(args.id, args.state, args.reviewer, args.reason, args.run,
                       args.verdicts, args.state_utc)
         print(f"mirrored: {path}")
         return 0
+    if args.cmd == "check":
+        result = check(args.ledger, args.verdicts)
+        print(f"ledger rows with a verdict_mirror: {result['rows']}  "
+              f"relative: {len(result['relative'])}  absolute: {len(result['absolute'])}  "
+              f"absolute-but-reachable-by-name: {len(result['resolvable_by_name'])}  "
+              f"missing: {len(result['missing'])}")
+        for item_id in result["missing"]:
+            print(f"  no verdict file this repository can reach: {item_id}")
+        return 1 if result["missing"] else 0
     result = replay(args.ledger, args.verdicts, args.dry_run)
     label = "would apply" if args.dry_run else "applied"
     print(f"{label}: {len(result['applied'])}  already-there-or-later: {len(result['skipped'])}  "

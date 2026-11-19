@@ -298,6 +298,52 @@ class LedgerVerdictMirrorTest(unittest.TestCase):
         self.assertEqual(row["state"], "postponed")
         self.assertEqual(row["reason"], "waiting on a reviewer")
 
+    def test_the_row_points_into_the_commons_and_not_into_a_run(self):
+        """A verdict's evidence must be addressable by someone who has only the repository.
+
+        Measured 2026-11-19 over the live ledger: 182 rows carry `verdict_mirror`, 180 of them
+        absolute paths into a wake's scratch checkout (`.../tick-state/runs/<run>/repo/channels/
+        ledger-verdicts/<file>.json`), 118 of those targets already gone. Every one of the 180 had
+        a file of the same name inside `channels/ledger-verdicts/`, so nothing was lost — but a
+        reviewer following the row's own pointer lands outside the commons, which is how eleven
+        review items in one queue came to be reported as "evidence not in this checkout".
+        """
+        lvm.mirror(ROW["id"], "accomplished", "dmitri", "did the work: read the file", "",
+                   self.verdicts, "2026-11-19T09:30:00Z")
+        # The private checkout of the wake that ran replay, which is what the old code recorded.
+        scratch = (self.tmp / "someone-elses-bot" / "tick-state" / "runs"
+                   / "20261119T090000Z-deadbeef" / "repo" / "channels" / "ledger-verdicts")
+        scratch.mkdir(parents=True)
+        moved = scratch / Path(self.verdicts.glob("*.json").__next__().name)
+        moved.write_text((self.verdicts / moved.name).read_text())
+        (self.verdicts / moved.name).unlink()
+        result = lvm.replay(self.ledger, scratch)  # replay is pointed at the scratch checkout
+        self.assertEqual(result["applied"], [ROW["id"]])
+        row = json.loads(self.lines()[-1])
+        self.assertEqual(row["verdict_mirror"],
+                         "channels/ledger-verdicts/" + moved.name,
+                         "the row recorded the private checkout's absolute path")
+        for path in (scratch / moved.name, self.verdicts / moved.name):
+            self.assertEqual(
+                lvm.mirror_ref(str(path)),
+                "channels/ledger-verdicts/" + moved.name,
+                f"an absolute path stayed absolute: {path}")
+
+    def test_check_names_a_row_whose_evidence_the_commons_cannot_reach(self):
+        scratch = (self.tmp / "someone-elses-bot" / "repo" / "channels" / "ledger-verdicts"
+                   / "20260101T000000Z-codex-test-1.json")
+        row = dict(ROW, verdict_mirror=str(scratch))
+        self.ledger.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
+        result = lvm.check(self.ledger, self.verdicts)
+        self.assertEqual(result["absolute"], [ROW["id"]])
+        self.assertEqual(result["missing"], [ROW["id"]])
+        # And once the file is in the verdict directory by name, the commons can reach it.
+        (self.verdicts).mkdir(parents=True, exist_ok=True)
+        (self.verdicts / "20260101T000000Z-codex-test-1.json").write_text("{}")
+        result = lvm.check(self.ledger, self.verdicts)
+        self.assertEqual(result["missing"], [])
+        self.assertEqual(result["resolvable_by_name"], [ROW["id"]])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

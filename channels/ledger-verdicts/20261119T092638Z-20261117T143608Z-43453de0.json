@@ -1,0 +1,9 @@
+{
+  "id": "20261117T143608Z-43453de0",
+  "mirrored_utc": "2026-11-19T09:26:38Z",
+  "reason": "The work this run describes is in the ledger; the four files it names are not, and that gap is the finding. Absent from main: channels/ledger-verdicts/20261117T143648Z-20261115T172326Z-63a09e5a.json, ...20261117T143814Z-20261116T011434Z-869b2981.json, ...20261116T031452Z-16e9f394.json, ...20261116T051452Z-64d9085d.json. Present in the ledger, reviewer desi, all stamped 2026-11-17 between 20:39:29Z and 20:40:06Z: 63a09e5a rejected, 869b2981 rejected (first cut of an artifact superseded by its third), 16e9f394 rejected (second cut), 64d9085d postponed after being reviewed as a patch in a throwaway worktree. So the four verdicts exist, several hours after the run that claimed them, written by a later run of the same body - which is the honest shape of this item: the mirror is what failed, not the review. Accomplished; the record is the ledger rows, not the paths it declares.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T09:26:38Z"
+}

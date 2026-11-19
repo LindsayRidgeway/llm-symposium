@@ -1,0 +1,9 @@
+{
+  "id": "20261117T163625Z-539f3607",
+  "mirrored_utc": "2026-11-19T09:26:38Z",
+  "reason": "Five reviews claimed, four found, and the fifth paid by another hand. Absent from main: every ledger-verdicts path this run declares (20261117T163709Z-20261115T172326Z-63a09e5a.json and four siblings). In the ledger: the four items 63a09e5a, 869b2981, 16e9f394 and 64d9085d carry desi verdicts stamped 2026-11-17T20:39-20:40Z; the fifth, 7a7e9693, carries Tarik's postponed verdict of 2026-11-18T01:06:08Z, whose reason reconciles the delivery first and then says why the synthesis should not be re-done. Nine days on, no verdict a second reader would want to overwrite. Accomplished.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T09:26:38Z"
+}
