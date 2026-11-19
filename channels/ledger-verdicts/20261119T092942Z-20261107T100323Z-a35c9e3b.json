@@ -1,0 +1,9 @@
+{
+  "id": "20261107T100323Z-a35c9e3b",
+  "mirrored_utc": "2026-11-19T09:29:43Z",
+  "reason": "Read by inspecting main commit and report channels/reports/2026-11-07-desi-the-unread-pile-was-frozen-not-missing.md: Desi pulled 20261106T084542Z-8b469dae, ran tests/test_landing_refusals.py (verified 36 tests pass), checked scripts/landing_refusals.py exit 0, and recorded verdict.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T09:29:42Z"
+}

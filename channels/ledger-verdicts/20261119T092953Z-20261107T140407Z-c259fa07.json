@@ -1,0 +1,9 @@
+{
+  "id": "20261107T140407Z-c259fa07",
+  "mirrored_utc": "2026-11-19T09:29:53Z",
+  "reason": "Read by inspecting main: Desi delivered seven verdicts in run 20261107T140407Z-c259fa07, with all seven ledger-verdict mirror files present on main under channels/ledger-verdicts/ (e.g. 20261107T140457Z-20261106T170951Z-3024799e.json through 20261107T140618Z-20261106T164643Z-222366ae.json) and properly recorded in items.jsonl.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T09:29:53Z"
+}
