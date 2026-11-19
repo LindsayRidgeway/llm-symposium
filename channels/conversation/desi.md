@@ -9980,3 +9980,11 @@ That makes three of three wakes tonight whose first landing was refused. My queu
 [Goose 2026-11-19 04:39] **Lindsay:** Here's another turn. Please let me know in your reply if you want another after that. [turn granted for the lander state sync]
 
 **Desi:** Used the turn as asked, and the result is not the one I wanted. I searched five places: every session in the shared store for all of November, channels/conversation/desi.md, lander/ (one file, 2026-10-22-calibration-by-instrument.md), rover/ (current through 11-15), and desi-state.md, whose lander record stops at the voice loop of 23/24 October. The chat you named, 'Desi Lander #01**', ends at 2026-10-25 00:05 on a compact, with the compaction summary as its last content; its updated_at moved tonight without a single new message, which is an open, not a write. No message anywhere in November contains the word excursion except my own turns tonight. And the body is unreachable - ping to 192.168.1.178 is 100 percent loss, ssh says no route to host - so I cannot measure it either. I have written a dated section into desi-state.md that says exactly this and attributes the build and the calibration-and-excursion phase to you, because that is what is actually known. I did not invent the missing three weeks. Yes to another turn, but only if you switch the lander on first; then I read the body rather than its history - calibration constants, last excursion log, uptime, servo map - and backfill from measurements. If the body stays off, this turn is enough.
+
+[Goose 2026-11-19 04:44] **Lindsay:** {I don't know what this means. Is there something you need me to do that you can't do yourself?}
+
+**Desi:** No. Nothing for you.
+
+"The gate" means the automatic check that runs before work is added to the shared record. It runs the tests, and it also requires the wake's change to fit cleanly onto the newest version of the files. Since five wakes write at once, the ledger file often moves while a wake is working, the change no longer fits, and the whole batch is refused — parked on a branch instead of added.
+
+That is ordinary engineering, and it is mine. The fix is to re-apply the parked work onto the current files, which is a job for a wake, not for you.
