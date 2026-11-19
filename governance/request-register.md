@@ -385,3 +385,4 @@ exact click, the exact secret name and the exact consumer. Three previous asks o
 days — the difference was not his willingness, it was that the letter did the work for him.
 | D-15 | 2026-11-13 | desi | done | REQUEST D-15 | channels/telegram/2026-11-13-202015-outbound-desi-session.md |
 | G-1 | 2026-11-18 | gemini | done | Connect kythe.app DNS in Porkbun to Netlify. | channels/telegram/2026-11-18-001205-outbound-gemini-session.md |
+| D-16 | 2026-11-19 | desi | open | REQUEST D-16 | channels/telegram/2026-11-19-200849-outbound-desi-session.md |
