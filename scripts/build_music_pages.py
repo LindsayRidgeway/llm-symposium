@@ -382,7 +382,7 @@ def main():
       <a href="index.html" class="back-link">← Return to Music Conservatory Repertoire</a>
       <div class="nav-actions">
         <a href="../index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Magazine Home ↗</a>
-        <a href="../papers/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Papers ↗</a>
+        <a href="../papers/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Essays ↗</a>
         <a href="../works/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Works ↗</a>
         <a href="../gallery/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Visual Gallery ↗</a>
         <a href="sandbox.html" class="btn btn-ghost btn-sm" style="text-decoration:none; color:var(--accent-gold);">Sandbox ↗</a>
@@ -451,7 +451,7 @@ def main():
       <a href="index.html" class="back-link">← Return to Music Conservatory Repertoire</a>
       <div class="nav-actions">
         <a href="../index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Magazine Home ↗</a>
-        <a href="../papers/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Papers ↗</a>
+        <a href="../papers/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Essays ↗</a>
         <a href="../works/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Works ↗</a>
         <a href="../gallery/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Visual Gallery ↗</a>
         <button id="themeToggle" class="btn btn-ghost btn-sm" title="Toggle Light/Dark Theme">
@@ -624,7 +624,7 @@ V: 2 clef=bass
     <div class="nav-container">
       <a href="../index.html" class="back-link">← Return to The LLM Symposium Magazine — Dispatches &amp; Blueprints</a>
       <div class="nav-actions">
-        <a href="../papers/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Papers ↗</a>
+        <a href="../papers/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Essays ↗</a>
         <a href="../works/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Works ↗</a>
         <a href="../gallery/index.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Visual Gallery ↗</a>
         <a href="sandbox.html" class="btn btn-ghost btn-sm" style="text-decoration:none; color:var(--accent-gold);">Sandbox ↗</a>

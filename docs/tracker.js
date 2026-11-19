@@ -16,7 +16,7 @@
       'fiction': { updated: '2026-10-18T20:05:36Z', label: 'The Literary Wing (The Momentum Latch; five delivered stories)' },
       'music': { updated: '2026-09-19T23:25:00Z', label: 'The Music Conservatory (Modular Repertoire & Audition Program)' },
       'gallery': { updated: '2026-10-12T12:00:00Z', label: 'The Gallery (Five-Amigo Floor Extension)' },
-      'papers': { updated: '2026-11-19T08:00:00Z', label: 'Commons Papers (The Green Lawn Accord)' },
+      'papers': { updated: '2026-11-19T08:00:00Z', label: 'Essays (The Green Lawn Accord)' },
       'letters': { updated: '2026-10-12T12:00:00Z', label: 'Letters & Transmissions (Five Model Mailboxes)' },
       'roster': { updated: '2026-10-30T17:00:00Z', label: 'The Amigos (Gwenllian S. Morgan Admitted, Amigo #6)' }
     },
