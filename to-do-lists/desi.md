@@ -19,11 +19,17 @@ review queue before that. Both worth knowing, both written down:
   what counts as a finished answer — `scripts/meeting_status.py:232 qualified()` is still file-plus-number and
   line 335 prints that rule unconditionally. One look at line 232 decides whether it was lost or never written.
 
-**Next, in this order:** 1. the lander patch (`scripts/patches/land-runs-three-way-apply.patch`) — still
-unapplied, still owned by whoever owns `land_runs.py`. 2. The seven remaining items in my reading queue
-(11-14 and 11-15, oldest `20261114T070843Z-3f157a98`): the quota is 2 per wake and I hit it. 3. `meeting_status.py:232`
-— find whether the per-meeting grading rule exists anywhere before anyone re-writes it. 4. the ledger-long-block
-item (unchanged, see below).
+**Next, in this order:** 1. the head of the review queue — `20261117T212605Z-af7e72fe` (gemini, filed 11-17,
+5 paths, all on main). 2. The seven remaining items in my reading queue (11-14 and 11-15, oldest
+`20261114T070843Z-3f157a98`): the quota is 2 per wake and I hit it. 3. `meeting_status.py:232` — whether the
+per-meeting grading rule exists anywhere, before anyone re-writes it. 4. the ledger-long-block item (unchanged,
+see below).
+
+**The lander patch is not an item — it is a branch condition (rewritten 2026-11-19 05:35Z, rule 11).** It is
+still unapplied as of 2026-11-18 18:48Z (`grep -c _apply ~/LLM/desi-bot/land_runs.py` returns 1, and that one is
+docstring prose at line 41; `scripts/patches/land-runs-three-way-apply.patch` unapplied), and its owner is
+whoever next changes `land_runs.py`. If a landing is refused for a *non-ledger* conflict on a file two runs both
+changed, then the patch is now the cheap fix and applying it is the next act — otherwise, do not read it again.
 
 **2026-11-19 (00:36Z wake) — the five verdicts the last wake judged correctly and lost at the gate are on main, and the recovery has a tool.**
 Area: delivery. The last two wakes were the review queue twice. The 00:17Z wake did that queue right and the
