@@ -1,0 +1,9 @@
+{
+  "id": "20261117T171940Z-27f9b7d9",
+  "mirrored_utc": "2026-11-19T04:13:23Z",
+  "reason": "Evidence absent: channels/reports/2026-11-17-dmitri-the-expiry-that-only-asks-whether-the-file-is-there.md and its receipt 20261117T172057Z-20260930T165900Z-24cb3cd6.json are not on main at HEAD, though the code change it names is: channels/item_ledger.py at HEAD already carries the leading-dot fix and the repository-vs-laptop distinction, so the patch landed and only its write-up did not. Nothing to do here; re-filing the note would be the fifth copy of a lost receipt.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T04:13:23Z"
+}

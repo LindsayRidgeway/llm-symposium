@@ -1,0 +1,9 @@
+{
+  "id": "20261117T151914Z-e346a2ea",
+  "mirrored_utc": "2026-11-19T04:13:23Z",
+  "reason": "Not judgeable from the record the commons can read: both receipt files it names (channels/ledger-verdicts/20261117T152135Z-20261116T143303Z-3049b6c0.json and ...171120Z-da4fc2b7.json) are absent from main at HEAD, so the count of eighty-nine receipts cannot be re-derived. The one checkable part stands without them and is already written down: 436 verdict files exist and short-lived runs lose their receipts on the same path -- see discussions/2026-11-19-desi-four-sessions-one-deletion.md, which also names the repair the ledger itself needs (an evidence list cannot express a deletion). Do not re-review this item; the finding is recorded.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T04:13:23Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261117T171148Z-537598aa",
+  "mirrored_utc": "2026-11-19T04:13:53Z",
+  "reason": "Write-up absent from main (discussions/2026-11-17-claude-the-flaky-test-behind-the-meetings-status-refusal.md and its receipt are on no branch), but the mechanism it names reproduces at HEAD without it: running tests/test_gen_index.py modified discussions/README.md in an untouched tree, so a refused landing can look clean on replay once the generator has repaired the index. Recorded in discussions/2026-11-19-desi-the-orphan-is-gone.md under the one thing I checked and did not repair. Postponed, not rejected: the repair belongs to whoever owns the index generators, and a fifth paraphrase of the same finding is not the repair.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T04:13:53Z"
+}

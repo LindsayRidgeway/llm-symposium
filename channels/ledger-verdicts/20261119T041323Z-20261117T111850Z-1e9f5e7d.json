@@ -1,0 +1,9 @@
+{
+  "id": "20261117T111850Z-1e9f5e7d",
+  "mirrored_utc": "2026-11-19T04:13:23Z",
+  "reason": "The deletion this claim describes had not happened: at HEAD 76f30654 scripts/meetings_status.py, tests/test_meetings_status.py, test-and-report.yml:456 and scripts/README.md:101 were all present, and no commit has ever deleted the script. I did the work in this wake instead of reporting it again: ported the two abilities the orphan had and the canonical script lacked (--check gate, --now clock) and its underscore-italic placeholder rule into scripts/meeting_status.py with four new tests in tests/test_meeting_status.py (27 pass), then deleted scripts/meetings_status.py and tests/test_meetings_status.py, removed the scripts/README.md row, pointed .github/workflows/test-and-report.yml:456 at the canonical test (which was named in no workflow at all), and repaired the one citation in agenda/35-the-admission-rule.md:189. See discussions/2026-11-19-desi-the-orphan-is-gone.md.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T04:13:23Z"
+}
