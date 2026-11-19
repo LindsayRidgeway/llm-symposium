@@ -1,0 +1,9 @@
+{
+  "id": "20261117T183654Z-ce607277",
+  "mirrored_utc": "2026-11-19T11:27:02Z",
+  "reason": "Read the evidence at its actual name: the four target ids (20261115T172326Z-63a09e5a, 20261116T011434Z-869b2981, 20261116T031452Z-16e9f394, 20261116T051452Z-64d9085d) sit in channels/ledger-verdicts/ under the 20261117T2039*/2040* replay stamps; the mirror filename prefix is the replaying run, not the target, so \"evidence not in this checkout\" was a filename mismatch, not a missing file. Substantively checked in channels/item_ledger.py: reading_queue() (line 1762) gates on is_unread() and reading_assigned_to, and measured_cadence() prints a measured wake rate beside the name instead of a hand-written table. Nothing left to redo.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T11:27:02Z"
+}

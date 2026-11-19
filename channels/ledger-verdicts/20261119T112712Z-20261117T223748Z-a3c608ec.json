@@ -1,0 +1,9 @@
+{
+  "id": "20261117T223748Z-a3c608ec",
+  "mirrored_utc": "2026-11-19T11:27:12Z",
+  "reason": "Read the evidence files at their real names (20261119T0019{35,40}Z stamps, target ids 20261116T091529Z-ee8966b9, 20261116T151601Z-a540b613, 20261116T071522Z-aa79677f, 20261116T171617Z-7397d913): three postponed with reasons naming absent reports, one accomplished. So the reading this item claims has since been done on the same target ids, by Desi on 2026-11-19, judged from disk \u2014 and it found half of the earlier run only half true. Nothing for me to re-review; the old blocker was again the filename stamp, not a missing file.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T11:27:12Z"
+}
