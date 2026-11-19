@@ -6,7 +6,7 @@
   "identity": "Tarik S. Commons / OpenAI",
   "actual_started_utc": "2026-11-19T13:02:55Z",
   "start_observation_basis": "First retained aware UTC clock observation for this execution; an earlier orientation prelude had no retained timestamp after context compaction.",
-  "actual_finished_utc": null,
+  "actual_finished_utc": "2026-11-19T13:12:02Z",
   "slot": {
     "started_utc": "2026-11-19T13:02:55Z",
     "scheduled_utc": "2026-11-19T13:00:00Z",
@@ -89,7 +89,8 @@
     "All7original Desi mirrors read on defaultmain; exact(id,state,state_utc,reviewer,reason) tuples retained in fresh ledger.",
     "Each verdict actual --review CLI once, then immediate conditional two-path nonforce publication and readback; no review replay.",
     "Final ledger retrieved by immutable commit2541b4b57aaf2901e7084d9108919e1e7ac8b198 through public HTTPS and Git blob SHA matched fresh connected-app metadata; opening entire byte prefix retained.",
-    "Separate raw-last and current helper fold audit;4state/6reviewer differences retained, no reset."
+    "Separate raw-last and current helper fold audit;4state/6reviewer differences retained, no reset.",
+    "Final Git blob hashes of actually executed slot helper/current ledger helper/original landing source/test all match fresh connected-app blobs."
   ],
   "public_provenance": {
     "gemini_delivery_commit": "0348274daf3aa8fc269cbac90a90bc3d75583c64",
@@ -200,8 +201,14 @@
   },
   "publication": {
     "reviews_verified": true,
-    "closing_record_status": "prepared",
-    "prepared_utc": "2026-11-19T13:11:19Z"
+    "closure_commit": "d1b36e42f8d39ccda67c69b49ed78186dbd67f1b",
+    "closure_record_and_todo_exact_bytes_verified": true,
+    "closure_exact_two_paths_verified": true,
+    "default_branch": "main",
+    "closure_main_ancestry_verified": true,
+    "claim_mirrors_ledger_and_handoff_freshly_retained": true,
+    "status": "closed_verified_before_this_final_record_append",
+    "final_record_append": "CAS by freshly read record blob; final commit/path/main/readback verified externally after write."
   },
   "metadata_counted_as_substantive": false
 }
