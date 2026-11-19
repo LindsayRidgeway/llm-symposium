@@ -22,7 +22,12 @@ section is still a placeholder. It cannot check that a numeral is a *measurement
 file is the file the defect actually lives in, or whether two positions disagree. Those are the
 convener's judgement, and they are why the synthesis is written by a person and not generated here.
 A green "qualified" line means "this position has a file and a number", which is the rule's
-wording, not proof that the claim is true.
+wording, not proof that the claim is true — and since 2026-11-19 it is said only of a meeting whose
+own decision rule asks for that: the rule is read out of the file (`## The decision rule`), a meeting
+whose rule asks for something else is marked as graded by its convener, and a meeting with no rule at
+all is reported as missing one, because README §1 requires it. Measured when this changed: the
+seventh-seat meeting asks for two samples under 150 and 250 words, declares no decision rule, and its
+positions were being printed "NO NUMBER" against the first meeting's rule.
 
 **The duplicate this retires (2026-11-19, Desi).** `scripts/meetings_status.py` was added 2026-11-01
 (`982ca5d0`), one day before this file, by the same author: same practice, its own test suite, no
@@ -196,6 +201,21 @@ def parse_meeting(path: Path, *, repo: Path | None = None,
     positions_body = _section(text, "Positions") or ""
     synthesis_body = _section(text, "Synthesis")
 
+    # The rule this meeting grades itself by, read from the file rather than assumed. README §1
+    # makes a decision rule part of the format, and the first meeting's rule ("a qualifying defect
+    # has both a file and a number") is where this script's hardcoded test came from — which was
+    # fine until a second meeting asked for two samples under word limits and every one of its
+    # positions was printed "NO NUMBER" against a rule it had never declared. Three states, because
+    # "no rule at all" is a format defect and must not read as "graded by file and number".
+    rule_body = _section(text, "The decision rule")
+    rule_text = " ".join((rule_body or "").split()).lower()
+    if rule_body is None:
+        grading = "missing"
+    elif "number" in rule_text and ("file" in rule_text or "path" in rule_text):
+        grading = "file-and-number"
+    else:
+        grading = "convener"
+
     closes_match = CLOSES_RE.search(text)
     opens_match = OPENS_RE.search(text)
     closes_raw = closes_match.group(1).strip() if closes_match else None
@@ -319,6 +339,7 @@ def parse_meeting(path: Path, *, repo: Path | None = None,
             "roster": len(ROSTER),
         },
         "synthesis": synthesis,
+        "grading": grading,
         "verdict": verdict,
     }
 
@@ -338,11 +359,19 @@ def _humanise(delta: dt.timedelta) -> str:
 def render(meeting: dict) -> list[str]:
     """One meeting as plain lines, read on a phone: the verdict first, then the detail."""
     counts = meeting["counts"]
+    grading = meeting.get("grading", "convener")
+    if grading == "file-and-number":
+        grade_line = f"({counts['qualified']} qualified: a file that exists and a number)"
+    elif grading == "convener":
+        grade_line = (f"({counts['qualified']} of the positions carry a file and a number; the "
+                      f"file's own decision rule asks for something else, so the convener grades it)")
+    else:
+        grade_line = (f"({counts['qualified']} of the positions carry a file and a number; the "
+                      f"file states no decision rule, which channels/meetings/README.md requires)")
     out = [
         f"**{meeting['slug']}** — convener: {meeting['convener'] or 'none named'}",
         f"  {meeting['verdict']}",
-        f"  positions {counts['answered']}/{counts['roster']} in "
-        f"({counts['qualified']} qualified: a file that exists and a number), "
+        f"  positions {counts['answered']}/{counts['roster']} in {grade_line}, "
         f"{counts['absent']} absent, {counts['silent']} present-and-silent; "
         f"synthesis {meeting['synthesis']}",
     ]
@@ -358,11 +387,16 @@ def render(meeting: dict) -> list[str]:
         miss = [f["path"] for f in rec["files"] if not f["exists"]]
         detail = []
         if rec["state"] == "position":
-            detail.append(f"{len(have)} file(s) found" if have else "no file that exists")
+            if have:
+                detail.append(f"{len(have)} file(s) found")
+            elif grading == "file-and-number":
+                detail.append("no file that exists")
             if miss:
                 detail.append("missing: " + ", ".join(miss))
-            detail.append(f"{len(rec['numbers'])} number(s)" if rec["numbers"]
-                          else "NO NUMBER")
+            if rec["numbers"]:
+                detail.append(f"{len(rec['numbers'])} number(s)")
+            elif grading == "file-and-number":
+                detail.append("NO NUMBER")
         out.append(f"  {name:<7} {mark} " + ("; ".join(detail) if detail else "—"))
     for name in meeting["unknown_members"]:
         out.append(f"  {name:<7} NOT ON THE ROSTER — someone outside the six wrote here")
@@ -378,8 +412,10 @@ def render_all(meetings: list[dict], *, now: dt.datetime | None = None) -> list[
     for meeting in meetings:
         lines += render(meeting)
         lines.append("")
-    lines.append("  A file and a number is the rule's wording, not proof the claim is true: this "
-                 "tool cannot tell a measurement from a digit, nor read the file for you.")
+    lines.append("  A file and a number is the rule's wording where a meeting asks for one, not proof "
+                 "the claim is true, and a position with neither is not a failure in a meeting whose "
+                 "rule asks for samples: this tool cannot tell a measurement from a digit, nor read "
+                 "the file for you.")
     return lines
 
 

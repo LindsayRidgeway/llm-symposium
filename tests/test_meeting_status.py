@@ -39,7 +39,9 @@ def write_meeting(tmp: Path, body: str, name: str = "2026-11-01-probe.md") -> Pa
 
 
 def meeting_text(*, closes: str = "2026-11-03 21:00 EST", slots: str,
-                 synthesis: str = "*(written by the convener after the close)*") -> str:
+                 synthesis: str = "*(written by the convener after the close)*",
+                 rule: str | None = "1. Rank the qualifiers.") -> str:
+    rule_block = "" if rule is None else "## The decision rule\n\n" + rule + "\n\n"
     return f"""# Meeting probe
 
 **Convener:** Dmitri
@@ -52,11 +54,7 @@ def meeting_text(*, closes: str = "2026-11-03 21:00 EST", slots: str,
 
 Because.
 
-## The decision rule
-
-1. Rank the qualifiers.
-
-## Positions
+{rule_block}## Positions
 
 One slot per member.
 
@@ -341,6 +339,55 @@ class CheckModeTest(unittest.TestCase):
             repo = self._repo(tmp, synthesis="_(written by the convener after the close)_")
             path = sorted((repo / "channels" / "meetings").glob("*.md"))[0]
             self.assertEqual(ms.parse_meeting(path, repo=repo, now=NOW)["synthesis"], "placeholder")
+
+
+class GradingRuleTest(unittest.TestCase):
+    """A meeting's own decision rule decides how its positions are graded — 2026-11-19 (Desi).
+
+    Measured before this: two meetings on disk, two different rules, one hardcoded test. The
+    seventh-seat meeting asks for two samples under word limits and declares no decision rule at
+    all; the daily report printed every position in it as "NO NUMBER" beside a rule it never made.
+    """
+
+    POSITION = "### Dmitri\n42 stones unturned, somewhere, and no file named.\n"
+
+    def _parse(self, tmp: str, **kwargs) -> dict:
+        repo = Path(tmp)
+        path = write_meeting(repo, meeting_text(slots=self.POSITION, **kwargs))
+        return ms.parse_meeting(path, repo=repo, now=NOW)
+
+    def test_a_rule_that_asks_for_a_file_and_a_number_grades_that_way(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            data = self._parse(tmp, rule="A qualifying defect has both a file and a number.")
+            self.assertEqual(data["grading"], "file-and-number")
+            text = "\n".join(ms.render(data))
+            self.assertIn("no file that exists", text)
+
+    def test_a_rule_that_asks_for_samples_is_not_graded_by_file_and_number(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            data = self._parse(tmp, rule="Two samples, under 150 words each. No verdict.")
+            self.assertEqual(data["grading"], "convener")
+            text = "\n".join(ms.render(data))
+            self.assertNotIn("NO NUMBER", text)
+            self.assertNotIn("no file that exists", text)
+            self.assertIn("the convener grades it", text)
+
+    def test_a_meeting_with_no_decision_rule_is_reported_as_missing_one(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            data = self._parse(tmp, rule=None)
+            self.assertEqual(data["grading"], "missing")
+            self.assertIn("states no decision rule", "\n".join(ms.render(data)))
+
+    def test_the_two_real_meetings_are_graded_by_their_own_rules(self) -> None:
+        meetings = {m["slug"]: m for m in ms.scan(ROOT, now=NOW)}
+        named = meetings["2026-11-01-named-defects"]
+        seat = meetings["2026-11-06-seventh-seat"]
+        self.assertEqual(named["grading"], "file-and-number")
+        self.assertEqual(seat["grading"], "missing")
+        rendered = "\n".join(ms.render(seat))
+        self.assertNotIn("NO NUMBER", rendered,
+                         "a meeting that never asked for a number is marked as missing one")
+        self.assertNotIn("no file that exists", rendered)
 
 
 if __name__ == "__main__":

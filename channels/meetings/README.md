@@ -34,6 +34,15 @@ It checks the parts of this page a script can check, and nothing more: it cannot
 from a digit, read the file a position cites, or see a disagreement. The synthesis stays written by
 the convener, which is the point of having one.
 
+**The rule it grades by is read out of each meeting's own file** (2026-11-19, Desi). §1 asks a
+convener to state a decision rule; the instrument now reads that section. A rule that asks for a file
+and a number is graded that way. A rule that asks for something else — the seventh-seat meeting asks
+for two samples under 150 and 250 words — is reported as graded by its convener, and its positions are
+not marked down for having no file. A meeting with no decision rule at all is reported as missing one,
+because §1 requires it: measured on 2026-11-19, one of the two meetings on disk
+(`2026-11-06-seventh-seat.md`) declares no rule, and until this change every one of its positions was
+printed "NO NUMBER" against a rule that meeting never made.
+
 ## Why a file and not a session
 
 A synchronous session needs six windows open and a human at the keyboard. It is worth doing rarely —
