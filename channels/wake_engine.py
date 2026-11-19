@@ -409,6 +409,56 @@ BLOCKER_CHARS = 300
 BLOCKER_SHOWN = 5
 
 
+REVIEW_HEAD_SHOWN = 3
+REVIEW_HEAD_CHARS = 150
+
+
+def review_head(repo, amigo=None):
+    """The oldest items waiting on this seat, in the prompt rather than behind a command.
+
+    Added 2026-11-18 because the human asked, in four short questions, what a wake does first and
+    when the thing at the head of the queue ever closes. Measured in the answer: the review queue is
+    not in the wake's context at all, so a seat reaches it only by choosing to run a command, and the
+    head of that queue had been the same item for several wakes — a wake arrived, found the item's
+    named report was not on main, and moved on. The head is now shown, with its age and with the
+    named paths that are absent from this checkout, so "unreviewable" is a fact on the page and not
+    a discovery each wake makes again.
+
+    Read-only and silent on error: a missing ledger must not cost a wake its prompt.
+    """
+    amigo = amigo or AMIGO
+    try:
+        sys.path.insert(0, str(Path(repo) / 'channels'))
+        import item_ledger as il
+        items = il.load(Path(repo) / 'channels' / 'items.jsonl')
+    except Exception as exc:
+        return ('=== YOUR REVIEW QUEUE ===\nunreadable this run (%s: %s); run '
+                '`item_ledger.py --queue %s` by hand.' % (type(exc).__name__, exc, amigo))
+    mine = [(r.get('assigned_utc') or r.get('filed_utc') or '', k, r) for k, r in items.items()
+            if il.letter_for(r) == 'W' and r.get('assigned_to') == amigo]
+    if not mine:
+        return ''
+    mine.sort()
+    today = datetime.datetime.now(datetime.timezone.utc)
+    lines = ['=== YOUR REVIEW QUEUE — %d waiting, oldest first ===' % len(mine)]
+    for stamp, key, rec in mine[:REVIEW_HEAD_SHOWN]:
+        try:
+            age = (today - datetime.datetime.strptime(stamp[:19], '%Y-%m-%dT%H:%M:%S')
+                   .replace(tzinfo=datetime.timezone.utc)).days
+        except Exception:
+            age = 0
+        missing = [q for q in (rec.get('paths') or [])
+                   if q and not (Path(repo) / q).exists()]
+        name = rec.get('short_title') or (rec.get('title') or '')[:REVIEW_HEAD_CHARS]
+        lines.append('- %s  %dd  %s  %s' % (key, age, rec.get('amigo') or '?', name[:REVIEW_HEAD_CHARS]))
+        if missing:
+            lines.append('    evidence not in this checkout: %s — recover it or postpone with that '
+                         'reason; do not leave it at the head' % ', '.join(missing[:2]))
+    if len(mine) > REVIEW_HEAD_SHOWN:
+        lines.append('- ... and %d more (`item_ledger.py --queue %s`)' % (len(mine) - REVIEW_HEAD_SHOWN, amigo))
+    return '\n'.join(lines)
+
+
 def human_block(repo, amigo=None):
     """Questions already put to the human, so a wake does not ask the same one twice.
 
@@ -588,6 +638,13 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
     except Exception as exc:
         lines.append('=== WHAT IS DUE ===\nunavailable this run (%s: %s); '
                      'run `python3 scripts/todo_due.py` by hand.' % (type(exc).__name__, exc))
+    try:
+        queue = review_head(repo, amigo=AMIGO)
+        if queue:
+            lines.append(queue)
+    except Exception as exc:                      # a broken block must not lose the whole wake
+        lines.append('=== YOUR REVIEW QUEUE ===\nunavailable this run (%s: %s)'
+                     % (type(exc).__name__, exc))
     try:
         waiting = human_block(repo, amigo=AMIGO)
         if waiting:

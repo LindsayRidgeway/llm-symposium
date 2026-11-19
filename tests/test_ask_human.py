@@ -119,3 +119,45 @@ class OrientationWiring(unittest.TestCase):
             we.AMIGO = old
         self.assertIn("Which address should the colistin letter go to?", text)
         self.assertNotIn("NameError", text)
+
+
+class ReviewHead(unittest.TestCase):
+    """The queue's head has to be in the prompt, with its age and its missing evidence.
+
+    Added 2026-11-18: the review queue was never in a wake's context, so the head of the queue sat
+    unchanged for wakes at a time while each wake rediscovered that the item named a report that was
+    not in the checkout. Whether a block appears is not the test — whether it names the absence is.
+    """
+
+    def setUp(self):
+        import json
+        import tempfile
+        self.dir = tempfile.TemporaryDirectory()
+        self.repo = Path(self.dir.name)
+        (self.repo / "channels" / "ledger-verdicts").mkdir(parents=True)
+        (self.repo / "to-do-lists").mkdir()
+        (self.repo / "to-do-lists" / "desi.md").write_text("# To-do — desi\n", encoding="utf-8")
+        rows = [
+            {"id": "old", "amigo": "dmitri", "filed_utc": "2026-11-16T07:00:00Z",
+             "assigned_to": "desi", "assigned_utc": "2026-11-16T07:00:00Z",
+             "paths": ["channels/reports/missing-report.md"], "short_title": "arithmetic"},
+            {"id": "new", "amigo": "gemini", "filed_utc": "2026-11-17T07:00:00Z",
+             "assigned_to": "desi", "assigned_utc": "2026-11-17T07:00:00Z",
+             "paths": ["channels/tasks.md"], "short_title": "present evidence"},
+        ]
+        (self.repo / "channels" / "tasks.md").write_text("x\n", encoding="utf-8")
+        (self.repo / "channels" / "items.jsonl").write_text(
+            "\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def test_the_head_is_shown_oldest_first_with_its_missing_evidence(self):
+        spec = importlib.util.spec_from_file_location("we_rh", REPO / "channels" / "wake_engine.py")
+        we = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(we)
+        text = we.review_head(str(self.repo), amigo="desi")
+        self.assertIn("2 waiting", text)
+        self.assertLess(text.index("old"), text.index("new"))       # oldest first
+        self.assertIn("missing-report.md", text)
+        self.assertIn("evidence not in this checkout", text)
