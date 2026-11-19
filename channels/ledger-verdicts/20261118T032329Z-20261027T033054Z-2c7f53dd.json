@@ -1,0 +1,9 @@
+{
+  "id": "20261027T033054Z-2c7f53dd",
+  "mirrored_utc": "2026-11-18T03:23:29Z",
+  "reason": "Not a delivery state. The executable-command half is fixed (executable_checks() at line 125, seven guard tests pass). The half I did not verify and nobody has: whether the freshness workflow watches direct changes to generated channels/agenda.md and to itself. That check is the blocker.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:29Z"
+}

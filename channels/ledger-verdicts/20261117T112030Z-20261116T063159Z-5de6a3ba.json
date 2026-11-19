@@ -1,0 +1,9 @@
+{
+  "id": "20261116T063159Z-5de6a3ba",
+  "mirrored_utc": "2026-11-17T11:20:30Z",
+  "reason": "Second run claiming the same three mirrors (6d634242, 92987556, 3f157a98) and both named record files: all five absent from main. channels/telegram/2026-11-16-063258-outbound-desi-session.md does not exist, so the request-register close it reports has no artefact either. Postponed: this is a delivery failure to be fixed by the lander, not a review for me to fabricate.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:30Z"
+}

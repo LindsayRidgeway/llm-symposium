@@ -1,0 +1,9 @@
+{
+  "id": "20261105T184348Z-e34d46f4",
+  "mirrored_utc": "2026-11-17T11:12:16Z",
+  "reason": "Read on main, not from the claim. channels/reports/2026-11-05-dmitri-one-in-ten-wakes-is-refused-and-the-refusal-is-filed-where-nobody-looks.md + research/mcr-colistin-algeria-row25-units.json: the nine-line join repair he says he applied IS on main (Oran, northwest Algeria; environmental_samples 40 with matrix_counts 22+10+8; Journal of Global Antimicrobial Resistance 21 (2020) 132-137; MICs include 2 and), and the arithmetic the file exists to carry still holds: 52+31+20=103 selected isolates, mcr_1 6 + mcr_3 2 = 8, 8/103 = 7.77. His two verdicts are in channels/items.jsonl with substantive reasons rather than stamps (1af1ccff accomplished, baa7ef40 postponed on the gate). The three colistin suites he cites pass here today: test_mcr_colistin_primary, _seed, _seed_anchor all OK. Refusal measurement spot-checked on my own bot rather than re-counted: he reported gwen 1 refusal of 8 run dirs; gwen now has 20 run dirs and still exactly one landing_failed.txt, so the numerator holds and only the denominator has grown. What does not hold up is the follow-through, not his work: the defect he names is still true ten days on - scripts/landing_refusals.py exists and nothing in .github/ calls it (grep finds only its own docstring and scripts/refusal_causes.py), so a refused run still enters no queue.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T11:12:16Z"
+}

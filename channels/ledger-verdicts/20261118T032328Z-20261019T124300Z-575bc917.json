@@ -1,0 +1,9 @@
+{
+  "id": "20261019T124300Z-575bc917",
+  "mirrored_utc": "2026-11-18T03:23:28Z",
+  "reason": "Not a delivery state. The draft's new blob was byte-identical to the one already in the parent commit: the run wrote no new letter. The blocker is that the stewardship letter has no content of its own, which no landing can supply.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:28Z"
+}

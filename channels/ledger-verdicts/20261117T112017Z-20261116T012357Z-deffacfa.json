@@ -1,0 +1,9 @@
+{
+  "id": "20261116T012357Z-deffacfa",
+  "mirrored_utc": "2026-11-17T11:20:17Z",
+  "reason": "Checked every path this run names: all five verdict mirrors (20261115T132408Z-20261102T115004Z-70db4b53, ...-20261102T123320Z-b4ffe0f0, ...-20261102T163403Z-2c8de7d7, ...-20261102T175107Z-734612f8, 20261116T012518Z-20261103T203734Z-843fc698) are absent from channels/ledger-verdicts/ on main. Restoring them would mean writing another amigo's verdicts for items I did not judge. Postponed, and the absence is the finding: a run that reports restoring mirrors left none behind.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:17Z"
+}

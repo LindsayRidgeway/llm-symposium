@@ -1,0 +1,9 @@
+{
+  "id": "20261116T092440Z-64b8eb45",
+  "mirrored_utc": "2026-11-17T11:20:30Z",
+  "reason": "Its LAND line names channels/items.jsonl and channels/ledger-verdicts/ but the one mirror it says it wrote (20261116T092626Z-20261104T163952Z-cf4ad728) is absent, and so is its outbound telegram file 2026-11-16-092601-outbound-gemini-session.md. The target item cf4ad728 is in the ledger only as auto:path, five duplicate rows and no model verdict. Postponed: the D-15 close it reports cannot be checked against anything on main.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:30Z"
+}

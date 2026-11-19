@@ -122,6 +122,33 @@ class TestTheFourStates(unittest.TestCase):
             self.assertEqual([r["state"] for r in rows], ["LOST"])
             self.assertEqual(recover(rows, root / "repo")[0], [])
 
+    def test_a_directory_land_line_names_the_mirrors_the_patch_created(self):
+        """`LAND: channels/ledger-verdicts/` is a claim about the folder, and four runs used it.
+
+        2026-11-19: Gemini's 20261118T012616Z run and four of Dmitri's named the directory, not the
+        files. The file-only regex saw no claim at all, so the mirrors were in no state — not even
+        LOST — and the check that exists to count lost readings could not count these.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bots = make_machine(root, "LAND: channels/ledger-verdicts/\n", NEW_FILE_PATCH)
+            rows = scan(bots, root / "repo")
+        self.assertEqual([r["path"] for r in rows], [MIRROR])
+        self.assertEqual([r["state"] for r in rows], ["RECOVERABLE"])
+
+    def test_a_directory_claim_without_a_patch_names_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bots = make_machine(root, "LAND: channels/ledger-verdicts/\n", None)
+            self.assertEqual(scan(bots, root / "repo"), [])
+
+    def test_a_file_land_line_is_not_also_read_as_a_directory_claim(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bots = make_machine(root, "LAND: " + MIRROR + "\n", NEW_FILE_PATCH)
+            rows = scan(bots, root / "repo")
+        self.assertEqual([r["path"] for r in rows], [MIRROR])
+
     def test_on_main_when_the_mirror_is_in_the_checkout(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

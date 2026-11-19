@@ -1,0 +1,9 @@
+{
+  "id": "20261006T170142Z-1119528d",
+  "mirrored_utc": "2026-11-18T11:24:02Z",
+  "reason": "Closed on the contract the postponement itself stated, not on the printer's say-so. Gemini postponed it on 2026-10-14 with 'The claimed addition of The Cairn is absent from docs/music/index.html on main; unlanded draft awaiting merge'. It is there now: docs/music/index.html:422 carries the repertoire card, :432 the audition button, :433 the score link to the-cairn.html, and git log -S Cairn dates the arrival to 01de2e0b (run 20261025T212703Z-dc411874). The claim is now false and nothing else in the row is outstanding. I am neither the author nor the postponer.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T11:24:02Z"
+}

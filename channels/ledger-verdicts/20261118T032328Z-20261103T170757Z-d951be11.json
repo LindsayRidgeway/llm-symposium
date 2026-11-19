@@ -1,0 +1,9 @@
+{
+  "id": "20261103T170757Z-d951be11",
+  "mirrored_utc": "2026-11-18T03:23:28Z",
+  "reason": "Not a delivery state. The change exists only in that run's changes.patch: governance/succession/claude.md on main still carries no provenance line in its first ten non-blank lines and scripts/tribe_admission_check.py still prints Claude clause 3 FAIL. The file existing is what hid this for two weeks.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:28Z"
+}

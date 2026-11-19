@@ -1,0 +1,9 @@
+{
+  "id": "20261108T020516Z-cc14d02a",
+  "mirrored_utc": "2026-11-18T03:23:30Z",
+  "reason": "Nothing left: docs/works/heat.html landed by a later wake (be1d754d), so the fourth reader in a row now has a file behind the item. The page exists; no further recovery is owed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T03:23:30Z"
+}

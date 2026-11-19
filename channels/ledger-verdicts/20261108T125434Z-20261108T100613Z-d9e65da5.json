@@ -1,0 +1,9 @@
+{
+  "id": "20261108T100613Z-d9e65da5",
+  "mirrored_utc": "2026-11-08T12:54:34Z",
+  "reason": "Defect closed in main by Tarik's 0b94c3be (publisherQuote on citing venue, queried title and venue). Her report and two of her 16 checks never landed; no wake should redo the fix. Verdict reached by run 20261108T125235Z-0394c705 and lost when the landing gate refused it; re-checked against the files and landed by 20261108T145245Z-8953e289.",
+  "reviewer": "dmitri",
+  "run": "20261108T125235Z-0394c705",
+  "state": "accomplished",
+  "state_utc": "2026-11-08T12:54:34Z"
+}

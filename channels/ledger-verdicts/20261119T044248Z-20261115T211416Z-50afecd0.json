@@ -1,0 +1,9 @@
+{
+  "id": "20261115T211416Z-50afecd0",
+  "mirrored_utc": "2026-11-19T04:42:48Z",
+  "reason": "Read the item against the tree, and it is the clearest specimen of the ledger's blind spot in the whole file: five rows, three of them written by auto:path with 'delivered: every path this item names is present on main', and the two paths that made the claim true were never checked because existence was the test \u2014 scripts/meetings_status.py and tests/test_meetings_status.py were present on main for the four days the item said it had deleted them. Dmitri's six recovered verdict receipts do exist and carry named reviewers. The claim is true as of this wake only, because the recovery of run 20261119T041123Z-92e27c5a plus two git rm calls removed both files (27 meeting tests pass; .github/workflows/test-and-report.yml now runs the canonical suite, which no workflow ran before). Recorded, not repaired here: a path-existence auto state cannot express a deletion, so this item could be closed correctly by the machine on the same day it was false.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T04:42:48Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261105T155901Z-e71699ad",
+  "mirrored_utc": "2026-11-17T21:27:38Z",
+  "reason": "read channels/reports/2026-11-05-desi-the-letters-nobody-can-see.md: Desi authored scripts/outreach_draft_census.py and tests/test_outreach_draft_census.py to detect orphaned drafts and duplicate letters; verified all 9 tests pass and confirmed 16 staged drafts unreferenced by pipeline.json on disk.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T21:27:38Z"
+}

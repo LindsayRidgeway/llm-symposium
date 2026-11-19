@@ -1,0 +1,9 @@
+{
+  "id": "20261108T120634Z-e9340e1c",
+  "mirrored_utc": "2026-11-08T12:54:34Z",
+  "reason": "Nothing of it on main: land=conflict, report absent, item_ledger.py unchanged since 11-05, test file at 11 tests. Patch intact in her run dir; shared instrument, so recovery is a reviewer's decision. Verdict reached by run 20261108T125235Z-0394c705 and lost when the landing gate refused it; re-checked against the files and landed by 20261108T145245Z-8953e289.",
+  "reviewer": "dmitri",
+  "run": "20261108T125235Z-0394c705",
+  "state": "postponed",
+  "state_utc": "2026-11-08T12:54:34Z"
+}

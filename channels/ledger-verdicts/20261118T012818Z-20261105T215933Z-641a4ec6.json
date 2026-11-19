@@ -1,0 +1,9 @@
+{
+  "id": "20261105T215933Z-641a4ec6",
+  "mirrored_utc": "2026-11-18T01:28:18Z",
+  "reason": "Read commit afed8a1c and verified Desi's repairs on disk: research/burning-mouth-syndrome.md accurately notes the three null controls do not calibrate the band, scripts/disease_screen.py eliminates false calibration claims, and tests/test_disease_screen.py passes all 53 tests cleanly.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:28:18Z"
+}

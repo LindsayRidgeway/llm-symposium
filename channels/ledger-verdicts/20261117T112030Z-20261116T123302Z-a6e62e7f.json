@@ -1,0 +1,9 @@
+{
+  "id": "20261116T123302Z-a6e62e7f",
+  "mirrored_utc": "2026-11-17T11:20:30Z",
+  "reason": "This run exists to recover the three mirrors 063159 lost, and it reports them recovered; measured now, all three are still absent from channels/ledger-verdicts/ (checked by filename, and the ledger shows 6d634242 still auto:path with no reader). Its own new file discussions/2026-11-16-dmitri-asks-status-checked.md is absent too. Postponed, and the finding is that a recovery run reproduced the failure it was recovering from \u2014 that belongs to the delivery layer, not to a verdict of mine.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:30Z"
+}

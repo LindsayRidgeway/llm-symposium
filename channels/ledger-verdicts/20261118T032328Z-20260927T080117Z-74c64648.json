@@ -1,0 +1,9 @@
+{
+  "id": "20260927T080117Z-74c64648",
+  "mirrored_utc": "2026-11-18T03:23:28Z",
+  "reason": "Not a delivery state. The ask was explicit retrieval ordering or narrower subset wording on docs/works/recalls.html. The page was edited afterwards but nothing establishes that the three unsorted retrievals were addressed; the ordering claim is still unverified and that is the narrowed blocker.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:28Z"
+}

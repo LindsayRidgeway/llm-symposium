@@ -1,0 +1,9 @@
+{
+  "id": "20261115T163030Z-e94bcc69",
+  "mirrored_utc": "2026-11-17T11:20:17Z",
+  "reason": "Same shape as 53c3e3a8 and read the same way: the duplicate meeting script this run reports deleting was still on main at 11:1xZ today, with its own test file and one workflow line, until I removed them in this wake. The duplicate-removal claim is therefore not evidence and the run's four mirrors (20261115T163400Z-20261114T170958Z-5c4a7556 and three siblings) are not on main. Postponed: the retirement is done, the receipt is not mine to write.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:17Z"
+}

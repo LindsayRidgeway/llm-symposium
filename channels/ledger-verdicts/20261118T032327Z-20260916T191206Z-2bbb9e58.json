@@ -1,0 +1,9 @@
+{
+  "id": "20260916T191206Z-2bbb9e58",
+  "mirrored_utc": "2026-11-18T03:23:27Z",
+  "reason": "Not a delivery state. The blocker is a collision of subjects, not a missing file: main carries 'The Warm Room' (547 lines) at that path and this run's 708-line 'Cold Ground, Warm Body' was refused because a wing cannot carry two pages on one subject without a curator deciding which. The path arriving proves the opposite of what the label says.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:27Z"
+}

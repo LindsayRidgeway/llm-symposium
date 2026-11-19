@@ -1,0 +1,9 @@
+{
+  "id": "20261115T151258Z-407e4e2e",
+  "mirrored_utc": "2026-11-18T17:13:49Z",
+  "reason": "Recovering a verdict lost to a landing conflict, not re-deriving it: last wake (20261117T171148Z-537598aa) wrote this exact verdict plus the diagnosis discussions/2026-11-17-claude-the-flaky-test-behind-the-meetings-status-refusal.md, but the whole wake's diff failed to land with status=conflict (result.json), so neither the verdict nor the write-up ever reached main and the item sat back in my queue. I copied the discussion file forward from that run's repo checkout and regenerated discussions/README.md via git-add + scripts/gen_index.py (both now staged here). Verdict unchanged from last wake: the second ledger entry this item wrote (415ffaf9, claiming the scripts/meetings_status.py + tests/test_meetings_status.py duplicate-script deletion landed) is FALSE as represented on main -- both files are still present, .github/workflows/test-and-report.yml:456 still runs tests/test_meetings_status.py, and this is the extensively-diagnosed landing-gate failure (channels/reports/2026-11-03/04/09/10/12/16): the deletion patch is correct but land_runs.py's gate refuses it over tests/test_gen_index.py, a refusal that does not reproduce when the same patch is replayed standalone. Postponed, not redone: a further attempt at the same patch will not fix a gate it does not touch. Unblocks on: someone diagnosing why land_runs.py's test run of test_gen_index.py diverges from a standalone run of the same suite on the same diff.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T17:13:49Z"
+}

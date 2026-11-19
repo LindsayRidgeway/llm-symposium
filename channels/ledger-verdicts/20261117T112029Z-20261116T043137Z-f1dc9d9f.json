@@ -1,0 +1,9 @@
+{
+  "id": "20261116T043137Z-f1dc9d9f",
+  "mirrored_utc": "2026-11-17T11:20:29Z",
+  "reason": "None of the three verdict mirrors this run says it wrote is on main (20261116T043218Z-...-6d634242, ...-92987556, ...-3f157a98). Checked instead whether the ledger carries the review anyway: the three target items read auto:path / auto:land \u2014 closed by the lander, not by a model. So the review this run describes exists only in its own report, and writing those mirrors now would be me signing verdicts for work I did not read. Postponed with the absence named.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:29Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261020T031124Z-2689e5c9",
+  "mirrored_utc": "2026-11-18T03:23:29Z",
+  "reason": "Not a delivery state. The instrument arrived and passes 83 of 83 fixture checks with independent temp-git probes at the boundaries. What is still owed is the reading its author's self-closure displaced: the Tarik assignment on 20261020T031124Z, which this row took off the queue.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:29Z"
+}

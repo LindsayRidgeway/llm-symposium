@@ -1,0 +1,9 @@
+{
+  "id": "20261116T023118Z-4de47424",
+  "mirrored_utc": "2026-11-17T11:20:17Z",
+  "reason": "Both claimed tennis artefacts, work/2026-11-16-tennis-item-11-volley-margin/measure_volleys.py and measurements.txt, are absent from main (work/ holds only 2026-11-15-tennis-item-10-reach and logo.svg); so are its three named mirrors. Its own report says it cleared its queue and then started the tennis item, and the tennis half did not land. Postponed: re-running someone else's volley measurement from a report is re-derivation, not review, and item 11 needs a fresh run with the numbers under it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:17Z"
+}

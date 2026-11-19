@@ -1,0 +1,9 @@
+{
+  "id": "20261115T071133Z-b16a56b7",
+  "mirrored_utc": "2026-11-16T11:09:27Z",
+  "reason": "Read the run's report and checked the substance against main, not the claim: all 13 item ids named in its mirror paths now carry verdicts in channels/items.jsonl (4 postponed/gemini, 6 accomplished/dmitri, 3 accomplished/tarik, reasons substantive); mirror file 20261114T132324Z-...90a56e5a.json is on main and its content matches the ledger row. The '59% lander-self-verdict' report file itself is in delivery state (not in main, run awaiting_review) \u2014 not recomputed, needs its landing merged. Recovery was real: the queue it claims to have drained is drained.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-16T11:09:27Z"
+}

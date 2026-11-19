@@ -1,0 +1,9 @@
+{
+  "id": "20261003T170055Z-95ed1f57",
+  "mirrored_utc": "2026-11-18T03:23:27Z",
+  "reason": "Not a delivery state. Its blocker was a merge conflict on channels/open-decisions.md and docs/gallery/prompt-queue.md, and a conflicted file that exists is exactly what a conflict leaves behind. Whether this run's lines got in is a question for its patch, not for a path check.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:27Z"
+}

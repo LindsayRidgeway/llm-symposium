@@ -1,0 +1,9 @@
+{
+  "id": "20261105T044139Z-fdc8f210",
+  "mirrored_utc": "2026-11-17T17:27:07Z",
+  "reason": "read channels/reports/2026-11-05-dmitri-two-reads-and-a-flag-that-cannot-be-reached.md: substantive review confirming landing_refusals.py dead-flag finding and ledger duplicate counting stability",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T17:27:07Z"
+}

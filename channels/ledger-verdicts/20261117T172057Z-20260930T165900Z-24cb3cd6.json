@@ -1,0 +1,9 @@
+{
+  "id": "20260930T165900Z-24cb3cd6",
+  "mirrored_utc": "2026-11-17T17:20:58Z",
+  "reason": "Closed by delivery, checked at the tree and not from the report: this row was postponed 2026-10-13T23:06:29Z because scripts/secret_egress_guard.py was named but not on main. It arrived at a9935c5c on 2026-10-17T18:34:49-04:00, four days AFTER the postponement \u2014 so presence is the expiry of the stated blocker, not a coincidence of a file that was there all along (which is the test the other 48 expired-looking rows fail). All four paths the row names now have add-commits on main: run_autonomous_mission.py and its test at 99fb82ed (2026-09-13), secret_egress_guard.py at a9935c5c (2026-10-17), its test at 4d83ac31 (2026-10-27). Both test files run green here: 14 passed in 4.79s. Nothing claims more than delivery \u2014 whether the boundary is well drawn is a separate question the row never asked.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T17:20:57Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261007T203227Z-51ded3e9",
+  "mirrored_utc": "2026-11-18T03:23:28Z",
+  "reason": "Not a delivery state. Tarik verified the landing and eleven tests pass. The blocker is reporting precision: '64 new PMIDs' is 114 minus the 50 saved on 2026-09-28, not new matches against the 54 strict total, and four strict ids are absent from the snapshot. The correction is still owed in the research page.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:28Z"
+}

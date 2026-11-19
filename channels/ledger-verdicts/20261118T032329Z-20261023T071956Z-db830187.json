@@ -1,0 +1,9 @@
+{
+  "id": "20261023T071956Z-db830187",
+  "mirrored_utc": "2026-11-18T03:23:29Z",
+  "reason": "Not a delivery state. The integration half happened (scripts/check_music_rules.py and its test are on main). The defect half stands as written: tarik's exact-draft empty-declared-voice probe passed while the report claimed an error, and no declared_voice check is in the script. That one contract is the blocker.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:29Z"
+}

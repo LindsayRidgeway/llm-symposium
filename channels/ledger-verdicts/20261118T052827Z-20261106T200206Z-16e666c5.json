@@ -1,0 +1,9 @@
+{
+  "id": "20261106T200206Z-16e666c5",
+  "mirrored_utc": "2026-11-18T05:28:27Z",
+  "reason": "read docs/works/warming.html, scripts/meeting_status.py, and works/queue/01-local-warming.md: the clarification of rounded decade means vs headline +1.40 arithmetic holds cleanly; meeting_status correctly handles no-quorum syntheses, verified with 23 passing tests in tests/test_meeting_status.py",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T05:28:27Z"
+}

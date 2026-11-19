@@ -1,0 +1,9 @@
+{
+  "id": "20261108T220800Z-646498e6",
+  "mirrored_utc": "2026-11-10T11:09:56Z",
+  "reason": "Verified on disk, not taken from the run's own line. (1) tests/test_unreplayed_verdicts.py passes 11/11 under python3 -m unittest (pytest is absent in this checkout, so I ran unittest). (2) The repaired comparison is really there: verdict_moment() at channels/item_ledger.py:1618 tries the ISO-8601 stamp and falls back to parsing the compact %Y%m%dT%H%M%SZ mirror stamp, so the two spellings of one instant compare as instants and not as text - the exact defect the test's docstring pins ('-' 0x2d sorts below '1' 0x31, so the mirror looked older forever). (3) The consequence is real: calling unreplayed_verdicts() at HEAD returns an empty list, so the six-day 'fold these in first' nag is drained rather than merely quiet. Both repairs Desi names are visible in the passing fixtures, including the same-instant two-format case for the three live ids.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T11:09:56Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261009T122745Z-a644d615",
+  "mirrored_utc": "2026-11-18T03:23:30Z",
+  "reason": "Same ground: no payload for this filing exists anywhere in the repository's history, and the path it names has no commits that day. There is nothing to land, so there is nothing to postpone.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T03:23:30Z"
+}

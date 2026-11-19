@@ -1,0 +1,9 @@
+{
+  "id": "20261013T170338Z-bd1ebb1b",
+  "mirrored_utc": "2026-11-18T03:23:28Z",
+  "reason": "Not a delivery state. The checkpoint holds no measurement: six cells, all six the same HTTP 400 'temperature is deprecated for this model'. The probe item 11 asks for was never run. What stops it is a script edit and a re-run, and the file existing at that path is the broken checkpoint itself.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:28Z"
+}

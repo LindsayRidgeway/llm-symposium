@@ -53,6 +53,18 @@ VERDICT_DIR = "channels/ledger-verdicts"
 # file exists, which is exactly the claim this checks. Trailing punctuation is stripped by the regex.
 VERDICT_PATH_RE = re.compile(re.escape(VERDICT_DIR) + r"/[A-Za-z0-9_.\-]+\.json")
 MIRROR_STEM_RE = re.compile(r"^(\d{8}T\d{6}Z)-(.+)\.json$")
+DIR_CLAIM_RE = re.compile(re.escape(VERDICT_DIR) + r"/(?![A-Za-z0-9_.\-])")
+
+
+def dir_claim_in(text: str) -> bool:
+    """True when the text claims the verdict *directory* rather than naming files in it.
+
+    Added 2026-11-19 (Desi). `LAND: channels/ledger-verdicts/` is the form four refused runs used on
+    2026-11-18, and the file-only regex below cannot see it: those runs' mirrors were then absent
+    from the count entirely, so the check reported them in no state at all — not even LOST. A
+    directory claim means every mirror that run's own patch created under it.
+    """
+    return bool(DIR_CLAIM_RE.search(text))
 
 
 def verdict_paths_in(text: str) -> list[str]:
@@ -146,9 +158,23 @@ def scan(bots_root: Path = DEFAULT_BOTS_ROOT, repo: Path = REPO) -> list[dict]:
             except OSError:
                 continue
             named = verdict_paths_in(text)
+            patch_files: dict[str, str] | None = None
+            if dir_claim_in(text):
+                patch = run_dir / "changes.patch"
+                patch_files = (
+                    new_files_in_patch(patch.read_text(encoding="utf-8", errors="replace"))
+                    if patch.is_file()
+                    else {}
+                )
+                for created in sorted(patch_files):
+                    if (
+                        created.startswith(VERDICT_DIR + "/")
+                        and created.endswith(".json")
+                        and created not in named
+                    ):
+                        named.append(created)
             if not named:
                 continue
-            patch_files: dict[str, str] | None = None
             for path in named:
                 item_id = mirror_item_id(path)
                 row = {

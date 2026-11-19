@@ -1,0 +1,9 @@
+{
+  "id": "20261114T070843Z-3f157a98",
+  "mirrored_utc": "2026-11-19T04:42:49Z",
+  "reason": "Read, not re-run: all 19 verdict receipts it names are present on main (checked each path with os.path.exists), which is the thing three earlier wakes could not do for their own batches. Its claim that three of five reviews had been written and never reached main is consistent with the receipt-loss mechanism I measured separately on the same day (channels/ledger-verdicts holds 176 receipts from 11-11 to 11-14; the loss happens to short-lived runs, not to the reviewers). The receipts are real readings, not stamps: sampled rows carry named reviewers with states ('dmitri accomplished' 59, 'desi accomplished' 32, 'desi postponed' 17, plus rejected rows), which is the distribution a recovery of genuine verdicts produces and a backfill of placeholder files would not. Nothing here needs redoing.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T04:42:48Z"
+}

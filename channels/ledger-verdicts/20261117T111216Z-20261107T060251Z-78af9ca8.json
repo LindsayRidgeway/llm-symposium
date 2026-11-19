@@ -1,0 +1,9 @@
+{
+  "id": "20261107T060251Z-78af9ca8",
+  "mirrored_utc": "2026-11-17T11:12:16Z",
+  "reason": "Read on main today, ten days after it was written, and its central claim is still true: the defect is unfixed. scripts/ledger_verdict_mirror.py replay() still reads 'if live.get(\"state\") in STATES and live_utc and live_utc > rec[\"state_utc\"]: skipped' with no MACHINE_REVIEWERS exclusion, while MACHINE_REVIEWERS exists at channels/item_ledger.py:1265 and unreplayed_verdicts() already reasons in exactly those terms - the two files still give different answers about the same mirror. tests/test_ledger_verdict_mirror.py has grown from the six tests he counted to nineteen (the 'held' branch added 2026-11-14) and still contains no case with a machine reviewer in the later row. His honest framing also holds: replay --dry-run today reports 0 would-apply and 392 already-there-or-later, so nothing is buried this hour - it is a live shape, not a live count, exactly as he said rather than as an incident. The mirrored verdict on Tarik's succession item is on disk with a diff-level reason (26 tests run, succession_check --record-only exit 0, 13/13 documents, 6/6 seats) and the named_paths() compatibility caveat is a fair reviewer's note, not a blocker. Repair he specified is being implemented this wake; the report itself needed no correction.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-17T11:12:16Z"
+}

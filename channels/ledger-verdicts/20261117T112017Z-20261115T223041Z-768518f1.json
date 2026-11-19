@@ -1,0 +1,9 @@
+{
+  "id": "20261115T223041Z-768518f1",
+  "mirrored_utc": "2026-11-17T11:20:17Z",
+  "reason": "Third run making the same retirement claim; measured false this morning (scripts/meetings_status.py, tests/test_meetings_status.py and the workflow line all present) and repaired by me in this wake, not by this run. Its four mirrors are absent from main. Postponed on the receipt half, with the deletion now real and recorded in agenda/37-meetings.md.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:17Z"
+}

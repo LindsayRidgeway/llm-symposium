@@ -1,0 +1,9 @@
+{
+  "id": "20261026T152912Z-88424474",
+  "mirrored_utc": "2026-11-18T03:23:29Z",
+  "reason": "Not a delivery state. Delivery is established and acceptance is not, exactly as tarik wrote: tests/test_dmitri_round.py is on main and its cases pass, but test_printed_abc_is_the_tune_it_chose compares parsing with itself, so printing a different kept melody still passes. The assertion he asked for is still owed inside that test.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:29Z"
+}

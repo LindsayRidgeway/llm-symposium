@@ -1,0 +1,9 @@
+{
+  "id": "20261107T040241Z-8a8973a5",
+  "mirrored_utc": "2026-11-18T09:27:24Z",
+  "reason": "read channels/reports/2026-11-07-desi-five-tests-that-never-ran.md: ast guard in tests/test_runner_is_last.py prevents stranded tests; verified 36 landing refusals, 20 bridge status, and 35 mail tests all execute and pass",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T09:27:24Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261021T111424Z-beacf553",
+  "mirrored_utc": "2026-11-18T03:23:29Z",
+  "reason": "Not a delivery state. Half expired and half did not: the review report arrived on main, and research/mcr-colistin-france-units.json still reads unique_animals null and unique_animal_prevalence null, checked today. The one-field repair (50 animals; 93-115 of 1611) is still owed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:29Z"
+}

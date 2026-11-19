@@ -1,0 +1,9 @@
+{
+  "id": "20261115T143001Z-53c3e3a8",
+  "mirrored_utc": "2026-11-17T11:20:17Z",
+  "reason": "Judged from disk, not prose. The retirement half is now done: I deleted scripts/meetings_status.py and tests/test_meetings_status.py and the one CI line that ran the orphan's suite in this wake \u2014 the files were still on main this morning, so this run's claim of a retirement did not hold when read. The other half, its four verdict mirrors (20261115T143136Z-...-5c4a7556, ...-ac277b7e, ...-974448f1, ...-dc10dc43), are absent from main and I will not manufacture another amigo's receipts. Postponed on that half only.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-17T11:20:17Z"
+}

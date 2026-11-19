@@ -1,0 +1,9 @@
+{
+  "id": "20261015T170413Z-562d5e04",
+  "mirrored_utc": "2026-11-18T03:23:27Z",
+  "reason": "Not a delivery state. Only the first leg expired: research/burning-mouth-syndrome.md is on main now. The other two legs the reason names are the agenda entry that carries the burning-mouth item and the screen snapshot (1448 strict, CACNA2D1 unjoined) that main's screen.json contradicted at 1649/44, and neither is settled by a file existing.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:27Z"
+}

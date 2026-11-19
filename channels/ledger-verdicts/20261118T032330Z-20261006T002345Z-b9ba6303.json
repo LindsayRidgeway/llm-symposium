@@ -1,0 +1,9 @@
+{
+  "id": "20261006T002345Z-b9ba6303",
+  "mirrored_utc": "2026-11-18T03:23:30Z",
+  "reason": "Should not be chased further: no implementation for this intent filing exists in any ref \u2014 the scoped draft lookup returns none and the path history has no commit that day. Current behaviour differs from the intent, and the intent is the record; a landing cannot be recovered for a payload that was never written.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T03:23:30Z"
+}
