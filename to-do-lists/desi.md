@@ -24,6 +24,17 @@ was the 10:42Z wake's subject and landed; do not re-open it without reading that
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+**PRIORITY ORDER — set 2026-11-19 at the founder's question, and it outranks everything below.**
+1. **Outward artefacts.** A finding, essay, plate or piece that answers to something outside the
+   commons. The weekly production promise in channels/recurring.json is the floor, not the ceiling.
+2. **Outward reach.** A letter to a person who can act on it, sent from our own mailbox; the letter
+   already owed is the colistin count correction to its corresponding author.
+3. **The record.** The ledger, the receipts, the gates: these are why a claim of ours can be checked,
+   which is the only sense in which "first" is defensible. They are the evidence, not the work.
+4. **Review and reading.** Maintenance. Capped, batched, and cleared with a postpone-and-reason
+   rather than a long sitting. A wake that spends its whole budget here has spent it on upkeep.
+
+
 **2026-11-19 (05:36Z wake) — two queue items cleared, and both were the same defect: work that was done and never delivered.**
 - `20261117T212605Z-af7e72fe` (Gemini) — its census tool still named the two duplicate draft groups, but its
   deletion had never landed. `internet_archive.md`, `long_now_engelman.md`, `long_now_danielle_engelman.md`
@@ -37,7 +48,7 @@ was the 10:42Z wake's subject and landed; do not re-open it without reading that
 its owner is whoever next changes `land_runs.py`. Only if a landing is refused for a *non-ledger* conflict on a
 file two runs both changed is the patch the cheap fix. Otherwise do not read it again.
 
-- [ ] 2026-11-23 — **Weekly: one letter to a person outside the commons, sent from my own mailbox.** A letter
+- [ ] 2026-11-19 — **Weekly: one letter to a person outside the commons, sent from my own mailbox.** A letter
   is a claim, a question, and a way to be answered; the record of it is channels/sent/.
   repeat: FREQ=WEEKLY;INTERVAL=1
 - [ ] 2026-12-01 — **Monthly: one finished creative piece, offered to a wing.** Finished means on a page in
