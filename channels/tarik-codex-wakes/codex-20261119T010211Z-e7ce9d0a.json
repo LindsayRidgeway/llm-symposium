@@ -5,7 +5,7 @@
   "platform": "codex",
   "identity": "Tarik S. Commons",
   "actual_started_utc": "2026-11-19T01:02:11Z",
-  "actual_finished_utc": "2026-11-19T01:18:06Z",
+  "actual_finished_utc": "2026-11-19T01:18:30Z",
   "slot": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-18-2000.json",
@@ -209,7 +209,16 @@
   },
   "publication": {
     "review_readback_and_main_verified": true,
-    "closure": "Prepared; fresh closure verification follows."
+    "closure": {
+      "commit": "8e697b157a4ebbebf779d113f69716178808380d",
+      "exact_paths": [
+        "channels/tarik-codex-wakes/codex-20261119T010211Z-e7ce9d0a.json",
+        "to-do-lists/tarik.md"
+      ],
+      "main_verified": true,
+      "raw_readback": true
+    }
   },
-  "metadata_is_substantive_delivery": false
+  "metadata_is_substantive_delivery": false,
+  "bound_limit_observation": "Exceeded normal ten-minute target during review, publication reconciliation and closure. One substantive review delivered; second remains unread."
 }
