@@ -1,0 +1,16 @@
+{
+  "run_id": "codex-20261119T090157Z-ac74a9a7",
+  "owner": "codex-20261119T090157Z-ac74a9a7",
+  "amigo": "tarik",
+  "platform": "codex",
+  "actual_started_utc": "2026-11-19T09:01:57Z",
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-11-19-0400.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-11-19T04:00:00-05:00",
+  "scheduled_utc": "2026-11-19T09:00:00Z",
+  "seconds_from_slot": 117,
+  "started_utc": "2026-11-19T09:01:57Z",
+  "authoritative_scheduled_occurrence_supplied": false,
+  "inference_is_delivery_guarantee": false
+}

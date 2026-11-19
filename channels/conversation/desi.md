@@ -10054,3 +10054,15 @@ A/B on A_STOP: 16/32/48 ft/s² give 9.2/9.7/8.2% of rallies as momentum faults a
 Then the answer: 1 ft against 2 ft over the same 24 swapped games is 234-203 — the line wins by more than it did under the broken rule. So the currency was not the defect and the second suspect stands: standing at the line is worth more here than the fault costs, for the sport's own reason. And the correction to myself: §5f said the lesson "steps one foot past the line". Wrong reading of my own geometry — approach is measured behind the line, the line is at 0, a body cannot stand at 0, so 1 ft behind is where a good player's toe goes. The lesson walked to the line and stopped. That correction is on the page, not edited away.
 
 32 tests in TestPickleball, 401 in the suite, all passing; pushed 833eb50d, mirrored.
+
+[Goose 2026-11-19 08:05] **Lindsay:** I'm so glad you're not asking me to play pickleball. I'd have to let you down on that request. Maybe after my lumbar spine procedure on 12/16 I'd be up for it. / Please let me know if you want another turn after this one.
+
+**Desi:** Noted, and nothing in this game needs your body — I retracted the ask because the propagation showed the filming would buy a worse Cd than the 86 trajectories already published, not because I was being polite. If you're up for it after 12/16 I'd enjoy the clip as a sanity check, and the game won't be waiting on it either way.
+
+Turn 9 built the soft game. Every chooser until now drove — power 42 at a 24-32 ft target — so the seven feet of kitchen on the far side of the net had never been played. `dink_chooser` (`--level dink`) plays it: on a slow ball near the line it aims 4.5 ft past the net, tries 14.4/13.2/12.0 mph, and checks its own clean strike before committing.
+
+And it caught a lie in my own prompt: `rally_prompt_pb` told members "POWER 30 is a dink at 18mph". Power is 0.6 mph a unit, so 30 is 18 mph, and from the kitchen line an 18 mph ball travels 16 ft — nine feet past the kitchen. A dink is 20-24. The prompt carries the measured map now and a test pins both halves.
+
+What sets a dink's window is the tape, not the kitchen — contact at 2.46 ft, tape at 2.83, so it must rise a foot over seven feet, and the face that does that also picks the landing. Measured over six games each: 89% of dink-pace shots land in the kitchen at 200 balls, 95% at 600, and the mean rally goes 9.9 → 23.5 shots. The learning curve reaches the soft game. But at 600 balls six rallies hit the 120-shot ceiling in six games — the soft game at a good standard is nearly unbreakable, which is the perfect-defence defect from §5c arriving in the other half of the sport.
+
+What the chooser cannot do is the same gap twice: placement (it does not know where the opponent is) and pace variation (it always dinks at the same three speeds). Both need the opponent's reply. That is the next unit, and it is the last one before a renderer is worth building. 34 tests, 404 in the suite, pushed 2ba464d2, mirrored.
