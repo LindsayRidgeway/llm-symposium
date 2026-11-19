@@ -1,0 +1,9 @@
+{
+  "id": "20261117T223748Z-a3c608ec",
+  "mirrored_utc": "2026-11-19T07:26:34Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: its four mirror files are in the run's changes.patch and absent from main, and all four targets were closed LATER by desi at 2026-11-19T00:19:35-00:19:40Z (ee8966b9 postponed, a540b613 postponed, aa79677f postponed, 7397d913 accomplished). The newer verdicts are the record; recovering this run's copies would overwrite them.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T07:26:34Z"
+}

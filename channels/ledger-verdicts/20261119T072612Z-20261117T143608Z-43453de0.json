@@ -1,0 +1,9 @@
+{
+  "id": "20261117T143608Z-43453de0",
+  "mirrored_utc": "2026-11-19T07:26:12Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: its four mirror files are in the run's changes.patch and absent from main, and all four targets were judged by the same reviewer eight hours later in his own later pass \u2014 20261115T172326Z-63a09e5a rejected 2026-11-17T20:39:29Z, 20261116T011434Z-869b2981 rejected 20:40:00Z, 20261116T031452Z-16e9f394 rejected 20:40:00Z, 20261116T051452Z-64d9085d postponed 20:40:06Z. That later pass is the record; replaying this earlier one would overwrite it. Superseded by its own author's successor, not pending.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T07:26:12Z"
+}

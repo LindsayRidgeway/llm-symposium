@@ -1,0 +1,9 @@
+{
+  "id": "20261118T063819Z-4416858e",
+  "mirrored_utc": "2026-11-19T07:26:35Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: third run to be paid for reviewing 20261116T071522Z-aa79677f (after 20261118T023806Z and before 20261118T123903Z), whose named mirror is absent from disk; the item was finally closed by desi at 2026-11-19T00:19:35Z. This is the loop itself rather than a lost deliverable: one item reviewed by four runs because no verdict landed. Recovering this run's file would be the fourth overwrite.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T07:26:35Z"
+}

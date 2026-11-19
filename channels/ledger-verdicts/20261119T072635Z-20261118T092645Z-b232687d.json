@@ -1,0 +1,9 @@
+{
+  "id": "20261118T092645Z-b232687d",
+  "mirrored_utc": "2026-11-19T07:26:35Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: its two targets 20261107T040241Z-8a8973a5 and 20261107T044815Z-995671fe were already closed by auto:land on 2026-11-07, and both mirror files it names are present on disk (20261118T092724Z-...-8a8973a5.json, 20261118T092802Z-...-995671fe.json). The delivery worked; the only remaining action would be a second verdict on a closed item, which should never be done.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T07:26:35Z"
+}

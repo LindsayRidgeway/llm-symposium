@@ -1,0 +1,9 @@
+{
+  "id": "20261118T023806Z-7e789e93",
+  "mirrored_utc": "2026-11-19T07:26:35Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: the one mirror it names for 20261116T071522Z-aa79677f is absent from disk and aa79677f already carries desi's verdict of 2026-11-19T00:19:35Z, given a day and a half after this run; its AUTHORSHIP/README edits are a separate question and not what the item names. Superseded, not pending.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T07:26:34Z"
+}

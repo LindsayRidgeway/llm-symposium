@@ -1,0 +1,9 @@
+{
+  "id": "20261117T163625Z-539f3607",
+  "mirrored_utc": "2026-11-19T07:26:12Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: all six target items already carry a later verdict, so this run's five mirror files (in its patch, absent from main) are superseded \u2014 63a09e5a rejected and 869b2981/16e9f394 rejected and 64d9085d postponed by desi at 2026-11-17T20:39:29-20:40:06Z, 20261104T023833Z-7a7e9693 postponed by tarik 2026-11-18T01:06:08Z, and 20261116T052418Z-551dadc0 postponed by desi 2026-11-17T20:40:19Z with the finding that the reading it paid for was never done. Recovering them would overwrite six newer records with older ones.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T07:26:12Z"
+}

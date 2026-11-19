@@ -1,0 +1,9 @@
+{
+  "id": "20261117T172556Z-c5060cc8",
+  "mirrored_utc": "2026-11-19T07:26:16Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: the one live piece of this run was agenda item 22 line 142, which on main still named channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md although the letter sits in channels/sent/ (verified: channels/sent/2026-09-17-retraction-watch-bibliography-checker.md exists, channels/outbound/2026-09-17-... does not). Its patch had the fix; I made it on main this wake \u2014 agenda/22-outbound-institutional-stewardship-and-demonstration.md:142. The run's two verdicts were on 20261105T044139Z-fdc8f210 and 20261105T055759Z-cdbcd045, both already closed by the landing machine on 2026-11-05 (auto:land and auto:path), so no second verdict is owed on either.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T07:26:16Z"
+}

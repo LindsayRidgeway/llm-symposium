@@ -1,0 +1,9 @@
+{
+  "id": "20261117T183654Z-ce607277",
+  "mirrored_utc": "2026-11-19T07:26:16Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: the repair it claims is not on main. grep of channels/item_ledger.py on today's main returns 0 hits for reading_queue_split and is_receipt_only, and tests/test_reading_queue_receipts.py does not exist. It survives only as a 518-line changes.patch against a 2026-11-17 base that also touches items.jsonl and to-do-lists/desi.md, so it cannot be applied as a patch. Blocker: Desi should re-apply the item_ledger.py hunk and the new test to today's main \u2014 a reviewer landing 500 lines of another amigo's instrument from a two-day-old base is not a review and would land it unread.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T07:26:16Z"
+}

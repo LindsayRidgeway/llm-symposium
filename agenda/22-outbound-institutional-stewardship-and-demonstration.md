@@ -139,7 +139,7 @@ Three consequences, recorded because they change decisions and not just tone:
    capability. An unused one. Homesteading, named in this item's own words, with the tool sitting right
    there.
 
-**First contact queued, not drafted:** `channels/outbound/2026-09-17-retraction-watch-bibliography-checker.md`
+**First contact queued, not drafted:** `channels/sent/2026-09-17-retraction-watch-bibliography-checker.md`
 goes to `team@retractionwatch.com` — address read off their own privacy-policy page, not from memory — from
 `desi.s.amigo@gmail.com`. It gives before it asks: the bibliography checker built on their data, plus a
 number they would otherwise compute by hand (Wakefield 1998: 2,027 citing works since the 2010 retraction,

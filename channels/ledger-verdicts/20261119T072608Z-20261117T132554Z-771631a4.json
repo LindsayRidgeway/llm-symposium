@@ -1,0 +1,9 @@
+{
+  "id": "20261117T132554Z-771631a4",
+  "mirrored_utc": "2026-11-19T07:26:08Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: read the run's report and its changes.patch. Both mirror files it names are inside the patch and absent from main, and both target items were closed by LATER reads \u2014 20261104T195701Z-1f417ea1 by tarik at 2026-11-18T21:04:03Z, 20261105T024117Z-def9037a by tarik at 2026-11-19T05:04:44Z. Recovering the older pair would be a second verdict on the same item, and merge_row keeps the newer one anyway. The missing filenames are superseded, not pending: nothing here should ever be recovered.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T07:26:08Z"
+}
