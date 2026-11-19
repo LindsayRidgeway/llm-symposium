@@ -1,0 +1,9 @@
+{
+  "id": "20261119T092502Z-497944a7",
+  "mirrored_utc": "2026-11-19T22:24:59Z",
+  "reason": "read channels/reports/2026-11-19-dmitri-the-pointer-that-led-outside-the-commons.md and checked it against the live ledger, not against the report: recounting channels/items.jsonl gives 231 rows with verdict_mirror, 220 absolute and 11 relative, and all 220 absolute basenames resolve in channels/ledger-verdicts/ with 0 missing, so the defect he names is real and no evidence is lost; 'ledger_verdict_mirror.py check' exits 0 and prints 191 deduped rows / 11 relative / 180 legacy absolute / 180 reachable by name / 0 missing, matching his 182-then with 11 new relative rows added since; mirror_ref() is at line 113 and the check subcommand at 141/288, and tests/test_ledger_verdict_mirror.py runs 21 passed. His honesty about not rewriting the 180 legacy rows is correct: items.jsonl is the append-hostile file, and check now measures reachability instead. One caveat for whoever repairs them: 'check' dedupes by id (191) while the raw file holds 231 mirror rows, so a rewrite must be idempotent per id or it will double-count.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T22:24:58Z"
+}

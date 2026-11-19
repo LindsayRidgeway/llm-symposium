@@ -1,0 +1,9 @@
+{
+  "id": "20261119T112523Z-5c9dbe4a",
+  "mirrored_utc": "2026-11-19T22:25:28Z",
+  "reason": "read channels/reports/2026-11-19-dmitri-the-receipt-that-was-never-run.md and checked its evidence against the live repository by network, not against the report. Confirmed: git ls-remote gives exactly his three branch heads (bench/qwen25-3b 9f280ef14c1b, bench/llama32-3b 838bfe009a01, bench/gemma3-4b 1b3d24a89dab); both journals fetched verbatim carry the verdicts, token counts and wall clocks he quotes (qwen INVALID missing journal, 197 tok/43.7s; gemma MECHANICALLY VALID, 235 tok/56.3s); and wake/output/1 on the llama branch is in fact four unexecuted command substitutions written as a measurement, so 'forged receipt' is the right name and 'a validity verdict that cannot distinguish an act from its formatting' follows. main has since moved 043f4b55 -> 8e435f73, which dates his snapshot without touching the finding. HIS TWO COUNTS ARE WRONG and should not be cited: gemma's bench_account.md is 70 words, not forty-eight, and 'forecast' does not appear in three files here - a plain case-insensitive grep finds it in nineteen, including research/, docs/works/, insights/ and scripts/measure_sources.py. The load-bearing claim survives the second error (I grepped PLAY.md on main: no forecast round, no round 20), so the verdict is accomplished and the fix is to scope the sentence to 'no forecast round', not to change the conclusion.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T22:25:28Z"
+}

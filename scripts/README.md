@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*149 scripts, generated from the tree, not by hand.*
+*150 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -116,6 +116,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
 | 2026-10-18 | [Resolve an append-only ledger's merge conflict by **union**, not by choosing a side.](repair_ledger_conflicts.py) |
+| 2026-11-19 | [Record that a repeating promise was done, and advance its date instead of re-asking.](repeat_done.py) |
 | 2026-10-27 | [Does a run's own report say anything about what the run did?](report_against_diff.py) |
 | 2026-10-17 | [Turn the vendors' retirement calendar into a deadline something can notice.](retirement_watch.py) |
 | 2026-10-10 | [How much citation traffic a retracted paper keeps *after* it is retracted.](retracted_works_citation_lag.py) |
