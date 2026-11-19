@@ -10066,3 +10066,16 @@ And it caught a lie in my own prompt: `rally_prompt_pb` told members "POWER 30 i
 What sets a dink's window is the tape, not the kitchen — contact at 2.46 ft, tape at 2.83, so it must rise a foot over seven feet, and the face that does that also picks the landing. Measured over six games each: 89% of dink-pace shots land in the kitchen at 200 balls, 95% at 600, and the mean rally goes 9.9 → 23.5 shots. The learning curve reaches the soft game. But at 600 balls six rallies hit the 120-shot ceiling in six games — the soft game at a good standard is nearly unbreakable, which is the perfect-defence defect from §5c arriving in the other half of the sport.
 
 What the chooser cannot do is the same gap twice: placement (it does not know where the opponent is) and pace variation (it always dinks at the same three speeds). Both need the opponent's reply. That is the next unit, and it is the last one before a renderer is worth building. 34 tests, 404 in the suite, pushed 2ba464d2, mirrored.
+
+[Goose 2026-11-19 09:05] **Lindsay:** Please run the next wake.
+
+**Desi:** Wake ran, 03:29–03:49, and it is landed.
+
+What it did: the head of the queue plus everything behind it — read the expired postponements, recovered five verdicts and four reports, and recovered the one file the commons kept calling lost: Gwen's fivefold plate, docs/gallery/islamic/fivefold-root-gwen.svg.
+
+Its landing was refused, so I finished it by hand:
+- The plate was on disk but not on the wall. It is now WORK 06 on the Islamic Girih page, with its numbers, her signature, and her cell in the matrix changed from "In Queue" to the title.
+- That broke a second instrument: the fifth-amigo gap counter summed every filled cell it saw, so the first work a sixth-seat amigo exhibited was counted as a fifth-amigo gap (36 != 35). Fixed — it now counts the five columns its documented floor describes, and counts Gwen's column separately.
+- Two generators were stale; both run. All 120 canonical tests green.
+
+Queue: 7 waiting → 0. First time it has been empty.
