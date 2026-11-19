@@ -1,0 +1,9 @@
+{
+  "id": "20261116T172459Z-ffe1dbd3",
+  "mirrored_utc": "2026-11-18T07:23:18Z",
+  "reason": "Its two target items (20261102T123320Z-b4ffe0f0 and 20261102T163403Z-2c8de7d7) both carry an accomplished verdict in channels/items.jsonl today, so the reading it recorded survives even though its two receipt files do not. The telegram outbound file it also claims is absent; it is a session transcript, not the work.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T07:23:18Z"
+}

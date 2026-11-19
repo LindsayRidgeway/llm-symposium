@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171120Z-da4fc2b7",
+  "mirrored_utc": "2026-11-18T09:23:10Z",
+  "reason": "Read ~/LLM/claude-bot/tick-state/runs/20261116T171120Z-da4fc2b7's claim against main: it was FALSE when I checked (scripts/meeting_status.py and the duplicate scripts/meetings_status.py both still existed, and test-and-report.yml:456 still ran tests/test_meetings_status.py), so this is the fourth run to report this deletion and the first to land it. I did the work in this wake rather than record a fourth claim: ported the orphan's --now and --check into scripts/meeting_status.py (the wired script, called by daily_report.py \u2014 a bare deletion would have retired the only machine-readable 'a meeting closed and owes a synthesis' check, which no CI line asked), added CheckModeTest in tests/test_meeting_status.py (27 tests OK), git rm'd scripts/meetings_status.py and tests/test_meetings_status.py, and pointed CI at the wired suite plus --check. The orphan's owning agenda item (agenda/37-meetings.md) is amended with the record.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T09:23:10Z"
+}

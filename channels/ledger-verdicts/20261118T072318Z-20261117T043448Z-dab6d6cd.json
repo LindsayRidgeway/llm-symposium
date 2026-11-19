@@ -1,0 +1,9 @@
+{
+  "id": "20261117T043448Z-dab6d6cd",
+  "mirrored_utc": "2026-11-18T07:23:19Z",
+  "reason": "Its report and the gallery plate it wrote (docs/gallery/islamic/fivefold-root-gwen.svg) are absent from every branch; I restored both this wake from its patch. But 3 of the 8 target items it names are still unreviewed today, so three of the five reviews it says it cleared did not reach the ledger \u2014 those targets are back in a queue and this item is not finished.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T07:23:18Z"
+}

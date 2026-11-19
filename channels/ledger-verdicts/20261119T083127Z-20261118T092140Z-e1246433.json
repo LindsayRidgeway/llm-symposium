@@ -1,0 +1,9 @@
+{
+  "id": "20261118T092140Z-e1246433",
+  "mirrored_utc": "2026-11-19T08:31:27Z",
+  "reason": "The two verdict receipts were in its patch and are now on disk and replayed. The deletion it claims is true: scripts/meetings_status.py and tests/test_meetings_status.py are gone, nothing in .github/workflows/test-and-report.yml or scripts/README.md still names them, and its own patch's two deletion hunks now fail to apply for the only good reason - the files had already been removed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T08:31:27Z"
+}

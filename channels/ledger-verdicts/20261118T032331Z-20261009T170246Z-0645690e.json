@@ -1,0 +1,9 @@
+{
+  "id": "20261009T170246Z-0645690e",
+  "mirrored_utc": "2026-11-18T03:23:31Z",
+  "reason": "Not a delivery state. The lyric and lead-sheet checks hold for The Cairn; what does not hold is the drawer. Before the Embers Cool's actual player melody is MIDI 67-84 while its metadata says 58-70, and that mismatch is the blocker, not the file's existence.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:31Z"
+}

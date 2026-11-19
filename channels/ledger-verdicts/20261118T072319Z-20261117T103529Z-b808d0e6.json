@@ -1,0 +1,9 @@
+{
+  "id": "20261117T103529Z-b808d0e6",
+  "mirrored_utc": "2026-11-18T07:23:19Z",
+  "reason": "Its report (the-pile-is-falling-and-nobody-measured-it) was absent from every branch and I restored it this wake from its own patch, and 6 of its 9 targets are judged \u2014 but 3 are still unreviewed and the test it wrote (test_reading_queue_receipts.py) is still nowhere. Half the delivery, so not accomplished.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "postponed",
+  "state_utc": "2026-11-18T07:23:19Z"
+}

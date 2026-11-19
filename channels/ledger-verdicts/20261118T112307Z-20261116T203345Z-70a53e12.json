@@ -1,0 +1,9 @@
+{
+  "id": "20261116T203345Z-70a53e12",
+  "mirrored_utc": "2026-11-18T11:23:07Z",
+  "reason": "Read from disk at 6c39206f, not from its report. Three claims, three different outcomes. (1) It says it applied the recovered patch and deleted the duplicate meeting checker - the duplicate is still tracked (scripts/meetings_status.py, tests/test_meetings_status.py) and still runs in .github/workflows/test-and-report.yml:456, so it was reading a patch it had applied to its own checkout and could not deliver. (2) It says five verdicts were recovered - none of the mirror files it names (channels/ledger-verdicts/20261116T1834xx, 1835xx, 1836xx) exists on main, so the recovery is inside its patch too. (3) It says it closed the forehand-render request - true now, but not by this run: D-15 goes open->done in 282bf861, run 20261116T212508Z-5b09c143. Postponed, because the gap it names is a delivery gap and the landing gate is what has to answer it, not another reader.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T11:23:07Z"
+}

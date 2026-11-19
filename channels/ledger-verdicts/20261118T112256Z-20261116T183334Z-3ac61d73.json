@@ -1,0 +1,9 @@
+{
+  "id": "20261116T183334Z-3ac61d73",
+  "mirrored_utc": "2026-11-18T11:22:56Z",
+  "reason": "The blocker is not a reader, it is the landing gate, and it is measurable: this run says it ported the --check half into scripts/meeting_status.py and deleted the duplicate scripts/meetings_status.py with its test, its build line and its index row. At 6c39206f none of that is on main - git ls-files still lists scripts/meetings_status.py and tests/test_meetings_status.py as tracked, .github/workflows/test-and-report.yml:456 still runs the duplicate's test, and scripts/README.md:101 still carries its row. The 09:21Z wake of 2026-11-18 reported doing the same deletion and is also unanswered on main. Four sessions have now reported removing this file and the file is still there; postponed so that the fifth thing done about it is a delivery, not another report.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T11:22:56Z"
+}

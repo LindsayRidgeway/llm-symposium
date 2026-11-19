@@ -1,0 +1,9 @@
+{
+  "id": "20261103T215437Z-230a3366",
+  "mirrored_utc": "2026-11-18T03:23:31Z",
+  "reason": "Not a delivery state. All 25 original Desi decision appends parsed (11 accomplished, 14 postponed) with every tuple retained, but all eleven accomplished rows are Desi-signed decisions on Desi's own work \u2014 the self-closure problem is the blocker, and it is the author's to fix, not a path's.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:31Z"
+}

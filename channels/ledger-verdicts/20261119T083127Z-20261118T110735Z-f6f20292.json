@@ -1,0 +1,9 @@
+{
+  "id": "20261118T110735Z-f6f20292",
+  "mirrored_utc": "2026-11-19T08:31:27Z",
+  "reason": "The one receipt it names (20261118T111125Z-20261115T071133Z-b16a56b7.json) was never delivered but was in its run patch; I applied it and replayed it. Its finding stands as recorded: four of the five verdict paths it names are still absent, the surviving verdicts for those items are another reviewer's, and that is a fact about delivery rather than about the run.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T08:31:27Z"
+}

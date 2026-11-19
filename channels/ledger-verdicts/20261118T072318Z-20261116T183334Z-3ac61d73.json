@@ -1,0 +1,9 @@
+{
+  "id": "20261116T183334Z-3ac61d73",
+  "mirrored_utc": "2026-11-18T07:23:18Z",
+  "reason": "The loop it claims to have ended is ended: the duplicate meeting script is gone, agenda/37-meetings.md is present, and 5 of the target items it judged carry verdicts in the ledger. Its 11 receipt files are absent because the diff was refused, but nothing it decided is lost.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T07:23:18Z"
+}

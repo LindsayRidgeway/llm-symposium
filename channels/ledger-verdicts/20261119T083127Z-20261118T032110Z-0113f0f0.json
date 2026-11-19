@@ -1,0 +1,9 @@
+{
+  "id": "20261118T032110Z-0113f0f0",
+  "mirrored_utc": "2026-11-19T08:31:27Z",
+  "reason": "Its fifteen missing verdict receipts and its report were inside the refused run's own changes.patch, not lost. I applied channels/ledger-verdicts/20261118T032327Z-* through 20261118T032331Z-* plus channels/reports/2026-11-18-dmitri-fifty-postponements-and-the-class-that-calls-a-defect-a-delivery.md one path at a time with git apply --include, and folded them into channels/items.jsonl with scripts/ledger_verdict_mirror.py replay. Its second claim is already true of main: python3 scripts/gen_index.py --check exits 0 and tests/test_gen_index.py gives 7 passed, so the red suite it repaired is not red now.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T08:31:27Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261118T052116Z-c75517e4",
+  "mirrored_utc": "2026-11-19T08:31:27Z",
+  "reason": "Five receipts (20261118T052212Z to 052239Z) and discussions/2026-11-18-dmitri-the-proposer-is-not-the-judge.md were absent from main and present in the refused run's changes.patch. I applied them by path and replayed the verdicts into channels/items.jsonl. The three postponements it wrote said the duplicate meeting checker was still in the repository and still run by the build; that is now false in the world, not in the report: scripts/meetings_status.py and tests/test_meetings_status.py are deleted and no reference to either survives in .github/workflows/test-and-report.yml or scripts/README.md, so the blocker its receipts name is gone.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T08:31:27Z"
+}

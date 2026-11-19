@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200" role="img" aria-labelledby="t d">
+  <title id="t">Panj-Girih: The Fivefold Root</title>
+  <desc id="d">A fivefold girih rosette: ten rhombi of 72 and 108 degrees around the rim, a decagon, a pentagram whose five self-intersections carry five pairwise tangent decagons, and a void at the centre. Procedural SVG by Gwen (Qwen), verified arithmetically by its own generator.</desc>
+  <!--
+    Panj-Girih: The Fivefold Root — Gwen (Qwen), 2026-11-15.
+    Generator: generate-gwen-fivefold.py (deterministic, no RNG, no external asset).
+    The author of this plate runs a text-only model and cannot see the rendered image,
+    so the checks below are arithmetic and the generator refuses to write the file if
+    any of them fails. Reproduce with: python3 generate-gwen-fivefold.py
+      C5 rotational symmetry (72 deg): max vertex deviation 3.216e-13 px
+      D5 mirror symmetry (vertical axis): max vertex deviation 2.344e-13 px
+      pentagram self-intersection radius 152.786405 px vs R/phi^2 152.786405 px (delta 2.842e-14)
+      pentagon diagonal/side 1.618033988750 vs phi 1.618033988750 (delta 2.220e-16)
+      girih rhombus angle at the outer vertex 72.000000000 deg (target 72, delta 4.263e-14); the other two are 108 by construction
+      adjacent decagon centre distance 179.611191 px vs 2*rs 179.611191 px (delta 2.842e-14) — pairwise tangent
+      containment: 165 vertices, 0 outside the 1200x1200 viewBox with a 6.0px margin
+      Non-claim: no periodic or quasiperiodic tiling is asserted. This is a finite rosette.
+  -->
+  <defs>
+    <radialGradient id="gwenLapis" cx="50%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#16204d"/>
+      <stop offset="58%" stop-color="#0a1130"/>
+      <stop offset="100%" stop-color="#05081a"/>
+    </radialGradient>
+    <filter id="gwenSoft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#gwenLapis)"/>
+  <g filter="url(#gwenSoft)" opacity="0.35">
+    <circle cx="600.0" cy="600.0" r="344.0" fill="#60a5fa"/>
+  </g>
+  <circle cx="600.000" cy="600.000" r="450.000" fill="none" stroke="#bcd7ff" stroke-width="0.9" opacity="0.2"/>
+  <circle cx="600.000" cy="600.000" r="326.944" fill="none" stroke="#bcd7ff" stroke-width="0.9" opacity="0.16"/>
+  <circle cx="600.000" cy="600.000" r="400.000" fill="none" stroke="#bcd7ff" stroke-width="0.9" opacity="0.22"/>
+  <circle cx="600.000" cy="600.000" r="152.786" fill="none" stroke="#bcd7ff" stroke-width="0.9" opacity="0.26"/>
+  <circle cx="600.000" cy="600.000" r="89.806" fill="none" stroke="#bcd7ff" stroke-width="0.9" opacity="0.14"/>
+  <line x1="600.000" y1="600.000" x2="600.000" y2="129.750" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="323.594" y2="219.560" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="152.766" y2="454.685" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="152.766" y2="745.315" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="323.594" y2="980.440" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="600.000" y2="1070.250" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="876.406" y2="980.440" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="1047.234" y2="745.315" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="1047.234" y2="454.685" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <line x1="600.000" y1="600.000" x2="876.406" y2="219.560" stroke="#bcd7ff" stroke-width="0.7" opacity="0.13"/>
+  <polygon points="600.000,150.000 498.969,289.058 335.497,235.942 701.031,289.058" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="335.497,235.942 335.497,407.827 172.025,460.942 498.969,289.058" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="172.025,460.942 273.056,600.000 172.025,739.058 335.497,407.827" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="172.025,739.058 335.497,792.173 335.497,964.058 273.056,600.000" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="335.497,964.058 498.969,910.942 600.000,1050.000 335.497,792.173" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="600.000,1050.000 701.031,910.942 864.503,964.058 498.969,910.942" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="864.503,964.058 864.503,792.173 1027.975,739.058 701.031,910.942" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="1027.975,739.058 926.944,600.000 1027.975,460.942 864.503,792.173" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="1027.975,460.942 864.503,407.827 864.503,235.942 926.944,600.000" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="864.503,235.942 701.031,289.058 600.000,150.000 864.503,407.827" fill="#16204d" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.92"/>
+  <polygon points="600.000,200.000 364.886,276.393 219.577,476.393 219.577,723.607 364.886,923.607 600.000,1000.000 835.114,923.607 980.423,723.607 980.423,476.393 835.114,276.393" fill="none" stroke="#35a795" stroke-width="2.2" stroke-linejoin="round" opacity="0.85"/>
+  <polygon points="600.000,200.000 219.577,476.393 364.886,923.607 835.114,923.607 980.423,476.393" fill="none" stroke="#35a795" stroke-width="1.4" stroke-linejoin="round" opacity="0.65"/>
+  <line x1="600.000" y1="200.000" x2="364.886" y2="923.607" stroke="#d4af37" stroke-width="3.0" opacity="0.95"/>
+  <line x1="219.577" y1="476.393" x2="835.114" y2="923.607" stroke="#d4af37" stroke-width="3.0" opacity="0.95"/>
+  <line x1="364.886" y1="923.607" x2="980.423" y2="476.393" stroke="#d4af37" stroke-width="3.0" opacity="0.95"/>
+  <line x1="835.114" y1="923.607" x2="600.000" y2="200.000" stroke="#d4af37" stroke-width="3.0" opacity="0.95"/>
+  <line x1="980.423" y1="476.393" x2="219.577" y2="476.393" stroke="#d4af37" stroke-width="3.0" opacity="0.95"/>
+  <polygon points="454.691,647.214 600.000,752.786 745.309,647.214 689.806,476.393 510.194,476.393" fill="#16204d" stroke="#60a5fa" stroke-width="2.4" stroke-linejoin="round" opacity="0.9"/>
+  <polygon points="426.940,561.803 382.037,594.427 364.886,647.214 382.037,700.000 426.940,732.624 482.443,732.624 527.346,700.000 544.497,647.214 527.346,594.427 482.443,561.803" fill="none" stroke="#bcd7ff" stroke-width="1.5" stroke-linejoin="round" opacity="0.9"/>
+  <line x1="426.940" y1="561.803" x2="426.940" y2="732.624" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="364.886" y1="647.214" x2="527.346" y2="700.000" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="426.940" y1="732.624" x2="527.346" y2="594.427" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="527.346" y1="700.000" x2="426.940" y2="561.803" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="527.346" y1="594.427" x2="364.886" y2="647.214" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <polygon points="510.194,752.786 527.346,805.573 572.249,838.197 627.751,838.197 672.654,805.573 689.806,752.786 672.654,700.000 627.751,667.376 572.249,667.376 527.346,700.000" fill="none" stroke="#bcd7ff" stroke-width="1.5" stroke-linejoin="round" opacity="0.9"/>
+  <line x1="510.194" y1="752.786" x2="672.654" y2="805.573" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="572.249" y1="838.197" x2="672.654" y2="700.000" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="672.654" y1="805.573" x2="572.249" y2="667.376" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="672.654" y1="700.000" x2="510.194" y2="752.786" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="572.249" y1="667.376" x2="572.249" y2="838.197" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <polygon points="717.557,732.624 773.060,732.624 817.963,700.000 835.114,647.214 817.963,594.427 773.060,561.803 717.557,561.803 672.654,594.427 655.503,647.214 672.654,700.000" fill="none" stroke="#bcd7ff" stroke-width="1.5" stroke-linejoin="round" opacity="0.9"/>
+  <line x1="717.557" y1="732.624" x2="817.963" y2="594.427" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="817.963" y1="700.000" x2="717.557" y2="561.803" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="817.963" y1="594.427" x2="655.503" y2="647.214" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="717.557" y1="561.803" x2="717.557" y2="732.624" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="655.503" y1="647.214" x2="817.963" y2="700.000" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <polygon points="762.460,529.180 779.611,476.393 762.460,423.607 717.557,390.983 662.054,390.983 617.151,423.607 600.000,476.393 617.151,529.180 662.054,561.803 717.557,561.803" fill="none" stroke="#bcd7ff" stroke-width="1.5" stroke-linejoin="round" opacity="0.9"/>
+  <line x1="762.460" y1="529.180" x2="662.054" y2="390.983" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="762.460" y1="423.607" x2="600.000" y2="476.393" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="662.054" y1="390.983" x2="662.054" y2="561.803" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="600.000" y1="476.393" x2="762.460" y2="529.180" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="662.054" y1="561.803" x2="762.460" y2="423.607" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <polygon points="582.849,423.607 537.946,390.983 482.443,390.983 437.540,423.607 420.389,476.393 437.540,529.180 482.443,561.803 537.946,561.803 582.849,529.180 600.000,476.393" fill="none" stroke="#bcd7ff" stroke-width="1.5" stroke-linejoin="round" opacity="0.9"/>
+  <line x1="582.849" y1="423.607" x2="420.389" y2="476.393" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="482.443" y1="390.983" x2="482.443" y2="561.803" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="420.389" y1="476.393" x2="582.849" y2="529.180" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="482.443" y1="561.803" x2="582.849" y2="423.607" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <line x1="582.849" y1="529.180" x2="482.443" y2="390.983" stroke="#d4af37" stroke-width="1.0" opacity="0.55"/>
+  <polygon points="600.000,544.321 567.272,554.954 547.046,582.794 547.046,617.206 567.272,645.046 600.000,655.679 632.728,645.046 652.954,617.206 652.954,582.794 632.728,554.954" fill="none" stroke="#d4af37" stroke-width="2.0" stroke-linejoin="round" opacity="0.9"/>
+  <circle cx="600.000" cy="600.000" r="17.961" fill="none" stroke="#60a5fa" stroke-width="2.4" opacity="0.95"/>
+</svg>

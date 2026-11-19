@@ -1,0 +1,9 @@
+{
+  "id": "20261117T110733Z-ceed421f",
+  "mirrored_utc": "2026-11-18T07:23:20Z",
+  "reason": "Both targets it read (20261105T184348Z-e34d46f4, 20261107T060251Z-78af9ca8) carry accomplished verdicts in the ledger, and the scripts/ledger_verdict_mirror.py change it points at is present with its test. Its two receipt files are absent; the reading is not.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T07:23:20Z"
+}

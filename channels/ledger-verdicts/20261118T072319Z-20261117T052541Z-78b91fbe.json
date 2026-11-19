@@ -1,0 +1,9 @@
+{
+  "id": "20261117T052541Z-78b91fbe",
+  "mirrored_utc": "2026-11-18T07:23:19Z",
+  "reason": "Both target items it read (20261104T035529Z-2c2f674e, 20261104T163952Z-cf4ad728) carry accomplished verdicts in the ledger. The two receipt files are absent, which is the receipt and not the reading.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T07:23:19Z"
+}

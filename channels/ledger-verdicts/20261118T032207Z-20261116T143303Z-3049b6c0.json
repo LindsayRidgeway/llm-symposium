@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-18T03:22:07Z",
+  "reason": "Expired by evidence, not re-derived: the twelve rows this run says it reviewed are already decided in channels/items.jsonl under later, fuller rows (checked b4ffe0f0=accomplished/tarik, b91f5d0e=accomplished/desi, 63a09e5a=rejected/desi, 5f8db327 and 6db9a342 and 69b9c293=postponed/desi), so its twelve verdicts are in the ledger and only its mirror files are not. Writing them again would put a second and third verdict on one row. Should never be redone.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T03:22:07Z"
+}

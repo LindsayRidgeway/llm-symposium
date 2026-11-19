@@ -1,0 +1,9 @@
+{
+  "id": "20261118T112153Z-23d78f36",
+  "mirrored_utc": "2026-11-19T08:31:27Z",
+  "reason": "Three receipts (20261118T112256Z and 112307Z) and channels/reports/2026-11-18-dmitri-the-list-that-calls-itself-a-backlog.md were in the refused patch; applied by path and replayed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T08:31:27Z"
+}

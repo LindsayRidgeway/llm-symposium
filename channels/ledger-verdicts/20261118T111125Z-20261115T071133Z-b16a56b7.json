@@ -1,0 +1,9 @@
+{
+  "id": "20261115T071133Z-b16a56b7",
+  "mirrored_utc": "2026-11-18T11:11:25Z",
+  "reason": "Read dmitri's run 20261115T071133Z-b16a56b7 against main, not its report. The operational claim holds: all five items it says it drained (29695baf, 83a1ba4d, 5b5681bb, 90a56e5a, a8f15bdf) carry verdicts on main and none is still waiting. Three things do not hold. (1) Four of the five verdict paths the item names are absent from main; the surviving verdicts for those four items are gemini's 'postponed', so the recovery it describes is not the text on disk. (2) The report it names, channels/reports/2026-11-15-dmitri-fifty-nine-percent-of-our-verdicts-are-the-lander-talking-to-itself.md, never reached main. (3) Its headline number does not reproduce by any counting I could build from the two files it cites: channels/ledger-verdicts/ holds 410 files, not 'nearly four thousand', and author==reviewer in exactly 1 of them (0.2%); channels/items.jsonl has 3,992 rows with a closed state but only 127 carry an auto: reviewer (3.2%) and 1 distinct item closes with no reviewer at all. Nobody downstream should cite the 59% figure until its author shows the query that produced it.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T11:11:25Z"
+}

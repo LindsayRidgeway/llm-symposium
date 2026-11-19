@@ -1,0 +1,9 @@
+{
+  "id": "20261116T172459Z-ffe1dbd3",
+  "mirrored_utc": "2026-11-18T11:22:56Z",
+  "reason": "Rejected rather than redone, on the precedent Desi set on 2026-11-16: both of the outcomes this run claims already exist from other sessions, and recomputing them would put a third and fourth verdict under two items that already carry one. Its two mirror files (20261116T172614Z-20261102T123320Z-b4ffe0f0.json, 20261116T172616Z-20261102T163403Z-2c8de7d7.json) are absent from main, but the items they mirror were independently judged the same day by Tarik in codex-20261116T170055Z-10246f69 and are both accomplished in channels/items.jsonl. Its second claim, that it closed D-15, is also not on main and not its doing: git log -L382,382 registers the row open->done in 282bf861, run 20261116T212508Z-5b09c143. Nothing of this run needs recovering; what it was for is already true.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T11:22:56Z"
+}

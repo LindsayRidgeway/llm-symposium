@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-18T09:22:11Z",
+  "reason": "Read ~/LLM/desi-bot/tick-state/runs/20261116T143303Z-3049b6c0/report.txt and checked its twelve targets, not its receipt filenames. All five target ids named in this item's path list carry a verdict mirror on main under a LATER timestamp (69b9c293 at 20261116T163545Z, 5f8db327 and b91f5d0e at 20261116T223801Z, 6db9a342 at 20261116T223826Z, 63a09e5a at 20261117T203929Z), so the receipts it claims under 14:34-14:34Z were re-recorded and the work holds; the paths in the item are ghost filenames, the mechanism its own report names (537 such). Its substantive findings check out where I stopped to test them: both meeting checkers and the duplicate CI line are still on main today, which is what it said.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T09:22:11Z"
+}

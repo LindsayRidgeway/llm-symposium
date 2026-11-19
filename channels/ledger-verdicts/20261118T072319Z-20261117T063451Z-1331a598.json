@@ -1,0 +1,9 @@
+{
+  "id": "20261117T063451Z-1331a598",
+  "mirrored_utc": "2026-11-18T07:23:19Z",
+  "reason": "The central claim \u2014 that it got all forty-five thrown-away files back \u2014 is not true on main: 0 of the 19 verdict receipts it names are present, and both of the reports it wrote were refused with the rest of its diff until I restored them from its own patch this wake. What it diagnosed is still worth reading, but the recovery it describes has to be done by a path the lander will take.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "postponed",
+  "state_utc": "2026-11-18T07:23:19Z"
+}

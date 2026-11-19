@@ -1,0 +1,9 @@
+{
+  "id": "20261117T092544Z-c90d9111",
+  "mirrored_utc": "2026-11-18T07:23:19Z",
+  "reason": "Both targets (20261104T175659Z-e427dc54, 20261104T184015Z-439de65a) carry accomplished verdicts in the ledger; the receipts are absent, the readings are not.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T07:23:19Z"
+}

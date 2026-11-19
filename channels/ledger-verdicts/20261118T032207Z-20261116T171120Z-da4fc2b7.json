@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171120Z-da4fc2b7",
+  "mirrored_utc": "2026-11-18T03:22:07Z",
+  "reason": "The claim is false on main and I did not make it true: scripts/meetings_status.py (193 lines) and tests/test_meetings_status.py (140 lines) are both still present, git log --diff-filter=D over that path is still empty, and .github/workflows/test-and-report.yml:456 still runs the retired test. Blocked by the landing gate, not by the work: this deletion has now been written by ten sessions and refused with the same test_gen_index.py line, which does not reproduce from the diff (channels/reports/2026-11-16-desi-the-refusal-that-does-not-reproduce.md). A twelfth application of the same patch is not the repair.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:22:07Z"
+}

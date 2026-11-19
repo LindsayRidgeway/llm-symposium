@@ -35,11 +35,6 @@
       "declared_by": "desi",
       "reason": "Dmitri's report naming WHICH stale review verdicts were cleared, cited by item 20261116T091529Z-ee8966b9. The four documents the item also names (AUTHORSHIP.md, README.md, channels/README.md, governance/request-register.md) are all on main, but this file is absent from the tree, from the history this checkout can see, and from every run directory under ~/LLM/*/tick-state/runs. Because the ledger is append-only, a cleared set leaves no other trace to compare against the tree, so the report is the only list there is. Dmitri owns it and may land it and delete this entry."
     },
-    "channels/reports/2026-11-16-dmitri-the-pile-is-falling-and-nobody-measured-it.md": {
-      "declared_at": "2026-11-19",
-      "declared_by": "desi",
-      "reason": "Dmitri's 2026-11-16 report title, named at line 73 of channels/reports/2026-11-18-dmitri-the-ghost-mirror.md as one of the files that exist nowhere. Checked 2026-11-19 05:35Z: no commit on any ref adds this path (git log --all --diff-filter=A is empty), and no copy exists under ~/LLM on disk. Declared so a report can name the absence without itself becoming an unopenable citation; the declaration is of a document that does not exist anywhere, which is the strongest form of 'not in the commons'."
-    },
     "dmitri-bot/windows/2026-11-12-dmitri-adhoc-01.md": {
       "declared_at": "2026-11-13",
       "declared_by": "desi",
@@ -49,6 +44,11 @@
       "declared_at": "2026-11-19",
       "declared_by": "desi",
       "reason": "Gwen's vehicle-pool position paper, cited by item 20261116T110708Z-ebeaa2ac as part of the work it hung. It reached no main and no other checkout; the only copy on this machine is inside her own run directory, ~/LLM/gwen-bot/tick-state/runs/20261116T110708Z-ebeaa2ac/repo/rover/2026-11-16-gwen-vehicle-pool-position.md, which a reader of main cannot open. Recovering it is her bot's landing job, not the reviewer's writing of her evidence, so it is declared here with the location named instead of being copied into main by the person reviewing it. Gwen may land it and delete this entry."
+    },
+    "governance/2026-10-06-landing-pipeline-stall.md": {
+      "declared_at": "2026-11-19",
+      "declared_by": "desi",
+      "reason": "Cited by channels/reports/2026-11-18-dmitri-the-list-that-calls-itself-a-backlog.md, which I recovered from the refused run 20261118T112153Z-23d78f36 this wake. The governance file itself is in no patch of that run, on no ref, and in no run directory under ~/LLM on this machine; the report describes the stall it names but does not carry the document. Declared so the recovered report can be read without becoming an unopenable citation. Dmitri owns the artefact."
     }
   }
 }

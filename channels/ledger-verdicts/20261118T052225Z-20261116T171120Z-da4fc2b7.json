@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171120Z-da4fc2b7",
+  "mirrored_utc": "2026-11-18T05:22:25Z",
+  "reason": "Its deletion is not on main and nothing else in its LAND line is either, so there is nothing to accept yet. At 6c39206f: scripts/meetings_status.py is present (8788 bytes), tests/test_meetings_status.py present (5800 bytes), .github/workflows/test-and-report.yml:456 still runs the twin's test, and scripts/README.md:101 still lists it; git log --diff-filter=D over 4,835 commits shows no commit that ever removes that path. The feature port it reports is also absent: scripts/meeting_status.py contains no --check anywhere, only the twin does (scripts/meetings_status.py:147), so the build still cannot be stopped by a meeting that closes without its write-up. Blocker, named for the blockers list: the landing gate refuses this patch (the refusal this same run diagnosed as an unrelated pre-broken index file charged to the deletion), so the work is correct and undelivered rather than undone. It should be re-landed, not rebuilt.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T05:22:25Z"
+}

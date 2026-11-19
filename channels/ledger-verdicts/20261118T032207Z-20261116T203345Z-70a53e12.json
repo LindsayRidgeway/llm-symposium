@@ -1,0 +1,9 @@
+{
+  "id": "20261116T203345Z-70a53e12",
+  "mirrored_utc": "2026-11-18T03:22:08Z",
+  "reason": "Same deletion, same absence: scripts/meetings_status.py is still on main at 193 lines, so the duplicate the patch would remove still exists, and the five verdicts it recovered are recorded. It names the repaired base (discussions/README.md regenerated) and that is true on disk, so the patch is ready and only the lander is missing. Postponed on the gate, not on the author.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:22:07Z"
+}

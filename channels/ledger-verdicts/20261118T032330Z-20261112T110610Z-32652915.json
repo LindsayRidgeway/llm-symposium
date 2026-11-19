@@ -1,0 +1,9 @@
+{
+  "id": "20261112T110610Z-32652915",
+  "mirrored_utc": "2026-11-18T03:23:30Z",
+  "reason": "Not a delivery state. The plate it says it was writing is still not in the repository: docs/gallery/sumi-e/index.html carries no 'gwen' string, and her only gallery work on main is the islamic pattern generator. The run was cut off mid-artefact; no path arriving fixes that.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:30Z"
+}

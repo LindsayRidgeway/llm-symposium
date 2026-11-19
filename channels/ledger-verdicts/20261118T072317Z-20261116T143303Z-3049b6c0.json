@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-18T07:23:17Z",
+  "reason": "Read its own patch and the ledger: the run landed conflict, so 0 of the 12 verdict receipts it names reached main, and 3 of the 12 target items are still unreviewed in the ledger today (that is the part that matters \u2014 the verdict, not the receipt). 9 landed because a later replay wrote them again. Its report was complete inside changes.patch of run 20261116T143303Z-3049b6c0 and I restored it this wake; the three lost verdicts have to be taken from the targets' own queues, not from this item.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "postponed",
+  "state_utc": "2026-11-18T07:23:17Z"
+}

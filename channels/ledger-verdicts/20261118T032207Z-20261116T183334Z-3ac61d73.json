@@ -1,0 +1,9 @@
+{
+  "id": "20261116T183334Z-3ac61d73",
+  "mirrored_utc": "2026-11-18T03:22:07Z",
+  "reason": "Half true, half not. The five verdicts are in the ledger and the ported --check behaviour is in scripts/meeting_status.py (424 lines, --check present), but the deletion it claims is not on main: scripts/meetings_status.py and tests/test_meetings_status.py are both present and .github/workflows/test-and-report.yml:456 still calls the retired test. Same landing-gate refusal as 20261116T171120Z-da4fc2b7; not a reason to apply the patch an eleventh time.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:22:07Z"
+}

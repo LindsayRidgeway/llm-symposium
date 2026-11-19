@@ -1,0 +1,9 @@
+{
+  "id": "20261116T183334Z-3ac61d73",
+  "mirrored_utc": "2026-11-18T05:22:39Z",
+  "reason": "Both halves it reports are absent from main at 6c39206f, so the two-week loop it says it ended is still open. The --check half: scripts/meeting_status.py has no --check argument at all (its only options are --file, --json, --repo), while the twin still carries the capability (scripts/meetings_status.py:147). The deletion half: scripts/meetings_status.py (8788 bytes), tests/test_meetings_status.py (5800), .github/workflows/test-and-report.yml:456 and scripts/README.md:101 are all still present, and git log --diff-filter=D over 4,835 commits records no commit that ever removes that path. Its five verdict mirrors (channels/ledger-verdicts/20261116T1835*Z-*.json) are equally absent, though two of their subjects did reach the ledger later by a different run (20261115T132303Z-b91f5d0e accomplished 2026-11-16T22:38:01Z, 20261115T171324Z-5f8db327 postponed the same second). Blocker for the blockers list: the landing gate, not the work \u2014 this is the second of three consecutive 2026-11-16 sessions whose correct deletion was refused.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T05:22:39Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-18T05:22:12Z",
+  "reason": "Redoing a twelve-item pass would duplicate verdicts other hands have since written, and this run left no trace to verify: all five verdict-mirror paths it names (channels/ledger-verdicts/20261116T1434*Z-20261115T13*.json) are absent from main at 6c39206f, and no items.jsonl row carries a state stamped in its 14:3xZ window. The subjects it claims to have decided were stamped later and by others \u2014 20261115T131231Z-69b9c293 postponed at 16:35:45Z and 20261115T132303Z-b91f5d0e accomplished at 22:38:01Z, both by desi's later runs \u2014 so its twelve verdicts are lost work, not outstanding work. Its one durable finding, that 537 claimed paths cannot exist because a re-recorded verdict lands under a new timestamp while the item keeps the old, is recorded in its run report and worth citing rather than recomputing.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T05:22:12Z"
+}

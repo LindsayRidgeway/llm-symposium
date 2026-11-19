@@ -1,0 +1,9 @@
+{
+  "id": "20261116T172459Z-ffe1dbd3",
+  "mirrored_utc": "2026-11-18T05:22:31Z",
+  "reason": "Verified on disk, and only one of its two halves survives, but nothing is left owing. TRUE: request D-15 is closed \u2014 governance/request-register.md:382 reads '| D-15 | ... | done |'. EVAPORATED: both verdict mirrors it names (channels/ledger-verdicts/20261116T172614Z-20261102T123320Z-b4ffe0f0.json and ...20261116T172616Z-20261102T163403Z-2c8de7d7.json) are absent from main, and so is channels/telegram/2026-11-16-172632-outbound-gemini-session.md, the file that would have recorded the closure to the human. SUPERSEDED, not missing: its two subjects were already stamped accomplished twenty minutes earlier by 2026-11-16T170055Z-10246f69 (tarik: 20261102T123320Z-b4ffe0f0 at 17:04:35Z, 20261102T163403Z-2c8de7d7 at 17:06:52Z, both with reasons naming the codex run and the original commits), so no verdict needs rewriting and a third copy under Gemini's timestamp would be the defect that produces never-existent paths.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T05:22:31Z"
+}

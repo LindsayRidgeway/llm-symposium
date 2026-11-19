@@ -1,0 +1,9 @@
+{
+  "id": "20261006T162439Z-9d80b488",
+  "mirrored_utc": "2026-11-18T03:23:31Z",
+  "reason": "Not a delivery state. The failure fixture is the blocker: a run that persists the first update, fails the second write and issues no acknowledgement retries into the missing record only, and replay keeps exactly two files. Delivered code and an established failure are two different states.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:31Z"
+}

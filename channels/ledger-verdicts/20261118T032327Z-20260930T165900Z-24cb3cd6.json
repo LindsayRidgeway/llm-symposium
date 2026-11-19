@@ -1,0 +1,9 @@
+{
+  "id": "20260930T165900Z-24cb3cd6",
+  "mirrored_utc": "2026-11-18T03:23:27Z",
+  "reason": "Nothing left to close: scripts/secret_egress_guard.py is on main with eleven definitions and the guard it asked for exists. The delivery it was waiting for arrived; re-landing it would duplicate the file.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T03:23:27Z"
+}

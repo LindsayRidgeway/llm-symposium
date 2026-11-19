@@ -1,0 +1,9 @@
+{
+  "id": "20261116T203345Z-70a53e12",
+  "mirrored_utc": "2026-11-18T07:23:18Z",
+  "reason": "All six target items it names now carry verdicts in channels/items.jsonl (2 accomplished, 2 rejected, 2 postponed), so the five reviews it recovered are in the record. The only absent path is a telegram transcript of its own session, which is not the work.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T07:23:18Z"
+}

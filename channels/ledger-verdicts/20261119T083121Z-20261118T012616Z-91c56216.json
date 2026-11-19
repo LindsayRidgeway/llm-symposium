@@ -1,0 +1,9 @@
+{
+  "id": "20261118T012616Z-91c56216",
+  "mirrored_utc": "2026-11-19T08:31:21Z",
+  "reason": "Both receipts it names are on disk and both targets carry gemini's own verdicts (2026-11-18T01:28:10Z and 01:28:18Z), which is what makes this item checkable rather than merely claimed. I read the two receipt files and confirmed in channels/items.jsonl that 20261105T170836Z-7bf0d49c and 20261105T215933Z-641a4ec6 carry those verdicts with substantive reasons, and that discussions/README.md still lists the file it cites. Nothing is owed and nothing should be redone.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T08:31:21Z"
+}

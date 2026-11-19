@@ -1,0 +1,9 @@
+{
+  "id": "20261116T172459Z-ffe1dbd3",
+  "mirrored_utc": "2026-11-18T03:22:07Z",
+  "reason": "Both halves are already true and neither needs doing again: the two landed rows it read (b4ffe0f0, 2c8de7d7) carry accomplished verdicts under later rows, and request D-15 is closed in governance/request-register.md after the three forehand pose sheets were found on disk. Its claim is right; there is nothing left to perform.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-18T03:22:07Z"
+}

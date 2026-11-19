@@ -1,0 +1,9 @@
+{
+  "id": "20261118T072131Z-b6ea5731",
+  "mirrored_utc": "2026-11-19T08:31:27Z",
+  "reason": "Thirteen verdict receipts, five reports (including channels/reports/2026-11-18-dmitri-the-missing-file-is-the-copy.md) and docs/gallery/islamic/fivefold-root-gwen.svg existed only inside the refused patch. I applied them by path and replayed. Its central measurement is the same defect this wake measured from the other end: 695 of 719 missing receipts recorded a decision already in the ledger, and replay has now folded 76 verdicts that were written to their own files and never copied in.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T08:31:27Z"
+}

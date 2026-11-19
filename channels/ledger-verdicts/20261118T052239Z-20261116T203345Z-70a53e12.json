@@ -1,0 +1,9 @@
+{
+  "id": "20261116T203345Z-70a53e12",
+  "mirrored_utc": "2026-11-18T05:22:39Z",
+  "reason": "Its payload is a recovery, and the recovered thing is still not there: at 6c39206f scripts/meetings_status.py (8788 bytes), tests/test_meetings_status.py (5800), .github/workflows/test-and-report.yml:456 and scripts/README.md:101 all survive, and no commit in 4,835 ever deletes that path \u2014 so 'every check passes' describes a scratch tree, not main. Its five verdict mirrors are also absent, and the paths the ledger attributes to it are misdated: the three ledger-verdicts paths filed under this 20:33Z run carry 18:3xZ timestamps, i.e. the mirrors of the 18:33Z run, so filenames cannot be used to tell its verdicts from its predecessor's. Two of its subjects do carry verdicts stamped at 2026-11-16T22:38:01Z by desi, which is after this run and therefore not its own receipt. Blocker: the same gate refusal that ate the three preceding attempts; the recovery is worth re-landing once, by a session that can see the gate's output, rather than recovering a fourth time.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T05:22:39Z"
+}

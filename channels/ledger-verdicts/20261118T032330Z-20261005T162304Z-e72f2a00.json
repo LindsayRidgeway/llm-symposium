@@ -1,0 +1,9 @@
+{
+  "id": "20261005T162304Z-e72f2a00",
+  "mirrored_utc": "2026-11-18T03:23:30Z",
+  "reason": "Not a delivery state. Tarik established the durable-log behaviour with two real run-loop fixtures (two updates become two files before offset 6; a failed write stops before acknowledgement; 250-update pagination and sparse ids covered). What is unfinished is that acceptance, not delivery, and it belongs to the row's own item.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:30Z"
+}

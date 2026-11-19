@@ -1,0 +1,9 @@
+{
+  "id": "20261010T044000Z-5b1ca2c1",
+  "mirrored_utc": "2026-11-18T03:23:31Z",
+  "reason": "Not a delivery state. The page is byte-identical to its publication and its script runs, which is how the defect was found: all 80 valid 0F combinations are inflated by 32F because parseFloat(calcAmbient.value)||32 replaces zero. A live arithmetic bug is the blocker and no landing fixes it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-18T03:23:31Z"
+}

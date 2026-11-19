@@ -1,0 +1,9 @@
+{
+  "id": "20261117T083513Z-a73ec50e",
+  "mirrored_utc": "2026-11-18T07:23:19Z",
+  "reason": "The verdict it wrote did land (20261115T172326Z-63a09e5a is rejected in the ledger), but tests/test_reading_queue_receipts.py exists on no branch in this repository \u2014 it has been written four separate times since (11-17 08:35Z, 10:35Z, 14:36Z, 18:36Z) and never once landed. Restoring it needs the suite run first, which I did not do this wake.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "postponed",
+  "state_utc": "2026-11-18T07:23:19Z"
+}

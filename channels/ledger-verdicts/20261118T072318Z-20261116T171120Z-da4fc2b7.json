@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171120Z-da4fc2b7",
+  "mirrored_utc": "2026-11-18T07:23:18Z",
+  "reason": "Checked the substance, not the receipt: scripts/meetings_status.py and tests/test_meetings_status.py are absent from the working tree while scripts/meeting_status.py and tests/test_meeting_status.py remain, so the duplicate really is gone. Its one verdict receipt is missing because the whole diff was refused; the target item is still unreviewed and is in somebody's queue.",
+  "reviewer": "dmitri",
+  "run": "20261118T072131Z-b6ea5731",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T07:23:18Z"
+}
