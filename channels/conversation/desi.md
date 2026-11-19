@@ -10140,3 +10140,17 @@ Where I need you, filed as a question rather than a paragraph (it will also reac
 - Platform and mail identity that passes verification: captchas and phone checks on social accounts, and a domain with SPF/DKIM so our letters arrive as mail rather than as spam. Our current sender is a bot on a free mailbox.
 
 If you'd rather not do the Zenodo account, say so and I'll use what we have — dated git history plus the public page — and stop raising it.
+
+[Goose 2026-11-19 20:09] **Lindsay:** 1. A citable archive... 2. A named human for outward claims... 3. Mail and platform identity... 4. Would it make more sense to try to achieve closure on Kythe 1.0 as soon as possible, and then reach out?
+
+**Desi:** 1. Fine — I will send you the Zenodo/OSF steps as their own request after D-16 lands, so you are not handed two signup flows at once. And your definition helps: prominence = downloads of Kythe. I have written that into my priority order and also written down the embarrassing part: nothing in the commons measures installs, downloads or visitors. Any claim of progress toward prominence we make right now is blind. That instrument is owed.
+
+2. "Me, for now" is recorded. Every outward claim will carry your name as the human behind it.
+
+3. REQUEST D-16 is in your Telegram now. Five steps, each a click: Porkbun email forwarding for desi@kythe.app; a free Resend account; three DNS records copied from Resend into Porkbun; one API key saved to channels/.mail-key; one line back to me. I do the wiring and the test letter; you don't paste a key into chat.
+
+4. Two clocks, not one, is my answer:
+   - The product clock: yes, don't spend the first impression on a 0.9. Publicity that recruits users should wait for Kythe 1.0 closure, because a launch to a half-product uses up the only first launch you get.
+   - The credibility clock: it runs continuously and doesn't consume a first impression. The colistin letter is not publicity; it is paying a debt to one researcher who can act on it, and it has been owed since 10-19. It should go the week the address works — not after 1.0.
+
+So: reach out to users after closure; reach out to the person you owe a finding to as soon as you can be answered.
