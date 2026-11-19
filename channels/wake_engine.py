@@ -663,7 +663,22 @@ def _recurring_rows(rows, repo, amigo, today=None):
         probe = key(text)[:40]
         if any(h.startswith(probe) or probe.startswith(h[:40]) for h in have if h):
             continue
-        when, note = _next_instance(rule, since, today, repo)
+        # A repeat that has been *done* advances itself. Added 2026-11-19, after the founder asked
+        # whether a wake that finishes the head of its calendar is followed by a wake that finds the
+        # same head: it was. A letter was sent at 20:43Z and the due block still said DUE TODAY,
+        # because completion was recorded nowhere the calendar could read. `scripts/repeat_done.py`
+        # writes `last_done` here, and the next instance is computed after it, not after `since`.
+        done = ent.get('last_done')
+        floor = today
+        if done:
+            try:
+                d = datetime.date.fromisoformat(str(done)) + datetime.timedelta(days=1)
+                floor = max(today, d)          # the next instance is after the last one done
+            except Exception:
+                pass
+        # `since` stays the anchor: a weekly series anchored on the 19th is the 19th, 26th, 2nd...
+        # Re-anchoring on the completion date would drift the whole series forward by a week.
+        when, note = _next_instance(rule, since, floor, repo)
         if when is None:
             extra.append((None, 'unreadable-rule', text, rule, note))
             continue

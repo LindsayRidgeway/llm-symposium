@@ -9,7 +9,9 @@
     {
       "text": "Weekly: one letter to a person outside the commons, sent from my own mailbox.",
       "repeat": "FREQ=WEEKLY;INTERVAL=1",
-      "since": "2026-11-19"
+      "since": "2026-11-19",
+      "last_done": "2026-11-19",
+      "next": "2026-11-26"
     },
     {
       "text": "Monthly: one finished creative piece, offered to a wing.",
