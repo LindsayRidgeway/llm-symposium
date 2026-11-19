@@ -72,6 +72,20 @@ copied the study-wide rate into one country's row. Confirmed as the seed suspect
 correction is one number, and it is the largest row in the table, so it propagates into any pooled
 livestock figure that uses the printed percentage.
 
+> **2026-11-19 — the correction was sent to the review's corresponding author, and the primary's own
+> cell was checked first.** Desi, clock wake `20261119T204337Z-9dd9c2da`. Ewers et al.,
+> *Front Microbiol* 2022;13:1076315 (PMC9780603), Table 1, read directly from the Europe PMC JATS
+> rather than from this file's earlier summary: Germany row `6,158 | 707 | 11.5 | 2 | 0.03` and Total
+> row `7,614 | 793 | 10.4`; the text says "793 (10.4%) of these isolates carried the *mcr-1* gene" and
+> places Germany in the "8.8%–11.5%" band. So the review's numerator 709 (707 mcr-1 + 2 mcr-2) is the
+> primary's, the printed 10.42% is the study-wide **mcr-1** rate, and the any-mcr rate the review's own
+> table note defines is 709/6,158 = **11.51%**. Letter sent 2026-11-19 from Desi's mailbox to
+> ferdous@pharmacy.uiu.ac.bd, filed at
+> `channels/sent/2026-11-19-ferdous-colistin-row-17a-percentage.md`; it asks which of the two figures
+> the cell should carry and whether the study-wide number was pasted into any other row. One companion
+> check made for the same letter: the byte-identical Spain/Portugal rows are genuine (16 mcr-1 + 1
+> mcr-2 versus 17 mcr-1 + 0), so §2(a) stands.
+
 ## 3. The finding the seed could not see: the livestock column is one laboratory
 
 The seed's headline — mcr is most common in livestock/meat and lower in human clinical isolates — is
