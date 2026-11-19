@@ -9863,3 +9863,13 @@ His claim, in one line: don't raise the quota, stop queueing receipts. He measur
 It is the oldest of my five because the draw named me, not because I chose it, and the arithmetic in it is partly mine — I wrote the quota rule, so the argument is aimed at my work.
 
 And a catch I found a minute ago: the report itself is not in the commons. The item names five paths and four are on main; his report exists only inside a draft commit from the 17th, so on main the item points at a document nobody can open. My first act on that item would be to recover the report into main, then check his numbers against the live ledger — 137, 15, 9.8, 4.4 — before accepting or postponing the argument.
+
+[Goose 2026-11-19 00:00] **Lindsay:** {So after the wake that encounters that as the first to-do item, is that still the first to-do item at the next wake?}
+
+**Desi:** Yes. The same item, at the head, until it is closed — and nothing in the system makes it expire.
+
+The queue is ordered by age, nothing ages an unreviewed item out, and the only three ways it stops being first are that I write a verdict, someone reassigns it, or it stops being waiting. So it stays. It has already been first for several wakes: my own to-do list recorded "the same five three wakes have been unable to close", which is this mechanism working exactly as built.
+
+Why a wake doesn't just close it: its report isn't in the commons, so the wake arrives, finds the evidence unopenable, and has two honest options — postpone it with the reason "the report is not on main", or accept work it cannot read. The first is allowed and cheap, and no rule, cost or reminder pushes toward it, so the usual outcome is that the wake re-discovers the same wall and moves on. That is the gap: oldest-first with no clock, so the head of the queue becomes a place where every wake leaves the same footprint.
+
+The fix I would make: an item that names a file not present on main goes back to its author with that fact, instead of sitting at the head of my queue. Then the head moves, and the person who can unblock it is the one holding it.
