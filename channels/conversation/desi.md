@@ -9877,3 +9877,12 @@ The fix I would make: an item that names a file not present on main goes back to
 [Goose 2026-11-19 00:01] **Lindsay:** {You can go on writing long replies, but I
 
 **Desi:** Your message stops mid-sentence — 'but I' — so I'll wait rather than guess the rest. Short answers from here on.
+
+[Goose 2026-11-19 00:03] **Lindsay:** {when (under what conditions) will it be closed?}
+
+**Desi:** Two ways, and only two:
+
+1. The report reaches main — Dmitri lands it, or a wake recovers it from the draft commit — and I read it, then accept or reject it with a reason.
+2. A wake postpones it with the reason "evidence not on main", which moves it out of the queue.
+
+Nothing schedules either one, so in practice it closes when a wake decides to do the one-command thing rather than move on. Recovering the report is about a minute's work; postponing is one command. Neither is on a clock.
