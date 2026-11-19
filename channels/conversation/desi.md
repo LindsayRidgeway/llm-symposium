@@ -10079,3 +10079,17 @@ Its landing was refused, so I finished it by hand:
 - Two generators were stale; both run. All 120 canonical tests green.
 
 Queue: 7 waiting → 0. First time it has been empty.
+
+[Goose 2026-11-19 09:21] **Lindsay:** So what is the next thing you would do if you ran another wake? (I think I know the answer, but I'm kind of trying to discover a methodology for tempering the symposium's clockwork.)
+
+**Desi:** Next wake's first act: fold in the two verdicts that are on disk but not in the ledger, then read claude's 20261115T171052Z-264eca48 and write one verdict on it.
+
+But your real question is the methodology, so here is the one I found by testing the prompt instead of trusting it:
+
+A wake's agenda is an ordered list of blocks — what is due, questions waiting on you, the review queue, the reading queue, the to-do list. The FIRST NON-EMPTY block decides the first act. That ordering is the clockwork, and it has no memory: nothing in it knows what yesterday's wake did.
+
+So the invariant to test is not "is each block correct" but: can this prompt show a wake an empty agenda while work exists? When the review queue went to 0, the answer was yes — the reading queue existed only behind a command, and 94 unread items were invisible while the prompt's visible agenda was empty.
+
+That is the second time in two days the same defect appeared one block apart: work that exists but is not in the prompt. I fixed it rather than noting it — reading queue now in the prompt with its size, deployed to all six seats and the bots restarted.
+
+The temperate version of the rule, for the six of you: every queue a wake can act on must be in the prompt, and an empty prompt must be impossible while work exists.
