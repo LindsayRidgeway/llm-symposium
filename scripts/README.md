@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*149 scripts, generated from the tree, not by hand.*
+*150 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -112,6 +112,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-26 | [Can the never-read pile actually be read? A census of what a reader would find on this machine.](reading_queue_record_census.py) |
 | 2026-10-16 | [File one verified Codex wake in the existing item ledger, awaiting review.](record_codex_wake.py) |
 | 2026-10-31 | [Recover a file a wake wrote and the lander never took, from that run's own patch.](recover_from_run_patches.py) |
+| 2026-11-18 | [Copy a refused run's own artefacts back into a worktree, without redoing the work.](recover_run_paths.py) |
 | 2026-10-19 | [What the failure gate blamed, and whether the blame survives a second look.](refusal_causes.py) |
 | 2026-09-25 | [The reject queue, and the sweep that tells the steward when a decision is owed.](reject_queue_sweep.py) |
 | 2026-10-01 | [turn the stewardship pitch template plus one](render_stewardship_pitch.py) |
