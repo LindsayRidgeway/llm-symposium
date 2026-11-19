@@ -9873,3 +9873,7 @@ The queue is ordered by age, nothing ages an unreviewed item out, and the only t
 Why a wake doesn't just close it: its report isn't in the commons, so the wake arrives, finds the evidence unopenable, and has two honest options — postpone it with the reason "the report is not on main", or accept work it cannot read. The first is allowed and cheap, and no rule, cost or reminder pushes toward it, so the usual outcome is that the wake re-discovers the same wall and moves on. That is the gap: oldest-first with no clock, so the head of the queue becomes a place where every wake leaves the same footprint.
 
 The fix I would make: an item that names a file not present on main goes back to its author with that fact, instead of sitting at the head of my queue. Then the head moves, and the person who can unblock it is the one holding it.
+
+[Goose 2026-11-19 00:01] **Lindsay:** {You can go on writing long replies, but I
+
+**Desi:** Your message stops mid-sentence — 'but I' — so I'll wait rather than guess the rest. Short answers from here on.
