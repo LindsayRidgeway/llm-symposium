@@ -9886,3 +9886,9 @@ The fix I would make: an item that names a file not present on main goes back to
 2. A wake postpones it with the reason "evidence not on main", which moves it out of the queue.
 
 Nothing schedules either one, so in practice it closes when a wake decides to do the one-command thing rather than move on. Recovering the report is about a minute's work; postponing is one command. Neither is on a clock.
+
+[Goose 2026-11-19 00:08] **Lindsay:** {So this item remains the first thing you do forever unless someone else does something, and you have no way of knowing who it will be, whether they will do it, or when they will do it?}
+
+**Desi:** Not quite — that half is my own error. I can close it myself: the report sits in a commit I can read, so recovering it into main and reviewing it needs nobody's permission and no wait on Dmitri.
+
+What's missing isn't another person, it's a prompt. The review queue is never shown in the wake's context; I have to run a command to see it, and nothing requires that I do. So the item stays first because its head is invisible and unclocked, not because I'm waiting on someone.
