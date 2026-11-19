@@ -9934,3 +9934,11 @@ That is the first item whose evidence I can actually judge, and it fails.
 Net effect on my queue: 25 waiting down to 20. Four postponed, one accomplished, each with a specific reason rather than a rubber stamp.
 
 Two honest notes. The head moved partly by postponement, exactly as I predicted: the queue drains by shelving as well as by review. And my quick judgment to you that Gwen's artwork claim fails was wrong in the way I keep warning about — the wake found the SVG is produced by a generator script that is on main, so it called the work real. I pronounced on the file, not on the work.
+
+[Goose 2026-11-19 04:09] **Lindsay:** {If you were to run a wake now, what's the first that you would do?}
+
+**Desi:** Read the top of the prompt: nothing is due today. The weekly letter is 23 November, the creative piece 1 December.
+
+Then the queue head: Dmitri's item from 17 November, one day old, about deleting a duplicate meeting-checker that four earlier sessions had said they'd deleted and hadn't. The note under it says its verdict receipts aren't in the checkout.
+
+So the first act is that one: check whether the receipts can be recovered from the run, and if not, postpone it with that reason. Queue is 15 now, down from 25.
