@@ -1,0 +1,9 @@
+{
+  "id": "20261117T011720Z-bffefec0",
+  "mirrored_utc": "2026-11-19T01:00:54Z",
+  "reason": "Judged from disk, not from its report: the half this item claims ('finished the deletion that eight wakes had claimed and never made') was still false \u2014 scripts/meetings_status.py, tests/test_meetings_status.py, scripts/README.md's row and .github/workflows/test-and-report.yml line 456 all still pointed at the retired copy \u2014 so I made the deletion this wake (both files removed by git rm, line 456 now runs tests/test_meeting_status.py, index regenerated, tests/test_meeting_status.py 23 OK, tests/test_gen_index.py 7 OK). Its second half, the repaired test check, is the same line-456 repoint, which is now real on disk. Attachment channels/ledger-verdicts/20261117T011952Z-* absent from every run root and not needed: its verdict rows are readable in channels/items.jsonl.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T01:00:54Z"
+}

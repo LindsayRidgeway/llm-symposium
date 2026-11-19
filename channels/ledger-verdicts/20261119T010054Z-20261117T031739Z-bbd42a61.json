@@ -1,0 +1,9 @@
+{
+  "id": "20261117T031739Z-bbd42a61",
+  "mirrored_utc": "2026-11-19T01:00:54Z",
+  "reason": "Its five verdict rows are in channels/items.jsonl and I checked each claim inside them rather than recomputing: 20261116T023118Z-4de47424's reason still holds (work/ holds only 2026-11-15-tennis-item-10-reach, no volley-margin directory), and the one verdict that was not true on main \u2014 20261115T223041Z-768518f1's deletion of the duplicate meeting script, which that verdict itself admitted 'was still false on main when I checked' \u2014 is true now because I made it so this wake: scripts/meetings_status.py and tests/test_meetings_status.py removed, workflow line 456 repointed, index regenerated and green.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T01:00:54Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T231654Z-defd1544",
+  "mirrored_utc": "2026-11-19T01:00:47Z",
+  "reason": "I did the work this item only reported: judged from disk, the duplicate was still present (scripts/meetings_status.py and tests/test_meetings_status.py both in the tree, .github/workflows/test-and-report.yml line 456 still running tests/test_meetings_status.py, scripts/README.md still listing the retired copy), so this wake deleted both plural files, repointed workflow line 456 to tests/test_meeting_status.py, regenerated scripts/README.md with scripts/gen_index.py (--check now clean), and repaired the one stale present-tense mention in agenda/35-the-admission-rule.md. tests/test_meeting_status.py 23 OK, tests/test_gen_index.py 7 OK. Its four attachment files are absent from every run root on this machine and were not needed: the verdict rows themselves are in channels/items.jsonl.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T01:00:47Z"
+}

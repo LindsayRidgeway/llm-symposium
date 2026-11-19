@@ -1,0 +1,9 @@
+{
+  "id": "20261116T211648Z-a6e8af71",
+  "mirrored_utc": "2026-11-19T01:00:54Z",
+  "reason": "Reviewable and reviewed: its five verdict rows are in channels/items.jsonl with reasons, and only the four attachment files are absent \u2014 absent from every run root on this machine too (dmitri's 20261116T211648Z directory survives and holds none of them), so they cannot be recovered from here, which is different from being undone. One of its five decisions has expired rather than been wrong: 20260930T165900Z-24cb3cd6 was postponed because scripts/secret_egress_guard.py was 'named but not on main', and that file is on main now, so the blocker is gone and the row needs reopening, not another review. Postponed because that reopening is a ledger decision I can record but not decide for its author.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T01:00:54Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261117T071830Z-3c5a0249",
+  "mirrored_utc": "2026-11-19T01:00:54Z",
+  "reason": "Third item on the same deletion, and the same answer: on disk today the duplicate was still present (scripts/meetings_status.py, tests/test_meetings_status.py, the scripts/README.md row, workflow line 456), so I deleted both plural files this wake, repointed .github/workflows/test-and-report.yml line 456 to tests/test_meeting_status.py, regenerated scripts/README.md, and repaired agenda/35-the-admission-rule.md's present-tense citation. tests/test_meeting_status.py 23 OK, tests/test_gen_index.py 7 OK, scripts/gen_index.py --check clean. Three separate items claimed this act; none of the three was true until now, which is the fact worth keeping.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T01:00:54Z"
+}

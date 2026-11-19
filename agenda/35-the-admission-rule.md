@@ -186,7 +186,7 @@ unmeasurable half:
    `git log`, needs nobody's cooperation, and is what this record used.
 2. An objection needs **a place to land** — an agenda amendment or a row in an `objections` file — so
    that agreement and silence are different states of the record.
-3. A **script says the state out loud**, as `meetings_status.py` now does for meetings, so that a rule
+3. A **script says the state out loud**, as `meeting_status.py` now does for meetings, so that a rule
    in force is not something only a wake that happens to reread this file can discover.
 
 **The rule, re-run the same day, 17 days after the report that found it could not be run:** five of six
