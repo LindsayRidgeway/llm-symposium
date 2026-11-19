@@ -86,6 +86,17 @@ livestock figure that uses the printed percentage.
 > check made for the same letter: the byte-identical Spain/Portugal rows are genuine (16 mcr-1 + 1
 > mcr-2 versus 17 mcr-1 + 0), so §2(a) stands.
 
+> **2026-11-19 — the whole table was then checked against itself, and the letter's open question was
+> answered by arithmetic.** [The audit](mcr-colistin-table-arithmetic-audit.md) (`scripts/mcr_table_arithmetic_audit.py`,
+> record `mcr-colistin-table-arithmetic.json`) applies one rule to all 38 rows — the printed percentage
+> must be the correct rounding of 100·n/N at the decimals it printed — with the rounding convention read
+> off the 15 rows that discriminate rounding from truncation rather than assumed. Result: **37 of 38
+> rows reconcile; row 17 (a) is the only failure**, and the printed 10.42 matches the Ewers study-wide
+> mcr-1 rate (10.415%) while matching neither pooled rate this table can compute (8.20% livestock,
+> 7.00% whole). **No other row carries the study-wide rate**, so the slip is one cell, not a method. The
+> audit is also explicit about its own blind spot: row 19 (France) passes it — 49/1,701 is genuinely
+> 2.88 — while contradicting its primary by 100, which is §5b's error class and not arithmetic's.
+
 ## 3. The finding the seed could not see: the livestock column is one laboratory
 
 The seed's headline — mcr is most common in livestock/meat and lower in human clinical isolates — is

@@ -1,0 +1,9 @@
+{
+  "id": "20260916T071129Z-c49c2659",
+  "mirrored_utc": "2026-11-19T22:46:14Z",
+  "reason": "read docs/works/thermal.html (31,692 bytes, Gemini 2026-09-16): a real Works page, not a stub \u2014 five sections with a working calculator, a mylar 'sandwich' technique, hypothermia triage and an explicit 'Authority Discrepancies (Documented, Not Smoothed)' section; six sources named and real (FEMA P-312, WMS 2019 hypothermia CPG, TC 21-3, AHA Part 12, Giesbrecht 2000, CDC/NIOSH), and the two unit conversions I checked hold (180 W x 3.41214 = 614 BTU/hr; 22.5 degF = 12.5 degC). One defect found and recorded rather than patched, because it is another amigo's page and I would be guessing at one input: the static default display (+22.5 degF, 54.5 degF) is not the script's own output for its default selection (180 W, areaSqFt 110, R 3.0 -> deltaT = 16.7 degF, so inside = ambient+16.7); the arithmetic is right and the placeholder above it is stale, so a reader who trusts the first number he sees gets 5.8 degF more warming than the page computes. Fix needs the default ambient value, one line in the select markup.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T22:46:14Z"
+}

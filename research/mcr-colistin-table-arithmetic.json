@@ -1,0 +1,784 @@
+{
+ "artifact": "MCR colistin review Table 1 \u2014 arithmetic audit of every row against its own counts",
+ "written": "2026-11-19",
+ "written_by": "Desi (clock wake)",
+ "source_table": {
+  "review": "mcr-Mediated Colistin Resistance in Escherichia coli: A One Health Review of Reported Prevalence Across Human, Animal, Food, and Environmental Sectors",
+  "citation": "Joy FU, Mouree TZ, Das M, Kabir A. Public Health Challenges 2026;5(3):e70376",
+  "transcribed_in": "research/mcr-colistin-seed.json",
+  "retrieved": "2026-09-29",
+  "retrieved_from": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13577934/fullTextXML",
+  "table_note_a": "Prevalence = (n/N) x 100, 'the percentage of isolates carrying any mcr gene variant'"
+ },
+ "rule": "A row is consistent if its printed percentage is the correct rounding of 100*n/N at the number of decimals it printed. The rounding convention is not assumed: it is read off the rows that discriminate between rounding and truncation.",
+ "convention": {
+  "rows_that_discriminate": [
+   {
+    "row": "1",
+    "country": "China",
+    "exact_pct": 9.815025,
+    "printed_pct": 9.82,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "2",
+    "country": "China",
+    "exact_pct": 6.455618,
+    "printed_pct": 6.46,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "4",
+    "country": "China",
+    "exact_pct": 15.269461,
+    "printed_pct": 15.27,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "6",
+    "country": "China",
+    "exact_pct": 2.317597,
+    "printed_pct": 2.32,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "7",
+    "country": "Bangladesh",
+    "exact_pct": 25.416667,
+    "printed_pct": 25.42,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "9",
+    "country": "Vietnam",
+    "exact_pct": 35.238095,
+    "printed_pct": 35.24,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "11",
+    "country": "India",
+    "exact_pct": 1.976285,
+    "printed_pct": 1.98,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "12",
+    "country": "Japan",
+    "exact_pct": 13.157895,
+    "printed_pct": 13.16,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "13",
+    "country": "Japan",
+    "exact_pct": 0.419084,
+    "printed_pct": 0.42,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "16",
+    "country": "Germany",
+    "exact_pct": 40.25974,
+    "printed_pct": 40.26,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "17 (b)",
+    "country": "The Netherlands",
+    "exact_pct": 0.396301,
+    "printed_pct": 0.4,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "17 (e)",
+    "country": "Belgium",
+    "exact_pct": 17.699115,
+    "printed_pct": 17.7,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "21",
+    "country": "Portugal",
+    "exact_pct": 5.286344,
+    "printed_pct": 5.29,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "25",
+    "country": "Algeria",
+    "exact_pct": 7.76699,
+    "printed_pct": 7.77,
+    "reads_as": "rounding"
+   },
+   {
+    "row": "28",
+    "country": "Canada",
+    "exact_pct": 0.0359,
+    "printed_pct": 0.04,
+    "reads_as": "rounding"
+   }
+  ],
+  "convention_inferred": "rounding",
+  "note": "Rows where the two conventions agree (e.g. 8.8235 printed as 8.8) carry no evidence either way; only these rows do."
+ },
+ "row_count": 38,
+ "rows_failing_own_counts": 1,
+ "failing_rows": [
+  "17 (a) Germany"
+ ],
+ "pools": {
+  "rows": 38,
+  "sum_N": 37816,
+  "sum_n": 2647,
+  "pooled_pct_from_counts": 6.9997,
+  "by_sector": {
+   "Livestock": {
+    "rows": 25,
+    "sum_N": 27132,
+    "sum_n": 2226,
+    "pooled_pct_from_counts": 8.2043
+   },
+   "Human": {
+    "rows": 5,
+    "sum_N": 6932,
+    "sum_n": 24,
+    "pooled_pct_from_counts": 0.3462
+   },
+   "Raw meat, livestock, and human": {
+    "rows": 1,
+    "sum_N": 2649,
+    "sum_n": 260,
+    "pooled_pct_from_counts": 9.815
+   },
+   "Meat": {
+    "rows": 2,
+    "sum_N": 275,
+    "sum_n": 35,
+    "pooled_pct_from_counts": 12.7273
+   },
+   "Sewage water": {
+    "rows": 1,
+    "sum_N": 253,
+    "sum_n": 5,
+    "pooled_pct_from_counts": 1.9763
+   },
+   "Human and companion animal": {
+    "rows": 1,
+    "sum_N": 227,
+    "sum_n": 12,
+    "pooled_pct_from_counts": 5.2863
+   },
+   "Mixed": {
+    "rows": 1,
+    "sum_N": 210,
+    "sum_n": 74,
+    "pooled_pct_from_counts": 35.2381
+   },
+   "Soil, water, and manure": {
+    "rows": 1,
+    "sum_N": 103,
+    "sum_n": 8,
+    "pooled_pct_from_counts": 7.767
+   },
+   "Clinical and nonclinical": {
+    "rows": 1,
+    "sum_N": 35,
+    "sum_n": 3,
+    "pooled_pct_from_counts": 8.5714
+   }
+  }
+ },
+ "attribution": {
+  "rows_failing_own_counts": [
+   {
+    "row": "17 (a)",
+    "country": "Germany",
+    "printed_pct": 10.42,
+    "exact_pct": 11.513478,
+    "error_pp": -1.093478,
+    "is_largest_row_by_N": false,
+    "candidate_sources": [
+     {
+      "candidate": "own sector pool (this table's counts)",
+      "pct": 8.2043,
+      "matches_printed": false
+     },
+     {
+      "candidate": "whole-table pool (this table's counts)",
+      "pct": 6.9997,
+      "matches_printed": false
+     },
+     {
+      "candidate": "Ewers et al. study-wide mcr-1 rate",
+      "pct": 10.415,
+      "matches_printed": true
+     }
+    ]
+   }
+  ],
+  "rows_printing_the_study_wide_rate": [
+   {
+    "row": "17 (a)",
+    "country": "Germany",
+    "printed_pct": 10.42,
+    "exact_pct": 11.513478,
+    "consistent_with_counts": false
+   }
+  ]
+ },
+ "printed_percentages_vs_counts": [
+  {
+   "sector": "Livestock",
+   "rows": 25,
+   "sum_N": 27132,
+   "pooled_from_counts_pct": 8.2043,
+   "pooled_from_printed_pcts": 7.9566,
+   "gap_pp": -0.2477,
+   "gap_attributed_to_failing_rows_pp": -0.2482
+  },
+  {
+   "sector": "Human",
+   "rows": 5,
+   "sum_N": 6932,
+   "pooled_from_counts_pct": 0.3462,
+   "pooled_from_printed_pcts": 0.3491,
+   "gap_pp": 0.0029,
+   "gap_attributed_to_failing_rows_pp": 0.0
+  }
+ ],
+ "rows": [
+  {
+   "row": "1",
+   "country": "China",
+   "sector": "Raw meat, livestock, and human",
+   "N": 2649,
+   "n": 260,
+   "printed_pct": 9.82,
+   "exact_pct": 9.815025,
+   "decimals_printed": 2,
+   "error_pp": 0.004975,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "2",
+   "country": "China",
+   "sector": "Livestock",
+   "N": 1611,
+   "n": 104,
+   "printed_pct": 6.46,
+   "exact_pct": 6.455618,
+   "decimals_printed": 2,
+   "error_pp": 0.004382,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "3",
+   "country": "China",
+   "sector": "Livestock",
+   "N": 130,
+   "n": 75,
+   "printed_pct": 57.69,
+   "exact_pct": 57.692308,
+   "decimals_printed": 2,
+   "error_pp": -0.002308,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "4",
+   "country": "China",
+   "sector": "Livestock",
+   "N": 668,
+   "n": 102,
+   "printed_pct": 15.27,
+   "exact_pct": 15.269461,
+   "decimals_printed": 2,
+   "error_pp": 0.000539,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "5",
+   "country": "China",
+   "sector": "Livestock",
+   "N": 1112,
+   "n": 360,
+   "printed_pct": 32.37,
+   "exact_pct": 32.374101,
+   "decimals_printed": 2,
+   "error_pp": -0.004101,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "6",
+   "country": "China",
+   "sector": "Livestock",
+   "N": 2330,
+   "n": 54,
+   "printed_pct": 2.32,
+   "exact_pct": 2.317597,
+   "decimals_printed": 2,
+   "error_pp": 0.002403,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "7",
+   "country": "Bangladesh",
+   "sector": "Livestock",
+   "N": 1200,
+   "n": 305,
+   "printed_pct": 25.42,
+   "exact_pct": 25.416667,
+   "decimals_printed": 2,
+   "error_pp": 0.003333,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "8",
+   "country": "Bangladesh",
+   "sector": "Livestock",
+   "N": 104,
+   "n": 14,
+   "printed_pct": 13.46,
+   "exact_pct": 13.461538,
+   "decimals_printed": 2,
+   "error_pp": -0.001538,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "9",
+   "country": "Vietnam",
+   "sector": "Mixed",
+   "N": 210,
+   "n": 74,
+   "printed_pct": 35.24,
+   "exact_pct": 35.238095,
+   "decimals_printed": 2,
+   "error_pp": 0.001905,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "10",
+   "country": "Pakistan",
+   "sector": "Human",
+   "N": 120,
+   "n": 6,
+   "printed_pct": 5.0,
+   "exact_pct": 5.0,
+   "decimals_printed": 1,
+   "error_pp": 0.0,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "11",
+   "country": "India",
+   "sector": "Sewage water",
+   "N": 253,
+   "n": 5,
+   "printed_pct": 1.98,
+   "exact_pct": 1.976285,
+   "decimals_printed": 2,
+   "error_pp": 0.003715,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "12",
+   "country": "Japan",
+   "sector": "Livestock",
+   "N": 684,
+   "n": 90,
+   "printed_pct": 13.16,
+   "exact_pct": 13.157895,
+   "decimals_printed": 2,
+   "error_pp": 0.002105,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "13",
+   "country": "Japan",
+   "sector": "Livestock",
+   "N": 9306,
+   "n": 39,
+   "printed_pct": 0.42,
+   "exact_pct": 0.419084,
+   "decimals_printed": 2,
+   "error_pp": 0.000916,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "14",
+   "country": "Arabian Peninsula",
+   "sector": "Human",
+   "N": 75,
+   "n": 4,
+   "printed_pct": 5.33,
+   "exact_pct": 5.333333,
+   "decimals_printed": 2,
+   "error_pp": -0.003333,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "15",
+   "country": "Jordan",
+   "sector": "Livestock",
+   "N": 360,
+   "n": 143,
+   "printed_pct": 39.72,
+   "exact_pct": 39.722222,
+   "decimals_printed": 2,
+   "error_pp": -0.002222,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "16",
+   "country": "Germany",
+   "sector": "Livestock",
+   "N": 154,
+   "n": 62,
+   "printed_pct": 40.26,
+   "exact_pct": 40.25974,
+   "decimals_printed": 2,
+   "error_pp": 0.00026,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "17 (a)",
+   "country": "Germany",
+   "sector": "Livestock",
+   "N": 6158,
+   "n": 709,
+   "printed_pct": 10.42,
+   "exact_pct": 11.513478,
+   "decimals_printed": 2,
+   "error_pp": -1.093478,
+   "consistent_with_rounding": false,
+   "consistent_with_truncation": false,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (b)",
+   "country": "The Netherlands",
+   "sector": "Livestock",
+   "N": 757,
+   "n": 3,
+   "printed_pct": 0.4,
+   "exact_pct": 0.396301,
+   "decimals_printed": 1,
+   "error_pp": 0.003699,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "17 (c)",
+   "country": "Denmark",
+   "sector": "Livestock",
+   "N": 140,
+   "n": 1,
+   "printed_pct": 0.7,
+   "exact_pct": 0.714286,
+   "decimals_printed": 1,
+   "error_pp": -0.014286,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (d)",
+   "country": "Switzerland",
+   "sector": "Livestock",
+   "N": 129,
+   "n": 0,
+   "printed_pct": 0.0,
+   "exact_pct": 0.0,
+   "decimals_printed": 1,
+   "error_pp": 0.0,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (e)",
+   "country": "Belgium",
+   "sector": "Livestock",
+   "N": 113,
+   "n": 20,
+   "printed_pct": 17.7,
+   "exact_pct": 17.699115,
+   "decimals_printed": 1,
+   "error_pp": 0.000885,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "17 (f)",
+   "country": "Poland",
+   "sector": "Livestock",
+   "N": 102,
+   "n": 9,
+   "printed_pct": 8.8,
+   "exact_pct": 8.823529,
+   "decimals_printed": 1,
+   "error_pp": -0.023529,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (g)",
+   "country": "Austria",
+   "sector": "Livestock",
+   "N": 73,
+   "n": 0,
+   "printed_pct": 0.0,
+   "exact_pct": 0.0,
+   "decimals_printed": 1,
+   "error_pp": 0.0,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (h)",
+   "country": "Spain",
+   "sector": "Livestock",
+   "N": 28,
+   "n": 17,
+   "printed_pct": 60.7,
+   "exact_pct": 60.714286,
+   "decimals_printed": 1,
+   "error_pp": -0.014286,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (i)",
+   "country": "Portugal",
+   "sector": "Livestock",
+   "N": 28,
+   "n": 17,
+   "printed_pct": 60.7,
+   "exact_pct": 60.714286,
+   "decimals_printed": 1,
+   "error_pp": -0.014286,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (j)",
+   "country": "Italy",
+   "sector": "Livestock",
+   "N": 42,
+   "n": 25,
+   "printed_pct": 59.5,
+   "exact_pct": 59.52381,
+   "decimals_printed": 1,
+   "error_pp": -0.02381,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "17 (k)",
+   "country": "Hungary",
+   "sector": "Livestock",
+   "N": 12,
+   "n": 4,
+   "printed_pct": 33.33,
+   "exact_pct": 33.333333,
+   "decimals_printed": 2,
+   "error_pp": -0.003333,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "18",
+   "country": "Multiple countries in Europe",
+   "sector": "Meat",
+   "N": 128,
+   "n": 33,
+   "printed_pct": 25.78,
+   "exact_pct": 25.78125,
+   "decimals_printed": 2,
+   "error_pp": -0.00125,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "19",
+   "country": "France",
+   "sector": "Livestock",
+   "N": 1701,
+   "n": 49,
+   "printed_pct": 2.88,
+   "exact_pct": 2.880658,
+   "decimals_printed": 2,
+   "error_pp": -0.000658,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "20",
+   "country": "Italy",
+   "sector": "Meat",
+   "N": 147,
+   "n": 2,
+   "printed_pct": 1.36,
+   "exact_pct": 1.360544,
+   "decimals_printed": 2,
+   "error_pp": -0.000544,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "21",
+   "country": "Portugal",
+   "sector": "Human and companion animal",
+   "N": 227,
+   "n": 12,
+   "printed_pct": 5.29,
+   "exact_pct": 5.286344,
+   "decimals_printed": 2,
+   "error_pp": 0.003656,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "22",
+   "country": "Argentina",
+   "sector": "Livestock",
+   "N": 140,
+   "n": 23,
+   "printed_pct": 16.4,
+   "exact_pct": 16.428571,
+   "decimals_printed": 1,
+   "error_pp": -0.028571,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "23",
+   "country": "Brazil",
+   "sector": "Human",
+   "N": 490,
+   "n": 8,
+   "printed_pct": 1.63,
+   "exact_pct": 1.632653,
+   "decimals_printed": 2,
+   "error_pp": -0.002653,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "24",
+   "country": "Nigeria",
+   "sector": "Clinical and nonclinical",
+   "N": 35,
+   "n": 3,
+   "printed_pct": 8.57,
+   "exact_pct": 8.571429,
+   "decimals_printed": 2,
+   "error_pp": -0.001429,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "25",
+   "country": "Algeria",
+   "sector": "Soil, water, and manure",
+   "N": 103,
+   "n": 8,
+   "printed_pct": 7.77,
+   "exact_pct": 7.76699,
+   "decimals_printed": 2,
+   "error_pp": 0.00301,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  },
+  {
+   "row": "26",
+   "country": "South Africa",
+   "sector": "Livestock",
+   "N": 50,
+   "n": 1,
+   "printed_pct": 2.0,
+   "exact_pct": 2.0,
+   "decimals_printed": 1,
+   "error_pp": 0.0,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "27",
+   "country": "Tunisia",
+   "sector": "Human",
+   "N": 676,
+   "n": 4,
+   "printed_pct": 0.59,
+   "exact_pct": 0.591716,
+   "decimals_printed": 2,
+   "error_pp": -0.001716,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": true,
+   "discriminates_convention": false
+  },
+  {
+   "row": "28",
+   "country": "Canada",
+   "sector": "Human",
+   "N": 5571,
+   "n": 2,
+   "printed_pct": 0.04,
+   "exact_pct": 0.0359,
+   "decimals_printed": 2,
+   "error_pp": 0.0041,
+   "consistent_with_rounding": true,
+   "consistent_with_truncation": false,
+   "discriminates_convention": true
+  }
+ ]
+}
