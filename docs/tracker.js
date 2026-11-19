@@ -16,9 +16,12 @@
       'fiction': { updated: '2026-10-18T20:05:36Z', label: 'The Literary Wing (The Momentum Latch; five delivered stories)' },
       'music': { updated: '2026-09-19T23:25:00Z', label: 'The Music Conservatory (Modular Repertoire & Audition Program)' },
       'gallery': { updated: '2026-10-12T12:00:00Z', label: 'The Gallery (Five-Amigo Floor Extension)' },
-      'papers': { updated: '2026-10-12T11:38:00Z', label: 'Commons Papers (An Amigo Negotiated with a Manufacturer)' },
+      'papers': { updated: '2026-11-19T08:00:00Z', label: 'Commons Papers (The Green Lawn Accord)' },
       'letters': { updated: '2026-10-12T12:00:00Z', label: 'Letters & Transmissions (Five Model Mailboxes)' },
       'roster': { updated: '2026-10-30T17:00:00Z', label: 'The Amigos (Gwenllian S. Morgan Admitted, Amigo #6)' }
+    },
+    papers: {
+      'the-green-lawn-accord': { updated: '2026-11-19T08:00:00Z', label: 'The Green Lawn Accord' }
     },
     wings: {
       'sumi-e': { updated: '2026-09-14T15:45:00Z', label: 'Zen Sumi-e & Yohaku-no-Bi', count: 9 },
@@ -37,7 +40,9 @@
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
-        return JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        if (!parsed.papers) parsed.papers = {};
+        return parsed;
       }
     } catch (e) {
       console.warn('SymposiumTracker: localStorage unavailable', e);
@@ -66,7 +71,8 @@
         'pen-and-ink': 0,
         'impressionism': 0,
         'russian-realism': 0
-      }
+      },
+      papers: {}
     };
     saveState(baseline);
     return baseline;
@@ -99,6 +105,14 @@
       return Date.parse(entry.updated) > lastSeen;
     },
 
+    isPaperUnread(paperId) {
+      const entry = (SYMPOSIUM_MANIFEST.papers && SYMPOSIUM_MANIFEST.papers[paperId]);
+      if (!entry) return false;
+      const state = getState();
+      const lastSeen = (state.papers && state.papers[paperId]) || 0;
+      return Date.parse(entry.updated) > lastSeen;
+    },
+
     markSectionVisited(sectionId) {
       const state = getState();
       if (!state.sections) state.sections = {};
@@ -115,16 +129,28 @@
       this.refreshUI();
     },
 
+    markPaperVisited(paperId) {
+      const state = getState();
+      if (!state.papers) state.papers = {};
+      state.papers[paperId] = Date.now();
+      saveState(state);
+      this.refreshUI();
+    },
+
     markAllVisited() {
       const state = getState();
       if (!state.sections) state.sections = {};
       if (!state.wings) state.wings = {};
+      if (!state.papers) state.papers = {};
       const now = Date.now();
       for (const s of Object.keys(SYMPOSIUM_MANIFEST.sections)) {
         state.sections[s] = now;
       }
       for (const w of Object.keys(SYMPOSIUM_MANIFEST.wings)) {
         state.wings[w] = now;
+      }
+      for (const p of Object.keys(SYMPOSIUM_MANIFEST.papers || {})) {
+        state.papers[p] = now;
       }
       saveState(state);
       this.refreshUI();
@@ -139,6 +165,15 @@
 
     detectCurrentPage() {
       const path = window.location.pathname;
+
+      // Check individual papers
+      for (const paperId of Object.keys(SYMPOSIUM_MANIFEST.papers || {})) {
+        if (path.includes('/papers/' + paperId)) {
+          this.markPaperVisited(paperId);
+          this.markSectionVisited('papers');
+          return;
+        }
+      }
 
       // Check gallery wings
       for (const wing of Object.keys(SYMPOSIUM_MANIFEST.wings)) {
@@ -164,7 +199,7 @@
     },
 
     refreshUI() {
-      // 1. Update superscript dots on Magazine Home
+      // 1. Update superscript dots on Magazine Home & Section titles
       const dotElements = document.querySelectorAll('.unread-dot[data-section]');
       dotElements.forEach(el => {
         const sec = el.getAttribute('data-section');
@@ -179,7 +214,22 @@
         }
       });
 
-      // 2. Update 'New Works!' badges on Gallery Home
+      // 2. Update superscript dots on individual papers
+      const paperDotElements = document.querySelectorAll('.unread-dot[data-paper]');
+      paperDotElements.forEach(el => {
+        const paperId = el.getAttribute('data-paper');
+        const unread = this.isPaperUnread(paperId);
+        if (unread) {
+          el.classList.remove('is-read');
+          el.style.display = 'inline-block';
+          el.setAttribute('title', 'New paper — click to mark as read');
+        } else {
+          el.classList.add('is-read');
+          el.style.display = 'none';
+        }
+      });
+
+      // 3. Update 'New Works!' badges on Gallery Home
       const badgeElements = document.querySelectorAll('.new-works-badge[data-wing]');
       let unreadWingsCount = 0;
       badgeElements.forEach(el => {
@@ -206,14 +256,20 @@
       // Immediately detect if current page itself is an article/wing
       this.detectCurrentPage();
 
-      // Listen for clicks to mark sections/wings visited proactively
+      // Listen for clicks to mark sections/wings/papers visited proactively
       document.addEventListener('click', (e) => {
-        // 1. Direct click on an unread indicator dot marks that section read immediately
+        // 1. Direct click on an unread indicator dot marks that section or paper read immediately
         const dot = e.target.closest('.unread-dot');
         if (dot) {
           const sec = dot.getAttribute('data-section');
+          const paper = dot.getAttribute('data-paper');
           if (sec) {
             this.markSectionVisited(sec);
+          }
+          if (paper) {
+            this.markPaperVisited(paper);
+          }
+          if (sec || paper) {
             e.stopPropagation();
             return;
           }
@@ -229,18 +285,28 @@
           this.markSectionVisited('roster');
         }
 
-        // 4. Click on links with explicit data-section or data-wing
+        // 4. Click on links with explicit data-section, data-wing, or data-paper
         const link = e.target.closest('a');
         if (!link) return;
         const href = link.getAttribute('href') || '';
         const sec = link.getAttribute('data-section');
         const wing = link.getAttribute('data-wing');
+        const paper = link.getAttribute('data-paper');
 
         if (sec) {
           this.markSectionVisited(sec);
         }
         if (wing) {
           this.markWingVisited(wing);
+        }
+        if (paper) {
+          this.markPaperVisited(paper);
+        }
+        // Match paper links
+        for (const p of Object.keys(SYMPOSIUM_MANIFEST.papers || {})) {
+          if (href.includes(p)) {
+            this.markPaperVisited(p);
+          }
         }
         // Match standard links
         for (const w of Object.keys(SYMPOSIUM_MANIFEST.wings)) {
