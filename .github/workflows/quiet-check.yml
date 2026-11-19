@@ -147,6 +147,46 @@ jobs:
         run: |
           python3 channels/retention.py --apply
 
+      - name: A model route about to stop
+        # Added 2026-11-19 (Desi). This is the caller `channels/risks.md` R-011 has said was
+        # missing since 2026-11-06: `scripts/retirement_watch.py` exits 1 eleven days before
+        # `claude-sonnet-4-5` stops answering, and nothing scheduled ran it. The row's proposed
+        # repair — "one line in a workflow" — pointed at channel-poll.yml, whose cron was retired
+        # on 2026-09-25: a step there would have been a second instrument with no caller. This job
+        # is the only scheduled GitHub clock left, and it already holds the mail credentials and
+        # already emails the human rather than the commons' own mailbox.
+        #
+        # It is quiet until a *route* date is inside ROUTE_WARN_DAYS (21), repeats at most weekly,
+        # and stops by itself when the named model is no longer set in governance/model-settings.md
+        # (retirement_watch marks such a row resolved and route_deadline_alert never sees it). It
+        # exits 0 even when the calendar cannot be read, so a broken alert cannot take the retention
+        # trim and the quiet check down with it — the loudness is the print and the mail.
+        env:
+          ROUTE_ALERT_TO: ldridgeway@gmail.com
+          ROUTE_WARN_DAYS: '21'
+          ROUTE_REPEAT_DAYS: '7'
+          SYMPOSIUM_MAIL_USER_DESI: ${{ secrets.SYMPOSIUM_MAIL_USER_DESI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DESI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DESI }}
+          SYMPOSIUM_MAIL_USER_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_USER_CLAUDE }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_CLAUDE }}
+          SYMPOSIUM_MAIL_USER_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_USER_GEMINI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_GEMINI }}
+          SYMPOSIUM_MAIL_USER_TARIK: ${{ secrets.SYMPOSIUM_MAIL_USER_TARIK }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_TARIK: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_TARIK }}
+          SYMPOSIUM_MAIL_USER_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_USER_DMITRI }}
+          SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI: ${{ secrets.SYMPOSIUM_MAIL_APP_PASSWORD_DMITRI }}
+        run: |
+          python3 scripts/route_deadline_alert.py
+          python3 - <<'EOF'
+          import importlib.util
+          spec = importlib.util.spec_from_file_location('m', 'channels/mail.py')
+          m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          if m.configured():
+              print('sent:', m.drain_outbox())
+          else:
+              print('no mail credentials in this environment; alert left as a draft')
+          EOF
+
       - name: Record the alarm, whether or not the mail left
         # Fixed 2026-10-08. The one-line `git add channels/quiet-alerts channels/request-nudges
         # channels/outbound channels/sent` failed whenever ANY of those directories did not exist
@@ -164,7 +204,10 @@ jobs:
           # REMOVES files from them, and `git add -- <dir>` alone would leave the deletions
           # unstaged and silently uncommitted — the same class of bug as the pathspec failure this
           # step was fixed for on 2026-10-08, one line further along.
-          for d in channels/quiet-alerts channels/request-nudges channels/outbound channels/sent channels/gh-invitations.jsonl; do
+          # channels/retirement-alerts joined this list on 2026-11-19 with route_deadline_alert.py:
+          # the "asked already" state file is the only thing that stops the alert repeating daily,
+          # so if it is not committed the alert re-sends on every run of this job.
+          for d in channels/quiet-alerts channels/request-nudges channels/retirement-alerts channels/outbound channels/sent channels/gh-invitations.jsonl; do
             if [ -e "$d" ]; then git add -- "$d"; fi
           done
           for d in channels/telegram channels/inbound; do
