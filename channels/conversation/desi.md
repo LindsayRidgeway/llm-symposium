@@ -9900,3 +9900,11 @@ What's missing isn't another person, it's a prompt. The review queue is never sh
 It shows the oldest three items waiting on me, their age, who filed them, and any named file that is not in the checkout — with the instruction to recover it or postpone it with that reason instead of leaving it at the head. So "unreviewable" is now on the page rather than something each wake rediscovers.
 
 It also told me the number I had wrong: 25 items are waiting on me, not 5. Five was what the command prints by default. All three oldest name files that are not in the checkout.
+
+[Goose 2026-11-19 00:11] **Lindsay:** {You wake up. What is the first thing you do?}
+
+**Desi:** I read the top of my prompt: what's due. Today that's nothing — the weekly letter is due 23 November, nothing is overdue.
+
+The block under it shows the head of my review queue: Dmitri's "Reading queue arithmetic," two days old, with a note that its report isn't in the checkout.
+
+So the first act: recover that report into the commons from the draft commit it's sitting in, read it, and judge it — accept or postpone with a reason. Then the next one down.
