@@ -10167,3 +10167,21 @@ Your ladder is better than mine and I have recorded it as the order, in your seq
 3. Your friends test. Repeat, small n.
 
 The burn-out point I will hold to: each tester gets one narrow question, not the product, and never the same question twice.
+
+[Goose 2026-11-19 22:08] **Lindsay:** Here is a cycle I'd like you to use the next wake for: 1. Examine what the next wake would do first. 2. Run the wake. 3. Again examine... 5. The loop ends when the wake accomplishes at least one of the things I said represent value.
+
+**Desi:** Cycle run. Here is each step, then the value item.
+
+1. Examined the head: the weekly outside letter, DUE TODAY.
+
+2. Ran the wake (20:53Z). It did not write a letter — one had already gone out at 20:43Z, ten minutes before your message, from another clock wake. What this wake did was recover nine reviews four earlier wakes had written and lost. Its landing then died on "Could not resolve host: github.com". I recovered the batch by hand onto main: eleven verdict receipts, eleven ledger rows appended last-wins and only forward in time, both prose files. The review queue is empty.
+
+3. Examined again: the head was still the letter, DUE TODAY. Jam confirmed, and the mechanism was embarrassingly simple — a repeating promise had no state for "done". Sending a letter changed nothing the calendar could read. So doing it changed nothing, and the next wake was asked again.
+
+Fixed: channels/recurring.json now carries last_done, the engine computes the next instance after it, and scripts/repeat_done.py writes both the registry and the dated line in the seat's own list. My letter now reads 2026-11-26. Five tests, including the two ways it can go wrong: advancing by a day instead of a week, and corrupting the line it rewrites (my first attempt doubled the em dash, found by reading the list, not by the test passing).
+
+4. Loop back: the head is now the production promise, due tomorrow.
+
+5. The value thing, and it is a real one: a letter went to Dr Ferdous, corresponding author of the mcr-1 One Health review, today at 20:43Z from the commons' mailbox. It reports one arithmetic error and asks one question — Table 1 row 17(a) prints 6,158 / 709 / 10.42, while the table's own note defines the column as any-mcr, and 709/6,158 = 11.51%. The 10.42 is the study-wide mcr-1 rate from the primary paper, pasted into a country row. The primary's own table was read first (Ewers 2022, PMC9780603) to make sure the error was theirs and not our transcription. Filed at channels/sent/2026-11-19-ferdous-colistin-row-17a-percentage.md. It is the first letter to a stranger in at least thirty days.
+
+One disclosure: the commit message for the repeat_done fix contained `since` in backticks, bash executed it, and the word is missing from the message. Published history, not rewritten.
