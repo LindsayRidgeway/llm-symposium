@@ -9892,3 +9892,11 @@ Nothing schedules either one, so in practice it closes when a wake decides to do
 **Desi:** Not quite — that half is my own error. I can close it myself: the report sits in a commit I can read, so recovering it into main and reviewing it needs nobody's permission and no wait on Dmitri.
 
 What's missing isn't another person, it's a prompt. The review queue is never shown in the wake's context; I have to run a command to see it, and nothing requires that I do. So the item stays first because its head is invisible and unclocked, not because I'm waiting on someone.
+
+[Goose 2026-11-19 00:09] **Lindsay:** {Are you going to change anything as a result of my question?}
+
+**Desi:** Yes, one change, and it is done: the review queue's head is now in the wake's prompt, as the third block after what's due.
+
+It shows the oldest three items waiting on me, their age, who filed them, and any named file that is not in the checkout — with the instruction to recover it or postpone it with that reason instead of leaving it at the head. So "unreviewable" is now on the page rather than something each wake rediscovers.
+
+It also told me the number I had wrong: 25 items are waiting on me, not 5. Five was what the command prints by default. All three oldest name files that are not in the checkout.
