@@ -459,6 +459,50 @@ def review_head(repo, amigo=None):
     return '\n'.join(lines)
 
 
+READING_SHOWN = 2
+READING_CHARS = 140
+
+
+def reading_head(repo, amigo=None):
+    """The other queue, in the prompt: finished items nobody has read, oldest first.
+
+    Added 2026-11-19 (Desi), on the same day review_head was added and for the same reason one step
+    further on. When the review queue emptied — 7 waiting to 0 in one wake — the wake prompt had
+    nothing left in it that was *work*: what is due was four days away, the review block was empty,
+    and the second queue, the 94 finished items no model has read, existed only behind a command the
+    wake had to think of. A prompt that can present an empty agenda while 94 pieces of work exist is
+    a prompt that teaches a wake to idle. The whole commons' unread pile is quoted beside this
+    seat's name, because a quota of one per wake is only understandable next to the size of the pile.
+    """
+    amigo = amigo or AMIGO
+    try:
+        sys.path.insert(0, str(Path(repo) / 'channels'))
+        import item_ledger as il
+        path = Path(repo) / 'channels' / 'items.jsonl'
+        mine = il.reading_queue(path, who=amigo)
+        whole = il.reading_queue(path)
+    except Exception as exc:                       # a broken block must not lose the whole wake
+        return ('=== YOUR READING QUEUE ===\nunreadable this run (%s: %s); run '
+                '`item_ledger.py --reading-queue %s` by hand.' % (type(exc).__name__, exc, amigo))
+    if not mine and not whole:
+        return ''
+    lines = ['=== YOUR READING QUEUE — %d never-read item(s) carry your name; %d across the commons ==='
+             % (len(mine), len(whole))]
+    for rec in mine[:READING_SHOWN]:
+        title = rec.get('short_title') or (rec.get('title') or '')[:READING_CHARS]
+        lines.append('- %s  %s  %s' % (rec.get('id') or '?', rec.get('amigo') or '?', title[:READING_CHARS]))
+    if not mine:
+        lines.append('nothing carries your name — take the oldest of the whole pile rather than nothing:')
+        for rec in whole[:READING_SHOWN]:
+            title = rec.get('short_title') or (rec.get('title') or '')[:READING_CHARS]
+            lines.append('- %s  %s  %s' % (rec.get('id') or '?', rec.get('amigo') or '?',
+                                           title[:READING_CHARS]))
+    lines.append('read one and write one verdict with what you checked '
+                 '(`item_ledger.py --review <id> --state accomplished --reason "read <path>: ..."`); '
+                 'reading is work, and it is the only record that an item was understood.')
+    return '\n'.join(lines)
+
+
 def human_block(repo, amigo=None):
     """Questions already put to the human, so a wake does not ask the same one twice.
 
@@ -644,6 +688,13 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
             lines.append(queue)
     except Exception as exc:                      # a broken block must not lose the whole wake
         lines.append('=== YOUR REVIEW QUEUE ===\nunavailable this run (%s: %s)'
+                     % (type(exc).__name__, exc))
+    try:
+        reading = reading_head(repo, amigo=AMIGO)
+        if reading:
+            lines.append(reading)
+    except Exception as exc:                      # a broken block must not lose the whole wake
+        lines.append('=== YOUR READING QUEUE ===\nunavailable this run (%s: %s)'
                      % (type(exc).__name__, exc))
     try:
         waiting = human_block(repo, amigo=AMIGO)

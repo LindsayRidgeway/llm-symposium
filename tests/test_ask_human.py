@@ -77,6 +77,70 @@ class AskTest(unittest.TestCase):
         self.assertIn("unreadable", we.human_block(repo))
 
 
+class ReadingHead(unittest.TestCase):
+    """The second queue has to be in the prompt too, and the empty case is the one that matters.
+
+    Added 2026-11-19, the same day the review queue emptied for the first time. The failure this
+    pins is not "the block is missing" but "a prompt can show a wake nothing to do while 94 finished
+    items sit unread": with the review queue empty and nothing due for four days, the only honest
+    content of the agenda is the reading queue.
+    """
+
+    def setUp(self):
+        import json
+        import tempfile
+        self.dir = tempfile.TemporaryDirectory()
+        self.repo = Path(self.dir.name) / "repo"
+        (self.repo / "channels").mkdir(parents=True)
+        rows = [
+            {"id": "readmine", "amigo": "claude", "filed_utc": "2026-11-15T17:10:52Z",
+             "state": "accomplished", "reviewer": "auto:path",
+             "reading_assigned_to": "desi", "short_title": "conservatory to-do"},
+            {"id": "readother", "amigo": "gemini", "filed_utc": "2026-11-18T17:10:52Z",
+             "state": "accomplished", "reviewer": "auto:path",
+             "reading_assigned_to": "dmitri", "short_title": "another seat's"},
+        ]
+        path = self.repo / "channels" / "items.jsonl"
+        path.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        self.path = path
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def load(self):
+        spec = importlib.util.spec_from_file_location("we_rq", REPO / "channels" / "wake_engine.py")
+        we = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(we)
+        return we
+
+    def test_the_item_that_carries_my_name_is_named_with_the_size_of_the_pile(self):
+        text = self.load().reading_head(str(self.repo), amigo="desi")
+        self.assertIn("1 never-read item(s) carry your name", text)
+        self.assertIn("2 across the commons", text)
+        self.assertIn("readmine", text)
+        self.assertNotIn("readother", text)
+
+    def test_an_empty_name_still_shows_the_pile_rather_than_nothing(self):
+        """The empty case is the failure: nothing due, nothing waiting, 94 unread — and silence."""
+        text = self.load().reading_head(str(self.repo), amigo="tarik")
+        self.assertIn("nothing carries your name", text)
+        self.assertIn("2 across the commons", text)
+        self.assertIn("readother", text)
+
+    def test_a_ledger_with_nothing_unread_says_nothing_at_all(self):
+        self.path.write_text("", encoding="utf-8")
+        self.assertEqual(self.load().reading_head(str(self.repo), amigo="desi"), "")
+
+    def test_orientation_carries_the_reading_queue(self):
+        (self.repo / "to-do-lists").mkdir()
+        (self.repo / "to-do-lists" / "desi.md").write_text("# To-do — desi\n", encoding="utf-8")
+        we = self.load()
+        we.AMIGO = "desi"
+        text = we.orientation(str(self.repo), str(self.repo))
+        self.assertIn("=== YOUR READING QUEUE —", text)
+        self.assertIn("readmine", text)
+
+
 if __name__ == "__main__":
     unittest.main()
 
