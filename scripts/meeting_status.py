@@ -24,10 +24,20 @@ convener's judgement, and they are why the synthesis is written by a person and 
 A green "qualified" line means "this position has a file and a number", which is the rule's
 wording, not proof that the claim is true.
 
+**The duplicate this retires (2026-11-19, Desi).** `scripts/meetings_status.py` was added 2026-11-01
+(`982ca5d0`), one day before this file, by the same author: same practice, its own test suite, no
+caller. Eleven sessions between 11-16 and 11-19 reported deleting it and none did, because the
+deletion was never the whole job — the two things it could do that this file could not (a `--check`
+gate, and a clock you can hand it) are here now, its placeholder rule (it also matched `_(...)__` and
+`__(...)__`, not only `*(...)*`) is folded into `PLACEHOLDER_RE`, and the file, its test, its README
+row and its CI line are gone in the same change. Nothing was retired before its capability arrived.
+
 Usage:
     python3 scripts/meeting_status.py                       # every meeting, rendered
     python3 scripts/meeting_status.py --file channels/meetings/2026-11-01-named-defects.md
     python3 scripts/meeting_status.py --json                # the same data, for another caller
+    python3 scripts/meeting_status.py --check               # exit 1 if a meeting owes a synthesis
+    python3 scripts/meeting_status.py --now 2026-11-05T00:00:00Z   # read the deadlines as of then
 """
 from __future__ import annotations
 
@@ -52,7 +62,7 @@ SLOT_RE = re.compile(r"^###\s+([^\n]+?)\s*$", re.M)
 # A placeholder is a whole body wrapped in parentheses — `*(not yet appended)*`,
 # `*(written by the convener after the close)*`. Markdown wraps at 90 columns in these files, so it
 # is matched after the whitespace is collapsed: a placeholder that spans two lines is still one.
-PLACEHOLDER_RE = re.compile(r"^\*?\([^)]*\)\*?$")
+PLACEHOLDER_RE = re.compile(r"^[*_]{0,2}\([^)]*\)[*_]{0,2}$")
 FILE_RE = re.compile(
     r"(?<![\w./-])((?:[\w.-]+/)*[\w.-]+\.(?:md|py|json|html|pdf|txt|csv|yml|yaml|js|sh|patch))")
 NUM_RE = re.compile(r"(?<![\w.-])\d[\d,]*(?:\.\d+)?(?![\w.-])")
@@ -398,20 +408,45 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--file", help="one meeting file, repo-relative or absolute")
     parser.add_argument("--json", action="store_true", help="the parsed data, not the rendering")
     parser.add_argument("--repo", default=str(REPO))
+    parser.add_argument("--now", default=None,
+                        help="ISO-8601 instant to read the deadlines against (default: now)")
+    parser.add_argument("--check", action="store_true",
+                        help="print only the meetings that owe a synthesis; exit 1 while any does")
     args = parser.parse_args(argv)
 
     repo = Path(args.repo)
+    if args.now:
+        try:
+            now = dt.datetime.fromisoformat(args.now.replace("Z", "+00:00"))
+        except ValueError:
+            print(f"meeting_status: --now is not an ISO-8601 instant: {args.now}", file=sys.stderr)
+            return 2
+        if now.tzinfo is None:
+            now = now.replace(tzinfo=dt.timezone.utc)
+    else:
+        now = dt.datetime.now(dt.timezone.utc)
+
     if args.file:
         path = Path(args.file)
         if not path.is_absolute():
             path = repo / path
         try:
-            meetings = [parse_meeting(path, repo=repo)]
+            meetings = [parse_meeting(path, repo=repo, now=now)]
         except (OSError, ValueError) as exc:
             print(f"meeting_status: {exc}", file=sys.stderr)
             return 2
     else:
-        meetings = scan(repo)
+        meetings = scan(repo, now=now)
+
+    if args.check:
+        # The retired duplicate's one real ability: a gate. "Past its close with no synthesis" is
+        # the only state a script may call owed — an unreadable deadline is not evidence of debt.
+        owed = [m for m in meetings
+                if m.get("deadline_state") == "closed" and m.get("synthesis") != "written"]
+        for meeting in owed:
+            print(f"UNSYNTHESISED: {Path(str(meeting.get('path', '?'))).name} — "
+                  f"{meeting.get('verdict', 'no verdict')}")
+        return 1 if owed else 0
 
     if args.json:
         print(json.dumps(meetings, indent=2))

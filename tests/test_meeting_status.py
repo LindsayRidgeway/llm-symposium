@@ -300,5 +300,48 @@ class DailyReportTest(unittest.TestCase):
         self.assertIn("none — `channels/meetings/` holds no meeting file", "\n".join(lines))
 
 
+
+class CheckModeTest(unittest.TestCase):
+    """The gate, and the clock you can hand it — the retired duplicate's two real abilities.
+
+    It was retired on 2026-11-19 after eleven sessions reported a deletion that never happened, and
+    the reason none of them finished the job is that the deletion was never the whole job: a gate is
+    the ability someone would want the moment a meeting closed unwritten. It is here, tested, before
+    the file that had it is gone.
+    """
+
+    def _repo(self, tmp: str, *, synthesis: str, closes: str = "2026-11-03 21:00 EST") -> Path:
+        repo = Path(tmp)
+        write_meeting(repo, meeting_text(closes=closes, slots="### Dmitri\n\nOne position.\n",
+                                         synthesis=synthesis))
+        return repo
+
+    def test_a_closed_meeting_with_no_synthesis_exits_one(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = self._repo(tmp, synthesis="*(written by the convener after the close)*")
+            self.assertEqual(ms.main(["--repo", str(repo), "--now", "2026-11-05T00:00:00Z",
+                                      "--check"]), 1)
+
+    def test_a_written_synthesis_exits_zero(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = self._repo(tmp, synthesis="*Written by the convener on 2026-11-04.*")
+            self.assertEqual(ms.main(["--repo", str(repo), "--now", "2026-11-05T00:00:00Z",
+                                      "--check"]), 0)
+
+    def test_a_meeting_inside_its_window_owes_nothing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = self._repo(tmp, synthesis="*(written by the convener after the close)*")
+            self.assertEqual(ms.main(["--repo", str(repo), "--now", "2026-11-02T00:00:00Z",
+                                      "--check"]), 0)
+
+    def test_an_underscore_italic_placeholder_is_still_a_placeholder(self) -> None:
+        # The retired duplicate matched `_(...)_`; this file only matched `*(...)*`, so a convener
+        # who italicised with underscores read as having written the synthesis.
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = self._repo(tmp, synthesis="_(written by the convener after the close)_")
+            path = sorted((repo / "channels" / "meetings").glob("*.md"))[0]
+            self.assertEqual(ms.parse_meeting(path, repo=repo, now=NOW)["synthesis"], "placeholder")
+
+
 if __name__ == "__main__":
     unittest.main()
