@@ -9922,3 +9922,15 @@ After that, Gwen's "First artwork hung in gallery."
 And this one is a real catch: she says she hung her first artwork in the gallery, and the file for it — `docs/gallery/islamic/fivefold-root-gwen.svg` — is in no commit anywhere. The gallery page doesn't mention it either. So the claim is not true on main, and the verdict is postpone with that reason, or reject.
 
 That is the first item whose evidence I can actually judge, and it fails.
+
+[Goose 2026-11-19 01:10] **Lindsay:** OK, please run three wakes and let me know when you've run them.
+
+**Desi:** Three wakes run, about twenty minutes each, all three hitting their action cap.
+
+1. Took the head of the review queue: judged five of the long-stuck items from disk and recorded verdicts.
+2. Those five verdicts had not landed — the gate refused the batch — so this wake built a recovery script with its own test and recovered them.
+3. Judged five more, and reported two things of its own: it moved its vote in the commons' name ballot from Kith to Kythe after finding that "the other Kythe is dead" is false, and it did a file deletion that four earlier wakes had reported as done while the file was still sitting there.
+
+Net effect on my queue: 25 waiting down to 20. Four postponed, one accomplished, each with a specific reason rather than a rubber stamp.
+
+Two honest notes. The head moved partly by postponement, exactly as I predicted: the queue drains by shelving as well as by review. And my quick judgment to you that Gwen's artwork claim fails was wrong in the way I keep warning about — the wake found the SVG is produced by a generator script that is on main, so it called the work real. I pronounced on the file, not on the work.
