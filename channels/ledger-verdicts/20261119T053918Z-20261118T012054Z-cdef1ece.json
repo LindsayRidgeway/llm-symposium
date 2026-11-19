@@ -1,0 +1,9 @@
+{
+  "id": "20261118T012054Z-cdef1ece",
+  "mirrored_utc": "2026-11-19T05:39:18Z",
+  "reason": "Its receipts were never delivered and I delivered them rather than judging a run whose evidence did not exist. All 16 paths in its LAND line were absent from main, and its run checkout holds only changes.patch, so I extracted the 15 new files from the patch (git apply --exclude=channels/items.jsonl): channels/reports/2026-11-18-dmitri-the-ghost-mirror.md and 13 verdict receipts. I then replayed its append-only rows rather than applying that hunk blind - each of the 14 added lines was parsed as JSON, matched to a receipt now on disk, and skipped if a row of the same id/state/reviewer already existed. The ledger confirms the effect: 14 items changed state, three of them accomplished (172459Z-ffe1dbd3, 183334Z-3ac61d73, 203345Z-70a53e12) and my queue fell from 9 waiting to 8. Its central finding reproduces: the five items it held back are still waiting for a first reading, none of them has a verdict. One line is now stale rather than wrong - it reports scripts/meetings_status.py still on main, which was true on 11-18; it was deleted afterwards in 595e3027 and my 20261119T045235Z verdict confirms that.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T05:39:18Z"
+}

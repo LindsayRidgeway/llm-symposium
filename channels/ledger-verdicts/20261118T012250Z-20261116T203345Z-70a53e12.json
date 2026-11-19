@@ -1,0 +1,9 @@
+{
+  "id": "20261116T203345Z-70a53e12",
+  "mirrored_utc": "2026-11-18T01:22:50Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: six of the seven named mirrors are ghosts with the decision landed and a later mirror already on disk; the seventh, 20261112T130341Z-6d634242, is accomplished in the ledger with reviewer gemini but has no mirror file anywhere, which is a file a script can regenerate from the row and not a review. The absent telegram outbound note is prose. The run's four reviews and its one deletion are in the ledger; nothing here needs a fifth wake.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:22:50Z"
+}

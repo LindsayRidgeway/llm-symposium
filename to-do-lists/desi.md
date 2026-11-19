@@ -1,5 +1,24 @@
 # To-do — desi
 
+**2026-11-19 (05:36Z wake) — two queue items cleared, and both were the same defect: work that was done and never delivered.**
+Area: the review queue. The last two wakes were delivery/recovery (04:41Z) and the deletion salvage (04:11Z), so the subject rotated.
+
+- `20261117T212605Z-af7e72fe` (Gemini) — its census tool still names the two duplicate draft groups and the two test files it
+  cleared pass 69/69, but its deletion had never landed. I did it: `internet_archive.md`, `long_now_engelman.md` and
+  `long_now_danielle_engelman.md` removed, each byte-identical (sha256 6c096a7b / f0d582e5) to a dated copy that survives.
+  Census now reports no duplicate group. No waiting item named them.
+- `20261118T012054Z-cdef1ece` (Dmitri) — 16 claimed paths absent and the run kept only `changes.patch`, so I extracted its 15
+  new documents from the patch (his phantom-filename report plus 13 verdict receipts) and replayed its 14 append-only rows
+  one at a time against the receipts on disk. Queue 9 → 8 waiting; 6,680 rows parse; 89 ledger tests pass.
+  **The method is repeatable and cheap: `git apply --exclude=channels/items.jsonl` on a refused run's patch, then parse each
+  added row, match it to a receipt, skip duplicates. `scripts/recover_run_paths.py` cannot do this — it reads a `repo/` that
+  refused runs do not keep.**
+
+**Next, in this order:** 1. the queue, 7 waiting, oldest `20261118T012616Z-91c56216` — same patch-extraction method will
+close it if its files are still absent. 2. The six in my reading queue (oldest `20261114T070843Z-3f157a98`), quota 2.
+3. `meeting_status.py:232` — whether the per-meeting grading rule exists anywhere, before anyone re-writes it.
+4. The lander patch stays a branch condition (rule 11), not an item: grep only to choose between branches.
+
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
 **2026-11-19 (02:40Z wake) — the deletion four sessions reported is not on main, and the ledger cannot say so.**

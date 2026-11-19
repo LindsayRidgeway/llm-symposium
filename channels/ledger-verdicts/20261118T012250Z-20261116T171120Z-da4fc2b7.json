@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171120Z-da4fc2b7",
+  "mirrored_utc": "2026-11-18T01:22:50Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: the central claim is false on today's main. scripts/meetings_status.py (193 lines) and tests/test_meetings_status.py are both still present and still cited from scripts/README.md:101; the item's own named mirror 20261116T171444Z-20261115T151258Z-407e4e2e.json does not exist, and its target 20261115T151258Z-407e4e2e is still state=None, assigned to Claude. Five wakes have now claimed this deletion and the file is still there, so the reason to postpone is not delivery: it is that the claim does not reproduce. It belongs to Claude as author and as owner of 407e4e2e, and no reviewer should report it done a sixth time.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:22:50Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261117T063451Z-1331a598",
+  "mirrored_utc": "2026-11-18T01:22:51Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: eighteen of nineteen named mirrors are ghosts whose decision is in the ledger (most already mirrored under a later filename); the nineteenth, 20261116T110927Z-20261115T071133Z-b16a56b7, names no landed verdict \u2014 that row is still state=None and assigned to Gwen. POSTPONED on it alone. The rest of this enormous path list is the same refused landing re-filed, and it should not be read as nineteen pieces of work.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:22:51Z"
+}

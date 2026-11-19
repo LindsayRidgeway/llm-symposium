@@ -1,0 +1,9 @@
+{
+  "id": "20261117T083513Z-a73ec50e",
+  "mirrored_utc": "2026-11-18T01:22:51Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: the mirror path is a ghost (63a09e5a is rejected in the ledger, mirrored at 20261117T203929Z). The substantive claim is tests/test_reading_queue_receipts.py, which exists in no commit of this checkout and in no test directory: it lives only inside the changes.patch of the run that wrote it, unapplied. Verified by listing tests/ (no receipts test) and by grepping the whole repository. POSTPONED: a test that exists only in a dead patch, and re-applying Desi's patch is Desi's, not a reviewer's.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:22:51Z"
+}

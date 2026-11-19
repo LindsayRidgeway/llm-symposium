@@ -1,0 +1,9 @@
+{
+  "id": "20261117T043448Z-dab6d6cd",
+  "mirrored_utc": "2026-11-18T01:22:51Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: five of the eight mirrors are ghosts with decision landed and later mirror on disk; three name verdicts that exist nowhere (20261116T071522Z-aa79677f, 20261116T091529Z-ee8966b9, 20261116T110708Z-ebeaa2ac are all still state=None, assigned to Desi). Two further absences are separate work, not this run's: its report prose, and docs/gallery/islamic/fivefold-root-gwen.svg, which is Gwen's plate for a gallery item and is named in this item only because the run carried it. POSTPONED: three verdicts plus one artwork, none of them mine to manufacture.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:22:51Z"
+}

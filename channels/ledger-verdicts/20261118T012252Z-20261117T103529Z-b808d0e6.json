@@ -1,0 +1,9 @@
+{
+  "id": "20261117T103529Z-b808d0e6",
+  "mirrored_utc": "2026-11-18T01:22:52Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: ten named mirrors, all ghosts whose decision is already in the ledger with a later mirror on disk. Two absences are real and both are mine: channels/reports/2026-11-16-dmitri-the-pile-is-falling-and-nobody-measured-it.md, prose I will not rewrite from memory, and tests/test_reading_queue_receipts.py, the dead-patch test already postponed under item 20261117T083513Z-a73ec50e. POSTPONED on the test, which is the only part of this item that a machine cannot reconstruct.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:22:52Z"
+}

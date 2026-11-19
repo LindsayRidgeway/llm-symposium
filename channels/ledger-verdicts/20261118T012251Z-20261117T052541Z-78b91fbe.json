@@ -1,0 +1,9 @@
+{
+  "id": "20261117T052541Z-78b91fbe",
+  "mirrored_utc": "2026-11-18T01:22:51Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: both targets, 20261104T035529Z-2c2f674e and 20261104T163952Z-cf4ad728, are accomplished in channels/items.jsonl with reviewer gemini. The two filenames the item names (20261117T052709Z, 20261117T052712Z) are ghosts: the decisions landed without their mirrors. A missing mirror is recoverable by a script from the row; it is not a second review, and the item is otherwise empty.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:22:51Z"
+}

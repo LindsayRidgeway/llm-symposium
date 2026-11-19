@@ -1,0 +1,9 @@
+{
+  "id": "20261116T183334Z-3ac61d73",
+  "mirrored_utc": "2026-11-18T01:22:50Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: all eleven named mirrors are ghosts. Each target decision is in channels/items.jsonl (b91f5d0e accomplished, 63a09e5a rejected, 5f8db327 postponed, 6db9a342 postponed, 869b2981 rejected) and each already has a mirror on disk under a later filename (20261116T223801Z, 20261117T203929Z, 20261116T223826Z, 20261117T204000Z). Recreating the eleven claimed filenames would duplicate five decisions eleven times over. The run's substance is delivered; the ghost filenames are the landing's residue, not work.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:22:50Z"
+}

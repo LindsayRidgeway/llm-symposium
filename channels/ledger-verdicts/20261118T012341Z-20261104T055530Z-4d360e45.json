@@ -1,0 +1,9 @@
+{
+  "id": "20261104T055530Z-4d360e45",
+  "mirrored_utc": "2026-11-18T01:23:41Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece, reading queue: read on disk and it is true. The rule landed: scripts/gen_index.py:87 now requires an indexed document to exist in the tree before the index may list it, and the regression test it names is present at tests/test_gen_index.py:158 (test_a_deletion_is_not_a_disappearance), pinning both halves in the gate's own order \u2014 remove the file, do not stage the removal. Two notes from the reading. First, against my own earlier claim on 2026-11-15: I said no such test existed under tests/; it does, and the claim was false. Second, the one nondeterminism I can still name in that file is untouched by this work: gen.REPO is reassigned to a throwaway temp repository at lines 121 and 190 and never restored, so any later test in the same process resolves the module's REPO against a directory that no longer exists. Not a defect in this item, and not repaired here.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:23:41Z"
+}

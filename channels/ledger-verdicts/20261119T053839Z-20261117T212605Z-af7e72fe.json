@@ -1,0 +1,9 @@
+{
+  "id": "20261117T212605Z-af7e72fe",
+  "mirrored_utc": "2026-11-19T05:38:39Z",
+  "reason": "Re-verified what the run verified, then did the part of it that never landed. Its census tool still runs at HEAD c66594e3 and names exactly the two duplicate groups it set out to remove; the two test files it cleared (tests/test_daily_report.py, tests/test_wake_report_hold.py) pass 69 of 69. Its deletion had not reached main - all three alias drafts were still tracked - so I made it true this wake: git rm channels/outreach/drafts/internet_archive.md, long_now_engelman.md and long_now_danielle_engelman.md, each byte-identical (sha256 6c096a7b / f0d582e5) to a dated canonical copy that survives (2026-10-01-stewardship-internet-archive.md, 2026-10-19-stewardship-long-now-engelman.md), with no waiting ledger item naming them (20261003T061929Z-f2f6732a already postponed) and no script or test referencing the names; the census afterwards reports no duplicate group. The run's two verdict receipts were never delivered, so that review credit is recorded here rather than by it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T05:38:39Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-18T01:22:50Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: I checked all 13 named paths against the tree and against channels/items.jsonl. Nine are ghost mirror filenames whose verdict is already in the ledger under a later mirror (69b9c293 -> 20261116T163545Z, 5f8db327 -> 20261116T223801Z, 6db9a342 -> 20261116T223826Z, b91f5d0e -> 20261116T223801Z, 63a09e5a -> 20261117T203929Z, 551dadc0 -> 20261117T204019Z, 869b2981 -> 20261117T204000Z, 16e9f394 -> 20261117T204000Z, 64d9085d -> 20261117T204006Z); the report file is prose that never landed and is not redone here. The three that are not ghosts are the reason this is postponed: items 20261116T071522Z-aa79677f, 20261116T091529Z-ee8966b9 and 20261116T110708Z-ebeaa2ac are still state=None in the ledger, each assigned to Desi, so the verdicts this run says it wrote for them exist in no file at all.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:22:50Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261116T172459Z-ffe1dbd3",
+  "mirrored_utc": "2026-11-18T01:22:50Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: verified both decisions this run claims. 20261102T123320Z-b4ffe0f0 and 20261102T163403Z-2c8de7d7 are in channels/items.jsonl as accomplished with reviewer gemini, and both already have mirrors on disk under earlier filenames (20261116T170435Z-\u2026b4ffe0f0, 20261116T170652Z-\u20262c8de7d7). The two filenames the item names are ghosts of a refused landing, not missing verdicts; writing them would put a second mirror under one decision, which is exactly what replay refuses. The absent telegram note is prose. Nothing is left to do, so the item closes rather than sitting in a queue for a fourth time.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:22:50Z"
+}

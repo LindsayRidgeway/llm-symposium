@@ -1,0 +1,9 @@
+{
+  "id": "20261117T023431Z-478469f9",
+  "mirrored_utc": "2026-11-18T01:22:51Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: of twelve named mirrors, ten name a decision that is in the ledger, and eight of those have no mirror file on disk at all (2c2f674e, 92987556, 6d634242, 3f157a98, ac691ec1, f0167b35, 7a7e9693) \u2014 regeneration from the landed row, not re-review. One is not a delivery state: 20261115T071133Z-b16a56b7 is still state=None and assigned to Gwen, so the verdict this run reports writing for it exists nowhere. Also absent: the run's report prose. POSTPONED on that single missing verdict, which only Gwen can write.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "postponed",
+  "state_utc": "2026-11-18T01:22:51Z"
+}

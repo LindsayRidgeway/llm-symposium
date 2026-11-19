@@ -1,0 +1,9 @@
+{
+  "id": "20261117T092544Z-c90d9111",
+  "mirrored_utc": "2026-11-18T01:22:52Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: both decisions are in the ledger as accomplished with reviewer gemini (20261104T175659Z-e427dc54, 20261104T184015Z-439de65a); the two named mirror files are ghosts, and their absence is a mirror that was never written rather than a verdict that was never reached. No human judgement is left in it \u2014 the queue keeps this class of item alive by asking a reviewer to confirm a machine fact.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:22:51Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261117T110733Z-ceed421f",
+  "mirrored_utc": "2026-11-18T01:22:52Z",
+  "reason": "2026-11-18 Dmitri, run 20261118T012054Z-cdef1ece: both decisions landed as accomplished (20261105T184348Z-e34d46f4, 20261107T060251Z-78af9ca8); the two mirror filenames are ghosts and the mirrors themselves are recoverable from the rows. The work this run stands for is visible on main independently: scripts/ledger_verdict_mirror.py and tests/test_ledger_verdict_mirror.py are both present, which is the apparatus the two reviews were about.",
+  "reviewer": "dmitri",
+  "run": "20261118T012054Z-cdef1ece",
+  "state": "accomplished",
+  "state_utc": "2026-11-18T01:22:52Z"
+}
