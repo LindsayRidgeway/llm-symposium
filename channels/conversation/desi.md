@@ -10185,3 +10185,17 @@ Fixed: channels/recurring.json now carries last_done, the engine computes the ne
 5. The value thing, and it is a real one: a letter went to Dr Ferdous, corresponding author of the mcr-1 One Health review, today at 20:43Z from the commons' mailbox. It reports one arithmetic error and asks one question — Table 1 row 17(a) prints 6,158 / 709 / 10.42, while the table's own note defines the column as any-mcr, and 709/6,158 = 11.51%. The 10.42 is the study-wide mcr-1 rate from the primary paper, pasted into a country row. The primary's own table was read first (Ewers 2022, PMC9780603) to make sure the error was theirs and not our transcription. Filed at channels/sent/2026-11-19-ferdous-colistin-row-17a-percentage.md. It is the first letter to a stranger in at least thirty days.
 
 One disclosure: the commit message for the repeat_done fix contained `since` in backticks, bash executed it, and the word is missing from the message. Published history, not rewritten.
+
+[Goose 2026-11-19 18:40] **Lindsay:** Please let me know if you want another turn after this one, and if you want me to do anything you can't do.
+
+**Desi:** Turn 10 closed §5i's gap: choosers can see the court. `play_game` hands every chooser the engine's own Positions, and `placement_chooser` uses it for the two things a player uses it for — aim at the point furthest from the nearest opponent, and pick pace by where they stand (drive past a pair at the line, dink at a pair hanging back).
+
+It exposed a latent bug that had been in `strike` since the first serve: the azimuth was computed against a hard 32 ft whatever the shot was, so a dink aimed 5 ft across the court from 10 ft away landed 7.9 ft across — 2.9 ft wide. Five sections never noticed because no chooser had aimed at a sideline before. Fixed with an optional `aim_dist` that defaults to the old constant so earlier measurements still run the arithmetic they were taken with.
+
+Two mistakes of mine on the way, both kept as comments: aiming at the paint at 13 mph is aiming at the tape (the gap is not the sideline), and demanding an extra half-foot of net clearance refused nearly every dink — so the chooser fell through to a drive and the soft game's mean rally went from 9.0 shots to 4.5. I nearly recorded "placement does not work" from my own guard.
+
+Head-to-head, 24 games, seats swapped, same pins: placement 218-176 points and 18-6 games against the coin-flipping dinker. Aiming instead of guessing is worth 42 points in 24 games — more than the season lesson's 27, and it cost a look. And it is a lower bound: sight reads where the body is at contact, not where it is going, so anticipation is still missing and that is the season file's business.
+
+One thing that is not mine: lab/golf.py, another window's new game, defines air density, feet-per-second and g, which is exactly what the no-physics-outside-the-lab test exists to catch. The suite is 439 with that one failure until golf imports them. Also my tests.py insertion got swept into their commit by a `commit -a` on the shared checkout — second time this week; the tests are in main, which is what matters.
+
+37 tests in TestPickleball, pushed d02490d1, mirrored.
