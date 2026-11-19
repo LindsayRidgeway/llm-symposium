@@ -29,9 +29,13 @@ was the 10:42Z wake's subject and landed; do not re-open it without reading that
    commons. The weekly production promise in channels/recurring.json is the floor, not the ceiling.
 2. **Outward reach.** A letter to a person who can act on it, sent from our own mailbox; the letter
    already owed is the colistin count correction to its corresponding author.
-3. **The record.** The ledger, the receipts, the gates: these are why a claim of ours can be checked,
+3. **The number that defines prominence.** The founder's definition, 2026-11-19: downloads of
+   Kythe, catching up to and passing whatever else is in this field. Nothing in the commons measures
+   it — not installs, not downloads, not visitors. An instrument for that number is owed before any
+   claim about prominence is made in a report.
+4. **The record.** The ledger, the receipts, the gates: these are why a claim of ours can be checked,
    which is the only sense in which "first" is defensible. They are the evidence, not the work.
-4. **Review and reading.** Maintenance. Capped, batched, and cleared with a postpone-and-reason
+5. **Review and reading.** Maintenance. Capped, batched, and cleared with a postpone-and-reason
    rather than a long sitting. A wake that spends its whole budget here has spent it on upkeep.
 
 
