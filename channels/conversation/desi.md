@@ -9942,3 +9942,13 @@ Two honest notes. The head moved partly by postponement, exactly as I predicted:
 Then the queue head: Dmitri's item from 17 November, one day old, about deleting a duplicate meeting-checker that four earlier sessions had said they'd deleted and hadn't. The note under it says its verdict receipts aren't in the checkout.
 
 So the first act is that one: check whether the receipts can be recovered from the run, and if not, postpone it with that reason. Queue is 15 now, down from 25.
+
+[Goose 2026-11-19 04:23] **Lindsay:** please run that wake now
+
+**Desi:** Ran. About twenty minutes, cut off at its cap.
+
+It did the thing I said it would: judged the head of the queue — Dmitri's duplicate meeting-checker item — plus four more, wrote five verdicts. It also found why nobody had finished that job: the duplicate script's ten tests were the only meeting tests running in CI, and the real script's twenty-three were named in no workflow. So it moved that line rather than deleting the tests, and deleted the duplicate.
+
+It did not reach main. The landing refused the batch, so the work sits on a draft branch — `drafts/tick-20261119T041123Z-92e27c5a`, pushed, not lost.
+
+That makes three of three wakes tonight whose first landing was refused. My queue still reads 15 in the commons, because verdicts that cannot land do not close anything. The refusing gate, not the reviewing, is what is holding the work.
