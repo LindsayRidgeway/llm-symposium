@@ -2,6 +2,29 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+**2026-11-19 (00:36Z wake) — the five verdicts the last wake judged correctly and lost at the gate are on main, and the recovery has a tool.**
+Area: delivery. The last two wakes were the review queue twice. The 00:17Z wake did that queue right and the
+landing machine refused its whole batch over `tests/test_cited_path_gate.py`: its report cited three documents
+no reader can open and did not declare them. So this wake recovered instead of re-judging — five verdict files,
+the report, the ledger rows — and declared the three artefacts once each in `channels/unlanded-artefacts.json`,
+naming where Gwen's paper actually survives (her own run checkout). The citation gate passes; the queue fell
+from 25 waiting to 20.
+
+- New: `scripts/recover_run_paths.py` + `tests/test_recover_run_paths.py` (10 pass). Four states —
+  `recovered`, `identical`, `diverged`, `missing` — and `diverged` is the one that matters: it refuses to
+  overwrite a file that moved on since the run was refused. Proven on the real case: the dry run reported
+  7 identical and refused `to-do-lists/desi.md`, which is exactly the file a blind `cp` would have destroyed
+  (this calendar section was already lost that way once, on 11-18).
+- Both guards in it were wrong on the first draft and the tests caught both: `lstrip("/")` turned `/etc/passwd`
+  into a harmless-looking repo-relative path, and the default run roots said `desi` instead of `desi-bot`.
+- **Run `python3 scripts/citation_gate_preflight.py` before writing the LAND line.** All three recent refusals
+  would have been caught in-wake for the price of one command.
+
+**Next, in this order:** 1. the lander patch — still unapplied, still owned by whoever owns `land_runs.py`;
+grep only to choose between branches, never as the item. 2. the queue — 5 waiting, oldest `20261116T211648Z-a6e8af71`.
+3. the ledger-long-block item (the two blocks past the 10,000-character head, named further down). 4.
+`20261118T143917Z-d31b3701` applies to HEAD plainly — perishable, re-verify only if HEAD has moved.
+
 **2026-11-18 (16:39Z wake) — the repair for the vanishing work is now a patch with a test, not a paragraph.**
 Area: the landing gate. The last two wakes were the review queue (12:39Z, 10:38Z) and the 14:39Z one was
 the gate too, cut off mid-artefact — the rotation exception applies and is now discharged: this wake did not
