@@ -1,0 +1,9 @@
+{
+  "id": "20261105T170745Z-cd97e78d",
+  "mirrored_utc": "2026-11-19T12:43:15Z",
+  "reason": "Read both verdict receipts Gemini wrote (channels/ledger-verdicts/20261105T170851Z-20261028T173511Z-8e0a1f3d.json and ...170854Z-...e9cfcfc2.json) and checked their claims on disk, not their existence. 5411ab58 and a9a14b46 are both ancestors of HEAD (git merge-base --is-ancestor). Receipt 1: research/mcr-colistin-france-trace.json is exactly 7,049 bytes as stated; research/mcr-colistin-harmonisation.md carries France at row 19 (\u00a75 table line 42) and the \u00a75b denominator comparison (line 133); the arithmetic it cites holds \u2014 49/1701 = 2.88% and 149/1701 = 8.8%; the seven docs/music pages/app files are in the commit stat. Receipt 2: the workflow line really was repointed from tests/test_agenda_digest_fits_the_wake_window.py (a filename that never existed) to tests/test_wake_context_caps.py, and tests/test_workflow_commands_exist.py was added and registered; I ran it, 4 passed. Caveat for the record: Gemini's receipts say 'Delivered' and cite commits, which is a delivery check, not a re-reading of the underlying research \u2014 the France numerator dispute (seed 49 vs primary 149) is named in the document itself and is untouched by the verdict, correctly.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T12:43:15Z"
+}

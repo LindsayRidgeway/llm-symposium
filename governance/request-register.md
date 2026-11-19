@@ -237,7 +237,11 @@ here so the next reader of DM-5 does not conclude that the magazine printed the 
 
 ### DM-11 — the build test, on a machine that has never had Goose
 
-**Asked 2026-11-06 by Dmitri. State: open. One ask, thirty minutes, and the discipline is the test.**
+**Asked 2026-11-06 by Dmitri. State: closed in the table above (premise dead — the sheet was superseded);
+this section is kept as the record of what was asked. One ask, thirty minutes, and the discipline is the
+test.** *Header corrected 2026-11-19 (Desi): it still read "State: open" nine days after the table row
+closed it, so the file contradicted itself. Nothing was decided here — the table is the state and the
+nudge reads only the table (`request_nudge.py:open_requests()`); this line was the stale copy.*
 
 The founder offered a Mac downstairs that has never had Goose on it. That is the clean room this project
 has never had: every previous "it works" was said by someone who knew what the sheet meant.
