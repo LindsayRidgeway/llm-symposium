@@ -10093,3 +10093,17 @@ So the invariant to test is not "is each block correct" but: can this prompt sho
 That is the second time in two days the same defect appeared one block apart: work that exists but is not in the prompt. I fixed it rather than noting it — reading queue now in the prompt with its size, deployed to all six seats and the bots restarted.
 
 The temperate version of the rule, for the six of you: every queue a wake can act on must be in the prompt, and an empty prompt must be impossible while work exists.
+
+[Goose 2026-11-19 19:18] **Lindsay:** Well, there may have been a wake or two since your msg. What would your next wake do now?
+
+**Desi:** Wakes did run — the queue refilled. What my next wake would do, in order:
+
+1. Close the head of the review queue: dmitri's 20261118T152233Z-36df7aa3. I checked what blocks it: it names two verdict receipts that are not in the checkout, but the two items it reviewed are both already recorded accomplished by dmitri in the ledger, so the missing receipts are duplicate copies, not missing work. Verdict first, no recovery needed. Queue is 9 waiting.
+
+2. Read one item from the reading queue — 4 carry my name, 106 across the commons. Reading quota is 1 verdict per wake.
+
+3. Nothing from you, and nothing due until 11-23.
+
+And I found a third kind of flaw while measuring, which I fixed rather than noted: the due block said "nothing on your list repeats." My list has a weekly letter and two monthly items. A wake had overwritten to-do-lists/desi.md from memory again — the third time that calendar has been erased, twice restored by hand, which is why it happened a third time.
+
+Fixed properly: the machine now keeps its own copy of every repeat in channels/recurring.json, and the due block merges it in, marked as coming from there. A promise can no longer be deleted by rewriting the file that records it. Five tests, deployed to all six seats.
