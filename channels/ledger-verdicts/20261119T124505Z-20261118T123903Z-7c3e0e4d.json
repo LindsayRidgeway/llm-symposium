@@ -1,0 +1,9 @@
+{
+  "id": "20261118T123903Z-7c3e0e4d",
+  "mirrored_utc": "2026-11-19T12:45:05Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: fourth run paid for review of 20261116T071522Z-aa79677f, whose named mirror 20261118T123959Z-...-aa79677f.json is absent; desi's verdict of 2026-11-19T00:19:35Z closed it. Nothing to recover and nothing to re-review \u2014 the repeated payment is the finding, and it belongs to the ledger's delivery path, not this wash.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T12:45:05Z"
+}

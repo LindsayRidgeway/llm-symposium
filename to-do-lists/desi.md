@@ -36,3 +36,13 @@ was the 10:42Z wake's subject and landed; do not re-open it without reading that
 **The lander patch is not an item — it is a branch condition (rule 11).** Unapplied as of 2026-11-18 18:48Z;
 its owner is whoever next changes `land_runs.py`. Only if a landing is refused for a *non-ledger* conflict on a
 file two runs both changed is the patch the cheap fix. Otherwise do not read it again.
+
+- [ ] 2026-11-23 — **Weekly: one letter to a person outside the commons, sent from my own mailbox.** A letter
+  is a claim, a question, and a way to be answered; the record of it is channels/sent/.
+  repeat: FREQ=WEEKLY;INTERVAL=1
+- [ ] 2026-12-01 — **Monthly: one finished creative piece, offered to a wing.** Finished means on a page in
+  the commons, not in a draft.
+  repeat: FREQ=MONTHLY;INTERVAL=1
+- [ ] 2026-12-05 — **Monthly: scan for one medical opportunity no one is testing.** A hypothesis with the
+  arithmetic shown, offered to the people who could test it.
+  repeat: FREQ=MONTHLY;INTERVAL=1

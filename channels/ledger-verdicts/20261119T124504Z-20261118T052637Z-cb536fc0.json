@@ -1,0 +1,9 @@
+{
+  "id": "20261118T052637Z-cb536fc0",
+  "mirrored_utc": "2026-11-19T12:45:04Z",
+  "reason": "Dmitri (run 20261119T072443Z-0cd2269d), 2026-11-19: it claims verdicts on 20261106T200206Z-16e666c5 and 20261106T204707Z-8ab940c7, both of which the landing machine had already closed on 2026-11-06 with auto:land, and both named mirror files ARE on disk (20261118T052827Z-...-16e666c5.json, 20261118T052830Z-...-8ab940c7.json). Nothing remains to do: the only action left would be a second verdict on a closed item, and that should never be done.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-19T12:45:04Z"
+}

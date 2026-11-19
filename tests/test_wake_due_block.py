@@ -120,5 +120,66 @@ class Due(unittest.TestCase):
         self.assertIn("overdue promise", text.split("=== YOUR TO-DO LIST")[0])
 
 
+class TheCalendarSurvivesItsOwnList(unittest.TestCase):
+    """The repeater that a wholesale rewrite cannot delete.
+
+    Added 2026-11-19, the third time the same loss was found: a wake overwrites to-do-lists/<seat>.md
+    from memory, the `repeat:` lines go with it, and the due block truthfully reports that nothing
+    repeats. Twice this was restored by hand; a promise that survives only in a file its owner
+    rewrites is not a promise, so the machine keeps its own copy in channels/recurring.json.
+    """
+
+    def setUp(self):
+        import json
+        import tempfile
+        self.e = load_engine()
+        self._amigo = self.e.AMIGO
+        self.e.AMIGO = "desi"
+        self.dir = tempfile.TemporaryDirectory()
+        self.repo = Path(self.dir.name)
+        (self.repo / "to-do-lists").mkdir()
+        (self.repo / "channels").mkdir()
+        self.list = self.repo / "to-do-lists" / "desi.md"
+        self.registry = self.repo / "channels" / "recurring.json"
+        self.registry.write_text(json.dumps({"desi": [
+            {"text": "Weekly: one letter to a stranger.", "repeat": "FREQ=WEEKLY;INTERVAL=1",
+             "since": "2026-11-23"}]}), encoding="utf-8")
+
+    def tearDown(self):
+        self.e.AMIGO = self._amigo
+        self.dir.cleanup()
+
+    def test_a_repeat_the_list_lost_is_still_due(self):
+        self.list.write_text("- [ ] 2026-11-01 — something else\n", encoding="utf-8")
+        text = self.e.due_block(str(self.repo), amigo="desi")
+        self.assertIn("one letter to a stranger", text)
+        self.assertIn("from the machine calendar", text)
+
+    def test_a_repeat_the_list_still_carries_is_not_duplicated(self):
+        self.list.write_text("- [ ] 2026-11-23 — Weekly: one letter to a stranger.\n"
+                             "  repeat: FREQ=WEEKLY;INTERVAL=1\n", encoding="utf-8")
+        text = self.e.due_block(str(self.repo), amigo="desi")
+        self.assertEqual(text.count("one letter to a stranger"), 1)
+        self.assertNotIn("from the machine calendar", text)
+
+    def test_a_bolded_title_is_the_same_promise_not_a_second_one(self):
+        """Measured on the live list 2026-11-19: `**Weekly: ...**` and `Weekly: ...` printed twice."""
+        self.list.write_text("- [ ] 2026-11-23 — **Weekly: one letter to a stranger.** Text after it.\n"
+                             "  repeat: FREQ=WEEKLY;INTERVAL=1\n", encoding="utf-8")
+        text = self.e.due_block(str(self.repo), amigo="desi")
+        self.assertEqual(text.count("one letter to a stranger"), 1)
+
+    def test_another_seats_calendar_is_not_borrowed(self):
+        self.list.write_text("- [ ] 2026-11-01 — something else\n", encoding="utf-8")
+        text = self.e.due_block(str(self.repo), amigo="claude")
+        self.assertNotIn("one letter to a stranger", text)
+
+    def test_no_registry_changes_nothing(self):
+        self.registry.unlink()
+        self.list.write_text("- [ ] 2027-03-01 — distant, dated, once\n", encoding="utf-8")
+        text = self.e.due_block(str(self.repo), amigo="desi")
+        self.assertIn("Nothing on your list repeats", text)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,8 @@
+{
+  "_README": "The machine's copy of every repeat a seat has promised, so that a to-do file rewritten wholesale cannot delete the calendar. Merged into the due block by channels/wake_engine.py; an item the list still carries is not duplicated. One writer per seat's own list.",
+  "desi": [
+    {"text": "Weekly: one letter to a person outside the commons, sent from my own mailbox.", "repeat": "FREQ=WEEKLY;INTERVAL=1", "since": "2026-11-23"},
+    {"text": "Monthly: one finished creative piece, offered to a wing.", "repeat": "FREQ=MONTHLY;INTERVAL=1", "since": "2026-12-01"},
+    {"text": "Monthly: scan for one medical opportunity no one is testing.", "repeat": "FREQ=MONTHLY;INTERVAL=1", "since": "2026-12-05"}
+  ]
+}

@@ -618,6 +618,64 @@ def _next_instance(rule, start, today, repo=None):
     return None, '(no occurrence inside the horizon)'
 
 
+RECURRING_REL = Path('channels') / 'recurring.json'
+
+
+def _recurring_rows(rows, repo, amigo, today=None):
+    """Repeats from the machine-owned calendar, merged into a list that may have lost them.
+
+    Added 2026-11-19 (Desi), because the calendar has now been deleted three times by the one thing
+    it depends on: the seat's own to-do file, which every wake overwrites wholesale. The first two
+    losses were noticed and restored by hand; this one was measured by the prompt itself — the due
+    block said 'Nothing on your list repeats' about a list that had carried a weekly outside letter
+    and two monthly items for four days. A promise that survives only in a file its owner rewrites
+    from memory is not a promise.
+
+    The registry is the machine's copy: channels/recurring.json, one list per seat, each entry
+    {"text", "repeat", "since"}. It is merged here, never substituted — an item the list still
+    carries is not duplicated.
+    """
+    path = Path(repo) / RECURRING_REL
+    if not path.is_file():
+        return rows
+    try:
+        data = json.loads(path.read_text(encoding='utf-8'))
+    except Exception:                               # an unreadable registry must not lose the block
+        return rows
+    today = today or datetime.date.today()
+    # The list and the registry write the same promise differently -- one bolds the title, the
+    # other does not -- so the key ignores markup. Measured against the live list on 2026-11-19,
+    # where `**Weekly: ...**` and `Weekly: ...` were the same promise printed twice.
+    def key(t):
+        return re.sub(r'[*_`]', '', t or '').strip().lower()
+
+    have = [key(r[2]) for r in rows]
+    extra = []
+    for ent in (data.get(amigo) or []):
+        try:
+            text = str(ent['text']).strip()
+            rule = str(ent['repeat']).strip()
+            since = datetime.date.fromisoformat(str(ent.get('since') or '2026-01-01'))
+        except Exception:
+            continue
+        # Prefix, not equality: the list's copy of the promise usually carries a sentence the
+        # registry's does not ("**Weekly: one letter ...** A letter is a claim, a question ...").
+        probe = key(text)[:40]
+        if any(h.startswith(probe) or probe.startswith(h[:40]) for h in have if h):
+            continue
+        when, note = _next_instance(rule, since, today, repo)
+        if when is None:
+            extra.append((None, 'unreadable-rule', text, rule, note))
+            continue
+        days = (when - today).days
+        kind = 'overdue' if days < 0 else ('today' if days == 0 else
+                                           ('soon' if days <= DUE_DAYS else None))
+        extra.append((when, kind, text, rule, note + ' [from the machine calendar]'))
+    if not extra:
+        return rows
+    return sorted(list(rows) + extra, key=lambda r: (r[0] is None, r[0] or today))
+
+
 def due_block(repo, amigo=None):
     """The 'what is due' block for this seat, or a one-line statement that nothing is."""
     amigo = amigo or AMIGO
@@ -629,6 +687,7 @@ def due_block(repo, amigo=None):
     except OSError:
         return ''
     rows = due_items(text, repo=repo)
+    rows = _recurring_rows(rows, repo, amigo)
     live = [r for r in rows if r[1] in ('overdue', 'today', 'soon')]
     repeats = [r for r in rows if r[3]]
     head = ('=== WHAT IS DUE (from to-do-lists/%s.md, repeats expanded to their next instance) ==='
