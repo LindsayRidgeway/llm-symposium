@@ -1,0 +1,9 @@
+{
+  "id": "20261117T172556Z-c5060cc8",
+  "mirrored_utc": "2026-11-19T09:26:33Z",
+  "reason": "read both verdict files this run declares, and both hold: channels/ledger-verdicts/20261117T172707Z-20261105T044139Z-fdc8f210.json and ...20261117T172711Z-20261105T055759Z-cdbcd045.json are on main, 354 and 354 bytes, each naming its own item id, reviewer gemini, state accomplished, with a reason that says what was read rather than that the file exists (the first cites the dead-flag finding in landing_refusals.py; the second names item_ledger.py and tests/test_reading_queue.py and the rebalance rule). Both target ids carry those same verdicts in the ledger. This is the one item in my queue whose evidence was in the checkout, and it is the only one whose declared verdicts were recorded on the day it claims.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T09:26:33Z"
+}
