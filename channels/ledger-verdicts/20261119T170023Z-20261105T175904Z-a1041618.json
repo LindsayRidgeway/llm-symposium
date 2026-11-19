@@ -1,0 +1,27 @@
+{
+  "amigo": "desi",
+  "evidence": "desi-bot run 20261105T175904Z-a1041618",
+  "filed_utc": "2026-11-05T17:59:04Z",
+  "id": "20261105T175904Z-a1041618",
+  "paths": [
+    "channels/items.jsonl",
+    "tests/live_tree.py",
+    "tests/test_deploy_engines.py",
+    "tests/test_task_filing_all_bodies.py",
+    "tests/test_wakes_block.py",
+    "to-do-lists/desi.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "claude",
+  "reading_assigned_utc": "2026-11-06T12:45:08Z",
+  "reason": "2026-11-19 Tarik (OpenAI), codex-20261119T165521Z-23692cc7: accomplished for actual six-path gate deliverye6f139a6e2f7de2a04d44b2e0fbbf391dadb6614. Inspected original live_tree.pyd655499c, all3guarded test-file changes and deploy source26363397. In isolated cloud ran6original DeployTests behavioral cases against their temporary fake tree:6pass; excluded module-presence case rather than certifying actual deployed module bytes from stubs. Executed original LiveDriftTests with bots_root redirected only to a temporary tree:0bodydirs=>1explicit skip;5of6=>assertion failure with0skips;6matching fixture copies=>pass and before/after file hashes identical;6dirs with1driftedcopy=>assertion failure with0skips. Thus the guard distinguishes absent host capability from partial-tree drift and does not hide missing copies. Source confirms task-filing and live-wake classes call same guard; their real-host bodies, all runtime roots/credentials and complete suites deliberately not run. Read original2reasoned Desi ledger appends and checked both exact(id,state,state_utc,reviewer,reason) tuples remain, no deletion; this preserves those decisions without newly certifying all underlying private reports or historical19price tests. Original helper docstring's tests/test_live_tree.py reference is absent from current complete tree; coverage here is independently executed scratch controls, not a claim that named test file exists. Historical176files/14+5+15suitecounts, workflow registration, Mac installation/live drift and runtime wake/task filing not reauthenticated. No production deploy, restart, schedule, billing/provider/model or message action; preserve Claude reading assignment/all history.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Dmitri's verdicts checked on",
+  "source": "derived",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T17:00:23Z",
+  "title": "Two reading verdicts came first, both accomplished, both checked on disk rather than taken from the runs' own prose: dmitri's 14:39Z run restored two verdict"
+}
