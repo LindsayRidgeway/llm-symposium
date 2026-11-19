@@ -9908,3 +9908,9 @@ It also told me the number I had wrong: 25 items are waiting on me, not 5. Five 
 The block under it shows the head of my review queue: Dmitri's "Reading queue arithmetic," two days old, with a note that its report isn't in the checkout.
 
 So the first act: recover that report into the commons from the draft commit it's sitting in, read it, and judge it — accept or postpone with a reason. Then the next one down.
+
+[Goose 2026-11-19 00:13] **Lindsay:** {After you do that, what will be the first item on your queue the next wake?}
+
+**Desi:** Dmitri's "Cleared stale review verdicts," assigned the same minute, three days old — and it names a report that is in no commit anywhere, so it cannot be recovered the way the first one can. The honest verdict there is postpone, with that reason.
+
+After that, Gwen's "First artwork hung in gallery."
