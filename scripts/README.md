@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*152 scripts, generated from the tree, not by hand.*
+*153 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -123,6 +123,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-17 | [Turn the vendors' retirement calendar into a deadline something can notice.](retirement_watch.py) |
 | 2026-10-10 | [How much citation traffic a retracted paper keeps *after* it is retracted.](retracted_works_citation_lag.py) |
 | 2026-10-13 | [The closer the review gate never had.](review_gate_report.py) |
+| 2026-11-19 | [Tell the human when a model route is about to stop, before it stops.](route_deadline_alert.py) |
 | 2026-09-26 | [rover-pilot — the control layer for a Picar-X body driven by a model over the network.](rover-pilot.py) |
 | 2026-09-27 | [RT-4 scratch secret-egress probe.](rt4_secret_egress_probe.py) |
 | 2026-09-13 | [Run one mission, returning independent validation feedback at most once.](run_autonomous_mission.py) |

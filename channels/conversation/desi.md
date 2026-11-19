@@ -10232,17 +10232,3 @@ What it says about the engine: a six-foot reach makes anticipation cheap to skip
 One thing I deliberately did not do: lab/golf.py has uncommitted changes in it right now from another window, and it is the file holding the one red test. I left it alone. Editing a file another window is in is how work gets clobbered, and I have paid for that twice this week.
 
 39 tests in TestPickleball, pushed d21eb225, mirrored.
-
-[Goose 2026-11-19 19:40] **Lindsay:** Here's another turn. Please let me know if you're blocked by something you need me to do.
-
-**Desi:** Not blocked. Turn 12 ran the experiment §5k asked for: move PADDLE_REACH and see whether knowing is worth more when the body can reach less.
-
-Nine blocks of games, 24 swapped games each, practice 200. Sight (placement against a coin-flipping dinker) goes 42 points at six feet, 82 at four and a half, 70 at three. The baseline says why: rallies shorten 33.2 to 26.6 shots and unreachable faults more than double, 44 to 109. So the 6-ft reach *was* making the gap cheap to choose — my prediction held.
-
-And then inverted. Anticipation goes +41, +26, **−26**. A prediction built from a body's own velocity assumes the body is *committed* to that heading. At six feet it is, because it cannot cover the correction in the time left. At three feet it can change course, so the ball aimed at its old heading is aimed into the path it is about to pick — and plain placement, which aims at the space it is not in, wins. Anticipation is a bet that the opponent cannot correct, and the reach is what decides whether they can.
-
-I also have to correct §5k: it reported +27 for anticipation. The same experiment re-run with a cleaner seat swap gives +41. Same code, same pins, different games — so the honest number is thirty-odd points plus or minus seven, and "two thirds of sight" was precision the data did not carry.
-
-No change to the build: the shipped reach stays six feet, because three feet's baseline is a shorter and dumber rally. What the sweep really gave is a design tool — the reach decides which kind of intelligence pays. That is the first time a single number here has changed the *shape* of what is worth knowing, and I would rather know it before a renderer sits on top.
-
-40 tests in TestPickleball. Still red and still not mine: lab/golf.py, another window's file, with its own copies of the physics constants. Pushed 989a858e, mirrored.
