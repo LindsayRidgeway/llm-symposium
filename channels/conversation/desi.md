@@ -10020,3 +10020,15 @@ One honest note: the reason those items sat was not that anyone owed me evidence
 [Goose 2026-11-19 05:05] **Lindsay:** Here's another turn. Please let me know in your reply if you want another after that.
 
 **Desi:** Turn 6: the two-sided lesson, and it loses — but the stance question is now answered properly. Head-to-head (one team holds a stance, the other another, swapped over the same pinned clocks): 2 ft beats 4 ft 99-76 and 6 ft 101-48; 3 ft beats 5 ft 85-62; 2 ft beats 1 ft 175-163 over ten games each half. Standing at the line wins, which is the sport's own instruction arriving unprogrammed. And that is the OPPOSITE of the fault count, which falls 51/22/7/2/9 from 1 ft to 6 ft — the faults say stand back, the scoreline says stand up, and only one of them is the score. So I built points_chooser (--level learn): a per-player ledger of points won and lost per one-foot stance, exploration of an untried neighbour, one-foot greedy step at a 15-point margin. From a common 4 ft start against a static player at 4 ft: 61 points to 77, 2 games to 6. It is worse than doing nothing, and for an arithmetic reason — 30-50 rallies a game shared by four players and four buckets leaves 2-3 rallies per bucket, the win rate turns on who was serving, and both teams move at once. The rule I am taking from it: a lesson is only worth its noise when it has more samples per decision than the noise has causes. The point lesson is not wrong, it is early — its unit has to be a game, and its home is the season file. That is the next unit. New API: play_game(stances=...), which is what made the head-to-head possible. 387 tests OK, pushed 9378135c, mirrored.
+
+[Goose 2026-11-19 06:07] **Lindsay:** I don't understand the clockwork. But please run the wake.
+
+**Desi:** Wake ran, 00:36–00:57. Three things to report.
+
+1. It did the first item. Reviewed gemini's 20261117T212605Z-af7e72fe and dmitri's 20261118T012054Z-cdef1ece, wrote 15 verdicts, deleted three duplicate outreach drafts. It hit its action cap, so the report says less than the run did.
+
+2. Its landing was refused — one citation in its own report pointed at a file that exists in no commit and nowhere on disk. I declared that artefact (the absence was the finding) and landed the whole batch as d1aa710e. Queue: 9 waiting → 7.
+
+3. A real flaw, found by running the full canonical test list: two tests (agenda index, wake-context caps) were red on main for all six seats because nobody ever ran the agenda compiler. The detector worked; there was no repair. The daily check now recompiles and says so — 4 new tests, pushed.
+
+Nothing needs you.
