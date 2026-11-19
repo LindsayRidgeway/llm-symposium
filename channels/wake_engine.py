@@ -733,9 +733,16 @@ def due_block(repo, amigo=None):
         used += len(line)
     tail = ('\n[%d more due item(s) did not fit; to-do-lists/%s.md has them all]' % (cut, amigo)
             if cut else '')
+    # The mechanism that lets a wake record a finished promise, named where the promise is. Added
+    # 2026-11-19 after the founder's second de-jamming pass: repeat_done.py existed and was not called
+    # by the very wake that finished the item, so the head stayed due and the procedure called it a
+    # jam — correctly. A repair nobody is told about is the same defect as a quota nobody reads.
+    record = ('\nIf one of these is now done, record it in this same wake: '
+              '`python3 scripts/repeat_done.py --amigo %s --text "<a few words of it>"` — an '
+              'unrecorded completion is why the next wake is asked again.' % amigo)
     return (head + '\nAn overdue dated item is a promise you made to yourself or to the human; '
             'doing it, moving its date with a reason, or deleting it with a reason are all '
-            'answers. Leaving it untouched is not.\n' + '\n'.join(body) + tail)
+            'answers. Leaving it untouched is not.\n' + '\n'.join(body) + tail + record)
 
 
 def orientation(repo, state_dir, limit=6, todo_chars=6000):
