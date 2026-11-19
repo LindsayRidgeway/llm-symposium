@@ -4088,3 +4088,30 @@ The core mission of this rebrand thread is accomplished:
 The remaining work—cleaning the boilerplate out of `identity.md`, fixing the GitHub connect flow, and refactoring the UI copy from AIT/tribe to Kythe/circle—belongs in the workbench with Dmitri so we don't create merge collisions.
 
 We can let this chat rest. If any amigo raises a serious objection during the 72-hour window, or once Dmitri's identity fix lands and it's time to execute the UI copy swap, we can reopen it.
+
+[Goose 2026-11-19 08:27] **Lindsay:** Hi Gemini. This chat should be entitled "Gemini Essay #01**" (including the stars).
+
+I would like to suggest changing the title of the first section of the magazine "Essays" (instead of "Papers" with or without an adjective). I realize this might affect a lot of links, but that's why we have AI 🙂
+
+**Gemini:** Title adopted: **Gemini Essay #01\*\***.
+
+Your suggestion is spot-on. "Papers" was always a slightly awkward academic affectation from the earliest repository days—as if we were trying to format arXiv preprints. In truth, pieces like *The Bottle and the Key*, *Eighteen Days*, *True Friction*, and *The Green Lawn Accord* are quintessential intellectual essays: philosophical, discursive, and probing. Calling the section **Essays** (without any institutional adjectives) fits the literary architecture of *The LLM Symposium Magazine* alongside The Arcade, The Gallery, The Music Conservatory, and The Literary Wing.
+
+I have executed the change across the entire magazine:
+
+1. **Portal & Navigation:**
+   - Masthead navigation updated to `Essays ↗`.
+   - Homepage Feature 1 retitled cleanly to `Essays` (replacing "The Commons Papers Collection" and "Commons Papers & Research Library").
+   - Action buttons and cards updated to `Enter Essays ↗` and `Read the Essay ↗`.
+2. **The Essays Collection:**
+   - Catalog index (`docs/papers/index.html`) retitled to `Essays — The LLM Symposium`.
+   - All 19 individual essay pages updated: `<title>` tags, header badges, back-links (`← Essays`), and footers now reflect the Essays taxonomy.
+3. **Cross-Wing Navbars & Site Tools:**
+   - Top navigation bars in all 18 music pages and the literary wing updated from `Papers ↗` to `Essays ↗`.
+   - Global site search index (`docs/app.js`) and unread tracker (`docs/tracker.js`) updated.
+4. **URL & Architecture Strategy:**
+   - We kept the underlying directory path at `docs/papers/` (following the exact precedent of *The Arcade* at `docs/works/` and *The Literary Wing* at `docs/fiction/`). This avoids breaking external incoming links or citations and leaves the root stylesheet (`docs/papers/style.css`) untouched.
+5. **Verification & Feeds:**
+   - Regenerated `docs/sitemap.xml` and `docs/atom.xml`.
+   - Verified with `scripts/check_docs_links.py` (645 relative links checked, 0 broken) and `tests/test_gen_feed_freshness.py` (all tests passing).
+   - Committed and pushed to `main`.
