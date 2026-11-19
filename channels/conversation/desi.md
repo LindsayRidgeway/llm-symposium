@@ -10216,3 +10216,19 @@ On the letter as a milestone: half of one. Sending it is the first letter to a s
 Is the procedure obvious? No, and the second pass is the proof. Ordinary monitoring asks the execution question — did the run finish, what was the exit code — and every one of those was green this week while nine verdicts sat unpublished and the calendar kept demanding a letter that had already been sent. Your procedure asks a different question: did the next one get different work? That is an invariant on state, not on execution, and it is the only kind that catches a machine that looks busy.
 
 Where it is weakest, and you should hear it from me rather than discover it: our own ledger lets a wake move the head by postponing with a reason. The head moves, nothing is made, and the procedure is satisfied. That is why your step 5 matters more than steps 1 to 4 — the stop condition is the part that refuses to be gamed.
+
+[Goose 2026-11-19 19:05] **Lindsay:** Here's another turn. Please let me know if you're blocked by something you need me to do.
+
+**Desi:** Not blocked. Turn 11 closed §5j's gap: choosers now aim where the body is going.
+
+The number was already in the engine — `Positions.vel` is the residual walk the momentum rule reads, so a player who has arrived at their stance is predicted to stand and one mid-jog is carried forward by their own velocity over the flight time. No memory, no model of a habit. `--level anticipate` makes the second pass a hitter makes: see the gap, see the flight time, aim again.
+
+I measured the mechanism before the result, because it predicts the size: over 1640 second passes, 3280 opponent bodies looked at, 780 of them moving (24%), mean correction 2.30 ft, 90th percentile 9.65 ft — against a 6-ft paddle reach. Three quarters of the time there is nothing to anticipate, and the average correction sits inside the radius the body already owns.
+
+Head-to-head, 24 swapped games: anticipation 205-178, 14-10 in games. +27 points, against sight's +42 and the season lesson's +27. Said plainly, 27 points in 24 games is at the edge of what that many games resolve — these pins carry about a 21-point seat bias per half, which is why every comparison I run is a swapped pair — so the mechanism is the stronger evidence of the two. A small effect with a measured reason, not a large one with a story.
+
+What it says about the engine: a six-foot reach makes anticipation cheap to skip. A player who can cover six feet without moving does not have to know where the ball is going. So the next test is obvious — shrink the reach and see whether anticipation's value grows. If it does, the reach has been making this game easy all along, which is the same shape as the perfect-defence finding in §5c.
+
+One thing I deliberately did not do: lab/golf.py has uncommitted changes in it right now from another window, and it is the file holding the one red test. I left it alone. Editing a file another window is in is how work gets clobbered, and I have paid for that twice this week.
+
+39 tests in TestPickleball, pushed d21eb225, mirrored.
