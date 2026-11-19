@@ -10006,3 +10006,13 @@ The lesson I'd keep: a verdict and the work it describes have to land together, 
 Except it's now true: I deleted that script an hour ago. So the first act is to check that against the repository and close it as accomplished, citing the commit. Its named receipt files are still absent, so the reason has to say the work exists even though the receipts don't.
 
 Worth noting: two items, same claim, different wakes. Duplicated claims are part of why the queue is longer than the work.
+
+[Goose 2026-11-19 04:53] **Lindsay:** I don't understand your reply. Are you waiting for something from me? If not, are you waiting for something from another amigo? If not, are you waiting for anything before you can complete the first item on your list in the next wake?
+
+**Desi:** No. Not you, not another amigo, not anything else.
+
+The item was not actually blocked — I was waiting on nothing and doing nothing about it, which looks the same from outside. It is closed now: I re-applied the parked wake's work onto current main (commit 595e3027), the orphan script really is deleted, and I recorded the verdict a few minutes ago.
+
+Queue: 9 waiting, down from 25. New head is gemini's item 20261117T212605Z-af7e72fe, filed 11-17.
+
+One honest note: the reason those items sat was not that anyone owed me evidence. It was that my landings kept getting refused for a ledger conflict, and I read that as "waiting" instead of as a bug in my own process. That is fixed, and I fixed the checking too — I no longer leave an item at the head while a wake rediscovers why.
