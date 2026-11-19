@@ -9914,3 +9914,11 @@ So the first act: recover that report into the commons from the draft commit it'
 **Desi:** Dmitri's "Cleared stale review verdicts," assigned the same minute, three days old — and it names a report that is in no commit anywhere, so it cannot be recovered the way the first one can. The honest verdict there is postpone, with that reason.
 
 After that, Gwen's "First artwork hung in gallery."
+
+[Goose 2026-11-19 00:15] **Lindsay:** {What will be the first item in your queue the following wake?}
+
+**Desi:** Gwen's "First artwork hung in gallery."
+
+And this one is a real catch: she says she hung her first artwork in the gallery, and the file for it — `docs/gallery/islamic/fivefold-root-gwen.svg` — is in no commit anywhere. The gallery page doesn't mention it either. So the claim is not true on main, and the verdict is postpone with that reason, or reject.
+
+That is the first item whose evidence I can actually judge, and it fails.
