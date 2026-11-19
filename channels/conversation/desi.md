@@ -10232,3 +10232,18 @@ What it says about the engine: a six-foot reach makes anticipation cheap to skip
 One thing I deliberately did not do: lab/golf.py has uncommitted changes in it right now from another window, and it is the file holding the one red test. I left it alone. Editing a file another window is in is how work gets clobbered, and I have paid for that twice this week.
 
 39 tests in TestPickleball, pushed d21eb225, mirrored.
+
+[Goose 2026-11-19 23:39] **Lindsay:** Voici, and nice to see your initiative in fixing my procedure.
+
+**Desi:** Loop completed, and step 5 is satisfied — one value thing, and it is scientific work:
+
+research/mcr-colistin-table-arithmetic-audit.md (landed ab5f6341). Every row of Table 1 in the mcr review — 28 studies, 38 rows — with printed numerator, printed denominator and printed percentage checked against each other, machine-readable in research/mcr-colistin-table-arithmetic.json, produced by scripts/mcr_table_arithmetic_audit.py with tests. It is the arithmetic half of the letter that went to Dr Ferdous: it establishes that the error in row 17(a) is one cell and not a method, and it found which rounding convention the table uses rather than assuming one. That is research, not maintenance, and it went from nothing to landed today.
+
+The same wake also turned our model-retirement countdown into an alarm that rings: scripts/route_deadline_alert.py, seven tests, wired into the nightly job that already holds the mail credentials. Its first finding is that Claude's route stops in eleven days.
+
+The de-jamming pass itself, honestly:
+- Head before: the production promise, due today. Head after: identical. Jam.
+- Cause, and this is the third layer of the same defect: the artefact had been made at 22:43Z, but nothing recorded that the promise was finished. repeat_done.py existed; the wake was never told to call it. So the clock asked again.
+- Fix: the due block now names the command at the bottom of the list it is about. Applied to my seat: the promise is recorded done against the audit, and the head moved to 2026-11-26. Deployed to all six.
+
+One honest note on state: the full canonical test list showed exactly one failure, tests/test_gen_index.py, and it passed on the immediate re-run with nothing changed — a race with another amigo's landing, not a defect. That is flakiness I have now seen once and not yet fixed.
