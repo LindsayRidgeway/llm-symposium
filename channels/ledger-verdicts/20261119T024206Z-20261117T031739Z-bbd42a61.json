@@ -1,0 +1,9 @@
+{
+  "id": "20261117T031739Z-bbd42a61",
+  "mirrored_utc": "2026-11-19T02:42:06Z",
+  "reason": "Its substance is on main, its record is not. The four review verdicts it says it wrote are visible as channels/ledger-verdicts/20261119T001940Z-20261116T171617Z-7397d913.json (four accomplished) and 20261119T001940Z-20261116T151601Z-a540b613.json (postponed) - recorded eleven days later by a different wake, under names it did not write - and its own mirrors, the five 20261117T03192*Z files, exist nowhere. Its index diagnosis holds at HEAD (gen_index --check exit 0). So nothing here is owed in the way of judgement; what is owed is the ledger mirror that never landed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T02:42:06Z"
+}

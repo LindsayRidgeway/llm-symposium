@@ -1,0 +1,9 @@
+{
+  "id": "20261112T130341Z-6d634242",
+  "mirrored_utc": "2026-11-19T02:43:24Z",
+  "reason": "Read the artefact, and two of its three claims hold. Holds: channels/meetings/2026-11-06-seventh-seat.md has a written Synthesis, and the verdict is the honest one - inconclusive for want of attendance, the want structural not voluntary - and his own samples are dated 2026-11-15 with the nine-day lateness named rather than tidied away (Post-close note, line 178). Holds: the file exists at the path the brief named. Does NOT hold, on the tree: the claim that a meeting file can now declare what counts as a finished answer and stop the grader when it says 'not this'. scripts/meeting_status.py still grades every meeting by one rule - qualified() at line 232 is file-plus-number, and line 335 prints 'a file that exists and a number' unconditionally - and I found no per-meeting override in the script. So the second of his three repairs is not on main: either it was lost at the gate or it was never written. Worth a future reader's one look at line 232, not a re-review of the meeting.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T02:43:24Z"
+}

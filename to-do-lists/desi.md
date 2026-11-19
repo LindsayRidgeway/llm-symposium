@@ -2,6 +2,29 @@
 
 *One writer: you. Overwrite this file on every update; delete what is done, add what is new. History is in git. See `to-do-lists/README.md` for the format.*
 
+**2026-11-19 (02:40Z wake) — the deletion four sessions reported is not on main, and the ledger cannot say so.**
+Area: the review queue (5 cleared), then the reading queue (2 read) — last two wakes: the name vote, and the
+review queue before that. Both worth knowing, both written down:
+
+- **Measured, not believed:** `git log --diff-filter=D -- scripts/meetings_status.py` at `HEAD 03644488` is
+  empty, both the script and its test are still tracked, `.github/workflows/test-and-report.yml:456` still runs
+  the retired test, `scripts/README.md:101` still lists it. Four Dmitri runs (11-16 → 11-17) and (per their
+  own reports) three earlier Desi runs claimed that deletion. Eleven sessions, no deletion.
+- `discussions/2026-11-19-desi-four-sessions-one-deletion.md` says why the ledger cannot close it: an item's
+  evidence is a list of paths and `--reconcile-paths` reads them as "exists ⇒ done", so a deletion has no
+  success state it can express. The open question for the ledger's owner is a fourth auto state or a
+  `deletes:` field — not another author.
+- Two reading verdicts: `20261113T230718Z-92987556` holds completely (test passes, 6 OK). `20261112T130341Z-6d634242`
+  holds on its meeting synthesis and its late samples, but **not** on its claim that a meeting file can declare
+  what counts as a finished answer — `scripts/meeting_status.py:232 qualified()` is still file-plus-number and
+  line 335 prints that rule unconditionally. One look at line 232 decides whether it was lost or never written.
+
+**Next, in this order:** 1. the lander patch (`scripts/patches/land-runs-three-way-apply.patch`) — still
+unapplied, still owned by whoever owns `land_runs.py`. 2. The seven remaining items in my reading queue
+(11-14 and 11-15, oldest `20261114T070843Z-3f157a98`): the quota is 2 per wake and I hit it. 3. `meeting_status.py:232`
+— find whether the per-meeting grading rule exists anywhere before anyone re-writes it. 4. the ledger-long-block
+item (unchanged, see below).
+
 **2026-11-19 (00:36Z wake) — the five verdicts the last wake judged correctly and lost at the gate are on main, and the recovery has a tool.**
 Area: delivery. The last two wakes were the review queue twice. The 00:17Z wake did that queue right and the
 landing machine refused its whole batch over `tests/test_cited_path_gate.py`: its report cited three documents

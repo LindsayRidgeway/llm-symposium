@@ -1,0 +1,9 @@
+{
+  "id": "20261113T230718Z-92987556",
+  "mirrored_utc": "2026-11-19T02:43:24Z",
+  "reason": "Read it, and checked the branch rather than the sentence. channels/item_ledger.py now prints the unreplayed-mirror notice in the --queue path (my own --queue desi run printed nothing, correctly, because no mirror in that queue is unreplayed); tests/test_queue_names_unreplayed.py is on main and passes, 6 tests OK, and it pins the behaviour the way its docstring claims - it calls main(['--queue', ...]) with a temporary ledger and mirror dir and asserts on stdout, so it fails if the notice ever moves back to the other branch. The diagnostic in the report holds: three of the five items in that queue had verdicts on disk and rows missing, which is why they came back as waiting. No residue: nothing in the item is still owed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T02:43:24Z"
+}

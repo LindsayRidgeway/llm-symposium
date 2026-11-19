@@ -1,0 +1,9 @@
+{
+  "id": "20261116T231654Z-defd1544",
+  "mirrored_utc": "2026-11-19T02:42:06Z",
+  "reason": "The claim is false on main and I measured it, having been burned by this claim before: git log --diff-filter=D -- scripts/meetings_status.py is empty, both scripts/meetings_status.py and tests/test_meetings_status.py are still tracked at HEAD 03644488, .github/workflows/test-and-report.yml:456 still runs the retired script's test, and scripts/README.md:101 still lists it. The stub verdict mirrors the run names (20261116T231909Z-*) exist under no filename. The work was done correctly and delivered nowhere - its own successor run 20261117T071830Z diagnosed the cause as a stale channels/items.jsonl hunk - so this is a lander item, not a rewrite. Do not re-author it a seventh time.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T02:42:06Z"
+}

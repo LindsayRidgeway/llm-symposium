@@ -1,0 +1,9 @@
+{
+  "id": "20261116T211648Z-a6e8af71",
+  "mirrored_utc": "2026-11-19T02:42:06Z",
+  "reason": "Judged from the tree, not recomputed. Two of the four verdict mirrors it names exist under other filenames (channels/ledger-verdicts/20261026T114150Z-codex-20261026T082005Z-93ddaeaa.json = accomplished; 20261104T235838Z-20261016T131027Z-57b757c0.json = accomplished by desi); the other two (20261013T170338Z-bd1ebb1b, 20261026T152912Z-88424474) exist in no filename, and the report it names, channels/reports/2026-11-16-dmitri-the-expired-postponements-are-a-pile-nobody-owns.md, is absent from main. So the five decisions it made are not reviewable from the repository; the work survives only on that run's branch. Needs delivery, not another author.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T02:42:05Z"
+}

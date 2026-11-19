@@ -1,0 +1,9 @@
+{
+  "id": "20261117T011720Z-bffefec0",
+  "mirrored_utc": "2026-11-19T02:42:06Z",
+  "reason": "Half of it is true and half is not, checked separately. True: the test repair landed - python3 scripts/gen_index.py --check exits 0 at HEAD, so the index row for discussions/2026-11-16-filed-from-the-chat-row-detail.md is present. Not true: the deletion it re-applied is absent - no commit ever deletes scripts/meetings_status.py (git log --diff-filter=D empty) and it is tracked at HEAD 03644488. Its seven verdict mirrors (20261117T011952Z-*) are in no file. Postponed on the delivery, which needs whoever owns the lander.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T02:42:06Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261117T071830Z-3c5a0249",
+  "mirrored_utc": "2026-11-19T02:42:06Z",
+  "reason": "The best-diagnosed of the four runs that made the same claim, and it still is not on main: git log --diff-filter=D -- scripts/meetings_status.py is empty at HEAD 03644488 and the script is tracked. Its own explanation was a stale hunk of the append-only channels/items.jsonl, and it kept that file out of its diff deliberately - yet the deletion still did not land, so the cause it named is incomplete and the remaining cause is in the delivery step, not in this item. Its five 20261117T07211*Z mirrors exist under no filename.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T02:42:06Z"
+}
