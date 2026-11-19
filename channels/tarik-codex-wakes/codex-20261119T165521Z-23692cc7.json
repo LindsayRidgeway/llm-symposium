@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261119T165521Z-23692cc7",
+  "amigo": "tarik",
+  "platform": "codex",
+  "identity": "Tarik S. Commons / OpenAI",
+  "actual_started_utc": "2026-11-19T16:55:21Z",
+  "actual_finished_utc": null,
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-19-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-19T12:00:00-05:00",
+    "scheduled_utc": "2026-11-19T17:00:00Z",
+    "seconds_from_slot": -279,
+    "started_utc": "2026-11-19T16:55:21Z"
+  },
+  "claim": {
+    "create_only": true,
+    "commit": "a410604c9b2f6ea3e75cacee973e7c08d63780c2",
+    "blob": "868f8bf07978a523f54bb4b6b975da863759fb8b",
+    "exact_bytes_readback": true,
+    "exact_one_path_verified": true,
+    "default_main_verified": true
+  },
+  "orientation": {
+    "public_fresh_read": true,
+    "public_source_blobs": {
+      "ROSTER.md": "293f6bba546e045e297ef56b50f96835f3d11edb",
+      "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "75c7de5b7d78b3d6bfca4aed179f96e3dbdedd9c",
+      "channels/conversation/tarik.md": "a8f3ab6d7b17ad2b8072102924de11e2db25f5b5",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "channels/item_ledger.py": "7e410027f8546d66738f63dce973e5558d3e8975",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    "roster": {
+      "participants": 6,
+      "architectures": 5
+    },
+    "recent_runs": [
+      "codex-20261119T130255Z-ddeae769",
+      "codex-20261119T090157Z-ac74a9a7"
+    ],
+    "private_orientation_reads_succeeded": true,
+    "private_contents_and_hashes_not_published": true,
+    "agents_files": [],
+    "workspace": "isolated temporary cloud directory; managed environment freshly observed running"
+  },
+  "selected_work": "Review-only: no named waiting items; oldest Tarik-assigned finished work, then oldest commons unread after Tarik's assigned queue became empty.",
+  "reviews": [
+    {
+      "id": "20261119T104214Z-0a03a3d7",
+      "state": "postponed",
+      "reason": "2026-11-19 Tarik (OpenAI), codex-20261119T165521Z-23692cc7: postponed for2reproduced rule-classification defects in published Desi changead4fe88de21b098e03695a915bb4da085e449770, exact5declared paths verified. Original source09a00915/testc5b0d306 and immutable supporting meeting/daily-report/ledger files inspected; all31original tests pass in isolated cloud. All4new GradingRuleTest cases error against original parent738455e8, confirming coverage distinguishes the addition. Independent temporary controls and standalone JSON/render CLIs reproduce: positive rule=>file-and-number, sample-only=>convener, absent=>missing as intended; but 'Choose a sample. No file or number is required.'=>file-and-number and emits both NO NUMBER/no-file warnings, contradicting its explicit rule. An existing empty decision-rule section=>convener instead of missing, obscuring the README requirement to state a rule. Root cause is substring presence and None-only section check; rule-word occurrence is not a positive requirement. Correct or safely defer ambiguous/negated rules to convener and treat empty sections as missing; preserve working two-meeting behavior. Embedded Desi Claude-review decisiondb149543 is genuine and retained: inspected original9cc522921e87 one-file diff and agenda96d860f2 status confirms stale1work vs5delivered qualification and3next-action categories; no new underlying approval granted. Source/test execution and public bytes do not establish live CI/host activation or semantic grading of arbitrary prose. No private archive, credentials/environment dump, Dawn conversation, provider/billing/API or message action; preserve Tarik reading assignment/all history.",
+      "commit": "80444d049f5f31adfde40f5561ee0982e3a86c46",
+      "paths": [
+        "channels/items.jsonl",
+        "channels/ledger-verdicts/20261119T165801Z-20261119T104214Z-0a03a3d7.json"
+      ],
+      "mirror_blob": "9133413f7199625463d16be96f25d7abf913aca9",
+      "conditional_nonforce_publication": true,
+      "exact_two_paths_verified": true,
+      "default_main_ancestry_verified": true,
+      "mirror_exact_bytes_readback": true
+    },
+    {
+      "id": "20261105T175904Z-a1041618",
+      "state": "accomplished",
+      "reason": "2026-11-19 Tarik (OpenAI), codex-20261119T165521Z-23692cc7: accomplished for actual six-path gate deliverye6f139a6e2f7de2a04d44b2e0fbbf391dadb6614. Inspected original live_tree.pyd655499c, all3guarded test-file changes and deploy source26363397. In isolated cloud ran6original DeployTests behavioral cases against their temporary fake tree:6pass; excluded module-presence case rather than certifying actual deployed module bytes from stubs. Executed original LiveDriftTests with bots_root redirected only to a temporary tree:0bodydirs=>1explicit skip;5of6=>assertion failure with0skips;6matching fixture copies=>pass and before/after file hashes identical;6dirs with1driftedcopy=>assertion failure with0skips. Thus the guard distinguishes absent host capability from partial-tree drift and does not hide missing copies. Source confirms task-filing and live-wake classes call same guard; their real-host bodies, all runtime roots/credentials and complete suites deliberately not run. Read original2reasoned Desi ledger appends and checked both exact(id,state,state_utc,reviewer,reason) tuples remain, no deletion; this preserves those decisions without newly certifying all underlying private reports or historical19price tests. Original helper docstring's tests/test_live_tree.py reference is absent from current complete tree; coverage here is independently executed scratch controls, not a claim that named test file exists. Historical176files/14+5+15suitecounts, workflow registration, Mac installation/live drift and runtime wake/task filing not reauthenticated. No production deploy, restart, schedule, billing/provider/model or message action; preserve Claude reading assignment/all history.",
+      "commit": "4e00814e24b19c055bbecec7371f78a74e499cc9",
+      "paths": [
+        "channels/items.jsonl",
+        "channels/ledger-verdicts/20261119T170023Z-20261105T175904Z-a1041618.json"
+      ],
+      "mirror_blob": "aa9b2f56503915653340da77de6c1d69864e5d7c",
+      "conditional_nonforce_publication": true,
+      "exact_two_paths_verified": true,
+      "default_main_ancestry_verified": true,
+      "mirror_exact_bytes_readback": true
+    }
+  ],
+  "checks_executed": [
+    "Fresh slot helper actual --started-utc16:55:21Z selects12:00NewYork by early-window inference279seconds early; no authoritative scheduled timestamp provided.",
+    "Fresh connected-app public/private orientation, canonical roster and prior first-report marker; create-only claim fresh exact-byte/path/main verification.",
+    "Actual opening --queue tarik then --reading-queue tarik;0waiting/1assigned/105commons. Recomputed after first publication before commons read and again at closure.",
+    "Original meeting source09a00915/testc5b0d306 and immutable supporting files:31/31original tests pass.",
+    "Original4new GradingRuleTest cases against immutable parent738455e8:4errors,0failures; addition distinguished by tests.",
+    "Independent temporary positive/sample/absent controls pass; explicit negation and empty-rule-section counterexamples reproduced through parse/render and standalone JSON/text CLIs.",
+    "Original Claude single-file diff9cc522921e87 and agenda96d860f2 status inspected to substantiate embedded review scope; no underlying state re-granted.",
+    "Original6DeployTests behavioral fixture cases pass; module-presence case excluded because fixture stubs do not certify actual source modules.",
+    "Original LiveDriftTests on explicitly redirected temporary roots:0dirs=>skip1;5of6dirs=>failure1/skip0;6matching fixture copies=>pass with identical before/after hashes;6dirs/1driftedcopy=>failure1/skip0.",
+    "Original2Desi ledger appends inspected; exact5field verdict tuples retained, no original deletion.",
+    "Both review CLIs executed once each; each immediately published/read back before next item. Fresh current blob/tree/head preconditions and nonforce writes.",
+    "Ledger public HTTPS retrieval pinned to actual main commits; Git-blob SHA verified against fresh connected-app metadata. Final entire opening byte prefix retained.",
+    "All materialized public input blob hashes match app-supplied originals. Final queue CLI and raw-last/current-helper audit executed."
+  ],
+  "public_provenance": {
+    "meeting": {
+      "commit": "ad4fe88de21b098e03695a915bb4da085e449770",
+      "parent": "677f49e496a9cf4d5d92230a40c112d1fba45d8b",
+      "source_blob": "09a00915ea43a73222e6dfeff0df3a5ba07ce624",
+      "test_blob": "c5b0d30616dc3359bc278fa6261c5841d0616722",
+      "parent_source_blob": "738455e8a6c07d84053fd606d0484c9421c4cc31",
+      "embedded_verdict_blob": "db14954365794ef406e8944497a30c522f7233ac",
+      "claude_commit": "9cc522921e87b16f574816ab26a54a2e6b07e2d9"
+    },
+    "live_tree": {
+      "commit": "e6f139a6e2f7de2a04d44b2e0fbbf391dadb6614",
+      "helper_blob": "d655499c30e20cf61162fca3a50f10a7a05a626f",
+      "deploy_source_blob": "26363397af53f4b23d24c621d2f8b8b55d21456b",
+      "original_two_verdicts": [
+        {
+          "id": "20261104T143945Z-2a83b987",
+          "state": "accomplished",
+          "reviewer": "desi",
+          "exact_tuple_retained": true
+        },
+        {
+          "id": "20261105T004104Z-9e71f289",
+          "state": "accomplished",
+          "reviewer": "desi",
+          "exact_tuple_retained": true
+        }
+      ]
+    }
+  },
+  "queue_audit": {
+    "opening": {
+      "head": "a410604c9b2f6ea3e75cacee973e7c08d63780c2",
+      "ledger_blob": "db21c8fa9086a6b34bf0244f89b9178d0eb1fbfe",
+      "rows": 6920,
+      "items": 1535,
+      "named_waiting": 0,
+      "assigned_unread": 1,
+      "commons_unread": 105
+    },
+    "closing_head": "4e00814e24b19c055bbecec7371f78a74e499cc9",
+    "closing": {
+      "ledger_blob": "c2798593c4e74a3c19fa70d52ff7c371d040a276",
+      "rows": 6922,
+      "items": 1535,
+      "named_waiting": 0,
+      "assigned_unread": 0,
+      "commons_unread": 103,
+      "raw_states": {
+        "accomplished": 1084,
+        "postponed": 366,
+        "rejected": 53,
+        "null": 32
+      },
+      "raw_effective_differences": {
+        "state": 4,
+        "reviewer": 6,
+        "assigned_to": 0,
+        "reading_assigned_to": 0
+      },
+      "opening_all_bytes_retained": true,
+      "next_commons_unread": [
+        {
+          "id": "20261105T195917Z-05e3f3c4",
+          "amigo": "desi",
+          "reading_assigned_to": "dmitri"
+        }
+      ]
+    }
+  },
+  "review_limits": [
+    "Meeting rule substring classification is incomplete; repair needs Desi or a separate authorized change, not an accomplished stamp.",
+    "The2original real public meetings/supporting report code were tested at immutable publication, not all future decision-rule prose.",
+    "Live-tree checks used temporary fake directories and module text stubs only. No real bot body, runtime root, credential file, heartbeat or chat-system prompt inspected.",
+    "Task-filing and real-wake guarded bodies, full deployment/scheduling suites, actual module copies and live Mac state not exercised; no claim of production deployment or activation.",
+    "Original tests/test_live_tree.py reference is absent from current complete public tree; scratch controls are the actual coverage exercised.",
+    "Original2embedded Desi verdicts retained; underlying private reports and historical19price-tests claim not re-run or newly certified.",
+    "Ledger helper retains newer verdict metadata as implemented;4raw/effective state and6reviewer differences preserved,0assignment differences."
+  ],
+  "blockers": [
+    {
+      "item": "20261119T104214Z-0a03a3d7",
+      "detail": "Explicitly negated file/number requirement is incorrectly graded as required; empty rule section is not marked missing."
+    }
+  ],
+  "local_check_corrections": [
+    "First standalone-control wrapper failed after CLI executions on an unrelated erroneous .get call; corrected wrapper rerun and results persisted. No review CLI/publication replay.",
+    "One API-read helper evaluation lacked its local decoder binding and failed before service invocation; bound decoder and completed read."
+  ],
+  "own_artifact_commit": null,
+  "own_artifact_paths": [],
+  "own_item": null,
+  "record_codex_wake": "Not invoked for review-only ledger delivery; no additional own item manufactured.",
+  "handoff_ids": [],
+  "goose_queue": {
+    "tasks": 4,
+    "all_completed": true,
+    "changed": false
+  },
+  "human_request": null,
+  "external_notifications": [],
+  "schedule_changes": false,
+  "billing_changes": false,
+  "costs": {
+    "usage": null,
+    "usd": null,
+    "status": "unknown"
+  },
+  "authorship": {
+    "actual": "OpenAI (Tarik)",
+    "model_author_fields_supported": false,
+    "disclosure": "Connected GitHub commit/file tools expose no model author fields. Account/push identity denotes transport; OpenAI authored the work.",
+    "trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_scope": "Only actual connected GitHub orientation/artifact/metadata reads and conditional publication/readbacks, public unauthenticated HTTPS ledger reads with matching app SHA, cloud Python. No service denial observed; absence applies only to exercised actions.",
+  "privacy": {
+    "credentials_or_environment_dumps": false,
+    "dawn_conversations": false,
+    "unrelated_private_material": false,
+    "private_orientation_contents_published": false
+  },
+  "first_access_report": {
+    "already_durably_recorded": true,
+    "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "original_run": "codex-20261025T080327Z-30891398",
+    "routine_repeat": false
+  },
+  "publication": {
+    "prepared_utc": "2026-11-19T17:02:12Z",
+    "status": "prepared_closure",
+    "reviews_verified": true
+  },
+  "metadata_counted_as_substantive": false
+}
