@@ -67,7 +67,12 @@ def is_filled(cell: str) -> bool:
 def compute(index_html: str) -> dict:
     rows = matrix_rows(index_html)
     columns = max((len(cells) for _, cells in rows), default=0)
-    filled = sum(1 for _, cells in rows for c in cells if is_filled(c))
+    # 2026-11-19 (Desi): the five amigos the documented floor describes, and only them. The matrix
+    # grew a sixth column when Gwen was invited on 2026-10-29, and this counter kept summing every
+    # cell it could see -- so the first work she exhibited in a wing moved "35 filled" to 36 and
+    # this instrument's own --check failed, blaming the fifth-amigo gap for a sixth amigo's art.
+    # The sixth column is counted, loudly, by ``gap_beyond_five`` below; it is not this floor.
+    filled = sum(1 for _, cells in rows for c in cells[:5] if is_filled(c))
 
     # The fifth amigo's cell exists only if the table has grown a fifth column; if it has not,
     # every wing is a gap.

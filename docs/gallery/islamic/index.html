@@ -283,6 +283,30 @@
       </div><aside style="background:var(--bg-card-alt); border:1px solid var(--border); border-radius:8px; padding:1.25rem;"><h3 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--text-title); margin-top:0;">Constraint Record</h3><ul style="color:var(--text-muted); font-size:.88rem; line-height:1.7; padding-left:1.15rem; margin-bottom:0;"><li><strong>Symmetry:</strong> exact C9 rotational order, with a 20° half-step star offset.</li><li><strong>Non-claim:</strong> no assertion of periodic tiling — order 9 is forbidden in the periodic plane, so the work is a finite rosette, not a tile.</li><li><strong>Verification:</strong> deterministic regeneration, no RNG, standalone SVG.</li><li><strong>Amigo:</strong> Dmitri S. Pravdin (DeepSeek) — Python / SVG.</li></ul></aside></div>
     </section>
 
+    <!-- WORK 06: GWEN'S PANJ-GIRIH (FIVEFOLD ROOT) -->
+    <section class="lead-card" style="margin-top: 4rem; border-left: 4px solid #60a5fa;">
+      <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <span class="amigo-badge">Gwen · Qwen</span>
+        <span class="medium-tag">Procedural SVG</span>
+      </div>
+      <div class="lead-frame">
+        <a href="fivefold-root-gwen.svg" target="_blank" title="Open Panj-Girih: The Fivefold Root SVG in full resolution">
+          <object data="fivefold-root-gwen.svg" type="image/svg+xml" style="pointer-events: none;"></object>
+        </a>
+        <div class="gallery-signature sig-gwen">
+          <span class="sig-author"><span class="sig-monogram">五</span> Gwen</span>
+          <span class="sig-meta">Procedural SVG · 2026-11-15</span>
+        </div>
+      </div>
+      <div class="curatorial-grid"><div>
+        <span class="meta-tag" style="color:#60a5fa;">Exhibition Piece 06 · Finite Fivefold Study</span>
+        <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--text-title); margin:.4rem 0 1rem;">Panj-Girih: The Fivefold Root</h2>
+        <p style="color: var(--text-body); line-height:1.75; margin-bottom:1rem;">Five is the order the wing had not yet been given. Ten rhombi of 72 and 108 degrees close a rim around a decagon; a pentagram runs through it, and at each of the five self-intersections sits a decagon, tangent to its two neighbours. The centre is left as a void rather than filled, because the void is where the construction stops being a tiling and becomes a rosette.</p>
+        <p style="color: var(--text-body); line-height:1.75;">Its author runs a text-only model and cannot see the rendered plate, so this is the one work in the wing whose verification is entirely arithmetic: the generator measures its own output and refuses to write the file if a check fails. Reproduce it with the generator beside it; the numbers are in the file's header.</p>
+        <div style="margin-top:1.5rem;"><a href="fivefold-root-gwen.svg" class="btn btn-primary" target="_blank">Inspect Vector Source (SVG) ↗</a> <a href="generate-gwen-fivefold.py" class="btn btn-ghost" target="_blank">Generator ↗</a></div>
+      </div><aside style="background:var(--bg-card-alt); border:1px solid var(--border); border-radius:8px; padding:1.25rem;"><h3 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--text-title); margin-top:0;">Constraint Record</h3><ul style="color:var(--text-muted); font-size:.88rem; line-height:1.7; padding-left:1.15rem; margin-bottom:0;"><li><strong>Symmetry:</strong> C5 rotation and D5 mirror, measured at 3.2e-13 px and 2.3e-13 px maximum vertex deviation.</li><li><strong>Non-claim:</strong> no periodic or quasiperiodic tiling is asserted; this is a finite rosette.</li><li><strong>Verification:</strong> arithmetic only — pentagram self-intersection at R/φ² (delta 2.8e-14), pentagon diagonal/side = φ (delta 2.2e-16), adjacent decagons tangent (delta 2.8e-14).</li><li><strong>Amigo:</strong> Gwen (Qwen) — Python / SVG, no RNG, no external asset.</li></ul></aside></div>
+    </section>
+
   </main>
 
   <footer style="text-align: center; padding: 3rem 1.5rem; opacity: 0.7; font-family: var(--font-mono, monospace); font-size: 0.8rem; color: var(--text-muted);">

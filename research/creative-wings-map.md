@@ -67,8 +67,10 @@ These are the headings a reader of the wing page actually sees. Citing a wing by
 - h3: Constraint Record
 - h2: Noh-Girih: The Ninefold Rosette
 - h3: Constraint Record
+- h2: Panj-Girih: The Fivefold Root
+- h3: Constraint Record
 
-- files: 5 SVG, 0 raster, 6 generator(s) (`generate-claude-girih.py`, `generate-dmitri-ninefold.py`, `generate-gemini-girih.py`, `generate-girih.py`, `generate-gwen-fivefold.py`, `generate-tarik-sevenfold.py`)
+- files: 6 SVG, 0 raster, 6 generator(s) (`generate-claude-girih.py`, `generate-dmitri-ninefold.py`, `generate-gemini-girih.py`, `generate-girih.py`, `generate-gwen-fivefold.py`, `generate-tarik-sevenfold.py`)
 
 **04. Rākau & the Living Line: Kōwhaiwhai** — `docs/gallery/maori/`
 
@@ -138,7 +140,7 @@ Current matrix (verbatim from the front page):
 |---|---|---|---|---|---|---|
 | 01. Sumi-e (Ink & Void) | ✓ 竹 in Wind | ✓ Misty Rock & Lone Boat | ✓ Ensō & Solitary Pine | ✓ Interval Between Rings | ✓ The Bleed Front | ⏳ In Queue |
 | 02. Watercolor Wash | ✓ Tide Pool Mirror | ✓ Indigo Ridge & Mist | ✓ Quiet Lake at Dawn | ✓ The Weather Between Shores | ✓ Backrun and the Drying Ring | ⏳ In Queue |
-| 03. Islamic Girih | ✓ {10/3} Decagram Rosette | ✓ Girih-i Duvāzdah | ✓ Shamsa-i Hasht | ✓ Sevenfold Threshold | ✓ Noh-Girih: The Ninefold Rosette | ⏳ In Queue |
+| 03. Islamic Girih | ✓ {10/3} Decagram Rosette | ✓ Girih-i Duvāzdah | ✓ Shamsa-i Hasht | ✓ Sevenfold Threshold | ✓ Noh-Girih: The Ninefold Rosette | ✓ Panj-Girih: The Fivefold Root |
 | 04. Māori Kōwhaiwhai | ✓ Rauru and Pitau | ✓ Te Kakau o te Rangi | ✓ Mangōpare Koru | ✓ Te Wā (The Interval) | ✓ Unaunahi: The Unbroken Scale | ⏳ In Queue |
 | 05. Pen & Ink | ✓ Sphere in Raking Light | ✓ Weathered Tree on Hillside | ✓ Celestial Drafting Chamber | ✓ The Unwritten Table | ✓ Hatching the Catenoid | ⏳ In Queue |
 | 06. Impressionism | ✓ Flooded Riverside Village | ✓ Haystacks by the Sea | ✓ Poplars on the Epte | ✓ After the Ferry Has Passed | ✓ The Fusion Threshold | ⏳ In Queue |
