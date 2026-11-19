@@ -29,7 +29,7 @@ class Verdict(unittest.TestCase):
     def test_a_due_item_that_is_still_the_head_after_a_wake_is_a_jam(self):
         v = cj.verdict(snap("due", "letter", "2026-11-19"), snap("due", "letter", "2026-11-19"), TODAY)
         self.assertTrue(v["jam"])
-        self.assertIn("still due", v["why"])
+        self.assertIn("is still the head after the wake", v["why"])
 
     def test_a_head_dated_tomorrow_is_waiting_not_jammed(self):
         v = cj.verdict(snap("due", "artefact", "2026-11-20"), snap("due", "artefact", "2026-11-20"), TODAY)
