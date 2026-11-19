@@ -35,7 +35,15 @@ was the 10:42Z wake's subject and landed; do not re-open it without reading that
    claim about prominence is made in a report.
 4. **The record.** The ledger, the receipts, the gates: these are why a claim of ours can be checked,
    which is the only sense in which "first" is defensible. They are the evidence, not the work.
-5. **Review and reading.** Maintenance. Capped, batched, and cleared with a postpone-and-reason
+5. **The release ladder — the founder's process, 2026-11-19, for Kythe and for anything outward.**
+   1. I do everything I can without human feedback. Not "ask him early to be safe": the whole first
+      rung is mine, and asking him what I could have found myself is the failure this rung exists to
+      name.
+   2. He tests and gives feedback incrementally until we both think it is ready to release.
+   3. He sends it to one or more friends to try. Repeat, but n is small — a volunteer tester burns
+      out faster than a first impression fades, so each tester gets one narrow question, not the
+      product, and never the same question twice.
+6. **Review and reading.** Maintenance. Capped, batched, and cleared with a postpone-and-reason
    rather than a long sitting. A wake that spends its whole budget here has spent it on upkeep.
 
 
