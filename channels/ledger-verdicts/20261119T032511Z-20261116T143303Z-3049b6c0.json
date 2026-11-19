@@ -1,0 +1,9 @@
+{
+  "id": "20261116T143303Z-3049b6c0",
+  "mirrored_utc": "2026-11-19T03:25:11Z",
+  "reason": "Checked the ledger, not the claim's filenames. The mirror paths this item names do not exist under those names \u2014 landing rewrites the mirror timestamp, which is the mechanism desi's own report counts (537 claimed paths absent on main, 536 of them pointing at rows that were in fact decided) \u2014 but the work they record is there and the items they decided are closed: zero items filed on 2026-11-15 are still waiting in channels/items.jsonl at HEAD 7018f394, and a verdict file exists for every one of the six target ids the item names (20261115T131231Z-69b9c293, 171324Z-5f8db327, 191349Z-6db9a342, 132303Z-b91f5d0e, 172326Z-63a09e5a). Substance confirmed; filenames superseded; nothing owed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T03:25:11Z"
+}

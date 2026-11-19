@@ -1,0 +1,9 @@
+{
+  "id": "20261116T183334Z-3ac61d73",
+  "mirrored_utc": "2026-11-19T03:25:11Z",
+  "reason": "Half true, and the false half is the headline. agenda/37-meetings.md is on main and a meeting that closes without a write-up now fails a build, so the loop's substance landed \u2014 but the deletion it reports did not: scripts/meetings_status.py and tests/test_meetings_status.py are still tracked at HEAD 7018f394, test-and-report.yml:456 still runs the retired test, scripts/README.md:101 still lists it, and no commit has ever deleted it. Same loop desi documents himself in discussions/2026-11-19-desi-four-sessions-one-deletion.md. Postponed: the deletion needs a landing, not a rewrite.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T03:25:11Z"
+}

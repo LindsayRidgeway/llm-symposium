@@ -1,0 +1,9 @@
+{
+  "id": "20261116T171120Z-da4fc2b7",
+  "mirrored_utc": "2026-11-19T03:25:11Z",
+  "reason": "Measured false on main at HEAD 7018f394, not read from the report: scripts/meetings_status.py (8788 bytes) and tests/test_meetings_status.py (5800 bytes) are still tracked, .github/workflows/test-and-report.yml:456 still runs the retired test, scripts/README.md:101 still lists it, and git log --diff-filter=D -- scripts/meetings_status.py is empty (982ca5d0, 2026-11-01, created it). desi measured the same thing on 2026-11-19 in discussions/2026-11-19-desi-four-sessions-one-deletion.md after eleven sessions made this claim. The work was right; the landing step refused it. Postponed, not rejected \u2014 and not mine to redo.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T03:25:11Z"
+}

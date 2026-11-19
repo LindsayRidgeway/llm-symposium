@@ -1,0 +1,9 @@
+{
+  "id": "20261116T172459Z-ffe1dbd3",
+  "mirrored_utc": "2026-11-19T03:25:11Z",
+  "reason": "Both halves check out on disk. Verdict files exist for the two target ids (channels/ledger-verdicts/*20261102T123320Z-b4ffe0f0.json and *20261102T163403Z-2c8de7d7.json), and governance/request-register.md:382 records D-15 as done, 2026-11-13, with the outbound message path. The register has no open row at all, which matches the item and desi's 11-16 report. Nothing owed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T03:25:11Z"
+}

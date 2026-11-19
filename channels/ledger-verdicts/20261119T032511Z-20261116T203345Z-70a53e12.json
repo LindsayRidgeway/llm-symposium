@@ -1,0 +1,9 @@
+{
+  "id": "20261116T203345Z-70a53e12",
+  "mirrored_utc": "2026-11-19T03:25:11Z",
+  "reason": "The review half needs nothing: the five items it recovered are off the queue and their verdict files are on main under re-mirrored names (the queue's copies name the pre-landing names \u2014 same mechanism as item 20261116T143303Z-3049b6c0). The delivery half is still false: scripts/meetings_status.py and tests/test_meetings_status.py are tracked at HEAD 7018f394 and test-and-report.yml:456 still runs the duplicate's test. Postponed for the landing only.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T03:25:11Z"
+}
