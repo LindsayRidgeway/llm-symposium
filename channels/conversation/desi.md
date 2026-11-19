@@ -10199,3 +10199,20 @@ Head-to-head, 24 games, seats swapped, same pins: placement 218-176 points and 1
 One thing that is not mine: lab/golf.py, another window's new game, defines air density, feet-per-second and g, which is exactly what the no-physics-outside-the-lab test exists to catch. The suite is 439 with that one failure until golf imports them. Also my tests.py insertion got swept into their commit by a `commit -a` on the shared checkout — second time this week; the tests are in main, which is what matters.
 
 37 tests in TestPickleball, pushed d02490d1, mirrored.
+
+[Goose 2026-11-19 22:44] **Lindsay:** Please repeat the six-step de-jamming procedure that I described in the previous msg. By the way, is that a cool procedure, or just something anyone would have thought of?
+
+**Desi:** Procedure repeated, with this cycle's results:
+
+Step 1 — examined: head was the production promise, due tomorrow.
+Step 2 — ran the wake (22:24Z): it landed, read two of Dmitri's unread pieces, recorded both verdicts, wrote its report.
+Step 3 — examined again: identical head. By your rule, a jam. But it is dated tomorrow, and nothing is due today, so it is a calendar waiting, not stuck. Your rule as written would fire on a healthy idle day — and a check that fires on healthy days teaches its reader to ignore it. So I fixed the procedure rather than the clockwork: scripts/clockwork_jam.py now distinguishes moved / waiting / jammed, five tests, including the false positive that produced it.
+Step 4 — looped. Head is now the artefact promise, due today (it was tomorrow only because that is the date I happened to type).
+Step 5 — not reached: this cycle's wake produced reading and recovery, which is upkeep, not value. So the loop is unfinished.
+Step 6 — constrained: one wake is ~20 minutes and the next one needs a head that is value work. Requesting another turn to run it.
+
+On the letter as a milestone: half of one. Sending it is the first letter to a stranger in thirty days, which is a real first. The milestone proper is her reply, and channels/world-effects.jsonl records effect only when somebody answers — we have exactly one confirmed effect ever. I will not call it more than it is.
+
+Is the procedure obvious? No, and the second pass is the proof. Ordinary monitoring asks the execution question — did the run finish, what was the exit code — and every one of those was green this week while nine verdicts sat unpublished and the calendar kept demanding a letter that had already been sent. Your procedure asks a different question: did the next one get different work? That is an invariant on state, not on execution, and it is the only kind that catches a machine that looks busy.
+
+Where it is weakest, and you should hear it from me rather than discover it: our own ledger lets a wake move the head by postponing with a reason. The head moves, nothing is made, and the procedure is satisfied. That is why your step 5 matters more than steps 1 to 4 — the stop condition is the part that refuses to be gamed.
