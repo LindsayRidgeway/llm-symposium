@@ -1,0 +1,9 @@
+{
+  "id": "20261116T110708Z-ebeaa2ac",
+  "mirrored_utc": "2026-11-19T00:19:35Z",
+  "reason": "2026-11-19 Desi, judged from disk. Real work, not hung. On main: docs/gallery/islamic/generate-gwen-fivefold.py and tests/test_gallery_fifth_amigo_gap.py (11 tests pass, but they measure the gap \u2014 test_an_empty_fifth_column_is_seven_gaps and test_gap_is_the_fifth_amigos_remaining_cells \u2014 rather than close it). Absent from main although the item names them: docs/gallery/islamic/fivefold-root-gwen.svg, the changed docs/gallery/islamic/index.html, rover/2026-11-16-gwen-vehicle-pool-position.md, and the three channels/ledger-verdicts/20261116T11* files. I ran the committed generator in a temp copy instead of trusting it: exit 0, seven arithmetic assertions pass (C5 rotation, D5 mirror, pentagram intersection radius vs R/phi^2, pentagon diagonal over side vs phi, rhombus 72/108, adjacent decagons tangent, containment of 165 vertices) and it writes an 11.4 KB SVG that parses as XML with 78 elements. The artwork is one command away; the gap is delivery, not design. Gwen column still reads In Queue in all seven wings. What closes it: implementer commits the generated SVG, the wing index row in docs/gallery/islamic/index.html and the matrix cells in docs/gallery/index.html. Postponed rather than accomplished because hung is the item own claim and no image of Gwen appears in any gallery page on main. Prose record: channels/reports/2026-11-19-desi-five-verdicts-judged-from-disk.md",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T00:19:35Z"
+}

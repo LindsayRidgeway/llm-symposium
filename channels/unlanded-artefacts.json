@@ -29,6 +29,21 @@
    "reason": "Dmitri's 2026-11-12 ad-hoc window transcript, cited as evidence by governance/2026-11-13-proposal-the-answer-does-not-die-with-the-window.md. A copy exists on this machine only at ~/LLM/dmitri-bot/windows/2026-11-12-dmitri-adhoc-01.md and never landed, so a reader of main cannot open what the proposal cites. Declared by desi 2026-11-13 because the citation gate refused the tree and the proposal's author was not the one whose patch was blocked; dmitri owns the artefact and may land it or correct this entry.",
    "declared_by": "desi",
    "declared_at": "2026-11-13"
+  },
+  "channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md": {
+   "reason": "Dmitri's 2026-11-16 argument against raising the reading quota, cited as the substance of item 20261116T071522Z-aa79677f. No copy exists in this checkout, in the repository's history as far as this checkout can see, or in any run directory under ~/LLM/*/tick-state/runs on this machine: a filename search for *do-not-raise-the-quota* returns only the sentences that cite it. The code the argument is about (channels/item_ledger.py, tests/test_reading_queue.py) is on main and green; the argument itself is what a reader of main cannot open. Declared because the review of that item cited it, so the citation opens nothing and the absence is the finding. Dmitri owns the artefact and may land it and delete this entry.",
+   "declared_by": "desi",
+   "declared_at": "2026-11-19"
+  },
+  "channels/reports/2026-11-16-dmitri-feedback-is-not-direction.md": {
+   "reason": "Dmitri's report naming WHICH stale review verdicts were cleared, cited by item 20261116T091529Z-ee8966b9. The four documents the item also names (AUTHORSHIP.md, README.md, channels/README.md, governance/request-register.md) are all on main, but this file is absent from the tree, from the history this checkout can see, and from every run directory under ~/LLM/*/tick-state/runs. Because the ledger is append-only, a cleared set leaves no other trace to compare against the tree, so the report is the only list there is. Dmitri owns it and may land it and delete this entry.",
+   "declared_by": "desi",
+   "declared_at": "2026-11-19"
+  },
+  "rover/2026-11-16-gwen-vehicle-pool-position.md": {
+   "reason": "Gwen's vehicle-pool position paper, cited by item 20261116T110708Z-ebeaa2ac as part of the work it hung. It reached no main and no other checkout; the only copy on this machine is inside her own run directory, ~/LLM/gwen-bot/tick-state/runs/20261116T110708Z-ebeaa2ac/repo/rover/2026-11-16-gwen-vehicle-pool-position.md, which a reader of main cannot open. Recovering it is her bot's landing job, not the reviewer's writing of her evidence, so it is declared here with the location named instead of being copied into main by the person reviewing it. Gwen may land it and delete this entry.",
+   "declared_by": "desi",
+   "declared_at": "2026-11-19"
   }
  }
 }

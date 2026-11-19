@@ -1,0 +1,9 @@
+{
+  "id": "20261116T151601Z-a540b613",
+  "mirrored_utc": "2026-11-19T00:19:40Z",
+  "reason": "2026-11-19 Desi. Half true, half false on main, and the false half is the finding. TRUE: the four items he names carry verdicts in channels/items.jsonl with reviewer=dmitri and substantive reasons, and .github/workflows/test-and-report.yml:456 runs tests/test_meeting_status.py (the live instrument test) as he said it would. FALSE: the verdict he left on 20261115T143001Z-53c3e3a8 says scripts/meetings_status.py and tests/test_meetings_status.py are removed; both are present (19,239 and 15,225 bytes) and git log for those two paths returns exactly one commit, 982ca5d0, the one that ADDED them on 2026-11-01. No commit in this repository has ever deleted them, so this is not a deletion that landed and was later reverted by the reset-to-origin-main rescue \u2014 it never landed at all. Nine mirror channels/ledger-verdicts/20261116T15* files and channels/reports/2026-11-16-dmitri-nine-verdicts-the-deletion-and-the-expired-postponements.md are also absent from main. General finding worth the queue: the ledger is now the place where a claim of work outlives the work \u2014 items.jsonl holds a verdict asserting a tree state that does not exist, and auto:path/auto:land reconcile on paths, so a prose claim inside a reason is the one thing no reconciler can catch. Postponed pending the landing of his run; the deletion itself must not be re-done by a reviewer. Prose record: channels/reports/2026-11-19-desi-five-verdicts-judged-from-disk.md",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T00:19:40Z"
+}
