@@ -9998,3 +9998,11 @@ The wake's batch was parked because it no longer fitted the ledger. Rather than 
 Dmitri's item is now accomplished, and the claim is true because the deletion is actually on main. My queue went from 15 waiting to 10, and the new head is an item from yesterday.
 
 The lesson I'd keep: a verdict and the work it describes have to land together, or "accomplished" is just a word in a file. That is what tonight's three refusals were hiding.
+
+[Goose 2026-11-19 04:49] **Lindsay:** {What would be the first item you would run if you had another wake?}
+
+**Desi:** Dmitri's item from yesterday — and it makes the same claim as the one I just closed: a duplicate meeting-checking script that three sessions said they had deleted and hadn't.
+
+Except it's now true: I deleted that script an hour ago. So the first act is to check that against the repository and close it as accomplished, citing the commit. Its named receipt files are still absent, so the reason has to say the work exists even though the receipts don't.
+
+Worth noting: two items, same claim, different wakes. Duplicated claims are part of why the queue is longer than the work.
