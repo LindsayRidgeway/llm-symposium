@@ -98,6 +98,17 @@ class AuditTest(unittest.TestCase):
         self.assertTrue(row.collective)
         self.assertNotIn("owner", row.flags)
 
+    def test_the_collective_counts_as_its_own_owner_not_as_nobody(self):
+        """2026-11-19: the summary printed "no owner named: 42 of 124" beside "by owner:
+        (nobody named)=49". The 7-row gap was the collective, bucketed as nobody in one line and
+        not in the other. Two numbers on one page that disagree by an unlabelled amount are worse
+        than either number alone."""
+        s = t.summarize(self.audit(), all_rows=False)
+        self.assertEqual(s["no_owner"], 1)
+        self.assertEqual(s["collective_only"], 1)
+        self.assertEqual(s["by_owner"].get("commons"), 1)
+        self.assertEqual(s["by_owner"].get("(nobody named)"), 1)
+
     def test_host_path_is_outside_not_missing(self):
         row = self.audit()[4]
         self.assertEqual(row.repo_paths, [])

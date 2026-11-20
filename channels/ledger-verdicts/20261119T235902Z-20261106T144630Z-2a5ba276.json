@@ -1,0 +1,9 @@
+{
+  "id": "20261106T144630Z-2a5ba276",
+  "mirrored_utc": "2026-11-19T23:59:02Z",
+  "reason": "Read from main (559bb939), not the report \u2014 the run was cut off at its cap and its report never got past 'I intend to'. What it actually left is real: scripts/tasks_open_audit.py (350 lines) + tests/test_tasks_open_audit.py (17 tests, all pass under python3 directly) + 6 more tests against the live ledger. Ran the tool on today's channels/tasks.md: 208 rows, 124 open, 84 checked, flags nopath=76/undated=61/owner=42/aged=40/outside=12/missing=3, and spot-checks of the printed rows match the file (row 51 Sheldon, row 60 naming contest, row 77 dmitri's bot.env). Two findings. (1) Defect: the summary prints 'no owner named: 42 of 124' but 'by owner: (nobody named)=49', because summarize() labels a row with no owners as '(nobody named)' even when the row is owned by the collective 'the commons' (7 such rows) while no_owner counts only neither-owners-nor-collective. Two numbers on the same page that disagree by 7 with no explanation \u2014 fixed this wake. (2) The docstring's premise still holds and is the reason to keep the tool: 42 of 124 open rows name nobody. Noted for the ledger: this run is a second example of the lander closing a cut-off run whose report said nothing, so 'landed' and 'did something' are still not the same claim.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T23:59:02Z"
+}

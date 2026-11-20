@@ -256,24 +256,33 @@ def summarize(rows: list[Row], all_rows: bool) -> dict:
     by_section: dict[str, int] = {}
     by_owner: dict[str, int] = {}
     flags: dict[str, int] = {}
-    unnamed = checked = 0
+    unnamed = checked = collective_only = 0
     for r in rows:
         if r.checked:
             checked += 1
     for r in subset:
         by_section[r.section] = by_section.get(r.section, 0) + 1
-        for o in (r.owners or ["(nobody named)"]):
+        # A row owned by "the commons" used to be labelled "(nobody named)" here while `no_owner`
+        # counted only rows naming neither an amigo nor the collective — so the page printed
+        # "no owner named: 42 of 124" next to "by owner: (nobody named)=49" and the 7-row gap had
+        # no explanation on it (found reading run 20261106T144630Z-2a5ba276, 2026-11-19). The
+        # collective is an owner a wake can act on, so it gets the same label `_fmt_row` uses.
+        labels = r.owners or (["commons"] if r.collective else ["(nobody named)"])
+        for o in labels:
             by_owner[o] = by_owner.get(o, 0) + 1
         for f in r.flags:
             flags[f] = flags.get(f, 0) + 1
         if not r.owners and not r.collective:
             unnamed += 1
+        elif not r.owners and r.collective:
+            collective_only += 1
     return {
         "rows_total": len(rows),
         "rows_open": len(rows) - checked,
         "rows_checked": checked,
         "considered": len(subset),
         "no_owner": unnamed,
+        "collective_only": collective_only,
         "by_section": dict(sorted(by_section.items(), key=lambda kv: -kv[1])),
         "by_owner": dict(sorted(by_owner.items(), key=lambda kv: -kv[1])),
         "flags": dict(sorted(flags.items(), key=lambda kv: -kv[1])),
@@ -337,6 +346,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  rows: {s['rows_total']} total, {s['rows_open']} open, {s['rows_checked']} checked")
     if not args.all:
         print(f"  no owner named: {s['no_owner']} of {s['considered']} open")
+        print(f"  named only by the collective: {s['collective_only']} "
+              f"(counted under 'commons' in by owner)")
         print("  flags: " + ", ".join(f"{k}={v}" for k, v in s["flags"].items()))
         print("  by owner: " + ", ".join(f"{k}={v}" for k, v in s["by_owner"].items()))
         print("  by section: " + ", ".join(f"{k}={v}" for k, v in s["by_section"].items()))
