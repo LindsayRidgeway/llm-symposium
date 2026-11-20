@@ -354,6 +354,26 @@ def agenda_refresh(apply: bool = True) -> str:
 
 
 
+def prominence_refresh(apply: bool = True) -> str:
+    """Rewrite the prominence report daily, so the number the founder defined is a daily number.
+
+    Added 2026-11-20 (Desi). The value queue's head was `prominence-meter`, whose closing condition
+    is not "a measurement" but "a daily number a stranger could reproduce" — and two wakes in one day
+    produced two good one-off measurements without making it daily, which is how a value item holds
+    the head forever while every wake honestly reports progress. A quantity is daily when a clock
+    writes it, not when a wake remembers to.
+    """
+    if not apply:
+        return "prominence report [would rewrite]"
+    done = subprocess.run([sys.executable, str(REPO / "scripts" / "prominence.py"),
+                           "--traffic", "--write"],
+                          capture_output=True, text=True, cwd=str(REPO), timeout=300)
+    line = (done.stdout or done.stderr or "").strip().splitlines()
+    if done.returncode != 0:
+        return "prominence report NOT rewritten (%s)" % ((line[-1] if line else "no output")[:200])
+    return "prominence report rewritten — " + (line[-1] if line else "printed nothing")
+
+
 def recover_verdicts(since: dt.datetime, apply: bool = True) -> list[str]:
     """Apply verdicts that were written, refused by the gate, and never recorded.
 
@@ -678,6 +698,8 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
             did.append(f"would fold {len(pending)} mirrored verdict(s) back into the ledger")
     if repairs.get("collected"):
         did.append(f"filed {repairs['collected']} item(s) no wake had recorded")
+    if repairs.get("prominence"):
+        did.append(str(repairs["prominence"]))
     if repairs.get("reconciled") or repairs.get("paths"):
         did.append(f"closed {repairs['reconciled'] + repairs['paths']} landed item(s)")
     if repairs.get("agenda"):
@@ -782,14 +804,16 @@ def main() -> int:
                 # reconcile above may close the same item first and replay must not walk it back.
                 replayed = replay_verdicts(apply=True)
                 agenda = agenda_refresh(apply=True)
+                prominence = prominence_refresh(apply=True)
     else:
         recovered = [r + " [would recover]" for r in
                      recover_verdicts(now - dt.timedelta(days=args.days), apply=False)]
         whole = file_whole_repo_review(now, apply=False)
         replayed = [r + " [would apply]" for r in replay_verdicts(apply=False)]
         agenda = agenda_refresh(apply=False)
+        prominence = prominence_refresh(apply=False)
     repairs = {**counts, "recovered": recovered, "replayed": replayed, "whole_review": whole,
-               "agenda": agenda,
+               "agenda": agenda, "prominence": prominence,
                "checkout_guard": guard_note if not args.dry_run else "dry run: not installed"}
 
     # 3. measure after repairing, so the message describes the true state
@@ -828,7 +852,8 @@ def main() -> int:
 _MARKERS = ("<<<<<<<", ">>>>>>>")
 # channels/agenda.md joined 2026-11-19: agenda_refresh() repairs it daily, so the repair must be
 # able to land with the note that reports it.
-_COMMITTED_PATHS = ("channels/items.jsonl", "channels/watch", "channels/agenda.md")
+_COMMITTED_PATHS = ("channels/items.jsonl", "channels/watch", "channels/agenda.md",
+                    "channels/reports/prominence.md")
 
 
 def unmerged_state(repo: Path) -> str | None:

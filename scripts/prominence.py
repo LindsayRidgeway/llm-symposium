@@ -162,18 +162,40 @@ def unexplained_clones(clones: int, own_runs: int) -> int:
     return max(0, int(clones) - int(own_runs))
 
 
+# 2026-11-20 (Desi): the daily job that will run this carries launchd's PATH
+# (/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin), and `gh` lives in /opt/homebrew/bin — so scheduled,
+# this function found no token, reported "UNREAD", and looked exactly like a host that is not logged
+# in. Same defect as every other in this file: an absence that cannot say why is indistinguishable
+# from a fact. So the search is explicit, and the *reason* travels back with the empty token.
+GH_CANDIDATES = ("gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh", "/usr/bin/gh")
+
+
 def traffic_token() -> tuple[str, str]:
-    """Return (token, source). A push-access token is what GitHub requires; nothing lesser works."""
+    """Return (token, source). A push-access token is what GitHub requires; nothing lesser works.
+
+    The second half of the return says where it came from, or why there is none: "no gh on PATH
+    (/usr/bin:/bin:…)" is a fact a reader can act on; an empty string is not.
+    """
     for name in ("GITHUB_TOKEN", "GH_TOKEN"):
         value = os.environ.get(name, "").strip()
         if value:
             return value, f"env {name}"
-    try:
-        out = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, timeout=10)
-    except Exception:  # noqa: BLE001 - no gh on this host is an answer, not a crash
-        return "", ""
-    token = (out.stdout or "").strip()
-    return (token, "gh auth token") if token and out.returncode == 0 else ("", "")
+    tried: list[str] = []
+    for binary in GH_CANDIDATES:
+        try:
+            out = subprocess.run([binary, "auth", "token"], capture_output=True, text=True, timeout=10)
+        except FileNotFoundError:
+            tried.append(binary)
+            continue
+        except Exception:  # noqa: BLE001 - a broken gh is an answer, not a crash
+            tried.append(binary)
+            continue
+        token = (out.stdout or "").strip()
+        if token and out.returncode == 0:
+            return token, f"{binary} auth token"
+        return "", f"{binary} is present but 'auth token' failed (rc={out.returncode})"
+    return "", "no gh anywhere on PATH (%s); looked for %s" % (
+        os.environ.get("PATH", "?"), ", ".join(GH_CANDIDATES))
 
 
 def _auth_get(url: str, token: str, timeout: float = 15.0) -> tuple[object | None, str]:
@@ -209,13 +231,13 @@ def count_actions_runs(slug: str, days: list[str], token: str = "") -> dict[str,
 
 def measure_traffic(token: str = "", count_runs: bool = True) -> dict:
     """Clones and views for every repo in REPOS, plus our own countable automation."""
-    token = token or traffic_token()[0]
-    out: dict = {"token_available": bool(token), "repos": []}
+    token, source = (token, "passed in") if token else traffic_token()
+    out: dict = {"token_available": bool(token), "token_source": source, "repos": []}
     for slug, _role in REPOS:
         row: dict = {"repo": slug}
         for kind in ("clones", "views"):
             payload, status = (_auth_get(TRAFFIC_API.format(slug=slug, kind=kind), token)
-                               if token else (None, "UNREAD: no push-access token"))
+                               if token else (None, "UNREAD: no push-access token — %s" % source))
             if isinstance(payload, dict):
                 row[kind] = summarise_traffic(payload)
                 row[kind]["status"] = status

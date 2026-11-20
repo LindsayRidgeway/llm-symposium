@@ -168,9 +168,6 @@ class ReadingHead(unittest.TestCase):
         self.assertIn("readmine", text)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class OrientationWiring(unittest.TestCase):
     """The block has to arrive through the call a wake actually makes, not only when called by hand.
@@ -282,3 +279,6 @@ class ReviewHead(unittest.TestCase):
         self.assertFalse(we.evidence_path_present(
             str(self.repo), "channels/ledger-verdicts/20261119T132832Z-20261107T205044Z-d37ee9e7.json"))
 
+
+if __name__ == "__main__":
+    unittest.main()

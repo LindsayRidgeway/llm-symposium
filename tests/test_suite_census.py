@@ -18,7 +18,9 @@ import json
 import os
 import shutil
 import sys
+from pathlib import Path
 import tempfile
+import re
 import unittest
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -168,6 +170,32 @@ class TestRecordAndCli(unittest.TestCase):
         code = suite_census.main(["--repo", self.root, "--only", "bbb", "--jobs", "1",
                                   "--timeout", "5", "--record", self.record, "--diff"])
         self.assertEqual(code, 1)
+
+
+class TestTheRunnerReachesTheEnd(unittest.TestCase):
+    """A test file whose `unittest.main()` sits above more classes has tests that never run.
+
+    Found 2026-11-20 (Desi) while checking a file I had just edited: `tests/test_ask_human.py` carried
+    its guard at line 171 with two classes below it, and `tests/test_prominence.py` at line 81 with
+    nine. The canonical runner is `python3 tests/<file>.py`, so everything below the guard is dead
+    code wearing a test's clothes — and one of the dead classes was `OrientationWiring`, the test that
+    pins "the block arrives through the function a wake actually calls". An invariant whose test
+    cannot run is an invariant nobody is keeping.
+    """
+
+    ROOT = Path(__file__).resolve().parents[1]
+
+    def test_no_canonical_test_file_carries_its_main_guard_above_more_tests(self):
+        offenders = []
+        for f in sorted((self.ROOT / "tests").glob("test_*.py")):
+            lines = f.read_text(encoding="utf-8", errors="replace").splitlines()
+            idx = [i for i, ln in enumerate(lines) if ln.strip().startswith("if __name__ ==")]
+            if not idx:
+                continue
+            tail = "\n".join(lines[idx[-1]:])
+            if re.search(r"^class |^def ", tail, flags=re.M):
+                offenders.append((f.name, idx[-1] + 1))
+        self.assertEqual(offenders, [], "move `if __name__` to the end: %s" % offenders)
 
 
 if __name__ == "__main__":

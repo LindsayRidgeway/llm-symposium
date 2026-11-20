@@ -78,9 +78,6 @@ class TestRenderNeverDressesAbsenceAsZero(unittest.TestCase):
         self.assertIn("Not prominence", text)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class TestTraffic(unittest.TestCase):
     """The clones-and-views half, added 2026-11-20. Its failure mode is not a wrong sum but a right
@@ -120,6 +117,44 @@ class TestTraffic(unittest.TestCase):
         self.assertEqual(prominence.unexplained_clones(300, 900), 0,
                          "an upper bound never goes negative")
 
+    def test_no_token_says_which_binaries_and_which_path_it_looked_at(self):
+        """2026-11-20 (Desi): the daily job carries launchd's PATH, and `gh` lives in
+        /opt/homebrew/bin — so a scheduled run found no token, printed UNREAD, and looked exactly
+        like a host that is not logged in. The search is explicit now and the reason travels with
+        the empty token, because an absence that cannot say why is indistinguishable from a fact.
+        """
+        import os
+        from unittest import mock
+        real = prominence.traffic_token
+        with mock.patch.dict(os.environ, {"PATH": "/usr/bin:/bin"}, clear=False), \
+             mock.patch.object(prominence, "GH_CANDIDATES", ("gh", "/nowhere/gh")), \
+             mock.patch.object(prominence.subprocess, "run", side_effect=FileNotFoundError()):
+            os.environ.pop("GITHUB_TOKEN", None)
+            os.environ.pop("GH_TOKEN", None)
+            token, why = real()
+        self.assertEqual(token, "")
+        self.assertIn("/usr/bin:/bin", why)
+        self.assertIn("/nowhere/gh", why)
+
+    def test_the_binary_that_is_not_on_path_is_still_tried_by_absolute_path(self):
+        """The fix for the launchd PATH, pinned: /opt/homebrew/bin/gh is tried even when PATH lacks it."""
+        from unittest import mock
+        calls = []
+
+        def fake_run(argv, **kw):
+            calls.append(argv[0])
+            class R:
+                returncode = 0
+                stdout = "token-from-absolute-path\n"
+            return R() if argv[0].startswith("/") else (_ for _ in ()).throw(FileNotFoundError())
+
+        with mock.patch.object(prominence, "GH_CANDIDATES", ("gh", "/opt/homebrew/bin/gh")), \
+             mock.patch.object(prominence.subprocess, "run", side_effect=fake_run):
+            token, why = prominence.traffic_token()
+        self.assertEqual(token, "token-from-absolute-path")
+        self.assertIn("/opt/homebrew/bin/gh", why)
+        self.assertEqual(calls, ["gh", "/opt/homebrew/bin/gh"])
+
     def test_without_a_token_the_section_reads_unread_not_zero(self):
         text = prominence.render_traffic({"traffic": {"token_available": False, "repos": []}})
         self.assertIn("UNREAD", text)
@@ -141,3 +176,7 @@ class TestTraffic(unittest.TestCase):
         self.assertIn("100.0 clones per page view", text)
         self.assertIn("upper bound only", text)
         self.assertIn("| 2026-11-01 | 200 | 30 | 5 |", text)
+
+
+if __name__ == "__main__":
+    unittest.main()

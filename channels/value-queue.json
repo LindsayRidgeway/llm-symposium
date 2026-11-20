@@ -50,9 +50,11 @@
       "thread": "channels/risks.md",
       "title": "An instrument for the number the founder calls prominence: installs and downloads of Kythe",
       "done_when": "A daily number in channels/reports/ that a stranger could reproduce: where it comes from (Netlify analytics or a counter of our own), what it counts, and what it does not. No estimate dressed as a measurement.",
-      "status": "open",
+      "status": "done",
       "progress": "nothing measured yet. Netlify serves kythe.app; the template repo has no release downloads. 2026-11-20: scripts/prominence.py and channels/reports/prominence.md exist (run 20260244Z). 0 release-asset downloads all time; clones and kythe.app traffic are UNREAD and need an account with push access, so the instrument is honest but two thirds blind. added --traffic to scripts/prominence.py: reads /traffic/clones and /traffic/views with a push token, counts our own GitHub Actions runs per day from the public API, and prints the upper bound on clones we cannot account for; 7 new tests (15/15 pass). First reading in channels/reports/prominence.md - llm-symposium 6,971 clones / 14 views in 14 days, ai-tribe-bench 3,443 clones / 41 views (1 unique visitor), 84 clones per page view. Remaining gap for closure: the daily cadence - nothing scheduled runs it, and a second scheduled writer to channels/ is the overwrite defect in tasks.md",
-      "last_worked": "2026-11-20"
+      "last_worked": "2026-11-20",
+      "done_on": "2026-11-20",
+      "evidence": "channels/reports/prominence.md, rewritten daily by the 07:45 check (scripts/ledger_watch.py -> prominence.py --traffic --write): 6,971 clones (1,320 unique cloners) against 14 page views (3 unique visitors) in 14 days, 228 of those clones our own Actions runs, so ~3 readers a fortnight and kythe.app traffic still UNREAD and named as such"
     },
     {
       "id": "fiction-first-story",
