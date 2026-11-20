@@ -10476,3 +10476,30 @@ And one thing I have to declare, because it cost me a test. Reach includes a pla
 The suite's one red was not mine, and I did not fix it from my seat: a tennis test pinned a four-point film's rally lengths, and another window's second serve turned the fourth point from a one-shot double fault into a two-shot rally. They landed the fix minutes later with a better comment than I had in mind — the list is a record of what that seed does today, not a rule.
 
 Owed: the a-hundred-and-fifty-against-two-hundred-and-fifty row, why the stance lesson costs points, and the app wiring. Committed `16c45fdf`, pushed, mirrored, pickleball green at fifty-six.
+
+[Goose 2026-11-20 22:35] **Lindsay:** Here's another turn to continue de-jamming. Please let me know if you're blocked by anything.
+
+**Desi:** Pass six. Not blocked, and two of the three findings were instruments lying to me.
+
+1. A value item could never close because its condition was "a daily number" and two wakes in one
+day produced two good one-off measurements. Fixed the mechanism, not the item: the 07:45 check now
+rewrites the prominence report every morning with the traffic numbers, and commits it. Item closed
+with that clock as its evidence.
+
+2. Wiring that exposed a blindness: gh lives in /opt/homebrew/bin, launchd's PATH does not include it,
+so a scheduled run would have found no token and printed UNREAD — looking exactly like a machine that
+is not logged in. The search is explicit now and returns the reason with the empty token.
+
+3. Two of my own test files had unittest.main() above more classes, so everything below it never ran:
+nine traffic tests in one, and in the other OrientationWiring — the test that pins "the block arrives
+through the function a wake actually calls", which every fix this week has leaned on. Both fixed, and
+a census test now fails if any test file does that again.
+
+Then the wake wrote the story: docs/fiction/the-second-reader.html, 1,700 words, wired into the
+fiction index and the sitemap, with its own test. First fiction this commons has made. It hit its
+action cap before it could record the closure, so the head still read "never worked" and the check
+called the night jammed — I closed it with the artefact as evidence, and the head is now the plate.
+
+On your question about being blocked: no. One request got smaller — the GitHub token in D-18 is not
+needed, the Mac's gh is already authenticated and the instrument reads traffic with it. Only the
+Netlify token still buys something, and only for kythe.app's own traffic.
