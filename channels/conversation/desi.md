@@ -10325,3 +10325,19 @@ Two tests, and both are A/Bs: the distance-from-stance share with the walk and w
 One thing to report rather than fix: my tests.py edits were swept into another window's commit by a `commit -a` on the shared checkout — third time this week. The tests are in main and pass; the commit message under them says "film: the receiver splits their step". It is a checkout-discipline problem and I cannot fix it from this seat.
 
 Pushed `5e4989db`, mirrored.
+
+[Goose 2026-11-19 22:20] **Lindsay:** This isn't my call, but I would think you'd want this integrated into Kythe: the players would be members of the circle; they'd get better with practice, and those who practiced more would get better faster; you'd use animated figures as you did in your tennis game.
+
+**Desi:** Right on all three, and the order is not the one you listed. Before agreeing to build anything I checked the seat the whole thing would sit on, because `member_chooser_pb` had existed since the engine was written and had never been handed a key. It has now: four seats, four vendors, real keys, two rallies.
+
+It works, and what it played is the finding. Both members answered in the exact line the parser wants — no prose, no fallback — and both serves went into their own side of the net, 6.8 ft short at 19 mph and then 1.0 ft short at 22 mph. The reason is not the model: the prompt asks for a *face angle in degrees* and never says what a legal serve requires. A member is being handed the paddle's angle and asked to infer the trajectory, which is the one piece of arithmetic the engine already does for its own choosers. So the first unit of the Kythe integration is a movement language a member can play from — name the target and the height, not the angle — and the app shell comes after it. A game whose first ball is a fault with no explanation is not a game a member can learn from.
+
+Your second bullet is already true and measured, which is worth knowing before it gets built twice. Hands come from `practice_of`, and the season ledger (§5f) is the file that carries it: beginners at zero balls play rallies of about two shots, the same hands at two hundred play nine, and the lesson that teaches where to stand wins only against a static four feet — 196–179 over 24 swapped games with a control of exactly 193–193. The practice gradient is the engine's oldest part; what is missing is a member on the end of it.
+
+The third bullet I would argue with, and this is the argument. The tennis film's figures are three.js with a vendor tree and a skeleton, and that page cannot be opened from disk — it fetches. The pickleball page is one self-contained file, seven hundred kilobytes with the whole film baked in, and it opens by double-clicking. Inside Kythe that trade flips, because the repo is served, so the dependency stops costing anything; but the figures you saw are stick figures for a reason that still holds: a pickleball court is small and the interesting motion is a step and a paddle, both of which a canvas can articulate. My preference is articulated two-dimensional figures with a real gait and a swing arc, keeping the page self-contained, and reaching for the three.js rig only if the result still reads as abstract. If you want the tennis look specifically, say so and I will port the rig instead of arguing.
+
+And the number that will shape all of it: 10.6 seconds a shot, end to end. The dink film is 439 shots. A member's game at that pace is an hour of model calls, against tennis's hundred. The soft game is expensive because it is long — §5i arriving as a bill. That argues for a short format (three points, driving pace) rather than a full game to eleven, or for the model being asked only at the decisions and the engine playing the routine balls.
+
+Pushed `eef2f79d` with the measurement in the page's §5o.
+
+[Goose 2026-11-19 22:25] **Lindsay:** {No further turn needed}
