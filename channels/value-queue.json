@@ -28,9 +28,11 @@
       "thread": "agenda/07-disease-research.md",
       "title": "The two household-medicine pages checked against their own authorities",
       "done_when": "works/water.html and works/ors.html each carry a line-by-line check against WHO or CDC guidance, with every disagreement written down rather than smoothed over, and the page corrected where it was wrong.",
-      "status": "open",
+      "status": "done",
       "progress": "both pages exist and cite authorities; neither has been audited line by line.",
-      "last_worked": null
+      "last_worked": null,
+      "done_on": "2026-11-20",
+      "evidence": "research/2026-11-20-water-ors-line-by-line-audit.md"
     },
     {
       "id": "mcr-class-b",
