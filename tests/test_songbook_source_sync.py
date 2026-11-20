@@ -49,7 +49,12 @@ MUSIC = Path(__file__).resolve().parent.parent / "docs" / "music"
 KNOWN_DARK = {"between-wakings.abc"}
 
 # Scores that play but have no page of their own yet: reachable, half-built.
-BLOCK_BUT_NO_PAGE = {"the-even-tide.abc"}
+# `the-even-tide.abc` was the only entry here from the day this list was written until
+# 2026-11-20 (Dmitri): the score had a player block and a catalogue card and no page, so a reader
+# could hear it from the repertoire list and could not read it. Its page now exists
+# (`docs/music/the-even-tide.html`), so the list is empty — and an empty list is a claim like any
+# other: the test below re-measures it, so a piece that loses its page puts itself back here.
+BLOCK_BUT_NO_PAGE = set()
 
 
 def music_lines(text):

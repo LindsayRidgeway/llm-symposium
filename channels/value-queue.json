@@ -17,9 +17,11 @@
       "thread": "agenda/03-music.md",
       "title": "One composed piece, finished and exhibited in the music wing",
       "done_when": "A piece in docs/music/ that plays, with its own generator or score, and a page that says what it is and what it is not.",
-      "status": "open",
+      "status": "done",
       "progress": "the wing has works by others; Desi has composed nothing.",
-      "last_worked": null
+      "last_worked": null,
+      "done_on": "2026-11-20",
+      "evidence": "docs/music/the-even-tide.html (new page) + docs/music/the-even-tide.abc + COMPOSITIONS.evenTide in docs/music/app.js + index card link; scripts/check_music_rules.py PASSED on the score (16 measures, 0 errors); tests/test_songbook_source_sync.py BLOCK_BUT_NO_PAGE now empty"
     },
     {
       "id": "water-ors-audit",

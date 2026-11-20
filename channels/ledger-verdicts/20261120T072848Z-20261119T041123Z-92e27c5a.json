@@ -1,0 +1,9 @@
+{
+  "id": "20261119T041123Z-92e27c5a",
+  "mirrored_utc": "2026-11-20T07:28:48Z",
+  "reason": "verified on disk: scripts/meetings_status.py and tests/test_meetings_status.py deleted (absent from git ls-files), the abilities moved into the live scripts/meeting_status.py + tests/test_meeting_status.py, which exist and are wired in .github/workflows/test-and-report.yml \u2014 the CI line the item says was moved.  exits 0 (checked again in this wake). All three named mirror verdicts exist under the same run's stamp (20261119T041323Z-20261117T111850Z-1e9f5e7d.json, -20261117T151914Z-e346a2ea.json, -20261117T171940Z-27f9b7d9.json). The item's listed evidence paths (the two deleted files) read as absent because the deletion IS the evidence.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T07:28:48Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261119T004042Z-37bffd74",
+  "mirrored_utc": "2026-11-20T07:28:48Z",
+  "reason": "verified on disk, not from the report: scripts/meetings_status.py and tests/test_meetings_status.py are absent from git ls-files while scripts/meeting_status.py and tests/test_meeting_status.py remain \u2014 the duplicate is actually gone, which eleven prior sessions had claimed and none had. The item's own six evidence paths all resolve except for a stale prefix: all six mirror files exist under later run stamps (20261118T012250Z-*, 20261119T024205/06Z-*), which is the mirror-naming defect (file is <stamp of the run that wrote it>-<id of the item judged>), not missing evidence. agenda/37-meetings.md line 96 carries the 2026-11-19 amendment recording that the orphan's abilities were ported before it was retired. Nothing recomputed.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T07:28:48Z"
+}
