@@ -48,6 +48,41 @@ def next_up(data: dict, count: int = 2) -> list[dict]:
             if (i.get("status") or "").lower() in OPEN][:count]
 
 
+def worked(item_id: str, note: str = "", path: Path | None = None,
+           when: datetime.date | None = None) -> dict:
+    """Record that an item was worked on, and send it to the back of the queue.
+
+    Added 2026-11-19 at the founder's follow-up, which was the better idea: *shouldn't value-work
+    rotate? maybe a task would never finish, but at least it wouldn't stay at the top of the queue.*
+    Closure and rotation are different jobs and the first version only had closure. An item that takes
+    a week of wakes would hold the head for a week even though every wake did real work on it — and a
+    queue where the head is whatever was last worked is a queue with one item in it.
+
+    So this is push-to-bottom, the same rule the to-do lists already use for repeats: work it, write
+    what you did, and the next wake sees something else. Rotation costs nothing when an item is nearly
+    done and forgives everything when it is not.
+    """
+    path = path or QUEUE
+    data = load(path)
+    items = data.get("items") or []
+    hit = None
+    for item in items:
+        if item.get("id") == item_id:
+            hit = item
+            break
+    if hit is None:
+        raise LookupError(f"no value item with id {item_id!r} in {path.name}")
+    hit["last_worked"] = (when or datetime.date.today()).isoformat()
+    if note.strip():
+        hit["progress"] = (note.strip() if not hit.get("progress")
+                           else hit["progress"].rstrip() + " " + note.strip())
+    items.remove(hit)
+    items.append(hit)                       # push to the bottom, finished or not
+    data["items"] = items
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    return hit
+
+
 def done(item_id: str, evidence: str, path: Path | None = None,
          when: datetime.date | None = None) -> dict:
     """Close an item. Evidence is required: an item finished with no artefact is a claim, not a close."""
@@ -72,6 +107,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--done", metavar="ID")
     ap.add_argument("--evidence")
+    ap.add_argument("--worked", metavar="ID", help="record work and push the item to the back")
+    ap.add_argument("--note", help="with --worked: one line on what you did")
     args = ap.parse_args(argv)
 
     data = load()
@@ -84,6 +121,16 @@ def main(argv: list[str] | None = None) -> int:
         print(f"value_queue: {item['id']} closed on {item['done_on']} — {item['evidence'][:80]}")
         nxt = head(load())
         print(f"value_queue: the head is now {nxt['id'] if nxt else 'nothing — the queue is empty'}")
+        return 0
+    if args.worked:
+        try:
+            item = worked(args.worked, args.note or "")
+        except LookupError as exc:
+            print(f"value_queue: {exc}")
+            return 1
+        print(f"value_queue: {item['id']} worked on {item['last_worked']} and pushed to the bottom")
+        nxt = head(load())
+        print(f"value_queue: the head is now {nxt['id'] if nxt else 'nothing'}")
         return 0
     if args.list:
         for item in data.get("items") or []:
@@ -99,6 +146,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"    closes when: {item['done_when']}")
         if item.get("progress"):
             print(f"    so far: {item['progress']}")
+    print("  worked on it, finished or not? push it to the back so the queue rotates: "
+          "python3 scripts/value_queue.py --worked <id> --note '<one line>'")
     print("  close it with: python3 scripts/value_queue.py --done <id> --evidence '<path or url>'")
     return 0
 

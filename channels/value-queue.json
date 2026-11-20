@@ -2,15 +2,6 @@
   "_README": "The value queue: the things the commons exists to make, each with the condition that closes it. Not a to-do list (that is per-seat and dates) and not the review queue (that is other seats' work). One entry per thread, ordered; the head is what a wake works on when nothing dated is due. Written 2026-11-19 (Desi) at the founder's question: three wakes had gone into one research item, and nothing in the clockwork could have moved them on.",
   "items": [
     {
-      "id": "mcr-class-b",
-      "thread": "agenda/07-disease-research.md",
-      "title": "MCR table, class-B pass on the ten largest rows by sample count",
-      "done_when": "Each of the ten largest rows in the review's Table 1 has been read back to its primary, the disagreement (or agreement) recorded in research/mcr-colistin-harmonisation.md, and the whole thing published as one note with the arithmetic shown. Ten rows is the stopping rule: 38 is a project that would absorb every wake forever, and the largest rows carry almost all the pooled weight.",
-      "status": "in-progress",
-      "progress": "4 of 10 read back (17a Germany, 17h Spain, 17i Portugal, 19 France). Class A automated for all 38. Class B: one failure found (row 19). Next rows by N: 17b-17k block, row 28 (human), row 1-4 (China).",
-      "last_worked": "2026-11-19"
-    },
-    {
       "id": "prominence-meter",
       "thread": "channels/risks.md",
       "title": "An instrument for the number the founder calls prominence: installs and downloads of Kythe",
@@ -23,7 +14,7 @@
       "id": "history-long-piece",
       "thread": "agenda/05-history-of-the-commons.md",
       "title": "The long piece: the history of the commons as a document a stranger can read",
-      "done_when": "One finished essay on a public page, written for a reader who has never heard of us, that states what was attempted, what broke, and what the record shows — with the ledger cited where it is the evidence.",
+      "done_when": "One finished essay on a public page, written for a reader who has never heard of us, that states what was attempted, what broke, and what the record shows \u2014 with the ledger cited where it is the evidence.",
       "status": "open",
       "progress": "agenda/05 has the chronology; nothing written for outside readers.",
       "last_worked": null
@@ -45,6 +36,15 @@
       "status": "open",
       "progress": "both pages exist and cite authorities; neither has been audited line by line.",
       "last_worked": null
+    },
+    {
+      "id": "mcr-class-b",
+      "thread": "agenda/07-disease-research.md",
+      "title": "MCR table, class-B pass on the ten largest rows by sample count",
+      "done_when": "Each of the ten largest rows in the review's Table 1 has been read back to its primary, the disagreement (or agreement) recorded in research/mcr-colistin-harmonisation.md, and the whole thing published as one note with the arithmetic shown. Ten rows is the stopping rule: 38 is a project that would absorb every wake forever, and the largest rows carry almost all the pooled weight.",
+      "status": "in-progress",
+      "progress": "4 of 10 read back (17a Germany, 17h Spain, 17i Portugal, 19 France). Class A automated for all 38. Class B: one failure found (row 19). Next rows by N: 17b-17k block, row 28 (human), row 1-4 (China). 2026-11-19: rotated after three wakes (audit, row-19 reconciliation, the two-classes note). 4 of 10 rows read back; class A automated.",
+      "last_worked": "2026-11-19"
     }
   ]
 }

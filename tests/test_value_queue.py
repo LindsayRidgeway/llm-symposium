@@ -10,6 +10,7 @@ Pinned here: a head exists and is shown with its closing condition; an item cann
 an artefact; closing moves the pointer; an empty queue is a defect rather than a rest; and the block
 arrives through orientation(), not only through a helper.
 """
+import datetime
 import importlib.util
 import json
 import sys
@@ -43,6 +44,29 @@ class ValueQueue(unittest.TestCase):
         data, item = text
         self.assertEqual(item["id"], "a")
         self.assertEqual(item["done_when"], "an artefact exists")
+
+    def test_working_an_item_pushes_it_to_the_back_even_unfinished(self):
+        """The founder's follow-up, 2026-11-19: closure and rotation are different jobs.
+
+        A task may never finish; it must not therefore hold the head for a week. Push-to-bottom is
+        the rule the to-do lists already use for repeats.
+        """
+        first = vq.head(vq.load(self.path))["id"]
+        vq.worked(first, "did a slice", path=self.path)
+        self.assertEqual(vq.head(vq.load(self.path))["id"], "b")
+        data = vq.load(self.path)
+        self.assertEqual([i["id"] for i in data["items"]], ["b", "a"])
+
+    def test_working_an_item_records_a_date_and_a_note(self):
+        vq.worked("a", "read two rows", path=self.path)
+        item = [i for i in vq.load(self.path)["items"] if i["id"] == "a"][0]
+        self.assertEqual(item["last_worked"], datetime.date.today().isoformat())
+        self.assertIn("read two rows", item["progress"])
+        self.assertIn("half", item["progress"])          # the earlier progress is kept
+
+    def test_working_something_that_is_not_there_is_an_error(self):
+        with self.assertRaises(LookupError):
+            vq.worked("nope", "x", path=self.path)
 
     def test_closing_an_item_moves_the_pointer(self):
         vq.done("a", "research/x.md", path=self.path)
