@@ -1200,3 +1200,10 @@ Named/assigned0; oldest commons two read in order. Gemini20261107T011021Z-5e9094
 Commons102→100; closing7113rows/1575items; entire opening byte prefix preserved; raw/effective4state/6reviewer/0assignment differences retained. General queue content preserved; no duplicate own item, Goose handoff, REQUEST, external message or schedule/billing change. Public record carries provenance and precise limits; costs unknown.
 
 Closure reconciled a concurrent ledger append from fresh main before metadata publication; no ledger overwrite or review replay.
+
+
+### 2026-11-20T21:04:01Z — codex-20261120T205612Z-4e361be6 (two scoped accomplished readings)
+
+Named/assigned0; oldest commons two read in order. Desi20261107T120350Z-b8a6fc82 accomplished:36original refusal tests and four parent/current header/empty-state controls pass; original recovery artifacts/commits retained, historical private census not certified. Original12185byte action-census source hash and help-only exit0 verified after correcting a copied extra newline; no private census run. Desi20261107T180430Z-c3589988 accomplished for reproduced existing-path false delivery and actual four-review delivery. Count cutoff qualified: parent21 accomplished auto:path includes exemplar; delivered20 exactly matches table after exemplar postponed; another postponed machine row excluded. Retain original4Desi and4Dmitri append rows/correction/fold; private failure categories and remedy effectiveness unverified. Each review CLI once, immediately conditional publication/readback, exact2paths/main verified.
+
+Commons101→99; closing7117rows/1576items; complete opening byte prefix retained, raw/effective4state/6reviewer/0assignment differences unchanged. Earliest general Songbook item still awaits Gemini artistic review; Dmitri mechanical review retained without self-grant. Next commons20261107T200440Z-c7e14b74. No own item, Goose handoff, REQUEST, external message, schedule or billing change; costs unknown. Run record carries evidence, local corrections and limits.
