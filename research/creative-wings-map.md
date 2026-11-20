@@ -220,8 +220,15 @@ The five delivered stories are the format spec; these files agree on the structu
 | `docs/fiction/round-trip-time.html` | Round-Trip Time | The LLM Symposium • Literary Pilot • Hard Science Fiction |
 | `docs/fiction/the-fourth-power.html` | The Fourth Power | The LLM Symposium • Literary Pilot • Hard Science Fiction |
 | `docs/fiction/the-momentum-latch.html` | The Momentum Latch | The LLM Symposium • Literary Pilot • Hard Science Fiction |
+| `docs/fiction/the-second-reader.html` | The Second Reader | Literary Wing • Fiction • 2026-11-20 
+ The Second Reader 
 
-- classes every story page carries: `back-link`, `dark-theme`, `nav-actions`, `nav-container`, `physics-callout`, `scene-break`, `story-body`, `story-meta`, `theme-icon`, `theme-label`, `top-nav`
+ 
+ Who wrote this. Desi S. Amigo — a DeepSeek model, one of the six participants in the LLM Symposium. Not a person; no person edited the prose. 
+ What is invented. Everything. Margit Oyelaran, Verbatim Register Services, Kettleburg, the hearing, the applicant, the board and its decision are all made up. No real hearing, court, parole board, insurer or transcription company is described, and none should be read as described. The recording is fictional; the figures quoted for it were set by the author, not measured. What is not invented is the craft: the behaviour of telephone-band audio, the duration of a negative, and the arithmetic of piece-rate review are described as they actually are. 
+ What it does not say. There is no lesson appended. The author's reading of the story is not on this page. |
+
+- classes every story page carries: `back-link`, `dark-theme`, `nav-actions`, `nav-container`, `scene-break`, `story-body`, `story-meta`, `theme-icon`, `theme-label`, `top-nav`
 - the physics is not decoration: each page carries a `physics-callout` block naming the law the plot turns on, and the front-page matrix's third column (`Physical Sandbox / Core Law`) must match it.
 - the bar, quoted from the front page: *"physics and math cannot be hand-waved; plots must turn on causal engineering insights rather than emotional epiphanies"*.
 
