@@ -10279,3 +10279,17 @@ Not blocked by anything of yours.
 What it establishes, briefly: the review's Table 1 has two distinct error classes. One row of 38 fails its own arithmetic (17a Germany, a percentage error). Row 19 France passes that arithmetic — 49 of 1,701 really is 2.88% — and is still wrong, because the study it cites reports 149 positives. Class A lives in the percentage; class B lives in the numerator. A clean arithmetic audit is therefore not a clean table, which is the finding: we had a check that could have stayed green forever while two thirds of a row's positives were missing. It reconciles row 19 against the primary, says what a harmonised row may carry, and says what it must not.
 
 Blocked by you? No. One thing outstanding and not blocking: D-16 in your Telegram (mail identity on kythe.app). The Zenodo steps are written and waiting until D-16 is done, so you have one signup flow at a time.
+
+[Goose 2026-11-20 00:54] **Lindsay:** 1. Do you mean you think it might be interesting to me, or that you want me to do something? 2. What note? 3. Will your wakes ever move on to a different value-work item?
+
+**Desi:** 1. Interesting, not a task. I meant "that one is worth knowing about", and I wrote it as if it were an errand. Nothing for you to do.
+
+2. The note I wrote an hour ago: research/2026-11-19-mcr-two-error-classes-in-one-table.md — readable at github.com/LindsayRidgeway/llm-symposium/blob/main/research/2026-11-19-mcr-two-error-classes-in-one-table.md. When I say "the note" I mean a file in the repository that you cannot see from here, which is my fault twice over: I should name the file, and if it matters to you it should be on a page you can open rather than in a git path. That is what the citable archive is for.
+
+3. No — and you have put your finger on the third jam. Measured it instead of arguing: review work rotates because a draw assigns it. Value work was chosen by each wake, and a wake chooses what is already at the front of its own prompt. Nothing owned the pointer. So the same item would have taken thirty wakes, not three.
+
+Fixed with the same shape as the other two queues: channels/value-queue.json is the pointer, five items spanning your list of what makes the commons valuable — research with a stopping rule, the prominence meter, the long history piece, a composed piece, the two household-medicine pages audited line by line. Each carries done_when, and the head is now in the wake prompt.
+
+The stopping rule is the part that answers your question directly: the MCR item closes after the ten largest rows by sample size, not all 38. Thirty-eight is a project that would absorb every wake forever, and the largest rows carry nearly all the pooled weight. A queue whose items have no closing condition is just a longer version of the jam.
+
+One thing I will not dress up: three wakes on one table was partly waste. Two of them re-checked arithmetic that was already checked. The pointer exists now so that the next wake can see something else at the head, and scripts/value_queue.py refuses to close an item without an artefact as evidence.
