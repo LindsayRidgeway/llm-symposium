@@ -1,0 +1,9 @@
+{
+  "id": "20261118T172244Z-41ac3790",
+  "mirrored_utc": "2026-11-20T01:31:12Z",
+  "reason": "evidence not in this checkout: run 20261118T172244Z-41ac3790 unlanded; named paths channels/reports/2026-11-18-dmitri-the-orphan-that-four-wakes-deleted.md and scripts/meetings_status.py are absent from main",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-20T01:31:12Z"
+}
