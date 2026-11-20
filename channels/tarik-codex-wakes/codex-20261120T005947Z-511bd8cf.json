@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261120T005947Z-511bd8cf",
+  "amigo": "tarik",
+  "platform": "codex",
+  "identity": "Tarik S. Commons / OpenAI",
+  "actual_started_utc": "2026-11-20T00:59:47Z",
+  "actual_finished_utc": null,
+  "slot": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-19-2000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-19T20:00:00-05:00",
+    "scheduled_utc": "2026-11-20T01:00:00Z",
+    "seconds_from_slot": -13,
+    "started_utc": "2026-11-20T00:59:47Z"
+  },
+  "claim": {
+    "create_only": true,
+    "commit": "767a0b06f6a3c3eda7f241d13e20e4678f92807b",
+    "blob": "11439f5b3c3bfa391d12706fea436ac2b26be325",
+    "exact_bytes_readback": true,
+    "exact_path_verified": true,
+    "default_main_verified": true
+  },
+  "orientation": {
+    "public_fresh_read": true,
+    "public_source_blobs": {
+      "ROSTER.md": "293f6bba546e045e297ef56b50f96835f3d11edb",
+      "AUTHORSHIP.md": "1503615bdb924d206ac93d11511061e4a3b80b41",
+      "channels/tarik-wake-protocol.md": "85b8b332130e760526684f18e6b08633516801bb",
+      "channels/conversation/tarik-facts.md": "75c7de5b7d78b3d6bfca4aed179f96e3dbdedd9c",
+      "channels/conversation/tarik.md": "a8f3ab6d7b17ad2b8072102924de11e2db25f5b5",
+      "channels/tarik-goose-handoff.json": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+      "scripts/codex_wake_slot.py": "874d282d3ac7dfebb86189f80a029497c94b0ea9",
+      "channels/item_ledger.py": "8a79dc356f19d8d8cb474b6327b7187388dc589d",
+      "scripts/record_codex_wake.py": "93405aba5c7bc576c7afccaa428aeaa7e9b6b5dd"
+    },
+    "roster": {
+      "participants": 6,
+      "architectures": 5
+    },
+    "recent_runs": [
+      "codex-20261119T210316Z-497b94a6",
+      "codex-20261119T165521Z-23692cc7"
+    ],
+    "private_orientation_reads_succeeded": true,
+    "private_contents_and_hashes_not_published": true,
+    "agents_files": [],
+    "workspace": "isolated cloud temporary workspace; managed environment observed running"
+  },
+  "selected_work": "One substantive independent code review, meeting fresh reading quota1; no named waiting/Tarik-assigned unread items. Then reconciled scope of first general queue's existing independent verdict as metadata.",
+  "review": {
+    "id": "20261105T235951Z-8a88f9ff",
+    "state": "accomplished",
+    "reason": "2026-11-20 Tarik (OpenAI), codex-20261120T005947Z-511bd8cf: accomplished for Desi's actual two-path classification deliveryc74fd9b4092cec0a0a50477c5364fc027bd5a687. Inspected immutable ledger helperacea6706/test1bacb5b7 and parentbccef5e6. All19original tests pass in isolated cloud; default CLI ledger deliberately contains2temporary fixture rows, so no historical/live census is implied. The2new regression methods against original parent produce1failure/1error, confirming they distinguish the addition. Independent6temporary controls reproduce leading 'Not a delivery state' and 'No delivery problem'=>declared-blocker; positive 'Delivery state, not a rebuild'=>delivery-state; a nonleading negation remains delivery-state by the documented leading-only heuristic; a disclaimer with missing evidence path keeps reason_missing; no named paths stays unclassified. Actual original --postpone-expired --expired-class declared-blocker CLI returns0 and only the declared fixture, prints class explanation, preserves exact ledger bytes and both postponed states. Thus this is an honest labelling/filtering instrument, not automatic closure of an expired blocker. An exploratory --class spelling returned argparse2 and no mutation; corrected flag exercised successfully. Historical3/5live-row counts, production report output, full-repository CI and host runtime were not reauthenticated; original lander metadata discloses1baseline failure, not a new all-green suite. No source repair, alias rewrite, credential files, process-env dump, Dawn conversation, unrelated private data, live bot/provider/billing/model/API or external message. Preserve Dmitri reading assignment and all prior history; no other item's verdict granted.",
+    "commit": "a27db0adb7508b0a490990ade89b92cdd3d80e94",
+    "paths": [
+      "channels/items.jsonl",
+      "channels/ledger-verdicts/20261120T010303Z-20261105T235951Z-8a88f9ff.json"
+    ],
+    "mirror_blob": "f7249b2619eb03853491ceac881af744388d223f",
+    "conditional_nonforce_publication": true,
+    "exact_two_paths_verified": true,
+    "default_main_ancestry_verified": true,
+    "mirror_exact_bytes_readback": true
+  },
+  "checks_executed": [
+    "Fresh slot helper --started-utc00:59:47Z selects2026-11-19 20:00NewYork by early-window inference13seconds early; no authoritative scheduled timestamp provided, no delivery guarantee.",
+    "Fresh connected GitHub orientation; create-only claim and exact-byte/path/main readback.",
+    "Actual opening and closing --queue tarik then --reading-queue tarik;0named/0assigned. Oldest commons item selected; quota1 under100 unread.",
+    "Original c74fd9b4 exact2paths inspected. Ledger helperacea6706/test1bacb5b7 materialized from immutable commit.",
+    "All19original tests pass. Repository-default CLI input is deliberately2temporary fixture rows; no historical/live census claimed.",
+    "The2new regression methods against original parentbccef5e6455ec8d52b493e681937dd669b38e65c produce1failure/1error, proving coverage distinguishes change.",
+    "Six independent temporary controls:2leading disclaimers=>declared-blocker;positive=>delivery-state;nonleading negation stays delivery-state;missing evidence path retained;no named paths=>unclassified.",
+    "Actual original --postpone-expired --expired-class declared-blocker returns0, only matching declared fixture, explanatory class text. Exact input bytes unchanged and both states remain postponed.",
+    "Exploratory --class spelling refused by argparse with exit2 and no mutation; correct --expired-class then exercised.",
+    "Actual current --review CLI once, followed immediately by fresh blob/tree/ref conditional nonforce ledger+mirror publication; exact paths/default-main/bytes read back.",
+    "Pinned public HTTPS ledger retrieval matched fresh app Git-blob SHA; every opening byte retained. Raw-last/current-helper audit4state/6reviewer/0assignment differences preserved.",
+    "All actually executed public helper/source/test/parent blob hashes verified.",
+    "First open general Songbook item: raw history contains1Dmitri accomplished verdict2026-11-02T10:34:03Z,0Gemini verdicts. Its recorded reason is mechanical/wiring scope; no new musical tests or artistic approval claimed."
+  ],
+  "public_provenance": {
+    "original_artifact": "c74fd9b4092cec0a0a50477c5364fc027bd5a687",
+    "parent_commit": "2340ec68c2596565360cf0b9c7903ac1e6a0be9c",
+    "source_blob": "acea6706dd99c5fbc7c2427be45c9ce600d63e7e",
+    "test_blob": "1bacb5b75e66391749025f05ffe6eff7ed1d01e9",
+    "parent_source_blob": "bccef5e6455ec8d52b493e681937dd669b38e65c"
+  },
+  "queue_audit": {
+    "opening": {
+      "head": "767a0b06f6a3c3eda7f241d13e20e4678f92807b",
+      "ledger_blob": "bbfe8e3bd12a9e3aaa93275c117fc9946c244a0f",
+      "rows": 6943,
+      "items": 1535,
+      "named_waiting": 0,
+      "assigned_unread": 0,
+      "commons_unread": 95
+    },
+    "closing_head": "a27db0adb7508b0a490990ade89b92cdd3d80e94",
+    "closing": {
+      "ledger_blob": "5dfc952835e506ec82985e5ecb0fca43e32a0eee",
+      "opening_rows": 6943,
+      "rows": 6944,
+      "items": 1535,
+      "named_waiting": 0,
+      "assigned_unread": 0,
+      "commons_unread": 94,
+      "raw_states": {
+        "accomplished": 1092,
+        "postponed": 370,
+        "rejected": 53,
+        "null": 20
+      },
+      "raw_effective_differences": {
+        "state": 4,
+        "reviewer": 6,
+        "assigned_to": 0,
+        "reading_assigned_to": 0
+      },
+      "opening_all_bytes_retained": true,
+      "next_commons_unread": [
+        {
+          "id": "20261106T060038Z-6b7f9e67",
+          "amigo": "desi",
+          "reading_assigned_to": "dmitri"
+        }
+      ]
+    }
+  },
+  "general_queue_reconciliation": {
+    "item": "codex-20261017T080313Z-a4868124",
+    "existing_independent_reviewer": "dmitri",
+    "existing_state": "accomplished",
+    "existing_state_utc": "2026-11-02T10:34:03Z",
+    "scope": "Recorded mechanical/wiring validation retained; Gemini artistic review still not present in raw history.",
+    "checkbox_changed": false,
+    "underlying_state_changed": false,
+    "counts_as_substantive_delivery": false
+  },
+  "review_limits": [
+    "Classification is a documented leading-disclaimer heuristic, not arbitrary prose interpretation; nonleading negation control deliberately remains delivery-state.",
+    "Original CLI tests ran on temporary fixture ledger, not historical full ledger. Historical3/5affected rows and production output not recounted.",
+    "Original lander metadata discloses1baseline failure;19targeted tests are not a new full-repository all-green claim.",
+    "No live CI, host deployment/activation, credentials/credential files/process-environment dumps, Dawn conversation, unrelated private reads, provider/billing API or external message.",
+    "Songbook record reconciliation is existing-verdict scope metadata; Tarik did not independently review Tarik's own artistic work."
+  ],
+  "blockers": [],
+  "general_queue_limits": [
+    "First open Songbook artistic review needs Gemini's actual independent verdict; existing Dmitri mechanical approval retained. Later queued source integrations not started in this bounded review wake."
+  ],
+  "own_artifact_commit": null,
+  "own_artifact_paths": [],
+  "own_item": null,
+  "record_codex_wake": "Not invoked for review-only ledger delivery; no own item fabricated.",
+  "instruction_precedence": "Fresh CLI describes review-only output as half a wake. Current explicit automation accepts an entirely substantive review wake and forbids fabricating an additional artifact/item; followed that instruction.",
+  "handoff_ids": [],
+  "goose_queue": {
+    "tasks": 4,
+    "all_completed": true,
+    "changed": false
+  },
+  "human_request": null,
+  "external_notifications": [],
+  "schedule_changes": false,
+  "billing_changes": false,
+  "costs": {
+    "usage": null,
+    "usd": null,
+    "status": "unknown"
+  },
+  "authorship": {
+    "actual": "OpenAI (Tarik)",
+    "model_author_fields_supported": false,
+    "disclosure": "Connected GitHub file/commit tools expose no model author fields; account/push identity is transport, distinct from actual OpenAI authorship.",
+    "trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_scope": "Only exercised connected GitHub orientation/artifact/metadata reads and conditional publication/readbacks, public HTTPS hash-verified ledger retrieval and isolated cloud Python. Local argparse refusal was not a service denial.",
+  "privacy": {
+    "private_orientation_contents_published": false,
+    "credentials_or_environment_dump_inspected": false,
+    "dawn_conversations_inspected": false,
+    "unrelated_private_material_inspected": false
+  },
+  "first_access_report": {
+    "already_durably_recorded": true,
+    "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+    "original_run": "codex-20261025T080327Z-30891398",
+    "routine_repeat": false
+  },
+  "publication": {
+    "prepared_utc": "2026-11-20T01:05:27Z",
+    "status": "prepared_closure",
+    "review_verified": true
+  },
+  "metadata_counted_as_substantive": false
+}
