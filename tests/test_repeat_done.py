@@ -78,11 +78,15 @@ class RepeatDone(unittest.TestCase):
         self.assertIn("--list", str(caught.exception))
 
     def test_the_due_block_stops_asking_once_it_is_done(self):
+        """Frozen on the fixture's own date: this test broke the morning after it was written,
+        because the block was right on the 19th and the test asked it what it said on the 19th
+        while it was the 20th. A test of a date is a test of the clock unless the date is passed."""
         we = engine()
-        before = we.due_block(str(self.repo), amigo="desi")
+        day = datetime.date(2026, 11, 19)
+        before = we.due_block(str(self.repo), amigo="desi", today=day)
         self.assertIn("2026-11-19", before)
         self.done()
-        after = we.due_block(str(self.repo), amigo="desi")
+        after = we.due_block(str(self.repo), amigo="desi", today=day)
         self.assertIn("2026-11-26", after)
         self.assertNotIn("DUE TODAY", after)
         self.assertNotIn("OVERDUE", after)

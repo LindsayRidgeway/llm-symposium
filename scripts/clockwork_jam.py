@@ -26,23 +26,38 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 
 
-def head(amigo: str, repo: Path = REPO, today: datetime.date | None = None) -> dict:
-    """The first non-empty item in the seat's agenda: due block, then review queue, then reading."""
-    spec = importlib.util.spec_from_file_location("we_jam", repo / "channels" / "wake_engine.py")
-    we = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(we)                     # type: ignore[union-attr]
-    today = today or datetime.date.today()
+def _load(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)                    # type: ignore[union-attr]
+    return mod
 
-    rows = we.due_items((repo / "to-do-lists" / f"{amigo}.md").read_text(encoding="utf-8"),
-                        today=today, repo=str(repo))
-    rows = we._recurring_rows(rows, repo, amigo, today)
-    live = [r for r in rows if r[1] in ("overdue", "today", "soon")]
+
+def head(amigo: str, repo: Path = REPO, today: datetime.date | None = None) -> dict:
+    """The first item a wake would actually act on: due today, review, reading, then value.
+
+    Rewritten 2026-11-20 (Desi). It used to treat a row that is merely *soon* as the head and it
+    stopped before the value queue, so the check could only ever see the calendar. Measured that
+    morning: the head was the weekly letter dated 2026-11-26, six days out — a wake that spent the
+    night on the value queue would have left the head byte-identical and the procedure would have
+    called a productive night jammed. The head is what is DUE; when nothing is due, the queues below
+    decide, in the order the prompt shows them. The reading queue counts only when it carries this
+    seat's name or the pile is in arrears, because that is what `wake_engine.reading_head()` now
+    offers — a check that models a different prompt than the wake receives is worse than no check.
+    """
+    today = today or datetime.date.today()
+    spec_we = _load("we_jam", repo / "channels" / "wake_engine.py")
+    rows = spec_we.due_items((repo / "to-do-lists" / f"{amigo}.md").read_text(encoding="utf-8"),
+                             today=today, repo=str(repo))
+    rows = spec_we._recurring_rows(rows, repo, amigo, today)
+    live = [r for r in rows if r[1] in ("overdue", "today")]
     if live:
         when, kind, text, _rule, _note = live[0]
         return {"block": "due", "id": text[:60], "when": when.isoformat(), "kind": kind}
+    soon = [r for r in rows if r[1] == "soon"]
     try:
         sys.path.insert(0, str(repo / "channels"))
-        import item_ledger as il
+        il = _load("il_jam", repo / "channels" / "item_ledger.py")
         path = repo / "channels" / "items.jsonl"
         waiting = [r for r in il.load(path).values()
                    if il.letter_for(r) == "W" and r.get("assigned_to") == amigo]
@@ -50,10 +65,22 @@ def head(amigo: str, repo: Path = REPO, today: datetime.date | None = None) -> d
             waiting.sort(key=lambda r: r.get("assigned_utc") or r.get("filed_utc") or "")
             return {"block": "review", "id": waiting[0].get("id"), "when": None, "kind": "waiting"}
         reading = il.reading_queue(path, who=amigo)
+        if not reading:
+            whole = il.reading_queue(path)
+            if len(whole) > int(getattr(il, "PILE_TARGET", 100)):
+                reading = [r for r in whole if (r.get("amigo") or "") != amigo][:1]
         if reading:
             return {"block": "reading", "id": reading[0].get("id"), "when": None, "kind": "unread"}
+        vq = _load("vq_jam", repo / "scripts" / "value_queue.py")
+        top = vq.head(vq.load(repo / "channels" / "value-queue.json"))
+        if top:
+            return {"block": "value", "id": top.get("id"), "when": top.get("last_worked"),
+                    "kind": "value"}
     except Exception as exc:                        # noqa: BLE001 — a check must not crash a wake
         return {"block": "error", "id": f"{type(exc).__name__}: {exc}", "when": None, "kind": None}
+    if soon:
+        when, _kind, text, _rule, _note = soon[0]
+        return {"block": "waiting", "id": text[:60], "when": when.isoformat(), "kind": "soon"}
     return {"block": "none", "id": "", "when": None, "kind": None}
 
 
@@ -63,6 +90,19 @@ def verdict(before: dict, after: dict, today: datetime.date | None = None) -> di
     same = (before.get("block"), before.get("id")) == (after.get("block"), after.get("id"))
     if not same:
         return {"jam": False, "why": "the head moved"}
+    if after.get("block") == "value" and before.get("when") != after.get("when"):
+        return {"jam": False,
+                "why": "the same item is still at the head but it was worked: last_worked advanced "
+                       "from %s to %s, and the queue records the work" % (before.get("when"),
+                                                                         after.get("when"))}
+    if after.get("block") == "waiting":
+        return {"jam": False,
+                "why": "nothing is due, nothing is queued, and the next dated item is %s — the "
+                       "calendar is waiting rather than stuck" % after.get("when")}
+    if after.get("block") == "none":
+        return {"jam": True,
+                "why": "the agenda is empty: nothing due, nothing waiting, nothing unread and no "
+                       "value item. An empty agenda while the commons exists is a defect, not a rest"}
     if after.get("block") != "due":
         return {"jam": True,
                 "why": "the same %s item is at the head and no clock will move it" % after["block"]}

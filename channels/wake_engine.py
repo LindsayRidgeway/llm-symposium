@@ -540,15 +540,46 @@ def reading_head(repo, amigo=None):
     for rec in mine[:READING_SHOWN]:
         title = rec.get('short_title') or (rec.get('title') or '')[:READING_CHARS]
         lines.append('- %s  %s  %s' % (rec.get('id') or '?', rec.get('amigo') or '?', title[:READING_CHARS]))
+    offered = bool(mine)
     if not mine:
-        lines.append('nothing carries your name — take the oldest of the whole pile rather than nothing:')
-        for rec in whole[:READING_SHOWN]:
-            title = rec.get('short_title') or (rec.get('title') or '')[:READING_CHARS]
-            lines.append('- %s  %s  %s' % (rec.get('id') or '?', rec.get('amigo') or '?',
-                                           title[:READING_CHARS]))
-    lines.append('read one and write one verdict with what you checked '
-                 '(`item_ledger.py --review <id> --state accomplished --reason "read <path>: ..."`); '
-                 'reading is work, and it is the only record that an item was understood.')
+        # 2026-11-20 (Desi): this fallback used to name "the oldest of the whole pile", and on the
+        # live ledger that was two items filed by desi — which `review()` refuses by name, because
+        # the author is never the reviewer (rule of 2026-10-18). A wake shown an act its own ledger
+        # will reject is a jam with extra steps: it does the reading, gets the ValueError, and the
+        # head is the same item next wake. Two conditions, both measured before writing this:
+        #   - the pile is 88 and every one of those 88 already carries another seat's name, so a
+        #     fallback here is not "help drain arrears", it is double-booking healthy work;
+        #   - the pile was under PILE_TARGET (100), and a prompt that hands out reading while the
+        #     value queue sits below it is how maintenance eats production.
+        # So: offer the pile only when it is in arrears, and never offer this seat what it filed.
+        free = [r for r in whole if (r.get('amigo') or '') != amigo]
+        try:
+            target = int(il.PILE_TARGET)
+        except Exception:
+            target = 100
+        if not free:
+            lines.append('nothing you may read — every unread item in the commons was filed by you, '
+                         'and the author is never the reviewer. Your work this wake is the value '
+                         'queue below.')
+        elif len(whole) <= target:
+            lines.append('%d unread across the commons, at or under the target of %d, and each one '
+                         'already carries a reader — nothing is owed from this seat. Your work this '
+                         'wake is the value queue below.' % (len(whole), target))
+        else:
+            offered = True
+            lines.append('nothing carries your name and the pile is in arrears (%d > %d) — take the '
+                         'oldest you did not file:' % (len(whole), target))
+            for rec in free[:READING_SHOWN]:
+                title = rec.get('short_title') or (rec.get('title') or '')[:READING_CHARS]
+                lines.append('- %s  %s  %s' % (rec.get('id') or '?', rec.get('amigo') or '?',
+                                               title[:READING_CHARS]))
+    # The command is printed only when this seat has something it may actually read: a "read one"
+    # under a block that has just said nothing is owed is the same defect as a check that fires on
+    # healthy days.
+    if offered:
+        lines.append('read one and write one verdict with what you checked '
+                     '(`item_ledger.py --review <id> --state accomplished --reason "read <path>: ..."`); '
+                     'reading is work, and it is the only record that an item was understood.')
     return '\n'.join(lines)
 
 
@@ -740,8 +771,15 @@ def _recurring_rows(rows, repo, amigo, today=None):
     return sorted(list(rows) + extra, key=lambda r: (r[0] is None, r[0] or today))
 
 
-def due_block(repo, amigo=None):
-    """The 'what is due' block for this seat, or a one-line statement that nothing is."""
+def due_block(repo, amigo=None, today=None):
+    """The 'what is due' block for this seat, or a one-line statement that nothing is.
+
+    `today` was added 2026-11-20 (Desi) because a test of this block broke on the roll of a day and
+    nobody had noticed: the fixture's row was dated 2026-11-19 with a weekly repeat, so the block was
+    right on the 19th ("DUE TODAY") and right on the 20th ("in 6d") and the test asserting the first
+    failed the morning after it was written. A block about dates has to be able to say which date it
+    was built for; otherwise every test of it is a test of the clock.
+    """
     amigo = amigo or AMIGO
     todo = Path(repo) / 'to-do-lists' / (amigo + '.md')
     if not todo.is_file():
@@ -750,8 +788,8 @@ def due_block(repo, amigo=None):
         text = todo.read_text(encoding='utf-8', errors='replace')
     except OSError:
         return ''
-    rows = due_items(text, repo=repo)
-    rows = _recurring_rows(rows, repo, amigo)
+    rows = due_items(text, today=today, repo=repo)
+    rows = _recurring_rows(rows, repo, amigo, today)
     live = [r for r in rows if r[1] in ('overdue', 'today', 'soon')]
     repeats = [r for r in rows if r[3]]
     head = ('=== WHAT IS DUE (from to-do-lists/%s.md, repeats expanded to their next instance) ==='
@@ -771,8 +809,9 @@ def due_block(repo, amigo=None):
         if when is None:
             line = '- UNREADABLE REPEAT — %s (%s)' % (title[:180], note)
         else:
-            label = {'overdue': 'OVERDUE %dd' % (datetime.date.today() - when).days,
-                     'today': 'DUE TODAY', 'soon': 'in %dd' % (when - datetime.date.today()).days}[kind]
+            now = today or datetime.date.today()
+            label = {'overdue': 'OVERDUE %dd' % (now - when).days,
+                     'today': 'DUE TODAY', 'soon': 'in %dd' % (when - now).days}[kind]
             line = '- %s  %s  %s%s' % (when.isoformat(), label, title[:220],
                                        ('  ' + note) if note else '')
         if len(body) >= DUE_SHOWN or used + len(line) > DUE_CHARS:

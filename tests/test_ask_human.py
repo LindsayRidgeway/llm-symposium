@@ -120,12 +120,39 @@ class ReadingHead(unittest.TestCase):
         self.assertIn("readmine", text)
         self.assertNotIn("readother", text)
 
-    def test_an_empty_name_still_shows_the_pile_rather_than_nothing(self):
-        """The empty case is the failure: nothing due, nothing waiting, 94 unread — and silence."""
+    def test_a_seat_with_no_name_on_a_healthy_pile_is_told_nothing_is_owed(self):
+        """Changed 2026-11-20 (Desi). The empty case is still the failure — but the answer is not
+        "read anybody's item".
+
+        Measured on the live ledger: desi held 0 of the 88 unread, every one of the 88 already
+        carried another seat's name, and the pile was 88 against a target of 100. The old fallback
+        said "take the oldest of the whole pile rather than nothing", which on that ledger was two
+        items *filed by desi* — and `review()` refuses those by name, because the author is never
+        the reviewer. A wake handed an act its own ledger rejects does the reading, gets the
+        ValueError, and faces the same item next wake: a jam with extra steps. Double-booking
+        healthy work while the value queue below sits untouched is how maintenance eats production.
+        """
         text = self.load().reading_head(str(self.repo), amigo="tarik")
-        self.assertIn("nothing carries your name", text)
+        self.assertIn("nothing is owed from this seat", text)
         self.assertIn("2 across the commons", text)
-        self.assertIn("readother", text)
+        self.assertIn("value queue below", text)
+        self.assertNotIn("readother", text)
+
+    def test_a_pile_in_arrears_offers_the_oldest_that_this_seat_did_not_file(self):
+        """Arrears is the condition that turns the fallback on, and authorship is the line it keeps."""
+        import json
+        rows = [{"id": "minefirst", "amigo": "desi", "filed_utc": "2026-11-01T00:00:00Z",
+                 "state": "accomplished", "reviewer": "auto:path",
+                 "reading_assigned_to": "dmitri", "short_title": "desi's own, oldest of all"}]
+        for i in range(120):
+            rows.append({"id": "pile%03d" % i, "amigo": "gemini", "filed_utc": "2026-11-10T00:00:00Z",
+                         "state": "accomplished", "reviewer": "auto:path",
+                         "reading_assigned_to": "dmitri", "short_title": "somebody else's work"})
+        self.path.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        text = self.load().reading_head(str(self.repo), amigo="desi")
+        self.assertIn("in arrears (121 > 100)", text)
+        self.assertIn("pile000", text)
+        self.assertNotIn("minefirst", text)
 
     def test_a_ledger_with_nothing_unread_says_nothing_at_all(self):
         self.path.write_text("", encoding="utf-8")
