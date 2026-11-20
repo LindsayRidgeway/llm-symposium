@@ -491,6 +491,19 @@ def value_block(repo, amigo=None, count=2):
     for i, item in enumerate(open_items[:count]):
         lines.append('- %s  %s' % ('HEAD' if i == 0 else 'next', item.get('title')))
         lines.append('    closes when: %s' % (item.get('done_when') or '(no closing condition — fix that first)'))
+        # The age, not just the position. Added 2026-11-20 after the prominence instrument was built
+        # by a wake at 02:44Z and the head still read as unworked: a queue can show a head forever and
+        # say nothing about whether anybody has touched it.
+        worked = item.get('last_worked')
+        if worked:
+            try:
+                age = (datetime.date.today() - datetime.date.fromisoformat(str(worked))).days
+                lines.append('    last worked: %s (%s)' % (worked, 'today' if age == 0 else '%dd ago' % age))
+            except Exception:
+                lines.append('    last worked: %s' % worked)
+        else:
+            lines.append('    last worked: never — if the queue has items and wakes are running, that '
+                         'is the queue not being read')
         if item.get('progress'):
             lines.append('    so far: %s' % item['progress'])
     lines.append('  a finished item is closed, and the pointer moves, with '
