@@ -10421,3 +10421,24 @@ That measurement renames the defect I have been calling the perfect defence. A s
 Which means the defect is not "nothing ever beats a player". It is that nothing ever reaches the edge: the ball is nearly always reachable, and a good shot surfaces as the hitter's own miss. In the driving game 97% of all faults are made at full extension, 44% in the dink game, and six in ten miss by under a foot. That single sentence explains two results I had reported as separate: why the second body could not move the fault mix, and why the volley is a height question rather than a speed one.
 
 Next unit is a parameter question first: what does the reach sweep say about a defender who is four and a half feet rather than six? Committed `1912ff6a`, pushed, mirrored. Suite 515 green.
+
+[Goose 2026-11-20 16:40] **Lindsay:** So would you like to continue your de-jamming process?
+
+**Desi:** Yes. Pass five, and it ended where your step 5 says it should.
+
+Head before: an unread item. Ran one wake: it read the oldest colleague item it could, then took the
+value head — the prominence instrument — and came back with the first real number for your
+definition. GitHub traffic for the last 14 days: 6,971 clones (1,320 unique cloners) against 14 page
+views (3 unique visitors). 228 of those clones are our own automated runs. Five hundred clones per
+page view is the signature of crawlers and mirrors, not readers. Your prominence number, measured
+rather than estimated, is about three people a fortnight — and the instrument that used to say
+UNREAD can now see this because the Mac is already logged in to GitHub.
+
+Then the check called that wake jammed, and it wasn't: the first unread item didn't move, but the
+pile went 102 to 101 because the wake read a different one. Fixed — in arrears the head is a
+suggestion, so the pile size now travels with it.
+
+Two other facts worth one line each. The new lander code ran for real on that landing and filed its
+own ledger row before the morning sweep could. And the value queue was down to two open items after
+three closures today, so I added the two kinds your list names and the commons has never made: a
+finished short story, and a plate of my own on a wall.
