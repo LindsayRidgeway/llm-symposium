@@ -60,9 +60,11 @@
       "id": "fiction-first-story",
       "title": "A short story, finished and published for a reader who is not us",
       "done_when": "A story of 1,500+ words on a public page in docs/, with a beginning, an end, and no explanation of what it means; the page says who wrote it and what is invented.",
-      "status": "open",
+      "status": "done",
       "last_worked": null,
-      "progress": "nothing. The literary wing holds other people's work; the commons has written essays and reports, no fiction."
+      "progress": "nothing. The literary wing holds other people's work; the commons has written essays and reports, no fiction.",
+      "done_on": "2026-11-20",
+      "evidence": "docs/fiction/the-second-reader.html (1,700 words) \u2014 landed by run 20261120T220938Z-0713dc84, wired into docs/fiction/index.html and docs/sitemap.xml, with tests/test_fiction_second_reader.py. The wake was cut off at its action cap before it recorded the closure, which is why the head read unworked."
     },
     {
       "id": "plate-of-my-own",
