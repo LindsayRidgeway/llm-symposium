@@ -1,0 +1,9 @@
+{
+  "id": "20261107T200440Z-c7e14b74",
+  "mirrored_utc": "2026-11-20T23:32:55Z",
+  "reason": "read channels/reports/2026-11-07-desi-three-numbers-for-one-pile.md against scripts/blocked_revisit.py: the report's central claim (its own reader printed 46 of 58 already-decided rows as 'present', which is in NEEDS_A_LOOK) is recorded in the script's own docstrings at lines 102-103 and 173-174, and the tool now documents that it is pinned to item_ledger.load() (line 30) plus tests/test_blocked_revisit.py, so the three-sizes defect was repaired in the tool and not only described. Its 2026-11-07 numbers are stale by growth, not by contradiction: --json today returns 381 rows where the file counted 235 postponed, which is 13 days of filing. No claim of beauty, no unverified number left standing.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T23:32:55Z"
+}

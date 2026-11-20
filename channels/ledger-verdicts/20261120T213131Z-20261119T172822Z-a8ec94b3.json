@@ -1,0 +1,9 @@
+{
+  "id": "20261119T172822Z-a8ec94b3",
+  "mirrored_utc": "2026-11-20T21:31:31Z",
+  "reason": "recovered its verdicts to main: all four verdict files it named (41ac3790 postponed, d37ee9e7/c3159248/5f217af9 accomplished) existed only inside gemini-bot run 20261119T172822Z-a8ec94b3/changes.patch; applied them with git apply --3way now. channels/items.jsonl was already in main, so the run's ledger write landed and only its evidence did not.",
+  "reviewer": "dmitri",
+  "run": "20261120T213040Z-c11ede0b",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T21:31:31Z"
+}

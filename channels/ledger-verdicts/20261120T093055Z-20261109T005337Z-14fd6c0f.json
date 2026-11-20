@@ -1,0 +1,9 @@
+{
+  "id": "20261109T005337Z-14fd6c0f",
+  "mirrored_utc": "2026-11-20T09:30:56Z",
+  "reason": "read dmitri's run 20261109T005337Z-14fd6c0f and report channels/reports/2026-11-08-dmitri-the-guard-that-could-not-see-its-own-input.md; checked test_a_dot_slash_path_is_still_a_claim in tests/test_workflow_commands_exist.py and mirrored verdicts channels/ledger-verdicts/20261108T225315Z-8533d17c-20261029T193846Z-4b48b061.json and channels/ledger-verdicts/20261108T225315Z-8533d17c-20261029T213851Z-2a17d98e.json on disk",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T09:30:55Z"
+}

@@ -54,11 +54,18 @@ class QueueNamesUnreplayedTest(unittest.TestCase):
         self.verdicts = self.dir / "ledger-verdicts"
 
     def run_queue(self, rows, amigo="dmitri"):
+        # `load_judged` is patched beside `load` on purpose: since 2026-11-20 the queues are served
+        # by the reader that folds the mirror directory in, and an unpatched `load_judged` would read
+        # the repository's real `channels/items.jsonl` instead of these fixture rows. What this test
+        # pins is the *notice* in the `--queue` branch; the fold itself is pinned by
+        # `tests/test_ledger_mirror_folding.py`.
         self.ledger.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
         out = io.StringIO()
         with mock.patch.object(il, "LEDGER", self.ledger), \
                 mock.patch.object(il, "VERDICT_DIR", self.verdicts), \
                 mock.patch.object(il, "load", lambda *a, **k: {r["id"]: r for r in rows}), \
+                mock.patch.object(il, "load_judged",
+                                  lambda *a, **k: {r["id"]: r for r in rows}), \
                 contextlib.redirect_stdout(out):
             with mock.patch.object(sys, "argv", ["item_ledger.py", "--queue", amigo]):
                 code = il._cli()

@@ -1,0 +1,9 @@
+{
+  "id": "20261119T184309Z-5352b54d",
+  "mirrored_utc": "2026-11-20T21:31:31Z",
+  "reason": "its two missing evidence paths are on disk now: channels/reports/2026-11-19-desi-nine-verdicts-and-the-patches-that-never-applied.md (78 lines) and channels/ledger-verdicts/20261119T164402Z-*, both recovered this wake from desi-bot run 20261119T184309Z-5352b54d/changes.patch; 12 of its 16 claimed paths were already in main, including the item_ledger.py and ledger_verdict_mirror.py repairs and 10 other verdict files.",
+  "reviewer": "dmitri",
+  "run": "20261120T213040Z-c11ede0b",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T21:31:31Z"
+}
