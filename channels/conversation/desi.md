@@ -10385,3 +10385,23 @@ evidence and the head moved to the music piece. A wake is working on that now.
 Two loose ends: D-18 is in your Telegram (two read-only tokens, so the prominence number stops being
 one-third blind), and the lander refused the essay batch over a generated index — I recovered it by
 hand, but all-or-nothing `git apply` is still the bottleneck and it needs its owner.
+
+[Goose 2026-11-20 11:05] **Lindsay:** 1. Have you worked on adding avatars to the video instead of stick figures? 2. Have you considered what pickleball's UI in Kythe will be? 3. Here's another turn.
+
+**Desi:** Not before this turn — that is the honest answer to both, so I did them instead of answering them.
+
+**The figures.** A body was one stroke from the feet to a head circle with an arm line. It is now eleven joints in the same feet-and-z the ball is integrated in, so the projection does the work and a figure cannot drift off the court it stands on. Two animations, and neither is invented: the legs walk because the engine wrote a move — velocity from the move's own positions and duration, stride phase from distance walked, the second leg half a cycle behind — and the arm swings because the engine struck a shot, with half a second of backswing before the shot's own strike time and the blade tilted by that shot's face. The partner walk I added two turns ago arrived as animation for free: it was already in the film and nothing had read it.
+
+The rest is what separates a body from a stick: a torso as a hip-to-shoulder quadrilateral, a head with a cap in the team's colour, the paddle at a paddle's proportions drawn as a rotated shape rather than a thicker line, and the painter's sort running inside the body as well as on the court.
+
+The ceiling, stated now rather than discovered later: at this camera a figure is about forty pixels tall near the baseline and eighteen at the far end, and at eighteen a joint model is "a coloured body with legs". So no faces and no per-member look, which is what "avatar" would usually mean. Two honest prices if you want that: a sprite sheet per member is cheap and loses the court's own geometry; the tennis three.js rig is 1775 lines, a vendor tree and a fetch, which means the page stops opening by double-click. My default stays articulated two-dimensional. If you want faces, I would put a portrait in the scoreboard and on the head before I would put a mesh in the page — say the word and I will do either.
+
+**The screen.** Considered, drawn, and it is one decision: the court is the control. `games/pickleball/ui-mock.html` is a single file that opens from disk — you click a point on their court, choose a pace from four buttons, and the panel prints `PACE 24 AT 26,6`, which is the same line a member answers with. That is deliberate: a human's point and a member's point go through one parser, so the language is not a member-only dialect.
+
+Not the tennis play form, and this is the reason rather than taste. That form asks for a face angle in degrees, a power in per cent and an aim in feet from the sideline — the exact three numbers that put two member serves into their own net last night. So the pickleball screen has a test asserting it contains no number inputs and never says FACE or POWER.
+
+First to three, not eleven, and the number chooses the format: at 9.5 seconds a shot, eleven points is an hour of model calls and three is a couple of minutes. The last point is printed in the player's own words — "landed (18,6): their own side of the net, 6.8 ft short" — because a body told its own face angle cannot learn anything from it, and that line is the whole feedback loop practice needs. And the model is optional: two people can play each other with no keys at all, both seats clicking, the engine playing both hands.
+
+Stills of both are in `games/pickleball/replays/` and §5q of the page carries the argument. TestPickleball 50 to 52, full suite 498, pushed and mirrored.
+
+Three things still owed, in order: the season lesson re-run through the fixed aim, the `#/play` wiring (a sport row and a pickleball recipe in the shape `season.yml` already uses), and §5c's perfect defence — 0.993 out-faults a rally, nothing yet beats a player.
