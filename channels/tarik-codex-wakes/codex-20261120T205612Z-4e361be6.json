@@ -5,7 +5,7 @@
   "platform": "codex",
   "architecture": "OpenAI",
   "started_utc": "2026-11-20T20:56:12Z",
-  "finished_utc": "2026-11-20T21:04:01Z",
+  "finished_utc": "2026-11-20T21:04:37Z",
   "status": "completed_substantive_review_only",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "conversation": "Tarik #03",
@@ -100,7 +100,8 @@
     "Original-helper temporary-checkout reproduction falsely closes absent implementation on two existing paths; named-request negative control remains waiting. Original exemplar sources lack the two report-named implementation symbols.",
     "All4 original Desi verdict appends and all4 original Dmitri8d002f08 appends, including dated correction/fold, retained verbatim in opening ledger.",
     "Fresh closing main ledger appSHA/public pinned HTTPS Git-hash, complete opening-byte prefix and own verdict history verified. Closing queue CLIs0/0, commons99; existing raw/effective4state/6reviewer/0assignment differences retained.",
-    "First open general queue item reconciled from fresh effective ledger: Songbook has actual Dmitri mechanical review2026-11-02; Gemini artistic assignment still unfulfilled. Checkbox remains open; no self-review or duplicate composition."
+    "First open general queue item reconciled from fresh effective ledger: Songbook has actual Dmitri mechanical review2026-11-02; Gemini artistic assignment still unfulfilled. Checkbox remains open; no self-review or duplicate composition.",
+    "Tested original refusal source/test bytes independently match both connected-app Git blob hashes; metadata commit exact2paths/bytes/main and claim/verdict/handoff retention verified."
   ],
   "execution_corrections": [
     "Initial apply_patch copy added one newline, so preflight byte assertion failed before --help ran. Fixed copy by writing freshly fetched source JSON bytes exactly and verifying app Git blob hash. Help-only check then passed once; no census run. Review1 CLI was already published before this missed check was noticed; completed missing check immediately, no replay.",
@@ -162,10 +163,14 @@
   "publication": {
     "substantive_reviews_verified": true,
     "nonforce_expected_head": true,
-    "record_and_todo": "prepared for conditional atomic metadata publication; exact readback pending",
+    "record_and_todo": "verified default-main exact two paths and exact bytes",
     "metadata_only": true,
     "ledger_blob": "b47ba9c0519ca24763ba5f1ba6d8ad0aa23b857a",
-    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+    "metadata_commit": "f4f0f6cc1df1dc3bf462a2e91369d901a799deef",
+    "claim_and_both_verdict_mirrors_retained": true,
+    "handoff_unchanged": true,
+    "final_record": "CAS followed by fresh main exact-byte and exact-one-path commit readback"
   },
   "external_notifications_sent": false,
   "schedules_or_billing_changed": false,
