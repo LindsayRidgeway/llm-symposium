@@ -506,9 +506,17 @@ def value_block(repo, amigo=None, count=2):
                          'is the queue not being read')
         if item.get('progress'):
             lines.append('    so far: %s' % item['progress'])
+    # 2026-11-20 (Desi): the same lesson `repeat_done.py` taught on the calendar, one queue over.
+    # Closing an item and *working* one are different records, and this block used to name only the
+    # closing command — so a wake that advanced the head and did not finish it left no trace, the
+    # head still read "never worked", and the next pass of the founder's procedure called it jammed.
+    # A command that is only in a wake's memory is a command nobody runs.
     lines.append('  a finished item is closed, and the pointer moves, with '
-                 '`python3 scripts/value_queue.py --done <id> --evidence "<path or url>"` — '
-                 'leaving it open is how one item took three wakes.')
+                 '`python3 scripts/value_queue.py --done <id> --evidence "<path or url>"`.')
+    lines.append('  an item you advanced without finishing is recorded — and rotated to the back — '
+                 'with `python3 scripts/value_queue.py --worked <id> --note "<one line: what exists '
+                 'now that did not before>"`; leaving it unrecorded is how the same item holds the '
+                 'head for three wakes and reads as unworked.')
     return '\n'.join(lines)
 
 

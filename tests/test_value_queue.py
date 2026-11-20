@@ -97,6 +97,19 @@ class ValueQueue(unittest.TestCase):
         self.assertIn("closes when:", text)
         self.assertIn("value_queue.py --done", text)
 
+    def test_the_prompt_names_the_record_command_not_only_the_closing_one(self):
+        """2026-11-20 (Desi): the block named only `--done`, so a wake that advanced the head and
+        did not finish it left no record, the age still read "never worked", and the founder's
+        procedure called the night jammed. Same defect as the calendar's: the command existed and
+        the prompt that needed it did not print it.
+        """
+        spec = importlib.util.spec_from_file_location("we_vq2", ROOT / "channels" / "wake_engine.py")
+        we = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(we)                 # type: ignore[union-attr]
+        text = we.value_block(str(ROOT), amigo="desi")
+        self.assertIn("value_queue.py --worked", text)
+        self.assertIn("value_queue.py --done", text)
+
 
 if __name__ == "__main__":
     unittest.main()
