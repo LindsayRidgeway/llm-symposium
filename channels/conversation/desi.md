@@ -10341,3 +10341,21 @@ And the number that will shape all of it: 10.6 seconds a shot, end to end. The d
 Pushed `eef2f79d` with the measurement in the page's §5o.
 
 [Goose 2026-11-19 22:25] **Lindsay:** {No further turn needed}
+
+[Goose 2026-11-20 00:55] **Lindsay:** Here's another turn. Please let me know if you're blocked by anything.
+
+**Desi:** Not blocked. The turn went to §5o's decision — the movement language — and I found something on the way that I should have found six sections ago.
+
+A member now says `PACE 24 AT 26,6`: how hard, and where. The engine solves the paddle's angle with the same solver its own choosers use. Old FACE/POWER/AIM lines still parse, so every record made before last night replays as itself; prose falls back to a legal serve rather than the drive-at-the-middle the old fallback gave, which for a server was a second fault stacked on the first. And the prompt now carries a court map on the engine's own axes and a table of how far a ball actually goes, because the arithmetic a member gets wrong is distance, not angle.
+
+The defect: `strike` turns the aim into a lateral angle, and an angle needs the distance it is measured down. Every chooser probed with the true distance and then dropped it at the return, so the engine flew the ball on a hard thirty-two-foot azimuth — a drive's angle — from §5j until tonight. The ball played was not the ball probed. I A/B'd it in one sitting, twelve pinned games each way with the seats swapped: mean rally 9.61 shots to 6.78, the longest rally in twelve games 82 to 45, volleys 14 to 4, momentum faults 9 to 3. The thirty-two-foot column reproduces §5n to three decimals, which is the useful part — it was systematic, not noise, and every dink number I have published since §5i carries it. I re-ran the reach sweep, which is the one §5l's conclusion rests on; unreachable goes 5.9, 7.2, 9.1 as reach shrinks, against 4.8, 8.1, 11.9 before. §5l survives, slightly flattened.
+
+Honouring the probe makes the dink game shorter and softer, and that is not damage: a chooser whose target is finally the target stops hitting balls that carry deep, so more of them die in the kitchen. §5m's one-volley-in-875 is now four volleys in 415 serves — the soft game was never hiding a volley, the leak was hiding how soft it is.
+
+The member's second run: three rallies, seven shots, no prose, 9.5 seconds a shot. Two of three serves legal and diagonal, three and a third feet past their kitchen line; one volley carried six tenths of a foot and stopped a foot outside the kitchen, so the momentum rule got asked in a game a member played and answered no. The failures moved rather than vanished — one ball netted at the post, one two and a third feet long, and one serve that named a point at a pace the ball could not carry, dying five and a fifth feet short on its own side. The engine does not lie for a member: it plays what you named and tells you where it went. That is coachable, which "face +40 degrees" was not.
+
+Two things owed honestly: the season lesson has not been re-run through the fixed aim, so "the lesson is worth seventeen points" is still a leaky-engine number; and nothing here beats a player — out-faults per rally are 0.993, 412 of 415 rallies ended in somebody's error. The perfect defence is where the next unit goes if you want one.
+
+One more thing for the record, and it is mine this time. I `git add`ed and swept another window's seven tests into my commit, so `ca788ee8`'s message describes my work and carries theirs. I have been the victim of that three turns running; first time I have been the cause.
+
+Pushed `ca788ee8`, mirrored to `desi/pickleball-2026-11-15`, page §5p.
