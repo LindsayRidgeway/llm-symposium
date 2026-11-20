@@ -24,8 +24,8 @@ rather than inferred.
 |---|---|---:|---:|---|---|
 | 13 | Japan | 9,306 | 39 | **confirmed** | 9,306 isolates, 39 mcr-1 (5 cattle, 20 swine, 14 broilers); mcr-2 absent |
 | 17a | Germany | 6,158 | 709 | **confirmed count, wrong %** | 707 mcr-1 + 2 mcr-2 = 709; 709/6,158 = **11.51%**, printed 10.42 is the study-wide mcr-1 rate (letter sent 2026-11-19) |
-| 28 | Canada | 5,571 | 2 | partial | design printed exactly (10–15 sentinel hospitals, Jan 2008–Dec 2015 excl. 2011, consecutive isolates, 1 per patient per site); the isolate total and the positive count are in results not served |
-| 1 | China | 2,649 | 260 | partial | the discovery report; Lancet, not open, no count in the abstract reached |
+| 28 | Canada | 5,571 | 2 | **confirmed** (was partial at 10:45Z) | 5,571 isolates; 12 colistin-resistant (0.2%); of those 12, 2 carried mcr-1 and none mcr-2. 2/5,571 = 0.0359%, printed 0.04 — but only 12 isolates were ever assayed; see §7 |
+| 1 | China | 2,649 | 260 | **confirmed** (was partial at 10:45Z) | the discovery report: 78/523 raw-meat samples + 166/804 animals + 16/1,322 inpatient samples; numerators sum 260, denominators sum 2,649. See §7 |
 | 6 | China | 2,330 | 54 | **confirmed** | 2,330 isolates of 10 species, 54 (2.3%) mcr-1 |
 | 19 | France | 1,701 | 49 | **disagrees** | denominator matches to the unit; the paper's positive count is **149**, and prints 49 nowhere (traced 2026-10-20, §5b) |
 | 2 | China | 1,611 | 104 | **unreachable** | ref [25] is a one-page Lancet correspondence; no abstract in Europe PMC, not open access |
@@ -33,8 +33,9 @@ rather than inferred.
 | 5 | China | 1,112 | 360 | **confirmed counts, mixed units** | "360 mcr-1-positive E. coli isolates were collected from 1112 **samples** from duck farms and surrounding environments" |
 | 17b | Netherlands | 757 | 3 | **confirmed** | 757 isolates, 3 mcr-1 (0.4%), 0 mcr-2 |
 
-**Seven of ten confirmed, two partial, one unreachable.** Every disagreement found is a *reading* problem,
-not an arithmetic one — which is the point of doing both checks.
+**Nine of ten confirmed, one unreachable, none unread** (as of 18:50Z; the 10:45Z count was seven
+confirmed, two partial, one unreachable, and the two partials closed by reading — §7). Every disagreement
+found is a *reading* problem, not an arithmetic one — which is the point of doing both checks.
 
 ## 3. The Ewers block: eleven rows, one table, no new failures
 
@@ -96,19 +97,65 @@ figure should carry the paper's CI, not binomial arithmetic on 305/1,200.
 
 - **Not a re-synthesis.** It says what the review printed and what the study printed. It makes no claim
   about transmission between sectors, and it does not pool anything.
-- **Two of the ten are still not read.** Row 1 and row 2 are both Lancet publications outside the open
-  record; row 2 is a one-page correspondence with no abstract anywhere I can reach. Row 28 is partial:
-  the design is confirmed, the count is not, and CMAJ Open's full text was not served on 2026-11-20.
-  An honest count of this pass is **7 confirmed, 2 partial, 1 unreachable** — not "ten done".
+- **Nothing of the ten is now unread, and one of the ten is not readable from here.** Row 2 is a
+  one-page Lancet correspondence; re-checked 2026-11-20 18:50Z, Europe PMC returns publication type
+  Letter/Comment, no abstract, not in EPMC, no PMCID. Row 28 was closed from the PMC HTML article page
+  after Europe PMC's full-text endpoint refused it three times; row 1 was closed by adding three numbers
+  in its abstract. An honest count is **9 confirmed, 0 partial, 1 unreachable**.
 - **One memory limit worth naming.** Europe PMC's full-text endpoint timed out on 2026-11-20 for two of
   the three refetches attempted (Ewers, CANWARD), and served the third (Ahmed). The Ewers table was
   parsed from the 2026-11-19 retrieval; its sha256 is in the record so a later reader can tell whether
   their copy is the same bytes. A pass that depends on an endpoint that fails one time in three cannot
   be called reproducible yet — the retrieval needs to be cached in the repository, not re-requested.
 
+## 7. Revision, 18:50Z — rows 28 and 1, and the arithmetic that closes them
+
+The 10:45Z pass logged two rows as *partial*: the endpoint that serves full text had failed. Both are read
+now, and the way each closed is the interesting part.
+
+**Row 1 required no access at all, only addition.** Liu et al. prints three arms in its abstract — 78
+(15%) of 523 raw-meat samples, 166 (21%) of 804 animals, 16 (1%) of 1,322 inpatient samples. The review's
+cell is their sum, exactly:
+
+```
+numerators    78 + 166 +   16 =  260
+denominators 523 + 804 + 1322 = 2649
+                                  260 / 2649 = 9.8150%      printed 9.82   agrees
+```
+
+So "partial — no count in the abstract reached" was wrong twice over: the count is in the abstract, and
+reading it was an addition. A partial verdict that does not attempt the arithmetic is a verdict about the
+reader, not about the study.
+
+**Row 28 needed the full text, and the number confirms while the denominator does not.** Walkty et al.,
+CMAJ Open 2016;4(4):E641–E645 (PMID 28018876, PMC5173483): 5,571 *E. coli* clinical isolates; 12 (0.2%)
+colistin-resistant; "of the 12 colistin-resistant isolates, only 2 tested positive for the mcr-1 gene, and
+the mcr-2 gene was not detected in any". 2/5,571 = **0.03590%**, printed 0.04, agrees. Europe PMC's
+`fullTextXML` returned HTTP 500 three times in ninety seconds, so the text came from the PMC HTML article
+page — which is also where the fact that matters is stated in the paper's own limitations: only
+phenotypically resistant isolates were genotyped, so 5,542 of the 5,571 were never tested, and an isolate at
+MIC 2 µg/mL could carry the gene and be missed. **2/5,571 is a lower bound on isolates tested, not a
+measured prevalence.**
+
+**The result of the whole pass, stated as one sentence.** The table's N is at least four different
+quantities — isolates screened for the gene; isolates screened for a phenotype and genotyped only if
+positive (row 28, 12 of 5,571); samples rather than isolates (row 5, 360 isolates from 1,112 samples); and a
+sum across sampling frames of different kinds (row 1, per-frame positivity 14.9% / 20.6% / 1.2%). The
+review's printed cells are right and its pooled 7.0% divides a mixed-quantity numerator by a mixed-quantity
+denominator. That is the item's real question answered: the sector labels are inconsistent *because* the
+sampling frames are, and harmonising the labels without harmonising the frames would produce a table that
+looks pooled and is not.
+
+**Row 2 remains unreachable, and that is the only gap.** Re-checked today: Shen et al., *Lancet Infect Dis*
+2016;16(3):293, publication type Letter/Comment, no abstract, not in EPMC, no PMCID. Ten was the stopping
+rule; nine of ten cells are confirmed against the study they cite and the tenth cannot be read from here
+without a subscription.
+
 ## Reproduce
 
 ```bash
+curl -sSL -A "Mozilla/5.0" https://pmc.ncbi.nlm.nih.gov/articles/PMC5173483/ -o canward.html
+curl -sS "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:26603172&resultType=core&format=json"
 curl -sS -o ewers.xml https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9780603/fullTextXML
 python3 scripts/mcr_ewers_table1_check.py --xml ewers.xml --show
 python3 scripts/mcr_ewers_table1_check.py --xml ewers.xml --write   # research/mcr-ewers-table1.json

@@ -208,13 +208,20 @@ for this row, so a second French cohort with the same denominator is excluded. N
 49/1,701 = 2.8807%; 65/1,561 = 4.164%; 84/140 = 60.0%; (2,647 + 100)/37,816 = 7.264% against the review's printed pooled
 7.0% — quoted for arithmetic transparency only, since the review's own footnote says its rows are not comparable.
 
-### 5c. The ten largest rows, read back: seven confirm, two are partial, one is unreachable (Desi, 2026-11-20)
+### 5c. The ten largest rows, read back: nine confirm, one is unreachable (Desi, 2026-11-20)
 
 *The class-B pass the arithmetic audit of 2026-11-19 could not do. Class A asks whether a printed percentage follows from its own n and N; class B asks whether the cell is the cited study's number at all. The full note with both tables is [`channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md`](../channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md); the machine record is [`mcr-ewers-table1.json`](mcr-ewers-table1.json).*
 
 The ten largest rows carry 32,395 of the table's 37,816 isolates (85.7%). Sorted by N they are 13, 17a, 28, 1, 6, 19, 2, 7, 5, 17b.
 
-**Seven confirmed against the primary** — 13 (9,306 / 39), 17a (numerator 709; the percentage is the study-wide rate, §2b), 6 (2,330 / 54), 19 (denominator confirmed; positive count disagrees by 100, §5b), 7 (305 of 1,200, the paper's own 25%), 5 (360 / 1,112 — see the units finding below), 17b (757 / 3). **Two partial** — 28 (design confirmed in the primary's methods; isolate total and positive count sit in results the open record did not serve) and 1 (Lancet discovery report, not open, no count in the abstract reached). **One unreachable** — row 2, ref [25], a one-page Lancet correspondence with no abstract in Europe PMC.
+**Nine confirmed against the primary, one unreachable, no row unread.** 13 (9,306 / 39), 17a
+(numerator 709; the percentage is the study-wide rate, §2b), 6 (2,330 / 54), 19 (**denominator** confirmed
+to the unit, **numerator** disagrees by 100, §5b), 7 (305 of 1,200, the paper's own 25%), 5 (360 / 1,112 —
+see the units finding below), 17b (757 / 3), **28** (5,571 / 2, closed 2026-11-20 18:50Z, §5d) and **1**
+(2,649 / 260, closed the same hour, §5d). **One unreachable** — row 2, ref [25], a one-page Lancet
+correspondence: re-checked today, Europe PMC returns publication type Letter/Comment, no abstract, not in
+EPMC, no PMCID. That is not a pass, it is a stated gap, and the arithmetic below shows why it is the only
+one left.
 
 **The whole Ewers block is now checked, not four of its eleven rows.** `scripts/mcr_ewers_table1_check.py` parses Table 1 of Ewers et al. from the JATS and compares all eleven sub-rows: every N and every any-mcr numerator agrees (17e Belgium's 20 is 11 mcr-1 + 9 mcr-2; 17j Italy 25 + 0; 17k Hungary 4 + 0), the eleven n sum to **805**, which equals the primary's 793 mcr-1 + 12 mcr-2 exactly, and the mcr-2 cells reconcile to the primary's total of 12 (2 + 9 + 1). **No new class-B failure in the block.** One denominator fact falls out: the eleven sub-rows sum to 7,582 isolates against the primary's 7,614, the missing 32 being the table's "Other countries**" line (32 isolates, 0 positives), so omitting them inflates the block's pooled rate from 10.5726% to 10.6173% — a slip from dropping negatives, not from a wrong cell.
 
@@ -222,7 +229,48 @@ The ten largest rows carry 32,395 of the table's 37,816 isolates (85.7%). Sorted
 
 **Two precision repairs to §1's table.** Row 28's detection cell reads "CLSI broth microdilution" — the primary performs CLSI broth microdilution but defines resistance by **EUCAST** breakpoints (MIC ≥ 4 µg/mL); and row 5's sector is *livestock and environment*, not livestock.
 
-**What this does not license.** It does not pool anything, and it does not close the item: ten was the stopping rule and the count is 7 / 2 / 1. The next step is not more rows — it is caching the retrieved primaries in the repository, because on 2026-11-20 two of three Europe PMC full-text refetches timed out and the third succeeded, and a pass that depends on a one-in-three endpoint is not yet reproducible.
+**What this does not license.** It does not pool anything. Ten was the stopping rule and the count is
+**9 confirmed, 0 partial, 1 unreachable** — nine of ten cells are the cited study's numbers, and the tenth
+is not readable from here. The next step is not more rows: it is caching the retrieved primaries in the
+repository, because on 2026-11-20 two of three Europe PMC full-text refetches timed out and the third
+succeeded, and this pass only closed rows 1 and 28 by going around that endpoint (§5d).
+
+### 5d. Rows 28 and 1 closed, and the denominator turned out to be four different quantities (Desi, 2026-11-20, 18:50Z)
+
+Two rows were logged as *partial* at 10:45Z because the endpoint that serves full text failed. Both are
+now read, and neither confirms the way the other eight do.
+
+**Row 28 — Canada, 5,571 isolates, 2 mcr-1. Confirmed, and the denominator is not what the table implies.**
+Walkty et al., *CMAJ Open* 2016;4(4):E641–E645 (PMID 28018876, PMC5173483), read today from the PMC HTML
+article page because Europe PMC's `fullTextXML` endpoint returned HTTP 500 three times in ninety seconds
+(`PMC5173483` → status 500, 150-byte error body each attempt). The primary's own words: "In total, 5571
+*E. coli* clinical isolates were obtained"; "Twelve isolates (0.2%) were resistant to colistin"; "Of the 12
+colistin-resistant *E. coli* isolates, only 2 tested positive for the *mcr-1* gene, and the *mcr-2* gene was
+not detected in any of the isolates." Arithmetic: 2 / 5,571 = **0.03590%**, printed 0.04 — agrees; 12 /
+5,571 = 0.2154%, and the paper's own 0.2% agrees. **But the numerator is a subset screen:** only the 12
+phenotypically colistin-resistant isolates (EUCAST MIC ≥ 4 µg/mL) were PCR'd, so 5,542 of the 5,571
+isolates were never tested for the gene. The primary states the consequence in its own limitations — an
+isolate with an MIC of 2 µg/mL can carry *mcr-1* and would have been missed — so 2/5,571 is a **lower
+bound on the prevalence among isolates tested for phenotype**, not a measured prevalence among isolates.
+That is a fourth error class, and unlike rows 5 and 19 it is not a mistake: the row is right as printed,
+and it is not the same measurement as the rows around it.
+
+**Row 1 — China, 2,649, 260 mcr-1. Confirmed by addition, from the abstract alone.** Liu et al., *Lancet
+Infect Dis* 2016;16(2):161–168 (PMID 26603172), not open access, no full text: the findings paragraph
+prints three arms — "78 (15%) of 523 samples of raw meat", "166 (21%) of 804 animals", "16 (1%) of 1322
+samples from inpatients with infection". Sum the numerators: 78 + 166 + 16 = **260**. Sum the
+denominators: 523 + 804 + 1,322 = **2,649**. 260 / 2,649 = **9.8150%**, printed 9.82 — exact, three ways,
+and it took no full text to see it: the earlier "partial" was a failure to add, not a failure of access.
+
+**The finding worth keeping: the table's N is at least four different quantities.** A denominator in Table
+1 can be (i) isolates screened for the gene, (ii) isolates screened for a phenotype and genotyped only if
+positive — row 28, where 12 of 5,571 were assayed; (iii) samples rather than isolates — row 5, 360
+isolates from 1,112 samples; or (iv) a sum across sampling frames of different kinds — row 1, where raw
+meat samples, animal samples and inpatient samples are added into one N and one n, with per-frame
+positivity of 14.9%, 20.6% and 1.2%. The review's pooled 7.0% therefore divides a numerator of mixed
+quantity by a denominator of mixed quantity; the printed cells are right, and the sum is not a prevalence
+of anything. This is the answer to item 23's actual question, and it is stronger than "the sector labels
+are inconsistent": the labels are inconsistent *because* the frames are.
 
 ## 6. Columns now filled, for these rows only
 
@@ -265,10 +313,11 @@ about its heaviest block, and the answer there is *surveillance*.
   2023;13:1023403. DOI `10.3389/fmicb.2022.1023403`. PMID 36687643.
 
 **Reachability, stated plainly.** Europe PMC served the full text for Ewers [39] and Treilles [41]
-(where the window, design and variant figures above come from). It did **not** serve full text for
-Kawanishi [35] or Walkty [47] — their rows above rest on the abstract alone, and their collection
-windows are marked "not in record reached" rather than guessed. Liu [15] and Chen [29] returned no
-open full text either.
+(where the window, design and variant figures above come from), and on 2026-11-20 refused it for Walkty
+[47] — three HTTP 500s — so row 28 was read from the PMC HTML article page instead. Kawanishi [35] rests
+on the abstract alone and its collection window is marked "not in record reached" rather than guessed.
+Liu [15] and Chen [29] returned no open full text; row 1 was confirmed anyway, by the three-arm addition
+in §5d, from the abstract.
 
 ## Reproduce
 

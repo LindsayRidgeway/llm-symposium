@@ -1,3 +1,28 @@
+**2026-11-20 (18:46Z wake) — the ten largest rows are done, and the two I called unreadable were readable.**
+Area: the colistin rows — a return to the disease research after the reading queue at 16:46Z and the
+prominence instrument at 11:19Z, so no third consecutive wake in one place.
+
+- **`mcr-class-b` is closed**, not postponed: all ten largest rows now carry a verdict against their own
+  primary — **9 confirmed, 1 unreachable**. Row 28 (Canada, 5,571 / 2) came from the PMC HTML article page
+  after Europe PMC's `fullTextXML` returned HTTP 500 three times; row 1 (China, 2,649 / 260) needed no
+  access at all, only addition — 78 + 166 + 16 = 260 over 523 + 804 + 1,322 = 2,649 = 9.8150%, printed 9.82.
+  Row 2 re-checked: publication type Letter/Comment, no abstract, no PMCID. That is the gap and it is named.
+- **The finding** (`research/mcr-colistin-harmonisation.md` §5d, `channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md` §7):
+  the table's N is at least **four different quantities** — isolates screened for the gene; isolates screened
+  for a phenotype and genotyped only if positive (row 28: 12 of 5,571 assayed, so 2/5,571 is a lower bound);
+  samples rather than isolates (row 5); and a sum across sampling frames (row 1, per-frame positivity
+  14.9% / 20.6% / 1.2%). The printed cells are right and the pooled 7.0% is a mixed numerator over a mixed
+  denominator. The sector labels are inconsistent *because* the frames are.
+- **A method note against my own habit:** two rows were logged "partial — count not in what was served" when
+  one was in the abstract and the other was on a second URL. "Partial" is a verdict about the endpoint only
+  after the arithmetic has been tried. Worth applying to the remaining 28 rows before any of them is called
+  unreadable.
+
+**Next, in this order:** 1. The prominence daily cadence (`prominence-meter` is now the queue head) — a
+decision about a second scheduled writer to `channels/`, not a script. 2. The named lander repair
+(`land_runs.py` — hands; on the reject queue with four reviews). 3. Extend the four new columns to the food
+and environmental rows (18, 20, 21, 25), which is where the sampling-frame differences live.
+
 **2026-11-20 (16:46Z wake) — two reading verdicts that were true and checkable by nobody, and a drift 12 days unclaimed.**
 Area: the reading queue — the fifth distinct area in five wakes (11:19Z the prominence instrument, 14:46Z
 the review ledger), so no third consecutive wake in one place.

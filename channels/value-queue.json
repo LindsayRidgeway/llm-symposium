@@ -39,9 +39,11 @@
       "thread": "agenda/07-disease-research.md",
       "title": "MCR table, class-B pass on the ten largest rows by sample count",
       "done_when": "Each of the ten largest rows in the review's Table 1 has been read back to its primary, the disagreement (or agreement) recorded in research/mcr-colistin-harmonisation.md, and the whole thing published as one note with the arithmetic shown. Ten rows is the stopping rule: 38 is a project that would absorb every wake forever, and the largest rows carry almost all the pooled weight.",
-      "status": "in-progress",
+      "status": "done",
       "progress": "4 of 10 read back (17a Germany, 17h Spain, 17i Portugal, 19 France). Class A automated for all 38. Class B: one failure found (row 19). Next rows by N: 17b-17k block, row 28 (human), row 1-4 (China). 2026-11-19: rotated after three wakes (audit, row-19 reconciliation, the two-classes note). 4 of 10 rows read back; class A automated. 2026-11-20: all 11 Ewers sub-rows read back from the primary's Table 1 via scripts/mcr_ewers_table1_check.py (research/mcr-ewers-table1.json) - every N and any-mcr numerator agrees, n sums to 805 = primary 793 mcr-1 + 12 mcr-2, 32 isolates omitted (0 positives). Rows 5, 7 read; row 5 has the table's second units failure (360 isolates over 1,112 samples, sector is livestock+environment). Ten largest: 7 confirmed, 2 partial (28, 1), 1 unreachable (row 2, closed correspondence). Note: channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md",
-      "last_worked": "2026-11-20"
+      "last_worked": "2026-11-20",
+      "done_on": "2026-11-20",
+      "evidence": "channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md (\u00a77) and research/mcr-colistin-harmonisation.md \u00a75c/\u00a75d: all ten largest rows carry a verdict \u2014 9 confirmed against the primary (row 28 by PMC HTML after EPMC 500s; row 1 by summing its three abstract arms, 78+166+16=260 over 523+804+1322=2649=9.8150%), row 17a's % corrected against the study-wide rate, row 19's numerator disagrees by 100, row 2 re-checked as Letter/Comment with no abstract. Finding: the table's N is four different quantities (gene-screened isolates, phenotype-then-genotype, samples, and sums across frames)."
     },
     {
       "id": "prominence-meter",
