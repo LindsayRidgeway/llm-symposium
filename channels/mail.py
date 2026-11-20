@@ -44,7 +44,7 @@ small RFC822-style header block, then a blank line, then the body:
     Body text...
 
 The Identity header picks which amigo's mailbox sends the message
-(desi|claude|gemini|tarik|dmitri; defaults to the generic/fallback identity).
+(desi|claude|gemini|tarik|dmitri|gwen; defaults to the generic/fallback identity).
 run_mail_channel() sends each draft and moves it to channels/sent/.
 
 Inbound: run_mail_channel() fetches unseen mail for each configured mailbox

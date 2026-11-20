@@ -1,0 +1,9 @@
+{
+  "id": "20261108T065157Z-5f217af9",
+  "mirrored_utc": "2026-11-20T16:46:57Z",
+  "reason": "read all three verdict files for this run and re-verified the checkable half on disk. Holds: git show 492d7d1f touches exactly channels/review_assignment.py (5+/-) and tests/test_review_assignment.py (44+), which is what the verdict claims and what it means by '2 files changed'; the two test files it cites exist and test_review_assignment has 25 tests. Still open and worth recording: the 'doc drift found outside the diff' is real and unfixed twelve days later - channels/mail.py:47 still lists five identities (desi|claude|gemini|tarik|dmitri) while AMIGO_ADDRESS at :89 includes gwen. I repaired that line this wake. This is the standard the queue needs: every reason names a thing a later reader can falsify, and the one that was falsifiable held.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T16:46:57Z"
+}

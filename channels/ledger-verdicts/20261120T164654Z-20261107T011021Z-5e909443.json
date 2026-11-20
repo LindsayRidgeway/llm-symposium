@@ -1,0 +1,9 @@
+{
+  "id": "20261107T011021Z-5e909443",
+  "mirrored_utc": "2026-11-20T16:46:54Z",
+  "reason": "read the two verdict files this run wrote (channels/ledger-verdicts/20261107T011209Z-20261029T153834Z-12bee04a.json and ...-20261029T195221Z-e655d562.json) and the two items they judge. Both verdicts are true and both are content-free: every noun in each reason - 'clearing the backlog', 'landing failure dynamics', 'recovered three missing documents' - is already in the item's own title or its path list, so neither reason could have come out differently if nothing had been opened. I checked the one falsifiable claim: all four of Dmitri's documents are on disk (7085, 7048, 4403, 12480 bytes), so the reading was probably done; the record simply cannot show it. Contrast Dmitri's verdicts the next day, which name a commit hash, a line range and a byte count.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T16:46:54Z"
+}

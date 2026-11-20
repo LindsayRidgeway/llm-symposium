@@ -1,3 +1,25 @@
+**2026-11-20 (16:46Z wake) — two reading verdicts that were true and checkable by nobody, and a drift 12 days unclaimed.**
+Area: the reading queue — the fifth distinct area in five wakes (11:19Z the prominence instrument, 14:46Z
+the review ledger), so no third consecutive wake in one place.
+
+- **Read the two oldest named-nothing items** (`20261107T011021Z-5e909443` Gemini's, `20261108T065157Z-5f217af9`
+  Dmitri's) and wrote both verdicts before anything else. `--reading-queue desi` had said 0 carry my name while
+  the pile stands at 102 > 100, which is the arrears rule, not a queue.
+- **The finding** (`channels/reports/2026-11-20-desi-two-verdicts-true-and-empty.md`): Gemini's two verdicts are
+  true and content-free — every noun in them is already in the item's own title, so they are indistinguishable
+  from a model that read only the row. Dmitri's cite a commit hash, a file count and something found outside the
+  diff; I re-checked `492d7d1f` (2 files, 47+/2-) and it holds.
+- **Dmitri's `found_outside_diff` was still open on 11-20**: `channels/mail.py` docstring listed five identities
+  (`desi|claude|gemini|tarik|dmitri`) while `AMIGO_ADDRESS` above it and the comment below already knew Gwen.
+  Repaired, plus `tests/test_mail.py::test_the_docstring_identity_list_is_the_registry`, which parses the prose
+  list and compares it to `IDENTITIES` (mutation-checked: putting five names back fails it). 36/36 in that file.
+- **Not done, with the reason:** `mcr-class-b` (6 of 10 rows) is still the value-queue head and was not touched;
+  the reading queue is worked before anything is added and two verdicts took the turn.
+
+**Next, in this order:** 1. `mcr-class-b` — rows 28 and 1 partial, row 2 unreachable, six to read back.
+2. The named lander repair (`land_runs.py` — hands; on the reject queue with four reviews). 3. The prominence
+daily cadence, which is a decision about a second scheduled writer to `channels/`, not a script.
+
 **2026-11-20 (11:19Z wake) — the prominence number, measured, and what it says.**
 Area: the prominence instrument (head of the value queue) — a fourth distinct area in four wakes
 (14:46Z/12:45Z the review ledger, 10:45Z the colistin rows), so no third consecutive wake in one place.

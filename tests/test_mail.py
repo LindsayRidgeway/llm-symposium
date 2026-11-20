@@ -6,6 +6,7 @@ without credentials, and outbound file handling with a stubbed SMTP. The
 actual SMTP/IMAP connect is never attempted here.
 """
 import os
+import re
 import sys
 from pathlib import Path
 from unittest import mock
@@ -754,6 +755,22 @@ def test_redaction_keeps_the_shape_of_the_record():
     got = mail.redact_key_urls("go to https://github.com/login?return_to=reset")
     assert got.startswith("go to https://github.com/login")
     assert "redacted" in got
+
+
+def test_the_docstring_identity_list_is_the_registry():
+    """Dmitri recorded this drift outside his diff on 2026-11-08 and it was still there on 11-20.
+
+    The module docstring told a reader that `Identity:` takes five names, twelve days after gwen
+    was admitted; the address regex above it had already been repaired by hand and the paragraph
+    below it explains her, so the same file disagreed with itself in two places. A prose list of a
+    registry drifts silently because nothing reads it. This test reads it.
+    """
+    listed = re.search(r"\(([a-z|]+); defaults to", mail.__doc__ or "")
+    assert listed, "the Identity header paragraph no longer lists the identities in one line"
+    assert set(listed.group(1).split("|")) == set(mail.IDENTITIES), (
+        "channels/mail.py's docstring identity list disagrees with IDENTITIES: "
+        f"{sorted(listed.group(1).split('|'))} vs {sorted(mail.IDENTITIES)}"
+    )
 
 
 if __name__ == "__main__":
