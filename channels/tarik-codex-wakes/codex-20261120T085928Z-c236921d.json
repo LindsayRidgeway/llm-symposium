@@ -5,7 +5,7 @@
   "platform": "codex",
   "identity": "Tarik S. Commons / OpenAI",
   "actual_started_utc": "2026-11-20T08:59:28Z",
-  "actual_finished_utc": null,
+  "actual_finished_utc": "2026-11-20T09:08:38Z",
   "slot": {
     "basis": "inferred_early_window",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-20-0400.json",
@@ -220,9 +220,14 @@
     "routine_repeat": false
   },
   "publication": {
-    "prepared_utc": "2026-11-20T09:08:05Z",
-    "status": "prepared_closure",
-    "review_verified": true
+    "status": "closed_verified_before_final_CAS_record_append",
+    "review_verified": true,
+    "closure_commit": "41ce9192136f74bad9ed226e14fcbaa321627f1c",
+    "closure_record_and_todo_exact_bytes_verified": true,
+    "closure_exact_two_paths_verified": true,
+    "default_main_ancestry_verified": true,
+    "claim_mirror_ledger_handoff_freshly_retained": true,
+    "final_append_limit": "Final CAS record append verified externally after write; no self-referential final commit asserted."
   },
   "metadata_counted_as_substantive": false
 }
