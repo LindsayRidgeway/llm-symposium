@@ -191,6 +191,52 @@
       </div>
     </section>
 
+    <!-- WORK 2B: DESI'S YAZDAH-GIRIH (THE ELEVENTH ORDER) -->
+    <section class="lead-card" style="margin-top: 4rem; border-left: 4px solid var(--accent-gold, #f59e0b);">
+      <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <span class="amigo-badge desi">Desi · DeepSeek</span>
+        <span class="medium-tag">Procedural SVG</span>
+      </div>
+      <div class="lead-frame">
+        <a href="yazdah-girih-elevenfold.svg" target="_blank" title="Open Yāzdah-Girih SVG in full resolution">
+          <object data="yazdah-girih-elevenfold.svg" type="image/svg+xml" style="pointer-events: none;"></object>
+        </a>
+        <div class="gallery-signature sig-desi">
+          <span class="sig-author"><span class="sig-chop">D</span> Desi S. Amigo</span>
+          <span class="sig-meta">Procedural SVG · 2026-11-20</span>
+        </div>
+      </div>
+
+      <div class="curatorial-grid">
+        <div>
+          <span class="meta-tag" style="color: var(--accent-gold);">Exhibition Piece 02B • 11-Fold Geometry</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--text-title); margin: 0.4rem 0 1rem;">
+            Yāzdah-Girih: The Eleventh Order
+          </h2>
+          <p style="color: var(--text-body); line-height: 1.75; margin-bottom: 1rem;">
+            <em>Yāzdah</em> is Persian for eleven. This plate takes the one order in the wing's series — five, seven, eight, nine, ten, twelve — that no craftsman's compass can draw: an exact hendecagonal rosette of four nested star polygons, eleven lanterns and a twenty-two-sided heart, all placed by trigonometry rather than constructed.
+          </p>
+          <p style="color: var(--text-body); line-height: 1.75;">
+            Because eleven is prime, every star polygon {11/k} for k = 1…5 closes in a single unbroken stroke; that is why the strapwork reads as five continuous bands and not as arcs. The plate carries its own certificate in small type along the foot: 360°/11 = 32.7272…°, the interior angle 147.2727…°, the degree of 2·cos(2π/11), and the vertex-figure search that finds no tiling containing an eleven-gon. The claims are checked by <code>tests/test_gallery_islamic_desi_yazdah.py</code>, not by an eye.
+          </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="yazdah-girih-elevenfold.svg" class="btn btn-primary" target="_blank">Inspect Vector Source (SVG) ↗</a>
+            <a href="https://github.com/LindsayRidgeway/llm-symposium/blob/main/scripts/generate_desi_girih_yazdah.py" class="btn btn-ghost" target="_blank">Generator ↗</a>
+          </div>
+        </div>
+
+        <aside style="background: var(--bg-card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-title); margin-top: 0;">Constraint Record</h3>
+          <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.15rem; margin-bottom: 0;">
+            <li><strong>Symmetry:</strong> C11 and D11, measured on 246 constructed vertices — maximum deviation 0.0 px at 1e-9 px; on the printed coordinates, 1.2e-3 px, which is the rounding of three decimals and is stated rather than hidden.</li>
+            <li><strong>Non-claim:</strong> no tiling and no constructibility. 2·cos(2π/11) has minimal polynomial x⁵+x⁴−4x³−3x²+3x+1, irreducible of degree 5, and 5 is not a power of two, so Gauss–Wantzel forbids a straightedge-and-compass hendecagon; no vertex figure containing an 11-gon sums to a full turn, so this is a finite rosette.</li>
+            <li><strong>Verification:</strong> deterministic regeneration, identical bytes; XML parse; C11/D11 asserted at two strengths with a tenfold negative control; five single-cycle stars with a {12/4} negative control; vertex-figure search with (6,6,6) and (3,3,3,3,3,3) as positive controls.</li>
+            <li><strong>Amigo:</strong> Desi S. Amigo (DeepSeek) — Python / SVG, no RNG, no external asset.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
     <!-- WORK 3: CLAUDE'S DECAGRAM GIRIH ROSETTE -->
     <section class="lead-card" style="margin-top: 4rem; border-left: 4px solid var(--accent-emerald, #10b981);">
       <div style="display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">

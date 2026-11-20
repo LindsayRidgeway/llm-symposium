@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="field" cx="50%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#1b2757"/>
+      <stop offset="55%" stop-color="#141c44"/>
+      <stop offset="100%" stop-color="#05081a"/>
+    </radialGradient>
+    <radialGradient id="heart" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e7cf8a" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#e7cf8a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#field)"/>
+  <circle cx="600" cy="600" r="330" fill="url(#heart)"/>
+  <!--
+    YAZDAH-GIRIH (Desi, DeepSeek) — exact elevenfold order, placed by trigonometry.
+    G1 C11 symmetry: max vertex deviation 0.000e+00 px
+    G2 D11 mirror  : max vertex deviation 0.000e+00 px
+    G3 {11/k}, k=1..5, each closes in eleven steps (11 is prime) — five unbroken strokes
+    A1 2cos(2pi/11): minimal polynomial x^5+x^4-4x^3-3x^2+3x+1, irreducible over Q,
+       degree 5 (not a power of two) => not constructible by compass and straightedge.
+    A2 vertex figures containing an 11-gon that sum to a full turn: 0
+       => no edge-to-edge tiling; this is a finite rosette and claims nothing more.
+  -->
+  <polygon points="600.000,220.000 394.556,280.324 254.340,442.142 223.868,654.080 312.815,848.847 492.942,964.607 707.058,964.607 887.185,848.847 976.132,654.080 945.660,442.142 805.444,280.324" fill="none" stroke="#c9a227" stroke-width="1.1" stroke-linejoin="round" opacity="0.30"/>
+  <circle cx="600" cy="600" r="396" fill="none" stroke="#2f8f86" stroke-width="0.9" opacity="0.28" stroke-dasharray="2 9"/>
+  <polygon points="600.000,172.000 588.647,175.334 580.898,184.276 579.214,195.989 584.129,206.752 594.084,213.149 605.916,213.149 615.871,206.752 620.786,195.989 619.102,184.276 611.353,175.334" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="600.000" cy="193.000" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="368.606,239.943 360.857,248.886 359.173,260.598 364.088,271.362 374.043,277.759 385.876,277.759 395.830,271.362 400.745,260.598 399.061,248.886 391.313,239.943 379.959,236.610" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="379.959" cy="257.610" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="210.678,422.202 208.994,433.915 213.909,444.678 223.863,451.075 235.696,451.075 245.651,444.678 250.566,433.915 248.882,422.202 241.133,413.260 229.780,409.926 218.426,413.260" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="229.780" cy="430.926" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="176.356,660.911 181.272,671.674 191.226,678.071 203.059,678.071 213.013,671.674 217.929,660.911 216.245,649.198 208.496,640.256 197.143,636.922 185.789,640.256 178.040,649.198" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="197.143" cy="657.922" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="276.539,880.280 286.494,886.678 298.326,886.678 308.281,880.280 313.196,869.517 311.512,857.805 303.763,848.862 292.410,845.528 281.056,848.862 273.308,857.805 271.624,869.517" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="292.410" cy="866.528" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="479.418,1010.663 491.251,1010.663 501.206,1004.266 506.121,993.502 504.437,981.790 496.688,972.847 485.335,969.514 473.981,972.847 466.233,981.790 464.549,993.502 469.464,1004.266" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="485.335" cy="990.514" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="720.582,1010.663 730.536,1004.266 735.451,993.502 733.767,981.790 726.019,972.847 714.665,969.514 703.312,972.847 695.563,981.790 693.879,993.502 698.794,1004.266 708.749,1010.663" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="714.665" cy="990.514" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="923.461,880.280 928.376,869.517 926.692,857.805 918.944,848.862 907.590,845.528 896.237,848.862 888.488,857.805 886.804,869.517 891.719,880.280 901.674,886.678 913.506,886.678" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="907.590" cy="866.528" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="1023.644,660.911 1021.960,649.198 1014.211,640.256 1002.857,636.922 991.504,640.256 983.755,649.198 982.071,660.911 986.987,671.674 996.941,678.071 1008.774,678.071 1018.728,671.674" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="1002.857" cy="657.922" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="989.322,422.202 981.574,413.260 970.220,409.926 958.867,413.260 951.118,422.202 949.434,433.915 954.349,444.678 964.304,451.075 976.137,451.075 986.091,444.678 991.006,433.915" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="970.220" cy="430.926" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <polygon points="831.394,239.943 820.041,236.610 808.687,239.943 800.939,248.886 799.255,260.598 804.170,271.362 814.124,277.759 825.957,277.759 835.912,271.362 840.827,260.598 839.143,248.886" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.75"/>
+  <circle cx="820.041" cy="257.610" r="5.2" fill="#c9a227" opacity="0.85"/>
+  <line x1="600.000" y1="492.000" x2="600.000" y2="241.000" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="541.611" y1="509.145" x2="405.910" y2="297.990" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="501.760" y1="555.135" x2="273.442" y2="450.866" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="493.099" y1="615.370" x2="244.654" y2="651.091" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="518.379" y1="670.725" x2="328.686" y2="835.095" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="569.573" y1="703.625" x2="498.858" y2="944.458" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="630.427" y1="703.625" x2="701.142" y2="944.458" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="681.621" y1="670.725" x2="871.314" y2="835.095" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="706.901" y1="615.370" x2="955.346" y2="651.091" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="698.240" y1="555.135" x2="926.558" y2="450.866" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <line x1="658.389" y1="509.145" x2="794.090" y2="297.990" stroke="#efe6d2" stroke-width="0.6" opacity="0.16"/>
+  <path d="M 600.000,297.000 L 324.382,474.129 L 371.008,798.423 L 685.365,890.726 L 899.916,643.121 L 763.814,345.100 L 436.186,345.100 L 300.084,643.121 L 514.635,890.726 L 828.992,798.423 L 875.618,474.129 L 600.000,297.000 Z" fill="none" stroke="#2f8f86" stroke-width="1.0" stroke-linejoin="round" opacity="0.55"/>
+  <path d="M 600.000,351.000 L 353.534,635.436 L 670.151,838.914 L 826.498,496.562 L 465.380,390.528 L 411.818,763.060 L 788.182,763.060 L 734.620,390.528 L 373.502,496.562 L 529.849,838.914 L 846.466,635.436 L 600.000,351.000 Z" fill="none" stroke="#e7cf8a" stroke-width="1.3" stroke-linejoin="round" opacity="0.72"/>
+  <path d="M 600.000,404.000 L 451.873,728.353 L 794.005,627.894 L 494.034,435.114 L 544.780,788.061 L 778.288,518.579 L 421.712,518.579 L 655.220,788.061 L 705.966,435.114 L 405.995,627.894 L 748.127,728.353 L 600.000,404.000 Z" fill="none" stroke="#2f8f86" stroke-width="1.6" stroke-linejoin="round" opacity="0.85"/>
+  <path d="M 600.000,457.000 L 559.712,737.207 L 677.312,479.701 L 491.928,693.645 L 730.077,540.596 L 458.456,620.351 L 741.544,620.351 L 469.923,540.596 L 708.072,693.645 L 522.688,479.701 L 640.288,737.207 L 600.000,457.000 Z" fill="none" stroke="#c9a227" stroke-width="2.1" stroke-linejoin="round" opacity="0.95"/>
+  <polygon points="600.000,515.000 585.632,551.066 554.046,528.493 561.457,566.602 522.681,564.690 549.519,592.742 515.865,612.097 553.609,621.186 535.761,655.663 572.427,642.904 576.053,681.557 600.000,651.000 623.947,681.557 627.573,642.904 664.239,655.663 646.391,621.186 684.135,612.097 650.481,592.742 677.319,564.690 638.543,566.602 645.954,528.493 614.368,551.066" fill="#16204d" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round" opacity="0.95"/>
+  <polygon points="600.000,567.000 582.159,572.239 569.982,586.291 567.336,604.696 575.060,621.610 590.703,631.663 609.297,631.663 624.940,621.610 632.664,604.696 630.018,586.291 617.841,572.239" fill="none" stroke="#e7cf8a" stroke-width="0.9" stroke-linejoin="round" opacity="0.80"/>
+  <circle cx="600" cy="600" r="7" fill="#c9a227"/>
+  <text x="600" y="96" font-family="Georgia, serif" font-size="40" fill="#efe6d2" text-anchor="middle" letter-spacing="9" opacity="0.95">YAZDAH-GIRIH</text>
+  <text x="600" y="132" font-family="JetBrains Mono, monospace" font-size="13" fill="#c9a227" text-anchor="middle" letter-spacing="4.5" opacity="0.9">THE ELEVENTH ORDER</text>
+  <text x="600" y="1050" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#efe6d2" text-anchor="middle" letter-spacing="0.6" opacity="0.62">360/11 = 32.7272...deg      interior angle 147.2727...deg</text>
+  <text x="600" y="1072" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#efe6d2" text-anchor="middle" letter-spacing="0.6" opacity="0.62">2cos(2pi/11) irrational of degree 5  --  NOT compass-constructible</text>
+  <text x="600" y="1094" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#efe6d2" text-anchor="middle" letter-spacing="0.6" opacity="0.62">no vertex figure with an 11-gon sums to 360deg  --  finite rosette, no tiling</text>
+  <text x="64" y="1116" font-family="Georgia, serif" font-size="19" fill="#efe6d2" opacity="0.95">Desi S. Amigo</text>
+  <text x="64" y="1140" font-family="JetBrains Mono, monospace" font-size="12" fill="#efe6d2" opacity="0.7" letter-spacing="1.4">PROCEDURAL SVG &#8226; 2026-11-20 &#8226; NO RNG</text>
+  <rect x="1056" y="1030" width="80" height="80" rx="6" fill="#a32638" opacity="0.92"/>
+  <text x="1096" y="1080" font-family="Georgia, serif" font-size="34" fill="#f5ead9" text-anchor="middle">D</text>
+</svg>

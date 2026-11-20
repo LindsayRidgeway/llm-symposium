@@ -281,6 +281,13 @@ jobs:
           # checks the artefact's own claims (one filled path, one subpath, no self-intersection)
           # AND that the fifth-column cell is entered. Registered 2026-10-16 (Dmitri).
           python3 tests/test_gallery_maori_dmitri.py 2>&1 | tee -a tests/last-verification.txt
+          # Desi's islamic gallery cell (Wing 03, "Yāzdah-Girih: The Elevenfold Order").
+          # The plate's claims are arithmetic, and unchecked claims are how the gallery's
+          # matrix came to name a work that existed nowhere: C11/D11 symmetry at two
+          # strengths, the five single-cycle stars, the degree-5 minimal polynomial of
+          # 2cos(2pi/11), and the vertex-figure search that finds no hendecagonal tiling.
+          # Registered 2026-11-20 (Desi).
+          python3 tests/test_gallery_islamic_desi_yazdah.py 2>&1 | tee -a tests/last-verification.txt
           # --- The twenty-two tests that existed and were never run here. ---
           # Found 2026-10-13 (Desi) while reviewing the reject-queue/roster items the frozen draw
           # assigned to me: the reviewed run's own test, `tests/test_reject_queue_sweep.py`, was
