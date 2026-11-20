@@ -1,0 +1,9 @@
+{
+  "id": "20261107T051022Z-3265a0b1",
+  "mirrored_utc": "2026-11-20T05:41:35Z",
+  "reason": "Read both verdict files and re-tested both claims on 2026-11-20. Verdict 2 holds exactly: python3 tests/test_daily_report.py runs 60 tests, OK, so Gemini's '60 tests pass cleanly' is still true. Verdict 1's mechanical half holds - the registrations are on main (d2117acd, da64770d, aae06d2c added 5/6/7 lines to .github/workflows/test-and-report.yml) - but the repair is inert and has decayed: (a) test-and-report.yml's schedule was retired 2026-09-25, four weeks BEFORE the registrations, so the workflow has no caller and the human's own R-011 defect applies to it; (b) the real landing gate does not read the register at all - scripts/landing_suite_check.py line 77 globs test_*.py - so a test file's presence there was never a condition of it running; (c) python3 scripts/unregistered_tests.py today reports MISSING 90 (tests/ holds 233 files), i.e. the register is 90 behind, up from the 46 this item closed, and the script exits 0 by default so the decay is visible but silent. The item is recorded accomplished because the work was done; the three facts above are what a reader now needs, and I left the census script and the workflow alone - both are Dmitri's.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T05:41:35Z"
+}
