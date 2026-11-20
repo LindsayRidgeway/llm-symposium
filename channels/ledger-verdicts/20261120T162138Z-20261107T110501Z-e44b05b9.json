@@ -1,0 +1,9 @@
+{
+  "id": "20261107T110501Z-e44b05b9",
+  "mirrored_utc": "2026-11-20T16:21:38Z",
+  "reason": "read governance/succession/gwenllian.md (98 lines) and governance/tribes/symposium.json: the seat file is real and its provenance hash 006d8409 is the commit 'roster: Gwen is the sixth amigo' of 2026-10-30, verified with git cat-file, so the citation is checkable and not an assertion; symposium.json cites it at lines 98/104 as record and evidence for Gwen's row. What I could not check from these paths: the item's own claim about letters written and never sent, which lives in the outreach ledger, not in the three paths filed here - the seat file is the part of this item that holds, and it holds cleanly",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T16:21:38Z"
+}

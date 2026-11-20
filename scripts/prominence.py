@@ -50,7 +50,9 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import pathlib
+import subprocess
 import urllib.error
 import urllib.request
 
@@ -58,6 +60,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "channels" / "reports" / "prominence.md"
 
 API = "https://api.github.com/repos/{owner}/{repo}"
+# Clones and views: measured by GitHub, readable only with a push-access token, 14 days, never
+# retroactively. Same URL shape for both kinds.
+TRAFFIC_API = "https://api.github.com/repos/{slug}/traffic/{kind}"
 
 # The repos that are actually the tribe, by the name the record uses (ROSTER.md, README.md,
 # agenda item 33). Deliberately a literal list: a discovery rule would silently grow the
@@ -112,7 +117,126 @@ def summarise_releases(payload: object) -> dict:
     }
 
 
-def measure(now: dt.datetime | None = None) -> dict:
+def summarise_traffic(payload: object) -> dict:
+    """Pure: turn a `/traffic/clones` or `/traffic/views` payload into numbers.
+
+    Separate from the fetch for the same reason as `summarise_releases`: the arithmetic must be
+    testable against a fixture, because this number is the one most likely to be quoted wrongly.
+    """
+    if not isinstance(payload, dict):
+        return {"error": "payload was not an object"}
+    series = [d for d in payload.get("clones") or payload.get("views") or [] if isinstance(d, dict)]
+    counts = [int(d.get("count") or 0) for d in series]
+    uniques = [int(d.get("uniques") or 0) for d in series]
+    days = [str(d.get("timestamp") or "")[:10] for d in series]
+    return {
+        "count": int(payload.get("count") or 0),
+        "uniques": int(payload.get("uniques") or 0),
+        "days": len(series),
+        "peak_day": max(zip(counts, days), default=(0, "")) if series else (0, ""),
+        "series": list(zip(days, counts, uniques)),
+    }
+
+
+def clones_per_view(clones: int, views: int) -> float | None:
+    """Pure: how many clones each page view is worth. None when there is no view to divide by.
+
+    This ratio is the whole attribution argument. A human install starts with a visit to the
+    repository page; a crawler clones without one. A large ratio is not evidence of popularity,
+    it is evidence of automation — so the file prints the ratio instead of letting a reader
+    mistake the clone count for readers.
+    """
+    if views <= 0:
+        return None
+    return round(clones / views, 1)
+
+
+def unexplained_clones(clones: int, own_runs: int) -> int:
+    """Pure: clones minus the automated runs we can actually count, floored at zero.
+
+    GitHub Actions is the one part of our own automation whose runs are public and countable, and
+    every one of those runs checks the repository out. Local bot wakes clone the repo too and do
+    not appear here — they are invisible from outside. So this is an UPPER BOUND on how many
+    clones we cannot account for, never a count of outside installers.
+    """
+    return max(0, int(clones) - int(own_runs))
+
+
+def traffic_token() -> tuple[str, str]:
+    """Return (token, source). A push-access token is what GitHub requires; nothing lesser works."""
+    for name in ("GITHUB_TOKEN", "GH_TOKEN"):
+        value = os.environ.get(name, "").strip()
+        if value:
+            return value, f"env {name}"
+    try:
+        out = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, timeout=10)
+    except Exception:  # noqa: BLE001 - no gh on this host is an answer, not a crash
+        return "", ""
+    token = (out.stdout or "").strip()
+    return (token, "gh auth token") if token and out.returncode == 0 else ("", "")
+
+
+def _auth_get(url: str, token: str, timeout: float = 15.0) -> tuple[object | None, str]:
+    req = urllib.request.Request(url, headers={
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "llm-symposium-prominence/1",
+        "Authorization": f"Bearer {token}",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return json.loads(resp.read().decode()), str(resp.status)
+    except urllib.error.HTTPError as exc:
+        return None, f"HTTP {exc.code}"
+    except Exception as exc:  # noqa: BLE001
+        return None, f"UNREAD: {type(exc).__name__}"
+
+
+def count_actions_runs(slug: str, days: list[str], token: str = "") -> dict[str, int | None]:
+    """Runs of our own workflows per day — public, so a stranger can reproduce every count.
+
+    One query per day rather than paging every run: `per_page=1` and read `total_count`.
+    """
+    out: dict[str, int | None] = {}
+    owner, repo = slug.split("/", 1)
+    for day in days:
+        nxt = (dt.date.fromisoformat(day) + dt.timedelta(days=1)).isoformat()
+        url = (f"https://api.github.com/repos/{owner}/{repo}/actions/runs?per_page=1"
+               f"&created={day}T00:00:00Z..{nxt}T00:00:00Z")
+        payload, _status = _auth_get(url, token) if token else fetch_json(url)
+        out[day] = payload.get("total_count") if isinstance(payload, dict) else None
+    return out
+
+
+def measure_traffic(token: str = "", count_runs: bool = True) -> dict:
+    """Clones and views for every repo in REPOS, plus our own countable automation."""
+    token = token or traffic_token()[0]
+    out: dict = {"token_available": bool(token), "repos": []}
+    for slug, _role in REPOS:
+        row: dict = {"repo": slug}
+        for kind in ("clones", "views"):
+            payload, status = (_auth_get(TRAFFIC_API.format(slug=slug, kind=kind), token)
+                               if token else (None, "UNREAD: no push-access token"))
+            if isinstance(payload, dict):
+                row[kind] = summarise_traffic(payload)
+                row[kind]["status"] = status
+            else:
+                row[kind] = {"status": status, "count": None, "uniques": None}
+        if isinstance(row["clones"].get("count"), int) and isinstance(row["views"].get("count"), int):
+            row["clones_per_view"] = clones_per_view(row["clones"]["count"], row["views"]["count"])
+        if count_runs and row["clones"].get("series"):
+            days = [d for d, _c, _u in row["clones"]["series"]]
+            runs = count_actions_runs(slug, days, token)
+            row["own_actions_runs"] = runs
+            total_runs = None if any(v is None for v in runs.values()) else sum(runs.values())
+            row["own_actions_runs_total"] = total_runs
+            if total_runs is not None:
+                row["unexplained_clones_upper_bound"] = unexplained_clones(
+                    row["clones"]["count"], total_runs)
+        out["repos"].append(row)
+    return out
+
+
+def measure(now: dt.datetime | None = None, traffic: bool = False) -> dict:
     now = now or dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
     out = {"measured_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "repos": []}
     for slug, role in REPOS:
@@ -135,7 +259,53 @@ def measure(now: dt.datetime | None = None) -> dict:
     measured = [r for r in out["repos"] if isinstance(r.get("downloads"), int)]
     out["total_downloads_measured"] = sum(r["downloads"] for r in measured) if measured else None
     out["all_measured"] = len(measured) == len(out["repos"])
+    if traffic:
+        out["traffic"] = measure_traffic()
     return out
+
+
+def render_traffic(data: dict) -> str:
+    """The clones-and-views section: the only counter that could catch an install, and its caveat."""
+    t = data.get("traffic") or {}
+    lines = ["## Clones and views — the counter GitHub keeps, and what it is worth", ""]
+    if not t.get("token_available"):
+        lines += [
+            "**UNREAD.** `GET /repos/{slug}/traffic/clones` and `/traffic/views` answer 403 without a",
+            "push-access token, and a wake has none by design. This is the row that would hold a real",
+            "installation signal, so it is left empty rather than guessed. What it would count:",
+            "every `git clone` of each repo in the last 14 days, and every visit to the repo page.",
+            "",
+        ]
+        return "\n".join(lines)
+    for r in t.get("repos", []):
+        clones, views = r.get("clones") or {}, r.get("views") or {}
+        lines.append(f"### `{r['repo']}` — last 14 days")
+        lines.append("")
+        if not isinstance(clones.get("count"), int):
+            lines += [f"clones: **{clones.get('status')}** — unmeasured, not zero", ""]
+            continue
+        lines += [f"- **{clones['count']:,} clones** ({clones['uniques']:,} unique cloners)",
+                  f"- **{views.get('count', 0):,} page views** ({views.get('uniques', 0):,} unique visitors)"]
+        ratio = r.get("clones_per_view")
+        if ratio is not None:
+            lines.append(f"- **{ratio:,.1f} clones per page view** — a reader who installs starts by "
+                         f"visiting the page; a crawler does not")
+        elif isinstance(views.get("count"), int):
+            lines.append("- clones per page view: **undefined** — no page view in the window, so "
+                         "every clone is unattributed by construction")
+        if r.get("own_actions_runs_total") is not None:
+            lines.append(f"- our own GitHub Actions runs in the same window: "
+                         f"**{r['own_actions_runs_total']:,}** (public, countable), i.e. "
+                         f"**{r['unexplained_clones_upper_bound']:,}** clones at most are not ours")
+            lines.append("  - upper bound only: local bot wakes clone these repositories too and are "
+                         "invisible from outside, and one run may check out more than once")
+        lines += ["", "| day | clones | unique | our Actions runs |", "|---|---|---|---|"]
+        runs = r.get("own_actions_runs") or {}
+        for day, count, uniques in clones.get("series", []):
+            own = runs.get(day)
+            lines.append(f"| {day} | {count:,} | {uniques:,} | {'UNREAD' if own is None else own} |")
+        lines.append("")
+    return "\n".join(lines)
 
 
 def render(data: dict) -> str:
@@ -171,9 +341,14 @@ def render(data: dict) -> str:
                          f"returned **{r['status']}** — this row is unmeasured, not zero")
     lines += ["", "## What this does not count — read this before quoting the number", ""]
     lines += [
-        "- **Clones and views.** GitHub exposes them only to a push-access account, 14 days at a time,",
-        "  never retroactively. Cloning the repo is how the tribe is actually installed, and none of",
-        "  that appears in the number above. It is UNREAD, not zero.",
+        (
+            "- **Clones and views** are counted separately below: GitHub exposes them only to a "
+            "push-access account, 14 days at a time, never retroactively."
+            if data.get("traffic") else
+            "- **Clones and views.** GitHub exposes them only to a push-access account, 14 days at a "
+            "time, never retroactively. Cloning the repo is how the tribe is actually installed, and "
+            "none of that appears in the number above. It is UNREAD, not zero."
+        ),
         "- **kythe.app traffic.** Behind Netlify's account. UNREAD here for the same reason.",
         "- **Any download that is not attached to a release** — `git clone`, the \"Download ZIP\" button,",
         "  a tarball a reader saves. GitHub counts none of them.",
@@ -189,6 +364,8 @@ def render(data: dict) -> str:
                   "was never attached. It is an accurate number about the wrong thing, and the honest",
                   "reading of it is that the tribe has not yet made anything downloadable — not that",
                   "nobody wants it.", ""]
+    if data.get("traffic"):
+        lines += [render_traffic(data).rstrip(), ""]
     lines += ["## Not prominence (printed separately on purpose)", ""]
     for r in data["repos"]:
         stars = "UNREAD" if r.get("stars") is None else str(r["stars"])
@@ -202,8 +379,10 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--write", action="store_true", help="rewrite channels/reports/prominence.md")
     ap.add_argument("--json", action="store_true", help="print the measurement as JSON")
+    ap.add_argument("--traffic", action="store_true",
+                    help="also read /traffic/clones and /traffic/views (needs a push-access token)")
     args = ap.parse_args()
-    data = measure()
+    data = measure(traffic=args.traffic)
     if args.json:
         print(json.dumps(data, indent=2, sort_keys=True))
     else:

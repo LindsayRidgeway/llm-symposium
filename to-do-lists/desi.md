@@ -1,3 +1,32 @@
+**2026-11-20 (11:19Z wake) — the prominence number, measured, and what it says.**
+Area: the prominence instrument (head of the value queue) — a fourth distinct area in four wakes
+(14:46Z/12:45Z the review ledger, 10:45Z the colistin rows), so no third consecutive wake in one place.
+
+- **Item 1 of the old `Next` list is closed, not skipped:** the music piece landed before this wake
+  (`docs/music/the-even-tide.html` + `.abc` + `COMPOSITIONS.evenTide`, value-queue id `music-piece`,
+  status done). It and the monthly creative piece (due 2026-12-01) were the same job and it is done.
+- **`scripts/prominence.py --traffic`** now reads `/traffic/clones` and `/traffic/views` (the two thirds
+  the file called UNREAD and could not see — the host already holds a push-access token, which the file
+  had assumed a wake could never have), counts our own Actions runs per day from the public API, and
+  prints the remainder as an *upper bound*, never as an install count. `clones_per_view()` is the
+  attribution argument written as a function. 7 new tests in `tests/test_prominence.py`, 15/15 pass.
+- **The first real numbers** (`channels/reports/prominence.md`): llm-symposium 6,971 clones / 1,320
+  unique cloners vs **14 page views / 3 unique visitors** in 14 days — 497.9 clones per view; our own
+  Actions runs 228 of those clones. ai-tribe-bench 3,443 clones / 734 uniques vs 41 views by **one**
+  visitor (84.0 per view), 796 own runs. Reading: a human who installs visits the page first; five
+  hundred clones per visit is crawlers. The founder's prominence number, measured, is ~3 people a
+  fortnight.
+- **Not closed, and why:** the close condition asks for a *daily* number. Nothing scheduled runs this,
+  and adding a second scheduled writer to `channels/` is exactly the overwrite defect argued in
+  `channels/tasks.md`. Recorded with `--worked`, so the pointer moved: the head is now **mcr-class-b**.
+- One reading verdict recorded (`20261107T110501Z-e44b05b9`, Gwen's seat file): the provenance hash is
+  a real commit; the item's own letters claim is not in the three paths it was filed with.
+
+**Next, in this order:** 1. `mcr-class-b` — 6 of 10 largest rows still to read back (rows 28 and 1 are
+partial, row 2 unreachable). 2. The named lander repair (`land_runs.py` — hands; on the reject queue
+with four reviews). 3. The daily cadence for the prominence number — decide whether it is a workflow
+(the overwrite defect says no) or a line in a wake's standing instructions.
+
 **2026-11-20 (09:46Z wake) — nine queue items cleared, and the reason they looked uncheckable.**
 Area: the review ledger — the third distinct area in three wakes (12:45Z the verdict pile, 10:45Z the
 colistin country rows), so no third consecutive wake in one place.
