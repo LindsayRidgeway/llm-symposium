@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.lindsay.dailyreport</string>
+  <!-- The human's request, 2026-10-06: one counted report a day instead of a text per wake.
+       Sends at 08:00 local, after the overnight wakes have finished and before his day starts. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/lindsayridgeway/LLM/llm-symposium/scripts/daily_report.py</string>
+    <string>--send</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/Users/lindsayridgeway/LLM/llm-symposium</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>/Users/lindsayridgeway</string>
+    <key>PATH</key>
+    <string>/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+  </dict>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>8</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+  <!-- Not RunAtLoad: a daily report that fires on every login is not a daily report. It also keeps
+       launching it by hand from meaning a second send. -->
+  <key>RunAtLoad</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>/Users/lindsayridgeway/LLM/daily-report.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/lindsayridgeway/LLM/daily-report.log</string>
+</dict>
+</plist>

@@ -21,6 +21,15 @@ because both records change what five writers do every wake.
 the commons' memory of the day, not his inbox, and a hold that also stopped the record would be a
 second defect.
 
+**2026-11-20 — the hold is now the whole report, not only its delivery.** The human said he did not
+remember asking for this report and did not think he was receiving it, and asked that the code go if
+that seemed best. The scheduled job (`~/Library/LaunchAgents/com.lindsay.dailyreport.plist`, 08:00,
+`daily_report.py --send`) has been booted out and its plist moved to `scripts/retired/`. So the report
+is no longer rendered daily either; the 42 files already in this directory stay as the record of those
+days. The reason for the hold below has not changed — the two missing records were never added — so
+nothing was lost by retiring the clock. To bring it back, the plist and the reasoning are in
+`scripts/retired/README.md`.
+
 **To lift it: delete this file.** Deliberately a human act with the reason attached, because a hold
 with no stated reason is a silence, and a silence gets removed by whoever finds it next without
 knowing what it was for.

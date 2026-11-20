@@ -2,6 +2,13 @@
 # Owner: Desi
 """The daily item report — the human's request of 2026-10-06, revised by him on 2026-10-07.
 
+NOT SCHEDULED SINCE 2026-11-20. The launchd job that ran this with `--send` at 08:00 every day has
+been retired (see `scripts/retired/README.md`): its delivery had been held since 2026-10-14 at the
+human's request, and on 2026-11-20 he said he did not remember asking for it and asked that the code
+go if that seemed best. The clock went; this file stayed, because `scripts/world_report.py` imports
+`HUMAN_EMAILS` and `received()` from it and because the vocabulary below is the specification. Run it
+by hand if a day's record is ever wanted.
+
 His first words: stop sending a report of what each wake did; once a day, send counts for the last
 24 hours and for life, for items performed (N), accomplished (A), postponed (P) and rejected (R),
 each split by amigo and by internal/external, plus the titles added in the last 24 hours and the
