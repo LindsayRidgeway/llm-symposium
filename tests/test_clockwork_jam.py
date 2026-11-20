@@ -21,8 +21,8 @@ import clockwork_jam as cj  # noqa: E402
 TODAY = datetime.date(2026, 11, 19)
 
 
-def snap(block, ident="x", when=None):
-    return {"block": block, "id": ident, "when": when, "kind": None}
+def snap(block, ident="x", when=None, size=None):
+    return {"block": block, "id": ident, "when": when, "kind": None, "size": size}
 
 
 class Verdict(unittest.TestCase):
@@ -58,6 +58,21 @@ class Verdict(unittest.TestCase):
                        snap("value", "history-long-piece", "2026-11-20"), TODAY)
         self.assertFalse(v["jam"])
         self.assertIn("last_worked advanced", v["why"])
+
+    def test_the_head_staying_put_while_the_pile_falls_is_not_a_jam(self):
+        """Measured 2026-11-20: the head was an item named to claude, the wake read a different one,
+        and the pile went 102 -> 101. The check called that jammed. In arrears every unread item
+        already carries somebody's name, so the head is a suggestion and the pile is the work.
+        """
+        v = cj.verdict(snap("reading", "20261107T011021Z-5e909443", size=102),
+                       snap("reading", "20261107T011021Z-5e909443", size=101), TODAY)
+        self.assertFalse(v["jam"])
+        self.assertIn("the pile fell", v["why"])
+
+    def test_a_reading_head_with_the_same_pile_is_a_jam(self):
+        v = cj.verdict(snap("reading", "20261107T011021Z-5e909443", size=102),
+                       snap("reading", "20261107T011021Z-5e909443", size=102), TODAY)
+        self.assertTrue(v["jam"])
 
     def test_a_value_item_that_is_the_head_and_unworked_is_a_jam(self):
         v = cj.verdict(snap("value", "history-long-piece", None),

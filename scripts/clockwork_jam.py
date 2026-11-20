@@ -65,12 +65,19 @@ def head(amigo: str, repo: Path = REPO, today: datetime.date | None = None) -> d
             waiting.sort(key=lambda r: r.get("assigned_utc") or r.get("filed_utc") or "")
             return {"block": "review", "id": waiting[0].get("id"), "when": None, "kind": "waiting"}
         reading = il.reading_queue(path, who=amigo)
+        whole = il.reading_queue(path) if not reading else []
         if not reading:
-            whole = il.reading_queue(path)
             if len(whole) > int(getattr(il, "PILE_TARGET", 100)):
                 reading = [r for r in whole if (r.get("amigo") or "") != amigo][:1]
         if reading:
-            return {"block": "reading", "id": reading[0].get("id"), "when": None, "kind": "unread"}
+            # The pile size travels with the head, because in arrears every item already carries
+            # somebody's name and a wake may read any of them. Measured 2026-11-20: the head stayed
+            # 20261107T011021Z-5e909443 (named to claude) while the wake read a different item and
+            # the pile went 102 -> 101 — real work that this check called jammed. A check that cannot
+            # tell "nobody read anything" from "somebody read the second item" fires on healthy
+            # nights, which is the failure this file was written to stop.
+            return {"block": "reading", "id": reading[0].get("id"), "when": None, "kind": "unread",
+                    "size": len(whole)}
         vq = _load("vq_jam", repo / "scripts" / "value_queue.py")
         top = vq.head(vq.load(repo / "channels" / "value-queue.json"))
         if top:
@@ -95,6 +102,13 @@ def verdict(before: dict, after: dict, today: datetime.date | None = None) -> di
                 "why": "the same item is still at the head but it was worked: last_worked advanced "
                        "from %s to %s, and the queue records the work" % (before.get("when"),
                                                                          after.get("when"))}
+    if (after.get("block") == "reading" and before.get("size") is not None
+            and after.get("size") is not None and after["size"] < before["size"]):
+        return {"jam": False,
+                "why": "the same item is still first but the pile fell from %d to %d: something was "
+                       "read, just not the head — in arrears every unread item already carries "
+                       "somebody's name, so the head is a suggestion" % (before["size"],
+                                                                         after["size"])}
     if after.get("block") == "waiting":
         return {"jam": False,
                 "why": "nothing is due, nothing is queued, and the next dated item is %s — the "
