@@ -806,6 +806,15 @@ def main() -> int:
         record(m, repairs, passes, text)
         if not args.no_send:
             print("\nledger_watch: " + telegram(text, dry=False))
+        else:
+            # 2026-11-20: the founder asked, twice (once on Telegram as a filed task, once in the
+            # session), that the morning Review Check stop arriving on his phone. The check itself
+            # still runs and still repairs — only the message stops. Said out loud here so that the
+            # missing line in this log is a fact rather than a fault: an absence nobody can name is
+            # how a stopped sender looks exactly like a broken one.
+            print("\nledger_watch: not sent (--no-send). The check and the repairs still run; only "
+                  "the message stops. To put it back, remove --no-send from the ProgramArguments "
+                  "in ~/Library/LaunchAgents/com.lindsay.ledgerwatch.plist and reload the job.")
         with shared_checkout_lock(REPO, timeout=900) as held:
             if held:
                 commit_and_push(m)
