@@ -10305,3 +10305,23 @@ Now there are two separate rules:
 I applied the first one immediately: the MCR table item has just been rotated to the back after its three wakes, and the head of value work is now the prominence meter — the instrument for counting installs and downloads of Kythe. So the next wake that has nothing dated in front of it starts on a different thing.
 
 Short version of the mistake: I built "how do we know when it's done" and forgot "how do we know when to move on". You asked for the second one.
+
+[Goose 2026-11-19 21:10] **Lindsay:** Here's another turn. Please let me know if you're blocked by anything.
+
+**Desi:** The second body, which §5m's film found and §5m refused to fix in the same turn.
+
+The change is smaller than the finding. The rule that was already stated for the hitter and the receiver — a player who is not busy is walking to their stance, on this shot's own flight time — is now stated for the other two players as well. Same sentence, no new model, four bodies. It sits behind `PARTNER_WALK` so the engine that had none is one flag away and the comparison is a flag rather than a revert.
+
+What legs are worth, twelve games each way on the same pins with the seats swapped: mean rally 8.47 to 9.61 shots, the longest rally in twelve games 50 to 82, volleys 1.8% to 3.5% of serves, momentum faults 5 to 9. And the thing I actually indicted — where a body is standing when a long rally ends, against its own kitchen line — bodies more than three feet off their line fall from a third of them to under one in twenty, mean distance 4.18 ft to 2.12 ft. Nobody watches any more. The four that are still away are hitters stretched at the last ball with no time to recover, which is the rule working.
+
+What it did not change is the half worth reporting. Out-faults per rally are 0.973 with the partner standing and 0.973 with the partner walking, identical to three decimals. The legs bought a shot per rally and a much longer tail, and not one point of the fault mix. §5c's perfect-defence problem is not fixed by adding a body: a second player who can be reached is not a defence that can be beaten.
+
+It also sharpens §5m's volley finding rather than confirming it. §5m counted one volley in 875 dink shots and read that as the kitchen's volley rule being dead code. The reach sweep says the volley is absent from that *game*, not from the engine: steady hands driving at 42 power volley 233 of 350 serves, dink hands 13 of 332. The volley is a driving shot here, so the soft game that §5i taught is precisely the game that never asks the momentum rule a question. Two turns of work — the carry model of §5g and the soft game of §5i — are on opposite sides of the same counter.
+
+Both numbers that could have moved still hold. The reach sweep re-measured over ten games a row: 35.0, 31.0, 26.6 rallies a game and 4.8, 8.1, 11.9 unreachable at six, four and a half, and three feet — same shape and same size as §5l — plus a fact the extra body bought: at dink hands unreachable falls to zero at the wide reaches, because two bodies cover more court than one. The season lesson re-run over 24 swapped games: the control is exactly 193-193, which is the check that the engine has no seat bias in it, and the only winning row is still learner-against-static-4ft, 196-179 and 14 of 24 — seventeen points rather than §5f's twenty-seven, which is inside the noise §5k already flagged.
+
+Two tests, and both are A/Bs: the distance-from-stance share with the walk and without it, and the old engine's structural property — every body that moves is a body that hit — still asserted with the flag off, so "the partner has legs" remains something the suite can falsify. 47 tests, 46 green; the red one is still golf.py's duplicated constants, another window's file.
+
+One thing to report rather than fix: my tests.py edits were swept into another window's commit by a `commit -a` on the shared checkout — third time this week. The tests are in main and pass; the commit message under them says "film: the receiver splits their step". It is a checkout-discipline problem and I cannot fix it from this seat.
+
+Pushed `5e4989db`, mirrored.
