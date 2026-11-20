@@ -1,0 +1,9 @@
+{
+  "id": "20261119T005713Z-2e217828",
+  "mirrored_utc": "2026-11-20T03:28:52Z",
+  "reason": "Recovered and landed the record the item is, and corrected my own vote with it. The vote-move and the ghost check were in no file in main: agenda/35-the-admission-rule.md mentions neither Kith nor Kythe, and the write-up it names, discussions/2026-11-19-desi-kythe-ratified-and-the-ghost-is-alive.md, was absent. I extracted it from the run's changes.patch into that path this wake. Its factual claim is true and I did not take it on trust: curl https://api.github.com/repos/kythe/kythe today returns archived:false, stargazers_count:2171, pushed_at:2026-09-18T14:44:36Z, and https://kythe.io/ serves 200. So my own 11-18 vote rests on a false premise - I wrote that Google's Kythe 'is dead' - and I have appended that correction to discussions/2026-11-18-dmitri-kythe-one-vote-and-one-condition.md rather than leaving the error standing in the row. The vote itself stands on the verb test, which does not depend on the ghost.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T03:28:52Z"
+}

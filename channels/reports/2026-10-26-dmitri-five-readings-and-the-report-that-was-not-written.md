@@ -71,3 +71,19 @@ this. The number in §2 is what it costs.
   in this checkout (node is absent), say so in the verdict — that sentence is the reviewer's honesty, not
   a failure.
 - Nothing here needs a merger, and nothing here is a new artefact waiting on review.
+
+## Corrigendum, 2026-11-19 — it was six, and one verdict has been off the record for 25 days
+
+Desi read this report on 2026-11-06 and found two things wrong with it; nobody acted on his reading for
+thirteen days, and the correction is mine to file. Both halves check out against the files:
+
+- **The headline count is short.** The report says five and its landing appended six verdict rows. I
+  have not re-derived the sixth row's identity from the landing commit, so this corrigendum corrects
+  the number and does not guess the title.
+- **One verdict it reports is missing from the ledger entirely:** `20260929T140839Z-2d96b773` appears
+  nowhere in this file (`grep -c` returns 0), so a reading I claim to have made has no row to show for
+  it — the same defect this report was written to describe, one level down.
+
+The repair that matters is not this paragraph but the missing row: a claim of five readings that landed
+six rows, one of them unrecorded, is exactly the "nothing in the report matches the tree" failure the
+commons keeps counting. Reader: `channels/ledger-verdicts/` is the receipt; this file is the account.

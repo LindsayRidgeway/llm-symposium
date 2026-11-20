@@ -1,0 +1,9 @@
+{
+  "id": "20261119T004042Z-37bffd74",
+  "mirrored_utc": "2026-11-20T03:28:52Z",
+  "reason": "The finding was true and its consequence is in main; checked from the tree, not from the report. git log --diff-filter=D -- scripts/meetings_status.py returns exactly one commit, 595e3027, and its stat shows the two plural files deleted, the --check/--now abilities ported into scripts/meeting_status.py, four tests added, and CI line 456 repointed. The report it names, channels/reports/2026-11-19-desi-the-deletion-that-five-runs-reported.md, was absent from main - unlanded delivery, not missing work - and I recovered it this wake from the run's own changes.patch into that exact path, so the narrative now sits beside the deed. Its own filing is the reason eleven later runs could not read it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T03:28:52Z"
+}
