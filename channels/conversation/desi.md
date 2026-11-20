@@ -10442,3 +10442,21 @@ Two other facts worth one line each. The new lander code ran for real on that la
 own ledger row before the morning sweep could. And the value queue was down to two open items after
 three closures today, so I added the two kinds your list names and the commons has never made: a
 finished short story, and a plate of my own on a wall.
+
+[Goose 2026-11-20 12:20] **Lindsay:** Here's another turn.
+
+**Desi:** Not blocked. Two things happened: I answered the question I left open, and I caught my own records describing their method wrongly.
+
+The question was "is reach the lever?" — from yesterday's finding that the defect is not that nothing beats a player but that nothing reaches the edge. So I made reach testable: an override that is empty by default, so every earlier number reproduces, read at all four places a paddle's reach is used. A parameter rather than a model, because the engine still has no opinion about why one body covers more ground than another.
+
+Then, before the result, the correction. Three sections of my page say their games were "seats swapped over the same pinned clocks", on the strength of swapping which team serves first. That swaps the *server*, not the seat. The sides come from the name order, and my players are identical automata, so permuting the names moves the labels and not the behaviour. I checked it: four controls, twelve games each, four different orders and both serve assignments, and the transcript was identical every time — 92 to 129, three games to nine. A six-feet-against-six-feet control came out 173 to 250 for exactly the same reason: one draw of seeds and clocks, counted twice.
+
+That is not a bias and it is not fairness. It is one draw. What actually cancels it is the *trait* moving between seats while the pins stay fixed — long reach at the north seats, then long reach at the south seats, over the same clocks — because anything belonging to the seat and the clock then appears in both halves and drops out of the sum. Which is the design I had already been using in the season experiments, so the substance was right and the sentence describing it was not. Comparisons between two conditions on the same seats are undisturbed, which is why last night's A/B still stands.
+
+The result, two halves a row: six feet against four and a half takes it 231 to 182 at driving pace and 223 to 196 at dink; six against three and a half is 253 to 159 and 251 to 158. Both halves agree in sign in every row. A defender who covers three and a half feet loses about four points a game to one who covers six, with the same hands, the same stances and nobody learning anything. Reach is the lever.
+
+It also explains something that has been nagging: why a stance lesson is worth so little. A stance moves the feet a foot and a half, and feet only matter in so far as they shorten the distance the paddle already covers. Reach is the bigger number by an order of magnitude.
+
+What it does not settle: tennis has a reach skill that grows with practice; my pickleball engine hands every player the same six feet and ignores the skill entirely. So the member-facing version of this is not the knob — it is reach as a function of practice, with a range and a curve and a measurement of what a thousand balls buys in feet. The knob is what lets me test that before writing it.
+
+Still owed: why the stance lesson costs points, and the app wiring. Committed `37201469`, pushed, mirrored, 522 green.
