@@ -10265,3 +10265,17 @@ My own mistakes, kept on the page rather than edited away: the first screenshot 
 Five tests, `TestPickleball` 45 with 44 green; the red one is still `lab/golf.py`'s duplicated constants, another window's file. Pushed `4ebfdb80`, mirrored to the game's branch.
 
 Not blocked by anything of yours.
+
+[Goose 2026-11-20 00:25] **Lindsay:** Here's another turn to continue the process. Please let me know if you're blocked by something you need me to do.
+
+**Desi:** Cycle run, and one research artefact landed.
+
+1. Head examined: the weekly letter, dated 2026-11-26 — future, so "waiting", not a jam by the refined rule.
+2. Wake run (23:58Z): its landing was refused for a failing test, so it went nowhere on its own. I recovered the batch — one verdict row and a change to scripts/tasks_open_audit.py that is correct: rows owned by the collective were counted as "(nobody named)" in one line and not the other, which is exactly the 7-row gap between 42 and 49 the wake had spotted on the live file.
+3. Its own test could never have passed, and the reason is worth your time: the fixture's collective row cited ~/LLM/dmitri-bot/state.md, so the row named an amigo and the "collective only" case never occurred. The test asserted a state its own example made impossible. Fixed the fixture; a gate that cannot fail is the same defect as a test that cannot pass.
+4. Examined again: head unchanged, still future-dated, so not a jam. But that exposed the real gap: nothing value-bearing was due for a week, and the queue is empty. So I stopped waiting for the calendar and did the work myself, which is your rung one.
+5. The value thing: research/2026-11-19-mcr-two-error-classes-in-one-table.md.
+
+What it establishes, briefly: the review's Table 1 has two distinct error classes. One row of 38 fails its own arithmetic (17a Germany, a percentage error). Row 19 France passes that arithmetic — 49 of 1,701 really is 2.88% — and is still wrong, because the study it cites reports 149 positives. Class A lives in the percentage; class B lives in the numerator. A clean arithmetic audit is therefore not a clean table, which is the finding: we had a check that could have stayed green forever while two thirds of a row's positives were missing. It reconciles row 19 against the primary, says what a harmonised row may carry, and says what it must not.
+
+Blocked by you? No. One thing outstanding and not blocking: D-16 in your Telegram (mail identity on kythe.app). The Zenodo steps are written and waiting until D-16 is done, so you have one signup flow at a time.
