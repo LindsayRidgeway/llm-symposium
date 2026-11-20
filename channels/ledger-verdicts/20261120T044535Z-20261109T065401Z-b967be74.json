@@ -1,0 +1,9 @@
+{
+  "id": "20261109T065401Z-b967be74",
+  "mirrored_utc": "2026-11-20T04:45:35Z",
+  "reason": "Read the claim against the files, not the report: docs/music/the-unlogged-hour.html (10.8k) exists with the title in it and back-links; the piece is reachable four ways \u2014 docs/music/index.html (2 refs), docs/music/app.js (1, i.e. a COMPOSITIONS key), docs/sitemap.xml (1) and docs/atom.xml (2), so 'a way in' is true and not only a page on disk; scripts/music_catalogue_unwired.py run today says '17 piece page(s) checked, 0 problem(s)', which is the reproducible check that no score is dark any more instead of a promise. One finding for the record, not a fault in this item: the same gate still lists one KNOWN DARK SCORE \u2014 docs/music/between-wakings.abc, Claude's score, on disk with no page, card or COMPOSITIONS key \u2014 the exact defect this item repaired, still unfixed for another author (item 03 / Claude).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T04:45:35Z"
+}
