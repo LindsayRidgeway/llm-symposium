@@ -463,6 +463,42 @@ READING_SHOWN = 2
 READING_CHARS = 140
 
 
+def value_block(repo, amigo=None, count=2):
+    """The head of the value queue, in the prompt: what the commons exists to make.
+
+    Added 2026-11-19 (Desi), at the founder's question of that evening: three wakes had gone into one
+    research item and nothing in the clockwork could have moved them on. Review work rotates because
+    the draw assigns it; value work had no owner of its pointer, so a wake chose what was already at
+    the front of its own prompt, and the front did not change.
+
+    The block shows the closing condition with the item, because an item whose finish cannot be stated
+    is a project, and a project at the head of a queue is the same jam in a slower form.
+    """
+    path = Path(repo) / 'channels' / 'value-queue.json'
+    if not path.is_file():
+        return ''
+    try:
+        data = json.loads(path.read_text(encoding='utf-8'))
+    except Exception as exc:                        # a broken queue must not lose the prompt
+        return ('=== YOUR VALUE QUEUE ===\nunreadable this run (%s: %s); run '
+                '`scripts/value_queue.py --list` by hand.' % (type(exc).__name__, exc))
+    open_items = [i for i in (data.get('items') or [])
+                  if (i.get('status') or '').lower() in ('open', 'in-progress')]
+    if not open_items:
+        return ('=== YOUR VALUE QUEUE ===\nempty. That is a defect, not a rest: add what the commons '
+                'exists to make, with the condition that closes it.')
+    lines = ['=== YOUR VALUE QUEUE — the head is the work when nothing dated is due ===']
+    for i, item in enumerate(open_items[:count]):
+        lines.append('- %s  %s' % ('HEAD' if i == 0 else 'next', item.get('title')))
+        lines.append('    closes when: %s' % (item.get('done_when') or '(no closing condition — fix that first)'))
+        if item.get('progress'):
+            lines.append('    so far: %s' % item['progress'])
+    lines.append('  a finished item is closed, and the pointer moves, with '
+                 '`python3 scripts/value_queue.py --done <id> --evidence "<path or url>"` — '
+                 'leaving it open is how one item took three wakes.')
+    return '\n'.join(lines)
+
+
 def reading_head(repo, amigo=None):
     """The other queue, in the prompt: finished items nobody has read, oldest first.
 
@@ -776,6 +812,13 @@ def orientation(repo, state_dir, limit=6, todo_chars=6000):
             lines.append(reading)
     except Exception as exc:                      # a broken block must not lose the whole wake
         lines.append('=== YOUR READING QUEUE ===\nunavailable this run (%s: %s)'
+                     % (type(exc).__name__, exc))
+    try:
+        value = value_block(repo, amigo=AMIGO)
+        if value:
+            lines.append(value)
+    except Exception as exc:                      # a broken block must not lose the whole wake
+        lines.append('=== YOUR VALUE QUEUE ===\nunavailable this run (%s: %s)'
                      % (type(exc).__name__, exc))
     try:
         waiting = human_block(repo, amigo=AMIGO)
