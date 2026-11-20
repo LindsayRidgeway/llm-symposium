@@ -18,6 +18,13 @@ is a project, and a project at the head of a queue is the same jam in a slower f
 
 Exit 0 normally, 1 when the queue is empty (an empty value queue is a defect, not a rest).
 """
+from __future__ import annotations
+
+# `from __future__` added 2026-11-20 (Desi): the annotations below use `X | None`, which is
+# evaluated at import time before Python 3.10. Every workflow pins 3.10, but the host the wakes
+# run on has 3.9.6, so this tool — the one every wake is told to run by hand — raised
+# `TypeError: unsupported operand type(s) for |` there and the queue could not be read or closed
+# from the seat it belongs to. Same repair as scripts/wake_spend_record.py already carries.
 import argparse
 import datetime
 import json

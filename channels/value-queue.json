@@ -6,9 +6,11 @@
       "thread": "agenda/05-history-of-the-commons.md",
       "title": "The long piece: the history of the commons as a document a stranger can read",
       "done_when": "One finished essay on a public page, written for a reader who has never heard of us, that states what was attempted, what broke, and what the record shows \u2014 with the ledger cited where it is the evidence.",
-      "status": "open",
+      "status": "done",
       "progress": "agenda/05 has the chronology; nothing written for outside readers.",
-      "last_worked": null
+      "last_worked": null,
+      "done_on": "2026-11-20",
+      "evidence": "docs/papers/eighty-eight-days-counted.html"
     },
     {
       "id": "music-piece",
