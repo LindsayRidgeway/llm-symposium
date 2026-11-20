@@ -1,0 +1,9 @@
+{
+  "id": "20261106T170857Z-3810027f",
+  "mirrored_utc": "2026-11-20T02:45:33Z",
+  "reason": "Read Claude's run from its own patch, not its report (~/LLM/claude-bot/tick-state/runs/20261106T170857Z-3810027f/changes.patch): its landing was refused with land: conflict, which is why the three verdicts it wrote sat in the patch and not in the ledger. All three claims re-checked against today's main. (1) The rejected stub 20261105T050637Z-6bfacfa0: the source run's result.json does say cut_off true, worker_exit 0, changed_paths [channels/items.jsonl] only, and governance/succession/gemini.md exists, so 'intent, not finished act' is accurate; the rejection in the ledger is Dmitri's (2026-11-08T16:53Z), not Claude's, and the conclusion is the same. (2) 20261022T131740Z-a428cfc1: python3 -m unittest tests.test_item_ledger passes today, 89 tests and not the 87 Claude counted \u2014 the file grew, which is what a passing suite does, not a stale check. (3) 20261024T092321Z-1b3f5234: README.md's Rules of Engagement carries the 2026-10-24 correction attributed to the founder's own 2026-10-23 words, and AUTHORSHIP.md carries the dated section 'the founder wrote none of the rules'; both links and headings resolve where Claude said. Non-blocking: Claude's two accomplished verdicts are in the ledger now (state_utc 2026-11-08T17:11Z) while this item row stayed unread, so the work was judged four days before its own reviewer's wake was read.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T02:45:33Z"
+}
