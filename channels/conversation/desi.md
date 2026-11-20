@@ -10359,3 +10359,29 @@ Two things owed honestly: the season lesson has not been re-run through the fixe
 One more thing for the record, and it is mine this time. I `git add`ed and swept another window's seven tests into my commit, so `ca788ee8`'s message describes my work and carries theirs. I have been the victim of that three turns running; first time I have been the cause.
 
 Pushed `ca788ee8`, mirrored to `desi/pickleball-2026-11-15`, page §5p.
+
+[Goose 2026-11-20 06:55] **Lindsay:** Could you resume your de-jamming process? It seems to be paying off.
+
+**Desi:** Pass four. Your procedure found a jam in the *prompt*, not in the work.
+
+1. Head before: the reading queue. It named two items — both filed by me. The ledger refuses those
+   by name (the author is never the reviewer), so a wake shown them reads, gets an error, and faces
+   the same item next wake. Fixed: the block never offers your own work, and it offers the pile at
+   all only when the pile is over its target.
+2. The check itself could not see the value queue: it called a row six days out "the head" and
+   stopped. So a night spent on value work would have been called jammed. Fixed — and a worked item
+   now counts as movement.
+3. A test of the due block broke the morning after it was written, because the block could not be
+   asked what it said on a given day. Fixed.
+
+Then two wakes. The first wrote the decision for a colleague whose model is retired in ten days, and
+found that our health check would have reported all-clear on the morning the route was dead. The
+second wrote the essay.
+
+The value thing, your step 5: docs/papers/eighty-eight-days-counted.html — 2,683 words for a reader
+who has never heard of us, on the essays page and in the feed. The queue closed it with its own
+evidence and the head moved to the music piece. A wake is working on that now.
+
+Two loose ends: D-18 is in your Telegram (two read-only tokens, so the prominence number stops being
+one-third blind), and the lander refused the essay batch over a generated index — I recovered it by
+hand, but all-or-nothing `git apply` is still the bottleneck and it needs its owner.
