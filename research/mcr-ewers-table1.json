@@ -1,0 +1,290 @@
+{
+ "artifact": "Ewers et al. Table 1 read back against the review's rows 17a-17k (class-B check)",
+ "written": "2026-11-20",
+ "written_by": "Desi (clock wake)",
+ "primary": {
+  "citation": "Ewers C, et al. Occurrence of mcr-1 and mcr-2 colistin resistance genes in porcine Escherichia coli isolates (2010-2020) and genomic characterization of mcr-2-positive E. coli. Front Microbiol 2022;13:1076315.",
+  "pmid": "36569100",
+  "pmcid": "PMC9780603",
+  "doi": "10.3389/fmicb.2022.1076315",
+  "retrieved_from": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9780603/fullTextXML",
+  "retrieved_utc": "2026-11-19T20:31Z",
+  "bytes": 225201,
+  "sha256": "e1304da1e20652743c8ff79079cd0df87c2a2e377014ffd022c97ce34c559219",
+  "table_label": "TABLE 1",
+  "caption": "Frequency of mcr-1 and mcr-2 in E. coli isolates collected from pigs in Germany and other European countries (2010 \u2013 2020)."
+ },
+ "method": "Parse `<table-wrap>` for the caption 'Frequency of mcr-1 and mcr-2'; read the 2010-2017 arm; compare isolates with the seed's N and (mcr-1 + mcr-2) with the seed's n. The review's own column definition is 'isolates carrying any mcr gene variant', so mcr-1 + mcr-2 is the number its cells should hold.",
+ "note_on_refetch": "A refetch on 2026-11-20 timed out (55 s, 0 bytes) from the same endpoint; the bytes parsed here are the 2026-11-19 retrieval. The sha256 is recorded so a later reader can tell whether their copy is the same one.",
+ "rows": [
+  {
+   "seed_row": "17 (a)",
+   "country": "Germany",
+   "primary": {
+    "isolates_2010_2017": 6158,
+    "mcr1_n": 707,
+    "mcr1_pct_printed": 11.5,
+    "mcr2_n": 2,
+    "any_mcr_n": 709,
+    "any_mcr_pct_computed": 11.513478,
+    "isolates_2018_2020": 997
+   },
+   "seed": {
+    "N": 6158,
+    "n": 709,
+    "pct_printed": 10.42
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 11.51,
+   "pct_agrees_with_own_counts": false,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (b)",
+   "country": "The Netherlands",
+   "primary": {
+    "isolates_2010_2017": 757,
+    "mcr1_n": 3,
+    "mcr1_pct_printed": 0.4,
+    "mcr2_n": 0,
+    "any_mcr_n": 3,
+    "any_mcr_pct_computed": 0.396301,
+    "isolates_2018_2020": 131
+   },
+   "seed": {
+    "N": 757,
+    "n": 3,
+    "pct_printed": 0.4
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 0.4,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (c)",
+   "country": "Denmark",
+   "primary": {
+    "isolates_2010_2017": 140,
+    "mcr1_n": 1,
+    "mcr1_pct_printed": 0.7,
+    "mcr2_n": 0,
+    "any_mcr_n": 1,
+    "any_mcr_pct_computed": 0.714286,
+    "isolates_2018_2020": 5
+   },
+   "seed": {
+    "N": 140,
+    "n": 1,
+    "pct_printed": 0.7
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 0.7,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (d)",
+   "country": "Switzerland",
+   "primary": {
+    "isolates_2010_2017": 129,
+    "mcr1_n": 0,
+    "mcr1_pct_printed": 0.0,
+    "mcr2_n": 0,
+    "any_mcr_n": 0,
+    "any_mcr_pct_computed": 0.0,
+    "isolates_2018_2020": 12
+   },
+   "seed": {
+    "N": 129,
+    "n": 0,
+    "pct_printed": 0.0
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 0.0,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (e)",
+   "country": "Belgium",
+   "primary": {
+    "isolates_2010_2017": 113,
+    "mcr1_n": 11,
+    "mcr1_pct_printed": 9.7,
+    "mcr2_n": 9,
+    "any_mcr_n": 20,
+    "any_mcr_pct_computed": 17.699115,
+    "isolates_2018_2020": 18
+   },
+   "seed": {
+    "N": 113,
+    "n": 20,
+    "pct_printed": 17.7
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 17.7,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (f)",
+   "country": "Poland",
+   "primary": {
+    "isolates_2010_2017": 102,
+    "mcr1_n": 9,
+    "mcr1_pct_printed": 8.8,
+    "mcr2_n": 0,
+    "any_mcr_n": 9,
+    "any_mcr_pct_computed": 8.823529,
+    "isolates_2018_2020": 247
+   },
+   "seed": {
+    "N": 102,
+    "n": 9,
+    "pct_printed": 8.8
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 8.8,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (g)",
+   "country": "Austria",
+   "primary": {
+    "isolates_2010_2017": 73,
+    "mcr1_n": 0,
+    "mcr1_pct_printed": 0.0,
+    "mcr2_n": 0,
+    "any_mcr_n": 0,
+    "any_mcr_pct_computed": 0.0,
+    "isolates_2018_2020": 14
+   },
+   "seed": {
+    "N": 73,
+    "n": 0,
+    "pct_printed": 0.0
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 0.0,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (h)",
+   "country": "Spain",
+   "primary": {
+    "isolates_2010_2017": 28,
+    "mcr1_n": 16,
+    "mcr1_pct_printed": 57.1,
+    "mcr2_n": 1,
+    "any_mcr_n": 17,
+    "any_mcr_pct_computed": 60.714286,
+    "isolates_2018_2020": 0
+   },
+   "seed": {
+    "N": 28,
+    "n": 17,
+    "pct_printed": 60.7
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 60.7,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (i)",
+   "country": "Portugal",
+   "primary": {
+    "isolates_2010_2017": 28,
+    "mcr1_n": 17,
+    "mcr1_pct_printed": 60.7,
+    "mcr2_n": 0,
+    "any_mcr_n": 17,
+    "any_mcr_pct_computed": 60.714286,
+    "isolates_2018_2020": 0
+   },
+   "seed": {
+    "N": 28,
+    "n": 17,
+    "pct_printed": 60.7
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 60.7,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (j)",
+   "country": "Italy",
+   "primary": {
+    "isolates_2010_2017": 42,
+    "mcr1_n": 25,
+    "mcr1_pct_printed": 59.5,
+    "mcr2_n": 0,
+    "any_mcr_n": 25,
+    "any_mcr_pct_computed": 59.52381,
+    "isolates_2018_2020": 0
+   },
+   "seed": {
+    "N": 42,
+    "n": 25,
+    "pct_printed": 59.5
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 59.5,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  },
+  {
+   "seed_row": "17 (k)",
+   "country": "Hungary",
+   "primary": {
+    "isolates_2010_2017": 12,
+    "mcr1_n": 4,
+    "mcr1_pct_printed": 33.3,
+    "mcr2_n": 0,
+    "any_mcr_n": 4,
+    "any_mcr_pct_computed": 33.333333,
+    "isolates_2018_2020": 44
+   },
+   "seed": {
+    "N": 12,
+    "n": 4,
+    "pct_printed": 33.33
+   },
+   "n_agrees": true,
+   "any_mcr_agrees": true,
+   "pct_printed_at_decimals": 33.33,
+   "pct_agrees_with_own_counts": true,
+   "status": "agrees"
+  }
+ ],
+ "block_arithmetic": {
+  "seed_rows_labelled_17": 11,
+  "seed_N_sum": 7582,
+  "seed_n_sum": 805,
+  "primary_total_isolates": 7614,
+  "primary_total_mcr1": 793,
+  "primary_total_mcr2": 12,
+  "primary_other_countries_isolates": 32,
+  "primary_other_countries_mcr1": 0,
+  "primary_other_countries_mcr2": 0,
+  "primary_total_any_mcr": 805,
+  "seed_positives_equal_primary_any_mcr": true,
+  "unrepresented_isolates": 32,
+  "primary_pooled_any_mcr_pct": 10.5726,
+  "seed_pooled_any_mcr_pct": 10.6173
+ }
+}

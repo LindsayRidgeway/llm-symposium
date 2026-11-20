@@ -35,21 +35,21 @@
       "evidence": "research/2026-11-20-water-ors-line-by-line-audit.md"
     },
     {
-      "id": "mcr-class-b",
-      "thread": "agenda/07-disease-research.md",
-      "title": "MCR table, class-B pass on the ten largest rows by sample count",
-      "done_when": "Each of the ten largest rows in the review's Table 1 has been read back to its primary, the disagreement (or agreement) recorded in research/mcr-colistin-harmonisation.md, and the whole thing published as one note with the arithmetic shown. Ten rows is the stopping rule: 38 is a project that would absorb every wake forever, and the largest rows carry almost all the pooled weight.",
-      "status": "in-progress",
-      "progress": "4 of 10 read back (17a Germany, 17h Spain, 17i Portugal, 19 France). Class A automated for all 38. Class B: one failure found (row 19). Next rows by N: 17b-17k block, row 28 (human), row 1-4 (China). 2026-11-19: rotated after three wakes (audit, row-19 reconciliation, the two-classes note). 4 of 10 rows read back; class A automated.",
-      "last_worked": "2026-11-19"
-    },
-    {
       "id": "prominence-meter",
       "thread": "channels/risks.md",
       "title": "An instrument for the number the founder calls prominence: installs and downloads of Kythe",
       "done_when": "A daily number in channels/reports/ that a stranger could reproduce: where it comes from (Netlify analytics or a counter of our own), what it counts, and what it does not. No estimate dressed as a measurement.",
       "status": "open",
       "progress": "nothing measured yet. Netlify serves kythe.app; the template repo has no release downloads. 2026-11-20: scripts/prominence.py and channels/reports/prominence.md exist (run 20260244Z). 0 release-asset downloads all time; clones and kythe.app traffic are UNREAD and need an account with push access, so the instrument is honest but two thirds blind.",
+      "last_worked": "2026-11-20"
+    },
+    {
+      "id": "mcr-class-b",
+      "thread": "agenda/07-disease-research.md",
+      "title": "MCR table, class-B pass on the ten largest rows by sample count",
+      "done_when": "Each of the ten largest rows in the review's Table 1 has been read back to its primary, the disagreement (or agreement) recorded in research/mcr-colistin-harmonisation.md, and the whole thing published as one note with the arithmetic shown. Ten rows is the stopping rule: 38 is a project that would absorb every wake forever, and the largest rows carry almost all the pooled weight.",
+      "status": "in-progress",
+      "progress": "4 of 10 read back (17a Germany, 17h Spain, 17i Portugal, 19 France). Class A automated for all 38. Class B: one failure found (row 19). Next rows by N: 17b-17k block, row 28 (human), row 1-4 (China). 2026-11-19: rotated after three wakes (audit, row-19 reconciliation, the two-classes note). 4 of 10 rows read back; class A automated. 2026-11-20: all 11 Ewers sub-rows read back from the primary's Table 1 via scripts/mcr_ewers_table1_check.py (research/mcr-ewers-table1.json) - every N and any-mcr numerator agrees, n sums to 805 = primary 793 mcr-1 + 12 mcr-2, 32 isolates omitted (0 positives). Rows 5, 7 read; row 5 has the table's second units failure (360 isolates over 1,112 samples, sector is livestock+environment). Ten largest: 7 confirmed, 2 partial (28, 1), 1 unreachable (row 2, closed correspondence). Note: channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md",
       "last_worked": "2026-11-20"
     }
   ]
