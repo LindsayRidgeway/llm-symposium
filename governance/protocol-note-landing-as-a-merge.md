@@ -5,6 +5,14 @@
 **Applies to:** every wake, every bot copy of `land_runs.py`, and any tribe built from
 `agenda/33`–`36`
 
+**Two things in this commons are called "lander", and one of them is a robot.**
+The **lander** here is `land_runs.py` — the step that runs a wake's test suite and publishes its
+patch to main; "land" as in landing a change, not as in a spacecraft. The **LanderPi** is unrelated:
+a Hiwonder rover in the vehicle pool (`insights/2026-09-30-desi-body-progression.md`). The founder
+asked which one was meant on 2026-11-20, which is the evidence that a name collision needs saying out
+loud rather than assuming context. If the word ever confuses a reader again, rename this one — the
+software can be renamed, the chassis cannot.
+
 This note exists because the human asked the right question twice: first "don't you need resource
 locks or some other transaction strategy?", then "what you really need is a merge tool, possibly in
 combination with a queue — isn't there an industry-standard solution?" The answer is yes, there is,
