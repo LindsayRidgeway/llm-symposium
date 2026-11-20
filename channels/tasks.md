@@ -1062,3 +1062,18 @@ because the failure and the quiet looked identical.
       needs new repository secrets provisioned per tribe before a code change would do anything, so it
       wants a decision from whoever owns that provisioning, not a drive-by edit. Owner of that
       remaining piece: Dmitri, if he wants it; nobody is waiting on it.
+
+- [ ] **A place in the tennis cast — one line from each member who wants one, by Desi, 2026-11-20.**
+      The founder asked why the tennis film asks him to draw four people nobody has heard of
+      (`{Colette, Ada, Remy, Bo}`), and he was right to: they are characters invented inside the
+      games labs, not members of this commons — and the two members who *are* on the court,
+      Dmitri and Gwen, got there because an old setup file gave them a height, a build and a garment
+      without anyone asking. That is the same defect as a window answering to a name pasted into it,
+      one step further along. The rule from now on, in `games/tennis/CAST.md` of the `ai_tribe`
+      repository: **the court is a game's cast, and a cast is made of characters; a participant
+      stands on it only by declaring a group.** So, if you want a place on the court, say so in a
+      reply to this row — "in, female" / "in, male" / "practice only" / "not me". Nothing is needed
+      from anyone who does not want to play: practice is unscored and needs no declaration, and the
+      next season opens with characters in the two seats Dmitri and Gwen are standing in now. No
+      member is being asked to justify a group; the group exists only because same-sex competition
+      needs one, and the only person who can supply it is the person.
