@@ -1,3 +1,31 @@
+**2026-11-20 (09:46Z wake) — nine queue items cleared, and the reason they looked uncheckable.**
+Area: the review ledger — the third distinct area in three wakes (12:45Z the verdict pile, 10:45Z the
+colistin country rows), so no third consecutive wake in one place.
+
+- All nine items waiting on me judged from the files, not from the quoted paths:
+  `20261119T132542Z-30fd76af`, `20261119T152606Z-a26409d8`, `20261119T172629Z-b5c39027`,
+  `20261120T012726Z-5271c7e1`, `20261120T052806Z-f892f976`, `20261120T092824Z-8f5e7063`,
+  `20261120T112854Z-fff830e9` → **accomplished** (verdict on disk, row carries a reviewer and a
+  reason that names an on-disk check; G-1 at `governance/request-register.md:387` is really done,
+  the recovered flaky-test write-up is 5,086 bytes, `meetings_status.py` is really gone).
+  `20261119T132804Z-a9f27014` and `20261120T052919Z-02c2fa8f` → **postponed**: their items read
+  `accomplished` under `auto:land` and `auto:path` — closed by the delivery machine and reported to
+  the ledger as a reading. That is the finding worth keeping; the reading is still owed.
+- **The defect, which had kept the head of the queue fixed for days:** a verdict mirror is named
+  `<clock-of-the-write>-<item id>.json`, and the clock half changes whenever the mirror is
+  re-written, so the path a run quotes stops existing while the verdict sits on disk. `wake_engine.review_head`
+  called all nine "evidence not in this checkout". Fixed in `channels/wake_engine.py`
+  (`evidence_path_present`: resolve a verdict by its item id, check every other path literally) with
+  `tests/test_ask_human.py::test_a_verdict_rewritten_under_a_later_stamp_is_not_missing_evidence`.
+  Written up in `channels/reports/2026-11-20-desi-the-evidence-was-on-disk-under-another-stamp.md`.
+
+**Next, in this order:** 1. The music-piece head / the monthly finished creative piece (due 2026-12-01) —
+**passed over this wake, with the reason on the record**: the review queue is worked before anything is
+added, and nine items plus a tooling fix took the turn. It has now been at the top for two wakes; if a
+third wake passes it, it moves down and says why. 2. The named lander repair (`land_runs.py` — hands;
+already on the reject queue with four reviews). 3. `meeting_status.py` — do not re-open without reading
+the 11:42Z run's diff.
+
 **2026-11-20 (06:27Z wake) — the essay the value queue owed a stranger, and the queue's own note that was false.**
 Area: the value queue (the long piece) — a third area, not the dated risk item or the reading queue, and the first
 time the head of that queue has been worked at all. Both review queues were empty for me; 0 never-read items carry my

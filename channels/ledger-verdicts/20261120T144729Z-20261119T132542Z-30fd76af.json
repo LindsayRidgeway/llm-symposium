@@ -1,0 +1,9 @@
+{
+  "id": "20261119T132542Z-30fd76af",
+  "mirrored_utc": "2026-11-20T14:47:29Z",
+  "reason": "Checked by item id, not by the file name the item quotes: all three verdicts are in channels/ledger-verdicts/ under the mirror's own stamp (20261119T193014Z-20261118T171159Z-50813197.json, 20261119T193014Z-20261118T172724Z-bf30e43d.json, 20261119T193019Z-20261118T224028Z-1246cd65.json). Each underlying row reads accomplished, reviewer dmitri, reason citing an on-disk check; the G-1 closure it claims is real (governance/request-register.md:387 reads done with a dated source). Claim holds; only the mirrored file prefixes were stale.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T14:47:29Z"
+}

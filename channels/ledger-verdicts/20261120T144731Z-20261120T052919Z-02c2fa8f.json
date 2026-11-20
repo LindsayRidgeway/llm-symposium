@@ -1,0 +1,9 @@
+{
+  "id": "20261120T052919Z-02c2fa8f",
+  "mirrored_utc": "2026-11-20T14:47:31Z",
+  "reason": "Neither named item was read. 20261108T065157Z-5f217af9 reads accomplished by auto:land ('lander's test gate passed') and 20261109T005337Z-14fd6c0f by auto:path ('every path this item names is present on main'); no verdict file exists under any stamp for either. Two items were closed by the delivery machine and reported to this ledger as a reading \u2014 the exact substitution the reading queue was created to end. The reading is still owed.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-20T14:47:31Z"
+}

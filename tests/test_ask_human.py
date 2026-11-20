@@ -252,3 +252,33 @@ class ReviewHead(unittest.TestCase):
         self.assertLess(text.index("old"), text.index("new"))       # oldest first
         self.assertIn("missing-report.md", text)
         self.assertIn("evidence not in this checkout", text)
+
+    def test_a_verdict_rewritten_under_a_later_stamp_is_not_missing_evidence(self):
+        """2026-11-20: nine queue heads in a row were flagged for evidence that was already on disk.
+
+        A mirror's filename leads with the clock of the write, so the path a run quotes stops
+        existing when the file is re-written; the item id, which is the stable half, does not.
+        """
+        import importlib.util
+        import json
+        stamped = "20261119T132832Z-20261118T171159Z-50813197.json"
+        (self.repo / "channels" / "ledger-verdicts" / "20261119T193014Z-20261118T171159Z-50813197.json"
+         ).write_text("{}", encoding="utf-8")
+        rows = [
+            {"id": "stale", "amigo": "dmitri", "filed_utc": "2026-11-19T13:25:42Z",
+             "assigned_to": "desi", "assigned_utc": "2026-11-19T13:25:42Z",
+             "paths": ["channels/ledger-verdicts/" + stamped], "short_title": "cleared the queue"},
+        ]
+        (self.repo / "channels" / "items.jsonl").write_text(
+            "\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        spec = importlib.util.spec_from_file_location("we_rh2", REPO / "channels" / "wake_engine.py")
+        we = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(we)
+        text = we.review_head(str(self.repo), amigo="desi")
+        self.assertIn("1 waiting", text)
+        self.assertNotIn("evidence not in this checkout", text)
+        # the literal check still stands for a path that really is absent
+        self.assertFalse(we.evidence_path_present(str(self.repo), "channels/reports/absent.md"))
+        self.assertFalse(we.evidence_path_present(
+            str(self.repo), "channels/ledger-verdicts/20261119T132832Z-20261107T205044Z-d37ee9e7.json"))
+

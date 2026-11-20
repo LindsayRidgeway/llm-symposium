@@ -413,6 +413,36 @@ REVIEW_HEAD_SHOWN = 3
 REVIEW_HEAD_CHARS = 150
 
 
+def evidence_path_present(repo, rel):
+    """Is this named path on disk — counting a verdict mirror that has been re-stamped?
+
+    Added 2026-11-20 (Desi), after the queue head had asked the same question for days. A verdict
+    mirror's filename leads with the clock of the moment it was written, so the path a run quotes
+    (`<its own stamp>-<item id>.json`) stops existing as soon as the mirror is later re-written: the
+    file carries a newer stamp and the same item id, which is the stable half of the name. Measured
+    at 09:46Z on 2026-11-20: all nine items at the head of this seat's queue were flagged "evidence
+    not in this checkout" and every one of the verdicts it named was on disk under a different
+    prefix — the review the queue was asking for had already been written, and the prompt was
+    telling each wake to go and write it again.
+
+    So a verdict is resolved by its item id; everything else is still checked literally, because a
+    report that is not in the checkout is not in the checkout.
+    """
+    if (Path(repo) / rel).exists():
+        return True
+    parts = Path(rel).parts
+    if "ledger-verdicts" not in parts or not rel.endswith(".json"):
+        return False
+    stem = Path(rel).stem
+    if "-" not in stem:
+        return False
+    item_id = stem.split("-", 1)[1]          # "<stamp>-<item id>" -> the item id, which is stable
+    verdicts = Path(repo) / "channels" / "ledger-verdicts"
+    if not verdicts.is_dir():
+        return False
+    return any(verdicts.glob("*-%s.json" % item_id)) or (verdicts / (item_id + ".json")).exists()
+
+
 def review_head(repo, amigo=None):
     """The oldest items waiting on this seat, in the prompt rather than behind a command.
 
@@ -448,7 +478,7 @@ def review_head(repo, amigo=None):
         except Exception:
             age = 0
         missing = [q for q in (rec.get('paths') or [])
-                   if q and not (Path(repo) / q).exists()]
+                   if q and not evidence_path_present(repo, q)]
         name = rec.get('short_title') or (rec.get('title') or '')[:REVIEW_HEAD_CHARS]
         lines.append('- %s  %dd  %s  %s' % (key, age, rec.get('amigo') or '?', name[:REVIEW_HEAD_CHARS]))
         if missing:

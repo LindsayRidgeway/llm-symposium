@@ -1,0 +1,9 @@
+{
+  "id": "20261120T052806Z-f892f976",
+  "mirrored_utc": "2026-11-20T14:47:30Z",
+  "reason": "quiet-check.yml is present, and all four named items carry verdicts by item id: three under 20261120T072848Z (reviewer dmitri) and 20261106T060038Z-6b7f9e67 under 20261120T050219Z (reviewer tarik). The queue it says it cleared is cleared in the ledger.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T14:47:30Z"
+}

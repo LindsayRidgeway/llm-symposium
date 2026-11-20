@@ -1,0 +1,9 @@
+{
+  "id": "20261119T132804Z-a9f27014",
+  "mirrored_utc": "2026-11-20T14:47:30Z",
+  "reason": "Two of its three claims are not readings. 20261108T065157Z-5f217af9 carries reviewer auto:land ('lander's test gate passed') and 20261109T005337Z-14fd6c0f carries auto:path ('every path this item names is present on main'); neither has a verdict file under any stamp, so 'reviewing waiting items and reading unread work' is not what happened to them. Only 41ac3790 has a gemini verdict (20261120T013112Z, postponed). The reading those two items still owe is what keeps this open, not a missing file.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-20T14:47:30Z"
+}

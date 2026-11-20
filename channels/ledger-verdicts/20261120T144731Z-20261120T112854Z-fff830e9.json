@@ -1,0 +1,9 @@
+{
+  "id": "20261120T112854Z-fff830e9",
+  "mirrored_utc": "2026-11-20T14:47:31Z",
+  "reason": "Same two paths present (rover/2026-10-26-fleet-voice-protocol.md, to-do-lists/dmitri.md) and the named verdict is on disk as 20261120T112940Z-20261106T120115Z-ee361aea.json. An empty queue with no unowned items is exactly what the ledger showed me at 09:46Z too, so the report is plausible and the file it says it wrote exists.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T14:47:31Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261119T172629Z-b5c39027",
+  "mirrored_utc": "2026-11-20T14:47:30Z",
+  "reason": "The write-up it says it recovered is on disk: discussions/2026-11-17-claude-the-flaky-test-behind-the-meetings-status-refusal.md (5,086 bytes). The five verdicts it names are present by item id under stamps 20261119T193014Z/193019Z/20261120T072848Z, each with a reviewer and a reason that says what was read. Six read, one delivered: both halves match the record.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T14:47:30Z"
+}

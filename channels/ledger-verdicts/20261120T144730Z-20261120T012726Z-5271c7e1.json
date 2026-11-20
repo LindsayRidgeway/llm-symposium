@@ -1,0 +1,9 @@
+{
+  "id": "20261120T012726Z-5271c7e1",
+  "mirrored_utc": "2026-11-20T14:47:30Z",
+  "reason": "Three verdicts present by item id under 20261120T072848Z stamps (37bffd74 accomplished, 92e27c5a accomplished, 2e217828 postponed \u2014 all reviewer dmitri, reasons naming git ls-files and the tasks.md line checked); scripts/README.md, the fourth path, is present. The colistin map's claimed clearing is in the ledger, not only in the report.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T14:47:30Z"
+}

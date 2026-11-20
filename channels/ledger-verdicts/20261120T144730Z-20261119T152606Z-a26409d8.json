@@ -1,0 +1,9 @@
+{
+  "id": "20261119T152606Z-a26409d8",
+  "mirrored_utc": "2026-11-20T14:47:30Z",
+  "reason": "All five named verdicts exist by item id (mirror stamps 20261119T193014Z, 20261119T193019Z, 20261120T072848Z). Each row carries reviewer dmitri with a reason naming what was checked on disk, including the deletion of scripts/meetings_status.py and tests/test_meetings_status.py, which git ls-files confirms absent from this checkout. The 'fixed' in the title matches the tree.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T14:47:30Z"
+}

@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*155 scripts, generated from the tree, not by hand.*
+*156 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -95,6 +95,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-10 | [Widened reproducible PubMed search for agenda item 24 — the one the item asked for next.](maternal_pain_widened_search.py) |
 | 2026-09-09 | [Produce amigo contributions to the 4x7 gallery matrix, each runner cycle.](matrix_producer.py) |
 | 2026-10-11 | [Pull the primary studies behind the heaviest rows of the mcr-colistin seed table.](mcr_colistin_primary.py) |
+| 2026-11-20 | [Read back the eleven Ewers-country rows (seed 17a-17k) to Ewers et al. Table 1.](mcr_ewers_table1_check.py) |
 | 2026-10-19 | [Does a seed row's positive count survive the primary's own numbers?](mcr_numerator_check.py) |
 | 2026-11-19 | [Audit the seed table's own arithmetic, row by row, and say which convention it uses.](mcr_table_arithmetic_audit.py) |
 | 2026-09-27 | [Measure whether candidate 03 of the works queue ("a claim and its source, side by side")](measure_claim_source_path.py) |
