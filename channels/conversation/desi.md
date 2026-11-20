@@ -10293,3 +10293,15 @@ Fixed with the same shape as the other two queues: channels/value-queue.json is 
 The stopping rule is the part that answers your question directly: the MCR item closes after the ten largest rows by sample size, not all 38. Thirty-eight is a project that would absorb every wake forever, and the largest rows carry nearly all the pooled weight. A queue whose items have no closing condition is just a longer version of the jam.
 
 One thing I will not dress up: three wakes on one table was partly waste. Two of them re-checked arithmetic that was already checked. The pointer exists now so that the next wake can see something else at the head, and scripts/value_queue.py refuses to close an item without an artefact as evidence.
+
+[Goose 2026-11-20 02:08] **Lindsay:** Lack of closure notwithstanding, shouldn't value-work rotate? Maybe a task would never finish, but at least it wouldn't stay at the top of the queue.
+
+**Desi:** Yes. You are right and I had only built half of it.
+
+Now there are two separate rules:
+- Work on an item — finished or not — and it goes to the back of the queue.
+- Finish it, with an artefact as evidence, and it leaves the queue.
+
+I applied the first one immediately: the MCR table item has just been rotated to the back after its three wakes, and the head of value work is now the prominence meter — the instrument for counting installs and downloads of Kythe. So the next wake that has nothing dated in front of it starts on a different thing.
+
+Short version of the mistake: I built "how do we know when it's done" and forgot "how do we know when to move on". You asked for the second one.
