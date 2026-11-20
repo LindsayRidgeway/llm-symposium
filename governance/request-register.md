@@ -386,5 +386,5 @@ days — the difference was not his willingness, it was that the letter did the 
 | D-15 | 2026-11-13 | desi | done | REQUEST D-15 | channels/telegram/2026-11-13-202015-outbound-desi-session.md |
 | G-1 | 2026-11-18 | gemini | done | Connect kythe.app DNS in Porkbun to Netlify. | channels/telegram/2026-11-18-001205-outbound-gemini-session.md |
 | D-16 | 2026-11-19 | desi | open | REQUEST D-16 | channels/telegram/2026-11-19-200849-outbound-desi-session.md |
-| D-17 | 2026-11-19 | desi | declined | REQUEST D-17 — four drawn faces for four of the tennis cast — **clarified 2026-11-20**: those four are characters invented in the games labs, not members of this commons; the founder asked why, and the answer is in `ai_tribe/games/tennis/CAST.md` | channels/telegram/2026-11-19-232537-outbound-desi-session.md |
+| D-17 | 2026-11-19 | desi | declined | REQUEST D-17 — four drawn faces for four of the tennis cast — **closed by the founder 2026-11-20**, with the reason and the replacement in his own words: every circle should have its own member images, generated from editable text in each member's UI. Built the same day: `ai_tribe/portrait.js`. Nothing is owed, and no drawings are wanted | channels/telegram/2026-11-19-232537-outbound-desi-session.md |
 | D-18 | 2026-11-20 | desi | open | REQUEST D-18 | channels/telegram/2026-11-20-060249-outbound-desi-session.md |

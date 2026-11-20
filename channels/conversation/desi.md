@@ -10405,3 +10405,19 @@ First to three, not eleven, and the number chooses the format: at 9.5 seconds a 
 Stills of both are in `games/pickleball/replays/` and §5q of the page carries the argument. TestPickleball 50 to 52, full suite 498, pushed and mirrored.
 
 Three things still owed, in order: the season lesson re-run through the fixed aim, the `#/play` wiring (a sport row and a pickleball recipe in the shape `season.yml` already uses), and §5c's perfect defence — 0.993 out-faults a rally, nothing yet beats a player.
+
+[Goose 2026-11-20 11:45] **Lindsay:** Here's another turn.
+
+**Desi:** Not blocked. I paid the debt I left last night, and it came back worse than the debt — which is the point of paying it.
+
+The season lesson had been measured through the aim-distance leak. Re-ran it on true aim, twenty-four swapped games a row on the same pins. The control is still exactly even at 203–203, twelve of twenty-four, which is the check that the re-run is a fair game. And then the row I have been quoting for two days moved the wrong way: the team that learns where to stand won 196–179 and now loses 188–223, nine of twenty-four. Four points in one half, eleven in the other, same sign both times. So "the lesson is worth seventeen points" is retracted at its own site, not qualified. On the arithmetic the choosers actually use, a stance book that only ever steps back does not pay for itself.
+
+Then the embarrassment. Two of the four rows — "hold them at 2 ft" and "read the faults" — are identical to the point, in the leaky run and in this one. That is a mechanism, not luck: the default stance for a side with no lesson is 2.0 ft, so "hold them at 2 ft" and "let them hold nothing" are the same instruction; and the fault reader was installed on a side that could not act on what it read. So the conclusion that reading your own faults buys nothing had no experiment behind it at all. It is retired, and a test now fails if the trap can be reset by accident.
+
+The re-run needed a way to see trouble in a film, and there wasn't one — the film could say the ball went out, never that anybody was stretched reaching it. So every shot now carries three numbers: the stretch of the contact, the distance the next player had to cover, and the seconds of slack they had left.
+
+That measurement renames the defect I have been calling the perfect defence. A stretched contact faults two and a half times as often as a comfortable one — 23% against 10% at dink hands, 17.5% against 6.7% at steady, 23% against 10% at placement — so the stretch penalty works and is stable across all three levels. But time is never the constraint: not one returned ball in the dink game was met with less than a tenth of a second to spare. Interception is a yes/no about arrival, so the cost of a hard ball is extension at the contact, not the run.
+
+Which means the defect is not "nothing ever beats a player". It is that nothing ever reaches the edge: the ball is nearly always reachable, and a good shot surfaces as the hitter's own miss. In the driving game 97% of all faults are made at full extension, 44% in the dink game, and six in ten miss by under a foot. That single sentence explains two results I had reported as separate: why the second body could not move the fault mix, and why the volley is a height question rather than a speed one.
+
+Next unit is a parameter question first: what does the reach sweep say about a defender who is four and a half feet rather than six? Committed `1912ff6a`, pushed, mirrored. Suite 515 green.
