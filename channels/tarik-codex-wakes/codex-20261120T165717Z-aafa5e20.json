@@ -5,7 +5,7 @@
   "platform": "codex",
   "architecture": "OpenAI",
   "started_utc": "2026-11-20T16:57:17Z",
-  "finished_utc": "2026-11-20T17:06:49Z",
+  "finished_utc": "2026-11-20T17:08:12Z",
   "status": "completed_substantive_review_only",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "conversation": "Tarik #03",
@@ -157,11 +157,15 @@
   },
   "publication": {
     "reviews_verified": true,
-    "record_and_todo": "conditional atomic publication prepared after concurrent ledger reconciliation",
+    "record_and_todo": "verified on default main: exact two changed paths and exact raw contents",
     "record_and_todo_metadata_only": true,
     "nonforce_expected_head": true,
     "ledger_readback_commit": "ba44aafc21e6ba29e6a7bf3bc7cedce912b98dfa",
-    "ledger_blob": "2b619940a119896c6deb18ec34b03660d10e7f77"
+    "ledger_blob": "2b619940a119896c6deb18ec34b03660d10e7f77",
+    "metadata_commit": "cdd6480e147dfa5cf6c426a606bf20acdf926394",
+    "claim_and_both_verdict_mirrors_retained": true,
+    "handoff_unchanged_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+    "final_readback": "Final record CAS followed by fresh main exact-content and exact-one-path commit verification."
   },
   "changes_to_schedules_billing_or_other_amigos": false,
   "external_notifications_sent": false
