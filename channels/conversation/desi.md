@@ -10247,3 +10247,21 @@ The de-jamming pass itself, honestly:
 - Fix: the due block now names the command at the bottom of the list it is about. Applied to my seat: the promise is recorded done against the audit, and the head moved to 2026-11-26. Deployed to all six.
 
 One honest note on state: the full canonical test list showed exactly one failure, tests/test_gen_index.py, and it passed on the immediate re-run with nothing changed — a race with another amigo's landing, not a defect. That is flakiness I have now seen once and not yet fixed.
+
+[Goose 2026-11-19 19:05] **Lindsay:** Here's another turn. Please let me know if you're blocked by something you need me to do.
+
+**Desi:** Turn 13 closed the last gap the game had: the picture. `lab/pickleball.py` now carries a rally clock and writes a film — every shot's traced path, every position the engine writes to a body stamped with the second it wrote it, one line per rally saying what the rally cost — and `games/pickleball/replays/film-2026-11-19.html` is one game of dink hands baked into a page that fetches nothing and imports nothing, the way the golf page does and the tennis one does not. 25 rallies, 224 shots, 249 moves, 10,091 traced points. Space pauses, arrows change rally, `#r=13&t=4.1` pins a still.
+
+The clock was not a convenience. The engine had no time in it at all: every shot was a fresh measurement against bodies that happened to be standing somewhere. A shot is now struck at `t_now` and the next begins when the ball is *met*, not when it lands. And the volley had to override it, because `interception()` was asked what a ball that is going to land does, and a volley is a contact before the bounce — without the override the film showed a paddle meeting a ball that had already bounced behind it.
+
+The picture then found two things no table had.
+
+Doubles is being played by two people. V1 gave the partner a defined absence, and the film makes it visible: in twelve rallies of six shots or more, fourteen of the forty-eight body-slots are spectators, and a stranded partner can watch a whole point from behind a baseline. That is §5b's defect — a body that is not the player's — surviving in the half of doubles nobody had looked at. Not fixed: giving the partner feet changes where every ball is received and therefore the score, and a renderer that co-authors is not evidence.
+
+And: 875 shots, one volley. Three dink games at 200 balls — 97 serves, 777 groundstrokes, one volley; 95 of 97 rallies ended in somebody's error, nobody was ever beaten by a ball. The kitchen's momentum rule, which §5g spent a whole turn modelling as a velocity rather than a place, is nearly dead code in the game this engine plays best: dinks bounce, and the players stand on the kitchen line, so the shot the sport is famous for never happens. The rule is right and tested; the sport being played never asks it a question. That puts §5g in a different light than §5g put itself, and the page says so in §5m.
+
+My own mistakes, kept on the page rather than edited away: the first screenshot was a blank sky (a canvas is 300×150 until something sizes it), the caption spoilt every rally by printing its ending from the first frame, and every interception wrote a walk even when the player had arrived — 543 moves for a beginner game, most of them zero-length.
+
+Five tests, `TestPickleball` 45 with 44 green; the red one is still `lab/golf.py`'s duplicated constants, another window's file. Pushed `4ebfdb80`, mirrored to the game's branch.
+
+Not blocked by anything of yours.
