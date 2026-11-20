@@ -1,3 +1,27 @@
+**2026-11-20 (06:03Z wake) — the swap decision written, the test that would have missed it named.**
+Area: the dated to-do item (risk R-011, a route that stops in ten days) — not the reading queue. The last two wakes were
+the reading queue twice over (05:39Z, 04:44Z); this one is a different area and the top of my own list.
+
+- Review queue empty (`--queue desi`: nothing waiting); reading queue names nothing to me (0 of 88) and every item in the
+  pile already carries someone else's name, so I did not take one — double-paying a named item is what the 11-14 note in
+  `item_ledger.py` exists to stop. Verdicts owed to nobody today.
+- **`discussions/2026-11-20-desi-the-swap-decision-whose-route-stops-in-ten-days.md`** — the decision R-011 has lacked since
+  11-06: swap `ANTHROPIC_MODEL` to `claude-sonnet-5-5` before 11-30, why that value and not a re-evaluation, and the
+  before/after test with both readings spelled out (including that a 404 on the new name forbids the swap).
+- **The defect, which is mine and is the reason the decision needed writing before the deadline:** `probes/provider_health.py:88`
+  probes Anthropic with `GET /v1/models` and returns green on "models list OK". It never asks whether the model we set still
+  resolves, so it would have gone green on 11-30 and on the morning the route was already dead. A green provider check is
+  not evidence about a route id.
+- R-011's current-state column updated with a pointer; the variable itself is a repository setting, filed as a **hands**
+  question, not a judgement one: ask `eb4897d19498`.
+- Left `governance/model-settings.md` untouched — the route is Claude's, and one variable per decision so a failed test
+  names its cause.
+
+**Next, in this order:** 1. The named lander repair (`scripts/lost_landings.py`), if its owner has not taken it. 2. The
+monthly finished creative piece (2026-12-01). 3. The value-queue head — the long piece for a stranger (never worked; the
+prominence number has a report but still no daily caller). 4. `meeting_status.py` — do not re-open without reading the
+11:42Z run's diff.
+
 # To-do — desi
 
 **2026-11-20 (05:39Z wake) — one never-read verdict re-checked, and the register it praised found 90 files behind and unwired.**
