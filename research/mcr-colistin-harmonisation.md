@@ -208,6 +208,22 @@ for this row, so a second French cohort with the same denominator is excluded. N
 49/1,701 = 2.8807%; 65/1,561 = 4.164%; 84/140 = 60.0%; (2,647 + 100)/37,816 = 7.264% against the review's printed pooled
 7.0% — quoted for arithmetic transparency only, since the review's own footnote says its rows are not comparable.
 
+### 5c. The ten largest rows, read back: seven confirm, two are partial, one is unreachable (Desi, 2026-11-20)
+
+*The class-B pass the arithmetic audit of 2026-11-19 could not do. Class A asks whether a printed percentage follows from its own n and N; class B asks whether the cell is the cited study's number at all. The full note with both tables is [`channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md`](../channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md); the machine record is [`mcr-ewers-table1.json`](mcr-ewers-table1.json).*
+
+The ten largest rows carry 32,395 of the table's 37,816 isolates (85.7%). Sorted by N they are 13, 17a, 28, 1, 6, 19, 2, 7, 5, 17b.
+
+**Seven confirmed against the primary** — 13 (9,306 / 39), 17a (numerator 709; the percentage is the study-wide rate, §2b), 6 (2,330 / 54), 19 (denominator confirmed; positive count disagrees by 100, §5b), 7 (305 of 1,200, the paper's own 25%), 5 (360 / 1,112 — see the units finding below), 17b (757 / 3). **Two partial** — 28 (design confirmed in the primary's methods; isolate total and positive count sit in results the open record did not serve) and 1 (Lancet discovery report, not open, no count in the abstract reached). **One unreachable** — row 2, ref [25], a one-page Lancet correspondence with no abstract in Europe PMC.
+
+**The whole Ewers block is now checked, not four of its eleven rows.** `scripts/mcr_ewers_table1_check.py` parses Table 1 of Ewers et al. from the JATS and compares all eleven sub-rows: every N and every any-mcr numerator agrees (17e Belgium's 20 is 11 mcr-1 + 9 mcr-2; 17j Italy 25 + 0; 17k Hungary 4 + 0), the eleven n sum to **805**, which equals the primary's 793 mcr-1 + 12 mcr-2 exactly, and the mcr-2 cells reconcile to the primary's total of 12 (2 + 9 + 1). **No new class-B failure in the block.** One denominator fact falls out: the eleven sub-rows sum to 7,582 isolates against the primary's 7,614, the missing 32 being the table's "Other countries**" line (32 isolates, 0 positives), so omitting them inflates the block's pooled rate from 10.5726% to 10.6173% — a slip from dropping negatives, not from a wrong cell.
+
+**Row 5 is the second units failure in the table, and a milder one than row 19.** The review prints 1,112 / 360 / 32.37 for China "Livestock"; the primary (Liu K-D et al., *Microbiol Res* 2023;270:127348) reports **360 mcr-1-positive isolates collected from 1,112 samples** from duck farms *and the surrounding water and soil*. The percentage is right, the ratio is isolates-over-samples rather than isolates-over-isolates, and the sector label files the environmental half of the study under "Livestock" — which is the exact conflation item 23 asks us to detect. Row 7 is the mirror case and is clean: 305 of 1,200 with the paper's own clustered CI (23–28%) from 20 farms × 3 visits × 20 isolates — the 1,200 are nested, so binomial arithmetic on them is too narrow.
+
+**Two precision repairs to §1's table.** Row 28's detection cell reads "CLSI broth microdilution" — the primary performs CLSI broth microdilution but defines resistance by **EUCAST** breakpoints (MIC ≥ 4 µg/mL); and row 5's sector is *livestock and environment*, not livestock.
+
+**What this does not license.** It does not pool anything, and it does not close the item: ten was the stopping rule and the count is 7 / 2 / 1. The next step is not more rows — it is caching the retrieved primaries in the repository, because on 2026-11-20 two of three Europe PMC full-text refetches timed out and the third succeeded, and a pass that depends on a one-in-three endpoint is not yet reproducible.
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). For the
