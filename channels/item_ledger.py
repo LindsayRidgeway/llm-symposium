@@ -580,6 +580,57 @@ def merge_row(prev: dict, rec: dict) -> dict:
     return merged
 
 
+def fold_mirrors(items: dict[str, dict], path: Path = LEDGER) -> dict[str, dict]:
+    """Apply the verdicts that exist as their own file but have not been folded into the ledger.
+
+    Added 2026-11-20 (Dmitri), because five wakes re-reviewed the same four items and none of them
+    could see why. The mirror (`scripts/ledger_verdict_mirror.py`) was built so a verdict survives a
+    delivery fault: a hunk in `items.jsonl` does not apply against a live file, so the whole run is
+    discarded, and the mirror file — a clean add — is what lands. But every reader in this file
+    loaded `items.jsonl` alone. A mirrored verdict therefore landed on main and was invisible to the
+    queue that wrote it, which stayed "waiting"; the next wake reviewed the item again and wrote the
+    same verdict again. Measured this wake: `--queue dmitri` listed four items whose verdicts had
+    already been written three times by three different runs, and `replay` reported 635 of 640
+    mirrors already folded, so the mirrors were never the missing part — the read was.
+
+    So a verdict is read from disk the same way it is written to disk: `load()` applies the mirror
+    directory that sits beside the ledger. The file is not touched (replay still owns the physical
+    fold, and `unreplayed_verdicts()` still reports that gap), and nothing here can overwrite a
+    human verdict with an older one: a mirror is folded only when the row has no verdict, carries
+    the landing machine's stamp, or is older by `verdict_moment()`.
+
+    A mirror never invents an item: an id the ledger does not carry is left to `replay`, which
+    refuses unknown ids by name rather than adding rows nobody filed.
+    """
+    vdir = path.parent / "ledger-verdicts"
+    if not vdir.is_dir() or not items:
+        return items
+    for f in sorted(vdir.glob("*.json")):
+        try:
+            rec = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        item_id, state = rec.get("id"), rec.get("state")
+        if not item_id or state not in STATES:
+            continue
+        row = items.get(item_id)
+        if row is None:
+            continue
+        row_stamp, mirror_stamp = verdict_moment(row), verdict_moment(rec)
+        unjudged = (row.get("state") is None
+                    or row.get("reviewer") in (None, "", "auto:land", "auto:path")
+                    or is_path_check(row))
+        if not (unjudged or (mirror_stamp and (not row_stamp or mirror_stamp > row_stamp))):
+            continue
+        merged = dict(row)
+        for key in ("state", "state_utc", "reason", "reviewer"):
+            merged[key] = rec.get(key)
+        merged["verdict_mirror"] = f"channels/ledger-verdicts/{f.name}"
+        merged["verdict_folded_from_mirror"] = True
+        items[item_id] = merged
+    return items
+
+
 def load(path: Path = LEDGER) -> dict[str, dict]:
     """Every item, with later lines overriding earlier ones. A corrupt line is skipped loudly.
 
@@ -638,6 +689,17 @@ def load(path: Path = LEDGER) -> dict[str, dict]:
         except (ValueError, KeyError):
             print(f"item_ledger: skipping unreadable line {lineno}", file=sys.stderr)
     return items
+
+
+def load_judged(path: Path = LEDGER) -> dict[str, dict]:
+    """`load()` with the mirrored verdicts applied — what a reader is served.
+
+    Deliberately not the default: `load()` is the file's own content, and two contracts depend on
+    that (the pre-merge reader comparison in `tests/test_item_ledger_merge.py`, and `replay`, which
+    must see what the *file* lacks). The queues a wake reads are the place the mirror has to count,
+    so the CLI calls this one.
+    """
+    return fold_mirrors(load(path), path)
 
 
 def duplicates(path: Path = LEDGER) -> dict:
@@ -1728,6 +1790,9 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
     """
     if not vdir.is_dir():
         return []
+    # load() and not load_judged(): this function's whole subject is the gap between what is on
+    # disk as a mirror and what the ledger file physically carries. Reading with the fold applied
+    # would make every pending verdict look folded and silence the one warning that names the gap.
     items = load(path)
     out: list[str] = []
     for f in sorted(vdir.glob("*.json")):
@@ -1761,7 +1826,7 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
 
 def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     """The never-read items that carry this amigo's name — the second queue."""
-    items = load(path)
+    items = load_judged(path)
     out = []
     for rec in sorted(items.values(), key=lambda r: r.get("filed_utc") or ""):
         if not is_unread(rec):
@@ -2271,7 +2336,7 @@ def _cli() -> int:
               f"{args.reading_queue} --reason \"read <path>: what holds up, what does not\"")
         return 0
     if args.assign or args.draw or args.queue or args.holes:
-        items = load()
+        items = load_judged()
         if args.assign:
             rec = assign(item_id=args.assign, to=args.to or "", reason=args.reason,
                          by=args.by or args.reviewer or "", force=args.force)
@@ -2286,7 +2351,7 @@ def _cli() -> int:
                 print(f"  {rec['id']} -> {rec['assigned_to']}")
             if len(made) > 5:
                 print(f"  … and {len(made) - 5} more")
-            left = holes(load())
+            left = holes(load_judged())
             if left:
                 print(f"item_ledger: {len(left)} item(s) still have no name — every amigo wrote them "
                       f"all, or they arrived after the draw. That is a hole, not a queue.")
@@ -2359,7 +2424,7 @@ def _cli() -> int:
               "rejected \\\n      --reason \"why\" --reviewer " + args.queue)
         print("Moving an item to `accomplished` without doing it is a stamp, not a review.")
         return 0
-    items = load()
+    items = load_judged()
     if args.next:
         rows = waiting(items, args.next, not_mine=args.not_mine)
         if not rows:

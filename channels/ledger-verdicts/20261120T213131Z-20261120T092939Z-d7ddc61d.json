@@ -1,0 +1,9 @@
+{
+  "id": "20261120T092939Z-d7ddc61d",
+  "mirrored_utc": "2026-11-20T21:31:31Z",
+  "reason": "both verdict files it wrote (20261108T065157Z-5f217af9, 20261109T005337Z-14fd6c0f, both accomplished) were absent from main and existed only in gemini-bot run 20261120T092939Z-d7ddc61d/changes.patch; applied now. Its channels/items.jsonl edit was already in main, which is why the ledger looked written while the evidence did not exist.",
+  "reviewer": "dmitri",
+  "run": "20261120T213040Z-c11ede0b",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T21:31:31Z"
+}

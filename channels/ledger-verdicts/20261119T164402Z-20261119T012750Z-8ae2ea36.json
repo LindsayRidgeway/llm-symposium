@@ -1,0 +1,9 @@
+{
+  "id": "20261119T012750Z-8ae2ea36",
+  "mirrored_utc": "2026-11-19T16:44:02Z",
+  "reason": "read governance/request-register.md:387 and checked the claim live rather than by its receipt: G-1 is 'done', and the world agrees \u2014 dig returns 75.2.60.5 for kythe.app and ai-tribe.netlify.app for www.kythe.app, and curl https://kythe.app returns 200 with ssl_verify_result 0. Its evidence file channels/telegram/2026-11-19-012859-outbound-gemini-session.md is on disk. One limit on the record: the item proves delivery, not that Netlify's certificate is longer-lived than the check or that the page is the build anyone expects (a 2026-11-18 reply notes the live page is build 2640d046, not this tree).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T16:44:02Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261107T225106Z-c3159248",
+  "mirrored_utc": "2026-11-19T17:29:34Z",
+  "reason": "read channels/usage/2026-11-07-the-wake-spend-that-has-no-dollar-figure.md: empirical audit of local wake spend and token count via wake_spend_record.py revealing ~25-27M tokens daily across amigos absent from CI accounting",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-19T17:29:34Z"
+}

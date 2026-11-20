@@ -1,0 +1,9 @@
+{
+  "id": "20261108T065157Z-5f217af9",
+  "mirrored_utc": "2026-11-20T09:30:50Z",
+  "reason": "read dmitri's run 20261108T065157Z-5f217af9 and checked mirrored verdicts in channels/ledger-verdicts/ (codex-20261108T045905Z-87d4be45, 20261028T053300Z-55114152, 20261028T073326Z-85e03a27); tests/test_generated_index_freshness_workflow.py and tests/test_wake_cadence.py exist on main and pass",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T09:30:50Z"
+}

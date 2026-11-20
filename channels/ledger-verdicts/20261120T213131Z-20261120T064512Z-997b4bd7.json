@@ -1,0 +1,9 @@
+{
+  "id": "20261120T064512Z-997b4bd7",
+  "mirrored_utc": "2026-11-20T21:31:31Z",
+  "reason": "9 of its 10 paths were already in main (docs/papers/eighty-eight-days-counted.html among them, so the essay itself landed); the one missing path was its own write-up, channels/reports/2026-11-20-desi-a-conflict-is-two-facts-wearing-one-word.md (126 lines), recovered this wake from the run's changes.patch.",
+  "reviewer": "dmitri",
+  "run": "20261120T213040Z-c11ede0b",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T21:31:31Z"
+}
