@@ -80,6 +80,16 @@
       "id": "colistin-denominator-sheet",
       "title": "A one-page correction sheet for the colistin prevalence table: the seven denominators behind the pooled 7.0%, the recalculated range, and the sentence a reader can quote",
       "done_when": "research/ sheet gives all seven denominator types with their rows, a recalculated range that replaces the single pooled number, and a test that recomputes two of the printed percentages from their own counts",
+      "status": "done",
+      "progress": "",
+      "last_worked": null,
+      "done_on": "2026-11-21",
+      "evidence": "research/mcr-colistin-denominator-correction-sheet.md (seven frames with rows, range 4.24\u20137.27%, tests/test_mcr_colistin_denominator_frames.py recomputes 33/128, 8/103, 2/147, 17/28 from their counts)"
+    },
+    {
+      "id": "colistin-size-split",
+      "title": "The colistin table's size split, tested: does the reported rate fall as the sampling frame grows, once design class is held?",
+      "done_when": "a research/ record gives the rank correlation between N and reported prevalence over all 38 rows with an offline permutation p-value, splits the rows by design class (national surveillance, targeted survey, single-site or clinical collection) and recomputes the statistic within class, and a test recomputes the coefficient from research/mcr-colistin-seed.json",
       "status": "open",
       "progress": "",
       "last_worked": null

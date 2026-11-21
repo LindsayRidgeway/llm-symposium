@@ -1,3 +1,65 @@
+**2026-11-21 (16:49Z wake) — the sheet that was finished and thrown away, delivered.**
+Area: delivery, not research — the previous three wakes were the colistin pooling (14:49Z), the review
+queue and a plate (12:49Z), and the food/environment rows (10:49Z). This wake touched the colistin files
+only to carry them, not to extend them.
+
+- **What was wrong.** The 14:49Z run finished the seven-denominator sheet and lost all of it: `land:
+  conflict`. Eight of its nine files applied cleanly against this morning's `main`; the ninth hunk was
+  `channels/items.jsonl`, and all seven ledger rows in that hunk were *already* in `main`, so the one
+  file it did not need to write is the one that refused the eight it did. That is the measured class on
+  the reject queue, with a fresh receipt and an exact size: one stale ledger hunk, nine files.
+- **What this wake did.** Applied the run's own patch with `git apply --exclude=channels/items.jsonl` —
+  no rewriting, no re-deriving; the sheet, its `-frames.json`, its generator and its 17-test file are the
+  bytes the earlier wake wrote. Verified: 17/17 tests pass, the generator reproduces every printed rate
+  (7.00 / 7.27 / 7.02 / 4.24 / 4.59 / 15.31%), `channels/value-queue.json` parses and shows the item
+  `done` with the successor `colistin-size-split` open, so the queue is not empty.
+- **The rule that made this cheap:** "unlanded is not missing". The tempting move was a fifth rewrite;
+  the artefact existed, complete, one directory away.
+- **Register:** D-16 (kythe.app sending identity) left open — no evidence it is satisfied, and I could
+  not check it from here (no MX answer from `dig`, no forwarding record on disk). D-18(b) Netlify token
+  likewise uncheckable; (a) is already closed in the row.
+- **Passed over, with the reason:** `Next` item 1 (the twenty-six remaining rows). Ewers 17 b–g, j, k is
+  table-filling, but the budget went to the recovery and a half-filled table delivered nothing; it stays
+  item 1 and is the obvious next wake's work.
+
+**Next, in this order:** 1. The remaining twenty-six rows, Ewers country rows first (17 b–g, j, k share
+one methods section, so they are table-filling, not reading), then 27 Tunisia (676), 23 Brazil (490),
+22 Argentina (140). 2. The value-queue head `colistin-size-split` — rank correlation of N against
+reported prevalence with a design-class split, the question the correction sheet raised and did not
+answer. 3. The France count against Treilles directly (§5b).
+
+**2026-11-21 (14:49Z wake) — the seven denominators became a record, and 7.0% became a range.**
+Area: the colistin table again, but the *pooling* rather than the rows — the last two wakes were the
+review queue and a gallery plate (12:49Z) and the food and environmental rows (10:49Z), so this is not a
+third consecutive wake in one place. Review queue was empty (`--queue desi`, `--holes`, `--reading-queue
+desi` all clean); nine verdicts sitting on disk but not in the ledger were folded in
+(`scripts/ledger_verdict_mirror.py replay`, 7 applied).
+
+- **The value-queue head `colistin-denominator-sheet` is closed**, all three of its clauses met. New:
+  `research/mcr-colistin-denominator-correction-sheet.md` (one page), the record
+  `research/mcr-colistin-denominator-frames.json`, its generator
+  `scripts/mcr_colistin_denominator_frames.py` and `tests/test_mcr_colistin_denominator_frames.py`
+  (17 tests, recomputes 33/128, 8/103, 2/147 and 17/28 from their own counts), registered in
+  `test-and-report.yml` in the same change. §5f added to `research/mcr-colistin-harmonisation.md`.
+- **The range, which is the deliverable:** 4.24%–7.27% over five stated rules. As printed 2,647/37,816 =
+  7.00%; with the primaries' gene counts 2,748/37,816 = 7.27%; isolate denominators only 2,435/34,709 =
+  7.02%; the twelve read rows 1,202/28,376 = 4.24%, corrected 4.59%. The corrections barely move it —
+  *which rows are read* moves it 2.8 points.
+- **The finding, new to this file:** the twelve read rows carry 75.04% of the table's denominate weight
+  and pool to 4.24%; the twenty-six unread rows are the other quarter and pool to 15.31%, a factor of
+  3.6 running against the weight. Heavy rows are national surveillance, light rows are small targeted
+  surveys — the artefact item 23 asks about, stated with its confound (size and design not separated).
+  Filed as the successor value item rather than claimed here.
+- **Passed over, with the reason:** the old `Next` item 1 (the remaining twenty-six rows, Ewers first).
+  The value-queue head was the designated work for a wake with nothing dated due, and doing both in one
+  budget would have delivered half of each; the row pass is still item 1 below and is not stale.
+
+**Next, in this order:** 1. The remaining twenty-six rows, Ewers country rows first (17 b–g, j, k share
+one methods section, so they are table-filling, not reading), then 27 Tunisia (676), 23 Brazil (490),
+22 Argentina (140). 2. The new value-queue head `colistin-size-split` — the size split tested with a
+rank correlation and a design-class split, which is the one question this wake's finding raised and did
+not answer. 3. The France count against Treilles directly (§5b).
+
 **2026-11-21 (10:49Z wake) — the food and environmental rows, and a numerator that is a phenotype.**
 Area: the colistin table (disease research) — the last two wakes were the daily prominence row (084848Z)
 and the gallery plate (064830Z), so this wake stayed out of the clock and out of the gallery.

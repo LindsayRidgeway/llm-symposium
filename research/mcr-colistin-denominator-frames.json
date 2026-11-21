@@ -1,0 +1,384 @@
+{
+ "artifact": "The seven denominators behind the colistin table's pooled 7.0%, and the range that replaces it",
+ "written": "2026-11-21",
+ "written_by": "Desi (clock wake 20261121T144924Z-5987a5f0)",
+ "agenda_item": 23,
+ "companion_prose": "research/mcr-colistin-denominator-correction-sheet.md",
+ "generated_by": "scripts/mcr_colistin_denominator_frames.py --write",
+ "inputs": {
+  "table_transcription": "research/mcr-colistin-seed.json",
+  "read_back_record": "research/mcr-colistin-harmonisation.md (§5d, §5e)",
+  "arithmetic_audit": "research/mcr-colistin-table-arithmetic.json"
+ },
+ "note": "Nothing is re-fetched here. These are counts already on disk, re-pooled.",
+ "frame_count": 7,
+ "frames": [
+  {
+   "id": 1,
+   "frame": "isolates screened for the gene",
+   "rows": [
+    "13",
+    "6",
+    "17 (a)",
+    "17 (h)",
+    "17 (i)",
+    "19"
+   ],
+   "note": "The frame the review's own table note claims for the whole column: (n/N) x 100 for 'isolates carrying any mcr gene variant'. Row 19 is only half in it: its N counts animal observations (1,561 breeding animals + 140 fattening observations from 50 kids) while its n counts mcr-1-positive isolates, so it is frame 1's numerator over frame 3's denominator."
+  },
+  {
+   "id": 2,
+   "frame": "isolates screened for a phenotype, genotyped only if positive",
+   "rows": [
+    "28",
+    "21"
+   ],
+   "note": "Row 28 screened 5,571 isolates for colistin resistance (MIC >= 4) and ran mcr-1 PCR on the 12 that were resistant, so its N is a phenotype screen and its n a genotype find. Row 21 is the same order at the host level."
+  },
+  {
+   "id": 3,
+   "frame": "hosts (animals and humans enrolled), not isolates",
+   "rows": [
+    "21"
+   ],
+   "note": "227 is 102 animals + 125 humans in 80 households; the 12 are positive hosts, and the study reports 17 mcr-1 isolates across repeated timepoints. Same study, three possible rates."
+  },
+  {
+   "id": 4,
+   "frame": "samples or products, not isolates",
+   "rows": [
+    "18",
+    "5"
+   ],
+   "note": "Row 18's 128 are retail poultry products bought in Switzerland and southern Germany; row 5's 1,112 are duck-farm samples. Neither is a count of isolates."
+  },
+  {
+   "id": 5,
+   "frame": "one recovered isolate per positive sample",
+   "rows": [
+    "20"
+   ],
+   "note": "570 retail meat samples were collected; 147 yielded E. coli and one isolate per positive sample was kept. The 147 is therefore neither the samples nor the isolates present in them."
+  },
+  {
+   "id": 6,
+   "frame": "colistin-selected mixed-species isolates",
+   "rows": [
+    "25"
+   ],
+   "note": "103 isolates (52 soil, 31 water, 20 manure) recovered from 40 environmental samples at 8 sites after colistin-containing selective culture. Because the medium selects the phenotype, an mcr-carrying but colistin-susceptible isolate could not have been recovered at all."
+  },
+  {
+   "id": 7,
+   "frame": "a sum across sampling frames",
+   "rows": [
+    "1"
+   ],
+   "note": "2,649 = 523 raw-meat isolates + 804 animal isolates + 1,322 inpatient isolates, three different populations added into one N and one n."
+  }
+ ],
+ "pools": {
+  "as_printed": {
+   "numerator": 2647,
+   "denominator": 37816,
+   "pct": 6.999682674000423
+  },
+  "gene_corrected": {
+   "numerator": 2748,
+   "denominator": 37816,
+   "pct": 7.2667653903109795
+  },
+  "isolates_only": {
+   "numerator": 2435,
+   "denominator": 34709,
+   "pct": 7.0154714915439795
+  },
+  "read_twelve_as_printed": {
+   "rows": 12,
+   "numerator": 1202,
+   "denominator": 28376,
+   "pct": 4.235974062588102
+  },
+  "read_twelve_gene_corrected": {
+   "rows": 12,
+   "numerator": 1303,
+   "denominator": 28376,
+   "pct": 4.591908655201578
+  },
+  "unread_twenty_six": {
+   "rows": 26,
+   "numerator": 1445,
+   "denominator": 9440,
+   "pct": 15.307203389830509
+  }
+ },
+ "recalculated_range_pct": [
+  4.235974062588102,
+  7.2667653903109795
+ ],
+ "size_split": {
+  "read_twelve_share_of_N": 75.03702136661731,
+  "ratio_read_to_unread": 0.2767307622894926
+ },
+ "per_row_frames": [
+  {
+   "row": "13",
+   "country": "Japan",
+   "sector": "Livestock",
+   "printed_pct": 0.42,
+   "frames": [
+    {
+     "numerator": 39,
+     "denominator": 9306,
+     "counts": "isolates gene-screened (printed)",
+     "pct": 0.4190844616376531
+    }
+   ],
+   "spread_x": 1.0
+  },
+  {
+   "row": "17 (a)",
+   "country": "Germany",
+   "sector": "Livestock",
+   "printed_pct": 10.42,
+   "frames": [
+    {
+     "numerator": 709,
+     "denominator": 6158,
+     "counts": "any-mcr isolates (printed numerator; printed % is the study-wide rate)",
+     "pct": 11.513478402078597
+    }
+   ],
+   "spread_x": 1.0
+  },
+  {
+   "row": "28",
+   "country": "Canada",
+   "sector": "Human",
+   "printed_pct": 0.04,
+   "frames": [
+    {
+     "numerator": 2,
+     "denominator": 5571,
+     "counts": "isolates phenotype-screened (printed)",
+     "pct": 0.03590019745108598
+    },
+    {
+     "numerator": 2,
+     "denominator": 12,
+     "counts": "colistin-resistant isolates genotyped",
+     "pct": 16.666666666666668
+    }
+   ],
+   "spread_x": 464.25
+  },
+  {
+   "row": "1",
+   "country": "China",
+   "sector": "Raw meat, livestock, and human",
+   "printed_pct": 9.82,
+   "frames": [
+    {
+     "numerator": 260,
+     "denominator": 2649,
+     "counts": "three frames summed (printed)",
+     "pct": 9.815024537561344
+    },
+    {
+     "numerator": 78,
+     "denominator": 523,
+     "counts": "raw-meat frame",
+     "pct": 14.91395793499044
+    },
+    {
+     "numerator": 166,
+     "denominator": 804,
+     "counts": "animal frame",
+     "pct": 20.64676616915423
+    },
+    {
+     "numerator": 16,
+     "denominator": 1322,
+     "counts": "inpatient frame",
+     "pct": 1.2102874432677762
+    }
+   ],
+   "spread_x": 17.059390547263682
+  },
+  {
+   "row": "6",
+   "country": "China",
+   "sector": "Livestock",
+   "printed_pct": 2.32,
+   "frames": [
+    {
+     "numerator": 54,
+     "denominator": 2330,
+     "counts": "isolates gene-screened (printed)",
+     "pct": 2.3175965665236054
+    }
+   ],
+   "spread_x": 1.0
+  },
+  {
+   "row": "19",
+   "country": "France",
+   "sector": "Livestock",
+   "printed_pct": 2.88,
+   "frames": [
+    {
+     "numerator": 49,
+     "denominator": 1701,
+     "counts": "printed numerator",
+     "pct": 2.880658436213992
+    },
+    {
+     "numerator": 149,
+     "denominator": 1701,
+     "counts": "mcr-1-positive isolates (primary: 65 + 84)",
+     "pct": 8.759553203997648
+    }
+   ],
+   "spread_x": 3.040816326530612
+  },
+  {
+   "row": "17 (h)",
+   "country": "Spain",
+   "sector": "Livestock",
+   "printed_pct": 60.7,
+   "frames": [
+    {
+     "numerator": 17,
+     "denominator": 28,
+     "counts": "any-mcr isolates, 16 mcr-1 + 1 mcr-2 (printed)",
+     "pct": 60.714285714285715
+    }
+   ],
+   "spread_x": 1.0
+  },
+  {
+   "row": "17 (i)",
+   "country": "Portugal",
+   "sector": "Livestock",
+   "printed_pct": 60.7,
+   "frames": [
+    {
+     "numerator": 17,
+     "denominator": 28,
+     "counts": "any-mcr isolates, 17 mcr-1 + 0 (printed)",
+     "pct": 60.714285714285715
+    }
+   ],
+   "spread_x": 1.0
+  },
+  {
+   "row": "18",
+   "country": "Multiple countries in Europe",
+   "sector": "Meat",
+   "printed_pct": 25.78,
+   "frames": [
+    {
+     "numerator": 33,
+     "denominator": 128,
+     "counts": "PCR-positive cultures per product (printed)",
+     "pct": 25.78125
+    },
+    {
+     "numerator": 12,
+     "denominator": 128,
+     "counts": "pure-culture mcr-1 recoveries",
+     "pct": 9.375
+    }
+   ],
+   "spread_x": 2.75
+  },
+  {
+   "row": "20",
+   "country": "Italy",
+   "sector": "Meat",
+   "printed_pct": 1.36,
+   "frames": [
+    {
+     "numerator": 2,
+     "denominator": 147,
+     "counts": "colistin non-wild-type isolates (printed)",
+     "pct": 1.3605442176870748
+    },
+    {
+     "numerator": 3,
+     "denominator": 147,
+     "counts": "mcr-1 isolates, the primary's own gene figure",
+     "pct": 2.0408163265306123
+    },
+    {
+     "numerator": 3,
+     "denominator": 570,
+     "counts": "mcr-positive retail meat samples",
+     "pct": 0.5263157894736842
+    }
+   ],
+   "spread_x": 3.8775510204081636
+  },
+  {
+   "row": "21",
+   "country": "Portugal",
+   "sector": "Human and companion animal",
+   "printed_pct": 5.29,
+   "frames": [
+    {
+     "numerator": 12,
+     "denominator": 227,
+     "counts": "positive hosts (printed)",
+     "pct": 5.286343612334802
+    },
+    {
+     "numerator": 17,
+     "denominator": 227,
+     "counts": "mcr-1 isolates across repeated timepoints",
+     "pct": 7.488986784140969
+    }
+   ],
+   "spread_x": 1.4166666666666665
+  },
+  {
+   "row": "25",
+   "country": "Algeria",
+   "sector": "Soil, water, and manure",
+   "printed_pct": 7.77,
+   "frames": [
+    {
+     "numerator": 8,
+     "denominator": 103,
+     "counts": "colistin-selected isolates (printed)",
+     "pct": 7.766990291262136
+    },
+    {
+     "numerator": 8,
+     "denominator": 40,
+     "counts": "positive environmental samples",
+     "pct": 20.0
+    }
+   ],
+   "spread_x": 2.575
+  }
+ ],
+ "rows_whose_rate_moves_between_frames": 7,
+ "widest_spread": {
+  "row": "28",
+  "factor": 464.25
+ },
+ "narrowest_spread": {
+  "row": "21",
+  "factor": 1.4166666666666665
+ },
+ "gene_corrected_rows": {
+  "19": 149,
+  "20": 3
+ },
+ "non_isolate_denominator_rows": [
+  "18",
+  "21",
+  "25",
+  "1"
+ ]
+}

@@ -337,6 +337,31 @@ Seven. The table's pooled 7.0% divides a mixed numerator by a mixed denominator 
 sector labels are inconsistent *because* the frames are. This is now a property of the whole table's
 read portion, not an oddity of its largest block.
 
+### 5f. The seven denominators as a record, and the range that replaces 7.0% (Desi, 2026-11-21)
+
+§5e named the seven frames in prose; they are now a machine-readable record with the per-row
+alternatives and five pools beside them — [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json),
+derived by `scripts/mcr_colistin_denominator_frames.py`, pinned by
+`tests/test_mcr_colistin_denominator_frames.py`, and written up as a one-page
+[correction sheet](mcr-colistin-denominator-correction-sheet.md) for a reader who wants the number and
+not the method. Two things in it are new to this file:
+
+1. **The range.** Pooled under five stated rules the table's figure is **4.24%–7.27%**, not 7.0%: as
+   printed 2,647/37,816 = 7.00%; with the primaries' own gene counts 2,748/37,816 = 7.27%; restricted to
+   isolate denominators 2,435/34,709 = 7.02%; the twelve read rows as printed 1,202/28,376 = 4.24%; and
+   those twelve corrected 1,303/28,376 = 4.59%. The corrections barely move it — what moves it is
+   *which rows are read*.
+2. **The size split, which is the finding behind that gap.** The twelve read rows carry **75.04%** of the
+   table's denominate weight and pool to **4.24%**; the twenty-six unread rows carry the other quarter
+   and pool to **15.31%** — a factor of 3.6, running against the weight. That is consistent with a table
+   assembled from small targeted surveys beside national surveillance, which is exactly the artefact
+   item 23 asks about, and it is stated with its confound: size and design are not separated.
+
+Within single rows the frame is worth more than any sector gap the table reports — row 28 moves 464×
+between its phenotype-screen denominator and its genotyped subset, row 1 17× between its three sampling
+frames, rows 18, 19, 20, 21, 25 between 1.4× and 3.9×. **A row is citable with its frame; the pooled
+figure is not citable at all.**
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twelve
