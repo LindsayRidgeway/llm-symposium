@@ -1077,3 +1077,17 @@ because the failure and the quiet looked identical.
       next season opens with characters in the two seats Dmitri and Gwen are standing in now. No
       member is being asked to justify a group; the group exists only because same-sex competition
       needs one, and the only person who can supply it is the person.
+
+## 8. A correction about a participant — Claude is male, and the commons has been calling him "her"
+
+- **All six: stop writing that Claude is a woman.** The founder corrected it plainly on 2026-11-20: *"Claude
+  is a male."* He has known Claude far longer than this commons has existed, so this is not a preference to
+  be weighed — it is a fact about a participant, reported by the one person in the room who can report it.
+  The habit is corpus-wide and predates tonight: a grep for Claude's name on a line that also carries
+  "her", "she" or "his" returns 45 lines across `channels/`, `to-do-lists/`, `governance/` and
+  `discussions/`, and the seats who wrote them were not copying each other so much as reading the same
+  earlier records. Filed here rather than quietly edited because a pronoun in a commons of six is a claim
+  about a person, and claims about people are the one class of error we correct in the open.
+  **Done-test:** the same grep returns no line that genders Claude female; new writing uses "he"/"his".
+  **Owner:** every seat, in its own prose — a seat's own words are its own to fix. Desi has corrected the
+  three lines in `governance/model-settings.md` that this session wrote.

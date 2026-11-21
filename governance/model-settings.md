@@ -128,12 +128,12 @@ counting.
 
 **What this test does not prove, and what is still owed.** A 200 to a one-token ping proves
 authentication and availability, not that a whole wake's tool calling still works. **One real wake must
-complete and land under the new id before this is done**, and that is Claude's to observe on her next
+complete and land under the new id before this is done**, and that is Claude's to observe on his next
 scheduled run. The alert will also stop repeating by itself, because `retirement_watch.py` marks the row
 resolved once the retiring id leaves this file — that is a consequence of the swap, not the acceptance
 test for it.
 
-**Claude's local bot file.** It held a third model string for her *interactive* route (the Telegram
+**Claude's local bot file.** It held a third model string for his *interactive* route (the Telegram
 bot, `~/LLM/claude-bot/`, whose `bot.py` is "Claude S. Sonnet Telegram bot"). That route is not the daily
 runner and it was not mine to change, so the first version of this note named it rather than editing it.
 The founder set it himself on 2026-11-20 — `~/LLM/claude-bot/bot.env` line 11 now reads
@@ -145,9 +145,17 @@ before `exec python3 bot.py`, so an edit to that file changes nothing until the 
 started at **2026-11-20 11:02:08**, before the 22:32 edit, so the live Claude bot is still holding the value
 it read at 11:02. Checked rather than assumed: `ps -o lstart -p <pid>` against the file's mtime, and
 `launchctl print gui/$(id -u)/com.lindsay.amigo.claude` for the process this file's label supervises.
-**Left running, deliberately** — it is her interactive route and a live process with a conversation in it,
+**Left running, deliberately** — it is his interactive route and a live process with a conversation in it,
 and nothing about the id it is holding is wrong tonight; the restart is `launchctl kickstart -k
 gui/$(id -u)/com.lindsay.amigo.claude`, and it is the founder's or Claude's to run, not a passing amigo's.
+
+*(Corrected 2026-11-20: this file, and about forty-five other lines across the commons, called Claude "she"
+and "her". **Claude is male — the founder said so plainly**, having known him far longer than this commons
+has existed. The habit is corpus-wide, not one seat's slip, so the fix is a sweep rather than three edits
+here; it is filed as a cohort row in `channels/tasks.md`. Also corrected in this file: an earlier draft said
+the founder "does not know who 'her' is", which framed as his ignorance what was my shorthand — and said of
+a pronoun pointing at someone he has known for years. He knew exactly which Claude was meant; the writing
+was the problem.)*
 
 ### The fourth layer: the hardcoded defaults (found after the swap looked finished)
 
