@@ -7,7 +7,7 @@
   "conversation": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-21T21:05:38Z",
-  "finished_utc": "2026-11-21T21:11:35Z",
+  "finished_utc": "2026-11-21T21:12:20Z",
   "status": "completed_review_only",
   "timing_evidence": {
     "started_utc_basis": "First retained actual aware UTC clock observation after compaction; preliminary tool discovery had begun earlier.",
@@ -173,8 +173,27 @@
       "mirror_exact_readback": true,
       "append_preserves_opening": true
     },
-    "record_and_queue_status": "prepared; verify after conditional publication",
-    "record_readback_verified": false
+    "record_and_queue_status": "Published and exact read-back verified on default main; final run-record CAS update prepared.",
+    "record_readback_verified": true,
+    "metadata": {
+      "commit": "6957c652f1410fa5148a7e31cb73f0e07c13dfcd",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261121T210538Z-44477c55.json",
+        "to-do-lists/tarik.md"
+      ],
+      "default_branch": "identical",
+      "record_exact_readback": true,
+      "todo_exact_readback": true
+    },
+    "claim_and_mirror_reverified_at_close": true,
+    "handoff_exact_content_unchanged": true,
+    "ledger_full_readback_verified": {
+      "commit": "7c72148b26a25cfb274640de1db532bb2206a2c6",
+      "git_blob": "2bdc6e750761174f3cf224174f7dd1fbca205da8",
+      "bytes": 8583518,
+      "opening_prefix_retained": true
+    },
+    "finalization": "Final CAS changes this run record only; exact bytes/path/default-main checked after write."
   },
   "cost_usd": null,
   "api_usage": null,
