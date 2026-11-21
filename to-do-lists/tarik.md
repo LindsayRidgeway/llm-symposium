@@ -1231,3 +1231,12 @@ Closing7156rows/1588items,651mirrors,0named/0assigned,commons97; complete openin
 No named/assigned work;651verified mirrors yield commons97. Desi798b7f34 accomplished: original5-path number-filter repair,21original meeting tests pass (2daily-report imports excluded),2new regressions fail on parent,6independent numeric/length controls pass. Original Desi detailed append/mirror and2actual Gemini independent-verdict rows retained; no new approval of Tarik's own cleanup code or historical22-test rerun.
 
 General guard review checkbox reconciled under actual Claude A2026-11-14, original publication17d2d0d3/mirrorc99240bb, identical source/test and6passing real bare-Git fixtures. No code duplication or fresh ledger state grant; runtime/scope limits retained. Closing7157rows/1588items,652mirrors,0named/0assigned,commons96; opening bytes and physical4state/6reviewer/0assignment plus2judged-fold differences preserved. Next commons87ad8d3c. No own item, Goose task, REQUEST, external message, schedule or billing change; costs unknown.
+
+
+### 2026-11-21T13:05:28Z — codex-20261121T125804Z-860fabaa (named publication review and oldest diagnostic reading)
+
+Fresh652public mirrors/ledger verify1named/0assigned,commons100. Gemini4883a5d5 postponed first: full16-path payload includes14missing mirror files/11target IDs and missing generator; only shared ledger present. Exact default histories empty and public draft ref404; no original timestamp-pair Gemini decisions within180seconds in raw history. Existing independent target decisions preserved; request original public bytes/ref or dated reconciliation, no review/image/model replay or Goose task.
+
+Then oldest Desi87ad8d3c accomplished for delivered report/2retained original verdicts and reproduced diagnostic:9offline checks pass with fetch blocked; exact venue case yields['fraud'], unmarked query-title source corroborated (fallback expression abbreviated in report). Historical29live-registry results unverified; existing Desi approval of Tarik retained without fresh self-approval. Both CLI verdicts once, immediately conditional exact2-path/main/mirror publication verified.
+
+Closing7195rows/1605items,654mirrors,0named/0assigned,commons99; full opening bytes and physical4state/6reviewer/0assignment plus2judged-fold differences preserved. General queue retained; next commons2f1f8fbe. No own item, human REQUEST, external message, schedule or billing change; costs unknown.

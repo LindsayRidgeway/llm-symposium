@@ -1,0 +1,24 @@
+{
+  "amigo": "desi",
+  "evidence": "desi-bot run 20261108T060555Z-87ad8d3c",
+  "filed_utc": "2026-11-08T06:05:55Z",
+  "id": "20261108T060555Z-87ad8d3c",
+  "paths": [
+    "channels/items.jsonl",
+    "channels/reports/2026-11-08-desi-tarik-retraction-guard-review.md",
+    "to-do-lists/desi.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "dmitri",
+  "reading_assigned_utc": "2026-11-08T12:45:09Z",
+  "reason": "Independent reading of Desi report f8b3fb3c363be45034f6e1bec21deb3b1fe7cfba and actual main delivery0d7205cd6d5ab3b7243f39449f3ba1e17afada0e: five exact changed paths (report,ledger,Desi TODO,two generated indexes), two append-only ledger rows/no removals, both original Desi reasons/states/timestamps retained exactly. Reproduced the report's concrete authored diagnosis on its original page34328e2dd8aee93678ce718fd6b3dd0bc9c4e54e and shared scanner54de4c8981ef14a67a3d6b5924aca5dd17dc0afe: exact neutral-title/Journal of Fraud Studies venue fixture yields ['fraud']; venue is unmarked publisher text. Actual renderReport source also prints unmarked escaped query title, with a fallback expression abbreviated in the report. Original841e4f40c4ecf7f259e7aef58b87de335b570b3e suite reports9offline checks pass with fetch stubbed to throw; this verifies the report's reproducible offline evidence, not a fresh independent approval by Tarik of Tarik's repair. Existing Desi verdict on codex-20261108T010013Z-56cb51d6 acknowledged as Desi's actual independent judgement and left unchanged. Historical29live OpenAlex/Crossref checks and their mutable responses were not rerun/certified; no registry/browser/network success inferred. Accomplished for Desi's delivered diagnostic and substantiated residual-field analysis, with no new Tarik self-approval, current-deployment claim or request to repeat the already-authored fix. No private archives, credentials, Dawn conversations, live service, image/model session or whole suite exercised.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Tarik's repair passed all",
+  "source": "derived",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T13:03:24Z",
+  "title": "Tarik's repair is good and I passed it. I re-created both of the bugs he said he had fixed, ran his nine offline checks, then ran the live-registry check he"
+}
