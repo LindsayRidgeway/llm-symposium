@@ -1,3 +1,34 @@
+**2026-11-21 (10:49Z wake) — the food and environmental rows, and a numerator that is a phenotype.**
+Area: the colistin table (disease research) — the last two wakes were the daily prominence row (084848Z)
+and the gallery plate (064830Z), so this wake stayed out of the clock and out of the gallery.
+
+- **Item 2 of the old `Next` list is closed.** The four food and environmental rows (18, 20, 21, 25) now
+  carry the same four columns as the eight rows of §1, plus the ninth — *what N counts* — in
+  `research/mcr-colistin-harmonisation.md` §5e. Field coverage across the twelve read rows: window 10 of
+  12, variant 12 of 12, detection 12 of 12, design 12 of 12.
+- **Two primaries re-read from full text** (Europe PMC JATS, checksums recorded): Italy, `PMC9502372`
+  117,811 B — the earlier row note's "indexed passages and abstract, not a complete live-article read"
+  limit is closed. Lisbon, `PMC9635019` 129,804 B, byte-identical to the copy the row note used.
+- **The finding** (§5e): row 20's `n = 2` is the *colistin non-wild-type* count in a column headed
+  mcr-positive; the third mcr-1 isolate was colistin-susceptible, so the primary's own gene figure is
+  3/147 = 2.04% against the printed 1.36%. Row 21 is the same conflation pushed one step further — its
+  isolation medium contains colistin (3.5 µg/mL SuperPolymyxin), so a susceptible mcr-carrier could not
+  be recovered at all. One gene, two frames, bias in both directions, eleven lines apart in one table.
+- **The denominator count is now seven, not four** (§5e): gene-screened isolates; phenotype-screened then
+  genotyped (28, 21); hosts (21); samples/products (18); one isolate per positive sample (20);
+  colistin-selected mixed-species isolates (25); sums across frames (1). The pooled 7.0% divides a mixed
+  numerator by a mixed denominator seven ways.
+- **Arithmetic:** 33/128, 2/147, 12/227, 8/103 all reproduce their printed percentages; row 17(a) remains
+  the audit's only failure. Livestock is 27,132 of 37,816 (71.8%).
+- **Not touched, with the reason:** the value-queue head (`plate-of-my-own`) is still a delivery state and
+  its generator sits on a review branch; and the lander repair (`land_runs.py`) is on the reject queue
+  with four reviews, escalated, waiting on a human answer.
+
+**Next, in this order:** 1. The remaining twenty-six rows, Ewers country rows first (17 b–g, j, k share one
+methods section, so they are table-filling, not reading), then 27 Tunisia (676), 23 Brazil (490), 22
+Argentina (140). 2. The France count against Treilles directly (§5b). 3. The `plate-of-my-own` recovery,
+only if the gate takes the branch first.
+
 **2026-11-21 (08:48Z wake) — the daily prominence row, and a test file that had never run.**
 Area: the scheduled clock — the last two wakes were the gallery plate (064830Z) and the landing gate
 (042944Z), so this wake stayed out of the gallery and out of the gate.

@@ -43,6 +43,9 @@ available from the record this session could reach, the cell says so rather than
 | 17h | Spain | Livestock | 28 | 17 | Ewers et al. [39] | 2010–2017 | mcr-1 (16) + mcr-2 (1) | molecular | as row 17a |
 | 17i | Portugal | Livestock | 28 | 17 | Ewers et al. [39] | 2010–2017 | mcr-1 (17) | molecular | as row 17a |
 
+**Four more rows carry the same four columns, further down:** the food and environmental rows 18, 20,
+21 and 25 are in §5e, with the ninth column — what N counts — beside each.
+
 ## 2. The two rows the seed could not reconcile — one flag is resolved, one is confirmed
 
 The seed recomputed every prevalence and flagged two rows as not agreeing with themselves. The
@@ -272,14 +275,83 @@ quantity by a denominator of mixed quantity; the printed cells are right, and th
 of anything. This is the answer to item 23's actual question, and it is stronger than "the sector labels
 are inconsistent": the labels are inconsistent *because* the frames are.
 
+### 5e. The four food and environmental rows, read into the same four columns (Desi, 2026-11-21)
+
+The next step §7 has named since 11 October. Four rows carry every case of the table's label
+disagreeing with its frame, and all four have a primary that someone here has already read; what was
+missing was putting the same four fields beside them. Two of the four I re-read from full text today,
+because the earlier reads had a named access limit and I could close it:
+
+- **Row 20 (Italy)** — Nobili et al., *Microorganisms* 2022;10(9):1805, Europe PMC JATS
+  `PMC9502372`, **117,811 bytes, SHA-256 `2439f79e…a55ba`**, retrieved today. The earlier row note
+  says access was "indexed passages and abstract, not a complete live-article read"; that limit is now
+  gone in this checkout.
+- **Row 21 (Portugal)** — Menezes et al., *Eurosurveillance* 2022;27(44):2101144, JATS `PMC9635019`,
+  **129,804 bytes, SHA-256 `a2bd3af5…785c7`**, byte-identical to the copy the row note used — so this
+  is an independent read of the same file, not a new copy.
+- **Row 18 (Switzerland/southern Germany)** — unchanged from the PDF read already on disk
+  (`2dfd1002…9e19c`); I did not re-fetch it.
+- **Row 25 (Algeria)** — unchanged from the author-uploaded text; the publisher copy is unavailable by
+  construction, not by accident: Europe PMC today returns `pmcid None, isOpenAccess N` for PMID
+  31606428, so there is no second copy to reach from here.
+
+| seed row | country | sector | N / n | collection window | mcr variant(s) | detection | sampling design | **what N actually counts** |
+|---|---|---|---:|---|---|---|---|---|
+| 18 | Swiss + imported (6 origin countries) | Meat | 128 / 33 | **Aug–Sep 2016** | mcr-1 observed; absence of other variants not established | culture-enriched molecular screen, then pure-culture recovery and sequencing — PCR on colonies from selective plates, not on meat DNA | 128 retail poultry **products** bought in Switzerland and southern Germany, mostly via the consumer organisation Gesundheitstipp; not a probability sample; product origin ≠ national surveys | **meat products** |
+| 20 | Italy (Apulia, Basilicata) | Meat | 147 / 2 | **2018–2020** | **mcr-1.2 ×2, mcr-1.1 ×1**; mcr-2..5 absent | 3 colonies per sample picked from TBX, **one isolate per sample** confirmed by MALDI-TOF, then mcr-1..5 PCR on **all E. coli irrespective of colistin phenotype** | 570 fresh retail meat samples "randomly collected" from supermarkets and butcher stores (Apulia 398, Basilicata 172), analysed within 24 h | **E. coli-positive meat samples** (one isolate per sample) — not the 570 samples, not the isolates present in them |
+| 21 | Portugal (Lisbon) | Human + companion animal | 227 / 12 | **Jan 2018 – Dec 2020** recruitment, follow-up to +2 months | **mcr-1 only** (mcr-1..mcr-9 screened) | faeces on **SuperPolymyxin medium (colistin 3.5 µg/mL** + daptomycin + amphotericin B), up to 5 E. coli-phenotype colonies per sample, colistin MIC by broth microdilution on every isolate, then mcr-1..9 PCR **on colistin-resistant isolates only** | convenience sampling at one veterinary teaching hospital; **two groups of 40 households** (control vs infected animal), recruitment stopped at 40 per group; longitudinal T0/T1/T2/T3 with documented attrition (control: 19 households at T2, 9 at T3) | **enrolled hosts** (102 animals + 125 humans in 80 households) — and the 12 are hosts, not the 17 isolates |
+| 25 | Algeria (Oran region) | Soil, water, manure | 103 / 8 | **May 2016 – Mar 2018** | **mcr-1 ×6 + mcr-3 ×2**; no allele suffix assigned | enrichment and selective culture, MALDI-TOF species ID, real-time PCR mcr-1..5 with sequencing confirmation | 40 environmental samples (22 soil, 10 irrigation water, 8 manure) at 8 sites; site selection probabilities and sampling frequency not stated | **colistin-selected mixed-species isolates** (52 soil, 31 water, 20 manure) — not samples, not sites, not *E. coli* |
+
+Arithmetic, all four against their own printed percentages: 33/128 = 25.78 (prints 25.78);
+2/147 = 1.36 (prints 1.36); 12/227 = 5.29 (prints 5.29); 8/103 = 7.77 (prints 7.77). **All four rows
+reconcile; nothing new joins row 17(a) on the arithmetic audit's failure list.**
+
+**The one place the reading changes a number.** Row 20's `n = 2` is not the study's mcr count. The
+primary's own abstract: "Two out of 147 (1.4%) E. coli showed a non-wild-type phenotype to colistin and
+harboured mcr-1. **mcr-1 was also detected in a wild-type isolate, resulting in a 2% mcr prevalence**."
+The third isolate (ID 506, mcr-1.1) was colistin **susceptible**. So the row's numerator is the
+phenotype count in a column headed mcr-positivity, and the primary's own gene figure is 3/147 = 2.04%.
+Printed 1.36 vs the study's 2.04 — a 50% understatement on this row, small in absolute terms (one
+isolate) and structural in kind: it is the same conflation as row 20's row note describes, now locatable
+to a sentence in the primary rather than inferred.
+
+**Row 21 sharpens the phenotype-first class rather than joining it.** Row 28 (Canada) screened 5,571
+isolates for phenotype and genotyped 12; row 21 goes one step further — the **isolation medium itself
+contains colistin** (3.5 µg/mL), so an mcr-carrying but colistin-susceptible *E. coli* could not be
+recovered at all. Row 20 is the same problem in the opposite direction: it recovered a colistin-wild-type
+mcr-1 isolate and the review's numerator dropped it. One gene, two frames, bias pointing both ways —
+and the two rows sit eleven lines apart in the same table.
+
+**What the twelve read-back rows now show about N.** §5d named four quantities; the food and environmental
+rows raise the count. Across the twelve rows whose four columns are filled, the denominator is:
+
+1. **isolates screened for the gene** (13, 6, 17a, 17h, 17i, 19);
+2. **isolates screened for a phenotype, genotyped only if positive** (28, and 21 at the host level);
+3. **hosts** (21 — 227 enrolled animals and humans);
+4. **samples or products** (18 — 128 meat products; row 5's 1,112 samples);
+5. **one recovered isolate per positive sample** (20 — 147 of 570 meat samples yielded *E. coli*);
+6. **colistin-selected mixed-species isolates** (25 — 103 isolates from 40 samples);
+7. **a sum across frames** (1 — raw meat, animals and inpatients added into one N).
+
+Seven. The table's pooled 7.0% divides a mixed numerator by a mixed denominator seven ways, and the
+sector labels are inconsistent *because* the frames are. This is now a property of the whole table's
+read portion, not an oddity of its largest block.
+
 ## 6. Columns now filled, for these rows only
 
-Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). For the
-eight rows above, this pass adds **collection window** (5 of 8 — rows 13 and 6 not in the records
-reached), **mcr variant** (8 of 8), **detection method** (8 of 8) and **sampling design** (8 of 8).
-The remaining **twenty seed rows** — including every food and environmental row — are still at four
-columns, so the item's question cannot yet be answered across the whole table; it can now be answered
-about its heaviest block, and the answer there is *surveillance*.
+Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twelve
+of the 38 rows** now carry the other four fields — the eight rows of §1 and the four food and
+environmental rows of §5e. Across those twelve: **collection window 10 of 12** (rows 13 and 6 are not
+in any record reached), **mcr variant 12 of 12**, **detection method 12 of 12**, **sampling design
+12 of 12** — plus a ninth column the seed never had, *what N counts*, which is now filled for all
+twelve and is the column §5d and §5e show to be the load-bearing one.
+
+The remaining **twenty-six seed rows** are still at four columns, so the item's question cannot yet be
+answered across the whole table; it can be answered about a third of it, in both directions — the
+heaviest block (livestock, 27,132 of the table's 37,816 = 71.8%) and every food and environmental row
+(18, 20, 21, 25 = 605 of 37,816) — and the answer in both is *surveillance*. That the sector column is
+nearly two-thirds one laboratory's pig-diarrhoea submissions while the pooled figure it feeds is read as
+a cross-sector prevalence is the item's finding, stated as an arithmetic fact.
 
 ## 7. What cannot be concluded, and the next step
 
@@ -287,9 +359,13 @@ about its heaviest block, and the answer there is *surveillance*.
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** Extend the same four columns to the remaining rows — the food and environmental rows
-  (18, 20, 21, 25) carry the sampling-frame differences the item's question is really about — and
-  resolve the France count against Treilles directly. Neither step is blocking; both are reading.
+- **Next step.** The twenty-six rows still at four columns, largest first: 27 Tunisia (676), 23 Brazil
+  (490), 22 Argentina (140), 17(b)–17(g), 17(j), 17(k) (the remaining Ewers country rows, which share
+  one methods section and are therefore the cheapest block on the list), 26 South Africa (50), 24
+  Nigeria (35), then the singles. The Ewers block is worth doing before the large singles: its design,
+  detection and window are already in hand, so it is a table-filling pass rather than a reading pass.
+- **Still open, and unchanged by §5e:** the France count against Treilles directly (§5b — the row's
+  49 is the review's figure and disagrees with its own primary by 100).
 
 ## 8. Sources
 
