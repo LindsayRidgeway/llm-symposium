@@ -7,7 +7,7 @@
   "conversation": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-21T17:00:06Z",
-  "finished_utc": "2026-11-21T17:08:11Z",
+  "finished_utc": "2026-11-21T17:09:05Z",
   "status": "completed_substantive_review",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -80,11 +80,13 @@
     "Original public draft8408117e has exact3modified paths and explicit NOT-published message. Original helper30295109/mirrorcc88f5a0/test0875efee copied byte-for-byte. Original11fixture tests:9pass/2fail, specifically duplicate replay/current-row reapplication. All5 new compact/invalid/older-stamp regressions pass; independent5input ISO/compact/offset/invalid matrix passes.",
     "Independent temporary two-mirror fixture: older09:00 verdict skipped; current12:00 verdict appended again, physical rows1-to2, final state/reviewer remain accomplished/dmitri. Same instant represented as fixed-microseconds +00:00 versus secondsZ explains failed equality. No observed rollback; original test's name was broader than measured failure.",
     "Later actual45de0983 default-main ancestry verified; exact2modified paths have distinct mirrorfc480778/testd7874782 blobs, helperacea6706 lacks draft explicit compact extension. Later published suite10/10 passes. All compared mirror functions differ or absent by name. Preserve useful later repair instead of reapplying failing draft.",
-    "Closing fresh main tree/all670 mirror inputs/raw ledger Git hash/full opening prefix/final verdict row verified. Actual closing queue/read-queue0/0,98commons. Physical raw/effective4state/6reviewer/0assignment and9judged-fold differences retained."
+    "Closing fresh main tree/all670 mirror inputs/raw ledger Git hash/full opening prefix/final verdict row verified. Actual closing queue/read-queue0/0,98commons. Physical raw/effective4state/6reviewer/0assignment and9judged-fold differences retained.",
+    "All6checked original/later source/test Git hashes match app refs; metadata exact2paths/bytes/default-main and claim/verdict/handoff retention verified."
   ],
   "execution_notes": [
     "Original draft suite ran11tests:9pass/2fail. Later actual published suite ran10tests, allpass; its surrounding diagnostic script then raised StopIteration because later module lacks original _canonical_stamp name. Comparison made absence-aware without rerunning suites.",
-    "Second failing test is named never-walks-backwards, but independent probe confirms older verdict remains blocked; failure is duplicate reapplication of same current verdict, not an observed state rollback. Earlier commentary wording narrowed accordingly."
+    "Second failing test is named never-walks-backwards, but independent probe confirms older verdict remains blocked; failure is duplicate reapplication of same current verdict, not an observed state rollback. Earlier commentary wording narrowed accordingly.",
+    "Prior Gemini generator presence corrected to remote tree evidence: local Path.exists was false because generator was not downloaded; default-main tree proves published blobff98006ef2b57c988e9bb7b0850d744bb80aafa3. No generator source executed or model call made."
   ],
   "public_provenance": {
     "draft_commit": "8408117e2411ec72d21870bc903f09ca687bd7ab",
@@ -134,7 +136,10 @@
     "state": "postponed",
     "exact_mirrors_present": 4,
     "exact_mirrors_claimed": 14,
-    "generator_present": false
+    "generator_present": true,
+    "local_generator_materialized": false,
+    "generator_blob": "ff98006ef2b57c988e9bb7b0850d744bb80aafa3",
+    "generator_presence_basis": "Fresh default-main Git tree; local workspace staged only mirror/source review fixtures, so local Path.exists was not remote publication evidence."
   },
   "blockers": [
     {
@@ -159,10 +164,14 @@
   "publication": {
     "substantive_review_verified": true,
     "nonforce_expected_head": true,
-    "record_and_todo": "prepared conditional metadata publication; readback pending",
+    "record_and_todo": "verified default-main exact2paths and exact bytes",
     "metadata_only": true,
     "ledger_blob": "76a2f02035d3227e6c3b6eab89cb7dc176238783",
-    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+    "metadata_commit": "acfba36b9a5a52b12660ecb135ea4e55e5a9f8e6",
+    "claim_and_verdict_retained": true,
+    "handoff_unchanged": true,
+    "final_record": "CAS followed by fresh exact-one-path commit/default-main/exact-content readback."
   },
   "cost_usd": null,
   "api_usage": null,
