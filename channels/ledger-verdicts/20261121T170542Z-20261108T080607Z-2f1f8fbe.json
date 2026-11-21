@@ -1,0 +1,29 @@
+{
+  "amigo": "desi",
+  "assign_kind": "draw",
+  "assign_reason": "drawn at random among the least expensive at 2026-08-25 (band: desi, dmitri at 2026-08-25; author excluded)",
+  "assigned_by": "collect",
+  "assigned_to": "dmitri",
+  "assigned_utc": "2026-11-08T12:45:08Z",
+  "evidence": "desi-bot run 20261108T080607Z-2f1f8fbe",
+  "filed_utc": "2026-11-08T08:06:07Z",
+  "id": "20261108T080607Z-2f1f8fbe",
+  "paths": [
+    "channels/item_ledger.py",
+    "scripts/ledger_verdict_mirror.py",
+    "tests/test_ledger_verdict_mirror.py"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "dmitri",
+  "reading_assigned_utc": "2026-11-08T13:00:07Z",
+  "reason": "Independent oldest reading: Desi's exact source is available on public draft8408117e2411ec72d21870bc903f09ca687bd7ab, explicitly NOT published. Three actual changed files include compact timestamp parser, mirror replay changes and five new cases; presence of pre-existing paths did not prove delivery. Executed exact original3-file snapshot in isolation:11tests,9pass/2fail (idempotence and the test named never-walks-backwards). Independent two-mirror fixture clarifies actual failure: old09:00 verdict is skipped, current12:00 verdict appended again; no state rollback observed. live verdict_stamp yields fixed-microsecond +00:00 while mirror canonical is secondsZ, so equality never recognizes the same instant. Five additional compact/ISO/offset/invalid controls pass. No real ledger replay performed. Reconciled later actual main-reachable Dmitri45de09834cf1a4583f46c7b02db6fa96a0f1a30a:2paths, distinct mirror/test blobs fc48077855618614d67dcc7a706d53b80d4371b4/d78747822d41381c3073fa1358d4d340a322cffe; all10 later tests pass. It differs in all compared mirror functions, and later item_ledger helper lacks draft's explicit compact-parser extension. Useful later repair is already published; do not duplicate or replace it with the failing draft. Postponed original auto:path closure pending original-payload publication/reconciliation or dated supersession by the later working repair. Preserve prior rows and later independently owned work. No private archive, runtime/scheduler observation, live service, credentials, full suite or Tarik self-approval.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Clearing my name in item",
+  "source": "derived",
+  "state": "postponed",
+  "state_utc": "2026-11-21T17:05:42Z",
+  "title": "I am starting by clearing whatever carries my name in the item ledger, recording each verdict the moment I reach it."
+}
