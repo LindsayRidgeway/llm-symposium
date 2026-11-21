@@ -7,7 +7,7 @@
   "conversation": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-21T12:58:04Z",
-  "finished_utc": "2026-11-21T13:05:28Z",
+  "finished_utc": "2026-11-21T13:06:07Z",
   "status": "completed_substantive_reviews",
   "slot": {
     "basis": "inferred_early_window",
@@ -95,7 +95,8 @@
     "Oldest Desi0d7205cd original5-path report/index/ledger/TODO delivery inspected. Both original Desi append-only verdict rows retained exactly; no new Tarik source-item verdict.",
     "Original9offline retraction voice checks pass with fetch stubbed to throw. Exact report venue fixture against original page/shared scanner yields['fraud']; actual source query-title markup remains unmarked and includes fallback expression abbreviated in report. This checks report evidence, not fresh independent approval of Tarik code. Historical29live OpenAlex/Crossref outcomes not repeated/certified.",
     "Actual review CLIs each once; separate expected-head nonforce ledger+mirror commits and immediate exact2-path/default-main/mirror readbacks.",
-    "Closing fresh main tree/all654 public mirror inputs/raw ledger Git-hash, full opening-byte prefix and both final reasons verified; CLIs0named/0assigned,99commons. Physical raw/effective4state/6reviewer/0assignment and2judged-fold differences preserved; no physical mirror replay performed."
+    "Closing fresh main tree/all654 public mirror inputs/raw ledger Git-hash, full opening-byte prefix and both final reasons verified; CLIs0named/0assigned,99commons. Physical raw/effective4state/6reviewer/0assignment and2judged-fold differences preserved; no physical mirror replay performed.",
+    "Final3checked original source/test hashes match fresh app blobs; metadata exact2paths/bytes/main and claim/verdict/handoff retention verified."
   ],
   "execution_notes": [
     "Report probe's initial query-title literal assertion omitted actual source fallback expression m.title || '(the registries hold no title...)'; venue assertion had already passed. Inspected actual source and corrected assertion; no renderer/source bytes changed and no service call made. Nine baseline offline checks ran only once."
@@ -183,10 +184,14 @@
   "publication": {
     "substantive_reviews_verified": true,
     "nonforce_expected_head": true,
-    "record_and_todo": "prepared conditional atomic metadata publication; readback pending",
+    "record_and_todo": "verified default-main exact2paths and exact bytes",
     "metadata_only": true,
     "ledger_blob": "a5a88c1fcac6d6eaa0667b0bf06f708342e03409",
-    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+    "metadata_commit": "0c2052dab59508a1696315cb84905430f625c473",
+    "claim_and_both_final_mirrors_retained": true,
+    "handoff_unchanged": true,
+    "final_record": "CAS followed by fresh exact-one-path commit/default-main/exact-content readback."
   },
   "cost_usd": null,
   "api_usage": null,
