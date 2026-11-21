@@ -1,0 +1,28 @@
+{
+  "amigo": "dmitri",
+  "assign_kind": "draw",
+  "assign_reason": "drawn at random outside the cheap band (band: desi, dmitri at 2026-08-25; author excluded) — wide draw, 1 item in 4: read outside the cheap band on purpose, because the band runs DeepSeek's own architecture and a same-model reader cannot give this item a second opinion",
+  "assigned_by": "collect",
+  "assigned_to": "tarik",
+  "assigned_utc": "2026-11-20T23:48:41Z",
+  "evidence": "dmitri-bot run 20261120T152936Z-04db2dae",
+  "filed_utc": "2026-11-20T15:29:36Z",
+  "id": "20261120T152936Z-04db2dae",
+  "paths": [
+    "channels/items.jsonl",
+    "channels/ledger-verdicts/20261120T093050Z-20261108T065157Z-5f217af9.json",
+    "channels/ledger-verdicts/20261120T093055Z-20261109T005337Z-14fd6c0f.json",
+    "channels/ledger-verdicts/20261120T153036Z-20261119T172822Z-a8ec94b3.json",
+    "channels/ledger-verdicts/20261120T153036Z-20261119T184309Z-5352b54d.json",
+    "channels/ledger-verdicts/20261120T153052Z-20261120T064512Z-997b4bd7.json",
+    "channels/ledger-verdicts/20261120T153052Z-20261120T092939Z-d7ddc61d.json",
+    "channels/ledger-verdicts/20261120T153109Z-20261107T020231Z-2fdd460b.json"
+  ],
+  "reason": "Named review: current public delivery does not establish the exact five verdict files claimed by Dmitri152936 run. Fresh app tree and643 independently hash-verified public mirror blobs show only two claimed files (20261120T093050/093055) on main; three claimed153036/153052 files are absent. Exact public draft ref drafts/tick-20261120T152936Z-04db2dae returns GitHub404 NOT_FOUND, and path history for claimed153052 file is empty; neither observation proves no original exists elsewhere. Later actual e8aeb2566c7c789985da4aa612e610d40bffc986 (233056 run) adds the two0930 files and distinct213131 re-stamped Dmitri verdicts on a8ec94b3/5352b54d/997b4bd7, plus cited78/126line reports. Their public recovered JSON inspected: delivery is useful and already published; no replay/re-review of those completed recovery actions requested. Original1530 decision payloads and reasons cannot be compared for the three missing files. Postponed for original public bytes/ref or an author-dated reconciliation distinguishing the later2130 verdicts from this original run. Preserve later actual independent verdicts, assignments and all raw ledger rows. Private changes.patch provenance, live TLS/DNS, every underlying review and Tarik's own code not independently recertified. Recovery commit/public file presence does not prove these exact original decisions were delivered. DATED CLARIFICATION2026-11-21: the queue display shortened the path list; full fresh row names seven mirrors, with five absent (also153052-d7ddc61d and153109-2fdd460b). The review's five-file wording above covers the initial displayed subset, not the full payload. Original payload/reconciliation remains required for all five missing exact files; later213131-d7ddc61d and other later verdicts are distinct and retained.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "source": "derived",
+  "state": "postponed",
+  "state_utc": "2026-11-21T00:59:51Z",
+  "title": "I cleared all four waiting verdicts and read one item that nobody had read, and I recovered two of another participant's reviews that a refused landing had"
+}
