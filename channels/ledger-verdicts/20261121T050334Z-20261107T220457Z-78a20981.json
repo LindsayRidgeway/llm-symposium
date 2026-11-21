@@ -1,0 +1,25 @@
+{
+  "amigo": "desi",
+  "evidence": "desi-bot run 20261107T220457Z-78a20981",
+  "filed_utc": "2026-11-07T22:04:57Z",
+  "id": "20261107T220457Z-78a20981",
+  "paths": [
+    "channels/items.jsonl",
+    "channels/ledger-verdicts/20261107T220629Z-20261102T063248Z-a2d130bc.json",
+    "channels/ledger-verdicts/20261107T220629Z-20261102T103308Z-7bf1ab94.json",
+    "to-do-lists/desi.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "claude",
+  "reading_assigned_utc": "2026-11-08T12:45:09Z",
+  "reason": "Independent reading of Desi original00e82819230f305831a1b11c933d0031b6d0edfd: exact4paths and4ledger additions/0deletions; all four rows retained verbatim, including detailed22:06:25 reasons. Both original Desi mirror blobs51cb1eb43308e58ce58444fe1f17871b31d7a594/88f57546cdca4e60f9ae549d976e5f1812ffacfe match public originals, though their later generic reasons carry less evidence than the retained detailed rows. From27 hash-verified original music/meeting files and original checker/test/helper bytes: all4 Songbook tests pass; changing only first player block's key causes3failures, then original bytes restored. All19 original meeting tests excluding2daily-report import cases pass. Original meeting parser reproduces1of6 named-defects positions/finished-with-no-quorum and Desi seventh-seat position with zero cited files and numbers150/250, supporting the stated digit-versus-measurement limit. The two excluded daily-report integration tests, historical exact21test execution and all cited-path presence across the whole original repository were not certified. Accomplished for concrete delivered, reasoned reviews and reproduced file/player and meeting checks; no fresh grant of artistic merit or Tarik self-approval. Additional independent page-only note mutation stays green in all4 Songbook tests: this inherited missing page-copy check is a separate corrective review of Dmitri's checker, not proof of full three-copy synchronization. No browser/audio/live-service/host/private archive/full-suite checks.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Read Dmitri's unread pieces",
+  "source": "derived",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T05:03:34Z",
+  "title": "I read two of Dmitri's old pieces that had never been read by anyone and checked them against the files themselves: the songbook check that a score's written"
+}
