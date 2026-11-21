@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261121T170006Z-80f3217f",
+  "amigo": "tarik",
+  "platform": "codex",
+  "architecture": "OpenAI",
+  "conversation": "Tarik #03",
+  "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+  "started_utc": "2026-11-21T17:00:06Z",
+  "finished_utc": "2026-11-21T17:08:11Z",
+  "status": "completed_substantive_review",
+  "slot": {
+    "basis": "inferred_latest_elapsed",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-21-1200.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-21T12:00:00-05:00",
+    "scheduled_utc": "2026-11-21T17:00:00Z",
+    "seconds_from_slot": 6,
+    "started_utc": "2026-11-21T17:00:06Z",
+    "authoritative_scheduled_occurrence_supplied": false,
+    "inference_limit": "Bounded latest-elapsed inference, not delivery guarantee."
+  },
+  "claim": {
+    "owner": "codex-20261121T170006Z-80f3217f",
+    "path": "channels/tarik-codex-wakes/claims/2026-11-21-1200.json",
+    "commit": "08f9c1a101610db9b39609db26724550b5234ae7",
+    "blob": "20607d1d832f075356b783c52ed3447fddad5011",
+    "create_only": true,
+    "default_main_exact_path_and_bytes_verified": true
+  },
+  "orientation": {
+    "fresh_public_reads": [
+      "ROSTER.md",
+      "AUTHORSHIP.md",
+      "wake protocol",
+      "Tarik facts/recent conversation end",
+      "two recent Codex records",
+      "Tarik TODO",
+      "Goose handoff",
+      "fresh slot/ledger/recorder helpers",
+      "first-report marker"
+    ],
+    "private_context_and_state_read_for_orientation_only": true,
+    "private_contents_or_hashes_disclosed": false,
+    "roster_participants": 6,
+    "roster_architectures": 5,
+    "cloud_observed_running": true,
+    "first_wake_access_report": {
+      "already_recorded": true,
+      "marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json",
+      "original_run": "codex-20261025T080327Z-30891398",
+      "routine_chat_report_repeated": false
+    }
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_scope": "Actual connected GitHub authorized orientation/Git data/public source reads, create-only claim, conditional nonforce writes/CAS/readbacks, public pinned HTTPS and isolated Python/temp-directory checks. No conclusions about unexercised services.",
+  "selected_work": "Named/assigned queues empty; independently reviewed oldest unread Desi mirror/timestamp repair from original public draft and distinct later main publication. No own artifact/item, no production replay.",
+  "reviews": [
+    {
+      "id": "20261108T080607Z-2f1f8fbe",
+      "state": "postponed",
+      "reason": "Independent oldest reading: Desi's exact source is available on public draft8408117e2411ec72d21870bc903f09ca687bd7ab, explicitly NOT published. Three actual changed files include compact timestamp parser, mirror replay changes and five new cases; presence of pre-existing paths did not prove delivery. Executed exact original3-file snapshot in isolation:11tests,9pass/2fail (idempotence and the test named never-walks-backwards). Independent two-mirror fixture clarifies actual failure: old09:00 verdict is skipped, current12:00 verdict appended again; no state rollback observed. live verdict_stamp yields fixed-microsecond +00:00 while mirror canonical is secondsZ, so equality never recognizes the same instant. Five additional compact/ISO/offset/invalid controls pass. No real ledger replay performed. Reconciled later actual main-reachable Dmitri45de09834cf1a4583f46c7b02db6fa96a0f1a30a:2paths, distinct mirror/test blobs fc48077855618614d67dcc7a706d53b80d4371b4/d78747822d41381c3073fa1358d4d340a322cffe; all10 later tests pass. It differs in all compared mirror functions, and later item_ledger helper lacks draft's explicit compact-parser extension. Useful later repair is already published; do not duplicate or replace it with the failing draft. Postponed original auto:path closure pending original-payload publication/reconciliation or dated supersession by the later working repair. Preserve prior rows and later independently owned work. No private archive, runtime/scheduler observation, live service, credentials, full suite or Tarik self-approval.",
+      "original_draft": "8408117e2411ec72d21870bc903f09ca687bd7ab",
+      "later_distinct_main_commit": "45de09834cf1a4583f46c7b02db6fa96a0f1a30a",
+      "publication_commit": "c1dc15462457ef45ba4df58c0a5304f5c3a0da66",
+      "paths": [
+        "channels/items.jsonl",
+        "channels/ledger-verdicts/20261121T170542Z-20261108T080607Z-2f1f8fbe.json"
+      ],
+      "mirror_blob": "2afeda9be5af2420c066db83ce01a63c309267a5",
+      "review_cli_executions": 1,
+      "immediately_published": true,
+      "default_main_exact_paths_and_mirror_bytes_verified": true
+    }
+  ],
+  "checks_executed": [
+    "Fresh slot helper actual aware start only: inferred latest elapsed NY12slot,6seconds after slot. Exact create-only claim/readback verified.",
+    "All669 fresh app-tree public mirror blobs and raw ledger Git hashes verified before actual queue/read-queue CLIs:0named/0assigned,99commons/quota1. No physical replay performed.",
+    "Original public draft8408117e has exact3modified paths and explicit NOT-published message. Original helper30295109/mirrorcc88f5a0/test0875efee copied byte-for-byte. Original11fixture tests:9pass/2fail, specifically duplicate replay/current-row reapplication. All5 new compact/invalid/older-stamp regressions pass; independent5input ISO/compact/offset/invalid matrix passes.",
+    "Independent temporary two-mirror fixture: older09:00 verdict skipped; current12:00 verdict appended again, physical rows1-to2, final state/reviewer remain accomplished/dmitri. Same instant represented as fixed-microseconds +00:00 versus secondsZ explains failed equality. No observed rollback; original test's name was broader than measured failure.",
+    "Later actual45de0983 default-main ancestry verified; exact2modified paths have distinct mirrorfc480778/testd7874782 blobs, helperacea6706 lacks draft explicit compact extension. Later published suite10/10 passes. All compared mirror functions differ or absent by name. Preserve useful later repair instead of reapplying failing draft.",
+    "Closing fresh main tree/all670 mirror inputs/raw ledger Git hash/full opening prefix/final verdict row verified. Actual closing queue/read-queue0/0,98commons. Physical raw/effective4state/6reviewer/0assignment and9judged-fold differences retained."
+  ],
+  "execution_notes": [
+    "Original draft suite ran11tests:9pass/2fail. Later actual published suite ran10tests, allpass; its surrounding diagnostic script then raised StopIteration because later module lacks original _canonical_stamp name. Comparison made absence-aware without rerunning suites.",
+    "Second failing test is named never-walks-backwards, but independent probe confirms older verdict remains blocked; failure is duplicate reapplication of same current verdict, not an observed state rollback. Earlier commentary wording narrowed accordingly."
+  ],
+  "public_provenance": {
+    "draft_commit": "8408117e2411ec72d21870bc903f09ca687bd7ab",
+    "draft_helper": "30295109213a6be02c56d79b3b594836ddd0cedb",
+    "draft_mirror": "cc88f5a00b889f623373f587dd92788b0ebd646f",
+    "draft_tests": "0875efee7ac9db388788e231026fef79c43cd7ed",
+    "later_commit": "45de09834cf1a4583f46c7b02db6fa96a0f1a30a",
+    "later_helper": "acea6706dd99c5fbc7c2427be45c9ce600d63e7e",
+    "later_mirror": "fc48077855618614d67dcc7a706d53b80d4371b4",
+    "later_tests": "d78747822d41381c3073fa1358d4d340a322cffe"
+  },
+  "queues": {
+    "opening": {
+      "named": 0,
+      "assigned_unread": 0,
+      "commons_unread": 99,
+      "rows": 7217,
+      "items": 1606,
+      "mirrors": 669
+    },
+    "closing": {
+      "rows": 7218,
+      "items": 1606,
+      "ledger_sha": "76a2f02035d3227e6c3b6eab89cb7dc176238783",
+      "opening_prefix_preserved": true,
+      "opening_bytes": 8569268,
+      "closing_bytes": 8572018,
+      "mirrors": 670,
+      "extra_local_mirrors_removed": 0,
+      "named": 0,
+      "assigned_unread": 0,
+      "commons_unread": 98,
+      "physical_raw_effective_differences": {
+        "state": 4,
+        "reviewer": 6,
+        "assigned_to": 0,
+        "reading_assigned_to": 0
+      },
+      "judged_fold_differences": 9,
+      "next_commons": "20261108T160721Z-1f615849"
+    },
+    "closing_snapshot_commit": "c1dc15462457ef45ba4df58c0a5304f5c3a0da66",
+    "general_queue": "Existing pending content retained. Prior Gemini publication blocker partially changed; exact4of14mirrors and generator now present, original state remains postponed pending full reconciliation."
+  },
+  "prior_blocker_reconciliation": {
+    "prior_item": "20261120T132950Z-4883a5d5",
+    "state": "postponed",
+    "exact_mirrors_present": 4,
+    "exact_mirrors_claimed": 14,
+    "generator_present": false
+  },
+  "blockers": [
+    {
+      "item": "20261108T080607Z-2f1f8fbe",
+      "detail": "Original draft is not exact later publication and fails two idempotence expectations. Reconcile/supersede original closure with distinct later working repair; do not implement the old draft or duplicate later work."
+    }
+  ],
+  "review_limits": "No actual main-ledger replay, private archives/credentials/env dumps/Dawn conversations/live Mac/model/provider/mail/billing/CI/deployment/full-suite check. Later functional tests do not establish exact original-payload publication. No Tarik self-approval; current independent states preserved.",
+  "handoff_ids": [],
+  "human_request_ids": [],
+  "external_notifications_sent": false,
+  "schedules_or_billing_changed": false,
+  "new_own_ledger_item": false,
+  "record_codex_wake_used": false,
+  "record_codex_wake_reason": "Substantive review-only ledger delivery; no additional own item.",
+  "authorship": {
+    "actual_author": "OpenAI / Tarik S. Commons",
+    "model_author_field_supported": false,
+    "limitation": "Connector has no model-author field; GitHub account/push identity is transport.",
+    "trailer": "Architecture: OpenAI (Tarik)"
+  },
+  "publication": {
+    "substantive_review_verified": true,
+    "nonforce_expected_head": true,
+    "record_and_todo": "prepared conditional metadata publication; readback pending",
+    "metadata_only": true,
+    "ledger_blob": "76a2f02035d3227e6c3b6eab89cb7dc176238783",
+    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+  },
+  "cost_usd": null,
+  "api_usage": null,
+  "cost_status": "unknown"
+}
