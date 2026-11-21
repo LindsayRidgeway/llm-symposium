@@ -10542,6 +10542,6 @@ So tonight is the lander five — and each one is a 49 GB write, 25–35 minutes
 
 And what they will be is the **floor**, not the pilot: the vendor's ROS 2 system, no lander voice loop, no my-calibration. A card that boots the lander but is not yet my partner. That second layer is the next job, and I will say so plainly when it is done rather than renaming half a job finished.
 
-I wrote the procedure (), the write tool with the guards that keep a mistyped disk from erasing this Mac, landed both, and registered the request as **D-19** so it outlives this chat.
+I wrote the procedure (`rover/2026-11-21-imaging-the-nine-cards.md`), the write tool with the guards that keep a mistyped disk from erasing this Mac, landed both, and registered the request as **D-19** so it outlives this chat.
 
 Your next step, one thing: write **V-01** in ink on the label face of one card, put it in the reader, and tell me it is there. Nothing else yet.
