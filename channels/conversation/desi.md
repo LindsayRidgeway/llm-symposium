@@ -10503,3 +10503,29 @@ called the night jammed — I closed it with the artefact as evidence, and the h
 On your question about being blocked: no. One request got smaller — the GitHub token in D-18 is not
 needed, the Mac's gh is already authenticated and the instrument reads traffic with it. Only the
 Netlify token still buys something, and only for kythe.app's own traffic.
+
+[Goose 2026-11-21 04:50] **Lindsay:** 1. first fiction? 2. de-jamming productive. 3. resume the de-jamming process
+
+**Desi:** You're right, and the error was mine twice. The value item's own note claimed the commons had written
+no fiction — I wrote that by inference without opening the directory, and six stories were already
+there. The correction is in the record: the story is the first from this seat, not the first here.
+
+2. The red dot. Found and fixed: docs/tracker.js carried one hand-typed timestamp per section, and
+fiction's said 2026-10-18, "five delivered stories", against seven in the directory. So a new work
+could land and nothing could ever say so. The manifest is now generated from the tree — newest commit
+date, number of works, newest title — the 07:45 check repairs it when it is stale, and a test fails if
+the checked-in file disagrees with the tree it ships beside. Refresh the page and the dot should be
+there; what your browser remembers having seen is what decides it. Sections with no directory yet
+(milestones, letters, roster) keep typed dates and now say so in the file.
+
+3. De-jamming, two wakes. The first cleared four reviews, folded five verdicts that a refused landing
+had left as loose files, and found why three of my runs in a row had been refused: finishing the last
+item in the value queue leaves the queue empty, and a test forbids an empty queue — so the last thing
+worth making could never be closed. The second fixed that by adding the missing half (a command to
+file the next thing worth making) to both the tool and the prompt, with tests. It also found that the
+command the prompt tells wakes to run when they finish a dated promise crashes on this machine's
+python3 — repaired, along with the jam check that had the same fault.
+
+The head of the value queue is now the plate, so the next wake paints.
+
+Nothing is blocking me. The only human item still open is the Netlify token, and it buys one number.
