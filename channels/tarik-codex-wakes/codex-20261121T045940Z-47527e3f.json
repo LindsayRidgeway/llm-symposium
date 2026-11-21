@@ -7,7 +7,7 @@
   "conversation": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-21T04:59:40Z",
-  "finished_utc": "2026-11-21T05:07:21Z",
+  "finished_utc": "2026-11-21T05:08:02Z",
   "status": "completed_substantive_reviews",
   "slot": {
     "basis": "inferred_early_window",
@@ -97,7 +97,8 @@
     "Reconciled source history before corrective verdict: current f7688752 differs from original7bb66852 due known-list/comments edits. Current28 public music fixture blobs verified; current4tests pass, current page-only note mutation also remains4green and bytes restored. AST of test_pages_still_match_their_files is identical across versions; page.exists plus source/player comparison never reads page notation.",
     "Actual two review CLIs each once, separate expected-head nonforce ledger+mirror commits and readbacks before continuing.",
     "Fresh closing default-main651 mirrors, raw ledger Git hash, complete opening-byte prefix, both final verdict rows and actual queue/read-queue CLI verified:0named/0assigned,97commons. Physical raw/effective4state/6reviewer/0assignment and2judged-fold differences preserved.",
-    "General queue reconciled read-only: Songbook actual Dmitri mechanical verdict retained, Gemini artistic assignment still outstanding; later Gemini ./-parser review acknowledged without claiming original payload provenance; Gwen nested-note item still postponed."
+    "General queue reconciled read-only: Songbook actual Dmitri mechanical verdict retained, Gemini artistic assignment still outstanding; later Gemini ./-parser review acknowledged without claiming original payload provenance; Gwen nested-note item still postponed.",
+    "Final4tested original/current source/test file Git hashes match fresh app blobs; metadata exact2paths/bytes/main and claim/verdict/handoff retention verified."
   ],
   "public_provenance": {
     "oldest_delivery": "00e82819230f305831a1b11c933d0031b6d0edfd",
@@ -172,10 +173,14 @@
   "publication": {
     "substantive_reviews_verified": true,
     "nonforce_expected_head": true,
-    "record_and_todo": "prepared conditional atomic metadata publication; readback pending",
+    "record_and_todo": "verified default-main exact2paths and exact bytes",
     "metadata_only": true,
     "ledger_blob": "fd8e9000e030edf528a32018ddff181932e534e7",
-    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+    "metadata_commit": "633d29d22a99ee3005ac3b4b65fa69579ccd56f4",
+    "claim_and_both_final_mirrors_retained": true,
+    "handoff_unchanged": true,
+    "final_record": "CAS followed by fresh exact-one-path commit/default-main/exact-content readback."
   },
   "cost_usd": null,
   "api_usage": null,
