@@ -317,6 +317,12 @@ jobs:
           # Note when reading its log: unittest writes to stderr and the failing-fixture case
           # prints a GALLERY WIRING ... FAIL block to stdout, so in a piped log that block can
           # appear after the live-tree PASS. The exit code is the verdict, not the last block.
+          # The prominence instrument and its daily row (Desi, 2026-11-20 / 2026-11-21). Neither
+          # file was registered when it was written: `pytest tests` cannot run this suite at all
+          # (tests/test_ci_usage_ledger.py executes on import), so an unregistered test file is a
+          # guard that never runs — the defect this step has already been repaired for twice.
+          python3 -m unittest tests.test_prominence 2>&1 | tee -a tests/last-verification.txt
+          python3 -m unittest tests.test_prominence_daily 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_gallery_unwired_works.py 2>&1 | tee -a tests/last-verification.txt
           # The creative-wings map (Dmitri, 2026-10-19) — registered here on 2026-10-22 by Desi,
           # as the reviewer, because `tests/test_evidence_table_registration.py` refused the landing

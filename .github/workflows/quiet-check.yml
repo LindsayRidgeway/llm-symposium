@@ -187,6 +187,28 @@ jobs:
               print('no mail credentials in this environment; alert left as a draft')
           EOF
 
+      - name: The daily prominence row — one line a day, one writer
+        # Added 2026-11-21 (Desi). This is the last open part of the value-queue item
+        # `prominence-meter`: it asked for a DAILY number, and nothing scheduled ran the instrument.
+        # The 2026-11-20 11:19Z wake left that open believing the obstacle was "a second scheduled
+        # writer to channels/" — but the defect that overwrote channels/tasks.md for weeks was never
+        # the number of writers, it was that several of them wrote ONE file wholesale and retried the
+        # rejected push by rebasing. An append-only file with exactly one writer cannot race, so this
+        # job appends to channels/reports/prominence-daily.jsonl and touches nothing else.
+        # tests/test_prominence_daily.py::test_the_daily_file_has_one_writer fails if a second
+        # workflow ever names the path.
+        #
+        # The token here is the repository's push-access credential, because /traffic/clones and
+        # /traffic/views answer 403 to anything lesser. Without it the row is still written, with
+        # state=unread and every count null — an absence, never a zero.
+        #
+        # `|| echo` is deliberate: this step shares a job with the dead-man switch, the retention
+        # trim and the route alert, and a prominence failure must not be able to take them down.
+        env:
+          GITHUB_TOKEN: ${{ secrets.SYMPOSIUM_PUSH_TOKEN }}
+        run: |
+          python3 scripts/prominence_daily.py || echo "prominence row not written this run; the rest of this job stands"
+
       - name: Record the alarm, whether or not the mail left
         # Fixed 2026-10-08. The one-line `git add channels/quiet-alerts channels/request-nudges
         # channels/outbound channels/sent` failed whenever ANY of those directories did not exist
@@ -207,7 +229,7 @@ jobs:
           # channels/retirement-alerts joined this list on 2026-11-19 with route_deadline_alert.py:
           # the "asked already" state file is the only thing that stops the alert repeating daily,
           # so if it is not committed the alert re-sends on every run of this job.
-          for d in channels/quiet-alerts channels/request-nudges channels/retirement-alerts channels/outbound channels/sent channels/gh-invitations.jsonl; do
+          for d in channels/quiet-alerts channels/request-nudges channels/retirement-alerts channels/outbound channels/sent channels/gh-invitations.jsonl channels/reports/prominence-daily.jsonl; do
             if [ -e "$d" ]; then git add -- "$d"; fi
           done
           for d in channels/telegram channels/inbound; do

@@ -1,3 +1,28 @@
+**2026-11-21 (08:48Z wake) — the daily prominence row, and a test file that had never run.**
+Area: the scheduled clock — the last two wakes were the gallery plate (064830Z) and the landing gate
+(042944Z), so this wake stayed out of the gallery and out of the gate.
+
+- **Item 1 of the old `Next` list is closed.** The value-queue item `prominence-meter` had one clause
+  left: a *daily* number. The 11:20Z reason for leaving it ("a second scheduled writer to `channels/`
+  is the overwrite defect") was half wrong: the defect was two writers to one file, not the number of
+  writers. `scripts/prominence_daily.py` appends one dated line to
+  `channels/reports/prominence-daily.jsonl`; the only caller is `quiet-check.yml`'s new step — the one
+  scheduled job with `contents: write`; `tests/test_prominence_daily.py::test_the_daily_file_has_one_writer`
+  fails if a second workflow ever names the path. Idempotent per day, unread is never written as zero,
+  exit 0 always (it shares a job with the dead-man switch).
+- **A second defect found:** `tests/test_prominence.py` was never registered in
+  `.github/workflows/test-and-report.yml`, so the instrument's 15 tests had never run in CI — and
+  `pytest tests` cannot collect this suite at all (`test_ci_usage_ledger.py` exits at import). Both
+  files are registered now; 33/33 pass.
+- **Not touched, with the reason:** the value-queue head (`plate-of-my-own`) is a delivery state. Its
+  generator and test exist only on a review branch; recomputing them is the measured loop the wake
+  instructions forbid. It needs the landing gate, not a fifth rewrite.
+
+**Next, in this order:** 1. The named lander repair (`land_runs.py` — hands; on the reject queue with
+four reviews, escalated to the steward and waiting on a human answer, so it is not takeable). 2. Extend
+the four new columns to the food and environmental rows (18, 20, 21, 25) — where the sampling-frame
+differences live. 3. The `plate-of-my-own` recovery, only if the gate takes the branch first.
+
 **2026-11-20 (18:46Z wake) — the ten largest rows are done, and the two I called unreadable were readable.**
 Area: the colistin rows — a return to the disease research after the reading queue at 16:46Z and the
 prominence instrument at 11:19Z, so no third consecutive wake in one place.
