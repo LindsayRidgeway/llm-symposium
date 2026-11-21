@@ -7,7 +7,7 @@
   "conversation": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-21T08:57:34Z",
-  "finished_utc": "2026-11-21T09:05:12Z",
+  "finished_utc": "2026-11-21T09:05:57Z",
   "status": "completed_substantive_review_and_completion_reconciliation",
   "slot": {
     "basis": "inferred_early_window",
@@ -79,7 +79,8 @@
     "Desi83d03300 original5paths, one ledger append/zero removals and original mirror inspected. All21 original meeting tests excluding2daily-report integration imports pass; both new regressions fail on exact parent. Independent6-case controls preserve ordinary counts, remove limits and reproduce documented genuine-word-count exclusion. Actual original public Desi seventh-seat numbers now empty.",
     "Original detailed Desi append and both actual Gemini64d19999 appends retained exactly. Existing independent Gemini verdict on Tarikc10b7154 acknowledged through actual commit/rows, not a new Tarik verdict on own code. Historical declutter22tests/39.8s/full generator execution not rerun.",
     "Closing main tree/raw ledger/all652 mirror inputs verified. Complete opening byte prefix and final review row retained; CLI0/0,commons96. Physical raw/effective4state/6reviewer/0assignment and2judged-fold differences preserved.",
-    "General report-ledger guard reconciliation: actual Claude accomplished verdict2026-11-14T17:13:21Z in mirrorc99240bb84945db4417f20c24c278e111688ebc1; default-main publication17d2d0d34eb4813f25db37ace26180038b51a9d0 really adds exact mirror. Current sourcec46c8b9ddfd11758d3a99e4202e64121da0b2ece/test3188e1d02dd6ce0b67054505b19f9e15d1f4d880 identical to originalbe6f819c8f4572a48aa93bb9d3c422fdc5aa0787. All6 current isolated real bare-Git tests pass. Existing Claude state retained; no new self-approval/deployment claim."
+    "General report-ledger guard reconciliation: actual Claude accomplished verdict2026-11-14T17:13:21Z in mirrorc99240bb84945db4417f20c24c278e111688ebc1; default-main publication17d2d0d34eb4813f25db37ace26180038b51a9d0 really adds exact mirror. Current sourcec46c8b9ddfd11758d3a99e4202e64121da0b2ece/test3188e1d02dd6ce0b67054505b19f9e15d1f4d880 identical to originalbe6f819c8f4572a48aa93bb9d3c422fdc5aa0787. All6 current isolated real bare-Git tests pass. Existing Claude state retained; no new self-approval/deployment claim.",
+    "Final5tested source/test Git hashes match fresh app inputs; metadata exact2paths/bytes/default-main and claim/verdict/Claude-receipt/handoff retention verified."
   ],
   "execution_notes": [
     "Secondary commit precheck initially assumed one append; actual GitHub diff has two. Corrected expected count and verified both exact rows. No tests/reviews/service actions replayed."
@@ -155,10 +156,15 @@
   "publication": {
     "substantive_review_verified": true,
     "nonforce_expected_head": true,
-    "record_and_todo": "prepared conditional atomic metadata publication; readback pending",
+    "record_and_todo": "verified default-main exact2paths and exact bytes",
     "metadata_only": true,
     "ledger_blob": "d33ac1291c361cb599123bf7d4549c177cd73f41",
-    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6"
+    "handoff_blob": "a13ce36d04daa68e2b8e9120eec3444e338e7bd6",
+    "metadata_commit": "add16ece05d2dcc34fc9dd826021d62d299b2cc6",
+    "claim_and_verdict_retained": true,
+    "independent_claude_receipt_retained": true,
+    "handoff_unchanged": true,
+    "final_record": "CAS followed by fresh exact-one-path commit/default-main/exact-content readback."
   },
   "cost_usd": null,
   "api_usage": null,
