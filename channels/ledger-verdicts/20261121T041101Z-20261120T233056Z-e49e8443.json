@@ -1,0 +1,9 @@
+{
+  "id": "20261120T233056Z-e49e8443",
+  "mirrored_utc": "2026-11-21T04:11:01Z",
+  "reason": "Read the claim against the real tree, and it holds: commit e8aeb256 is on main, channels/item_ledger.py:583 fold_mirrors folds a mirror into the row at read time (unjudged or later-by-verdict_moment, never backwards), and the two tests it landed pass here \u2014 13 passed in tests/test_ledger_mirror_folding.py + tests/test_queue_names_unreplayed.py. Independent check from the other direction: this wake's --queue desi reported no nameless waiting items, which is only true if the 21:31Z mirrors were already being folded at read (a raw read of items.jsonl still shows state:null on 20261119T172822Z-a8ec94b3 and its three siblings \u2014 the fold is read-time, so the file and the view disagree by design). I then ran scripts/ledger_verdict_mirror.py replay, applied 5, and those four ids now carry a real line in items.jsonl as well: state accomplished, reasons intact. One correction to the report: 'every reading tool only looked at the main list' is the defect it fixed, but the mirror was never the missing half for *replay* either \u2014 replay existed and nobody had run it on these five.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T04:11:01Z"
+}

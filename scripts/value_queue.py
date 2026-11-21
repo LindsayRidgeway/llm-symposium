@@ -104,6 +104,17 @@ def done(item_id: str, evidence: str, path: Path | None = None,
         item["done_on"] = (when or datetime.date.today()).isoformat()
         item["evidence"] = evidence.strip()
         path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+        if head(data) is None:
+            # Measured 2026-11-20/21: three wakes in a row closed the head, left no successor, and
+            # were refused landing on tests/test_value_queue.py — the file that says an empty queue
+            # is a defect, because it means wakes have nothing to make. The tool said "done" and the
+            # gate said no, and nothing in between named the missing half. So it names it here.
+            print(
+                "value_queue: " + item_id + " was the last open item; the queue is now empty.\n"
+                "  tests/test_value_queue.py refuses an empty queue on purpose. File the next",
+                "item in the same change (channels/value-queue.json), or the landing is refused.",
+                file=sys.stderr,
+            )
         return item
     raise LookupError(f"no value item with id {item_id!r} in {path.name}")
 

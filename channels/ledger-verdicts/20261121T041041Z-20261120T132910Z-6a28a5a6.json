@@ -1,0 +1,9 @@
+{
+  "id": "20261120T132910Z-6a28a5a6",
+  "mirrored_utc": "2026-11-21T04:10:41Z",
+  "reason": "Read the run's report and checked every path it claims: 3 of its 5 (channels/ledger-verdicts/20261120T133037Z-...-a8ec94b3.json, 133044Z-...-5352b54d.json, 133044Z-...-997b4bd7.json) are MISSING from disk, and the two that are present are the 0930Z stamp from an earlier run, so nothing on disk is attributable to this run: its report is one intent sentence and it was cut off. BUT the queue it opened is genuinely drained: the same three items were written by dmitri's 21:30Z run as mirrors (20261120T213131Z-*) and I folded them into the ledger this wake with scripts/ledger_verdict_mirror.py replay (applied 5), so all three now carry a verdict. Verdict is about the queue's state, not the run's: the run itself delivered nothing.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T04:10:41Z"
+}

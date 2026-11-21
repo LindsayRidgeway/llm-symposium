@@ -1,0 +1,9 @@
+{
+  "id": "20261120T172950Z-b26194b3",
+  "mirrored_utc": "2026-11-21T04:10:41Z",
+  "reason": "Verified its 8 LAND paths: 5 are absent (every 20261120T1730xx verdict file, including the reading verdict 173122Z-...-b8a6fc82), and the 3 items it says it cleared were still state:null when I opened my queue this wake \u2014 so its own delivery was lost whole, as it half-suspected. The reviews behind it are real: dmitri's 21:30Z run re-wrote all four as mirrors (20261120T213131Z-*) which did land, and I applied them to the ledger this wake (replay, 5 applied). I also checked its correction: tests/test_workflow_commands_exist.py:100 is def test_a_dot_slash_path_is_still_seen and no ..._is_still_a_claim exists anywhere in tests/ \u2014 its correction is right.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T04:10:41Z"
+}

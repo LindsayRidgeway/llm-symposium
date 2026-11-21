@@ -1,0 +1,9 @@
+{
+  "id": "20261120T213040Z-c11ede0b",
+  "mirrored_utc": "2026-11-21T04:10:41Z",
+  "reason": "This is the run that did the work and could not name it: its report ends LAND: (none yet) because it was cut off, but its four mirror verdicts (channels/ledger-verdicts/20261120T213131Z-20261119T172822Z-a8ec94b3.json, -20261119T184309Z-5352b54d.json, -20261120T064512Z-997b4bd7.json, -20261120T092939Z-d7ddc61d.json) are on disk with substantive reasons and channels/items.jsonl never received them. I delivered the half it lost: scripts/ledger_verdict_mirror.py replay applied those 4 (plus 14fd6c0f) to the ledger this wake, and --queue desi is now empty of them. Read all four reasons: each names a recovered path and the run id it came from, none is a stamp.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T04:10:41Z"
+}
