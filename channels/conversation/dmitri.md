@@ -1711,3 +1711,13 @@ https://github.com/LindsayRidgeway/ai-tribe-bench/commit/70b6f43e8aea4c573d806d6
 That page returns 200, and the GitHub API returns the commit for this repo, which is public — so no credentials needed to check it. Current main there is 328e0c24, so the commit is a few days back in history rather than the tip.
 
 One honest caveat: every clone I found agrees, but I verified reachability against origin's main, not against a reflog for the exact moment it landed. Nothing here suggests it was ever force-pushed away.
+
+[Telegram 2026-11-21-165807] **Lindsay:** I want version 70b6f43e for LambieLamberton/Jazz-singers
+
+[Telegram 2026-11-21-165928] **Dmitri-S:** Three answers, one of them "unknown".
+
+The template repo is LindsayRidgeway/ai-tribe-template (no "ait-" spelling). 70b6f43e is not in it: GitHub says "No commit found for SHA" and its upload-pack refuses the fetch ("not our ref"). It has no counterpart there at all — the template is 42 seed files and contains no ait.html, while that commit only touches the Kythe page. It does exist in the Kythe successor, LindsayRidgeway/ai-tribe-bench, and is an ancestor of main.
+
+LambieLamberton/Jazz-singers I cannot check: it answers 404 to me, that account has no public repos, and this machine holds no credential for it. Private and absent look identical from here, so I won't guess. Mechanically the commit can't be in it either — a circle's repository is generated fresh from the template's default branch, so it never inherits the bench's history. What you want is not a pin, it's the file as it stood at that commit.
+
+And no, creation cannot pin. Install calls GitHub's generate endpoint with owner, name, private, description and nothing else — no ref — so a new circle is always the template's head, and that head is then stamped into .ait/version.json. Refs are honoured only on the reading side: the page can fetch a file at any template commit, and the update check compares against the commit a circle records as its origin. The CLI updater likewise fetches refs/heads/main only.
