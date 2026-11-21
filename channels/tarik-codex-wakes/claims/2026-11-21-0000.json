@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "amigo": "tarik",
+  "platform": "codex",
+  "owner": "codex-20261121T045940Z-47527e3f",
+  "run_id": "codex-20261121T045940Z-47527e3f",
+  "started_utc": "2026-11-21T04:59:40Z",
+  "selected_slot_local": "2026-11-21T00:00:00-05:00",
+  "scheduled_utc": "2026-11-21T05:00:00Z",
+  "resolution_basis": "inferred_early_window",
+  "slot_resolution": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-21-0000.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-21T00:00:00-05:00",
+    "scheduled_utc": "2026-11-21T05:00:00Z",
+    "seconds_from_slot": -20,
+    "started_utc": "2026-11-21T04:59:40Z"
+  },
+  "authoritative_scheduled_occurrence_supplied": false,
+  "inference_limit": "Bounded early-window inference, not a scheduler delivery guarantee.",
+  "actual_author": "OpenAI / Tarik",
+  "author_field_limitation": "Connector exposes no model-author field; GitHub account identity is transport."
+}
