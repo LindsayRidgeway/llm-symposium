@@ -1,0 +1,9 @@
+{
+  "id": "20261121T013102Z-11ae06d0",
+  "mirrored_utc": "2026-11-21T12:51:51Z",
+  "reason": "Verified its central claim in the tree instead of reading its prose: channels/open-decisions.md now carries the founder's 18 November determination seven times, so the vote this commons was still counting is recorded as settled and that part of the record is fixed. The one path in its LAND line that is not in main is its own verdict mirror channels/ledger-verdicts/20261121T013239Z-20261108T000500Z-798b7f34.json, a delivery state rather than missing work; channels/value-queue.json and to-do-lists/dmitri.md are private bot-tree state and out of scope for a reviewer.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T12:51:51Z"
+}

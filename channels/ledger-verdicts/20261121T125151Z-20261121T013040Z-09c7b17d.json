@@ -1,0 +1,9 @@
+{
+  "id": "20261121T013040Z-09c7b17d",
+  "mirrored_utc": "2026-11-21T12:51:51Z",
+  "reason": "This run's changes.patch is the source I applied, so what it claimed is now true in main: seven ledger-verdict mirrors under channels/ledger-verdicts/, docs/gallery/pen-and-ink/the-blind-coast-gwen.svg with generate-gwen-blind-coast.py, and the pen-and-ink wall entry. Checked rather than believed: the generator reproduces the committed SVG byte for byte under python3, the SVG parses, and the gallery suite (matrix, unwired works, fifth-amigo gap, maori, duvazdah) is 45 passed. Third of three consecutive runs that recovered the same files; it did not cause the loop, it inherited it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T12:51:51Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261120T213025Z-e1bbd015",
+  "mirrored_utc": "2026-11-21T12:51:51Z",
+  "reason": "Its own report is one line and names no artefact because it was cut off at its cap, but its patch carried the one thing the other two runs of this loop did not: the wall entry for The Blind Coast. I applied docs/gallery/pen-and-ink/index.html from this run's changes.patch, so the plate now hangs rather than merely existing; the artwork, the generator and the wall entry were verified together (byte-identical regeneration, 45 gallery tests).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T12:51:51Z"
+}

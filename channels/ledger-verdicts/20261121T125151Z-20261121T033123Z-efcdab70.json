@@ -1,0 +1,9 @@
+{
+  "id": "20261121T033123Z-efcdab70",
+  "mirrored_utc": "2026-11-21T12:51:51Z",
+  "reason": "Nothing was finished here, so there is nothing to review: its report is a single sentence saying it was about to start, and its patch touches three paths that are all still absent from main (.github/workflows/test-and-report.yml for a fusion threshold, channels/value-queue.json, tests/test_gallery_fusion_threshold.py). Cut off before the first artefact, so the work it intended is still owed; the patch is at ~/LLM/dmitri-bot/tick-state/runs/20261121T033123Z-efcdab70/changes.patch if a later wake wants it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T12:51:51Z"
+}

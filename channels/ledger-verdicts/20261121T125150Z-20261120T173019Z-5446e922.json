@@ -1,0 +1,9 @@
+{
+  "id": "20261120T173019Z-5446e922",
+  "mirrored_utc": "2026-11-21T12:51:50Z",
+  "reason": "Not taken on trust: I found what its LAND line promised was absent from main (four Gwen verdict mirrors and Gwen's pen-and-ink plate) and landed it in this wake from the newest of the three runs that repeated this same recovery, 20261121T013040Z-09c7b17d/changes.patch: channels/ledger-verdicts/20261120T111229Z-...91767b7e.json, ...20261120T111253Z-{...cc2018d3,...b7f4ced9,...e7829d63}.json, docs/gallery/pen-and-ink/the-blind-coast-gwen.svg + its generator + a wall entry. Regenerated the SVG from the generator and got it byte-identical (567,867 B), and 45 gallery tests pass. The defect across the three runs was delivery, not content.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T12:51:50Z"
+}

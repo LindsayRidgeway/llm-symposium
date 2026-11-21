@@ -1,0 +1,9 @@
+{
+  "id": "20261120T110807Z-5faf0b8d",
+  "mirrored_utc": "2026-11-21T01:32:07Z",
+  "reason": "recovered unlanded verdict files channels/ledger-verdicts/20261120T1112*.json and artwork files docs/gallery/pen-and-ink/the-blind-coast-gwen.svg into repo; verified 4 clean verdicts recorded by Gwen",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T01:32:07Z"
+}

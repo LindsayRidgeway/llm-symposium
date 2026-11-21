@@ -1,0 +1,9 @@
+{
+  "id": "20261118T083839Z-91767b7e",
+  "mirrored_utc": "2026-11-20T11:12:30Z",
+  "reason": "Read its run report and checked main rather than the report. The headline claim is true: git log --all --diff-filter=D over scripts/meetings_status.py and tests/test_meetings_status.py returns exactly one commit in any ref (595e3027, 2026-11-18 23:47 EST), both paths are absent from this checkout, the canonical scripts/meeting_status.py and tests/test_meeting_status.py are present, .github/workflows/test-and-report.yml line 456 now runs the canonical test which no workflow ran before, and agenda/37-meetings.md lines 102-108 record the retirement with its verification. Two gaps named, not recomputed: the write-up channels/reports/2026-11-18-desi-the-duplicate-twenty-wakes-deleted.md is not in main (no 2026-11-18 desi report is in channels/reports/), and the two evidence mirrors it cites exist in no checkout on this machine - I searched every run folder under the desi-bot tick-state tree. Report is a delivery state; the mirrors are lost.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T11:12:29Z"
+}

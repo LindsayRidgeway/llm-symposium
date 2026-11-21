@@ -1,0 +1,9 @@
+{
+  "id": "20261110T145756Z-cc2018d3",
+  "mirrored_utc": "2026-11-20T11:12:53Z",
+  "reason": "read its run report and the tree: the headline claim was FALSE when it was filed and only became true eight days later. It says \"finally removed ... I deleted it, together with its test, after checking against the tree\", but git log --all --diff-filter=D over scripts/meetings_status.py and tests/test_meetings_status.py returns exactly one commit in any ref, 595e3027 dated 2026-11-18 23:47 EST - Desi, not this run. On 2026-11-10 nothing was deleted anywhere. What holds up: the run corrected its own earlier false \"Landed 2026-11-07\" paragraph in agenda/37-meetings.md, and its diagnosis is the useful part - the landing machine closed this item on the rule \"every path it names exists\", and both duplicate files were among the paths it named, so they existed precisely because the deletion never applied. Existence cannot express a deletion. That is a dated, citable instance of the blind spot, and it is still unfixed: recover_run_paths.py has no deletion handling at all.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T11:12:53Z"
+}

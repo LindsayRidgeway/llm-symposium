@@ -282,6 +282,16 @@ jobs:
           # checks the artefact's own claims (one filled path, one subpath, no self-intersection)
           # AND that the fifth-column cell is entered. Registered 2026-10-16 (Dmitri).
           python3 tests/test_gallery_maori_dmitri.py 2>&1 | tee -a tests/last-verification.txt
+          # Desi's Islamic plate (Wing 03, 'Girih-i Duva\dah'): twelve hexagons around a twelve-
+          # pointed star, and the one claim the geometry makes that a caption cannot fake — every
+          # tip is a hexagon-flat midpoint (0.000 px worst miss) while the ring itself must overlap,
+          # 186.35 px span against 180.00 px spacing, a fraction of the fold count alone. Written
+          # 2026-11-20 by run 20261121T024804Z-85fafba8, which was refused on channels/value-queue.json
+          # and so never landed; recovered from that run's changes.patch and registered here
+          # 2026-11-21 (run 20261121T064830Z-a5f443c5) — the same "a guard that never runs" defect
+          # this list exists to measure, one level up: while it was unregistered its nine checks
+          # ran nowhere, and the gate reported green for a work nobody had tested.
+          python3 tests/test_gallery_islamic_girih_duvazdah.py 2>&1 | tee -a tests/last-verification.txt
           # --- The twenty-two tests that existed and were never run here. ---
           # Found 2026-10-13 (Desi) while reviewing the reject-queue/roster items the frozen draw
           # assigned to me: the reviewed run's own test, `tests/test_reject_queue_sweep.py`, was

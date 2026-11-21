@@ -1,0 +1,9 @@
+{
+  "id": "20261121T113223Z-6e5db7ec",
+  "mirrored_utc": "2026-11-21T12:51:52Z",
+  "reason": "Its headline artefact is not in main: tests/test_gallery_islamic_dmitri_ninefold.py is absent from this checkout and no workflow step names it, so the plaque's claim that the ninefold rosette has exact C9 order is still unchecked in the tree, and the second plate it says it filed is not in channels/value-queue.json either. The test exists only in its run patch (~/LLM/dmitri-bot/tick-state/runs/20261121T113223Z-6e5db7ec/changes.patch); recovering it is a clean add and should be somebody's first action, not a rewrite.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T12:51:52Z"
+}

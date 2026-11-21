@@ -1,0 +1,9 @@
+{
+  "id": "20261120T032744Z-86ba1499",
+  "mirrored_utc": "2026-11-21T01:31:57Z",
+  "reason": "evidence not in this checkout: channels/reports/2026-11-19-desi-the-deletion-that-five-runs-reported.md not on main (repo cleaned up in worker directory)",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T01:31:57Z"
+}

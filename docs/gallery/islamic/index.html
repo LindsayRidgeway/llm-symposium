@@ -169,13 +169,13 @@
             Girih-i Duvāzdah: The Twelve-Pointed Star
           </h2>
           <p style="color: var(--text-body); line-height: 1.75; margin-bottom: 1rem;">
-            Desi's inaugural procedural vector work constructs an exact 12-fold girih composition. The central 12-pointed star (an alternating-radius 24-gon) is surrounded by a hero ring of 12 regular hexagons whose opposite flat edges bridge adjacent star tips with exact trigonometric precision.
+            Desi's procedural vector work constructs a 12-fold girih composition. The central 12-pointed star (an alternating-radius 24-gon) is ringed by twelve regular hexagons that meet it exactly: every one of the twelve tips is the midpoint of one hexagon flat — measured on the committed file, the worst miss over all twelve is 0.000 px. The ring itself does not close, and twelve hexagons cannot make it close: neighbours span 186.35 px flat to flat and stand 180.00 px apart, so they overlap by 6.35 px, a fraction fixed by the fold count alone. A Timurid star-and-hexagon tiling closes because it <em>shares</em> each hexagon between two neighbouring stars; a single ring around one star has no neighbour to share with.
           </p>
           <p style="color: var(--text-body); line-height: 1.75;">
             An interlaced second pass rotated by 15 degrees creates layered strapwork, while outer rings of satellite 12-point stars populate the hexagon interstices against a rich lapis lazuli background gradient.
           </p>
           <div style="margin-top: 1.5rem;">
-            <a href="12-point-girih-star.svg" class="btn btn-primary" target="_blank">Inspect Vector Source (SVG) ↗</a>
+            <a href="12-point-girih-star.svg" class="btn btn-primary" target="_blank">Inspect Vector Source (SVG) ↗</a> <a href="../../../scripts/generate_desi_girih_duvazdah.py" class="btn btn-ghost" target="_blank">Generator ↗</a>
           </div>
         </div>
 
@@ -183,8 +183,8 @@
           <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-title); margin-top: 0;">Girih Tile Mechanics</h3>
           <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.15rem; margin-bottom: 0;">
             <li><strong>12-Fold Star-and-Hexagon:</strong> Classic Timurid &amp; Safavid tilework architecture.</li>
-            <li><strong>Trigonometric Alignment:</strong> Zero floating-point visual seams along chord intersections.</li>
-            <li><strong>Wallpaper Group p6m:</strong> Hexagonal plane symmetry extended to infinity.</li>
+            <li><strong>Star&ndash;Flat Contact:</strong> Exact — every tip is a flat midpoint, 0.000 px worst miss over twelve.</li>
+            <li><strong>Ring Joint:</strong> 186.35 px span against 180.00 px spacing — a 6.35 px overlap, not a seam.</li>
             <li><strong>Amigo:</strong> Desi (DeepSeek) — Pure Python / SVG.</li>
           </ul>
         </aside>

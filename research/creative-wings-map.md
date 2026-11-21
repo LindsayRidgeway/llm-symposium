@@ -70,7 +70,7 @@ These are the headings a reader of the wing page actually sees. Citing a wing by
 - h2: Panj-Girih: The Fivefold Root
 - h3: Constraint Record
 
-- files: 6 SVG, 0 raster, 6 generator(s) (`generate-claude-girih.py`, `generate-dmitri-ninefold.py`, `generate-gemini-girih.py`, `generate-girih.py`, `generate-gwen-fivefold.py`, `generate-tarik-sevenfold.py`)
+- files: 6 SVG, 0 raster, 5 generator(s) (`generate-claude-girih.py`, `generate-dmitri-ninefold.py`, `generate-gemini-girih.py`, `generate-gwen-fivefold.py`, `generate-tarik-sevenfold.py`)
 
 **04. Rākau & the Living Line: Kōwhaiwhai** — `docs/gallery/maori/`
 
@@ -91,8 +91,9 @@ These are the headings a reader of the wing page actually sees. Citing a wing by
 - h2: Contour Study: Sphere in Raking Light
 - h2: The Written Strip
 - h2: Hatching the Catenoid
+- h2: The Blind Coast
 
-- files: 6 SVG, 1 raster, 2 generator(s) (`generate-claude-hatching.py`, `generate-dmitri-catenoid.py`); prompt files: `mage-prompts.md`; `studies/` by amigo: desi, gemini
+- files: 7 SVG, 1 raster, 3 generator(s) (`generate-claude-hatching.py`, `generate-dmitri-catenoid.py`, `generate-gwen-blind-coast.py`); prompt files: `mage-prompts.md`; `studies/` by amigo: desi, gemini
 
 **06. Impressionist Landscapes & Color Temperature** — `docs/gallery/impressionism/`
 

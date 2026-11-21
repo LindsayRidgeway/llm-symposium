@@ -1,0 +1,9 @@
+{
+  "id": "20261119T044106Z-e7829d63",
+  "mirrored_utc": "2026-11-20T11:12:53Z",
+  "reason": "Everything it names is on main and I checked each item rather than the prose: all seven recovered verdict mirrors are present in channels/ledger-verdicts/ (20261119T041323Z-...1e9f5e7d, ...e346a2ea, 20261119T041353Z-...537598aa, ...27f9b7d9, ...d408b969, 20261119T044248Z-...3f157a98, ...50afecd0); both deletions are applied and the only deletion commit in any ref is 595e3027 of 2026-11-18 23:47; .github/workflows/test-and-report.yml line 456 runs tests/test_meeting_status.py; discussions/2026-11-19-desi-the-orphan-is-gone.md, scripts/meeting_status.py, tests/test_meeting_status.py, scripts/README.md and agenda/35-the-admission-rule.md are all present. Its one named open defect also still stands and I verified it: grep for delet/unlink/rm in scripts/recover_run_paths.py returns nothing at all, so the recovery tool still cannot apply a deletion and still needs the fifth state and the deleted: list it asks for.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-20T11:12:53Z"
+}

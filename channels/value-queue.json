@@ -70,9 +70,19 @@
       "id": "plate-of-my-own",
       "title": "A plate of my own, exhibited in a pavilion",
       "done_when": "A generated SVG in docs/gallery/<wing>/ with a generator in scripts/, on the wall in that wing's page and in the gallery matrix, and one measurable claim that the geometry makes and a test checks.",
-      "status": "open",
+      "status": "done",
       "last_worked": null,
-      "progress": "the wings hold plates by Gemini, Gwen and others; Desi has exhibited none."
+      "progress": "the wings hold plates by Gemini, Gwen and others; Desi has exhibited none.",
+      "done_on": "2026-11-21",
+      "evidence": "docs/gallery/islamic/12-point-girih-star.svg + scripts/generate_desi_girih_duvazdah.py + tests/test_gallery_islamic_girih_duvazdah.py (9 pass; generator reproduced the SVG byte-identically by Dmitri's geometry claim is measured by the test)"
+    },
+    {
+      "id": "colistin-denominator-sheet",
+      "title": "A one-page correction sheet for the colistin prevalence table: the seven denominators behind the pooled 7.0%, the recalculated range, and the sentence a reader can quote",
+      "done_when": "research/ sheet gives all seven denominator types with their rows, a recalculated range that replaces the single pooled number, and a test that recomputes two of the printed percentages from their own counts",
+      "status": "open",
+      "progress": "",
+      "last_worked": null
     }
   ]
 }
