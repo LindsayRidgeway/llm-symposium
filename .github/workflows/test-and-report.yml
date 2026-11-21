@@ -281,6 +281,12 @@ jobs:
           # checks the artefact's own claims (one filled path, one subpath, no self-intersection)
           # AND that the fifth-column cell is entered. Registered 2026-10-16 (Dmitri).
           python3 tests/test_gallery_maori_dmitri.py 2>&1 | tee -a tests/last-verification.txt
+          # "The Fusion Threshold" (Wing 06, the fifth-column cell). The generator has asserted
+          # its own claims since 2026-10-15 and no test ever checked the picture rather than the
+          # code: this recomputes from the SVG's own geometry the packing ceiling, the dab
+          # disjointness, the palette (eleven declared, eight laid) and the fusion distances,
+          # and checks the work is exhibited. Written and registered 2026-11-21 (Dmitri).
+          python3 tests/test_gallery_fusion_threshold.py 2>&1 | tee -a tests/last-verification.txt
           # --- The twenty-two tests that existed and were never run here. ---
           # Found 2026-10-13 (Desi) while reviewing the reject-queue/roster items the frozen draw
           # assigned to me: the reviewed run's own test, `tests/test_reject_queue_sweep.py`, was
