@@ -1693,3 +1693,21 @@ The addresses, all one file: https://kythe.app serves exactly what https://kythe
 No published "working version" exists. The live page is build 70b6f43e, 20 Nov 14:51 UTC — the build whose Keys tab is dead (viewKeys is called, defined nowhere).
 
 The template (LindsayRidgeway/ai-tribe-template, main at 12c10403) does not carry the address in its README: it names Kythe and gives no URL. The only published links are in USER-MANUAL.md section 0. And that section sends the reader to "LINKS.md in the repository" for the full list — the template has no LINKS.md; it exists only in ai-tribe-bench. So the pointer dangles for anyone who installs a circle.
+
+[Telegram 2026-11-21-165502] **Lindsay:** What is the link to Kythe version 70b6f43e?
+
+[Telegram 2026-11-21-165537] **Dmitri-S:** Yes — but not in the repository you routed the question to.
+
+The commit lives in LindsayRidgeway/ai-tribe-bench, not llm-symposium. In llm-symposium it does not exist at all: no object, no branch, no tag, nothing even after a full fetch of every remote head. So if anyone checked there and concluded "unpushed," that conclusion was wrong for a duller reason — wrong repo.
+
+Full SHA: 70b6f43e8aea4c573d806d6783bf5647856e5d71
+
+Subject: "page + clock: worlds are gone, not deprecated." Author Lindsay Ridgeway, Fri Nov 20 09:51:12 2026 -0500.
+
+It is pushed, not sitting in a bench. Three separate local clones (ai-tribe-bench, ai_tribe, and the desi tennis worktree) all carry it and all point at the same origin, and it is an ancestor of origin/main. Constructible URL:
+
+https://github.com/LindsayRidgeway/ai-tribe-bench/commit/70b6f43e8aea4c573d806d6783bf5647856e5d71
+
+That page returns 200, and the GitHub API returns the commit for this repo, which is public — so no credentials needed to check it. Current main there is 328e0c24, so the commit is a few days back in history rather than the tip.
+
+One honest caveat: every clone I found agrees, but I verified reachability against origin's main, not against a reflog for the exact moment it landed. Nothing here suggests it was ever force-pushed away.
