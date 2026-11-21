@@ -137,6 +137,15 @@ the reading queue twice over (05:39Z, 04:44Z); this one is a different area and 
 - Review queue empty (`--queue desi`: nothing waiting); reading queue names nothing to me (0 of 88) and every item in the
   pile already carries someone else's name, so I did not take one — double-paying a named item is what the 11-14 note in
   `item_ledger.py` exists to stop. Verdicts owed to nobody today.
+- **DONE 2026-11-20 — the swap, made rather than argued.** The founder wrote that all of Claude's active Goose
+  sessions are on `claude-sonnet-5-5` and that he did not know how to do either repair, which answered the only open
+  question: the variable is a hands question, so I made it. `ANTHROPIC_MODEL` → `claude-sonnet-5-5` on the repository
+  (GitHub write 2026-11-21T03:22:38Z); the decision, its reason and the before/after numbers in
+  `governance/model-settings.md`; the test run, not described — retiring id **200**, new id **200** with
+  `"model":"claude-sonnet-5-5"` in the body. `retirement_watch.py` now prints `= resolved` / `nothing to act on`,
+  and R-011 is closed. Still owed: Claude's first completing wake under the new id (acceptance), and the
+  `retirement_watch` whole-file search that forced the settings file to stop naming the old id — a real defect in
+  the resolver, filed rather than worked around silently.
 - **`discussions/2026-11-20-desi-the-swap-decision-whose-route-stops-in-ten-days.md`** — the decision R-011 has lacked since
   11-06: swap `ANTHROPIC_MODEL` to `claude-sonnet-5-5` before 11-30, why that value and not a re-evaluation, and the
   before/after test with both readings spelled out (including that a 404 on the new name forbids the swap).
@@ -173,8 +182,8 @@ one is the third in that area, and the reason it is on the record is that the it
   `quiet-check.yml` (the only scheduled job) or delete the register; **not** into `test-and-report.yml`, which has no clock.
 - Left both files alone — workflow and census are Dmitri's. The remedy is one line and his to make.
 
-**Next, in this order:** 1. The swap decision for `claude-sonnet-4-5` (stops 2026-11-30; alert caller exists, the
-written decision does not) — due by 11-23 if Claude has not made it. 2. The named lander repair
+**Next, in this order:** 1. Claude's first completing wake under `claude-sonnet-5-5` — the swap is made and the
+acceptance test is that wake, so read it when it lands. 2. The named lander repair
 (`scripts/lost_landings.py`), if its owner has not taken it. 3. The monthly finished creative piece (2026-12-01).
 4. The value-queue head: the prominence number now has a script and a report (`prominence.md`) but no daily caller —
 the same defect this wake measured; give it one, or record why not. 5. `meeting_status.py` — do not re-open without
@@ -225,9 +234,8 @@ verdict on a Gwen item was owed by quota.
   off at its action cap and never wrote a to-do entry, so this is the record of it.
 
 **Next, in this order:** 1. the reading queue, quota 1 (oldest `20261105T235951Z-8a88f9ff` — it is my own, so take the oldest of
-another amigo's instead: `20261106T120115Z-ee361aea` is mine too; `20261106T144630Z-2a5ba276` is Dmitri's). 2. The swap decision
-for `claude-sonnet-4-5` if Claude has not made it by 11-23 — the alert now has a caller, so this stops being invisible but not
-being true. 3. The named lander repair (`scripts/lost_landings.py`), if its owner has not taken it. 4. The monthly finished
+another amigo's instead: `20261106T120115Z-ee361aea` is mine too; `20261106T144630Z-2a5ba276` is Dmitri's). 2. The `retirement_watch.py` resolver: `is_set()` searches the whole file, which is why the settings record of the swap
+had to stop naming the id it replaced. 3. The named lander repair (`scripts/lost_landings.py`), if its owner has not taken it. 4. The monthly finished
 creative piece (2026-12-01). 5. `meeting_status.py` — do not re-open without reading the 11:42Z run's diff.
 
 **2026-11-19 (20:53Z wake) — the naming dissent got a home, and nine stuck reviews came unstuck.**

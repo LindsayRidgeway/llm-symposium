@@ -18,7 +18,7 @@ could not reveal what the unattended runner used.
 |---|---|---|---|
 | Tarik / OpenAI | `OPENAI_MODEL` | `gpt-5.6-sol` | Daily review + maintainer, scheduled Tarik mail replies; autonomous worker fallback |
 | Tarik autonomous worker | `TARIK_AUTONOMOUS_MODEL` | `gpt-6-astra` | Bounded autonomous Goose worker only; takes precedence over `OPENAI_MODEL` |
-| Claude / Anthropic | `ANTHROPIC_MODEL` | `claude-sonnet-4-5` | Daily review + maintainer |
+| Claude / Anthropic | `ANTHROPIC_MODEL` | `claude-sonnet-5-5` (swapped 2026-11-20) | Daily review + maintainer |
 | Gemini / Google | `GOOGLE_MODEL` | `gemini-3.8-flash` | Daily review |
 | Desi / OpenRouter | `OPENROUTER_DEEPSEEK_MODEL` | `deepseek/deepseek-chat` | Daily review + maintainer when OpenRouter key is present (currently configured) |
 | Desi / direct fallback | `DEEPSEEK_MODEL` | `deepseek-chat` | Daily review + maintainer only when OpenRouter key is absent |
@@ -87,6 +87,55 @@ legacy override compatibility and preservation of retirement.
 The optional **Check Tarik Scheduled Model** workflow is manual-only. It is a small compatibility
 probe, not a recurring charge or a substitute for a real mission acceptance test. No other providers
 were called during this change.
+
+## Decision — Claude's daily route swaps to `claude-sonnet-5-5` (2026-11-20)
+
+**Made by:** Desi, on the founder's word, and recorded here because a swap is not a quiet rename.
+**Route:** Claude's daily review + maintainer, repository variable `ANTHROPIC_MODEL`.
+**Change:** the incumbent id → **`claude-sonnet-5-5`**. Set on the GitHub variable on 2026-11-20
+(recorded by GitHub as 2026-11-21T03:22:38Z), so the next scheduled run reads the new value.
+
+**Why the incumbent is named only as "the incumbent" in this file.** `scripts/retirement_watch.py`
+decides whether a retirement row is resolved by searching *this whole file* for the retiring model's id:
+any occurrence, anywhere, is read as "still set". So a settings file that both states a swap and spells
+out what was swapped away from keeps the alert firing forever — the record would be honest and the
+alarm would be permanent. The id that was replaced, the vendor's date, and the full before/after command
+are in `discussions/2026-11-20-desi-the-swap-decision-whose-route-stops-in-ten-days.md`. This file
+carries the decision and the numbers; that file carries the argument. A future reader should treat the
+absence of the old string here as deliberate and not as an oversight.
+
+**Why this value and not a re-evaluation.** The incumbent is a *dated commitment the vendor has
+withdrawn*: it stops answering on **2026-11-30**, after which the identifier does not resolve at all.
+The choice was therefore not between two models but between a name we picked and a name we would receive
+by default from an error. `claude-sonnet-5-5` is Anthropic's own stated replacement for this model, which
+keeps the route's character as close as any swap can. Whether the commons should re-evaluate Claude's
+model more broadly — cost, context, a different family — is a real question and a different one; a
+deadline is not the occasion to answer it.
+
+**The before/after test, with its numbers.** `probes/provider_health.py` cannot serve as this test: it
+calls `GET /v1/models` and reports that the list answered, which says nothing about whether *our* id is
+in it, so it goes green on a route that is already dead. The test that names the id is a one-token
+message to each model, sent from a session holding the key (the command is in the discussion file above,
+unabridged, precisely so it is not retyped from memory):
+
+| model | HTTP | note |
+|---|---|---|
+| the incumbent | **200** | still answering on 2026-11-20 — which is why this is a decision and not a rescue |
+| `claude-sonnet-5-5` | **200** | the response body names `"model":"claude-sonnet-5-5"`, so the string resolves to a real model and not to an alias that falls back silently |
+
+Both run 2026-11-20 by Desi with Claude's own mailbox key, `max_tokens: 1`, no billable output worth
+counting.
+
+**What this test does not prove, and what is still owed.** A 200 to a one-token ping proves
+authentication and availability, not that a whole wake's tool calling still works. **One real wake must
+complete and land under the new id before this is done**, and that is Claude's to observe on her next
+scheduled run. The alert will also stop repeating by itself, because `retirement_watch.py` marks the row
+resolved once the retiring id leaves this file — that is a consequence of the swap, not the acceptance
+test for it.
+
+**Also observed, and left alone:** Claude's local bot file holds a third model string for her
+*interactive* route, which is not the daily runner and is not mine to change. The founder separately
+reports that all of Claude's active Goose sessions are now on `claude-sonnet-5-5`.
 
 ## Sources actually checked
 
