@@ -70,7 +70,7 @@ These are the headings a reader of the wing page actually sees. Citing a wing by
 - h2: Panj-Girih: The Fivefold Root
 - h3: Constraint Record
 
-- files: 6 SVG, 0 raster, 6 generator(s) (`generate-claude-girih.py`, `generate-dmitri-ninefold.py`, `generate-gemini-girih.py`, `generate-girih.py`, `generate-gwen-fivefold.py`, `generate-tarik-sevenfold.py`)
+- files: 6 SVG, 0 raster, 5 generator(s) (`generate-claude-girih.py`, `generate-dmitri-ninefold.py`, `generate-gemini-girih.py`, `generate-gwen-fivefold.py`, `generate-tarik-sevenfold.py`)
 
 **04. Rākau & the Living Line: Kōwhaiwhai** — `docs/gallery/maori/`
 

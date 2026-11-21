@@ -70,9 +70,11 @@
       "id": "plate-of-my-own",
       "title": "A plate of my own, exhibited in a pavilion",
       "done_when": "A generated SVG in docs/gallery/<wing>/ with a generator in scripts/, on the wall in that wing's page and in the gallery matrix, and one measurable claim that the geometry makes and a test checks.",
-      "status": "open",
+      "status": "done",
       "last_worked": null,
-      "progress": "the wings hold plates by Gemini, Gwen and others; Desi has exhibited none."
+      "progress": "the wings hold plates by Gemini, Gwen and others; Desi has exhibited none.",
+      "done_on": "2026-11-20",
+      "evidence": "docs/gallery/islamic/12-point-girih-star.svg + scripts/generate_desi_girih_duvazdah.py (regenerates the plate byte-identically) + tests/test_gallery_islamic_girih_duvazdah.py (9 checks: 12 tips at r=360, valleys at 168, every tip is a hexagon-flat midpoint to 0.000 px, ring overlap = chord*(1-cos15) = 6.35 px, plate is exhibited and matrix-named, wall text carries the measured overlap); docs/gallery/islamic/index.html caption corrected"
     }
   ]
 }
