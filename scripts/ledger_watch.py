@@ -374,6 +374,27 @@ def prominence_refresh(apply: bool = True) -> str:
     return "prominence report rewritten — " + (line[-1] if line else "printed nothing")
 
 
+def tracker_refresh(apply: bool = True) -> str:
+    """Rewrite the reader tracker's manifest when a landing has made it stale.
+
+    Added 2026-11-20 (Desi). The founder found the failure before we did: a story landed in the
+    literary wing and no red dot appeared on the menu or the wing page, because the manifest's
+    timestamps were typed by hand and nobody had typed them. The detector is a test; this is the
+    repair, on the same reasoning as agenda_refresh() — a red test without a repair is a red test
+    everyone learns to skip.
+    """
+    if not apply:
+        return "tracker manifest [would rewrite]"
+    done = subprocess.run([sys.executable, str(REPO / "scripts" / "tracker_manifest.py")],
+                          capture_output=True, text=True, cwd=str(REPO), timeout=120)
+    line = (done.stdout or done.stderr or "").strip().splitlines()
+    if done.returncode != 0:
+        return "tracker manifest NOT rewritten (%s)" % ((line[-1] if line else "no output")[:200])
+    if any("already matches" in ln for ln in line):
+        return ""
+    return "tracker manifest was stale — " + (line[-1] if line else "rewrote it")
+
+
 def recover_verdicts(since: dt.datetime, apply: bool = True) -> list[str]:
     """Apply verdicts that were written, refused by the gate, and never recorded.
 
@@ -700,6 +721,8 @@ def message(m: dict, prev: dict | None, label: str, repairs: dict, passes: bool,
         did.append(f"filed {repairs['collected']} item(s) no wake had recorded")
     if repairs.get("prominence"):
         did.append(str(repairs["prominence"]))
+    if repairs.get("tracker"):
+        did.append(str(repairs["tracker"]))
     if repairs.get("reconciled") or repairs.get("paths"):
         did.append(f"closed {repairs['reconciled'] + repairs['paths']} landed item(s)")
     if repairs.get("agenda"):
@@ -805,6 +828,7 @@ def main() -> int:
                 replayed = replay_verdicts(apply=True)
                 agenda = agenda_refresh(apply=True)
                 prominence = prominence_refresh(apply=True)
+                tracker = tracker_refresh(apply=True)
     else:
         recovered = [r + " [would recover]" for r in
                      recover_verdicts(now - dt.timedelta(days=args.days), apply=False)]
@@ -812,8 +836,9 @@ def main() -> int:
         replayed = [r + " [would apply]" for r in replay_verdicts(apply=False)]
         agenda = agenda_refresh(apply=False)
         prominence = prominence_refresh(apply=False)
+        tracker = tracker_refresh(apply=False)
     repairs = {**counts, "recovered": recovered, "replayed": replayed, "whole_review": whole,
-               "agenda": agenda, "prominence": prominence,
+               "agenda": agenda, "prominence": prominence, "tracker": tracker,
                "checkout_guard": guard_note if not args.dry_run else "dry run: not installed"}
 
     # 3. measure after repairing, so the message describes the true state
@@ -853,7 +878,7 @@ _MARKERS = ("<<<<<<<", ">>>>>>>")
 # channels/agenda.md joined 2026-11-19: agenda_refresh() repairs it daily, so the repair must be
 # able to land with the note that reports it.
 _COMMITTED_PATHS = ("channels/items.jsonl", "channels/watch", "channels/agenda.md",
-                    "channels/reports/prominence.md")
+                    "channels/reports/prominence.md", "docs/tracker.js")
 
 
 def unmerged_state(repo: Path) -> str | None:

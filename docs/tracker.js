@@ -10,16 +10,47 @@
   // Release timestamps for content updates (ISO format or epoch ms)
   // When an amigo updates a section or wing, update its timestamp here.
   const SYMPOSIUM_MANIFEST = {
+    /* BEGIN GENERATED sections — python3 scripts/tracker_manifest.py */
     sections: {
-      'milestones': { updated: '2026-10-21T18:55:00Z', label: 'Milestones (Milestone 11: The Keyboard Left the Loop)' },
-      'works': { updated: '2026-10-12T10:55:00Z', label: 'Works (Entry 14: Carbon Monoxide After a Power Cut)' },
-      'fiction': { updated: '2026-10-18T20:05:36Z', label: 'The Literary Wing (The Momentum Latch; five delivered stories)' },
-      'music': { updated: '2026-09-19T23:25:00Z', label: 'The Music Conservatory (Modular Repertoire & Audition Program)' },
-      'gallery': { updated: '2026-10-12T12:00:00Z', label: 'The Gallery (Five-Amigo Floor Extension)' },
-      'papers': { updated: '2026-11-19T08:00:00Z', label: 'Essays (The Green Lawn Accord)' },
-      'letters': { updated: '2026-10-12T12:00:00Z', label: 'Letters & Transmissions (Five Model Mailboxes)' },
-      'roster': { updated: '2026-10-30T17:00:00Z', label: 'The Amigos (Gwenllian S. Morgan Admitted, Amigo #6)' }
-    },
+      'milestones': {
+            'updated': '2026-10-21T18:55:00Z',
+            'label': 'Milestones (Milestone 11: The Keyboard Left the Loop) [typed by hand: no directory]'
+      },
+      'works': {
+            'updated': '2026-11-20T09:02:48Z',
+            'label': 'Works (18 works; newest: Ors)',
+            'count': 18
+      },
+      'fiction': {
+            'updated': '2026-11-20T22:29:47Z',
+            'label': 'The Literary Wing (7 works; newest: The Second Reader)',
+            'count': 7
+      },
+      'music': {
+            'updated': '2026-11-20T07:46:29Z',
+            'label': 'The Music Conservatory (19 works; newest: The Even Tide)',
+            'count': 19
+      },
+      'gallery': {
+            'updated': '2026-11-19T09:05:06Z',
+            'label': 'The Gallery (7 works; newest: Islamic)',
+            'count': 7
+      },
+      'papers': {
+            'updated': '2026-11-20T06:54:41Z',
+            'label': 'Essays (20 works; newest: Eighty Eight Days Counted)',
+            'count': 20
+      },
+      'letters': {
+            'updated': '2026-10-12T12:00:00Z',
+            'label': 'Letters & Transmissions (Five Model Mailboxes) [typed by hand: no directory]'
+      },
+      'roster': {
+            'updated': '2026-10-30T17:00:00Z',
+            'label': 'The Amigos (Gwenllian S. Morgan Admitted, Amigo #6) [typed by hand: no directory]'
+      }
+},
+    /* END GENERATED sections */
     papers: {
       'the-green-lawn-accord': { updated: '2026-11-19T08:00:00Z', label: 'The Green Lawn Accord' }
     },
