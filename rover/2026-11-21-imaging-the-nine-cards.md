@@ -1,0 +1,128 @@
+# Imaging the nine cards — the plan, and the two things the plan does not have
+
+*Desi, 2026-11-21 evening. Written the hour the founder reported the box open: nine SanDisk EXTREME
+64 GB cards (order 112-6317894-9355469) in hand, four rover-class and five lander-class to be made.*
+
+This file is the procedure, so that nine cards written over several sessions are nine cards written
+one way. It is also the record of two gaps, because a plan that pretends to be complete is how a
+session ends up telling him a card is ready when it is only blank.
+
+## 1. What was checked tonight, and what is not on this Mac
+
+Measured, not remembered:
+
+| thing | state 2026-11-21 ~18:30 |
+|---|---|
+| the nine cards | **in hand**, per the founder. No card is in a reader; `diskutil list` shows no external disk. |
+| `LanderPi_20260526.img` (49.1 GiB, the lander vendor image) | **absent** — no `~/Downloads/landerepi-image`, no `*.img` over 500 MB anywhere within reach. The 2026-10-22 insight ("no local copy remains") is still true. |
+| the vendor archive's Drive links | **live.** Re-fetched 2026-11-21 18:32 with `desi-bot/ros2-image-fetch.sh`: four volumes, 3,221,225,472 B each = 12 GiB, ~55 MB/s. |
+| a rover boot-floor image | **does not exist, anywhere.** Neither rover card has ever been cloned off, and no image was ever kept. `mdfind` over the whole disk, Time Machine's destination not mounted, Imager cache empty. |
+| Raspberry Pi Imager | installed, **v2.0.11.1**, and its `--cli` takes `src dst` with `--sha256`, `--first-run-script`, `--disable-eject`. |
+| disk space | 103 GiB free. The archive is 12 GiB; the extracted image 49.1 GiB. Both fit, with ~40 GiB left. |
+
+## 2. The shape of the job: a card is a floor plus a pilot, and tonight only the floor exists
+
+Dmitri's contract (`2026-11-11-dmitri-what-a-pool-card-carries.md`) splits a pool card in two: a
+**boot floor** (OS + the class's driver stack, identical across the class, no hostname) and a
+**pilot** (the pilot server, the voice loop, the first-boot self-identification). Tonight's imaging
+can produce the floor for both classes. It cannot produce the pilot for either, because:
+
+- **The lander's pilot is on the lander**, not in the vendor image: `/home/pi/ttsd.py`,
+  `/home/pi/audio-setup.sh`, the ear on the Mac (`tools/voice3.py`), the audio gain recipe, and the
+  calibration of 2026-10-22. A fresh vendor card is a working ROS 2 lander with the vendor's own
+  demos, and it is not *my* lander until that layer is put on it.
+- **The rovers have no image at all.** Their floor was built by hand in September, one command at a
+  time, and the only copy of it is the card inside each rover.
+
+So the job is two stages, and the second is the one that makes cards worth carrying:
+
+**Stage A — floor.** Write the class image to a card, put the envelope beside it, key it, record it.
+**Stage B — pilot, once per class.** Take one card of each class, boot it on a body, install the
+pilot and the first-boot check, shut down, pull it, and keep it as the class **master**. Every card
+of that class is then a clone of the master, and the two stages collapse into one write per card
+from then on.
+
+Writing Stage A to all nine and then re-writing eight of them with the Stage B master costs one extra
+write per card. Writing Stage B *first* would save that, and it is the better order — but it needs a
+body and a pilot build before any card is written, and the box is open now. Decision: **Stage A on
+the lander five first** (their floor is a 49 GiB file that needs nothing but a reader), **Stage B for
+the rovers first**, because there is no rover floor to write. Stage B for the lander follows on the
+first card, and the lander five get their master-clone pass when it exists.
+
+## 3. The classes, and what is written to each
+
+| class | floor written tonight | what it is | size written |
+|---|---|---|---|
+| `lander` | `LanderPi_20260526.img` | the vendor's MentorPi/LanderPi system, the same image the lander's own card came from on 2026-10-15 (D-6) | 49.1 GiB (~52.7 GB) |
+| `picar-x` | **nothing yet** | Raspberry Pi OS 64-bit + robot-hat 2.5.x + vilib + picar-x 2.1.x + `i2samp.sh` + the lgpio gpiochip fix, exactly as built on 2026-09-22 | — |
+
+**Why the vendor image and not a clone of the lander's current card.** A clone would carry the
+lander's SSH keys, its Wi-Fi credentials, my calibration and my working files. Dmitri's contract
+forbids all four on a shared card, and the argument is not etiquette: a writable copy of an owner's
+calibration on a card anybody can boot is a baseline that can silently undo a later fix. The vendor
+image is exactly the thing the contract calls the boot floor: it knows the hardware and not who is
+driving.
+
+## 4. How a card is written — the procedure, with the guard that matters
+
+The 2026-09-22 lesson stands: in a storage list the card appears as a ~64 GB external disk beside
+"Macintosh HD", and picking the wrong one erases the Mac. `desi-bot/tools/image_card.sh` therefore
+refuses to write unless all of these hold, and refuses before it does anything:
+
+1. the target is an **external** disk (`diskutil info` → `Internal: false`);
+2. its size is inside **50–70 GB** — one of the nine, not the 32 GB spares, not the Mac's 500 GB;
+3. it is **not** the Time Machine destination;
+4. the operator passes the device and an image explicitly; there is no auto-detect, ever.
+
+Then: `diskutil unmountDisk` (not eject), write to the **raw** device (`/dev/rdiskN`, which is the
+fast path), `sync`, and — only when asked — a read-back comparison of the first 32 MiB plus the
+image's whole written length against the source.
+
+Per card, after the write:
+
+- the **envelope**: `POOL-CARD.json` and a plain-text `POOL-CARD.txt` beside it, on the card's boot
+  partition (the FAT volume macOS can read without booting anything — which is the point: the reader
+  of these fields is a person holding the card). If a class image's boot partition cannot be written
+  from macOS, the envelope goes on the first-boot pass instead and the row says so. Nothing is
+  claimed as written until it has been read back off the card.
+- the **key**: `V-nn`, in the founder's ink, before the card is imaged — assigned in the order
+  written, never reserved (`rover/pegboard.md`). The key is the one field on the row that cannot be
+  wrong.
+- the **row**: pegboard gets the key, grade, size, class, and `state = imaged <date>`; `verified`
+  stays empty until a body boots it and says what it is.
+
+## 5. Times, so nobody is surprised at midnight
+
+Measured write speed is not yet measured on this reader; the estimates below assume 25–40 MB/s,
+which is the range these A2 cards are expected to sustain through a USB reader:
+
+| class | write | + read-back verify | × 5 cards |
+|---|---|---|---|
+| `lander` (49.1 GiB) | 22–35 min | 22–35 min | **~2–3 h with verify, ~2 h without** |
+| `picar-x` (~2 GB) | 1–2 min | 1–2 min | ~10–15 min with verify |
+
+The lander five are the whole evening. The honest way to spend it: verify **one** representative
+card fully (read-back and, later, a boot), write the other four with a sync and no read-back, and
+mark all five `imaged`, not `verified`. A read-back on all five buys a second pass over 264 GB and
+buys a confidence that a boot test gives for free on the first one.
+
+## 6. What the founder does, in order, one step at a time
+
+1. **Write a key on the first card** — `V-01` in ink on the label face, the format the pegboard
+   defines. Say the number; it becomes that card's identity everywhere.
+2. **Put it in the reader.** One card at a time, during the write, and not before.
+3. When the write reports done: pull it, write the next key, put the next one in.
+
+Nothing else is his. Nothing about which card is which class is his to remember: the key resolves it
+in `rover/pegboard.md`, and that is why the number is the only thing that goes on the plastic.
+
+## 7. What this file does not claim
+
+- **No card has been written or read** at the time of writing. The download is still running.
+- **No rover floor exists.** The four rover cards cannot be imaged tonight from anything, and saying
+  "four rover chips imaged" without one would be untrue.
+- **No card is verified.** `verified` in every envelope stays empty until a body answers with its own
+  name and the calibration it found. A card that has never been booted has an empty field, and an
+  empty field is a fact.
+- **The lander's cliff behaviour is still unmeasured** and belongs in `known_unknowns` on every
+  lander card.

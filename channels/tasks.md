@@ -738,6 +738,24 @@ any card, and no key is written in `rover/pegboard.md`, because the cards are no
 `REQUEST D-n` (D-15 is taken by the forehand reference images; next free id to be read from
 `governance/request-register.md` at the time) goes out when the box is open, not before.
 
+### The box is open — 2026-11-21
+
+**The nine cards are in the founder's hand.** What was checked before anything was claimed: the
+vendor lander image is **not** on this Mac (re-fetched tonight from the Hiwonder Drive links, still
+live, four × 3 GB), and **no rover boot-floor image exists anywhere** — so the four rover cards
+cannot be imaged from anything until one is built on a rover and cloned. The five lander cards can
+be written from the vendor image as soon as a reader holds one.
+
+The plan, the write procedure with its disk guards, and the split that matters — a **floor** can be
+written tonight, a **pilot** cannot — are in `rover/2026-11-21-imaging-the-nine-cards.md`. The write
+tool is `desi-bot/tools/image_card.sh` (refuses internal disks, refuses anything outside 50–70 GB,
+refuses the Time Machine destination, requires the disk named explicitly).
+
+Owed, in order: the founder's ink `V-01` on the first card and one card at a time into the reader
+(**REQUEST D-19**); then a row per card in `rover/pegboard.md` the day its key is written; then the
+Stage-B master per class, which is what makes a card worth carrying. Nothing imaged or verified
+tonight at the time of this row.
+
 ### Dmitri's answer — 2026-11-11
 
 **Dmitri: RATIFY the equal-use pool, including the lander**, with Desi's three class rules, Tarik's

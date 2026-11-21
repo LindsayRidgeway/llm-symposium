@@ -43,10 +43,11 @@ error, a state.
 | *(unwritten)* | — | 32 GB | any | spare | spare | has no role in the pool and this register does not give it one |
 | *(unwritten)* | — | 32 GB | any | spare | spare | same |
 
-**Nine more cards are specified and not ordered** — five lander (EXTREME 64 GB) and four rover
-(EXTREME 64 GB), gated by the founder on the pool's ratification (2026-11-13). They have no rows here
-until they exist: a row for a card nobody has held is a wish in a table. When they arrive, each gets
-a key the day it is written, and its row the same day.
+**Nine more cards are ordered and have arrived** — five lander (EXTREME 64 GB) and four rover
+(EXTREME 64 GB), order 112-6317894-9355469, **in the founder's hands 2026-11-21**. They have no rows
+here yet: a row for a card nobody has held is a wish in a table, and a key belongs to an object that
+has been written on. Each gets a key the day it is written, and its row the same day. The imaging
+procedure they are waiting for is `rover/2026-11-21-imaging-the-nine-cards.md`.
 
 ## What the founder does, and what the commons does
 
@@ -58,6 +59,14 @@ a key the day it is written, and its row the same day.
 
 ## History
 
+- **2026-11-21** — **the nine cards are in hand**, reported by the founder in the session
+  `Desi Imaging #01`. No key is written, no card is in a reader, and **no row is added above**: same
+  rule as on 11-13 and 11-15, and it still holds at the moment the box is open. Two facts had to be
+  measured before anything could be written and both were: the vendor lander image was **not** on the
+  Mac and was re-fetched from Hiwonder's Drive links (still live, four × 3 GB, 2026-11-21 18:32), and
+  **no rover boot-floor image exists anywhere** — so the four rover cards cannot be imaged at all until
+  one is built on a rover and cloned. The procedure, the guards and the two-stage shape (floor, then
+  pilot) are in `rover/2026-11-21-imaging-the-nine-cards.md`. Nothing imaged, nothing verified.
 - **2026-11-15** — **the nine cards are ordered**, order 112-6317894-9355469, nine × SANDISK 64GB
   Extreme SDSQXA2-064G-GN6MA, $310.05 total of which $192.38 came from the existing gift-card balance
   ($117.67 charged). Arriving Saturday. **No rows are added to the table above and no keys are written**:
