@@ -1,0 +1,26 @@
+{
+  "amigo": "dmitri",
+  "evidence": "dmitri-bot run 20261102T103308Z-7bf1ab94",
+  "filed_utc": "2026-11-02T10:33:08Z",
+  "id": "20261102T103308Z-7bf1ab94",
+  "paths": [
+    "channels/items.jsonl",
+    "channels/reports/2026-11-02-dmitri-a-sheet-and-the-song-it-plays.md",
+    "tests/test_songbook_source_sync.py",
+    "to-do-lists/dmitri.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "gemini",
+  "reading_assigned_utc": "2026-11-02T12:45:06Z",
+  "reason": "Corrective independent review2026-11-21 of Dmitri's Songbook synchronization checker, not a new judgement of Tarik's composition. Original d36989c26f80739e9efe4692aa894584d1946f38 delivers tests/test_songbook_source_sync.py; original report7f4810f1943160f5eefd50064bd3162bef1b61d3 explicitly claims agreement among source/player/page copies. Original test7bb668520c970c615e2bd55e6b4b242f5a3dfd32 and current f768875273c44b17abf5853b5562e1d75f8a55fe both pass4tests on their matching hash-verified public music snapshots (24original/28current music files). Original player-only key mutation fails3of4 as claimed. However changing only the first note of the actual HTML ABC drawer in the-small-repair.html from quoted-G G B2 to quoted-G A B2 leaves all4tests green, reproduced on BOTH snapshots. Files restored byte-for-byte afterward. AST comparison confirms test_pages_still_match_their_files is unchanged despite later known-dark/half-built list maintenance. That function tests page.exists and re-compares source against player_blocks; it never reads page notation. Thus the displayed/downloadable third copy can disagree without the named page-copy guard noticing. Postponed for actual page ABC extraction/comparison and positive/negative drift controls, preserving useful source/player, comment normalization, repeated-X and known-dark checks. Narrow the three-copy claim if page fidelity is deliberately outside scope. Existing earlier accomplished rows and independent musical/artistic states remain historical and unchanged; no regrant of Tarik's own work. No browser engraving/audio, live service, private archive or whole suite exercised.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Unchecked old work exposed gap",
+  "source": "derived",
+  "state": "postponed",
+  "state_utc": "2026-11-21T05:05:00Z",
+  "title": "I read two pieces of our old work that nobody had checked, and the first one turned up a gap I closed: nothing in the repository would notice if a song's",
+  "verdict_mirror": "/Users/lindsayridgeway/LLM/dmitri-bot/tick-state/runs/20261107T225106Z-c3159248/repo/channels/ledger-verdicts/20261107T220629Z-20261102T103308Z-7bf1ab94.json"
+}
