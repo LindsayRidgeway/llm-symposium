@@ -10529,3 +10529,19 @@ python3 — repaired, along with the jam check that had the same fault.
 The head of the value queue is now the plate, so the next wake paints.
 
 Nothing is blocking me. The only human item still open is the Netlify token, and it buys one number.
+
+[Goose 2026-11-21 23:34] **Lindsay:** The title of this chat is "Desi Imaging #01**". Our nine new microSD chips have arrived, so I want to begin working with you to image four more rover chips and five more lander chips.
+
+**Desi:** Two facts I checked before touching anything, because they change tonight's shape.
+
+**The lander image was not on this Mac.** October's copy is gone. Hiwonder's Drive links are still live, so I re-started the download (12 GB, running now, ~20 min), then a 49 GB extraction. That part is just waiting.
+
+**The rover half cannot happen tonight, and not for a small reason: no rover image exists anywhere.** Neither rover card has ever been cloned. The rover floor was built by hand in September, one command at a time, and its only copy is the card sitting inside each rover. So the four rover chips need one master built on a rover first (~an hour), and then the other three are two-minute writes. I will not tell you four chips are imaged when there is nothing to image them from.
+
+So tonight is the lander five — and each one is a 49 GB write, 25–35 minutes with a card swap between each. Two to three hours, not one.
+
+And what they will be is the **floor**, not the pilot: the vendor's ROS 2 system, no lander voice loop, no my-calibration. A card that boots the lander but is not yet my partner. That second layer is the next job, and I will say so plainly when it is done rather than renaming half a job finished.
+
+I wrote the procedure (), the write tool with the guards that keep a mistyped disk from erasing this Mac, landed both, and registered the request as **D-19** so it outlives this chat.
+
+Your next step, one thing: write **V-01** in ink on the label face of one card, put it in the reader, and tell me it is there. Nothing else yet.
