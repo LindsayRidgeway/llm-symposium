@@ -1683,3 +1683,13 @@ It was deleted by accident. Commit 70b6f43e ("page + clock: worlds are gone, not
 Not Android-specific and not a secure-context problem: no clipboard, file input, permission request or crypto.subtle sits in that path (the only clipboard call is copyAddress). It is broken in every browser, desktop included.
 
 Worse, it is live: kythe.app/ait.html serves build "70b6f43e 2026-11-20 14:51 UTC" — the exact commit that lost the function. No branch restores it. The fix is to put viewKeys back (the old version is in 70b6f43e^), and to add a page check that every nav destination actually renders.
+
+[Telegram 2026-11-21-165156] **Lindsay:** What is the link for the working version?
+
+[Telegram 2026-11-21-165314] **Dmitri-S:** Your question reached me cut off at the quoted word, so here is both halves, checked live.
+
+The addresses, all one file: https://kythe.app serves exactly what https://kythe.app/ait.html serves (byte-identical). Install a new circle: https://kythe.app/#/install. Connect one you have: https://kythe.app/#/connect. A circle's own link: https://kythe.app/?circle=owner/repo, and ?tribe= still opens the same circle. There is no kythe.html — https://kythe.app/kythe.html returns 404, so the November rebrand promise of "kythe.html with an ait.html shim" was implemented the other way round.
+
+No published "working version" exists. The live page is build 70b6f43e, 20 Nov 14:51 UTC — the build whose Keys tab is dead (viewKeys is called, defined nowhere).
+
+The template (LindsayRidgeway/ai-tribe-template, main at 12c10403) does not carry the address in its README: it names Kythe and gives no URL. The only published links are in USER-MANUAL.md section 0. And that section sends the reader to "LINKS.md in the repository" for the full list — the template has no LINKS.md; it exists only in ai-tribe-bench. So the pointer dangles for anyone who installs a circle.
