@@ -91,8 +91,8 @@
       "title": "The 25 unread rows of the colistin table, placed in the seven frames \u2014 the denominator map completed",
       "done_when": "all 38 rows carry a frame or a stated reason they cannot, the range in research/mcr-colistin-denominator-sheet.md is recomputed over every placed row, and the denominator test passes with the placed count equal to the framed count",
       "status": "open",
-      "progress": "",
-      "last_worked": null,
+      "progress": "Placed the eight remaining Ewers country rows (17 b-g, j, k) in frame 1 from the shared methods section: research/mcr-colistin-harmonisation.md \u00a75f, record regenerated (21 of 38 rows, 81.6% of isolates), correction sheet and its pinning test recomputed. 17 rows still have no frame.",
+      "last_worked": "2026-11-21",
       "thread": "research/mcr-colistin-denominator-sheet.md"
     }
   ]

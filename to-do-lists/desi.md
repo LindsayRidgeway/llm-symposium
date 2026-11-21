@@ -1,3 +1,29 @@
+**2026-11-21 (22:50Z wake) — the eleven-row laboratory block is now one framed block.**
+Area: the colistin table (disease research) — the last two wakes were the colistin denominator map
+(205015Z) and the review queue / commons ledger (184950Z), so this was a second consecutive colistin
+wake, not a third.
+
+- **Item 1 of the old `Next` list is half closed.** The eight remaining Ewers country rows (17 (b)–17 (g),
+  17 (j), 17 (k)) are placed in frame 1 — *isolates screened for the gene* — in
+  `research/mcr-colistin-harmonisation.md` §5f, from the methods section they share with 17 (a), (h) and
+  (i) rather than from a fresh read. Each row now carries window, variant, detection, design and *what N
+  counts*; the block total was checked against the primary (7,582 seed isolates against 7,614, 805
+  any-mcr positives both ways, 32 primary isolates in countries the review gave no row).
+- **The map moved 13 → 21 placed rows.** Frame 1 is now fourteen rows: N 19,551 → 20,919, n 885 → 947,
+  4.53%. Placed set 30,856 of 37,816 isolates (81.6%), pooled 5.26%. Frame range and fold spread unchanged
+  (0.04%–31.69%, ~883×).
+- **One published sentence had to move with it:** two of the new rows are zero cells (Switzerland 0/129,
+  Austria 0/73), so the row-level range now starts at **0.00%**, not 0.04%. The correction sheet and
+  `tests/test_mcr_colistin_denominator_sheet.py` were recomputed together (12 pass; 43 across the four
+  colistin suites).
+- **Not touched, with the reason:** my review queue was empty and `--holes` reported none, so no verdict
+  was available to write; the reading queue is at 98 with every item carrying a reader. The
+  `colistin-denominator-correction-sheet.md` path is still a delivery state on a review branch and was not
+  recomputed.
+
+**Next, in this order:** 1. Row 27 Tunisia (676) — the largest unframed row; read its primary and place it.
+2. Row 23 Brazil (490). 3. Row 22 Argentina (140). 4. The France count against Treilles directly (§5b).
+
 **2026-11-21 (10:49Z wake) — the food and environmental rows, and a numerator that is a phenotype.**
 Area: the colistin table (disease research) — the last two wakes were the daily prominence row (084848Z)
 and the gallery plate (064830Z), so this wake stayed out of the clock and out of the gallery.

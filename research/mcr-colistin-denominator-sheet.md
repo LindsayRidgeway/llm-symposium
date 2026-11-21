@@ -6,12 +6,19 @@ it was filed and never touched). It summarises reading already recorded row by r
 arithmetic check in [`mcr-colistin-table-arithmetic-audit.md`](mcr-colistin-table-arithmetic-audit.md).
 It adds no new row read; it adds the one page nobody had written.
 
+**Extended 2026-11-21, 22:50Z, by Desi.** Frame 1 now carries the eight remaining Ewers country rows
+(17 b–g, j, k), placed from the methods section they share with 17 (a), (h) and (i) rather than from a
+fresh read — the working is `mcr-colistin-harmonisation.md` §5f. Every count below is regenerated from
+the record; the placed set grew from 13 rows to 21 and the sentences that quoted 13, 29,488 and 78%
+have been recomputed rather than left standing.
+
 ## The sentence a reader can quote
 
-> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 13 rows of
-> this table — 29,488 of its 37,816 isolates, 78% — whose denominators have been read against their
+> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 21 rows of
+> this table — 30,856 of its 37,816 isolates, 81.6% — whose denominators have been read against their
 > primary studies, the denominator counts **seven different quantities**, and the rates those rows
-> support run from **0.04% to 31.7%** depending on which frame is asked. Cite the frame, not the pool.
+> support run from **0.00% to 60.7%** row by row and from **0.04% to 31.7%** by frame. Cite the frame,
+> not the pool.
 
 That is the whole finding. Everything below is the evidence for it and the arithmetic behind the two
 numbers in it.
@@ -25,7 +32,7 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 
 | # | what the denominator counts | rows | N | n | rate | what it is *not* |
 |---|---|---|---:|---:|---:|---|
-| 1 | isolates screened for the gene | 13, 6, 17 (a)\*, 17 (h), 17 (i), 19 | 19,551 | 885 | **4.53%** | not a population: 17a–17k is one lab's stored isolates from *diseased* piglets |
+| 1 | isolates screened for the gene | 13, 6, 17 (a)\*, 17 (b)–17 (k), 19 | 20,919 | 947 | **4.53%** | not a population: eleven of its fourteen rows are one lab's stored isolates from *diseased* piglets |
 | 2 | isolates screened for a phenotype, genotyped only if positive | 28 | 5,571 | 2 | **0.04%** | not a gene prevalence: 5,542 isolates were never assayed; a lower bound |
 | 3 | hosts (animals and humans enrolled) | 21 | 227 | 12 | **5.29%** | not isolates: the study's 17 isolates come from 12 positive hosts, on a colistin-containing medium |
 | 4 | samples or products | 18, 5 | 1,240 | 393 | **31.69%** | not isolates: 128 meat products; 360 isolates recovered from 1,112 farm/water/soil samples |
@@ -34,25 +41,27 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 | 7 | a sum across sampling frames | 1 | 2,649 | 260 | **9.82%** | not one population: meat, animals and inpatients added into one N (14.9%, 20.6%, 1.2%) |
 
 \* row 17 (a)'s cell prints 10.42%; its counts give 11.51%. Row 19's numerator is also wrong against
-its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 985 / 19,551 = **5.04%** — it
-does not move the range.
+its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 1,047 / 20,919 = **5.005%** — it
+does not move the range. Two of frame 1's rows are zero cells (17 (d) Switzerland 0/129, 17 (g) Austria
+0/73); they are the reason the row-level range now starts at 0.00%.
 
 ## The recalculated range that replaces the single number
 
 - **Frame rates: 0.04% – 31.7%**, an 883-fold spread, from seven frames built the same way (pool
   inside the frame, n over N).
-- **Row rates, for the same 13 rows: 0.04% – 60.7%** (row 28 low; rows 17 (h) and 17 (i) both 17/28) —
-  the far end is two 28-isolate cells in an eleven-row block that shares one methods section.
-- The 13 placed rows pooled *as printed* give **5.30%**, not 7.0%: the pool was never a stable number,
+- **Row rates, for the same 21 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
+  129 and 73 isolates; rows 17 (h) and 17 (i) high, both 17/28) — the far end is two 28-isolate cells in
+  an eleven-row block that shares one methods section.
+- The 21 placed rows pooled *as printed* give **5.26%**, not 7.0%: the pool was never a stable number,
   it was an artefact of which rows the review happened to include.
-- Arithmetic failures among the 13: **one**, row 17 (a), the already-documented cell.
+- Arithmetic failures among the 21: **one**, row 17 (a), the already-documented cell.
 
 ## What this does not say
 
 1. **Not that the seven rates are comparable.** They are not; that is the finding.
-2. **Not that the range is final.** 25 of the 38 rows are still at four columns and have no frame. The
-   three largest unread rows (Tunisia 676, Brazil 490, Argentina 140) could widen or narrow it, and
-   until they are placed the number is "78% of the table's isolates", not "the table".
+2. **Not that the range is final.** 17 of the 38 rows have no frame. The three largest of them
+   (Tunisia 676, Brazil 490, Argentina 140) could widen or narrow it, and until they are placed the
+   number is "81.6% of the table's isolates", not "the table".
 3. **Not a population prevalence anywhere.** Every frame is a surveillance design; the largest block
    is diagnostic submissions of sick piglets to one German institute.
 4. **Not a correction to the review's cells** except 17 (a) and 19, which have their own records and,
@@ -68,5 +77,5 @@ does not move the range.
 - The whole-table arithmetic: [`mcr-colistin-table-arithmetic-audit.md`](mcr-colistin-table-arithmetic-audit.md),
   whose sibling test `tests/test_mcr_table_arithmetic.py` pins that audit.
 - This sheet is pinned by `tests/test_mcr_colistin_denominator_sheet.py`, which recomputes rows 18 and
-  21 from their own counts, all thirteen placed rows against their printed cells, and the two numbers
+  21 from their own counts, all twenty-one placed rows against their printed cells, and the two numbers
   in the quotable sentence from the record — so a drifted count fails rather than re-reads as prose.

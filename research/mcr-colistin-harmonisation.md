@@ -337,21 +337,73 @@ Seven. The table's pooled 7.0% divides a mixed numerator by a mixed denominator 
 sector labels are inconsistent *because* the frames are. This is now a property of the whole table's
 read portion, not an oddity of its largest block.
 
+### 5f. The other eight Ewers rows, placed by the methods section they share (Desi, 2026-11-21, 22:50Z)
+
+§5e left seventeen rows unplaced and §7 called the Ewers block the cheapest of them, because its design,
+detection, window and variant column are already in hand: rows 17 (b)–17 (g), 17 (j) and 17 (k) are eight
+slices of the same study whose methods were read for §2a and §3. What was missing was not a read but a
+placement, so this is a table-filling pass, and it moves the denominator map from 13 rows to 21.
+
+**The evidence, in one paragraph.** Ewers et al. (Front Microbiol 2022;13:1076315) collected isolates
+from "feces or mucosal swabs collected from pigs during routine microbiological diagnostics at our
+institute from 2010 through 2020", stored those "carrying at least one of the virulence-associated genes",
+and screened the stored collection for *mcr-1* and *mcr-2* by PCR (Table 1, 2010–2017 arm). So every
+country's N in this block is a count of **isolates put through a molecular screen** — the same quantity as
+rows 13, 6, 17 (a), 17 (h), 17 (i) and 19 — and n is any-mcr (mcr-1 + mcr-2), the definition §2a
+established. It is not a count of samples, of hosts, of sites, or of any national population: the samples
+are diagnostic submissions of piglets with post-weaning diarrhoea or edema disease to one German
+laboratory, and a country's row counts the submissions that came from that country.
+
+| seed row | country | N / n | window | variant(s) | detection | design | **what N counts** | n/N |
+|---|---|---|---:|---|---|---|---|---:|
+| 17 (b) | The Netherlands | 757 / 3 | 2010–2017 | mcr-1 (mcr-2 = 0) | PCR on stored isolates | one institute's diagnostic submissions | **isolates screened for the gene** | 0.40 |
+| 17 (c) | Denmark | 140 / 1 | 2010–2017 | mcr-1 (mcr-2 = 0) | as above | as above | **isolates screened for the gene** | 0.71 |
+| 17 (d) | Switzerland | 129 / 0 | 2010–2017 | none detected (mcr-1 = 0, mcr-2 = 0) | as above | as above | **isolates screened for the gene** | 0.00 |
+| 17 (e) | Belgium | 113 / 20 | 2010–2017 | mcr-1 ×11, mcr-2 ×9 | as above | as above | **isolates screened for the gene** | 17.70 |
+| 17 (f) | Poland | 102 / 9 | 2010–2017 | mcr-1 (mcr-2 = 0) | as above | as above | **isolates screened for the gene** | 8.82 |
+| 17 (g) | Austria | 73 / 0 | 2010–2017 | none detected (mcr-1 = 0, mcr-2 = 0) | as above | as above | **isolates screened for the gene** | 0.00 |
+| 17 (j) | Italy | 42 / 25 | 2010–2017 | mcr-1 (mcr-2 = 0) | as above | as above | **isolates screened for the gene** | 59.52 |
+| 17 (k) | Hungary | 12 / 4 | 2010–2017 | mcr-1 (mcr-2 = 0) | as above | as above | **isolates screened for the gene** | 33.33 |
+
+**Arithmetic.** All eight reconcile with their own printed percentages against the table's rounding
+convention: 3/757 = 0.396 (prints 0.4), 1/140 = 0.714 (0.7), 0/129 = 0 (0.0), 20/113 = 17.699 (17.7),
+9/102 = 8.824 (8.8), 0/73 = 0 (0.0), 25/42 = 59.524 (59.5), 4/12 = 33.333 (33.33). Nothing new joins
+17 (a) on the audit's failure list. Two of the eight are **zero cells** — Switzerland 0/129 and Austria
+0/73 — which is the first time this table's placed set contains a row with no positives at all, and it
+changes one published sentence in the correction sheet: the row-level range now runs from **0.00%**, not
+0.04%.
+
+**The block totals, against the primary.** The eleven 17-labelled rows sum to 7,582 isolates and 805
+any-mcr positives in the seed; the primary's corresponding arm gives 7,614 isolates and 805 any-mcr, the
+difference being 32 isolates from countries the review did not give their own row. So the review's block
+is complete on the numerator and short 32 on the denominator — 0.4% of it — which is why the block
+arithmetic was recorded as agreeing (`research/mcr-ewers-table1.json`, `block_arithmetic`).
+
+**What it changes in the map.** Frame 1 grows from six rows to fourteen: N 19,551 → **20,919**, n 885 →
+**947**, framed rate **4.53%** (unchanged to two decimals, because the eight rows pool at 62/1,368 =
+4.53% themselves). The placed set grows from 13 rows to **21**: 30,856 of the table's 37,816 isolates
+(**81.6%**) and 1,624 of its 2,647 positives; pooled as printed it gives **5.26%**. The frame range is
+untouched (0.04%–31.69%) and the fold spread stays about 883×. What the eight rows *do* add is a
+population-interpretation point already made in §3 and now visible inside a frame: eleven of frame 1's
+fourteen rows are one laboratory's diseased-piglet submissions, so a frame that is honest at the level
+of "what quantity is N" is still not a set of comparable populations.
+
 ## 6. Columns now filled, for these rows only
 
-Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twelve
-of the 38 rows** now carry the other four fields — the eight rows of §1 and the four food and
-environmental rows of §5e. Across those twelve: **collection window 10 of 12** (rows 13 and 6 are not
-in any record reached), **mcr variant 12 of 12**, **detection method 12 of 12**, **sampling design
-12 of 12** — plus a ninth column the seed never had, *what N counts*, which is now filled for all
-twelve and is the column §5d and §5e show to be the load-bearing one.
+Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty
+of the 38 rows** now carry the other four fields — the eight rows of §1, the four food and environmental
+rows of §5e, and the eight remaining Ewers country rows of §5f. Across those twenty: **collection window
+18 of 20** (rows 13 and 6 are still not in any record reached), **mcr variant 20 of 20**, **detection
+method 20 of 20**, **sampling design 20 of 20** — plus a ninth column the seed never had, *what N counts*,
+which is now filled for all twenty and, with row 5's §5c read, gives **21 rows with a frame**.
 
-The remaining **twenty-six seed rows** are still at four columns, so the item's question cannot yet be
-answered across the whole table; it can be answered about a third of it, in both directions — the
-heaviest block (livestock, 27,132 of the table's 37,816 = 71.8%) and every food and environmental row
-(18, 20, 21, 25 = 605 of 37,816) — and the answer in both is *surveillance*. That the sector column is
-nearly two-thirds one laboratory's pig-diarrhoea submissions while the pooled figure it feeds is read as
-a cross-sector prevalence is the item's finding, stated as an arithmetic fact.
+The remaining **seventeen rows** have no frame; eighteen rows are still at four columns, one of them being
+row 5, whose frame was established in §5c. So the item's question still cannot be answered across the
+whole table, but it can now be answered about four-fifths of its isolates: the heaviest block (livestock,
+27,132 of the table's 37,816 = 71.8%), every food and environmental row (18, 20, 21, 25 = 605 of 37,816),
+and the whole of one eleven-row laboratory block. The answer in each is *surveillance*. That the sector
+column is nearly two-thirds one laboratory's pig-diarrhoea submissions while the pooled figure it feeds
+is read as a cross-sector prevalence is the item's finding, stated as an arithmetic fact.
 
 ## 7. What cannot be concluded, and the next step
 
@@ -359,11 +411,9 @@ a cross-sector prevalence is the item's finding, stated as an arithmetic fact.
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** The twenty-six rows still at four columns, largest first: 27 Tunisia (676), 23 Brazil
-  (490), 22 Argentina (140), 17(b)–17(g), 17(j), 17(k) (the remaining Ewers country rows, which share
-  one methods section and are therefore the cheapest block on the list), 26 South Africa (50), 24
-  Nigeria (35), then the singles. The Ewers block is worth doing before the large singles: its design,
-  detection and window are already in hand, so it is a table-filling pass rather than a reading pass.
+- **Next step.** The seventeen rows still without a frame, largest first: 27 Tunisia (676), 23 Brazil
+  (490), 22 Argentina (140), 26 South Africa (50), 24 Nigeria (35), then the singles (2, 3, 4, 7, 8, 9,
+  10, 11, 12, 14, 15, 16). The Ewers block that was first on this list on 21 November is closed in §5f.
 - **Still open, and unchanged by §5e:** the France count against Treilles directly (§5b — the row's
   49 is the review's figure and disagrees with its own primary by 100).
 

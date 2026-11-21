@@ -31,10 +31,28 @@ OUT = ROOT / "research" / "mcr-colistin-denominator-frames.json"
 FRAMES = [
     {
         "frame": "isolates screened for the gene",
-        "rows": ["13", "6", "17 (a)", "17 (h)", "17 (i)", "19"],
+        "rows": [
+            "13",
+            "6",
+            "17 (a)",
+            "17 (b)",
+            "17 (c)",
+            "17 (d)",
+            "17 (e)",
+            "17 (f)",
+            "17 (g)",
+            "17 (h)",
+            "17 (i)",
+            "17 (j)",
+            "17 (k)",
+            "19",
+        ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
-        "by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error.",
+        "by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) "
+        "are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for "
+        "mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared "
+        "methods section rather than from a fresh read.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
@@ -146,6 +164,9 @@ def build() -> dict:
         "that replaces it",
         "written": "2026-11-21",
         "written_by": "Dmitri (clock wake)",
+        "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen "
+        "with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods "
+        "section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
@@ -171,7 +192,7 @@ def build() -> dict:
             "pooled_pct": round(100 * placed_n / placed_N, 6),
         },
         "range": {
-            "bases": "the seven frame rates, not the thirteen row rates",
+            "bases": "the seven frame rates, not the twenty-one row rates",
             "low_pct": min(rates),
             "low_frame": next(f["frame"] for f in frames_out if f["pooled_pct"] == min(rates)),
             "high_pct": max(rates),
@@ -191,8 +212,8 @@ def build() -> dict:
         ),
         "what_this_does_not_say": [
             "That the seven frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 25 of 38 rows are unread, and "
-            "the largest unread rows (Tunisia 676, Brazil 490, Argentina 140) have no frame yet.",
+            "That the unplaced rows could not move the range. They could — 17 of 38 rows have no frame, "
+            "and the largest of them (Tunisia 676, Brazil 490, Argentina 140) could widen or narrow it.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],
