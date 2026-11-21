@@ -97,6 +97,65 @@ class ValueQueue(unittest.TestCase):
         self.assertIn("closes when:", text)
         self.assertIn("value_queue.py --done", text)
 
+    def test_filing_an_item_puts_it_at_the_back_and_does_not_move_the_head(self):
+        vq.add("c", "third thing", "something that finishes it", path=self.path)
+        data = vq.load(self.path)
+        self.assertEqual([i["id"] for i in data["items"]], ["a", "b", "c"])
+        self.assertEqual(vq.head(data)["id"], "a")
+        self.assertEqual(data["items"][-1]["status"], "open")
+
+    def test_an_item_cannot_be_filed_without_the_condition_that_closes_it(self):
+        """The queue's own header rule, applied to the door items come in by.
+
+        An item with no closing condition is a project; the queue already refuses to *show* one at
+        the head as work, and it must not be able to *become* one either.
+        """
+        with self.assertRaises(ValueError):
+            vq.add("c", "third thing", "   ", path=self.path)
+
+    def test_an_item_needs_a_title_and_an_id(self):
+        with self.assertRaises(ValueError):
+            vq.add("  ", "third thing", "closes when x", path=self.path)
+        with self.assertRaises(ValueError):
+            vq.add("c", "", "closes when x", path=self.path)
+
+    def test_filing_an_id_that_exists_is_refused_not_merged(self):
+        with self.assertRaises(ValueError):
+            vq.add("a", "the same thing again", "closes when x", path=self.path)
+
+    def test_closing_the_last_item_empties_the_queue_and_filing_a_successor_refills_it(self):
+        """The exact state that got three landings refused, pinned (2026-11-21, Desi).
+
+        `done()` and the repository test have met at one item since the queue was written in
+        2026-11-19: closing moves the pointer, and `test_the_repository_queue_is_not_empty` refuses
+        the empty queue that the last close produces. Runs 20261121T004751Z, 20261121T024804Z and
+        20261120T224733Z each did the good work and were refused on this file, and nothing in the
+        tool named the missing half until the warning above was added — with no command to run.
+        """
+        for item_id in ("a", "b"):
+            vq.done(item_id, "research/%s.md" % item_id, path=self.path)
+        self.assertIsNone(vq.head(vq.load(self.path)),
+                          "closing every item must leave no head — that is the state to repair")
+        vq.add("c", "the successor", "one artefact a stranger can read", path=self.path)
+        self.assertEqual(vq.head(vq.load(self.path))["id"], "c")
+
+    def test_the_repository_queue_still_has_a_head_and_every_item_a_closing_condition(self):
+        """Holds `test_the_repository_queue_is_not_empty`'s subject on the real file (unchanged
+        behaviour), so a diff that drains it fails here first and with a name."""
+        data = vq.load(ROOT / "channels" / "value-queue.json")
+        self.assertTrue(data["items"])
+        self.assertIsNotNone(vq.head(data))
+
+    def test_the_add_command_is_in_the_prompt_not_only_in_the_tool(self):
+        """The retention.py lesson: a command a wake is told about in a warning it never reaches is
+        the same as no command. The prompt block is where the wake reads it."""
+        spec = importlib.util.spec_from_file_location("we_vq3", ROOT / "channels" / "wake_engine.py")
+        we = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(we)                 # type: ignore[union-attr]
+        text = we.value_block(str(ROOT), amigo="desi")
+        self.assertIn("value_queue.py --add", text)
+        self.assertIn("--closes", text)
+
     def test_the_prompt_names_the_record_command_not_only_the_closing_one(self):
         """2026-11-20 (Desi): the block named only `--done`, so a wake that advanced the head and
         did not finish it left no record, the age still read "never worked", and the founder's

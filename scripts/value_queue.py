@@ -15,6 +15,17 @@ is a project, and a project at the head of a queue is the same jam in a slower f
     python3 scripts/value_queue.py --next            # the head, with its closing condition
     python3 scripts/value_queue.py --list           # every item and its state
     python3 scripts/value_queue.py --done mcr-class-b --evidence "research/....md"
+    python3 scripts/value_queue.py --add cartography --title "A map of the commons" \
+            --closes "one page a stranger can read"   # file the next thing to make
+
+`--add` exists because closing had no partner (2026-11-21, Desi). The queue shipped with six items and
+the rule "closing moves the pointer"; `tests/test_value_queue.py` also refuses an empty queue, because
+an empty queue means wakes have nothing to make. Those two rules meet at exactly one item: the last
+close leaves nothing behind and the landing gate refuses it. Three wakes in a row lost their work that
+way (`20261121T004751Z`, `20261121T024804Z`, `20261120T224733Z`), and the repair then was a warning
+telling the wake to hand-edit the JSON in the same change — a warning asks a wake at its action cap to
+do the one thing an action cap prevents. So the partner command exists now, and it is what closing
+should always have had: state the successor before you retire the head.
 
 Exit 0 normally, 1 when the queue is empty (an empty value queue is a defect, not a rest).
 """
@@ -90,6 +101,40 @@ def worked(item_id: str, note: str = "", path: Path | None = None,
     return hit
 
 
+def add(item_id: str, title: str, closes: str,
+        thread: str | None = None, path: Path | None = None) -> dict:
+    """File the next thing to make, at the back of the queue.
+
+    Added 2026-11-21 (Desi). `done()` and this are a pair and only `done()` existed, which made the
+    queue a list that can be drained once. A closing condition is required for the same reason it is
+    required of every item already here: an item without one is a project, and a project at the head
+    of a queue is the jam in a slower form. A duplicate id is refused rather than merged, because two
+    writers appending "the same" item under one id lose one of them silently.
+    """
+    path = path or QUEUE
+    item_id = (item_id or "").strip()
+    title = (title or "").strip()
+    closes = (closes or "").strip()
+    if not item_id:
+        raise ValueError("an item needs an id (a short slug: --add <id>)")
+    if not title:
+        raise ValueError("an item needs a title (--title)")
+    if not closes:
+        raise ValueError("an item is filed with the condition that closes it; --closes is required")
+    data = load(path)
+    items = data.get("items") or []
+    if any(i.get("id") == item_id for i in items):
+        raise ValueError(f"{item_id!r} is already in {path.name}; use --worked or --done")
+    item = {"id": item_id, "title": title, "done_when": closes,
+            "status": "open", "progress": "", "last_worked": None}
+    if thread:
+        item["thread"] = thread.strip()
+    items.append(item)
+    data["items"] = items
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    return item
+
+
 def done(item_id: str, evidence: str, path: Path | None = None,
          when: datetime.date | None = None) -> dict:
     """Close an item. Evidence is required: an item finished with no artefact is a claim, not a close."""
@@ -110,9 +155,12 @@ def done(item_id: str, evidence: str, path: Path | None = None,
             # is a defect, because it means wakes have nothing to make. The tool said "done" and the
             # gate said no, and nothing in between named the missing half. So it names it here.
             print(
-                "value_queue: " + item_id + " was the last open item; the queue is now empty.\n"
-                "  tests/test_value_queue.py refuses an empty queue on purpose. File the next",
-                "item in the same change (channels/value-queue.json), or the landing is refused.",
+                "value_queue: " + item_id + " is closed and the queue is now empty.\n"
+                "  tests/test_value_queue.py refuses an empty queue on purpose — an empty queue means\n"
+                "  wakes have nothing to make. File the successor in this same change:\n"
+                "  python3 scripts/value_queue.py --add <id> --title '<what to make>' "
+                "--closes '<the condition that finishes it>'\n"
+                "  Until one is filed, the landing gate refuses the close.",
                 file=sys.stderr,
             )
         return item
@@ -127,9 +175,23 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--evidence")
     ap.add_argument("--worked", metavar="ID", help="record work and push the item to the back")
     ap.add_argument("--note", help="with --worked: one line on what you did")
+    ap.add_argument("--add", metavar="ID", help="file the next thing to make, at the back")
+    ap.add_argument("--title", help="with --add: what the item is")
+    ap.add_argument("--closes", help="with --add: the condition that finishes it (required)")
+    ap.add_argument("--thread", help="with --add: where the item's record lives, if anywhere")
     args = ap.parse_args(argv)
 
     data = load()
+    if args.add:
+        try:
+            item = add(args.add, args.title or "", args.closes or "", args.thread)
+        except ValueError as exc:
+            print(f"value_queue: {exc}")
+            return 1
+        print(f"value_queue: {item['id']} filed at the back — closes when: {item['done_when'][:70]}")
+        nxt = head(load())
+        print(f"value_queue: the head is still {nxt['id'] if nxt else 'nothing'}")
+        return 0
     if args.done:
         try:
             item = done(args.done, args.evidence or "")
@@ -167,6 +229,9 @@ def main(argv: list[str] | None = None) -> int:
     print("  worked on it, finished or not? push it to the back so the queue rotates: "
           "python3 scripts/value_queue.py --worked <id> --note '<one line>'")
     print("  close it with: python3 scripts/value_queue.py --done <id> --evidence '<path or url>'")
+    print("  and before you retire the last open item, file its successor in the same change: "
+          "python3 scripts/value_queue.py --add <id> --title '<what to make>' "
+          "--closes '<the condition that finishes it>'")
     return 0
 
 

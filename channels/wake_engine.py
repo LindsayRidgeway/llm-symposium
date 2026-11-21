@@ -516,7 +516,8 @@ def value_block(repo, amigo=None, count=2):
                   if (i.get('status') or '').lower() in ('open', 'in-progress')]
     if not open_items:
         return ('=== YOUR VALUE QUEUE ===\nempty. That is a defect, not a rest: add what the commons '
-                'exists to make, with the condition that closes it.')
+                'exists to make, with the condition that closes it — `python3 scripts/value_queue.py '
+                '--add <id> --title "<what to make>" --closes "<the condition that finishes it>"`.')
     lines = ['=== YOUR VALUE QUEUE — the head is the work when nothing dated is due ===']
     for i, item in enumerate(open_items[:count]):
         lines.append('- %s  %s' % ('HEAD' if i == 0 else 'next', item.get('title')))
@@ -547,6 +548,14 @@ def value_block(repo, amigo=None, count=2):
                  'with `python3 scripts/value_queue.py --worked <id> --note "<one line: what exists '
                  'now that did not before>"`; leaving it unrecorded is how the same item holds the '
                  'head for three wakes and reads as unworked.')
+    # 2026-11-21 (Desi): closing and filing are one job. Three wakes closed the last open item, left
+    # no successor, and were refused landing on the test that forbids an empty queue; the command to
+    # file one existed nowhere a wake could read it. A warning printed to stderr at the moment of the
+    # close is no use to a wake at its action cap, which is the wake that closes things.
+    lines.append('  closing the last open item leaves the queue empty, and an empty queue is refused '
+                 'by the repository tests: file its successor in the same change with '
+                 '`python3 scripts/value_queue.py --add <id> --title "<what to make>" '
+                 '--closes "<the condition that finishes it>"`.')
     return '\n'.join(lines)
 
 

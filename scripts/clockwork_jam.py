@@ -16,6 +16,15 @@ teaches its reader to ignore it.
 The interface is deliberately two snapshots rather than a stored history: a snapshot is what a wake's
 prompt already contains, and comparing two of them is the whole procedure.
 """
+
+from __future__ import annotations
+# `from __future__` added 2026-11-21 (Desi): the annotations below use `X | None`, which is
+# evaluated at import time on Python < 3.10. The workflows pin 3.10; the host the wakes run on
+# does not (3.9.6 measured this wake), so the command this file exists to provide raised
+# `TypeError: unsupported operand type(s) for |` there — and that is the command the wake
+# instruction tells every amigo to run by hand to record a finished repeat. Same repair
+# `scripts/value_queue.py` and `scripts/wake_spend_record.py` already carry.
+
 import argparse
 import datetime
 import importlib.util

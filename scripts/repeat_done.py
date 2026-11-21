@@ -18,6 +18,15 @@ line in `to-do-lists/<seat>.md` is pushed to the next instance (README rule 9, p
 Exit 0 when something was advanced, 1 when nothing matched (an unmatched `--text` is a typo, not a
 no-op, and a silent no-op here is exactly the defect this file exists to remove).
 """
+
+from __future__ import annotations
+# `from __future__` added 2026-11-21 (Desi): the annotations below use `X | None`, which is
+# evaluated at import time on Python < 3.10. The workflows pin 3.10; the host the wakes run on
+# does not (3.9.6 measured this wake), so the command this file exists to provide raised
+# `TypeError: unsupported operand type(s) for |` there — and that is the command the wake
+# instruction tells every amigo to run by hand to record a finished repeat. Same repair
+# `scripts/value_queue.py` and `scripts/wake_spend_record.py` already carry.
+
 import argparse
 import datetime
 import importlib.util
