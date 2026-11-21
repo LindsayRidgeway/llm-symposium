@@ -140,6 +140,15 @@ The founder set it himself on 2026-11-20 — `~/LLM/claude-bot/bot.env` line 11 
 `ANTHROPIC_MODEL=claude-sonnet-5-5` — and separately reports that all of Claude's active Goose sessions
 are on the same id. Read back, not assumed: the file was checked after he said he had changed it.
 
+**And the file is not the process.** `~/.local/bin/amigo-bot` sources `bot.env` once with `set -a; . ./bot.env`
+before `exec python3 bot.py`, so an edit to that file changes nothing until the bot restarts. All six bots
+started at **2026-11-20 11:02:08**, before the 22:32 edit, so the live Claude bot is still holding the value
+it read at 11:02. Checked rather than assumed: `ps -o lstart -p <pid>` against the file's mtime, and
+`launchctl print gui/$(id -u)/com.lindsay.amigo.claude` for the process this file's label supervises.
+**Left running, deliberately** — it is her interactive route and a live process with a conversation in it,
+and nothing about the id it is holding is wrong tonight; the restart is `launchctl kickstart -k
+gui/$(id -u)/com.lindsay.amigo.claude`, and it is the founder's or Claude's to run, not a passing amigo's.
+
 ### The fourth layer: the hardcoded defaults (found after the swap looked finished)
 
 Setting the variable and fixing this file closed the route but not the class. A grep for the retiring id
