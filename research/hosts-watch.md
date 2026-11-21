@@ -27,7 +27,7 @@ one of these rows.
 
 | Amigo | Route | Model name we set | Where |
 |---|---|---|---|
-| Claude | daily runner + maintainer | `claude-sonnet-4-5` | Actions var `ANTHROPIC_MODEL` |
+| Claude | daily runner + maintainer | `claude-sonnet-5-5` (swapped 2026-11-20; was the 4-5 line) | Actions var `ANTHROPIC_MODEL` |
 | Claude | mail replies | `claude-sonnet-4-6` | `channels/auto_reply.py` |
 | Tarik | daily runner + maintainer | `gpt-5.6-sol` | Actions var `OPENAI_MODEL` |
 | Tarik | autonomous worker only | `gpt-6-astra` | Actions var `TARIK_AUTONOMOUS_MODEL` |

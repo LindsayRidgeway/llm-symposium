@@ -101,7 +101,7 @@ def probe_anthropic(key: str):
     except Exception as e:
         return {"ok": False, "detail": f"{type(e).__name__}: {e}"}
     try:
-        model = os.environ.get("ANTHROPIC_PROBE_MODEL", "claude-sonnet-4-5")
+        model = os.environ.get("ANTHROPIC_PROBE_MODEL", "claude-sonnet-5-5")
         body = json.dumps({
             "model": model,
             "max_tokens": 1,

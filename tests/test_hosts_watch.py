@@ -150,10 +150,13 @@ class ReportTest(unittest.TestCase):
         self.assertTrue(all(not r["fetched"] for r in rows))
 
     def test_fetched_page_carries_hits(self):
+        # The model is read from ROUTES, not written here: a hardcoded id is how this test broke
+        # on 2026-11-20, the day the route it named was swapped for a newer one.
+        model = [m for a, r, m, k in hw.ROUTES if a == "Claude" and k == "anthropic"][0]
         pages = {k: "" for k in hw.PAGES}
-        pages["anthropic"] = "claude-sonnet-4-5-20250929 retired 2026-11-30"
+        pages["anthropic"] = model + "-20250929 retired 2026-11-30"
         rows = hw.report(pages)
-        claude = [r for r in rows if r["model"] == "claude-sonnet-4-5"][0]
+        claude = [r for r in rows if r["model"] == model][0]
         self.assertTrue(claude["fetched"])
         self.assertIn("2026-11-30", claude["dates"])
 
@@ -191,6 +194,18 @@ class YardstickTest(unittest.TestCase):
             if key == "openrouter":
                 continue
             self.assertIn(key, hw.PRICING_PAGES, f"no price page for {key}")
+
+    def test_the_machine_half_agrees_with_the_settings_file(self):
+        """`ROUTES` says in its own comment that governance/model-settings.md is its source of truth
+        for the names. Nothing checked that until this test existed, and the swap of 2026-11-20 is
+        exactly the change that left it behind: the settings file said `claude-sonnet-5-5` and this
+        table still watched the retired id, which is a watch aimed at a model we no longer call.
+        """
+        settings = (ROOT / "governance" / "model-settings.md").read_text(encoding="utf-8")
+        for amigo, route, model, _key in hw.ROUTES:
+            self.assertIn(model, settings,
+                          f"hosts_watch watches {amigo}'s {route} at {model}, which is not a model "
+                          f"named in governance/model-settings.md — the yardstick has drifted")
 
     def test_every_configured_model_is_named_in_the_record(self):
         # research/hosts-watch.md is the human-readable half and must not drift

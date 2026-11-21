@@ -38,7 +38,7 @@ from pathlib import Path
 # The model identifiers the commons actually sets, and which page would announce
 # their death. Source of truth for the names: governance/model-settings.md.
 ROUTES = [
-    ("Claude", "daily runner + maintainer", "claude-sonnet-4-5", "anthropic"),
+    ("Claude", "daily runner + maintainer", "claude-sonnet-5-5", "anthropic"),
     ("Claude", "mail replies", "claude-sonnet-4-6", "anthropic"),
     ("Tarik", "daily runner + maintainer", "gpt-5.6-sol", "openai"),
     ("Tarik", "autonomous worker", "gpt-6-astra", "openai"),
