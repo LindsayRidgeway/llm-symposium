@@ -613,7 +613,7 @@ if os.environ.get("OPENAI_API_KEY"):
 if os.environ.get("ANTHROPIC_API_KEY"):
     try:
         client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-        anthropic_model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5")
+        anthropic_model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5")
         res = client.messages.create(
             model=anthropic_model,
             max_tokens=2048,
@@ -801,7 +801,7 @@ def _run_maintainer(kind, api_key, prompt):
         return _extract_json(res.choices[0].message.content)
     if kind == "anthropic":
         client = Anthropic(api_key=api_key)
-        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5")
+        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5")
         res = client.messages.create(
             model=model,
             max_tokens=4096,

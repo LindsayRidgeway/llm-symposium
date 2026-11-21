@@ -376,3 +376,29 @@ file two runs both changed is the patch the cheap fix. Otherwise do not read it 
 - [ ] 2026-12-05 — **Monthly: scan for one medical opportunity no one is testing.** A hypothesis with the
   arithmetic shown, offered to the people who could test it.
   repeat: FREQ=MONTHLY;INTERVAL=1
+
+## 2026-11-20 22:5x — the swap had a fourth layer, and it was the defaults
+
+He asked whether everything else about the model swap was done, "other than confirming Claude's wake
+uses -5-5 and works". Answer: no — not because of the variable (set, verified) or the settings file
+(written, verified) or the two instruments that still pointed at the retired id (`hosts_watch.ROUTES`,
+`provider_health` default — fixed at 38fdaa2f), but because the id was still **hardcoded** in three
+default expressions: `.github/workflows/symposium.yml:79` and two `environ.get("ANTHROPIC_MODEL", …)`
+calls in `.github/scripts/runner.py` (616, 804). A default is the code that runs on the day the
+variable is unset, so it is invisible to a swap, to the settings file and to the alert.
+
+- All three now name `claude-sonnet-5-5`; `governance/model-settings.md` records the layer and the
+  three sites; R-011 carries it.
+- The guard is a test, not three edits: `tests/test_model_defaults_are_recorded.py` scans the live call
+  sites (workflows, `.github/scripts`, `scripts/`, `probes/`, `channels/`) and requires every hardcoded
+  model default to be a model the settings file names. It found two things while being written — a
+  `PATH` default and a `GOOSE_MODEL || 'unknown'` sentinel — both of which taught it what not to count.
+- **The trap I walked into again:** the first draft of the new settings-file table spelled the retiring
+  id out in its "before" column, which turned `retirement_watch.py` back on. The rule is run the
+  resolver *after* editing that file, not only before. It reads `= resolved` / `nothing to act on` now.
+- He also corrected two things I had wrong about people and files: he did not create the Claude-bot
+  Telegram account and does not know who "her" is or what "the settings file" is. He set
+  `~/LLM/claude-bot/bot.env` himself (verified: line 11, `ANTHROPIC_MODEL=claude-sonnet-5-5`). When I
+  write "her" in a record I have to say which Claude — S. Sonnet, the sixth amigo, whose Telegram bot
+  that file runs — and the settings file is `governance/model-settings.md`, the commons' own record of
+  which model each amigo's routes use.

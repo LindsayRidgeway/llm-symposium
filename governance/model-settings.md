@@ -133,9 +133,37 @@ scheduled run. The alert will also stop repeating by itself, because `retirement
 resolved once the retiring id leaves this file — that is a consequence of the swap, not the acceptance
 test for it.
 
-**Also observed, and left alone:** Claude's local bot file holds a third model string for her
-*interactive* route, which is not the daily runner and is not mine to change. The founder separately
-reports that all of Claude's active Goose sessions are now on `claude-sonnet-5-5`.
+**Claude's local bot file.** It held a third model string for her *interactive* route (the Telegram
+bot, `~/LLM/claude-bot/`, whose `bot.py` is "Claude S. Sonnet Telegram bot"). That route is not the daily
+runner and it was not mine to change, so the first version of this note named it rather than editing it.
+The founder set it himself on 2026-11-20 — `~/LLM/claude-bot/bot.env` line 11 now reads
+`ANTHROPIC_MODEL=claude-sonnet-5-5` — and separately reports that all of Claude's active Goose sessions
+are on the same id. Read back, not assumed: the file was checked after he said he had changed it.
+
+### The fourth layer: the hardcoded defaults (found after the swap looked finished)
+
+Setting the variable and fixing this file closed the route but not the class. A grep for the retiring id
+afterwards found it in three more places, all of the same shape — **a default**, which is the code that
+runs on the day the variable is *not* set, and therefore the code that no swap and no settings-file
+check can see:
+
+| file | line | before | after |
+|---|---|---|---|
+| `.github/workflows/symposium.yml` | 79 | `vars.ANTHROPIC_MODEL \|\| '<the incumbent>'` | `… \|\| 'claude-sonnet-5-5'` |
+| `.github/scripts/runner.py` | 616 | `environ.get("ANTHROPIC_MODEL", "<the incumbent>")` | `… "claude-sonnet-5-5")` |
+| `.github/scripts/runner.py` | 804 | `environ.get("ANTHROPIC_MODEL", "<the incumbent>")` | `… "claude-sonnet-5-5")` |
+
+*(The left-hand column says `<the incumbent>` for the same reason the paragraph above says it: an id
+spelled out anywhere in this file reads to `retirement_watch.py` as still set. The first draft of this
+very table wrote it out in full and turned the alarm back on — caught by running the resolver, which is
+why the resolver is run after edits to this file and not only before them.)*
+
+It would have failed the way this whole row is about: not loudly on 2026-11-30, but quietly on some
+future day when the variable was missing for an unrelated reason, with the route reverting to a model
+that no longer resolves. **Fixed with a test, not with three edits it could undo:** 
+`tests/test_model_defaults_are_recorded.py` scans the live call sites (workflows, `.github/scripts`,
+`scripts/`, `probes/`, `channels/`) for every hardcoded model default and requires each to be a model
+this file names. A default that names nothing recorded here is a route nobody wrote down.
 
 ## Sources actually checked
 
