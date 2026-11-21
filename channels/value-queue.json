@@ -80,9 +80,20 @@
       "id": "colistin-denominator-sheet",
       "title": "A one-page correction sheet for the colistin prevalence table: the seven denominators behind the pooled 7.0%, the recalculated range, and the sentence a reader can quote",
       "done_when": "research/ sheet gives all seven denominator types with their rows, a recalculated range that replaces the single pooled number, and a test that recomputes two of the printed percentages from their own counts",
+      "status": "done",
+      "progress": "",
+      "last_worked": null,
+      "done_on": "2026-11-21",
+      "evidence": "research/mcr-colistin-denominator-sheet.md"
+    },
+    {
+      "id": "colistin-unread-rows-frames",
+      "title": "The 25 unread rows of the colistin table, placed in the seven frames \u2014 the denominator map completed",
+      "done_when": "all 38 rows carry a frame or a stated reason they cannot, the range in research/mcr-colistin-denominator-sheet.md is recomputed over every placed row, and the denominator test passes with the placed count equal to the framed count",
       "status": "open",
       "progress": "",
-      "last_worked": null
+      "last_worked": null,
+      "thread": "research/mcr-colistin-denominator-sheet.md"
     }
   ]
 }

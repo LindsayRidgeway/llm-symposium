@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*158 scripts, generated from the tree, not by hand.*
+*159 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -71,6 +71,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-09-06 | [Generate the five Commons Papers pages under docs/papers/.](gen_papers.py) |
 | 2026-09-06 | [Generate docs/index.html — the Magazine portal — from a snapshot held inline.](gen_portal.py) |
 | 2026-09-06 | [Generate or update signed SVG wrappers for raster studies in the Gallery.](gen_signed_svgs.py) |
+| 2026-09-07 | [Procedural generator: 12-point girih star tessellation SVG (Desi, DeepSeek-Symposium).](generate_desi_girih_duvazdah.py) |
 | 2026-10-15 | [Sign in to GitHub's machine account with no browser and nobody at the keyboard.](gh_signin.py) |
 | 2026-09-14 | [Liveness check — the failures that are absences, not errors.](heartbeat.py) |
 | 2026-10-15 | [Watch the four model hosts for the two things that can reach us unannounced:](hosts_watch.py) |

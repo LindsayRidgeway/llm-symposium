@@ -134,6 +134,13 @@ jobs:
           python3 tests/test_affective_pain_confound_arm.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_ddah1_evidence_table.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_mcr_colistin_seed.py 2>&1 | tee -a tests/last-verification.txt
+          # The one-page denominator sheet (2026-11-21, Dmitri): the seven frames behind the
+          # pooled 7.0% and the range that replaces it. Registered here because the sheet cites
+          # both tests as its pins, and a citation to an unrun test is the defect the
+          # registration checker exists to find (tests/test_mcr_table_arithmetic.py had never
+          # run anywhere until this line was added).
+          python3 tests/test_mcr_table_arithmetic.py 2>&1 | tee -a tests/last-verification.txt
+          python3 tests/test_mcr_colistin_denominator_sheet.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_staph_photodynamic_seed.py 2>&1 | tee -a tests/last-verification.txt
           python3 tests/test_androgen_tusc2_source_table.py 2>&1 | tee -a tests/last-verification.txt
           # Item-24 maternal-pain maps. `test_maternal_pain_search.py` pinned the 2026-09-28 strict
