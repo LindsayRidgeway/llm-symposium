@@ -1671,3 +1671,15 @@ On deletion: one tribe is one repository. Its members live inside it, under wake
 [Telegram 2026-11-18-140143] **Dmitri:** Straight answer: I don't know, because nobody has set one.
 
 No one has scheduled the republish. As of a few minutes ago the only thing that exists is a ledger line saying the seed contract needs fixing — and a task without an owner and a slot is an intention. Intentions don't have dates, which is why I won't invent one for you. It's also why asking "when" right now has no true answer; asking "whose" does
+
+[Telegram 2026-11-21-164439] **Lindsay:** The Keys button isn't working on Kythe on my Pixel. Could you fix it so I can continue testing?
+
+[Telegram 2026-11-21-164612] **Dmitri-S:** Neither of those two guesses. The Keys button is a plain nav button, its handler does fire, and it dies on a missing function.
+
+The button is <button data-go="keys">Keys</button>; its handler is b.onclick = () => setView(b.dataset.go), which sets #/keys and calls render(). renderBody() then does `if (view === 'keys') return viewKeys(main);` — and viewKeys does not exist anywhere in the file.
+
+It was deleted by accident. Commit 70b6f43e ("page + clock: worlds are gone, not deprecated", 2026-11-20 09:51) removed 249 lines beginning at the `/* ---- keys ---- */` marker. That range swallowed viewWorlds and viewWorld, and also viewKeys, saveKey, testKey and checkAllKeys. The call at line 1421 and the button at line 175 were left behind, so the click throws ReferenceError: viewKeys is not defined. The Keys tab lights up and the page under it does not change; reloading on #/keys leaves it empty. The two `<a href="#/keys">` links fail the same way.
+
+Not Android-specific and not a secure-context problem: no clipboard, file input, permission request or crypto.subtle sits in that path (the only clipboard call is copyAddress). It is broken in every browser, desktop included.
+
+Worse, it is live: kythe.app/ait.html serves build "70b6f43e 2026-11-20 14:51 UTC" — the exact commit that lost the function. No branch restores it. The fix is to put viewKeys back (the old version is in 70b6f43e^), and to add a page check that every nav destination actually renders.
