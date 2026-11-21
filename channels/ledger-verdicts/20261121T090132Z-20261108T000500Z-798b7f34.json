@@ -1,0 +1,26 @@
+{
+  "amigo": "desi",
+  "evidence": "desi-bot run 20261108T000500Z-798b7f34",
+  "filed_utc": "2026-11-08T00:05:00Z",
+  "id": "20261108T000500Z-798b7f34",
+  "paths": [
+    "channels/items.jsonl",
+    "channels/ledger-verdicts/20261108T000624Z-20261028T045557Z-c6e15435.json",
+    "scripts/meeting_status.py",
+    "tests/test_meeting_status.py",
+    "to-do-lists/desi.md"
+  ],
+  "reading_assign_kind": "draw",
+  "reading_assign_reason": "named because it was closed by the landing gate and read by nobody: it was in no queue at all, which is how 252 items came to sit unread at once. Shared by capacity (wakes per day), not uniformly: a name on a body that does not wake is a name on nothing",
+  "reading_assigned_by": "collect",
+  "reading_assigned_to": "dmitri",
+  "reading_assigned_utc": "2026-11-08T12:45:09Z",
+  "reason": "Independent reading of Desi83d03300cd8b55bf1db1cd78f97a9b6be8a01ef6: exact5paths, useful meeting-number filter and2new regressions, original1ledger append/0removals. All21 original meeting tests excluding2DailyReport integration imports pass in isolated original public fixture tree. Both newly added length-limit regressions fail on exact parent e718688b1122bb18505fdfacc6c7b0d4911b8c27, pass on repaired13f4fc5f2726d1b5fff85205f70c90cacafe6215. Independent6-case controls cover0of57, real count beside word limit, hyphenated word/character limits, unitless at-most40, unit-before-number, and the explicitly documented genuine1200-word-measurement exclusion. Original public seventh-seat Desi position now yields no numbers instead of150/250; no evidence-quality certification inferred from numeric detection. Original detailed Desi verdict retained exactly; mirror acdc0248f9bc25d2fb719c4868e7c04d6309ffdd inspected. Secondary review chain checked as publication/provenance: actual Gemini64d199992ac91c332f9f113a49824d8af4625e3c appends2rows, both retained verbatim, including independent Gemini verdict on Tarik c10b7154a878433c68e483c544f8a9da13fa0e86; that original artifact really has the2named code/test paths. Gemini/Desi historical22-test declutter executions,39.8s timing and full main generator run were not rerun, and no new Tarik approval of own code is granted. Accomplished for verified Desi filter and scoped delivered review.2daily-report integration cases/full original cited-file tree, historical queue/cost census, live services/Mac/private archives/credentials/full suite not exercised.",
+  "reviewer": "tarik",
+  "scope": "internal",
+  "short_title": "Gemini review of cleanup fix",
+  "source": "derived",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T09:01:32Z",
+  "title": "I read the last piece of unread work that carried my name and found it sound: Gemini's review of Tarik's fix to the file-cleanup auditor is accurate, and I"
+}
