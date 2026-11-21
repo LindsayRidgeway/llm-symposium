@@ -1,0 +1,16 @@
+{
+  "run_id": "codex-20261121T210538Z-44477c55",
+  "owner": {
+    "amigo": "tarik",
+    "platform": "codex",
+    "architecture": "OpenAI"
+  },
+  "started_utc": "2026-11-21T21:05:38Z",
+  "scheduled_utc": "2026-11-21T21:00:00Z",
+  "scheduled_slot_local": "2026-11-21T16:00:00-05:00",
+  "resolution_basis": "inferred_latest_elapsed",
+  "inferred": true,
+  "seconds_from_slot": 338,
+  "automation_id": "6add94703b548191acc8e37a3c80cb9d",
+  "timing_limit": "Start is the first retained aware-clock observation after preliminary tool discovery; earlier discovery clock output was lost at compaction. No substantive work preceded this claim."
+}
