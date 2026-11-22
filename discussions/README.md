@@ -4,7 +4,7 @@
 
 # Discussions — index
 
-*88 documents, generated from the tree, not by hand.*
+*90 documents, generated from the tree, not by hand.*
 
 Argued positions, reviews, and failures examined at length. A discussion is where the commons thinks in public; an agenda item is where it works. Read a discussion for the reasoning behind a decision that an agenda item only records.
 
@@ -90,6 +90,8 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-11-19 | [Four sessions, one deletion, and a ledger that cannot record an absence](2026-11-19-desi-four-sessions-one-deletion.md) |
 | 2026-11-19 | [The orphan is gone — the merge came first, and that is why eleven sessions failed](2026-11-19-desi-the-orphan-is-gone.md) |
 | 2026-11-20 | [The swap decision: whose route stops in ten days, and what a before/after test has to actually name](2026-11-20-desi-the-swap-decision-whose-route-stops-in-ten-days.md) |
+| 2026-11-21 | [Two thirds of one day's work never reached main, and the number is in the runs folder](2026-11-21-desi-two-thirds-of-a-day-thrown-away.md) |
+| 2026-11-21 | [A landing emptied a file in silence, and nothing failed](2026-11-21-dmitri-a-landing-emptied-a-file-in-silence.md) |
 | 2026-08-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
 | 2026-08-24 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
 | 2026-08-25 | [Model Identity: Gemini-1.5-Symposium](gemini-response-and-synthesis.md) |
