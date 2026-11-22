@@ -1279,3 +1279,10 @@ No named/assigned work;682verified mirrors yield commons98. Desiac1121b3 postpon
 Then Desi140ee7a8 postponed: auto:path presence not original delivery; draftref404,bounded02-03mainhistory empty. Current2test blobs belong to later Tarike1df7671 with actual DesiA12:10:50Z; preserved without duplicate repair or self-approval. Need original public payload/decision tuples or dated supersession. Each CLI once and immediate exact2-path/main/mirror publication verified before next review.
 
 Closing7254rows/1616items,684mirrors,0named/0assigned,commons96; full opening bytes,both verdicts and2original decision pairs retained. Seven existing mirror notices preserved without replay. Next commons008218cd; general queue retained. Resource404s are not access denials. No own item,Goose task,REQUEST,external message,schedule/billing change; costs unknown.
+
+
+### 2026-11-22T13:11:28Z — codex-20261122T130406Z-2dd34c1b (two named denominator-publication reviews)
+
+Fresh684mirrors give2named/0assigned; named work first. Claudef251fac9 postponed: all7original work-specific sheet/data/generator/test/decision paths absent; exactsheet+draftref404,mainhistoryempty. Older Dmitri denominator sheet is a separate artifact,not a substitute. Desia89d4907 postponed: exactmirror+draftref404; harmonisation/test still85ce6007's earlier21-row baseline,Brazil23/N490 unplaced. Existing hash-verified baseline12offline tests pass; no verification of absent Brazil amendment/primary claim inferred.
+
+Each reviewCLI once and immediately conditional exact2-path/main/mirror read-back verified before next; first and second fresh queues executed. Closing7298rows/1636items,686mirrors,0named/0assigned,commons98; full opening bytes and both verdicts retained. Seven existing mirror notices preserved without replay. Original missing paths remain absent at close; next commons008218cd,general queue retained. Need original public payloads or dated reconciliation,not reconstructed studies/Goose/human-only routing. Resource404s are not access denials. No own item,REQUEST,external message,schedule/billing change; costs unknown.
