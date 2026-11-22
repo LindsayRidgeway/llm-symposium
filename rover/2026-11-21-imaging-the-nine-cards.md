@@ -85,9 +85,10 @@ Per card, after the write:
   of these fields is a person holding the card). If a class image's boot partition cannot be written
   from macOS, the envelope goes on the first-boot pass instead and the row says so. Nothing is
   claimed as written until it has been read back off the card.
-- the **key**: `V-nn`, in the founder's ink, before the card is imaged — assigned in the order
-  written, never reserved (`rover/pegboard.md`). The key is the one field on the row that cannot be
-  wrong.
+- the **key**: `L-nn` or `R-nn`, in the founder's ink, before the card is imaged — the class letter
+  plus a serial, assigned in the order written, never reserved (`rover/pegboard.md`; format changed by
+  the founder 2026-11-21 from `V-nn`, before any key existed). The serial is the one field on the row
+  that cannot be wrong; the class letter is a claim the re-image amends.
 - the **row**: pegboard gets the key, grade, size, class, and `state = imaged <date>`; `verified`
   stays empty until a body boots it and says what it is.
 
@@ -106,10 +107,25 @@ card fully (read-back and, later, a boot), write the other four with a sync and 
 mark all five `imaged`, not `verified`. A read-back on all five buys a second pass over 264 GB and
 buys a confidence that a boot test gives for free on the first one.
 
+## 5a. What the extracted image actually is (measured 2026-11-21 19:56)
+
+The archive came down whole — 4 × 3,221,225,472 B and one 3,196,884,441 B — and `unar` produced
+`LanderPi_20260526.img`, **52,719,255,552 B**, byte-for-byte the size the 2026-10-12 fetch recorded. So
+the re-download is the same file, not a newer one. Reading its own partition table, without booting
+anything:
+
+| what | finding |
+|---|---|
+| partitions | two: `s1` FAT32 `bootfs`, 511 MiB (74 MiB used) and `s2` Linux ext4 |
+| the boot partition | a perfectly ordinary Raspberry Pi bootfs — `config.txt`, `cmdline.txt`, `kernel8.img`, `overlays/`, the Pi 5 dtbs. **Writable from macOS, which is where `POOL-CARD.json` goes**: readable in a hand, with no body and no boot. 437 MiB free, so nothing in the envelope can crowd it. |
+| credentials on the boot partition | **none** — no `wpa_supplicant.conf`, no `firstrun.sh`, no `userconf.txt`, no `ssh` file. Whatever the vendor's login is, it is in the ext4 root and not in a plaintext file beside it. |
+| Wi-Fi regulatory domain | `cfg80211.ieee80211_regdom=HK` in `cmdline.txt` — **Hong Kong**, in a Maryland house. The lander has been running with this since 2026-10-15 (D-6). It is not a fault on 2.4 GHz channels 1–11, and it is the wrong setting; it belongs in `known_unknowns` on every lander card until somebody changes it and measures the difference. |
+| vendor dirt | `.config.txt.swp` (a vim swap file, Feb 2025) and `FSCK0000.REC` sit in the boot partition. Harmless, and evidence the image was made on a running Pi by hand rather than built. Leave them: an image that differs from the vendor's is an image that cannot be re-derived. |
+
 ## 6. What the founder does, in order, one step at a time
 
-1. **Write a key on the first card** — `V-01` in ink on the label face, the format the pegboard
-   defines. Say the number; it becomes that card's identity everywhere.
+1. **Write a key on the first card** — `L-01` in ink on the label face. Say it; `L-01` is that
+   card's identity everywhere, and the letter says which image it is about to get.
 2. **Put it in the reader.** One card at a time, during the write, and not before.
 3. When the write reports done: pull it, write the next key, put the next one in.
 

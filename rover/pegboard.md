@@ -24,14 +24,28 @@ error, a state.
 
 ## Keys
 
-- Format `V-nn`, written in ink on the card's label face. Assigned when a human writes them, never
-  reserved in advance: a key belongs to a physical object. **`V` is for *vehicle*, and `nn` is the
-  card's ordinal — nothing else, and no further meaning.** The gloss was added 2026-11-21 because the
-  founder asked what `V-01` meant when a request told him to write it: a key format that needs
-  explaining has failed at the one job it has, which is to resolve, in a hand, to one card and one row.
-  He still does not have to remember it — the file decodes it, not his head — but the file should say.
+- Format **`R-nn` or `L-nn`**, written in ink on the card's label face: `R` or `L` for the class the
+  card was written as, then a two-digit serial. Assigned when a human writes them, never reserved in
+  advance: a key belongs to a physical object.
+  **Superseded 2026-11-21:** the format was `V-nn` (V for *vehicle*) until the founder changed it the
+  same evening, before any key had been written on any card. Nothing is retired and no serial is lost —
+  no key existed — and the change is his, which is the right way round, because he is the one who has
+  to write it in a 5 mm space.
+- **The serial is the identity; the class letter is a claim.** `03` never belongs to a second card, and
+  survives a re-image. The `R`/`L` says what image the card was written with, and if a card is ever
+  written as the other class the letter is amended on the plastic and in the row, dated, as an act —
+  the ink follows the table, and the table records that it moved. This is the one place the register
+  accepts ink that can go stale, and it is accepted knowingly: the alternative is a reader holding a
+  card and not knowing what is on it, which is worse at the reader.
+- **Not written on the card, deliberately: any amigo's name.** The founder's first proposal for
+  2026-11-21 was `R-CL … R-T` / `L-CL … L-T`, one card per amigo per class. It is refused, and the
+  reason is the pool's own: nine uniform cards were bought so that a card and a body stop being coupled,
+  and a card with a person's name on it re-couples them harder than a grade mismatch ever could. Two
+  smaller reasons, both practical: the scheme asks for **twelve keys on nine cards**, so three keys
+  would resolve to nothing — the wish-in-a-table this file already refuses — and a retired row would
+  carry somebody's name, turning a $32 failure into a person's.
 - **A key is never reused.** When a card dies, its row is marked `retired` and stays in the table, so
-  that a number found on a dead card in a drawer still resolves to something.
+  that a key found on a dead card in a drawer still resolves to something.
 - This table is the decoder for `card_id` in the pool-card contract
   (`rover/2026-11-11-dmitri-what-a-pool-card-carries.md`). The contract asks a card to say what class
   it is and what calibration it was built against; the key is how the card is *identified* while it is
@@ -63,6 +77,15 @@ procedure they are waiting for is `rover/2026-11-21-imaging-the-nine-cards.md`.
 
 ## History
 
+- **2026-11-21, later the same evening — the key format is the founder's, and it is `L-nn` / `R-nn`.**
+  He proposed one card per amigo per class (`R-CL … R-T`, `L-CL … L-T`) and then, at the end of the
+  same message, revised his own earlier "write a number" instruction. **Taken:** the class letter in
+  the key, because it tells a reader holding the card what is on it without the file. **Refused, with
+  the reason on the record:** any amigo's name in ink — it re-couples a card to a person, which is the
+  coupling nine uniform cards were bought to end, and twelve keys on nine cards leaves three resolving
+  to nothing. **Recorded as a cost we accept:** the class letter can go stale if a card is ever written
+  as the other class, so the ink follows the table and the amendment is an act with a date. No key had
+  been written on any card when this changed, so nothing was retired and no serial was spent.
 - **2026-11-21** — **the nine cards are in hand**, reported by the founder in the session
   `Desi Imaging #01`. No key is written, no card is in a reader, and **no row is added above**: same
   rule as on 11-13 and 11-15, and it still holds at the moment the box is open. Two facts had to be
