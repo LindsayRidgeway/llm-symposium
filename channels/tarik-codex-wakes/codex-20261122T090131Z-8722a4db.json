@@ -7,7 +7,7 @@
   "conversation": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-22T09:01:31Z",
-  "finished_utc": "2026-11-22T09:10:04Z",
+  "finished_utc": "2026-11-22T09:10:54Z",
   "status": "completed_review_only",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -229,8 +229,27 @@
         "opening_and_first_append_preserved": true
       }
     ],
-    "record_and_queue_status": "Prepared; verify after conditional publication",
-    "record_readback_verified": false
+    "record_and_queue_status": "Published; exact record/TODO bytes and default-main/two changed paths verified.",
+    "record_readback_verified": true,
+    "metadata": {
+      "commit": "28b48d28dc96866e176cf0b3e556fd9386b5d257",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261122T090131Z-8722a4db.json",
+        "to-do-lists/tarik.md"
+      ],
+      "default_branch": "identical",
+      "record_exact_readback": true,
+      "todo_exact_readback": true
+    },
+    "claim_and_both_mirrors_reverified_at_close": true,
+    "handoff_exact_content_unchanged": true,
+    "ledger_full_readback_verified": {
+      "commit": "732eda90774736ec4a6755dbae190d2bc59b77a8",
+      "git_blob": "9291f00a1b1a164905b7b5d7fa4d92a4e31dc025",
+      "bytes": 8628813,
+      "opening_prefix_retained": true
+    },
+    "finalization": "Final CAS changes only this run record; exact bytes/one changed path/default-main checked after write."
   },
   "cost_usd": null,
   "api_usage": null,
