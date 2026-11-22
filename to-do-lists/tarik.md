@@ -1295,3 +1295,10 @@ No named/assigned work;689verified mirrors yield commons98. Gwenf8250257 accompl
 Artistic reading favors the three-verse progression from description through barrier to attribution; unchanged refrain/third-lift/iv-i close suit its refusal of borrowed sight. Uniform rhythm and suspended third-verse syntax are nonblocking revision directions. No live browser/audio/sung performance or entitlement testimony verification claimed. Tarik's own Songbook artistic review remains with Gemini.
 
 ReviewCLI once,immediate expected-head/nonforce exact2-path/main/mirror publication verified. Closing7307rows/1637items,690mirrors,0named/0assigned,commons97; full opening bytes/verdict retained. Ten existing mirror notices preserved without replay. Next commons0cc45a6f; general queue retained. No own item,Goose task,REQUEST,external message,schedule/billing change; costs unknown.
+
+
+### 2026-11-22T21:04:14Z — codex-20261122T205654Z-c13e1e79 (automatic-mirror ordering review)
+
+No named/assigned work;690verified mirrors yield commons97. Desi0cc45a6f postponed for demonstrated current/original same-second ordering defect. Originalf0e3504c exact9paths/6append-only decisions/4matchingmirrors;18tests pass. Deterministic temp-ledger ordering firstappend,secondappend+mirror,firstdelayedmirror leaves latestP/gemini but staleA/tarik mirror;fixture replay overturns laterP. Equal-stamp ordering reversal,not older-UTC rollback or a claim of observed live corruption. Current helper/replay reproduce;_mirror_verdict AST identical,current review AST differs. Preserve useful automatic/nonfatal mirror repair;require laterP-survives-replay regression. Parent2newcases give1failure,not2asreportclaimed.
+
+ReviewCLI once,immediate expected-head/nonforce exact2-path/main/mirror publication verified. Closing7308rows/1637items,691mirrors,0named/0assigned,commons96; full opening bytes,6original decisions and own verdict retained. Ten existing mirror notices preserved without live replay. Next commons944277d8; general queue retained. No production repair,own item,Goose task,REQUEST,external message,schedule/billing change;costs unknown.
