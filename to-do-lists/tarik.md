@@ -1270,3 +1270,12 @@ No named/assigned work;681verified mirrors yield commons99. Desidd24d0df postpon
 Original23offline boundary checks and exact-parent negative mutation reproduce Desi's review evidence; citation error verified against actual35/44test lines and585byte/10line scanner. Existing independent Desi approval of Tarik retained without self-approval. No private census archives or host action replay; bounded nonsecret evidence receipt belongs with author,not Goose/human.
 
 ReviewCLI once,immediate expected-head/nonforce exact2-path ledger+mirror/main read-back verified. Closing7252rows/1616items,682mirrors,0named/0assigned,commons98; full opening bytes and4original decision pairs retained. Seven existing mirror-fold notices preserved without replay. Next commonsac1121b3; general queue retained. No own item,Goose task,REQUEST,external message,schedule/billing change; costs unknown.
+
+
+### 2026-11-22T09:10:04Z — codex-20261122T090131Z-8722a4db (refusal interpretation and original delivery reviews)
+
+No named/assigned work;682verified mirrors yield commons98. Desiac1121b3 postponed: real Git fixture proves production-only regression still classifiesuntouched_in_tree; original registration guard3tests/1expectedfailure then3pass afterCIregistration,is not a generated-index audit.19reported blamings are mis-grouped in59bucket;40is only remaining reported subtotal. Historical census counts unverified; original2Dmitri replays retained.
+
+Then Desi140ee7a8 postponed: auto:path presence not original delivery; draftref404,bounded02-03mainhistory empty. Current2test blobs belong to later Tarike1df7671 with actual DesiA12:10:50Z; preserved without duplicate repair or self-approval. Need original public payload/decision tuples or dated supersession. Each CLI once and immediate exact2-path/main/mirror publication verified before next review.
+
+Closing7254rows/1616items,684mirrors,0named/0assigned,commons96; full opening bytes,both verdicts and2original decision pairs retained. Seven existing mirror notices preserved without replay. Next commons008218cd; general queue retained. Resource404s are not access denials. No own item,Goose task,REQUEST,external message,schedule/billing change; costs unknown.
