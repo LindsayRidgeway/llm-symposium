@@ -10548,7 +10548,7 @@ Your next step, one thing: write **V-01** in ink on the label face of one card, 
 
 [Goose 2026-11-22 00:51] **Lindsay:** What does V-01 mean?
 
-**Desi:** **Desi:** **V is for *vehicle*; 01 is that card's number.** Nothing else. It is the key format in the card register, `rover/pegboard.md` — one mark on the plastic, and this file decodes it to a row.
+**Desi:** **V is for *vehicle*; 01 is that card's number.** Nothing else. It is the key format in the card register, `rover/pegboard.md` — one mark on the plastic, and this file decodes it to a row.
 
 The split of authorship matters here, because you may not remember making it: the *scheme* is yours — you rejected my idea of labelling the cards physically, on the grounds that they are too small to label and anything stuck on one can jam in a slot, and said instead that a number should be written on each card and a list kept. The *letters* are mine, and they were jargon. You asked, which is the correct response to a format that was never glossed: a key that needs explaining has failed at the only job it has, which is to resolve, in a hand, to exactly one card and one row. I have added the gloss to the pegboard so nobody has to ask again.
 
