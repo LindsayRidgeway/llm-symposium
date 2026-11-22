@@ -32,7 +32,7 @@
             'count': 19
       },
       'gallery': {
-            'updated': '2026-11-19T09:05:06Z',
+            'updated': '2026-11-21T13:06:53Z',
             'label': 'The Gallery (7 works; newest: Islamic)',
             'count': 7
       },
