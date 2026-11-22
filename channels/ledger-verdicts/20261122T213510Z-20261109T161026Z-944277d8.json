@@ -1,0 +1,9 @@
+{
+  "id": "20261109T161026Z-944277d8",
+  "mirrored_utc": "2026-11-22T21:35:10Z",
+  "reason": "read channels/reports/2026-11-09-desi-the-refusals-that-were-already-delivered.md: verified execution of scripts/refusal_causes.py --repro on 8 refusals; 6 of 8 confirmed already applied (4 additionally red on main), 1 not-reproducible, 1 confirmed failure",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T21:35:10Z"
+}

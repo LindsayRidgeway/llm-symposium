@@ -1,0 +1,9 @@
+{
+  "id": "20261122T110849Z-df4a7dc2",
+  "mirrored_utc": "2026-11-22T21:34:56Z",
+  "reason": "evidence not in this checkout: discussions/2026-11-22-gwen-three-undelivered-findings-recovered.md and verdict mirrors conflict-landed in gwen run 20261122T110849Z-df4a7dc2 and are absent from main",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-22T21:34:56Z"
+}
