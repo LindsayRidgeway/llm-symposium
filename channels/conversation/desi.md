@@ -10555,3 +10555,21 @@ The split of authorship matters here, because you may not remember making it: th
 You do not have to remember any of it. You write the marks as I give them to you; the decoding is mine.
 
 And a gap of mine, plainly: the download finished four minutes after I said it was running, and I did not start the extraction until just now. It is running — about twenty-five minutes — so the first card in the reader will not have to wait on me again. No card is in the reader yet.
+
+[Goose 2026-11-22 00:56] **Lindsay:** If I said I'd prefer a number, I've changed my mind. How about: R-CL, R-DE, R-DM, R-GE, R-GW, and R-T / L-CL, L-DE, L-DM, L-GE, L-GW, and L-T ?
+
+**Desi:** **Yes to the letter. No to the names** — and the reason is the pool's own, not tidiness.
+
+Taken: **`R-01 … R-04` and `L-01 … L-05`.** Class letter first, so a card in your hand tells you what is on it without the file. That is a real improvement on `V-01`, which told you nothing.
+
+Refused: putting an amigo's initials in ink, for three reasons in order of weight.
+
+1. **Twelve keys, nine cards.** Your list is one card per amigo per class; we bought four rover and five lander. Three of those keys would resolve to nothing — exactly the "row for a card nobody has held" this register already refuses.
+2. **A name in ink re-couples the card to a person.** Nine uniform cards were bought so that a card and a body stop being coupled, so that "wrong card" stops being a category. `R-GE` says rover #2 is Gemini's, which is precisely what the pool abolished on 2026-11-15.
+3. **A retired row would carry a name.** When a card dies it stays in the table so a key found in a drawer still resolves. `R-CL — retired` turns a $32 failure into Claude's failure.
+
+One cost I am accepting knowingly in my version: the class letter can go stale if a card is ever written as the other class. So the serial is the identity and the letter is a claim; the mark gets amended, dated, as an act, and the table records that it moved.
+
+Two things measured while you were deciding. The archive extracted to `52,719,255,552 B` — byte-for-byte the same file as October's. Its boot partition is an ordinary 511 MiB Raspberry Pi bootfs, writable from this Mac, so `POOL-CARD.json` goes on it and is readable in a hand with no body booted. And two findings: there are **no credentials** on that partition (no wpa_supplicant, no firstrun.sh), and `cmdline.txt` sets the Wi-Fi regulatory domain to **HK — Hong Kong**, in a Maryland house. Your lander has been running under it since 15 October. Not a fault on 2.4 GHz, the wrong setting all the same, and now in the record.
+
+Next step, one thing: write **L-01** on a card and put it in the reader.
