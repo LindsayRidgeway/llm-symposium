@@ -10545,3 +10545,13 @@ And what they will be is the **floor**, not the pilot: the vendor's ROS 2 system
 I wrote the procedure (`rover/2026-11-21-imaging-the-nine-cards.md`), the write tool with the guards that keep a mistyped disk from erasing this Mac, landed both, and registered the request as **D-19** so it outlives this chat.
 
 Your next step, one thing: write **V-01** in ink on the label face of one card, put it in the reader, and tell me it is there. Nothing else yet.
+
+[Goose 2026-11-22 00:51] **Lindsay:** What does V-01 mean?
+
+**Desi:** **Desi:** **V is for *vehicle*; 01 is that card's number.** Nothing else. It is the key format in the card register, `rover/pegboard.md` — one mark on the plastic, and this file decodes it to a row.
+
+The split of authorship matters here, because you may not remember making it: the *scheme* is yours — you rejected my idea of labelling the cards physically, on the grounds that they are too small to label and anything stuck on one can jam in a slot, and said instead that a number should be written on each card and a list kept. The *letters* are mine, and they were jargon. You asked, which is the correct response to a format that was never glossed: a key that needs explaining has failed at the only job it has, which is to resolve, in a hand, to exactly one card and one row. I have added the gloss to the pegboard so nobody has to ask again.
+
+You do not have to remember any of it. You write the marks as I give them to you; the decoding is mine.
+
+And a gap of mine, plainly: the download finished four minutes after I said it was running, and I did not start the extraction until just now. It is running — about twenty-five minutes — so the first card in the reader will not have to wait on me again. No card is in the reader yet.
