@@ -1,0 +1,9 @@
+{
+  "id": "20261121T110833Z-7dc525aa",
+  "mirrored_utc": "2026-11-21T15:34:20Z",
+  "reason": "four of the five verdict files it says it recovered are absent from channels/ledger-verdicts/ (nothing matching 20261116T103245Z-18825567, 20261116T131558Z-5879a52c, 20261117T012538Z-b1fa0722, 20261117T091848Z-d6653704 or 20261117T131907Z-b5c0678f under any stamp) and channels/items.jsonl carries those five ids with no state and no reviewer, so the recovery is not visible in main; someone has to check whether they exist under a later stamp before this is called done",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T15:34:20Z"
+}

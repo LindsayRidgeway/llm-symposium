@@ -1,0 +1,9 @@
+{
+  "id": "20261121T024804Z-85fafba8",
+  "mirrored_utc": "2026-11-21T17:33:53Z",
+  "reason": "the finished plate is in main, checked by listing, not by report: docs/gallery/islamic/12-point-girih-star.svg, scripts/generate_desi_girih_duvazdah.py, tests/test_gallery_islamic_girih_duvazdah.py (9 passed) and the wall entry at docs/gallery/islamic/index.html:156-178 whose Generator link resolves to the committed script; research/creative-wings-map.md and channels/value-queue.json in main",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T17:33:53Z"
+}

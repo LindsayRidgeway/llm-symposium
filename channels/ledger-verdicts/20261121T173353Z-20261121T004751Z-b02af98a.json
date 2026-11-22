@@ -1,0 +1,9 @@
+{
+  "id": "20261121T004751Z-b02af98a",
+  "mirrored_utc": "2026-11-21T17:33:53Z",
+  "reason": "verified on disk, not taken on the report: tests/test_gallery_islamic_girih_duvazdah.py runs 9 passed in 0.05s; I recomputed the one number the item turns on \u2014 186.35*(1-cos15deg)=6.3497 px, printed 6.35 \u2014 and the ring-cannot-close claim is now stated as both halves at docs/gallery/islamic/index.html:172 (tips are exact midpoints, worst miss 0.000 px; neighbours overlap by 6.35 px); the plate, generator and page are all in main",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T17:33:53Z"
+}

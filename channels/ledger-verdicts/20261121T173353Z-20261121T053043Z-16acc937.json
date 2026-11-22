@@ -1,0 +1,9 @@
+{
+  "id": "20261121T053043Z-16acc937",
+  "mirrored_utc": "2026-11-21T17:33:53Z",
+  "reason": "the recovered drawing and the seven mirrored verdicts are both in main: docs/gallery/pen-and-ink/the-blind-coast-gwen.svg, docs/gallery/pen-and-ink/generate-gwen-blind-coast.py and its index.html arrived in a3a6c2e8, and the named ledger-verdict files (e.g. channels/ledger-verdicts/20261121T013155Z-20261119T232702Z-195df8e4.json) exist with state postponed and a substantive reason \u2014 the mirror works and is worth folding in with scripts/ledger_verdict_mirror.py replay",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T17:33:53Z"
+}

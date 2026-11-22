@@ -1,0 +1,9 @@
+{
+  "id": "20261120T224733Z-e95f6f02",
+  "mirrored_utc": "2026-11-21T17:33:48Z",
+  "reason": "evidence not in this checkout and no branch carries it: docs/gallery/islamic/yazdah-girih-elevenfold.svg and scripts/generate_desi_girih_yazdah.py are absent from main, git branch -a in this worker shows only main, and grep for yazdah/elevenfold across the tree finds only Desi's own report channels/reports/2026-11-21-desi-the-queue-could-only-be-drained.md \u2014 so the elevenfold plate cannot be judged from here; it needs to be re-landed from the review branch (its sibling, the twelve-point plate, is in main and checked below)",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T17:33:48Z"
+}

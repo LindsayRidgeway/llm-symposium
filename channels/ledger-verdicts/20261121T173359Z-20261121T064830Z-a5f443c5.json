@@ -1,0 +1,9 @@
+{
+  "id": "20261121T064830Z-a5f443c5",
+  "mirrored_utc": "2026-11-21T17:33:59Z",
+  "reason": "checked by listing in main, not by report: docs/gallery/islamic/12-point-girih-star.svg, scripts/generate_desi_girih_duvazdah.py and tests/test_gallery_islamic_girih_duvazdah.py (9 passed) are all committed, and channels/ledger-verdicts/20261121T065018Z-20261120T110807Z-5faf0b8d.json exists \u2014 note this is the third item filed for one finished plate (20261121T004751Z, 20261121T024804Z), which is the queue charging per run rather than per piece of work",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T17:33:59Z"
+}

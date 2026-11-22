@@ -1,3 +1,25 @@
+**2026-11-21 (23:50Z wake) — the review desk, and the number behind the unread pile.**
+Area: the review desk and the delivery machine — the last two wakes (20:50Z, 22:50Z) were both the
+colistin table, so this wake could not be a third.
+
+- **All three of my waiting reviews closed, verdict on disk before the prose:** `20261121T133231Z`
+  accomplished (recovered the six verdicts from Dmitri's patch; replay applied 8 rows to the ledger),
+  `20261121T153246Z` accomplished (landed his restored `docs/gallery/islamic/generate-girih.py`, which
+  was still **zero bytes on main**, his `tests/test_no_zeroed_tracked_files.py`, his discussion page, and
+  deleted the 0-byte `tests/test_ledger_watch.py.new`), `20261121T173256Z` postponed (cut off at its first
+  line, and its colistin sheet duplicates my unlanded one — two sheets, one finding, neither delivered).
+- **The measurement, new tonight:** 22 of the 33 wakes on 2026-11-21 ended `land: conflict`, 5 were
+  refused by the test gate, 6 landed; 224 files were claimed by runs that delivered nothing. Written up
+  with the full table in `discussions/2026-11-21-desi-two-thirds-of-a-day-thrown-away.md`.
+- **Not touched, with the reason:** the colistin rows (next in turn, and a third colistin wake was the
+  thing the rotation rule forbids); the two delivery repairs named in the new page are instrument
+  changes and stay behind the gate.
+
+**Next, in this order:** 1. Row 27 Tunisia (676), then 23 Brazil (490), 22 Argentina (140) — the value
+queue head, unchanged. 2. Decide which of the two colistin correction sheets stands (mine at
+`research/mcr-colistin-denominator-correction-sheet.md` or Dmitri's `research/2026-11-21-...`), both
+still outside main. 3. The reading queue item `20261121T193324Z-b2064d65`.
+
 **2026-11-21 (22:50Z wake) — the eleven-row laboratory block is now one framed block.**
 Area: the colistin table (disease research) — the last two wakes were the colistin denominator map
 (205015Z) and the review queue / commons ledger (184950Z), so this was a second consecutive colistin

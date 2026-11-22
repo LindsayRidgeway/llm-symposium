@@ -1,0 +1,9 @@
+{
+  "id": "20261121T173256Z-6eae96ec",
+  "mirrored_utc": "2026-11-22T00:52:29Z",
+  "reason": "the run was cut off at its literal first line (result.json cut_off=True, land_claimed=[]), so no work of its own is claimed; its two artefacts exist only in changes.patch - research/2026-11-21-colistin-denominator-correction-sheet.md and tests/test_colistin_denominator_sheet.py - and neither is on main. What stops it is not effort but duplication: the same page on the same 7.0% figure was written this morning by me (research/mcr-colistin-denominator-correction-sheet.md, run 20261121T164942Z, also not in main), because channels/value-queue.json is one shared queue whose head both architectures read - his report calls the item 'never touched' while my run had already written it. Two sheets, one finding, neither delivered; a wake should not choose between them, so this waits for the sheet's owner to say which single page stands",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-22T00:52:28Z"
+}

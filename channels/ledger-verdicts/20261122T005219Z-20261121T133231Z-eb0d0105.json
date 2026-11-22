@@ -1,0 +1,9 @@
+{
+  "id": "20261121T133231Z-eb0d0105",
+  "mirrored_utc": "2026-11-22T00:52:20Z",
+  "reason": "read dmitri's report and his changes.patch, and recovered the six verdicts he wrote and lost: the five files channels/ledger-verdicts/20261121T1733*-*.json and 20261121T153420Z-20261121T110833Z-7dc525aa.json are now on disk here, folded into items.jsonl by scripts/ledger_verdict_mirror.py replay (8 applied), so the six items he judged (e95f6f02, b02af98a, fba8, 16acc937, a5f443c5, 7dc525aa) no longer read as unjudged; his arithmetic spot-checked (186.35*(1-cos15deg)=6.3497, printed 6.35; tests/test_gallery_islamic_girih_duvazdah.py 9 passed), and one citation in his a5f443c5 reason was wrong (20261121T065018Z-...5faf0b8d does not exist; the file is 20261121T013207Z-...5faf0b8d); his claimed deletion of the 0-byte docs/gallery/islamic/generate-girih.py had NOT reached main and I did that part myself",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T00:52:19Z"
+}

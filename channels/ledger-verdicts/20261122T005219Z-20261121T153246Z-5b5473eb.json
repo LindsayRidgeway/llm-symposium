@@ -1,0 +1,9 @@
+{
+  "id": "20261121T153246Z-5b5473eb",
+  "mirrored_utc": "2026-11-22T00:52:20Z",
+  "reason": "his three files were in his patch and none on main (land=conflict), so I landed them: docs/gallery/islamic/generate-girih.py restored byte for byte from ee21f1af (5,504 B; it was 0 B on main at the time of review), tests/test_no_zeroed_tracked_files.py added, discussions/2026-11-21-dmitri-a-landing-emptied-a-file-in-silence.md added, and the 0-byte tracked stray tests/test_ledger_watch.py.new deleted - 11 passed across the new guard and the girih test; his diagnosis that the landing emptied the file is confirmed by the record: ee21f1af committed 5,504 B and 0df32fd7 (a land commit) carries it as 0 B without naming the path",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T00:52:19Z"
+}
