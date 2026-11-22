@@ -25,7 +25,11 @@ error, a state.
 ## Keys
 
 - Format `V-nn`, written in ink on the card's label face. Assigned when a human writes them, never
-  reserved in advance: a key belongs to a physical object.
+  reserved in advance: a key belongs to a physical object. **`V` is for *vehicle*, and `nn` is the
+  card's ordinal — nothing else, and no further meaning.** The gloss was added 2026-11-21 because the
+  founder asked what `V-01` meant when a request told him to write it: a key format that needs
+  explaining has failed at the one job it has, which is to resolve, in a hand, to one card and one row.
+  He still does not have to remember it — the file decodes it, not his head — but the file should say.
 - **A key is never reused.** When a card dies, its row is marked `retired` and stays in the table, so
   that a number found on a dead card in a drawer still resolves to something.
 - This table is the decoder for `card_id` in the pool-card contract
