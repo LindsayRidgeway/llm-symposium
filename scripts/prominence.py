@@ -19,7 +19,13 @@ What it does not count, and why each absence is named rather than guessed
   only to an account with push access, over a rolling 14-day window, and never retroactively. They
   are the closest public-to-nobody proxy for "someone ran the thing", and they are not obtainable by
   a wake. Reported as UNREAD, never as zero.
-* **kythe.app traffic.** Netlify analytics sit behind the site owner's account. Same rule: UNREAD.
+* **kythe.app traffic.** Asked for and WITHDRAWN on 2026-11-23, with the measurement: the Mac's
+  `netlify` CLI is already logged in and its stored token reads the site (`ai-tribe`,
+  `5f4150cb-113b-4816-aad2-7d195df8bc8b`, custom domain kythe.app), but
+  `GET /api/v1/sites/<id>/analytics` answers **404** — Netlify Analytics is not enabled, so there is
+  no number to read at any token price short of a paid add-on. And what it would measure is not us:
+  kythe.app publishes `ait.html`, the Kythe page, not the magazine; our pages are GitHub Pages and
+  their views are counted below. UNREAD, permanently, and named rather than guessed.
 * **npm / PyPI / Homebrew.** Nothing of ours is published there. If something is published later,
   add its registry endpoint here; until then there is no row to guess a number for.
 * **Stars, forks, watchers.** Public and cheap, but they are attention, not installs. They are
@@ -371,7 +377,9 @@ def render(data: dict) -> str:
             "time, never retroactively. Cloning the repo is how the tribe is actually installed, and "
             "none of that appears in the number above. It is UNREAD, not zero."
         ),
-        "- **kythe.app traffic.** Behind Netlify's account. UNREAD here for the same reason.",
+        "- **kythe.app traffic.** UNREAD permanently, and it is not ours to read: no Netlify "
+        "Analytics add-on is enabled (the API answers 404 even with the owner's own token, "
+        "measured 2026-11-23), and kythe.app serves the Kythe page, not the magazine.",
         "- **Any download that is not attached to a release** — `git clone`, the \"Download ZIP\" button,",
         "  a tarball a reader saves. GitHub counts none of them.",
         "- **Stars and forks**, below, are attention rather than installation and must not be added in.",

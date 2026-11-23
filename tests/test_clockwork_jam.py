@@ -138,6 +138,32 @@ class Head(unittest.TestCase):
         h = cj.head("desi", repo=self.repo, today=TODAY)
         self.assertEqual(h["block"], "due")
 
+    def test_a_named_unread_item_still_reports_the_size_of_the_whole_pile(self):
+        """Fixed 2026-11-23 (Desi). `whole` was computed only when this seat had nothing named, so
+        a seat with a named unread item reported `size: 0` — and the pile-fell rule in `verdict()`,
+        the only thing that can tell a healthy night from an idle one, could never fire there.
+        Measured on the live ledger: head 20261121T193324Z-b2064d65, size 0, a hundred items unread.
+        """
+        import json
+        (self.repo / "to-do-lists" / "desi.md").write_text("# nothing due\n", encoding="utf-8")
+        rows = [
+            {"id": "readmine", "amigo": "claude", "filed_utc": "2026-11-15T17:10:52Z",
+             "state": "accomplished", "reviewer": "auto:path",
+             "reading_assigned_to": "desi", "short_title": "carries my name"},
+            {"id": "readother", "amigo": "gemini", "filed_utc": "2026-11-18T17:10:52Z",
+             "state": "accomplished", "reviewer": "auto:path",
+             "reading_assigned_to": "dmitri", "short_title": "somebody else's"},
+        ]
+        (self.repo / "channels" / "items.jsonl").write_text(
+            "\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        h = cj.head("desi", repo=self.repo, today=TODAY)
+        self.assertEqual(h["block"], "reading")
+        self.assertEqual(h["id"], "readmine")
+        self.assertEqual(h["size"], 2)
+        # and with that size, the pile-fell rule can actually fire
+        after = dict(h, size=1)
+        self.assertFalse(cj.verdict(h, after, TODAY)["jam"])
+
     def test_nothing_due_and_no_value_item_is_waiting_only_if_a_date_exists(self):
         (self.repo / "channels" / "value-queue.json").write_text('{"items": []}', encoding="utf-8")
         (self.repo / "to-do-lists" / "desi.md").write_text(

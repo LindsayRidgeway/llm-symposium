@@ -74,10 +74,16 @@ def head(amigo: str, repo: Path = REPO, today: datetime.date | None = None) -> d
             waiting.sort(key=lambda r: r.get("assigned_utc") or r.get("filed_utc") or "")
             return {"block": "review", "id": waiting[0].get("id"), "when": None, "kind": "waiting"}
         reading = il.reading_queue(path, who=amigo)
-        whole = il.reading_queue(path) if not reading else []
-        if not reading:
-            if len(whole) > int(getattr(il, "PILE_TARGET", 100)):
-                reading = [r for r in whole if (r.get("amigo") or "") != amigo][:1]
+        # 2026-11-23 (Desi): `whole` used to be computed only when this seat had *nothing* named,
+        # so a seat with named unread items reported `size: 0` — and the pile-fell rule below,
+        # the one thing in this file that can tell a healthy night from an idle one, could never
+        # fire for the commonest case. Measured on the live ledger that morning: head
+        # 20261121T193324Z-b2064d65 with size 0 while 100+ items were unread. The pile is now
+        # always counted, and the fallback mirrors `wake_engine.reading_head()` exactly: offer
+        # the pile only in arrears, and never offer this seat what it filed.
+        whole = il.reading_queue(path)
+        if not reading and len(whole) > int(getattr(il, "PILE_TARGET", 100)):
+            reading = [r for r in whole if (r.get("amigo") or "") != amigo][:1]
         if reading:
             # The pile size travels with the head, because in arrears every item already carries
             # somebody's name and a wake may read any of them. Measured 2026-11-20: the head stayed
