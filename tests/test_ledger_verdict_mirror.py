@@ -106,6 +106,60 @@ class LedgerVerdictMirrorTest(unittest.TestCase):
         self.assertEqual(live["state"], "accomplished")
         self.assertEqual(live["reviewer"], "dmitri")
 
+    def test_a_landing_machine_stamp_does_not_outrank_a_recorded_verdict(self):
+        """`accomplished` written by the lander is not a review, so it cannot supersede one.
+
+        Measured on the live ledger 2026-11-23: fourteen items carry a model's `postponed` or
+        `rejected` verdict in a mirror file and `accomplished` by `auto:land`/`auto:path` in the
+        ledger, stamped one to two hours later. Comparing clocks alone made every one of them
+        look superseded — `replay` applied nothing, while `item_ledger --queue` told every wake
+        "already judged, folding the mirror in is the work". A postponement quietly upgraded to
+        `accomplished` also leaves the blockers list, which is where a stoppage is recorded.
+        """
+        self.ledger.write_text(json.dumps({
+            "id": "codex-test-1", "amigo": "tarik", "state": "accomplished",
+            "state_utc": "2026-11-21T13:06:59Z", "reviewer": "auto:land",
+            "reason": "the run landed and the suite passed", "title": "a test item",
+            "source": "codex"}, sort_keys=True) + "\n", encoding="utf-8")
+        lvm.mirror("codex-test-1", "postponed", "gemini", "blocked on a merger", "",
+                   self.verdicts, "2026-11-21T11:15:59Z")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], ["codex-test-1"],
+                         "the lander's stamp buried a verdict a model had recorded")
+        live = json.loads(self.lines()[-1])
+        self.assertEqual(live["state"], "postponed")
+        self.assertEqual(live["reviewer"], "gemini")
+        self.assertEqual(live["reason"], "blocked on a merger")
+
+    def test_a_machine_stamp_with_no_readable_clock_is_still_only_a_stamp(self):
+        """The held branch protects a *verdict* with an unreadable clock, not a machine row."""
+        self.ledger.write_text(json.dumps({
+            "id": "codex-test-1", "amigo": "tarik", "state": "accomplished",
+            "state_utc": "yesterday afternoon", "reviewer": "auto:path",
+            "reason": "checked the paths", "title": "a test item", "source": "codex"},
+            sort_keys=True) + "\n", encoding="utf-8")
+        lvm.mirror("codex-test-1", "rejected", "desi", "never do this", "",
+                   self.verdicts, "2026-11-14T01:00:00Z")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], ["codex-test-1"])
+        self.assertEqual(result["held"], [])
+        self.assertEqual(json.loads(self.lines()[-1])["state"], "rejected")
+
+    def test_replay_folds_one_item_once_however_many_mirrors_it_has(self):
+        """Four files for one item are four ways of saying one thing: the newest one."""
+        lvm.mirror("codex-test-1", "accomplished", "dmitri", "first read", "",
+                   self.verdicts, "2026-11-22T03:35:28Z")
+        lvm.mirror("codex-test-1", "accomplished", "dmitri", "second read", "",
+                   self.verdicts, "2026-11-22T05:35:37Z")
+        lvm.mirror("codex-test-1", "rejected", "dmitri", "the later, corrected verdict", "",
+                   self.verdicts, "2026-11-22T11:36:25Z")
+        result = lvm.replay(self.ledger, self.verdicts)
+        self.assertEqual(result["applied"], ["codex-test-1"], "one item, one row")
+        self.assertEqual(len(self.lines()), 2)
+        live = json.loads(self.lines()[-1])
+        self.assertEqual(live["state"], "rejected")
+        self.assertEqual(live["reason"], "the later, corrected verdict")
+
     def test_replay_holds_a_ledger_verdict_whose_clock_it_cannot_read(self):
         """An unreadable stamp on the live row is not permission to overwrite that row.
 

@@ -229,14 +229,32 @@ def replay(ledger: Path = DEFAULT_LEDGER, verdicts: Path = DEFAULT_VERDICTS,
     """Fold mirrored verdicts into `ledger`. Idempotent, and never overwrites a later verdict."""
     current = item_ledger.load(ledger)
     records, unreadable = _verdict_files(verdicts)
+    # One verdict per item: the newest mirror. An item that was reviewed four times has four files
+    # that say almost the same thing, and folding all four appends four rows that differ only in
+    # the minute — so the last one is the whole of what they say.
+    newest: dict[str, dict] = {}
+    for rec in records:  # `_verdict_files` sorts oldest first
+        newest[rec["id"]] = rec
     applied, skipped, unknown, held = [], [], [], []
-    for rec in records:
+    for rec in newest.values():
         live = current.get(rec["id"])
         if live is None:
             unknown.append(rec["id"])
             continue
+        # A machine stamp is not a review, so it is not a verdict the mirror has to defer to.
+        # Measured 2026-11-23 (Dmitri): fourteen items carry a model's `postponed`/`rejected`
+        # verdict in a mirror file and, in the ledger, `accomplished` by `auto:land` or
+        # `auto:path` stamped one to two hours *later*. Comparing clocks alone made every one of
+        # those look superseded, so `replay` applied nothing while `item_ledger`'s queue warning
+        # told every wake "already judged, folding the mirror in is the work". A postponement
+        # that is silently upgraded to `accomplished` also leaves the blockers list, which is the
+        # one place a stoppage is recorded. `item_ledger` already knows the difference
+        # (`MACHINE_REVIEWERS`, `is_path_check`); this is the same rule on the folding side.
+        human_live = (live.get("state") in STATES
+                      and live.get("reviewer") not in item_ledger.MACHINE_REVIEWERS
+                      and not item_ledger.is_path_check(live))
         live_utc = ""
-        if live.get("state") in STATES and live.get("state_utc"):
+        if live.get("state") in STATES and live.get("state_utc") and human_live:
             try:  # a ledger row written by hand may carry the compact spelling too
                 live_utc = _aware(live["state_utc"])
             except SystemExit:

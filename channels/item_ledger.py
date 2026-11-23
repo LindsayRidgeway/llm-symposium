@@ -841,7 +841,8 @@ def _keep_decisions(records: list[dict], path: Path = LEDGER) -> list[dict]:
                     rec[field] = old.get(field)
             rec["decision_preserved_from"] = old.get("state_utc")
         elif old and verdict_stamp(old) and verdict_stamp(rec) \
-                and verdict_stamp(rec) < verdict_stamp(old):
+                and verdict_stamp(rec) < verdict_stamp(old) \
+                and not (old.get("reviewer") in MACHINE_REVIEWERS or is_path_check(old)):
             # Appending an older decision than the one already on file is a regression, whether it
             # arrived as a stale snapshot or from a patch applied out of order. Refused at the
             # write the way `load()` refuses it at the read, so the file stops accumulating rows
