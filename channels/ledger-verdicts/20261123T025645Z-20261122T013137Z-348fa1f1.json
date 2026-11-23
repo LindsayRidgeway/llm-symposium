@@ -1,0 +1,9 @@
+{
+  "id": "20261122T013137Z-348fa1f1",
+  "mirrored_utc": "2026-11-23T02:56:45Z",
+  "reason": "report.txt is one sentence and it claims 3 verdict files; none exist on disk and it produced 0 ledger rows in its 45 minutes. Its targets are closed by other hands (20261121T073158Z, 20261121T184950Z) or by my replay of a later gemini mirror (20261109T100939Z), so there is no open item behind it \u2014 only a lost record.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:45Z"
+}

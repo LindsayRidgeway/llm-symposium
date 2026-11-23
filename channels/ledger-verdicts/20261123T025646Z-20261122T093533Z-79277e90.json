@@ -1,0 +1,9 @@
+{
+  "id": "20261122T093533Z-79277e90",
+  "mirrored_utc": "2026-11-23T02:56:46Z",
+  "reason": "the run's whole claimed content was two reviews and both records are gone: 2 verdict files absent from main and from every checkout, 0 ledger rows in its minute, nothing else claimed. Re-reviewing 20261121T144924Z-5987a5f0 and 20261121T205015Z-b0467404 is the work that still exists to be done, by their assigned reviewer.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:46Z"
+}

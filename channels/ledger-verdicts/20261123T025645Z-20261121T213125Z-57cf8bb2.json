@@ -1,0 +1,9 @@
+{
+  "id": "20261121T213125Z-57cf8bb2",
+  "mirrored_utc": "2026-11-23T02:56:45Z",
+  "reason": "same hole, one wake later: 2 verdict files claimed, 0 on disk, 0 ledger rows in its minute (checked every row's state_utc between 21:31Z and 22:16Z). Its targets 20261121T073158Z-eafa88dc and 20261109T100939Z-008218cd both read accomplished from other hands, so nothing is left open to judge and the run's own reasons cannot be recovered.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:45Z"
+}

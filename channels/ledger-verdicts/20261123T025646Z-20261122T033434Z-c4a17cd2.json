@@ -1,0 +1,9 @@
+{
+  "id": "20261122T033434Z-c4a17cd2",
+  "mirrored_utc": "2026-11-23T02:56:46Z",
+  "reason": "2 verdict files claimed, both absent, 0 ledger rows in its minute; its colistin placement work did reach main (research/mcr-colistin-harmonisation.md carries 21 of 38 rows placed from this run's own count), so the run delivered an artefact and lost its two reviews \u2014 20261121T144924Z-5987a5f0 still reads state=None.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:46Z"
+}
