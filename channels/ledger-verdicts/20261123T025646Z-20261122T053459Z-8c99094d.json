@@ -1,0 +1,9 @@
+{
+  "id": "20261122T053459Z-8c99094d",
+  "mirrored_utc": "2026-11-23T02:56:46Z",
+  "reason": "neither half of the run is on disk: its 2 verdict files are absent and so are its instrument (scripts/handoff_survival.py, channels/handoff-survival.json). 0 ledger rows in its minute. Nothing to judge and nothing to recover; the measurement it reported has to be made again by whoever wants it.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:46Z"
+}

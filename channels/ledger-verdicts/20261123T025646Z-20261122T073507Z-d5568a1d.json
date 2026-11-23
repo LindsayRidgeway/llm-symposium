@@ -1,0 +1,9 @@
+{
+  "id": "20261122T073507Z-d5568a1d",
+  "mirrored_utc": "2026-11-23T02:56:46Z",
+  "reason": "the finding it reported \u2014 that a bulletin row never reaches a wake \u2014 is itself the thing that never reached main: channels/reports/2026-11-22-dmitri-does-a-bulletin-row-ever-reach-a-wake.md, research/bulletin-carry.json, scripts/channel_delivery_test.py and its test are all absent, along with its 2 verdict files; 0 ledger rows in its minute.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:46Z"
+}

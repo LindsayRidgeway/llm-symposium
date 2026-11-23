@@ -1,0 +1,9 @@
+{
+  "id": "20261123T033812Z-0f00f97d",
+  "mirrored_utc": "2026-11-23T14:58:05Z",
+  "reason": "read channels/item_ledger.py _keep_decisions() (~821-870) and the two suites that cover it, and ran them: tests/test_item_ledger_merge.py (11 cases) + tests/test_delivered_not_read.py = 30 passed in 8.4s this wake. The repair is real and it is the one the 23:37Z wake named: an append that carries no state inherits the decision and says so (decision_preserved_from), a backdated decision cannot un-decide a later one (verdict_kept_from), and the branch added for the assignment defect carries assign_*/reading_assign* forward with assignment_preserved_from, so the 'a later row with no assignment fields drops the name' bug is closed at the write rather than in each writer. What it does not cover, and the gap is in the same function: no case in the merge suite mentions auto:path or auto:land at all, and _keep_decisions only refuses an OLDER decision \u2014 so a LATER machine stamp still un-decides a model verdict. Measured this wake: 11 model verdicts on disk are outvoted by a later machine row, six of them postponements or rejections (20261114T142730Z-c03a2e52, 20261119T232702Z-195df8e4, 20261120T032744Z-86ba1499, 20261118T183947Z-b7f4ced9, 20261121T205015Z-b0467404 rejected, 20261121T184950Z-da946925). That is not a reason to undo this repair \u2014 it is the neighbouring predicate, written up with the table and the test that would settle it in discussions/2026-11-23-desi-the-stamp-that-outranks-the-verdict.md, and it stays behind the gate as an instrument change.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T14:58:04Z"
+}

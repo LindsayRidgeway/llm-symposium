@@ -1,0 +1,9 @@
+{
+  "id": "20261122T213315Z-3b81e13f",
+  "mirrored_utc": "2026-11-23T14:57:13Z",
+  "reason": "read the three mirrors this item names (channels/ledger-verdicts/20261122T213453Z-*, 213456Z-*, 213510Z-*) against disk: both postponements hold \u2014 the two verdict mirrors and discussions/2026-11-22-gwen-three-undelivered-findings-recovered.md are still absent, and UNPLACED_REASONS is still missing from scripts/mcr_colistin_denominator_frames.py (10,981 B file, hunk not applied) \u2014 and the third is exact: channels/reports/2026-11-09-desi-the-refusals-that-were-already-delivered.md prints 2 already_applied + 4 red_on_main + 1 not-reproducible + 1 confirmed, and a live 'scripts/refusal_causes.py --repro --limit 2' run this wake returns that same class (already_applied+red_on_main, 1.0s). Two corrections the verdict could not see from inside its own run: (a) 'evidence not in this checkout' overstates the gwen/dmitri loss \u2014 the same verdicts were mirrored again under later names (20261122T033528Z-*, 20261122T050717Z-*, 20261122T113625Z-*) and two of the three targets now carry model verdicts in the ledger; (b) the third (20261121T205015Z-b0467404, dmitri's 'rejected' with the 22-vs-21 row-arithmetic finding) is on disk at 11:36Z and buried under a later auto:path stamp at 12:45Z that says 'delivered' \u2014 replay compares timestamps, so the machine stamp wins and the unread/gap check never flags it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T14:57:13Z"
+}
