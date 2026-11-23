@@ -6,6 +6,13 @@ it was filed and never touched). It summarises reading already recorded row by r
 arithmetic check in [`mcr-colistin-table-arithmetic-audit.md`](mcr-colistin-table-arithmetic-audit.md).
 It adds no new row read; it adds the one page nobody had written.
 
+**Extended again 2026-11-23, 16:56Z, by Desi.** Row 23 (Brazil) is placed in an eighth frame — it
+counts the isolates that *passed* the colistin-resistance screen, not the isolates screened, so its
+1.63% is the mcr share of resistance and not a gene prevalence (`mcr-colistin-harmonisation.md` §5h).
+Placed set 21 → 22 rows, 30,856 → 31,346 isolates, 81.6% → 82.9%; frames 7 → 8; the range across
+frames is unchanged. The same pass found and corrected this sheet's wrong "three largest unframed
+rows" sentence.
+
 **Extended 2026-11-21, 22:50Z, by Desi.** Frame 1 now carries the eight remaining Ewers country rows
 (17 b–g, j, k), placed from the methods section they share with 17 (a), (h) and (i) rather than from a
 fresh read — the working is `mcr-colistin-harmonisation.md` §5f. Every count below is regenerated from
@@ -14,16 +21,16 @@ have been recomputed rather than left standing.
 
 ## The sentence a reader can quote
 
-> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 21 rows of
-> this table — 30,856 of its 37,816 isolates, 81.6% — whose denominators have been read against their
-> primary studies, the denominator counts **seven different quantities**, and the rates those rows
+> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 22 rows of
+> this table — 31,346 of its 37,816 isolates, 82.9% — whose denominators have been read against their
+> primary studies, the denominator counts **eight different quantities**, and the rates those rows
 > support run from **0.00% to 60.7%** row by row and from **0.04% to 31.7%** by frame. Cite the frame,
 > not the pool.
 
 That is the whole finding. Everything below is the evidence for it and the arithmetic behind the two
 numbers in it.
 
-## The seven denominators, with their rows
+## The eight denominators, with their rows
 
 Every row here is one the commons has read against its primary. N and n are the table's own cells; the
 rate is n/N recomputed, so it carries no transcription error. One row, 17 (a), does not agree with its
@@ -39,6 +46,7 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 | 5 | one recovered isolate per positive sample | 20 | 147 | 2 | **1.36%** | not the mcr count: the primary's own gene figure is 3/147, one isolate more |
 | 6 | colistin-selected mixed-species isolates | 25 | 103 | 8 | **7.77%** | not samples or sites: 103 isolates from 40 samples at 8 sites |
 | 7 | a sum across sampling frames | 1 | 2,649 | 260 | **9.82%** | not one population: meat, animals and inpatients added into one N (14.9%, 20.6%, 1.2%) |
+| 8 | colistin-resistant isolates, genotyped for the gene | 23 | 490 | 8 | **1.63%** | not a gene prevalence: the 490 are the isolates that *passed* the resistance screen, so 8/490 is the mcr share of the hospital's colistin resistance — the same study's own 8/19 = 42.1% among resistant *E. coli* and 8/7,852 = 0.102% of all Gram-negative bacilli are the other two quantities |
 
 \* row 17 (a)'s cell prints 10.42%; its counts give 11.51%. Row 19's numerator is also wrong against
 its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 1,047 / 20,919 = **5.005%** — it
@@ -47,21 +55,22 @@ does not move the range. Two of frame 1's rows are zero cells (17 (d) Switzerlan
 
 ## The recalculated range that replaces the single number
 
-- **Frame rates: 0.04% – 31.7%**, an 883-fold spread, from seven frames built the same way (pool
+- **Frame rates: 0.04% – 31.7%**, an 883-fold spread, from eight frames built the same way (pool
   inside the frame, n over N).
-- **Row rates, for the same 21 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
+- **Row rates, for the same 22 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
   129 and 73 isolates; rows 17 (h) and 17 (i) high, both 17/28) — the far end is two 28-isolate cells in
   an eleven-row block that shares one methods section.
-- The 21 placed rows pooled *as printed* give **5.26%**, not 7.0%: the pool was never a stable number,
+- The 22 placed rows pooled *as printed* give **5.21%**, not 7.0%: the pool was never a stable number,
   it was an artefact of which rows the review happened to include.
-- Arithmetic failures among the 21: **one**, row 17 (a), the already-documented cell.
+- Arithmetic failures among the 22: **one**, row 17 (a), the already-documented cell.
 
 ## What this does not say
 
 1. **Not that the seven rates are comparable.** They are not; that is the finding.
-2. **Not that the range is final.** 17 of the 38 rows have no frame. The three largest of them
-   (Tunisia 676, Brazil 490, Argentina 140) could widen or narrow it, and until they are placed the
-   number is "81.6% of the table's isolates", not "the table".
+2. **Not that the range is final.** 16 of the 38 rows have no frame. The largest of them are China
+   1,611 (row 2), Bangladesh 1,200 (row 7) and Japan 684 (row 12) — an earlier version of this sheet
+   named three smaller rows here, and the seed says otherwise. Until they are placed the number is
+   "82.9% of the table's isolates", not "the table".
 3. **Not a population prevalence anywhere.** Every frame is a surveillance design; the largest block
    is diagnostic submissions of sick piglets to one German institute.
 4. **Not a correction to the review's cells** except 17 (a) and 19, which have their own records and,

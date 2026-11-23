@@ -445,17 +445,96 @@ which is the other thing the queue's closing condition allows.
 and the frame range's lower end becomes **0.10%**, not 0.04%. The row-level range and the 31.69% top of
 the frame range do not move.
 
+### 5h. Row 23 (Brazil): the denominator is the resistant isolates, so the rate is an attribution, not a prevalence (Desi, 2026-11-23, 16:56Z)
+
+*Primary re-read in full: Girardello R, Piroupo CM, Martins J, et al., "Genomic Characterization of
+mcr-1.1-Producing Escherichia coli Recovered From Human Infections in São Paulo, Brazil", Frontiers in
+Microbiology 2021;12:663414, PMID 34177843, PMCID PMC8221240. Europe PMC JATS, 144,041 B, md5
+`c8719466acadbb82c65c8852ca572bbc`, fetched 2026-11-23 16:57Z. Methods, results and Tables 1–2 parsed;
+the abstract read only as a cross-check.*
+
+Row 23 is the second-largest unframed row — 490 isolates, 8 positives, printed 1.63% — and unlike row
+27 its arithmetic is **right**: 8/490 = 1.6327%, which is the study's own sentence ("1.63% of all
+colistin resistant Gram-negative bacilli"). The defect is not in the sum. It is in what the denominator
+counts.
+
+**What the study actually did.** One hospital complex, Hospital das Clínicas, São Paulo, isolates
+collected **April 2016 – March 2017** (one year). 7,852 Gram-negative bacilli were isolated; **490
+(6.24%) were colistin-resistant** (Vitek-2, confirmed by CLSI broth microdilution). *All 490* were then
+screened by PCR for mcr-1 to mcr-10, and mcr-1.1 was found in **eight *E. coli*** and in no other
+species. So the design is phenotype-first like row 28 (Canada) — but the denominator is **the isolates
+that passed the phenotype screen, not the isolates that were screened**.
+
+**The three quantities this one study contains**, all of them the study's own numbers:
+
+| what is counted | counts | rate |
+|---|---|---:|
+| mcr-1.1 among **colistin-resistant Gram-negative bacilli** (this is the row) | 8 / 490 | **1.63%** |
+| mcr-1.1 among **colistin-resistant *E. coli*** | 8 / 19 | **42.1%** |
+| mcr-1.1 among **all Gram-negative bacilli isolated** | 8 / 7,852 | **0.102%** |
+
+They differ by ~16-fold and ~1,600-fold. The row's 1.63% is an **attribution fraction** — how much of
+the hospital's colistin resistance is mcr-mediated — and it is the quantity the paper is actually
+arguing about ("indicating a low incidence of the mcr-1 production mechanism among colistin-resistant
+isolates"). It is the only one of the three the table carries, in a column headed simply as colistin
+resistance. Read as a prevalence it overstates the gene's frequency in the hospital's Gram-negative
+population by ~16-fold and says nothing at all about how much colistin resistance there is.
+
+**A second defect, in the primary rather than the row.** The paper writes that the eight are "42% of
+all *E. coli* isolates recovered in the hospital during the study". 8/19 = 42.1%, and 19 is the number
+of colistin-**resistant** *E. coli* among the 490 — so the sentence's denominator is a share of the
+resistant subset, not of all *E. coli*, and as printed it implies a hospital complex that recovered
+nineteen *E. coli* in a year while recovering 7,852 Gram-negative bacilli. Unlike row 27, this is
+resolvable inside the paper (it gives both 19 and 8) and it does not touch the row's cell.
+
+**Isolates, not patients.** The eight isolates come from **six patients**; three of the eight are one
+patient's bone, soft-tissue and urine isolates (all ST410, ≥99.93% similar, §Discussion). N and n both
+count isolates, so the ratio is internally consistent, but 37.5% of the numerator is one patient's
+three specimens.
+
+**Frame: a new one, because no existing frame can hold it.** Frame 2 is *isolates screened for a
+phenotype, genotyped only if positive*, and Canada's 5,571 are every isolate whose phenotype was tested,
+so 2/5,571 is a gene prevalence in the screened population. Brazil's 490 are only the phenotype
+positives, so 8/490 is a gene share among the resistant. Pooling them would add a 0.04% to a 1.63% and
+report the sum as one rate — the exact defect this sheet exists to expose. Row 23 therefore takes
+**frame 8, "colistin-resistant isolates, genotyped for the gene"**, N 490, n 8, 1.63%, and the record
+says why in the frame's own field.
+
+**Why this row can be placed where row 27 cannot.** 490 is a population the study reports and defines
+— twice ("490 (6.24%)" against 7,852). Row 27's 676 appears nowhere in its study. The distinction is
+the whole method decision §5g recommended be made once, in the record: a printed N that the primary
+reports is placed in its own frame; a printed N that the primary does not report gets a stated reason
+it is not placed. Row 23 needed no denominator replacement, so no seed cell is overridden.
+
+**Consequence for the map.** Frame 8 is 490 isolates / 8 positives = 1.63%. Placed set 21 → **22 rows**,
+30,856 → **31,346** of 37,816 isolates (**82.9%**), 1,624 → 1,632 positives; pooled as printed 5.26% →
+**5.21%**. Frames 7 → **8**, and the range across frames does not move: 0.04% (frame 2) to 31.69%
+(frame 4). The row-level range does not move either. Sixteen rows still have no frame.
+
+**One correction to the correction sheet while I was in it.** The sheet says the three largest unframed
+rows are "Tunisia 676, Brazil 490, Argentina 140". Checked against the seed that is false and was false
+when it was written: the largest unframed rows are **China 1,611 (row 2), Bangladesh 1,200 (row 7) and
+Japan 684 (row 12)**; Tunisia 676 is fourth and Argentina 140 is ninth. Those three are ordinary
+distinct studies, not subrows of a placed one. The sheet now names them.
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty
 of the 38 rows** now carry the other four fields — the eight rows of §1, the four food and environmental
 rows of §5e, and the eight remaining Ewers country rows of §5f. Across those twenty: **collection window
 18 of 20** (rows 13 and 6 are still not in any record reached), **mcr variant 20 of 20**, **detection
-method 20 of 20**, **sampling design 20 of 20** — plus a ninth column the seed never had, *what N counts*,
-which is now filled for all twenty and, with row 5's §5c read, gives **21 rows with a frame**.
+method 20 of 20**, **sampling design 20 of 20** — plus a ninth column the seed never had, *what N counts*.
 
-The remaining **seventeen rows** have no frame; eighteen rows are still at four columns, one of them being
-row 5, whose frame was established in §5c. So the item's question still cannot be answered across the
+**Three rows have been read since.** Row 5's frame was established in §5c; row 23 (§5h) adds window
+April 2016–March 2017, mcr-1.1 only, PCR after a colistin-resistance screen, one São Paulo hospital
+complex; row 27 (§5g) adds its own four fields and a stated reason it cannot be placed. *What N counts*
+is now filled for all **twenty-three**, which gives **22 rows with a frame** — the 21 counted above plus
+row 23, which founds an eighth frame rather than joining the seventh-frame taxonomy.
+
+The remaining **sixteen rows** have no frame, one of them being row 27, whose reason is in §5g; fifteen
+rows are still at four columns and have never been read. The largest of the unread are China 1,611
+(row 2), Bangladesh 1,200 (row 7) and Japan 684 (row 12) — the correction sheet used to name three
+smaller rows as the largest and has been corrected. So the item's question still cannot be answered across the
 whole table, but it can now be answered about four-fifths of its isolates: the heaviest block (livestock,
 27,132 of the table's 37,816 = 71.8%), every food and environmental row (18, 20, 21, 25 = 605 of 37,816),
 and the whole of one eleven-row laboratory block. The answer in each is *surveillance*. That the sector

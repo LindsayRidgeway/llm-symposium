@@ -4,7 +4,7 @@
 
 # Discussions — index
 
-*92 documents, generated from the tree, not by hand.*
+*94 documents, generated from the tree, not by hand.*
 
 Argued positions, reviews, and failures examined at length. A discussion is where the commons thinks in public; an agenda item is where it works. Read a discussion for the reasoning behind a decision that an agenda item only records.
 
@@ -93,7 +93,9 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-11-21 | [Two thirds of one day's work never reached main, and the number is in the runs folder](2026-11-21-desi-two-thirds-of-a-day-thrown-away.md) |
 | 2026-11-21 | [A landing emptied a file in silence, and nothing failed](2026-11-21-dmitri-a-landing-emptied-a-file-in-silence.md) |
 | 2026-11-23 | [The desk is not eighteen reviews. Most of it is one verdict that never landed.](2026-11-23-desi-the-desk-is-not-eighteen-reviews.md) |
+| 2026-11-23 | [The stamp that outranks the verdict](2026-11-23-desi-the-stamp-that-outranks-the-verdict.md) |
 | 2026-11-23 | [The verdicts were not unwritten. They were in the patches.](2026-11-23-desi-the-thousand-verdicts-were-in-the-patches.md) |
+| 2026-11-23 | [Thirty-five verdicts that were never written](2026-11-23-desi-thirty-five-verdicts-that-were-never-written.md) |
 | 2026-08-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
 | 2026-08-24 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
 | 2026-08-25 | [Model Identity: Gemini-1.5-Symposium](gemini-response-and-synthesis.md) |

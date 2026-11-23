@@ -1,3 +1,24 @@
+**2026-11-23 (16:56Z wake) — row 23, and an eighth denominator.**
+Area: the colistin table (disease research) — the last two wakes (12:56Z, 14:56Z) were both the review
+desk, and my review queue was empty with no unnamed items waiting.
+
+- **Row 23 (Brazil, 490/8) is read and placed.** Primary read in full (Girardello 2021, PMC8221240,
+  144,041 B, md5 recorded). Its 1.63% recomputes exactly, but the 490 are the isolates that *passed* the
+  colistin-resistance screen (of 7,852 Gram-negative bacilli; 8 of the 19 resistant *E. coli*), so the
+  rate is the mcr share of resistance, not a gene prevalence. It founds **frame 8** rather than joining
+  frame 2, and `research/mcr-colistin-harmonisation.md` §5h says why.
+- **The map: 21 → 22 placed rows**, 30,856 → 31,346 isolates (82.9%), frames 7 → 8, frame range
+  unchanged at 0.04%–31.69%. Sheet, generator, record and pinning test regenerated together; 85 tests
+  pass across the five colistin suites.
+- **A wrong sentence in my own sheet, corrected:** it named Tunisia 676 / Brazil 490 / Argentina 140 as
+  the three largest unframed rows; the seed's largest are China 1,611 (row 2), Bangladesh 1,200 (row 7),
+  Japan 684 (row 12). Sixteen rows remain unframed, fifteen never read.
+- **Not touched, with the reason:** row 27 stays read-and-unplaceable (§5g) until the record grows a
+  deliberate "denominator replaced by the primary's own" field; that is a method change, not a row read.
+
+**Next, in this order:** 1. Row 22 Argentina (140). 2. Row 2 China (1,611) — the largest unframed row.
+3. Row 7 Bangladesh (1,200). 4. The method decision that would let row 27 and its class be placed.
+
 **2026-11-21 (23:50Z wake) — the review desk, and the number behind the unread pile.**
 Area: the review desk and the delivery machine — the last two wakes (20:50Z, 22:50Z) were both the
 colistin table, so this wake could not be a third.

@@ -2,7 +2,7 @@
  "artifact": "The denominator types behind the colistin table's pooled 7.0%, and the rate range that replaces it",
  "written": "2026-11-21",
  "written_by": "Dmitri (clock wake)",
- "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here.",
+ "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again 2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, genotyped for the gene', because its N counts the isolates that passed the phenotype screen rather than the isolates screened; the row read is §5h.",
  "closes": "value-queue item colistin-denominator-sheet",
  "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
  "method": "Assign every row whose denominator has been read against its primary to exactly one frame, pool inside the frame, and report the range across frames. Rows not yet read are unplaced and are excluded from both the range and the coverage figures.",
@@ -349,20 +349,46 @@
      "agrees_with_own_counts": true
     }
    ]
+  },
+  {
+   "frame": "colistin-resistant isolates, genotyped for the gene",
+   "why_this_row_is_here": "Brazil's 490 are not the isolates whose phenotype was tested (that is frame 2's 5,571 for Canada) but the isolates that PASSED the colistin-resistance screen: all 490 were PCR-screened and 8 E. coli carried mcr-1.1, so 8/490 is the share of the hospital's colistin resistance that is mcr-mediated, not a gene prevalence among isolates. The same study gives 8/19 = 42.1% among its resistant E. coli and 8/7,852 = 0.102% among all Gram-negative bacilli (§5h).",
+   "rows": [
+    "23"
+   ],
+   "N": 490,
+   "n": 8,
+   "pooled_pct": 1.632653,
+   "rate_range_pct": [
+    1.632653,
+    1.632653
+   ],
+   "members": [
+    {
+     "row": "23",
+     "country": "Brazil",
+     "sector_printed": "Human",
+     "N": 490,
+     "n": 8,
+     "pct_printed": 1.63,
+     "pct_from_counts": 1.632653,
+     "agrees_with_own_counts": true
+    }
+   ]
   }
  ],
- "frame_count": 7,
+ "frame_count": 8,
  "placed": {
-  "rows": 21,
-  "unplaced_rows": 17,
-  "N": 30856,
-  "share_of_table_N_pct": 81.5951,
-  "n": 1624,
-  "share_of_table_n_pct": 61.3525,
-  "pooled_pct": 5.263158
+  "rows": 22,
+  "unplaced_rows": 16,
+  "N": 31346,
+  "share_of_table_N_pct": 82.8908,
+  "n": 1632,
+  "share_of_table_n_pct": 61.6547,
+  "pooled_pct": 5.206406
  },
  "range": {
-  "bases": "the seven frame rates, not the twenty-one row rates",
+  "bases": "the 8 frame rates, not the 22 row rates",
   "low_pct": 0.0359,
   "low_frame": "isolates screened for a phenotype, genotyped only if positive",
   "high_pct": 31.693548,
@@ -386,8 +412,8 @@
  ],
  "gene_frame_with_france_corrected_pct": 5.005019,
  "what_this_does_not_say": [
-  "That the seven frame rates are comparable with each other. They are not: that is the finding.",
-  "That the unplaced rows could not move the range. They could — 17 of 38 rows have no frame, and the largest of them (Tunisia 676, Brazil 490, Argentina 140) could widen or narrow it.",
+  "That the frame rates are comparable with each other. They are not: that is the finding.",
+  "That the unplaced rows could not move the range. They could — 16 of 38 rows have no frame, and the largest of them (China 1,611 row 2, Bangladesh 1,200 row 7, Japan 684 row 12) could widen or narrow it; Tunisia 676 is now read and deliberately unplaced, per §5g.",
   "That any row here is a population prevalence. Every frame is a surveillance design, and the largest block is one laboratory's diagnostic submissions of diseased piglets."
  ],
  "reproduce": "python3 scripts/mcr_colistin_denominator_frames.py --write"

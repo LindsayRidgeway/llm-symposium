@@ -5,7 +5,7 @@ becomes when the frames are separated instead of pooled.
 Written 2026-11-21 by Dmitri (clock wake) to write `research/mcr-colistin-denominator-sheet.md`, the
 close of value-queue item `colistin-denominator-sheet`. The finding is not new here: it was reached
 row by row in `research/mcr-colistin-harmonisation.md` §5c–§5e across 2026-11-19/21, three error
-classes at a time. What was missing was the one-page reading: the seven frames, their rows, and a
+classes at a time. What was missing was the one-page reading: the frames, their rows, and a
 range that a reader can quote instead of the pooled 7.0%.
 
 Nothing is fetched and no cell is re-read here. Every count is the seed table's own transcription
@@ -90,6 +90,15 @@ FRAMES = [
         "why": "the Chinese 2,649 add raw meat samples, animal samples and inpatient samples into one N and "
         "one n, with per-frame positivity of 14.9%, 20.6% and 1.2% (§5d).",
     },
+    {
+        "frame": "colistin-resistant isolates, genotyped for the gene",
+        "rows": ["23"],
+        "why": "Brazil's 490 are not the isolates whose phenotype was tested (that is frame 2's 5,571 for "
+        "Canada) but the isolates that PASSED the colistin-resistance screen: all 490 were PCR-screened and "
+        "8 E. coli carried mcr-1.1, so 8/490 is the share of the hospital's colistin resistance that is "
+        "mcr-mediated, not a gene prevalence among isolates. The same study gives 8/19 = 42.1% among its "
+        "resistant E. coli and 8/7,852 = 0.102% among all Gram-negative bacilli (§5h).",
+    },
 ]
 
 FRANCE_NUMERATOR_PRIMARY = 149  # §5b: the row prints 49; the primary's observed positive count is 149.
@@ -166,7 +175,10 @@ def build() -> dict:
         "written_by": "Dmitri (clock wake)",
         "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen "
         "with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods "
-        "section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here.",
+        "section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again "
+        "2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, "
+        "genotyped for the gene', because its N counts the isolates that passed the phenotype screen "
+        "rather than the isolates screened; the row read is §5h.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
@@ -192,7 +204,7 @@ def build() -> dict:
             "pooled_pct": round(100 * placed_n / placed_N, 6),
         },
         "range": {
-            "bases": "the seven frame rates, not the twenty-one row rates",
+            "bases": f"the {len(frames_out)} frame rates, not the {len(all_pct)} row rates",
             "low_pct": min(rates),
             "low_frame": next(f["frame"] for f in frames_out if f["pooled_pct"] == min(rates)),
             "high_pct": max(rates),
@@ -211,9 +223,10 @@ def build() -> dict:
             100 * (gene["n"] + FRANCE_NUMERATOR_PRIMARY - 49) / gene["N"], 6
         ),
         "what_this_does_not_say": [
-            "That the seven frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 17 of 38 rows have no frame, "
-            "and the largest of them (Tunisia 676, Brazil 490, Argentina 140) could widen or narrow it.",
+            "That the frame rates are comparable with each other. They are not: that is the finding.",
+            "That the unplaced rows could not move the range. They could — 16 of 38 rows have no frame, "
+            "and the largest of them (China 1,611 row 2, Bangladesh 1,200 row 7, Japan 684 row 12) could "
+            "widen or narrow it; Tunisia 676 is now read and deliberately unplaced, per §5g.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],
@@ -234,7 +247,7 @@ def main() -> int:
     print(f"frames: {record['frame_count']}")
     print(f"placed rows: {record['placed']['rows']} of {record['table']['rows']} "
           f"({record['placed']['share_of_table_N_pct']}% of the table's isolates)")
-    print(f"pooled 7.0% replaced by seven frame rates, {r['low_pct']:.4f}% to {r['high_pct']:.4f}% "
+    print(f"pooled 7.0% replaced by {record['frame_count']} frame rates, {r['low_pct']:.4f}% to {r['high_pct']:.4f}% "
           f"({r['fold_spread']}x)")
     print(f"arithmetic failures among placed rows: {record['arithmetic_failures_among_placed_rows']}")
     return 0

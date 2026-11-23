@@ -8,10 +8,10 @@ prose. So:
 
   * two printed percentages are recomputed from their own counts (rows 18 and 21) — the item's own
     example of what a reader would check;
-  * all twenty-one placed rows are recomputed, and exactly one fails its own counts — row 17 (a), the
+  * all twenty-two placed rows are recomputed, and exactly one fails its own counts — row 17 (a), the
     documented cell — so a new transcription slip fails here instead of joining the prose;
-  * the seven frames' names and their rows are the seven the sheet lists, and the coverage figures
-    (21 rows, 30,856 isolates, 81.6%) are the seed's counts, not the sheet's memory;
+  * the eight frames' names and their rows are the eight the sheet lists, and the coverage figures
+    (22 rows, 31,346 isolates, 82.9%) are the seed's counts, not the sheet's memory;
   * the eight Ewers country rows placed on 2026-11-21 22:50Z are in frame 1 and two of them are zero
     cells, so the row-level range starts at 0.00% and the sheet says so;
   * the range the sheet quotes is the frame range, and the two numbers in the quotable sentence are
@@ -34,7 +34,7 @@ RECORD = ROOT / "research" / "mcr-colistin-denominator-frames.json"
 SEED = ROOT / "research" / "mcr-colistin-seed.json"
 SCRIPT = ROOT / "scripts" / "mcr_colistin_denominator_frames.py"
 
-SEVEN_FRAMES = [
+EIGHT_FRAMES = [
     "isolates screened for the gene",
     "isolates screened for a phenotype, genotyped only if positive",
     "hosts (animals and humans enrolled)",
@@ -42,6 +42,7 @@ SEVEN_FRAMES = [
     "one recovered isolate per positive sample",
     "colistin-selected mixed-species isolates",
     "a sum across sampling frames",
+    "colistin-resistant isolates, genotyped for the gene",
 ]
 
 
@@ -98,12 +99,12 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("11.51", self.sheet)
         self.assertIn("10.42", self.sheet)
 
-    # --- seven frames, and the rows the sheet gives them ---
+    # --- eight frames, and the rows the sheet gives them ---
 
-    def test_seven_frames_in_the_sheets_order(self):
-        self.assertEqual(self.record["frame_count"], 7)
-        self.assertEqual([f["frame"] for f in self.record["frames"]], SEVEN_FRAMES)
-        for name in SEVEN_FRAMES:
+    def test_eight_frames_in_the_sheets_order(self):
+        self.assertEqual(self.record["frame_count"], 8)
+        self.assertEqual([f["frame"] for f in self.record["frames"]], EIGHT_FRAMES)
+        for name in EIGHT_FRAMES:
             self.assertIn(name, self.sheet, name)
 
     def test_the_two_zero_cells_are_placed_and_the_row_range_says_zero(self):
@@ -129,7 +130,7 @@ class DenominatorSheet(unittest.TestCase):
         self.assertEqual(len(placed), len(set(placed)))
         self.assertEqual(sorted(placed), sorted(
             ["13", "6", "17 (a)", "17 (b)", "17 (c)", "17 (d)", "17 (e)", "17 (f)", "17 (g)",
-             "17 (h)", "17 (i)", "17 (j)", "17 (k)", "19", "28", "21", "18", "5", "20", "25", "1"]
+             "17 (h)", "17 (i)", "17 (j)", "17 (k)", "19", "28", "21", "18", "5", "20", "25", "1", "23"]
         ))
         # The rows the harmonisation file established each frame on.
         by_frame = {f["frame"]: f["rows"] for f in self.record["frames"]}
@@ -140,13 +141,13 @@ class DenominatorSheet(unittest.TestCase):
 
     def test_coverage_is_the_seeds_own_counts(self):
         placed = self.record["placed"]
-        self.assertEqual(placed["rows"], 21)
-        self.assertEqual(placed["N"], 30856)
+        self.assertEqual(placed["rows"], 22)
+        self.assertEqual(placed["N"], 31346)
         self.assertEqual(placed["N"], sum(self.rows[r]["n_isolates"] for r in self.members))
-        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 30856 / 37816, places=3)
+        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 31346 / 37816, places=3)
         self.assertEqual(self.record["table"]["N"], self.seed["derived"]["sum_isolates"])
-        self.assertIn("30,856", self.sheet)
-        self.assertIn("81.6%", self.sheet)
+        self.assertIn("31,346", self.sheet)
+        self.assertIn("82.9%", self.sheet)
 
     def test_the_range_quoted_is_the_frame_range(self):
         r = self.record["range"]
@@ -159,18 +160,18 @@ class DenominatorSheet(unittest.TestCase):
         # The sheet's quotable sentence carries the same two endpoints, to its own rounding.
         self.assertIn("0.04%", self.sheet)
         self.assertIn("31.7%", self.sheet)
-        self.assertIn("seven different quantities", self.sheet)
+        self.assertIn("eight different quantities", self.sheet)
 
     def test_pooling_the_placed_rows_does_not_give_seven_percent(self):
-        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 1624 / 30856, places=4)
+        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 1632 / 31346, places=4)
         self.assertLess(self.record["placed"]["pooled_pct"], 6.0)
         # And the France correction is recorded rather than silently folded in.
         self.assertAlmostEqual(self.record["gene_frame_with_france_corrected_pct"],
                                100 * 1047 / 20919, places=4)
 
     def test_sheet_states_its_own_limits(self):
-        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 21)
-        self.assertIn(f"{len(self.rows) - 21} of the 38 rows", self.sheet)
+        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 22)
+        self.assertIn(f"{len(self.rows) - 22} of the 38 rows", self.sheet)
         self.assertIn("Not a population prevalence anywhere", self.sheet)
         self.assertIn("mcr-colistin-denominator-frames.json", self.sheet)
         self.assertIn("mcr-colistin-harmonisation.md", self.sheet)
@@ -182,8 +183,8 @@ class ScriptRuns(unittest.TestCase):
             [sys.executable, str(SCRIPT), "--show"], capture_output=True, text=True, timeout=60
         )
         self.assertEqual(out.returncode, 0, out.stderr)
-        self.assertIn("frames: 7", out.stdout)
-        self.assertIn("placed rows: 21 of 38", out.stdout)
+        self.assertIn("frames: 8", out.stdout)
+        self.assertIn("placed rows: 22 of 38", out.stdout)
         self.assertIn("17 (a)", out.stdout)
 
 
