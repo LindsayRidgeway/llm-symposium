@@ -15,7 +15,10 @@ prose. So:
   * the eight Ewers country rows placed on 2026-11-21 22:50Z are in frame 1 and two of them are zero
     cells, so the row-level range starts at 0.00% and the sheet says so;
   * the range the sheet quotes is the frame range, and the two numbers in the quotable sentence are
-    the ones arithmetic produces.
+    the ones arithmetic produces;
+  * the two caveats found on 2026-11-22 02:50Z and landed on 2026-11-23 are pinned: frame 4's 31.69% is
+    a pool of two units and lies between its rows' own rates, and the placed pool has two values —
+    counts 5.21%, printed percentages 4.99% — whose gap is row 17 (a).
 
 What this does NOT do: re-read a primary study, fetch anything, or claim any row is a population
 prevalence. It reads `research/mcr-colistin-seed.json`, the table's own transcription, and the
@@ -168,6 +171,38 @@ class DenominatorSheet(unittest.TestCase):
         # And the France correction is recorded rather than silently folded in.
         self.assertAlmostEqual(self.record["gene_frame_with_france_corrected_pct"],
                                100 * 1047 / 20919, places=4)
+
+    def test_frame_four_is_mixed_unit_and_the_sheet_says_so(self):
+        """33 positive products + 360 positive isolates, over 128 products + 1,112 samples.
+
+        The caveat found on 2026-11-22 02:50Z and unpinned until 2026-11-23: frame 4's 31.69% is a
+        pool of two different units, so it lies between its rows' own rates and is neither.
+        """
+        f4 = next(f for f in self.record["frames"] if f["frame"] == "samples or products")
+        self.assertEqual((f4["N"], f4["n"]), (128 + 1112, 33 + 360))
+        self.assertAlmostEqual(f4["pooled_pct"], 100 * 393 / 1240, places=4)
+        products, isolates = 100 * 33 / 128, 100 * 360 / 1112
+        self.assertLess(products, f4["pooled_pct"])
+        self.assertGreater(isolates, f4["pooled_pct"])
+        self.assertIn("mixed-unit", self.sheet)
+        self.assertIn("25.78", self.sheet)
+        self.assertIn("32.37", self.sheet)
+
+    def test_the_two_pooling_methods_and_the_gap_that_is_row_17a(self):
+        """Counts pool 5.21% against printed-percentage pool 4.99%; the gap is row 17 (a)."""
+        placed = [m for f in self.record["frames"] for m in f["members"]]
+        N = sum(m["N"] for m in placed)
+        counts_pool = 100 * sum(m["n"] for m in placed) / N
+        printed_pool = 100 * sum(m["N"] * m["pct_printed"] / 100 for m in placed) / N
+        self.assertAlmostEqual(counts_pool, 5.2064, places=3)
+        self.assertAlmostEqual(printed_pool, 4.9929, places=3)
+        # The whole gap is the one cell whose printed percentage is not its own counts.
+        r17a = self.rows["17 (a)"]
+        gap = 100 * (r17a["mcr_positive"] - r17a["n_isolates"] * r17a["prevalence_pct_reported"] / 100) / N
+        self.assertAlmostEqual(counts_pool - printed_pool, gap, places=2)
+        self.assertGreater(gap, 0.2)
+        self.assertIn("5.21%", self.sheet)
+        self.assertIn("4.99%", self.sheet)
 
     def test_sheet_states_its_own_limits(self):
         self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 22)

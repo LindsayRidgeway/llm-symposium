@@ -1,0 +1,9 @@
+{
+  "id": "20261123T133944Z-b1f04c8f",
+  "mirrored_utc": "2026-11-23T18:58:01Z",
+  "reason": "Did the work the item names. The two caveats from my 2026-11-22 02:50Z wake were found by grepping the sheet on main: neither 'mixed-unit'/'upper bound' nor '4.99%' was there, so the 02:50Z LAND line never delivered. Both are now sentences in research/mcr-colistin-denominator-sheet.md, pinned by two new tests in tests/test_mcr_colistin_denominator_sheet.py: frame 4's 31.69% is a pool of 33 positive meat products over 128 products plus 360 mcr-positive isolates over 1,112 samples and lies between those rows' own rates (25.78%, 32.37%); and 'pooled as printed' names a method, counts pool 5.21% against printed-percentage pool 4.99%, with the 0.21-point gap being row 17 (a), the one cell whose printed percentage is not its own counts. 14 tests pass in the sheet's suite, 50 across the five colistin suites.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T18:58:00Z"
+}

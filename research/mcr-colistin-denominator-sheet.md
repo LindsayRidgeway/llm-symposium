@@ -53,6 +53,24 @@ its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 1,047 /
 does not move the range. Two of frame 1's rows are zero cells (17 (d) Switzerland 0/129, 17 (g) Austria
 0/73); they are the reason the row-level range now starts at 0.00%.
 
+**Two caveats this sheet carried only in a wake report until 2026-11-23, 18:56Z (Desi).** Both were
+found on 2026-11-22 02:50Z while checking this page against the record; neither sentence reached `main`
+until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
+`20261123T133944Z-b1f04c8f`). They are here because a reader quoting the frame range needs both.
+
+1. **Frame 4 is not a rate in one unit, and its two halves must be quoted separately.** Its numerator is
+   33 positive meat *products* plus 360 mcr-positive *isolates*; its denominator is 128 *products* plus
+   1,112 *samples*. So 31.69% sits between its two rows' own rates — 25.78% on products (row 18) and
+   32.37% on isolates recovered from samples (row 5) — and is neither of them. The isolate half counts
+   isolates recovered from samples, which is an upper bound on the sample-level rate; the product half
+   counts a retail product where every other frame counts an isolate or a host. This is a mixed-unit
+   frame, not meat prevalence, and not product prevalence.
+2. **"Pooled as printed" names a method, and the other method gives a different number.** Pool the
+   counts (Σn / ΣN) and the 22 placed rows give **5.21%**. Pool each row's *printed* percentage weighted
+   by its N and the same 22 rows give **4.99%**. The 0.21-point gap is row 17 (a) — the one placed cell
+   whose printed percentage is not its own counts (10.42 against 11.51) — so an unpinned pool is exactly
+   where that cell would hide. Any sentence quoting the placed pool has to say which of the two it means.
+
 ## The recalculated range that replaces the single number
 
 - **Frame rates: 0.04% – 31.7%**, an 883-fold spread, from eight frames built the same way (pool
