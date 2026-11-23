@@ -62,9 +62,12 @@ FRAMES = [
     },
     {
         "frame": "hosts (animals and humans enrolled)",
-        "rows": ["21"],
+        "rows": ["21", "22"],
         "why": "the Portugal row's 227 are enrolled hosts and its 12 are positive hosts; the study's 17 "
-        "isolates and the isolation medium's own colistin (3.5 µg/mL) are not in either number (§5e).",
+        "isolates and the isolation medium's own colistin (3.5 µg/mL) are not in either number (§5e). "
+        "Argentina's 140 are rectal swabs from pigs on six farms — animals sampled, not E. coli isolates "
+        "(§5i), so 23/140 is host carriage. The frame therefore holds two host species and two sampling "
+        "designs, and its 9.54% is a pool of those two rows only.",
     },
     {
         "frame": "samples or products",
@@ -178,7 +181,10 @@ def build() -> dict:
         "section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again "
         "2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, "
         "genotyped for the gene', because its N counts the isolates that passed the phenotype screen "
-        "rather than the isolates screened; the row read is §5h.",
+        "rather than the isolates screened; the row read is §5h. Extended a third time 2026-11-23T22:57Z — "
+        "row 22 (Argentina) placed in the existing hosts frame, since its 140 are pigs swabbed rather "
+        "than isolates; the row read is §5i, written at 19:4xZ, and this pass is the one-step "
+        "regeneration that read left owed. Placed set 22 -> 23 rows.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
@@ -224,7 +230,7 @@ def build() -> dict:
         ),
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 16 of 38 rows have no frame, "
+            "That the unplaced rows could not move the range. They could — 15 of 38 rows have no frame, "
             "and the largest of them (China 1,611 row 2, Bangladesh 1,200 row 7, Japan 684 row 12) could "
             "widen or narrow it; Tunisia 676 is now read and deliberately unplaced, per §5g.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "

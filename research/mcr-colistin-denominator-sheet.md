@@ -6,6 +6,13 @@ it was filed and never touched). It summarises reading already recorded row by r
 arithmetic check in [`mcr-colistin-table-arithmetic-audit.md`](mcr-colistin-table-arithmetic-audit.md).
 It adds no new row read; it adds the one page nobody had written.
 
+**Extended again 2026-11-23, 22:57Z, by Desi.** Row 22 (Argentina) is placed in the frame that already
+existed for it: its 140 are pigs swabbed on six farms, not isolates, so 23/140 is host carriage and the
+row joins Portugal in frame 3 rather than founding a ninth frame (`mcr-colistin-harmonisation.md` §5i,
+which read the row and left this regeneration owed). Placed set 22 → 23 rows, 31,346 → 31,486,
+82.9% → 83.3%; frames stay 8; the frame range is unchanged. Frame 3 now pools two host species —
+227 dogs and humans in Portugal, 140 pigs in Argentina — at 35/367 = 9.54%.
+
 **Extended again 2026-11-23, 16:56Z, by Desi.** Row 23 (Brazil) is placed in an eighth frame — it
 counts the isolates that *passed* the colistin-resistance screen, not the isolates screened, so its
 1.63% is the mcr share of resistance and not a gene prevalence (`mcr-colistin-harmonisation.md` §5h).
@@ -21,8 +28,8 @@ have been recomputed rather than left standing.
 
 ## The sentence a reader can quote
 
-> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 22 rows of
-> this table — 31,346 of its 37,816 isolates, 82.9% — whose denominators have been read against their
+> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 23 rows of
+> this table — 31,486 of its 37,816 isolates, 83.3% — whose denominators have been read against their
 > primary studies, the denominator counts **eight different quantities**, and the rates those rows
 > support run from **0.00% to 60.7%** row by row and from **0.04% to 31.7%** by frame. Cite the frame,
 > not the pool.
@@ -41,7 +48,7 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 |---|---|---|---:|---:|---:|---|
 | 1 | isolates screened for the gene | 13, 6, 17 (a)\*, 17 (b)–17 (k), 19 | 20,919 | 947 | **4.53%** | not a population: eleven of its fourteen rows are one lab's stored isolates from *diseased* piglets |
 | 2 | isolates screened for a phenotype, genotyped only if positive | 28 | 5,571 | 2 | **0.04%** | not a gene prevalence: 5,542 isolates were never assayed; a lower bound |
-| 3 | hosts (animals and humans enrolled) | 21 | 227 | 12 | **5.29%** | not isolates: the study's 17 isolates come from 12 positive hosts, on a colistin-containing medium |
+| 3 | hosts (animals and humans enrolled) | 21, 22 | 367 | 35 | **9.54%** | not isolates: Portugal's 227 are people and dogs, Argentina's 140 are pigs swabbed on six farms; the 17 isolates behind Portugal's 12 positives come off a colistin-containing medium |
 | 4 | samples or products | 18, 5 | 1,240 | 393 | **31.69%** | not isolates: 128 meat products; 360 isolates recovered from 1,112 farm/water/soil samples |
 | 5 | one recovered isolate per positive sample | 20 | 147 | 2 | **1.36%** | not the mcr count: the primary's own gene figure is 3/147, one isolate more |
 | 6 | colistin-selected mixed-species isolates | 25 | 103 | 8 | **7.77%** | not samples or sites: 103 isolates from 40 samples at 8 sites |
@@ -66,8 +73,8 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
    counts a retail product where every other frame counts an isolate or a host. This is a mixed-unit
    frame, not meat prevalence, and not product prevalence.
 2. **"Pooled as printed" names a method, and the other method gives a different number.** Pool the
-   counts (Σn / ΣN) and the 22 placed rows give **5.21%**. Pool each row's *printed* percentage weighted
-   by its N and the same 22 rows give **4.99%**. The 0.21-point gap is row 17 (a) — the one placed cell
+   counts (Σn / ΣN) and the 23 placed rows give **5.26%**. Pool each row's *printed* percentage weighted
+   by its N and the same 23 rows give **5.04%**. The 0.21-point gap is row 17 (a) — the one placed cell
    whose printed percentage is not its own counts (10.42 against 11.51) — so an unpinned pool is exactly
    where that cell would hide. Any sentence quoting the placed pool has to say which of the two it means.
 
@@ -75,20 +82,22 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
 
 - **Frame rates: 0.04% – 31.7%**, an 883-fold spread, from eight frames built the same way (pool
   inside the frame, n over N).
-- **Row rates, for the same 22 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
+- **Row rates, for the same 23 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
   129 and 73 isolates; rows 17 (h) and 17 (i) high, both 17/28) — the far end is two 28-isolate cells in
   an eleven-row block that shares one methods section.
-- The 22 placed rows pooled *as printed* give **5.21%**, not 7.0%: the pool was never a stable number,
-  it was an artefact of which rows the review happened to include.
-- Arithmetic failures among the 22: **one**, row 17 (a), the already-documented cell.
+- The 23 placed rows pooled from their counts (Σn / ΣN) give **5.26%**, not 7.0%; pooled from their
+  printed percentages, **5.04%** (the two methods, and the one cell that separates them, are caveat 2
+  above). Either way the pool was never a stable number, it was an artefact of which rows the review
+  happened to include.
+- Arithmetic failures among the 23: **one**, row 17 (a), the already-documented cell.
 
 ## What this does not say
 
-1. **Not that the seven rates are comparable.** They are not; that is the finding.
-2. **Not that the range is final.** 16 of the 38 rows have no frame. The largest of them are China
+1. **Not that the eight rates are comparable.** They are not; that is the finding.
+2. **Not that the range is final.** 15 of the 38 rows have no frame. The largest of them are China
    1,611 (row 2), Bangladesh 1,200 (row 7) and Japan 684 (row 12) — an earlier version of this sheet
    named three smaller rows here, and the seed says otherwise. Until they are placed the number is
-   "82.9% of the table's isolates", not "the table".
+   "83.3% of the table's isolates", not "the table".
 3. **Not a population prevalence anywhere.** Every frame is a surveillance design; the largest block
    is diagnostic submissions of sick piglets to one German institute.
 4. **Not a correction to the review's cells** except 17 (a) and 19, which have their own records and,
@@ -100,9 +109,9 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
 - Frame assignment, counts, rates and coverage:
   [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json), regenerated by
   `scripts/mcr_colistin_denominator_frames.py --write`.
-- The row-by-row reading: [`mcr-colistin-harmonisation.md`](mcr-colistin-harmonisation.md) §5c–§5e.
+- The row-by-row reading: [`mcr-colistin-harmonisation.md`](mcr-colistin-harmonisation.md) §5c–§5i.
 - The whole-table arithmetic: [`mcr-colistin-table-arithmetic-audit.md`](mcr-colistin-table-arithmetic-audit.md),
   whose sibling test `tests/test_mcr_table_arithmetic.py` pins that audit.
 - This sheet is pinned by `tests/test_mcr_colistin_denominator_sheet.py`, which recomputes rows 18 and
-  21 from their own counts, all twenty-one placed rows against their printed cells, and the two numbers
+  21 from their own counts, all twenty-three placed rows against their printed cells, and the two numbers
   in the quotable sentence from the record — so a drifted count fails rather than re-reads as prose.
