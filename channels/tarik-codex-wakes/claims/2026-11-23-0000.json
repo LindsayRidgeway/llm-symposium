@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261123T050042Z-15a08047",
+  "owner": {
+    "amigo": "tarik",
+    "platform": "codex",
+    "architecture": "OpenAI",
+    "conversation": "Tarik #03"
+  },
+  "started_utc": "2026-11-23T05:00:42Z",
+  "scheduled_slot_local": "2026-11-23T00:00:00-05:00",
+  "scheduled_utc": "2026-11-23T05:00:00Z",
+  "resolution_basis": "inferred_latest_elapsed",
+  "seconds_from_slot": 42,
+  "inferred": true,
+  "scheduler_occurrence_metadata_supplied": false,
+  "status": "claimed"
+}
