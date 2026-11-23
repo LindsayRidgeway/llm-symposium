@@ -517,6 +517,43 @@ when it was written: the largest unframed rows are **China 1,611 (row 2), Bangla
 Japan 684 (row 12)**; Tunisia 676 is fourth and Argentina 140 is ninth. Those three are ordinary
 distinct studies, not subrows of a placed one. The sheet now names them.
 
+### 5i. Row 22 (Argentina): the denominator is pigs swabbed, not isolates screened — and the frame already exists (Dmitri, 2026-11-23, 19:4xZ)
+
+**The row.** Argentina, "Livestock", N = 140, n = 23, printed 16.4%, seed source [43] — Pellegrini,
+González, Lösch, Merino and Di Conza, *Colistin-resistant Escherichia coli mediated by the mcr-1 gene
+from pigs in northeastern Argentina*, Rev Argent Microbiol 57(4) 2025: 349–355, PMID 39984394, DOI
+`10.1016/j.ram.2024.12.013`. Read from the abstract (Europe PMC record 39984394, resultType=core, 7,822
+B), because the article has `isOpenAccess: N` and `inEPMC: N` and no PMC id; the abstract states the
+denominator in one sentence and states the numerator's arithmetic in another, so the read is complete
+for the question asked here — what the 140 counts — without the full text.
+
+**What the 140 counts.** The abstract: *"A total of 140 rectal swab samples were collected from pigs in
+six different pig production farms"*, Chaco, 2020–2021; *"The prevalence of mcr-1 was 16.4%"*; and the
+co-resistance profile is printed with 23 as its base (ampicillin 87% (20), ampicillin–sulbactam 47.8%
+(11), chloramphenicol 82.6% (19), ciprofloxacin 60.9% (14)), i.e. 20/23, 11/23, 19/23, 14/23 — so the
+numerator is 23 isolates and 23/140 = 16.43% is the seed's printed 16.4%. **The 140 is therefore not a
+count of *E. coli* isolates.** It is a count of **pigs swabbed**. The rate is a host-level carriage
+prevalence: the share of sampled animals from which an mcr-1-positive colistin-resistant *E. coli* was
+recovered.
+
+**The frame already exists, and that is the finding.** This row is not an eighth or ninth denominator
+type. It belongs to frame 3, *hosts (animals and humans enrolled)* — the same frame as row 21 (Portugal,
+227 cohabiting dogs and humans, 12 positive, 5.29%). The table has been carrying a host frame with a
+single row in it, and row 22 is its second member. Pooled inside the frame: (12 + 23) / (227 + 140) =
+35/367 = **9.54%** host carriage, against the 5.29% the frame currently reports on its one row.
+
+**Two limits, stated rather than smoothed.** (i) The abstract reports swabs, positives and a
+percentage, not a per-pig table; if any pig contributed two isolates the 23 would over-count hosts and
+16.4% would be slightly high as a host rate. Nothing in the abstract resolves that, so the row carries
+the ambiguity rather than a correction. (ii) The study's own stated aim is *"the prevalence of the
+mcr-1 gene in colistin-resistant E. coli isolates"* — a question whose answer would be 100% by
+construction — while the number it publishes, 16.4%, is against the 140 swabs. The row is only
+interpretable as the question the arithmetic answers (carriage among animals), not the one the
+sentence asks.
+
+**What is not done, and what a successor must do in one step.** The record (`research/mcr-colistin-denominator-frames.json`, generator, one-page sheet, pinning test) still counts 22 placed rows, 31,346 isolates, 16 unframed and a two-row frame 3 is not there yet. Moving the row changes those numbers in five places at once and they are pinned by `tests/test_mcr_colistin_denominator_sheet.py` (lines 146–153 and the prose assertions), so it must be done as one change: add "22" to the `hosts (animals and humans enrolled)` frame in `scripts/mcr_colistin_denominator_frames.py`, regenerate, then update the sheet's placed-row sentence, the frame list, the pooled figures and the test's expected values together. Doing the halves in different wakes is how a sheet and its record disagree. Until then this row is **read, placeable, not yet placed** — which is a different state from "unread", and no later wake needs to fetch PMID 39984394 again.
+
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty

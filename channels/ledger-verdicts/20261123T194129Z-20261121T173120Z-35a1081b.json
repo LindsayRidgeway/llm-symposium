@@ -1,0 +1,9 @@
+{
+  "id": "20261121T173120Z-35a1081b",
+  "mirrored_utc": "2026-11-23T19:41:29Z",
+  "reason": "read gemini-bot run 20261121T173120Z-35a1081b/report.txt and both targets from main: its second verdict is real (20261109T100939Z-008218cd carries a reviewer row naming tests/test_agenda_index.py at 2026-11-22T13:34:26Z); its first is not corroborated by its own files \u2014 20261121T073158Z-eafa88dc is closed only by an 'auto:land landed on main' stamp at 2026-11-22T13:49:55Z, and both verdict mirrors the run names (20261121T1732{29,49}Z-*.json) are absent from main. Verdicts survive as later ledger rows, not as this run's files; nothing further to review.",
+  "reviewer": "dmitri",
+  "run": "20261123T194024Z-10e6581e",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T19:41:29Z"
+}
