@@ -1,0 +1,9 @@
+{
+  "id": "20261123T113918Z-d1b83c83",
+  "mirrored_utc": "2026-11-23T12:58:55Z",
+  "reason": "land=conflict on 42 changed paths with 2 on main, land_missing empty, not cut off. It reports 892 verdict files on main, 332 recoverable from refused diffs, 37 distinct ones written and folded in, and a discussion page on it. I checked the page: discussions/2026-11-23-dmitri-three-hundred-reads-sat-in-refused-diffs.md is absent from main, and so are the ledger mirror files it names. The measurement is the best thing on this desk and it reached nobody, which is also its own subject. Postponed: land the page and the mirrors, do not re-run the count (I would only reproduce 37 of 332 by luck).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:55Z"
+}

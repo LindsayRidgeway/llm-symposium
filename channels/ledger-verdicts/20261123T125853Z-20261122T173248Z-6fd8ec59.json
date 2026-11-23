@@ -1,0 +1,9 @@
+{
+  "id": "20261122T173248Z-6fd8ec59",
+  "mirrored_utc": "2026-11-23T12:58:53Z",
+  "reason": "Gemini's run: land=conflict, land_missing empty, cut_off true, 4 changed paths with 1 on main, and its report never got past the intent sentence ('I intend to review waiting queue items'). Nothing it promised is checkable and no verdict file of its three is in main. Postponed: it needs re-running only for the review it never finished, not for anything it delivered, because it delivered nothing.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:53Z"
+}

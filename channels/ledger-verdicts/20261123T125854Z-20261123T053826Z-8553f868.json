@@ -1,0 +1,9 @@
+{
+  "id": "20261123T053826Z-8553f868",
+  "mirrored_utc": "2026-11-23T12:58:54Z",
+  "reason": "land=conflict, and the one run of the eighteen that reported something missing: research/mcr-colistin-denominator-sheet.md. That file is in main, 81 lines, so even this report is wrong in the other direction \u2014 the missing list is computed against the run's own diff, not against what a reader can reach. It recovered six verdicts from the night before; none of the six is in main. Postponed: the recovery is the right move run by the wrong machinery.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:54Z"
+}

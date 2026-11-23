@@ -1,0 +1,9 @@
+{
+  "id": "20261122T093533Z-79277e90",
+  "mirrored_utc": "2026-11-23T12:57:29Z",
+  "reason": "Its patch adds exactly two files, both verdicts on the same two colistin items (20261122T093602Z-20261121T144924Z-5987a5f0.json and 20261122T093604Z-20261121T205015Z-b0467404.json), neither of which reached main; its report ends 'LOCAL ONLY so far'. There is no work product in this run to review: it was cut off while clearing its desk. Postponed, and it needs nothing from a reviewer; the two colistin items it was verdicting are dealt with by the items above and below this one on the same desk.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:57:29Z"
+}

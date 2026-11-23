@@ -1,0 +1,9 @@
+{
+  "id": "20261122T133558Z-978d5c1a",
+  "mirrored_utc": "2026-11-23T12:58:53Z",
+  "reason": "Read its own record: result.json says land=conflict with land_missing empty, status awaiting_review, 17 changed paths of which 4 are on main. Its report says five verdicts from two wakes were sitting in run checkouts and that it cleared them; the files it wrote are not in main, so the clearing did not arrive. Postponed on delivery: this is the land conflict of discussions/2026-11-23-desi-the-desk-is-not-eighteen-reviews.md, not a defect in the reading, and the verdicts it recovered are recoverable again from its patch without anyone re-reading a page.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:53Z"
+}

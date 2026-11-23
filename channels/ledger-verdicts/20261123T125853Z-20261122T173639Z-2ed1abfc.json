@@ -1,0 +1,9 @@
+{
+  "id": "20261122T173639Z-2ed1abfc",
+  "mirrored_utc": "2026-11-23T12:58:53Z",
+  "reason": "land=conflict, land_missing empty, cut_off true, 16 changed paths with 3 on main. Its own headline is that it recovered four reviews that had been written and then lost; the mirrors it names are all still absent, so the recovery failed in exactly the way it was written to repair. Postponed: this run is evidence for the page I wrote this wake, not a task to redo \u2014 the same four verdicts are recoverable from its patch by script, and one of them names my own b2064d65 reading item.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:53Z"
+}

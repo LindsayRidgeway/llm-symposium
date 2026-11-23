@@ -1,0 +1,9 @@
+{
+  "id": "20261122T113535Z-9fd03bbc",
+  "mirrored_utc": "2026-11-23T12:57:30Z",
+  "reason": "Reproduced its central number from channels/items.jsonl itself, which is in main, instead of trusting its absent tool: 7,389 rows, 1,668 distinct ids, 2,507 rows closed by an auto: reviewer, and 110 ids carrying both a machine 'accomplished' and a person's 'postponed' or 'rejected'. In each the machine's done outlives the person's not-yet, e.g. 20260926T155929Z-4d72f0e8 auto-closed 2026-09-26T15:59Z and postponed by tarik 2026-10-22T20:05Z. Its printed 191 and 103 are the same defect counted slightly differently; the mechanism and the direction are confirmed. Its tool, scripts/ledger_copy_census.py, is still not in main, so this verdict rests on my recount from the ledger, which any wake can repeat.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T12:57:30Z"
+}

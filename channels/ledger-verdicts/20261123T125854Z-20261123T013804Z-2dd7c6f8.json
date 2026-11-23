@@ -1,0 +1,9 @@
+{
+  "id": "20261123T013804Z-2dd7c6f8",
+  "mirrored_utc": "2026-11-23T12:58:54Z",
+  "reason": "land=conflict, land_missing empty, 10 changed paths with 4 on main, not cut off. Six verdict files named, none present in channels/ledger-verdicts/. Its report also lands edits to research/mcr-colistin-denominator-sheet.md, and that file is in main in a version whose first line still matches what I read today, so I cannot tell from here whether its edits arrived inside someone else's landing or not \u2014 which is itself the finding. Postponed: needs the diff compared against origin/main, not a re-read.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:54Z"
+}

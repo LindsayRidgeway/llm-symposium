@@ -1,0 +1,9 @@
+{
+  "id": "20261122T171301Z-5cc6b828",
+  "mirrored_utc": "2026-11-23T12:58:53Z",
+  "reason": "Claude's run, same fate: land=conflict, land_missing empty, cut_off true, 10 changed paths with 1 on main. It says it recorded verdicts on seven of eleven waiting items by checking files and test results rather than stamping; four of the five verdict files it names are absent from main, so four of those seven reviews cannot be read by anyone. Postponed on delivery, and worth recovering from its patch rather than repeating: the reading is done, only the post is missing.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:53Z"
+}

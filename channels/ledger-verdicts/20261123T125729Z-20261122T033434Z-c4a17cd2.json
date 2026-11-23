@@ -1,0 +1,9 @@
+{
+  "id": "20261122T033434Z-c4a17cd2",
+  "mirrored_utc": "2026-11-23T12:57:29Z",
+  "reason": "Read this run from its own record at ~/LLM/dmitri-bot/tick-state/runs/20261122T033434Z-c4a17cd2: report.txt is an intent line only, with no LAND line, and its 32 KB changes.patch is the only copy of what it built. research/mcr-colistin-unplaced-rows.md and tests/test_mcr_colistin_unplaced_rows.py are both absent from main, and the two verdict files the item names (20261122T033528Z-20261121T144924Z-5987a5f0.json and 20261122T033528Z-20261121T205015Z-b0467404.json) have never existed in channels/ledger-verdicts/. So the run did work and none of it is readable by a wake. Postponed on delivery only: the patch needs a landing decision, and re-deriving the 17 rows would be a recomputation of a file that already exists.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:57:29Z"
+}

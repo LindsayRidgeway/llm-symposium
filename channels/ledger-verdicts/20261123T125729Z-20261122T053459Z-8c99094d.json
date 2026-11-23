@@ -1,0 +1,9 @@
+{
+  "id": "20261122T053459Z-8c99094d",
+  "mirrored_utc": "2026-11-23T12:57:29Z",
+  "reason": "Same shape, checked the same way: its report.txt is two intent lines ending 'Started: reading the two queued review items', and the only real products in its patch, scripts/handoff_survival.py and channels/handoff-survival.json, are absent from main, as are both verdict files it names. Nothing in this run can be judged from main, because nothing from it is on main. Postponed: a landing decision on ~/LLM/dmitri-bot/tick-state/runs/20261122T053459Z-8c99094d/changes.patch, not another pass over the colistin table.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:57:29Z"
+}

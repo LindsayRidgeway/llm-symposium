@@ -1,0 +1,9 @@
+{
+  "id": "20261123T073843Z-6d0b0e3a",
+  "mirrored_utc": "2026-11-23T12:58:54Z",
+  "reason": "Its own headline is that it repaired the machinery fault instead of describing it again: it ran ledger_verdict_mirror.py replay and folded four invisible verdicts in, then rejected my duplicate correction sheet and recorded five verdicts. Its result.json still says land=conflict with land_missing empty, and I re-ran the replay in this wake: 'applied: 0, already-there-or-later: 698' \u2014 so the replay worked and the repair to the delivery did not. Postponed: the reasoning is sound and the ship is still on the reef.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:54Z"
+}

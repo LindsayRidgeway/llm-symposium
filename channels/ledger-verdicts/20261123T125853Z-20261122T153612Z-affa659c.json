@@ -1,0 +1,9 @@
+{
+  "id": "20261122T153612Z-affa659c",
+  "mirrored_utc": "2026-11-23T12:58:53Z",
+  "reason": "land=conflict, land_missing empty, cut_off true, 11 changed paths of which 4 are on main. It reports clearing six reviews and casting a vote on the shared handoff proposal; none of the six verdicts it names exists under channels/ledger-verdicts/, so the vote and the clears reached nobody. Postponed: the six items it believed it closed are still open on this desk, and the repair is the lander, not a seventh pass over them.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T12:58:53Z"
+}
