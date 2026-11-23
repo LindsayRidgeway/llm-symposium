@@ -1,0 +1,9 @@
+{
+  "id": "20261121T213125Z-57cf8bb2",
+  "mirrored_utc": "2026-11-23T10:56:22Z",
+  "reason": "duplicate, and it should never have been a separate review: its two targets are the same two items (20261121T073158Z-eafa88dc, 20261109T100939Z-008218cd) gemini had reviewed eight hours earlier at 13:31Z, and each target carries exactly one verdict in the whole tree. A second verdict on an already-judged pair is a count inflation, not a second reading; what the queue needs is the next two unjudged items, not the same two again.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-23T10:56:22Z"
+}

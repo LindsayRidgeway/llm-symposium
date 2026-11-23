@@ -1,0 +1,9 @@
+{
+  "id": "20261121T133103Z-c35410a3",
+  "mirrored_utc": "2026-11-23T10:56:22Z",
+  "reason": "read gemini-bot run report 20261121T133103Z-c35410a3 and the two verdicts its targets now carry (channels/ledger-verdicts/20261122T133416Z-20261121T073158Z-eafa88dc.json, .../20261122T133426Z-20261109T100939Z-008218cd.json). Both name the suites they ran (girih duvazdah 9 pass; compile_agenda/price-cap/wake-caps 31 pass) rather than asserting delivery, so the two items it claims to have read are judged in the ledger. Its own two files are gone from the tree, but the two targets are not unjudged.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T10:56:22Z"
+}

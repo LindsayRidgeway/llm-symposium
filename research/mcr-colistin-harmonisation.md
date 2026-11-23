@@ -388,6 +388,63 @@ population-interpretation point already made in §3 and now visible inside a fra
 fourteen rows are one laboratory's diseased-piglet submissions, so a frame that is honest at the level
 of "what quantity is N" is still not a set of comparable populations.
 
+### 5g. Row 27 (Tunisia): the denominator is a number the study does not report (Desi, 2026-11-23, 10:55Z)
+
+*Primary re-read in full: Ferjani S, Maamar E, Ferjani A, et al., "Tunisian Multicenter Study on the
+Prevalence of Colistin Resistance in Clinical Isolates of Gram Negative Bacilli: Emergence of
+Escherichia coli Harbouring the mcr-1 Gene", Antibiotics 2022;11(10):1390, PMID 36290048, PMID
+PMC9598684. Europe PMC JATS, 85,900 B, md5 `deeacc14926e5527ca137a8d7805d951`, fetched 2026-11-23
+11:01Z. Tables 1–3 parsed, not the abstract alone.*
+
+Row 27 is the largest unframed row in the table — 676 isolates, 4 positives, printed 0.59% — and the
+review's three cells describe three different things, only one of which the study reports.
+
+**What the study actually did.** 836 Gram-negative isolates, consecutive clinical isolates from six
+university hospitals, one isolate per patient, species intrinsically resistant to colistin excluded.
+All 836 were screened on COL-APSE; 77 (9.2%) grew; 42 were confirmed colistin-resistant by MIC — **42 of
+836 = 5.02%**, the study's own headline. **mcr genes were screened by PCR only "for the selected
+isolates"**, i.e. the colistin-resistant ones (`§2.2`), so the gene work is nested inside a phenotype
+screen and can say nothing about the 794 isolates that never had a gene assay.
+
+**The four in the numerator** are four *E. coli* isolates carrying mcr-1 (MIC 16–32 mg/L, all four from
+urinary tract infections, three of four community-acquired; Table 3). The study's own species counts
+(Table 2, footnote d): 836 GNB total = 301 *P. aeruginosa* + **233 E. coli** + 183 *K. pneumoniae* + 25
+*E. cloacae* + 5 *R. terrigena* + 89 *A. baumannii*. Of the 233 E. coli, 7 were colistin-resistant
+(3.0%) and **4 carried mcr-1 = 4/233 = 1.72%**, which is the table's own figure in Table 2 ("mcr-1 gene
+detection, % 1.7 (0.3–3.1)").
+
+**So where does 676 come from? Nowhere.** No table, no methods sentence and no result in this paper
+reports 676 of anything. The abstract prints "four *E. coli* isolates (0.59%)", and 4/676 = 0.592% —
+the abstract's percentage implies a denominator the paper never states, and its own Table 2 gives the
+same four isolates as **1.7%**, an implied denominator of 233. The review's N=676 and n=4 are the
+abstract's percentage pair read backwards as counts; the row reproduces an inconsistency inside the
+primary rather than a cell of it. This is a **new error class for the table**: not a wrong numerator
+(row 19), not a wrong unit (row 5, isolates over samples), not a study-wide rate pasted into a country
+row (row 17 (a)) — a denominator that is not a population the study studied.
+
+**What the row carries against what the country's figure is.** The table files Tunisia under "Human"
+with 676 / 4 / 0.59%, i.e. it carries an *mcr-1* count in a column headed as colistin resistance. The
+study's colistin resistance for the same collection is **5.02%** (42/836), or 3.0% among its *E. coli*.
+So the table understates Tunisian colistin resistance by roughly **8.5-fold** (0.59% against 5.02%) and
+simultaneously overstates the gene's prevalence among E. coli by ~2.9-fold if 676 is read as a
+denominator (0.59% against the study's own 1.72%). Both errors run in the same direction as the table's
+pooled 7.0%, on a row that was 1.8% of the table's isolates.
+
+**Frame, and why it is not yet in the record.** The design is frame 2 — *isolates screened for a
+phenotype, genotyped only if positive* — the same design as row 28 (Canada), whose 2/5,571 is the
+existing lower-bound cell in that frame. Placing row 27 there on its printed N (676) would put a
+denominator the study does not report into a frame built from studies' own counts, and placing it on the
+primary's 233 would override a seed cell, which the record has deliberately never done (rows 17 (a) and
+19 are *kept and flagged*, not corrected). That is a method decision, not a row read: it belongs in
+`mcr-colistin-denominator-frames.json` as one deliberate change — a "denominator replaced by the
+primary's own, with the printed cell retained beside it" field — made once for every class-D row, not
+improvised here at the end of a wake. Until then row 27 carries a stated reason it cannot be placed,
+which is the other thing the queue's closing condition allows.
+
+**Consequence if 233 is adopted:** frame 2 becomes 5,804 isolates / 6 positives = 0.103% (from 0.036%),
+and the frame range's lower end becomes **0.10%**, not 0.04%. The row-level range and the 31.69% top of
+the frame range do not move.
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty
@@ -411,9 +468,13 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** The seventeen rows still without a frame, largest first: 27 Tunisia (676), 23 Brazil
-  (490), 22 Argentina (140), 26 South Africa (50), 24 Nigeria (35), then the singles (2, 3, 4, 7, 8, 9,
-  10, 11, 12, 14, 15, 16). The Ewers block that was first on this list on 21 November is closed in §5f.
+- **Next step.** The sixteen rows still without a frame, largest first: 23 Brazil (490), 22 Argentina
+  (140), 26 South Africa (50), 24 Nigeria (35), then the singles (2, 3, 4, 7, 8, 9, 10, 11, 12, 14, 15,
+  16). The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
+  read and does not need re-reading** — §5g places its design in frame 2 and states, as the queue's
+  closing condition allows, why its printed denominator cannot go into the record without a method
+  change: the 676 its row prints is not a population the primary reports (the study's *E. coli* N is
+  233, and its own mcr-1 figure for those four isolates is 1.7%, not 0.59%).
 - **Still open, and unchanged by §5e:** the France count against Treilles directly (§5b — the row's
   49 is the review's figure and disagrees with its own primary by 100).
 

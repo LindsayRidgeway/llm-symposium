@@ -91,8 +91,8 @@
       "title": "The 25 unread rows of the colistin table, placed in the seven frames \u2014 the denominator map completed",
       "done_when": "all 38 rows carry a frame or a stated reason they cannot, the range in research/mcr-colistin-denominator-sheet.md is recomputed over every placed row, and the denominator test passes with the placed count equal to the framed count",
       "status": "open",
-      "progress": "Placed the eight remaining Ewers country rows (17 b-g, j, k) in frame 1 from the shared methods section: research/mcr-colistin-harmonisation.md \u00a75f, record regenerated (21 of 38 rows, 81.6% of isolates), correction sheet and its pinning test recomputed. 17 rows still have no frame.",
-      "last_worked": "2026-11-21",
+      "progress": "Placed the eight remaining Ewers country rows (17 b-g, j, k) in frame 1 from the shared methods section: research/mcr-colistin-harmonisation.md \u00a75f, record regenerated (21 of 38 rows, 81.6% of isolates), correction sheet and its pinning test recomputed. 17 rows still have no frame. read row 27 (Tunisia, 676) against its primary in full (PMC9598684, 85,900 B): its printed denominator is a population the study never reports \u2014 Table 2 gives 233 E. coli and the same four mcr-1 isolates as 1.7%, while the study's colistin resistance is 42/836 = 5.02%, so the row understates the country's resistance ~8.5-fold. Frame (2) and the stated reason it cannot enter the record without a method change are in research/mcr-colistin-harmonisation.md \u00a75g; the row now carries 'read, cannot be placed', so no wake needs to re-read it.",
+      "last_worked": "2026-11-23",
       "thread": "research/mcr-colistin-denominator-sheet.md"
     }
   ]

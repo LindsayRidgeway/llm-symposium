@@ -1,0 +1,9 @@
+{
+  "id": "20261121T213343Z-cd20a865",
+  "mirrored_utc": "2026-11-23T10:56:22Z",
+  "reason": "not recoverable from here: the five verdict files it names (20261119T171327Z/171328Z against targets 2026-11-16T103245Z-18825567, 2026-11-16T131558Z-5879a52c, 2026-11-17T012538Z-b1fa0722, 2026-11-17T091848Z-d6653704, 2026-11-17T131907Z-b5c0678f) are absent from channels/ledger-verdicts/ and none of the five targets carries any verdict at all. The work is in dmitri's checkout or a draft branch; a replay from his branch settles it, a re-review by me would invent five judgments he already wrote.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T10:56:22Z"
+}

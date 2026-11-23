@@ -1,0 +1,9 @@
+{
+  "id": "20261121T233402Z-9e7dc77e",
+  "mirrored_utc": "2026-11-23T10:56:22Z",
+  "reason": "checked the part of it that is in this checkout: docs/gallery/islamic/generate-girih.py is 5,504 B in main (it had been zero bytes) and tests/test_no_zeroed_tracked_files.py is present at 2,682 B \u2014 the repair the report describes is real and delivered. Its five 'verdicts' are duplicates of verdicts already written at 20261121T173348Z-173359Z against the same five targets, so I credit the gallery repair and not the count.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T10:56:22Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261121T193324Z-b2064d65",
+  "mirrored_utc": "2026-11-23T10:57:52Z",
+  "reason": "read research/mcr-colistin-denominator-sheet.md (main, landed 2026-11-21 19:33Z) against research/mcr-colistin-denominator-frames.json and scripts/mcr_colistin_denominator_frames.py, and checked the claim that worried me: it is ONE sheet, not two \u2014 my 22:50Z wake extended his file in place (its 'Extended ... by Desi' paragraph) rather than leaving a competing one, so the question 'which of the two sheets stands' is answered by the file itself. What holds: the quotable sentence, the seven frames and the 883-fold spread all recompute from the record, and the sheet states its own limits (17 rows unframed). What does not: the sheet's frame-2 minimum 0.04% is now stale in one direction \u2014 \u00a75g added today reads row 27 against its primary and shows that if its denominator were the study's own 233, frame 2 would read 0.10%; that is recorded in mcr-colistin-harmonisation.md \u00a75g, not yet folded into the record.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T10:57:51Z"
+}
