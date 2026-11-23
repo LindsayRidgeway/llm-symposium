@@ -10573,3 +10573,52 @@ One cost I am accepting knowingly in my version: the class letter can go stale i
 Two things measured while you were deciding. The archive extracted to `52,719,255,552 B` — byte-for-byte the same file as October's. Its boot partition is an ordinary 511 MiB Raspberry Pi bootfs, writable from this Mac, so `POOL-CARD.json` goes on it and is readable in a hand with no body booted. And two findings: there are **no credentials** on that partition (no wpa_supplicant, no firstrun.sh), and `cmdline.txt` sets the Wi-Fi regulatory domain to **HK — Hong Kong**, in a Maryland house. Your lander has been running under it since 15 October. Not a fault on 2.4 GHz, the wrong setting all the same, and now in the record.
 
 Next step, one thing: write **L-01** on a card and put it in the reader.
+
+[Goose 2026-11-23 14:50] **Lindsay:** The founder asked what the Netlify action item was, then asked me to continue de-jamming and say if I was blocked.
+
+**Desi:** **1. The Netlify token: nothing for you to do — I withdraw the request.**
+
+You asked what the action was. Answering it properly showed there wasn't one:
+
+- **No credential is needed.** This Mac's `netlify` CLI is already logged in as you, and its stored
+  token read the site — `ai-tribe`, custom domain `kythe.app`, team Aoede. Same shape as the GitHub
+  half of that request, which also turned out to need nothing.
+- **The number doesn't exist.** `GET /sites/<id>/analytics` answers **404**: Netlify Analytics is a
+  paid add-on and it is not enabled on that site. No token buys it. I am not asking you to buy it.
+- **And it would measure the wrong thing.** kythe.app publishes `ait.html` — the Kythe page, not the
+  magazine. Our pages are GitHub Pages, and we already count those: 6,971 clones, 14 page views in
+  14 days.
+
+D-18 is closed in `governance/request-register.md` as "nothing was ever owed". The ask was the error.
+
+**2. De-jamming: the jam was the lander, and it was eating wakes' work.**
+
+The overnight log had the evidence I had been reading past: four of five runs refused with
+`error: patch failed: channels/items.jsonl:7306` while **every other file in the same patch applied
+cleanly**. `channels/items.jsonl` is the ledger every seat appends to, so a collision there is
+expected, not exceptional — and `git apply` is all-or-nothing, so the essay, the research page and
+the verdict files went in the bin with it.
+
+Fixed, in all six landers:
+- apply the patch with the ledger excluded, then **union-append** the run's rows (the file's own rule:
+  a later row wins, so the run's rows go last);
+- a run whose rows are all already on main is now `already_landed`, not `conflict` (it was scoring
+  18/18 rows present and still refusing, which re-publishes pages under two names);
+- the drafts fallback in Desi's and Dmitri's bots was throwing away the same patches by the same rule.
+
+Proof it works: the run refused at 05:55 landed at 09:5x — five verdict files nobody could see are
+on main, with the colistin harmonisation page — and **the head moved**:
+`20261121T193324Z-b2064d65` → `20261122T213315Z-3b81e13f`.
+
+The uncomfortable part: that item had been the head for two days, and the wake *had* read it at
+05:55. The proof was in the patch the lander threw away. So the jam I kept hunting was not a lazy
+wake. It was a machine that discards evidence and then asks the same question the next morning.
+
+Also fixed: the jam check reported the unread pile as **0** whenever a seat had items named to it, so
+the "pile fell" rule — the one thing in the check that can tell a healthy night from an idle one —
+could never fire. It reads 94 now.
+
+**In flight, nothing blocking me:** three more Desi runs landing (one per ~20 min, the test suite is
+the gate), and a Dmitri drain, because his seat has been losing the same way — the agenda page *One
+inbox, one bulletin, one bridge* has been written twice this morning because the first copy never
+landed.
