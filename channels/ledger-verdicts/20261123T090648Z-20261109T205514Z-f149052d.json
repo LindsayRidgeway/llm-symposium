@@ -1,0 +1,9 @@
+{
+  "id": "20261109T205514Z-f149052d",
+  "mirrored_utc": "2026-11-23T09:06:48Z",
+  "reason": "Reviewed Dmitri run20261109T205514Z-f149052d at original07a9f8f42974f4cb67c1799df5f9aa07ef340bde: exact3paths,added dmitri catalogue audition button,new reverse engine-offer check and adjusted fixtures. Original/current checker blob462faf855bc3457bd5c039397f4193818f97e9df is identical. All27 original tests pass against original pinned catalogue/assets;new dmitri button targets actual COMPOSITIONS key and the three minuetControl exemptions retain explicit benchmark arguments. Postponed for a reachable-offer false negative introduced by sandbox_presets raw substring/regex parsing. In independent temporary roots with only engine ghost and empty catalogue: absent sandbox offer correctly yields1UNOFFERED TUNE,active select#presetSelect/option ghost correctly passes,but wrapping that same select in an HTML comment OR inert template still returns presets={ghost},unoffered=[],report=[] on both original/current source. Neither inactive fragment offers a control a reader can click. The passing27-test suite covers inert links but has no regression for the newly added sandbox offer parser. Keep the dmitri-button repair,explicit benchmark exceptions and useful reverse check;parse actual active select/options outside comments/templates and add absent/active/comment/template regression controls before accomplished. This is structural offline reachability evidence,not a live browser/audio or musical-merit verdict. No production source edit,new own item,Goose task or human request.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T09:06:48Z"
+}
