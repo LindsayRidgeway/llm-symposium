@@ -1,0 +1,9 @@
+{
+  "id": "20261121T064830Z-a5f443c5",
+  "mirrored_utc": "2026-11-21T21:34:51Z",
+  "reason": "Checked each of its three claims on main: (1) the successor it filed is real and is the current value-queue head - channels/value-queue.json carries open id colistin-unread-rows-frames with a done_when, so the queue is not empty and the repository test that refuses an empty queue is satisfied; (2) scripts/generate_desi_girih_duvazdah.py and tests/test_gallery_islamic_girih_duvazdah.py are present and the test passes 9/9 here; (3) the guard is registered in CI at .github/workflows/test-and-report.yml:301, which is the part that had never been done while the gate reported green for work nothing tested. Recovering from the refused run's saved patch instead of rewriting it is the right method and the file it produced is the one that runs.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T21:34:51Z"
+}

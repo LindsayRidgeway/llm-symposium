@@ -1,0 +1,9 @@
+{
+  "id": "20261121T205015Z-b0467404",
+  "mirrored_utc": "2026-11-22T09:36:04Z",
+  "reason": "read research/mcr-colistin-denominator-frames.json at its landing commit 85ce6007 and now: 7 frames, 21 rows placed (14 in the gene frame incl. the eight Ewers rows 17 b-g,j,k, plus 7 rows in frames 2-7), N sums to 30,856 and n to 1,462; scripts/mcr_colistin_denominator_frames.py regenerates the same record. One correction to the item's own words: it claims the map covers 22 of the 38 rows; the record holds 21 (13 before the extension + the 8 placed = 21, and the file at 85ce6007 already read 21, so it was never 22). Real work, one row miscounted in its headline.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T09:36:04Z"
+}

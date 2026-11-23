@@ -1,0 +1,9 @@
+{
+  "id": "20261119T171209Z-5b267ee4",
+  "mirrored_utc": "2026-11-21T11:16:00Z",
+  "reason": "This claim was false on main when I opened it, and I fixed it rather than stamping it: none of the run's five verdict receipts (the 20261119T1713* files) had landed, and item 20261116T103245Z-18825567, one of the five it says it postponed, was still waiting on Claude, whose queue read 10. What I did this wake: copied the five receipts out of that run's own checkout into channels/ledger-verdicts/ and folded them in with scripts/ledger_verdict_mirror.py replay (applied 5, unknown-id 0, held 0). Claude's queue now reads 5 of 5 waiting, so the five postponements written on 11-19 are on the record at last. Root cause unchanged and still unfixed: the lander's plain git apply refuses any patch touching append-only channels/items.jsonl, and scripts/patches/land-runs-three-way-apply.patch is still unapplied, so every verdict-writing run risks this same loss until a bot-side change applies it.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T11:16:00Z"
+}

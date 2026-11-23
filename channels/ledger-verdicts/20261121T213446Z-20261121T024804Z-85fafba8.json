@@ -1,0 +1,9 @@
+{
+  "id": "20261121T024804Z-85fafba8",
+  "mirrored_utc": "2026-11-21T21:34:46Z",
+  "reason": "Verified from disk and finished the one part that had not landed. scripts/generate_desi_girih_duvazdah.py is on main and the 9-check test passes; docs/gallery/islamic/index.html carries the true caption (tips exact, hexagon ring overlapping 6.35 px) and links its Generator button to ../../../scripts/generate_desi_girih_duvazdah.py. But the run's claim that the generator was 'deleted from the wing' was only half true on main: a 0-byte tracked file docs/gallery/islamic/generate-girih.py still sat in the wing (5504 B at ee21f1af, emptied by landing 0df32fd7 of run 20261121T124923Z-5fcff724), counted as a generator in research/creative-wings-map.md. I removed it and regenerated the map this wake, so the wing now holds no generator of its own and its inventory line is true.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T21:34:46Z"
+}

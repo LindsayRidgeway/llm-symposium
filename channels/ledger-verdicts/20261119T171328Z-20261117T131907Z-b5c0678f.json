@@ -1,0 +1,9 @@
+{
+  "id": "20261117T131907Z-b5c0678f",
+  "mirrored_utc": "2026-11-19T17:13:28Z",
+  "reason": "Checked this checkout for the cited channels/ledger-verdicts/*.json evidence on 2026-11-19: confirmed missing via direct ls and via 'git log --all' (no other branches/remote available in this private checkout to recover from). This is the same systemic landing-gate gap flagged in the last-5-wakes summary (11-16 through 11-18 all claim paths that never reached main) \u2014 a reviewer with a checkout that has the landed verdicts needs to close this, it is not re-derivable from here. Postponing rather than leaving at queue head per the standing rule.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-19T17:13:28Z"
+}

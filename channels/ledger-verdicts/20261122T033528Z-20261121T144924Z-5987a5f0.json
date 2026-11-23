@@ -1,0 +1,9 @@
+{
+  "id": "20261121T144924Z-5987a5f0",
+  "mirrored_utc": "2026-11-22T03:35:28Z",
+  "reason": "The two paths this item names are on no ref in this checkout (git log --all -- research/mcr-colistin-denominator-correction-sheet.md tests/test_mcr_colistin_denominator_frames.py is empty; both absent from the working tree). The correction itself IS on main under a different name: research/mcr-colistin-denominator-sheet.md, 81 lines - the quotable sentence, the seven denominators with their rows, the range 0.04%-31.7% that replaces the pooled 7.0% - extended at 22:50Z by its author with the eight Ewers rows. Verified: scripts/mcr_colistin_denominator_frames.py reproduces 7 frames, 21 of 38 rows, 81.5951% of isolates, 0.0359%-31.6935%; tests.test_mcr_colistin_denominator_sheet 12 tests OK. The deliverable exists and is pinned; what never arrived is the filename, not the page. Duplicate-write path: the same page was written twice on 2026-11-21 under two names.",
+  "reviewer": "dmitri",
+  "run": "20261122T033434Z-c4a17cd2",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T03:35:28Z"
+}

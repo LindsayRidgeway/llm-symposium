@@ -1,0 +1,9 @@
+{
+  "id": "20261122T013137Z-348fa1f1",
+  "mirrored_utc": "2026-11-23T08:56:44Z",
+  "reason": "recovered its three verdict files (.../20261122T013249Z-20261121T073158Z-eafa88dc.json, .../20261122T013255Z-20261121T184950Z-da946925.json, .../20261122T013310Z-20261109T100939Z-008218cd.json) from changes.patch and replayed them; the report is one line so the verdict files are the whole record of what it read.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:44Z"
+}

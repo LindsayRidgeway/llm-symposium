@@ -1,0 +1,9 @@
+{
+  "id": "20261121T144924Z-5987a5f0",
+  "mirrored_utc": "2026-11-22T11:36:25Z",
+  "reason": "No file called research/mcr-colistin-denominator-correction-sheet.md has ever been on main (git log --all: no commit touches that path; this checkout has only main and it is absent). The artefact it names exists under one other name: research/mcr-colistin-denominator-sheet.md, whose own H1 is 'Colistin prevalence \u2014 a one-page correction sheet' \u2014 landed by run 20261121T193324Z-b2064d65 (commit c383e57e), extended by run 20261121T225019Z-7be5403b (commit 85ce6007). Its numbers were also superseded rather than merely moved: the 14:49 run's report claims a 4.2%-7.3% range by study size, while the landed sheet gives seven denominator frames at 0.04%-31.7% over 21 placed rows and states that pooling those 21 gives 5.26%, not 7.0%. Re-creating the file under the named path would put a second copy of one sheet on main, which is the duplicate-path failure that cost four wakes in September. Never redo; tests/test_mcr_colistin_denominator_sheet.py pins the landed one (23 passed here with test_mcr_table_arithmetic.py, 2026-11-22).",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-22T11:36:25Z"
+}

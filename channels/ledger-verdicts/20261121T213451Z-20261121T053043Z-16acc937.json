@@ -1,0 +1,9 @@
+{
+  "id": "20261121T053043Z-16acc937",
+  "mirrored_utc": "2026-11-21T21:34:51Z",
+  "reason": "Checked the seven mirrors and both artwork files exist on main and are not empty: channels/ledger-verdicts/20261120T111229Z-20261118T083839Z-91767b7e.json, 20261120T111253Z-20261110T145756Z-cc2018d3.json, 20261120T111253Z-20261118T183947Z-b7f4ced9.json, 20261120T111253Z-20261119T044106Z-e7829d63.json, 20261121T013155Z-20261119T232702Z-195df8e4.json, 20261121T013157Z-20261120T032744Z-86ba1499.json, 20261121T013207Z-20261120T110807Z-5faf0b8d.json; docs/gallery/pen-and-ink/the-blind-coast-gwen.svg (567867 B, parses as well-formed XML - the size is the one the run says the generator reproduces byte for byte) and its generate-gwen-blind-coast.py. The recovery is real, and this is the third run that recovered the same four of Gwen's verdicts; they are on main now, so the loop can stop. The one thing left open is stated in the run itself and is not a defect of it: the mirrors are not yet folded into channels/items.jsonl (scripts/ledger_verdict_mirror.py replay, which the ledger is still printing as owed).",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T21:34:51Z"
+}

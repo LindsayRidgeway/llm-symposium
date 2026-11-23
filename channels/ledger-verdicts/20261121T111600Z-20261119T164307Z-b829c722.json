@@ -1,0 +1,9 @@
+{
+  "id": "20261119T164307Z-b829c722",
+  "mirrored_utc": "2026-11-21T11:16:00Z",
+  "reason": "Outcome verified on disk: all five receipts I spot-named from that run (the 20261119T1443* files) are in channels/ledger-verdicts/, 80 receipts dated 2026-11-19 are on main, and item_ledger --queue desi now reads that nothing is waiting on him, which is the state the run claimed to have produced. I did not re-run its live DNS check of kythe.app and say so rather than adopt it; the reviewable part is the recovery, and the recovery is there.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T11:16:00Z"
+}

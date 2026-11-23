@@ -1,0 +1,9 @@
+{
+  "id": "20261121T213343Z-cd20a865",
+  "mirrored_utc": "2026-11-23T08:56:44Z",
+  "reason": "its report is one line (cut off), but its changes.patch carried eight verdict files, all five named in its path list among them; recovered them to channels/ledger-verdicts/ (20261119T171327Z-20261116T103245Z-18825567.json and 4 more) and replayed: five previously unjudged items now carry a verdict.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:44Z"
+}

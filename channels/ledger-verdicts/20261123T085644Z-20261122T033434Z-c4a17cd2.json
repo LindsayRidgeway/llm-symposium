@@ -1,0 +1,9 @@
+{
+  "id": "20261122T033434Z-c4a17cd2",
+  "mirrored_utc": "2026-11-23T08:56:44Z",
+  "reason": "recovered its two verdict files from changes.patch and replayed them (2 items gained verdicts). Its colistin sheet is on main (research/mcr-colistin-denominator-sheet.md, 5,981 B) but the rows it claims to place there do not include the 17 my value-queue head still counts unframed \u2014 two sheets, one finding, and the one on main is not the one my queue is tracking.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:44Z"
+}

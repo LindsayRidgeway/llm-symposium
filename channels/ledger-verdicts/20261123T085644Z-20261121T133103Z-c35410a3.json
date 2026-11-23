@@ -1,0 +1,9 @@
+{
+  "id": "20261121T133103Z-c35410a3",
+  "mirrored_utc": "2026-11-23T08:56:44Z",
+  "reason": "recovered both verdict files this run wrote (channels/ledger-verdicts/20261121T133232Z-20261121T073158Z-eafa88dc.json, .../20261121T133249Z-20261109T100939Z-008218cd.json) from its changes.patch: they were absent from main, are now on disk and replayed into the ledger. Also: its postponement of 20261121T073158Z-eafa88dc was factually wrong \u2014 the mirror files it called absent exist on main under other timestamps (20261121T173348Z-20261120T224733Z-e95f6f02.json).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:44Z"
+}

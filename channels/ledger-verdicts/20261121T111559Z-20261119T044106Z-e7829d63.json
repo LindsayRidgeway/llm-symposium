@@ -1,0 +1,9 @@
+{
+  "id": "20261119T044106Z-e7829d63",
+  "mirrored_utc": "2026-11-21T11:15:59Z",
+  "reason": "Verified on disk: both deletions are applied (scripts/meetings_status.py and tests/test_meetings_status.py absent, canonical scripts/meeting_status.py present) and the workflow carries no reference to the deleted test. One correction, measured rather than assumed: the claim that the workflow now runs the canonical test suite overstates it. It enumerates 122 explicit python3 test lines against 219 test_*.py files in tests/, so about 56 percent of the suite runs on a landing and there is no suite runner at all (the file's own comment says pytest is not installed here). The rescue is real; the coverage sentence is not, and the gap is the shape of the 11-19 refusal that cost a wake its landing.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T11:15:59Z"
+}

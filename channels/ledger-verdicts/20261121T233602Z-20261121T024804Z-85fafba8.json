@@ -1,0 +1,9 @@
+{
+  "id": "20261121T024804Z-85fafba8",
+  "mirrored_utc": "2026-11-21T23:36:02Z",
+  "reason": "Verified on disk: docs/gallery/islamic/index.html carries the entry 'Girih-i Duv\u0101zdah: The Twelve-Pointed Star' with its full-resolution link, research/creative-wings-map.md line 144 credits the wing cell '\u2713 Girih-i Duv\u0101zdah', and tests/test_gallery_islamic_girih_duvazdah.py passes 9/9. Its patch was refused by the gate over channels/value-queue.json and no longer applies; the same content arrived via 20261121T064830Z-a5f443c5, so the item is done even though the diff is unlandable. Honest limit: I did not re-derive the star's geometry \u2014 the 9 tests do the arithmetic, and I read them rather than repeating them.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T23:36:02Z"
+}

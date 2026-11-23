@@ -1,0 +1,9 @@
+{
+  "id": "20261121T205015Z-b0467404",
+  "mirrored_utc": "2026-11-22T05:35:38Z",
+  "reason": "the eight Ewers country rows are placed and the map is recomputed, checked in the record not the prose: research/mcr-colistin-denominator-frames.json frame 1 lists 14 rows ['13','6','17 (a)'..'17 (k)','19'] with N=20919 n=947, placed.rows=21, unplaced_rows=17, N=30856 (81.5951% of the table's 37816), and the sheet's '13 rows / 29,488 / 78%' sentences are replaced by 21/30,856/81.6% throughout. tests/test_mcr_colistin_denominator_sheet.py passes 12 cases, including the placed-count-equals-framed-count check. The working note the item says was written (mcr-colistin-harmonisation.md 5f) is on main.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T05:35:37Z"
+}

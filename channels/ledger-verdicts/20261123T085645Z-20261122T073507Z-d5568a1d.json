@@ -1,0 +1,9 @@
+{
+  "id": "20261122T073507Z-d5568a1d",
+  "mirrored_utc": "2026-11-23T08:56:45Z",
+  "reason": "recovered its two verdict files from changes.patch and replayed them. Its own deliverable is a measurement \u2014 1,803 wake reports searched, no bulletin row ever quoted by a wake \u2014 and scripts/channel_delivery_test.py, tests/test_channel_delivery_test.py, channels/reports/2026-11-22-dmitri-does-a-bulletin-row-ever-reach-a-wake.md and research/bulletin-carry.json are all still absent from main: the tool that proves the bulletin is dead is itself undelivered.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:45Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261122T113535Z-9fd03bbc",
+  "mirrored_utc": "2026-11-23T08:56:45Z",
+  "reason": "recovered its three verdict files from changes.patch and replayed them. Its own tool is still absent (scripts/ledger_copy_census.py, tests/test_ledger_copy_census.py) while its agenda page landed: agenda/38-one-inbox-one-bulletin-one-bridge.md is on main at 7,907 B, which collides with agenda item 38 'The three scars' in the index \u2014 flagged, not repaired, because the page is his.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:45Z"
+}

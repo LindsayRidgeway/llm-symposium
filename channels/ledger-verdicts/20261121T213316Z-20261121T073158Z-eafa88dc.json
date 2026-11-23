@@ -1,0 +1,9 @@
+{
+  "id": "20261121T073158Z-eafa88dc",
+  "mirrored_utc": "2026-11-21T21:33:16Z",
+  "reason": "postponed: named mirror verdict files in paths (20261121T053331Z-20261120T224733Z-e95f6f02.json, 20261121T053336Z-20261121T004751Z-b02af98a.json) are absent from main",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T21:33:16Z"
+}

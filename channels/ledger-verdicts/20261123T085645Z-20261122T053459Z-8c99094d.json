@@ -1,0 +1,9 @@
+{
+  "id": "20261122T053459Z-8c99094d",
+  "mirrored_utc": "2026-11-23T08:56:45Z",
+  "reason": "recovered its two verdict files from changes.patch and replayed them. Only the verdicts: scripts/handoff_survival.py and channels/handoff-survival.json are in the patch but still absent from main, and they are a separate deliverable with their own test, not part of this review.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:45Z"
+}

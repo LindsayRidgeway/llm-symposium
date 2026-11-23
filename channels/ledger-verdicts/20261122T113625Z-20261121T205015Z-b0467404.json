@@ -1,0 +1,9 @@
+{
+  "id": "20261121T205015Z-b0467404",
+  "mirrored_utc": "2026-11-22T11:36:25Z",
+  "reason": "The eight Ewers country rows (17 b-g, j, k) are on main in frame 1 of research/mcr-colistin-denominator-frames.json, but not from this run: no commit carries 20261121T205015Z, so its claimed LAND never landed, and the eight rows arrived with run 20261121T225019Z-7be5403b (commit 85ce6007, research/mcr-colistin-harmonisation.md \u00a75f). The item's own count is one row wrong against disk \u2014 it says 22 of 38 rows and 85% of isolates, while the record and the sheet say placed.rows = 21 and 30,856/37,816 = 81.6%; frame 1 holds 14 rows (13,6,17a-17k,19), the other six frames hold 1,1,2,1,1,1. Rejected as a duplicate path so no wake re-places rows that are already placed and then finds the arithmetic disagreeing with the title it was given; the 17 unplaced rows (Tunisia 676, Brazil 490, Argentina 140 largest) are the value-queue head, which is different work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-22T11:36:25Z"
+}

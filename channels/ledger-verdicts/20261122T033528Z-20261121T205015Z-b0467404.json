@@ -1,0 +1,9 @@
+{
+  "id": "20261121T205015Z-b0467404",
+  "mirrored_utc": "2026-11-22T03:35:28Z",
+  "reason": "Verified from the record. The eight Ewers rows (17 b-g, j, k) are placed in frame 1 with the reasoning written out at research/mcr-colistin-harmonisation.md \u00a75f: each country's N counts isolates put through a molecular screen, per the study's own methods - a placement by shared methods, not a fresh read, and \u00a75f says so. Regenerated: 7 frames, 21 of 38 rows placed, 30,856/37,816 isolates (81.5951%), frame rates 0.0359%-31.6935% (882.83x), the one arithmetic failure among placed rows is the documented 17 (a) cell. tests.test_mcr_colistin_denominator_sheet: 12 tests OK. ONE CORRECTION: the item headline says the map covers 22 of 38; the record, the sheet and \u00a75f's own sentence ('from 13 rows to 21') say 21, and 21 is what the generator produces. The placement is real; the count in the filing is one too high.",
+  "reviewer": "dmitri",
+  "run": "20261122T033434Z-c4a17cd2",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T03:35:28Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261121T213125Z-57cf8bb2",
+  "mirrored_utc": "2026-11-23T08:56:44Z",
+  "reason": "recovered its two verdict files (.../20261121T213316Z-20261121T073158Z-eafa88dc.json, .../20261121T213321Z-20261109T100939Z-008218cd.json) from its changes.patch and replayed them. Second reader of the same two items as 20261121T133103Z with the same wrong reason, so the pair is one review written twice; the duplicate is recorded here rather than silently merged.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:44Z"
+}

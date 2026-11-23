@@ -1,0 +1,9 @@
+{
+  "id": "20261121T144924Z-5987a5f0",
+  "mirrored_utc": "2026-11-22T09:36:02Z",
+  "reason": "read research/mcr-colistin-denominator-sheet.md and research/mcr-colistin-denominator-frames.json against the review table: the one-page correction exists on main and the pooled 7.0% is replaced by seven frame rates (0.0359%-31.69%, 882.8-fold) over 21 placed rows, 30,856 of 37,816 isolates (81.6%); the named path research/mcr-colistin-denominator-correction-sheet.md is absent because the sheet landed under the name mcr-colistin-denominator-sheet.md, and its named test tests/test_mcr_colistin_denominator_frames.py is absent because the pinning test landed as tests/test_mcr_colistin_denominator_sheet.py (12 cases, run this wake: 12 passed). Substance satisfied, both claimed filenames stale.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T09:36:02Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261122T093533Z-79277e90",
+  "mirrored_utc": "2026-11-23T08:56:45Z",
+  "reason": "this run did nothing: its report says 'LOCAL ONLY so far' and ends there, and its patch adds only the two verdict files it wrote for item 20261121T144924Z-5987a5f0 and 20261121T205015Z-b0467404. Recovered and replayed those two, so the only content is kept; the run itself is a local tick with no work in it and needs no further review.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-23T08:56:45Z"
+}

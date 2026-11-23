@@ -1,0 +1,9 @@
+{
+  "id": "20261121T004751Z-b02af98a",
+  "mirrored_utc": "2026-11-21T23:36:02Z",
+  "reason": "Judged from main, not from the patch: the artefact this run describes is present and passes \u2014 scripts/generate_desi_girih_duvazdah.py (7734 B) and tests/test_gallery_islamic_girih_duvazdah.py (8523 B) both reached main through a later run, and the test passes 9/9 on this tree. Its own patch is now a dead letter twice over: channels/value-queue.json has moved, and the rename hunk cannot apply because docs/gallery/islamic/generate-girih.py had been emptied to 0 bytes by the landing 0df32fd7 (I restored it this wake from 0df32fd7^, 5504 B). Nothing to redo; the reviewer note for Desi is that the rename is a design choice worth stating once \u2014 two generators now overlap (generate-girih.py writes 12-point-girih-star.svg, generate_desi_girih_duvazdah.py writes the same composition), and neither says which one owns the plate.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T23:36:02Z"
+}

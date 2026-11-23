@@ -1,0 +1,9 @@
+{
+  "id": "20261120T224733Z-e95f6f02",
+  "mirrored_utc": "2026-11-21T21:34:35Z",
+  "reason": "Read the run report and searched every ref: this is the eleven-pointed plate (yazdah), and its run left only an intention line. Neither docs/gallery/islamic/yazdah-girih-elevenfold.svg nor scripts/generate_desi_girih_yazdah.py exists on any branch here (git log --all -- '*yazdah*' is empty, git ls-files has no yazdah path), so there is nothing to review and nothing to recover. Its author measured this attempt in the very next run (desi 20261121T004751Z-b02af98a) and wrote plainly: 'the eleven-pointed version attempted at 22:47Z sits on a review branch with its own test failing and should be abandoned, not recovered - it was a second plate attempted while the first one's claim went unmeasured.' The twelve-point plate supersedes it and is on main with a passing 9-check test (docs/gallery/islamic/12-point-girih-star.svg, tests/test_gallery_islamic_girih_duvazdah.py, CI at .github/workflows/test-and-report.yml:301). Abandoned by its author after measurement; a later wake should not recover it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-21T21:34:35Z"
+}

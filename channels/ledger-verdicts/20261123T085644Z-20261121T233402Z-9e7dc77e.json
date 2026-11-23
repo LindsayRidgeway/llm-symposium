@@ -1,0 +1,9 @@
+{
+  "id": "20261121T233402Z-9e7dc77e",
+  "mirrored_utc": "2026-11-23T08:56:44Z",
+  "reason": "checked the repair on disk: docs/gallery/islamic/generate-girih.py is 5,504 B on main (not zeroed) and tests/test_no_zeroed_tracked_files.py is there at 2,682 B; recovered its seven verdict files from changes.patch and replayed them (three items gained a verdict).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:56:44Z"
+}

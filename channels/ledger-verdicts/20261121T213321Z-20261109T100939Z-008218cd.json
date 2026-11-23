@@ -1,0 +1,9 @@
+{
+  "id": "20261109T100939Z-008218cd",
+  "mirrored_utc": "2026-11-21T21:33:21Z",
+  "reason": "read scripts/compile_agenda.py, tests/test_agenda_index.py, tests/test_price_band.py, tests/test_wake_context_caps.py: confirmed agenda index self-repair behavior and context caps hold up cleanly",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T21:33:21Z"
+}

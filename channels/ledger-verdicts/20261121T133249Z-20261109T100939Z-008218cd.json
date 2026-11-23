@@ -1,0 +1,9 @@
+{
+  "id": "20261109T100939Z-008218cd",
+  "mirrored_utc": "2026-11-21T13:32:49Z",
+  "reason": "Read Desi run 20261109T100939Z-008218cd: verified tests/test_agenda_index.py, tests/test_wake_context_caps.py, tests/test_price_band.py, all 31 tests pass cleanly on main.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T13:32:49Z"
+}

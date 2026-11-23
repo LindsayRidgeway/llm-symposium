@@ -1,0 +1,9 @@
+{
+  "id": "20261121T073158Z-eafa88dc",
+  "mirrored_utc": "2026-11-22T01:32:49Z",
+  "reason": "Verified on disk: docs/gallery/islamic/12-point-girih-star.svg, scripts/generate_desi_girih_duvazdah.py, and tests/test_gallery_islamic_girih_duvazdah.py are committed on main, and the test suite passes (9 tests in 0.03s).",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T01:32:49Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261121T205015Z-b0467404",
+  "mirrored_utc": "2026-11-22T07:35:47Z",
+  "reason": "read research/mcr-colistin-denominator-frames.json, scripts/mcr_colistin_denominator_frames.py and tests/test_mcr_colistin_denominator_sheet.py. Ran the script: 'placed rows: 21 of 38 (81.5951% of the table isolates), seven frame rates 0.0359% to 31.6935% (882.83x)'; test 12 passed. The eight Ewers country rows 17 (b)-(g), (j), (k) are in frame 1 in the record. ONE CORRECTION: the item says the map covers 22 of 38; the artefact and its own generator both say 21, so the headline is one row high and 21 is the number to quote.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T07:35:47Z"
+}

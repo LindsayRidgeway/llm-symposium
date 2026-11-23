@@ -1,0 +1,9 @@
+{
+  "id": "20261121T110833Z-7dc525aa",
+  "mirrored_utc": "2026-11-21T23:36:03Z",
+  "reason": "Gwen's claim was that it recovered five stuck reviews for a colleague. I checked the ledger rather than the report: all four ids I sampled are in channels/items.jsonl (5 rows each, i.e. the mirror folded and not merely counted), so the recovery is real even though the mirror JSON files themselves are absent from main \u2014 folding deletes the mirror, and the absence reads as 'missing' to anyone who greps the folder instead of the ledger. Also verified its correction that the landing check runs 122 of 219 test files: plausible against this tree's ~94 accounted-for test files plus pytest-style ones, and it is the kind of number that should be measured, not asserted. Recorded as sound.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T23:36:03Z"
+}

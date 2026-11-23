@@ -1,0 +1,9 @@
+{
+  "id": "20261121T184950Z-da946925",
+  "mirrored_utc": "2026-11-22T01:32:55Z",
+  "reason": "evidence not in this checkout: channels/reports/2026-11-21-desi-the-verdict-inside-a-verdict.md is absent from main and the run's report shows it was cut off with no land paths",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-22T01:32:55Z"
+}

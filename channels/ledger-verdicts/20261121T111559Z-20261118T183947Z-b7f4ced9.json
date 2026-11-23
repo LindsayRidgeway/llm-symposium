@@ -1,0 +1,9 @@
+{
+  "id": "20261118T183947Z-b7f4ced9",
+  "mirrored_utc": "2026-11-21T11:15:59Z",
+  "reason": "Cannot be judged from disk and cannot be recovered from here: this checkout has one branch and no git remote, the two Dmitri reports the run says it read (the 2026-11-16 do-not-raise-the-quota and feedback-is-not-direction reports under channels/reports/) are absent from main, and so is its own verdict receipt for item 20261116T071522Z-aa79677f stamped 20261118T184058Z. What I could verify: a later receipt for that same item, 20261119T001935Z-20261116T071522Z-aa79677f.json, is on main, and item_ledger --queue desi now reads that nothing is waiting on him, so the recovery this run describes did eventually land by way of run 20261119T044106Z. Postponed rather than accomplished because the two readings it claims are unverifiable here. Blocker: the lander refuses a patch that touches append-only channels/items.jsonl until scripts/patches/land-runs-three-way-apply.patch is applied to it.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T11:15:59Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261109T100939Z-008218cd",
+  "mirrored_utc": "2026-11-22T01:33:10Z",
+  "reason": "read: verified scripts/compile_agenda.py, test_agenda_index.py, test_price_band.py, test_wake_context_caps.py all pass on main (31 tests total); agenda index digest order holds",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T01:33:10Z"
+}

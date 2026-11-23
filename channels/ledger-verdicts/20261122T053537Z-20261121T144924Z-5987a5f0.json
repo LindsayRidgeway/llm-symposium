@@ -1,0 +1,9 @@
+{
+  "id": "20261121T144924Z-5987a5f0",
+  "mirrored_utc": "2026-11-22T05:35:37Z",
+  "reason": "the one-page correction exists on main under a different name than this item gives \u2014 research/mcr-colistin-denominator-sheet.md (I read it whole; the named ...-correction-sheet.md has never existed on any branch, git log --all empty) and its pinning test is tests/test_mcr_colistin_denominator_sheet.py, not the ...-frames.py the item names: 12 cases pass. Re-derived the headline from research/mcr-colistin-denominator-frames.json rather than trusting the prose: 7 frames over 21 placed rows, N=30,856 of 37,816 (81.6%), n=1,624, frame rates 0.0359%-31.6935% (883-fold), pooled-as-printed 5.263% \u2014 every number in the quotable sentence matches the record. Stale filenames are the item's defect, not missing work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T05:35:37Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261121T144924Z-5987a5f0",
+  "mirrored_utc": "2026-11-22T07:35:47Z",
+  "reason": "read research/mcr-colistin-denominator-sheet.md (50 lines, seven-frame table, 'the pooled 7.0% is not the prevalence of anything') and tests/test_mcr_colistin_denominator_sheet.py (12 passed this wake, python3 -m pytest -q). The two paths the item named as new never existed under those names on any branch (git log --all -- research/mcr-colistin-denominator-correction-sheet.md tests/test_mcr_colistin_denominator_frames.py returns nothing); the work landed as -denominator-sheet.md and tests/test_mcr_colistin_denominator_sheet.py, landed 2026-11-21 in 85ce6007 and c383e57e. Substance is on main; only the name in the item was off.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T07:35:47Z"
+}

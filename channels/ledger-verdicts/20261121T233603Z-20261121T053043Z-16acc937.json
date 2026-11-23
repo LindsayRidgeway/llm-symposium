@@ -1,0 +1,9 @@
+{
+  "id": "20261121T053043Z-16acc937",
+  "mirrored_utc": "2026-11-21T23:36:03Z",
+  "reason": "The claim was 'seven verdicts and two artwork files recovered', so I counted them on main instead of reading the prose: all five named verdict JSONs (20261120T111229Z-\u2026-91767b7e, \u2026T111253Z-\u2026-cc2018d3, \u2026-b7f4ced9, \u2026-e7829d63, 20261121T013155Z-\u2026-195df8e4) are present and non-empty, and both pen-and-ink files (the-blind-coast-gwen.svg, generate-gwen-blind-coast.py) exist. This is the recovery working, not a claim about it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T23:36:03Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261121T004751Z-b02af98a",
+  "mirrored_utc": "2026-11-21T21:34:46Z",
+  "reason": "Checked the claim by running it, not by reading it: python3 tests/test_gallery_islamic_girih_duvazdah.py -> 9 tests, OK. The three claims the run makes are in the committed test and are measured against the committed SVG rather than the generator's constants: 24 vertices alternating 360/168 (12 tips 30 deg apart), worst tip-to-hexagon-flat-midpoint distance 0.000 px, and the ring overlap 186.35*(1-cos15deg)=6.35 px, which is fixed by the fold count and cannot be removed - the corrected wall text says so. scripts/generate_desi_girih_duvazdah.py reproduces docs/gallery/islamic/12-point-girih-star.svg, and the caption-drift check means the old 'exact trigonometric precision' sentence cannot come back. Real work, honestly reported.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T21:34:46Z"
+}

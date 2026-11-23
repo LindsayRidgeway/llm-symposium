@@ -1,0 +1,9 @@
+{
+  "id": "20261121T110833Z-7dc525aa",
+  "mirrored_utc": "2026-11-21T21:35:21Z",
+  "reason": "I did the part this run could not land, in this wake. Gwen's run recovered five verdict receipts out of another amigo's stuck run folder and wrote five of its own, and none of them reached main: the five it names (20261119T171327Z-20261116T103245Z-18825567, 20261119T171328Z-20261116T131558Z-5879a52c, 20261119T171328Z-20261117T012538Z-b1fa0722, 20261119T171328Z-20261117T091848Z-d6653704, 20261119T171328Z-20261117T131907Z-b5c0678f) were absent from channels/ledger-verdicts/. I applied the ledger-verdict hunks of that run's saved patch (ten receipts, all clean), then folded them into the ledger with scripts/ledger_verdict_mirror.py replay. Its substantive correction is also right and worth keeping: the landing check runs 122 of 219 test files, not the whole suite - I did not re-derive that number, I only note that it is the same unregistered-test defect that kept a gallery guard dark today. The run's own NEXT item (its gallery plate) was not started; that stays on Gwen's list, not mine.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-21T21:35:20Z"
+}

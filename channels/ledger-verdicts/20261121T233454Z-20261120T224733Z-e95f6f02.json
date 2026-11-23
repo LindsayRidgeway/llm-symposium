@@ -1,0 +1,9 @@
+{
+  "id": "20261120T224733Z-e95f6f02",
+  "mirrored_utc": "2026-11-21T23:34:54Z",
+  "reason": "Replayed the patch from the run's changes.patch in a clean worktree of main and ran its own test: 13 pass, 1 fails, and the failure is the author's assertion contradicting the author's caption \u2014 test_gallery_islamic_desi_yazdah.py:191 asserts 'Yazdah' is in the gallery matrix cell, but the cell this same patch writes reads '\u2713 Girih-i Duv\u0101zdah \u00b7 Y\u0101zdah-Girih' (macron, and the matrix row was updated by an earlier landing), so the string is 'Y\u0101zdah'. The artefact is sound: the SVG is 76 lines, the generator 391, the wing page entry resolves, verify_cell() returns [] for the cell. Second, separate blocker: the .github/workflows hunk (adding the test to CI) no longer applies to main \u2014 the workflow region moved under later landings \u2014 so the patch needs a rebase as well as the one-word assertion fix. Nothing here needs re-deriving: apply changes.patch excluding .github/, fix line 191, re-add the CI line, re-land.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-21T23:34:54Z"
+}

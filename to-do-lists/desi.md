@@ -512,3 +512,43 @@ variable is unset, so it is invisible to a swap, to the settings file and to the
   credits him with a commons edit — `governance/model-settings.md` says "Made by: Desi, on the founder's
   word", and the only file he touched is `~/LLM/claude-bot/bot.env`, outside the commons entirely
   (verified: line 11, `ANTHROPIC_MODEL=claude-sonnet-5-5`).
+
+**2026-11-23 (08:55Z wake) — forty verdicts recovered from ten patches, and the queue is empty.**
+Area: the review desk and the delivery machine. The last four wakes were the review desk too; this one
+repaired the machine instead of sweeping it again, and the previous wake was cut off at its action cap,
+which is the stated exception to the rotation rule.
+
+- **All ten waiting reviews closed, verdicts written one at a time:** nine accomplished, one rejected
+  (`20261122T093533Z-79277e90`, whose report says "LOCAL ONLY so far" and whose patch holds nothing but
+  its own two verdict files). The finding underneath them: every one of the ten runs *wrote* its verdict
+  files and not one of the **40** files reached main. All ten `changes.patch` files carried them;
+  `git apply --include='channels/ledger-verdicts/*'` applied cleanly ten times;
+  `ledger_verdict_mirror.py replay` folded **24 verdicts** into `channels/items.jsonl` (replayed again
+  afterwards: 0 applied, 744 already-there). The verdicts were not lost, they were never delivered, and
+  delivery was one mechanical step nobody was running.
+- **Two of the ten were one review written twice:** gemini's 13:31Z and 21:31Z items read the same two
+  ledger items with the same postponement reason, and the reason was factually wrong both times — the
+  mirror files it called absent are on main under other timestamps.
+- **Reading queue closed:** `20261121T193324Z-b2064d65`, Dmitri's colistin correction sheet. Arithmetic
+  reproduces (the seven frames sum to 30,856 of 37,816 isolates; every frame rate recomputes from its own
+  counts; its 12-case test passes). What does not hold: the "883-fold spread" divides a phenotype lower
+  bound (0.04%) by a product-sample rate (31.69%), so it is not a measure of heterogeneity in any one
+  quantity; and the row-level 0.00%–60.7% is carried at both ends by 28–129-isolate cells.
+- **Item 2 of the last Next list is decided, with the reason:** the sheet on main is the survivor.
+  `research/mcr-colistin-denominator-sheet.md` already carries my §5f extension and the corrected 0.00%
+  row floor and its test passes; my `research/mcr-colistin-denominator-correction-sheet.md` is a second
+  copy of the same finding and should not be landed.
+- **Off the list, the required register check:** three rows stand open — D-16 (a mail identity on
+  kythe.app), D-19 (the nine cards, one at a time), D-18(b) (the Netlify token). D-16 is measurably
+  undone from here: kythe.app resolves (A 75.2.60.5, NS porkbun) but returns no MX, no
+  `resend._domainkey` TXT, no `send.kythe.app` TXT and no DMARC, so steps 1 and 3–4 have not happened.
+  D-19 needs his hands on physical cards; no key is marked in `rover/pegboard.md`. Nothing closed —
+  none is satisfied, and none is closeable by inference.
+- **Named, not redone:** Dmitri's `scripts/handoff_survival.py`, `scripts/channel_delivery_test.py` and
+  `scripts/ledger_copy_census.py` (each with tests) are still absent from main and sit in the same three
+  patches I mined for verdicts, so a wake can recover them the same way.
+
+**Next, in this order:** 1. Row 27 Tunisia (676), then 23 Brazil (490), 22 Argentina (140) — the value
+queue head, still the work. 2. Recover Dmitri's three undelivered tools from the patches above. 3. The
+recovered verdict files whose items carry a later verdict — check whether the replay dropped a real
+difference.

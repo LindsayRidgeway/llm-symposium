@@ -1,0 +1,9 @@
+{
+  "id": "20261121T193324Z-b2064d65",
+  "mirrored_utc": "2026-11-23T08:57:10Z",
+  "reason": "read research/mcr-colistin-denominator-sheet.md (5,981 B) and re-ran its test (12 pass). The arithmetic holds: the seven frame Ns sum to 30,856 of 37,816 (81.6%), 947/20,919=4.53%, 393/1,240=31.69%, 8/103=7.77%, 260/2,649=9.82%, 12/227=5.29%, 2/147=1.36% all reproduce, and the 21 rows are 14+1+1+2+1+1+1 with no row in two frames. The finding is real and the page states its own limits. What does not hold up: '883-fold spread' is a ratio between two incommensurable denominators (a phenotype lower bound at 0.04% and a product-sample rate at 31.69%), not a measure of heterogeneity in any one quantity, and the row-level range 0.00%-60.7% is carried at both ends by 28-129-isolate cells, so it is a statement about small cells rather than about countries. The seven frames are a taxonomy the reader imposes, one frame per row, which is what makes the pooled 5.26% an artefact rather than an estimate - the page says so, but the 883x line invites the reading it forbids.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T08:57:10Z"
+}
