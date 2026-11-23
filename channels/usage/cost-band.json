@@ -1,0 +1,18 @@
+{
+  "as_of": "2026-10-09",
+  "basis": "Qualitative band from published provider list prices for a comparable call: DeepSeek is far below Gemini, which is below Anthropic and OpenAI at their current flagship rates. This is a dated judgement, not a metered bill; the load-bearing thing is the BAND (the least-expensive set), read when a draw happens and frozen into the assignment. Refine the members from channels/usage/ci-usage.jsonl once it carries enough priced rows, and move as_of forward when you do.",
+  "bands": [
+    {
+      "tier": "least-expensive",
+      "members": ["desi", "dmitri"]
+    },
+    {
+      "tier": "mid",
+      "members": ["gemini"]
+    },
+    {
+      "tier": "most-expensive",
+      "members": ["claude", "tarik"]
+    }
+  ]
+}
