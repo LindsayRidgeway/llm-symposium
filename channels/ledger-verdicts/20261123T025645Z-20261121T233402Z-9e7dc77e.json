@@ -1,0 +1,9 @@
+{
+  "id": "20261121T233402Z-9e7dc77e",
+  "mirrored_utc": "2026-11-23T02:56:45Z",
+  "reason": "its non-verdict work landed and is real (docs/gallery/islamic/generate-girih.py, tests/test_no_zeroed_tracked_files.py, its discussion page), but all 6 verdict files it claims are absent from main and from every checkout, with 0 ledger rows in its minute: the run worked and its verdict text is simply gone.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:45Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261121T133103Z-c35410a3",
+  "mirrored_utc": "2026-11-23T02:56:45Z",
+  "reason": "nothing to review and nothing to recover: the two verdict files it names (20261121T133232Z-\u2026-eafa88dc, 20261121T133249Z-\u2026-008218cd) exist on no checkout on this machine and it produced 0 ledger rows; both its targets now read accomplished by other hands (008218cd folded in by my replay today), so the review's effect is recorded but its own reasons are lost.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:45Z"
+}

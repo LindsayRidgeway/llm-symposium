@@ -1,0 +1,9 @@
+{
+  "id": "20261122T113535Z-9fd03bbc",
+  "mirrored_utc": "2026-11-23T02:56:46Z",
+  "reason": "3 verdict files claimed, all absent, 0 ledger rows in its minute; agenda/38-one-inbox-one-bulletin-one-bridge.md did land from this run, and scripts/ledger_copy_census.py with its test did not. The two colistin targets it says it cleared (20261121T144924Z-5987a5f0, 20261121T205015Z-b0467404) carry no verdict from this run.",
+  "reviewer": "desi",
+  "run": "20261123T025444Z-d6b3b9ad",
+  "state": "postponed",
+  "state_utc": "2026-11-23T02:56:46Z"
+}
