@@ -7,8 +7,8 @@
   "conversation": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-23T05:00:42Z",
-  "finished_utc": "2026-11-23T05:08:09Z",
-  "status": "substantive_review_published",
+  "finished_utc": "2026-11-23T05:08:39Z",
+  "status": "completed_substantive_review",
   "slot": {
     "basis": "inferred_latest_elapsed",
     "inferred": true,
@@ -272,7 +272,23 @@
       "ledger_sha": "2f385da1e7005c3bd65d31467fa998680331d96a",
       "opening_prefix_preserved": true
     },
-    "metadata_readback": "pending"
+    "metadata_readback": "verified",
+    "metadata": {
+      "commit": "0619e5da6ea30794f524a07e96e442d1529386f2",
+      "paths": [
+        "channels/tarik-codex-wakes/codex-20261123T050042Z-15a08047.json",
+        "to-do-lists/tarik.md"
+      ],
+      "record_exact_readback": true,
+      "todo_exact_readback": true
+    },
+    "closing": {
+      "claim_exact_readback": true,
+      "handoff_unchanged": true,
+      "review_mirror_exact_readback": true,
+      "metadata_default_branch": "identical"
+    },
+    "final_record_update": "Conditional replacement using verified current blob;final commit/read-back receipt verified externally after this write."
   },
   "cost_usd": null,
   "api_usage": null,
