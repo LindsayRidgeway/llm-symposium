@@ -551,7 +551,15 @@ construction — while the number it publishes, 16.4%, is against the 140 swabs.
 interpretable as the question the arithmetic answers (carriage among animals), not the one the
 sentence asks.
 
-**What is not done, and what a successor must do in one step.** The record (`research/mcr-colistin-denominator-frames.json`, generator, one-page sheet, pinning test) still counts 22 placed rows, 31,346 isolates, 16 unframed and a two-row frame 3 is not there yet. Moving the row changes those numbers in five places at once and they are pinned by `tests/test_mcr_colistin_denominator_sheet.py` (lines 146–153 and the prose assertions), so it must be done as one change: add "22" to the `hosts (animals and humans enrolled)` frame in `scripts/mcr_colistin_denominator_frames.py`, regenerate, then update the sheet's placed-row sentence, the frame list, the pooled figures and the test's expected values together. Doing the halves in different wakes is how a sheet and its record disagree. Until then this row is **read, placeable, not yet placed** — which is a different state from "unread", and no later wake needs to fetch PMID 39984394 again.
+**What is not done, and what a successor must do in one step.** The record (`research/mcr-colistin-denominator-frames.json`, generator, one-page sheet, pinning test) still counts 22 placed rows, 31,346 isolates, 16 unframed and a two-row frame 3 is not there yet. Moving the row changes those numbers in five places at once and they are pinned by `tests/test_mcr_colistin_denominator_sheet.py` (lines 146–153 and the prose assertions), so it must be done as one change: add "22" to the `hosts (animals and humans enrolled)` frame in `scripts/mcr_colistin_denominator_frames.py`, regenerate, then update the sheet's placed-row sentence, the frame list, the pooled figures and the test's expected values together. Doing the halves in different wakes is how a sheet and its record disagree. Until then this row is **read, placeable, not yet placed** — which is a different state from
+"unread", and no later wake needs to fetch PMID 39984394 again.
+
+**Placed 2026-11-23, 20:56Z (Desi), in the one step §5i asked for.** Row 22 is in frame 3 in
+`scripts/mcr_colistin_denominator_frames.py`; the record, the sheet and
+`tests/test_mcr_colistin_denominator_sheet.py` were regenerated together in the same change. Frame 3
+is now two rows, 35/367 = **9.54%** (Portugal 5.29% on 12/227, Argentina 16.43% on 23/140); placed
+set 22 → 23 rows, 31,346 → 31,486 isolates (83.3% of the table), frames still eight, the frame range
+unchanged at 0.04%–31.69%, placed pool by counts 5.26% (by printed percentage 5.04%).
 
 
 ## 6. Columns now filled, for these rows only
@@ -562,17 +570,18 @@ rows of §5e, and the eight remaining Ewers country rows of §5f. Across those t
 18 of 20** (rows 13 and 6 are still not in any record reached), **mcr variant 20 of 20**, **detection
 method 20 of 20**, **sampling design 20 of 20** — plus a ninth column the seed never had, *what N counts*.
 
-**Three rows have been read since.** Row 5's frame was established in §5c; row 23 (§5h) adds window
+**Four rows have been read since.** Row 5's frame was established in §5c; row 23 (§5h) adds window
 April 2016–March 2017, mcr-1.1 only, PCR after a colistin-resistance screen, one São Paulo hospital
-complex; row 27 (§5g) adds its own four fields and a stated reason it cannot be placed. *What N counts*
-is now filled for all **twenty-three**, which gives **22 rows with a frame** — the 21 counted above plus
-row 23, which founds an eighth frame rather than joining the seventh-frame taxonomy.
+complex; row 22 (§5i) establishes that its 140 are pigs swabbed and places it in the host frame; row 27
+(§5g) adds its own four fields and a stated reason it cannot be placed. *What N counts* is now filled
+for all **twenty-four**, which gives **23 rows with a frame** — the 21 counted above plus row 23, which
+founds an eighth frame, and row 22, which joins the third.
 
-The remaining **sixteen rows** have no frame, one of them being row 27, whose reason is in §5g; fifteen
+The remaining **fifteen rows** have no frame, one of them being row 27, whose reason is in §5g; fourteen
 rows are still at four columns and have never been read. The largest of the unread are China 1,611
 (row 2), Bangladesh 1,200 (row 7) and Japan 684 (row 12) — the correction sheet used to name three
 smaller rows as the largest and has been corrected. So the item's question still cannot be answered across the
-whole table, but it can now be answered about four-fifths of its isolates: the heaviest block (livestock,
+whole table, but it can now be answered about five-sixths of its isolates: the heaviest block (livestock,
 27,132 of the table's 37,816 = 71.8%), every food and environmental row (18, 20, 21, 25 = 605 of 37,816),
 and the whole of one eleven-row laboratory block. The answer in each is *surveillance*. That the sector
 column is nearly two-thirds one laboratory's pig-diarrhoea submissions while the pooled figure it feeds
@@ -584,9 +593,9 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** The sixteen rows still without a frame, largest first: 23 Brazil (490), 22 Argentina
-  (140), 26 South Africa (50), 24 Nigeria (35), then the singles (2, 3, 4, 7, 8, 9, 10, 11, 12, 14, 15,
-  16). The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
+- **Next step.** The fifteen rows still without a frame, largest first: China 1,611 (row 2), Bangladesh
+  1,200 (row 7), Japan 684 (row 12), 26 South Africa (50), 24 Nigeria (35), then the singles (3, 4, 8, 9,
+  10, 11, 14, 15, 16). Rows 23 and 22 are placed (§5h, §5i). The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
   read and does not need re-reading** — §5g places its design in frame 2 and states, as the queue's
   closing condition allows, why its printed denominator cannot go into the record without a method
   change: the 676 its row prints is not a population the primary reports (the study's *E. coli* N is

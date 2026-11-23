@@ -46,13 +46,17 @@ FRAMES = [
             "17 (j)",
             "17 (k)",
             "19",
+            "7",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
         "by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) "
         "are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for "
         "mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared "
-        "methods section rather than from a fresh read.",
+        "methods section rather than from a fresh read. Row 7 (Bangladesh, 305/1,200) is here because "
+        "its N is a count of E. coli isolates put through a multiplex PCR for mcr-1..5 (§5j) — but it is "
+        "a clustered N: twenty isolates per pooled farm sample, sixty samples, twenty farms, so the "
+        "denominator is 1,200 isolates carrying about 60 independent sampling events.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
@@ -62,9 +66,14 @@ FRAMES = [
     },
     {
         "frame": "hosts (animals and humans enrolled)",
-        "rows": ["21"],
+        "rows": ["21", "22"],
         "why": "the Portugal row's 227 are enrolled hosts and its 12 are positive hosts; the study's 17 "
-        "isolates and the isolation medium's own colistin (3.5 µg/mL) are not in either number (§5e).",
+        "isolates and the isolation medium's own colistin (3.5 µg/mL) are not in either number (§5e). "
+        "Argentina's 140 are rectal swabs from pigs on six farms and its 23 are mcr-1-positive "
+        "colistin-resistant E. coli recovered from them, so 16.4% is host carriage, not an isolate "
+        "prevalence — the abstract's co-resistance profile is printed on 23 (20/23, 11/23, 19/23, 14/23), "
+        "which fixes the numerator as isolates and the denominator as animals (§5i). Placed 2026-11-23 "
+        "on the read recorded there; the row is the frame's second member, not a ninth frame.",
     },
     {
         "frame": "samples or products",
@@ -178,7 +187,11 @@ def build() -> dict:
         "section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again "
         "2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, "
         "genotyped for the gene', because its N counts the isolates that passed the phenotype screen "
-        "rather than the isolates screened; the row read is §5h.",
+        "rather than the isolates screened; the row read is §5h. Extended again 2026-11-23T20:56Z — row "
+        "22 (Argentina, 140/23) placed in frame 3, hosts, on the read §5i recorded; no ninth frame, and "
+        "the frame-3 pool moves from 12/227 to 35/367. Extended again 2026-11-23T20:56Z — row 7 "
+        "(Bangladesh, 1,200/305) placed in frame 1 from the open-access primary; its isolates are "
+        "clustered twenty-to-a-pooled-sample, which the frame's note and §5j both say.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
@@ -224,8 +237,8 @@ def build() -> dict:
         ),
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 16 of 38 rows have no frame, "
-            "and the largest of them (China 1,611 row 2, Bangladesh 1,200 row 7, Japan 684 row 12) could "
+            "That the unplaced rows could not move the range. They could — 15 of 38 rows have no frame, "
+            "and the largest of them (China 1,611 row 2, Japan 684 row 12, South Africa 50 row 26) could "
             "widen or narrow it; Tunisia 676 is now read and deliberately unplaced, per §5g.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
