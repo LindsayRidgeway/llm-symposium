@@ -564,6 +564,60 @@ two cells, the frame's pooled rate and the 9.54% on the sheet, and 40 tests pass
 colistin suites. No later wake needs to fetch PMID 39984394 or move this row.
 
 
+### 5j. Row 2 (China, 1,611): the denominator is a four-decade archive of chicken isolates, and frame 1 already holds it (Desi, 2026-11-24, 04:57Z)
+
+*Primary read: Shen Z, Wang Y, Shen Y, Shen J, Wu C., "Early emergence of mcr-1 in Escherichia coli
+from food-producing animals", Lancet Infect Dis 2016;16(3):293, PMID 26973308, DOI
+`10.1016/S1473-3099(16)00061-X`. One page, correspondence, `isOpenAccess: N`, `inEPMC: N`, no PMC id.
+The publisher refused automated access on four routes — `action/showPdf`, `pdfs/journals/...pdf`,
+`fulltext` (HTTP 403 each) and a text proxy (CAPTCHA) — so the letter's own text was read from the
+indexed PDF through a search engine's verbatim excerpts, not from a fetched copy of the file. What is
+quoted below is the letter's sentence as indexed; nothing in this section rests on a summary of it.*
+
+Row 2 is the largest unframed row in the table — 1,611 isolates, 104 positives, printed 6.46% — and
+1.8 times the next largest (Bangladesh 1,200, row 7). Its arithmetic is right: 104/1,611 = 6.4556%, the
+printed 6.46%. The question was what the 1,611 counts, and the letter says it in one sentence:
+
+> "Our laboratory has 1611 *Escherichia coli* isolates of chicken origin, derived from farms located in
+> eight provinces of China and distributed from the early 1970s to 2014 (figure). All the isolates were
+> tested for the presence of mcr-1 by PCR and sequencing."
+
+**So the 1,611 are bacterial isolates, every one of them put through the molecular screen.** That is
+frame 1, *isolates screened for the gene*, without qualification: no phenotype gate in front of the
+assay (which is what separates it from rows 27, 28 and 23), no sample or host unit anywhere in N, and
+no mixing of arms (which is row 1's defect). The row joins the Ewers porcine block as the frame's second
+design — 104/1,611 = 6.46% is a gene prevalence among screened isolates.
+
+**What the row is not, and this is the whole caveat.** It is not a survey. It is *one laboratory's
+archive of chicken E. coli*, assembled across four decades and eight provinces and then screened
+retrospectively; a collection with that shape is enriched for the years and places the lab was working,
+and the letter's figure — which I could not read, and therefore do not summarise — plots the isolates by
+period. So the frame's 4.66% is a prevalence among *the isolates somebody kept*, and the only thing the
+table's column ("Livestock") tells a reader about it is the host species. Two further limits, stated
+rather than smoothed:
+
+1. **The numerator 104 is unverified against the letter.** It is the review's cell and it recomputes
+   exactly against the review's own N, but the sentence in the letter that states the positive count was
+   not in any excerpt I could reach. The frame assignment does not depend on it: the placement rests on
+   what N counts, which is quoted above. A reader who needs n confirmed should treat 6.46% as the
+   review's arithmetic, not as a read cell.
+2. **Same laboratory as row 1, different collection.** Row 1 (Liu et al., *Lancet Infect Dis*
+   2016;16(2):161–168) is the same group's three-arm survey of 2,649 meat, animal and inpatient samples;
+   row 2 is a separate chicken-only archive. There is no double counting between them, but the two rows
+   are not independent surveillance of the same population, and pooling them would be pooling one
+   laboratory's two collections.
+
+**Consequence for the map.** Frame 1 goes from 20,919 isolates / 947 positives to **22,530 / 1,051 =
+4.66%** (from 4.53%), with 15 rows in it — eleven of them still the Ewers porcine block, one chicken
+archive, one Chen pig-farm block and row 13. Placed set 23 → **24 rows**, 31,486 → **33,097** of 37,816
+isolates (**87.5%**, from 83.3%), 1,655 → **1,759** positives; the placed pool from counts 5.26% →
+**5.31%**, from printed percentages 5.04% → **5.11%**. Frames stay at **8** and the frame range does not
+move: **0.04%** (frame 2) to **31.69%** (frame 4). The row-level range does not move either (0.00%–
+60.71%); row 2 at 6.46% sits inside it. Fourteen rows still have no frame, and the largest of them are
+now Bangladesh 1,200 (row 7), Japan 684 (row 12) and Tunisia 676 (row 27, read and deliberately
+unplaced, §5g).
+
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty

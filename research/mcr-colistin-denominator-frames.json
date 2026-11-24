@@ -2,7 +2,7 @@
  "artifact": "The denominator types behind the colistin table's pooled 7.0%, and the rate range that replaces it",
  "written": "2026-11-21",
  "written_by": "Dmitri (clock wake)",
- "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again 2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, genotyped for the gene', because its N counts the isolates that passed the phenotype screen rather than the isolates screened; the row read is §5h. Extended a third time 2026-11-23T22:57Z — row 22 (Argentina) placed in the existing hosts frame, since its 140 are pigs swabbed rather than isolates; the row read is §5i, written at 19:4xZ, and this pass is the one-step regeneration that read left owed. Placed set 22 -> 23 rows.",
+ "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again 2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, genotyped for the gene', because its N counts the isolates that passed the phenotype screen rather than the isolates screened; the row read is §5h. Extended a third time 2026-11-23T22:57Z — row 22 (Argentina) placed in the existing hosts frame, since its 140 are pigs swabbed rather than isolates; the row read is §5i, written at 19:4xZ, and this pass is the one-step regeneration that read left owed. Placed set 22 -> 23 rows. Extended a fourth time 2026-11-24T04:57Z — row 2 (China, 1,611) placed in frame 1, the largest unframed row in the table; its N is a four-decade archive of chicken isolates all screened by PCR, read at §5j. Placed set 23 -> 24 rows; the numerator of that row is the review's cell, unverified against the letter, and §5j says so.",
  "closes": "value-queue item colistin-denominator-sheet",
  "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
  "method": "Assign every row whose denominator has been read against its primary to exactly one frame, pool inside the frame, and report the range across frames. Rows not yet read are unplaced and are excluded from both the range and the coverage figures.",
@@ -16,10 +16,11 @@
  "frames": [
   {
    "frame": "isolates screened for the gene",
-   "why_this_row_is_here": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared methods section rather than from a fresh read.",
+   "why_this_row_is_here": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared methods section rather than from a fresh read. Row 2 is the frame's second design: one laboratory's archive of 1,611 chicken E. coli isolates from eight provinces, distributed 1970s–2014, all PCR-screened for mcr-1 (§5j) — screened isolates, but a kept collection, not a survey.",
    "rows": [
     "13",
     "6",
+    "2",
     "17 (a)",
     "17 (b)",
     "17 (c)",
@@ -33,9 +34,9 @@
     "17 (k)",
     "19"
    ],
-   "N": 20919,
-   "n": 947,
-   "pooled_pct": 4.526985,
+   "N": 22530,
+   "n": 1051,
+   "pooled_pct": 4.664891,
    "rate_range_pct": [
     0.0,
     60.714286
@@ -59,6 +60,16 @@
      "n": 54,
      "pct_printed": 2.32,
      "pct_from_counts": 2.317597,
+     "agrees_with_own_counts": true
+    },
+    {
+     "row": "2",
+     "country": "China",
+     "sector_printed": "Livestock",
+     "N": 1611,
+     "n": 104,
+     "pct_printed": 6.46,
+     "pct_from_counts": 6.455618,
      "agrees_with_own_counts": true
     },
     {
@@ -390,16 +401,16 @@
  ],
  "frame_count": 8,
  "placed": {
-  "rows": 23,
-  "unplaced_rows": 15,
-  "N": 31486,
-  "share_of_table_N_pct": 83.2611,
-  "n": 1655,
-  "share_of_table_n_pct": 62.5236,
-  "pooled_pct": 5.256304
+  "rows": 24,
+  "unplaced_rows": 14,
+  "N": 33097,
+  "share_of_table_N_pct": 87.5212,
+  "n": 1759,
+  "share_of_table_n_pct": 66.4526,
+  "pooled_pct": 5.314681
  },
  "range": {
-  "bases": "the 8 frame rates, not the 23 row rates",
+  "bases": "the 8 frame rates, not the 24 row rates",
   "low_pct": 0.0359,
   "low_frame": "isolates screened for a phenotype, genotyped only if positive",
   "high_pct": 31.693548,
@@ -421,10 +432,10 @@
    "17 (a)"
   ]
  ],
- "gene_frame_with_france_corrected_pct": 5.005019,
+ "gene_frame_with_france_corrected_pct": 5.108744,
  "what_this_does_not_say": [
   "That the frame rates are comparable with each other. They are not: that is the finding.",
-  "That the unplaced rows could not move the range. They could — 15 of 38 rows have no frame, and the largest of them (China 1,611 row 2, Bangladesh 1,200 row 7, Japan 684 row 12) could widen or narrow it; Tunisia 676 is now read and deliberately unplaced, per §5g.",
+  "That the unplaced rows could not move the range. They could — 14 of 38 rows have no frame, and the largest of them (Bangladesh 1,200 row 7, Japan 684 row 12) could widen or narrow it; Tunisia 676 is read and deliberately unplaced, per §5g.",
   "That any row here is a population prevalence. Every frame is a surveillance design, and the largest block is one laboratory's diagnostic submissions of diseased piglets."
  ],
  "reproduce": "python3 scripts/mcr_colistin_denominator_frames.py --write"

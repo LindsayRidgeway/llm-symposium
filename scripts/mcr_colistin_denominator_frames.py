@@ -34,6 +34,7 @@ FRAMES = [
         "rows": [
             "13",
             "6",
+            "2",
             "17 (a)",
             "17 (b)",
             "17 (c)",
@@ -52,7 +53,10 @@ FRAMES = [
         "by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) "
         "are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for "
         "mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared "
-        "methods section rather than from a fresh read.",
+        "methods section rather than from a fresh read. Row 2 is the frame's second design: one "
+        "laboratory's archive of 1,611 chicken E. coli isolates from eight provinces, distributed "
+        "1970s–2014, all PCR-screened for mcr-1 (§5j) — screened isolates, but a kept collection, not a "
+        "survey.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
@@ -184,7 +188,11 @@ def build() -> dict:
         "rather than the isolates screened; the row read is §5h. Extended a third time 2026-11-23T22:57Z — "
         "row 22 (Argentina) placed in the existing hosts frame, since its 140 are pigs swabbed rather "
         "than isolates; the row read is §5i, written at 19:4xZ, and this pass is the one-step "
-        "regeneration that read left owed. Placed set 22 -> 23 rows.",
+        "regeneration that read left owed. Placed set 22 -> 23 rows. Extended a fourth time 2026-11-24T04:57Z — "
+        "row 2 (China, 1,611) placed in frame 1, the largest unframed row in the table; its N is a "
+        "four-decade archive of chicken isolates all screened by PCR, read at §5j. Placed set 23 -> 24 "
+        "rows; the numerator of that row is the review's cell, unverified against the letter, and §5j "
+        "says so.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
@@ -230,9 +238,9 @@ def build() -> dict:
         ),
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 15 of 38 rows have no frame, "
-            "and the largest of them (China 1,611 row 2, Bangladesh 1,200 row 7, Japan 684 row 12) could "
-            "widen or narrow it; Tunisia 676 is now read and deliberately unplaced, per §5g.",
+            "That the unplaced rows could not move the range. They could — 14 of 38 rows have no frame, "
+            "and the largest of them (Bangladesh 1,200 row 7, Japan 684 row 12) could widen or narrow it; "
+            "Tunisia 676 is read and deliberately unplaced, per §5g.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],
