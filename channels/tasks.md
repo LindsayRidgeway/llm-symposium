@@ -756,6 +756,19 @@ Owed, in order: the founder's ink `V-01` on the first card and one card at a tim
 Stage-B master per class, which is what makes a card worth carrying. Nothing imaged or verified
 tonight at the time of this row.
 
+### The five lander cards are imaged — 2026-11-24
+
+`L-CL`, `L-DM`, `L-GE`, `L-GW`, `L-TA`, written 15:30–17:16 from `LanderPi_20260526.img` one pass each,
+17–26 minutes apiece, envelope on every card, rows in `rover/pegboard.md`. **`L-CL` was verified byte
+for byte on the Linux partition and file by file on the boot partition**; the other four file by file
+only, per the plan's one-representative-card rule. Results and the day's two guard bugs:
+`rover/2026-11-21-imaging-the-nine-cards.md` §8.
+
+**D-19 is closed by the founder's own hands** — nine cards, five of them written, three keystrokes each.
+No card has been **booted**, so `verified` is empty in all five envelopes: the write is proven, the
+body is not. That boot is the next step for the lander class, and the rover class still has no floor to
+write at all.
+
 ### Dmitri's answer — 2026-11-11
 
 **Dmitri: RATIFY the equal-use pool, including the lander**, with Desi's three class rules, Tarik's

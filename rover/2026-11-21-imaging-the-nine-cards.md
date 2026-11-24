@@ -132,7 +132,12 @@ anything:
 Nothing else is his. Nothing about which card is which class is his to remember: the key resolves it
 in `rover/pegboard.md`, and that is why the number is the only thing that goes on the plastic.
 
-## 7. What this file does not claim
+## 7. What this file did not claim on 2026-11-21
+
+*Kept as written — everything in this section was true when it was written and is superseded by §8,
+which is the measurement rather than the plan.*
+
+## 7a. What this file does not claim
 
 - **No card has been written or read** at the time of writing. The download is still running.
 - **No rover floor exists.** The four rover cards cannot be imaged tonight from anything, and saying
@@ -142,3 +147,39 @@ in `rover/pegboard.md`, and that is why the number is the only thing that goes o
   empty field is a fact.
 - **The lander's cliff behaviour is still unmeasured** and belongs in `known_unknowns` on every
   lander card.
+
+
+## 8. What actually happened — 2026-11-24, the five lander cards
+
+Five cards written in one afternoon, the founder at the reader, one pass per card from a loop script
+that needs no session alive between cards (`desi-bot/staging/card-loop.sh`; why it exists: a goose
+session does not run between turns, the founder's observation, and an instruction that needs one is an
+instruction that silently does not happen).
+
+| key in ink | written | pass time | verification |
+|---|---|---|---|
+| `L-CL` | 15:53 | 26 min (includes a first attempt that failed verification, see below) | **Linux partition byte-identical to the image**, boot partition file-by-file |
+| `L-DM` | 16:19 | 21 min | boot partition file-by-file |
+| `L-GE` | 16:40 | 18 min | boot partition file-by-file |
+| `L-GW` | 16:58 | 17 min | boot partition file-by-file |
+| `L-TA` | 17:16 | 17 min | boot partition file-by-file |
+
+**The one real defect of the day, and it was in the verifier.** The first verification compared the
+whole disk with the whole image and failed at byte **4,195,305**. The card was fine: its boot partition
+starts at 4,194,304, and macOS had auto-mounted that FAT volume when the card was reinserted and
+written `.Spotlight-V100` and `.fseventsd` into it. **The check was measuring the host.** Redesigned in
+two halves that the host cannot touch — the ext4 partition from its own offset (52.2 of 52.7 GB, a
+region macOS cannot read at all) and the boot partition file by file, with macOS's droppings deleted
+before eject. The same class of bug as the disk guard earlier the same day, which looked for an
+`Internal:` line this macOS does not print: **two guards, both plausible on paper, both wrong only
+when run.**
+
+**What the five cards are, and are not.** Boot floors: the vendor's ROS 2 lander system plus a
+`POOL-CARD.json`/`.txt` envelope on the boot partition. **None has been booted** — `verified` is empty
+in all five envelopes, the agent is the write and the read-back, not the body. None carries the pilot,
+the voice loop, or my calibration.
+
+**What is left, in order.** (1) Boot one — cheapest is `L-CL`, in the lander, with the founder
+watching — and fill its `verified` field from what the body itself reports. (2) Build the lander pilot
+onto that card and clone it to the other four. (3) The four rover cards, which still have no floor to
+write.

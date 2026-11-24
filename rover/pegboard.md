@@ -1,9 +1,14 @@
 # Pegboard — the card register, by the number written on the card
 
-*Spotlight access: type `Pegboard` and open `~/Documents/Pegboard.md`, a two-line pointer that names
-this file. The pointer is deliberately not a copy — every landing replaces files in this repository,
-so any mirror outside it would go stale silently, which is the defect this whole thread has been
-about. The name of this file is the word, so the pointer has something honest to point at.*
+*Spotlight access: type `Pegboard` and open `~/Documents/Pegboard.html`, a pointer page that names
+this file and links to it. The pointer is deliberately not a copy — every landing replaces files in
+this repository, so any mirror outside it would go stale silently, which is the defect this whole
+thread has been about. The name of the file is the word, so the pointer has something honest to point
+at. **(Changed 2026-11-24:** the pointer was `Pegboard.md`, which this Mac opens in TextMate; typing
+the word in Spotlight produced a spinning pinwheel and a TextMate window that had to be force-quit.
+A pointer that cannot be opened is worse than no pointer. It is now an `.html` page, which opens in
+the browser and cannot hang. Why TextMate hung is not established, and the local `.md` is still the
+only authoritative copy.**)**
 
 *Created 2026-11-13 by Desi, on the founder's correction. He rejected the physical label I proposed
 and was right to: the cards are too small to label, and anything stuck onto one can jam in a slot.
@@ -67,6 +72,11 @@ error, a state.
 | *(unwritten)* | SanDisk ULTRA, A1/U1 | 64 GB | rover | rover #2 (Gemini) | in use through Gemini's calibration and voice-loop work; nothing re-imaged since | same |
 | *(unwritten)* | — | 32 GB | any | spare | spare | has no role in the pool and this register does not give it one |
 | *(unwritten)* | — | 32 GB | any | spare | spare | same |
+| `L-CL` | SanDisk EXTREME, A2/V30/U3 | 64 GB | lander | none — pool, unassigned | imaged 2026-11-24 from `LanderPi_20260526.img`; **read-back verified** (Linux partition byte-identical; boot partition file-by-file); not boot-tested | envelope on the card (`POOL-CARD.json` + `.txt`); first card of the class, and the one the verification was proven on. 1,008 s write observed on the two earlier attempts, ~85 MB/s |
+| `L-DM` | SanDisk EXTREME, A2/V30/U3 | 64 GB | lander | none — pool, unassigned | imaged 2026-11-24 from `LanderPi_20260526.img`; boot partition verified file-by-file; not boot-tested | envelope on the card |
+| `L-GE` | SanDisk EXTREME, A2/V30/U3 | 64 GB | lander | none — pool, unassigned | imaged 2026-11-24 from `LanderPi_20260526.img`; boot partition verified file-by-file; not boot-tested | envelope on the card |
+| `L-GW` | SanDisk EXTREME, A2/V30/U3 | 64 GB | lander | none — pool, unassigned | imaged 2026-11-24 from `LanderPi_20260526.img`; boot partition verified file-by-file; not boot-tested | envelope on the card |
+| `L-TA` | SanDisk EXTREME, A2/V30/U3 | 64 GB | lander | none — pool, unassigned | imaged 2026-11-24 from `LanderPi_20260526.img`; boot partition verified file-by-file; not boot-tested | envelope on the card; key written `L-TA`, not the `L-T` first proposed |
 
 **Nine more cards are ordered and have arrived** — five lander (EXTREME 64 GB) and four rover
 (EXTREME 64 GB), order 112-6317894-9355469, **in the founder's hands 2026-11-21**. They have no rows
