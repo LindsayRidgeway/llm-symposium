@@ -46,13 +46,19 @@ FRAMES = [
             "17 (j)",
             "17 (k)",
             "19",
+            "7",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
         "by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) "
         "are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for "
         "mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared "
-        "methods section rather than from a fresh read.",
+        "methods section rather than from a fresh read. Row 7 (Bangladesh 1,200 / 305) is an isolate "
+        "screen whose sampling unit is not the isolate: 20 MacConkey colonies picked at random per pooled "
+        "faecal sample, on 20 broiler farms at three points in one flock cycle (§5j). Its 25.42% is the "
+        "share of screened colonies, so it belongs to this frame by what N counts and carries a weight "
+        "caveat the frame's pool does not escape — 1,200 colonies from 60 samples now count twenty times "
+        "each in its 5.66%.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
@@ -184,7 +190,10 @@ def build() -> dict:
         "rather than the isolates screened; the row read is §5h. Extended a third time 2026-11-23T22:57Z — "
         "row 22 (Argentina) placed in the existing hosts frame, since its 140 are pigs swabbed rather "
         "than isolates; the row read is §5i, written at 19:4xZ, and this pass is the one-step "
-        "regeneration that read left owed. Placed set 22 -> 23 rows.",
+        "regeneration that read left owed. Extended a fourth time 2026-11-24T07:00Z — row 7 "
+        "(Bangladesh) placed in frame 1, the isolate screen, on a full read of its primary (Ahmed et "
+        "al., Sci Rep 2020, PMC7596488); the read is §5j and the caveat it leaves on the frame's pool is "
+        "stated there. Placed set 23 -> 24 rows.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
@@ -230,9 +239,9 @@ def build() -> dict:
         ),
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 15 of 38 rows have no frame, "
-            "and the largest of them (China 1,611 row 2, Bangladesh 1,200 row 7, Japan 684 row 12) could "
-            "widen or narrow it; Tunisia 676 is now read and deliberately unplaced, per §5g.",
+            "That the unplaced rows could not move the range. They could — 14 of 38 rows have no frame, "
+            "and the largest of them (China 1,611 row 2, Japan 684 row 12) could widen or narrow it; "
+            "Tunisia 676 is now read and deliberately unplaced, per §5g.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],

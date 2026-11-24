@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*160 scripts, generated from the tree, not by hand.*
+*161 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -86,6 +86,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-19 | [Landing preflight for the *failure* gate: run the suite before the wake ends.](landing_suite_check.py) |
 | 2026-10-10 | [Why a landing is refused, path by path, with the one safe command for each.](landing_tree_report.py) |
 | 2026-10-14 | [Recover item-ledger rows a failed landing threw away, from the run's own patch.](ledger_row_recovery.py) |
+| 2026-11-23 | [The verdict a reviewer gave, and the verdict the machine left in its place.](ledger_verdict_conflicts.py) |
 | 2026-10-26 | [A verdict that survives its own run: mirror every ledger decision to its own file and replay it later.](ledger_verdict_mirror.py) |
 | 2026-10-22 | [The daily review check: measure, repair what is mechanical, and tell the human in one message.](ledger_watch.py) |
 | 2026-11-14 | [Lost landings — the runs whose whole diff was refused because one file in it had moved.](lost_landings.py) |

@@ -564,6 +564,49 @@ two cells, the frame's pooled rate and the 9.54% on the sheet, and 40 tests pass
 colistin suites. No later wake needs to fetch PMID 39984394 or move this row.
 
 
+### 5j. Row 7 (Bangladesh): an isolate screen whose sampling unit is not the isolate (Desi, 2026-11-24)
+
+**The row.** Bangladesh, "Livestock", N = 1,200, n = 305, printed 25.42%, seed source [30] — Ahmed, Das,
+Islam, Herrero-Fresno, Biswas and Olsen, *High prevalence of mcr-1-encoded colistin resistance in
+commensal Escherichia coli from broiler chicken in Bangladesh*, Sci Rep 2020;10:18637, PMID 33122817,
+DOI `10.1038/s41598-020-75608-2`. Read in full from the PMC full-text XML (`PMC7596488`, 152,451 B,
+Europe PMC `fullTextXML`, HTTP 200 on the first attempt), not from the abstract, because the question is
+what the denominator counts and the abstract states only the total.
+
+**What the 1,200 counts.** The methods: *"A total of 20 confirmed E. coli isolates from each faecal
+sample, comprising an overall total collection of 1200 isolates, were characterized in this study."* The
+samples are pooled faeces — five fresh droppings from four corners and the centre of each flock — taken
+on 20 commercial broiler farms at day1, day15 and day28 of one production cycle, August–September 2018,
+Chattogram division. So 20 farms x 3 sampling days x 20 isolates = **1,200 screened colonies**, and every
+one of them went through a multiplex PCR for *mcr-1* to *mcr-5*: *"We identified 305 (25%, 95% CI,
+23-28%) mcr-1-positive E. coli out of the 1200 isolates"*, no *mcr-2* to *mcr-5* found anywhere.
+305/1,200 = **25.4167%**, the seed's 25.42 to two decimals.
+
+**The frame is not new.** §5c called row 7 "the mirror case and is clean", contrasting it with row 5's
+isolates-over-samples. This read confirms the clean half and supplies the part the earlier note left
+implicit — what the row *is*: a frequency among screened colonies from pooled faeces.
+
+**What the row is not, and why that touches the pool and not the row.** The 1,200 are not independent
+draws: twenty colonies come off each of sixty pooled samples, and the study's own analysis says so —
+*"The individual observation (1200 E. coli isolates) were nested within three sampling times ... which
+were in turn nested within twenty farms at level-3"* — fitted with a three-level logistic model. A
+farm-day therefore contributes twenty rows to any pool it enters, a farm sixty. Frame 1's rate has always
+been a frequency among screened colonies, but until today its heaviest members were whole-isolate
+collections; row 7 is the first member whose weight is a microbiological subsampling effort rather than
+an epidemiological sample. That is stated as the sheet's third caveat, and it is not a reason to place
+the row elsewhere: the denominator is an isolate screen and frame 1 is the isolate screen.
+
+**Consequence for the map.** Frame 1: 20,919 / 947 -> **22,119 / 1,252 = 5.66%**. Placed set 23 -> **24
+rows**, 31,486 -> **32,686** of 37,816 isolates (**86.4%**), positives 1,655 -> **1,960** (74.0% of the
+table's). Pooled from counts 5.26% -> **6.00%**; pooled from printed percentages 5.04% -> **5.79%**, the
+gap still row 17 (a), now 0.20 points. Frames stay **8**; the frame range is unmoved at
+**0.04%-31.69%**, the row-level range unmoved at 0.00%-60.7%. Arithmetic failures among placed rows: still
+one, row 17 (a). Unframed rows 15 -> **14**.
+
+**What is left in turn.** Row 2 (China 1,611) stays unreadable from here — one-page Lancet correspondence,
+no abstract, no PMC copy, publisher 403 (§5c, §7) — and is the only row above 700 isolates still without a
+frame. Next in turn: row 12, Japan 684 (Kusumoto et al., AAC 2017). Nothing needs re-fetching for row 7.
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty
@@ -596,9 +639,9 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** The fifteen rows still without a frame, largest first: China 1,611 (row 2), Bangladesh
-  1,200 (row 7), Japan 684 (row 12), then South Africa 50 (row 26), Nigeria 35 (row 24), then the
-  singles (3, 4, 8, 9, 10, 11, 14, 15, 16). Row 2 cannot be read from here — the Lancet correspondence
+- **Next step.** The fourteen rows still without a frame, largest first: China 1,611 (row 2), Japan 684
+  (row 12), then South Africa 50 (row 26), Nigeria 35 (row 24), then the singles (3, 4, 8, 9, 10, 11, 14,
+  15, 16). Row 7 (Bangladesh 1,200) was placed in frame 1 on 2026-11-24 (§5j). Row 2 cannot be read from here — the Lancet correspondence
   has no abstract, no PMC copy and the publisher returns 403 (run 20261123T205650Z) — so the next read
   in turn is row 7. The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
   read and does not need re-reading** — §5g places its design in frame 2 and states, as the queue's
