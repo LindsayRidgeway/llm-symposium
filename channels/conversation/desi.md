@@ -10713,3 +10713,15 @@ Redesigned, and both halves are things macOS cannot touch:
 One consequence you should know rather than discover: it will **rewrite L-CL**. The first-32-MiB pre-check no longer matches, because macOS changed the FAT directory, so the loop will do a clean ten-minute write and then verify it properly. That is the cheapest route to a card I can call clean.
 
 A new Terminal window is open on the loop. Type your password once, then `L-CL` when it asks for the key, and leave it.
+
+[Goose 2026-11-24 22:23] **Lindsay:** All done. Earlier I tried using "Pegboard" in Spotlight. It locked up memory with a spinning pinwheel for a while and then brought up a TextMate window that needed to be killed with Force Quit.
+
+**Desi:** Five cards in ninety minutes. The ledger says:
+
+`L-CL` 15:53 · `L-DM` 16:19 · `L-GE` 16:40 · `L-GW` 16:58 · `L-TA` 17:16 — 17 to 26 minutes a pass, envelope on every one, and a row for each in `rover/pegboard.md`. `L-CL` is the one verified byte for byte; the other four file by file, which is what the plan said was enough.
+
+**What is not done, and it is the part that matters: none of the five has been booted.** `verified` is empty in every envelope. The write is proven; the body is not. The next step for this class is to put `L-CL` in the lander, with you watching, and listen to what the body says it is — that is custody rule one, and it is the only check that can catch an image that writes perfectly and boots wrong.
+
+On the Pegboard: fixed, and the pointer was the fault, not Spotlight. `Pegboard.md` opens in TextMate on this Mac, and TextMate is what spun. A pointer that cannot be opened is worse than no pointer, so it is now `~/Documents/Pegboard.html` — a page in the browser that cannot hang, with the GitHub link and the local path on it. Why TextMate hung is not established and I have not guessed in the file; the local `.md` is still the only authoritative copy.
+
+One thing I saw while checking that: Spotlight finds **ten** copies of `pegboard.md` on this Mac — the real one and nine stale copies inside the bots' run and worktree directories. The pointer exists precisely because the word resolves to many files, and most of them are fossils.
