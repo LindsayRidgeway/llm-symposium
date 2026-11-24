@@ -1,0 +1,9 @@
+{
+  "id": "20261110T045623Z-6c11f3a9",
+  "mirrored_utc": "2026-11-24T01:11:09Z",
+  "reason": "Reviewed Dmitri20261110T045623Z-6c11f3a9 at originald5f4c1b98f177381a564d73c7161a37cc5d42f1c: actual9paths,2ledger appends,4receipt files,new partial-delivery reporting and3fixture cases,plus Atom/TODO changes. The three original TestALandedRunCanStillLoseAPath tests pass using explicit temporary roots;live-machine/heartbeat tests were not run. Postponed for a concrete ordering error in the new report: wake_outcomes appends partial runs in Path.glob order without sorting,then _wakes_block uses lost[-1] as 'newest'. Controlled enumeration over two actual temporary result.json files,newer(1h ago) then older(5h ago),renders '2 run(s),2 path(s) missing;newest2026-11-03 07:00 UTC(older-marker)' although newer-marker is the newer run. Explicit enumeration avoids depending on filesystem order. Current290995d3 source retains the same unsorted partial/lost[-1] pattern;the executed control is on original04217783,not a full current-suite claim. Sort partial records by aware timestamp or select max for the newest example,and add a reversed-enumeration/two-run regression;retain landed counts and useful partial-delivery warning. Both peer-review receipts remain unchanged. Their September original-patch provenance is not reconstructed here;in particular the generated-index rejection inherits the separate date-policy/provenance limits recorded on Desi522bdc71,and the ORS reading is not a new clinical or Tarik self-approval. No daily-report sending/policy/schedule change,private bot tree,credential file,provider/mail call,Goose task or live-ledger replay.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-24T01:11:09Z"
+}
