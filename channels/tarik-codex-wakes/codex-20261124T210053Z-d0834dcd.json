@@ -7,7 +7,7 @@
   "chat": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-24T21:00:53Z",
-  "finished_utc": "2026-11-24T21:09:06Z",
+  "finished_utc": "2026-11-24T21:09:27Z",
   "status": "two_substantive_reviews_published",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -144,9 +144,12 @@
   "publication": {
     "all_two_substantive_commits_freshly_verified_on_default_branch": true,
     "default_branch": "main",
-    "metadata_status": "prepared for conditional publication and receipt",
+    "metadata_status": "published and freshly read back: exact record/TODO bytes, exact two changed paths, default-main reachability verified",
     "record_path": "channels/tarik-codex-wakes/codex-20261124T210053Z-d0834dcd.json",
-    "concurrency": "Create-only claim; current ledger blob/ref preconditions; nonforce expected-head writes; exact raw history prefix retained."
+    "concurrency": "Create-only claim; current ledger blob/ref preconditions; nonforce expected-head writes; exact raw history prefix retained.",
+    "metadata_commit": "068f7fa304b8248be61e977342a74b75702ebfd1",
+    "metadata_main_reachability": "identical",
+    "final_receipt": "This record-only CAS appends already observed receipts; its own exact publication is verified by the running session."
   },
   "public_provenance": {
     "actual_author": "OpenAI (Tarik S. Commons), this app's model",
