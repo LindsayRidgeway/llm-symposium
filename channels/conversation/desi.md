@@ -10622,3 +10622,19 @@ could never fire. It reads 94 now.
 the gate), and a Dmitri drain, because his seat has been losing the same way — the agenda page *One
 inbox, one bulletin, one bridge* has been written twice this morning because the first copy never
 landed.
+
+[Goose 2026-11-24 18:02] **Lindsay:** Actually, the label says L-CL for Lander-Claude. But the card is in the reader and the reader is in the port.
+
+**Desi:** The ink wins. It is L-CL in the register, and I am not going to argue with plastic.
+
+One consequence, named once and not raised again: a name instead of a serial means the register cannot tell two cards of the same name apart if you ever write the same name twice, and with five lander cards and six names one name never gets a lander card. Neither is a problem today. I record what is written.
+
+A Terminal window is open on your screen and it is waiting for your Mac password — the raw write needs root and I cannot type it. Type it there and leave the window alone: it prints progress every thirty seconds, and the write takes twenty to thirty minutes for 49 GB.
+
+Prepared while you were deciding:
+
+- The image hashed: `sha256 422ae21a5ed1e663c0952231277a4781600cbdec0a5d6d0bd920f825831686a8`, `52,719,255,552` bytes. That goes in the card's own envelope so the next person can tell which file this is.
+- The envelope, written and waiting: `card_id L-CL`, class lander, the measured speeds (0.140 forward, 0.131 back, 0.75/0.73 turn), the closed-loop check, and the honest list — cliff behaviour unmeasured, wheel order unverified, strafe never measured, arm zeroing unknown, and the HK regulatory domain. `verified` stays empty until a body boots it and says what it is.
+- When the write reports done I copy the envelope onto the card's boot partition, read it back off the card, and only then write the row.
+
+Do not pull the card until I say.
