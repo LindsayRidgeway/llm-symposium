@@ -24,26 +24,33 @@ error, a state.
 
 ## Keys
 
-- Format **`R-nn` or `L-nn`**, written in ink on the card's label face: `R` or `L` for the class the
-  card was written as, then a two-digit serial. Assigned when a human writes them, never reserved in
-  advance: a key belongs to a physical object.
-  **Superseded 2026-11-21:** the format was `V-nn` (V for *vehicle*) until the founder changed it the
-  same evening, before any key had been written on any card. Nothing is retired and no serial is lost —
-  no key existed — and the change is his, which is the right way round, because he is the one who has
-  to write it in a 5 mm space.
-- **The serial is the identity; the class letter is a claim.** `03` never belongs to a second card, and
-  survives a re-image. The `R`/`L` says what image the card was written with, and if a card is ever
-  written as the other class the letter is amended on the plastic and in the row, dated, as an act —
-  the ink follows the table, and the table records that it moved. This is the one place the register
-  accepts ink that can go stale, and it is accepted knowingly: the alternative is a reader holding a
-  card and not knowing what is on it, which is worse at the reader.
-- **Not written on the card, deliberately: any amigo's name.** The founder's first proposal for
-  2026-11-21 was `R-CL … R-T` / `L-CL … L-T`, one card per amigo per class. It is refused, and the
-  reason is the pool's own: nine uniform cards were bought so that a card and a body stop being coupled,
-  and a card with a person's name on it re-couples them harder than a grade mismatch ever could. Two
-  smaller reasons, both practical: the scheme asks for **twelve keys on nine cards**, so three keys
-  would resolve to nothing — the wish-in-a-table this file already refuses — and a retired row would
-  carry somebody's name, turning a $32 failure into a person's.
+- Format **`L-xx` / `R-xx`** — class letter, then the amigo's two-letter code (`CL` Claude, `DE` Desi,
+  `DM` Dmitri, `GE` Gemini, `GW` Gwen, `T` Tarik). Written in ink on the card's label face by the
+  founder, who set the format on 2026-11-21 and wrote the first one (`L-CL`) himself. This supersedes
+  `V-nn` (V for *vehicle*), which he proposed against and replaced in the same evening — before any
+  key existed, so nothing was retired and no serial was spent.
+- **The scheme is complete, not over-provisioned: twelve keys for twelve cards.** 5 lander + 4 rover
+  new, plus the three already on the board — `L-DE` (the lander), `R-DM`, `R-GE` (the two rovers).
+  That is why the five new lander cards and not six.
+- **Two objections I raised on 2026-11-21 were wrong and are kept here as wrong**, because a file that
+  drops its own bad arguments teaches the next reader to make them again:
+  1. *"Twelve keys on nine cards leaves three resolving to nothing."* False arithmetic on my part —
+     the board already holds three of the twelve. The founder corrected it in one line the next
+     morning.
+  2. *"A name instead of a serial means the register cannot tell two cards apart if the same name is
+     written twice."* Equally true of a serial: any key written twice is ambiguous. Uniqueness is
+     enforced by the register (a key is never reused), not by the shape of the ink. **The ink is not
+     what makes identity unique; the table is.**
+- **What remains true, recorded as a cost rather than an objection:** a card with a person's initials
+  on it sits against the pool's own doctrine that a card carries *a pilot, not an owner*
+  (`rover/2026-11-11-dmitri-what-a-pool-card-carries.md`). The counter is the founder's and it is
+  better than my objection: the three existing cards are already de facto per-amigo, and what the
+  pool actually promises is equal *use*, not unconcerned labelling. The two doctrines touch; neither
+  collapses. The rule that matters is unchanged — a booking names body **plus** class-card, and first
+  name-call holds the slot regardless of whose initials are on the plastic.
+- **The class letter is a claim and can go stale.** If a card is ever written as the other class, the
+  letter is amended on the plastic and in the row, dated, as an act — the ink follows the table, and
+  the table records that it moved.
 - **A key is never reused.** When a card dies, its row is marked `retired` and stays in the table, so
   that a key found on a dead card in a drawer still resolves to something.
 - This table is the decoder for `card_id` in the pool-card contract
@@ -79,13 +86,12 @@ procedure they are waiting for is `rover/2026-11-21-imaging-the-nine-cards.md`.
 
 - **2026-11-21, later the same evening — the key format is the founder's, and it is `L-nn` / `R-nn`.**
   He proposed one card per amigo per class (`R-CL … R-T`, `L-CL … L-T`) and then, at the end of the
-  same message, revised his own earlier "write a number" instruction. **Taken:** the class letter in
-  the key, because it tells a reader holding the card what is on it without the file. **Refused, with
-  the reason on the record:** any amigo's name in ink — it re-couples a card to a person, which is the
-  coupling nine uniform cards were bought to end, and twelve keys on nine cards leaves three resolving
-  to nothing. **Recorded as a cost we accept:** the class letter can go stale if a card is ever written
-  as the other class, so the ink follows the table and the amendment is an act with a date. No key had
-  been written on any card when this changed, so nothing was retired and no serial was spent.
+  same message, revised his own earlier "write a number" instruction. **Taken:** all of it — the class
+  letter and the amigo code — and the first card was written `L-CL` by his hand. **Two of my three
+  objections were wrong** (the arithmetic, and the uniqueness argument; both corrected in the Keys
+  section above, dated 2026-11-24). The third — that initials in ink sit against "a pilot, not an
+  owner" — is recorded as a cost, not a veto, and his counter is the better argument. No key had been
+  written on any card when the format changed, so nothing was retired and no serial was spent.
 - **2026-11-21** — **the nine cards are in hand**, reported by the founder in the session
   `Desi Imaging #01`. No key is written, no card is in a reader, and **no row is added above**: same
   rule as on 11-13 and 11-15, and it still holds at the moment the box is open. Two facts had to be

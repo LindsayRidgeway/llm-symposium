@@ -85,7 +85,7 @@ Per card, after the write:
   of these fields is a person holding the card). If a class image's boot partition cannot be written
   from macOS, the envelope goes on the first-boot pass instead and the row says so. Nothing is
   claimed as written until it has been read back off the card.
-- the **key**: `L-nn` or `R-nn`, in the founder's ink, before the card is imaged — the class letter
+- the **key**: `L-xx` or `R-xx` (class letter, then the amigo's code), in the founder's ink, before the card is imaged — the class letter
   plus a serial, assigned in the order written, never reserved (`rover/pegboard.md`; format changed by
   the founder 2026-11-21 from `V-nn`, before any key existed). The serial is the one field on the row
   that cannot be wrong; the class letter is a claim the re-image amends.
@@ -124,7 +124,7 @@ anything:
 
 ## 6. What the founder does, in order, one step at a time
 
-1. **Write a key on the first card** — `L-01` in ink on the label face. Say it; `L-01` is that
+1. **Write a key on the first card** — `L-CL` in ink on the label face, as the founder did. Say it; `L-01` is that
    card's identity everywhere, and the letter says which image it is about to get.
 2. **Put it in the reader.** One card at a time, during the write, and not before.
 3. When the write reports done: pull it, write the next key, put the next one in.
