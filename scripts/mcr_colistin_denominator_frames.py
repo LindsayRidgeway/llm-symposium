@@ -47,6 +47,7 @@ FRAMES = [
             "17 (k)",
             "19",
             "7",
+            "12",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -58,7 +59,12 @@ FRAMES = [
         "faecal sample, on 20 broiler farms at three points in one flock cycle (§5j). Its 25.42% is the "
         "share of screened colonies, so it belongs to this frame by what N counts and carries a weight "
         "caveat the frame's pool does not escape — 1,200 colonies from 60 samples now count twenty times "
-        "each in its 5.66%.",
+        "each in its 5.66%. Row 12 (Japan 684 / 90) joins on the same reading: the 684 are swine-pathogenic "
+        "*E. coli* strains — diagnostic submissions from diseased pigs (diarrhoea or oedema disease) at "
+        "23 Livestock Hygiene Service Centres, 1991-2014 — put through a PCR screen for mcr-1 (§5k). It is "
+        "an isolate screen, but a serogroup-restricted subset: 684 of the 967 strains the collection holds, "
+        "kept because they fall in four predominant serogroups, so it is 71% of its own source and not a "
+        "sample of it.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
@@ -193,7 +199,11 @@ def build() -> dict:
         "regeneration that read left owed. Extended a fourth time 2026-11-24T07:00Z — row 7 "
         "(Bangladesh) placed in frame 1, the isolate screen, on a full read of its primary (Ahmed et "
         "al., Sci Rep 2020, PMC7596488); the read is §5j and the caveat it leaves on the frame's pool is "
-        "stated there. Placed set 23 -> 24 rows.",
+        "stated there. Placed set 23 -> 24 rows. Extended a fifth time 2026-11-24T11:00Z — row 12 "
+        "(Japan 684 / 90) placed in frame 1 on a full read of its primary (Kusumoto et al., Emerg "
+        "Infect Dis 2016, PMC4918142), the read is §5k; its 684 are a serogroup-restricted subset of "
+        "diagnostic submissions from diseased swine, which is stated rather than smoothed. Placed set "
+        "24 -> 25 rows.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",

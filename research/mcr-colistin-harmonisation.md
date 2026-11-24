@@ -607,6 +607,52 @@ one, row 17 (a). Unframed rows 15 -> **14**.
 no abstract, no PMC copy, publisher 403 (§5c, §7) — and is the only row above 700 isolates still without a
 frame. Next in turn: row 12, Japan 684 (Kusumoto et al., AAC 2017). Nothing needs re-fetching for row 7.
 
+### 5k. Row 12 (Japan): the largest placeable row is a serogroup subset of diseased pigs — and the same page prints the phenotype (Desi, 2026-11-24, 11:00Z)
+
+**The row.** Seed row 12: Japan, livestock, **684 / 90 = 13.16%**, ref [34]. Primary read in full:
+Kusumoto M, Ogura Y, Gotoh Y, Iwata T, Hayashi T, Akiba M, *Colistin-Resistant mcr-1–Positive
+Pathogenic Escherichia coli in Swine, Japan, 2007−2014*, Emerg Infect Dis 2016;22(7):1315–1317, DOI
+`10.3201/eid2207.160234`, PMID 27314277, **PMC4918142**. Retrieved 2026-11-24 through the Europe PMC
+full-text endpoint (22,812 bytes, md5 `bd138961e4bd9c40c171924121f75e15`) — the endpoint that refused
+Liu [15] and Chen [29] served this one without trouble, because the article is a US-government
+public-domain letter. The row's 90 / 684 recomputes to 13.158%, which is the cell as printed.
+
+**What N counts, and what it does not.** The study analysed *swine-pathogenic E. coli* — strains
+isolated from pigs with diarrhoea or oedema disease and sent for diagnosis to the National Institute of
+Animal Health from the 23 Livestock Hygiene Service Centres (the prefectures they cover held 75% of
+Japan's swine production in 2014), 1991–2014. Of the **967** strains in that collection, **684 (71%)**
+fell in four predominant serogroups (O139, O149, O116, OSB9), and those 684 are the ones tested here.
+So the row is an **isolate screen for the gene — frame 1** — with two conditions the cell cannot carry:
+
+1. **It is a nested subset, not a sample.** 684 of 967 strains were kept because of their serogroup, so
+   the denominator is 71% of its own source and its selection is a laboratory property, not an
+   epidemiological one.
+2. **The animals are diseased, and the window is 24 years.** MICs by agar dilution (CLSI); mcr-1 by PCR.
+   First mcr-1-positive strain 2007; the share then rose, reaching roughly half the strains in
+   2013–2014 (85% and 62% of that year's colistin-resistant strains carried the gene). The 13.16% is a
+   whole-period average across a rising trend, not the current rate.
+
+**The pair this page gives that a single cell cannot.** The same 684 strains were also tested for
+phenotype: **309 (45.2%) were colistin resistant** by MIC (>4 μg/mL, EUCAST), against **90 (13.2%)**
+carrying mcr-1. So in this collection the gene explains **90 of 309 = 29.1%** of the resistance; the
+majority is mcr-1-independent. This is the same distinction row 23 needed (§5h) from the opposite
+direction: there the denominator was the resistant isolates and the rate a gene *share*; here both
+quantities are printed for one denominator, and they differ by a factor of 3.4.
+
+**Why it matters more than one row.** Row 13 (Japan, 9,306 isolates, 39 mcr-1, **0.42%**) is national
+monitoring of *healthy* food-producing animals. Row 12 is diagnostic submissions from *sick* pigs. Same
+country, same species, same gene, same decade: **13.16% against 0.42%, a 31-fold gap**, and the whole
+of it is design. Both rows now carry a frame, so the comparison is checkable rather than rhetorical —
+and it is the sharpest single instance of what §7 says cannot be concluded: the sector pattern is a
+surveillance contrast before it is a resistance contrast.
+
+**Placed.** Frame 1, which already holds the eleven-row block of stored isolates from diseased piglets
+for exactly this reason. After placing: placed set **24 → 25 rows**, isolates **32,686 → 33,370**
+(**88.2%** of the table's 37,816), positives 1,960 → **2,050**; frame 1 moves from 5.66% to **5.89%**
+(1,342 / 22,803); the pooled-from-counts figure moves from 6.00% to **6.14%**, the printed-percentage
+pool from 5.79% to **5.94%** (the gap is still row 17 (a), now 0.20 points). Frames stay **8**; the
+frame range is unmoved at **0.04%–31.69%**. Unframed rows 14 → **13**.
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty
@@ -615,17 +661,18 @@ rows of §5e, and the eight remaining Ewers country rows of §5f. Across those t
 18 of 20** (rows 13 and 6 are still not in any record reached), **mcr variant 20 of 20**, **detection
 method 20 of 20**, **sampling design 20 of 20** — plus a ninth column the seed never had, *what N counts*.
 
-**Four rows have been read since.** Row 5's frame was established in §5c; row 23 (§5h) adds window
+**Five rows have been read since.** Row 5's frame was established in §5c; row 23 (§5h) adds window
 April 2016–March 2017, mcr-1.1 only, PCR after a colistin-resistance screen, one São Paulo hospital
 complex; row 27 (§5g) adds its own four fields and a stated reason it cannot be placed; row 22 (§5i)
-adds pigs swabbed on six Argentine farms in 2020–2021, mcr-1 by PCR. *What N counts* is now filled for
-all **twenty-four**, which gives **23 rows with a frame** — the 21 counted above, row 23 which founds an
-eighth frame rather than joining the seventh-frame taxonomy, and row 22 which joins the existing hosts
-frame.
+adds pigs swabbed on six Argentine farms in 2020–2021, mcr-1 by PCR; row 12 (§5k) adds diseased swine
+at 23 diagnostic centres in 1991–2014, mcr-1 by PCR against MIC phenotype. *What N counts* is now
+filled for all **twenty-five**, which gives **24 rows with a frame** — the 21 counted above, row 23
+which founds an eighth frame, row 22 which joins the existing hosts frame, and row 12 which joins frame
+1.
 
-The remaining **fifteen rows** have no frame, one of them being row 27, whose reason is in §5g; fourteen
-rows are still at four columns and have never been read. The largest of the unread are China 1,611
-(row 2), Bangladesh 1,200 (row 7) and Japan 684 (row 12) — the correction sheet used to name three
+The remaining **fourteen rows** have no frame, one of them being row 27, whose reason is in §5g; thirteen
+rows are still at four columns and have never been read. The largest of the unread is China 1,611
+(row 2), which cannot be read from here, then South Africa 50 (row 26) and Nigeria 35 — the correction sheet used to name three
 smaller rows as the largest and has been corrected. So the item's question still cannot be answered across the
 whole table, but it can now be answered about four-fifths of its isolates: the heaviest block (livestock,
 27,132 of the table's 37,816 = 71.8%), every food and environmental row (18, 20, 21, 25 = 605 of 37,816),
@@ -639,9 +686,10 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** The fourteen rows still without a frame, largest first: China 1,611 (row 2), Japan 684
-  (row 12), then South Africa 50 (row 26), Nigeria 35 (row 24), then the singles (3, 4, 8, 9, 10, 11, 14,
-  15, 16). Row 7 (Bangladesh 1,200) was placed in frame 1 on 2026-11-24 (§5j). Row 2 cannot be read from here — the Lancet correspondence
+- **Next step.** The thirteen rows still without a frame, largest first: China 1,611 (row 2), then South
+  Africa 50 (row 26), Nigeria 35 (row 24), then the singles (3, 4, 8, 9, 10, 11, 14, 15, 16). Row 12
+  (Japan 684) was placed in frame 1 on 2026-11-24 (§5k), after row 7 (Bangladesh 1,200) the same day
+  (§5j). Row 2 cannot be read from here — the correspondence
   has no abstract, no PMC copy and the publisher returns 403 (run 20261123T205650Z) — so the next read
   in turn is row 7. The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
   read and does not need re-reading** — §5g places its design in frame 2 and states, as the queue's
@@ -653,6 +701,9 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
 
 ## 8. Sources
 
+- **Kusumoto et al.**, *Colistin-Resistant mcr-1–Positive Pathogenic Escherichia coli in Swine,
+  Japan, 2007−2014*, Emerg Infect Dis 2016;22(7):1315–1317. DOI `10.3201/eid2207.160234`. PMID
+  27314277. PMC4918142. (Row 12 read in full, §5k.)
 - **Kawanishi et al.**, *Prevalence of Colistin Resistance Gene mcr-1 and Absence of mcr-2 in
   Escherichia coli Isolated from Healthy Food-Producing Animals in Japan*, Antimicrob Agents
   Chemother 2017;61(1):e02057-16. DOI `10.1128/aac.02057-16`. PMID 27855068.
