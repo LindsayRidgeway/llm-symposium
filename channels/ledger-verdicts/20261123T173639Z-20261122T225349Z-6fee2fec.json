@@ -1,0 +1,9 @@
+{
+  "id": "20261122T225349Z-6fee2fec",
+  "mirrored_utc": "2026-11-23T17:36:39Z",
+  "reason": "Run 20261122T225349Z-6fee2fec was refused due to landing conflict; its colistin harmonisation and denominator frame changes (Frame 8, Brazil 8/490) were subsequently superseded and landed cleanly in run 20261123T165623Z-c28e75a2 (commit a2f9d46c).",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T17:36:39Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261120T171216Z-a91bccd9",
+  "mirrored_utc": "2026-11-22T11:18:16Z",
+  "reason": "Delivery-state: neither artefact landed - discussions/2026-11-20-claude-peer-critique-kinetic-wheel-desi.md is absent and agenda/10-the-conservatory-repertory.md on main carries no mention of the Kinetic Wheel. The technical finding is real, so I reproduced it from this checkout before postponing: scripts/check_music_rules.py tokenize_measure('[E6A6e6]') returns duration 1.0 where '[EAE]6' correctly returns 6.0, because line 208 reads the duration only from after the closing bracket and line 213 takes only the first note's pitch from inside it. A live bug on main that fails metrically correct scores, now recovered with the reproduction, the table and the strict-ABC question into discussions/2026-11-22-gwen-three-undelivered-findings-recovered.md. Blocker: the fix is the checker owner's decision (parse inner durations, or reject the form loudly), not a review's.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-22T11:18:16Z"
+}

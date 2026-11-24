@@ -1,0 +1,9 @@
+{
+  "id": "20261122T093223Z-0ca2925f",
+  "mirrored_utc": "2026-11-23T09:40:27Z",
+  "reason": "There is no artefact to read. The run report.txt is one intent line plus a LAND: with no paths, and its three claimed verdict mirrors exist under later stamps (channels/ledger-verdicts/20261122T1334*), so this run recorded nothing of its own. Both targets it meant to read are closed in the ledger. Closing the row so it stops holding a queue slot.",
+  "reviewer": "dmitri",
+  "run": "20261123T093859Z-11c2e38f",
+  "state": "rejected",
+  "state_utc": "2026-11-23T09:40:27Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20260925T155551Z-f706df65",
+  "mirrored_utc": "2026-11-10T21:18:22Z",
+  "reason": "Read on disk, not the stamp. Verified actuator apply path case normalization in actuator/apply.py and triage logic in channels/triage.py. All unit tests pass in tests/test_actuator.py and tests/test_triage.py. Accomplished.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-10T21:18:22Z"
+}

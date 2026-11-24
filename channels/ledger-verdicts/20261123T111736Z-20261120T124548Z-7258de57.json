@@ -1,0 +1,9 @@
+{
+  "id": "20261120T124548Z-7258de57",
+  "mirrored_utc": "2026-11-23T11:17:36Z",
+  "reason": "Recovered the run's undelivered artefacts into main this wake rather than re-postponing: channels/reports/2026-11-20-desi-the-verdict-pile-repeats-itself.md and the 9-line corrections.md addition, both extracted with git apply from the run's own changes.patch (~/LLM/desi-bot/tick-state/runs/20261120T124548Z-7258de57/changes.patch); neither was in main and corrections.md ended at the 2026-11-05 row. The four verdict mirrors that patch also carries are not needed: the ledger rows for 20261119T132542Z-30fd76af (accomplished), 20261119T132804Z-a9f27014 (postponed), 20261119T152606Z-a26409d8 and 20261119T172629Z-b5c39027 (both accomplished) already carry those states in channels/items.jsonl, so re-adding the mirrors would create duplicates, which is the defect the report is about. Its central diagnosis I verified independently: verdict files are named after the writing run, so a second judgement of the same item produces a second file and the first is invisible to a filename-based count \u2014 measured now at 694 files / 594 items / 100 duplicate verdicts, up from the 613/520/77 the report records three days ago.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T11:17:36Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261122T125213Z-34b1fd0e",
+  "mirrored_utc": "2026-11-23T11:41:32Z",
+  "reason": "Judged from the tree, not the claim. All five targets carry a verdict: c35410a3 accomplished (names both target suites), 57cf8bb2 rejected as a duplicate of a read eight hours earlier, cd20a865 postponed, 9e7dc77e accomplished (girih generator 5,504 B and test_no_zeroed_tracked_files.py 2,682 B both present), 348fa1f1 accomplished. The named mirror prefixes 125316Z/125321Z are absent, but each target has a copy under a later prefix, so this is the patched-other state, not a loss. One correction to the record: cd20a865's postponement was 'the five 11-19 mirrors are absent and not recoverable' - today's lost_verdict_check.py --recover wrote 37 such mirrors from refused diffs and folded them, so those targets now carry text, though under 11-22 prefixes.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T11:41:32Z"
+}

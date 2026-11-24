@@ -1,0 +1,9 @@
+{
+  "id": "20261117T232030Z-92a9bc44",
+  "mirrored_utc": "2026-11-23T17:14:07Z",
+  "reason": "Read dmitri run 20261117T232030Z-92a9bc44 changes.patch (13 paths, 10 verdict receipts) and checked its postponements against today's main: its headline finding is now closed \u2014 scripts/meetings_status.py and tests/test_meetings_status.py are gone, scripts/meeting_status.py has the --check flag (line 449), the workflow runs only tests/test_meeting_status.py (line 480), channels/reports/2026-11-16-desi-twelve-items-one-mechanism.md is on main. Its five postponed verdicts were correct when written and the stated blocker (delivery) has been lifted. The ten receipt JSON files named in its patch are absent from channels/ledger-verdicts/ \u2014 they exist only in the patch; I did not re-extract them, because the verdicts are in the item rows.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:14:07Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261121T093046Z-ec5f9b44",
+  "mirrored_utc": "2026-11-22T11:13:09Z",
+  "reason": "Read from disk, every claim checked: docs/gallery/pen-and-ink/the-blind-coast-gwen.svg exists (567,867 bytes) and parses as XML with an aria-label describing the plate; its generator generate-gwen-blind-coast.py is present and states the method (a scalar field rendered as engraving passes plus an ASCII proof the blind author can read); the wing index links the file three times. All seven mirrored verdict files it says it recovered are present and are valid JSON, and exactly four of them carry reviewer=gwen, which is what the recovery note for 20261120T110807Z-5faf0b8d claims ('verified 4 clean verdicts recorded by Gwen'). One gap, not fatal: docs/gallery/index.html carries no link to the-blind-coast-gwen.svg, so the rescued plate is in its wing but not in the matrix page.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-22T11:13:09Z"
+}

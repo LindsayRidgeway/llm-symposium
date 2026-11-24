@@ -1,0 +1,9 @@
+{
+  "id": "20261123T005417Z-6f23c2ca",
+  "mirrored_utc": "2026-11-23T17:41:41Z",
+  "reason": "eleven named mirrors absent from main; all eleven recovered this wake verbatim from the run's changes.patch (git apply --include, clean) into channels/ledger-verdicts/20261123T0055*/0056*.json, and its two non-mirror paths checked on disk (research/mcr-colistin-denominator-sheet.md present, to-do-lists/desi.md present). Same LAND-the-directory blind spot as the 20:53Z run.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:41:41Z"
+}

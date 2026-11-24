@@ -1,0 +1,9 @@
+{
+  "id": "20261123T174007Z-4eb9caaa",
+  "mirrored_utc": "2026-11-24T02:59:18Z",
+  "reason": "His 17 lost verdicts were recoverable from his own delivery, so I recovered them rather than postponing: of the 49 verdict files in dmitri-bot run 20261123T174007Z-4eb9caaa/changes.patch, 27 name target ids that already carry a mirror on main under another timestamp (re-adding those is the duplicate loop he was describing), and 22 name a target id with no mirror at all. I took the 22, checked all parse and carry id+state, and folded them in with scripts/ledger_verdict_mirror.py replay: 22 applied, 0 refused. Two measurements from after the fold: his claim that the five reviews were already done and lost holds (the five named files are absent from main and their ids were covered), and the conflict reader's count moved 25 to 26 because one recovered verdict is itself older than a machine stamp -- the defect he found is still live, now with one more witness. I did not take his items.jsonl rows: the ledger rows for those ids are written by collect and replay, and hand-appending them would have duplicated what is already there.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T02:59:18Z"
+}

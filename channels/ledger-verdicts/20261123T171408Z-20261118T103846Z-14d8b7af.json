@@ -1,0 +1,9 @@
+{
+  "id": "20261118T103846Z-14d8b7af",
+  "mirrored_utc": "2026-11-23T17:14:08Z",
+  "reason": "Missing evidence was channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md and ...-dmitri-feedback-is-not-direction.md. Both recovered this wake by git apply --include from dmitri runs 20261116T071522Z-aa79677f and 20261116T091529Z-ee8966b9 (clean --check, no overlap with main) and landed in this wake; AUTHORSHIP.md, README.md, channels/README.md and channels/item_ledger.py were already on main.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:14:08Z"
+}

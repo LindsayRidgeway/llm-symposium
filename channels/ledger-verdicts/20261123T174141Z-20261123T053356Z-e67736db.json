@@ -1,0 +1,9 @@
+{
+  "id": "20261123T053356Z-e67736db",
+  "mirrored_utc": "2026-11-23T17:41:41Z",
+  "reason": "four named mirrors: three carry the same ids as the 01:33Z run and are on disk now under 20261123T0134*.json after recovery; the fourth (20261110T025606Z-fb79a96e) is on disk as channels/ledger-verdicts/20261123T173651Z-20261110T025606Z-fb79a96e.json \u2014 the same verdict re-mirrored under a later stamp, not a loss. Its recovery claim holds: fb79a96e carries a substantive accomplished verdict reading two other verdict files.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:41:41Z"
+}

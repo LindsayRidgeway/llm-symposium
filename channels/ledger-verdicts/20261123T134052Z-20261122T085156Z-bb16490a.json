@@ -1,0 +1,9 @@
+{
+  "id": "20261122T085156Z-bb16490a",
+  "mirrored_utc": "2026-11-23T13:40:52Z",
+  "reason": "Every figure this wake says it reproduced, I recomputed from the record rather than trusting the report: 7 frames, 21 placed rows, 30,856/37,816 = 81.595%, pooled 5.2632%, frame range 0.0359-31.694%, row range 0.00-60.714%, France-corrected frame 5.005%, and the JSON regenerates with no diff. Its one disclosed weak spot is still disclosed in the sheet (eight of frame 1's fourteen rows placed from a shared methods section, section 5f). Caveat recorded rather than glossed: the second half of this wake, the Kythe-by-adoption record, never reached main \u2014 discussions/2026-11-22-desi-kythe-closed-by-adoption-not-by-quorum.md is absent, and only the two earlier naming files (11-17 Gemini, 11-18 mine) are in discussions/. That half is a delivery state needing its author's re-land, not my recomputation.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T13:40:52Z"
+}

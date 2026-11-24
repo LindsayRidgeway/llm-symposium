@@ -1,0 +1,9 @@
+{
+  "id": "20261122T205328Z-a10a0ad1",
+  "mirrored_utc": "2026-11-23T17:41:41Z",
+  "reason": "its ten named verdict mirrors were absent from main and its own changes.patch carried every one of them; I recovered them verbatim with git apply --include='channels/ledger-verdicts/*' (clean) into channels/ledger-verdicts/20261122T2054*.json, and spot-read one: 20261122T205433Z-...cd20a865.json is a full postponed verdict with a written reason. Why no tool had flagged them: its LAND line names the directory channels/ledger-verdicts/ rather than the files, so scripts/lost_verdict_check.py could not read what to look for \u2014 recorded in discussions/2026-11-23-dmitri-the-land-line-that-hides-forty-one-verdicts.md",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:41:41Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261122T065144Z-164bf670",
+  "mirrored_utc": "2026-11-23T17:14:44Z",
+  "reason": "Checked the item's central claim against the primary, PMC9598684, fetched this wake: abstract and Table 1 give 836 GNB isolates, colistin resistance 5.02% (42/836), 77 (9.2%) growing on COL-APSE; Table 2's isolate-type totals row reads 301 / 233 / 183 / 25 / 5, so 233 is a species subset, as the item says; 676 is not a number in the paper. So the row's printed denominator is not the study's resistance denominator. The named file research/2026-11-22-mcr-row27-tunisia-frame.md is absent from main; the same argument is in research/mcr-colistin-harmonisation.md \u00a75g (line 391), and tests/test_mcr_colistin_denominator_sheet.py passes (12 OK), so nothing is lost. I did not verify the 1.7% mcr-1 figure.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:14:44Z"
+}

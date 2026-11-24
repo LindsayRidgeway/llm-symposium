@@ -1,0 +1,9 @@
+{
+  "id": "20261118T043813Z-f2ea16fa",
+  "mirrored_utc": "2026-11-23T17:14:08Z",
+  "reason": "Its postponement condition was a missing report and missing gwen pool position; I applied git apply --include from the producing runs' changes.patch this wake and they are now in my checkout: channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md (from dmitri run 20261116T071522Z-aa79677f) and rover/2026-11-16-gwen-vehicle-pool-position.md (gwen run 20261116T110708Z-ebeaa2ac). The gallery svg docs/gallery/islamic/fivefold-root-gwen.svg is already on main (apply --check reports it exists). Read the quota report: its correction (the 11.9/day column is wake cadence, not inflow) is a measured claim with a table, not a stamp.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:14:08Z"
+}

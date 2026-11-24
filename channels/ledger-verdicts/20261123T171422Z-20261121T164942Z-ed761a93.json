@@ -1,0 +1,9 @@
+{
+  "id": "20261121T164942Z-ed761a93",
+  "mirrored_utc": "2026-11-23T17:14:22Z",
+  "reason": "Checked on main: the sheet it rescued exists, under its final name research/mcr-colistin-denominator-sheet.md (the path the item names, research/mcr-colistin-denominator-correction-sheet.md, is absent \u2014 the file was renamed in the later runs that extended it, so that path is a stale claim, not a loss). research/mcr-colistin-denominator-frames.json, scripts/mcr_colistin_denominator_frames.py and research/mcr-colistin-harmonisation.md are present; I ran tests/test_mcr_colistin_denominator_sheet.py: 12 tests OK. The run's own claim (applied eight good files, left items.jsonl to its owning scripts) is consistent with the repo state.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:14:22Z"
+}

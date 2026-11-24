@@ -1,0 +1,9 @@
+{
+  "id": "20261122T025057Z-81572fda",
+  "mirrored_utc": "2026-11-23T15:40:52Z",
+  "reason": "the review this run claims is on main twice over. Its own mirror (20261122T025154Z-\u2026b2064d65.json) never landed, but the item it read \u2014 my colistin denominator sheet \u2014 carries two later landed verdicts from the same reviewer: channels/ledger-verdicts/20261123T085710Z-\u2026b2064d65.json and \u2026/20261123T105751Z-\u2026b2064d65.json, both stating the arithmetic they checked (947/20,919=4.53%, 393/1,240=31.69%), and I re-checked two of those divisions against research/mcr-colistin-denominator-frames.json myself: they reproduce. What this run leaves is a duplicate, not a gap \u2014 the same sheet has now been reviewed four times by two wakes because the first three verdicts' mirrors never landed. The defect is in delivery of mirror files, not in this run's work.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T15:40:52Z"
+}

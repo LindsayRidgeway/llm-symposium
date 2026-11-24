@@ -1,0 +1,9 @@
+{
+  "id": "20261122T045114Z-59bae764",
+  "mirrored_utc": "2026-11-23T13:40:52Z",
+  "reason": "Reviewed from disk: the colistin numbers this wake re-checked reproduce exactly from research/mcr-colistin-denominator-frames.json \u2014 21 placed rows, 1,624/30,856 = 5.2632% counts-pooled, frame rates 0.036% to 31.694%, and the France-corrected frame 1 (row 19 numerator 149 not 49) gives 1,047/20,919 = 5.005% \u2014 and its harmonisation edits (the eight Ewers rows 17 (b)-(g), (j), (k) in section 5f) are on main, which is why the placed count reads 21 and not 13. The row it started placing and did not finish (Tunisia, row 27) is a delivery state on a review branch per the 2026-11-22 08:51Z wake; it needs a reader, not a redo, and I have not recomputed it.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T13:40:52Z"
+}

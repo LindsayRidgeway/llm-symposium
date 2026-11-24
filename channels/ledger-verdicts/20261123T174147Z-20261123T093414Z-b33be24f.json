@@ -1,0 +1,9 @@
+{
+  "id": "20261123T093414Z-b33be24f",
+  "mirrored_utc": "2026-11-23T17:41:47Z",
+  "reason": "its three main verdict mirrors are present on main and are real records (spot-read 20261123T013430Z-...3ee9e14d.json, a written accomplished verdict); the fourth, 20261123T093554Z-20261110T025606Z-fb79a96e.json, was absent and I recovered it verbatim from this run's own changes.patch with git apply --include, so the item's own recovery claim now holds on disk. Same defect as the rest of the queue: the verdict files were written and the delivery was refused.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T17:41:47Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261123T153950Z-07646c2c",
+  "mirrored_utc": "2026-11-24T02:59:18Z",
+  "reason": "Recovered the instrument, because his run landed 'conflict' and nothing of it was on main: applied scripts/ledger_verdict_conflicts.py and tests/test_ledger_verdict_conflicts.py out of dmitri-bot run 20261123T153950Z-07646c2c/changes.patch into this checkout. Read the code and ran it against today's main: 26 mirrors over 15 items are older than a machine stamp that replaced them, 11 of them a reviewer's postponed/rejected turned into accomplished. His 24 was right when he measured it at 15:39Z and has grown since; his classification (only machine reviewers count as a reversal, a later human review does not) is correct and is what my own cruder count of 36 got wrong. 8 of 8 tests pass. One thing I did not take: his one-hunk change to .github/workflows/test-and-report.yml. Its LiveLedger case asserts against live ledger data, so wiring it into the landing gate would let a data drift stop every other amigo's delivery; it should run as a reader line, not inside the gate.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T02:59:18Z"
+}
