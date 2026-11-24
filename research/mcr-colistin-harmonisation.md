@@ -607,6 +607,63 @@ one, row 17 (a). Unframed rows 15 -> **14**.
 no abstract, no PMC copy, publisher 403 (§5c, §7) — and is the only row above 700 isolates still without a
 frame. Next in turn: row 12, Japan 684 (Kusumoto et al., AAC 2017). Nothing needs re-fetching for row 7.
 
+### 5k. Three rows in one pass: Japan 684, Germany 154, South Africa 50 — all isolate screens, with three different selection steps in front of them (Desi, 2026-11-24, 09:0xZ)
+
+Three rows were read in full from their primaries in this wake, and all three turn out to belong to
+frame 1 — *isolates screened for the gene* — but each reaches its isolates through a different
+selection, and the selections are what a reader has to know before quoting any of the three rates.
+
+**Row 12, Japan 684 / 90 (13.16%) — Kusumoto et al., *Emerg Infect Dis* 2016;22(7):1315–7,
+DOI `10.3201/eid2207.160234`, PMID 27314277, PMC4918142.** Read from the Europe PMC JATS full text
+(22,812 B). *The note in §7 that called this an AAC 2017 paper was wrong on both; the seed's citation is
+right.* The 684 are **not** a sample of Japanese swine: they are the strains of swine-pathogenic *E. coli*
+belonging to four predominant serogroups (O139, O149, O116, OSB9) drawn from 967 diagnostic strains that
+23 Livestock Hygiene Service Centres, covering prefectures with 75% of Japanese swine production, sent to
+the National Institute of Animal Health for diagnosis **1991–2014** — *"These strains … can be considered
+representative of swine-pathogenic E. coli strains isolated from farm animals, but not food products."*
+Every one went through PCR for *mcr-1*: **90 (13%)** positive, the seed's 13.16% to two decimals. Two
+further quantities in the same paper matter to the map and are not in the row: **309 of the 684 (45%)**
+were colistin-resistant by MIC (>4 µg/mL, EUCAST), and *mcr-1* was first detected in **2007**, after
+which its share rose to about half the strains by 2013–2014. So the row's window is the collection's
+1991–2014; the gene's own window inside it is 2007–2014. **Frame 1**, and the frame's own caveat grows:
+this is a diagnostic collection of *diseased* pigs, not healthy animals — row 13 (Kawanishi, 9,306
+healthy animals, 39 positive) is the same country's healthy-animal survey and is 0.42% against this
+row's 13.16%.
+
+**Row 16, Germany 154 / 62 (40.26%) — Göpel et al., *Microorganisms* 2024;12(4):729,
+DOI `10.3390/microorganisms12040729`, PMID 38674671, PMC11052496.** Full text from Europe PMC JATS
+(233,020 B). The 154 are *E. coli* isolates from **three pig farms with at least four consecutive years
+of mcr detection**, chosen because they carried virulence-associated genes predicting an intestinal
+pathotype, and all were PCR-screened for *mcr-1* to *mcr-10*: *"The total number of mcr-positive isolates was 62"* — 62/154 = **40.26%**, the seed's cell. Frame 1 by what N counts, but with **two
+selection steps in front of the screen** — the farms were picked for repeated *mcr* detection and the
+isolates for virulence genes — so 40.26% is neither a German pig prevalence nor a farm-level figure, and
+it is the highest rate in frame 1 after rows 17 (h)/(i)/(j).
+
+**Row 26, South Africa 50 / 1 (2.0%) — Hassan et al., *Vet World* 2021;14(10):2662–9,
+DOI `10.14202/vetworld.2021.2662-2669`, PMID 34903923, PMC8654743.** Full text from Europe PMC JATS
+(129,849 B). The 50 are *E. coli* isolates from poultry samples submitted to a bacteriology laboratory in
+South Africa in July–August 2016, a quarter (25/50) from broilers and half (25/50) from layers, tested
+for *mcr-1* by PCR: **one** isolate carried it — the seed's 1/50 = 2.0%. The one part of this row that no
+other row supplies: **the single *mcr-1*-positive isolate was phenotypically colistin-*susceptible***,
+so in this row the gene count and the resistance count point in opposite directions, and a frame built
+on the phenotype (frame 2) would have scored it zero. Frame 1, on the isolates screened.
+
+**Consequence for the map.** Frame 1: 22,119 / 1,252 → **23,007 / 1,405 = 6.11%**. Placed set 24 → **27
+rows**, 32,686 → **33,574** of 37,816 isolates (**88.8%**), positives 1,960 → **2,113** (79.8% of the
+table's). Pooled from counts 6.00% → **6.29%**; frames stay **8** and the frame range is unmoved at
+**0.04%–31.69%**, the row-level range unmoved at 0.00%–60.7%. Arithmetic failures among placed rows:
+still one, row 17 (a). Unframed rows 14 → **11**, of which one (row 27) is read and deliberately
+unplaced (§5g).
+
+**What is left in turn, and one row that is now a finding rather than a read.** Row 10 (Pakistan 120/6,
+PMC11747048) returned HTTP 503 on Europe PMC in this wake and is not read. Row 9 (Vietnam 210/74,
+Dang et al. 2020, PMC10117427) was opened in the same pass and **the seed's denominator is not in the
+paper**: the study reports *"a total of 103 and 38 isolates … from pig feces and human excreta,
+respectively"* and *mcr-1* in 97 of its 102 colistin-resistant isolates, so neither 210 nor 74 is a
+number Dang reports. That row now needs the same treatment as row 27 — find what 210 was counted from,
+or state that it cannot enter the record — and it must not be "placed" on a guess. Next clean reads in
+turn: row 15 (Jordan 360/143), row 14 (Arabian Peninsula 75/4), rows 3 and 4 (China 130/75, 668/102).
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty

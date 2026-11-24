@@ -47,6 +47,9 @@ FRAMES = [
             "17 (k)",
             "19",
             "7",
+            "12",
+            "16",
+            "26",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -58,7 +61,15 @@ FRAMES = [
         "faecal sample, on 20 broiler farms at three points in one flock cycle (§5j). Its 25.42% is the "
         "share of screened colonies, so it belongs to this frame by what N counts and carries a weight "
         "caveat the frame's pool does not escape — 1,200 colonies from 60 samples now count twenty times "
-        "each in its 5.66%.",
+        "each in its 5.66%. Three more rows were placed here on 2026-11-24 (§5k), each an isolate "
+        "screen with a different selection in front of it: row 12 (Japan 684 / 90) is a diagnostic "
+        "collection of diseased pigs, four serogroups out of 967 strains sent to one national institute "
+        "1991-2014, and the same country's healthy-animal survey is row 13 at 0.42% against its 13.16%; "
+        "row 16 (Germany 154 / 62) is 154 VAG-positive isolates from three farms chosen for four "
+        "consecutive years of mcr detection, so its 40.26% is neither a national nor a farm-level rate; "
+        "row 26 (South Africa 50 / 1) is poultry isolates submitted to one laboratory, and its single "
+        "mcr-1 carrier was phenotypically colistin-SUSCEPTIBLE, the one cell in this frame where the gene "
+        "count and the resistance count point opposite ways.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
@@ -193,7 +204,10 @@ def build() -> dict:
         "regeneration that read left owed. Extended a fourth time 2026-11-24T07:00Z — row 7 "
         "(Bangladesh) placed in frame 1, the isolate screen, on a full read of its primary (Ahmed et "
         "al., Sci Rep 2020, PMC7596488); the read is §5j and the caveat it leaves on the frame's pool is "
-        "stated there. Placed set 23 -> 24 rows.",
+        "stated there. Extended a fifth time 2026-11-24T09:05Z — rows 12 (Japan 684/90), 16 (Germany "
+        "154/62) and 26 (South Africa 50/1) placed in frame 1 on three full primary reads recorded in "
+        "research/mcr-colistin-harmonisation.md §5k; the selection steps in front of each screen are "
+        "stated there and in this frame's note. Placed set 24 -> 27 rows.",
         "closes": "value-queue item colistin-denominator-sheet",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
@@ -239,9 +253,10 @@ def build() -> dict:
         ),
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 14 of 38 rows have no frame, "
-            "and the largest of them (China 1,611 row 2, Japan 684 row 12) could widen or narrow it; "
-            "Tunisia 676 is now read and deliberately unplaced, per §5g.",
+            "That the unplaced rows could not move the range. They could — 11 of 38 rows have no "
+            "frame, and the largest is China 1,611 (row 2), which cannot be read from here; Tunisia 676 "
+            "is read and deliberately unplaced (§5g), and Vietnam 210 (row 9) has a denominator its own "
+            "primary does not report (§5k).",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],
