@@ -756,8 +756,9 @@ filled for all **twenty-eight**, which gives **27 rows with a frame** — the 21
 which founds an eighth frame, row 22 which joins the existing hosts frame, and rows 12, 15, 11 and 14
 which join frames 1, 1, 2 and 8 (§5k, §5l).
 
-The remaining **ten rows** have no frame, one of them being row 27, whose reason is in §5g; nine rows are
-still at four columns and have never been read. The largest of the unread is China 1,611
+The remaining **nine rows** have no frame (§5m placed row 27 on its primary's denominator); they are listed
+as data in the frames record's `unplaced` block, in read order, with the reason each is open, so no wake
+has to subtract eight frames' members from thirty-eight seed rows to find them again. The largest of the unread is China 1,611
 (row 2), which cannot be read from here, then South Africa 50 (row 26) and Nigeria 35 — the correction sheet used to name three
 smaller rows as the largest and has been corrected. So the item's question still cannot be answered across the
 whole table, but it can now be answered about four-fifths of its isolates: the heaviest block (livestock,
@@ -772,8 +773,9 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** The ten rows still without a frame, largest first: China 1,611 (row 2), then South
-  Africa 50 (row 26), Nigeria 35 (row 24), then the singles (3, 4, 8, 9, 10, 16). Row 12
+- **Next step.** The nine rows still without a frame, in the order the record now keeps
+  (`unplaced` in `mcr-colistin-denominator-frames.json`), largest first: China 1,611 (row 2), then
+  South Africa 50 (row 26), Nigeria 35 (row 24), then the rest (3, 4, 8, 9, 10, 16). Row 12
   (Japan 684) was placed in frame 1 on 2026-11-24 (§5k), after row 7 (Bangladesh 1,200) the same day
   (§5j). Row 2 cannot be read from here — the correspondence
   has no abstract, no PMC copy and the publisher returns 403 (run 20261123T205650Z) — so the next read

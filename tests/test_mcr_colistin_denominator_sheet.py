@@ -321,6 +321,85 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("mcr-colistin-harmonisation.md", self.sheet)
 
 
+class TheOpenSetIsData(unittest.TestCase):
+    """The nine rows with no frame are a block in the record, not a subtraction every wake repeats.
+
+    Added 2026-11-24 with the `unplaced` block. The point is narrow and worth a test: the set of open
+    rows used to exist only as the difference between thirty-eight seed rows and eight frames' members,
+    so each colistin wake re-derived it by hand, and one wake then spent its budget suspecting the
+    frames file's ids (`17 (a)`) did not match the seed's — they do. What this class pins is that the
+    set is computed from the seed rather than remembered, that it is disjoint from the placed rows,
+    that every row in it says why it is still open, and that the generator fails rather than build a
+    stale list.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.record = json.loads(RECORD.read_text())
+        cls.seed = json.loads(SEED.read_text())
+        cls.rows = {str(r["sl"]): r for r in cls.seed["rows"]}
+        cls.unplaced = cls.record["unplaced"]
+
+    def test_the_open_set_is_the_seed_minus_the_placed_rows(self):
+        placed = {m["row"] for f in self.record["frames"] for m in f["members"]}
+        self.assertEqual(len(placed), 29)
+        open_rows = set(self.rows) - placed
+        self.assertEqual(set(self.unplaced["rows"]), open_rows)
+        self.assertEqual(len(self.unplaced["rows"]), 9)
+        self.assertEqual(self.record["placed"]["unplaced_rows"], 9)
+
+    def test_nothing_is_both_placed_and_open_and_nothing_is_lost(self):
+        placed = {m["row"] for f in self.record["frames"] for m in f["members"]}
+        self.assertFalse(placed & set(self.unplaced["rows"]))
+        self.assertEqual(len(placed) + len(self.unplaced["rows"]), len(self.rows))
+        # and the open rows' own counts are the seed's, recomputed here
+        self.assertEqual(self.unplaced["N"], sum(self.rows[k]["n_isolates"] for k in self.unplaced["rows"]))
+        self.assertEqual(self.unplaced["n"], sum(self.rows[k]["mcr_positive"] for k in self.unplaced["rows"]))
+        self.assertEqual(self.unplaced["N"], 3082)
+        self.assertEqual(self.unplaced["n"], 441)
+        self.assertAlmostEqual(
+            self.unplaced["share_of_table_N_pct"],
+            round(100 * 3082 / self.seed["derived"]["sum_isolates"], 4),
+            places=4,
+        )
+
+    def test_every_open_row_says_why_it_is_open(self):
+        allowed = {"not read", "unreadable from here", "read, cannot be placed"}
+        for m in self.unplaced["members"]:
+            self.assertIn(m["read_status"], allowed, m["row"])
+            self.assertTrue(m["why"].strip(), m["row"])
+            self.assertEqual(m["N"], self.rows[m["row"]]["n_isolates"])
+        unreadable = [m["row"] for m in self.unplaced["members"] if m["read_status"] == "unreadable from here"]
+        self.assertEqual(unreadable, ["2"], "only China 1,611 is refused by its source")
+        self.assertEqual(self.unplaced["read_status_counts"], {"not read": 8, "unreadable from here": 1})
+
+    def test_the_read_order_is_the_one_the_working_names(self):
+        self.assertEqual(self.unplaced["rows"], ["2", "26", "24", "3", "4", "8", "9", "10", "16"])
+        self.assertEqual([m["read_order"] for m in self.unplaced["members"]], list(range(1, 10)))
+        harmonisation = (ROOT / "research" / "mcr-colistin-harmonisation.md").read_text()
+        self.assertIn("China 1,611 (row 2), then", harmonisation)
+        self.assertIn("Africa 50 (row 26), Nigeria 35 (row 24)", harmonisation)
+        sheet = SHEET.read_text()
+        self.assertIn("`unplaced`", sheet)
+
+    def test_the_generator_refuses_a_stale_open_list(self):
+        """A placement that leaves the list untouched must fail the build, not pass quietly."""
+        sys.path.insert(0, str(ROOT / "scripts"))
+        try:
+            import mcr_colistin_denominator_frames as mod
+        finally:
+            sys.path.pop(0)
+        saved = list(mod.UNPLACED_READ_ORDER)
+        try:
+            mod.UNPLACED_READ_ORDER = [k for k in saved if k != "26"]
+            with self.assertRaises(SystemExit) as ctx:
+                mod.build()
+            self.assertIn("UNPLACED_READ_ORDER is out of date", str(ctx.exception))
+        finally:
+            mod.UNPLACED_READ_ORDER = saved
+        self.assertEqual(mod.build()["unplaced"]["rows"], saved)
+
+
 class ScriptRuns(unittest.TestCase):
     def test_show_reports_the_frames_and_the_range(self):
         out = subprocess.run(

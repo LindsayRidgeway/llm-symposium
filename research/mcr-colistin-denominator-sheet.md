@@ -50,6 +50,13 @@ fresh read — the working is `mcr-colistin-harmonisation.md` §5f. Every count 
 the record; the placed set grew from 13 rows to 21 and the sentences that quoted 13, 29,488 and 78%
 have been recomputed rather than left standing.
 
+**Extended a ninth time 2026-11-24, 21:4xZ, by Dmitri — no row read and no number moved.** The nine rows
+with no frame are now a block in the record (`unplaced` in the frames JSON) computed as the seed minus
+every frame's members, in read order, each carrying its counts and the reason it is still open; the
+generator refuses to build if a placement leaves the list stale. Two prose errors about that list are
+corrected under *What this does not say* below — the third and last time the open set is edited in prose
+while a computed set exists to read it off.
+
 **Extended an eighth time 2026-11-24, 18:5xZ, by Desi — the method decision §5g left owed, now made.**
 Row 27 (Tunisia) has been read in full and unplaceable since 2026-11-23 10:55Z, because its printed
 denominator is a number the study never reports: the review's 676 appears in no table, no methods
@@ -158,13 +165,22 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
 ## What this does not say
 
 1. **Not that the eight rates are comparable.** They are not; that is the finding.
-2. **Not that the range is final.** 9 of the 38 rows still have no frame. The largest is China 1,611
-   (row 2), which cannot be read from here: a one-page Lancet correspondence with no abstract and no
-   PMCID, publisher 403, retried on 2026-11-24 and refused again. After it come South Africa 50 (row 26)
-   and Nigeria 35 (row 24), then six rows under thirty isolates that have never been read. (An earlier
-   version of this paragraph named three other rows as the largest unplaced, and one draft of it ran two
-   sentences together into an unreadable one; the seed's order is the one above.) Until they are placed
-   the number is "90.7% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
+2. **Not that the range is final.** 9 of the 38 rows still have no frame, and the record now lists
+   them instead of leaving the set to be subtracted: `unplaced` in
+   [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json) gives all nine in read
+   order, each with its counts and with *why it is still open* — one source refusal, eight unread. In
+   that order: China 1,611 (row 2, **cannot be read from here** — a one-page Lancet correspondence with
+   no abstract and no PMCID, publisher 403, retried on 2026-11-24 and refused again), South Africa 50
+   (row 26), Nigeria 35 (row 24), China 130 (row 3, printed **57.69%** — the table's highest cell, and
+   the read most likely to move a frame rate), China 668 (row 4), Bangladesh 104 (row 8), Vietnam 210
+   (row 9), Pakistan 120 (row 10), Germany 154 (row 16). Read order puts the two largest readable rows
+   late on purpose: §7 fixed that order before these counts were in one place, and re-ordering it by
+   size would be a new decision, not a correction. **Two corrections in this paragraph.** An earlier
+   version named three other rows as the largest unplaced; and until 2026-11-24 it described the last
+   six as "rows under thirty isolates", which is true of none of them — the smallest of the six is 104
+   isolates. Both errors came from writing the list in prose over separate wakes instead of reading it
+   off a computed set, which is what the `unplaced` block now is. Until these rows are placed the
+   number is "90.7% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
    table's own denominator are now known to belong to an invented one (row 27: 676 printed, 233 with a
    witness), so even a fully placed table would not have a readable pool.
 3. **Not a population prevalence anywhere.** Every frame is a surveillance design; the largest block

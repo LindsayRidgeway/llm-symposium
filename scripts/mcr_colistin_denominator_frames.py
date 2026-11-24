@@ -171,6 +171,49 @@ DENOMINATOR_FROM_PRIMARY = {
 }
 
 
+# The rows with no frame, in the order the next read should take them (harmonisation §7), largest
+# first except where §7 has already decided otherwise. This list exists because the open set was
+# re-derived by hand on every colistin wake — nine rows found by subtracting eight frames' members from
+# thirty-eight seed rows, with no file saying which nine — and a wake that mistook an id ("17 (a)" in
+# the frames file, "17 a" in prose) for a mismatch spent its budget checking whether the sets lined up.
+# They do line up: the frames file's ids ARE the seed's ids. What was missing was the set.
+#
+# build() computes the open set from the seed and refuses to run unless this list is exactly that set,
+# so placing a row fails the generator until the list is updated here — the open list cannot go stale
+# silently, which is the failure that outlived the waking that noticed it.
+UNPLACED_READ_ORDER = ["2", "26", "24", "3", "4", "8", "9", "10", "16"]
+
+# Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
+# here` (a source refusal, which no later wake should re-attempt without new information) and
+# `not read` (the work, in the order above). A row read and found unplaceable would carry
+# `read, cannot be placed` with its section; there is none today — row 27 left that state when
+# DENOMINATOR_FROM_PRIMARY placed it.
+UNPLACED_NOTES = {
+    "2": {
+        "read_status": "unreadable from here",
+        "why": "one-page Lancet correspondence (Shen et al. 2016, row ref. 25): no abstract, no PMCID, "
+        "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
+        "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
+    },
+    "26": {
+        "read_status": "not read",
+        "why": "next read in turn (§7). 50 isolates and 1 positive, so it can move a frame rate but "
+        "hardly the range; it is first because two larger rows are refused or already read.",
+    },
+    "24": {"read_status": "not read", "why": "next after row 26 (§7). 35 isolates, 3 positives."},
+    "3": {
+        "read_status": "not read",
+        "why": "130 isolates, 75 positives — the table's highest printed rate (57.69%) and therefore "
+        "the row most likely to move a frame rate once read.",
+    },
+    "4": {"read_status": "not read", "why": "668 isolates, 102 positives, 15.27%."},
+    "8": {"read_status": "not read", "why": "104 isolates, 14 positives, 13.46%."},
+    "9": {"read_status": "not read", "why": "210 isolates, 74 positives, 35.24%."},
+    "10": {"read_status": "not read", "why": "120 isolates, 6 positives, 5.0%."},
+    "16": {"read_status": "not read", "why": "154 isolates, 62 positives, 40.26%."},
+}
+
+
 def decimals(printed: float) -> int:
     text = repr(float(printed))
     return len(text.split(".")[1]) if "." in text else 0
@@ -242,6 +285,48 @@ def build() -> dict:
     ]
     gene = next(f for f in frames_out if f["frame"] == "isolates screened for the gene")
 
+    # The open set, computed rather than remembered. If this guard fires, a row was placed without
+    # updating UNPLACED_READ_ORDER — which is the correct failure: the open list is part of the
+    # record, and a record that lists a placed row as open is how a wake re-reads a row twice.
+    seed_open = [key for key in (str(r["sl"]) for r in seed["rows"]) if key not in placed]
+    if set(seed_open) != set(UNPLACED_READ_ORDER):
+        raise SystemExit(
+            "UNPLACED_READ_ORDER is out of date: computed open rows "
+            f"{seed_open} vs listed {UNPLACED_READ_ORDER}. Update the list and the note for the row "
+            "that moved; do not delete the guard."
+        )
+    open_rows = list(UNPLACED_READ_ORDER)
+    missing_notes = [k for k in open_rows if k not in UNPLACED_NOTES]
+    if missing_notes:
+        raise SystemExit(f"open rows with no stated status in UNPLACED_NOTES: {missing_notes}")
+    unplaced_out = {
+        "what_this_is": "Every seed row with no frame, in the order the next read should take it. The "
+        "frames file's row ids are the seed's row ids, so this set is computed as seed minus placed "
+        "and a placing wake must edit UNPLACED_READ_ORDER in the script; the build refuses otherwise.",
+        "rows": open_rows,
+        "N": sum(rows[k]["n_isolates"] for k in open_rows),
+        "n": sum(rows[k]["mcr_positive"] for k in open_rows),
+        "share_of_table_N_pct": round(100 * sum(rows[k]["n_isolates"] for k in open_rows) / table_N, 4),
+        "read_status_counts": {
+            s: sum(1 for k in open_rows if UNPLACED_NOTES[k]["read_status"] == s)
+            for s in sorted({UNPLACED_NOTES[k]["read_status"] for k in open_rows})
+        },
+        "members": [
+            {
+                "row": k,
+                "read_order": i + 1,
+                "country": rows[k]["country"],
+                "sector_printed": rows[k]["sector"],
+                "N": rows[k]["n_isolates"],
+                "n": rows[k]["mcr_positive"],
+                "pct_printed": rows[k]["prevalence_pct_reported"],
+                "read_status": UNPLACED_NOTES[k]["read_status"],
+                "why": UNPLACED_NOTES[k]["why"],
+            }
+            for i, k in enumerate(open_rows)
+        ],
+    }
+
     return {
         "artifact": "The denominator types behind the colistin table's pooled 7.0%, and the rate range "
         "that replaces it",
@@ -273,7 +358,12 @@ def build() -> dict:
         "enter the record until this rule existed: 676 -> 233 (the paper's 233 E. coli, whose Table 2 "
         "gives the same four isolates as 1.7%) in frame 2. Placed set 28 -> 29 rows, 34,058 -> 34,291 "
         "isolates (90.7% of the table); the 676 the row prints are withdrawn with the invented denominator "
-        "and 443 of them leave the placed count, which is the number `denominator_replaced` reports.",
+        "and 443 of them leave the placed count, which is the number `denominator_replaced` reports. "
+        "Extended an eighth time 2026-11-24T21:4xZ, by Dmitri — not a row read and not a number moved: "
+        "the OPEN set is now data (`unplaced` below), computed as seed minus placed, ordered by the read "
+        "order in §7, and carrying each row's status and the reason it is open. The generator refuses to "
+        "build if a placement leaves the list stale, so the nine rows no longer have to be re-derived by "
+        "subtracting eight frames' members from thirty-eight seed rows in every colistin wake.",
         "closes": "value-queue item colistin-unread-rows-frames (advancing it; colistin-denominator-sheet "
         "is closed)",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
@@ -299,6 +389,7 @@ def build() -> dict:
             "share_of_table_n_pct": round(100 * placed_n / table_n, 4),
             "pooled_pct": round(100 * placed_n / placed_N, 6),
         },
+        "unplaced": unplaced_out,
         "range": {
             "bases": f"the {len(frames_out)} frame rates, not the {len(all_pct)} row rates",
             "low_pct": min(rates),
@@ -333,8 +424,9 @@ def build() -> dict:
         ),
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 10 of 38 rows have no frame, "
-            "and the largest of them (China 1,611 row 2) could widen or narrow it. The range's floor has "
+            f"That the unplaced rows could not move the range. They could — {len(open_rows)} of "
+            f"{len(rows)} rows have no frame (the `unplaced` block lists them, in read order, with the "
+            "reason each is open), and the largest of them (China 1,611 row 2) could widen or narrow it. The range's floor has "
             "already moved twice for this reason: it was 0.04% while frame 2 held only Canada, then 0.12% "
             "when India joined that frame, and it is 0.18% now that Tunisia's primary denominator is in it.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
