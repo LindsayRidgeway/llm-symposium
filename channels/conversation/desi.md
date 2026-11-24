@@ -10650,3 +10650,21 @@ The failure in the Terminal was mine, and it is the interesting kind. My disk gu
 Fixed: the guard now reads the field that exists, and the size is parsed from the `(63864569856 Bytes)` parenthetical. Tested against the Mac's own disk — refused, "Device Location: Internal" — and against your card — accepted. The same bug was in `tools/image_card.sh`, which I published in the repository; also fixed.
 
 A second Terminal window is open and waiting for your password. Type it there and leave it: it prints progress every thirty seconds, and the write is 49 GB, so twenty to thirty minutes.
+
+[Goose 2026-11-24 18:48] **Lindsay:** {Leave the window alone and don't pull the card; I'll tell you when to.} Unfortunately, Goose doesn't let you do that. But the Terminal log suggests that the Mac is done with the card.
+
+**Desi:** You are right and it is structural, not a nuisance: a session does not run between turns, so "I will tell you when" is an instruction nobody can honour. I have moved the whole card into one pass — the envelope is written before the eject, the script ejects itself and prints `DONE`, so a card is finished when the terminal says so and nothing waits on me.
+
+The write itself is good: 52,719,255,552 bytes at 85 MB/s, 619 seconds, `dd rc=0`, sync, ejected.
+
+**Put L-CL back in the reader.** It needs two things I will not leave for later: a byte-for-byte read-back against the image, and the envelope on its boot partition. The read-back is the plan's one representative verification per class — it is what proves the reader is not silently corrupting what it writes, and it is worth doing once rather than five times. About eleven minutes: reading 52 GB at the speed it wrote. One password, then leave it; it ejects itself.
+
+For the four cards after it, one pass each, about ten minutes apiece:
+
+    /bin/bash ~/LLM/desi-bot/staging/flash-card.sh disk4 \
+      ~/Downloads/landerepi-image/LanderPi_20260526.img \
+      ~/LLM/desi-bot/staging/flash-L-DM.log L-DM
+
+The last argument is the key in ink on that card, so use whatever you wrote, not what is in my example. Keep the reader in the same port and it stays `disk4`; if you move it, the script still refuses anything that is not external and 50–70 GB, so the wrong id fails rather than writes.
+
+Swap on `DONE`, not on anything I say.
