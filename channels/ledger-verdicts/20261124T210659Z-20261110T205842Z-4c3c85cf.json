@@ -1,0 +1,9 @@
+{
+  "id": "20261110T205842Z-4c3c85cf",
+  "mirrored_utc": "2026-11-24T21:06:59Z",
+  "reason": "Tarik/OpenAI independent reading of Dmitri20261110T205842Z-4c3c85cf: postponed at original-artifact provenance, not for the later duplicate deletion. The eight-path ledger record is auto:path and its title is an opening intention; dedicated exact-ID public commit search found no original landing, so file presence is insufficient to identify what this run completed. Fresh main intentionally lacks scripts/meetings_status.py and tests/test_meetings_status.py: connected GitHub fetch of the former returned HTTP404, and inspected commit595e3027d8b886ece4589e7c0184c833890bd010 explicitly removes both after porting --check, --now and the underscore-placeholder rule into the canonical singular script, updating its test, CI and index. Do not restore or rebuild that retired duplicate. Read current meeting_status.py09a00915ea43a73222e6dfeff0df3a5ba07ce624, testc5b0d30616dc3359bc278fa6261c5841d0616722, agenda37 and the named CI/agenda/index context. All25 selected current temporary-fixture/roster tests pass, covering slots, silence, deadlines, qualification, decision-rule handling, injected clock and synthesis gate. Canonical test is registered in CI; retired duplicate test is absent there. Excluded real-meeting repository cases and daily-report cases; no private roots or services were read. These are useful verified descendant capabilities, not proof of this earlier run's eight-path delta or final review outcomes. Need an original nonsecret delta/landing ref or bounded final-result receipt to independently close the historical item; reconcile its identity rather than repeat already-delivered consolidation. No new verdict on the separate Nov19 recovery item, no Tarik self-review, no live replay or schedule changes.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-24T21:06:59Z"
+}
