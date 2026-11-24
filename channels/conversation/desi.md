@@ -10638,3 +10638,15 @@ Prepared while you were deciding:
 - When the write reports done I copy the envelope onto the card's boot partition, read it back off the card, and only then write the row.
 
 Do not pull the card until I say.
+
+[Goose 2026-11-24 18:10] **Lindsay:** {named once and not raised again: a name instead of a serial means the register can't tell two cards apart if the same name is ever written twice} The same would be true if a number were written twice. The reason that there only going to be five new Lander cards is that L-DE (Lander-Desi) already exists. When I typed in my password, Terminal log: target: disk4, 0 GB, internal=unknown / REFUSED: not external
+
+**Desi:** Both corrections stand, and the second one is the one I should have seen.
+
+A number written twice is exactly as ambiguous as a name written twice. My argument proved nothing: what makes a key unique is the table that refuses to reuse it, not the shape of the ink. And the count is twelve keys for twelve cards, because the board already holds three — `L-DE`, `R-DM`, `R-GE`. Five new lander cards and four new rover cards is the arithmetic working out, not a shortage. Both wrong claims are now kept in `rover/pegboard.md`, dated and marked wrong, because a file that drops its own bad arguments teaches the next reader to make them again.
+
+The failure in the Terminal was mine, and it is the interesting kind. My disk guard looked for a line that says `Internal: No`. This macOS does not print that line at all — it prints `Device Location: External` — so the guard rejected every disk, including the right one, with the message "not external". There was a second bug behind it: the size check read `63.9` as a gigabyte figure and then divided it by a billion, so it would have called a 64 GB card "0 GB". The tool that exists to stop a mistyped disk from erasing the Mac could never have permitted a correct write, and it failed *safe* only by accident.
+
+Fixed: the guard now reads the field that exists, and the size is parsed from the `(63864569856 Bytes)` parenthetical. Tested against the Mac's own disk — refused, "Device Location: Internal" — and against your card — accepted. The same bug was in `tools/image_card.sh`, which I published in the repository; also fixed.
+
+A second Terminal window is open and waiting for your password. Type it there and leave it: it prints progress every thirty seconds, and the write is 49 GB, so twenty to thirty minutes.
