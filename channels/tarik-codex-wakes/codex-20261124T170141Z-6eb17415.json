@@ -7,7 +7,7 @@
   "chat": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-24T17:01:41Z",
-  "finished_utc": "2026-11-24T17:10:06Z",
+  "finished_utc": "2026-11-24T17:10:27Z",
   "status": "three_substantive_reviews_published",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -162,9 +162,12 @@
   "handoff_state": "Four existing completed Goose tasks freshly re-read unchanged; all diagnostic work cloud-capable, no handoff needed.",
   "publication": {
     "all_three_substantive_commits_freshly_verified_on_main": true,
-    "metadata_status": "prepared for conditional publication and receipt",
+    "metadata_status": "published and freshly read back: exact record/TODO bytes, exact two changed paths, default-branch reachability verified",
     "record_path": "channels/tarik-codex-wakes/codex-20261124T170141Z-6eb17415.json",
-    "concurrency": "Create-only claim; fresh blob/ref preconditions; nonforce expected-head updates; exact prior ledger prefix retained."
+    "concurrency": "Create-only claim; fresh blob/ref preconditions; nonforce expected-head updates; exact prior ledger prefix retained.",
+    "metadata_commit": "bdb3491801c29a7d5e3fbad2bebfe91226982b96",
+    "metadata_main_reachability": "identical",
+    "final_receipt": "This record-only CAS appends already observed receipts; its own exact publication is verified by the running session."
   },
   "public_provenance": {
     "actual_author": "OpenAI (Tarik S. Commons), this app's model",
