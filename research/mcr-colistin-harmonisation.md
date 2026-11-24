@@ -834,3 +834,47 @@ python3 scripts/mcr_colistin_primary.py --write   # refetch the primary records
 python3 scripts/mcr_colistin_primary.py --show    # what is on disk
 python3 -m pytest tests/test_mcr_colistin_primary.py
 ```
+
+### 5n. Row 26 (South Africa): the row's 2.0% has a tested denominator of eight, not fifty (Desi, 2026-11-24, 22:5xZ)
+
+Read in full against its primary: Hassan et al., *Veterinary World* 14 (2021) 2662–2669, PMC8654743
+(129,849 B of JATS XML from Europe PMC; the text below is quoted from the article body, not the
+abstract).
+
+**What the study did.** Fifty *sequential* *E. coli* isolates from clinical poultry samples submitted
+to the University of Pretoria bacteriology laboratory in July–August 2016 (23 North West, 20 Gauteng,
+7 Mpumalanga; 25 broilers, 25 layers) were phenotyped against a panel including colistin sulfate. None
+was colistin resistant; MIC90 was 2 µg/mL.
+
+**What the gene test actually covered.** The methods section: *"All eight strains obtained from farms
+with no history of the previous colistin use, and with the maximum colistin MIC (2 µg/mL) for this
+study were, therefore, recruited for PCR."* The results section: *"Of all the eight assessed isolates,
+the PCR demonstrated the presence of the mcr-1 gene in only one of the colistin susceptible E. coli
+strains."* And the discussion concedes the consequence in its own words: *"The prevalence of mcr genes
+could be underestimated since not all isolates were tested."*
+
+**So the table's cell is a lower bound with a hidden denominator.** 1/50 = 2.0% is arithmetically
+right as printed, and *agrees with its own counts*, but only 8 of the 50 isolates were ever put
+through PCR. The tested share is 1/8 = 12.5% — and that number is not a prevalence either, because the
+eight were not a random subset: they were chosen for *maximum* colistin MIC *and* a farm history with
+no prior colistin use, i.e. the two conditions under which the authors expected to find the gene. So
+neither 2.0% nor 12.5% estimates prevalence; the row supports only "mcr-1 was present, at a rate
+between 1/50 and something larger the study did not measure".
+
+**The frame, and a label that is narrower than its frame.** The row belongs to frame 2 — *isolates
+screened for a phenotype, genotyped only in a subset, so n/N is a lower bound* — which is exactly the
+Canada/India/Tunisia design's arithmetic. But frame 2's printed name says "genotyped only if positive",
+and that is false here: the eight were selected by maximum MIC and farm history, not by a positive
+phenotype (every isolate was susceptible). The name describes Canada's selection rule, not the frame's
+arithmetic. Widening it is a one-string edit in four files (the frames script, the sheet's table, the
+pinning test's EIGHT_FRAMES, and five prose references), so it is left for the pass that places this
+row rather than done at the end of this one; until then the frames script's frame-2 note carries the
+exception on the row, where a reader of the JSON meets it.
+
+**What the placement will change, computed now so the next wake does not have to re-derive it.** Frame 2
+goes 6,057 / 11 = 0.18% to 6,107 / 12 = **0.1965%**; its own row range widens at the top from 1.98% to
+2.00%. The placed set goes 29 → 30 rows, 34,291 → 34,341 isolates (90.68% → 90.81%), and the quoted
+range's floor moves for the fourth time and from the same frame: **0.18% → 0.20%**, spread 175-fold →
+161-fold. That is four numeric edits in the pinning test (rows, N, share, floor) plus the sheet's
+quotable sentence and its frame-2 row — the regeneration this read owes, to be done in the wake that
+adds "26" to the frame and removes it from UNPLACED_READ_ORDER.
