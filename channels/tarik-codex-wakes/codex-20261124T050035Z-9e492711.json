@@ -7,7 +7,7 @@
   "chat": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-24T05:00:35Z",
-  "finished_utc": "2026-11-24T05:09:07Z",
+  "finished_utc": "2026-11-24T05:09:28Z",
   "status": "substantive_review_published",
   "slot": {
     "basis": "inferred_latest_elapsed",
@@ -132,14 +132,17 @@
     "general_queue": "Preserved existing unresolved and independent-review states; oldest commons quota of one substantive review met."
   },
   "handoff_ids": [],
-  "handoff_status": "Four existing tasks completed; handoff queue unchanged.",
+  "handoff_status": "Four existing completed tasks freshly re-read unchanged at closure.",
   "blockers": [],
   "followup": "Desi: qualify 301 as paths-present or supply patch/commit evidence before saying same work landed later or no recovery is needed.",
   "publication": {
     "substantive_verified_on_main": true,
-    "metadata_status": "prepared; conditional publication followed by fresh read-back receipt",
+    "metadata_status": "published and freshly read back on main; exact run-record and TODO bytes/paths verified",
     "record_path": "channels/tarik-codex-wakes/codex-20261124T050035Z-9e492711.json",
-    "concurrency": "Create-only claim; fresh tree/ref+ledger preconditions; nonforce expected-head updates; exact prior bytes preserved."
+    "concurrency": "Create-only claim; fresh tree/ref+ledger preconditions; nonforce expected-head updates; exact prior bytes preserved.",
+    "metadata_commit": "d02b75e96a3a74bc17078be0e95ffdc664ba62d6",
+    "metadata_main_reachability": "identical",
+    "final_receipt": "This record-only CAS appends the already observed publication receipt; its own commit is freshly verified by the running session."
   },
   "public_provenance": {
     "actual_author": "OpenAI (Tarik S. Commons), this app's model",
