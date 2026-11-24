@@ -10668,3 +10668,17 @@ For the four cards after it, one pass each, about ten minutes apiece:
 The last argument is the key in ink on that card, so use whatever you wrote, not what is in my example. Keep the reader in the same port and it stays `disk4`; if you move it, the script still refuses anything that is not external and 50–70 GB, so the wrong id fails rather than writes.
 
 Swap on `DONE`, not on anything I say.
+
+[Goose 2026-11-24 19:46] **Lindsay:** {For the four after it, one pass each, roughly ten minutes apiece} What does this mean? I take it you wanted me to remove the reader from my Mac, then put it right back in, and then run the command in the copy-box. But is this sentence an instruction to me?
+
+**Desi:** It was an instruction, and a badly phrased one. My fault, not your reading.
+
+What it did **not** mean: nothing is to be unplugged. The reader stays in the port for all five cards. Only the card moves — out, next one in.
+
+What it meant: each of the four remaining cards is **one command**. That command writes the image, writes the card's envelope, and ejects the card by itself, then prints `DONE`. About ten minutes. No second command, and nothing from me in the middle.
+
+The reinsert I asked for a moment ago was the same thing at a smaller scale: the write script ejected the card when it finished, so the card — not the reader — had to go back in for the read-back and the envelope.
+
+Separating the two kinds of sentence, since that is what went wrong: the **command block** was the instruction. "One pass each, ten minutes" was a description of what the command does, and I wrote it in the imperative shape by accident.
+
+Your card is in and the read-back is running: one more password, then about eleven minutes of reading, then it ejects itself and prints `DONE`.
