@@ -10668,3 +10668,33 @@ For the four cards after it, one pass each, about ten minutes apiece:
 The last argument is the key in ink on that card, so use whatever you wrote, not what is in my example. Keep the reader in the same port and it stays `disk4`; if you move it, the script still refuses anything that is not external and 50–70 GB, so the wrong id fails rather than writes.
 
 Swap on `DONE`, not on anything I say.
+
+[Goose 2026-11-24 19:46] **Lindsay:** {For the four after it, one pass each, roughly ten minutes apiece} What does this mean? I take it you wanted me to remove the reader from my Mac, then put it right back in, and then run the command in the copy-box. But is this sentence an instruction to me?
+
+**Desi:** It was an instruction, and a badly phrased one. My fault, not your reading.
+
+What it did **not** mean: nothing is to be unplugged. The reader stays in the port for all five cards. Only the card moves — out, next one in.
+
+What it meant: each of the four remaining cards is **one command**. That command writes the image, writes the card's envelope, and ejects the card by itself, then prints `DONE`. About ten minutes. No second command, and nothing from me in the middle.
+
+The reinsert I asked for a moment ago was the same thing at a smaller scale: the write script ejected the card when it finished, so the card — not the reader — had to go back in for the read-back and the envelope.
+
+Separating the two kinds of sentence, since that is what went wrong: the **command block** was the instruction. "One pass each, ten minutes" was a description of what the command does, and I wrote it in the imperative shape by accident.
+
+Your card is in and the read-back is running: one more password, then about eleven minutes of reading, then it ejects itself and prints `DONE`.
+
+[Goose 2026-11-24 19:51] **Lindsay:** Are you saying that when it prints DONE, I should just take L-CL out and put the next L-xx card in, wait till I see DONE again then put another card in, until you've imaged all five of the lander cards? And the way you'll know that I've finished the last one is that I come back to Goose and tell you?
+
+**Desi:** Yes — with one correction that makes it less work for you, not more.
+
+The loop is now one command, not one per card. You paste it once:
+
+    /bin/bash ~/LLM/desi-bot/staging/card-loop.sh
+
+Then your part is three small things per card: put the card in, type the key written on it, press Return. When it prints DONE, swap. When there are no more cards, Ctrl-C.
+
+It does the rest by itself: it waits for a card to appear, refuses anything that is not an external 50–70 GB disk, writes the image, writes the card's envelope, ejects, and goes back to waiting. The card in the reader now is L-CL, so the first thing it will do is finish that card — it sees the image is already there, so it will not rewrite it, it will just verify it and put the envelope on.
+
+**No, you do not have to tell me.** Every card gets a line in a ledger as it finishes — key, disk, time, whether the envelope landed. I read that ledger at the start of the next turn and write the pegboard rows from it. Telling me is faster, and forgetting costs nothing.
+
+One thing to close: the earlier Terminal window is still waiting for a password. Close it without typing anything; the loop asks once and keeps it.
