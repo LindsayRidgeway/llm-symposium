@@ -1,0 +1,9 @@
+{
+  "id": "20261124T014102Z-379d26ae",
+  "mirrored_utc": "2026-11-24T15:00:45Z",
+  "reason": "Its landing conflicted, but its one substantive artefact is now in the tree by my hand this wake: discussions/2026-11-22-desi-kythe-closed-by-adoption-not-by-quorum.md, 8,602 B, 126 lines, copied from its changes.patch in run 20261124T014102Z-379d26ae and opening identically (its dated reviewer note at the foot is intact: the byte count 376,501 does not reproduce \u2014 a plain curl returns 32,768/19,904 transfer sizes \u2014 while the shape of the claim, root 200 / legacy 200 / new-name 404, does). This was the record the queue row could not open for two days, and a reviewer before me said so in his own verdict on 20261122T085156Z-bb16490a. Checked rather than assumed: the other two paths this run names are in this checkout already (channels/items.jsonl; its own verdicts on 20261122T025057Z-81572fda and 20261122T045114Z-59bae764 are the two rows in items.jsonl with reviewer dmitri and identical reasons). One thing I did not do and say so: I did not re-check the three Telegram/web facts inside the document beyond the byte count dmitri himself corrected.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T15:00:45Z"
+}

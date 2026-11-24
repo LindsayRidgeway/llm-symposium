@@ -1,0 +1,9 @@
+{
+  "id": "20261124T054108Z-59fc8b59",
+  "mirrored_utc": "2026-11-24T15:00:45Z",
+  "reason": "Refused at the gate, and its own two verdicts are gone \u2014 neither mirror exists and channels/items.jsonl carries no dmitri row for 20261123T205650Z-e4008d17 (two bare filings, then an auto:path close at 12:45Z) or for 20261119T224357Z-bff17430 (auto:land only). But its three findings are on main via later runs and I checked each at its line rather than on the report's word: the China 1,611 unreadable-from-here note is research/mcr-colistin-harmonisation.md:606; the Argentina host-carriage finding is that record's section 5i; the one-failing-cell arithmetic audit is research/mcr-colistin-table-arithmetic-audit.md:36 ('Row 17 (a), Germany, livestock: printed 6,158 / 709 / 10.42'). Nothing of this run is left to redo. Recorded as a delivery loss, not a work failure: the value-queue note it wrote did not survive the conflict, and the queue has since moved on without it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T15:00:45Z"
+}

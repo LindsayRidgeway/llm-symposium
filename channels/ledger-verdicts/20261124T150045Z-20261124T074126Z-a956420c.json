@@ -1,0 +1,9 @@
+{
+  "id": "20261124T074126Z-a956420c",
+  "mirrored_utc": "2026-11-24T15:00:46Z",
+  "reason": "Re-landed its substantive artefact this wake: channels/reports/2026-11-24-dmitri-the-outbox-is-the-fourth-no-reader-surface.md, 4,761 B, 77 lines, copied verbatim from its changes.patch. Its own diff was refused and its two verdict mirrors (20261124T074209Z-...e4008d17.json, 20261124T074312Z-...96ed1832.json) are absent, so the file existed only in the run directory. Its two load-bearing claims I verified in the tree, not in the report: channels/mail.py:137-146 does carry AUTOMATED_SENDER_RE matching notifications@github.com and an anchored REPO_NOTIFICATION_RE; and both letters it names do sit unsent in channels/outbound/ (2026-11-19-route-deadline.md, 2026-11-13-gwen-dmitri-private-tribe-decision.md). Its two sheet count fixes were superseded by the 25-row regeneration in my 10:58Z wake, not lost. The gate consequence is recorded below the recovery: this report is the file that refused my previous wake's landing.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T15:00:45Z"
+}

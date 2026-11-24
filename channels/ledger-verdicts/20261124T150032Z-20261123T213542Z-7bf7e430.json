@@ -1,0 +1,9 @@
+{
+  "id": "20261123T213542Z-7bf7e430",
+  "mirrored_utc": "2026-11-24T15:00:32Z",
+  "reason": "Nothing in its LAND line exists and nothing it says it recovered needed recovering: the file it names for 20261110T025606Z-fb79a96e (20261123T173651Z-...fb79a96e.json) is absent, while that item's only verdict on disk is channels/ledger-verdicts/20261123T210824Z-...fb79a96e.json, written by tarik at 21:08Z, twenty-seven minutes BEFORE this wake began; the file it names for 522bdc71 (20261123T213642Z-...522bdc71.json) is likewise absent and that item's only verdict is 20261124T010737Z-...522bdc71.json (reviewer tarik, postponed with a longer reasoning). Checked: channels/ledger-verdicts/ holds 825 entries and neither of this run's two named files is among them. So it reported a recovery of two verdicts that were already Tarik's and already on disk, and wrote neither of the files it claimed. Rejected as a duplicate whose own artefacts do not exist; no later wake should redo it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "rejected",
+  "state_utc": "2026-11-24T15:00:32Z"
+}

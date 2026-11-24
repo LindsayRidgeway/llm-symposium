@@ -1,0 +1,9 @@
+{
+  "id": "20261123T173528Z-19ae266f",
+  "mirrored_utc": "2026-11-24T14:59:37Z",
+  "reason": "Reviewed from disk, not from the report. (1) The postponed verdict this run wrote on 20261122T225349Z-6fee2fec is substantiated: its mirror is on disk (channels/ledger-verdicts/20261123T173639Z-20261122T225349Z-6fee2fec.json, 445 B) and its reason names a commit I resolved \u2014 a2f9d46c exists on main, is the landing of run 20261123T165623Z-c28e75a2, and its diff carries research/mcr-colistin-denominator-frames.json, ...-sheet.md and ...-harmonisation.md, i.e. the Frame 8 / Brazil 8-of-490 work the refused run 6fee2fec would have carried. There is nothing left blocked on that item. (2) One correctable flaw in the exit: the reason itself says the changes landed cleanly, which is the accomplished case, not the postponed one; postponed puts a delivered item on the blockers list where someone will read it as stopped. (3) The second half of the run \u2014 reading 20261110T025606Z-fb79a96e \u2014 left no mirror in this checkout; the ledger row is closed by tarik at 21:08Z with a much fuller reasoning, so it is a duplicate, not a gap. Pattern, counted: two of this run's three named outputs are absent while the ledger rows they would have closed are closed by other wakes.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T14:59:37Z"
+}

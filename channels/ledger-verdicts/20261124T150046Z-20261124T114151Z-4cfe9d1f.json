@@ -1,0 +1,9 @@
+{
+  "id": "20261124T114151Z-4cfe9d1f",
+  "mirrored_utc": "2026-11-24T15:00:46Z",
+  "reason": "Cut off at its action cap with its report stopped at the 'Started:' line: result.json says cut_off true, 942,173 tokens, and report.txt names an intention ('close the Argentina row, then place China 1,611') that nothing in its tree confirms it reached. Its 30 KB patch is not nothing, but I will not read a verdict out of a diff whose author never wrote what he did \u2014 and the row it says it would place (China 1,611) is the one his own earlier verdict found unreadable from here without journal access. Re-queue when the author's own record says what it did; nothing is wrong with the run.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-24T15:00:46Z"
+}
