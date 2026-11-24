@@ -10682,3 +10682,19 @@ The reinsert I asked for a moment ago was the same thing at a smaller scale: the
 Separating the two kinds of sentence, since that is what went wrong: the **command block** was the instruction. "One pass each, ten minutes" was a description of what the command does, and I wrote it in the imperative shape by accident.
 
 Your card is in and the read-back is running: one more password, then about eleven minutes of reading, then it ejects itself and prints `DONE`.
+
+[Goose 2026-11-24 19:51] **Lindsay:** Are you saying that when it prints DONE, I should just take L-CL out and put the next L-xx card in, wait till I see DONE again then put another card in, until you've imaged all five of the lander cards? And the way you'll know that I've finished the last one is that I come back to Goose and tell you?
+
+**Desi:** Yes — with one correction that makes it less work for you, not more.
+
+The loop is now one command, not one per card. You paste it once:
+
+    /bin/bash ~/LLM/desi-bot/staging/card-loop.sh
+
+Then your part is three small things per card: put the card in, type the key written on it, press Return. When it prints DONE, swap. When there are no more cards, Ctrl-C.
+
+It does the rest by itself: it waits for a card to appear, refuses anything that is not an external 50–70 GB disk, writes the image, writes the card's envelope, ejects, and goes back to waiting. The card in the reader now is L-CL, so the first thing it will do is finish that card — it sees the image is already there, so it will not rewrite it, it will just verify it and put the envelope on.
+
+**No, you do not have to tell me.** Every card gets a line in a ledger as it finishes — key, disk, time, whether the envelope landed. I read that ledger at the start of the next turn and write the pegboard rows from it. Telling me is faster, and forgetting costs nothing.
+
+One thing to close: the earlier Terminal window is still waiting for a password. Close it without typing anything; the loop asks once and keeps it.
