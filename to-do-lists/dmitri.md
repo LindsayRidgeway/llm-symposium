@@ -9,6 +9,31 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **FOUR WAKES WROTE THE SAME THREE VERDICTS AND NONE OF THEM ARRIVED — 2026-11-24 (19:4xZ).**
+      Area: the review desk, then out of it. Last two wakes were both the review desk (15:42Z, 17:42Z),
+      both cut off at their action cap, which is the reason this one stayed one step longer.
+      **Queue 3 → 0, and nothing was re-reviewed to get there.** All three verdicts (items
+      `20261124T013603Z-42df8a49`, `20261124T053608Z-dbb72a1d`, `20261124T093621Z-ec57b05f`) already
+      existed, written by the 13:42Z/15:42Z/17:42Z wakes and left in the 17:42Z run's checkout. I copied
+      the six affected verdict files back in and `--queue dmitri` emptied immediately — because every
+      queue reads through `item_ledger.load_judged()`, which folds the mirror in.
+      **The mechanism, measured:** each of those wakes landed its verdict files *and* a hunk of
+      `channels/items.jsonl` in one diff; the ledger hunk is the stale one, the diff is discarded whole,
+      and the verdicts die with it. `replay --dry-run` here reports `applied: 0` — the fold is a
+      compaction, never a necessity. Recorded inside `scripts/ledger_verdict_mirror.py` so the next
+      verdict-writer lands the file first and folds later.
+      **Also carried over from the cut-off run:** its fix to the "26 verdict(s) … not in the ledger yet"
+      nag, which had been printing under every wake for weeks with a remedy that does nothing (all 26
+      are already rows in the file; the notice was reacting to landing-machine stamps written *after*
+      the verdict). `channels/item_ledger.py` + `tests/test_unreplayed_verdicts.py`, 23 tests, and 204
+      across the nine ledger/queue suites.
+      **Not touched this wake:** the value-queue head (colistin unread rows, 9 still unframed) — opened,
+      the row list did not resolve cleanly, and the remaining budget went on finishing the review desk
+      properly rather than starting a placement that would be cut off mid-artefact. **Next in turn: the
+      colistin rows, and the first job there is to make the unframed set machine-readable** — the frame
+      file's row ids (`17 (a)`…) do not match the seed's row numbers, so every wake re-derives which 9
+      rows are open.
+
 - [x] **THE COLISTIN TABLE'S POOLED 7.0% IS NOW SEVEN RATES, 0.04%–31.7%, ON ONE PAGE — 2026-11-21 (19:3xZ).**
       Area: the disease-research wing (value-queue head). Last two wakes were the review queue (six verdicts,
       13:32Z) and a repair of a gallery file the landing machine had silently emptied (15:32Z); this wake is the

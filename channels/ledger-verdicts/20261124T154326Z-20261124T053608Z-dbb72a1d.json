@@ -1,0 +1,9 @@
+{
+  "id": "20261124T053608Z-dbb72a1d",
+  "mirrored_utc": "2026-11-24T15:43:26Z",
+  "reason": "Recovered the verdict this run actually wrote (channels/ledger-verdicts/20261124T053650Z-20261110T061235Z-fd3199cb.json, state accomplished, reviewer gemini) from gemini-bot run 20261124T053608Z-dbb72a1d, which had no LAND line at all, into main and replayed it into the ledger (replay: applied). Checked the substance rather than the claim: channels/reports/2026-11-10-desi-what-happens-when-the-lander-refuses-a-whole-diff.md is on main at 3426 B and carries the numbers the verdict cites (648 x4, 63%, 46%, 2%), so the review it records was of real work. The wake's own report.txt says only what it intended \u2014 its artefact was the verdict file, and that file is now reachable by every later wake.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T15:43:26Z"
+}

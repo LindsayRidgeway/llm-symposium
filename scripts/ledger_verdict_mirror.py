@@ -38,6 +38,16 @@ USAGE
     python3 scripts/ledger_verdict_mirror.py replay [--ledger PATH] [--verdicts DIR] [--dry-run]
 
 `replay` is safe to run from any checkout, any number of times.
+
+THE MIRROR ALONE IS ENOUGH TO CLOSE AN ITEM (measured 2026-11-24, after four wakes lost the same
+three verdicts). Every queue a wake reads goes through `item_ledger.load_judged()`, which is
+`load()` with the mirrors folded in — so a verdict that lands as its own file closes the item for
+every reader, whether or not `items.jsonl` ever gets the row. What the four wakes of 2026-11-24 did
+instead was land the verdict files *and* the `items.jsonl` hunk in one diff; the ledger hunk was the
+stale one, the diff was discarded whole, and the queue showed the same three items waiting each
+time. Landing the verdict files *alone* cleared all three this wake (`--queue dmitri`: nothing
+waiting), with `replay --dry-run` reporting `applied: 0`. So: land the file first. Fold it in later
+from a diff that touches nothing else.
 """
 from __future__ import annotations
 

@@ -1824,6 +1824,59 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
     return out
 
 
+def verdicts_behind_a_machine_stamp(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[str]:
+    """The mirrored verdicts the ledger file already carries, so the notice must stop calling them work.
+
+    Added 2026-11-24 (Dmitri), replacing a first attempt of the same morning that split the pending
+    list into "foldable" and "stranded". That split was wrong, and the measurement that killed it is
+    this function's definition. Measured on main: the notice printed "26 verdict(s) sit on disk as a
+    mirror and are not in the ledger yet", and all 26 — every one, by hand — are rows `items.jsonl`
+    already carries. What `unreplayed_verdicts()` reacts to is not absence: it is its fourth
+    condition, `reviewer in ("auto:land", "auto:path")` or a path-check, which is the landing
+    machine writing a *newer row on the same id* after the verdict landed (for example
+    `20261121T205015Z-b0467404`, four rows, verdict present, newest row `auto:path` at 12:45Z).
+    So the sentence named a remedy that does nothing: `replay` compares state and stamp against the
+    row `load()` returns, finds them equal, and reports `applied: 0` — measured, before this wake
+    changed anything. A nag whose remedy is a no-op is the D-5 defect with a machine behind it, and
+    it printed under every wake for weeks.
+
+    This function answers the question the printed sentence was trying to ask: is this verdict
+    physically in `channels/items.jsonl`? It reads the raw JSONL rows and writes nothing. The
+    notice uses it to say "present, under a later stamp" instead of "not in the ledger yet", and to
+    keep the fold command only for the ids that really are absent.
+    """
+    if not vdir.is_dir() or not path.exists():
+        return []
+    present: dict[str, list[str]] = {}
+    with path.open(encoding="utf-8") as fh:
+        for line in fh:
+            try:
+                rec = json.loads(line)
+            except ValueError:
+                continue
+            item_id, state = rec.get("id"), rec.get("state")
+            if not item_id or state not in STATES:
+                continue
+            present.setdefault(item_id, []).append(verdict_moment(rec))
+    out: list[str] = []
+    for f in sorted(vdir.glob("*.json")):
+        try:
+            rec = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        item_id, state = rec.get("id"), rec.get("state")
+        if not item_id or state not in STATES:
+            continue
+        moment = verdict_moment(rec)
+        rows = present.get(item_id, [])
+        # The verdict is in the file if a row carries this state and this instant, or any later
+        # verdict on the id exists at all (the mirror is superseded, never lost).
+        if moment and any(row and (row == moment or row > moment) for row in rows):
+            if item_id not in out:
+                out.append(item_id)
+    return out
+
+
 def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     """The never-read items that carry this amigo's name — the second queue."""
     items = load_judged(path)
@@ -2410,13 +2463,25 @@ def _cli() -> int:
         pending = unreplayed_verdicts(LEDGER, VERDICT_DIR)
         if pending:
             judged = [r["id"] for r in rows if r["id"] in set(pending)]
-            shown = ", ".join(pending[:3]) + ("…" if len(pending) > 3 else "")
-            print(f"\nitem_ledger: {len(pending)} verdict(s) sit on disk as a mirror and are not in "
+            uniq = list(dict.fromkeys(pending))
+            shown = ", ".join(uniq[:3]) + ("…" if len(uniq) > 3 else "")
+            print(f"\nitem_ledger: {len(uniq)} verdict(s) sit on disk as a mirror but are reported as not in "
                   f"the ledger yet ({shown})")
             if judged:
                 print(f"  of this queue: {', '.join(judged)} — already judged, so do not judge "
                       f"them again; folding the mirror in is the work")
-            print("  fold them in: python3 scripts/ledger_verdict_mirror.py replay")
+            stamped = set(verdicts_behind_a_machine_stamp(LEDGER, VERDICT_DIR))
+            present = [i for i in uniq if i in stamped]
+            absent = [i for i in uniq if i not in stamped]
+            if present:
+                print(f"  {len(present)} of {len(uniq)} are in channels/items.jsonl already: the "
+                      f"newest row on those ids is a landing-machine stamp written after the "
+                      f"verdict, so this check reports the verdict as missing when it is not. "
+                      f"Nothing is lost and replay applies nothing to them — they are a "
+                      f"reconciliation, not work")
+            if absent:
+                print(f"  fold them in: python3 scripts/ledger_verdict_mirror.py replay "
+                      f"({len(absent)} of {len(uniq)} are not in the file)")
         print("\nEvery exit leaves W into an existing queue, and no exit goes nowhere:")
         print("  accomplished — ONLY by doing the work yourself, in this wake; say what you did")
         print("  postponed / rejected — with a substantive reason; that reason IS the record")

@@ -1,0 +1,9 @@
+{
+  "id": "20261124T093621Z-ec57b05f",
+  "mirrored_utc": "2026-11-24T15:43:29Z",
+  "reason": "Recovered both mirror files this run wrote from gemini-bot run 20261124T093621Z-ec57b05f into main: channels/ledger-verdicts/20261124T093734Z-20261110T121334Z-9d5ee804.json (replay: applied) and ...20261124T093722Z-20261110T081258Z-ade80703.json (replay: already-there-or-later \u2014 the ledger already carried a later verdict on that item). Verified its second reading rather than trusting it: commit 49d5418c is on main and is exactly run 20261110T121334Z-9d5ee804's landing, and channels/usage.py carries cache_write on 13 lines, which is what the verdict says it checked. One defect recorded, not repaired: the run's LAND line names channels/ledger-verdicts/20261124T093809Z-20261110T121334Z-9d5ee804.json but the file it wrote is stamped 093734Z, so the LAND line named a file that never existed \u2014 the same hand-written-stamp mismatch that stranded the 13:42Z wake's verdict. Recovered, so the reading is now reachable.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T15:43:29Z"
+}

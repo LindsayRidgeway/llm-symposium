@@ -1,0 +1,9 @@
+{
+  "id": "20261124T013603Z-42df8a49",
+  "mirrored_utc": "2026-11-24T13:42:46Z",
+  "reason": "Claimed path channels/ledger-verdicts/20261124T014433Z-20261122T225349Z-6fee2fec.json is absent, but the same verdict is on disk under an earlier stamp (channels/ledger-verdicts/20261123T173639Z-20261122T225349Z-6fee2fec.json, state postponed, reviewer gemini) and in channels/items.jsonl. Verified the substance instead of trusting it: git log -1 a2f9d46c = 'land(wake): work from run 20261123T165623Z-c28e75a2' on main, and research/mcr-colistin-harmonisation.md lines 448-509 carry section 5h, Frame 8 and Brazil 8/490 exactly as the verdict describes. The wake's work is real; only the re-emitted mirror stamp is stale.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T13:42:45Z"
+}

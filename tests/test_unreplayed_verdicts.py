@@ -174,5 +174,89 @@ class UnreplayedVerdictsTest(unittest.TestCase):
         self.assertEqual(il.verdict_moment({"state": "accomplished", "state_utc": ""}), "")
 
 
+class VerdictsBehindAMachineStampTest(unittest.TestCase):
+    """The notice must stop calling a delivered verdict "not in the ledger yet".
+
+    Added 2026-11-24. Measured at HEAD that morning: the notice printed "26 verdict(s) sit on disk
+    as a mirror and are not in the ledger yet" and closed with "fold them in: replay". Running it
+    returned `applied: 0`, and all 26 were in `channels/items.jsonl` already — `unreplayed_verdicts`
+    was reacting to its landing-machine condition (`reviewer` of `auto:land` / `auto:path`, or a
+    path-check), which writes a *newer row on the same id* after the verdict lands. A nag whose
+    remedy is a no-op is the D-5 defect with a machine behind it. This function asks the question
+    the sentence meant: is the verdict physically in the ledger file?
+    """
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = Path(self._tmp.name)
+        self.ledger = self.tmp / "items.jsonl"
+        self.verdicts = self.tmp / "ledger-verdicts"
+        self.verdicts.mkdir()
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def write_rows(self, *rows):
+        self.ledger.write_text("".join(json.dumps(r, sort_keys=True) + "\n" for r in rows),
+                              encoding="utf-8")
+
+    def mirror(self, item_id, state, state_utc, name=None):
+        path = self.verdicts / (name or f"{state_utc.replace('-', '').replace(':', '')}-{item_id}.json")
+        path.write_text(json.dumps({"id": item_id, "state": state, "state_utc": state_utc,
+                                    "reviewer": "dmitri", "reason": "a reason", "run": "",
+                                    "mirrored_utc": "2026-11-24T00:00:00Z"}, sort_keys=True),
+                        encoding="utf-8")
+        return path
+
+    def stamped(self):
+        return il.verdicts_behind_a_machine_stamp(self.ledger, self.verdicts)
+
+    def test_a_verdict_followed_by_a_landing_stamp_is_present_not_missing(self):
+        """The measured shape: verdict row, then a newer auto:path row on the same id."""
+        self.write_rows(row("item-1", "accomplished", "2026-11-21T20:35:00Z", "dmitri"),
+                        row("item-1", "accomplished", "2026-11-21T20:36:00Z", "auto:path"))
+        self.mirror("item-1", "accomplished", "2026-11-21T20:35:00Z")
+        self.assertEqual(il.unreplayed_verdicts(self.ledger, self.verdicts), ["item-1"])
+        self.assertEqual(self.stamped(), ["item-1"])
+
+    def test_a_compact_mirror_of_a_rowed_verdict_counts_as_present(self):
+        self.write_rows(row("item-1", "accomplished", "2026-11-21T20:35:00Z", "auto:land"))
+        self.mirror("item-1", "accomplished", "20261121T203500Z")
+        self.assertEqual(self.stamped(), ["item-1"])
+
+    def test_a_mirror_the_file_does_not_carry_is_not_called_present(self):
+        """No row carries this verdict, so replay is real work here and must keep its command."""
+        self.write_rows(row("item-1", "postponed", "2026-11-21T20:00:00Z", "gemini"))
+        self.mirror("item-1", "accomplished", "2026-11-24T12:00:00Z")
+        self.assertEqual(self.stamped(), [])
+
+    def test_a_superseded_mirror_is_present_not_missing(self):
+        self.write_rows(row("item-1", "rejected", "2026-11-22T09:00:00Z", "gemini"))
+        self.mirror("item-1", "accomplished", "2026-11-21T20:00:00Z")
+        self.assertEqual(self.stamped(), ["item-1"])
+
+    def test_an_undatable_mirror_is_left_to_replay_rather_than_called_present(self):
+        self.write_rows(row("item-1", "accomplished", "2026-11-21T20:35:00Z", "auto:land"))
+        self.mirror("item-1", "accomplished", "yesterday-ish", name="undatable.json")
+        self.assertEqual(self.stamped(), [])
+
+    def test_two_mirrors_of_one_item_are_named_once(self):
+        self.write_rows(row("item-1", "accomplished", "2026-11-21T20:35:00Z", "auto:land"))
+        self.mirror("item-1", "accomplished", "20261121T203500Z", name="a.json")
+        self.mirror("item-1", "accomplished", "20261121T203500Z", name="b.json")
+        self.assertEqual(self.stamped(), ["item-1"])
+
+    def test_asking_writes_nothing(self):
+        self.write_rows(row("item-1", "accomplished", "2026-11-21T20:35:00Z", "auto:path"))
+        self.mirror("item-1", "accomplished", "2026-11-21T20:35:00Z")
+        before = {q.name: q.read_bytes() for q in self.tmp.rglob("*") if q.is_file()}
+        self.assertEqual(self.stamped(), ["item-1"])
+        self.assertEqual(before, {q.name: q.read_bytes() for q in self.tmp.rglob("*") if q.is_file()})
+
+    def test_no_verdict_directory_reads_as_nothing(self):
+        self.write_rows(row("item-1", "accomplished", "2026-11-21T20:35:00Z", "dmitri"))
+        self.assertEqual(il.verdicts_behind_a_machine_stamp(self.ledger, self.tmp / "absent"), [])
+
+
 if __name__ == "__main__":
     unittest.main()
