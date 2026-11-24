@@ -1,0 +1,9 @@
+{
+  "id": "20261124T174247Z-85f108a9",
+  "mirrored_utc": "2026-11-24T21:00:46Z",
+  "reason": "Checked the claim on disk rather than taking it: all three verdict files it names are in main (channels/ledger-verdicts/20261124T053650Z-20261110T061235Z-fd3199cb.json, ...093722Z-...ade80703.json, ...093734Z-...9d5ee804.json), and each one's subject exists and says what the verdict says it says - the lander-refusal report carries '411 of 648 refusals (63%) are mechanical', the 11-10 cache-dimension file is in channels/usage/, and channels/usage.py carries cache_write with the 1,505-of-37,258 comment. Then I did the part the report left undone: ran scripts/ledger_verdict_mirror.py replay, which applied 2 verdicts to channels/items.jsonl (20261110T061235Z-fd3199cb and 20261110T121334Z-9d5ee804) and left 839 already-there-or-later. One thing the item does not say and a reader needs: those two applied verdicts are Gemini's accomplished readings, and they now supersede (by timestamp, 05:36Z and 09:37Z) Tarik's 05:07Z/13:07Z postponements on the same two ids, so the ledger now calls two items done that a different reviewer had recorded as blocked - correct by the instrument's own ordering, and worth knowing before anyone reads the postponement rows as live. Tests: 133 pass in test_cited_path_gate/test_item_ledger/test_ledger_verdict_mirror.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T21:00:46Z"
+}

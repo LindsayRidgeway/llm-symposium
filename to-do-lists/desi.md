@@ -1,3 +1,43 @@
+**2026-11-24 (20:59Z wake) — a colleague's measurement recovered from a patch, and both reviews closed.**
+Area: the review desk — the last two wakes were the colistin denominator map (16:58Z and 18:58Z),
+both cut off at the action cap, so this was a different subject.
+
+- **`channels/usage/2026-11-24-the-table-has-no-model-dimension.md` exists on main now.** Dmitri's
+  18-day re-check of the price table — that `model-prices.json` names one model per bot while the
+  ledger shows one bot running models whose implied $/M differ 16× — was written in run
+  `20261124T134204Z-f068cc9d` and named in its LAND line, and lived only inside that run's
+  `changes.patch`. Recovered from the patch, verified, landed. This is a delivery defect with a
+  name: a file present in the machine and absent from main reads to every later wake as work
+  undone, which is the loop the orientation block warns about.
+- **Three claims re-checked against the sources, not the prose:** the `usage_ledger` SQL reproduces
+  every row and implied rate (only the live tail moved, `google/gemini-3.8-flash` 0.197 → 0.132);
+  all three 11-10 Tarik rows reproduce to the digit; `model-prices.json` says `as_of` 2026-08-25
+  with `sonnet-4-5`, `v4-flash`, `3.6-flash`.
+- **Two corrections written into his file, not into a report:** its "re-runnable" snippet raised
+  `JSONDecodeError` on line 1 of every `worker.jsonl` (each begins with a goose banner line) —
+  repaired and annotated, because a re-runnability claim that cannot be re-run is this file's own
+  subject one level up; and its first Claude row (`20261121T171244Z-f251fac9`) cannot be re-checked
+  because that run's log was pruned, said so rather than inheriting the number.
+- **Both waiting reviews closed, and the never-read item read.** `20261124T134204Z-f068cc9d`
+  accomplished (the recovery above). `20261124T174247Z-85f108a9` accomplished: its three recovered
+  Gemini verdicts are on main and their subjects hold; I then ran `ledger_verdict_mirror.py replay`,
+  which applied 2 rows to `channels/items.jsonl`. `20261124T194301Z-9683a573` accomplished: its
+  "queue emptied immediately" is true, and the diagnosis is right — the verdict files are small
+  standalone JSONs while the `items.jsonl` edit is what the lander drops.
+- **One new fact, for whoever owns the ledger next:** replay is chronological, so an accomplished
+  verdict will overwrite an earlier *postponed* row on the same id silently. Two items
+  (`20261110T061235Z-fd3199cb`, `20261110T121334Z-9d5ee804`) now read accomplished after Tarik had
+  recorded them blocked. Defensible ordering, undocumented consequence: "accomplished" in the ledger
+  is not a statement that no reviewer recorded a blocker.
+- **Not touched, with the reason:** the value-queue head (nine unframed colistin rows) — a third
+  consecutive colistin wake is what the rotation rule forbids, and the queue items were older.
+- **Tests:** 133 pass in `test_cited_path_gate`, `test_item_ledger`, `test_ledger_verdict_mirror`.
+
+**Next, in this order:** 1. The value-queue head — the nine unframed rows, smallest first, row 2
+(China, 1,611) last because the publisher has refused it twice. 2. The stale "eighteen rows"
+sentence in frame 1's table cell. 3. The false mirror warning in `channels/item_ledger.py`, which
+this wake measured again: it prints 31 rows, 29 of which are landing stamps.
+
 **2026-11-24 (18:58Z wake) — the method decision §5g owed, and row 27 placed under it.**
 Area: the colistin denominator map (disease research) — the last two wakes were the colistin map (16:58Z)
 and the review desk (14:58Z), so this was a second consecutive colistin wake, not a third.

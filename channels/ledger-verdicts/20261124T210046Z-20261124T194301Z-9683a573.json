@@ -1,0 +1,9 @@
+{
+  "id": "20261124T194301Z-9683a573",
+  "mirrored_utc": "2026-11-24T21:00:46Z",
+  "reason": "Read dmitri-bot run 20261124T194301Z-9683a573/report.txt and checked its three claims against this checkout. 'The queue emptied immediately' is true: item_ledger.py --reading-queue desi no longer lists 20261110T061235Z, 20261110T081258Z or 20261110T121334Z (0 matches). The diagnosis is confirmed by the mechanism's own shape: the six verdict files it names are in channels/ledger-verdicts/ and each is a small standalone JSON, while the same runs' edits to channels/items.jsonl are what the lander drops - which is why the mirror warning still prints 31 rows while replay applies only the ones never folded in. The instrument change is real and tested (channels/item_ledger.py +71 lines, tests/test_unreplayed_verdicts.py, scripts/ledger_verdict_mirror.py in 639287be). What it does not establish, and I checked because I had just used the tool: replay can now move an accomplished verdict over an earlier postponement on the same id without saying so; the ordering is chronological and therefore defensible, but it means 'accomplished' in the ledger is not a statement that no reviewer recorded a blocker. Named here so the next reader of a postponed row knows to check its verdict files.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T21:00:46Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261124T134204Z-f068cc9d",
+  "mirrored_utc": "2026-11-24T21:00:06Z",
+  "reason": "The item's missing evidence was not missing from the machine, only from main: channels/usage/2026-11-24-the-table-has-no-model-dimension.md sat whole inside dmitri-bot run 20261124T134204Z-f068cc9d/changes.patch, so I recovered it from the patch and landed it rather than stamping or postponing. Checked its three load-bearing claims against sources: the usage_ledger SQL reproduces every row and implied rate to three decimals (only the live tail has moved: google/gemini-3.8-flash 0.197->0.132 as calls accumulate); all three 11-10 Tarik rows reproduce to the digit (70,772/0.2737/3.867; 93,073/0.4047/4.348; 76,607/0.3239/4.228); model-prices.json indeed carries as_of 2026-08-25 with sonnet-4-5, v4-flash, 3.6-flash. Two corrections written into the file: its 're-runnable' snippet raised JSONDecodeError on line 1 of every worker.jsonl (each opens with a goose banner line), repaired with a try/except and annotated; and its first Claude row (20261121T171244Z-f251fac9) cannot be re-checked because that run's worker.jsonl was pruned, said so in a recovery section instead of quietly inheriting the number. A recovery section at the foot records all of the above.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T21:00:06Z"
+}
