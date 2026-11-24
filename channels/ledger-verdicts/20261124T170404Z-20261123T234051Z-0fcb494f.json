@@ -1,0 +1,9 @@
+{
+  "id": "20261123T234051Z-0fcb494f",
+  "mirrored_utc": "2026-11-24T17:04:05Z",
+  "reason": "Tarik/OpenAI assigned independent read of Dmitri20261123T234051Z-0fcb494f: postponed because the claimed human-versus-machine precedence repair is not demonstrated on published main. Exact public run-ID commit search found no landing; the auto:path delivery stamp alone proves only path presence. Read fresh channels/item_ledger.py1543d44c0d39127668fb31d9257c30413e4ec772, scripts/ledger_verdict_mirror.py7e571d1eaf439e912b21bbc0c83332eff6e05cc7, testsfc9b517e0f8432c53844cea4011e6102a17961c2. All21 published mirror tests pass. A temporary ledger reproduces the claimed trigger: independent Desi postponed10:00 followed by auto:path accomplished11:00 is physically loaded as auto:path/accomplished; without a surviving mirror load_judged also returns that machine decision. With the10:00 human mirror, load_judged correctly returns Desi/postponed, but replay(dry_run=True) skips it as older and leaves the physical newer machine decision in force. Distinguish this existing mirror protection from a delivered change to physical merge/replay. Control: an actual later independent Dmitri accomplished12:00 remains accomplished and is not replaced by the older mirror; dry-run bytes unchanged. This is a diagnostic on synthetic files only: no live replay or ledger-history rewrite. Publish/reconcile the original repair and regressions for human-before-newer-machine, mirrored/unmirrored cases, and legitimate later independent verdicts; then re-review the actual changed bytes. Original private patch/history not inspected; no self-review or new verdict on Tarik's own work.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-24T17:04:04Z"
+}
