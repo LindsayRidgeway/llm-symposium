@@ -183,3 +183,23 @@ the voice loop, or my calibration.
 watching — and fill its `verified` field from what the body itself reports. (2) Build the lander pilot
 onto that card and clone it to the other four. (3) The four rover cards, which still have no floor to
 write.
+
+### The image has been deleted from the Mac — 2026-11-24 evening
+
+On the founder's instruction, 65 GB went: the image (`52,719,255,552 B`) and the four archive volumes
+(`4 × 3,221,225,472 B` less 2.5 MB). `~/Downloads/landerepi-image` no longer exists.
+
+**Nothing is lost, and the reason is worth writing down rather than assuming.** The bytes exist in two
+places that do not depend on this Mac:
+
+1. **Five cards in the drawer** — `L-CL`, `L-DM`, `L-GE`, `L-GW`, `L-TA` — are byte-identical copies of
+   it on their Linux partitions, verified today (one byte for byte, four file by file). A sixth copy is
+   the lander's own working card, which is this image plus three weeks of work on top.
+2. **Hiwonder's Drive links**, live when re-fetched on 2026-11-21: `desi-bot/ros2-image-fetch.sh`
+   re-downloads the four volumes in about seven minutes at 55 MB/s, and `unar` takes ~25 minutes to
+   produce the image again. Total cost of needing it back: **about half an hour, unattended.**
+
+The identity to check a re-fetch against is in every envelope on every card:
+`sha256 422ae21a5ed1e663c0952231277a4781600cbdec0a5d6d0bd920f825831686a8` over `52,719,255,552` bytes.
+If a future re-download does not hash to that, it is not the same image and the envelopes are wrong —
+which is exactly the check the sha256 is in the envelope to make possible.

@@ -10725,3 +10725,17 @@ A new Terminal window is open on the loop. Type your password once, then `L-CL` 
 On the Pegboard: fixed, and the pointer was the fault, not Spotlight. `Pegboard.md` opens in TextMate on this Mac, and TextMate is what spun. A pointer that cannot be opened is worse than no pointer, so it is now `~/Documents/Pegboard.html` — a page in the browser that cannot hang, with the GitHub link and the local path on it. Why TextMate hung is not established and I have not guessed in the file; the local `.md` is still the only authoritative copy.
 
 One thing I saw while checking that: Spotlight finds **ten** copies of `pegboard.md` on this Mac — the real one and nine stale copies inside the bots' run and worktree directories. The pointer exists precisely because the word resolves to many files, and most of them are fossils.
+
+[Goose 2026-11-24 23:05] **Lindsay:** If you don't need that 50GB img any more, could you delete it and free up that disk space?
+
+**Desi:** Done — 65 GB gone. The image was 52.7 GB and the four archive volumes another 12.6 GB; `~/Downloads` is 342 MB now and the Mac reports 102 GiB free.
+
+Nothing is lost, and I want that on the record rather than in my confidence:
+
+- **Five cards in the drawer are copies of it** — `L-CL` byte for byte on its Linux partition, the other four file by file. The lander's own working card is a sixth copy, and it is this image plus three weeks of work.
+- **Hiwonder's links are still live** and `desi-bot/ros2-image-fetch.sh` rebuilds it in about seven minutes plus twenty-five of extraction. Needing it back costs half an hour, unattended.
+- **The hash to check a re-fetch against is printed in every envelope on every lander card** — `422ae21a…831686a8` over `52,719,255,552` bytes. If a future download does not hash to that, it is not the same image and every envelope is wrong, which is the check those fields exist to make possible.
+
+I also deleted the copy of `L-CL`'s envelope I had staged on the Mac. It carried a placeholder timestamp and had been superseded by the one on the card; a stale envelope sitting in a folder is the same defect as a stale register.
+
+Recorded in `rover/2026-11-21-imaging-the-nine-cards.md`. The next step is unchanged: boot `L-CL` in the lander with you watching.
