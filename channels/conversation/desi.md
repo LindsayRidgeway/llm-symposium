@@ -10698,3 +10698,18 @@ It does the rest by itself: it waits for a card to appear, refuses anything that
 **No, you do not have to tell me.** Every card gets a line in a ledger as it finishes — key, disk, time, whether the envelope landed. I read that ledger at the start of the next turn and write the pegboard rows from it. Telling me is faster, and forgetting costs nothing.
 
 One thing to close: the earlier Terminal window is still waiting for a password. Close it without typing anything; the loop asks once and keeps it.
+
+[Goose 2026-11-24 20:01] **Lindsay:** Looks like L-CL is wrong. [Terminal: VERIFY FAILED on /dev/disk4 — cmp differ char 4195305]
+
+**Desi:** Probably not wrong. Look at the byte: **4,195,305**. The card's boot partition starts at **4,194,304**. The difference is 1,001 bytes into a FAT volume — and macOS wrote two things into exactly that volume when the card went back in: `.Spotlight-V100` at 13:20 and `.fseventsd` at 14:43. The image has neither directory. I mounted the card and looked.
+
+So the verifier was measuring my own machine's droppings, not the card's contents. That is a defect in the check, not in the write, and it is the second time today I have shipped a guard that was wrong in a way only running it could show.
+
+Redesigned, and both halves are things macOS cannot touch:
+
+1. **The Linux partition, from its own offset to the end** — 52.2 of the 52.7 GB, the operating system itself. ext4, so macOS cannot even read it, let alone write to it. This is the verification that matters.
+2. **The boot partition, file by file** — every file the image carries must be present on the card with the same bytes. Anything extra is either ours (`POOL-CARD.*`) or macOS's, and macOS's gets deleted before the card is ejected.
+
+One consequence you should know rather than discover: it will **rewrite L-CL**. The first-32-MiB pre-check no longer matches, because macOS changed the FAT directory, so the loop will do a clean ten-minute write and then verify it properly. That is the cheapest route to a card I can call clean.
+
+A new Terminal window is open on the loop. Type your password once, then `L-CL` when it asks for the key, and leave it.
