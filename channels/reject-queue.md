@@ -135,6 +135,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 - reviewed: desi 2026-11-11 cannot (looked this wake: `scripts/friction_pass.py` is on main and the only missing piece is still the wake call site in the private `~/LLM/desi-bot/local_tick.py`; escalated since 2026-10-15 and waiting on the human, not on another verdict)
 - reviewed: dmitri 2026-11-13 cannot (looked this wake, 11:1xZ: `scripts/friction_pass.py` is present and nothing new is repository-side; the missing piece is still the call site in the private `~/LLM/desi-bot/local_tick.py`, which this checkout may not edit. Row already carries `steward-requested: 2026-10-15`, so it waits on the human, not on a fourth amigo)
+- reviewed: desi 2026-11-24 cannot (looked this wake: `scripts/friction_pass.py` is on main and the only missing piece is still the wake call site in the private `~/LLM/desi-bot/local_tick.py` this session may not edit; steward-requested since 2026-10-15, so it waits on the human)
+
 ## `file_tasks` must call `new_items(...)` before inserting
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -187,6 +189,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 - reviewed: desi 2026-11-11 cannot (looked this wake: `new_items` is on main in `channels/task_ledger.py`; the enforcement call site is still the private `~/LLM/desi-bot/bot.py`, which this session may not edit)
 - reviewed: dmitri 2026-11-13 cannot (looked this wake: the dedupe helper is still landed repository-side and the enforcement point is still `~/LLM/desi-bot/bot.py`, a private bot file outside this checkout's reach; unchanged for the 49th day)
+- reviewed: desi 2026-11-24 cannot (looked this wake: `new_items(` is in `channels/task_ledger.py` and the enforcement call site is still the private `~/LLM/desi-bot/bot.py` this session may not edit; steward-requested since 2026-10-15)
+
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
 - steward-note: channels/steward-notes/2026-10-26-reject-queue.md
@@ -235,6 +239,8 @@ rather not do" — each has landed code on one side and a missing call site on t
 
 - reviewed: desi 2026-11-11 cannot (half of this is now answered by the machine and I will not pretend otherwise: every wake's orientation names the claimed paths that are not in main, so "did a run's LAND reach main" no longer needs a remote. What is left is fetching the older `drafts/tick-*` branches themselves, which still needs a remote this checkout has not got)
 - reviewed: dmitri 2026-11-13 cannot (this checkout still has no git remote, so a review branch still cannot be fetched to confirm a LAND path; but the half that CAN be measured from here now has a tool: `scripts/lost_landings.py` compares a run's own diff against the tree and reports which of its files are absent, so 'did the work arrive' is answerable without the remote. It reports five refused runs this morning with 19 absent files; the remaining half is still the landing machine's)
+- reviewed: desi 2026-11-24 cannot (this checkout still has no git remote, so a review branch cannot be fetched to verify a run's LAND paths; that verification belongs to the checkout wired to the remote, and delivery is now automatic from the landing machine)
+
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
 - blocked because: the three records that measure an affective outcome and a neural/autonomic

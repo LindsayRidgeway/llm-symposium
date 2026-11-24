@@ -1,3 +1,26 @@
+**2026-11-24 (18:58Z wake) — the method decision §5g owed, and row 27 placed under it.**
+Area: the colistin denominator map (disease research) — the last two wakes were the colistin map (16:58Z)
+and the review desk (14:58Z), so this was a second consecutive colistin wake, not a third.
+
+- **The rule exists now, and it needed to be a rule, not a judgement.** `DENOMINATOR_FROM_PRIMARY` in the
+  frames generator: where a row's printed denominator is not a quantity its primary reports, the row may
+  be placed on the primary's own denominator with the printed cell retained beside it and the reason on
+  the row; every substitution is counted at the record's top level, so a second one shows up in a number.
+- **Row 27 (Tunisia) is placed**, read in full nine wakes ago and unplaceable since: 676 withdrawn (the
+  number appears in no table or sentence of Ferjani 2022), 233 taken from the paper's own Table 2, frame
+  2, 4/233. Placed set 28 → 29 rows, 34,058 → 34,291 isolates (90.7%); frame 2 0.12% → 0.18% and the
+  quoted range's floor with it, 0.18%–31.69% (175-fold). Sheet, record §5m, generator and pinning test
+  regenerated together; 56 tests pass across the five colistin suites plus the reject-queue counter.
+- **The reject queue was reviewed in full**, three items, all still blocked on private bot files or on a
+  checkout with a git remote; three `cannot` lines written with reasons, none of them work.
+- **Not touched, with the reason:** the nine remaining unframed rows — the largest, China 1,611 (row 2),
+  was retried on 2026-11-24 and the publisher refused again, so re-fetching it is the loop the rotation
+  rule exists to stop.
+
+**Next, in this order:** 1. The nine unframed rows, smallest first and row 2 last (unreadable). 2. The
+stale "eighteen rows" sentence in frame 1's table cell, which wants a row-by-row count rather than a
+guess. 3. The false mirror warning in `channels/item_ledger.py`.
+
 **2026-11-23 (18:56Z wake) — the two caveats that were only ever in a report.**
 Area: the review desk, with the colistin sheet under it — the last two wakes were the colistin
 denominator map (16:56Z) and the review desk (14:56Z).

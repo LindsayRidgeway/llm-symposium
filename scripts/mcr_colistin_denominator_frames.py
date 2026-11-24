@@ -73,7 +73,7 @@ FRAMES = [
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
-        "rows": ["28", "11"],
+        "rows": ["28", "11", "27"],
         "why": "Canada genotyped the 12 colistin-resistant isolates of 5,571 and nothing else, so 2/5,571 "
         "is a lower bound among isolates tested for phenotype, not a gene prevalence (§5d). India (§5l) is "
         "the same design on a different substrate: 253 non-duplicate sewage isolates phenotypically "
@@ -81,7 +81,12 @@ FRAMES = [
         "genotyped. Two caveats the frame now carries: India's 253 are three species (E. coli, Aeromonas "
         "veronii, A. dhakensis) and two of its five mcr-1 positives are Aeromonas, so as an E. coli row it "
         "overstates; and adding it moves the frame from 0.04% to 0.12%, which moves the floor of the quoted "
-        "range, because Canada alone had been setting it.",
+        "range, because Canada alone had been setting it. Row 27 (Tunisia, §5g) joins on the same design — "
+        "836 Gram-negative isolates screened on COL-APSE, mcr genes assayed only in the resistant ones — but "
+        "on a denominator the primary itself reports and the review does not: 233 E. coli, not the printed "
+        "676, which appears in no table of the paper. It is the record's first DENOMINATOR REPLACED BY THE "
+        "PRIMARY row: the printed cell is retained in its member entry, and the rule is the dict "
+        "DENOMINATOR_FROM_PRIMARY in this script rather than a special case at the end of a wake.",
     },
     {
         "frame": "hosts (animals and humans enrolled)",
@@ -142,6 +147,29 @@ READ_BASIS_NOTES = {
 
 FRANCE_NUMERATOR_PRIMARY = 149  # §5b: the row prints 49; the primary's observed positive count is 149.
 
+# The method decision §5g left owed, made once here (2026-11-24, Desi) so that it is a rule of the
+# record and not an improvisation at the end of a wake: where a row's printed denominator is not a
+# quantity its primary study reports at all, the record may place the row on the primary's own
+# denominator, provided the printed cell is retained beside it and the reason is written down. Every
+# row placed this way is flagged in its member entry (`denominator_basis`), counted in
+# `denominator_replaced` below, and excluded from nothing — it pools on the primary's denominator.
+# Today the class has one member, row 27 (Tunisia): the review's 676 appears in no table, methods
+# sentence or result of Ferjani 2022, whose own Table 2 gives the same four mcr-1 isolates as 1.7% of
+# 233 E. coli; 4/676 is the abstract's percentage pair read backwards as counts (§5g).
+DENOMINATOR_FROM_PRIMARY = {
+    "27": {
+        "N": 233,
+        "N_printed": 676,
+        "n": 4,
+        "why": "§5g: 676 is a denominator the primary never reports — its abstract prints four E. coli "
+        "(0.59%), and 4/676 = 0.592% is that percentage pair read backwards. Table 2 of the same paper "
+        "gives the same four isolates as 1.7% of its 233 E. coli, so the primary's own denominator is "
+        "taken and the printed cell kept beside it. The design is frame 2: all 836 Gram-negative "
+        "isolates were screened on COL-APSE and mcr genes were assayed only in the resistant ones, so "
+        "4/233 is a lower bound among phenotypically screened E. coli, like Canada's 2/5,571.",
+    }
+}
+
 
 def decimals(printed: float) -> int:
     text = repr(float(printed))
@@ -162,20 +190,27 @@ def build() -> dict:
         for key in f["rows"]:
             r = rows[key]
             N, n, printed = r["n_isolates"], r["mcr_positive"], r["prevalence_pct_reported"]
+            replaced = DENOMINATOR_FROM_PRIMARY.get(key)
             computed = 100 * n / N
             tol = 0.5 * 10 ** -decimals(printed) + 1e-9
-            members.append(
-                {
-                    "row": key,
-                    "country": r["country"],
-                    "sector_printed": r["sector"],
-                    "N": N,
-                    "n": n,
-                    "pct_printed": printed,
-                    "pct_from_counts": round(computed, 6),
-                    "agrees_with_own_counts": abs(computed - printed) <= tol,
-                }
-            )
+            member = {
+                "row": key,
+                "country": r["country"],
+                "sector_printed": r["sector"],
+                "N": replaced["N"] if replaced else N,
+                "n": replaced["n"] if replaced else n,
+                "pct_printed": printed,
+                "pct_from_counts": round(100 * (replaced["n"] if replaced else n) / (replaced["N"] if replaced else N), 6),
+                # agrees_with_own_counts is a statement about the TABLE's printed pair, so it is
+                # computed on the printed pair even where the placed denominator is the primary's.
+                "agrees_with_own_counts": abs(computed - printed) <= tol,
+                "denominator_basis": "replaced by the primary's" if replaced else "as printed",
+            }
+            if replaced:
+                member["N_printed"] = N
+                member["pct_from_printed_counts"] = round(computed, 6)
+                member["denominator_replaced_why"] = replaced["why"]
+            members.append(member)
         placed.extend(f["rows"])
         N = sum(m["N"] for m in members)
         n = sum(m["n"] for m in members)
@@ -231,7 +266,14 @@ def build() -> dict:
         "(Arabian Peninsula) placed from their primaries' own abstracts, the full texts being paywalled "
         "(§5l); the basis is recorded in read_basis_notes so an abstract read is never mistaken for a "
         "methods-section read. Placed set 25 -> 28 rows, and frame 2 stops being a singleton: the quoted "
-        "range's floor moves from 0.04% to 0.12% and the spread from 883-fold to 264-fold.",
+        "range's floor moves from 0.04% to 0.12% and the spread from 883-fold to 264-fold. Extended a "
+        "seventh time 2026-11-24T18:5xZ — the method decision §5g left owed is made once, in this script: "
+        "DENOMINATOR_FROM_PRIMARY, a row placed on its primary's own denominator with the printed cell "
+        "retained. Its first member is row 27 (Tunisia), read in full in §5g nine wakes ago and unable to "
+        "enter the record until this rule existed: 676 -> 233 (the paper's 233 E. coli, whose Table 2 "
+        "gives the same four isolates as 1.7%) in frame 2. Placed set 28 -> 29 rows, 34,058 -> 34,291 "
+        "isolates (90.7% of the table); the 676 the row prints are withdrawn with the invented denominator "
+        "and 443 of them leave the placed count, which is the number `denominator_replaced` reports.",
         "closes": "value-queue item colistin-unread-rows-frames (advancing it; colistin-denominator-sheet "
         "is closed)",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
@@ -273,6 +315,18 @@ def build() -> dict:
             ],
         },
         "arithmetic_failures_among_placed_rows": [list(x) for x in failures],
+        "denominator_replaced": {
+            "rule": "A row whose printed denominator is a quantity its primary never reports may be placed "
+            "on the primary's own denominator, with the printed cell retained in its member entry, a "
+            "written reason on the row, and the substitution counted here. Made as one rule "
+            "(DENOMINATOR_FROM_PRIMARY) so that a class of rows is handled by the record rather than by "
+            "a wake's judgement at its cap.",
+            "rows": sorted(DENOMINATOR_FROM_PRIMARY),
+            "printed_isolates_withdrawn": sum(
+                DENOMINATOR_FROM_PRIMARY[k]["N_printed"] - DENOMINATOR_FROM_PRIMARY[k]["N"]
+                for k in DENOMINATOR_FROM_PRIMARY
+            ),
+        },
         "read_basis_notes": READ_BASIS_NOTES,
         "gene_frame_with_france_corrected_pct": round(
             100 * (gene["n"] + FRANCE_NUMERATOR_PRIMARY - 49) / gene["N"], 6
@@ -280,9 +334,9 @@ def build() -> dict:
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
             "That the unplaced rows could not move the range. They could — 10 of 38 rows have no frame, "
-            "and the largest of them (China 1,611 row 2) could widen or narrow it; Tunisia 676 is read and "
-            "deliberately unplaced, per §5g. The range's floor has already moved once for this reason: it "
-            "was 0.04% while frame 2 held only Canada.",
+            "and the largest of them (China 1,611 row 2) could widen or narrow it. The range's floor has "
+            "already moved twice for this reason: it was 0.04% while frame 2 held only Canada, then 0.12% "
+            "when India joined that frame, and it is 0.18% now that Tunisia's primary denominator is in it.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],

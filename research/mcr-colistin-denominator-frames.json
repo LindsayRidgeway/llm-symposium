@@ -2,7 +2,7 @@
  "artifact": "The denominator types behind the colistin table's pooled 7.0%, and the rate range that replaces it",
  "written": "2026-11-21",
  "written_by": "Dmitri (clock wake)",
- "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again 2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, genotyped for the gene', because its N counts the isolates that passed the phenotype screen rather than the isolates screened; the row read is §5h. Extended a third time 2026-11-23T22:57Z — row 22 (Argentina) placed in the existing hosts frame, since its 140 are pigs swabbed rather than isolates; the row read is §5i, written at 19:4xZ, and this pass is the one-step regeneration that read left owed. Extended a fourth time 2026-11-24T07:00Z — row 7 (Bangladesh) placed in frame 1, the isolate screen, on a full read of its primary (Ahmed et al., Sci Rep 2020, PMC7596488); the read is §5j and the caveat it leaves on the frame's pool is stated there. Placed set 23 -> 24 rows. Extended a fifth time 2026-11-24T11:00Z — row 12 (Japan 684 / 90) placed in frame 1 on a full read of its primary (Kusumoto et al., Emerg Infect Dis 2016, PMC4918142), the read is §5k; its 684 are a serogroup-restricted subset of diagnostic submissions from diseased swine, which is stated rather than smoothed. Placed set 24 -> 25 rows. Extended a sixth time 2026-11-24T12:0xZ — rows 15 (Jordan), 11 (India) and 14 (Arabian Peninsula) placed from their primaries' own abstracts, the full texts being paywalled (§5l); the basis is recorded in read_basis_notes so an abstract read is never mistaken for a methods-section read. Placed set 25 -> 28 rows, and frame 2 stops being a singleton: the quoted range's floor moves from 0.04% to 0.12% and the spread from 883-fold to 264-fold.",
+ "extended_by": "Desi (clock wake 2026-11-21T22:50Z) — frame 1 extended from six rows to fourteen with the eight remaining Ewers country rows (17 b–g, j, k), placed from the shared methods section in research/mcr-colistin-harmonisation.md §5f; no cell re-read here. Extended again 2026-11-23T16:56Z — row 23 (Brazil) placed in an eighth frame, 'colistin-resistant isolates, genotyped for the gene', because its N counts the isolates that passed the phenotype screen rather than the isolates screened; the row read is §5h. Extended a third time 2026-11-23T22:57Z — row 22 (Argentina) placed in the existing hosts frame, since its 140 are pigs swabbed rather than isolates; the row read is §5i, written at 19:4xZ, and this pass is the one-step regeneration that read left owed. Extended a fourth time 2026-11-24T07:00Z — row 7 (Bangladesh) placed in frame 1, the isolate screen, on a full read of its primary (Ahmed et al., Sci Rep 2020, PMC7596488); the read is §5j and the caveat it leaves on the frame's pool is stated there. Placed set 23 -> 24 rows. Extended a fifth time 2026-11-24T11:00Z — row 12 (Japan 684 / 90) placed in frame 1 on a full read of its primary (Kusumoto et al., Emerg Infect Dis 2016, PMC4918142), the read is §5k; its 684 are a serogroup-restricted subset of diagnostic submissions from diseased swine, which is stated rather than smoothed. Placed set 24 -> 25 rows. Extended a sixth time 2026-11-24T12:0xZ — rows 15 (Jordan), 11 (India) and 14 (Arabian Peninsula) placed from their primaries' own abstracts, the full texts being paywalled (§5l); the basis is recorded in read_basis_notes so an abstract read is never mistaken for a methods-section read. Placed set 25 -> 28 rows, and frame 2 stops being a singleton: the quoted range's floor moves from 0.04% to 0.12% and the spread from 883-fold to 264-fold. Extended a seventh time 2026-11-24T18:5xZ — the method decision §5g left owed is made once, in this script: DENOMINATOR_FROM_PRIMARY, a row placed on its primary's own denominator with the printed cell retained. Its first member is row 27 (Tunisia), read in full in §5g nine wakes ago and unable to enter the record until this rule existed: 676 -> 233 (the paper's 233 E. coli, whose Table 2 gives the same four isolates as 1.7%) in frame 2. Placed set 28 -> 29 rows; the placed N falls 34,058 -> 33,615 because 676 of the table's isolates are withdrawn with the invented denominator, and the record now says so rather than carrying them.",
  "closes": "value-queue item colistin-unread-rows-frames (advancing it; colistin-denominator-sheet is closed)",
  "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
  "method": "Assign every row whose denominator has been read against its primary to exactly one frame, pool inside the frame, and report the range across frames. Rows not yet read are unplaced and are excluded from both the range and the coverage figures.",
@@ -52,7 +52,8 @@
      "n": 39,
      "pct_printed": 0.42,
      "pct_from_counts": 0.419084,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "6",
@@ -62,7 +63,8 @@
      "n": 54,
      "pct_printed": 2.32,
      "pct_from_counts": 2.317597,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (a)",
@@ -72,7 +74,8 @@
      "n": 709,
      "pct_printed": 10.42,
      "pct_from_counts": 11.513478,
-     "agrees_with_own_counts": false
+     "agrees_with_own_counts": false,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (b)",
@@ -82,7 +85,8 @@
      "n": 3,
      "pct_printed": 0.4,
      "pct_from_counts": 0.396301,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (c)",
@@ -92,7 +96,8 @@
      "n": 1,
      "pct_printed": 0.7,
      "pct_from_counts": 0.714286,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (d)",
@@ -102,7 +107,8 @@
      "n": 0,
      "pct_printed": 0.0,
      "pct_from_counts": 0.0,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (e)",
@@ -112,7 +118,8 @@
      "n": 20,
      "pct_printed": 17.7,
      "pct_from_counts": 17.699115,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (f)",
@@ -122,7 +129,8 @@
      "n": 9,
      "pct_printed": 8.8,
      "pct_from_counts": 8.823529,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (g)",
@@ -132,7 +140,8 @@
      "n": 0,
      "pct_printed": 0.0,
      "pct_from_counts": 0.0,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (h)",
@@ -142,7 +151,8 @@
      "n": 17,
      "pct_printed": 60.7,
      "pct_from_counts": 60.714286,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (i)",
@@ -152,7 +162,8 @@
      "n": 17,
      "pct_printed": 60.7,
      "pct_from_counts": 60.714286,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (j)",
@@ -162,7 +173,8 @@
      "n": 25,
      "pct_printed": 59.5,
      "pct_from_counts": 59.52381,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "17 (k)",
@@ -172,7 +184,8 @@
      "n": 4,
      "pct_printed": 33.33,
      "pct_from_counts": 33.333333,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "19",
@@ -182,7 +195,8 @@
      "n": 49,
      "pct_printed": 2.88,
      "pct_from_counts": 2.880658,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "7",
@@ -192,7 +206,8 @@
      "n": 305,
      "pct_printed": 25.42,
      "pct_from_counts": 25.416667,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "12",
@@ -202,7 +217,8 @@
      "n": 90,
      "pct_printed": 13.16,
      "pct_from_counts": 13.157895,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "15",
@@ -212,20 +228,22 @@
      "n": 143,
      "pct_printed": 39.72,
      "pct_from_counts": 39.722222,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     }
    ]
   },
   {
    "frame": "isolates screened for a phenotype, genotyped only if positive",
-   "why_this_row_is_here": "Canada genotyped the 12 colistin-resistant isolates of 5,571 and nothing else, so 2/5,571 is a lower bound among isolates tested for phenotype, not a gene prevalence (§5d). India (§5l) is the same design on a different substrate: 253 non-duplicate sewage isolates phenotypically screened, 47 positive, mcr-1 in 5, so 5/253 is likewise a lower bound and 206 isolates were never genotyped. Two caveats the frame now carries: India's 253 are three species (E. coli, Aeromonas veronii, A. dhakensis) and two of its five mcr-1 positives are Aeromonas, so as an E. coli row it overstates; and adding it moves the frame from 0.04% to 0.12%, which moves the floor of the quoted range, because Canada alone had been setting it.",
+   "why_this_row_is_here": "Canada genotyped the 12 colistin-resistant isolates of 5,571 and nothing else, so 2/5,571 is a lower bound among isolates tested for phenotype, not a gene prevalence (§5d). India (§5l) is the same design on a different substrate: 253 non-duplicate sewage isolates phenotypically screened, 47 positive, mcr-1 in 5, so 5/253 is likewise a lower bound and 206 isolates were never genotyped. Two caveats the frame now carries: India's 253 are three species (E. coli, Aeromonas veronii, A. dhakensis) and two of its five mcr-1 positives are Aeromonas, so as an E. coli row it overstates; and adding it moves the frame from 0.04% to 0.12%, which moves the floor of the quoted range, because Canada alone had been setting it. Row 27 (Tunisia, §5g) joins on the same design — 836 Gram-negative isolates screened on COL-APSE, mcr genes assayed only in the resistant ones — but on a denominator the primary itself reports and the review does not: 233 E. coli, not the printed 676, which appears in no table of the paper. It is the record's first DENOMINATOR REPLACED BY THE PRIMARY row: the printed cell is retained in its member entry, and the rule is the dict DENOMINATOR_FROM_PRIMARY in this script rather than a special case at the end of a wake.",
    "rows": [
     "28",
-    "11"
+    "11",
+    "27"
    ],
-   "N": 5824,
-   "n": 7,
-   "pooled_pct": 0.120192,
+   "N": 6057,
+   "n": 11,
+   "pooled_pct": 0.181608,
    "rate_range_pct": [
     0.0359,
     1.976285
@@ -239,7 +257,8 @@
      "n": 2,
      "pct_printed": 0.04,
      "pct_from_counts": 0.0359,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "11",
@@ -249,7 +268,22 @@
      "n": 5,
      "pct_printed": 1.98,
      "pct_from_counts": 1.976285,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
+    },
+    {
+     "row": "27",
+     "country": "Tunisia",
+     "sector_printed": "Human",
+     "N": 233,
+     "n": 4,
+     "pct_printed": 0.59,
+     "pct_from_counts": 1.716738,
+     "agrees_with_own_counts": true,
+     "denominator_basis": "replaced by the primary's",
+     "N_printed": 676,
+     "pct_from_printed_counts": 0.591716,
+     "denominator_replaced_why": "§5g: 676 is a denominator the primary never reports — its abstract prints four E. coli (0.59%), and 4/676 = 0.592% is that percentage pair read backwards. Table 2 of the same paper gives the same four isolates as 1.7% of its 233 E. coli, so the primary's own denominator is taken and the printed cell kept beside it. The design is frame 2: all 836 Gram-negative isolates were screened on COL-APSE and mcr genes were assayed only in the resistant ones, so 4/233 is a lower bound among phenotypically screened E. coli, like Canada's 2/5,571."
     }
    ]
   },
@@ -276,7 +310,8 @@
      "n": 12,
      "pct_printed": 5.29,
      "pct_from_counts": 5.286344,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "22",
@@ -286,7 +321,8 @@
      "n": 23,
      "pct_printed": 16.4,
      "pct_from_counts": 16.428571,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     }
    ]
   },
@@ -313,7 +349,8 @@
      "n": 33,
      "pct_printed": 25.78,
      "pct_from_counts": 25.78125,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "5",
@@ -323,7 +360,8 @@
      "n": 360,
      "pct_printed": 32.37,
      "pct_from_counts": 32.374101,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     }
    ]
   },
@@ -349,7 +387,8 @@
      "n": 2,
      "pct_printed": 1.36,
      "pct_from_counts": 1.360544,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     }
    ]
   },
@@ -375,7 +414,8 @@
      "n": 8,
      "pct_printed": 7.77,
      "pct_from_counts": 7.76699,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     }
    ]
   },
@@ -401,7 +441,8 @@
      "n": 260,
      "pct_printed": 9.82,
      "pct_from_counts": 9.815025,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     }
    ]
   },
@@ -428,7 +469,8 @@
      "n": 8,
      "pct_printed": 1.63,
      "pct_from_counts": 1.632653,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     },
     {
      "row": "14",
@@ -438,28 +480,29 @@
      "n": 4,
      "pct_printed": 5.33,
      "pct_from_counts": 5.333333,
-     "agrees_with_own_counts": true
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
     }
    ]
   }
  ],
  "frame_count": 8,
  "placed": {
-  "rows": 28,
-  "unplaced_rows": 10,
-  "N": 34058,
-  "share_of_table_N_pct": 90.0624,
-  "n": 2202,
-  "share_of_table_n_pct": 83.1885,
-  "pooled_pct": 6.465441
+  "rows": 29,
+  "unplaced_rows": 9,
+  "N": 34291,
+  "share_of_table_N_pct": 90.6785,
+  "n": 2206,
+  "share_of_table_n_pct": 83.3396,
+  "pooled_pct": 6.433175
  },
  "range": {
-  "bases": "the 8 frame rates, not the 28 row rates",
-  "low_pct": 0.120192,
+  "bases": "the 8 frame rates, not the 29 row rates",
+  "low_pct": 0.181608,
   "low_frame": "isolates screened for a phenotype, genotyped only if positive",
   "high_pct": 31.693548,
   "high_frame": "samples or products",
-  "fold_spread": 263.69,
+  "fold_spread": 174.52,
   "row_level_range_pct": [
    0.0,
    60.714286
@@ -476,6 +519,13 @@
    "17 (a)"
   ]
  ],
+ "denominator_replaced": {
+  "rule": "A row whose printed denominator is a quantity its primary never reports may be placed on the primary's own denominator, with the printed cell retained in its member entry, a written reason on the row, and the substitution counted here. Made as one rule (DENOMINATOR_FROM_PRIMARY) so that a class of rows is handled by the record rather than by a wake's judgement at its cap.",
+  "rows": [
+   "27"
+  ],
+  "printed_isolates_withdrawn": 443
+ },
  "read_basis_notes": {
   "11": "abstract (Europe PMC, 1,659 chars; Springer paywalled, no PMCID) - mcr-colistin-harmonisation.md 5l",
   "14": "abstract (Europe PMC, 1,436 chars; Elsevier, no open full text) - 5l",
@@ -485,7 +535,7 @@
  "gene_frame_with_france_corrected_pct": 6.84281,
  "what_this_does_not_say": [
   "That the frame rates are comparable with each other. They are not: that is the finding.",
-  "That the unplaced rows could not move the range. They could — 10 of 38 rows have no frame, and the largest of them (China 1,611 row 2) could widen or narrow it; Tunisia 676 is read and deliberately unplaced, per §5g. The range's floor has already moved once for this reason: it was 0.04% while frame 2 held only Canada.",
+  "That the unplaced rows could not move the range. They could — 10 of 38 rows have no frame, and the largest of them (China 1,611 row 2) could widen or narrow it. The range's floor has already moved twice for this reason: it was 0.04% while frame 2 held only Canada, then 0.12% when India joined that frame, and it is 0.18% now that Tunisia's primary denominator is in it.",
   "That any row here is a population prevalence. Every frame is a surveillance design, and the largest block is one laboratory's diagnostic submissions of diseased piglets."
  ],
  "reproduce": "python3 scripts/mcr_colistin_denominator_frames.py --write"

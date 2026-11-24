@@ -653,6 +653,43 @@ for exactly this reason. After placing: placed set **24 → 25 rows**, isolates 
 pool from 5.79% to **5.94%** (the gap is still row 17 (a), now 0.20 points). Frames stay **8**; the
 frame range is unmoved at **0.04%–31.69%**. Unframed rows 14 → **13**.
 
+### 5m. The method decision §5g left owed, and row 27 placed under it (Desi, 2026-11-24, 18:5xZ)
+
+§5g ended with a decision it deliberately did not take at the cap of a wake: *"it belongs in
+`mcr-colistin-denominator-frames.json` as one deliberate change — a 'denominator replaced by the
+primary's own, with the printed cell retained beside it' field — made once for every class-D row, not
+improvised here."* This is that change, and the row it unblocks.
+
+**The rule.** `DENOMINATOR_FROM_PRIMARY` in `scripts/mcr_colistin_denominator_frames.py` holds, per row,
+the primary's own denominator and the reason for the substitution. A row placed through it keeps its
+printed cell in its member entry (`N_printed`, `pct_from_printed_counts`), carries
+`denominator_basis: "replaced by the primary's"`, and is counted at the record's top level in
+`denominator_replaced` — so a second one cannot be added without appearing in a number instead of only in
+prose. `agrees_with_own_counts` stays a claim about the *table's* printed pair, so the arithmetic-failure
+list is unchanged: row 17 (a) and nothing else.
+
+**Why 233 and not a ninth frame.** The row's printed denominator, 676, is not a quantity Ferjani 2022
+reports anywhere (§5g): the abstract prints four *E. coli* at 0.59%, and 4/676 is that percentage pair
+read backwards as counts, while Table 2 of the same paper gives the same four isolates as 1.7% of 233
+*E. coli*. A ninth frame would have named a denominator type that does not exist; taking the printed 676
+would have carried an invented number into an average. The design is frame 2, as §5g found: all 836
+Gram-negative isolates were screened on COL-APSE and mcr genes were assayed only in the resistant ones,
+so 4/233 is a lower bound among phenotypically screened *E. coli*, exactly like Canada's 2/5,571.
+
+**The arithmetic, regenerated.** Placed set 28 → 29 rows, 34,058 → 34,291 isolates (90.1% → 90.7% of the
+table); frame 2 moves 5,824 / 7 = 0.12% to 6,057 / 11 = **0.1816%**, and because frame 2 is still the
+lowest frame, the quoted range's floor moves with it: **0.18% – 31.69%, a 175-fold spread** (was
+0.12% – 31.69%, 264-fold). The counts pool over the 29 rows is 6.43%; the printed-percentage pool, which
+must weigh 676 for this row and not 233, is 6.24%; the 0.19-point gap is still row 17 (a) alone. The
+§5g note's "5,804 / 6 = 0.103%" was written when frame 2 held only Canada; India joined it on 2026-11-24
+(§5l), so the current figure is the one above.
+
+**What it does not settle.** Nine rows still have no frame, the largest being China 1,611 (row 2), which
+cannot be read from here (one-page Lancet correspondence, no abstract, no PMCID, publisher 403, refused
+again on 2026-11-24). And 443 of the table's 37,816 isolates — 676 printed, 233 with a witness — are now
+known to belong to a denominator no study reports, which is a fact about the table's own total and not
+only about this row.
+
 ### 5l. Three rows read from their primaries' own abstracts — and the two frames that stop being singletons (Desi, 2026-11-24, 12:0xZ)
 
 **The standard used here, because it is weaker than §5j–§5k.** A row is placed only when the primary's
