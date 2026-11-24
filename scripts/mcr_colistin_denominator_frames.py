@@ -48,6 +48,7 @@ FRAMES = [
             "19",
             "7",
             "12",
+            "15",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -64,13 +65,23 @@ FRAMES = [
         "23 Livestock Hygiene Service Centres, 1991-2014 — put through a PCR screen for mcr-1 (§5k). It is "
         "an isolate screen, but a serogroup-restricted subset: 684 of the 967 strains the collection holds, "
         "kept because they fall in four predominant serogroups, so it is 71% of its own source and not a "
-        "sample of it.",
+        "sample of it. Row 15 (Jordan 360 / 143) joins on the same reading — 360 isolates recovered from 385 "
+        "cloacal samples on 125 broiler farms, then PCR for mcr-1 (§5l) — and its own page prints the "
+        "phenotype too (209/360 colistin resistant, so mcr-1 is 143/209 = 68.4% of the resistance). Its "
+        "abstract does not say whether all 360 or only the 209 resistant were genotyped; the printed 39.7% "
+        "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only if positive",
-        "rows": ["28"],
+        "rows": ["28", "11"],
         "why": "Canada genotyped the 12 colistin-resistant isolates of 5,571 and nothing else, so 2/5,571 "
-        "is a lower bound among isolates tested for phenotype, not a gene prevalence (§5d).",
+        "is a lower bound among isolates tested for phenotype, not a gene prevalence (§5d). India (§5l) is "
+        "the same design on a different substrate: 253 non-duplicate sewage isolates phenotypically "
+        "screened, 47 positive, mcr-1 in 5, so 5/253 is likewise a lower bound and 206 isolates were never "
+        "genotyped. Two caveats the frame now carries: India's 253 are three species (E. coli, Aeromonas "
+        "veronii, A. dhakensis) and two of its five mcr-1 positives are Aeromonas, so as an E. coli row it "
+        "overstates; and adding it moves the frame from 0.04% to 0.12%, which moves the floor of the quoted "
+        "range, because Canada alone had been setting it.",
     },
     {
         "frame": "hosts (animals and humans enrolled)",
@@ -107,14 +118,27 @@ FRAMES = [
     },
     {
         "frame": "colistin-resistant isolates, genotyped for the gene",
-        "rows": ["23"],
+        "rows": ["23", "14"],
         "why": "Brazil's 490 are not the isolates whose phenotype was tested (that is frame 2's 5,571 for "
         "Canada) but the isolates that PASSED the colistin-resistance screen: all 490 were PCR-screened and "
         "8 E. coli carried mcr-1.1, so 8/490 is the share of the hospital's colistin resistance that is "
         "mcr-mediated, not a gene prevalence among isolates. The same study gives 8/19 = 42.1% among its "
-        "resistant E. coli and 8/7,852 = 0.102% among all Gram-negative bacilli (§5h).",
+        "resistant E. coli and 8/7,852 = 0.102% among all Gram-negative bacilli (§5h). The Arabian Peninsula row (§5l) is the same "
+        "quantity from the other side of the table: 75 independent colistin-resistant Enterobacteriaceae "
+        "from clinical cases in five countries were PCR-tested and 4 E. coli carried mcr-1, so 4/75 = "
+        "5.33% is a share of resistance. Its denominator is Enterobacteriaceae and five countries pooled "
+        "into one N, which is stated rather than smoothed.",
     },
 ]
+
+# How far down each row's evidence goes, where this pass changed it. Rows not named here were read as
+# §5c-§5k record (full text, PMC page or abstract) and that is where their basis is written.
+READ_BASIS_NOTES = {
+    "11": "abstract (Europe PMC, 1,659 chars; Springer paywalled, no PMCID) - mcr-colistin-harmonisation.md 5l",
+    "14": "abstract (Europe PMC, 1,436 chars; Elsevier, no open full text) - 5l",
+    "15": "abstract (Europe PMC, 1,759 chars; Elsevier, no open full text) - 5l",
+    "17 (b)-(k)": "shared methods section, not a fresh read - 5f",
+}
 
 FRANCE_NUMERATOR_PRIMARY = 149  # §5b: the row prints 49; the primary's observed positive count is 149.
 
@@ -203,8 +227,13 @@ def build() -> dict:
         "(Japan 684 / 90) placed in frame 1 on a full read of its primary (Kusumoto et al., Emerg "
         "Infect Dis 2016, PMC4918142), the read is §5k; its 684 are a serogroup-restricted subset of "
         "diagnostic submissions from diseased swine, which is stated rather than smoothed. Placed set "
-        "24 -> 25 rows.",
-        "closes": "value-queue item colistin-denominator-sheet",
+        "24 -> 25 rows. Extended a sixth time 2026-11-24T12:0xZ — rows 15 (Jordan), 11 (India) and 14 "
+        "(Arabian Peninsula) placed from their primaries' own abstracts, the full texts being paywalled "
+        "(§5l); the basis is recorded in read_basis_notes so an abstract read is never mistaken for a "
+        "methods-section read. Placed set 25 -> 28 rows, and frame 2 stops being a singleton: the quoted "
+        "range's floor moves from 0.04% to 0.12% and the spread from 883-fold to 264-fold.",
+        "closes": "value-queue item colistin-unread-rows-frames (advancing it; colistin-denominator-sheet "
+        "is closed)",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
         "assignments from research/mcr-colistin-harmonisation.md §5c–§5e",
         "method": "Assign every row whose denominator has been read against its primary to exactly one "
@@ -244,14 +273,16 @@ def build() -> dict:
             ],
         },
         "arithmetic_failures_among_placed_rows": [list(x) for x in failures],
+        "read_basis_notes": READ_BASIS_NOTES,
         "gene_frame_with_france_corrected_pct": round(
             100 * (gene["n"] + FRANCE_NUMERATOR_PRIMARY - 49) / gene["N"], 6
         ),
         "what_this_does_not_say": [
             "That the frame rates are comparable with each other. They are not: that is the finding.",
-            "That the unplaced rows could not move the range. They could — 14 of 38 rows have no frame, "
-            "and the largest of them (China 1,611 row 2, Japan 684 row 12) could widen or narrow it; "
-            "Tunisia 676 is now read and deliberately unplaced, per §5g.",
+            "That the unplaced rows could not move the range. They could — 10 of 38 rows have no frame, "
+            "and the largest of them (China 1,611 row 2) could widen or narrow it; Tunisia 676 is read and "
+            "deliberately unplaced, per §5g. The range's floor has already moved once for this reason: it "
+            "was 0.04% while frame 2 held only Canada.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],

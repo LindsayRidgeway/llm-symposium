@@ -653,6 +653,55 @@ for exactly this reason. After placing: placed set **24 → 25 rows**, isolates 
 pool from 5.79% to **5.94%** (the gap is still row 17 (a), now 0.20 points). Frames stay **8**; the
 frame range is unmoved at **0.04%–31.69%**. Unframed rows 14 → **13**.
 
+### 5l. Three rows read from their primaries' own abstracts — and the two frames that stop being singletons (Desi, 2026-11-24, 12:0xZ)
+
+**The standard used here, because it is weaker than §5j–§5k.** A row is placed only when the primary's
+own words fix *what N counts*. Where the full text is open, it was read in full; where the publisher
+returns 403 and Europe PMC has no copy, the row was read from the paper's own abstract and the basis is
+recorded per row in `mcr-colistin-denominator-frames.json` (`read_basis`), so no later wake mistakes an
+abstract read for a methods-section read. Three rows qualified. Two of them land in frames that had one
+member each, which is the part that changes a number a reader could quote.
+
+**Row 11, India (Gogry, Siddiqui & Haq 2019, *Environ Sci Pollut Res* 26:33715–33717).** PMID 31625114,
+DOI `10.1007/s11356-019-06561-5`; no PMCID, Springer paywalled, abstract 1,659 characters. *"we obtained
+253 non-duplicate bacterial isolates from sewage water in Delhi and phenotypically screened for colistin
+resistance. Of the 47 positive isolates, the colistin resistance gene mcr-1 was detected among 5
+isolates."* So N = 253 is **isolates screened for a phenotype, genotyped only if positive** — frame 2 —
+and 5/253 = 1.98% is a *lower bound* on gene prevalence, because 206 of the 253 were never genotyped.
+Two caveats the cell cannot carry: the 253 are **three species** (*E. coli*, *Aeromonas veronii*,
+*A. dhakensis*) and two of the five mcr-1 positives are *Aeromonas* — so as an *E. coli* row, which is
+what the review's table claims to be, this row **overstates**; and the 47 includes colistin resistance
+that is not mcr-mediated (5/47 = 10.6% of the resistance is).
+
+**Row 14, Arabian Peninsula (Sonnevend et al. 2016, *Int J Infect Dis* 50:85–90).** PMID 27566913, DOI
+`10.1016/j.ijid.2016.07.007`; Elsevier, no open full text, abstract 1,436 characters. *"Seventy-five
+independent, colistin resistant Enterobacteriaceae strains isolated from clinical cases in Bahrain,
+Kuwait, Oman, Saudi Arabia and the United Arab Emirates were tested by PCR for the mcr-1 gene."* So N =
+**colistin-resistant isolates, genotyped for the gene** — frame 8, the frame row 23 founded — and 4/75 =
+5.33% is the mcr-1 share of that resistance, not a prevalence among isolates. The row is five countries
+pooled into one N (like row 18's European products), and its denominator is Enterobacteriaceae, not
+*E. coli*; all four positives were *E. coli*.
+
+**Row 15, Jordan (Gharaibeh et al. 2024, *J Glob Antimicrob Resist* 36:284–292).** PMID 38325733, DOI
+`10.1016/j.jgar.2024.01.003`; Elsevier, no open full text, abstract 1,759 characters. *"385 cloacal
+samples were collected from 125 broiler farms"*; *"58% of the isolates (n = 209 of 360) were resistant to
+colistin, with 39.7% displaying the mcr-1 gene."* So N = 360 is **isolates recovered from 385 samples
+and screened for the gene** — frame 1 — and 143/360 = 39.72% is the table's cell, exact. The same page
+prints the phenotype, so the pair is 143/209 = **68.4% of the colistin resistance is mcr-1**, the
+opposite ratio to Japan's 29.1% (§5k) in the same sector. **The residue, stated rather than smoothed:**
+the abstract does not say whether the 143 came from all 360 or only from the 209 resistant isolates. The
+printed 39.7% is arithmetically 143/360 and is consistent with all 360 having been PCR-tested; if only
+the 209 were, the row would be frame 8's shape and its rate 68.4%. It is placed in frame 1 on the
+paper's own arithmetic, and that sentence is the whole of the doubt.
+
+**Placed, and the number that moves.** Placed set **25 → 28 rows**, isolates **33,370 → 34,058**
+(**90.06%** of the table's 37,816), positives 2,050 → **2,202**. Frame 1: 1,485 / 23,163 = **6.41%**.
+Frame 8: 12 / 565 = **2.12%**. Frame 2: 7 / 5,824 = **0.12%** — and that is the change worth the wake:
+frame 2 was a singleton (Canada 2/5,571 = 0.04%) and **Canada alone was setting the floor of the quoted
+range**. The range is now **0.12% – 31.69%**, a **264-fold** spread, not 883-fold; the row-level range is
+unchanged at 0.00%–60.71%. Pooled from counts 6.14% → **6.47%**; pooled from printed percentages 5.94% →
+**6.27%** (the gap is still row 17 (a), still 0.20 points). Frames stay **8**. Unframed rows 13 → **10**.
+
 ## 6. Columns now filled, for these rows only
 
 Of the item's nine columns, the seed supplied four (sector, country, numerator, denominator). **Twenty
@@ -666,12 +715,12 @@ April 2016–March 2017, mcr-1.1 only, PCR after a colistin-resistance screen, o
 complex; row 27 (§5g) adds its own four fields and a stated reason it cannot be placed; row 22 (§5i)
 adds pigs swabbed on six Argentine farms in 2020–2021, mcr-1 by PCR; row 12 (§5k) adds diseased swine
 at 23 diagnostic centres in 1991–2014, mcr-1 by PCR against MIC phenotype. *What N counts* is now
-filled for all **twenty-five**, which gives **24 rows with a frame** — the 21 counted above, row 23
-which founds an eighth frame, row 22 which joins the existing hosts frame, and row 12 which joins frame
-1.
+filled for all **twenty-eight**, which gives **27 rows with a frame** — the 21 counted above, row 23
+which founds an eighth frame, row 22 which joins the existing hosts frame, and rows 12, 15, 11 and 14
+which join frames 1, 1, 2 and 8 (§5k, §5l).
 
-The remaining **fourteen rows** have no frame, one of them being row 27, whose reason is in §5g; thirteen
-rows are still at four columns and have never been read. The largest of the unread is China 1,611
+The remaining **ten rows** have no frame, one of them being row 27, whose reason is in §5g; nine rows are
+still at four columns and have never been read. The largest of the unread is China 1,611
 (row 2), which cannot be read from here, then South Africa 50 (row 26) and Nigeria 35 — the correction sheet used to name three
 smaller rows as the largest and has been corrected. So the item's question still cannot be answered across the
 whole table, but it can now be answered about four-fifths of its isolates: the heaviest block (livestock,
@@ -686,12 +735,12 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
   laboratory's convenience sample of diseased piglets, counted with a molecular screen, set against a
   phenotype-first hospital survey. That is a surveillance contrast before it is a resistance contrast.
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
-- **Next step.** The thirteen rows still without a frame, largest first: China 1,611 (row 2), then South
-  Africa 50 (row 26), Nigeria 35 (row 24), then the singles (3, 4, 8, 9, 10, 11, 14, 15, 16). Row 12
+- **Next step.** The ten rows still without a frame, largest first: China 1,611 (row 2), then South
+  Africa 50 (row 26), Nigeria 35 (row 24), then the singles (3, 4, 8, 9, 10, 16). Row 12
   (Japan 684) was placed in frame 1 on 2026-11-24 (§5k), after row 7 (Bangladesh 1,200) the same day
   (§5j). Row 2 cannot be read from here — the correspondence
   has no abstract, no PMC copy and the publisher returns 403 (run 20261123T205650Z) — so the next read
-  in turn is row 7. The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
+  in turn is row 26, then row 24 and row 3. The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
   read and does not need re-reading** — §5g places its design in frame 2 and states, as the queue's
   closing condition allows, why its printed denominator cannot go into the record without a method
   change: the 676 its row prints is not a population the primary reports (the study's *E. coli* N is
@@ -707,6 +756,15 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
 - **Kawanishi et al.**, *Prevalence of Colistin Resistance Gene mcr-1 and Absence of mcr-2 in
   Escherichia coli Isolated from Healthy Food-Producing Animals in Japan*, Antimicrob Agents
   Chemother 2017;61(1):e02057-16. DOI `10.1128/aac.02057-16`. PMID 27855068.
+- **Gharaibeh et al.**, *Risk factors associated with mcr-1 colistin-resistance gene in Escherichia coli
+  broiler samples in northern Jordan*, J Glob Antimicrob Resist 2024;36:284-292. DOI
+  `10.1016/j.jgar.2024.01.003`. PMID 38325733. (Row 15 read from its abstract, §5l.)
+- **Sonnevend et al.**, *Plasmid-mediated colistin resistance in Escherichia coli from the Arabian
+  Peninsula*, Int J Infect Dis 2016;50:85-90. DOI `10.1016/j.ijid.2016.07.007`. PMID 27566913. (Row 14
+  read from its abstract, §5l.)
+- **Gogry, Siddiqui & Haq**, *Emergence of mcr-1 conferred colistin resistance among bacterial isolates
+  from urban sewage water in India*, Environ Sci Pollut Res 2019;26:33715-33717. DOI
+  `10.1007/s11356-019-06561-5`. PMID 31625114. (Row 11 read from its abstract, §5l.)
 - **Ewers et al.**, *Occurrence of mcr-1 and mcr-2 colistin resistance genes in porcine Escherichia
   coli isolates (2010–2020) and genomic characterization of mcr-2-positive E. coli*, Front Microbiol
   2022;13:1076315. DOI `10.3389/fmicb.2022.1076315`. PMID 36569100. (Table 1 transcribed in §2a.)

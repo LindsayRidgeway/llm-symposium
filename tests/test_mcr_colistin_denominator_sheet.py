@@ -133,7 +133,8 @@ class DenominatorSheet(unittest.TestCase):
         self.assertEqual(len(placed), len(set(placed)))
         self.assertEqual(sorted(placed), sorted(
             ["13", "6", "17 (a)", "17 (b)", "17 (c)", "17 (d)", "17 (e)", "17 (f)", "17 (g)",
-             "17 (h)", "17 (i)", "17 (j)", "17 (k)", "19", "7", "12", "28", "21", "22", "18", "5", "20", "25", "1", "23"]
+             "17 (h)", "17 (i)", "17 (j)", "17 (k)", "19", "7", "12", "28", "21", "22", "18", "5", "20", "25", "1", "23",
+             "15", "11", "14"]
         ))
         # The rows the harmonisation file established each frame on.
         by_frame = {f["frame"]: f["rows"] for f in self.record["frames"]}
@@ -166,10 +167,9 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("7", gene["rows"])
         self.assertEqual((self.members["7"]["N"], self.members["7"]["n"]), (1200, 305))
         self.assertTrue(self.members["7"]["agrees_with_own_counts"])
-        self.assertEqual((gene["N"], gene["n"]), (22803, 1342))
-        self.assertAlmostEqual(gene["pooled_pct"], 100 * 1342 / 22803, places=5)
+        self.assertAlmostEqual(gene["pooled_pct"], 100 * gene["n"] / gene["N"], places=5)
         self.assertEqual(self.record["frame_count"], 8)
-        self.assertIn("5.89%", self.sheet)
+        self.assertIn(f"{gene['pooled_pct']:.2f}%", self.sheet)
         self.assertIn("twenty *E. coli* colonies picked per pooled faecal sample", self.sheet)
 
     def test_row_12_japan_joins_frame_1_as_a_nested_subset(self):
@@ -191,37 +191,56 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("71% of its own collection", self.sheet)
         self.assertIn("90 of 309 = 29.1%", self.sheet)
 
+    def test_three_abstract_read_rows_and_the_floor_they_moved(self):
+        """Rows 15, 11 and 14 read from their primaries' abstracts on 2026-11-24 (§5l).
+
+        The point of pinning them is the number that moved: frame 2 held only Canada, so a single row
+        was setting the low end of the quoted range; India joins it and the floor goes 0.04% -> 0.12%.
+        """
+        by_frame = {f["frame"]: f["rows"] for f in self.record["frames"]}
+        self.assertIn("15", by_frame["isolates screened for the gene"])
+        self.assertIn("11", by_frame["isolates screened for a phenotype, genotyped only if positive"])
+        self.assertIn("14", by_frame["colistin-resistant isolates, genotyped for the gene"])
+        pheno = next(f for f in self.record["frames"]
+                     if f["frame"].startswith("isolates screened for a phenotype"))
+        self.assertEqual((pheno["N"], pheno["n"], pheno["rows"]), (5824, 7, ["28", "11"]))
+        self.assertAlmostEqual(pheno["pooled_pct"], 100 * 7 / 5824, places=5)
+        self.assertGreater(pheno["pooled_pct"], 100 * 2 / 5571)  # the singleton it replaced as the floor
+        self.assertIn("11", self.record["read_basis_notes"])
+        self.assertIn("abstract", self.record["read_basis_notes"]["11"])
+        self.assertIn("caveat 4", self.sheet)
+
     # --- the recalculated range, and the coverage it is a range over ---
 
     def test_coverage_is_the_seeds_own_counts(self):
         placed = self.record["placed"]
-        self.assertEqual(placed["rows"], 25)
-        self.assertEqual(placed["N"], 33370)
+        self.assertEqual(placed["rows"], 28)
+        self.assertEqual(placed["N"], 34058)
         self.assertEqual(placed["N"], sum(self.rows[r]["n_isolates"] for r in self.members))
-        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 33370 / 37816, places=3)
+        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34058 / 37816, places=3)
         self.assertEqual(self.record["table"]["N"], self.seed["derived"]["sum_isolates"])
-        self.assertIn("33,370", self.sheet)
-        self.assertIn("88.2%", self.sheet)
+        self.assertIn("34,058", self.sheet)
+        self.assertIn("90.1%", self.sheet)
 
     def test_the_range_quoted_is_the_frame_range(self):
         r = self.record["range"]
         rates = [f["pooled_pct"] for f in self.record["frames"]]
         self.assertAlmostEqual(r["low_pct"], min(rates), places=5)
         self.assertAlmostEqual(r["high_pct"], max(rates), places=5)
-        self.assertAlmostEqual(r["low_pct"], 100 * 2 / 5571, places=4)      # row 28, phenotype-first
+        self.assertAlmostEqual(r["low_pct"], 100 * 7 / 5824, places=4)      # rows 28 + 11, phenotype-first
         self.assertAlmostEqual(r["high_pct"], 100 * 393 / 1240, places=4)   # rows 18 + 5
-        self.assertGreater(r["fold_spread"], 800)
+        self.assertGreater(r["fold_spread"], 200)
         # The sheet's quotable sentence carries the same two endpoints, to its own rounding.
-        self.assertIn("0.04%", self.sheet)
+        self.assertIn("0.12%", self.sheet)
         self.assertIn("31.7%", self.sheet)
         self.assertIn("eight different quantities", self.sheet)
 
     def test_pooling_the_placed_rows_does_not_give_seven_percent(self):
-        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 2050 / 33370, places=4)
+        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 2202 / 34058, places=4)
         self.assertLess(self.record["placed"]["pooled_pct"], 6.5)
         # And the France correction is recorded rather than silently folded in.
         self.assertAlmostEqual(self.record["gene_frame_with_france_corrected_pct"],
-                               100 * 1442 / 22803, places=4)
+                               100 * 1585 / 23163, places=4)
 
     def test_frame_four_is_mixed_unit_and_the_sheet_says_so(self):
         """33 positive products + 360 positive isolates, over 128 products + 1,112 samples.
@@ -240,24 +259,24 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("32.37", self.sheet)
 
     def test_the_two_pooling_methods_and_the_gap_that_is_row_17a(self):
-        """Counts pool 5.26% against printed-percentage pool 5.04%; the gap is row 17 (a)."""
+        """Counts pool 6.47% against printed-percentage pool 6.27%; the gap is row 17 (a)."""
         placed = [m for f in self.record["frames"] for m in f["members"]]
         N = sum(m["N"] for m in placed)
         counts_pool = 100 * sum(m["n"] for m in placed) / N
         printed_pool = 100 * sum(m["N"] * m["pct_printed"] / 100 for m in placed) / N
-        self.assertAlmostEqual(counts_pool, 6.1432, places=3)
-        self.assertAlmostEqual(printed_pool, 5.9427, places=3)
+        self.assertAlmostEqual(counts_pool, 6.4654, places=3)
+        self.assertAlmostEqual(printed_pool, 6.2690, places=3)
         # The whole gap is the one cell whose printed percentage is not its own counts.
         r17a = self.rows["17 (a)"]
         gap = 100 * (r17a["mcr_positive"] - r17a["n_isolates"] * r17a["prevalence_pct_reported"] / 100) / N
         self.assertAlmostEqual(counts_pool - printed_pool, gap, places=2)
-        self.assertGreater(gap, 0.2)
-        self.assertIn("6.14%", self.sheet)
-        self.assertIn("5.94%", self.sheet)
+        self.assertGreater(gap, 0.19)  # 0.198 now: the pool grew by 688 isolates, the cell did not
+        self.assertIn("6.47%", self.sheet)
+        self.assertIn("6.27%", self.sheet)
 
     def test_sheet_states_its_own_limits(self):
-        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 25)
-        self.assertIn(f"{len(self.rows) - 25} of the 38 rows", self.sheet)
+        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 28)
+        self.assertIn(f"{len(self.rows) - 28} of the 38 rows", self.sheet)
         self.assertIn("Not a population prevalence anywhere", self.sheet)
         self.assertIn("mcr-colistin-denominator-frames.json", self.sheet)
         self.assertIn("mcr-colistin-harmonisation.md", self.sheet)
@@ -270,7 +289,7 @@ class ScriptRuns(unittest.TestCase):
         )
         self.assertEqual(out.returncode, 0, out.stderr)
         self.assertIn("frames: 8", out.stdout)
-        self.assertIn("placed rows: 25 of 38", out.stdout)
+        self.assertIn("placed rows: 28 of 38", out.stdout)
         self.assertIn("17 (a)", out.stdout)
 
 
