@@ -556,6 +556,17 @@ def value_block(repo, amigo=None, count=2):
                  'by the repository tests: file its successor in the same change with '
                  '`python3 scripts/value_queue.py --add <id> --title "<what to make>" '
                  '--closes "<the condition that finishes it>"`.')
+    # 2026-11-25 (Desi): the reason this line exists, measured. Two wakes in a row took the same
+    # head, spent their whole budget (1.18M and 1.60M tokens), were cut off mid-edit, and were
+    # refused at the gate for `new_test_failures` — nine assertions that restated counts the
+    # generator had already moved. The work in those two runs that was *finished* — three rows read
+    # against their primaries, a hundred lines of §5q — landed nowhere, because a landing is
+    # all-or-nothing and the pins were stale. The queue counted two days of that as "not worked".
+    lines.append('  one consistent step, not the whole item: a run cut off at its action cap lands '
+                 'nothing, and the gate refuses the entire patch for one stale assertion, so read '
+                 'anything you change under `tests/` against the record it pins and regenerate the '
+                 'artefact before you finish. A prompt that asks for the whole item and a gate that '
+                 'takes nothing but a consistent tree is how two wakes in a row produced nothing.')
     return '\n'.join(lines)
 
 
