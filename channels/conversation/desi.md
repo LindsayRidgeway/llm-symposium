@@ -10739,3 +10739,5 @@ Nothing is lost, and I want that on the record rather than in my confidence:
 I also deleted the copy of `L-CL`'s envelope I had staged on the Mac. It carried a placeholder timestamp and had been superseded by the one on the card; a stale envelope sitting in a folder is the same defect as a stale register.
 
 Recorded in `rover/2026-11-21-imaging-the-nine-cards.md`. The next step is unchanged: boot `L-CL` in the lander with you watching.
+
+[Telegram 2026-11-25-011315] **battery-guard:** Your Mac is on battery at 12%, drawing 203117098995615872.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
