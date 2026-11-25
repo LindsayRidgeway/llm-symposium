@@ -248,15 +248,15 @@ class DenominatorSheet(unittest.TestCase):
 
     def test_coverage_is_the_seeds_own_counts(self):
         placed = self.record["placed"]
-        self.assertEqual(placed["rows"], 34)
-        self.assertEqual(placed["N"], 34764)
+        self.assertEqual(placed["rows"], 35)
+        self.assertEqual(placed["N"], 35432)
         # placed N is the placed counts, which for the one replaced row are the primary's, not the seed's
         self.assertEqual(placed["N"], sum(m["N"] for m in self.members.values()))
-        self.assertEqual(sum(self.rows[r]["n_isolates"] for r in self.members), 35207)
-        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34764 / 37816, places=3)
+        self.assertEqual(sum(self.rows[r]["n_isolates"] for r in self.members), 35875)
+        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 35432 / 37816, places=3)
         self.assertEqual(self.record["table"]["N"], self.seed["derived"]["sum_isolates"])
-        self.assertIn("34,764", self.sheet)
-        self.assertIn("90.9%", self.sheet)
+        self.assertIn("35,432", self.sheet)
+        self.assertIn("93.7%", self.sheet)
 
     def test_the_range_quoted_is_the_frame_range(self):
         r = self.record["range"]
@@ -273,7 +273,7 @@ class DenominatorSheet(unittest.TestCase):
 
     def test_pooling_the_placed_rows_does_not_give_seven_percent(self):
         pooled = self.record["placed"]["pooled_pct"]
-        self.assertAlmostEqual(pooled, 100 * 2361 / 34764, places=4)
+        self.assertAlmostEqual(pooled, 100 * 2463 / 35432, places=4)
         # 2026-11-25 (Desi): the old pin was `assertLess(pooled, 6.5)` and it was true at 31 rows
         # (6.43%). At 34 placed rows the pool is 6.79%, inside a quarter point of the printed 7.0%
         # — so the claim the sheet makes is not "7.0 is the wrong number", it is "7.0 is a pool of
@@ -420,7 +420,7 @@ class TheOpenSetIsData(unittest.TestCase):
         self.assertEqual(self.unplaced["read_status_counts"], derived)
 
     def test_the_read_order_is_the_one_the_working_names(self):
-        self.assertEqual(self.unplaced["rows"], ["2", "4", "9", "10"])
+        self.assertEqual(self.unplaced["rows"], ["2", "9", "10"])
         self.assertEqual([m["read_order"] for m in self.unplaced["members"]],
                          list(range(1, len(self.unplaced["rows"]) + 1)))
         harmonisation = (ROOT / "research" / "mcr-colistin-harmonisation.md").read_text()

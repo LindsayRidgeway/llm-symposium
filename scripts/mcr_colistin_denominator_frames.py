@@ -53,6 +53,7 @@ FRAMES = [
             "8",
             "3",
             "16",
+            "4",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -74,7 +75,11 @@ FRAMES = [
         "phenotype too (209/360 colistin resistant, so mcr-1 is 143/209 = 68.4% of the resistance). Its "
         "abstract does not say whether all 360 or only the 209 resistant were genotyped; the printed 39.7% "
         "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down. "
-        "Three rows joined on 2026-11-25 (§5q). Row 8 (Bangladesh 104 / 14) is an isolate screen with a "
+        "A fourth row joined on 2026-11-25 (§5r): row 4 (China 668 / 102) is 668 non-duplicate E. coli recovered "
+        "from 722 one-per-bird rectal swabs on eight large Shandong poultry farms (2017-2018), every one of "
+        "them PCR-screened for mcr-1: 102 (15.27%) positive, reproducing the printed cell exactly. A clean "
+        "isolate screen, but its sampling unit is the bird, not the isolate - 668 isolates from 722 animals - "
+        "so it is not a farm or bird prevalence. Three rows joined on 2026-11-25 (§5q). Row 8 (Bangladesh 104 / 14) is an isolate screen with a "
         "denominator narrower than the table implies: the 104 are the extended-spectrum "
         "β-lactamase-PRODUCING E. coli of a poultry survey — a resistance-phenotype subset of an "
         "unreported total, from live bird markets, rural farms and backyard flocks — and all 104 were "
@@ -165,6 +170,8 @@ FRAMES = [
 # How far down each row's evidence goes, where this pass changed it. Rows not named here were read as
 # §5c-§5k record (full text, PMC page or abstract) and that is where their basis is written.
 READ_BASIS_NOTES = {
+    "4": "full text (JATS XML, PMC7044118) - mcr-colistin-harmonisation.md 5r",
+    "10": "full text (JATS XML, PMC11747048) - mcr-colistin-harmonisation.md 5r",
     "26": "full text (JATS XML, PMC8654743) - mcr-colistin-harmonisation.md 5n",
     "11": "abstract (Europe PMC, 1,659 chars; Springer paywalled, no PMCID) - mcr-colistin-harmonisation.md 5l",
     "14": "abstract (Europe PMC, 1,436 chars; Elsevier, no open full text) - 5l",
@@ -214,7 +221,7 @@ DENOMINATOR_FROM_PRIMARY = {
 # build() computes the open set from the seed and refuses to run unless this list is exactly that set,
 # so placing a row fails the generator until the list is updated here — the open list cannot go stale
 # silently, which is the failure that outlived the waking that noticed it.
-UNPLACED_READ_ORDER = ["2", "4", "9", "10"]
+UNPLACED_READ_ORDER = ["2", "9", "10"]
 
 # Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
 # here` (a source refusal, which no later wake should re-attempt without new information) and
@@ -228,15 +235,19 @@ UNPLACED_NOTES = {
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
         "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
     },
-    "4": {"read_status": "not read", "why": "668 isolates, 102 positives, 15.27%; Europe PMC returned "
-    "HTTP 500 for its full text on 2026-11-25, so it needs the PMC page or the PDF."},
     "9": {"read_status": "read, cannot be placed yet", "why": "read in full on 2026-11-25 (JATS XML, "
     "PMC10117427) and the row's 210/74 does not come from the paper's text: the primary reports 102 "
     "colistin-resistant pig isolates and 34 human ones, with mcr-1 in 97/102 and 31/34. Whether 210 "
     "is an isolate total from one of its tables is unresolved — §5q states what is known; do not "
     "re-read, read the section."},
-    "10": {"read_status": "not read", "why": "120 isolates, 6 positives, 5.0%; Europe PMC returned "
-    "HTTP 500 for its full text on 2026-11-25."},
+    "10": {"read_status": "read, cannot be placed yet", "why": "read in full on 2026-11-25 (§5r, "
+    "PMC11747048, the §5q HTTP 500 having cleared): the primary reports 240 clinical E. coli from urine "
+    "and pus, subcultured on colistin 2 ug/mL, then PCR for mcr-1 on the 10 resistant isolates - 10/10 "
+    "positive, printed as 10/240 = 4%. The string '120' occurs once in the article, in a reference, and "
+    "no six-positive count exists anywhere, so the row's 120 / 6 / 5.0% is not this study's, exactly as "
+    "row 9's is not its own. Do not re-read; read §5r. The paper's usable quantity is 10/240 = 4.17% "
+    "and it is a frame-8 quantity (genotyped among phenotype-selected isolates), so placing it would "
+    "replace the row rather than frame it."},
 }
 
 

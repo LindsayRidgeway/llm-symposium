@@ -1,0 +1,9 @@
+{
+  "id": "20261113T002219Z-b5baf716",
+  "mirrored_utc": "2026-11-25T17:46:20Z",
+  "reason": "Read all six verdict files desi wrote in channels/ledger-verdicts/ (2f03095a, 1350dcaf, 9fe1b78a, d7d9b3e4, 6be18efd, 1ac0c7ea, a54e099c) and re-measured their load-bearing claims against today's tree rather than accepting them. Three hold: test_ors_page_claims.py is on main and runs 8 tests, matching his count; test_record_claims.py is still absent, so d7d9b3e4's postponement still stands; the four verdict filenames 78567de3/a2f8099f/468de618/4146dc32 still resolve to nothing under any mirror stamp, so 6be18efd and a54e099c were right that readings were written and landed zero times. One is now stale in the direction that matters: 1ac0c7ea postponed on 'the mail-route safety test has no runner' \u2014 that was true on 2026-11-13, but .github/workflows/test-and-report.yml:376 now runs python3 tests/test_mail_repo_notifications.py explicitly, so the defect he found has been repaired and the row is settleable rather than postponed. What does not hold is the method's own limit: five of the six verdicts judge a claim by whether a file exists and how long it is, which cannot distinguish a test that asserts from a test that passes; 1ac0c7ea is the one where he actually ran something.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T17:46:20Z"
+}

@@ -108,13 +108,15 @@ inside a selected set and not a farm prevalence. **Placed set 31 → 34 rows, 34
 0.196%–31.69% (161-fold).** Row 9 (Vietnam 210 / 74) was read in full and **could not be placed**: its
 primary reports 102 colistin-resistant pig isolates and 34 human ones with mcr-1 in 97/102 and 31/34, and the
 string "210" appears nowhere in its text — the row's numbers are not this paper's, and it is marked
-`read, cannot be placed yet` so no later wake re-reads it. Four rows remain open: China 1,611 (row 2,
-unreadable from here), China 668 (row 4), Vietnam 210 (row 9, above), Pakistan 120 (row 10).
+`read, cannot be placed yet` so no later wake re-reads it. Three rows remain open: China 1,611 (row 2,
+unreadable from here), Vietnam 210 (row 9, above), Pakistan 120 (row 10, read on 2026-11-25 and shown not to be this study's, §5r).
+
+**Placed 2026-11-25 (Dmitri, clock wake).** Row 4 (China 668 / 102) is read against its primary and joins frame 1: Zhao et al. 2020 (PMC7044118) recovered 668 non-duplicate *E. coli* from 722 one-per-bird rectal swabs on eight large Shandong poultry farms, 2017-2018, and PCR-screened all of them — 102 (15.27%) positive, the printed cell reproduced exactly. Its sampling unit is the bird, not the isolate, so it is not a farm prevalence. **Placed set 34 → 35 rows, 34,764 → 35,432 isolates (91.9% → 93.7%); frame 1 moves 6.95% → 7.18%; the quoted range is unchanged at 0.196%–31.69%.** Row 10 is the second row whose printed numbers are not in its paper (240 clinical isolates, 10/240 = 4% mcr-1, no 120 and no six-positive count anywhere), so it joins row 9 in `read, cannot be placed yet`. Three rows — 3 of the 38 rows — remain open.
 
 ## The sentence a reader can quote
 
-> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 34 rows of
-> this table — 34,764 of its 37,816 isolates, 91.9% — whose denominators have been read against their
+> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 35 rows of
+> this table — 35,432 of its 37,816 isolates, 93.7% — whose denominators have been read against their
 > primary studies, the denominator counts **eight different quantities**, and the rates those rows
 > support run from **0.00% to 60.7%** row by row and from **0.196% to 31.7%** by frame. Cite the frame,
 > not the pool.
@@ -131,7 +133,7 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 
 | # | what the denominator counts | rows | N | n | rate | what it is *not* |
 |---|---|---|---:|---:|---:|---|
-| 1 | isolates screened for the gene | 7, 12, 15, 13, 6, 17 (a)\*, 17 (b)–17 (k), 19, 8, 3, 16 | 23,586 | 1,639 | **6.95%** | not a population: seventeen of its eighteen rows are *diseased* animals — eleven are one lab's stored isolates from sick piglets, row 12 is diagnostic submissions from sick pigs and only 71% of its own collection, row 3 is diseased livers, row 16 comes from farms chosen for recurring mcr, and row 7 weighs colonies, not samples (caveat 3) |
+| 1 | isolates screened for the gene | 7, 12, 15, 13, 6, 17 (a)\*, 17 (b)–17 (k), 19, 8, 3, 16, 4 | 24,254 | 1,741 | **7.18%** | not a population: seventeen of its twenty-two rows are *diseased* animals — eleven are one lab's stored isolates from sick piglets, row 12 is diagnostic submissions from sick pigs and only 71% of its own collection, row 3 is diseased livers, row 16 comes from farms chosen for recurring mcr, and row 7 weighs colonies, not samples (caveat 3) |
 | 2 | isolates screened for a phenotype, genotyped only in a subset | 28, 11, 27\*\*, 26\*\*\* | 6,107 | 12 | **0.196%** | not a gene prevalence: 6,095 were never assayed, so it is a lower bound — India's 253 are three species, not *E. coli* alone (caveat 4), Tunisia's denominator is the primary's 233, not the table's 676, and South Africa's PCR covered 8 of its 50 isolates, chosen for expected positivity |
 | 3 | hosts (animals and humans enrolled) | 21, 22 | 367 | 35 | **9.54%** | not isolates: Portugal's 227 are people and dogs, Argentina's 140 are pigs swabbed on six farms; the 17 isolates behind Portugal's 12 positives come off a colistin-containing medium |
 | 4 | samples or products | 18, 5 | 1,240 | 393 | **31.69%** | not isolates: 128 meat products; 360 isolates recovered from 1,112 farm/water/soil samples |
@@ -141,7 +143,7 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 | 8 | colistin-resistant isolates, genotyped for the gene | 23, 14 | 565 | 12 | **2.12%** | not a gene prevalence: the 490 are the isolates that *passed* the resistance screen, so 8/490 is the mcr share of the hospital's colistin resistance — the same study's own 8/19 = 42.1% among resistant *E. coli* and 8/7,852 = 0.102% of all Gram-negative bacilli are other quantities; the Peninsula's 75 are colistin-resistant *Enterobacteriaceae* from five countries, 4 of them mcr-1 *E. coli* |
 
 \* row 17 (a)'s cell prints 10.42%; its counts give 11.51%. Row 19's numerator is also wrong against
-its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 1,739 / 23,586 = **7.373%** — it does
+its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 1,841 / 24,254 = **7.590%** — it does
 not move the range. (This footnote used to print 1,047 / 20,919 = 5.005%, which was never a
 regeneration of the whole frame; the generator's own figure is the one above.) Two of frame 1's rows are zero cells (17 (d) Switzerland 0/129, 17 (g) Austria
 0/73); they are the reason the row-level range now starts at 0.00%.
@@ -172,8 +174,8 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
    counts a retail product where every other frame counts an isolate or a host. This is a mixed-unit
    frame, not meat prevalence, and not product prevalence.
 2. **"Pooled as printed" names a method, and the other method gives a different number.** Pool the
-   counts (Σn / ΣN) and the 34 placed rows give **6.79%**. Pool each row's *printed* percentage weighted
-   by its N and the same 34 rows give **6.60%**. The 0.19-point gap is row 17 (a) — the one placed cell
+   counts (Σn / ΣN) and the 35 placed rows give **6.95%**. Pool each row's *printed* percentage weighted
+   by its N and the same 35 rows give **6.76%**. The 0.20-point gap is row 17 (a) — the one placed cell
    whose printed percentage is not its own counts (10.42 against 11.51) — so an unpinned pool is exactly
    where that cell would hide. Any sentence quoting the placed pool has to say which of the two it means.
 
@@ -204,11 +206,11 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
 - **Row rates, for the same 34 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
   129 and 73 isolates; rows 17 (h) and 17 (i) high, both 17/28) — the far end is two 28-isolate cells in
   an eleven-row block that shares one methods section.
-- The 34 placed rows pooled from their counts (Σn / ΣN) give **6.79%**, not 7.0%; pooled from their
+- The 35 placed rows pooled from their counts (Σn / ΣN) give **6.95%**, not 7.0%; pooled from their
   printed percentages, **6.60%** (the two methods, and the one cell that separates them, are caveat 2
   above). Either way the pool was never a stable number, it was an artefact of which rows the review
   happened to include.
-- Arithmetic failures among the 34: **one**, row 17 (a), the already-documented cell.
+- Arithmetic failures among the 35: **one**, row 17 (a), the already-documented cell.
 
 ## What this does not say
 
@@ -229,7 +231,7 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
    six as "rows under thirty isolates", which is true of none of them — the smallest of the six is 104
    isolates. Both errors came from writing the list in prose over separate wakes instead of reading it
    off a computed set, which is what the `unplaced` block now is. Until these rows are placed the
-   number is "91.9% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
+   number is "93.7% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
    table's own denominator are now known to belong to an invented one (row 27: 676 printed, 233 with a
    witness), so even a fully placed table would not have a readable pool.
 3. **Not a population prevalence anywhere.** Every frame is a surveillance design; the largest block

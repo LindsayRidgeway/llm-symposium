@@ -104,7 +104,7 @@
       "last_worked": "2026-11-25",
       "thread": "research/mcr-colistin-denominator-sheet.md",
       "done_on": "2026-11-25",
-      "evidence": "research/mcr-colistin-denominator-frames.json \u2014 34 of 38 rows placed (34,764 of 37,816 isolates, 91.9%), the other 4 each carrying a stated reason; frames stay 8 (0.196%-31.69%, 161-fold); research/mcr-colistin-denominator-sheet.md recomputed over every placed row; tests/test_mcr_colistin_denominator_sheet.py 25 tests pass with placed count (34) equal to framed member count (34), plus the four sibling colistin suites green on 2026-11-25"
+      "evidence": "research/mcr-colistin-denominator-sheet.md rows 4 and 10; research/mcr-colistin-denominator-frames.json placed=35/38"
     }
   ]
 }
