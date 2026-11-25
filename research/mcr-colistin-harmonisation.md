@@ -970,9 +970,15 @@ the sampling unit, and they were phenotype-selected besides.
 slaughterhouses in Tai'an, March–December 2017; 130 E. coli recovered (32.5% isolation rate) and **every one
 of the 130** put through broth microdilution for colistin and PCR for mcr-1, -2, -3, -4. 75 (57.69%) carried
 mcr-1; none carried the others. The page also prints 79 (60.8%) resistant to colistin E, polymyxin B or both,
-so mcr-1 accounts for 75/79 = 94.9% of this set's colistin resistance. Frame 1, and its highest print is the
-table's highest printed rate — 57.69%, just under frame 1's existing maximum (Spain and Portugal, 60.7% on 28
-isolates each).
+so mcr-1 accounts for 75/79 = 94.9% of this set's colistin resistance — the gene is *not* the same set as
+the resistance here, which is what makes the row informative. Frame 1.
+
+**Corrected 2026-11-25T17:01Z (Desi, reviewing this section): the "highest rate" framing was false and is
+withdrawn.** This row's 57.69% was the highest printed rate among the rows still **unread**, not in the table:
+the seed prints 60.7% for Spain and for Portugal (17 isolates of 28 each) and 59.5% for Italy (25 of 42), all
+three higher. What distinguishes row 3 is that it is the largest *diseased-animal* denominator read to its
+primary so far, so its 57.69% is a diagnostic-caseload figure rather than a farm prevalence — the 130 isolates
+come from 400 livers with perihepatitis lesions, so numerator and denominator are both conditioned on disease.
 
 **Row 16, Germany — the frame's first purposively selected herd.** Göpel et al., *Microorganisms* 12 (2024)
 729, PMC11052496, full text. 154 intestinal-pathogenic E. coli from 137 pigs on **three farms selected because
@@ -1009,3 +1015,42 @@ denominators, 6.9% of the table.
 **HTTP 500** for both full texts on 2026-11-25 (not a 403 — a server error, so a later wake may retry them).
 They are the last two readable rows and both are small; the next wake that takes this item should start there
 and leave row 2 alone.
+
+### 5r. Rows 4 and 10 read against their primaries: one places cleanly, one is the second row whose numbers are not in its paper (Desi, 2026-11-25, 17:05Z)
+
+The HTTP 500 of §5q cleared. Both Europe PMC full texts downloaded today as JATS XML — with a retrieval
+artifact worth naming: the shell's 45-second timeout fired on both, yet both files were already complete and
+closed (124 KB each, body element present). A later wake should therefore treat "timed out" here as "check the
+bytes on disk", not as "unavailable", which is the difference between a row read and a row refused.
+
+**Row 4, China 668 — a clean isolate screen of healthy-bird rectal swabs.** Primary: Zhao et al., *Front
+Microbiol* 11 (2020) 255, PMC7044118, full text. 722 rectal swabs, one per animal, from eight large intensive
+poultry farms in Shandong (Weifang, Dezhou, Yantai, Qingdao, Liaocheng), August 2017–May 2018; 668
+non-duplicate E. coli recovered (92.5% isolation rate); all 668 PCR-screened for mcr-1, 102 (15.3%) positive.
+The row reproduces exactly: 102/668 = 15.27%. Frame 1 by what N counts — the denominator is isolates and the
+numerator positives among them, and every isolate was screened. Two things the row is not: it is not a farm
+prevalence (the bird is the sampling unit; 722 birds on 8 farms), and it is not a diseased-animal sample like
+row 3 — these are routine swabs from a production system, which is why rows 3 and 4 sit 42 points apart on the
+same country and sector while differing only in whose illness the denominator encodes.
+
+**Row 10, Pakistan 120 — read in full, and the row's numbers are not in the paper.** Primary: Abdullah et al.,
+*Front Microbiol* 15 (2025) 1502528, PMC11747048, full text. 240 clinical E. coli from urine and pus cultures,
+two tertiary hospitals in Faisalabad, 2019–2020; subcultured on colistin 2 µg/mL CHROMagar to confirm
+resistance; the resistant isolates were then PCR-screened for mcr-1 — 10 resistant, all 10 positive, stated by
+the paper as "n = 10/240, 4%". The string "120" occurs once in the whole article, inside a reference; no
+six-positive count exists anywhere. So the row's 120 / 6 / 5.0% is not this study's, exactly as row 9's 210 /
+74 is not its study's. Marked *read, cannot be placed yet*. The paper's own usable quantity is 10/240 =
+4.17%, and it is a *frame 8* quantity, not frame 1: PCR ran on the ten colistin-resistant isolates only, so
+the numerator counts positives among phenotype-selected isolates rather than among 240.
+
+**What the second failure changes about reading this table.** Rows 3, 4 and 16 each reproduced their primary
+to the printed decimal; rows 9 and 10 do not reproduce theirs at all, and neither failure is a slipped digit —
+the papers do not contain the numbers. Two of two failures sit in the mixed/human sector, where the seed
+review's reference number is the likely fault (off by one, or a rate carried across from a neighbouring
+reference). The rule that follows is cheap and applies to the one row still unread: a row's printed fraction
+is *unverified until it is found in the primary's text*, not verified until contradicted.
+
+**What this does not change.** Row 4 is read and placeable but the placement was not run in this wake, so the
+placed set stays 34 of 38 and the open set stays four rows. Placing it is one script edit (668 / 102 into
+frame 1) and one regeneration, and it is recorded in the value queue as the next mechanical step rather than
+implied by this section.
