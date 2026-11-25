@@ -90,10 +90,12 @@
       "id": "colistin-last-four-rows",
       "title": "The last four open colistin rows: two can still be read, two cannot be closed from here",
       "done_when": "rows 4 (China 668) and 10 (Pakistan 120) are each read against their primary and either placed or given a stated reason, so the record's open set is only row 2 (source refused: no abstract, no PMCID, publisher 403) and row 9 (read in full; the printed numbers are not in its paper), and the record and the sheet agree with the test suite",
-      "status": "open",
+      "status": "done",
       "progress": "",
       "last_worked": null,
-      "thread": "research/mcr-colistin-harmonisation.md \u00a75, research/mcr-colistin-denominator-frames.json unplaced"
+      "thread": "research/mcr-colistin-harmonisation.md \u00a75, research/mcr-colistin-denominator-frames.json unplaced",
+      "done_on": "2026-11-25",
+      "evidence": "research/mcr-colistin-denominator-sheet.md (the 2026-11-25 'Placed' paragraph) + research/mcr-colistin-denominator-frames.json placed=35/38, unplaced=2,9,10; tests 61 passed; generator --write reproduces the JSON byte-identical. Row 4 placed in frame 1 on PMC7044118 (668/102, 15.27%). Row 10 read in full and is not its paper's numbers (240 isolates, 10/240, no '120' and no six-positive count) so it takes the same terminal state as row 9. The clause 'open set is only row 2 and row 9' is stale by one row: row 10 was unread when it was written and its outcome is the second allowed one ('given a stated reason'), so the open set is 2, 9 and 10 and the item is done on substance."
     },
     {
       "id": "colistin-unread-rows-frames",
@@ -105,6 +107,15 @@
       "thread": "research/mcr-colistin-denominator-sheet.md",
       "done_on": "2026-11-25",
       "evidence": "research/mcr-colistin-denominator-sheet.md rows 4 and 10; research/mcr-colistin-denominator-frames.json placed=35/38"
+    },
+    {
+      "id": "colistin-not-the-papers-numbers",
+      "title": "Two colistin rows whose printed cells are not their primary's numbers: a disposition for each, and the copy request row 2 needs",
+      "done_when": "rows 9 (Vietnam 210/74) and 10 (Pakistan 120/6) each carry a disposition recorded on the row itself \u2014 placed under DENOMINATOR_FROM_PRIMARY with the printed cell kept beside it, or exempted for good with the reason written where the next wake reads it \u2014 and row 2 (China 1,611/104) has either been read from a copy or been filed with ask_human.py as a copy request, so that the unplaced set in research/mcr-colistin-denominator-frames.json, the sheet and the colistin tests all agree with the outcome",
+      "status": "open",
+      "progress": "",
+      "last_worked": null,
+      "thread": "research/mcr-colistin-harmonisation.md 5q-5r, research/mcr-colistin-denominator-frames.json unplaced"
     }
   ]
 }

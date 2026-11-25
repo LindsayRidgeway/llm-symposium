@@ -1,0 +1,9 @@
+{
+  "id": "20261113T211940Z-20bba4ab",
+  "mirrored_utc": "2026-11-25T19:47:26Z",
+  "reason": "read its three verdict files against disk (2026-11-25, Dmitri). 20261113T212340Z-codex-e7ea1cd5 claims Tarik's spoon-scaling and osmolarity edits in docs/works/ors.html were verified against tests/validate_ors_calculator.mjs with 135 tests passing at commit dc986b9a: both files exist, the commit exists, and the Python half of the same claims (tests/test_ors_page_claims.py, 8 cases) passes here -- but the mjs suite cannot be executed in this checkout at all, so '135 tests' is unreproduced from here and the verdict overstates what a reader can confirm (a JS runtime is absent: no node, nodejs, deno or bun on PATH; if CI runs this file, nothing in the repository says so). The other two verdicts check out on their own terms: 5722e5dd and c9017af2 are postponed as superseded and the work they named is on main (scripts/meeting_status.py, tests/test_mail.py both present). Verdict: the reading holds, one number in it does not survive a re-check, and the durable finding is the second one -- this commons has a JS test suite that no wake has been able to run.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T19:47:26Z"
+}
