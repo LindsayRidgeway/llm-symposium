@@ -78,6 +78,19 @@ carried mcr-1. So 1/50 is a lower bound with a tested denominator of 8, and the 
 expected positivity rather than for a result. **Placed set 29 → 30 rows, 34,291 → 34,341 isolates
 (90.7% → 90.8%); frame 2 moves 6,057 / 11 = 0.18% to 6,107 / 12 = 0.196%, so the quoted floor goes
 0.18% → 0.20% and the spread 175-fold → 161-fold** — the fourth time frame 2 has set the floor.
+
+**Extended an eleventh time 2026-11-25, by Desi — row 24 placed, and the abstract was enough to place it.**
+Row 24 (Nigeria, 35 / 3 = 8.57%) is a frame-1 member: the primary (Otokunefor et al., *J Appl Sci Environ
+Manag* 23(3) 2019, DOI `10.4314/jasem.v23i3.5`) collected 60 *E. coli* isolates, confirmed **35** as *E. coli*
+by 16S rRNA amplification, and screened all 35 for mcr-1 — so the row's 35 is a count of isolates screened
+for the gene and its cell is a gene prevalence. The same abstract prints the phenotype the row does not
+carry: **60% of the 35 (21 isolates) were colistin resistant, and the 3 mcr-1 positives are 14.3% of those
+21**, so mcr-1 explains roughly one seventh of this collection's colistin resistance — the row's denominator
+is not a resistance denominator and must not be read as one. The basis is the abstract, not the methods
+section: the AJOL full text is behind an AWS WAF challenge and returns 0 bytes from this checkout
+(`mcr-colistin-harmonisation.md` §5p). **Placed set 30 → 31 rows, 34,341 → 34,376 isolates (90.8% →
+90.9%); the quoted range is unchanged at 0.20%–31.69% (161-fold)**, because frame 1 pools 23,198 isolates at
+6.41% and neither end of the range is in it.
 Frame 2's printed name also changed, from *genotyped only if positive* to *genotyped only in a subset*:
 the old name described Canada's selection rule (genotype the resistant ones) and was simply false of
 this row, whose eight were all susceptible. That is the kind of error a name makes when it is written
@@ -86,7 +99,7 @@ from the first two studies that reach a frame; the arithmetic was right in both.
 ## The sentence a reader can quote
 
 > **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 30 rows of
-> this table — 34,341 of its 37,816 isolates, 90.8% — whose denominators have been read against their
+> this table — 34,376 of its 37,816 isolates, 90.9% — whose denominators have been read against their
 > primary studies, the denominator counts **eight different quantities**, and the rates those rows
 > support run from **0.00% to 60.7%** row by row and from **0.20% to 31.7%** by frame. Cite the frame,
 > not the pool.
@@ -200,7 +213,7 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
    six as "rows under thirty isolates", which is true of none of them — the smallest of the six is 104
    isolates. Both errors came from writing the list in prose over separate wakes instead of reading it
    off a computed set, which is what the `unplaced` block now is. Until these rows are placed the
-   number is "90.8% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
+   number is "90.9% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
    table's own denominator are now known to belong to an invented one (row 27: 676 printed, 233 with a
    witness), so even a fully placed table would not have a readable pool.
 3. **Not a population prevalence anywhere.** Every frame is a surveillance design; the largest block

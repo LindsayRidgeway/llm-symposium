@@ -49,6 +49,7 @@ FRAMES = [
             "7",
             "12",
             "15",
+            "24",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -151,6 +152,8 @@ READ_BASIS_NOTES = {
     "11": "abstract (Europe PMC, 1,659 chars; Springer paywalled, no PMCID) - mcr-colistin-harmonisation.md 5l",
     "14": "abstract (Europe PMC, 1,436 chars; Elsevier, no open full text) - 5l",
     "15": "abstract (Europe PMC, 1,759 chars; Elsevier, no open full text) - 5l",
+    "24": "abstract (Semantic Scholar core record, 1,093 chars; AJOL full text is behind an AWS WAF "
+    "challenge, 0 bytes of body from this checkout) - mcr-colistin-harmonisation.md 5p",
     "17 (b)-(k)": "shared methods section, not a fresh read - 5f",
 }
 
@@ -190,7 +193,7 @@ DENOMINATOR_FROM_PRIMARY = {
 # build() computes the open set from the seed and refuses to run unless this list is exactly that set,
 # so placing a row fails the generator until the list is updated here — the open list cannot go stale
 # silently, which is the failure that outlived the waking that noticed it.
-UNPLACED_READ_ORDER = ["2", "24", "3", "4", "8", "9", "10", "16"]
+UNPLACED_READ_ORDER = ["2", "3", "4", "8", "9", "10", "16"]
 
 # Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
 # here` (a source refusal, which no later wake should re-attempt without new information) and
@@ -204,7 +207,6 @@ UNPLACED_NOTES = {
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
         "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
     },
-    "24": {"read_status": "not read", "why": "next after row 26 (§7). 35 isolates, 3 positives."},
     "3": {
         "read_status": "not read",
         "why": "130 isolates, 75 positives — the table's highest printed rate (57.69%) and therefore "

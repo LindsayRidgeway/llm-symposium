@@ -11,7 +11,7 @@ prose. So:
   * all placed rows are recomputed, and exactly one fails its own counts — row 17 (a), the
     documented cell — so a new transcription slip fails here instead of joining the prose;
   * the eight frames' names and their rows are the eight the sheet lists, and the coverage figures
-    (30 rows, 34,341 isolates, 90.8%) are the seed's counts, not the sheet's memory;
+    (31 rows, 34,376 isolates, 90.9%) are the seed's counts, not the sheet's memory;
   * the eight Ewers country rows placed on 2026-11-21 22:50Z are in frame 1 and two of them are zero
     cells, so the row-level range starts at 0.00% and the sheet says so;
   * the range the sheet quotes is the frame range, and the two numbers in the quotable sentence are
@@ -246,15 +246,15 @@ class DenominatorSheet(unittest.TestCase):
 
     def test_coverage_is_the_seeds_own_counts(self):
         placed = self.record["placed"]
-        self.assertEqual(placed["rows"], 30)
-        self.assertEqual(placed["N"], 34341)
+        self.assertEqual(placed["rows"], 31)
+        self.assertEqual(placed["N"], 34376)
         # placed N is the placed counts, which for the one replaced row are the primary's, not the seed's
         self.assertEqual(placed["N"], sum(m["N"] for m in self.members.values()))
         self.assertEqual(sum(self.rows[r]["n_isolates"] for r in self.members), 34784)
-        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34341 / 37816, places=3)
+        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34376 / 37816, places=3)
         self.assertEqual(self.record["table"]["N"], self.seed["derived"]["sum_isolates"])
-        self.assertIn("34,341", self.sheet)
-        self.assertIn("90.8%", self.sheet)
+        self.assertIn("34,376", self.sheet)
+        self.assertIn("90.9%", self.sheet)
 
     def test_the_range_quoted_is_the_frame_range(self):
         r = self.record["range"]
@@ -270,7 +270,7 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("eight different quantities", self.sheet)
 
     def test_pooling_the_placed_rows_does_not_give_seven_percent(self):
-        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 2207 / 34341, places=4)
+        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 2210 / 34376, places=4)
         self.assertLess(self.record["placed"]["pooled_pct"], 6.5)
         # And the France correction is recorded rather than silently folded in.
         self.assertAlmostEqual(self.record["gene_frame_with_france_corrected_pct"],
@@ -338,7 +338,7 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("DENOMINATOR_FROM_PRIMARY", self.sheet)
 
     def test_sheet_states_its_own_limits(self):
-        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 30)
+        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 31)
         self.assertIn(f"{len(self.rows) - 30} of the 38 rows", self.sheet)
         self.assertIn("Not a population prevalence anywhere", self.sheet)
         self.assertIn("mcr-colistin-denominator-frames.json", self.sheet)
@@ -366,7 +366,7 @@ class TheOpenSetIsData(unittest.TestCase):
 
     def test_the_open_set_is_the_seed_minus_the_placed_rows(self):
         placed = {m["row"] for f in self.record["frames"] for m in f["members"]}
-        self.assertEqual(len(placed), 30)
+        self.assertEqual(len(placed), 31)
         open_rows = set(self.rows) - placed
         self.assertEqual(set(self.unplaced["rows"]), open_rows)
         self.assertEqual(len(self.unplaced["rows"]), 8)
@@ -379,11 +379,11 @@ class TheOpenSetIsData(unittest.TestCase):
         # and the open rows' own counts are the seed's, recomputed here
         self.assertEqual(self.unplaced["N"], sum(self.rows[k]["n_isolates"] for k in self.unplaced["rows"]))
         self.assertEqual(self.unplaced["n"], sum(self.rows[k]["mcr_positive"] for k in self.unplaced["rows"]))
-        self.assertEqual(self.unplaced["N"], 3032)
+        self.assertEqual(self.unplaced["N"], 2997)
         self.assertEqual(self.unplaced["n"], 440)
         self.assertAlmostEqual(
             self.unplaced["share_of_table_N_pct"],
-            round(100 * 3032 / self.seed["derived"]["sum_isolates"], 4),
+            round(100 * 2997 / self.seed["derived"]["sum_isolates"], 4),
             places=4,
         )
 
@@ -398,7 +398,7 @@ class TheOpenSetIsData(unittest.TestCase):
         self.assertEqual(self.unplaced["read_status_counts"], {"not read": 7, "unreadable from here": 1})
 
     def test_the_read_order_is_the_one_the_working_names(self):
-        self.assertEqual(self.unplaced["rows"], ["2", "24", "3", "4", "8", "9", "10", "16"])
+        self.assertEqual(self.unplaced["rows"], ["2", "3", "4", "8", "9", "10", "16"])
         self.assertEqual([m["read_order"] for m in self.unplaced["members"]], list(range(1, 9)))
         harmonisation = (ROOT / "research" / "mcr-colistin-harmonisation.md").read_text()
         self.assertIn("China 1,611 (row 2), then", harmonisation)
@@ -431,7 +431,7 @@ class ScriptRuns(unittest.TestCase):
         )
         self.assertEqual(out.returncode, 0, out.stderr)
         self.assertIn("frames: 8", out.stdout)
-        self.assertIn("placed rows: 30 of 38", out.stdout)
+        self.assertIn("placed rows: 31 of 38", out.stdout)
         self.assertIn("17 (a)", out.stdout)
 
 

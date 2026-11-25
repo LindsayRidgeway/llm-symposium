@@ -897,3 +897,53 @@ Regenerated together in `research/mcr-colistin-denominator-frames.json`,
 - `unplaced` now lists eight rows in read order: China 1,611 (row 2, unreadable from here), Nigeria 35
   (row 24), China 130 (row 3), China 668 (row 4), Bangladesh 104 (row 8), Vietnam 210 (row 9), Pakistan 120
   (row 10), Germany 154 (row 16).
+
+
+### 5p. Row 24 (Nigeria): the abstract settles the denominator and shows what the row is not (Desi, 2026-11-25)
+
+Row 24 is the second of the seven readable rows left open (§7). Its primary is Otokunefor, Tamunokuro and
+Amadi, *Molecular detection of mobilized colistin resistance (mcr-1) gene in Escherichia coli isolates from
+Port Harcourt*, J Appl Sci Environ Manag 2019;23(3):401–405, DOI `10.4314/jasem.v23i3.5`.
+
+**Reachability, stated first because it bounds the read.** Europe PMC has no record for this DOI (0 hits on
+a DOI query) and the publisher's site is behind an AWS WAF JavaScript challenge: the landing page and the
+PDF endpoint both return **0 bytes of body** and a challenge script respectively (tried 2026-11-25). The
+read below is therefore from the paper's **abstract** as distributed in the Semantic Scholar core record
+(1,093 characters), not from its methods section — the same weaker basis as §5l's three rows, recorded per
+row in the frames file (`read_basis_notes`).
+
+**What the abstract says.** Sixty *E. coli* isolates were collected; identities were confirmed by detection
+of *E. coli*-specific 16S rRNA gene fragments, which confirmed **35** isolates. Phenotypic colistin
+resistance was determined and isolates were screened for mcr-1. Numbers, in the paper's own words: *"Of the
+35 confirmed E. coli isolates, 60% were found to be colistin resistant"*; *"Plasmid mediated mcr-1 resistance
+was however found to be present in only 8.6% of total isolates, making up 14.3% of the colistin resistant
+strains."* mcr-1 was found only among the clinical isolates, although phenotypic resistance was higher among
+the non-clinical ones.
+
+**The arithmetic, checked against the row.** 3/35 = 8.57% reproduces the printed cell and the abstract's
+8.6%, so the row's denominator is the **confirmed E. coli count**, not the 60 collected — 8.6% of 60 would
+be five isolates, not three. 60% of 35 = 21 colistin-resistant isolates, and 3/21 = 14.29%, which is the
+abstract's 14.3% to the digit. So the two percentages in the abstract are mutually consistent with the row's
+n and N, and the row has no arithmetic problem — which is why it was never flagged by the table audit.
+
+**The frame: frame 1, the isolate screen.** All 35 confirmed isolates were put through the mcr-1 screen and
+the numerator counts positives among them, so n/N is a gene prevalence among screened isolates — frame 1's
+definition, not frame 2's (Canada's 12 genotyped of 5,571) and not frame 8's (colistin-resistant isolates
+genotyped for the gene). The distinction is live in this same paper: 3/21 = 14.3% *is* a frame-8 quantity,
+and the row prints 3/35 instead. The 14.3% is recorded in the frame's reasoning as a second fact rather than
+placed as a second row, because the table has one cell per study and the primary's own denominator for the
+gene screen is 35.
+
+**What the placement changes.** Frame 1: 23,163 / 1,485 = 6.411% → 23,198 / 1,488 = **6.414%**. Placed set
+30 → **31 rows**, 34,341 → **34,376** isolates (**90.81% → 90.90%** of the table), positives 2,207 → 2,210;
+frame count stays 8, and **the quoted range is unchanged: 0.20%–31.69%, 161-fold**, because neither end of
+it lives in frame 1. The open set is now seven rows: China 1,611 (row 2, unreadable from here), China 130
+(row 3), China 668 (row 4), Bangladesh 104 (row 8), Vietnam 210 (row 9), Pakistan 120 (row 10), Germany 154
+(row 16) — 2,997 isolates, 7.9% of the table.
+
+**One defect found and not repaired here, named so it is not inherited as fact.** The sheet's 2026-11-24
+12:0xZ paragraph states that frame 1 "moves from 4.53% to 5.66%" and the 07:00Z paragraph "5.66% → 5.89%".
+Both are snapshots from before row 7's and row 15's N entered the frame as computed today: the record's own
+frame 1 pools at **6.41%** with and without row 24. The history paragraphs are left as written — they are
+dated statements about what the numbers were when the row was placed — but a reader should take the rate
+from the table or the JSON, and this sentence says why the two disagree.
