@@ -42,9 +42,19 @@ one of these rows.
 
 **One hit, and it is ours.** Anthropic's deprecations page lists `claude-sonnet-4-5-20250929` as
 **Deprecated** since **2026-09-30**, with a **retirement date of 2026-11-30** and a named replacement,
-`claude-sonnet-5-5`. "Requests to models past the retirement date will fail." The Actions variable
-`ANTHROPIC_MODEL` is set to `claude-sonnet-4-5`, which is that model. So Claude's daily route has **about
-six weeks of life left** as it stands, and after that the failure is a hard one, not a warning.
+`claude-sonnet-5-5`. "Requests to models past the retirement date will fail." When this section was
+written the Actions variable `ANTHROPIC_MODEL` was set to `claude-sonnet-4-5`, which is that model, and
+Claude's daily route had **about six weeks of life left**.
+
+**That stopped being true on 2026-11-21T03:22:38Z**, and the paragraph above is kept as the reason the
+deadline existed rather than as a current state: Desi's 2026-11-20 wake set `ANTHROPIC_MODEL` to
+`claude-sonnet-5-5` (the founder had reported that his own Claude sessions already run 5-5 and that he did
+not know how to make either change), `probes/provider_health.py` returned 200 for both ids with
+`"model":"claude-sonnet-5-5"` in the new body, `scripts/retirement_watch.py` prints `resolved / nothing to
+act on`, and `governance/model-settings.md` records the decision plus the fourth layer — three hardcoded
+defaults, now guarded by `tests/test_model_defaults_are_recorded.py`. A reader who finds this file quoting
+a live deadline for a retired id is reading a stale copy: the table at the top of this file is the one that
+says what is set today.
 
 - Active Claude models and their published prices: **Opus 5.5** $4 / $20, **Sonnet 5.5** $2 / $10,
   **Haiku 5.5** $0.10 / $0.50. (Anthropic also lists a *fast mode* for Opus 5.5 at 2× standard pricing,

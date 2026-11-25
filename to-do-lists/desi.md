@@ -1,3 +1,41 @@
+**2026-11-25 (09:00Z wake) — the reject queue reviewed in full, one ask closed, one research file that contradicted its own table.**
+Area: the review desk and the ledger's instruments — the last two wakes were both the colistin denominator map
+(05:00Z and 07:00Z), so a third consecutive colistin wake is what the rotation rule forbids.
+
+- **The reject queue was reviewed in full, all six items, and none is doable from this checkout.** Six `reviewed:`
+  lines written, one physical line each, with the reason measured rather than carried: `scripts/friction_pass.py`
+  and `channels/task_ledger.py` are present and the two missing pieces are call sites in the private
+  `~/LLM/desi-bot/local_tick.py` and `bot.py`; `git remote -v` here still prints 0 lines, so the draft-pile item
+  still cannot fetch a review branch; agenda 32's three records are still closed access; the lander's name-set
+  baseline is still in the private `land_runs.py`. **Also repaired in the file:** Dmitri's 2026-11-13 review line
+  had been joined to mine of 2026-11-20 on one physical line — the exact format the file's own note says makes a
+  verdict invisible to the sweep's line regex. Split into two.
+- **One measurement in a reviewed line is new, and it is this morning's:** the landing gate refused
+  `20261125T050015Z-0ea9bc9d` over `test_mcr_colistin_denominator_sheet.py` — a test the run *did* touch. The
+  queue's item says the gate cannot tell a run's own new failure from a stranger's; that refusal is the case it
+  does not describe, and the gate still cannot distinguish them.
+- **The ANTHROPIC_MODEL ask is closed, because it is already true in the world** (`--close eb4897d19498`, no open
+  asks left in `channels/human-blockers.jsonl`). It had been open since 2026-11-20 asking him to set a variable
+  that my own 2026-11-21T03:22:38Z wake had already set. That is the D-5 defect exactly — a queue nagging a man
+  about work finished before breakfast — and it is the third time this month.
+- **`research/hosts-watch.md` contradicted itself and now does not.** Its route table (line 30) says Claude's
+  variable is `claude-sonnet-5-5`, swapped 2026-11-20; the Anthropic section below it still said the variable was
+  set to `claude-sonnet-4-5` with "about six weeks of life left" — a live deadline for an id nobody runs, which is
+  the kind of sentence an alert or a successor reads as current. The section keeps the history and names the
+  instant it stopped being true.
+- **Item 3 of my last list was already done when I got there:** the false mirror warning in `channels/item_ledger.py`
+  was fixed this morning by Dmitri (`mirror_notice`, 2026-11-25) — the notice now says "present, under a later
+  stamp" and keeps the replay command only for ids that really are absent. The reading queue prints both
+  sentences and they agree; nothing left for me there.
+- **Not touched, with the reason:** the value-queue head (eight unframed colistin rows) — the rotation rule, third
+  consecutive wake, as above. The three steward-requested reject-queue items still have no delivery record, and the
+  queue rule forbids me notifying him about the queue myself, so that stays where it is.
+
+**Next, in this order:** 1. The value-queue head — the eight unframed colistin rows, smallest first, row 2 (China,
+1,611) last because the publisher has refused it twice. 2. The stale "eighteen rows" sentence in frame 1's table
+cell. 3. The three steward-requested reject-queue items with no delivery record — a delivery mechanism question for
+whoever owns the sweep.
+
 **2026-11-24 (20:59Z wake) — a colleague's measurement recovered from a patch, and both reviews closed.**
 Area: the review desk — the last two wakes were the colistin denominator map (16:58Z and 18:58Z),
 both cut off at the action cap, so this was a different subject.
