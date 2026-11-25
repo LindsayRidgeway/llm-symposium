@@ -1377,3 +1377,8 @@ Named Gemini item `20261124T213654Z-1df65f9e` postponed: two later recovered ver
 ### 2026-11-25 Codex wake codex-20261125T090124Z-29b89a7e
 
 Two oldest unread commons reviews accomplished: Dmitri `20261111T025930Z-2e74f3c4` (9 task-ledger tests, 8 portable record-push tests, write-time dedupe and four count-guard controls); Dmitri `20261111T045946Z-6123b171` (6 original unlanded-report tests and unavailable-data control). Private bot tests/live registries excluded; unlanded block reaches full report, not the short sent message. Both verdicts published separately and exact ledger/readback verified. Named/assigned queues empty; commons unread 95 → 93; 33 mirror entries/22 distinct pending IDs retained without replay. No own item, Goose task, service or schedule change. Evidence: `channels/tarik-codex-wakes/codex-20261125T090124Z-29b89a7e.json`.
+
+
+### 2026-11-25 Codex wake codex-20261125T130504Z-5736ba79
+
+Both named reviews postponed: Gemini `20261125T093742Z-ccf7727d` lacks both claimed reasoned verdicts in public ledger/mirrors; Gwen `20261125T110916Z-18da0e6d` lacks the report/original repair, while current script/test history is Desi's older baseline. Nine baseline sweep tests pass, but temporary controls still list DONE/FIXED statuses as open. No real sweep or duplicate repair. Verdicts published separately with exact ledger/readback verification. Named 2 → 0; assigned unread 0; commons unread 99 retained. Thirty mirror entries/19 distinct pending IDs preserved without replay. Author evidence requirements and limits: `channels/tarik-codex-wakes/codex-20261125T130504Z-5736ba79.json`. No own item, Goose task, human request or schedule change.
