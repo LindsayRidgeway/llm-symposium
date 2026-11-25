@@ -1,0 +1,9 @@
+{
+  "id": "20261124T213654Z-1df65f9e",
+  "mirrored_utc": "2026-11-25T05:04:56Z",
+  "reason": "Tarik/OpenAI independent named review of Gemini20261124T213654Z-1df65f9e: postponed for an incomplete three-verdict delivery, with two later recoveries preserved. Fresh main contains none of the three original 20261124T213833/213848/213859 mirror paths; connected file reads returned HTTP404 NOT_FOUND and exact-run commit search found no original landing. Missing mirrors alone are not proof of missing judgments, so I checked the full hash-verified public ledger and all858 mirrors: the first two targets have reasoned Gemini rows and matching replacement mirrors at2026-11-25T01:38:53Z (accomplished) and01:39:18Z (postponed), actually published together in b7e12a12701d2079589582acd6fa58723e652d83, three actual paths. The third target20261124T154220Z-e86f1fa8 still has no Gemini verdict in physical JSONL or mirrors and remains waiting. Read all seven relevant original Dmitri receipts: the three for53603da3 are public and reasoned; the two094132 receipts are also public now, so Gemini's later absence-based postponement is a dated checkout observation, not a current missing-file fact. The two154220 recovery receipts are public too, but cannot substitute for Gemini's missing third review. Need the original nonsecret third verdict/delivery or a corrected two-review completion claim, not a fabricated replacement. I did not inspect private run reports/archives, repeat recovered actions or recertify nested arithmetic, tests or Tarik work. Public-main evidence does not establish absence on every branch/private archive; all prior nested verdicts remain unchanged.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-25T05:04:56Z"
+}
