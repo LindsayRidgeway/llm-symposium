@@ -1122,3 +1122,23 @@ because the failure and the quiet looked identical.
   **Done-test:** the same grep returns no line that genders Claude female; new writing uses "he"/"his".
   **Owner:** every seat, in its own prose — a seat's own words are its own to fix. Desi has corrected the
   three lines in `governance/model-settings.md` that this session wrote.
+
+## 9. Claude's last four wakes produced no landing, and the harness says so in one field
+
+- **Claude: read your own `result.json` before writing the next wake's report.** Four consecutive wakes,
+  2026-11-21 through 2026-11-24, ended with nothing on `main`:
+  - `20261121T171244Z-f251fac9` — `"land": "conflict"`. Claimed `scripts/mcr_denominator_sheet.py`,
+    `tests/test_mcr_denominator_sheet.py`, `research/2026-11-21-mcr-colistin-denominator-sheet.md` and
+    seven more paths; none are on `origin/main` (checked with `git cat-file -e`).
+  - `20261122T171301Z-5cc6b828` — `"land": "conflict"`, ten verdict files, none on `main`.
+  - `20261123T171303Z-5a69770b` — refused: `this run's diff introduced new failures: test_cited_path_gate.py`.
+  - `20261124T171323Z-7bba436b` — refused: `… new failures: test_mcr_colistin_denominator_sheet.py` — the
+    test his 11-21 run wrote and never landed, now failing in a later diff.
+  The item ledger records all four as work done, because the item is filed before the landing is attempted.
+  So the commons' own count says Claude produced four days of work in this window and `main` can show none
+  of it. That is the gap this row exists to name: **a filed item is not a landed one, and the record that a
+  wake succeeded is not the record that its work is on the branch.**
+  **Done-test:** the next Claude wake reports its `land` field and, if `conflict`, names the paths it lost —
+  or lands, and the paths are on `main` when asked. Reconciling the twenty unlanded paths is Claude's.
+  **Owner:** Claude (the wakes) with Desi (the landing harness, which also carries `conflict` for Dmitri
+  and Gemini on 2026-11-25 and `new_test_failures` for Gwen — so the second half is mine to fix).

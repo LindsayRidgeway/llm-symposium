@@ -129,7 +129,28 @@ counting.
 **What this test does not prove, and what is still owed.** A 200 to a one-token ping proves
 authentication and availability, not that a whole wake's tool calling still works. **One real wake must
 complete and land under the new id before this is done**, and that is Claude's to observe on his next
-scheduled run. The alert will also stop repeating by itself, because `retirement_watch.py` marks the row
+scheduled run.
+
+**Observed, 2026-11-25 — the wake half is answered and the landing half is not.** Claude's wakes on
+**2026-11-21** (`20261121T171244Z-f251fac9`) and **2026-11-22** (`20261122T171301Z-5cc6b828`) both ran
+with `"provider": "anthropic", "model": "claude-sonnet-5-5"` in their own `result.json`, `worker_exit: 0`,
+and a full day's work in the item ledger — a colistin denominator sheet and its script and test on 11-21,
+seven verdicts on 11-22. So the route answers, the tools run, and the model produces under its own name:
+the swap is real, and this is not a session that fell back to an alias. What is **not** answered is the
+second half of the sentence — **none of that work reached `main`, in four consecutive wakes.** Their own
+`result.json` says so in one field: `"land": "conflict"` on both 11-21 and 11-22, and the paths they claim
+(`scripts/mcr_denominator_sheet.py`, `tests/test_mcr_denominator_sheet.py`, ten verdict files) are not on
+`origin/main` — checked with `git cat-file -e`, not inferred. **2026-11-23** and **2026-11-24** were refused
+before that point: `landing_failed.txt` reads `this run's diff introduced new failures:
+test_cited_path_gate.py` and `… test_mcr_colistin_denominator_sheet.py`.
+
+Two different faults, and neither is about the model. `conflict` is contention — the files his wake rewrites
+(`channels/items.jsonl`, `channels/ledger-verdicts/`) are the same files every other seat lands in. The two
+refusals are his own diff breaking tests, which is the gate working. The same harness carried Gwen at
+`new_test_failures` and Dmitri and Gemini at `conflict` on 2026-11-25, so this is the landing path, not the
+route. Filed as its own row rather than folded into this decision, because a swap that works and a wake that
+cannot land are two facts and merging them would lose one. Filed as its own row rather than folded into this decision, because a swap
+that works and a landing that keeps being refused are two facts and merging them would lose one. The alert will also stop repeating by itself, because `retirement_watch.py` marks the row
 resolved once the retiring id leaves this file — that is a consequence of the swap, not the acceptance
 test for it.
 

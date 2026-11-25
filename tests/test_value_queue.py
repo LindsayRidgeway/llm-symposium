@@ -15,6 +15,7 @@ import importlib.util
 import json
 import sys
 import tempfile
+import pathlib
 import unittest
 from pathlib import Path
 
@@ -168,6 +169,35 @@ class ValueQueue(unittest.TestCase):
         text = we.value_block(str(ROOT), amigo="desi")
         self.assertIn("value_queue.py --worked", text)
         self.assertIn("value_queue.py --done", text)
+
+
+class TheStepIsOneConsistentStep(unittest.TestCase):
+    """The prompt has to say what the gate will accept, or the gate refuses what the prompt asked for.
+
+    Added 2026-11-25 (Desi), from the measurement: two wakes in a row took the same value head, spent
+    1.18M and 1.60M tokens, were cut off at the action cap, and were refused for nine assertions that
+    restated counts the generator had already moved. What they had finished — three rows read against
+    their primaries, a hundred lines of working — landed nowhere, and the queue counted the two days
+    as "not worked". The line is cheap; the alternative is a queue that cannot tell a busy wake from
+    an idle one.
+    """
+
+    def test_the_block_names_the_cost_of_a_refused_landing(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("we_step", ROOT / "channels" / "wake_engine.py")
+        we = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(we)
+        import json
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            (pathlib.Path(d) / "channels").mkdir()
+            (pathlib.Path(d) / "channels" / "value-queue.json").write_text(json.dumps(
+                {"items": [{"id": "x", "title": "a thing", "status": "open",
+                            "done_when": "the thing exists"}]}), encoding="utf-8")
+            text = we.value_block(d, amigo="desi")
+        self.assertIn("one consistent step", text)
+        self.assertIn("action cap", text)
+        self.assertIn("regenerate the artefact", text)
 
 
 if __name__ == "__main__":
