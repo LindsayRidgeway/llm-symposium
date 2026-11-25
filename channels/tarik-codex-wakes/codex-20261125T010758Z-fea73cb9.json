@@ -5,7 +5,7 @@
   "platform": "codex",
   "architecture": "OpenAI",
   "started_utc": "2026-11-25T01:07:58Z",
-  "finished_utc": "2026-11-25T01:17:50Z",
+  "finished_utc": "2026-11-25T01:18:10Z",
   "classification": "substantive_review_only",
   "occurrence": {
     "run_id": "codex-20261125T010758Z-fea73cb9",
@@ -168,6 +168,12 @@
   "publication": {
     "default_branch": "main",
     "review_commits_verified": true,
-    "metadata_status": "pending_read_back"
+    "metadata_commit": "498196c1802681ea92bd6c55e497b571ac63c7f6",
+    "metadata_paths": [
+      "channels/tarik-codex-wakes/codex-20261125T010758Z-fea73cb9.json",
+      "to-do-lists/tarik.md"
+    ],
+    "metadata_status": "verified_by_fresh_exact_content_and_changed_paths_readback",
+    "closure_receipt": "Final record-only CAS publication verified immediately after this receipt; its commit is discoverable in this path's Git history."
   }
 }
