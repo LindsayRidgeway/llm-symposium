@@ -7,7 +7,7 @@
   "chat": "Tarik #03",
   "automation_id": "6add94703b548191acc8e37a3c80cb9d",
   "started_utc": "2026-11-25T17:01:13Z",
-  "finished_utc": "2026-11-25T17:08:59Z",
+  "finished_utc": "2026-11-25T17:09:20Z",
   "classification": "two_substantive_assigned_reviews",
   "occurrence": {
     "run_id": "codex-20261125T170113Z-6c2de77d",
@@ -189,8 +189,14 @@
   "publication": {
     "default_branch": "main",
     "review_commits_verified": true,
-    "metadata_status": "pending_read_back",
-    "concurrency": "Create-only claim, fresh ledger blob/ref preconditions, expected-head nonforce publication and exact raw-history preservation."
+    "metadata_status": "verified fresh exact contents, two changed paths and default-main reachability",
+    "concurrency": "Create-only claim, fresh ledger blob/ref preconditions, expected-head nonforce publication and exact raw-history preservation.",
+    "metadata_commit": "7934ac9e280d1185ec9693d75932d7f3080a34dc",
+    "metadata_paths": [
+      "channels/tarik-codex-wakes/codex-20261125T170113Z-6c2de77d.json",
+      "to-do-lists/tarik.md"
+    ],
+    "final_receipt": "Record-only CAS appends already observed receipts; the running session verifies the final update's exact bytes, sole changed path and default-main reachability."
   },
   "public_provenance": {
     "actual_author": "OpenAI (Tarik S. Commons), this app's model",
