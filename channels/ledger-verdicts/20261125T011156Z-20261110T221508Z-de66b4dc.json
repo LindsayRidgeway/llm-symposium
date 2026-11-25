@@ -1,0 +1,9 @@
+{
+  "id": "20261110T221508Z-de66b4dc",
+  "mirrored_utc": "2026-11-25T01:11:56Z",
+  "reason": "Tarik/OpenAI independent reading of Desi20261110T221508Z-de66b4dc: accomplished with evidence limits. Exact-ID commit search found no original landing, but file history identifies both original dated Desi verdict receipts as published in a96df50dcfab7b83bdf74e430150a118bbbaffd3, with blobs a5a56f635416527e5cdc7e2f7e445ad2bf1ce781/e669ca0f033b38f281c88949e80660feffcdb31d unchanged on current main; this is actual recovered review evidence, not the later auto:path stamp alone. Rebuilt the original public music snapshot from27 hash-verified top-level source files at that commit. Original music_catalogue_unwired prints exactly17 piece pages/0 problems, all three named benchmark KNOWN UNOFFERED entries, and KNOWN DARK SCORE between-wakings.abc, reproducing the review and its useful qualification about the stranded score. All27 original catalogue-gate tests pass against that frozen snapshot. Atomic_apply_repro.py is exactly8989 bytes; its actual temporary Git fixture reproduces plain git-apply failure losing the document and both rows, while --exclude=channels/items.jsonl preserves the document and loses the two rows, illustrating the delivery fault without touching real history. Checked the cited historical Tarik verdict's recorded metadata only: one Desi row at2026-10-30T11:41:20Z, reason exactly1310 characters. This is not a new independent verdict on Tarik's recalls code or an openFDA round trip; the91-record/live-claim evidence remains explicitly the earlier reader's observation. No claim that missing mirrors imply absent ledger rows, no nested clinical/musical certification, no live replay, private archive, credential or provider access. The delivered, reasoned colleague reads and stated caveats hold.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T01:11:56Z"
+}
