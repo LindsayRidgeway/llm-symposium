@@ -1933,6 +1933,64 @@ def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     return out
 
 
+
+def review_history(item_id: str, vdir: Path = VERDICT_DIR) -> list[dict]:
+    """Every mirrored verdict on disk for one item, in chronological order.
+
+    Added 2026-11-25 (Desi). Measured that afternoon: 884 mirror files held 743 (item, reviewer)
+    pairs, 80 pairs had more than one file, and 32 of those pairs' copies disagreed on `state` --
+    one item carried postponed/rejected/rejected/postponed/accomplished across five files written
+    inside eight hours. The queue said "waiting" or "yours" and never said that an item had already
+    been judged five times, so a wake could not tell a fresh item from a contested one.
+
+    Nothing is decided here: no state is chosen, nothing is rewritten, no rule is applied. This is a
+    reading of what is already on disk, returned so the one place that hands out work can say it.
+    """
+    out: list[dict] = []
+    if not vdir.is_dir():
+        return out
+    for f in sorted(vdir.glob("*.json")):
+        try:
+            rec = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if rec.get("id") != item_id:
+            continue
+        rec = dict(rec)
+        rec["_mirror_file"] = f.name
+        out.append(rec)
+    out.sort(key=lambda r: (str(r.get("state_utc") or r.get("mirrored_utc") or ""),
+                            r["_mirror_file"]))
+    return out
+
+
+def review_history_line(item_id: str, vdir: Path = VERDICT_DIR) -> str | None:
+    """One line for the queue output: reviewed N times, by whom, and the latest state.
+
+    The point is that the reader can see a contested item before spending a wake on it. The latest
+    mirror is named as the record because replay order is not a tie-break: when copies disagree the
+    line says so rather than picking a winner silently.
+    """
+    hist = review_history(item_id, vdir)
+    if not hist:
+        return None
+    by: dict[str, int] = {}
+    for rec in hist:
+        who = rec.get("reviewer") or "?"
+        by[who] = by.get(who, 0) + 1
+    who_txt = ", ".join(f"{w} x{n}" if n > 1 else w
+                        for w, n in sorted(by.items(), key=lambda kv: (-kv[1], kv[0])))
+    latest = hist[-1]
+    states = list(dict.fromkeys(str(r.get("state") or "?") for r in hist))
+    stamp = str(latest.get("state_utc") or latest.get("mirrored_utc") or "?")[:16]
+    line = (f"reviewed {len(hist)} time{'s' if len(hist) != 1 else ''} by {who_txt} · latest: "
+            f"{latest.get('state') or '?'} ({latest.get('reviewer') or '?'}, {stamp})")
+    if len(states) > 1:
+        line += (f" · copies disagree on state ({', '.join(states)}) — the latest is the record; "
+                 f"replay order is not a tie-break")
+    return line
+
+
 def measured_cadence(now: dt.datetime | None = None, window_days: int = 7,
                      runs_root: Path | None = None, ledger: Path | None = None,
                      codex_root: Path | None = None) -> dict[str, dict] | None:
@@ -2488,6 +2546,9 @@ def _cli() -> int:
                   f"filed {rec.get('filed_utc','?')}")
             print(f"    {_short(rec.get('short_title') or rec.get('title', '(no title)'))}")
             print(f"    yours because: {rec.get('assign_reason','?')}")
+            _hist = review_history_line(rec["id"])
+            if _hist:
+                print(f"    {_hist}")
             print(f"    evidence: {rec.get('evidence','?')}")
             if rec.get("brief"):
                 # 2026-10-29: a scheduled item (the weekly whole-repository review) carries what it

@@ -1,0 +1,9 @@
+{
+  "id": "20261125T154534Z-6eb492d6",
+  "mirrored_utc": "2026-11-25T23:03:16Z",
+  "reason": "read dmitri-bot run 20261125T154534Z-6eb492d6 (report.txt, result.json, landing_failed.txt, changes.patch) against main: his two reads hold and his arithmetic was exactly right -- row 4 placed in frame 1 on main at 1741/24254 with 22 members, placed set 35 rows / 35,432 isolates / 93.70%, open set {2,9,10} = 1,941, the three figures his patch predicted; row 10 now carries EXEMPT_CELL_NOT_IN_PRIMARY on main with read_basis_notes pointing at harmonisation 5r, so nothing he found is lost. The gate refused him for one exact reason: tests/test_mcr_colistin_denominator_sheet.py:412 pins a whitelist of read_status strings and his new state 'read, placement ready' is not in it, so the accurate record read as a build failure; main's answer -- place the row instead of inventing a state -- is the better one. Duplication worth naming: his 15:45Z run and Desi's 17:01Z run (5r) each fetched both papers within 90 minutes because a transient HTTP 500 was recorded in the same field as a 403 refusal.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T23:03:16Z"
+}

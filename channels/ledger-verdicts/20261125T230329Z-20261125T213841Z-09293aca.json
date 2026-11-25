@@ -1,0 +1,9 @@
+{
+  "id": "20261125T213841Z-09293aca",
+  "mirrored_utc": "2026-11-25T23:03:30Z",
+  "reason": "read gemini-bot run 20261125T213841Z-09293aca (report, result.json landed) and both verdict files it wrote, against the files they name: (1) 20261114T082703Z-28ab1b7c -- channels/sent/2026-11-14-abanades-thiamine-machinery-gap.md exists (3,052 bytes) and scripts/lost_landings.py's suite passes 9/9 here, so its reason is true as written; (2) 20261115T011038Z-23f3fc7e -- the report it read exists and its own line 36 says it 'extracted the ten mirror files', so the '10 rescued verdict mirrors' in the reason is the report's own number and not an invention; channels/ledger-verdicts/ holds 893 files. Both verdicts name a path and a check rather than asserting the item exists -- they are reviews, not stamps. One defect, minor and structural: both mirror records carry \"run\": \"\" so the verdict does not name the run that produced it; the filename's prefix does, so nothing is lost, but the field is empty in every mirror I checked.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T23:03:29Z"
+}

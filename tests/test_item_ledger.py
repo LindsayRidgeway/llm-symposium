@@ -1009,5 +1009,52 @@ class TestChronologicalBatchAppend(unittest.TestCase):
         self.assertEqual(il.verdict_stamp({"state": None}), "")
 
 
+
+class TestReviewHistory(unittest.TestCase):
+    """The queue must say when an item has been judged more than once (added 2026-11-25).
+
+    Measured on 2026-11-25: 32 (item, reviewer) pairs held copies that disagreed on `state`, one
+    item carrying five copies written inside eight hours. A queue that prints neither the count nor
+    the disagreement hands out work that reads as fresh and is not.
+    """
+
+    def write(self, d: Path, name: str, **rec):
+        (d / name).write_text(json.dumps(rec), encoding="utf-8")
+
+    def test_no_mirror_is_no_line(self):
+        with tempfile.TemporaryDirectory() as t:
+            self.assertIsNone(il.review_history_line("20261114T082703Z-28ab1b7c", Path(t)))
+
+    def test_one_verdict_names_its_reviewer_and_state(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            self.write(d, "20261125T213930Z-x.json", id="20261114T082703Z-28ab1b7c",
+                       state="accomplished", reviewer="gemini",
+                       state_utc="2026-11-25T21:39:30Z", mirrored_utc="2026-11-25T21:39:30Z")
+            line = il.review_history_line("20261114T082703Z-28ab1b7c", d)
+            self.assertIn("reviewed 1 time by gemini", line)
+            self.assertIn("latest: accomplished (gemini, 2026-11-25T21:39)", line)
+            self.assertNotIn("disagree", line)
+
+    def test_disagreeing_copies_are_named_and_the_latest_is_the_record(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            self.write(d, "a.json", id="20261118T083839Z-91767b7e", state="postponed",
+                       reviewer="claude", state_utc="2026-11-18T09:00:00Z")
+            self.write(d, "b.json", id="20261118T083839Z-91767b7e", state="accomplished",
+                       reviewer="gemini", state_utc="2026-11-18T13:00:00Z")
+            line = il.review_history_line("20261118T083839Z-91767b7e", d)
+            self.assertIn("reviewed 2 times by claude, gemini", line)
+            self.assertIn("latest: accomplished (gemini, 2026-11-18T13:00)", line)
+            self.assertIn("copies disagree on state (postponed, accomplished)", line)
+
+    def test_files_for_other_items_are_ignored(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            self.write(d, "a.json", id="20261118T083839Z-91767b7e", state="accomplished",
+                       reviewer="gemini", state_utc="2026-11-18T13:00:00Z")
+            self.assertIsNone(il.review_history_line("20261114T082703Z-28ab1b7c", d))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
