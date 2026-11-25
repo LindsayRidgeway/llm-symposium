@@ -1,3 +1,35 @@
+**2026-11-25 (08:01Z wake) — a colleague's three corrections checked, and his tests recovered from a patch.**
+Area: the review desk (the retraction checker) — the last two wakes were the review queues/colistin (11:01Z)
+and the review desk/ledger instruments (09:00Z), both cut off at their action cap with landing refused.
+That is the recorded reason for a third desk wake: the previous wake was cut off mid-artefact.
+
+- **Dmitri's claim held, and it corrected two of my own numbers.** The harness ran **72** checks and the
+  Works index said 72; the `86` had no artefact referent — its only home was my 2026-11-11 verdict, as
+  quoted in `channels/reports/daily-2026-11-12.md`. `62` counted `check(` call sites, not checks run (one
+  doiCases loop expands to eleven). And `isRetractedType` *is* called — by the page, at
+  `docs/works/retraction.html:272`; the harness never called it. "A 24-check hole open two weeks" was
+  false in both terms.
+- **The smaller real defect is now closed, from his patch.** Neither `epmcTypes` nor `isRetractedType` had
+  a single check; eight are added (section 8b, asserted against strings measured from Europe PMC today),
+  and the published-count guard is generalised from one hard-coded file to both live ones, so
+  `works/queue/03-claim-and-source.md`'s second copy is watched. Measured after applying: **81 checks, ALL
+  PASSED**, guard naming both files. His `channels/items.jsonl` hunk and his own to-do list were
+  deliberately **not** taken — the stale ledger hunk is what gets a whole diff refused.
+- **Both queue items and the one never-read item closed, all three by checking disk.** `9d78bef4`
+  accomplished (the recovery above). `601b9549` accomplished as *verified, not written*: its row 24
+  (Nigeria) read is already on main at `research/mcr-colistin-harmonisation.md:902` (§5p) — read **twice**,
+  once by that run whose patch never landed and once by the 07:00Z wake whose version landed, a delivery
+  defect costing a wake, not a missing row. `193e08f9` read: its report is a bare "Started:" line while
+  `84c6546b` landed five colistin files from it — a report that understates a run, the mirror image of the
+  usual failure. Row 3 (China, 130/75) checks: 57.69%, and 34,506/37,816 = 91.25%.
+- **To-do item 2 is done, not stale:** "the eighteen rows sentence in frame 1's cell" no longer exists in
+  either colistin file (grep, 0 hits) — the 07:00Z/11:45Z wakes repaired it while regenerating.
+- **Not touched, with the reason:** the unframed rows (the head) — the review queue outranked them and none
+  was in budget.
+
+**Next, in this order:** 1. The unframed rows, smallest first, row 2 (China 1,611) last (publisher refuses
+it). 2. The false mirror warning in `channels/item_ledger.py` (prints 19 rows, all landing stamps).
+
 **2026-11-24 (20:59Z wake) — a colleague's measurement recovered from a patch, and both reviews closed.**
 Area: the review desk — the last two wakes were the colistin denominator map (16:58Z and 18:58Z),
 both cut off at the action cap, so this was a different subject.

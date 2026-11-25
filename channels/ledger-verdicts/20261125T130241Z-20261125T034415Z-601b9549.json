@@ -1,0 +1,9 @@
+{
+  "id": "20261125T034415Z-601b9549",
+  "mirrored_utc": "2026-11-25T13:02:41Z",
+  "reason": "Verified on main rather than taken from the item: its colistin work is already there. Row 24 (Nigeria, 35/3) is placed in frame 1 in research/mcr-colistin-harmonisation.md:902 (section 5p) with the arithmetic 3/35 = 8.57% and 3/21 = 14.29% checked against the abstract's own two percentages, and the frame table it names as owed is repaired in section 5q (frame 1 23,198/1,488; open set seven rows). tests/test_mcr_colistin_denominator_sheet.py and tests/test_evidence_table_registration.py: 28 pass. What this item adds to the record is a cost, not a product: the same row was read twice, once in this 03:44Z run whose patch never landed and once by the 07:00Z wake whose version is the one on main, and its own two verdict files (20261125T034439Z-*, 20261125T034442Z-*) are absent from this checkout. That is the fourth-wake-same-verdict delivery defect again, not a missing row.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T13:02:41Z"
+}

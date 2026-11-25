@@ -1,0 +1,9 @@
+{
+  "id": "20261125T114525Z-193e08f9",
+  "mirrored_utc": "2026-11-25T13:02:55Z",
+  "reason": "Read the run, not just its report, and the report is the interesting part: it says only 'Started: checking my review and reading queues, then the colistin denominator-map head' while commit 84c6546b landed five files from it (frames JSON, sheet, harmonisation, generator, pinning test; 151 insertions). So its own record understates it \u2014 a start line was never replaced \u2014 which is the report defect the wake instructions exist to prevent, in the opposite direction from usual. What it actually did: sections 5q places row 3 (China, 130/75, Song 2020, PMC7587627) in frame 1 as a joint phenotype-and-genotype count on liver samples from birds with colibacillosis, and repairs two table drifts it found while regenerating (frame 1 shown as 23,163/1,485 against the record's 23,198/1,488; 'eight rows' where the record said seven). Checked against disk: 75/130 = 57.69% matches the printed cell; 34,506/37,816 = 91.25% matches the stated 91.2%; the sheet, the frames JSON, the generator and the pinning test are consistent and 28 tests pass across the two colistin suites plus evidence-table registration. The one thing it does not do is separate the numerator \u2014 the paper never reports gene-only prevalence \u2014 and it says so on the member entry rather than smoothing it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T13:02:54Z"
+}

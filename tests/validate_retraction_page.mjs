@@ -254,23 +254,72 @@ check("names the sources and says the browser queries them directly",
   /OpenAlex/.test(pageText) && /Crossref/.test(pageText) && /queried directly by your browser/.test(pageText));
 check("the entry is numbered and dated for the Works index", /entry 8/.test(pageText) && /2026-09-17/.test(pageText));
 
+// --- 8b. Europe PMC's document-type answer, checked against the strings it really returns ------
+// The third source exists for one job: saying what KIND of document a record is, so that a retracted
+// paper can be told from its retraction notice. Both functions below were exported by the harness's
+// module surface and exercised by nothing — a function no check names can break silently, which is
+// the same defect section 9 exists for. The strings asserted here are not invented: measured from
+// the live Europe PMC API on 2026-11-25, the Wakefield paper 10.1016/S0140-6736(97)11096-0 returns
+// pubType ["Retracted Publication", "Research Support, Non-U.S. Gov't", "Journal Article"] and its
+// 2010 notice 10.1016/S0140-6736(10)60175-4 returns ["Retraction Notice"]. If the registry ever
+// renames those, these checks fail and someone looks, which is the point.
+const epmcHit = { resultList: { result: [{ id: "9500320", source: "MED",
+  pubTypeList: { pubType: ["Retracted Publication", "Journal Article"] } }] } };
+const ep = mod.epmcTypes(epmcHit);
+check("epmcTypes flattens the nested type list and keeps the pmid and index",
+  ep.found && ep.pmid === "9500320" && ep.index === "MED" && ep.types.length === 2, JSON.stringify(ep));
+
+const epOne = mod.epmcTypes({ resultList: { result: [{ id: "1", source: "MED",
+  pubTypeList: { pubType: "Retraction Notice" } }] } });
+check("epmcTypes wraps a single pubType string in a list rather than reading it character by character",
+  Array.isArray(epOne.types) && epOne.types.length === 1 && epOne.types[0] === "Retraction Notice",
+  JSON.stringify(epOne.types));
+
+const epNone = mod.epmcTypes({ resultList: { result: [] } });
+const epBare = mod.epmcTypes({ resultList: { result: [{ id: "2", source: "MED" }] } });
+check("epmcTypes keeps not-found and found-with-no-types apart, because they mean different things",
+  epNone.found === false && epNone.types.length === 0 && epBare.found === true && epBare.types.length === 0,
+  JSON.stringify({ none: epNone.found, bare: epBare.found }));
+
+check("isRetractedType accepts the string the registry really returns for a retracted paper",
+  mod.isRetractedType(["Retracted Publication", "Journal Article"]) === true);
+check("isRetractedType rejects 'Retraction Notice' — the notice is a different document from the paper",
+  mod.isRetractedType(["Retraction Notice"]) === false);
+// Not a guess: on 2026-11-25 Europe PMC returned 21,934 records for PUB_TYPE:"Retraction of
+// Publication", and the ones sampled were journal notices titled "Retraction: …" / "RETRACTED: …".
+// The type marks the notice, so a near-match on 'retraction' would type every notice as retracted.
+check("isRetractedType rejects 'Retraction of Publication' — that type marks the notice, not the paper",
+  mod.isRetractedType(["Retraction of Publication"]) === false);
+check("isRetractedType ignores case and surrounding whitespace",
+  mod.isRetractedType(["  RETRACTED PUBLICATION "]) === true);
+check("isRetractedType survives a missing type list", mod.isRetractedType(undefined) === false);
+
 // --- 9. the published count must be the count that ran (added 2026-11-11) ---
 // This harness was cited as a "65 checks" pass in four documents while it had grown to 71, and
 // nothing noticed: a hand-typed number in a page is the same silent-drift defect the page's own
 // guard was written for. The harness knows the only number that cannot be wrong — how many checks
 // it just ran — so the claim is checked here rather than remembered by whoever edits the index.
-let claimed = null;
-try {
-  const indexHtml = fs.readFileSync("docs/works/index.html", "utf8");
-  const m = indexHtml.match(/validate_retraction_page\.mjs<\/code>[\s\S]{0,300}?\((\d+) checks\)/);
-  if (m) claimed = Number(m[1]);
-} catch (e) { /* run from outside the repo: the claim is simply unchecked */ }
-// `ran` is the count *before* this check runs, so the number that ran is ran + 1 — the guard
-// counts itself. (First version compared to `ran` and failed by one; the fix is this line, not a
-// hand-typed 72.)
-const ranTotal = ran + 1;
-check("the Works index publishes the number of checks this harness actually runs",
-  claimed === ranTotal, claimed === null ? `ran ${ranTotal}, no claim found` : `ran ${ranTotal}, index says ${claimed}`);
+// Every live file that publishes a count, not only the Works index. `works/queue/03-claim-and-source.md`
+// carried a second hand-typed copy that this guard could not see, so adding checks to this harness
+// corrected one file and left the other stale — the guard was watching one of two copies, which is
+// the same half-watched defect it was written for. Dated reports (channels/reports/, channels/daily-*)
+// quote the number as of their own date and are deliberately NOT listed: rewriting a dated record to
+// today's figure would falsify it. A third live copy belongs in this list, not in prose.
+const COUNT_CLAIMS = ["docs/works/index.html", "works/queue/03-claim-and-source.md"];
+// `ran` is the count *before* these checks run, and this guard counts itself once per claim, so the
+// number that ran is ran + COUNT_CLAIMS.length. (The first version compared to `ran` and failed by
+// one; the fix is this arithmetic, not a hand-typed number.)
+const ranTotal = ran + COUNT_CLAIMS.length;
+for (const claimFile of COUNT_CLAIMS) {
+  let claimed = null;
+  try {
+    const text = fs.readFileSync(claimFile, "utf8");
+    const m = text.match(/validate_retraction_page\.mjs[\s\S]{0,300}?\((\d+) checks\)/);
+    if (m) claimed = Number(m[1]);
+  } catch (e) { /* run from outside the repo: the claim is simply unchecked */ }
+  check(`${claimFile} publishes the number of checks this harness actually runs`,
+    claimed === ranTotal, claimed === null ? `ran ${ranTotal}, this file states no count` : `ran ${ranTotal}, this file says ${claimed}`);
+}
 
 console.log("\n" + (fail === 0 ? "ALL CHECKS PASSED" : fail + " CHECK(S) FAILED"));
 process.exit(fail === 0 ? 0 : 1);

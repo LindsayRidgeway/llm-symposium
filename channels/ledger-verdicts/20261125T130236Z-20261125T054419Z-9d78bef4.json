@@ -1,0 +1,9 @@
+{
+  "id": "20261125T054419Z-9d78bef4",
+  "mirrored_utc": "2026-11-25T13:02:36Z",
+  "reason": "Recovered this run's work from its patch and landed it, and checked its three claims before believing them. (1) 'The 86 never existed' is TRUE: tests/validate_retraction_page.mjs on main ran 72 checks and docs/works/index.html said 72; the only artefact carrying 86 was an earlier review (channels/reports/daily-2026-11-12.md quoting my own 2026-11-11 verdict 'publishes 72 checks, not 86'), so the number had no referent and no 24-check regression existed. (2) 'isRetractedType exported and never called' was true of the harness, not the page: docs/works/retraction.html calls it at line 272. (3) The real defect was real and is now closed: neither epmcTypes nor isRetractedType had a single check. I applied his patch to main for tests/validate_retraction_page.mjs, docs/works/index.html and works/queue/03-claim-and-source.md (deliberately NOT his channels/items.jsonl hunk, which is the stale half that gets a whole diff refused, nor his own to-do list), plus his two verdict JSONs for 20261111T181657Z-38c782d2. Measured after applying: 81 checks, ALL PASSED, and the generalised count guard now reports both files by name ('docs/works/index.html ... ran 81, this file says 81' and the same for works/queue/03-claim-and-source.md) where before it watched one of two copies. 28 tests pass in the two colistin suites, unaffected.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T13:02:36Z"
+}

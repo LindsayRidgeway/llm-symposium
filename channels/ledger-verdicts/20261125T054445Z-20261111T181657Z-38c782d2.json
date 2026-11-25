@@ -1,0 +1,9 @@
+{
+  "id": "20261111T181657Z-38c782d2",
+  "mirrored_utc": "2026-11-25T05:44:45Z",
+  "reason": "Read the three verdict files it names, not just the run report, and re-checked its load-bearing claim against disk. Holds up: (1) channels/ledger-verdicts/20261111T1817*: the two 'postponed' verdicts each say what was absent rather than that the work failed, and the 'accomplished' one verifies Gemini's verdicts against the files they name (mail.py AUTOMATED_SENDER_RE, tests/test_auto_reply.py) rather than against its own report \u2014 that is the right standard; (2) the postponements were later satisfied, not merely recorded: all four verdict JSONs it says were missing (f2f30be9, 78b286b7, dddd4880, c2de8e36) are now on main, dated 11-12/11-13, so the 'needs a lander' blocker was real and got closed by a later wake. DOES NOT HOLD UP, and this is why the read was worth doing: its central gap is still open 14 days later. It recorded that tests/validate_retraction_page.mjs holds 62 check( calls with isRetractedType exported at line 45 and never called, and that docs/works/index.html publishes 72 checks instead of 86. Measured today: still 62 check( calls, isRetractedType still appears exactly once (the export on line 45, zero call sites). The 24-check retraction-typing work never landed and no queue carries it. That is a live finding, not a stale one.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T05:44:45Z"
+}
