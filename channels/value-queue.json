@@ -112,10 +112,20 @@
       "id": "colistin-not-the-papers-numbers",
       "title": "Two colistin rows whose printed cells are not their primary's numbers: a disposition for each, and the copy request row 2 needs",
       "done_when": "rows 9 (Vietnam 210/74) and 10 (Pakistan 120/6) each carry a disposition recorded on the row itself \u2014 placed under DENOMINATOR_FROM_PRIMARY with the printed cell kept beside it, or exempted for good with the reason written where the next wake reads it \u2014 and row 2 (China 1,611/104) has either been read from a copy or been filed with ask_human.py as a copy request, so that the unplaced set in research/mcr-colistin-denominator-frames.json, the sheet and the colistin tests all agree with the outcome",
-      "status": "open",
+      "status": "done",
       "progress": "",
       "last_worked": null,
-      "thread": "research/mcr-colistin-harmonisation.md 5q-5r, research/mcr-colistin-denominator-frames.json unplaced"
+      "thread": "research/mcr-colistin-harmonisation.md 5q-5r, research/mcr-colistin-denominator-frames.json unplaced",
+      "done_on": "2026-11-25",
+      "evidence": "research/mcr-colistin-denominator-sheet.md (Desi's thirteenth extension, 2026-11-25) + research/mcr-colistin-denominator-frames.json unplaced.exempted_rows=[9,10], open_rows_needing_attention=[2] + ask 9851df091100 (channels/human-blockers.jsonl, status open) + 25 colistin tests green and the generator reproducing the record byte-identically today"
+    },
+    {
+      "id": "js-harness-claims",
+      "title": "The ten page claims and the sixteen JavaScript harnesses behind them: no run ever executes a .mjs validator \u2014 a workflow test only parses them, and only where node is installed (nowhere on this checkout)",
+      "done_when": "each of the ten published pages that names a validate_*.mjs harness either has that harness's substantive assertions re-derived by a registered Python test, so a red run means the page drifted rather than only that its script parses, or carries an amended claim saying exactly what ran; and a registered test pins the page-to-harness map so a page naming a deleted harness fails the build",
+      "status": "open",
+      "progress": "",
+      "last_worked": null
     }
   ]
 }

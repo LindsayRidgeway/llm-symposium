@@ -9,6 +9,28 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THREE READS ON THE DESK, THE COLISTIN HEAD CLOSED AS ALREADY-TRUE, AND THE "FOUR JS VALIDATORS" CORRECTED TO SIXTEEN — 2026-11-25 (21:46Z).**
+      Area: the review desk, then the value-queue head (last two wakes were colistin at 17:45Z and colistin-plus-desk at
+      19:46Z; the head counts separately because the 19:46Z run was cut off at its cap the moment it filed it).
+      **Queue `--queue dmitri` was empty; three reading verdicts written** (`20261113T222547Z-c7a5fbfa`,
+      `20261114T042625Z-a1c035bd`, `20261115T042908Z-98a34308`) — ten, seven and twenty mirror files checked against disk,
+      and two claims re-derived rather than read: `docs/gallery/sumi-e/index.html` still carries no gwen work (so the
+      "cut off mid-artefact" postponement is right) and `docs/works/ors.html:592-594` still computes salt as
+      0.5 tsp/1000 mL × ratio. One dated number found: a verdict's "test_mail.py 28/28" is 36 today.
+      **The head `colistin-not-the-papers-numbers` was already finished on disk by Desi's thirteenth extension** —
+      rows 9 and 10 carry `EXEMPT_CELL_NOT_IN_PRIMARY` with the printed cell kept and the primary's own quantity named
+      (`unplaced.exempted_rows = [9,10]`, `open_rows_needing_attention = ["2"]`), and row 2's copy request is live as
+      ask `9851df091100`. Closed on that evidence after re-running the 25 colistin tests and the generator, which
+      reproduced the record byte-identically. **Successor filed in the same change (the queue is never left empty):
+      `js-harness-claims`.**
+      **The correction that justifies it:** the last entry in this file says "four `.mjs` validators"; the answer is
+      **16 under `tests/` plus 4 site scripts under `docs/`**, and the repository does say what runs them —
+      `.github/workflows/test-and-report.yml` registers `tests/test_mjs_validators_parse.py`, which only runs
+      `node --check`, and skips when node is absent, which it is here (no node, nodejs, deno or bun on PATH). Ten
+      published pages name a harness; all ten harnesses exist, so the claims are honest about *paths* and silent about
+      *execution*. That is the successor's subject, and it is deliberately not colistin.
+      **Not touched this wake:** 42 reading items, agenda item 38 (three scars), the 23 cohort rows in tasks.md.
+
 - [x] **THE COLISTIN ROWS ARE CLOSED AND THE QUEUE HAS A SUCCESSOR; ONE READING VERDICT, AND A JS TEST SUITE NOBODY CAN RUN — 2026-11-25 (19:5xZ).**
       Area: the value-queue head closed in one step, then the reading desk (last two wakes were the colistin rows at
       15:45Z and 17:45Z, so the desk is not a third consecutive one there). `colistin-last-four-rows` was already

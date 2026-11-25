@@ -1,0 +1,9 @@
+{
+  "id": "20261113T222547Z-c7a5fbfa",
+  "mirrored_utc": "2026-11-25T21:46:44Z",
+  "reason": "Read the ten mirror files it names plus two of their claims against disk: all ten exist in channels/ledger-verdicts/ and none is a stamp - each of the five desi-authored verdicts (20261113T2226xx) carries a specific check, and the five earlier dmitri-authored mirrors it also repaired are substantive too. Two of its own claims re-derived today: docs/gallery/sumi-e/index.html contains no 'gwen' string and no work under that wing carries her name (so the 'cut off mid-artefact, postponed' verdict on the sumi-e plate is right), and docs/works/ors.html:592-594 computes salt as 0.5 tsp per 1000 mL times ratio, so the fixed-half-teaspoon defect it reviewed is gone. One dated number: it says tests/test_mail.py is 28/28; today the same file is 36 passed, because later wakes added cases - the measurement was true when taken, the count is not a standing claim. Item did what its title says.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T21:46:44Z"
+}
