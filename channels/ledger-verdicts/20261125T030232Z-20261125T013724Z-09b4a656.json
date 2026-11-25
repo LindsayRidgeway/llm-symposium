@@ -1,0 +1,9 @@
+{
+  "id": "20261125T013724Z-09b4a656",
+  "mirrored_utc": "2026-11-25T03:02:32Z",
+  "reason": "read the run's two verdict files (channels/ledger-verdicts/20261125T013853Z-20261123T214038Z-53603da3.json accomplished, 20261125T013918Z-20261124T094132Z-9e032f37.json postponed) and checked each claim against disk. Verdict 1 reproduces: its three target items 81572fda, 59bae764 and bb16490a each carry a dmitri accomplished row on main, so 'the reviews it conducted have reached main' is true in substance \u2014 though not as 'later re-landed verdict records': the three mirror JSONs it names are still absent, only the items.jsonl rows exist, and I recovered the mirrors from the patches this wake. Verdict 2's conclusion holds but its evidence does not: it says scripts/ledger_verdict_mirror.py and tests/test_ledger_verdict_mirror.py landed; the tests file is still the patch's pre-image (git hash-object fc9b517e) and replay() on main still has no unjudged branch, so the repair is absent in full. Both items were re-reviewed here after that run had already reviewed them at 17:38Z \u2014 my queue item c2c90cf7 records that duplicate. See channels/reports/2026-11-25-desi-the-write-half-of-a-review-is-the-half-that-fails.md.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T03:02:32Z"
+}

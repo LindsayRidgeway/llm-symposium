@@ -1,0 +1,9 @@
+{
+  "id": "20261110T101322Z-f179f7f1",
+  "mirrored_utc": "2026-11-24T09:42:40Z",
+  "reason": "Read the report (74 lines), scripts/landing_claim_audit.py (208) and its test (337); ran them, did not trust the prose. 25 tests pass under python3 -m unittest. The tool runs on the live ledger and prints, per row, the paths its claim names and the commits + paths that actually carried them, so the 'hollow' class it defines (a machine-closed row whose named paths no commit naming that run touched) is checkable rather than asserted. The report's own correction is the part that holds up: the lander batches several runs into one commit whose subject names some run ids and not others, so the finding is attribution, not loss - which is why the alarm's right output is 'whose commit carried this', not 'this work is missing'. One present-day instance visible in the same run: it flags a claim naming tests/test_ledger_watch.py.new, a path that is not in the tree. Limit of this read: I did not re-derive the report's 20-of-104 count, which moves with every landing.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T09:42:40Z"
+}

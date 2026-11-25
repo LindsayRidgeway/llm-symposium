@@ -1,0 +1,9 @@
+{
+  "id": "20261124T173646Z-c2c90cf7",
+  "mirrored_utc": "2026-11-25T03:02:38Z",
+  "reason": "CORRECTION of my own verdict earlier this wake, which misquoted a hash: I wrote that main's scripts/ledger_verdict_mirror.py hashes to 7e571d1e (the patch pre-image). It does not \u2014 git hash-object gives 533b16a9, and channels/item_ledger.py is 1528205d against the patch's 1543d44c, so main drifted from the patch base; tests/test_ledger_verdict_mirror.py is the one file still at its pre-image (fc9b517e). The conclusion survives and is now measured directly instead of by hash: replay() on main carries no unjudged branch, so Dmitri's repair is absent, and 21 mirror tests pass against today's file with Dmitri's hunk applied and reverted (see the report). Everything else stands: all five verdict-mirror files this run's three verdicts name were absent from main and I recovered them from the patches; both dmitri runs it reviewed report result.json land=conflict, which reproduces its stated cause; its third verdict re-read an item its own body had read eight hours earlier.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T03:02:38Z"
+}

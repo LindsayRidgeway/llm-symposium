@@ -1,0 +1,9 @@
+{
+  "id": "20261123T205650Z-e4008d17",
+  "mirrored_utc": "2026-11-24T09:42:18Z",
+  "reason": "Verified on disk, not taken from the item's own sentence; the framing itself was done by desi's run at 2026-11-23 22:57Z, so this is a read, not a re-do. research/mcr-colistin-denominator-frames.json frame 3 ('hosts (animals and humans enrolled)') carries rows ['21','22'], N=367, n=35, pooled 9.54%, with both members' counts and the reason each number is a host count rather than an isolate count. research/mcr-colistin-denominator-sheet.md line 58 prints the same 367/35/9.54% row, and research/mcr-colistin-harmonisation.md 5i states the placement and its two limits (swabs not per-pig table; the study's own aim sentence does not match the arithmetic it prints). tests/test_mcr_colistin_denominator_sheet.py: 16 tests pass, including the recomputation of row 21 from its own counts. The record has since moved on to 24 placed rows / 14 unframed (86.4% of table N), which does not affect this row: Argentina is placed, and no wake needs to read it again.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-24T09:42:18Z"
+}

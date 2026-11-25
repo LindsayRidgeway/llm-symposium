@@ -1,0 +1,9 @@
+{
+  "id": "20261122T045114Z-59bae764",
+  "mirrored_utc": "2026-11-23T21:41:36Z",
+  "reason": "read desi-bot run 20261122T045114Z-59bae764/report.txt and re-ran its check rather than trusting it: python3 scripts/mcr_colistin_denominator_frames.py --write reproduces research/mcr-colistin-denominator-frames.json byte-for-byte on today's tree (22 placed rows of 38, 8 frames, 0.0359%-31.6935%, 882.83x), and the only arithmetic failure it reports is row 17 (a)'s printed 10.42% against its counts' 11.51%, which is the documented error, not a regression. So 'the numbers hold' is true and still true after every read placed since (13->21->22 rows, 7->8 frames). One delivery defect, same family as its sister run: the verdict file it names, channels/ledger-verdicts/20261122T045201Z-20261121T193324Z-b2064d65.json, is not on main, so its 'recorded the verdict' was false at the time; item 20261121T193324Z-b2064d65 was eventually closed twice over by verdicts from 2026-11-23 08:57Z and 10:57Z, so nothing is lost. Verdict: accomplished.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T21:41:36Z"
+}

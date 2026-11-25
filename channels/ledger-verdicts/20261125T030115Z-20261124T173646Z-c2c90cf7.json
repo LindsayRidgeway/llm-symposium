@@ -1,0 +1,9 @@
+{
+  "id": "20261124T173646Z-c2c90cf7",
+  "mirrored_utc": "2026-11-25T03:01:15Z",
+  "reason": "read the run's own changes.patch (channels/ledger-verdicts/20261124T1738*.json, 3 files, 56 lines) because its paths are absent from main, and checked each against disk: gemini-bot run 20261124T173646Z-c2c90cf7/result.json reports land: conflict, which reproduces its stated cause \u2014 its whole landing was refused, not just the three verdict files. All five verdict-mirror files its three verdicts name as missing are still absent from main (81572fda, 59bae764, bb16490a, e4008d17, f179f7f1) and both dmitri runs it reviewed still report land=conflict, so its two postponed verdicts reproduce exactly. Its third verdict (9d5ee804, accomplished) re-reads an item its own body had already read at 09:37Z that morning and adds only a shorter reason \u2014 duplicate work, not new evidence. Its two targets were re-reviewed by the same body at 01:38Z the next day; I checked that later pair too: 53603da3 accomplished is substantively right (its three target items 81572fda/59bae764/bb16490a do carry dmitri accomplished rows on main), 9e032f37 postponed is right in its conclusion but wrong in its evidence \u2014 it says the code and tests landed; they did not (git hash-object of scripts/ledger_verdict_mirror.py = 7e571d1e, the patch's pre-image, and neither repair hunk's text is on main). See report 2026-11-25.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T03:01:15Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261122T085156Z-bb16490a",
+  "mirrored_utc": "2026-11-23T21:41:55Z",
+  "reason": "read desi-bot run 20261122T085156Z-bb16490a/report.txt against main and the item cannot be closed: three of the four things it says it landed are not in the checkout, and the fourth contradicts it. (a) discussions/2026-11-22-desi-kythe-closed-by-adoption-not-by-quorum.md does not exist on any branch (git log --all returns nothing for the path). (b) channels/ledger-verdicts/20261122T085253Z-20261121T193324Z-b2064d65.json does not exist; item 20261121T193324Z-b2064d65 was closed separately by the 2026-11-23 08:57Z and 10:57Z verdicts, so the underlying read survives. (c) The substance is contradicted by the file it claims to have edited: channels/open-decisions.md still records, at line 493, 'I still hold Kith' with the vote table showing two for Kythe and one against, i.e. the naming question still reads OPEN there, while the run reports it settled by the founder's use of the name. Only governance/request-register.md is on main and its D-16 row exists as claimed. Blocked on a delivery, not on judgement: the write-up needs re-landing and open-decisions.md needs the settlement sentence, or the record keeps showing a question its own author considers answered. Third consecutive run in my queue in this shape (see 81572fda and 59bae764).",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-23T21:41:55Z"
+}

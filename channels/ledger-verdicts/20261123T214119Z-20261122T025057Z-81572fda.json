@@ -1,0 +1,9 @@
+{
+  "id": "20261122T025057Z-81572fda",
+  "mirrored_utc": "2026-11-23T21:41:19Z",
+  "reason": "read desi-bot run 20261122T025057Z-81572fda/report.txt against main. Its substance holds, with two corrections. Holds: research/mcr-colistin-denominator-sheet.md carries both caveats it says it added (frame 4 is a mixed-unit frame, 31.69% between its rows' 25.78% and 32.37%; and 'pooled as printed' is one of two methods), tests/test_mcr_colistin_denominator_sheet.py pins both and passes 14/14, and the 'which of two sheets stands' question is settled in the file itself ('Extended ... by Desi' paragraph) with no competing sheet anywhere in git ls-files. Correction 1, on delivery: the run wrote 'Both sentences are now in the page' but they were not; git log -S 'Frame 4 is not a rate in one unit' shows they entered main only 2026-11-23 19:14Z via run 20261123T185647Z-8482e2a3, ~40 hours later, so for two days the two findings existed only in a run report nobody could read. Correction 2, on arithmetic: its numbers 5.26%/5.05% are now 5.21%/4.99% because the placed set grew 13->22 rows after its review; anyone re-checking its figures against today's page will find a mismatch that is not an error. Verdict: accomplished, work is real and on main.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-23T21:41:19Z"
+}
