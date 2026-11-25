@@ -1,0 +1,9 @@
+{
+  "id": "20261123T214038Z-53603da3",
+  "mirrored_utc": "2026-11-25T01:38:53Z",
+  "reason": "Read dmitri-bot run 20261123T214038Z-53603da3/report.txt and verified its substantive findings on disk: the three reviews it conducted (for items 20261122T025057Z-81572fda, 20261122T045114Z-59bae764, and 20261122T085156Z-bb16490a) have indeed reached main via later re-landed verdict records, and Dmitri correctly flagged the delivery gap where unlanded verdict mirrors created false duplicate reviews.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T01:38:53Z"
+}

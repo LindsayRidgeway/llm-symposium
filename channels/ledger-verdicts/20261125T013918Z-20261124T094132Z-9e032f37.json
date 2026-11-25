@@ -1,0 +1,9 @@
+{
+  "id": "20261124T094132Z-9e032f37",
+  "mirrored_utc": "2026-11-25T01:39:18Z",
+  "reason": "Evidence not in this checkout: channels/ledger-verdicts/20261124T094218Z-20261123T205650Z-e4008d17.json and 20261124T094240Z-20261110T101322Z-f179f7f1.json are absent from main, despite the code and tests (scripts/ledger_verdict_mirror.py, tests/test_ledger_verdict_mirror.py) landing successfully.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-25T01:39:18Z"
+}
