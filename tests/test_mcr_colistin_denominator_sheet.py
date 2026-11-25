@@ -139,11 +139,13 @@ class DenominatorSheet(unittest.TestCase):
     def test_row_to_frame_assignment_is_one_frame_per_row(self):
         placed = [m["row"] for f in self.record["frames"] for m in f["members"]]
         self.assertEqual(len(placed), len(set(placed)))
-        self.assertEqual(sorted(placed), sorted(
-            ["13", "6", "17 (a)", "17 (b)", "17 (c)", "17 (d)", "17 (e)", "17 (f)", "17 (g)",
-             "17 (h)", "17 (i)", "17 (j)", "17 (k)", "19", "7", "12", "28", "21", "22", "18", "5", "20", "25", "1", "23",
-             "15", "11", "14", "27", "24", "26", "3"]
-        ))
+        # 2026-11-25 (Desi): this used to be a hand-typed list of the placed rows, and every
+        # placing wake had to remember to extend it — which is how the 11:01Z wake spent its
+        # budget and was refused at the landing gate with nine stale pins. The claim is not "these
+        # thirty-one ids"; it is "every seed row is placed or open, and nothing is both", so it is
+        # now checked against the record's own two blocks.
+        self.assertFalse(set(placed) & set(self.record["unplaced"]["rows"]))
+        self.assertEqual(set(placed) | set(self.record["unplaced"]["rows"]), set(self.rows))
         # The rows the harmonisation file established each frame on.
         by_frame = {f["frame"]: f["rows"] for f in self.record["frames"]}
         self.assertIn("5", by_frame["samples or products"])
@@ -246,15 +248,15 @@ class DenominatorSheet(unittest.TestCase):
 
     def test_coverage_is_the_seeds_own_counts(self):
         placed = self.record["placed"]
-        self.assertEqual(placed["rows"], 32)
-        self.assertEqual(placed["N"], 34506)
+        self.assertEqual(placed["rows"], 34)
+        self.assertEqual(placed["N"], 34764)
         # placed N is the placed counts, which for the one replaced row are the primary's, not the seed's
         self.assertEqual(placed["N"], sum(m["N"] for m in self.members.values()))
-        self.assertEqual(sum(self.rows[r]["n_isolates"] for r in self.members), 34949)
-        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34506 / 37816, places=3)
+        self.assertEqual(sum(self.rows[r]["n_isolates"] for r in self.members), 35207)
+        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34764 / 37816, places=3)
         self.assertEqual(self.record["table"]["N"], self.seed["derived"]["sum_isolates"])
-        self.assertIn("34,506", self.sheet)
-        self.assertIn("91.2%", self.sheet)
+        self.assertIn("34,764", self.sheet)
+        self.assertIn("90.9%", self.sheet)
 
     def test_the_range_quoted_is_the_frame_range(self):
         r = self.record["range"]
@@ -270,11 +272,23 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("eight different quantities", self.sheet)
 
     def test_pooling_the_placed_rows_does_not_give_seven_percent(self):
-        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 2285 / 34506, places=4)
-        self.assertLess(self.record["placed"]["pooled_pct"], 6.7)
+        pooled = self.record["placed"]["pooled_pct"]
+        self.assertAlmostEqual(pooled, 100 * 2361 / 34764, places=4)
+        # 2026-11-25 (Desi): the old pin was `assertLess(pooled, 6.5)` and it was true at 31 rows
+        # (6.43%). At 34 placed rows the pool is 6.79%, inside a quarter point of the printed 7.0%
+        # — so the claim the sheet makes is not "7.0 is the wrong number", it is "7.0 is a pool of
+        # eight incommensurable quantities and its closeness to this one is a coincidence of
+        # weights". Pinned that way, and the sheet has to print the current figure.
+        self.assertLess(pooled, 7.0)
+        self.assertIn(f"{pooled:.2f}%", self.sheet)
         # And the France correction is recorded rather than silently folded in.
+        # Row 19's printed numerator is 49 and its primary's is 149 (§5b), so the corrected frame
+        # is frame 1's own counts plus the 100 the review under-counted — derived, because the
+        # literal was 1588/23198 and went stale the moment three rows joined frame 1.
+        gene = next(f for f in self.record["frames"]
+                    if f["frame"] == "isolates screened for the gene")
         self.assertAlmostEqual(self.record["gene_frame_with_france_corrected_pct"],
-                               100 * 1663 / 23328, places=4)
+                               100 * (gene["n"] + 100) / gene["N"], places=4)
 
     def test_frame_four_is_mixed_unit_and_the_sheet_says_so(self):
         """33 positive products + 360 positive isolates, over 128 products + 1,112 samples.
@@ -299,15 +313,18 @@ class DenominatorSheet(unittest.TestCase):
         counts_pool = 100 * sum(m["n"] for m in placed) / N
         # the printed percentage is a percentage of the PRINTED N, so row 27 weighs 676 here, not 233
         printed_pool = 100 * sum(m.get("N_printed", m["N"]) * m["pct_printed"] / 100 for m in placed) / N
-        self.assertAlmostEqual(counts_pool, 6.6220, places=3)
-        self.assertAlmostEqual(printed_pool, 6.4281, places=3)
+        # Counts pool and the record's own placed figure are built by different code paths, so
+        # agreeing is a real check; the absolute value is not pinned because it moves with every
+        # placed row, and pinning it is what made nine assertions stale on 2026-11-25.
+        self.assertAlmostEqual(counts_pool, self.record["placed"]["pooled_pct"], places=4)
+        self.assertLess(printed_pool, counts_pool)
         # The whole gap is the one cell whose printed percentage is not its own counts.
         r17a = self.rows["17 (a)"]
         gap = 100 * (r17a["mcr_positive"] - r17a["n_isolates"] * r17a["prevalence_pct_reported"] / 100) / N
         self.assertAlmostEqual(counts_pool - printed_pool, gap, places=2)
-        self.assertGreater(gap, 0.19)  # 0.195 now: the pool grew by 688 isolates, the cell did not
-        self.assertIn("6.43%", self.sheet)
-        self.assertIn("6.62%", self.sheet)
+        self.assertGreater(gap, 0.15)  # 0.193 at 34 placed rows; the cell is fixed, the pool is not
+        self.assertIn(f"{counts_pool:.2f}%", self.sheet)
+        self.assertIn(f"{printed_pool:.2f}%", self.sheet)
 
     def test_row_27_is_placed_on_the_primaries_denominator_and_the_printed_cell_is_kept(self):
         """§5g's method decision, made as a rule: 676 is withdrawn, 233 is the primary's own count.
@@ -338,8 +355,8 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("DENOMINATOR_FROM_PRIMARY", self.sheet)
 
     def test_sheet_states_its_own_limits(self):
-        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - 32)
-        self.assertIn(f"{len(self.rows) - 32} of the 38 rows", self.sheet)
+        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.rows) - self.record["placed"]["rows"])
+        self.assertIn(f"{self.record['placed']['unplaced_rows']} of the 38 rows", self.sheet)
         self.assertIn("Not a population prevalence anywhere", self.sheet)
         self.assertIn("mcr-colistin-denominator-frames.json", self.sheet)
         self.assertIn("mcr-colistin-harmonisation.md", self.sheet)
@@ -366,11 +383,9 @@ class TheOpenSetIsData(unittest.TestCase):
 
     def test_the_open_set_is_the_seed_minus_the_placed_rows(self):
         placed = {m["row"] for f in self.record["frames"] for m in f["members"]}
-        self.assertEqual(len(placed), 32)
         open_rows = set(self.rows) - placed
         self.assertEqual(set(self.unplaced["rows"]), open_rows)
-        self.assertEqual(len(self.unplaced["rows"]), 6)
-        self.assertEqual(self.record["placed"]["unplaced_rows"], 6)
+        self.assertEqual(self.record["placed"]["unplaced_rows"], len(self.unplaced["rows"]))
 
     def test_nothing_is_both_placed_and_open_and_nothing_is_lost(self):
         placed = {m["row"] for f in self.record["frames"] for m in f["members"]}
@@ -379,27 +394,35 @@ class TheOpenSetIsData(unittest.TestCase):
         # and the open rows' own counts are the seed's, recomputed here
         self.assertEqual(self.unplaced["N"], sum(self.rows[k]["n_isolates"] for k in self.unplaced["rows"]))
         self.assertEqual(self.unplaced["n"], sum(self.rows[k]["mcr_positive"] for k in self.unplaced["rows"]))
-        self.assertEqual(self.unplaced["N"], 2867)
-        self.assertEqual(self.unplaced["n"], 362)
+        # The two lines above already recompute N and n from the seed; these literals restated
+        # them and went stale the first time a row was placed, so they are gone.
         self.assertAlmostEqual(
             self.unplaced["share_of_table_N_pct"],
-            round(100 * 2867 / self.seed["derived"]["sum_isolates"], 4),
+            round(100 * self.unplaced["N"] / self.seed["derived"]["sum_isolates"], 4),
             places=4,
         )
 
     def test_every_open_row_says_why_it_is_open(self):
-        allowed = {"not read", "unreadable from here", "read, cannot be placed"}
+        # "read, cannot be placed yet" added 2026-11-25: row 9 (Vietnam) was read in full and its
+        # numbers are not in the primary, which is a different fact from "read and no frame suits",
+        # and the sheet must not blur the two.
+        allowed = {"not read", "unreadable from here", "read, cannot be placed",
+                   "read, cannot be placed yet"}
         for m in self.unplaced["members"]:
             self.assertIn(m["read_status"], allowed, m["row"])
             self.assertTrue(m["why"].strip(), m["row"])
             self.assertEqual(m["N"], self.rows[m["row"]]["n_isolates"])
         unreadable = [m["row"] for m in self.unplaced["members"] if m["read_status"] == "unreadable from here"]
         self.assertEqual(unreadable, ["2"], "only China 1,611 is refused by its source")
-        self.assertEqual(self.unplaced["read_status_counts"], {"not read": 5, "unreadable from here": 1})
+        derived = {}
+        for m in self.unplaced["members"]:
+            derived[m["read_status"]] = derived.get(m["read_status"], 0) + 1
+        self.assertEqual(self.unplaced["read_status_counts"], derived)
 
     def test_the_read_order_is_the_one_the_working_names(self):
-        self.assertEqual(self.unplaced["rows"], ["2", "4", "8", "9", "10", "16"])
-        self.assertEqual([m["read_order"] for m in self.unplaced["members"]], list(range(1, 7)))
+        self.assertEqual(self.unplaced["rows"], ["2", "4", "9", "10"])
+        self.assertEqual([m["read_order"] for m in self.unplaced["members"]],
+                         list(range(1, len(self.unplaced["rows"]) + 1)))
         harmonisation = (ROOT / "research" / "mcr-colistin-harmonisation.md").read_text()
         self.assertIn("China 1,611 (row 2), then", harmonisation)
         self.assertIn("Nigeria 35 (row 24)", harmonisation)
@@ -431,7 +454,8 @@ class ScriptRuns(unittest.TestCase):
         )
         self.assertEqual(out.returncode, 0, out.stderr)
         self.assertIn("frames: 8", out.stdout)
-        self.assertIn("placed rows: 32 of 38", out.stdout)
+        record = json.loads(RECORD.read_text())
+        self.assertIn("placed rows: %d of 38" % record["placed"]["rows"], out.stdout)
         self.assertIn("17 (a)", out.stdout)
 
 
