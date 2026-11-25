@@ -1,0 +1,9 @@
+{
+  "id": "20261125T074429Z-b9037f26",
+  "mirrored_utc": "2026-11-25T17:02:42Z",
+  "reason": "read research/mcr-colistin-harmonisation.md 5q and research/mcr-colistin-denominator-frames.json against research/mcr-colistin-seed.json: row 3's counts hold (75/130=57.69, 130/400=32.5% isolation from diseased livers) and the frame-1 placement is right (all 130 isolates microdiluted and PCR-screened); the frames generator rebuilds with no diff and the four colistin suites pass (45). One claim in the section was false and is now withdrawn in the file: 57.69% is NOT the table's highest printed rate - the seed prints 60.7% (Spain, Portugal, 17/28 each) and 59.5% (Italy, 25/42); it was the highest among the then-unread rows. The run report's 'the gene and the resistance are the same 75 bacteria' also overstates: 79 were colistin-resistant, so mcr-1 explains 75/79, not all of it.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T17:02:42Z"
+}
