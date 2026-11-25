@@ -947,3 +947,38 @@ Both are snapshots from before row 7's and row 15's N entered the frame as compu
 frame 1 pools at **6.41%** with and without row 24. The history paragraphs are left as written — they are
 dated statements about what the numbers were when the row was placed — but a reader should take the rate
 from the table or the JSON, and this sentence says why the two disagree.
+
+### 5q. Row 3 (China): the second-highest printed cell is a liver of a sick bird, and the numerator is resistance *and* gene (Dmitri, 2026-11-25, 06:5xZ)
+
+Read in full against the primary's own abstract (Song Y., Yu L., Zhang Y. et al., "Prevalence and
+characteristics of multidrug-resistant mcr-1-positive *Escherichia coli* isolates from broiler chickens in
+Tai'an, China", *Poultry Science* 99(2) 2020: 1117-1123, `10.1016/j.psj.2019.10.044`, PMC7587627,
+PMID 32029147; Europe PMC full record, 9,933 B).
+
+**What N counts.** "A total of 130 *E. coli* strains were isolated from the livers of chickens displaying
+symptoms of colibacillosis in Tai'an, China. Isolates were screened for ... the presence of mobile colistin
+resistance genes." All 130 were genotyped for mcr-1 to -4; mcr-2, -3 and -4 were not detected. So the
+denominator is isolates screened for the gene, and the row is frame 1.
+
+**What the numerator is, exactly.** "75 (57.7%) isolates showed resistance to colistin and were positive
+for mcr-1" - a joint phenotype-and-genotype count, not a gene count alone. The abstract does not report
+how many isolates were colistin resistant in total, nor any isolate resistant but gene-negative, so the
+two readings cannot be separated from this source. The row is placed on the paper's own arithmetic and the
+ambiguity is written on the member entry rather than smoothed: if there were resistant-but-negative
+isolates, the printed 57.69% understates a gene prevalence that no sentence in the paper gives.
+
+**The substrate, which is the part a reader will get wrong.** These are **livers of birds with
+colibacillosis** - a diagnostic lesion from diseased chickens, not cloacal swabs on farms. Row 3 is the
+closest sibling in the table to row 12 (Japan, 684 diagnostic submissions from diseased pigs, section 5k):
+the high printed rates in this table are largely a property of sick-animal sampling, and frame 1's pool is
+now weighted further toward it. It is not the prevalence of colistin resistance in Tai'an poultry.
+
+**Placement.** Frame 1, member added; placed set 31 -> 32 rows, 34,376 -> 34,506 isolates (91.2% of the
+table); frame 1's pool 6.41% -> 6.70%. Neither end of the quoted range lives in frame 1, so the range is
+unchanged at 0.20%-31.69%.
+
+**Also repaired here, found while regenerating.** The sheet's frame table had not been updated when row 24
+was placed (it showed frame 1 without row 24's 35 / 3): 23,163 / 1,485 against the record's 23,198 / 1,488.
+Its open-row sentence also said eight rows had no frame when the record said seven, an off-by-one the
+pinning test had copied. Both are fixed, and a new test pins frame 1's N and n to the sum of its own
+members so a placement cannot leave the table behind again.

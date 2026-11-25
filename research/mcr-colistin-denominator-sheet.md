@@ -96,10 +96,28 @@ the old name described Canada's selection rule (genotype the resistant ones) and
 this row, whose eight were all susceptible. That is the kind of error a name makes when it is written
 from the first two studies that reach a frame; the arithmetic was right in both.
 
+**Extended a twelfth time 2026-11-25, 06:5xZ, by Dmitri — row 3 placed, and a stale table row repaired in
+the same pass.** Row 3 (China 130 / 75, the table's second-highest printed rate at 57.69%) is a frame-1
+member: the primary (Song et al., *Poultry Science* 99(2) 2020, PMC7587627) isolated 130 *E. coli* from the
+**livers of chickens with colibacillosis** in Tai'an, screened all of them for mcr-1 to -4, and found 75 both
+colistin resistant and mcr-1 positive (`mcr-colistin-harmonisation.md` §5q). Frame 1 gains a nineteenth row and
+another *disease-selected* substrate — this one a clinical lesion, not a farm. Its numerator is the paper's
+resistance-*and*-gene count, so if any isolate had been resistant but gene-negative the 57.69% would
+understate; the abstract reports none, and the doubt is written on the row. **Placed set 31 → 32 rows,
+34,376 → 34,506 isolates (90.9% → 91.2%); frame 1 pools 23,328 isolates at 6.70% (it was 6.41%), and the
+quoted range is unchanged at 0.20%–31.69% (161-fold)** because neither end of it lives in frame 1.
+The same pass found that this sheet's frame table had **not** been updated when row 24 (Nigeria 35 / 3) was
+placed: it still showed frame 1 as 23,163 / 1,485 = 6.41%, which is the frame *without* row 24. The record
+was never wrong — the JSON held 23,198 / 1,488 — only the prose table was, and no test compared the two. Both
+are corrected here, and a new test pins frame 1's N and n to the sum of its own members so a placement cannot
+leave the table behind again. A second, older miscount is repaired with it: this sheet said "8 of the 38 rows
+still have no frame" when the record said seven, and the test that pinned the sentence computed the same
+off-by-one from the row total. It now reads the count off the record.
+
 ## The sentence a reader can quote
 
-> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 30 rows of
-> this table — 34,376 of its 37,816 isolates, 90.9% — whose denominators have been read against their
+> **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 32 rows of
+> this table — 34,506 of its 37,816 isolates, 91.2% — whose denominators have been read against their
 > primary studies, the denominator counts **eight different quantities**, and the rates those rows
 > support run from **0.00% to 60.7%** row by row and from **0.20% to 31.7%** by frame. Cite the frame,
 > not the pool.
@@ -116,7 +134,7 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 
 | # | what the denominator counts | rows | N | n | rate | what it is *not* |
 |---|---|---|---:|---:|---:|---|
-| 1 | isolates screened for the gene | 7, 12, 15, 13, 6, 17 (a)\*, 17 (b)–17 (k), 19 | 23,163 | 1,485 | **6.41%** | not a population: seventeen of its eighteen rows are *diseased* animals — eleven are one lab's stored isolates from sick piglets, row 12 is diagnostic submissions from sick pigs and only 71% of its own collection — and its newest row weighs colonies, not samples (caveat 3) |
+| 1 | isolates screened for the gene | 7, 12, 15, 3, 13, 6, 24, 17 (a)\*, 17 (b)–17 (k), 19 | 23,328 | 1,563 | **6.70%** | not a population: most of its nineteen rows are *diseased* animals — eleven are one lab's stored isolates from sick piglets, row 12 is diagnostic submissions from sick pigs and only 71% of its own collection, row 3 is the livers of colibacillosis chickens — and one row weighs colonies, not samples (caveat 3) |
 | 2 | isolates screened for a phenotype, genotyped only in a subset | 28, 11, 27\*\*, 26\*\*\* | 6,107 | 12 | **0.196%** | not a gene prevalence: 6,095 were never assayed, so it is a lower bound — India's 253 are three species, not *E. coli* alone (caveat 4), Tunisia's denominator is the primary's 233, not the table's 676, and South Africa's PCR covered 8 of its 50 isolates, chosen for expected positivity |
 | 3 | hosts (animals and humans enrolled) | 21, 22 | 367 | 35 | **9.54%** | not isolates: Portugal's 227 are people and dogs, Argentina's 140 are pigs swabbed on six farms; the 17 isolates behind Portugal's 12 positives come off a colistin-containing medium |
 | 4 | samples or products | 18, 5 | 1,240 | 393 | **31.69%** | not isolates: 128 meat products; 360 isolates recovered from 1,112 farm/water/soil samples |
@@ -126,7 +144,7 @@ pasted into one country's row; it is kept in its frame and flagged, not quietly 
 | 8 | colistin-resistant isolates, genotyped for the gene | 23, 14 | 565 | 12 | **2.12%** | not a gene prevalence: the 490 are the isolates that *passed* the resistance screen, so 8/490 is the mcr share of the hospital's colistin resistance — the same study's own 8/19 = 42.1% among resistant *E. coli* and 8/7,852 = 0.102% of all Gram-negative bacilli are other quantities; the Peninsula's 75 are colistin-resistant *Enterobacteriaceae* from five countries, 4 of them mcr-1 *E. coli* |
 
 \* row 17 (a)'s cell prints 10.42%; its counts give 11.51%. Row 19's numerator is also wrong against
-its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 1,585 / 23,163 = **6.843%** — it does
+its primary (49 printed, 149 observed, §5b); corrected, frame 1 becomes 1,660 / 23,328 = **7.116%** — it does
 not move the range. (This footnote used to print 1,047 / 20,919 = 5.005%, which was never a
 regeneration of the whole frame; the generator's own figure is the one above.) Two of frame 1's rows are zero cells (17 (d) Switzerland 0/129, 17 (g) Austria
 0/73); they are the reason the row-level range now starts at 0.00%.
@@ -157,8 +175,8 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
    counts a retail product where every other frame counts an isolate or a host. This is a mixed-unit
    frame, not meat prevalence, and not product prevalence.
 2. **"Pooled as printed" names a method, and the other method gives a different number.** Pool the
-   counts (Σn / ΣN) and the 31 placed rows give **6.43%**. Pool each row's *printed* percentage weighted
-   by its N and the same 30 rows give **6.23%**. The 0.19-point gap is row 17 (a) — the one placed cell
+   counts (Σn / ΣN) and the 32 placed rows give **6.62%**. Pool each row's *printed* percentage weighted
+   by its N and the same 32 rows give **6.43%**. The 0.19-point gap is row 17 (a) — the one placed cell
    whose printed percentage is not its own counts (10.42 against 11.51) — so an unpinned pool is exactly
    where that cell would hide. Any sentence quoting the placed pool has to say which of the two it means.
 
@@ -169,7 +187,7 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
    yesterday.** Row 7's 1,200 are twenty *E. coli* colonies picked per pooled faecal sample — 20 farms
    sampled on three days, sixty samples in all — so one farm-day contributes twenty rows to the pool and
    a farm contributes sixty. The row is an isolate screen and belongs in frame 1 on what its N counts, but
-   the frame's 6.41% is now weighted toward the smallest sampling effort in the table. It is a frequency
+   the frame's 6.70% is now weighted toward the smallest sampling effort in the table. It is a frequency
    among screened colonies, not a share of farms, birds or samples, and it must not be read as the
    country's prevalence.
 
@@ -186,34 +204,32 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
 
 - **Frame rates: 0.196% – 31.7%**, a 161-fold spread, from eight frames built the same way (pool
   inside the frame, n over N).
-- **Row rates, for the same 30 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
+- **Row rates, for the same 32 rows: 0.00% – 60.7%** (rows 17 (d) and 17 (g) low, at zero positives in
   129 and 73 isolates; rows 17 (h) and 17 (i) high, both 17/28) — the far end is two 28-isolate cells in
   an eleven-row block that shares one methods section.
-- The 31 placed rows pooled from their counts (Σn / ΣN) give **6.43%**, not 7.0%; pooled from their
-  printed percentages, **6.23%** (the two methods, and the one cell that separates them, are caveat 2
+- The 32 placed rows pooled from their counts (Σn / ΣN) give **6.62%**, not 7.0%; pooled from their
+  printed percentages, **6.43%** (the two methods, and the one cell that separates them, are caveat 2
   above). Either way the pool was never a stable number, it was an artefact of which rows the review
   happened to include.
-- Arithmetic failures among the 30: **one**, row 17 (a), the already-documented cell.
+- Arithmetic failures among the 32: **one**, row 17 (a), the already-documented cell.
 
 ## What this does not say
 
 1. **Not that the eight rates are comparable.** They are not; that is the finding.
-2. **Not that the range is final.** 8 of the 38 rows still have no frame, and the record now lists
+2. **Not that the range is final.** 6 of the 38 rows still have no frame, and the record now lists
    them instead of leaving the set to be subtracted: `unplaced` in
-   [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json) gives all nine in read
-   order, each with its counts and with *why it is still open* — one source refusal, seven unread. In
+   [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json) gives all six in read
+   order, each with its counts and with *why it is still open* — one source refusal, five unread. In
    that order: China 1,611 (row 2, **cannot be read from here** — a one-page Lancet correspondence with
-   no abstract and no PMCID, publisher 403, retried on 2026-11-24 and refused again), Nigeria 35
-   (row 24), China 130 (row 3, printed **57.69%** — the table's highest cell, and
-   the read most likely to move a frame rate), China 668 (row 4), Bangladesh 104 (row 8), Vietnam 210
-   (row 9), Pakistan 120 (row 10), Germany 154 (row 16). Read order puts the two largest readable rows
+   no abstract and no PMCID, publisher 403, retried on 2026-11-24 and refused again), China 668 (row 4),
+   Bangladesh 104 (row 8), Vietnam 210 (row 9), Pakistan 120 (row 10), Germany 154 (row 16). Read order puts the two largest readable rows
    late on purpose: §7 fixed that order before these counts were in one place, and re-ordering it by
    size would be a new decision, not a correction. **Two corrections in this paragraph.** An earlier
    version named three other rows as the largest unplaced; and until 2026-11-24 it described the last
-   six as "rows under thirty isolates", which is true of none of them — the smallest of the six is 104
+   six as "rows under thirty isolates", which is true of none of them — the smallest of the five is 104
    isolates. Both errors came from writing the list in prose over separate wakes instead of reading it
    off a computed set, which is what the `unplaced` block now is. Until these rows are placed the
-   number is "90.9% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
+   number is "91.2% of the table's isolates", not "the table". And 443 of the 37,816 isolates in the
    table's own denominator are now known to belong to an invented one (row 27: 676 printed, 233 with a
    witness), so even a fully placed table would not have a readable pool.
 3. **Not a population prevalence anywhere.** Every frame is a surveillance design; the largest block
@@ -227,10 +243,10 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
 - Frame assignment, counts, rates and coverage:
   [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json), regenerated by
   `scripts/mcr_colistin_denominator_frames.py --write`.
-- The row-by-row reading: [`mcr-colistin-harmonisation.md`](mcr-colistin-harmonisation.md) §5c–§5l.
+- The row-by-row reading: [`mcr-colistin-harmonisation.md`](mcr-colistin-harmonisation.md) §5c–§5q.
 - The whole-table arithmetic: [`mcr-colistin-table-arithmetic-audit.md`](mcr-colistin-table-arithmetic-audit.md),
   whose sibling test `tests/test_mcr_table_arithmetic.py` pins that audit.
 - This sheet is pinned by `tests/test_mcr_colistin_denominator_sheet.py`, which recomputes rows 18 and
-  21 from their own counts, all thirty-one placed rows against their printed cells (and the one whose placed counts are the
+  21 from their own counts, all thirty-two placed rows against their printed cells (and the one whose placed counts are the
 primary's rather than the table's), and the two numbers
   in the quotable sentence from the record — so a drifted count fails rather than re-reads as prose.

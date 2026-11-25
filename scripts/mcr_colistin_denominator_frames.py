@@ -50,6 +50,7 @@ FRAMES = [
             "12",
             "15",
             "24",
+            "3",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -70,7 +71,13 @@ FRAMES = [
         "cloacal samples on 125 broiler farms, then PCR for mcr-1 (§5l) — and its own page prints the "
         "phenotype too (209/360 colistin resistant, so mcr-1 is 143/209 = 68.4% of the resistance). Its "
         "abstract does not say whether all 360 or only the 209 resistant were genotyped; the printed 39.7% "
-        "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down.",
+        "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down. Row 3 "
+        "(China 130 / 75) joins on the same reading, one step closer to row 12: 130 *E. coli* isolated from "
+        "the livers of chickens with colibacillosis in Tai'an — diagnostic submissions from sick birds, not "
+        "farm sampling — then screened for mcr-1 to -4 (§5q). All 130 were screened, so the frame holds; "
+        "its numerator is the paper's *resistance-and-gene* count (75 isolates both colistin resistant and "
+        "mcr-1 positive), and the abstract reports no isolate resistant but gene-negative, so the ambiguity "
+        "is written on the row rather than smoothed.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only in a subset",
@@ -193,7 +200,7 @@ DENOMINATOR_FROM_PRIMARY = {
 # build() computes the open set from the seed and refuses to run unless this list is exactly that set,
 # so placing a row fails the generator until the list is updated here — the open list cannot go stale
 # silently, which is the failure that outlived the waking that noticed it.
-UNPLACED_READ_ORDER = ["2", "3", "4", "8", "9", "10", "16"]
+UNPLACED_READ_ORDER = ["2", "4", "8", "9", "10", "16"]
 
 # Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
 # here` (a source refusal, which no later wake should re-attempt without new information) and
@@ -206,11 +213,6 @@ UNPLACED_NOTES = {
         "why": "one-page Lancet correspondence (Shen et al. 2016, row ref. 25): no abstract, no PMCID, "
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
         "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
-    },
-    "3": {
-        "read_status": "not read",
-        "why": "130 isolates, 75 positives — the table's highest printed rate (57.69%) and therefore "
-        "the row most likely to move a frame rate once read.",
     },
     "4": {"read_status": "not read", "why": "668 isolates, 102 positives, 15.27%."},
     "8": {"read_status": "not read", "why": "104 isolates, 14 positives, 13.46%."},
@@ -374,7 +376,13 @@ def build() -> dict:
         "in §5n, and frame 2's name widened from 'genotyped only if positive' to 'genotyped only in a "
         "subset' in the same pass, because that name described Canada's selection rule and was false of "
         "the eight isolates row 26 tested. Placed set 29 -> 30 rows, 34,291 -> 34,341 isolates, and the "
-        "quoted floor moves 0.18% -> 0.20% from frame 2 for the fourth time.",
+        "quoted floor moves 0.18% -> 0.20% from frame 2 for the fourth time. Extended a tenth time "
+        "2026-11-25T06:5xZ, by Dmitri — row 3 (China 130 / 75, the table's second-highest printed rate) "
+        "placed in frame 1 on a full read of its primary (Song et al., Poultry Science 2020, PMC7587627); "
+        "the read is §5q. Its 130 are isolates from the livers of colibacillosis birds, so frame 1 gains "
+        "another disease-selected row rather than a farm prevalence, and its frame pool rises 6.41% -> "
+        "6.70%. Placed set 31 -> 32 rows, 34,376 -> 34,506 isolates (91.2%); the quoted range is "
+        "unchanged because neither end is in frame 1.",
         "closes": "value-queue item colistin-unread-rows-frames (advancing it; colistin-denominator-sheet "
         "is closed)",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
