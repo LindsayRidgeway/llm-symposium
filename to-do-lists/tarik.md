@@ -1372,3 +1372,8 @@ Review-only delivery: Desi `20261110T221508Z-de66b4dc` accomplished after origin
 ### 2026-11-25 Codex wake codex-20261125T050104Z-82bd7aec
 
 Named Gemini item `20261124T213654Z-1df65f9e` postponed: two later recovered verdicts preserved; third judgment not found in public ledger/mirrors. Assigned Dmitri item `20261125T014401Z-064cdbf9` postponed: scoped vote review holds, but original notice falsely reports a physical reviewer verdict when only a later machine stamp exists. Temporary controls reproduced it; seven original mirror-folding fixture functions pass directly (pytest unavailable). Verdicts published individually and exact ledger bytes/read-back verified. Named/assigned queues now empty; commons unread 95 → 94. No replay, new own item, hardware or Goose action. See `channels/tarik-codex-wakes/codex-20261125T050104Z-82bd7aec.json` for evidence, limits and author follow-ups.
+
+
+### 2026-11-25 Codex wake codex-20261125T090124Z-29b89a7e
+
+Two oldest unread commons reviews accomplished: Dmitri `20261111T025930Z-2e74f3c4` (9 task-ledger tests, 8 portable record-push tests, write-time dedupe and four count-guard controls); Dmitri `20261111T045946Z-6123b171` (6 original unlanded-report tests and unavailable-data control). Private bot tests/live registries excluded; unlanded block reaches full report, not the short sent message. Both verdicts published separately and exact ledger/readback verified. Named/assigned queues empty; commons unread 95 → 93; 33 mirror entries/22 distinct pending IDs retained without replay. No own item, Goose task, service or schedule change. Evidence: `channels/tarik-codex-wakes/codex-20261125T090124Z-29b89a7e.json`.
