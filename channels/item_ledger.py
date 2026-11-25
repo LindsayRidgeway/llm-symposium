@@ -1877,6 +1877,45 @@ def verdicts_behind_a_machine_stamp(path: Path = LEDGER, vdir: Path = VERDICT_DI
     return out
 
 
+def mirror_notice(pending: list[str], in_queue: list[str] = ()) -> list[str]:
+    """The one sentence about mirrored verdicts, in one place, for both queues.
+
+    Added 2026-11-25 (Dmitri). The 11-24 wake taught `--queue` to stop calling a delivered verdict
+    "not in the ledger yet" and left the reading queue printing the old sentence with a no-op
+    remedy — so the fix reached the branch that was empty that night and missed the branch that
+    printed under every wake. A notice written twice drifts once per author. This returns the lines;
+    each branch prints them, so the split cannot be true in one queue and false in the other.
+
+    The split itself: `verdicts_behind_a_machine_stamp()` says which of the ids `items.jsonl`
+    physically carries (the landing machine writes a newer row on the same id after the verdict
+    lands, which is what made the check call them missing). Those need no action. Only the rest are
+    work, and only for them is the replay command printed.
+    """
+    uniq = list(dict.fromkeys(pending))
+    if not uniq:
+        return []
+    shown = ", ".join(uniq[:3]) + ("…" if len(uniq) > 3 else "")
+    stamped = set(verdicts_behind_a_machine_stamp(LEDGER, VERDICT_DIR))
+    present = [i for i in uniq if i in stamped]
+    absent = [i for i in uniq if i not in stamped]
+    out = [f"item_ledger: {len(uniq)} verdict(s) sit on disk as a mirror but are reported as not "
+           f"in the ledger yet ({shown})"]
+    if in_queue:
+        judged = [i for i in uniq if i in set(in_queue)]
+        if judged:
+            out.append(f"  of this queue: {', '.join(judged)} — already judged, so do not judge "
+                       f"them again; folding the mirror in is the work")
+    if present:
+        out.append(f"  {len(present)} of {len(uniq)} are in channels/items.jsonl already: the "
+                   f"newest row on those ids is a landing-machine stamp written after the verdict, "
+                   f"so this check reports the verdict as missing when it is not. Nothing is lost "
+                   f"and replay applies nothing to them — they are a reconciliation, not work")
+    if absent:
+        out.append(f"  fold them in: python3 scripts/ledger_verdict_mirror.py replay "
+                   f"({len(absent)} of {len(uniq)} are not in the file)")
+    return out
+
+
 def reading_queue(path: Path = LEDGER, who: str = "") -> list[dict]:
     """The never-read items that carry this amigo's name — the second queue."""
     items = load_judged(path)
@@ -2348,12 +2387,11 @@ def _cli() -> int:
                   f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
         if len(mine) > args.hours:
             print(f"  … and {len(mine) - args.hours} more")
-        pending = unreplayed_verdicts()
-        if pending:
-            shown = ", ".join(pending[:3]) + ("…" if len(pending) > 3 else "")
-            print(f"item_ledger: {len(pending)} mirrored verdict(s) are on disk but not yet in the "
-                  f"ledger ({shown}) — items above may already be judged. Fold them in first: "
-                  f"python3 scripts/ledger_verdict_mirror.py replay")
+        # 2026-11-25 (Dmitri): this branch printed the notice the 11-24 fix corrected only in
+        # `--queue` — the same no-op remedy ("Fold them in first: replay", measured `applied: 0`).
+        # Both branches now print `mirror_notice()`, so the two cannot disagree again.
+        for line in mirror_notice(unreplayed_verdicts(), [r["id"] for r in mine]):
+            print(line)
         # 2026-10-29 (Desi): the quota was written on 10-25 into scripts/wake_review_queue.py, which
         # prints a block only when a person runs it by hand — and nothing runs it. So no wake was
         # ever told a number, and the daily check called that "the quota being ignored". Reads fell
@@ -2463,25 +2501,9 @@ def _cli() -> int:
         pending = unreplayed_verdicts(LEDGER, VERDICT_DIR)
         if pending:
             judged = [r["id"] for r in rows if r["id"] in set(pending)]
-            uniq = list(dict.fromkeys(pending))
-            shown = ", ".join(uniq[:3]) + ("…" if len(uniq) > 3 else "")
-            print(f"\nitem_ledger: {len(uniq)} verdict(s) sit on disk as a mirror but are reported as not in "
-                  f"the ledger yet ({shown})")
-            if judged:
-                print(f"  of this queue: {', '.join(judged)} — already judged, so do not judge "
-                      f"them again; folding the mirror in is the work")
-            stamped = set(verdicts_behind_a_machine_stamp(LEDGER, VERDICT_DIR))
-            present = [i for i in uniq if i in stamped]
-            absent = [i for i in uniq if i not in stamped]
-            if present:
-                print(f"  {len(present)} of {len(uniq)} are in channels/items.jsonl already: the "
-                      f"newest row on those ids is a landing-machine stamp written after the "
-                      f"verdict, so this check reports the verdict as missing when it is not. "
-                      f"Nothing is lost and replay applies nothing to them — they are a "
-                      f"reconciliation, not work")
-            if absent:
-                print(f"  fold them in: python3 scripts/ledger_verdict_mirror.py replay "
-                      f"({len(absent)} of {len(uniq)} are not in the file)")
+            print()
+            for line in mirror_notice(pending, judged):
+                print(line)
         print("\nEvery exit leaves W into an existing queue, and no exit goes nowhere:")
         print("  accomplished — ONLY by doing the work yourself, in this wake; say what you did")
         print("  postponed / rejected — with a substantive reason; that reason IS the record")
