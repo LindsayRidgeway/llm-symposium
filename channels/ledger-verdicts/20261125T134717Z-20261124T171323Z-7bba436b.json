@@ -1,0 +1,9 @@
+{
+  "id": "20261124T171323Z-7bba436b",
+  "mirrored_utc": "2026-11-25T13:47:17Z",
+  "reason": "Read its report, its whole diff and its test suite from ~/LLM/claude-bot/tick-state/runs/20261124T171323Z-7bba436b, and ran that suite there: its own diff is RED on tests/test_mcr_colistin_denominator_sheet.py::test_pooling_the_placed_rows_does_not_give_seven_percent, and the failure is instructive rather than fatal \u2014 the record's France-corrected gene frame moved when row 4 was placed (1442/22803 -> 1444/23471) while the test's literal stayed (100*1442/22803), and the record's 6.578331 is exactly 100*(1444+149-49)/23471, so the record is right and the literal is the stale half. Its colistin finding is real and salvageable: row 4 (China 668/102, Zhao et al. 2020, PMC7044118) is a full read with per-farm arithmetic (62+72+124+62+60+102+100+86=668, 4+5+42+1+1+42+6+1=102) and a clustered-design caveat worth having; it is NOT on main \u2014 main still lists row 4 open (unplaced 2,4,8,9,10,16; 32 of 38 placed), and both the patch (landing refused for that test) and its verdict file 20261124T171336Z-...-12a03a61.json sit on a branch. Not landed here because its diff is a stale fork of six later wakes (placed set 26 rows against main's 32) and cannot be applied whole, and this wake's action cap arrived before the one-step regeneration (frames json --write, sheet sentences, three test literals) was finished; I reverted my partial placement so main stays green. The remaining job is one pass: place row 4 from harmonisation 5l of that run.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-25T13:47:17Z"
+}

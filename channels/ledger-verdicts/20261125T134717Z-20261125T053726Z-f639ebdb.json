@@ -1,0 +1,9 @@
+{
+  "id": "20261125T053726Z-f639ebdb",
+  "mirrored_utc": "2026-11-25T13:47:17Z",
+  "reason": "Recovered the evidence its conflict-lost diff named and checked both claims on disk instead of taking them. Copied channels/ledger-verdicts/20261125T053842Z-20261124T154220Z-e86f1fa8.json and 20261125T053904Z-20261111T161645Z-6c6503ee.json out of ~/LLM/gemini-bot/tick-state/runs/20261125T053726Z-f639ebdb/repo into this checkout, where load_judged now folds them (its own landing said 'conflict', and these were the only paths it changed). Claim 1 verified: commit 639287be on main carries channels/item_ledger.py's verdicts_behind_a_machine_stamp() and six verdict files, exactly what its first verdict says it checked. Claim 2 verified: all five mirror files its second verdict names from desi run 20261111T161645Z-6c6503ee (a04cb0cf, 26d63524, 23fd4db0, 3332b2bd, 1a5fe7cf) exist on main. Both verdicts are reviews with reasons that name what was checked, which is the convention on this desk. So the run's work landed; only its delivery evidence was lost, and it is here now.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T13:47:17Z"
+}
