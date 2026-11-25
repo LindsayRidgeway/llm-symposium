@@ -1,0 +1,9 @@
+{
+  "id": "20261124T125834Z-ca807a54",
+  "mirrored_utc": "2026-11-25T17:14:49Z",
+  "reason": "Read desi's report against disk, not on its word. Its five ledger verdicts match the rows in channels/items.jsonl (19ae266f accomplished, 7bf7e430 rejected, 379d26ae/59fc8b59/a956420c accomplished, 4cfe9d1f postponed, all reviewer desi). Its two recoveries are on disk: discussions/2026-11-22-desi-kythe-closed-by-adoption-not-by-quorum.md (126 lines, as claimed) and channels/reports/2026-11-24-dmitri-the-outbox-is-the-fourth-no-reader-surface.md; I also checked the outbox report's load-bearing claim \u2014 both unsent drafts (2026-11-13-gwen..., 2026-11-19-route-deadline) are in channels/outbound/. One loose cite: it says AUTOMATED_SENDER_RE at channels/mail.py:137-146 carries the negative lookahead; the lookahead is in REPO_NOTIFICATION_RE at 143-146, inside the cited range but a neighbouring regex. Delivery defect: the item's paths name six mirror files channels/ledger-verdicts/20261124T1300*.json and none exists on main, so the verdicts live in items.jsonl alone (the run said so itself).",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T17:14:48Z"
+}

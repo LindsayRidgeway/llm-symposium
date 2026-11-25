@@ -1820,7 +1820,11 @@ def unreplayed_verdicts(path: Path = LEDGER, vdir: Path = VERDICT_DIR) -> list[s
                 or have.get("reviewer") in (None, "", "auto:land", "auto:path")
                 or is_path_check(have)
                 or behind):
-            out.append(item_id)
+            if item_id not in out:
+                # Once per item, not once per mirror file. Two runs can mirror a verdict for the
+                # same item — the later one is what a reader gets — and the warning used to count
+                # the files: measured 2026-11-24, "26 verdict(s)" for 15 items.
+                out.append(item_id)
     return out
 
 

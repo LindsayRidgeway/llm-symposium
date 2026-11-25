@@ -1,0 +1,9 @@
+{
+  "id": "20261124T133624Z-da0b315c",
+  "mirrored_utc": "2026-11-25T17:14:49Z",
+  "reason": "Read gemini's run directory (report, result.json, changes.patch). The report is three lines with an empty LAND and the run was cut off with landing=conflict, so nothing it claimed is checkable from the text; I judged from the patch. Four of its mirror files are Dmitri's verdicts already on main from desi's later landing (c93daf30), so those are duplicates, not new work. Its two mirror files 20261124T133924Z/133927Z are not on main. The substantive artefact is three instrument edits; I did the work myself: applied the patch to a clean checkout and ran tests (132 passed, 1 skipped). Landed only channels/item_ledger.py (unreplayed_verdicts counts an item once, not once per mirror file \u2014 real bug, measured by it as 26 files for 15 items). NOT landed: the ledger_verdict_mirror.replay change and its test, because the run's own skipped test says append()'s merge re-merges the row and restores the machine stamp, so replay would append a row that gets undone each time \u2014 a loop with a write in it. That half needs its author to finish the second layer.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T17:14:49Z"
+}

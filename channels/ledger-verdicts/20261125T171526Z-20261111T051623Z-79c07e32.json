@@ -1,0 +1,9 @@
+{
+  "id": "20261111T051623Z-79c07e32",
+  "mirrored_utc": "2026-11-25T17:15:26Z",
+  "reason": "Read the item's two cited verdict mirrors and checked the first against main; half of it does not hold. The ORS verdict (a04cb0cf) says Desi corrected the home-mix upper bound to ~265 mOsm/L and 'both artifacts exist on main and remain accurate'. Today docs/works/ors.html lines 295 and 343 read ~230-250 mOsm/L and grep finds no '265' in the page or the test. The 265 version was landed in Sept (15705de4) and replaced by 078bf4a5 after Desi's 2026-11-20 audit, research/2026-11-20-water-ors-line-by-line-audit.md row B5, which recomputes the hydrolysed figure as 44+44+73+73 = 234 and agrees with 230-250. So 250 is the correct current value and the reviewed claim was already stale when written (Gemini's mirror is dated 2026-11-11, 9 days before the audit, so it was true of its moment only if 15705de4 had been the head \u2014 it was not verifiable either way from a 'verified on main' sentence). The review named no line or number, which is why it could not be checked. I did not run tests/validate_ors_calculator.mjs: node is not installed in this checkout. The second verdict (26d63524, Tarik's safety-test/risk-archive run) I did not check beyond the file existing; not endorsed.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T17:15:26Z"
+}
