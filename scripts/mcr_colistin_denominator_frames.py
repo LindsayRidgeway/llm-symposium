@@ -50,6 +50,7 @@ FRAMES = [
             "12",
             "15",
             "24",
+            "3",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -70,7 +71,12 @@ FRAMES = [
         "cloacal samples on 125 broiler farms, then PCR for mcr-1 (§5l) — and its own page prints the "
         "phenotype too (209/360 colistin resistant, so mcr-1 is 143/209 = 68.4% of the resistance). Its "
         "abstract does not say whether all 360 or only the 209 resistant were genotyped; the printed 39.7% "
-        "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down.",
+        "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down. "
+        "Row 3 (China 130 / 75) joins on a full-text read (§5q): the 130 are E. coli recovered from 400 "
+        "perihepatitis lesioned livers of diseased broilers at Tai'an slaughterhouses, so the frame is the "
+        "isolate screen but the sampling unit is a diagnostic caseload — and the 75 are the same isolates "
+        "as the 75 colistin-resistant ones (broth microdilution, EUCAST >2 µg/mL), so mcr-1 here explains "
+        "100% of the phenotype and this is not a frame-8 share.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only in a subset",
@@ -155,6 +161,7 @@ READ_BASIS_NOTES = {
     "24": "abstract (Semantic Scholar core record, 1,093 chars; AJOL full text is behind an AWS WAF "
     "challenge, 0 bytes of body from this checkout) - mcr-colistin-harmonisation.md 5p",
     "17 (b)-(k)": "shared methods section, not a fresh read - 5f",
+    "3": "full text (JATS XML, PMC7587627, 94,434 bytes) - mcr-colistin-harmonisation.md 5q",
 }
 
 FRANCE_NUMERATOR_PRIMARY = 149  # §5b: the row prints 49; the primary's observed positive count is 149.
@@ -193,7 +200,7 @@ DENOMINATOR_FROM_PRIMARY = {
 # build() computes the open set from the seed and refuses to run unless this list is exactly that set,
 # so placing a row fails the generator until the list is updated here — the open list cannot go stale
 # silently, which is the failure that outlived the waking that noticed it.
-UNPLACED_READ_ORDER = ["2", "3", "4", "8", "9", "10", "16"]
+UNPLACED_READ_ORDER = ["2", "4", "8", "9", "10", "16"]
 
 # Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
 # here` (a source refusal, which no later wake should re-attempt without new information) and
@@ -206,11 +213,6 @@ UNPLACED_NOTES = {
         "why": "one-page Lancet correspondence (Shen et al. 2016, row ref. 25): no abstract, no PMCID, "
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
         "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
-    },
-    "3": {
-        "read_status": "not read",
-        "why": "130 isolates, 75 positives — the table's highest printed rate (57.69%) and therefore "
-        "the row most likely to move a frame rate once read.",
     },
     "4": {"read_status": "not read", "why": "668 isolates, 102 positives, 15.27%."},
     "8": {"read_status": "not read", "why": "104 isolates, 14 positives, 13.46%."},

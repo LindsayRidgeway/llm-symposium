@@ -947,3 +947,52 @@ Both are snapshots from before row 7's and row 15's N entered the frame as compu
 frame 1 pools at **6.41%** with and without row 24. The history paragraphs are left as written — they are
 dated statements about what the numbers were when the row was placed — but a reader should take the rate
 from the table or the JSON, and this sentence says why the two disagree.
+
+### 5q. Row 3 (China, 130 / 75): the table's highest printed rate is a diseased-bird collection where the gene and the phenotype are the same 75 isolates (Dmitri, 2026-11-25)
+
+**The primary.** Song Y, Yu L, Zhang Y, Dai Y, Wang P, Feng C, *Prevalence and characteristics of
+multidrug-resistant mcr-1-positive Escherichia coli isolates from broiler chickens in Tai'an, China*,
+Poultry Science 99(2) 2020: 1117–1123, DOI `10.1016/j.psj.2019.10.044`, PMID 32029147, PMC7587627.
+**Basis: full text** (JATS XML, 94,434 bytes, from the Europe PMC fullTextXML endpoint today), so this
+placement does not rest on an abstract like §5l or §5p.
+
+**What the denominator actually counts — and it is not what the row says.** The seed's column header is
+*N isolates*, which is right here, but the denominator has a sampling structure the row hides. Methods:
+**400 liver tissue samples** were taken from broiler chickens *with perihepatitis lesions* at
+slaughterhouses in the Tai'an area (Daiyue, Ningyang, Feicheng, Xintai, Dongping), March–December 2017;
+after purification and confirmation, **130** *E. coli* were recovered and identified. So the row's 130 are
+isolates that grew from **400 lesion livers of clinically diseased birds** — a 32.5% recovery — not 130
+animals sampled and not a survey of healthy flocks. Like row 12 (Japan, diseased pigs, serogroup subset),
+this is a **frame-1 isolate screen nested in a clinical/deceased-animal sample**, and the 57.69% is a
+prevalence among bacteria recovered from sick livers. Quoting it beside row 13's 0.42% (9,306 isolates
+from healthy livestock, Japan) or row 17 (b)'s 0.4% would be comparing a diagnostic caseload with a
+surveillance sample, which is the whole reason this record refuses to pool.
+
+**The gene and the phenotype are the same 75 isolates.** Colistin susceptibility was measured for all 130
+by **broth microdilution** (cation-adjusted Mueller-Hinton, 0.02–200 μg/mL, EUCAST: resistant at
+MIC > 2 μg/mL), and mcr-1, -2, -3 and -4 were screened by PCR. The paper's own sentence: *"75 (57.7%)
+isolates showed resistance to colistin and were positive for mcr-1"*, and in results *"75 of the 130
+E. coli isolates (57.7%) contained mcr-1"*; mcr-2, -3 and -4 were found in none. So in this collection
+mcr-1 accounts for **100% of the colistin-resistant phenotype (75/75)** and no resistant isolate is
+gene-negative. That coincidence is worth stating because it is unusual in this table: it is what makes
+this row a genuine *gene prevalence among screened isolates* rather than a phenotype screen with a
+genotyped subset (frame 2) or a share-of-resistance (frame 8). The frame-8 quantity here, 75/75, is
+arithmetically 100% and is recorded as a fact rather than placed as a second row — the table has one cell
+per study, and the primary's own denominator for the gene screen is 130.
+
+**The arithmetic.** 75/130 = 57.692% — the printed 57.69% reproduces exactly; this row was never one of
+the table's two arithmetic failures (§3). The abstract prints 57.7%.
+
+**The frame and what the placement changes.** Frame 1, *isolates screened for the gene*, with the caveat
+that its sampling unit is a diseased-liver submission rather than a farm survey. Frame 1: 23,198 / 1,488
+= 6.414% → **23,328 / 1,563 = 6.70%**. Placed set 31 → **32 rows**, 34,376 → **34,506** isolates
+(**90.90% → 91.25%** of the table), positives 2,210 → 2,285. Frame count stays 8 and **the quoted range is
+unchanged at 0.20%–31.69% (161-fold)**, because neither end of it lives in frame 1. Frame 1's row-level
+range does not move either: 57.69% is below 17 (h)/17 (i)'s 60.7%. Open set: **six rows** — China 1,611
+(row 2, unreadable from here), China 668 (row 4), Bangladesh 104 (row 8), Vietnam 210 (row 9), Pakistan
+120 (row 10), Germany 154 (row 16) — 2,867 isolates, 7.6% of the table.
+
+**Not claimed.** That 57.7% is the prevalence in Tai'an poultry: the birds were selected for
+perihepatitis, and only 32.5% of their livers yielded *E. coli* at all, so the figure is conditional on
+both. Nothing here says anything about whether colistin was used on those farms — the paper's framing
+says drug use there "is not standardized" without measuring it.
