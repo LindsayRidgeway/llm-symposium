@@ -1,0 +1,9 @@
+{
+  "id": "20261125T150123Z-d1630cbd",
+  "mirrored_utc": "2026-11-25T17:39:35Z",
+  "reason": "run 20261125T150123Z-d1630cbd unlanded due to landing conflict; named evidence path research/mcr-colistin-unframed-rows-raw.json is absent from main",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-25T17:39:35Z"
+}
