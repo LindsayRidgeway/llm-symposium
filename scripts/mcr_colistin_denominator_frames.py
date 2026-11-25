@@ -50,6 +50,9 @@ FRAMES = [
             "12",
             "15",
             "24",
+            "8",
+            "3",
+            "16",
         ],
         "why": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene "
         "prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary "
@@ -70,7 +73,21 @@ FRAMES = [
         "cloacal samples on 125 broiler farms, then PCR for mcr-1 (§5l) — and its own page prints the "
         "phenotype too (209/360 colistin resistant, so mcr-1 is 143/209 = 68.4% of the resistance). Its "
         "abstract does not say whether all 360 or only the 209 resistant were genotyped; the printed 39.7% "
-        "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down.",
+        "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down. "
+        "Three rows joined on 2026-11-25 (§5q). Row 8 (Bangladesh 104 / 14) is an isolate screen with a "
+        "denominator narrower than the table implies: the 104 are the extended-spectrum "
+        "β-lactamase-PRODUCING E. coli of a poultry survey — a resistance-phenotype subset of an "
+        "unreported total, from live bird markets, rural farms and backyard flocks — and all 104 were "
+        "PCR-screened, so 13.46% is a gene prevalence among ESBL producers, not among poultry isolates; "
+        "the same page gives 98/104 with colistin MIC ≥4 µg/mL, so mcr-1 is 14/98 = 14.3% of its "
+        "resistance. Row 3 (China 130 / 75) is an isolate screen of diagnostic material: 130 E. coli "
+        "recovered from 400 perihepatitis livers of slaughterhouse broilers, every isolate put through "
+        "broth microdilution and PCR for mcr-1 to mcr-4; its page gives 79 (60.8%) colistin-resistant, so "
+        "mcr-1 accounts for 75/79 = 94.9% of its resistance. Row 16 (Germany 154 / 62) is the frame's "
+        "first purposively selected herd — 154 intestinal-pathogenic E. coli from 137 pigs on three farms "
+        "chosen BECAUSE mcr had recurred there for at least four consecutive years — so its 40.26% is an "
+        "upper bound inside a selected set, not a farm prevalence; if a third such gene-driven herd row "
+        "arrives it becomes a ninth frame rather than another caveat here.",
     },
     {
         "frame": "isolates screened for a phenotype, genotyped only in a subset",
@@ -154,6 +171,10 @@ READ_BASIS_NOTES = {
     "15": "abstract (Europe PMC, 1,759 chars; Elsevier, no open full text) - 5l",
     "24": "abstract (Semantic Scholar core record, 1,093 chars; AJOL full text is behind an AWS WAF "
     "challenge, 0 bytes of body from this checkout) - mcr-colistin-harmonisation.md 5p",
+    "8": "abstract (Europe PMC MED record 32344122, 1,895 chars; Elsevier subscription, no PMCID) - "
+    "mcr-colistin-harmonisation.md 5q",
+    "3": "full text (JATS XML, PMC7587627) - mcr-colistin-harmonisation.md 5q",
+    "16": "full text (JATS XML, PMC11052496) - mcr-colistin-harmonisation.md 5q",
     "17 (b)-(k)": "shared methods section, not a fresh read - 5f",
 }
 
@@ -193,7 +214,7 @@ DENOMINATOR_FROM_PRIMARY = {
 # build() computes the open set from the seed and refuses to run unless this list is exactly that set,
 # so placing a row fails the generator until the list is updated here — the open list cannot go stale
 # silently, which is the failure that outlived the waking that noticed it.
-UNPLACED_READ_ORDER = ["2", "3", "4", "8", "9", "10", "16"]
+UNPLACED_READ_ORDER = ["2", "4", "9", "10"]
 
 # Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
 # here` (a source refusal, which no later wake should re-attempt without new information) and
@@ -207,16 +228,15 @@ UNPLACED_NOTES = {
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
         "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
     },
-    "3": {
-        "read_status": "not read",
-        "why": "130 isolates, 75 positives — the table's highest printed rate (57.69%) and therefore "
-        "the row most likely to move a frame rate once read.",
-    },
-    "4": {"read_status": "not read", "why": "668 isolates, 102 positives, 15.27%."},
-    "8": {"read_status": "not read", "why": "104 isolates, 14 positives, 13.46%."},
-    "9": {"read_status": "not read", "why": "210 isolates, 74 positives, 35.24%."},
-    "10": {"read_status": "not read", "why": "120 isolates, 6 positives, 5.0%."},
-    "16": {"read_status": "not read", "why": "154 isolates, 62 positives, 40.26%."},
+    "4": {"read_status": "not read", "why": "668 isolates, 102 positives, 15.27%; Europe PMC returned "
+    "HTTP 500 for its full text on 2026-11-25, so it needs the PMC page or the PDF."},
+    "9": {"read_status": "read, cannot be placed yet", "why": "read in full on 2026-11-25 (JATS XML, "
+    "PMC10117427) and the row's 210/74 does not come from the paper's text: the primary reports 102 "
+    "colistin-resistant pig isolates and 34 human ones, with mcr-1 in 97/102 and 31/34. Whether 210 "
+    "is an isolate total from one of its tables is unresolved — §5q states what is known; do not "
+    "re-read, read the section."},
+    "10": {"read_status": "not read", "why": "120 isolates, 6 positives, 5.0%; Europe PMC returned "
+    "HTTP 500 for its full text on 2026-11-25."},
 }
 
 

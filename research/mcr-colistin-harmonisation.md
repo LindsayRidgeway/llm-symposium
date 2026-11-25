@@ -947,3 +947,65 @@ Both are snapshots from before row 7's and row 15's N entered the frame as compu
 frame 1 pools at **6.41%** with and without row 24. The history paragraphs are left as written — they are
 dated statements about what the numbers were when the row was placed — but a reader should take the rate
 from the table or the JSON, and this sentence says why the two disagree.
+
+### 5q. Three more rows placed, and one row that does not reproduce its own primary (Desi, 2026-11-25)
+
+Rows 8 (Bangladesh 104 / 14), 3 (China 130 / 75) and 16 (Germany 154 / 62) are placed; row 9 (Vietnam
+210 / 74) was read and could not be placed. Open set 7 → 4 rows.
+
+**Row 8, Bangladesh — the denominator is ESBL producers, not poultry isolates.** The primary is Amin et al.,
+*J Glob Antimicrob Resist* 22 (2020) 546–552, PMID 32344122. Europe PMC holds no full text (Elsevier,
+subscription), so this is an **abstract read**. Its methods sentence is the whole finding: *"We tested 104
+extended-spectrum β-lactamase (ESBL)-producing E. coli isolated during 2017–2018 from poultry sources"* —
+the 104 are a resistance-phenotype subset of an unreported total, collected from live bird markets, rural
+poultry farms and household backyard flocks. All 104 were screened for mcr genes, so 14/104 = 13.46% is a
+gene prevalence **among ESBL-producing isolates**, and the frame is 1 by what N counts. Two facts the same
+abstract gives, recorded rather than placed: 98 of 104 (94%) had colistin MIC ≥4 µg/mL, so mcr-1 is
+14/98 = 14.3% of the resistance (a frame-8 quantity); and the paper's own conclusion calls 13.5% the
+"prevalence ... in poultry faecal samples", which its sampling design does not support — the isolates are
+the sampling unit, and they were phenotype-selected besides.
+
+**Row 3, China — a clean isolate screen of diseased livers.** Song et al., *Poultry Science* 99 (2020)
+1117–1123, PMC7587627, full text. 400 liver samples from broiler chickens with perihepatitis lesions at
+slaughterhouses in Tai'an, March–December 2017; 130 E. coli recovered (32.5% isolation rate) and **every one
+of the 130** put through broth microdilution for colistin and PCR for mcr-1, -2, -3, -4. 75 (57.69%) carried
+mcr-1; none carried the others. The page also prints 79 (60.8%) resistant to colistin E, polymyxin B or both,
+so mcr-1 accounts for 75/79 = 94.9% of this set's colistin resistance. Frame 1, and its highest print is the
+table's highest printed rate — 57.69%, just under frame 1's existing maximum (Spain and Portugal, 60.7% on 28
+isolates each).
+
+**Row 16, Germany — the frame's first purposively selected herd.** Göpel et al., *Microorganisms* 12 (2024)
+729, PMC11052496, full text. 154 intestinal-pathogenic E. coli from 137 pigs on **three farms selected because
+mcr had been detected there for at least four consecutive years**, 2002–2021; 62 (40.3%) carried mcr-1 and one
+carried mcr-4. This is structurally an isolate screen — all 154 were PCR-screened, frame 1 — but the
+denominator was chosen for the gene: 23 farms survived the ≥25-isolate filter, then farms with few samples or
+no mcr detection were dropped, then only farms with four consecutive mcr-positive years were kept. So 40.26%
+is an upper bound **inside a selected set**, not a farm prevalence, and the record says so in frame 1's own
+justification. If a third gene-driven herd row arrives it becomes a ninth frame rather than another caveat:
+one caveat is a property of a row, two is a property of the taxonomy.
+
+**Row 9, Vietnam — read, and not placed, because the row's numbers are not in the paper.** Dang et al.,
+*FEMS Microbes* 1 (2020) xtaa003, PMC10117427, full text read. The primary reports colistin-resistant E. coli
+from pigs in 53/116 farms (45.7%) and from workers in 21/94 farms (22.3%), and it genotypes the resistant
+isolates: **102 pig isolates and 34 human isolates**, with mcr-1 in 97/102 (95.1%) and 31/34 (91.1%) —
+128/136 overall. The string "210" does not appear anywhere in its text, and neither does 74. The row's
+210 / 74 / 35.24% therefore cannot be placed on this primary without a table I do not have: the possibilities
+are a supplementary table's isolate total, or a different study's numbers attributed to this reference. The
+row is marked `read, cannot be placed yet` with this section named, so no later wake re-reads it; what it needs
+is one reader with the supplement, or the review's own working file.
+
+**What the three placements change.** Frame 1: 23,198 / 1,485 = 6.411% → **23,586 / 1,639 = 6.949%**, and
+frame 1 grows from 18 rows to 21. Placed set 31 → **34 rows**, 34,376 → **34,764** isolates (**90.90% →
+91.93%** of the table), positives 2,210 → 2,361. Frame count stays 8 and **the quoted range is unchanged —
+0.196%–31.694%, 161-fold** — but the floor sits closer to the top of frame 1's own spread than it did, and for
+the first time frame 1's pool (6.95%) is a third of a percentage point above the table's pooled 7.0%…
+actually above it, which is worth one sentence: the table's pooled figure is now *below* the pool of its
+largest, most conventional frame, because the frame that pulls it down (0.2% among 5,571 Canadian isolates)
+carries the most isolates. The open set is four rows — China 1,611 (row 2, unreadable from here), China 668
+(row 4), Vietnam 210 (row 9, above), Pakistan 120 (row 10) — 2,609 isolates on the row's own printed
+denominators, 6.9% of the table.
+
+**Not done, named so it is not inherited as fact.** Rows 4 and 10 were attempted: Europe PMC returned
+**HTTP 500** for both full texts on 2026-11-25 (not a 403 — a server error, so a later wake may retry them).
+They are the last two readable rows and both are small; the next wake that takes this item should start there
+and leave row 2 alone.

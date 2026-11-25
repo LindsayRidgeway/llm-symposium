@@ -246,14 +246,14 @@ class DenominatorSheet(unittest.TestCase):
 
     def test_coverage_is_the_seeds_own_counts(self):
         placed = self.record["placed"]
-        self.assertEqual(placed["rows"], 31)
-        self.assertEqual(placed["N"], 34376)
+        self.assertEqual(placed["rows"], 34)
+        self.assertEqual(placed["N"], 34764)
         # placed N is the placed counts, which for the one replaced row are the primary's, not the seed's
         self.assertEqual(placed["N"], sum(m["N"] for m in self.members.values()))
-        self.assertEqual(sum(self.rows[r]["n_isolates"] for r in self.members), 34819)
-        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34376 / 37816, places=3)
+        self.assertEqual(sum(self.rows[r]["n_isolates"] for r in self.members), 35207)
+        self.assertAlmostEqual(placed["share_of_table_N_pct"], 100 * 34764 / 37816, places=3)
         self.assertEqual(self.record["table"]["N"], self.seed["derived"]["sum_isolates"])
-        self.assertIn("34,376", self.sheet)
+        self.assertIn("34,764", self.sheet)
         self.assertIn("90.9%", self.sheet)
 
     def test_the_range_quoted_is_the_frame_range(self):
@@ -270,7 +270,7 @@ class DenominatorSheet(unittest.TestCase):
         self.assertIn("eight different quantities", self.sheet)
 
     def test_pooling_the_placed_rows_does_not_give_seven_percent(self):
-        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 2210 / 34376, places=4)
+        self.assertAlmostEqual(self.record["placed"]["pooled_pct"], 100 * 2361 / 34764, places=4)
         self.assertLess(self.record["placed"]["pooled_pct"], 6.5)
         # And the France correction is recorded rather than silently folded in.
         self.assertAlmostEqual(self.record["gene_frame_with_france_corrected_pct"],

@@ -16,7 +16,7 @@
  "frames": [
   {
    "frame": "isolates screened for the gene",
-   "why_this_row_is_here": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared methods section rather than from a fresh read. Row 7 (Bangladesh 1,200 / 305) is an isolate screen whose sampling unit is not the isolate: 20 MacConkey colonies picked at random per pooled faecal sample, on 20 broiler farms at three points in one flock cycle (§5j). Its 25.42% is the share of screened colonies, so it belongs to this frame by what N counts and carries a weight caveat the frame's pool does not escape — 1,200 colonies from 60 samples now count twenty times each in its 5.66%. Row 12 (Japan 684 / 90) joins on the same reading: the 684 are swine-pathogenic *E. coli* strains — diagnostic submissions from diseased pigs (diarrhoea or oedema disease) at 23 Livestock Hygiene Service Centres, 1991-2014 — put through a PCR screen for mcr-1 (§5k). It is an isolate screen, but a serogroup-restricted subset: 684 of the 967 strains the collection holds, kept because they fall in four predominant serogroups, so it is 71% of its own source and not a sample of it. Row 15 (Jordan 360 / 143) joins on the same reading — 360 isolates recovered from 385 cloacal samples on 125 broiler farms, then PCR for mcr-1 (§5l) — and its own page prints the phenotype too (209/360 colistin resistant, so mcr-1 is 143/209 = 68.4% of the resistance). Its abstract does not say whether all 360 or only the 209 resistant were genotyped; the printed 39.7% is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down.",
+   "why_this_row_is_here": "each N is a count of bacterial isolates put through a molecular screen, so n/N is a gene prevalence among screened isolates. Row 19's printed numerator disagrees with its own primary by 100 (49 vs 149, §5b) — the frame is still this one, the cell is the error. Rows 17 (a)–17 (k) are the eleven country slices of one laboratory's stored porcine isolates, PCR-screened for mcr-1 and mcr-2 (§2a, §3, §5f); eight of them were placed on 2026-11-21 22:50Z from the shared methods section rather than from a fresh read. Row 7 (Bangladesh 1,200 / 305) is an isolate screen whose sampling unit is not the isolate: 20 MacConkey colonies picked at random per pooled faecal sample, on 20 broiler farms at three points in one flock cycle (§5j). Its 25.42% is the share of screened colonies, so it belongs to this frame by what N counts and carries a weight caveat the frame's pool does not escape — 1,200 colonies from 60 samples now count twenty times each in its 5.66%. Row 12 (Japan 684 / 90) joins on the same reading: the 684 are swine-pathogenic *E. coli* strains — diagnostic submissions from diseased pigs (diarrhoea or oedema disease) at 23 Livestock Hygiene Service Centres, 1991-2014 — put through a PCR screen for mcr-1 (§5k). It is an isolate screen, but a serogroup-restricted subset: 684 of the 967 strains the collection holds, kept because they fall in four predominant serogroups, so it is 71% of its own source and not a sample of it. Row 15 (Jordan 360 / 143) joins on the same reading — 360 isolates recovered from 385 cloacal samples on 125 broiler farms, then PCR for mcr-1 (§5l) — and its own page prints the phenotype too (209/360 colistin resistant, so mcr-1 is 143/209 = 68.4% of the resistance). Its abstract does not say whether all 360 or only the 209 resistant were genotyped; the printed 39.7% is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down. Three rows joined on 2026-11-25 (§5q). Row 8 (Bangladesh 104 / 14) is an isolate screen with a denominator narrower than the table implies: the 104 are the extended-spectrum β-lactamase-PRODUCING E. coli of a poultry survey — a resistance-phenotype subset of an unreported total, from live bird markets, rural farms and backyard flocks — and all 104 were PCR-screened, so 13.46% is a gene prevalence among ESBL producers, not among poultry isolates; the same page gives 98/104 with colistin MIC ≥4 µg/mL, so mcr-1 is 14/98 = 14.3% of its resistance. Row 3 (China 130 / 75) is an isolate screen of diagnostic material: 130 E. coli recovered from 400 perihepatitis livers of slaughterhouse broilers, every isolate put through broth microdilution and PCR for mcr-1 to mcr-4; its page gives 79 (60.8%) colistin-resistant, so mcr-1 accounts for 75/79 = 94.9% of its resistance. Row 16 (Germany 154 / 62) is the frame's first purposively selected herd — 154 intestinal-pathogenic E. coli from 137 pigs on three farms chosen BECAUSE mcr had recurred there for at least four consecutive years — so its 40.26% is an upper bound inside a selected set, not a farm prevalence; if a third such gene-driven herd row arrives it becomes a ninth frame rather than another caveat here.",
    "rows": [
     "13",
     "6",
@@ -35,11 +35,14 @@
     "7",
     "12",
     "15",
-    "24"
+    "24",
+    "8",
+    "3",
+    "16"
    ],
-   "N": 23198,
-   "n": 1488,
-   "pooled_pct": 6.414346,
+   "N": 23586,
+   "n": 1639,
+   "pooled_pct": 6.949038,
    "rate_range_pct": [
     0.0,
     60.714286
@@ -240,6 +243,39 @@
      "n": 3,
      "pct_printed": 8.57,
      "pct_from_counts": 8.571429,
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
+    },
+    {
+     "row": "8",
+     "country": "Bangladesh",
+     "sector_printed": "Livestock",
+     "N": 104,
+     "n": 14,
+     "pct_printed": 13.46,
+     "pct_from_counts": 13.461538,
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
+    },
+    {
+     "row": "3",
+     "country": "China",
+     "sector_printed": "Livestock",
+     "N": 130,
+     "n": 75,
+     "pct_printed": 57.69,
+     "pct_from_counts": 57.692308,
+     "agrees_with_own_counts": true,
+     "denominator_basis": "as printed"
+    },
+    {
+     "row": "16",
+     "country": "Germany",
+     "sector_printed": "Livestock",
+     "N": 154,
+     "n": 62,
+     "pct_printed": 40.26,
+     "pct_from_counts": 40.25974,
      "agrees_with_own_counts": true,
      "denominator_basis": "as printed"
     }
@@ -512,30 +548,28 @@
  ],
  "frame_count": 8,
  "placed": {
-  "rows": 31,
-  "unplaced_rows": 7,
-  "N": 34376,
-  "share_of_table_N_pct": 90.9033,
-  "n": 2210,
-  "share_of_table_n_pct": 83.4907,
-  "pooled_pct": 6.428904
+  "rows": 34,
+  "unplaced_rows": 4,
+  "N": 34764,
+  "share_of_table_N_pct": 91.9293,
+  "n": 2361,
+  "share_of_table_n_pct": 89.1953,
+  "pooled_pct": 6.791508
  },
  "unplaced": {
   "what_this_is": "Every seed row with no frame, in the order the next read should take it. The frames file's row ids are the seed's row ids, so this set is computed as seed minus placed and a placing wake must edit UNPLACED_READ_ORDER in the script; the build refuses otherwise.",
   "rows": [
    "2",
-   "3",
    "4",
-   "8",
    "9",
-   "10",
-   "16"
+   "10"
   ],
-  "N": 2997,
-  "n": 437,
-  "share_of_table_N_pct": 7.9252,
+  "N": 2609,
+  "n": 286,
+  "share_of_table_N_pct": 6.8992,
   "read_status_counts": {
-   "not read": 6,
+   "not read": 2,
+   "read, cannot be placed yet": 1,
    "unreadable from here": 1
   },
   "members": [
@@ -551,75 +585,42 @@
     "why": "one-page Lancet correspondence (Shen et al. 2016, row ref. 25): no abstract, no PMCID, publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. Largest open row in the table, and it cannot be closed from this checkout without a copy."
    },
    {
-    "row": "3",
-    "read_order": 2,
-    "country": "China",
-    "sector_printed": "Livestock",
-    "N": 130,
-    "n": 75,
-    "pct_printed": 57.69,
-    "read_status": "not read",
-    "why": "130 isolates, 75 positives — the table's highest printed rate (57.69%) and therefore the row most likely to move a frame rate once read."
-   },
-   {
     "row": "4",
-    "read_order": 3,
+    "read_order": 2,
     "country": "China",
     "sector_printed": "Livestock",
     "N": 668,
     "n": 102,
     "pct_printed": 15.27,
     "read_status": "not read",
-    "why": "668 isolates, 102 positives, 15.27%."
-   },
-   {
-    "row": "8",
-    "read_order": 4,
-    "country": "Bangladesh",
-    "sector_printed": "Livestock",
-    "N": 104,
-    "n": 14,
-    "pct_printed": 13.46,
-    "read_status": "not read",
-    "why": "104 isolates, 14 positives, 13.46%."
+    "why": "668 isolates, 102 positives, 15.27%; Europe PMC returned HTTP 500 for its full text on 2026-11-25, so it needs the PMC page or the PDF."
    },
    {
     "row": "9",
-    "read_order": 5,
+    "read_order": 3,
     "country": "Vietnam",
     "sector_printed": "Mixed",
     "N": 210,
     "n": 74,
     "pct_printed": 35.24,
-    "read_status": "not read",
-    "why": "210 isolates, 74 positives, 35.24%."
+    "read_status": "read, cannot be placed yet",
+    "why": "read in full on 2026-11-25 (JATS XML, PMC10117427) and the row's 210/74 does not come from the paper's text: the primary reports 102 colistin-resistant pig isolates and 34 human ones, with mcr-1 in 97/102 and 31/34. Whether 210 is an isolate total from one of its tables is unresolved — §5q states what is known; do not re-read, read the section."
    },
    {
     "row": "10",
-    "read_order": 6,
+    "read_order": 4,
     "country": "Pakistan",
     "sector_printed": "Human",
     "N": 120,
     "n": 6,
     "pct_printed": 5.0,
     "read_status": "not read",
-    "why": "120 isolates, 6 positives, 5.0%."
-   },
-   {
-    "row": "16",
-    "read_order": 7,
-    "country": "Germany",
-    "sector_printed": "Livestock",
-    "N": 154,
-    "n": 62,
-    "pct_printed": 40.26,
-    "read_status": "not read",
-    "why": "154 isolates, 62 positives, 40.26%."
+    "why": "120 isolates, 6 positives, 5.0%; Europe PMC returned HTTP 500 for its full text on 2026-11-25."
    }
   ]
  },
  "range": {
-  "bases": "the 8 frame rates, not the 31 row rates",
+  "bases": "the 8 frame rates, not the 34 row rates",
   "low_pct": 0.196496,
   "low_frame": "isolates screened for a phenotype, genotyped only in a subset",
   "high_pct": 31.693548,
@@ -654,12 +655,15 @@
   "14": "abstract (Europe PMC, 1,436 chars; Elsevier, no open full text) - 5l",
   "15": "abstract (Europe PMC, 1,759 chars; Elsevier, no open full text) - 5l",
   "24": "abstract (Semantic Scholar core record, 1,093 chars; AJOL full text is behind an AWS WAF challenge, 0 bytes of body from this checkout) - mcr-colistin-harmonisation.md 5p",
+  "8": "abstract (Europe PMC MED record 32344122, 1,895 chars; Elsevier subscription, no PMCID) - mcr-colistin-harmonisation.md 5q",
+  "3": "full text (JATS XML, PMC7587627) - mcr-colistin-harmonisation.md 5q",
+  "16": "full text (JATS XML, PMC11052496) - mcr-colistin-harmonisation.md 5q",
   "17 (b)-(k)": "shared methods section, not a fresh read - 5f"
  },
- "gene_frame_with_france_corrected_pct": 6.845418,
+ "gene_frame_with_france_corrected_pct": 7.373018,
  "what_this_does_not_say": [
   "That the frame rates are comparable with each other. They are not: that is the finding.",
-  "That the unplaced rows could not move the range. They could — 7 of 38 rows have no frame (the `unplaced` block lists them, in read order, with the reason each is open), and the largest of them (China 1,611 row 2) could widen or narrow it. The range's floor has already moved twice for this reason: it was 0.04% while frame 2 held only Canada, then 0.12% when India joined that frame, 0.18% when Tunisia's primary denominator entered it, and 0.20% now that row 26 is in it.",
+  "That the unplaced rows could not move the range. They could — 4 of 38 rows have no frame (the `unplaced` block lists them, in read order, with the reason each is open), and the largest of them (China 1,611 row 2) could widen or narrow it. The range's floor has already moved twice for this reason: it was 0.04% while frame 2 held only Canada, then 0.12% when India joined that frame, 0.18% when Tunisia's primary denominator entered it, and 0.20% now that row 26 is in it.",
   "That any row here is a population prevalence. Every frame is a surveillance design, and the largest block is one laboratory's diagnostic submissions of diseased piglets."
  ],
  "reproduce": "python3 scripts/mcr_colistin_denominator_frames.py --write"
