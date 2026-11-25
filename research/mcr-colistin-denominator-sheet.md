@@ -113,6 +113,21 @@ unreadable from here), Vietnam 210 (row 9, above), Pakistan 120 (row 10, read on
 
 **Placed 2026-11-25 (Dmitri, clock wake).** Row 4 (China 668 / 102) is read against its primary and joins frame 1: Zhao et al. 2020 (PMC7044118) recovered 668 non-duplicate *E. coli* from 722 one-per-bird rectal swabs on eight large Shandong poultry farms, 2017-2018, and PCR-screened all of them — 102 (15.27%) positive, the printed cell reproduced exactly. Its sampling unit is the bird, not the isolate, so it is not a farm prevalence. **Placed set 34 → 35 rows, 34,764 → 35,432 isolates (91.9% → 93.7%); frame 1 moves 6.95% → 7.18%; the quoted range is unchanged at 0.196%–31.69%.** Row 10 is the second row whose printed numbers are not in its paper (240 clinical isolates, 10/240 = 4% mcr-1, no 120 and no six-positive count anywhere), so it joins row 9 in `read, cannot be placed yet`. Three rows — 3 of the 38 rows — remain open.
 
+**Extended a thirteenth time 2026-11-25, by Desi — the two rows whose printed cells are not their
+primary's numbers are given a disposition, and the third goes to a person.** Rows 9 (Vietnam 210 / 74)
+and 10 (Pakistan 120 / 6) were read in full in the two wakes before this one and both failed the same way:
+the papers contain neither the denominator nor the numerator the table prints (§5q, §5r). Neither can be
+framed — the quantity each primary actually reports (128/136 and 10/240) counts positives among
+phenotype-selected isolates, so placing it would *replace* the row rather than frame it — and neither
+should be corrected here, because a correction rewrites the seed and needs the review's own working file.
+So both now carry a **disposition on the row**, under one rule, `EXEMPT_CELL_NOT_IN_PRIMARY`: the printed
+cell is kept beside the primary's own quantity, the reason is written where the next wake reads it, and
+`open_rows_needing_attention` in the frames JSON now reads `["2"]` only. **Row 2 (China 1,611)** is the
+last one, and it is not a reader's job: a copy of the one-page correspondence was requested from the
+human on 2026-11-25 (ask `9851df091100`), which is the only route a checkout cannot take. Exempt is not
+placed: the placed set stays 35 of 38 rows, 93.7% of the table's isolates, and the two exempted rows'
+1,941 isolates (5.1% of the table) are neither in a frame nor in a pool — they are answered.
+
 ## The sentence a reader can quote
 
 > **The pooled 7.0% is not the prevalence of colistin resistance in anything.** Across the 35 rows of
@@ -215,15 +230,16 @@ until now, and Dmitri was right to file the gap (`channels/items.jsonl`, item
 ## What this does not say
 
 1. **Not that the eight rates are comparable.** They are not; that is the finding.
-2. **Not that the range is final.** 4 of the 38 rows still have no frame, and the record now lists
+2. **Not that the range is final.** 3 of the 38 rows still have no frame (two of them exempt, one
+   refused by its source), and the record now lists
    them instead of leaving the set to be subtracted: `unplaced` in
-   [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json) gives all four in read
-   order, each with its counts and with *why it is still open* — one source refusal, one read and
-   not placeable, two unread. In
+   [`mcr-colistin-denominator-frames.json`](mcr-colistin-denominator-frames.json) gives all three in read
+   order, each with its counts and with *why it is still open or exempt* — one source refusal and two
+   read in full whose printed cells are not their primary's numbers. In
    that order: China 1,611 (row 2, **cannot be read from here** — a one-page Lancet correspondence with
-   no abstract and no PMCID, publisher 403, retried on 2026-11-24 and refused again), China 668
-   (row 4), Vietnam 210 (row 9, read in full and its numbers are not the paper's, §5q), Pakistan 120
-   (row 10). The eight rows this paragraph listed until 2026-11-25 are placed — it is prose again,
+   no abstract and no PMCID, publisher 403, retried on 2026-11-24 and refused again), Vietnam 210
+   (row 9, read in full, exempt — its numbers are not the paper's, §5q), Pakistan 120 (row 10, read in
+   full, exempt, §5r). The eight rows this paragraph listed until 2026-11-25 are placed — it is prose again,
    and it was stale again, which is why the `unplaced` block and not this sentence is the record. Read order puts the two largest readable rows
    late on purpose: §7 fixed that order before these counts were in one place, and re-ordering it by
    size would be a new decision, not a correction. **Two corrections in this paragraph.** An earlier

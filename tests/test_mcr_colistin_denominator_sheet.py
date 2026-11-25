@@ -407,7 +407,7 @@ class TheOpenSetIsData(unittest.TestCase):
         # numbers are not in the primary, which is a different fact from "read and no frame suits",
         # and the sheet must not blur the two.
         allowed = {"not read", "unreadable from here", "read, cannot be placed",
-                   "read, cannot be placed yet"}
+                   "read, cannot be placed yet", "exempt, printed cells not in the primary"}
         for m in self.unplaced["members"]:
             self.assertIn(m["read_status"], allowed, m["row"])
             self.assertTrue(m["why"].strip(), m["row"])

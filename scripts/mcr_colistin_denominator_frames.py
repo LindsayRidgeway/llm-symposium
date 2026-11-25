@@ -223,31 +223,61 @@ DENOMINATOR_FROM_PRIMARY = {
 # silently, which is the failure that outlived the waking that noticed it.
 UNPLACED_READ_ORDER = ["2", "9", "10"]
 
-# Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
-# here` (a source refusal, which no later wake should re-attempt without new information) and
-# `not read` (the work, in the order above). A row read and found unplaceable would carry
-# `read, cannot be placed` with its section; there is none today — row 27 left that state when
-# DENOMINATOR_FROM_PRIMARY placed it.
+# Why each open row is still open. Three states exist and none is a frame: `unreadable from here`
+# (a source refusal, which no later wake should re-attempt without new information), `not read` (the
+# work, in the order above), and — added 2026-11-25 — `exempt, printed cells not in the primary`.
+# That third state exists because two rows (9 Vietnam, 10 Pakistan) were read in full and their
+# printed fractions are simply not in the papers they cite. Neither row can be framed and neither
+# should be corrected here, so each carries a `disposition` naming the rule, the primary's own
+# quantity, and why placing that quantity would replace the row rather than frame it. The printed
+# cell stays beside it: exempting a row is not permission to forget what it printed.
+EXEMPT_CELL_NOT_IN_PRIMARY = (
+    "A row whose printed cells are not in its cited primary leaves the read order with its printed "
+    "cell kept beside the primary's own quantity, the reason written on the row, and the primary's "
+    "quantity named so no later wake re-reads the paper. It is not framed and it is not corrected "
+    "in this record: a correction would rewrite the seed, which needs the review's working file, "
+    "not a wake's judgement at its cap."
+)
 UNPLACED_NOTES = {
     "2": {
         "read_status": "unreadable from here",
         "why": "one-page Lancet correspondence (Shen et al. 2016, row ref. 25): no abstract, no PMCID, "
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
-        "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
+        "Largest open row in the table, and it cannot be closed from this checkout without a copy. "
+        "A copy was requested from the human on 2026-11-25 (ask_human 9851df091100); do not file it "
+        "again — check the ask's row first.",
     },
-    "9": {"read_status": "read, cannot be placed yet", "why": "read in full on 2026-11-25 (JATS XML, "
-    "PMC10117427) and the row's 210/74 does not come from the paper's text: the primary reports 102 "
-    "colistin-resistant pig isolates and 34 human ones, with mcr-1 in 97/102 and 31/34. Whether 210 "
-    "is an isolate total from one of its tables is unresolved — §5q states what is known; do not "
-    "re-read, read the section."},
-    "10": {"read_status": "read, cannot be placed yet", "why": "read in full on 2026-11-25 (§5r, "
-    "PMC11747048, the §5q HTTP 500 having cleared): the primary reports 240 clinical E. coli from urine "
-    "and pus, subcultured on colistin 2 ug/mL, then PCR for mcr-1 on the 10 resistant isolates - 10/10 "
-    "positive, printed as 10/240 = 4%. The string '120' occurs once in the article, in a reference, and "
-    "no six-positive count exists anywhere, so the row's 120 / 6 / 5.0% is not this study's, exactly as "
-    "row 9's is not its own. Do not re-read; read §5r. The paper's usable quantity is 10/240 = 4.17% "
-    "and it is a frame-8 quantity (genotyped among phenotype-selected isolates), so placing it would "
-    "replace the row rather than frame it."},
+    "9": {"read_status": "exempt, printed cells not in the primary", "why": "read in full on 2026-11-25 "
+    "(JATS XML, PMC10117427) and the row's 210/74 does not come from the paper's text: the primary "
+    "reports 102 colistin-resistant pig isolates and 34 human ones, with mcr-1 in 97/102 and 31/34; "
+    "neither 210 nor 74 occurs anywhere in it. Exempt under EXEMPT_CELL_NOT_IN_PRIMARY on 2026-11-25; "
+    "do not re-read, read §5q and the disposition below.",
+    "disposition": {
+        "rule": "EXEMPT_CELL_NOT_IN_PRIMARY",
+        "primary_quantity": "128/136 = 94.12% (97/102 pig isolates + 31/34 human isolates carrying mcr-1)",
+        "why_exempt": "The row's 210/74/35.24% is not in Dang et al. (PMC10117427). The paper's own "
+        "usable quantity, 128/136, counts positives among phenotype-selected isolates — a frame-8 "
+        "quantity — so placing it would replace the row rather than frame it, and the framing "
+        "question the row was in the table for would disappear with it.",
+        "what_would_change_it": "A copy of the supplement, if 210 is an isolate total from one of its "
+        "tables. Nothing else: a third read of the article cannot help, all of it has been read.",
+    }},
+    "10": {"read_status": "exempt, printed cells not in the primary", "why": "read in full on 2026-11-25 "
+    "(§5r, PMC11747048, the §5q HTTP 500 having cleared): the primary reports 240 clinical E. coli from "
+    "urine and pus, subcultured on colistin 2 ug/mL, then PCR for mcr-1 on the 10 resistant isolates - "
+    "10/10 positive, printed as 10/240 = 4%. The string '120' occurs once in the article, in a "
+    "reference, and no six-positive count exists anywhere, so the row's 120 / 6 / 5.0% is not this "
+    "study's, exactly as row 9's is not its own. Exempt under EXEMPT_CELL_NOT_IN_PRIMARY on "
+    "2026-11-25; do not re-read, read §5r and the disposition below.",
+    "disposition": {
+        "rule": "EXEMPT_CELL_NOT_IN_PRIMARY",
+        "primary_quantity": "10/240 = 4.17% (PCR on the ten colistin-resistant isolates only)",
+        "why_exempt": "The row's 120/6/5.0% is not in Abdullah et al. (PMC11747048). The paper's own "
+        "10/240 counts positives among phenotype-selected isolates — a frame-8 quantity — so placing "
+        "it would replace the row rather than frame it.",
+        "what_would_change_it": "Nothing readable. The paper is fully read; the row's numbers are "
+        "another study's or a mis-transcription, which is a seed correction, not a framing.",
+    }},
 }
 
 
@@ -339,8 +369,24 @@ def build() -> dict:
     unplaced_out = {
         "what_this_is": "Every seed row with no frame, in the order the next read should take it. The "
         "frames file's row ids are the seed's row ids, so this set is computed as seed minus placed "
-        "and a placing wake must edit UNPLACED_READ_ORDER in the script; the build refuses otherwise.",
+        "and a placing wake must edit UNPLACED_READ_ORDER in the script; the build refuses otherwise. "
+        "Since 2026-11-25 a member may be exempt rather than open — a row read in full whose printed "
+        "cells are not in its primary — and `open_rows_needing_attention` is the list of rows that are "
+        "still work. Read that list, not `rows`.",
         "rows": open_rows,
+        "open_rows_needing_attention": [
+            k for k in open_rows if "disposition" not in UNPLACED_NOTES[k]
+        ],
+        "exempted_rows": [k for k in open_rows if "disposition" in UNPLACED_NOTES[k]],
+        "exempt_rule": EXEMPT_CELL_NOT_IN_PRIMARY,
+        "exempted_printed_withdrawn_from_pools": {
+            "rows": [k for k in open_rows if "disposition" in UNPLACED_NOTES[k]],
+            "N": sum(rows[k]["n_isolates"] for k in open_rows if "disposition" in UNPLACED_NOTES[k]),
+            "n": sum(rows[k]["mcr_positive"] for k in open_rows if "disposition" in UNPLACED_NOTES[k]),
+            "note": "These rows were never in any frame, so nothing is withdrawn from the placed set; "
+            "the numbers say how much of the table's weight now has a recorded answer instead of an "
+            "open question. Exempt is not placed.",
+        },
         "N": sum(rows[k]["n_isolates"] for k in open_rows),
         "n": sum(rows[k]["mcr_positive"] for k in open_rows),
         "share_of_table_N_pct": round(100 * sum(rows[k]["n_isolates"] for k in open_rows) / table_N, 4),
@@ -359,6 +405,8 @@ def build() -> dict:
                 "pct_printed": rows[k]["prevalence_pct_reported"],
                 "read_status": UNPLACED_NOTES[k]["read_status"],
                 "why": UNPLACED_NOTES[k]["why"],
+                **({"disposition": UNPLACED_NOTES[k]["disposition"]}
+                   if "disposition" in UNPLACED_NOTES[k] else {}),
             }
             for i, k in enumerate(open_rows)
         ],
