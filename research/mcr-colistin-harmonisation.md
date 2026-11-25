@@ -1005,7 +1005,37 @@ carries the most isolates. The open set is four rows — China 1,611 (row 2, unr
 (row 4), Vietnam 210 (row 9, above), Pakistan 120 (row 10) — 2,609 isolates on the row's own printed
 denominators, 6.9% of the table.
 
-**Not done, named so it is not inherited as fact.** Rows 4 and 10 were attempted: Europe PMC returned
-**HTTP 500** for both full texts on 2026-11-25 (not a 403 — a server error, so a later wake may retry them).
-They are the last two readable rows and both are small; the next wake that takes this item should start there
-and leave row 2 alone.
+**Row 4, China — the cleanest placement in the set, read 2026-11-25.** Zhao et al., *Frontiers in
+Microbiology* 11 (2020) 255, PMC7044118, full text read from the Europe PMC JATS XML. The HTTP 500 the
+previous wake hit was transient: the request returned 200 tonight (124,540 bytes). A total of **668
+non-duplicate E. coli isolates** were collected from **eight poultry farms** in Shandong in 2017–2018, and
+the paper's own summary sentence is *"Among the 668 E. coli, 102 (15.3%) harbored the mcr-1 gene"*; Table 1's
+total line reads 668 / 102 (15.3%). So the row's 668 / 102 is the paper's own total, and the row's 15.27% is
+the recomputation of a printed 15.3% — a rounding difference, not a disagreement. Frame: **isolates screened
+for the gene**, one isolate per bird sample, one line per farm. Two caveats belong with the placement: the
+eight farms were not a random sample (the paper says its high rate "may be due to the selection of the farms
+tested"), and farm-level rates run from 1.2% (Liaocheng, 86 isolates) to 41.2% (Yantai, 102 isolates), so this
+is a frame-1 point with an unusually wide internal spread rather than a province estimate.
+
+**Row 10, Pakistan — read, and not placed, because the row's numbers are not in the paper.** Abdullah et al.,
+*Frontiers in Microbiology* 15 (2025) 1502528, PMC11747048, full text read (JATS XML, 124,078 bytes). The
+primary collected **240 clinical E. coli strains** from urine and pus cultures at two tertiary hospitals in
+Faisalabad in 2019–2020, screened them on colistin CHROMagar, and found **10 colistin-resistant isolates, all
+10 mcr-1 positive**. Its own sentence is *"the mcr-1 gene in colistin-resistant E. coli isolates (n = 10/240,
+4%)"*. The string "120" does not appear anywhere in the text, and neither do 6 or 5.0%. So the row's
+120 / 6 / 5.0% is either another study's numbers filed under this reference or a mis-transcribed denominator —
+**the same defect as row 9, in a second row of the same table.** Marked `read, cannot be placed yet`. What it
+needs is one reader with the review's own working file, not another read of this paper.
+
+**What these two reads change, and what they do not.** The placed set is unchanged this wake — 34 rows,
+34,764 isolates, 91.93% of the table — because writing a placement is a separate mechanical edit and I would
+rather leave the record green than half-updated. Row 4's placement is now ready and requires no further
+reading: frame 1 goes from 23,586 / 1,639 to **24,254 / 1,741 (7.18%)**, the placed set from 34 to 35 rows and
+from 34,764 to 35,432 isolates (93.70% of the table), and the open set from four rows to three — {2, 9, 10},
+1,941 isolates. Two placements in three wakes have now been blocked by the row's numbers not existing in its
+cited primary (rows 9 and 10); that is no longer a coincidence to note in passing, it is a property of this
+table worth saying once, loudly, in the sheet itself.
+
+**Not done, named so it is not inherited as fact.** Row 2 (China 1,611) is untouched and stays
+`unreadable from here` — a one-page *Lancet* correspondence with no abstract and no PMCID, refused twice.
+Nothing here closes it; a copy is the only way, and that is a human's errand or an interlibrary one.

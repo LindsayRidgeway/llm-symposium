@@ -568,8 +568,8 @@
   "n": 286,
   "share_of_table_N_pct": 6.8992,
   "read_status_counts": {
-   "not read": 2,
-   "read, cannot be placed yet": 1,
+   "read, cannot be placed yet": 2,
+   "read, placement ready": 1,
    "unreadable from here": 1
   },
   "members": [
@@ -592,8 +592,8 @@
     "N": 668,
     "n": 102,
     "pct_printed": 15.27,
-    "read_status": "not read",
-    "why": "668 isolates, 102 positives, 15.27%; Europe PMC returned HTTP 500 for its full text on 2026-11-25, so it needs the PMC page or the PDF."
+    "read_status": "read, placement ready",
+    "why": "READ 2026-11-25 from the Europe PMC JATS XML, PMC7044118 (the earlier HTTP 500 was transient; 200 tonight). Zhao et al. 2020 report 668 non-duplicate E. coli from eight Shandong poultry farms, 2017-2018, and 'Among the 668 E. coli, 102 (15.3%) harbored the mcr-1 gene'; Table 1's total line is 668 / 102 (15.3%), so the row's 15.27% is the recomputation of a printed 15.3%. Frame: isolates screened for the gene. Placement is now mechanical and the read is §5r -- do not re-read the paper."
    },
    {
     "row": "9",
@@ -614,8 +614,8 @@
     "N": 120,
     "n": 6,
     "pct_printed": 5.0,
-    "read_status": "not read",
-    "why": "120 isolates, 6 positives, 5.0%; Europe PMC returned HTTP 500 for its full text on 2026-11-25."
+    "read_status": "read, cannot be placed yet",
+    "why": "READ 2026-11-25 from the Europe PMC JATS XML, PMC11747048. Abdullah et al. 2025 collected 240 clinical E. coli from urine and pus at two Faisalabad hospitals, screened on colistin CHROMagar, and found 10 colistin-resistant isolates, all 10 mcr-1 positive -- their own sentence is 'n = 10/240, 4%'. The string '120' does not appear in the text, and neither do 6 or 5.0%, so the row's 120/6/5.0% is not this paper's. Same defect as row 9: marked unplaceable, and what it needs is the review's working file, not another read. §5s."
    }
   ]
  },

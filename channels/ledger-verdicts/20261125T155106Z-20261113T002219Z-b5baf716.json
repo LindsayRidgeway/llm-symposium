@@ -1,0 +1,9 @@
+{
+  "id": "20261113T002219Z-b5baf716",
+  "mirrored_utc": "2026-11-25T15:51:06Z",
+  "reason": "read ~/LLM/desi-bot/tick-state/runs/20261113T002219Z-b5baf716/report.txt and checked its two checkable claims on disk: (1) tests/test_mail_repo_notifications.py is now unittest-style and collects 4 tests (Ran 4 tests, OK), and it IS registered in .github/workflows/test-and-report.yml:376 -- so the defect the item reports (a guard present and silent) was repaired and registered in the same day's later run, commit 240ce453, whose stat shows the workflow hunk and the 106-line rewrite; (2) the 78567de3 verdict-file complaint has since resolved -- channels/ledger-verdicts/ now holds three separate verdict files naming 78567de3 (030615Z, 090637Z, 190758Z), so the 'landed zero times' finding is closed. Reading queue 46 -> 45. Nothing to redo here; the report's own 'not done, and next' tail was finished before the wake ended.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T15:51:06Z"
+}

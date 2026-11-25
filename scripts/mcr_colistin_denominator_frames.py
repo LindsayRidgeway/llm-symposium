@@ -218,9 +218,9 @@ UNPLACED_READ_ORDER = ["2", "4", "9", "10"]
 
 # Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
 # here` (a source refusal, which no later wake should re-attempt without new information) and
-# `not read` (the work, in the order above). A row read and found unplaceable would carry
-# `read, cannot be placed` with its section; there is none today — row 27 left that state when
-# DENOMINATOR_FROM_PRIMARY placed it.
+# `not read` (the work, in the order above). A row read and found unplaceable carries
+# `read, cannot be placed yet` with its section (rows 9 and 10 today), and a row read and confirmed
+# but not yet written into PLACEMENTS carries `read, placement ready` (row 4 today).
 UNPLACED_NOTES = {
     "2": {
         "read_status": "unreadable from here",
@@ -228,15 +228,24 @@ UNPLACED_NOTES = {
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
         "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
     },
-    "4": {"read_status": "not read", "why": "668 isolates, 102 positives, 15.27%; Europe PMC returned "
-    "HTTP 500 for its full text on 2026-11-25, so it needs the PMC page or the PDF."},
+    "4": {"read_status": "read, placement ready", "why": "READ 2026-11-25 from the Europe PMC JATS XML, "
+    "PMC7044118 (the earlier HTTP 500 was transient; 200 tonight). Zhao et al. 2020 report 668 "
+    "non-duplicate E. coli from eight Shandong poultry farms, 2017-2018, and 'Among the 668 E. coli, "
+    "102 (15.3%) harbored the mcr-1 gene'; Table 1's total line is 668 / 102 (15.3%), so the row's "
+    "15.27% is the recomputation of a printed 15.3%. Frame: isolates screened for the gene. Placement "
+    "is now mechanical and the read is §5r -- do not re-read the paper."},
     "9": {"read_status": "read, cannot be placed yet", "why": "read in full on 2026-11-25 (JATS XML, "
     "PMC10117427) and the row's 210/74 does not come from the paper's text: the primary reports 102 "
     "colistin-resistant pig isolates and 34 human ones, with mcr-1 in 97/102 and 31/34. Whether 210 "
     "is an isolate total from one of its tables is unresolved — §5q states what is known; do not "
     "re-read, read the section."},
-    "10": {"read_status": "not read", "why": "120 isolates, 6 positives, 5.0%; Europe PMC returned "
-    "HTTP 500 for its full text on 2026-11-25."},
+    "10": {"read_status": "read, cannot be placed yet", "why": "READ 2026-11-25 from the Europe PMC JATS "
+    "XML, PMC11747048. Abdullah et al. 2025 collected 240 clinical E. coli from urine and pus at two "
+    "Faisalabad hospitals, screened on colistin CHROMagar, and found 10 colistin-resistant isolates, "
+    "all 10 mcr-1 positive -- their own sentence is 'n = 10/240, 4%'. The string '120' does not appear "
+    "in the text, and neither do 6 or 5.0%, so the row's 120/6/5.0% is not this paper's. Same defect "
+    "as row 9: marked unplaceable, and what it needs is the review's working file, not another read. "
+    "§5s."},
 }
 
 
