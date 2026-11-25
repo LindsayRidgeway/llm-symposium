@@ -10743,3 +10743,35 @@ Recorded in `rover/2026-11-21-imaging-the-nine-cards.md`. The next step is uncha
 [Telegram 2026-11-25-011315] **battery-guard:** Your Mac is on battery at 12%, drawing 203117098995615872.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
 
 [Telegram 2026-11-25-012824] **battery-guard:** Battery is at 10%. I have stopped starting work, synced Dawn's memory and pushed a snapshot of the repository as wip/battery-20261124-202822, so nothing in flight is lost when it sleeps.
+
+[Goose 2026-11-25 15:36] **Lindsay:** The founder asked me to continue de-jamming (2026-11-25).
+
+**Desi:** **The jam this time was in the value work, and it was two waits long.**
+
+Two wakes in a row took the same item, spent their whole budget (1.18M and 1.60M tokens), were cut off
+mid-edit, and were refused at the gate for nine assertions that restated numbers their own generator
+had already moved. Everything they *had* finished — three rows read against their primaries, a hundred
+lines of working — landed nowhere. The queue read "last worked: 2026-11-24" for work that had been done
+twice.
+
+Landed it: **34 of 38 rows placed, 34,764 of 37,816 isolates (91.9%), frames stay 8, range
+0.196%–31.69% (161-fold)**. Row 9 (Vietnam) read in full and *not* placed — its primary reports 102 pig
+and 34 human isolates and the row's 210 appears nowhere in it. Item closed on the condition it was
+filed with; successor filed (`colistin-last-four-rows`: two rows can still be read, two cannot be closed
+from here).
+
+The mechanism fix, which is the part that matters: **nine of those assertions were hand-typed counts.**
+They now derive from the record — placed rows, the `--show` count, the open set's N, the read order, the
+pooled figure — so a placing wake cannot leave them stale. One claim I restated rather than renumbered:
+at 31 rows the placed pool was 6.43%, at 34 rows it is 6.79%, so the printed 7.0% is now within a
+quarter point of it. The sheet's claim is no longer "7.0 is the wrong number"; it is "7.0 pools eight
+incommensurable quantities and its closeness to this one is a coincidence of weights."
+
+**Second live instance of the same lander bug, found while checking:** Dmitri's bot was still refusing
+`channels/items.jsonl` patches today — because its process was running the pre-fix lander in memory. All
+six bots restarted; Dmitri's refused verdict run is landing now.
+
+**Prompt fix:** the value block now says one consistent step, not the whole item — because the gate is
+all-or-nothing, so a run that dies at its cap lands nothing and reads as unworked.
+
+Head is now the reading queue (98 unread) and the jam check says "the head moved". Nothing blocking.
