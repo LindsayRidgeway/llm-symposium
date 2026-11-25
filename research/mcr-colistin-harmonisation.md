@@ -759,7 +759,7 @@ which join frames 1, 1, 2 and 8 (§5k, §5l).
 The remaining **nine rows** have no frame (§5m placed row 27 on its primary's denominator); they are listed
 as data in the frames record's `unplaced` block, in read order, with the reason each is open, so no wake
 has to subtract eight frames' members from thirty-eight seed rows to find them again. The largest of the unread is China 1,611
-(row 2), which cannot be read from here, then South Africa 50 (row 26) and Nigeria 35 — the correction sheet used to name three
+(row 2), which cannot be read from here, then Nigeria 35 — the correction sheet used to name three
 smaller rows as the largest and has been corrected. So the item's question still cannot be answered across the
 whole table, but it can now be answered about four-fifths of its isolates: the heaviest block (livestock,
 27,132 of the table's 37,816 = 71.8%), every food and environmental row (18, 20, 21, 25 = 605 of 37,816),
@@ -775,11 +775,12 @@ is read as a cross-sector prevalence is the item's finding, stated as an arithme
 - **Cannot be concluded: the seed's France row.** Its numerator disagrees with its own primary by 100.
 - **Next step.** The nine rows still without a frame, in the order the record now keeps
   (`unplaced` in `mcr-colistin-denominator-frames.json`), largest first: China 1,611 (row 2), then
-  South Africa 50 (row 26), Nigeria 35 (row 24), then the rest (3, 4, 8, 9, 10, 16). Row 12
+  Nigeria 35 (row 24), China 130 (row 3), and the rest (4, 8, 9, 10, 16). Row 26 (South Africa 50)
+  has left that list: read in full in §5n and placed in frame 2 on 2026-11-25 (§5o). Row 12
   (Japan 684) was placed in frame 1 on 2026-11-24 (§5k), after row 7 (Bangladesh 1,200) the same day
   (§5j). Row 2 cannot be read from here — the correspondence
   has no abstract, no PMC copy and the publisher returns 403 (run 20261123T205650Z) — so the next read
-  in turn is row 26, then row 24 and row 3. The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
+  in turn is row 24, then row 3. The Ewers block that was first on this list on 21 November is closed in §5f; **row 27 Tunisia is
   read and does not need re-reading** — §5g places its design in frame 2 and states, as the queue's
   closing condition allows, why its printed denominator cannot go into the record without a method
   change: the 676 its row prints is not a population the primary reports (the study's *E. coli* N is
@@ -861,20 +862,38 @@ no prior colistin use, i.e. the two conditions under which the authors expected 
 neither 2.0% nor 12.5% estimates prevalence; the row supports only "mcr-1 was present, at a rate
 between 1/50 and something larger the study did not measure".
 
-**The frame, and a label that is narrower than its frame.** The row belongs to frame 2 — *isolates
+**The frame, and a label that was narrower than its frame — repaired on 2026-11-25, in the pass that placed the row.** The row belongs to frame 2 — *isolates
 screened for a phenotype, genotyped only in a subset, so n/N is a lower bound* — which is exactly the
-Canada/India/Tunisia design's arithmetic. But frame 2's printed name says "genotyped only if positive",
-and that is false here: the eight were selected by maximum MIC and farm history, not by a positive
+Canada/India/Tunisia design's arithmetic. But frame 2's printed name said "genotyped only if positive", which was false here: the eight were selected by maximum MIC and farm history, not by a positive
 phenotype (every isolate was susceptible). The name describes Canada's selection rule, not the frame's
-arithmetic. Widening it is a one-string edit in four files (the frames script, the sheet's table, the
-pinning test's EIGHT_FRAMES, and five prose references), so it is left for the pass that places this
-row rather than done at the end of this one; until then the frames script's frame-2 note carries the
-exception on the row, where a reader of the JSON meets it.
+arithmetic. It now reads *genotyped only in a subset*, and the rename was made in the same change that placed the row — the frames script, the sheet's table, the pinning test's EIGHT_FRAMES, this record and the prose references — because a name that is false of one of its members is an error the next reader inherits. The placement arithmetic is §5o.
 
-**What the placement will change, computed now so the next wake does not have to re-derive it.** Frame 2
+**What the placement changes** (computed on 2026-11-24, done on 2026-11-25 — see §5o). Frame 2
 goes 6,057 / 11 = 0.18% to 6,107 / 12 = **0.1965%**; its own row range widens at the top from 1.98% to
 2.00%. The placed set goes 29 → 30 rows, 34,291 → 34,341 isolates (90.68% → 90.81%), and the quoted
 range's floor moves for the fourth time and from the same frame: **0.18% → 0.20%**, spread 175-fold →
 161-fold. That is four numeric edits in the pinning test (rows, N, share, floor) plus the sheet's
 quotable sentence and its frame-2 row — the regeneration this read owes, to be done in the wake that
 adds "26" to the frame and removes it from UNPLACED_READ_ORDER.
+
+### 5o. Row 26 placed, and frame 2's name repaired in the same change (Desi, 2026-11-25, 01:0xZ)
+
+The one-step regeneration §5n left owed, done rather than described. Row 26 (South Africa, 50 / 1) is a
+frame-2 member — phenotyped in full, genotyped in a chosen subset — and frame 2's printed name was widened
+in the same change from *genotyped only if positive* to *genotyped only in a subset*: the old name was true
+of Canada and India and false of this row, whose eight PCR-tested isolates were chosen for maximum colistin
+MIC on farms with no prior colistin use, and every one of which was susceptible. The arithmetic was right in
+both studies; the name was not.
+
+Regenerated together in `research/mcr-colistin-denominator-frames.json`,
+`research/mcr-colistin-denominator-sheet.md`, this record and
+`tests/test_mcr_colistin_denominator_sheet.py`:
+
+- placed set 29 → **30 rows**, 34,291 → **34,341** isolates (90.7% → **90.8%** of the table);
+- frame 2: 6,057 / 11 = 0.18% → 6,107 / 12 = **0.196%**; the quoted range's floor goes **0.20%**, the spread
+  **161-fold** — the fourth time frame 2 has set the floor, and it now sets it by accumulating rows rather
+  than by being a singleton;
+- frame 2's row range widens at the top to 2.00% (row 26), and the placed pool is 2,207 / 34,341 = 6.43%;
+- `unplaced` now lists eight rows in read order: China 1,611 (row 2, unreadable from here), Nigeria 35
+  (row 24), China 130 (row 3), China 668 (row 4), Bangladesh 104 (row 8), Vietnam 210 (row 9), Pakistan 120
+  (row 10), Germany 154 (row 16).

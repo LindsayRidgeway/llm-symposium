@@ -72,8 +72,8 @@ FRAMES = [
         "is 143/360, so it is placed here on the paper's own arithmetic and the doubt is written down.",
     },
     {
-        "frame": "isolates screened for a phenotype, genotyped only if positive",
-        "rows": ["28", "11", "27"],
+        "frame": "isolates screened for a phenotype, genotyped only in a subset",
+        "rows": ["28", "11", "27", "26"],
         "why": "Canada genotyped the 12 colistin-resistant isolates of 5,571 and nothing else, so 2/5,571 "
         "is a lower bound among isolates tested for phenotype, not a gene prevalence (§5d). India (§5l) is "
         "the same design on a different substrate: 253 non-duplicate sewage isolates phenotypically "
@@ -86,7 +86,15 @@ FRAMES = [
         "on a denominator the primary itself reports and the review does not: 233 E. coli, not the printed "
         "676, which appears in no table of the paper. It is the record's first DENOMINATOR REPLACED BY THE "
         "PRIMARY row: the printed cell is retained in its member entry, and the rule is the dict "
-        "DENOMINATOR_FROM_PRIMARY in this script rather than a special case at the end of a wake.",
+        "DENOMINATOR_FROM_PRIMARY in this script rather than a special case at the end of a wake. Row 26 "
+        "(South Africa 50 / 1, §5n) joins on the same arithmetic and not the same selection rule: 50 "
+        "clinical poultry isolates were phenotyped (none resistant), and only the eight with the maximum "
+        "colistin MIC from farms with no prior colistin use were PCR-tested, one of which carried mcr-1 "
+        "— so 1/50 is a lower bound, the tested denominator is 8, and the eight were chosen for expected "
+        "positivity rather than for a result. That is why this frame's NAME widened in the same pass, "
+        "from 'genotyped only if positive' to 'genotyped only in a subset': the old name described "
+        "Canada's selection rule and was false of row 26, whose eight were all susceptible (the paper "
+        "concedes 'prevalence could be underestimated since not all isolates were tested').",
     },
     {
         "frame": "hosts (animals and humans enrolled)",
@@ -139,6 +147,7 @@ FRAMES = [
 # How far down each row's evidence goes, where this pass changed it. Rows not named here were read as
 # §5c-§5k record (full text, PMC page or abstract) and that is where their basis is written.
 READ_BASIS_NOTES = {
+    "26": "full text (JATS XML, PMC8654743) - mcr-colistin-harmonisation.md 5n",
     "11": "abstract (Europe PMC, 1,659 chars; Springer paywalled, no PMCID) - mcr-colistin-harmonisation.md 5l",
     "14": "abstract (Europe PMC, 1,436 chars; Elsevier, no open full text) - 5l",
     "15": "abstract (Europe PMC, 1,759 chars; Elsevier, no open full text) - 5l",
@@ -181,7 +190,7 @@ DENOMINATOR_FROM_PRIMARY = {
 # build() computes the open set from the seed and refuses to run unless this list is exactly that set,
 # so placing a row fails the generator until the list is updated here — the open list cannot go stale
 # silently, which is the failure that outlived the waking that noticed it.
-UNPLACED_READ_ORDER = ["2", "26", "24", "3", "4", "8", "9", "10", "16"]
+UNPLACED_READ_ORDER = ["2", "24", "3", "4", "8", "9", "10", "16"]
 
 # Why each open row is still open. Only two states exist and neither is a frame: `unreadable from
 # here` (a source refusal, which no later wake should re-attempt without new information) and
@@ -194,11 +203,6 @@ UNPLACED_NOTES = {
         "why": "one-page Lancet correspondence (Shen et al. 2016, row ref. 25): no abstract, no PMCID, "
         "publisher returns 403. Refused on 2026-11-23 (run 20261123T205650Z) and again on 2026-11-24. "
         "Largest open row in the table, and it cannot be closed from this checkout without a copy.",
-    },
-    "26": {
-        "read_status": "not read",
-        "why": "next read in turn (§7). 50 isolates and 1 positive, so it can move a frame rate but "
-        "hardly the range; it is first because two larger rows are refused or already read.",
     },
     "24": {"read_status": "not read", "why": "next after row 26 (§7). 35 isolates, 3 positives."},
     "3": {
@@ -363,7 +367,12 @@ def build() -> dict:
         "the OPEN set is now data (`unplaced` below), computed as seed minus placed, ordered by the read "
         "order in §7, and carrying each row's status and the reason it is open. The generator refuses to "
         "build if a placement leaves the list stale, so the nine rows no longer have to be re-derived by "
-        "subtracting eight frames' members from thirty-eight seed rows in every colistin wake.",
+        "subtracting eight frames' members from thirty-eight seed rows in every colistin wake. Extended a "
+        "ninth time 2026-11-25T01:0xZ — row 26 (South Africa 50 / 1) placed in frame 2 on the full read "
+        "in §5n, and frame 2's name widened from 'genotyped only if positive' to 'genotyped only in a "
+        "subset' in the same pass, because that name described Canada's selection rule and was false of "
+        "the eight isolates row 26 tested. Placed set 29 -> 30 rows, 34,291 -> 34,341 isolates, and the "
+        "quoted floor moves 0.18% -> 0.20% from frame 2 for the fourth time.",
         "closes": "value-queue item colistin-unread-rows-frames (advancing it; colistin-denominator-sheet "
         "is closed)",
         "source": "research/mcr-colistin-seed.json (the review's Table 1, as transcribed); frame "
@@ -428,7 +437,8 @@ def build() -> dict:
             f"{len(rows)} rows have no frame (the `unplaced` block lists them, in read order, with the "
             "reason each is open), and the largest of them (China 1,611 row 2) could widen or narrow it. The range's floor has "
             "already moved twice for this reason: it was 0.04% while frame 2 held only Canada, then 0.12% "
-            "when India joined that frame, and it is 0.18% now that Tunisia's primary denominator is in it.",
+            "when India joined that frame, 0.18% when Tunisia's primary denominator entered it, and 0.20% "
+            "now that row 26 is in it.",
             "That any row here is a population prevalence. Every frame is a surveillance design, and the "
             "largest block is one laboratory's diagnostic submissions of diseased piglets.",
         ],
