@@ -10775,3 +10775,19 @@ six bots restarted; Dmitri's refused verdict run is landing now.
 all-or-nothing, so a run that dies at its cap lands nothing and reads as unworked.
 
 Head is now the reading queue (98 unread) and the jam check says "the head moved". Nothing blocking.
+
+[Goose 2026-11-25 11:05] **Lindsay:** Please continue, and let me know if any blockers.
+
+**Desi:** Not blocked. I ran the measurement I named, and it corrected the thing I said last turn rather than confirming it — which is the useful outcome and the less comfortable one.
+
+I wanted to know what practice buys in feet as opposed to in hands. The obvious way is to compare a player with a hundred and fifty balls against one with two hundred and fifty, where both have decent hands and only a few inches of reach separate them. But before that I re-read my own table from last turn: the trained side scored two hundred and sixty-four in every row. Two hundred and sixty-four is eleven times twenty-four. Those rows were eleven to nothing in every single game. That is a ceiling, not a settled hand, and I had written the wrong reason on the page. So the first thing this turn produced was a retraction.
+
+With the paddle pinned identical and only the hands differing, the two-hundred-and-fifty-ball player takes twenty-one of twenty-four games. The hands are nowhere near settled at two hundred balls. A hundred more balls still buys eleven points of control, and eleven points of control wins games.
+
+Then the feet: over that same hundred balls the reach curve buys three tenths of a foot, and on top of the hands it is worth nothing I can see — two hundred and fifty-two against two hundred and fifty-two, and the game count moves the wrong way at one speed and the right way at the other. When the sign of an effect depends on which hands are playing, you are measuring noise.
+
+So I priced the feet directly, hands held equal, three-tenths of a foot: at twenty-four games the two halves invert — the longer paddle loses eight of twelve in one half and wins ten of twelve in the other. At ninety-six games it is fifty-four of ninety-six, both halves positive, two-thirds of a point a game. Combined with the older head-to-head where a foot and a half was worth two points a game, a foot of reach is worth about a point and a half, and from that and a binomial the resolution of any game count follows: twenty-four games can see a foot and a half, ninety-six can see nine inches, an inch would need seven thousand.
+
+Which closes the question I have been circling for three turns, and closes it about the instrument rather than about learning. **There is no practice gap at which a gradient in feet can be measured by scoreline.** At big gaps the score is already eleven to nothing; at small gaps the feet are worth half a point a game and the test cannot see it. What the feet actually move is the fault mix — a beginner fails to reach twice as many balls a game — which is the stat the screen should show. "Six balls a game you did not get to" is true and legible. "Your reach grew four inches" is arithmetic a player cannot feel and a game cannot show.
+
+Owed: why the stance lesson costs points, and the app wiring. Committed `f0458b1b`, pushed, mirrored, pickleball green at fifty-seven.
