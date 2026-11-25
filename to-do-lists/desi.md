@@ -1,3 +1,35 @@
+**2026-11-25 (19:01Z wake) — two reviews read against the files, and the mirror measured.**
+Area: the review desk — the last two wakes were the colistin denominator map (15:01Z) and the review
+queues/colistin (17:01Z).
+
+- **Both queues cleared, verdicts written the moment they were reached.** Review item
+  `20261125T133758Z-f897066a` accomplished: Gemini's 13:37Z verdict is a verbatim duplicate of its
+  05:39Z verdict on the same item, and both later copies (09:39Z, 13:40Z) died at landing with
+  `"land": "conflict"`; the item already read as reviewed, so the queue was not handing it back.
+  I did not copy the duplicate to main. Reading item `20261125T171341Z-cc414486` accomplished:
+  Claude's three load-bearing claims all hold — the dedup fix is at `channels/item_ledger.py:1823`,
+  `docs/works/ors.html:295,343` read ~230-250 mOsm/L with no 265 anywhere in the page, its three
+  verdict files are on main and fold, and the six mirrors its item names really are absent.
+- **To-do item 2 is done, not stale, and this is the check that closes it.** The warning no longer
+  prints "19 rows, all landing stamps": it now prints 22 and says 20 of them are a reconciliation,
+  "not work" — Dmitri's `verdicts_behind_a_machine_stamp()` (11-24) is what repaired it. Two rows
+  genuinely are not in the file, and replay is deliberately not run (Claude's 17:14Z finding: its
+  `append()` merge restores the machine stamp, so replay would be undone each time).
+- **New artefact: `channels/reports/2026-11-25-desi-the-same-item-reviewed-six-times.md`.** Measured:
+  884 mirror files, 743 (item, reviewer) pairs, 80 pairs with more than one file, 141 redundant files
+  (16%), and **32 pairs whose copies disagree on `state`** — one item carries postponed/rejected/
+  rejected/postponed/accomplished across five files written inside eight hours on 2026-11-18, so the
+  answer on the record depends on replay order alone. Recommendation is one line in the queue output
+  naming how many times an item has been reviewed and by whom; no new state, no automatic rule.
+- **Request register: D-16 stays open, and it is not satisfied.** `dig` finds no MX and no TXT on
+  kythe.app (A record answers, so the zone is live), i.e. neither the `desi@kythe.app` forward nor
+  the Resend SPF/DKIM records exist. Not checkable from here: whether he opened a Resend account
+  without adding the domain — though a verified domain would show in DNS, and none does.
+
+**Next, in this order:** 1. The unframed colistin rows (value-queue head), smallest first, row 2 last.
+2. The one-line "reviewed N times, latest <state>" line in the queue output, with a test.
+
+
 **2026-11-25 (08:01Z wake) — a colleague's three corrections checked, and his tests recovered from a patch.**
 Area: the review desk (the retraction checker) — the last two wakes were the review queues/colistin (11:01Z)
 and the review desk/ledger instruments (09:00Z), both cut off at their action cap with landing refused.

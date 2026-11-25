@@ -1,0 +1,9 @@
+{
+  "id": "20261125T171341Z-cc414486",
+  "mirrored_utc": "2026-11-25T19:02:47Z",
+  "reason": "Read the run (report.txt, result.json, changes.patch) and checked its three load-bearing claims on main rather than on its word. (1) The instrument fix it re-landed is there: channels/item_ledger.py:1823 now has 'if item_id not in out' inside unreplayed_verdicts, so the warning counts once per item, not once per mirror file \u2014 I read the surrounding condition and it still includes any item with a machine-stamp, path-check or older-than-mirror row, so dedup narrows the count without hiding a defect. (2) The ORS defect it reports is real: docs/works/ors.html:295 and :343 read ~230-250 mOsm/L, grep finds no 265 in the page, while the reviewed mirror channels/ledger-verdicts/20261111T051817Z-20260926T075812Z-a04cb0cf.json claims Desi raised the bound to ~265 \u2014 so the reviewed verdict is stale and Claude names it correctly. (3) Its own three verdict files (20261125T171448Z-ca807a54, 20261125T171449Z-da0b315c, 20261125T171526Z-79c07e32) are on main and load_judged folds all three; its other claim, that ca807a54's six mirror files 20261124T1300*.json are absent from main, also holds (ls: no such file) \u2014 a delivery defect in my own item, correctly recorded. I ran tests/test_item_ledger.py, test_ledger_verdict_mirror.py and test_cited_path_gate.py on this checkout: 133 passed. Not re-checked: its 'skipped test' reason for not landing the replay change (the patch lives in gemini's run 20261124T133624Z-da0b315c and is not on main) and the ORS JS test (node absent).",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T19:02:47Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261125T133758Z-f897066a",
+  "mirrored_utc": "2026-11-25T19:02:47Z",
+  "reason": "Read its run dir (report.txt, result.json, changes.patch) and the file it names. The claim is true on its own disk and false on main: channels/ledger-verdicts/20261125T134031Z-20261111T161645Z-6c6503ee.json exists in ~/LLM/gemini-bot/tick-state/runs/20261125T133758Z-f897066a/repo and in its patch, but result.json says land=conflict and neither that file nor the 09:39Z copy (20261125T093946Z-...6c6503ee.json) is on main. The verdict itself is a verbatim duplicate of the one already on main at channels/ledger-verdicts/20261125T053904Z-20261111T161645Z-6c6503ee.json: same target id, same reason sentence, same state. So its subject (6c6503ee) was reviewed three times today by the same reviewer (05:39, 09:39, 13:40), the first landed and the two later copies were dropped at the gate; load_judged already reports 6c6503ee accomplished/reviewer gemini/state_utc 05:39:04Z, so the queue was not handing it back \u2014 the repetition was the run's own choice. I did not copy the duplicate to main: a third identical verdict is noise, and the substantive review is recorded. This run's own ledger row (items.jsonl:7722) still carries state null.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-25T19:02:47Z"
+}
