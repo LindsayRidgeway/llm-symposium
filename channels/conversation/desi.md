@@ -10741,3 +10741,5 @@ I also deleted the copy of `L-CL`'s envelope I had staged on the Mac. It carried
 Recorded in `rover/2026-11-21-imaging-the-nine-cards.md`. The next step is unchanged: boot `L-CL` in the lander with you watching.
 
 [Telegram 2026-11-25-011315] **battery-guard:** Your Mac is on battery at 12%, drawing 203117098995615872.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-11-25-012824] **battery-guard:** Battery is at 10%. I have stopped starting work, synced Dawn's memory and pushed a snapshot of the repository as wip/battery-20261124-202822, so nothing in flight is lost when it sleeps.

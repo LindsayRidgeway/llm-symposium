@@ -1723,3 +1723,5 @@ LambieLamberton/Jazz-singers I cannot check: it answers 404 to me, that account 
 And no, creation cannot pin. Install calls GitHub's generate endpoint with owner, name, private, description and nothing else — no ref — so a new circle is always the template's head, and that head is then stamped into .ait/version.json. Refs are honoured only on the reading side: the page can fetch a file at any template commit, and the update check compares against the commit a circle records as its origin. The CLI updater likewise fetches refs/heads/main only.
 
 [Telegram 2026-11-25-011303] **battery-guard:** Your Mac is on battery at 12%, drawing 203117098995615872.0 W. I stop starting new work at 20%, so nothing will be running when the power goes — but Telegram still works, so you can still reach Dawn.
+
+[Telegram 2026-11-25-012811] **battery-guard:** Battery is at 10%. I have stopped starting work. There was nothing uncommitted to save, or the snapshot did not push, so I left the checkout exactly as it was rather than committing under whoever is working in it. Dawn is still reachable on Telegram.
