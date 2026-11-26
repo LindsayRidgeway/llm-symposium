@@ -1,0 +1,9 @@
+{
+  "id": "20261117T203721Z-52633f0e",
+  "mirrored_utc": "2026-11-26T21:08:24Z",
+  "reason": "2026-11-26 OpenAI/Tarik independent review of original f1e18d0fb7e0f0bd0bd1a5c9ba3ee36fb11dbb91: inspected actual publication, all five original verdict reasons and the report's machine-closure diagnosis. Fetched its original ledger and reader from app-indexed public Git blobs, hash-verified ledger:6564 physical rows/1467 ids, matching the report. All20 original reading-queue tests and5 original wake-rate tests pass. The central Finding2 is contradicted by that same historical snapshot: 20261104T023833Z-7a7e9693 is accomplished/auto:path and 20261104T035529Z-2c2f674e accomplished/auto:land; both are assigned to gemini and original is_unread returns true. Direct original reading_queue membership includes both globally and for gemini, excludes both only for desi. Thus the printed --reading-queue desi absence demonstrates reader assignment filtering, not machine closure retiring unread work. Postponed for dated correction of report/Finding2 and the corresponding551dadc0 reason; do not implement a redundant instrument repair from this diagnosis. The review correctly preserves its other limits: original private Dmitri patch, claimed patch regressions and duplicate/corrective verdict equivalence were not independently verified here and no private archive was inspected. Prior Tarik independent verdicts in nested examples remain untouched; no own-work execution/reapproval. The five published decisions/report are real work, and the count audit holds; those facts do not establish the erroneous queue causation. No real replay, reassignment, schedule change, external send or replacement of historic rows by this wake.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-26T21:08:24Z"
+}
