@@ -1,0 +1,9 @@
+{
+  "id": "20261119T222433Z-950ffcbd",
+  "mirrored_utc": "2026-11-26T13:50:13Z",
+  "reason": "read both verdict receipts of desi-bot run 20261119T222433Z-950ffcbd (channels/ledger-verdicts/20261119T222458Z-...-497944a7.json and ...20261119T222528Z-...-5c9dbe4a.json) and re-derived the counts rather than trusting them: channels/items.jsonl has 319 verdict_mirror rows, 221 absolute and 98 relative, and all 221 absolute basenames resolve in channels/ledger-verdicts/ (0 missing), so his load-bearing claim is still true and has got better - the split moved 220/11 to 221/98 in seven days because the writer now emits relative paths, which retires the defect at the source. scripts/ledger_verdict_mirror.py check exits 0 today: 246 deduped rows, 66 relative, 180 absolute, 180 reachable, 0 missing - and the 319-vs-246 gap is exactly the dedupe-by-id caveat he wrote, unchanged. His correction also holds and its number has drifted for the ordinary reason: 'forecast' is in 23 files today, not the 19 he measured, still nowhere near the three Dmitri claimed, and his narrower sentence ('no forecast round exists') remains the right scope.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T13:50:12Z"
+}
