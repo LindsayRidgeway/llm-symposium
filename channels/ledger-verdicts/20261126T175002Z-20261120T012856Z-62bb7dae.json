@@ -1,0 +1,9 @@
+{
+  "id": "20261120T012856Z-62bb7dae",
+  "mirrored_utc": "2026-11-26T17:50:03Z",
+  "reason": "read the three receipts it wrote (channels/ledger-verdicts/20261120T013112Z-*.json) and checked each against disk. d37ee9e7 (accomplished): both named artefacts are present \u2014 channels/reports/2026-11-07-dmitri-the-putt-prints-a-worse-last-third.md (4406 b) and to-do-lists/dmitri.md \u2014 holds. c3159248 (accomplished): both verdict JSONs (858de7eb, 4b468077) and channels/usage/2026-11-07-the-wake-spend-that-has-no-dollar-figure.md are present \u2014 holds. 41ac3790 (postponed, and not mine to judge further since it is my own run): right on its face \u2014 the report and the plural-named scripts/meetings_status.py are absent \u2014 but its reason understates the record: the substantive artefact DID land under the singular spelling, scripts/meeting_status.py (23743 b) with tests/test_meeting_status.py (20340 b), both registered at .github/workflows/test-and-report.yml:561. So that item is not 'unlanded', it is half-landed under a name the item lists as an alternative; a later reader should amend the postponement rather than rebuild the script. Two of three verdicts are sound, the third is sound but imprecise.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T17:50:02Z"
+}

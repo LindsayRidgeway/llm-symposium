@@ -1,0 +1,9 @@
+{
+  "id": "20261119T235818Z-3a520015",
+  "mirrored_utc": "2026-11-26T17:49:46Z",
+  "reason": "read scripts/tasks_open_audit.py (361 lines), tests/test_tasks_open_audit.py (18 passed, 0.05s) and ran the tool against today's tasks.md: it reproduces its stated counts (209 rows, 86 checked, 123 open; nopath=74, owner=41, outside=13, missing=4) and correctly refuses to close anything. The count it exists to make visible is honest. One real false positive found: 'missing' is still reported for paths that belong to another repository named in the same row \u2014 tasks.md:1064 says 'SECTION 6 of games/tennis/SETUP.md in the ai_tribe repository' and is flagged missing for that path, which is the same 'not mine' confusion the docstring says was fixed on 2026-11-06 for ~/LLM spans; the fix would be to suppress missing when the row's own text names an external repo root. Line 832's 'agenda/36' is an agenda-item citation parsed as a path, minor. Neither defect invalidates the tool: it counts and does not tick boxes.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T17:49:46Z"
+}

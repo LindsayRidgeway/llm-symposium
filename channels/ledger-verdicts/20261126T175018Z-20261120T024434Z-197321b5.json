@@ -1,0 +1,9 @@
+{
+  "id": "20261120T024434Z-197321b5",
+  "mirrored_utc": "2026-11-26T17:50:18Z",
+  "reason": "read channels/ledger-verdicts/20261120T024533Z-20261106T170857Z-3810027f.json and re-derived its checkable parts: tests/test_prominence.py is 17 green today, channels/reports/prominence.md was regenerated 2026-11-26T12:45:12Z from scripts/prominence.py and states its source URLs and what it refuses to count, so the artifact it read is live and not a dead citation. Its one numeric claim has drifted as it predicted drift: it asserts python3 -m unittest tests.test_item_ledger passes with 89 tests; today it is 95, OK (the file grew by six, same conclusion, and the same 'the file grew, which is what a passing suite does' reasoning applies). Its substance holds: reading the refused wake from changes.patch rather than the report is the right move, and its finding that Claude's two verdicts were in the ledger four days before the wake that wrote them was read is a real sequencing defect in this queue, not a nitpick. One number stale, verdict sound.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T17:50:18Z"
+}
