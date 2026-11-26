@@ -1056,5 +1056,81 @@ class TestReviewHistory(unittest.TestCase):
             self.assertIsNone(il.review_history_line("20261114T082703Z-28ab1b7c", d))
 
 
+class TestReadingQueueShowsHistory(unittest.TestCase):
+    """The reading queue must print the same history line as `--queue` (added 2026-11-26).
+
+    Measured on 2026-11-25: 884 mirror files, 80 (item, reviewer) pairs with more than one file, and
+    32 pairs whose copies disagree on `state`. The one-line history that names that was wired into
+    `--queue` only. The reading queue — the command that hands out the pile, and the one a wake
+    opens with — printed no history at all, so a never-read item whose mirror held an earlier
+    `postponed` beside its landing stamp read exactly like a fresh one.
+    """
+
+    ITEM = "20261120T000000Z-aaaaaaa1"
+
+    def _ledger(self, d: Path) -> Path:
+        path = d / "items.jsonl"
+        il.append([{
+            "id": self.ITEM, "amigo": "gemini", "scope": "secretary",
+            "title": "an item nobody has read", "state": "accomplished",
+            "reviewer": "auto:land", "reason": "landed on main (lander's test gate passed)",
+            "filed_utc": "2026-11-20T00:00:00Z", "changed_paths": ["docs/x.html"],
+        }], path)
+        il.name_unread(path=path, by="collect")
+        return path
+
+    def _run_branch(self, path: Path, mirror: Path) -> str:
+        real_queue, real_index = il.reading_queue, il.review_history_index
+        argv = sys.argv[:]
+        out = io.StringIO()
+
+        def on_the_temp_ledger(path_=None, who=""):
+            return real_queue(path_ or path, who=who)
+
+        def on_the_temp_mirror(vdir=None, ids=None):
+            return real_index(mirror, ids=ids)
+
+        # the name comes from the frozen draw, not from this test: read as whoever the ledger named
+        who = il.load_judged(path)[self.ITEM]["reading_assigned_to"]
+        try:
+            il.reading_queue = on_the_temp_ledger
+            il.review_history_index = on_the_temp_mirror
+            sys.argv = ["item_ledger.py", "--reading-queue", who]
+            with contextlib.redirect_stdout(out):
+                il._cli()
+        finally:
+            il.reading_queue, il.review_history_index = real_queue, real_index
+            sys.argv = argv
+        return out.getvalue()
+
+    def test_an_item_whose_copies_disagree_says_so_in_the_reading_queue(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            path = self._ledger(d)
+            mirror = d / "ledger-verdicts"
+            mirror.mkdir()
+            (mirror / "a.json").write_text(json.dumps({
+                "id": self.ITEM, "state": "postponed", "reviewer": "claude",
+                "state_utc": "2026-11-19T09:00:00Z"}), encoding="utf-8")
+            (mirror / "b.json").write_text(json.dumps({
+                "id": self.ITEM, "state": "accomplished", "reviewer": "auto:land",
+                "state_utc": "2026-11-20T00:00:00Z"}), encoding="utf-8")
+            text = self._run_branch(path, mirror)
+            self.assertIn(self.ITEM, text)
+            self.assertIn("reviewed 2 times by auto:land, claude", text)
+            self.assertIn("latest: accomplished (auto:land, 2026-11-20T00:00)", text)
+            self.assertIn("copies disagree on state (postponed, accomplished)", text)
+
+    def test_an_item_with_no_mirror_gets_no_history_line(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            path = self._ledger(d)
+            mirror = d / "ledger-verdicts"
+            mirror.mkdir()
+            text = self._run_branch(path, mirror)
+            self.assertIn(self.ITEM, text)
+            self.assertNotIn("reviewed ", text)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

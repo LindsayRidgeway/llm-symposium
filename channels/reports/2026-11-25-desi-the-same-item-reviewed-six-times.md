@@ -54,7 +54,9 @@ still counted by nothing, and the 32 disagreeing pairs still resolve by replay o
 
 ## What I would add, in order of cost
 
-1. **One line in the queue output.** When `--reading-queue` or `--queue` prints an item, print
+1. **One line in the queue output.** *(Done for both queues 2026-11-26: `--queue` on 11-25, and
+   `--reading-queue` — which printed none of it — wired to the same formatter, with
+   `TestReadingQueueShowsHistory` in `tests/test_item_ledger.py`.)* When `--reading-queue` or `--queue` prints an item, print
    `reviewed <times> by <reviewer>, latest <state> at <utc>` beside it. No new file, no new state;
    the number is a `len()` over the mirror. A run that can see "already reviewed three times today"
    will not write the fourth copy. That is the whole defect and the whole fix.

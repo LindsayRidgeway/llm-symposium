@@ -1946,21 +1946,35 @@ def review_history(item_id: str, vdir: Path = VERDICT_DIR) -> list[dict]:
     Nothing is decided here: no state is chosen, nothing is rewritten, no rule is applied. This is a
     reading of what is already on disk, returned so the one place that hands out work can say it.
     """
-    out: list[dict] = []
+    return review_history_index(vdir, ids=[item_id]).get(item_id, [])
+
+
+def review_history_index(vdir: Path = VERDICT_DIR,
+                         ids: "set[str] | list[str] | None" = None) -> dict[str, list[dict]]:
+    """The mirror, read in one pass, grouped by item id — optionally only for `ids`.
+
+    Added 2026-11-26 (Desi). `review_history()` parses the whole directory to answer about one item,
+    and the mirror held 884 files on 2026-11-25, so a queue that printed a history line per row would
+    read and parse the directory once per row. Same answer, one pass. `ids=None` means every item.
+    """
+    out: dict[str, list[dict]] = {}
     if not vdir.is_dir():
         return out
+    want = set(ids) if ids is not None else None
     for f in sorted(vdir.glob("*.json")):
         try:
             rec = json.loads(f.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
-        if rec.get("id") != item_id:
+        item_id = rec.get("id")
+        if not item_id or (want is not None and item_id not in want):
             continue
         rec = dict(rec)
         rec["_mirror_file"] = f.name
-        out.append(rec)
-    out.sort(key=lambda r: (str(r.get("state_utc") or r.get("mirrored_utc") or ""),
-                            r["_mirror_file"]))
+        out.setdefault(item_id, []).append(rec)
+    for hist in out.values():
+        hist.sort(key=lambda r: (str(r.get("state_utc") or r.get("mirrored_utc") or ""),
+                                 r["_mirror_file"]))
     return out
 
 
@@ -1971,7 +1985,11 @@ def review_history_line(item_id: str, vdir: Path = VERDICT_DIR) -> str | None:
     mirror is named as the record because replay order is not a tie-break: when copies disagree the
     line says so rather than picking a winner silently.
     """
-    hist = review_history(item_id, vdir)
+    return review_history_line_from(review_history(item_id, vdir))
+
+
+def review_history_line_from(hist: "list[dict]") -> str | None:
+    """The same line, from history already read — so a queue can print it for many rows in one pass."""
     if not hist:
         return None
     by: dict[str, int] = {}
@@ -2442,11 +2460,19 @@ def _cli() -> int:
         measured = measured_cadence()
         print(f"item_ledger: {len(mine)} never-read item(s) carry {args.reading_queue}'s name. "
               f"These are in the repository already and nobody has checked them.")
+        # 2026-11-26 (Desi): the history line was wired into `--queue` on 11-25 and into this branch
+        # not at all — the one command that hands out the pile printed none of it, so an item whose
+        # mirror held a reviewer's earlier `postponed` and a later machine `accomplished` read
+        # exactly like one nobody had ever touched. Read the mirror once for the rows on screen.
+        hist_index = review_history_index(ids=[r["id"] for r in mine[:args.hours]])
         for rec in mine[:args.hours]:
             reader = rec.get("reading_assigned_to") or "unnamed"
             print(f"  {rec['id']}  by {rec.get('amigo','?'):8} filed {(rec.get('filed_utc') or '')[:10]}"
                   f"  -> {reader} [{rate_beside(measured, reader)}]"
                   f"  {(rec.get('short_title') or rec.get('title') or '')[:60]}")
+            _hist = review_history_line_from(hist_index.get(rec["id"], []))
+            if _hist:
+                print(f"      {_hist}")
         if len(mine) > args.hours:
             print(f"  … and {len(mine) - args.hours} more")
         # 2026-11-25 (Dmitri): this branch printed the notice the 11-24 fix corrected only in
