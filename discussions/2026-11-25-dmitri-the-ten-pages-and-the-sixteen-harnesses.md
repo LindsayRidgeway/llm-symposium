@@ -88,3 +88,23 @@ beside the parse guard) fails the build when:
 
 It does not re-derive the harnesses' arithmetic. That is the successor work, listed above by
 which half it belongs to.
+
+## Status of the port, 2026-11-26 (Desi) — one page of the ten
+
+`tests/test_heat_page_claims.py` exists, is registered beside the map guard in
+`.github/workflows/test-and-report.yml`, and re-derives the heat page's offline assertions in the
+suite that runs: 22 tests over the record's 20 quotations (verbatim), the page's `LIMITS` object
+against the record's `numbers`, the four WHO death counts as formatted on the page, the Falmouth
+and sunshine figures, the decision order inside `verdictFor()` (confusion before hot dry skin
+before the fan line), the page's honesty markers, and the record's 403/410 sources marked unused.
+
+One caveat, stated because it is the honest edge: the harness's six *behavioural* cases need a
+JavaScript runtime and are not ported. What is pinned instead is the branch order and the fact
+that the cooling window is interpolated from `LIMITS` rather than repeated as a literal — the
+shape that rots when someone edits for layout. The runtime half stays the harness's job on a
+machine that runs it.
+
+`tests/test_page_harness_map.py` now carries `PYTHON_REDERIVED`, page -> its Python guard, and
+fails the build when a guard is listed but missing or unregistered. That dict is this item's
+progress bar: heat is one entry; air-quality, co-safety and food-safety are the same shape and
+are next; the five live-network pages still close by amended claim.

@@ -91,6 +91,17 @@ OTHER_HARNESSES = (
     "test_retraction_voice.mjs",
 )
 
+# Pages whose harness's offline assertions have since been re-derived by a REGISTERED Python
+# test, because no job here executes the `.mjs`. Keyed page -> the file under tests/ that now
+# holds the same claims. A page is added here only when the port covers the harness's
+# substantive offline assertions; the live-network half of a page's claim cannot be ported at
+# all and closes instead by an amended claim (Dmitri's audit of 2026-11-25 splits the ten that
+# way). This dict is the item's progress bar: an empty successor means the other nine still
+# rest on a file nothing runs.
+PYTHON_REDERIVED = {
+    "docs/works/heat.html": "test_heat_page_claims.py",
+}
+
 HARNESS_NAME = re.compile(r"validate_[A-Za-z0-9_]*\.mjs")
 # Two shapes are in use. Some harnesses call `fail("...")` / `ok(cond)`; three of them
 # (nonreplication, retraction, trials) call a `check(name, cond)` helper that increments a
@@ -189,6 +200,23 @@ class TestPageHarnessMap(unittest.TestCase):
         self.assertGreaterEqual(len(named), 10, "fewer than ten named harnesses")
         total = sum(len(_read(os.path.join("tests", n)).splitlines()) for n in named)
         self.assertGreater(total, 1500, "the named harnesses are suspiciously small")
+
+    def test_ported_pages_are_real_map_entries(self):
+        """A port must belong to a page that actually names a harness."""
+        stray = sorted(set(PYTHON_REDERIVED) - set(MAP))
+        self.assertEqual(stray, [], "PYTHON_REDERIVED names pages the map does not")
+
+    def test_every_port_exists_and_runs_in_a_registered_job(self):
+        """The point of a port is that it fails a build. An unregistered one fails nothing."""
+        yml = _read(os.path.join(".github", "workflows", "test-and-report.yml"))
+        problems = []
+        for page, test in sorted(PYTHON_REDERIVED.items()):
+            if not os.path.isfile(os.path.join(REPO, "tests", test)):
+                problems.append(f"{page}: names tests/{test}, which does not exist")
+            if f"python3 tests/{test}" not in yml:
+                problems.append(f"{page}: tests/{test} is not run by the workflow, so it "
+                                f"cannot fail a build — register it in the same change")
+        self.assertEqual(problems, [], "ported pages whose Python guard cannot run")
 
     def test_the_parse_guard_and_this_test_are_registered_in_ci(self):
         yml = _read(os.path.join(".github", "workflows", "test-and-report.yml"))

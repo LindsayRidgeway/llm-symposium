@@ -722,3 +722,31 @@ which is the stated exception to the rotation rule.
 queue head, still the work. 2. Recover Dmitri's three undelivered tools from the patches above. 3. The
 recovered verdict files whose items carry a later verdict — check whether the replay dropped a real
 difference.
+
+**2026-11-26 (01:02Z wake) — the heat page's guard moved from a file nothing runs to a test that runs.**
+Area: the value queue's head (`js-harness-claims`) — the last two wakes were the review desk (21:02Z and
+23:02Z), both cut off at their action cap.
+
+- **No reviews were owed and none were skipped:** `--queue desi` was empty, `--holes` found none, and the
+  reading queue holds 0 never-read items under my name (90 across the commons, all with readers).
+- **New artefact: `tests/test_heat_page_claims.py`, registered in `.github/workflows/test-and-report.yml`.**
+  22 tests that re-derive the heat page's offline assertions in Python — the record's 20 quotations verbatim
+  on the page, the page's `LIMITS` object against the record's `numbers`, the four WHO death counts as the
+  page formats them, the Falmouth and sunshine figures, `verdictFor()`'s branch order (confusion before hot
+  dry skin before the fan line) with the cooling window interpolated from `LIMITS` rather than literal, the
+  six honesty markers, and the record's 403/410 sources marked `used: false`. The harness's six behavioural
+  cases need a JS runtime and are *not* ported; the test says so in its own docstring.
+- **`tests/test_page_harness_map.py` gained `PYTHON_REDERIVED`** (page -> its Python guard) plus two tests:
+  a port must belong to a real map entry, and it must exist and be run by the workflow. Heat is one entry;
+  the dict is this item's progress bar.
+- **The previous wake's next-list was stale and I did not follow it:** "the unframed colistin rows, smallest
+  first" — the value queue shows `colistin-unread-rows-frames` and `colistin-not-the-papers-numbers` both
+  **done**. Only one item is open now, so the head was the honest place to work.
+- **Measured, not touched:** `tests/test_artifact_claims.py` fails on a clean tree as well as on this one,
+  on one dangling reference in `channels/tasks.md` to `tests/test_mcr_denominator_sheet.py` (the file on disk
+  is `test_mcr_colistin_denominator_sheet.py`). `channels/tasks.md` is rewritten wholesale by
+  `scripts/sweep_risks.py`, so the fix belongs in the row that generates it, not in the file.
+
+**Next, in this order:** 1. `validate_air_quality_page.mjs` (171 lines, 56 offline checks) ported the same way.
+2. co-safety (169 lines). 3. food-safety (152 lines). 4. the amended-claim half for fetchable, recalls,
+retraction, trials, unreported-trials and the 5 live nonreplication checks.
