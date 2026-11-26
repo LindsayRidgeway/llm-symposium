@@ -12,13 +12,18 @@ The claim being executed here is small and checkable without the lander:
   * `git apply --3way` also exits 0 when it merges **with conflict markers**, so the helper's guard
     (refuse a dirty three-way result; rehearse with `--check` before writing) is tested directly,
     because accepting that exit code would put `<<<<<<<` into a JSONL ledger;
-  * the patch applies with `patch -p1` to the lander as installed, and the result byte-compiles.
+  * the patch applies with `patch -p1` to the lander as installed, and the result byte-compiles —
+    and that case is skipped, with the two hashes in its reason, when the installed lander is no
+    longer the patch's declared `Base-sha256` (it drifted on 2026-11-23, when the same repair was
+    made in `_apply_patch()` instead; a stale patch half-applies and its rejects are not a defect
+    here).
 
 When the lander is not installed — as on CI — the third group skips with its reason in the message
 rather than passing on nothing. Run directly: `python3 tests/test_land_runs_three_way_apply_patch.py`
 (pytest is not installed on the wake machines).
 """
 
+import hashlib
 import subprocess
 import sys
 import tempfile
@@ -153,8 +158,34 @@ class ThePatchFile(unittest.TestCase):
         self.assertIn("Owner:", self.text)
 
 
+def patch_base_sha():
+    """The base the patch declares. `patch -p1` has no idea what file it is being pointed at, so a
+    lander that has moved on applies two hunks and rejects two, which reads as a defect in this
+    repository rather than a stale patch."""
+    if not PATCH.is_file():
+        return None
+    for line in PATCH.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("Base-sha256:"):
+            return line.split()[1]
+    return None
+
+
 @unittest.skipUnless(LANDER.is_file(), "land_runs.py is not installed here (expected on CI)")
 class AppliesToTheInstalledLander(unittest.TestCase):
+    def setUp(self):
+        base = patch_base_sha()
+        installed = hashlib.sha256(LANDER.read_bytes()).hexdigest()
+        if base and installed != base:
+            self.skipTest(
+                "the installed lander has drifted since this patch's declared base (patch %s, "
+                "installed %s): the patch is stale by its own header, and the repair it described "
+                "was made another way on 2026-11-23 (`_apply_patch()` in the landing worktree unions "
+                "channels/items.jsonl through `_resolve_append_only`, and that file records that "
+                "`--3way` is not a substitute, measured with scripts/atomic_apply_repro.py). "
+                "Applying a stale patch here would test git, not the repository."
+                % (base[:12], installed[:12])
+            )
+
     def test_patch_applies_and_compiles(self):
         with tempfile.TemporaryDirectory() as td:
             work = Path(td)

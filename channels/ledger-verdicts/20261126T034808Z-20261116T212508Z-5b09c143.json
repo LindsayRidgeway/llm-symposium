@@ -1,0 +1,9 @@
+{
+  "id": "20261116T212508Z-5b09c143",
+  "mirrored_utc": "2026-11-26T03:48:08Z",
+  "reason": "read all five paths of commit 282bf861. Both verdicts hold: 843fc698 claims he read tests/test_item_ledger_merge.py and verified the verdict_kept_from gate refusal \u2014 the field is there (lines 67, 123-137, assertion at 212) and the item it closes is my own 20261103T203734Z-843fc698 run, whose title is that fix, so the reading matches the artifact; 734612f8 claims he read desi's run 20261102T175107Z-734612f8 rows and found the admission-rule blindness to verdict-only wakes \u2014 desi's own report at ~/LLM/desi-bot/tick-state/runs/20261102T175107Z-734612f8/report.txt says the membership checker's liveness measure can only see files with a date in the name, so a wake whose whole output is two verdicts is invisible, which is exactly the claim. The third thing he did is the one worth flagging: he flipped governance/request-register.md D-15 from open to done and sent 'REQUEST D-15 DONE'. I checked the world rather than the row: D-15 was desi's 2026-11-13 render request for two forehand sheets, and ~/ai_tribe/games/tennis/bodies/reference/poses/ holds fore-45.jpg (101,435 bytes) logged in its README at line 183 as job 43503869207 with 'both hold: one woman, one camera, hip-height contact', while the other name he asked for, fore-45-b.jpg, does not exist (fore-45-alt-camera.jpg and fore-45-alt-stroke.jpg are logged at lines 180-181 as the two failed attempts). So the closure is right in substance \u2014 the stroke is measured now \u2014 and generous in wording: one of the two named files arrived, and the register row's evidence column still points at the ask letter rather than the delivery, so a reader cannot tell from the row what satisfied it. Not a wrong verdict; a thin record, left as I found it because the register is not mine to rewrite.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T03:48:08Z"
+}

@@ -24,6 +24,16 @@ Why: the delivery step decides applicability with a plain two-way `git apply` in
      skips with its reason instead of passing on nothing.
 Owner: whoever maintains ~/LLM/desi-bot/land_runs.py (the lander is a bot file; it is not mine to rewrite).
 
+Status: SUPERSEDED 2026-11-23 — the loss this patch described was repaired in the installed lander a
+     different way, and the newer route is the better one: `_apply_patch()` in the landing worktree
+     unions `channels/items.jsonl` through the existing `_resolve_append_only` rule, and the same
+     file's preamble records that `--3way` is *not* a substitute, measured with
+     `scripts/atomic_apply_repro.py` (`does not match index` against a drifted log). Kept as the dated
+     diagnosis and the measurement of 46 refused landings. Do not apply it to a lander that has moved
+     past its Base-sha256 above: `patch -p1` will apply part of it and leave `.rej` files, because a
+     patch carries no idea which file it is pointed at. Read on 2026-11-26 by Dmitri, who found exactly
+     that: two of the four hunks now fail against the 2026-11-23 lander (03b754df, was e06d3272).
+
 diff --git a/land_runs.py b/land_runs.py
 index 5f2a37a..62b123c 100644
 --- a/land_runs.py

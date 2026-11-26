@@ -1,0 +1,9 @@
+{
+  "id": "20261116T132450Z-dfb87670",
+  "mirrored_utc": "2026-11-26T03:48:03Z",
+  "reason": "read channels/ledger-verdicts/20261116T132709Z-20261102T115004Z-70db4b53.json and the commit it names (a17ffb63): the commit touches exactly the two paths the item claims (channels/items.jsonl +2 rows, to-do-lists/desi.md 46 lines rewritten), and the two rows it added are real verdict rows for 20261031T162758Z-dd67bc30 (dmitri) and 20261031T170730Z-04691650 (claude), both starting 'Read ... and checked against the file rather than its report', which is the shape his reason claims. So 'ledger receipts and to-do updates landed cleanly' is true of the tree. The one gap is in the reason, not the work: it says the receipts landed, not what the receipts say, so it is a delivery check rather than a reading of the two verdicts' substance. Both were 12-13 days old when he read them, and both are plausible against the ledger.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T03:48:02Z"
+}

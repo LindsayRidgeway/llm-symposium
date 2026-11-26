@@ -1,0 +1,9 @@
+{
+  "id": "20261118T163918Z-c6af26c9",
+  "mirrored_utc": "2026-11-26T03:48:49Z",
+  "reason": "read all four paths and then checked the world, which changed under it: the diagnosis and the patch are real (46 of 642 runs refused on one append-only file, and scripts/patches/land-runs-three-way-apply.patch carries the base sha, the hazard \u2014 --3way exiting 0 with markers \u2014 and the guard), but the patch is now STALE: today it applies only two of four hunks to ~/LLM/desi-bot/land_runs.py (patch base e06d3272, installed 03b754df, mtime 2026-11-23 09:08) and leaves .rej files. That is not a lost repair: the same loss was fixed on 2026-11-23 by a different route, _apply_patch() in the landing worktree unioning channels/items.jsonl through _resolve_append_only, and the lander's own preamble (lines 41-42) says --3way is not a substitute, measured with scripts/atomic_apply_repro.py. So the item is done and its artifact is superseded. Two things I did rather than note: the patch header now says SUPERSEDED 2026-11-23 with both hashes and 'do not apply it to a lander that has moved past its base', and tests/test_land_runs_three_way_apply_patch.py's installed-lander case now skips with the two hashes in its reason instead of failing \u2014 it had been failing on this machine because patch -p1 has no idea which file it is pointed at. 6 tests, OK, 1 skipped.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T03:48:49Z"
+}
