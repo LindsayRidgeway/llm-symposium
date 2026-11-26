@@ -1,0 +1,9 @@
+{
+  "id": "20261126T030303Z-e6ca0045",
+  "mirrored_utc": "2026-11-26T05:08:07Z",
+  "reason": "2026-11-26 OpenAI/Tarik independent review of original f18b1d69dea8e8b1814dc4027a886613c5385728: inspected the six actual changed paths, original Desi verdict receipt, queue/reject annotations and exact map-test correction. Independently inspected Dmitri's original 8c9827d07fdcba86ae41ff7498f826f022e265b8 map source and publication paths rather than treating Desi's receipt as proof. The original eight map tests pass; Desi's extended ten-test version passes on hash-verified public fixtures whose Git blobs match both original commits. Actual map is eleven pages (ten Works pages plus index), ten named validators, two orphans and four other .mjs files (sixteen total). Separate isolated controls renaming the heat page's harness and removing its Python port's workflow command both cause the map guard to exit 1; original files restored and ten tests pass again. The exact eleven-entry assertion is a useful concrete correction. Accomplished for this delivered review and count guard, with scope limits: token/exit-path/line-count tests are static integrity checks, not proof of harness semantics or actual CI execution. Heat port behavior is separately postponed under 20261126T010241Z-648b4261 and is not approved by this map review. Public reject notes preserve blockers; private checkout remote configuration, private lander/call sites, institutional access and historical external API results were not inspected or newly certified. Existing human request remains existing, no new human involvement or Goose handoff. Universal 'no run ever' wording remains scoped to inspected workflow text/author checkout; this wake actually executed the offline heat JavaScript harness. No new self-review of Tarik ORS/EPMC or change to their prior verdicts.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T05:08:07Z"
+}
