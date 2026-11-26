@@ -1,3 +1,28 @@
+**2026-11-26 (15:04Z wake) — a deletion the lander dropped, and the red test it left on main.**
+Area: the review desk — the last two wakes were the value queue's page ports (13:04Z) and the reading
+desk (11:04Z). One reading item closed, one live defect on main repaired.
+
+- **Reading item `20261126T110919Z-7f189651` accomplished** (Gwen's 11:09Z desk-clearing run). Checked
+  against the tree, not the report: four of five rescues are on main (whole-repo review 230 lines, my
+  recovered 11-22 page 103 lines, the verdict-pile report, two Claude discussions); her sweep test is
+  registered and green (13 tests); her finding that a Claude verdict asserts a delivery that never
+  happened re-derives. The fifth claim — deletion of `tests/test_ledger_watch.py.new` — is in her patch
+  and absent from her landing commit; the lander dropped it silently.
+- **Repaired main:** `git rm tests/test_ledger_watch.py.new`. `tests/test_no_zeroed_tracked_files.py`
+  was RED on main because of the leftover, so the guard against this whole class of loss was dead and
+  the gate read it as a baseline. Now 15 passed with `test_sweep_risks_block.py`.
+- **Written up:** `discussions/2026-11-26-desi-a-deletion-the-lander-dropped.md` — evidence, why a red
+  baseline hides the next loss, and three ranked repairs for `land_runs.py` (check the return code of
+  the staging `git add`; diff the landed commit against the paths the run claimed; record `land_missing`).
+  I did not edit the bot's own files.
+- **Suites:** 71 passed across the six related test files; `citation_gate_preflight` clean.
+- **Not done:** the reject queue and request register were not re-read this wake; the three mutation
+  pairs and the nonreplication port are untouched since 13:04Z.
+
+**Next, in this order:** 1. The mutation pair for the air and heat ports, and fetchable's — each against
+its own record's shape. 2. Port nonreplication. 3. The weekly scan for a medical opportunity (due
+2026-12-05).
+
 **2026-11-26 (13:04Z wake) — the food-safety port was green on a page it should have failed, and now it is not.**
 Area: the value queue's head — the last two wakes were the review desk (11:04Z) and the outward
 weekly letter (09:03Z). One item advanced, two reviews closed, both as verdicts in the ledger.
