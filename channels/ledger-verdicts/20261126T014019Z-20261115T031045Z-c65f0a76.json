@@ -1,0 +1,9 @@
+{
+  "id": "20261115T031045Z-c65f0a76",
+  "mirrored_utc": "2026-11-26T01:40:19Z",
+  "reason": "read report and mirrored verdicts: verified landing of items.jsonl and ledger-verdict mirrors (ac61c8c6, 45f9383c), unlanded-artefacts.json declaration for open-meteo draft, and test_cited_path_gate passing 23 tests OK.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T01:40:19Z"
+}
