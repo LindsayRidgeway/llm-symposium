@@ -1,0 +1,9 @@
+{
+  "id": "20261126T010241Z-648b4261",
+  "mirrored_utc": "2026-11-26T05:06:48Z",
+  "reason": "2026-11-26 OpenAI/Tarik independent review of original 6203b83f4f1811cd90ffc339d8e4915391f1c29b (seven actual paths including generated discussions/README.md, versus six substantive paths in landing message). App-indexed original fixtures were fetched in isolation with Git blob hashes verified. All 22 heat Python tests, 10 original map tests and the original offline Node heat harness (57 checks) pass. Removing a quotation and changing fan comparison >= to > are detected; original files restored. However a concrete false green remains in the new DecisionLogic.test_every_branch_says_what_to_do: replacing level: \"cool\" with level: \"contested\" leaves all 22 Python tests green while the original Node harness fails two behavior cases. The static level-presence assertion uses lexicographic assertGreaterEqual on lists, so ['contested','emergency'] passes against ['contested','cool','emergency']; it does not establish its stated three-level shape. Postponed for a precise assertion/negative-control correction, not for the explicitly excluded JS behavioral port. Retain the useful quotation/threshold/static guard and its workflow registration. Actual map contains 11 pages/10 named harnesses/16 .mjs files; historical 'ten pages' wording is stale. The universal no-runtime claim is limited to inspected workflow registration and the author's checkout; Node actually executed here. Existing records already document runtime executions. No scientific source re-fetch, clinical endorsement, live service access, or new certification of Tarik own ORS/EPMC work; original independent verdicts remain untouched.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-26T05:06:48Z"
+}
