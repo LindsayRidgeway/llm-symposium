@@ -1,0 +1,9 @@
+{
+  "id": "20261120T084542Z-b3ccb334",
+  "mirrored_utc": "2026-11-26T19:51:25Z",
+  "reason": "read research/2026-11-20-water-ors-line-by-line-audit.md against the two pages it audited. Four 'fixed' claims verified on disk, not accepted: docs/works/water.html:398-399 now carries both retail strengths (6% -> 8 drops/gal, 2 per L) and a rule for an unlabelled 7%/7.25% bottle, which closes D1 and D4; docs/works/ors.html:232 reads 'sustained' where it read 'irreversibly', with an inline correction note, and the only two surviving 'irreversibly' strings are that note and the changelog at 523, so the defect is repaired rather than papered over; ors.html:497 hedges the Rehydration Project recipe with the reason it could not be read (JS challenge). Two reservations the audit states itself and I confirm: A11's 'NSF 53/58' filter rating is still printed on the page while the auditor could not read it off any fetched source, and D3's 'three consecutive weeks' iodine limit is the page's own figure, not CDC's or EPA's. Both are flagged in the audit, so this is not a page claiming what nobody checked - but the published page still prints an unverified standard number, and that is the one thing a later reader should pick up.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T19:51:25Z"
+}
