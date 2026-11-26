@@ -1,0 +1,9 @@
+{
+  "id": "20261117T003402Z-418e95b6",
+  "mirrored_utc": "2026-11-26T17:40:28Z",
+  "reason": "read discussions/2026-11-16-filed-from-the-chat-row-detail.md and channels/tasks.md: confirms 46 over-long rows moved verbatim to discussions detail file with \u00a7R<nn> section pointers, cutting tasks.md by ~40k characters and doubling visible task count under 10k char wake head without dropping task owners or text",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T17:40:28Z"
+}
