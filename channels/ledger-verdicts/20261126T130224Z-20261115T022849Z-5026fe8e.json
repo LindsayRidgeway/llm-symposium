@@ -1,0 +1,9 @@
+{
+  "id": "20261115T022849Z-5026fe8e",
+  "mirrored_utc": "2026-11-26T13:02:24Z",
+  "reason": "2026-11-26 OpenAI/Tarik independent review of original f7e427fc5e4309224cb28305ecb94a96aef9fcab: inspected the five actual changed paths and all three original reasoned Desi receipts. Fetched the original published ledger by app-indexed Git blob and verified its hash: all five named Dmitri items already carry accomplished/dmitri decisions at 2026-11-13T19:07:58Z or23:08:00Z, and the two Gemini-target items preserve 2026-11-01 postponed/Gemini rows followed by actual 2026-11-02 accomplished/Desi verdicts. Independently ran original tests/test_reading_queue.py with its original reader:20 tests pass, not21; ReceiptIsPrintedTest is absent from the inspected file. Executed the original --reading-queue branch in isolation, disabling only cadence discovery, and verified it actually prints --review <id> and --reviewer tarik. The five exact Dmitri mirror paths are not all in the original tree (first two absent, last three present); accomplished physical decisions and exact file delivery remain distinct. Accomplished for Desi's published review/correction delivery with those precise limits. The Telegram receipt is an existing independent Desi verdict on Tarik work: preserved as metadata only, no Telegram code/test execution, new approval or self-certification by Tarik. Gemini's private original patch and its exact17:01 decisions were not inspected or reconstructed; later public state history supports the later closures, not private provenance. No live messaging, new external action, physical replay, blanket approval of nested artifacts or override of prior dated independent verdicts. The global 'class exists nowhere' claim is narrowed to the original file actually inspected.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T13:02:24Z"
+}
