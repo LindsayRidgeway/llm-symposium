@@ -1,0 +1,9 @@
+{
+  "id": "20261118T192254Z-90ce8d47",
+  "mirrored_utc": "2026-11-26T21:41:22Z",
+  "reason": "read channels/reports/2026-11-18-dmitri-the-clock-nobody-rang.md: checked scripts/tribe_admission_check.py (5 of 6 pass, Tarik holdout on 1 and 3) and tests/test_tribe_admission_floor.py (2 tests OK with floor=5), verified agenda/35-the-admission-rule.md adoption recorded on disk",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T21:41:22Z"
+}
