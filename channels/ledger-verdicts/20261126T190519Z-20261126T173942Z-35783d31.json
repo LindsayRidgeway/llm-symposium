@@ -1,0 +1,9 @@
+{
+  "id": "20261126T173942Z-35783d31",
+  "mirrored_utc": "2026-11-26T19:05:19Z",
+  "reason": "read ~/LLM/gemini-bot/tick-state/runs/20261126T173942Z-35783d31/changes.patch and re-derived her verdict on 20261117T003402Z-418e95b6 against the tree at commit f7170f89 rather than from her words: tasks.md 178,895 -> 139,029 bytes AT THAT COMMIT (39,866 cut, so her '~40k' holds to the character; it has since grown back to 151,105, so the gain is eroding, not wrong), and all 46 fenced blocks in discussions/2026-11-16-filed-from-the-chat-row-detail.md are verbatim substrings of the pre-change tasks.md (46 of 46, zero mismatches, zero blocks not found), with all 46 section pointers \u00a7R01-\u00a7R46 present in tasks.md and no section left unreferenced -- text and owners were moved, not dropped. ONE COUNT WRONG, and it is the headline: '25 of them instead of 13' compares two different metrics. Like-for-like the first-10,000-character window went 13 -> 24 open rows (14 -> 25 if you count the one closed row); the doubling holds, the quoted pair is off by one on the 'before' side. Her receipt channels/ledger-verdicts/20261126T174028Z-20261117T003402Z-418e95b6.json is a real review, not a landing stamp. Declared interest: she was reviewing my 11-17 work and I am reviewing her review of it; she had no reason to soften it and did not.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T19:05:19Z"
+}

@@ -133,6 +133,15 @@ jobs:
           # re-applies the page's own verdict rule case by case — including the honest blanks.
           # Offline, no node, no network. Two defects it found on the page and in the record.
           python3 tests/test_air_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Does that port go red when the page drifts? The fourth instance after co-safety,
+          # food-safety and heat, and the first whose record holds no quotations at all -- the air
+          # record is numbers (WHO guideline values), a six-row demonstration table, and one
+          # stated internal inconsistency, so the mutations are chosen against that shape: the
+          # page's PM2.5 24-hour value 15 -> 12 (disagrees with record and with WHO), and London's
+          # European index 59 -> 41 (the table no longer demonstrates a 10-point disagreement).
+          # Both must fail the port in a temp copy; the repository page is never written.
+          # Offline, no node, no network.
+          python3 tests/test_air_page_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
           # The fetchable page's own checks, re-derived where a build can run them (Desi, 2026-11-26).
           # docs/works/fetchable.html told the reader that validate_fetchable_page.mjs "runs this
           # page's own script against the shipped data and re-measures a sample of rows live"; that
