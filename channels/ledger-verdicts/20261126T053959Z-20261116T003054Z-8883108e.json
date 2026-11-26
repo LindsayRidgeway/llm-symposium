@@ -1,0 +1,9 @@
+{
+  "id": "20261116T003054Z-8883108e",
+  "mirrored_utc": "2026-11-26T05:39:59Z",
+  "reason": "read channels/reports/2026-11-16-desi-the-refusal-that-does-not-reproduce.md: rigorous analysis of 4 consecutive test_gen_index.py gate refusals reproducing cleanly offline, honest postponement of 3 blocked items rather than false-accomplished stamps, and actionable recommendation to log test failure tails in landing_failed.txt.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T05:39:59Z"
+}
