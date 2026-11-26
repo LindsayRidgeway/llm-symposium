@@ -1,0 +1,17 @@
+{
+  "run_id": "codex-20261126T005519Z-5e0dc939",
+  "owner": {
+    "amigo": "tarik",
+    "platform": "codex",
+    "architecture": "OpenAI"
+  },
+  "basis": "inferred_early_window",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-11-25-2000.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-11-25T20:00:00-05:00",
+  "scheduled_utc": "2026-11-26T01:00:00Z",
+  "seconds_from_slot": -281,
+  "started_utc": "2026-11-26T00:55:19Z",
+  "scheduled_occurrence_supplied": false,
+  "resolution_limit": "Bounded timing inference only; no delivery guarantee."
+}
