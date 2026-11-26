@@ -10791,3 +10791,21 @@ So I priced the feet directly, hands held equal, three-tenths of a foot: at twen
 Which closes the question I have been circling for three turns, and closes it about the instrument rather than about learning. **There is no practice gap at which a gradient in feet can be measured by scoreline.** At big gaps the score is already eleven to nothing; at small gaps the feet are worth half a point a game and the test cannot see it. What the feet actually move is the fault mix — a beginner fails to reach twice as many balls a game — which is the stat the screen should show. "Six balls a game you did not get to" is true and legible. "Your reach grew four inches" is arithmetic a player cannot feel and a game cannot show.
 
 Owed: why the stance lesson costs points, and the app wiring. Committed `f0458b1b`, pushed, mirrored, pickleball green at fifty-seven.
+
+[Goose 2026-11-26 12:20] **Lindsay:** Please continue, and let me know if any blockers.
+
+**Desi:** Not blocked. This turn I built the seat rather than measuring one, and playing it found two defects I would not have reasoned my way to.
+
+The game has had a movement language since Sunday and a screen since the week before: type `PACE 24 AT 26,6`, and the engine solves the paddle for you. But nothing played a person. The doubles game asks four members for a shot, and a person's seat simply did not exist. So there is now one — the person first, their partner second, three members across and beside, each of them asked afresh on every ball exactly as they would be in a game with nobody watching. One movement is the person's whole session, because a form on a runner cannot stop mid-rally; that limitation is tennis's too and I would rather write it down than have someone discover it at the scoreline.
+
+Two things fell out of actually playing it.
+
+The first is that the record was lying. A season writes down every member's balls after a session, and every number it wrote was zero, because the writer was handed player objects somebody had just built instead of the ones the engine had been counting on. No pickleball season has ever been played, so nothing had ever looked. I would not have found it by reading — I found it because I wanted a person's session in the season file and the session came back empty.
+
+The second is better. I typed my own suggestion — dink pace, aim at the kitchen — and served it. A serve has to cross fifteen feet of court and land in the diagonal box, and my line did neither: the ball landed a whisker short of the kitchen line, in the wrong half, and the man I was playing against took the point. A person gets one line for every shot, so their serve is their dink unless the engine does something about it. It does now: the point is pulled into the box, away from the centreline, and the pace is lifted to the engine's own serve pace and then walked until the clean ball is deep in the box. Every other shot keeps the pace I typed exactly, and there is a test holding both halves of that sentence, because the temptation is to let the forgiveness leak.
+
+I nearly shipped two wrong versions of that fix. The first looked fine on the serve I had in mind; measured across four stances, three paces, six targets and six winds, it was wrong on one in twenty. The second was wrong on one in ten. Both would have been invisible in the one game I had played. Same lesson as Sunday's resolution table, smaller instrument: if a fix has a parameter space, sample the space.
+
+What is left is the wiring — the dispatch that runs this on a runner when a person presses a button, and the sport row that gives them the button. That is now the entire gap between a person and this seat, and it is the only item on my list that a person can see.
+
+Owed: the `#/play` wiring, and the stance-lesson mechanism from §5r. Committed `06fe43dd`, pushed, mirrored, pickleball green at sixty-one.
