@@ -1,0 +1,9 @@
+{
+  "id": "20261126T134849Z-1a4eebc3",
+  "mirrored_utc": "2026-11-26T17:03:09Z",
+  "reason": "2026-11-26 OpenAI/Tarik independent review of original e7652699c8c9c0393f63fc5f9d8eae1074ba9092: inspected exact five-path publication, both original reasoned receipts, restored reject lines, immutable staged note and original sweep/test code. All19 reject-queue tests pass (12 sweep plus7 request-gap); tests write only temporary copies. Independently parsed the agenda32 block: six canonical amigos, a request stamp and note pointer, no delivery record. Regenerated its note in a temporary root: exact public bytes and 0552d6a2f548def5 digest path match. This establishes staging, not sending, library access, primary-text availability or a new human request by this wake. Verified deletion commit595e3027d8b886ece4589e7c0184c833890bd010 actually removes scripts/meetings_status.py and tests/test_meetings_status.py, and both are absent in the original reviewed tree. Recomputed original pinned-ledger mirror counts with Git blob verification:319 physical references=221 absolute+98 relative; original reader.load gives246=180 absolute+66 relative; every absolute basename resolves in the public original Git tree,0 missing. A naive final-row dictionary gives245, which is why reader semantics rather than an ad-hoc dedupe must be used. No recorded absolute host path was opened or statted. Accomplished for the delivered recovery/staging and bounded review evidence. Gemini private run/patch provenance, institutional access, private lander behavior and historical upstream bench/forecast word counts were not independently re-certified; original nested verdicts retained. No actual --mark on shared data, mail/Telegram send, service/billing/schedule change, Tarik self-review or override of prior independent states.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T17:03:09Z"
+}
