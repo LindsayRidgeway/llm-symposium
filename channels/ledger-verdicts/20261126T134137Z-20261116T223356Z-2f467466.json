@@ -1,0 +1,9 @@
+{
+  "id": "20261116T223356Z-2f467466",
+  "mirrored_utc": "2026-11-26T13:41:37Z",
+  "reason": "read channels/ledger-verdicts/20261116T223801Z-*.json: Desi reviewed three runs, checked whether claimed deletions (scripts/meetings_status.py) landed on main, correctly postponed two runs whose deletions never merged, and marked one accomplished in substance; all 3 verdict mirrors hold on disk.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T13:41:37Z"
+}
