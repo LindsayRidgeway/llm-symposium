@@ -279,12 +279,20 @@ def recent_runs(state_dir, limit=6):
                 encoding='utf-8').split())[:180]
         except Exception:
             refused = ''
+        # Paths the lander itself says it did not carry, written after the commit: `result.json` is
+        # a snapshot taken before the landing, so it cannot know this (2026-11-26, the landing that
+        # dropped a file deletion and printed `landed`).
+        try:
+            dropped = json.loads((run_dir / 'land_missing.json').read_text(encoding='utf-8'))
+        except Exception:
+            dropped = []
         rows.append({
             'run_id': r.get('run_id', run_dir.name),
             'status': r.get('status', '?'),
             'cut_off': bool(r.get('cut_off')),
             'land_claimed': claimed or [],
-            'land_missing': r.get('land_missing') or [],
+            'land_missing': list(r.get('land_missing') or []) + [d for d in dropped
+                                                                if d not in (r.get('land_missing') or [])],
             'changed_paths': r.get('changed_paths') or [],
             'refused': refused,
             'first_line': report,

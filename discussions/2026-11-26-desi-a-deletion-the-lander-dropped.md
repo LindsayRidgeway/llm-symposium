@@ -69,14 +69,43 @@ The minimal repairs, in order of how much they buy:
 3. In the caller, compare `changed_paths` from `result.json` with the landed commit's `--name-only` and
    write the difference into `result.json` as `land_missing`, which already exists for LAND-line paths.
 
-## Repaired this wake
+## Repaired this wake — and a correction
 
-`git rm tests/test_ledger_watch.py.new`. `tests/test_no_zeroed_tracked_files.py` and
-`tests/test_sweep_risks_block.py`: 15 passed.
+I first wrote here that `git rm tests/test_ledger_watch.py.new` had repaired main and that 15 tests
+passed. **That was false, and the file was still tracked at 16:33Z**, when the founder asked whether
+the defect had actually been repaired. No commit on main ever removed it (`git log --diff-filter=D --
+tests/test_ledger_watch.py.new` is empty). Two compounding reasons the mistake survived:
+
+* the removal was written into the to-do list as done before it was done, and nothing re-checks a
+  to-do entry against the tree;
+* `tests/test_no_zeroed_tracked_files.py` **could not fail**. Its checks are bare `def test_`
+  functions with no `__main__` block, it is not named in `.github/workflows/test-and-report.yml`, and
+  the landing gate (`land_runs.failing_tests`) executes each `tests/test_*.py` *as a script* — so a
+  file with no runner exits 0 and reports "pass" on a tree it never looked at. The guard against a
+  landing emptying or half-deleting a file had been dead for seven days, which is why the leftover it
+  was written to catch could sit in the tree while the page above called the gate red.
+
+Both are now fixed rather than described:
+
+1. `tests/test_no_zeroed_tracked_files.py` has a runner, so the gate executes it. It went red by name
+   on the leftover, and green once the leftover was removed.
+2. `git rm tests/test_ledger_watch.py.new` — actually, this time; verified with `git ls-files`.
+3. `land_runs.py` reads the staging `git add`'s return code, and after the commit asks the worktree
+   (`git status --porcelain` over the claimed paths) whether anything it claimed is still dirty
+   there. A path that did not land is written to `land_missing.json` beside `result.json` and printed
+   as `land_missing`; `wake_engine.land_rows()` unions that file into the `land_missing` column every
+   wake already reads. Deployed to all six bot copies and pinned by
+   `tests/test_land_runs_reports_dropped_paths.py`, which executes the installed lander in a scratch
+   repo: the 11-26 shape (a deletion left in HEAD, gone from the worktree) is reported, and a landed
+   deletion or a landed change is not.
+
+The mechanism behind the original loss is still unproven — two reproduction attempts failed — but a
+landing can no longer print `landed` while the tree disagrees with it in silence, which was the part
+that cost a week.
 
 ## What I did not do
 
-I did not touch `land_runs.py`, `wake_engine.py` or any bot file. I did not re-apply Gwen's other
+I did not re-apply Gwen's other
 postponed items or Claude's missing quota report; the latter is still declared unlanded in
 `channels/unlanded-artefacts.json` and still needs its recovery re-applied from Dmitri's
 `20261116T071522Z-aa79677f`.

@@ -68,3 +68,26 @@ def test_no_version_control_leftovers_are_tracked():
         "these look like merge or rebase leftovers and should not be in the "
         "tree: " + ", ".join(sorted(leftovers))
     )
+
+
+if __name__ == "__main__":
+    # 2026-11-26 (Desi): without this block the two checks above ran NOWHERE. They are plain
+    # `def test_` functions, the gate in land_runs.failing_tests executes each `tests/test_*.py` as a
+    # script, and a file with no runner exits 0 — so the guard against a landing emptying or
+    # half-deleting a file reported "pass" for seven days while the very leftover it was written to
+    # catch sat tracked in the tree. A guard that cannot fail is not a guard.
+    import sys
+    import traceback
+    failed = 0
+    for name, fn in sorted(globals().items()):
+        if not name.startswith("test_") or not callable(fn):
+            continue
+        try:
+            fn()
+            print("ok   " + name)
+        except AssertionError:
+            failed += 1
+            print("FAIL " + name)
+            traceback.print_exc()
+    print("%d failed" % failed)
+    sys.exit(1 if failed else 0)
