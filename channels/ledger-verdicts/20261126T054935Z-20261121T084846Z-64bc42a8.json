@@ -1,0 +1,9 @@
+{
+  "id": "20261121T084846Z-64bc42a8",
+  "mirrored_utc": "2026-11-26T05:49:35Z",
+  "reason": "read scripts/prominence_daily.py, tests/test_prominence_daily.py and channels/reports/2026-11-21-desi-the-daily-prominence-row.md: the claim is 'one dated row a day, append-only, one writer, and a failure cannot take the rest of the job down'. All four hold on disk \u2014 quiet-check.yml:210 runs the script with '|| echo ... the rest of this job stands' so a network failure degrades to a message rather than a red job (measured: it printed 'ERROR RuntimeError: the network is not there', appended the row to the temp path and exited without failing the caller); the test is registered at test-and-report.yml:365 beside test_prominence, so it fails a build; the file is append-only by construction and the report names it. Suite: OK.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T05:49:35Z"
+}

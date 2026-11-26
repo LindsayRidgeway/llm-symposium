@@ -108,3 +108,27 @@ machine that runs it.
 fails the build when a guard is listed but missing or unregistered. That dict is this item's
 progress bar: heat is one entry; air-quality, co-safety and food-safety are the same shape and
 are next; the five live-network pages still close by amended claim.
+
+## Progress — 2026-11-26: the air page ported, and two defects it found
+
+`tests/test_air_page_claims.py` (26 tests, registered in `test-and-report.yml` beside the heat
+port, and named in `PYTHON_REDERIVED`) re-derives the air page's offline assertions in Python:
+the page's `WHO_GUIDELINES` and `EXAMPLES` equal `air-quality-sources.json` field for field; the
+record's own values equal the WHO's published 2021 numbers, hard-coded in the test; the page's
+verdict rule — read from its function bodies and re-applied to the record's numbers — answers the
+harness's case table the same way, including a missing reading as "unknown" and exactly-at-the-
+guideline as "under"; the demonstration table still visibly disagrees with itself (six rows, two
+gaps of 10+, London differing); the Beijing inconsistency is in the record and printed; and the
+honesty markers are still on the page.
+
+Two real defects, both fixed in the same change rather than asserted around:
+
+- `air-quality-sources.json` said the demonstration was "seven places" beside a six-row list. The
+  harness asserts six and never reads the note, so nothing could have caught it. Now "six", and
+  the test pins the note's count against the list's length.
+- The demo note pointed the reader at "the second and third rows" while discussing London, which
+  is the third row. Now "the third row", pinned against the table's own order.
+
+Progress bar on `js-harness-claims`: 2 of the 4 "offline, N checks" pages ported (heat, air).
+Co-safety and food-safety remain, then the 32 offline checks of nonreplication and warming; the
+five live-network pages still close by amended claim.

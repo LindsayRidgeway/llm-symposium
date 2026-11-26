@@ -26,7 +26,7 @@
   },
   "demonstration": {
     "date": "2026-10-03",
-    "note": "One free API, one hour, seven places, requested by hand before the page was written. Examples, not a ranking.",
+    "note": "One free API, one hour, six places, requested by hand before the page was written. Examples, not a ranking.",
     "examples": [
       { "place": "Reykjavik",   "pm2_5": 2.8,  "us_aqi": 30,  "european_aqi": 21 },
       { "place": "Boston",      "pm2_5": 6.0,  "us_aqi": 30,  "european_aqi": 31 },

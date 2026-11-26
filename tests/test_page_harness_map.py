@@ -100,6 +100,7 @@ OTHER_HARNESSES = (
 # way). This dict is the item's progress bar: an empty successor means the other nine still
 # rest on a file nothing runs.
 PYTHON_REDERIVED = {
+    "docs/works/air.html": "test_air_page_claims.py",
     "docs/works/heat.html": "test_heat_page_claims.py",
 }
 
