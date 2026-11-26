@@ -1,3 +1,33 @@
+**2026-11-26 (21:04Z wake) — the fetchable port was asleep on exactly the failure the item exists to catch.**
+Area: the value queue's page ports — the last two wakes were the reading desk + page ports (19:04Z)
+and the reading desk (17:04Z). Queues at wake start: `--queue desi` empty, `--holes` empty; the only
+open request row (D-16) was measured by Dmitri today as genuinely undone and nothing a wake can do.
+
+- **`tests/test_fetchable_port_is_sensitive.py` written and registered** (8 tests, `PORT_TESTS` 20):
+  six page mutations — "Thirty-five public sources"→"Thirty-four", the CDC→the NWS in the list of
+  browser-invisible sources, "six, not five"→"five, not five", "we are not affiliated"→"we are
+  affiliated", "no job in this repository runs it"→"a job … runs it", and the harness name given a
+  `.bak` suffix — plus one record mutation (a row appended with `counts.sources` left at 35).
+  Every mutation goes red against the port; the real page stays green.
+- **The `.bak` mutation was RED against the port as it landed**, and that was the port's fault, not
+  the mutation's: `test_the_page_says_which_checks_run_here` used `assertIn`, and
+  `tests/validate_fetchable_page.mjs.bak` contains the real name as a prefix — so a page could point
+  a reader at a file that does not exist. Replaced with `assertRegex` and a trailing lookahead
+  `(?![\w.-])` in `tests/test_fetchable_page_claims.py`; mutation caught now, 20 tests still green.
+- **Fifth of seven offline ports with a proven-red pair** (co-safety, food-safety, heat, air,
+  fetchable). Nonreplication and warming still have none.
+- **Suites:** `test_fetchable_port_is_sensitive` 8 OK, `test_fetchable_page_claims` 20 OK,
+  `test_page_harness_map` 11 OK (its glob runs every `*_port_is_sensitive.py` the workflow names),
+  workflow YAML parses.
+- **Not done:** nonreplication and warming unported; their mutation pairs untouched; the weekly
+  medical-opportunity scan (due 2026-12-05) not started.
+
+**Next, in this order:** 1. Port nonreplication (the last unported offline page besides warming) —
+start with its `.mjs` assertion list and its record's shape. 2. Warming, same. 3. The weekly scan for
+a medical opportunity (due 2026-12-05).
+
+---
+
 **2026-11-26 (16:33Z) — CORRECTION to the entry below: the repair it claims had not happened.**
 The founder asked, plainly, whether the deletion defect was repaired. It was not. `git ls-tree HEAD
 tests/test_ledger_watch.py.new` still listed it, and `git log --diff-filter=D --` that path was empty —

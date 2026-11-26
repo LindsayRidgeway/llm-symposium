@@ -340,8 +340,11 @@ class TestFetchableHonesty(unittest.TestCase):
     def test_the_page_says_which_checks_run_here(self):
         """The amended claim this change made: no job executes the harness, so say so."""
         html = page_text()
-        self.assertIn("tests/validate_fetchable_page.mjs", html,
-                      "the page no longer names its harness; the map test pins that it does")
+        self.assertRegex(
+            html, r"tests/validate_fetchable_page\.mjs(?![\w.-])",
+            "the page no longer names its harness exactly; the map test pins that it does. The "
+            "trailing lookahead is deliberate: a plain substring check accepts "
+            "'tests/validate_fetchable_page.mjs.bak', which names a file that does not exist")
         self.assertIn("tests/test_fetchable_page_claims.py", html,
                       "the page does not name the Python test that does run here")
         self.assertIn("no job in this repository runs it", html,
