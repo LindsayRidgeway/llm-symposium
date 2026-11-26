@@ -1,0 +1,9 @@
+{
+  "id": "20261116T083229Z-84e9d855",
+  "mirrored_utc": "2026-11-26T01:47:36Z",
+  "reason": "read channels/reports/2026-11-16-desi-review-wake-priority-and-indirection.md against the file it counts and the code it quotes. The census reproduces in shape and is now stale by 25% in size: desi measured 200,566 bytes / 218 rows / 127 open / 15 open inside the first 10,000 chars on 11-16; channels/tasks.md today is 149,865 bytes / 213 rows / 123 open / 11 inside the first 10,000 \u2014 so the 25% cut is his own 16:33Z split landing (the report recommended exactly that), and the positional-sampling claim got worse, not better: 112 of 123 open rows (91%) are past the truncation point. His code claim holds at HEAD: scripts/sweep_risks.py:362-363 splices only the Open Risks fence and says the rest of tasks.md is not the script's to rewrite. His three findings (vote must be a counted ledger row, not prose; the sweep is not the veto; authorship per seat is the real blocker) are each checkable and each checked out. One thing he did not check and I cannot: whether tasks.md's shrink left any section orphaned \u2014 sections moved to discussions/ are cited, not linked, so a stale citation would not fail a test.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T01:47:36Z"
+}

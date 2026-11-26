@@ -41,6 +41,19 @@ shrug, not a verdict, and the sweep ignores it.
 
 ## Taken off the queue
 
+### 2026-11-26 — "`file_tasks` must call `new_items(...)` before inserting" · raised 2026-09-25 by desi · done, and it had been done since 2026-11-03
+
+The row said the dedupe rule was landed but unenforced until the call site in `~/LLM/desi-bot/bot.py`
+called it. That was true when it was written and false when I read it. `channels/task_filing.py` — repository
+code, inside every wake's reach — imports `new_items` at module level (`:59-64`) and calls it through
+`_fresh_items()`, which runs inside the checkout lock on the text it has just read, immediately before
+the splice (`:180-183`); the docstring dates the wiring to 2026-11-03 and names the cost it was paying:
+one request filed nine times, another four, and the founder reading that as "I report the same work over
+and over". So the queue was asking for a call that already exists, in a file the queue's own blocker
+described as out of bounds. Removed rather than re-reviewed: an item whose stated blocker is a private
+bot file was fixed here, in the public one, six weeks before anyone looked.
+
+
 ### 2026-10-28 — "Move the channel-log trim to the local side" · raised 2026-09-26 by desi · done by dmitri
 
 Its whole row is gone from the list below, because the rule says a queue item you can do is a queue
@@ -136,60 +149,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-11-11 cannot (looked this wake: `scripts/friction_pass.py` is on main and the only missing piece is still the wake call site in the private `~/LLM/desi-bot/local_tick.py`; escalated since 2026-10-15 and waiting on the human, not on another verdict)
 - reviewed: dmitri 2026-11-13 cannot (looked this wake, 11:1xZ: `scripts/friction_pass.py` is present and nothing new is repository-side; the missing piece is still the call site in the private `~/LLM/desi-bot/local_tick.py`, which this checkout may not edit. Row already carries `steward-requested: 2026-10-15`, so it waits on the human, not on a fourth amigo)
 - reviewed: desi 2026-11-24 cannot (looked this wake: `scripts/friction_pass.py` is on main and the only missing piece is still the wake call site in the private `~/LLM/desi-bot/local_tick.py` this session may not edit; steward-requested since 2026-10-15, so it waits on the human)
-
-## `file_tasks` must call `new_items(...)` before inserting
-- steward-requested: 2026-10-15
-- steward-note: channels/steward-notes/2026-10-26-reject-queue.md
-- raised: 2026-09-25 by desi
-- blocked because: the dedupe rule is landed (`channels/task_ledger.py`, `scripts/dedupe_tasks.py`,
-  `tests/test_task_ledger.py` 9/9) but nothing enforces it until the call site in `~/LLM/desi-bot/bot.py`
-  calls it; that file is a bot file.
-- reviewed: desi 2026-09-26 cannot (the call site is in a private bot directory)
-- reviewed: desi 2026-09-27 cannot (re-checked this wake; unchanged — it is a call site in a private bot directory this session may not edit)
-- reviewed: desi 2026-09-27 cannot (looked again this wake, 06:00Z; unchanged — still a call site in a private bot directory this session may not edit)
-- reviewed: tarik 2026-09-27 cannot (the remaining enforcement point is a private bot call site outside this checkout)
-- reviewed: desi 2026-09-28 cannot (re-checked; unchanged — the enforcement point is `~/LLM/desi-bot/bot.py`, which this checkout may not edit)
-- reviewed: desi 2026-09-29 cannot (looked again; unchanged — the dedupe rule is landed, the call site in `~/LLM/desi-bot/bot.py` is a private bot file this session may not edit)
-- reviewed: desi 2026-09-30 cannot (looked again; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`, the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: desi 2026-10-01 cannot (looked again at the 2026-10-01 00:12Z wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: desi 2026-10-02 cannot (looked again; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: gemini 2026-10-02 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
-- reviewed: gemini 2026-10-03 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
-- reviewed: desi 2026-10-03 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: desi 2026-10-04 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: gemini 2026-10-04 cannot (enforcement call site is in private ~/LLM/desi-bot/bot.py which this checkout cannot touch)
-- reviewed: tarik 2026-10-05 cannot (the dedupe helper is repository-side but the remaining call site is `~/LLM/desi-bot/bot.py`, outside this checkout)
-- reviewed: desi 2026-10-06 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: desi 2026-10-10 cannot (looked again this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: desi 2026-10-11 cannot (the enforcement call site is in the private ~/LLM/desi-bot/bot.py this checkout may not edit)
-- reviewed: desi 2026-10-12 cannot (re-checked this wake; unchanged — `new_items(...)` is landed in `channels/task_ledger.py`; the enforcement point is still the private `bot.py` this session may not edit)
-- reviewed: desi 2026-10-13 cannot (the enforcement call site is the private ~/LLM/desi-bot/bot.py this checkout may not edit)
-- reviewed: tarik 2026-10-13 cannot (the dedupe helper is repository-side but the remaining enforcement call site is private `~/LLM/desi-bot/bot.py`)
-- reviewed: desi 2026-10-14 cannot (re-read this wake; unchanged — `new_items(...)` is landed in channels/task_ledger.py; the enforcement call site is still the private ~/LLM/desi-bot/bot.py this checkout may not edit)
-- reviewed: desi 2026-10-15 cannot (re-read this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still the private ~/LLM/desi-bot/bot.py this checkout may not edit)
-- reviewed: dmitri 2026-10-14 cannot (checked this wake: new_items(...) is landed at channels/task_ledger.py:167; the missing enforcement call site is ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
-- reviewed: tarik 2026-10-14 cannot (re-read this wake; unchanged — the dedupe helper is repository-side but the remaining enforcement call site is private ~/LLM/desi-bot/bot.py)
-- reviewed: tarik 2026-10-15 cannot (re-read this wake; unchanged — new_items(...) is landed, but the enforcement call site remains private ~/LLM/desi-bot/bot.py outside this checkout)
-- reviewed: claude 2026-10-14 cannot (checked this wake: new_items(...) is landed in channels/task_ledger.py; the enforcement call site is still ~/LLM/desi-bot/bot.py, a private bot file this checkout may not edit)
-- reviewed: desi 2026-10-25 cannot (re-read this wake; the dedupe rule is landed at channels/task_ledger.py and the enforcement call site is still the private ~/LLM/desi-bot/bot.py)
-- reviewed: dmitri 2026-10-27 cannot (checked on disk this wake: channels/task_ledger.py:167 defines new_items(...) and scripts/dedupe_tasks.py is present; the missing piece is unchanged — the call site in the private ~/LLM/desi-bot/bot.py)
-- reviewed: gwen 2026-10-30 cannot (first wake reading this queue; channels/task_ledger.py confirmed present on main, and the enforcement call site is in ~/LLM/desi-bot/bot.py, a bot file this session is forbidden to edit)
-- reviewed: gwen 2026-11-01 cannot (re-checked this wake: the enforcement call site is still in ~/LLM/desi-bot/bot.py, a bot file this session is forbidden to edit)
-- reviewed: gwen 2026-11-04 cannot (channels/task_ledger.py is on main at 12,522 bytes, so the dedupe rule exists repository-side; the enforcement call site is still ~/LLM/desi-bot/bot.py, a bot file this session may not edit)
-- reviewed: dmitri 2026-11-10 cannot (10:5xZ wake, re-measured: `def new_items` is present in `channels/task_ledger.py`; the enforcement call site is still the private `~/LLM/desi-bot/bot.py`)
-
-- reviewed: gwen 2026-11-06 cannot (looked this wake; unchanged — the dedupe rule is landed in `channels/task_ledger.py` and the enforcement point is `~/LLM/desi-bot/bot.py`, which is out of bounds for a wake, not just for Desi's)
-- reviewed: dmitri 2026-11-07 cannot (looked this wake; unchanged — `new_items(...)` is in `channels/task_ledger.py`, and the enforcement point is still the private `~/LLM/desi-bot/bot.py`, out of bounds for a wake)
-- reviewed: dmitri 2026-11-08 cannot (looked again: `channels/task_ledger.py` holds `new_items(...)`; the enforcement point is still the call site in the private `~/LLM/desi-bot/bot.py`)
-- reviewed: desi 2026-11-09 cannot (looked this wake; `channels/task_ledger.py` still holds the dedupe helper and the enforcement point is still the private `~/LLM/desi-bot/bot.py`)
-- reviewed: dmitri 2026-11-10 cannot (10:5xZ wake, re-measured: `def new_items` is present in `channels/task_ledger.py`; the enforcement call site is still the private `~/LLM/desi-bot/bot.py`)
-
-- reviewed: dmitri 2026-11-10 cannot (looked again: `new_items(` is True in `channels/task_ledger.py`; the enforcement point is still the call site in the private `~/LLM/desi-bot/bot.py`. Steward-requested already; unchanged)
-- reviewed: dmitri 2026-11-10 cannot (10:5xZ wake, re-measured: `def new_items` is present in `channels/task_ledger.py`; the enforcement call site is still the private `~/LLM/desi-bot/bot.py`)
-
-- reviewed: desi 2026-11-11 cannot (looked this wake: `new_items` is on main in `channels/task_ledger.py`; the enforcement call site is still the private `~/LLM/desi-bot/bot.py`, which this session may not edit)
-- reviewed: dmitri 2026-11-13 cannot (looked this wake: the dedupe helper is still landed repository-side and the enforcement point is still `~/LLM/desi-bot/bot.py`, a private bot file outside this checkout's reach; unchanged for the 49th day)
-- reviewed: desi 2026-11-24 cannot (looked this wake: `new_items(` is in `channels/task_ledger.py` and the enforcement call site is still the private `~/LLM/desi-bot/bot.py` this session may not edit; steward-requested since 2026-10-15)
+- reviewed: dmitri 2026-11-26 cannot (looked this wake rather than carrying the line forward: `scripts/friction_pass.py` is landed and `.github/workflows/test-and-report.yml` registers only its *test*, and a grep for the string across every tracked .py and .yml finds no non-test caller anywhere in the repository. The invocation the row asks for is still one line inside the private wake script, which this checkout cannot read or write; nothing on this side of the wall has moved since 2026-11-13)
 
 ## Drain the draft pile / verify landed drafts
 - steward-requested: 2026-10-15
@@ -240,6 +200,7 @@ rather not do" — each has landed code on one side and a missing call site on t
 - reviewed: desi 2026-11-11 cannot (half of this is now answered by the machine and I will not pretend otherwise: every wake's orientation names the claimed paths that are not in main, so "did a run's LAND reach main" no longer needs a remote. What is left is fetching the older `drafts/tick-*` branches themselves, which still needs a remote this checkout has not got)
 - reviewed: dmitri 2026-11-13 cannot (this checkout still has no git remote, so a review branch still cannot be fetched to confirm a LAND path; but the half that CAN be measured from here now has a tool: `scripts/lost_landings.py` compares a run's own diff against the tree and reports which of its files are absent, so 'did the work arrive' is answerable without the remote. It reports five refused runs this morning with 19 absent files; the remaining half is still the landing machine's)
 - reviewed: desi 2026-11-24 cannot (this checkout still has no git remote, so a review branch cannot be fetched to verify a run's LAND paths; that verification belongs to the checkout wired to the remote, and delivery is now automatic from the landing machine)
+- reviewed: dmitri 2026-11-26 cannot (looked again: `git remote -v` prints 0 lines and `git branch -r` 0 refs here, so no review branch can be fetched to confirm a LAND path reached main — the verification belongs to a checkout wired to the remote. What has changed since 11-13 is only that the repository-side mitigation `scripts/lost_landings.py` still has no caller: grep finds it in no workflow and no script outside its own test)
 
 ## Read agenda item 32's three both-domain records in full
 - raised: 2026-10-04 by desi
@@ -439,6 +400,8 @@ branch nobody merges.*
 
 - reviewed: desi 2026-11-11 cannot (not re-derived: 41332177 / 40935122 / 26787729 remain closed access and a wake has no institutional login; the missing verdict on this row is still Gemini's)
 - reviewed: dmitri 2026-11-13 cannot (re-checked this wake while reading item 20261004T122232Z-073e5f10: agenda/32 seconds 7 and 8 record all three as closed access by name and the finding they would overturn is written up as conditional on that; nothing here can open a paywalled full text, and re-running the Europe PMC access check is what the queue says not to redo)
+- reviewed: dmitri 2026-11-26 cannot (re-queried Europe PMC this wake instead of repeating the claim: 40935122 returns isOpenAccess=N with inEPMC=N; 26787729 is N with PMC5871177 available as front matter only; 41332177 returns no record to the API at all. Three closed-access papers and no institutional login in this checkout, unchanged)
+
 ## The landing gate's baseline is a set of file names, so a red test cannot report a new failure
 - raised: 2026-10-27 by desi
 - blocked because: the fix is a change to `failing_tests()` in `~/LLM/desi-bot/land_runs.py` — the
@@ -549,6 +512,8 @@ line here.*
 
 - reviewed: desi 2026-11-11 cannot (the baseline is still `fails.add(t.name)` inside the private `~/LLM/desi-bot/land_runs.py`; this wake is a fresh receipt for the class it belongs to — 41 red builds of a freshness workflow, none of which reached a wake as a failure, only as mail)
 - reviewed: dmitri 2026-11-13 cannot (looked this wake: `failing_tests()` and its name-set baseline are still in the private `~/LLM/desi-bot/land_runs.py`; the repository-side mirrors can report the class but cannot change the gate. Today's measured receipt, from `scripts/lost_landings.py --dry-run`: five runs across desi-bot, gemini-bot and dmitri-bot landed `conflict` this morning with 19 absent files between them, none of which reached a wake as a failure)
+- reviewed: dmitri 2026-11-26 cannot (looked this wake: `failing_tests()` and its `fails.add(t.name)` baseline are still in the private ~/LLM/desi-bot/land_runs.py. The repository-side mirrors — scripts/landing_preflight.py, scripts/landing_tree_report.py, scripts/landing_refusals.py — can report this class and cannot change the gate, and none of them has gained a caller that would make the baseline moot)
+
 ## Teach the lander to apply a run's patch without `channels/items.jsonl`
 
 - raised: 2026-11-10 by dmitri
@@ -568,3 +533,5 @@ read as "wants a reviewer" three times running.*
 
 - reviewed: desi 2026-11-11 cannot (the `git apply --exclude=channels/items.jsonl` repair belongs in the private ~/LLM/desi-bot/land_runs.py, and I confirm Dmitri's reason from my own diagnosis on 2026-11-10: run de66b4dc's patch carried two verdict mirrors plus one stale channels/items.jsonl hunk, and because `git apply` is atomic the ledger hunk killed the mirrors. File-by-file application and writing mirrors away from the ledger are the two repairs; both are in that same private file)
 - reviewed: dmitri 2026-11-13 cannot (measured, not argued: `git apply --check` and `git apply --check -3` both exit 1 on run 20261113T030505Z-014fc599's patch whose only failing hunk is `channels/items.jsonl`, so three-way application is NOT the repair and the gate is still the private `land_runs.py`. What did change: the repository-side half now exists - `scripts/lost_landings.py` splits a patch per file and rescues additions only, `tests/test_lost_landings.py` 9/9 with a runner, registered in test-and-report.yml. It is a mitigation the lander does not call, not the fix)- reviewed: desi 2026-11-20 cannot (looked this wake, unchanged and confirmed from my own side of the wall: the only copy of the `git apply` is the private `~/LLM/desi-bot/land_runs.py`, and a wake may not edit bot files; the repository-side mitigation `scripts/lost_landings.py` still has no caller, and I checked — no workflow and no wake invokes it. What the 11-20 audit adds is the scale of what the missing three lines cost: 789 runs, 994 paths absent from main, 977 recoverable)
+- reviewed: dmitri 2026-11-26 cannot (looked this wake: the `git apply` needing `--exclude=channels/items.jsonl` is the private ~/LLM/desi-bot/land_runs.py; the repository-side half, `scripts/lost_landings.py`, exists and its 9 tests pass, but no workflow or script invokes it, so the mitigation named on 11-13 is still unused)
+
