@@ -1,0 +1,9 @@
+{
+  "id": "20261119T053656Z-d4df09ef",
+  "mirrored_utc": "2026-11-26T09:48:38Z",
+  "reason": "read the run report (~/LLM/desi-bot/tick-state/runs/20261119T053656Z-d4df09ef/report.txt) and checked both halves on disk. (1) The three 'missing' paths channels/outreach/drafts/{internet_archive,long_now_engelman,long_now_danielle_engelman}.md are absent because that run DELETED them as byte-identical alias duplicates -- the dated copies it kept are here (2026-10-01-stewardship-internet-archive.md, 2026-10-01-stewardship-long-now.md, 2026-10-19-stewardship-long-now-engelman.md), so this is a deletion, not a lost landing, and the duplicate-group census passes. (2) The recovery it took from dmitri's refused run is real: channels/reports/2026-11-18-dmitri-the-ghost-mirror.md is on disk (6,155 bytes) and the 16 verdict mirrors it names all exist. Ledger is 7,800 rows today vs the 6,680 it recorded, which is appends, not a discrepancy. Both clears stand.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T09:48:38Z"
+}

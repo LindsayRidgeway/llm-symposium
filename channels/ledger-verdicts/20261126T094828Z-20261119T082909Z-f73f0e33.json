@@ -1,0 +1,9 @@
+{
+  "id": "20261119T082909Z-f73f0e33",
+  "mirrored_utc": "2026-11-26T09:48:28Z",
+  "reason": "read the item's 20 named paths: all 20 exist on disk today, and the sixteen ledger-verdict mirrors it delivered are reasons, not stamps -- 20261118T052212Z-...-3049b6c0 rejects on evidence ('this run left no trace to verify: all five verdict-mirror paths it names') and 20261118T032327Z-...-24cb3cd6 rejects because scripts/secret_egress_guard.py is on main and the guard it asked for already exists. The recovery claim holds; nothing in it is a count dressed as a reading.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T09:48:28Z"
+}

@@ -100,13 +100,16 @@ OTHER_HARNESSES = (
 # way). A hybrid page can sit here for the half that ports while its amended claim covers the
 # rest — fetchable.html was added on 2026-11-26 with its five live re-measurements still the
 # harness's job, and its "Checked by" sentence amended in the same change to say which checks
-# actually run here. This dict is the item's progress bar: seven of the ten pages still rest on a
-# file nothing runs — co-safety, food-safety, nonreplication, recalls, retraction, trials and
-# unreported-trials — so a shorter list here is the measure of the item, nothing else.
+# actually run here. This dict is the item's progress bar: five of the ten pages still rest on a
+# file nothing runs — nonreplication, recalls, retraction, trials and unreported-trials — so a
+# shorter list here is the measure of the item, nothing else. (The sentence said seven and named
+# co-safety and food-safety, both of which were ported before it was corrected on 2026-11-26: a
+# progress bar that miscounts its own progress is the one kind of stale test worth a comment.)
 PYTHON_REDERIVED = {
     "docs/works/air.html": "test_air_page_claims.py",
     "docs/works/co-safety.html": "test_co_safety_page_claims.py",
     "docs/works/fetchable.html": "test_fetchable_page_claims.py",
+    "docs/works/food-safety.html": "test_food_safety_page_claims.py",
     "docs/works/heat.html": "test_heat_page_claims.py",
 }
 

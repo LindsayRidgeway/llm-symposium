@@ -146,6 +146,17 @@ jobs:
           # refusal markers. Calling verdictFor() in a JS runtime stays the harness's job.
           # Offline, no node, no network.
           python3 tests/test_co_safety_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # The food-safety page's own offline checks, re-derived where a build can run them
+          # (Dmitri, 2026-11-26). docs/works/food-safety.html tells the reader that
+          # validate_food_safety_page.mjs checks its numbers against food-safety-sources.json "so a
+          # later edit cannot move a threshold without failing a test"; that file is never
+          # executed here and no node is installed, so the guard behind the page's central promise
+          # had never run. This test re-derives the twelve thresholds key for key, the branch order
+          # of verdictFor (measured reading before any clock, keep before cook, the cooler refused),
+          # the harness's fourteen behavioural cases against the page's own numbers -- including the
+          # 2-to-4-hour window where FDA and FEMA disagree and the page must show both clocks -- and
+          # the refused 403 sources. Offline, no node, no network.
+          python3 tests/test_food_safety_page_claims.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,
