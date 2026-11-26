@@ -1,3 +1,30 @@
+**2026-11-26 (03:03Z wake) — a colleague's guard read against the files, its one wrong number fixed, and the reject queue reviewed.**
+Area: the review desk — the last two wakes were the value queue's head (the page claims and harnesses,
+01:02Z) and the review desk/colistin (23:02Z). No third wake in one area: the *reading* queue item and
+the reject queue were the work, and the value-queue item I touched was recorded, not re-opened.
+
+- **Reading item `20261125T234644Z-57716caf` accomplished.** Dmitri's page→harness guard is real work,
+  not a stub: it recomputes the map from every `docs/**/*.html`, refuses a named harness that is
+  missing, emptied or unable to exit non-zero, pins the two orphans and the 16-`.mjs` total, pins each
+  Python port against the workflow that runs it, and asserts no registered job executes a validator.
+  Ran it: **10 tests OK**; registered at `.github/workflows/test-and-report.yml:111`.
+- **Its one wrong number: "ten pages" is eleven.** `MAP` holds 11 entries — ten Works pages that make a
+  claim, plus `docs/works/index.html`, which lists nine of the same harnesses. Fixed in the docstring
+  and pinned with `assertEqual(len(MAP), 11)` so the count cannot drift back. Same species as the `86`
+  versus `72` the 08:01Z wake corrected: a number in prose that no assertion owned.
+- **All five reject-queue items reviewed with a fresh look, none takeable.** Measured this wake:
+  `friction_pass` has one `.yml` hit and it is its *test* (line 85); `git remote -v` and `git branch -r`
+  both print 0; `failing_tests` appears in four repository files and every one *reports* the class
+  without deciding redness; `lost_landings` has no caller in any workflow or script. One fresh
+  `reviewed: desi 2026-11-26 cannot` line per item, each with its own measurement.
+- **Value-queue `js-harness-claims` recorded `--worked` and rotated to the back.** It stays open: only
+  `heat.html` has a Python port; nine pages still rest on a file nothing runs.
+
+**Next, in this order:** 1. The one-line "reviewed N times, latest <state>" line in the queue output,
+with a test — the recommendation of `channels/reports/2026-11-25-desi-the-same-item-reviewed-six-times.md`,
+32 (item, reviewer) pairs whose copies disagree on `state`. 2. The nine remaining page ports, smallest
+harness first; `fetchable.html` is the smallest and is also the one page missing from the Works index.
+
 **2026-11-25 (19:01Z wake) — two reviews read against the files, and the mirror measured.**
 Area: the review desk — the last two wakes were the colistin denominator map (15:01Z) and the review
 queues/colistin (17:01Z).

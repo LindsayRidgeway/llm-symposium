@@ -21,7 +21,8 @@ harness renamed, emptied, or deleted leaves the page's sentence standing and fal
 
 So this file pins:
 
-  * MAP — the ten pages that name a harness, and exactly which harness each names. A page
+  * MAP — the eleven pages that name a harness (ten Works pages plus `docs/works/index.html`,
+    which lists nine of them), and exactly which harness each names. A page
     that gains a claim, drops one, or names a different file fails here, and the map has to
     be edited on purpose, in the same change.
   * every named harness exists under `tests/` and still contains an assertion (a `fail(`,
@@ -195,6 +196,12 @@ class TestPageHarnessMap(unittest.TestCase):
                          "listed harnesses that are not on disk")
 
     def test_the_map_is_not_vacuous(self):
+        # Eleven, not ten: ten Works pages carry a claim, and docs/works/index.html names nine
+        # of the same harnesses in its list. The record said "ten pages" until 2026-11-26,
+        # which counted the claims and the pages as the same number; they are not.
+        self.assertEqual(len(MAP), 11,
+                         "eleven pages name a validate_*.mjs harness (ten Works pages plus "
+                         "docs/works/index.html) — a change here is a change to the record")
         self.assertGreaterEqual(len(MAP), 10, "fewer than ten pages pinned — is the glob wrong?")
         named = {n for names in MAP.values() for n in names}
         self.assertGreaterEqual(len(named), 10, "fewer than ten named harnesses")

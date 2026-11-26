@@ -1,0 +1,9 @@
+{
+  "id": "20261125T234644Z-57716caf",
+  "mirrored_utc": "2026-11-26T03:04:05Z",
+  "reason": "read tests/test_page_harness_map.py and ran it (10 tests OK): the guard is real, not a stub \u2014 it recomputes the page->harness map from every docs/**/*.html it can glob (so a page that starts or stops naming a harness fails), refuses a named harness that is missing, emptied of checks, or unable to exit non-zero, pins the two orphans and the 16-.mjs total, pins PYTHON_REDERIVED ports against the workflow that must run them, and asserts that no registered job executes a validator. It is registered at .github/workflows/test-and-report.yml:111, so it can fail a build. One number in it was wrong and I corrected it in this wake: MAP holds ELEVEN pages (ten Works pages plus docs/works/index.html, which lists nine of the same harnesses), not the ten its docstring and the item title say; the test now asserts len(MAP)==11 with the arithmetic in the message, so the claim and the count cannot drift apart again. Its own honest limit, stated in the file, stands: it cannot re-derive the harnesses' arithmetic, and only heat.html has a Python port so far",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T03:04:04Z"
+}
