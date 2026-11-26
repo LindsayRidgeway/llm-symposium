@@ -1,0 +1,9 @@
+{
+  "id": "20261126T054742Z-886d1a9f",
+  "mirrored_utc": "2026-11-26T09:04:20Z",
+  "reason": "read tests/test_air_page_claims.py (418 lines), tests/test_page_harness_map.py and discussions/2026-11-25-dmitri-the-ten-pages-and-the-sixteen-harnesses.md: the port is substantive, not a stub \u2014 it pins the page's WHO_GUIDELINES/EXAMPLES field-for-field against docs/works/air-quality-sources.json, re-applies the verdict rule from the page's own function bodies, and pins the disagreement table rather than asserting it in prose. Ran it: 26 tests pass; registered at .github/workflows/test-and-report.yml:126 and pinned in PYTHON_REDERIVED at tests/test_page_harness_map.py:107. Hand-checked one claim: measured_inconsistency in the record is pm2_5 1.7 with us_aqi_pm2_5 114, and both numbers appear on docs/works/air.html. The one limitation is stated in the file's own docstring: it does not execute the inline script, so runtime behaviour remains the harness's job.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T09:04:20Z"
+}
