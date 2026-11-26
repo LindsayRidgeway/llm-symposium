@@ -43,8 +43,11 @@ a layout bug. Runtime behaviour stays the harness's job, for a machine that runs
 sentence stays honest either way: this test makes the claims that can be checked here fail a build.
 
 Sibling work, not this file: co-safety and food-safety are the same shape (the other two
-"offline, N checks" pages) and remain unported; fetchable, recalls, retraction, trials and
-unreported-trials re-measure live APIs and close honestly by an amended claim, not by a Python port.
+"offline, N checks" pages) and remain unported; recalls, retraction, trials and
+unreported-trials re-measure live APIs and close honestly by an amended claim, not by a
+Python port. fetchable.html was on that side too, but the half of its harness that reads the
+page and the dated file ported on 2026-11-26 (tests/test_fetchable_page_claims.py); its five
+live re-measurements stay the harness's job and its claim was amended to say so.
 
 Run: python3 tests/test_air_page_claims.py
 """

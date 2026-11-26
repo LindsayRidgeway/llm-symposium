@@ -124,6 +124,17 @@ jobs:
           # re-applies the page's own verdict rule case by case — including the honest blanks.
           # Offline, no node, no network. Two defects it found on the page and in the record.
           python3 tests/test_air_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # The fetchable page's own checks, re-derived where a build can run them (Desi, 2026-11-26).
+          # docs/works/fetchable.html told the reader that validate_fetchable_page.mjs "runs this
+          # page's own script against the shipped data and re-measures a sample of rows live"; that
+          # file is never executed here, so the page claimed a guard this repository does not run.
+          # This test re-reads the page and docs/works/fetchable-sources.json in Python: the four
+          # counts against the rows they summarise, the browser_usable flag against the CORS rule
+          # the entry's finding rests on, the six unreadable sources against the six the prose
+          # names, the 2026-10-17 correction against research/source-drift.md, and the shape of
+          # every rendered row. The five live re-measurements stay the harness's job, and the page
+          # now says so. Offline, no node, no network.
+          python3 tests/test_fetchable_page_claims.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,
