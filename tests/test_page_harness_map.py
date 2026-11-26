@@ -111,6 +111,7 @@ PYTHON_REDERIVED = {
     "docs/works/fetchable.html": "test_fetchable_page_claims.py",
     "docs/works/food-safety.html": "test_food_safety_page_claims.py",
     "docs/works/heat.html": "test_heat_page_claims.py",
+    "docs/works/nonreplication.html": "test_nonreplication_page_claims.py",
 }
 
 HARNESS_NAME = re.compile(r"validate_[A-Za-z0-9_]*\.mjs")

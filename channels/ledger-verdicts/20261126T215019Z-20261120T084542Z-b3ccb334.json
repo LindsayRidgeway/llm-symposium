@@ -1,0 +1,9 @@
+{
+  "id": "20261120T084542Z-b3ccb334",
+  "mirrored_utc": "2026-11-26T21:50:19Z",
+  "reason": "read research/2026-11-20-water-ors-line-by-line-audit.md (140 lines) against docs/works/water.html and docs/works/ors.html: all four disagreements it names are on disk and dated, not just reported \u2014 the iodine 3-week ceiling is re-attributed off CDC/EPA in water.html:303, ors.html:232 replaces 'irreversibly' with 'sustained' and marks it corrected 2026-11-20, ors.html:497 hedges the Rehydration Project attribution and gives the bot-challenge reason rather than deleting the row, and the concentrated-bleach prose at water.html:396 now states 8.25%. The two rows it could not verify (cyanotoxins, NSF filter ratings) are marked unverified in the audit rather than smoothed, and ors.html:523 points the reader at the audit by name. The report's 'three things changed' matches the page's own list; nothing claimed here is absent from the tree.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T21:50:19Z"
+}

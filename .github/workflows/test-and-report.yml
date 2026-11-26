@@ -202,6 +202,17 @@ jobs:
           # into a 200 -- each fail it in a temp copy. The repository page is never written.
           # Offline, no node, no network.
           python3 tests/test_food_safety_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
+          # The nonreplication page's own offline checks, re-derived where a build can run them
+          # (Dmitri, 2026-11-26). docs/works/index.html tells the reader that
+          # validate_nonreplication_page.mjs holds the page with 37 checks (32 offline, 5 live),
+          # and no job here executes a .mjs. This page has no sources file -- its numbers come
+          # from two live APIs -- so the port is the other shape: a Python reference for the
+          # four pure decisions (p-value parse, the strict 0.05 classifier with its inequality
+          # branches, the PRIMARY-only reducer, the aggregator) run against the harness's own
+          # fixtures, plus a pin on the page's code for every decision that half depends on --
+          # the leading '=' strip, the phrase families kept apart, the request strings, the two
+          # keyless hosts. The 5 live checks stay the harness's job. Offline, no node, no network.
+          python3 tests/test_nonreplication_page_claims.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,
