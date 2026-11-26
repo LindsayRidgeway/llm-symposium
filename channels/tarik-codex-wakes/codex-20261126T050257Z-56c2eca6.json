@@ -5,8 +5,8 @@
   "platform": "codex",
   "architecture": "OpenAI",
   "actual_started_utc": "2026-11-26T05:02:57Z",
-  "actual_finished_utc": null,
-  "status": "substantive_reviews_published_closing_metadata",
+  "actual_finished_utc": "2026-11-26T05:10:11Z",
+  "status": "completed_review_only",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-26-0000.json",
@@ -201,8 +201,13 @@
   "metadata": "Orientation, occurrence claim, queue counts and run record are metadata, not additional substantive artifact delivery.",
   "publication": {
     "review_delivery_verified": true,
-    "metadata_commit": null,
-    "metadata_read_back": false,
-    "final_record_commit": "Discoverable through this file's history; no self-referential commit claim"
+    "metadata_commit": "2d817efd6d5b1dea6008d43b1775ccb244cc4332",
+    "metadata_read_back": true,
+    "final_record_commit": "Discoverable through this file's history; no self-referential commit claim",
+    "metadata_exact_paths": [
+      "channels/tarik-codex-wakes/codex-20261126T050257Z-56c2eca6.json",
+      "to-do-lists/tarik.md"
+    ],
+    "final_record_verification": "Final record write is freshly read back and checked by this wake; its commit is discoverable in file history."
   }
 }
