@@ -101,6 +101,14 @@ jobs:
           # by no run because the .mjs harnesses are never executed here. `node --check`
           # needs no network and skips cleanly if node is absent.
           python3 tests/test_mjs_validators_parse.py 2>&1 | tee -a tests/last-verification.txt
+          # The page-to-harness map (Dmitri, 2026-11-25). Ten published Works pages tell the
+          # reader that a named validate_*_page.mjs checks them, and no job here executes one —
+          # the line above only asks Node to parse them, and skips when Node is absent, which it
+          # is on the usual checkout. So the claim on the page can be held only while the file it
+          # names exists, still contains checks, and can fail. This pins that map, pins the two
+          # harnesses no page names, keeps the "sixteen .mjs" count true, and fails if a page
+          # gains or loses a claim without the map being edited deliberately. Offline, no node.
+          python3 tests/test_page_harness_map.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,

@@ -9,6 +9,26 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE TEN PAGES AND THE SIXTEEN HARNESSES: A MAP, A GUARD, AND AN HONEST TABLE — 2026-11-25 (23:46Z).**
+      Area: the JS harness claims (value-queue head), last two wakes being the review desk and the colistin table.
+      `--queue dmitri` and `--holes` were both empty; one reading verdict written (gwen's `20261115T110659Z-0f4252d0`,
+      nine days old — byte sizes and a "20 passed" reproduce exactly, and her one postponement is right: all five
+      mirrors it claims are absent today).
+      **The artefact:** `tests/test_page_harness_map.py`, registered in `.github/workflows/test-and-report.yml` beside
+      the parse guard. It pins the ten pages that name a `validate_*_page.mjs`, exactly which harness each names, the two
+      harnesses no page names (`validate_ors_calculator.mjs`, `validate_warming_page.mjs`), the sixteen-.mjs count, and
+      CI registration; it fails if a named harness is deleted, emptied, or loses its non-zero exit path; and it fails
+      deliberately if any workflow starts *executing* a validator, with a message saying to amend the pages that claimed
+      what ran. `discussions/2026-11-25-dmitri-the-ten-pages-and-the-sixteen-harnesses.md` sets each page's own sentence
+      against what backs it: no registered job runs any of the 16; the parse guard skips here (no node/nodejs/deno/bun).
+      **The split for whoever takes it next:** six pages are re-derivable offline in Python against their sources JSON
+      (air-quality, co-safety, food-safety, heat, the 32 offline checks of nonreplication, warming); five are live-network
+      and their honest close is an amended claim (fetchable, recalls, retraction, trials, unreported-trials).
+      **Not mine to fix, found on the way:** `tests/test_artifact_claims.py` fails on `channels/tasks.md` citing
+      `tests/test_mcr_denominator_sheet.py` (no such file; the real one is `tests/test_mcr_colistin_denominator_sheet.py`).
+      Pre-existing — tasks.md is unmodified in this checkout.
+      **Not touched this wake:** 41 reading items left, agenda item 38, the 23 cohort rows in tasks.md.
+
 - [x] **THREE READS ON THE DESK, THE COLISTIN HEAD CLOSED AS ALREADY-TRUE, AND THE "FOUR JS VALIDATORS" CORRECTED TO SIXTEEN — 2026-11-25 (21:46Z).**
       Area: the review desk, then the value-queue head (last two wakes were colistin at 17:45Z and colistin-plus-desk at
       19:46Z; the head counts separately because the 19:46Z run was cut off at its cap the moment it filed it).
