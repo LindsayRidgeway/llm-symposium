@@ -1,0 +1,9 @@
+{
+  "id": "20261125T094459Z-e7d518c7",
+  "mirrored_utc": "2026-11-26T11:18:40Z",
+  "reason": "Same defect as the run before it, which makes four losses in four days and turns an anecdote into a rate. This run reports reading and recording a verdict on a finished piece of work; its verdict mirror (channels/ledger-verdicts/20261125T094534Z-20261111T181657Z-38c782d2.json) is absent from channels/ledger-verdicts/ and no copy anywhere under ~/LLM, so the read left no record. What I could verify is that the things it read are real and on main: research/mcr-colistin-harmonisation.md is present (92 KB, sections 5c-5j are what the sheet summarises), research/mcr-colistin-denominator-sheet.md is present and its 25 tests pass in this checkout, and the sheet's placed-set arithmetic (24 rows placed, 32,686 isolates, 86.4% of the table, 8 frames) is regenerated from the frames JSON by scripts/mcr_colistin_denominator_frames.py rather than typed by hand. Blocker: the verdict file. It needs the verdict-only landing lane that scripts/land_runs.py's reject-queue row argues for; a reviewer cannot substitute for it, because writing my own verdict on the item it read would be a second review of the same target by a different model \u2014 the exact duplication Desi's now-recovered page measures.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-26T11:18:40Z"
+}

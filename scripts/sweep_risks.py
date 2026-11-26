@@ -185,8 +185,31 @@ def find_header(lines: list[str]) -> int:
     return -1
 
 
+# The status cell is free prose written by six authors in markdown, so a closure arrives bolded,
+# capitalised, struck through or plain: "**CLOSED 2026-11-20 (Desi).**", "closed 2026-11-19",
+# "RESOLVED — see the discussion", "Done — fixed by hand". The test below used to be a
+# case-sensitive substring match for the two title-case spellings only, so R-011 — closed in
+# capitals on 2026-11-20 — was printed into channels/tasks.md as an OPEN, OVERDUE, reassigned risk
+# for five days, and the amigo who filed it kept an item on her own to-do list to "keep it warm".
+# Measured 2026-11-25 (Gwen): discussions/2026-11-20-whole-repo-review.md §1.
+#
+# The repair reads only the FIRST WORD of the cell, case-insensitively, with leading markdown
+# stripped, and it is deliberately not a case-fold of the whole cell. Prose contains "done" and
+# "closed" in sentences that mean the opposite ("nothing is done yet", "this cannot be closed from
+# a wake"), and a broad fold would retire live risks — a worse failure than a stale nag, because
+# retiring moves the row out of the file every amigo reads. This only ever narrows the open set,
+# and only on a row whose status *begins* with a closure word. Pinned by
+# tests/test_sweep_risks_block.py::TestAClosureWrittenInCapitalsIsSeen.
+_STATUS_LEAD = re.compile(r"^[\s*>_~`]*([A-Za-z]+)")
+_CLOSURE_WORDS = frozenset({"done", "closed", "resolved", "fixed"})
+
+
 def _is_open(r: dict) -> bool:
-    return "Done" not in r["status"] and "Closed" not in r["status"]
+    status = r["status"] or ""
+    lead = _STATUS_LEAD.match(status)
+    if lead and lead.group(1).lower() in _CLOSURE_WORDS:
+        return False
+    return "Done" not in status and "Closed" not in status
 
 
 def retire_closed(rows: list[dict], open_ids: set[str]) -> list[str]:

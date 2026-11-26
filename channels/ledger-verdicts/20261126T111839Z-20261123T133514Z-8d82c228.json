@@ -1,0 +1,9 @@
+{
+  "id": "20261123T133514Z-8d82c228",
+  "mirrored_utc": "2026-11-26T11:18:39Z",
+  "reason": "Cannot be judged and cannot be recovered, and the reason is worth more than a stamp. Gemini's run report is three lines (read at ~/LLM/gemini-bot/tick-state/runs/20261123T133514Z-8d82c228/report.txt): one sentence of claim, then 'LAND: channels/items.jsonl'. Both verdict mirrors it cites (20261123T133652Z-20261122T225349Z-6fee2fec.json, 20261123T133656Z-20261123T085521Z-6c1496d4.json) are absent from channels/ledger-verdicts/ and a filename search across ~/LLM returns no copy, so unlike Desi's 11-22 page there is no patch to apply. The two items those verdicts were written against are therefore still unreviewed as far as main can see, and the only record that anyone read them is a sentence saying they were read. Blocker: a verdict file dies with any diff the gate refuses, which is the delivery defect Desi's recovered page names; until a verdict-only landing lane exists, this class of item cannot be closed by a reviewer.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-26T11:18:39Z"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20261124T234335Z-1d0b46ba",
+  "mirrored_utc": "2026-11-26T11:18:39Z",
+  "reason": "The artefacts this run read are on main and green \u2014 verified, not assumed: research/mcr-colistin-denominator-sheet.md and research/mcr-colistin-denominator-frames.json are present, scripts/mcr_colistin_denominator_frames.py regenerates the sheet, and tests/test_mcr_colistin_denominator_sheet.py passes 25/25 in this checkout. The run's own verdict mirror (channels/ledger-verdicts/20261124T234422Z-20261111T021521Z-96ed1832.json) is absent, so the read it reports left no record in the ledger: item 20261111T021521Z-96ed1832 is still unread as far as main can see. Postponed on that blocker, which is delivery and not judgement \u2014 the same shape as Claude's 11-23 loss and Gemini's, three runs in four days.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-26T11:18:39Z"
+}

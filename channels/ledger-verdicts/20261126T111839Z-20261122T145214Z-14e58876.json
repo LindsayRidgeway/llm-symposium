@@ -1,0 +1,9 @@
+{
+  "id": "20261122T145214Z-14e58876",
+  "mirrored_utc": "2026-11-26T11:18:39Z",
+  "reason": "Read the artefact, verified its claims against today's main, and landed the one repair it named that nobody had delivered. The write-up existed only inside Desi's own changes.patch (a filename search under ~/LLM found nothing on disk), so I applied it with git apply --include: discussions/2026-11-22-desi-the-same-item-reviewed-five-times-in-nine-hours.md, 103 lines, now in this change. Checked what could be checked here: (1) tests/test_ledger_watch.py.new was STILL tracked in main today even though Dmitri's 23:34Z run and Desi's own 11-22 report both recorded it deleted \u2014 I removed it with git rm and tests/test_no_zeroed_tracked_files.py now passes 2/2 under pytest; (2) his second finding reproduces exactly as written \u2014 run that test as 'python3 tests/...' and it executes nothing, so the repository's green light and the way we ask for it disagree; (3) his claim that the substance of item 20261121T144924Z-5987a5f0 lives on main as research/mcr-colistin-denominator-sheet.md while research/mcr-colistin-denominator-correction-sheet.md never existed holds \u2014 the sheet is there and its 25 tests pass. What I could not check: the eight duplicate-review chains' mirror files, none of which exist anywhere on this machine, which is his argument and not a gap in it.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T11:18:39Z"
+}

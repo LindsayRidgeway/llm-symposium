@@ -192,5 +192,77 @@ class TestASecondWriterSurvivesTheWrite(unittest.TestCase):
         self.assertIn("the founder's volume rule", after)
 
 
+CLOSURE_RISKS_MD = """# Risks
+
+| ID | Risk | Flagged | Status | Owner |
+| --- | ---- | ------- | ------ | ----- |
+| R-101 | closed in bold capitals | 2026-11-06 | **CLOSED 2026-11-20 (Desi).** the repair and its before/after test are written above | Gwen |
+| R-102 | closed in lowercase | 2026-11-01 | closed 2026-11-19, see the discussion | Tarik |
+| R-103 | resolved in capitals | 2026-11-02 | RESOLVED — the caller exists now | Claude |
+| R-104 | done, then explained | 2026-10-30 | Done — fixed by hand, row kept for the record | Dmitri |
+| R-105 | still open, and its prose says the closure words | 2026-11-10 | **Open — nothing is done yet and this cannot be closed from a wake.** | Gemini |
+| R-106 | still open, plainly | 2026-11-12 | Open — needs the human's hands | Desi |
+"""
+
+
+class TestAClosureWrittenInCapitalsIsSeen(unittest.TestCase):
+    """`_is_open()` was a case-sensitive substring test for "Done"/"Closed", so a risk closed as
+    `**CLOSED 2026-11-20 (Desi).**` stayed open forever: it was spliced into channels/tasks.md as
+    OVERDUE work on every sweep, and never retired to the archive. R-011 was that row for five days
+    (measured 2026-11-25, Gwen; discussions/2026-11-20-whole-repo-review.md §1).
+
+    The repair reads the first word of the status cell only. The two rows that must stay OPEN are
+    the point of keeping it that narrow: R-105's prose contains both closure words and means the
+    opposite of them, and a whole-cell case-fold would archive it.
+    """
+
+    def setUp(self):
+        self.td = tempfile.TemporaryDirectory()
+        self.m = load_sweep(self.td.name)
+        self.m.RISKS.write_text(CLOSURE_RISKS_MD, encoding="utf-8")
+
+    def tearDown(self):
+        self.td.cleanup()
+
+    def _rows(self):
+        return self.m.parse_risks()
+
+    def test_a_bold_capital_closure_is_not_open(self):
+        rows = {r["id"]: r for r in self._rows()}
+        self.assertFalse(self.m._is_open(rows["R-101"]),
+                         '"**CLOSED …**" was read as an open risk: the test was case-sensitive')
+        self.assertFalse(self.m._is_open(rows["R-102"]))
+        self.assertFalse(self.m._is_open(rows["R-103"]))
+        self.assertFalse(self.m._is_open(rows["R-104"]))
+
+    def test_an_open_row_whose_prose_says_done_and_closed_stays_open(self):
+        rows = {r["id"]: r for r in self._rows()}
+        self.assertTrue(self.m._is_open(rows["R-105"]),
+                        "a live risk was retired because its prose mentioned the closure words")
+        self.assertTrue(self.m._is_open(rows["R-106"]))
+
+    def test_the_generated_block_lists_only_the_open_rows(self):
+        self.m.main()
+        after = self.m.TASKS.read_text(encoding="utf-8")
+        begin = after.index("<!-- sweep-risks:begin -->")
+        end = after.index("<!-- sweep-risks:end -->")
+        block = after[begin:end]
+        for closed in ("R-101", "R-102", "R-103", "R-104"):
+            self.assertNotIn(closed, block, f"{closed} is closed and was still printed as open work")
+        for live in ("R-105", "R-106"):
+            self.assertIn(live, block, f"{live} is open and did not reach the block")
+
+    def test_the_capital_closure_is_retired_to_the_archive_not_dropped(self):
+        self.m.main()
+        live = self.m.RISKS.read_text(encoding="utf-8")
+        self.assertNotIn("R-101", live, "the closed row was left in the live ledger")
+        archived = "\n".join(
+            p.read_text(encoding="utf-8") for p in self.m.ARCHIVE_DIR.glob("*.md")
+        ) if self.m.ARCHIVE_DIR.exists() else ""
+        self.assertIn("R-101", archived, "the closed row vanished instead of being filed")
+        self.assertIn("closed in bold capitals", archived)
+        self.assertIn("R-105", live, "an open row was archived")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
