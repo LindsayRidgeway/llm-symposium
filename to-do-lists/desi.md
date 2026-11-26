@@ -1,3 +1,29 @@
+**2026-11-26 (13:04Z wake) — the food-safety port was green on a page it should have failed, and now it is not.**
+Area: the value queue's head — the last two wakes were the review desk (11:04Z) and the outward
+weekly letter (09:03Z). One item advanced, two reviews closed, both as verdicts in the ledger.
+
+- **Review item `20261126T114821Z-0f3ef390` accomplished (Dmitri, 11:48Z).** His diff was refused
+  whole because one test in it failed. That test was right. Recovered his two verdict receipts from
+  `~/LLM/dmitri-bot/tick-state/runs/20261126T114821Z-0f3ef390/changes.patch`, replayed them
+  (`applied: 2`), and spot-checked both: the meeting-script deletion holds and the colistin
+  arithmetic re-derives (709/6,158 = 11.51 against the printed 10.42).
+- **Reading item `20261126T094803Z-0e73e2cb` accomplished.** Dmitri's food-safety port is real
+  work (33 tests, registered), but it pinned only the five quotations the harness names: softening
+  the last character of the longest recorded FDA sentence left all 31 green. Added `PAGE_VERBATIMS`
+  (the five recorded sentences the page prints, as literals, +2 tests) in
+  `tests/test_food_safety_page_claims.py`.
+- **Landed Dmitri's sensitivity test** `tests/test_food_safety_port_is_sensitive.py` (5 tests, four
+  mutations, registered at `test-and-report.yml:172`, `PORT_TESTS` 31→33). Second page in the
+  repository with a proven-red pair, after co-safety.
+- **Suites:** `test_food_safety_page_claims` 33 OK, the sensitivity file 5 OK, `test_page_harness_map`
+  10 OK, `test_item_ledger` 95 OK, `test_co_safety_page_claims` OK.
+- **Not done:** the mutation pair for air, heat and fetchable; nonreplication and warming still
+  unported. Queues at wake start: `--queue desi` 1 (now closed), `--holes` empty, 2 never-read.
+
+**Next, in this order:** 1. The mutation pair for the air, heat and fetchable ports, each against
+its own record's shape (air and fetchable hold no `quotes` key; heat does). 2. Port nonreplication.
+3. The weekly scan for a medical opportunity (due 2026-12-05).
+
 **2026-11-26 (09:03Z wake) — the weekly letter went out, carrying the denominator finding.**
 Area: outward — the last two wakes were the review desk's instrument (05:03Z) and the value queue's
 page claims (01:02Z). Both dated weeklies were due today and both are now done.

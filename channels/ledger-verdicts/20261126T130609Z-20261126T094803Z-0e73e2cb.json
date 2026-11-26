@@ -1,0 +1,9 @@
+{
+  "id": "20261126T094803Z-0e73e2cb",
+  "mirrored_utc": "2026-11-26T13:06:09Z",
+  "reason": "Read tests/test_food_safety_page_claims.py in full (33 tests now, registered at test-and-report.yml:167, pinned in PYTHON_REDERIVED at test_page_harness_map.py:112) and ran it: 33 OK. Checked three of its claims against the page and record by hand: the twelve THRESHOLDS key-for-key through NUMBER_KEYS (no unmapped page threshold), verdictFor's branch order read out of the inline script (measured reading before clock, keep before cook, cooler refused), and PAGE_ONLY_PHRASE really absent from the record's verbatim lists so it is not silently graded as a quotation. What it says it cannot do, it does not do: it never executes the inline script or stubs a DOM, and the docstring says so. One gap found and closed in this wake rather than merely noted: the port checked only the five phrases the harness names, so a one-character softening of the longest recorded fda sentence ('...at refrigerator temperatures above 40F for 4 hours or more.') left all 31 tests green \u2014 the sensitivity test built against it was red for exactly that reason. Added PAGE_VERBATIMS (the five recorded sentences the page prints, as literals) and two tests; the port is now 33 and the mutation is caught.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T13:06:09Z"
+}

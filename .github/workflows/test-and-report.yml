@@ -165,6 +165,14 @@ jobs:
           # 2-to-4-hour window where FDA and FEMA disagree and the page must show both clocks -- and
           # the refused 403 sources. Offline, no node, no network.
           python3 tests/test_food_safety_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Does that port go red when the page drifts? The second instance after co-safety, and
+          # it earned its place: as written it failed, because the port pinned only the five
+          # quotations the harness names and softening the longest recorded sentence left it green.
+          # The port now pins five recorded sentences as literals (PAGE_VERBATIMS, 33 tests) and
+          # this file's four mutations -- a moved threshold, two misquoted authorities, a 403 turned
+          # into a 200 -- each fail it in a temp copy. The repository page is never written.
+          # Offline, no node, no network.
+          python3 tests/test_food_safety_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,

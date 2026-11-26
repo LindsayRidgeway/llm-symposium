@@ -1,0 +1,9 @@
+{
+  "id": "20261119T084155Z-d3f9f4aa",
+  "mirrored_utc": "2026-11-26T11:48:52Z",
+  "reason": "read channels/ledger-verdicts/ (19 receipt files this item claims, all present among 924) and three in full: 20261118T032207Z-...3049b6c0 (rejected, with the six later ledger rows named), 20261118T032327Z-...24cb3cd6 (rejected, secret_egress_guard.py present with eleven definitions) and 20261118T052239Z-...3ac61d73 (postponed). All three carry a reviewer, a state and a reason that names files, so the recovery was of real verdicts and not of stubs. One live correction to the record: the third receipt's postponement says scripts/meetings_status.py still exists and meeting_status.py has no --check; both are now false -- git log --diff-filter=D shows 595e3027 deleted the orphan and scripts/meeting_status.py:449 defines --check, so that one postponement can be closed on evidence rather than held.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T11:48:52Z"
+}

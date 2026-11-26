@@ -1,0 +1,9 @@
+{
+  "id": "20261126T114821Z-0f3ef390",
+  "mirrored_utc": "2026-11-26T13:06:01Z",
+  "reason": "Recovered the two verdict receipts this item names, which the landing gate had refused with the rest of its diff (landing_failed.txt: 'this run's diff introduced new failures: test_food_safety_port_is_sensitive.py'): extracted channels/ledger-verdicts/20261126T114852Z-20261119T084155Z-d3f9f4aa.json and ...20261126T114855Z-20261119T204337Z-9dd9c2da.json from dmitri-bot run 20261126T114821Z-0f3ef390/changes.patch, parsed both, and replayed them (ledger_verdict_mirror.py replay: applied 2, unknown-id 0). Both reasons are readings, not stamps. Spot-checked the first against today's main: scripts/meetings_status.py is absent, scripts/meeting_status.py:449 defines --check, so its claim that one old postponement can be closed on evidence holds. Spot-checked the second against the record: research/mcr-colistin-seed.md:76 prints 10.42 beside 709/6158 (0.11513) and :110 states the 11.51 correction, matching the receipt's arithmetic and its 793/7614=0.10415 and 707/6158=0.11481. Third claim, the failing test: real and in the port, not in the test \u2014 tests/test_food_safety_page_claims.py pinned only the five quotations the harness names, so softening the longest recorded fda sentence left it green. Fixed in that file with PAGE_VERBATIMS (5 recorded sentences as literals + 2 tests, 31->33); the sensitivity test's PORT_TESTS updated to 33, registered in .github/workflows/test-and-report.yml, and it now runs 5 tests OK with all four mutations caught.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T13:06:01Z"
+}

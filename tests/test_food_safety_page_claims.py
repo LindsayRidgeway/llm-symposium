@@ -29,7 +29,10 @@ This test is the food-safety page's share of `js-harness-claims`, the half Dmitr
      refrigerator, where FDA and FEMA disagree and the page must show both clocks rather than pick
      a side;
   6. the quotations the harness calls verbatim are on the page AND in the record, except one
-     sentence the record does not hold (see `PAGE_ONLY_PHRASE`);
+     sentence the record does not hold (see `PAGE_ONLY_PHRASE`), AND the five longer recorded
+     sentences the page prints are pinned in `PAGE_VERBATIMS` — added 2026-11-26 (Desi) after
+     `tests/test_food_safety_port_is_sensitive.py` showed the harness's five phrases were the only
+     ones guarded;
   7. the honesty markers: the 403s are marked, the two refused authorities are recorded as unused,
      the page says nothing was measured in a real kitchen, and it says a clock is not a clearance.
 
@@ -86,6 +89,21 @@ QUOTED_CLAIMS = (
     ("warmer than 40 degrees F", True),                             # Red Cross, no time stated
     ("even when they are thoroughly cooked", True),                 # FDA: cooking does not save it
     (PAGE_ONLY_PHRASE, False),                                      # FDA wording, not in our record
+)
+
+# The record's quotations that the page carries in full, as (source id, exact sentence). Pinned as
+# literals rather than computed from the page, because a check that derives its expectations from
+# the bytes it is checking is vacuous. This table exists because of a measured gap, not a worry:
+# `tests/test_food_safety_port_is_sensitive.py` (2026-11-26) softened the last character of the fda
+# discard rule — the longest recorded sentence the page prints — and this whole port stayed green,
+# because QUOTED_CLAIMS above checks only the five phrases the harness names. If a failure here
+# lands, the sentence really changed on the page: re-read the record before editing this table.
+PAGE_VERBATIMS = (
+    ("fda", "If the freezer thermometer reads 40° F or below, the food is safe and may be refrozen."),
+    ("fda", "Discard any refrigerated perishable food (such as meat, poultry, seafood, milk, eggs, or leftovers) that has been at refrigerator temperatures above 40°F for 4 hours or more."),
+    ("fda", "Perishable foods with temperatures that are 45°F or below (measured with a food thermometer) should be safe, but should be cooked and consumed as soon as possible."),
+    ("fema", "When in doubt, throw it out! Throw away any food that has been exposed to temperatures 40 degrees or higher for two hours or more, or that has an unusual odor, color or texture."),
+    ("redcross", "Measure the food temperature in your refrigerator and freezer with a thermometer. Throw out food that has been warmer than 40 degrees F."),
 )
 
 # The harness's fourteen cases, verbatim from tests/validate_food_safety_page.mjs: appliance,
@@ -454,6 +472,23 @@ class Quotations(unittest.TestCase):
                     self.assertNotIn(phrase, verbatim,
                                      "the record now holds this sentence — drop it from "
                                      "PAGE_ONLY_PHRASE and check it against the record instead")
+
+    def test_every_recorded_sentence_the_page_prints_is_printed_in_full(self):
+        """The other twelve recorded sentences, not only the harness's five phrases."""
+        page = page_text()
+        for sid, sentence in PAGE_VERBATIMS:
+            with self.subTest(sid=sid, start=sentence[:40]):
+                self.assertIn(sentence, page,
+                              "a sentence this page prints as a quotation no longer appears "
+                              "verbatim on docs/works/food-safety.html")
+
+    def test_every_pinned_sentence_belongs_to_the_source_it_is_pinned_to(self):
+        by_id = {s["id"]: s for s in record()["sources"]}
+        for sid, sentence in PAGE_VERBATIMS:
+            with self.subTest(sid=sid, start=sentence[:40]):
+                self.assertIn(sentence, by_id[sid].get("verbatim", []),
+                              "this test pins a sentence the record no longer attributes to that "
+                              "source, so the page is quoting somebody else's words")
 
     def test_the_record_keeps_a_real_quotation_set(self):
         n = sum(len(s.get("verbatim", [])) for s in record()["sources"])
