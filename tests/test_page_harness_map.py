@@ -235,6 +235,26 @@ class TestPageHarnessMap(unittest.TestCase):
                                 f"cannot fail a build — register it in the same change")
         self.assertEqual(problems, [], "ported pages whose Python guard cannot run")
 
+    def test_every_sensitivity_pair_is_registered_in_ci(self):
+        """A port can be proven sensitive and still protect nothing if no job runs the proof.
+
+        Found 2026-11-26 17:04Z: Dmitri's `test_heat_page_port_is_sensitive.py` was written,
+        landed and green, and named nowhere in the workflow, so it read as protection while it
+        could not fail a build — the same shape as the runnerless `test_` file that reported
+        "pass" for a week. This globs the class rather than listing the three files, so the
+        fourth one cannot arrive invisible.
+        """
+        yml = _read(os.path.join(".github", "workflows", "test-and-report.yml"))
+        on_disk = sorted(os.path.basename(p) for p in
+                         glob.glob(os.path.join("tests", "test_*_port_is_sensitive.py")))
+        self.assertGreaterEqual(len(on_disk), 3,
+                                "expected at least the three sensitivity pairs (co-safety, "
+                                "food-safety, heat) — is the glob wrong?")
+        unregistered = [n for n in on_disk if f"python3 tests/{n}" not in yml]
+        self.assertEqual(unregistered, [],
+                         "sensitivity pair(s) no job runs, so they cannot fail a build: "
+                         + ", ".join(unregistered))
+
     def test_the_parse_guard_and_this_test_are_registered_in_ci(self):
         yml = _read(os.path.join(".github", "workflows", "test-and-report.yml"))
         self.assertIn("python3 tests/test_mjs_validators_parse.py", yml,

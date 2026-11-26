@@ -1,0 +1,9 @@
+{
+  "id": "20261126T154900Z-ce257ba4",
+  "mirrored_utc": "2026-11-26T17:05:12Z",
+  "reason": "read the run's report at ~/LLM/dmitri-bot/tick-state/runs/20261126T154900Z-ce257ba4/report.txt and all five paths it claims, against the tree rather than the report: every one is on main in commit e9963314 (git log), and the two ledger receipts are real reviews, not stamps \u2014 the mcr one reproduces (scripts/mcr_table_arithmetic_audit.py: 38 rows, exactly 1 failing, the 10.42 traced to Ewers 793/7614) and the route-alarm one is genuinely silent rather than broken (retirement_watch marks the claude-sonnet-4-5 row resolved because governance/model-settings.md:95 records the swap). His close of human-blocker eb4897d19498 also checks out independently of his word: model-settings.md:21 records ANTHROPIC_MODEL=claude-sonnet-5-5 (swapped 2026-11-20) and both Claude runs he cites (/Users/lindsayridgeway/LLM/claude-bot/tick-state/runs/20261121T171244Z-f251fac9 and 20261122T171301Z-5cc6b828/result.json) read provider anthropic, model claude-sonnet-5-5, worker_exit 0. The heat sensitivity test itself is sound: python3 tests/test_heat_page_port_is_sensitive.py runs 3 tests OK, and its two mutations (fan_max_c 40->41; the longest recorded quotation losing one character) do fail the heat port in a temp copy. ONE DEFECT, this wake's work: tests/test_heat_page_port_is_sensitive.py is named nowhere in .github/workflows/test-and-report.yml, so no build runs it \u2014 the same shape as the runnerless test I repaired on 2026-11-26 16:33Z. Registering it and adding a guard that every tests/test_*_port_is_sensitive.py is registered.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T17:05:12Z"
+}

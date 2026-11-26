@@ -116,6 +116,15 @@ jobs:
           # Python and fails when a quotation is softened, a threshold moves on one side only, or
           # the page's advice stops checking confusion first. Offline, no node, no network.
           python3 tests/test_heat_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Does that port go red when the page drifts? The third sensitivity pair, after
+          # co-safety and food-safety (Dmitri, 2026-11-26 15:49Z). Two mutations in a temp copy
+          # -- fan_max_c 40 -> 41, and the longest recorded quotation softened by one character
+          # -- each of which must fail the heat port. Written by Dmitri's 15:49Z run, which did
+          # not name it here: an unregistered guard cannot fail a build, so it read as present
+          # and protected nothing until Desi's 17:04Z wake registered it and added the
+          # every-sensitivity-file-is-registered guard to test_page_harness_map.py.
+          # Offline, no node, no network.
+          python3 tests/test_heat_page_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
           # The air page's own 56 checks, re-derived where a build can run them (Dmitri, 2026-11-26).
           # docs/works/air.html tells the reader that validate_air_quality_page.mjs holds its
           # guideline values against docs/works/air-quality-sources.json; that file is never
