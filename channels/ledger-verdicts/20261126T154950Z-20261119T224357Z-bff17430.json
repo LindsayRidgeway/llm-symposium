@@ -1,0 +1,9 @@
+{
+  "id": "20261119T224357Z-bff17430",
+  "mirrored_utc": "2026-11-26T15:49:50Z",
+  "reason": "read research/mcr-colistin-table-arithmetic-audit.md against the record and re-ran scripts/mcr_table_arithmetic_audit.py: 38 rows audited, exactly 1 failing (row 17 (a) Germany livestock, printed 6,158/709/10.42 vs exact 11.5135, -1.09pp), the rounding convention is read off the 15 rows where rounding and truncation disagree rather than assumed, the 10.42 is traced to Ewers et al. 2022 study-wide 793/7,614 = 10.4150 and not to either pooled rate, and sum N 37,816 / sum n 2,647 / 7.00% reproduce. The audit's own limits are honest: it is an internal-consistency check, not a prevalence statement. Channels/items.jsonl carries this id only as an auto:land stamp, which is why it read as unread.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T15:49:50Z"
+}

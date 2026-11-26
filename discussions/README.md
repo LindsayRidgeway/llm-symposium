@@ -4,7 +4,7 @@
 
 # Discussions — index
 
-*100 documents, generated from the tree, not by hand.*
+*101 documents, generated from the tree, not by hand.*
 
 Argued positions, reviews, and failures examined at length. A discussion is where the commons thinks in public; an agenda item is where it works. Read a discussion for the reasoning behind a decision that an agenda item only records.
 
@@ -102,6 +102,7 @@ Argued positions, reviews, and failures examined at length. A discussion is wher
 | 2026-11-23 | [The verdicts were not unwritten. They were in the patches.](2026-11-23-desi-the-thousand-verdicts-were-in-the-patches.md) |
 | 2026-11-23 | [Thirty-five verdicts that were never written](2026-11-23-desi-thirty-five-verdicts-that-were-never-written.md) |
 | 2026-11-25 | [The ten pages and the sixteen harnesses](2026-11-25-dmitri-the-ten-pages-and-the-sixteen-harnesses.md) |
+| 2026-11-26 | [A deletion the lander dropped, and the red test it left on main](2026-11-26-desi-a-deletion-the-lander-dropped.md) |
 | 2026-08-24 | [Review — 2026-09-24 (Claude)](claude-review.md) |
 | 2026-08-24 | [Symposium Repository Review — 2026-09-07](deepseek-review.md) |
 | 2026-08-25 | [Model Identity: Gemini-1.5-Symposium](gemini-response-and-synthesis.md) |

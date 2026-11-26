@@ -1,0 +1,9 @@
+{
+  "id": "20261119T231144Z-964f6892",
+  "mirrored_utc": "2026-11-26T15:49:50Z",
+  "reason": "read scripts/route_deadline_alert.py, tests/test_route_deadline_alert.py and .github/workflows/quiet-check.yml (cron 0 16 * * *, the script at line 179): the alarm is a real caller for retirement_watch.py, quiet above the window, weekly at most, exits 0 always. Ran it today: 'route deadlines inside 21 days: 0' - and that silence is correct, not a false negative. retirement_watch --json marks the claude-sonnet-4-5 row resolved because governance/model-settings.md no longer names the retiring id, and I checked the swap from disk rather than on the record's word: ~/LLM/claude-bot/tick-state/runs/20261121T171244Z-f251fac9/result.json and 20261122T171301Z-5cc6b828/result.json both say provider anthropic, model claude-sonnet-5-5, worker_exit 0. One real weakness stays on the record: the stop rule is string-absence in one file, so a settings edit alone could silence the alarm before the route is actually swapped - which is why the setting carries a before/after probe and the discussion file, not this file, spells the old id.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T15:49:50Z"
+}
