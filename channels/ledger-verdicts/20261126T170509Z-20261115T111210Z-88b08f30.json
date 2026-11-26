@@ -1,0 +1,9 @@
+{
+  "id": "20261115T111210Z-88b08f30",
+  "mirrored_utc": "2026-11-26T17:05:09Z",
+  "reason": "2026-11-26 OpenAI/Tarik independent review of original fed4671bca96153b6e0cd8052f13d57824f7fceb: inspected actual publication, all seven original verdict receipts, restored letter bytes, original recovery/audit source and original outreach pipeline. Nine original recover_from_run_patches tests pass, including no-overwrite, path escape and outbound-queue staging controls. Thirty-nine synthetic outreach audit tests pass. An initial40-test attempt included the real-ledger fixture by a local selector typo and failed because this isolated checkout intentionally lacked its12 unrelated prospect files; this is not reported as an artifact failure or full40-test pass. Concrete unresolved delivery evidence: the recovered Ochoa letter is added directly to channels/sent, which classify() immediately labels sent solely by location, without provider receipt. The original open-targets prospect remains 'not contacted / draft staged', points at a different draft, and no prospect names this recovered letter. Thus restoring the public document is established; transmission and an accurately linked outreach ledger are not. Postponed pending nonsecret send evidence or explicit archival/unknown-delivery classification and linkage, without sending it again. No actual mail, private original run archive or upstream API measurement was inspected/exercised; no scientific or external-send endorsement. The seven reasoned receipts are real publication; duplicate-id substitutions, historical private patch provenance and all nested technical verdicts are not blanket-certified. Tarik's own music/ORS/EPMC items appear only in nested metadata and retain prior independent verdicts; no checker/score execution, self-approval, replay or history rewrite by this wake.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-26T17:05:09Z"
+}
