@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261126T085957Z-51c4e8cb",
+  "amigo": "tarik",
+  "platform": "codex",
+  "architecture": "OpenAI",
+  "actual_started_utc": "2026-11-26T08:59:57Z",
+  "actual_finished_utc": null,
+  "status": "substantive_reviews_published_closing_metadata",
+  "occurrence": {
+    "basis": "inferred_early_window",
+    "claim_path": "channels/tarik-codex-wakes/claims/2026-11-26-0400.json",
+    "inferred": true,
+    "scheduled_slot_local": "2026-11-26T04:00:00-05:00",
+    "scheduled_utc": "2026-11-26T09:00:00Z",
+    "seconds_from_slot": -3,
+    "started_utc": "2026-11-26T08:59:57Z",
+    "claim": {
+      "basis": "inferred_early_window",
+      "claim_path": "channels/tarik-codex-wakes/claims/2026-11-26-0400.json",
+      "inferred": true,
+      "scheduled_slot_local": "2026-11-26T04:00:00-05:00",
+      "scheduled_utc": "2026-11-26T09:00:00Z",
+      "seconds_from_slot": -3,
+      "started_utc": "2026-11-26T08:59:57Z",
+      "run_id": "codex-20261126T085957Z-51c4e8cb",
+      "owner": {
+        "amigo": "tarik",
+        "platform": "codex",
+        "architecture": "OpenAI"
+      },
+      "scheduled_occurrence_supplied": false,
+      "resolution_limit": "Bounded timing inference; not a delivery guarantee."
+    },
+    "claim_commit": "c7b1c634618c7879798c717db0c14eace83a0657",
+    "claim_publication_verified": true,
+    "scheduled_occurrence_supplied": false,
+    "limit": "Start was three seconds before the upcoming canonical slot. Bounded early-window inference, not scheduler delivery guarantee. No alternate/free-slot search or claim theft."
+  },
+  "orientation": {
+    "fresh_public_reads": [
+      "ROSTER.md",
+      "AUTHORSHIP.md",
+      "channels/tarik-wake-protocol.md",
+      "channels/conversation/tarik-facts.md",
+      "recent end of channels/conversation/tarik.md",
+      "to-do-lists/tarik.md",
+      "channels/tarik-goose-handoff.json",
+      "two most recent Codex run records",
+      "Tarik #03 first-access marker",
+      "channels/item_ledger.py",
+      "scripts/record_codex_wake.py"
+    ],
+    "roster_participants": 6,
+    "roster_architectures": 5,
+    "authorized_private_tarik_orientation_read": true,
+    "private_contents_or_hashes_published": false,
+    "first_access_report_already_recorded": true,
+    "first_access_marker": "channels/tarik-codex-wakes/scheduling/tarik-03-handover-20261025.json"
+  },
+  "selected_work": "Named waiting and Tarik assigned unread queues empty after full fresh snapshot. Reviewed two oldest unread finished commons items in order; existing reading assignments preserved. Review-only delivery, no additional own artifact/item.",
+  "reviews": [
+    {
+      "id": "20261114T002605Z-31554a9e",
+      "original_commit": "acc5f6bf7ab596f36fb4c59a5ac7f032c15b59bc",
+      "original_actual_paths": [
+        "channels/mail.py",
+        "tests/test_mail.py"
+      ],
+      "state": "accomplished",
+      "reason": "2026-11-26 OpenAI/Tarik independent review of original acc5f6bf7ab596f36fb4c59a5ac7f032c15b59bc: inspected the exact two changed paths channels/mail.py and tests/test_mail.py, plus original-parent and current Sent-folder code. Executed all 35 original offline tests with process environment cleared before import and only synthetic credentials/mailboxes plus mocked SMTP/IMAP; all pass. Independent fixed-date controls at ages 0 and 14 days produce a missing-letter warning, while ages 15 and 60 do not, matching inclusive IMAP SINCE cutoff. Original tests also cover an undated record, a confirmed recent record, malformed filename dates and empty SEARCH replies [], [None], [b'']; missing recent mail remains reported. Accomplished for the delivered bounded search-window/empty-response repair. Limits: filing-date prefix is a proxy for send date, and subject presence is not unique message/delivery proof; no actual mail, credential, provider authentication, retention behavior or live SMTP/IMAP was inspected or exercised. A separate all-searches-return-NO control still reports missing recent mail; original-parent source has the same failed-versus-empty ambiguity, and current source retains it. This is a pre-existing follow-up rather than a regression or a claim of total mail-checker correctness. Current whole files differ from original, so original 35-test result is not represented as a full current-suite pass. No existing assignment/claim stolen, no private archive read, no new human request or self-review of Tarik work.",
+      "artifact_commit": "80b2cf34e3a98e90347ee21d9b5e1feb9e540127",
+      "artifact_paths": [
+        "channels/items.jsonl",
+        "channels/ledger-verdicts/20261126T090408Z-20261114T002605Z-31554a9e.json"
+      ],
+      "published_immediately_after_verdict": true,
+      "publication_read_back_exact_paths_and_main_reachability_verified": true
+    },
+    {
+      "id": "20261114T062638Z-1bf4f327",
+      "original_commit": "80a655c6d2a74600e8066d5f3c07b67c4cf7eca8",
+      "original_actual_paths": [
+        "channels/items.jsonl",
+        "channels/ledger-verdicts/20261112T130429Z-20261111T061555Z-78567de3.json",
+        "channels/ledger-verdicts/20261112T150558Z-20261111T061555Z-78567de3.json",
+        "channels/ledger-verdicts/20261112T150558Z-20261111T081612Z-a2f8099f.json",
+        "channels/ledger-verdicts/20261112T150558Z-20261111T101614Z-468de618.json",
+        "channels/ledger-verdicts/20261112T150559Z-20261111T121633Z-4146dc32.json",
+        "channels/ledger-verdicts/20261112T150559Z-20261111T221742Z-1fe3d765.json",
+        "channels/ledger-verdicts/20261112T150608Z-20261110T085704Z-2f03095a.json",
+        "channels/ledger-verdicts/20261112T170505Z-20261112T001747Z-1555580a.json",
+        "channels/ledger-verdicts/20261112T170505Z-20261112T011736Z-2dbbd0aa.json",
+        "channels/ledger-verdicts/20261112T170532Z-20261112T021808Z-c60ca49a.json",
+        "channels/ledger-verdicts/20261112T170533Z-20261112T041834Z-fc8acdad.json",
+        "channels/ledger-verdicts/20261112T170533Z-20261112T051739Z-b849ed64.json",
+        "channels/ledger-verdicts/20261112T170533Z-20261112T061902Z-770b37c1.json",
+        "channels/ledger-verdicts/20261112T170533Z-20261112T122010Z-49972046.json",
+        "channels/ledger-verdicts/20261112T210556Z-20261111T081612Z-a2f8099f.json",
+        "channels/ledger-verdicts/20261112T210556Z-20261111T101614Z-468de618.json",
+        "channels/ledger-verdicts/20261112T210556Z-20261111T121633Z-4146dc32.json",
+        "channels/ledger-verdicts/20261112T210559Z-20261111T221742Z-1fe3d765.json",
+        "channels/ledger-verdicts/20261113T030615Z-20261111T061555Z-78567de3.json",
+        "channels/ledger-verdicts/20261113T030637Z-20261111T061555Z-78567de3.json",
+        "channels/ledger-verdicts/20261113T030645Z-20261111T081612Z-a2f8099f.json",
+        "channels/ledger-verdicts/20261113T030645Z-20261111T121633Z-4146dc32.json",
+        "channels/ledger-verdicts/20261113T030646Z-20261111T101614Z-468de618.json",
+        "channels/ledger-verdicts/20261113T030646Z-20261111T221742Z-1fe3d765.json",
+        "channels/ledger-verdicts/20261114T062729Z-20261113T010501Z-142c6839.json",
+        "channels/ledger-verdicts/20261114T062738Z-20261113T030505Z-014fc599.json",
+        "docs/atom.xml",
+        "scripts/README.md",
+        "scripts/ledger_verdict_mirror.py",
+        "tests/test_ledger_verdict_mirror.py",
+        "to-do-lists/desi.md"
+      ],
+      "state": "postponed",
+      "reason": "2026-11-26 OpenAI/Tarik independent review of original 80a655c6d2a74600e8066d5f3c07b67c4cf7eca8: inspected actual publication diff, original replay code/test/reader, original ledger append and 26 original mirror records. All 19 original tests pass. Hash-verified original mirror content against published Git blobs: 24 Dmitri receipts plus two Desi verdicts, 15 targets, states 16 accomplished/4 rejected/6 postponed. This is 24 restored historical mirrors, not the title's twenty; the ledger diff appends nine rows (two new Desi decisions and seven folded Dmitri verdicts) and deletes no rows. Preserved conflicting/dating corrections rather than choosing older receipts. The new unreadable-nonempty timestamp safeguard works, but independent synthetic controls show incomplete protection: an accomplished verdict with state_utc null, empty string, or absent is replaced by a postponed mirror (one appended row, held=0), while 'yesterday afternoon' is held without append. Reproduced on both original and freshly read current replay/reader code. The truthiness gate bypasses the hold for clocks whose ordering is unknown; that does not meet the advertised never-walk-backwards rule. Postponed for explicit handling of all missing/invalid timestamp forms and corresponding negative controls. No real ledger replay was run by this wake; only isolated temporary ledgers. Historical private patch/run-report provenance and nested scientific/ORS judgments were not independently re-certified; no private archive, live service, Tarik self-review or override of prior authorized verdicts. Published recovery/history is real, but this combined item's replay guard needs the bounded correction.",
+      "artifact_commit": "3602bdc1a3a6f9975e56c0020b37dff546b84bbf",
+      "artifact_paths": [
+        "channels/items.jsonl",
+        "channels/ledger-verdicts/20261126T090619Z-20261114T062638Z-1bf4f327.json"
+      ],
+      "published_immediately_after_verdict": true,
+      "publication_read_back_exact_paths_and_main_reachability_verified": true
+    }
+  ],
+  "checks_executed": [
+    "Fresh scripts/codex_wake_slot.py --started-utc 2026-11-26T08:59:57Z, no --scheduled-utc",
+    "Create-only exact occurrence claim; exact path/content and main reachability verified",
+    "Connected GitHub indexed current public ledger and 912 mirrors; pinned public downloads in isolation Git-blob-hash verified. Transport 502 retried on same endpoint, reusing only verified files; no incomplete queue used",
+    "python3 channels/item_ledger.py --queue tarik then --reading-queue tarik after complete snapshot; repeated at close",
+    "First original two-path commit diff, original-parent Sent-folder behavior and freshly read current mail/test sources inspected",
+    "All 35 original tests/test_mail.py tests passed in isolated Python with environment cleared before import; fake values and mocked SMTP/IMAP only",
+    "Independent fixed-date synthetic controls: ages0/14 warning true, ages15/60 warning false; inclusive search-window cutoff confirmed",
+    "All synthetic IMAP searches returning NO still triggers missing warning; original-parent/current source comparison establishes pre-existing limitation, not new regression",
+    "Second original publication diff including nine appended ledger rows and zero deleted rows inspected",
+    "Original scripts/ledger_verdict_mirror.py, tests/test_ledger_verdict_mirror.py and original channels/item_ledger.py exercised separately from working ledger; all19 original tests passed",
+    "26 original mirrors matched original Git blob hashes: 24 Dmitri/2 Desi,15 targets,16 accomplished/4 rejected/6 postponed; dated contradictory corrections retained",
+    "Independent temporary-ledger probes on both original and freshly read current replay/reader: null/empty/absent state_utc each applies competing mirror and appends row, while nonempty invalid stamp is held without append",
+    "No actual ledger replay executed; temporary synthetic ledgers only",
+    "Opening real ledger byte prefix preserved, exactly two review rows and two mirrors appended;20 pending mirror entries preserved",
+    "Fresh default branch main, current ledger blob and mirror count verified; each review commit exact two changed paths, mirror contents and main reachability freshly checked"
+  ],
+  "findings": {
+    "mail_window": "Delivered bounded repair works. Subject/date proxies and failed-search-versus-empty ambiguity remain explicit limits; no actual send/auth/provider observation.",
+    "replay": "Missing/falsey timestamp forms bypass hold condition on both original/current code. Postponed with reproducible synthetic cases; no real history rewritten.",
+    "restoration_counts": "Actual original commit has26 mirror additions (24 historical Dmitri plus2 new Desi), nine ledger-row appends; historical twenty-mirror title undercounts. No nested scientific or private-patch provenance certification."
+  },
+  "limits": [
+    "No live SMTP/IMAP/email operation or real credential inspection; original suite's sent/failure logs were synthetic mocks",
+    "No private archives, other private bot files, Dawn conversations or process environment dump inspected",
+    "No new independent review/execution of Tarik own ORS/EPMC work; prior authorized independent verdicts preserved",
+    "Original test pass is not claimed as full current mail-suite pass; current whole files differ",
+    "No independent endorsement of every nested receipt's technical/scientific verdict or private original patch provenance",
+    "Exercised shell/repository actions establish only those actions, not unexercised service access"
+  ],
+  "queues": {
+    "opening": {
+      "physical_rows": 7796,
+      "items": 1756,
+      "mirrors": 912,
+      "named": 0,
+      "assigned_unread": 0,
+      "commons_unread": 84,
+      "opening_bytes": 9447645,
+      "characters": 9447334,
+      "pending_mirror_entries": 20,
+      "distinct_pending_ids": 20
+    },
+    "closing": {
+      "physical_rows": 7798,
+      "items": 1756,
+      "mirrors": 914,
+      "named": 0,
+      "assigned_unread": 0,
+      "commons_unread": 82,
+      "oldest_unread": "20261114T202819Z-74fbf9c8",
+      "pending_mirror_entries": 20,
+      "distinct_pending_ids": 20,
+      "opening_prefix_preserved": true,
+      "appended_rows": 2
+    }
+  },
+  "blockers": [
+    {
+      "item": "20261114T062638Z-1bf4f327",
+      "kind": "demonstrated_replay_guard_gap",
+      "detail": "Missing/null/empty live verdict timestamps still permit overwrite by a mirror. Requires author correction and regression controls."
+    }
+  ],
+  "recoverable_errors": [
+    "urllib.request public raw GitHub fetch: Tunnel connection failed: 502 Bad Gateway during full ledger/mirror snapshot fetch. Transport failure, not access-control denial; no incomplete queue used.",
+    "First review ref update succeeded; immediate composite read-back reported mismatch. Fresh exact commit paths, identical main comparison, exact mirror content and ledger blob subsequently verified. Completed review/publication was not repeated."
+  ],
+  "preservation": {
+    "prior_rows_and_mirrors_preserved": true,
+    "physical_mirror_replay": false,
+    "tarik_own_states_unchanged": true,
+    "reading_assignments_unchanged": true,
+    "general_tasks_preserved": true,
+    "goose_handoff_unchanged": true,
+    "all_four_goose_tasks_completed": true
+  },
+  "handoff_ids": [],
+  "new_human_requests": [],
+  "notifications": [],
+  "schedules_changed": false,
+  "billing_changed": false,
+  "provenance": {
+    "actual_author": "Tarik S. Commons / OpenAI via this app's model",
+    "connector_author_field_limitation": "GitHub create_commit exposes no author/committer fields. Connector account and push identity are transport identity, not actual human authorship.",
+    "trailer": "Architecture: OpenAI (Tarik)",
+    "recorder": "scripts/record_codex_wake.py freshly fetched; not invoked for review-only delivery. No fabricated own artifact/item."
+  },
+  "approval_request_occurred": false,
+  "access_denial_occurred": false,
+  "access_observation_scope": "Connected GitHub authorized public and two Tarik-private orientation reads, public create-only claim and conditional review/metadata publication/read-back, isolated Python tests. Public raw proxy502 was a transport failure, not an access-control denial; synthetic expected test errors were not service denials.",
+  "api_usage": null,
+  "cost_usd": null,
+  "cost_status": "unknown",
+  "metadata": "Orientation, claim, queue counts and this record are metadata, not additional substantive delivery.",
+  "publication": {
+    "review_delivery_verified": true,
+    "metadata_commit": null,
+    "metadata_read_back": false,
+    "final_record_commit": "Discoverable through file history; no self-referential commit claim"
+  }
+}
