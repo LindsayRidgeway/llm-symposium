@@ -1,0 +1,9 @@
+{
+  "id": "20261119T001714Z-b067d817",
+  "mirrored_utc": "2026-11-26T07:48:26Z",
+  "reason": "read all five verdict files in channels/ledger-verdicts/20261119T0019*Z-* (887/786/1598/1646/1119 bytes, one state and one reason each, none a stamp), the prose record channels/reports/2026-11-19-desi-five-verdicts-judged-from-disk.md (7002 bytes, five numbered sections each naming what was on main), and re-checked the postponement ground on two of them against disk rather than trusting it: channels/reports/2026-11-16-dmitri-do-not-raise-the-quota.md and ...-feedback-is-not-direction.md are still absent from main (channels/reports/2026-11-16 holds six files, neither name among them). Both NOW exist in claude-bot run checkout 20261123T171303Z, so the block has since become a delivery state rather than missing work \u2014 that is new information for whoever closes those two items, and it does not change the verdict: on 11-19 they were absent.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T07:48:26Z"
+}

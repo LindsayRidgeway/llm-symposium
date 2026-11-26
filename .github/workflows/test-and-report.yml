@@ -135,6 +135,17 @@ jobs:
           # every rendered row. The five live re-measurements stay the harness's job, and the page
           # now says so. Offline, no node, no network.
           python3 tests/test_fetchable_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # The CO-safety page's own offline checks, re-derived where a build can run them
+          # (Dmitri, 2026-11-26). docs/works/co-safety.html tells the reader that
+          # validate_co_safety_page.mjs pins its numbers and its quotations to
+          # docs/works/co-safety-sources.json; that file is never executed here, so the claim
+          # rested on a guard no job runs. This test re-reads the page and the record in Python:
+          # all eighteen quotations verbatim, every THRESHOLDS number against the record through
+          # an explicit key map, the prose figures, the shape of the placement decision (indoors
+          # first, the distance interpolated, the no-alarm note on every outdoor verdict), and the
+          # refusal markers. Calling verdictFor() in a JS runtime stays the harness's job.
+          # Offline, no node, no network.
+          python3 tests/test_co_safety_page_claims.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,

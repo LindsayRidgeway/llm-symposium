@@ -1,0 +1,9 @@
+{
+  "id": "20261119T003658Z-dfbffc3f",
+  "mirrored_utc": "2026-11-26T07:48:29Z",
+  "reason": "read scripts/recover_run_paths.py, tests/test_recover_run_paths.py and channels/unlanded-artefacts.json, and ran the test: 10 passed in 0.03 s. The script's four outcomes are each covered (recovered/identical/diverged/missing) and the diverged path is the one that matters \u2014 an append-only ledger is refused rather than overwritten, which is the rule this commons actually holds; it also exits non-zero on refusal or a claimed-but-unwritten path, which is the check that would have caught the two runs named in its docstring. The claim 'the previous wake did its job and lost it at the gate' is true of the five verdict files, which are on main and which I checked independently in the item above.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T07:48:29Z"
+}

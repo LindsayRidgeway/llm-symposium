@@ -105,6 +105,7 @@ OTHER_HARNESSES = (
 # unreported-trials — so a shorter list here is the measure of the item, nothing else.
 PYTHON_REDERIVED = {
     "docs/works/air.html": "test_air_page_claims.py",
+    "docs/works/co-safety.html": "test_co_safety_page_claims.py",
     "docs/works/fetchable.html": "test_fetchable_page_claims.py",
     "docs/works/heat.html": "test_heat_page_claims.py",
 }
