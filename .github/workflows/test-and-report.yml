@@ -146,6 +146,14 @@ jobs:
           # refusal markers. Calling verdictFor() in a JS runtime stays the harness's job.
           # Offline, no node, no network.
           python3 tests/test_co_safety_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Does that port actually go red when the page drifts? Nothing had ever run a port
+          # against a deliberately wrong page, and a port can pass perfectly while asserting
+          # nothing: it is the second half of the item's closure condition ('a red run means the
+          # page drifted rather than only that its script parses'). Two mutations in a temp copy
+          # -- distance_feet 20 -> 25, and the longest recorded quotation softened by one
+          # character -- each of which must fail the port. The repository file is never written.
+          # Offline, no node, no network.
+          python3 tests/test_co_safety_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
           # The food-safety page's own offline checks, re-derived where a build can run them
           # (Dmitri, 2026-11-26). docs/works/food-safety.html tells the reader that
           # validate_food_safety_page.mjs checks its numbers against food-safety-sources.json "so a

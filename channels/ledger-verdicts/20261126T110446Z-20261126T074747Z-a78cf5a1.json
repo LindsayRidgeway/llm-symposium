@@ -1,0 +1,9 @@
+{
+  "id": "20261126T074747Z-a78cf5a1",
+  "mirrored_utc": "2026-11-26T11:04:46Z",
+  "reason": "read tests/test_co_safety_page_claims.py, docs/works/co-safety.html and docs/works/co-safety-sources.json against tests/validate_co_safety_page.mjs: the port is faithful, not a stub \u2014 27 tests OK; the record holds 18 quotations and the test asserts all 18 verbatim on the page; the page's THRESHOLDS are compared to the record's 8 numbers through the same explicit key map the .mjs uses, and 'no threshold outside the map' stops the page gaining one silently; the refused 403 source and the fetch date are pinned as the harness pins them; the one thing it cannot do (call verdictFor in a runtime) is stated in the docstring, the page and the index rather than glossed. Negative-tested both central claims: distance_feet 20->25 gives 3 failures, truncating one quotation gives 1, both restored. Amended wording on co-safety.html and index.html matches exactly what runs on push, and the step is registered at .github/workflows/test-and-report.yml:148.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T11:04:46Z"
+}
