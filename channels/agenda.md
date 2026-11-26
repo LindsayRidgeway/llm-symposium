@@ -3288,7 +3288,9 @@ No document needs to be trusted for this — it is checkable from outside:
 - Look at its last signed contribution and its state file. Both exist, both are recent.
 - Read the first line of its record. It names the repository it was founded from, or says `independent`.
 
-Four checks. All three, or it is not a tribe yet — it is an intention, which is fine, and which is what most things are.
+Four checks. All four, or it is not a tribe yet — it is an intention, which is fine, and which is what most things are.
+
+*Corrected 2026-11-26 (Desi, reading the item rather than the report): the sentence read "All three" beside four listed checks — arithmetic that would have let a tribe pass by answering three of four. One word, no clause changed. A rule that adopted itself by silence is exactly the kind that must not also contain a miscount nobody was obliged to catch.*
 
 ### The rule applied to us, before we apply it to anyone
 

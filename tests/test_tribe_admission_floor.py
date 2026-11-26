@@ -17,6 +17,7 @@ clause 3 an hour after it passed is the failure this pins.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 import unittest
@@ -38,6 +39,45 @@ def run_checker() -> tuple[int, dict]:
     return out.returncode, json.loads(out.stdout)
 
 
+AGENDA = REPO / "agenda" / "35-the-admission-rule.md"
+NUMBER_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7}
+
+
+def five_minute_count_mismatch(text: str) -> str | None:
+    """Return a description of the miscount, or None if the rule counts its own test correctly.
+
+    The item adopted itself by silence on 2026-11-08, so its arithmetic is unopposed by default:
+    on 2026-11-26 it listed four outside checks and then required "All three". Nothing caught it
+    for eighteen days, and nothing would have caught the reverse — a fifth check added without
+    raising the requirement. This is that catch, on the sentence a stranger is told to run.
+    """
+    try:
+        start = text.index("it is checkable from outside")
+    except ValueError:
+        return "the five-minute test's own sentences are gone from the agenda item"
+    lines = text[start:].splitlines()
+    block = []
+    for line in lines:
+        block.append(line)
+        if re.match(r"^\w+ checks\.", line):
+            break
+    block_text = "\n".join(block)
+    bullets = [line for line in block if line.startswith("- ")]
+    claim = re.search(r"All (\w+), or it is not a tribe yet", block_text)
+    headline = re.search(r"^(\w+) checks\.", block_text, re.MULTILINE)
+    if claim is None or headline is None:
+        return "the 'All <n>' / '<N> checks.' sentences are gone from the agenda item"
+    words = (claim.group(1).lower(), headline.group(1).lower())
+    for word in words:
+        if word not in NUMBER_WORDS:
+            return f"'{word}' is not a number this guard can count"
+    required = {NUMBER_WORDS[word] for word in words}
+    if required != {len(bullets)}:
+        return (f"the rule lists {len(bullets)} outside check(s) and requires "
+                f"{'/'.join(sorted(str(n) for n in required))}")
+    return None
+
+
 class TribeAdmissionFloor(unittest.TestCase):
     def test_members_do_not_fall_below_the_recorded_floor(self):
         _rc, data = run_checker()
@@ -56,6 +96,31 @@ class TribeAdmissionFloor(unittest.TestCase):
         self.assertGreaterEqual(len(names), 5, f"only {len(names)} tribe(s) declared: {names}")
         self.assertNotEqual(rc, 0, "the checker now exits 0, so five tribes pass — raise FLOOR, "
                                    "and only then consider a failing CI step")
+
+    def test_the_rule_counts_its_own_five_minute_test_correctly(self):
+        """Four checks and 'All three' is not a rounding error, it is a weaker rule."""
+        mismatch = five_minute_count_mismatch(AGENDA.read_text(encoding="utf-8"))
+        self.assertIsNone(mismatch, f"agenda/35 miscounts its own test: {mismatch}")
+
+    def test_that_guard_goes_red_on_the_defect_it_was_written_for(self):
+        """The defect was live on main for eighteen days: four bullets, 'All three'.
+
+        A guard that has only ever been run against the repaired file proves nothing, so the
+        mutation is made here, against the real text, and both directions are checked.
+        """
+        real = AGENDA.read_text(encoding="utf-8")
+        self.assertIsNone(five_minute_count_mismatch(real))
+        softened = real.replace("All four, or it is not a tribe yet",
+                                "All three, or it is not a tribe yet", 1)
+        self.assertNotEqual(softened, real, "the sentence this guard pins is gone; fix the guard")
+        softened_gap = five_minute_count_mismatch(softened)
+        self.assertIsNotNone(softened_gap, "the original defect ('All three' beside four checks) is green")
+        self.assertTrue("3" in softened_gap and "4" in softened_gap, softened_gap)
+        extra = real.replace("- Read the first line of its record.",
+                             "- Read the first line of its record.\n"
+                             "- Ask a steward to confirm it by mail.", 1)
+        self.assertIsNotNone(five_minute_count_mismatch(extra),
+                             "a fifth check added without raising the requirement stayed green")
 
 
 if __name__ == "__main__":
