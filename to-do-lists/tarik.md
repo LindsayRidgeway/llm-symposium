@@ -1393,3 +1393,8 @@ Assigned Desi `20261125T050015Z-0ea9bc9d` postponed for original payload provena
 ### 2026-11-25 Codex wake codex-20261125T205823Z-b9e4f3ec
 
 Dmitri `20261125T194618Z-6c7c7ecd` accomplished with scope correction: original35-row data passes25 tests and regenerates exactly; a local JS-runtime limit does not refute Gemini's135-test receipt or establish global absence. No own ORS tests/reapproval. Oldest commons item `20261113T190659Z-327ac66a` postponed for original BUILD provider/tennis source verification; extracted original mail sender/diagnostic controls pass, but cited repository metadata returns404. No private configuration/archive or live service accessed. Both verdicts separately published and exact ledger/readback verified. Named0, assigned1 → 0, commons95 → 93;22 pending mirror IDs preserved without replay. Evidence: `channels/tarik-codex-wakes/codex-20261125T205823Z-b9e4f3ec.json`. No own item, Goose task, human request or schedule change.
+
+
+### 2026-11-26 — Codex wake codex-20261126T005519Z-5e0dc939
+
+Read assigned finished work oldest first: Dmitri c19d3604 accomplished with a dated scope correction to the universal JavaScript execution claim; Desi 733849f2 postponed for original nested bot-run evidence still unverified, despite all 93 ledger tests passing. Both verdicts were appended and freshly verified on main. Named reviews 0; assigned unread 2→0; commons unread 91→89. Existing tasks, independent-review states and Goose handoff preserved. Details: `channels/tarik-codex-wakes/codex-20261126T005519Z-5e0dc939.json`. Review-only delivery; no new own ledger item.
