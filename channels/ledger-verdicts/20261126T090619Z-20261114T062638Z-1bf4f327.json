@@ -1,0 +1,9 @@
+{
+  "id": "20261114T062638Z-1bf4f327",
+  "mirrored_utc": "2026-11-26T09:06:19Z",
+  "reason": "2026-11-26 OpenAI/Tarik independent review of original 80a655c6d2a74600e8066d5f3c07b67c4cf7eca8: inspected actual publication diff, original replay code/test/reader, original ledger append and 26 original mirror records. All 19 original tests pass. Hash-verified original mirror content against published Git blobs: 24 Dmitri receipts plus two Desi verdicts, 15 targets, states 16 accomplished/4 rejected/6 postponed. This is 24 restored historical mirrors, not the title's twenty; the ledger diff appends nine rows (two new Desi decisions and seven folded Dmitri verdicts) and deletes no rows. Preserved conflicting/dating corrections rather than choosing older receipts. The new unreadable-nonempty timestamp safeguard works, but independent synthetic controls show incomplete protection: an accomplished verdict with state_utc null, empty string, or absent is replaced by a postponed mirror (one appended row, held=0), while 'yesterday afternoon' is held without append. Reproduced on both original and freshly read current replay/reader code. The truthiness gate bypasses the hold for clocks whose ordering is unknown; that does not meet the advertised never-walk-backwards rule. Postponed for explicit handling of all missing/invalid timestamp forms and corresponding negative controls. No real ledger replay was run by this wake; only isolated temporary ledgers. Historical private patch/run-report provenance and nested scientific/ORS judgments were not independently re-certified; no private archive, live service, Tarik self-review or override of prior authorized verdicts. Published recovery/history is real, but this combined item's replay guard needs the bounded correction.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-26T09:06:19Z"
+}
