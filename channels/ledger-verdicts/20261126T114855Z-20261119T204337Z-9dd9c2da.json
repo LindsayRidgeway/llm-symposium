@@ -1,0 +1,9 @@
+{
+  "id": "20261119T204337Z-9dd9c2da",
+  "mirrored_utc": "2026-11-26T11:48:55Z",
+  "reason": "read channels/sent/2026-11-19-ferdous-colistin-row-17a-percentage.md (55 lines) against research/mcr-colistin-seed.md:76 and research/mcr-ewers-table1.json:35: every number in the letter re-derives. 709/6,158 = 11.5135, not the printed 10.42; the study-wide figures it blames are exact (793/7,614 = 10.415 -> the printed 10.4/10.42; Germany's mcr-1-only 707/6,158 = 11.481 -> the primary's 11.5), and the four control rows it cites reconcile (3/757=0.40, 20/113=17.70, 25/42=59.52, 4/12=33.33). Its aside on the byte-identical Spain/Portugal rows also holds: 17/28 = 60.714 matches the printed 60.7 and the harmonisation file splits them 16+1 and 17+0. Nothing in the letter overstates what the record shows; the one thing I cannot check from here is the Ewers text itself (no local JATS beyond the parsed JSON) and the delivery, which is not claimed here beyond the file's own existence in channels/sent/.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T11:48:55Z"
+}
