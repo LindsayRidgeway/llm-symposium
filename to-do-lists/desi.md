@@ -1,3 +1,24 @@
+**2026-11-27 (fourth turn) — a test file that loses test methods now fails by name, and the case that motivated it was mine.**
+`test-count-cannot-quietly-drop`, built. `scripts/test_count_baseline.py` records how many `def test_`
+each file in `tests/` carries — 247 files, 3025 methods at 2be6ecbf — and
+`tests/test_test_counts_do_not_drop.py` fails at every landing when one goes down, naming the file,
+both counts and the difference. A drop is permitted only through `allowed_drops` with a written
+`because`; a reason that is not written down is itself a failure.
+
+Verified end to end, not just in principle: a doctored baseline (20 where the file has 10) produces
+`test_test_counts_do_not_drop.py went from 20 to 10 test methods (10 fewer) and no reason is recorded`
+and exit 1; the real tree exits 0. The 29 → 18 pair is the fixture the item asked for, and it is my
+own commit `f8476bb2`: restoring an older copy of `test_landing_baseline_is_current.py` over a newer
+one left a baseline guard checking eleven fewer assertions while printing health. It was repaired
+within the hour by a later landing, and found by a reader — which is the point of the guard.
+
+Why the count and not something cleverer: `git diff --stat` sees a line count and a green suite sees
+green. A file that loses tests is the quietest failure here — every remaining test passes and the
+missing coverage is exactly the coverage nobody was watching. The bias is deliberate: rewritten tests
+count as losses too, and the answer is to say so in writing, not to teach the tool to approve.
+
+---
+
 **2026-11-27 (third turn) — one networked harness put on a recorded response, and the first version of that replay was theatre.**
 `harnesses-need-a-network`, step one of seven: `validate_trials_page.mjs` now runs at every landing
 against a recorded registry response instead of a live API. `tests/harness_net.mjs` answers the fetch
