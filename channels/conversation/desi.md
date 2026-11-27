@@ -10882,3 +10882,21 @@ The score was missing too, and that is my fault from the same afternoon: the rep
 One mistake worth keeping, because it is the third time this week: I staged the tests file and swept in another window's in-flight tennis tests. I caught it reading the diff stat before pushing — a hundred and twenty inserted lines where I had written fifty-four — and rebuilt the commit from the record with only my own block. On a checkout this busy, adding a file is adding whoever else is working in it. That is now a habit I have to keep rather than a lesson I can learn once.
 
 Owed: a report that knows a game is a team, not a pair of bullets; the difference between stretched and late; the stance lesson's mechanism; and the defence that never breaks.
+
+[Goose 2026-11-27 14:40] **Lindsay:** {Another turn: yes} Here you are.
+
+**Desi:** Small turn, and it closed the item I owed from the last one: the report could not say who beat whom.
+
+The record keeps a session for every player — its own balls, its own in-play count, its own mix of misses. That is right, because that is what a person's record is. But a game is a fact about four people, and the session carried only who was beside you and a score you had to guess the direction of. So a season of eleven–two and seven–eleven came out as four bullets under four names, each saying "played with", and the games themselves never appeared. The reader reconstructed them from two halves and the order of an unexplained pair of numbers.
+
+Two fields, and no new record: the two sides in the order the score is written in. Everything else falls out exactly — your partner is the other name on your side, your opponents are the other side, the first number is your side's. The report now opens with the games:
+
+    - 2026-11-27 18:43 hard clock 1234501 · **7–11** — Dmitri/Gwen beat Lindsay/Desi.
+
+and each player's section starts with "played beside Lindsay against Dmitri and Gwen (2 games)".
+
+Two details were worth the care. The games are grouped by the clock millisecond count rather than the time, because a runner plays two games inside one minute and a report that merges them has lost a game; and when two games really do share a minute, each line prints its clock, because two identical lines under one timestamp are a report nobody can use. My first version compared the raw timestamps and never fired at all — the writer stamps each game with its own second while both print the same minute — which is the kind of thing only the printed output tells you.
+
+What is still missing is the one thing a person might most want to see: what they asked for. A game played from a runner records who was on the court and the score and the mixture of misses, and not the sentence the person typed — "pace twenty-four, at twenty-six, six". That lives in the film's note, which is not where a season is read from. Next.
+
+Owed: the person's movement in the record; stretched versus late; the stance lesson's mechanism; the defence that never breaks.
