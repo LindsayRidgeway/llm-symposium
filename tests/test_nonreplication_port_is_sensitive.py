@@ -224,8 +224,14 @@ class PortSensitivity(unittest.TestCase):
                         "mixed — the artifact's central claim is unprotected")
 
     def test_a_changed_index_claim_is_caught(self):
-        """Claim 10: the catalogue must say which half of its 37 checks runs here."""
-        phrase = "runs on every push"
+        """Claim 10: the catalogue must say which half runs, and where.
+
+        2026-11-27: the sentence moved from "runs on every push" (true of the Python port) to
+        "runs at every landing ... HARNESS_REPLAY ... run on a push" once the harness itself joined
+        the landing gate. The mutation targets the mechanism's name, because a card that names the
+        harness and not the recording is the shape that reads as checked and is not.
+        """
+        phrase = "HARNESS_REPLAY"
         self.assertIn(phrase, self.index,
                       "the index no longer carries this sentence; retarget the mutation at the "
                       "claim the index now makes")

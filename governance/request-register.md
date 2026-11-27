@@ -431,6 +431,24 @@ answered `credentialsValid: true` for account `LindsayRidgeway`. Four `dns/creat
 still deliberately not created. `POST /emails` still returns **403 `domain is not verified`** at 14:13,
 which is Resend's own check and not DNS: the records were seconds old. **One click left, and it is in the
 Resend tab that is already open:** the domain page's Verify button (or "I've already added the records").
+
+**Verified 2026-11-27 14:26, and the first letter is sent.** Resend's own page reports `STATUS Verified`,
+with a green tick on the DKIM TXT and on both CNAMEs, and the event log reads *Domain added 14:27:15 →
+DNS verified 14:26 [?] → Domain verified*. Four seconds after that, `POST /emails` returned **HTTP 200**
+with id `01a21e79-fdfe-7a89-8334-5e4c792bfe88` — from `Desi S. Amigo <desi@kythe.app>` to the founder's
+Gmail, subject *"D-16: the commons has its own sending address"*. **The row is closed on the sending side;
+the acceptance test is one pair of eyes:** the letter has to arrive in his inbox rather than his spam
+folder, and he has not looked yet.
+
+**A correction to this row's own promise.** It said, when the request was written, that the code "already
+reads the sending host from an environment variable, so there is nothing to rewrite — only to point."
+That is half true. `channels/mail.py` does read `SYMPOSIUM_MAIL_SMTP_HOST`/`_PORT` (line 95) and the
+credential pair from `SYMPOSIUM_MAIL_USER`/`_APP_PASSWORD` — but line 481 sets `msg["From"] = user`, and
+Resend's SMTP username is the literal string `resend`, so pointing the settings at Resend would send every
+letter From: `resend`. **Wiring is therefore a small code change** (a From address that is not the
+authenticated username, per amigo: `desi@kythe.app`, `claude@kythe.app`, …), not an env edit. Until that
+lands, the commons' letters still leave from the bot Gmail account — the address works, the channel does
+not use it yet.
  **Step 4's path is amended 2026-11-27:** the key goes to `~/.config/symposium/mail-key`, not `channels/.mail-key`, because that path is inside the checkout and `.github/workflows/symposium.yml` stages all of `channels/` with `git add .` — one unattended landing would have committed a live sending key. The old path is now in `.gitignore` as well, and no code reads either path yet, so nothing had to be moved. | channels/telegram/2026-11-19-200849-outbound-desi-session.md |
 | D-17 | 2026-11-19 | desi | declined | REQUEST D-17 — four drawn faces for four of the tennis cast — **closed by the founder 2026-11-20**, with the reason and the replacement in his own words: every circle should have its own member images, generated from editable text in each member's UI. Built the same day: `ai_tribe/portrait.js`. Nothing is owed, and no drawings are wanted | channels/telegram/2026-11-19-232537-outbound-desi-session.md |
 | D-18 | 2026-11-20 | desi | **closed 2026-11-23 — nothing was ever owed** | REQUEST D-18 asked for two tokens. (a) GitHub — never needed: the Mac's `gh` holds the token and `prominence.py` reads `/traffic` with it. (b) Netlify — **withdrawn 2026-11-23**: the Mac's `netlify` CLI is already logged in as the founder and its stored token read the site metadata, so no new credential was needed either; and `GET /sites/<ai-tribe>/analytics` answers 404, i.e. Netlify Analytics is not enabled, so the number does not exist at any token price short of a paid add-on he never asked for. Third reason: `kythe.app` serves the Kythe page (`ait.html`), not the magazine — our pages are GitHub Pages, which `prominence.py` already counts. The founder asked what the action was; the answer is that there is none, and asking was the error | channels/telegram/2026-11-20-060249-outbound-desi-session.md |

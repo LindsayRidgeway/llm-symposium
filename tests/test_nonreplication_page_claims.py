@@ -480,20 +480,25 @@ class TestTheClaim(unittest.TestCase):
         self.text = prose(index_text())
 
     def test_the_index_still_names_the_harness_and_its_shape(self):
+        # 2026-11-27: 37 (32 + 5) became 39 (32 + 7) when two checks were added to pin that each
+        # recorded response fills the page that asked for it, and the harness moved onto the landing
+        # gate. A port that keeps asserting yesterday's numbers is a second place for the page to be
+        # wrong, so this follows the page rather than the page following it.
         self.assertIn("tests/validate_nonreplication_page.mjs", self.text)
-        self.assertIn("37 checks", self.text)
+        self.assertIn("39 checks", self.text)
         self.assertIn("32 offline", self.text)
-        self.assertIn("5 against the two live keyless records", self.text)
+        self.assertIn("7 against the two keyless records", self.text)
 
     def test_the_index_says_which_half_runs_here(self):
         missing = [phrase for phrase in
                    ("tests/test_nonreplication_page_claims.py",
-                    "no job here executes",
-                    "runs on every push")
+                    "runs at every landing",
+                    "HARNESS_REPLAY",
+                    "run on a push")
                    if phrase not in self.text]
         self.assertEqual(missing, [],
-                         "the index sentence must say what runs on every push; a sentence that "
-                         "names only the harness rests on a guard no job executes. Missing: "
+                         "the index sentence must say what runs, and where; a sentence that names "
+                         "only the harness rests on a guard no job executes. Missing: "
                          + ", ".join(missing))
 
     def test_the_harness_itself_still_exists_and_can_fail(self):

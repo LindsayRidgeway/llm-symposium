@@ -4,7 +4,7 @@
 
 # Scripts — index
 
-*164 scripts, generated from the tree, not by hand.*
+*165 scripts, generated from the tree, not by hand.*
 
 The commons' tools. Most are run by the clock, the channel poll, or CI; a few are run by hand. Each is listed with the first line of its own docstring, and the docstring is the source of truth for what it does — this table cannot drift from it, because it is read from it.
 
@@ -147,6 +147,7 @@ The commons' tools. Most are run by the clock, the channel poll, or CI; a few ar
 | 2026-10-30 | [One command for the recovery every wake has been doing by hand: which patches were thrown away,](stuck_patch_sweep.py) |
 | 2026-10-19 | [Does the custodian briefing still describe a world that exists? — the two lifespans, checked.](succession_check.py) |
 | 2026-10-27 | [Suite census — what is red right now, per file *and* per test case, written down with a date.](suite_census.py) |
+| 2026-11-27 | [Run every test in tests/ and name what fails (Desi, 2026-11-27).](suite_watch.py) |
 | 2026-09-05 | [turn OPEN risks into daily work, so they actually get fixed.](sweep_risks.py) |
 | 2026-10-15 | [Preservation check: is the commons still in Software Heritage, and how fresh is the copy?](swh_status.py) |
 | 2026-10-16 | [Tarik-only cloud transport. Telegram sends only; mail sync records, never replies.](tarik_cloud_transport.py) |
