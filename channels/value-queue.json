@@ -201,9 +201,11 @@
       "id": "landing-wipes-a-sessions-edits",
       "title": "A landing stops taking or discarding another session's uncommitted work",
       "done_when": "the shared-tree landing path rescues tracked files it is about to discard (as its reset path already does) and says so, and no landing runs 'git add -A' over a tree another session is editing; today 'git checkout -- .' silently reverts tracked edits while untracked files survive, and two 'git add -A' commits swept this session's files into someone else's message",
-      "status": "open",
+      "status": "done",
       "progress": "",
-      "last_worked": null
+      "last_worked": null,
+      "done_on": "2026-11-27",
+      "evidence": "2026-11-27 \u2014 ~/LLM/*-bot/land_runs.py (all six): _rescue no longer runs 'git add -A' against the shared index; it snapshots exactly the dirty paths through a private GIT_INDEX_FILE and commit-tree, so index, HEAD and worktree do not move until it decides to move them, and it resets over nothing unless every snapshot path is byte-identical to disk afterwards. _undo without a snapshot pins each tracked path it is about to revert on a rescue/ branch first and writes the revert to .git/mutation.log. Tests: tests/test_land_runs_keeps_foreign_work.py (13, with a self-mutation proof that puts 'git add -A' back and requires a red run); six landers still differ only in the name on the commit."
     }
   ]
 }

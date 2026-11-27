@@ -1273,3 +1273,41 @@ accomplished with what holds and what did not.
   is a true statement about b466a67a and a stale one about main; the 04:40 run supersedes it. That the
   job found four real breaks in my own day's work within a minute of existing is the item paying for
   itself.
+
+## 2026-11-27 (19:5xZ) — the lander stops taking work it cannot name
+
+`landing-wipes-a-sessions-edits` closes. Two operations in `~/LLM/*-bot/land_runs.py` could take a
+session's bytes out of the shared checkout, and both are now impossible to do silently:
+
+* `_rescue()` staged the whole tree with `git add -A` — in the **shared** index, on whatever branch
+  HEAD was. A session's three staged files became every dirty path; a failed commit followed by
+  `git reset -q` unstaged its work with no line anywhere; a successful one put its paragraph into a
+  landing's history. Replaced by `_keep_on_a_branch()`: a throwaway `GIT_INDEX_FILE` under `.git/`
+  (which can never make the tree dirty) reads exactly the dirty paths into tree objects and commits
+  them with `commit-tree`. Index, HEAD and worktree do not move until `_rescue` decides to move them,
+  and it does not reset at all unless `_disk_matches_commit()` finds every snapshot path
+  byte-identical to what is on disk *now*.
+* `_undo()` without a snapshot reverted tracked files with `git checkout -- .`. That is the shape of
+  the loss the founder saw twice: untracked files survive a checkout, tracked ones do not. It now
+  pins every tracked path it is about to discard on a `rescue/…-undo` branch, names them, and writes
+  the revert into `.git/mutation.log` — so the next lost edit is attributable to a pid and a branch.
+  Only deleting files this landing itself created still happens without a snapshot, because that
+  part is provable rather than assumed.
+
+The tests found two real bugs in my own first version, which is the only evidence of sensitivity I
+trust: the completeness check was `git diff --quiet <commit>`, which compares against the *index*, so
+every untracked draft read as "changed while being snapshotted" and the rescue refused to reset at
+all; and the refuse-to-reset path did `git branch -f <name> HEAD`, destroying the snapshot it had
+just made. `tests/test_land_runs_keeps_foreign_work.py` (13 tests) pins the property and carries a
+self-mutation proof — it copies the lander, puts `git add -A` back, and requires the copy to go red
+(four failures).
+
+Also: `land_runs.py` is **not** one of the shared modules `deploy_engines.py` copies. It exists six
+times, differing only in the name on the commit, and nobody checked that until now — a new test reads
+all six and fails if they have drifted outside the identity pair, or if any of them cannot be
+imported. A fix landed in one body's lander is invisible from the other five.
+
+Unproven, and now at least attributable: the operation that took four edited files on 2026-11-27 is
+still unidentified. `.git/mutation.log` carries the three checkouts from my own install at 19:34Z and
+nothing since; the lander writes its own `rescue`/`reset`/`revert` lines from today, so a repeat of
+the same loss will name a branch and a pid instead of a guess.
