@@ -91,15 +91,38 @@ def is_library(text: str) -> bool:
     return "export function" in text and "process.exit" not in text
 
 
-def needs_network(text: str) -> bool:
-    """A real API call, not a `fetch` handed to the page's own script."""
-    return "await fetch(" in text or "await (await fetch" in text
+# Which harness runs where, said in one place instead of inferred from the source.
+#
+# 2026-11-27, second turn: the first version classified by looking for `await fetch(`. It put
+# `validate_warming_page.mjs` in the network bucket although that harness stubs the fetch and runs
+# offline by default (its live branch is behind `WARMING_LIVE=1`) — so a page that could have been
+# checked at every landing was being skipped, and the skip looked like a considered decision. A scan
+# for a substring cannot tell a default path from a gated one. An explicit list can, and the
+# completeness test below means a new harness cannot be quietly omitted from both.
+OFFLINE = {
+    "validate_ors_calculator.mjs": "pure arithmetic over the page's own script",
+    "validate_air_quality_page.mjs": "no network at all",
+    "validate_food_safety_page.mjs": "no network at all",
+    "validate_co_safety_page.mjs": "reads sources JSON from the repo",
+    "validate_heat_page.mjs": "pinned to heat-sources.json",
+    "test_retraction_epmc.mjs": "offline checks; registry requests are refused",
+    "test_retraction_registry_boundary.mjs": "offline checks; registry requests are refused",
+    "test_retraction_voice.mjs": "offline checks; registry requests are refused",
+    "validate_trials_page.mjs": "runs on a recorded response (HARNESS_REPLAY, see harness_net.mjs)",
+    "validate_warming_page.mjs": "stubbed fetch; the live Boston figure runs only under WARMING_LIVE=1",
+}
 
+# These five need a live API on their default path. Named so that a green run still tells the truth
+# about what it did not check; `harnesses-need-a-network` is the queue item that shrinks this set.
+NETWORK = {
+    "validate_nonreplication_page.mjs": "three live keyless records",
+    "validate_fetchable_page.mjs": "five live hosts, re-measured per run",
+    "validate_retraction_page.mjs": "the registry and Europe PMC, live",
+    "validate_recalls_page.mjs": "openFDA, live",
+    "validate_unreported_trials_page.mjs": "the registry and Europe PMC, live",
+}
 
-# A harness that imports the replay hook can run without the network. Added 2026-11-27 with the
-# first port: seven of the sixteen reach a live API, and requiring one at every landing would make a
-# guard that goes red for the weather.
-REPLAY_HOOK = "HARNESS_REPLAY"
+REPLAY_ENV = {"validate_trials_page.mjs": "HARNESS_REPLAY"}
 
 
 def replay_fixture(path: Path) -> Path:
@@ -120,19 +143,16 @@ class TheHarnessesActuallyRun(unittest.TestCase):
     def test_every_offline_harness_exits_zero_and_says_something(self):
         ran, failed, silent = [], [], []
         for path in harnesses():
-            text = text_of(path)
-            if is_library(text):
+            if path.name not in OFFLINE:
                 continue
             env = None
-            if REPLAY_HOOK in text:
+            if path.name in REPLAY_ENV:
                 fixture = replay_fixture(path)
                 self.assertTrue(fixture.is_file(),
-                                "%s has a replay hook and no record at %s, so it can only run against "
-                                "a live API: record one with HARNESS_RECORD=%s node %s"
+                                "%s runs on a recorded response and has no record at %s: record one "
+                                "with HARNESS_RECORD=%s node %s"
                                 % (path.name, fixture, fixture, path.name))
                 env = dict(os.environ, HARNESS_REPLAY=str(fixture.relative_to(ROOT)))
-            elif needs_network(text):
-                continue
             r = run(path, env)
             ran.append(path.name)
             if r.returncode != 0:
@@ -145,7 +165,7 @@ class TheHarnessesActuallyRun(unittest.TestCase):
         self.assertEqual(silent, [], "these exit 0 and print nothing, so their assertions may not "
                                      "run at all — say which and why, do not let silence pass: "
                                      + ", ".join(silent))
-        self.assertGreaterEqual(len(ran), 9,
+        self.assertGreaterEqual(len(ran), 10,
                                 "only %d offline harness(es) ran: the set is shrinking, and the "
                                 "pages they guard are then checked by nothing" % len(ran))
 
@@ -176,11 +196,24 @@ class TheHarnessesActuallyRun(unittest.TestCase):
         self.assertIn("FAIL", (r.stdout or "") + (r.stderr or ""))
 
     def test_the_network_ones_are_named_rather_than_skipped_in_silence(self):
-        live = sorted(p.name for p in harnesses() if needs_network(text_of(p)))
-        self.assertTrue(live, "no harness reaches the network: the classification changed")
-        # Named in the failure message so that a reader of a green run still knows what is not
-        # checked at landing time: a live API is not a landing's business, but it is a fact.
-        self.assertGreaterEqual(len(live), 5)
+        self.assertGreaterEqual(len(NETWORK), 1, "no harness reaches the network: the split changed")
+        for name, why in sorted(NETWORK.items()):
+            self.assertTrue(why, "%s is in NETWORK with no reason written down" % name)
+
+    def test_every_harness_is_in_exactly_one_list(self):
+        """The lists are the classification; a harness in neither is one nobody decided about.
+
+        This is the assertion that replaces guessing from the source. It also refuses a harness in
+        both, which would mean running a live check at landing time by accident.
+        """
+        on_disk = {p.name for p in harnesses()}
+        self.assertEqual(sorted(on_disk - set(OFFLINE) - set(NETWORK)), [],
+                         "harness(es) classified as neither offline nor network — decide, and write "
+                         "the reason beside the name in this file")
+        self.assertEqual(sorted(set(OFFLINE) & set(NETWORK)), [],
+                         "harness(es) in both lists")
+        self.assertEqual(sorted((set(OFFLINE) | set(NETWORK)) - on_disk), [],
+                         "listed harness(es) that are not on disk")
 
     def test_the_ports_and_the_harnesses_are_not_the_same_guard(self):
         # The Python ports re-derive page claims; the harnesses run the page's own script. A page

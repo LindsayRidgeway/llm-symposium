@@ -129,5 +129,47 @@ class TheDetectorFiresOnTheRealCase(unittest.TestCase):
         self.assertTrue(found and "no recorded counts" in found[0])
 
 
+class ARecorderMustNotLoseAHarness(unittest.TestCase):
+    """The 692 → 655 drop: `--write` rebuilt the record from what it could run, and said only a
+    smaller total. `validate_nonreplication_page.mjs` (37 checks) vanished at 18:14Z on 2026-11-27 and
+    runs fine by hand — one transient fetch reset was enough to delete a number from the record."""
+
+    def test_a_harness_that_could_not_run_keeps_its_number_and_says_why(self):
+        merged, carried, unmeasured = pcc.reconcile(
+            {"validate_heat_page.mjs": 57},
+            {"validate_nonreplication_page.mjs": "exit 1: TypeError: fetch failed"},
+            {"validate_nonreplication_page.mjs": 37, "validate_heat_page.mjs": 57},
+            "2026-11-27T18:00:59Z")
+        self.assertEqual(merged["validate_nonreplication_page.mjs"], 37,
+                         "the number was dropped from the record instead of carried")
+        self.assertIn("fetch failed", carried["validate_nonreplication_page.mjs"])
+        self.assertIn("2026-11-27T18:00:59Z", carried["validate_nonreplication_page.mjs"])
+        self.assertEqual(unmeasured, {})
+
+    def test_a_harness_that_never_ran_has_no_number_and_is_named(self):
+        merged, carried, unmeasured = pcc.reconcile({}, {"validate_new_page.mjs": "no node"},
+                                                    {}, "an earlier run")
+        self.assertNotIn("validate_new_page.mjs", merged,
+                         "a count was invented for a harness that has never been measured")
+        self.assertIn("no node", unmeasured["validate_new_page.mjs"])
+
+    def test_the_write_exits_nonzero_when_something_never_measured(self):
+        self.assertEqual(len(pcc.reconcile({}, {"a": "x"}, {})[2]), 1)
+
+
+class TheOfflineSetIsAskedNotGuessed(unittest.TestCase):
+    def test_warming_is_re_derived_at_check_time(self):
+        warming = ROOT / "tests" / "validate_warming_page.mjs"
+        self.assertTrue(pcc.runs_offline(warming),
+                        "warming calls fetch only behind WARMING_LIVE=1; a content scan for "
+                        "`await fetch(` misreads it as live and its count goes unchecked forever")
+
+    def test_a_harness_with_a_recorded_response_is_offline(self):
+        self.assertTrue(pcc.runs_offline(ROOT / "tests" / "validate_trials_page.mjs"))
+
+    def test_a_live_harness_is_not(self):
+        self.assertFalse(pcc.runs_offline(ROOT / "tests" / "validate_recalls_page.mjs"))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

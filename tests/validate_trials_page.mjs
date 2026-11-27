@@ -57,11 +57,14 @@ check("query requests LocationGeoPoint (the distance field)", url.includes("Loca
 check("place is URL-encoded, not concatenated raw", mod.apiUrl("a b", "New York, NY").includes("New+York%2C+NY"));
 
 const api = net();
-if (!api.live && api.url) {
-  // The recorded body must answer the URL the page builds *now*: a fixture recorded against an
-  // older query would make every assertion below a statement about a page we no longer ship.
-  check("the record answers the query this page builds today", api.url === url,
-    api.url === url ? "" : `recorded ${api.url}`);
+if (!api.live && api.url && api.url !== url) {
+  // The recorded body must answer the URL the page builds *now*: a fixture recorded against an older
+  // query would make every assertion below a statement about a page we no longer ship. It is a hard
+  // failure and NOT a counted check, so that the page's printed number is the same in either mode.
+  console.error(`FAIL  the record answers a different query than this page builds now:`);
+  console.error(`      recorded: ${api.url}`);
+  console.error(`      page now: ${url}`);
+  process.exit(1);
 }
 const res = await api.fetch(url);
 check(`${api.label} registry answers HTTP 200 for the page's exact query`, res.ok, "HTTP " + res.status);

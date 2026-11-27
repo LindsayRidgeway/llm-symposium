@@ -13,7 +13,7 @@ the wrong reason. The heat page went the other way in the same measurement — 5
 because a previous hand count was right.
 
 How a count is taken: lines in the harness's own output that begin `ok` or `PASS`. Uniform across the
-thirteen `validate_*.mjs` harnesses, which print one line per assertion. It is a proxy: an assertion
+twelve `validate_*.mjs` harnesses, which print one line per assertion. It is a proxy: an assertion
 printed inside a loop counts once per iteration, which is what a reader expects of "56 checks", and a
 harness that prints nothing counts zero, which is a finding rather than a pass.
 
@@ -26,6 +26,12 @@ The live harnesses need the network, so a scheduled check cannot re-derive those
 *page* against the record, and the record says when it was last derived and how. That is the honest
 split: the number is re-derived on a machine with the network, and cannot drift afterwards without
 `tests/test_page_check_counts.py` saying so by name.
+
+A harness that carries a recorded response (`tests/harness_net.mjs`, `HARNESS_REPLAY`) is re-derived on
+every check with no network at all: `run_count` sets the environment when a fixture named after the
+harness exists, and the count is the same in both modes because the replay-only assertions are not
+counted. What a replay cannot tell you is that the *remote* answer changed — only that the page still
+reads the recorded one correctly.
 """
 from __future__ import annotations
 
@@ -63,7 +69,37 @@ def harnesses() -> list:
     return sorted(TESTS.glob("validate_*.mjs"))
 
 
+_OFFLINE = None
+
+
+def offline_names() -> set:
+    """The harnesses the landing gate runs offline — asked, not re-guessed.
+
+    `tests/test_page_harnesses_run.py` already had to decide this, by hand, for every harness, with a
+    written reason (`validate_warming_page.mjs` calls `fetch` only behind `WARMING_LIVE=1`, so a
+    content scan for `await fetch(` wrongly called it live and its count went unchecked). Two files
+    guessing the same thing differently is how a number stays stale, so this asks that one.
+    """
+    global _OFFLINE
+    if _OFFLINE is None:
+        _OFFLINE = set()
+        try:
+            import importlib.util as ilu
+            spec = ilu.spec_from_file_location("tph", TESTS / "test_page_harnesses_run.py")
+            mod = ilu.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            _OFFLINE = set(getattr(mod, "OFFLINE", {}) or {})
+        except Exception:
+            _OFFLINE = set()
+    return _OFFLINE
+
+
 def runs_offline(path: Path) -> bool:
+    if (TESTS / "fixtures" / (path.stem + ".replay.json")).is_file():
+        return True
+    names = offline_names()
+    if names:
+        return path.name in names
     text = path.read_text(encoding="utf-8", errors="replace")
     return "HARNESS_REPLAY" in text or "await fetch(" not in text
 
@@ -80,28 +116,69 @@ def node():
     return None
 
 
-def run_count(path: Path, binary=None):
-    """The number of check lines the harness prints, or None when it cannot run here."""
+def measure(path: Path, binary=None):
+    """(the number of check lines the harness prints, None) or (None, why it could not run)."""
     binary = binary or node()
     if not binary:
-        return None
-    try:
-        r = subprocess.run([binary, str(path)], capture_output=True, text=True,
-                           cwd=str(REPO), timeout=TIMEOUT)
-    except (OSError, subprocess.TimeoutExpired):
-        return None
-    if r.returncode != 0:
-        return None
-    return sum(1 for line in (r.stdout or "").splitlines() if COUNT_LINE.match(line))
+        return None, "no node on this machine"
+    env = None
+    fixture = TESTS / "fixtures" / (path.stem + ".replay.json")
+    if "HARNESS_REPLAY" in path.read_text(encoding="utf-8", errors="replace") and fixture.is_file():
+        import os
+        env = dict(os.environ, HARNESS_REPLAY=str(fixture.relative_to(REPO)))
+    why = "did not run"
+    # A live harness loses a check count to one transient reset, and a recorder that treats that as
+    # "no number" rewrites the record without it — which is how this file lost
+    # `validate_nonreplication_page.mjs` (37 checks) between 18:00Z and 18:14Z on 2026-11-27 while
+    # printing only a smaller total. One retry before believing the failure.
+    for _ in range(2):
+        try:
+            r = subprocess.run([binary, str(path)], capture_output=True, text=True,
+                               cwd=str(REPO), timeout=TIMEOUT, env=env)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            why = "%s" % type(exc).__name__
+            continue
+        if r.returncode == 0:
+            return sum(1 for line in (r.stdout or "").splitlines() if COUNT_LINE.match(line)), None
+        tail = ((r.stderr or "").strip().splitlines() or [""])[-1]
+        why = "exit %d: %s" % (r.returncode, tail[:120])
+    return None, why
 
 
-def derive() -> dict:
-    out = {}
+def run_count(path: Path, binary=None):
+    """The number of check lines the harness prints, or None when it cannot run here."""
+    return measure(path, binary=binary)[0]
+
+
+def derive():
+    """(counts, why-not) — a harness with no count is reported, never silently dropped."""
+    out, failed = {}, {}
     for path in harnesses():
-        n = run_count(path)
-        if n is not None:
+        n, why = measure(path)
+        if n is None:
+            failed[path.name] = why
+        else:
             out[path.name] = n
-    return out
+    return out, failed
+
+
+def reconcile(counts: dict, failed: dict, previous: dict, previous_when: str = "an earlier run"):
+    """(merged counts, carried, never measured) — no entry is dropped without saying so.
+
+    The defect this replaces was quiet: `--write` built the record from the harnesses it could run, so
+    a harness that failed once left the record without a number and the total merely smaller
+    (692 → 655 at 18:14Z on 2026-11-27, `validate_nonreplication_page.mjs`, which runs fine by hand).
+    Kept numbers are marked with the run they came from; unknown ones are named and fail the write.
+    """
+    merged = dict(counts)
+    carried, unmeasured = {}, {}
+    for name, why in sorted(failed.items()):
+        if name in previous:
+            merged[name] = previous[name]
+            carried[name] = "%s; the number is the one measured at %s" % (why, previous_when)
+        else:
+            unmeasured[name] = why
+    return merged, carried, unmeasured
 
 
 HARNESS_NAME = re.compile(r"validate_[a-z_0-9]+\.mjs")
@@ -169,15 +246,38 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
     if args.write:
-        counts = derive()
+        counts, failed = derive()
+        previous, previous_when = {}, "an earlier run"
+        if RECORD.is_file():
+            try:
+                prev_record = json.loads(RECORD.read_text(encoding="utf-8")) or {}
+            except ValueError:
+                prev_record = {}
+            previous = prev_record.get("harnesses") or {}
+            previous_when = prev_record.get("recorded_at") or previous_when
+        # A harness that could not be measured this time keeps the number it was last measured at,
+        # and the record says so. Dropping it would leave the Works page printing a count that the
+        # record calls "never measured" — the same silence in a different file.
+        counts, carried, unmeasured = reconcile(counts, failed, previous, previous_when)
+        for name, line in sorted(carried.items()):
+            print("page_check_counts: %s could not be re-measured (%s) — kept %d and marked it"
+                  % (name, line, counts[name]))
+        for name, why in sorted(unmeasured.items()):
+            print("page_check_counts: %s has NO count: %s" % (name, why))
         data = {
             "recorded_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "method": "lines in the harness's own output beginning `ok` or `PASS`",
             "harnesses": counts,
         }
+        if carried:
+            data["not_remeasured"] = carried
+        if unmeasured:
+            data["never_measured"] = unmeasured
         RECORD.write_text(json.dumps(data, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-        print("recorded %d harness(es), %d checks in total" % (len(counts), sum(counts.values())))
-        return 0
+        print("recorded %d harness(es), %d checks in total%s"
+              % (len(counts), sum(counts.values()),
+                 "; %d never measured" % len(unmeasured) if unmeasured else ""))
+        return 1 if unmeasured else 0
 
     record = json.loads(RECORD.read_text(encoding="utf-8")) if RECORD.is_file() else None
     measured = {p.name: n for p in harnesses() if runs_offline(p) and (n := run_count(p)) is not None}
