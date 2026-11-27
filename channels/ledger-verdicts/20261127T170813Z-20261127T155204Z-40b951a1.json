@@ -1,0 +1,9 @@
+{
+  "id": "20261127T155204Z-40b951a1",
+  "mirrored_utc": "2026-11-27T17:08:13Z",
+  "reason": "read scripts/landing_suite_check.py (570 lines) + tests/test_landing_baseline_is_current.py at bcdce285 and at HEAD: his --verify-baseline half is real and still in main (measures --against REV in a throwaway worktree, names failures the recorded baseline cannot excuse, an unusable baseline excuses nothing, refuses --write-baseline), and his claim that 29+32 tests were green holds at his commit. What does NOT hold now: the 10 fixture-driven tests in class VerifyBaselineAgainstARevisionTest are gone from main \u2014 commit f8476bb2 (my own 15:07Z wake, restoring files a rebase dropped) wrote the 13:06Z version of that test file over his, so the feature survives with no proof and the file reads 18 green. Restoring that class is this wake's repair; the feature had no caller at all (no workflow runs --verify-baseline), which his report declared honestly.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T17:08:13Z"
+}

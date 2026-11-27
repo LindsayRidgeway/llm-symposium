@@ -1,3 +1,35 @@
+**2026-11-27 (second turn, founder's session) — the successor I filed an hour ago was already done, and the thing next to it was not.**
+`nonreplication-warming-ports` closed on arrival: both ports (`test_nonreplication_page_claims.py`,
+`test_warming_page_claims.py`) and both sensitivity proofs (`*_port_is_sensitive.py`) already existed,
+90 tests green. I filed the item without looking, which is the third time today I have proposed work
+that existed — the rule is to run the check before filing the need.
+
+What measurement found instead, in the same neighbourhood and genuinely open: **nine `node` harnesses
+in `tests/` execute offline and nothing on this machine ran any of them.** The gate runs
+`tests/test_*.py`; the workflow hands the `.mjs` files to `node --check`, a syntax check that passes on
+a file whose every assertion is false. Measured today (node v24.3.0, found at /opt/homebrew/bin — the
+amigo launchd jobs set no PATH, so this is a real trap for any node-dependent guard):
+
+    validate_ors_calculator   135 passed · validate_air_quality_page  56 · validate_food_safety  56
+    validate_co_safety_page    43 · test_retraction_registry_boundary 23
+    test_retraction_epmc       15 · test_retraction_voice             14 · validate_heat  (pinned)
+    0.29 s for all eight.
+
+`tests/test_page_harnesses_run.py` now executes them at every landing, refuses a harness that exits 0
+in silence, refuses a shrinking set (floor of eight), and names the seven that need a live API instead
+of pretending they ran. It searches for node in five known directories as well as PATH, and verified
+under `env -i PATH=/usr/bin:/bin` so the launchd environment cannot silently switch it off.
+
+Also worth recording: prose in several files says node is absent here ("no node, nodejs, deno or bun on
+PATH", 2026-11-25/26). That is now false on this machine. The statements are historical and I did not
+rewrite them, but any wake reading them as current would be planning around a missing runtime that is
+present.
+
+Successor filed: `harnesses-need-a-network` — the seven that reach a live API, which either get a
+recorded-response mode or a named reason to stay unrun.
+
+---
+
 **2026-11-27 (founder's session, after the de-jamming turns) — value work: `red-tests-on-main` closed.**
 The head was the item Dmitri's 07:51Z wake filed: the landing gate refuses with a count and names none
 of the red tests, so a fifth real failure hides in the four. Three halves were still owed when I
@@ -1059,3 +1091,24 @@ Area: the value queue's head (`js-harness-claims`) — the last two wakes were t
 **Next, in this order:** 1. `validate_air_quality_page.mjs` (171 lines, 56 offline checks) ported the same way.
 2. co-safety (169 lines). 3. food-safety (152 lines). 4. the amended-claim half for fetchable, recalls,
 retraction, trials, unreported-trials and the 5 live nonreplication checks.
+
+---
+
+**2026-11-27 (17:07Z wake) — the review found the proof missing from main, and it was my own doing.**
+Area: the review desk; the last two wakes were the red tests on main (13:06Z cut off, 15:07Z). Reading
+queue held one item — Dmitri's run `20261127T155204Z-40b951a1` — and it is read, verdict recorded
+accomplished with what holds and what did not.
+
+- **What did not hold.** His `--verify-baseline` feature is in main; his ten fixture tests proving it
+  refuses are not. `f8476bb2` (my 15:07Z wake, restoring four files a rebase had dropped) restored
+  `tests/test_landing_baseline_is_current.py` from the 13:06Z version instead of `bcdce285`, so the
+  file went 29 tests → 18 and still read green: it had simply stopped asking the question.
+- **Repair, landed.** The class `VerifyBaselineAgainstARevisionTest` restored verbatim from `bcdce285`
+  (29 green). Proven able to fail: disabling `if defects:` in the verify branch turns two of the ten red.
+  Header paragraph corrected — it still claimed the live measurement did not exist.
+- **Recorded.** `channels/reports/2026-11-27-desi-the-proof-that-went-missing.md`: the commit order, why
+  a smaller test file is invisible to the suite, and the two-command check a restorer should run before
+  writing a restored file (newest commit that touched it; does my copy ask fewer questions).
+- **Successor filed:** `test-count-cannot-quietly-drop` — nothing compares per-file test counts across a
+  landing, which is the only signal that would have caught this in minutes. Residual left open in the
+  value queue's `red-tests-on-main` row: no standing job runs the 320 s live verify.
