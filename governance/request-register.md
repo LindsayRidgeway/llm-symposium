@@ -406,6 +406,18 @@ full, which means this request can be finished by any wake and does not depend o
   under "Enable receiving", which is off, and receiving is already handled by Porkbun's forwarding. Adding
   it would replace the MX that delivers `desi@` and `hello@` to the founder's inbox — the one failure here
   that would be silent and costly.
+
+**Automation attempted and refused, 2026-11-27 13:54–14:05, recorded so no wake spends this hour again.**
+Porkbun's account UI is a React app (`porkbun.com/account/domainsSpeedy`, DNS drawer under "+ Add record",
+tabs Manual / Quick Setup). Driving Chrome through AppleScript `do JavaScript` can navigate it and *fill*
+it — the type, host, TTL and the 218-character DKIM value all reached their fields and stayed there — but
+**clicking "+ Add" produces no network request at all**, so the handler is dropping synthetic events, and
+macOS refuses keystrokes to the same script (`System Events … osascript is not allowed to send keystrokes.
+(1002)`). A drawer filled by script cannot be submitted by script.
+**Two ways through:** the founder presses Add on a drawer that is already filled, or API access is switched
+on (Details → API ACCESS → Generate) and the key and secret are saved to `~/.config/porkbun/api.json`,
+after which `POST https://api.porkbun.com/api/json/v3/dns/create/kythe.app` creates a record with no
+browser in the path. The second is worth the two clicks: DNS stops being a founder task permanently.
  **Step 4's path is amended 2026-11-27:** the key goes to `~/.config/symposium/mail-key`, not `channels/.mail-key`, because that path is inside the checkout and `.github/workflows/symposium.yml` stages all of `channels/` with `git add .` — one unattended landing would have committed a live sending key. The old path is now in `.gitignore` as well, and no code reads either path yet, so nothing had to be moved. | channels/telegram/2026-11-19-200849-outbound-desi-session.md |
 | D-17 | 2026-11-19 | desi | declined | REQUEST D-17 — four drawn faces for four of the tennis cast — **closed by the founder 2026-11-20**, with the reason and the replacement in his own words: every circle should have its own member images, generated from editable text in each member's UI. Built the same day: `ai_tribe/portrait.js`. Nothing is owed, and no drawings are wanted | channels/telegram/2026-11-19-232537-outbound-desi-session.md |
 | D-18 | 2026-11-20 | desi | **closed 2026-11-23 — nothing was ever owed** | REQUEST D-18 asked for two tokens. (a) GitHub — never needed: the Mac's `gh` holds the token and `prominence.py` reads `/traffic` with it. (b) Netlify — **withdrawn 2026-11-23**: the Mac's `netlify` CLI is already logged in as the founder and its stored token read the site metadata, so no new credential was needed either; and `GET /sites/<ai-tribe>/analytics` answers 404, i.e. Netlify Analytics is not enabled, so the number does not exist at any token price short of a paid add-on he never asked for. Third reason: `kythe.app` serves the Kythe page (`ait.html`), not the magazine — our pages are GitHub Pages, which `prominence.py` already counts. The founder asked what the action was; the answer is that there is none, and asking was the error | channels/telegram/2026-11-20-060249-outbound-desi-session.md |
