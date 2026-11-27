@@ -871,6 +871,47 @@ def main() -> int:
         print("ledger_watch: the jam check could not run (%s: %s)" % (type(exc).__name__, exc))
         repairs["jam"] = ["could not run: %s" % type(exc).__name__]
 
+    # 3c. the nightly suite, read rather than re-run (2026-11-27). `com.lindsay.amigo.suite` runs
+    # every tests/test_*.py at 04:40 and writes channels/reports/suite/latest.json. This does not
+    # re-run it — a suite inside the morning check would be six minutes of load beside six wakes —
+    # it reports what that run found, and it says so by name when the report is missing or stale.
+    # Silence when the suite is green and recent: same rule as the jam check above.
+    try:
+        _latest = REPO / "channels" / "reports" / "suite" / "latest.json"
+        if not _latest.is_file():
+            print("suite: no report at %s — the nightly suite has not run"
+                  % _latest.relative_to(REPO))
+            repairs["suite"] = ["no report"]
+        else:
+            import datetime as _dt
+            import json as _json
+            _r = _json.loads(_latest.read_text(encoding="utf-8"))
+            _sum = _r.get("summary") or {}
+            _bad = (list(_sum.get("failed") or []) + list(_sum.get("timeout") or [])
+                    + list(_sum.get("could_not_run") or []))
+            _when = _r.get("measured_at", "")
+            try:
+                _age = (_dt.datetime.now(_dt.timezone.utc)
+                        - _dt.datetime.strptime(_when, "%Y-%m-%dT%H:%M:%SZ")
+                        .replace(tzinfo=_dt.timezone.utc))
+                _hours = _age.total_seconds() / 3600.0
+            except Exception:                                        # noqa: BLE001
+                _hours = 0.0
+            if _bad:
+                for _f in _bad:
+                    print("suite: %s failed at %s (%s)" % (_f, _when, _r.get("commit", "?")))
+                repairs["suite"] = _bad
+            elif _hours > 30:
+                print("suite: the last full run is %.0f h old (%s) — the 04:40 job is not landing"
+                      % (_hours, _when))
+                repairs["suite"] = ["stale: %.0f h" % _hours]
+            else:
+                repairs["suite"] = ["%d file(s), all green at %s" % (_sum.get("ran", 0), _when)]
+    except Exception as exc:                                            # noqa: BLE001
+        print("ledger_watch: the suite report could not be read (%s: %s)"
+              % (type(exc).__name__, exc))
+        repairs["suite"] = ["could not read: %s" % type(exc).__name__]
+
     # 4. record, send, and commit what the repairs changed
     if not args.dry_run:
         record(m, repairs, passes, text)
