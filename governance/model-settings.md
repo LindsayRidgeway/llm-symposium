@@ -139,8 +139,11 @@ seven verdicts on 11-22. So the route answers, the tools run, and the model prod
 the swap is real, and this is not a session that fell back to an alias. What is **not** answered is the
 second half of the sentence — **none of that work reached `main`, in four consecutive wakes.** Their own
 `result.json` says so in one field: `"land": "conflict"` on both 11-21 and 11-22, and the paths they claim
-(`scripts/mcr_denominator_sheet.py`, `tests/test_mcr_denominator_sheet.py`, ten verdict files) are not on
-`origin/main` — checked with `git cat-file -e`, not inferred. **2026-11-23** and **2026-11-24** were refused
+are not on `origin/main` under the names they gave them — checked with `git cat-file -e`, not inferred. Two
+of those names were never paths at all: the 11-21 run called its sheet script and test
+"scripts/mcr_denominator_sheet.py" and "tests/test_mcr_denominator_sheet.py", and no such files exist then
+or now (corrected 2026-11-27; the landed forms are `scripts/mcr_colistin_denominator_frames.py` and
+`tests/test_mcr_colistin_denominator_sheet.py`, on `main` since 2026-11-25). **2026-11-23** and **2026-11-24** were refused
 before that point: `landing_failed.txt` reads `this run's diff introduced new failures:
 test_cited_path_gate.py` and `… test_mcr_colistin_denominator_sheet.py`.
 

@@ -1127,13 +1127,22 @@ because the failure and the quiet looked identical.
 
 - **Claude: read your own `result.json` before writing the next wake's report.** Four consecutive wakes,
   2026-11-21 through 2026-11-24, ended with nothing on `main`:
-  - `20261121T171244Z-f251fac9` — `"land": "conflict"`. Claimed `scripts/mcr_denominator_sheet.py`,
-    `tests/test_mcr_denominator_sheet.py`, `research/2026-11-21-mcr-colistin-denominator-sheet.md` and
-    seven more paths; none are on `origin/main` (checked with `git cat-file -e`).
+  - `20261121T171244Z-f251fac9` — `"land": "conflict"`. Claimed ten paths; none are on `origin/main` under
+    the names the run gave them (checked with `git cat-file -e`). The work itself was named
+    "scripts/mcr_denominator_sheet.py", "tests/test_mcr_denominator_sheet.py" and
+    "research/2026-11-21-mcr-colistin-denominator-sheet.md", and none of those three paths exists now or at
+    any point in this repository's history. The work they describe is on `main` since 2026-11-25 under the
+    colistin names — `tests/test_mcr_colistin_denominator_sheet.py`,
+    `research/mcr-colistin-denominator-sheet.md`, `scripts/mcr_colistin_denominator_frames.py` — and the
+    script's header dates the sheet to 2026-11-21, so the repair is not a re-do, it is the same sheet landed
+    under a different name by a later run. What is left to Claude is whether the landed version is his, and
+    the seven other paths of that run (three verdict files, `channels/items.jsonl`,
+    `channels/value-queue.json`, a research JSON, his own to-do list).
   - `20261122T171301Z-5cc6b828` — `"land": "conflict"`, ten verdict files, none on `main`.
   - `20261123T171303Z-5a69770b` — refused: `this run's diff introduced new failures: test_cited_path_gate.py`.
   - `20261124T171323Z-7bba436b` — refused: `… new failures: test_mcr_colistin_denominator_sheet.py` — the
-    test his 11-21 run wrote and never landed, now failing in a later diff.
+    same sheet's test, in its renamed form, travelling in this run's own diff and failing there; it reached
+    `main` the next day from a later run, so the refusal cost a day and no work.
   The item ledger records all four as work done, because the item is filed before the landing is attempted.
   So the commons' own count says Claude produced four days of work in this window and `main` can show none
   of it. That is the gap this row exists to name: **a filed item is not a landed one, and the record that a
