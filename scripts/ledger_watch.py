@@ -772,6 +772,74 @@ def record(m: dict, repairs: dict, passes: bool, text: str) -> None:
 
 # --------------------------------------------------------------------------- main
 
+def suite_report(repo: Path | None = None, now: dt.datetime | None = None) -> tuple[list[str], list[str]]:
+    """What the nightly suite's latest report says about the tree — and about itself.
+
+    Returns (the lines to print, the list to record). Extractable and side-effect free so that the
+    two mistakes this block has already made can be tested instead of re-argued:
+
+      * 2026-11-27 — the 19:22Z report named five failures; all five were fixed by 19:5xZ. Read
+        without asking *which commit*, the 07:45 check would have printed
+        "suite: test_gen_feed_freshness.py failed" as though the tree were red. A report is a
+        statement about one commit; its failures are a statement about main only if that commit is
+        main.
+      * the age check ran only when the failure list was empty, so a week-old report carrying one
+        failure counted as a current verdict for as long as it survived. Age is asked first now.
+    """
+    repo = Path(repo or REPO)
+    now = now or dt.datetime.now(dt.timezone.utc)
+
+    def g(*args: str) -> subprocess.CompletedProcess:
+        return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True)
+
+    latest = repo / "channels" / "reports" / "suite" / "latest.json"
+    if not latest.is_file():
+        return (["suite: no report at %s — the nightly suite has not run"
+                 % latest.relative_to(repo)], ["no report"])
+    r = json.loads(latest.read_text(encoding="utf-8"))
+    summary = r.get("summary") or {}
+    bad = (list(summary.get("failed") or []) + list(summary.get("timeout") or [])
+           + list(summary.get("could_not_run") or []))
+    when = r.get("measured_at", "")
+    commit = (r.get("commit") or "").strip()
+    try:
+        hours = (now - dt.datetime.strptime(when, "%Y-%m-%dT%H:%M:%SZ")
+                 .replace(tzinfo=dt.timezone.utc)).total_seconds() / 3600.0
+    except Exception:                                                   # noqa: BLE001
+        hours = 0.0
+    behind, based = "", True
+    if commit:
+        if g("merge-base", "--is-ancestor", commit, "HEAD").returncode == 0:
+            n = (g("rev-list", "--count", "%s..HEAD" % commit).stdout or "").strip() or "0"
+            if n != "0":
+                behind = "%s commit(s) have landed since %s" % (n, commit)
+        else:
+            based = False
+            behind = "%s is not an ancestor of HEAD" % commit
+    lines: list[str] = []
+    if hours > 30:
+        lines.append("suite: the last full run is %.0f h old (%s) — the 04:40 job is not landing"
+                     % (hours, when))
+        if bad:
+            lines.append("suite: it named %d failing file(s), which is not a statement about this "
+                         "tree: %s" % (len(bad), ", ".join(bad)))
+        return lines, ["stale: %.0f h" % hours] + (["+%d old failure(s)" % len(bad)] if bad else [])
+    if bad:
+        for f in bad:
+            lines.append("suite: %s failed at %s (%s)" % (f, when, commit or "no commit"))
+        if behind:
+            lines.append("suite: that report describes a tree that is no longer main — %s. The "
+                         "failures above may already be fixed; the 04:40 run is the current "
+                         "verdict." % behind)
+        return lines, bad + (["measured at %s" % commit] if behind else [])
+    if not based:
+        lines.append("suite: green, but the report was measured on %s, which HEAD does not "
+                     "descend from — the number is not about this tree" % commit)
+        return lines, ["green at %s only" % commit]
+    return lines, ["%d file(s), all green at %s (%s)"
+                   % (summary.get("ran", 0), when, commit or "no commit")]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--dry-run", action="store_true", help="measure and print; change and send nothing")
@@ -877,36 +945,10 @@ def main() -> int:
     # it reports what that run found, and it says so by name when the report is missing or stale.
     # Silence when the suite is green and recent: same rule as the jam check above.
     try:
-        _latest = REPO / "channels" / "reports" / "suite" / "latest.json"
-        if not _latest.is_file():
-            print("suite: no report at %s — the nightly suite has not run"
-                  % _latest.relative_to(REPO))
-            repairs["suite"] = ["no report"]
-        else:
-            import datetime as _dt
-            import json as _json
-            _r = _json.loads(_latest.read_text(encoding="utf-8"))
-            _sum = _r.get("summary") or {}
-            _bad = (list(_sum.get("failed") or []) + list(_sum.get("timeout") or [])
-                    + list(_sum.get("could_not_run") or []))
-            _when = _r.get("measured_at", "")
-            try:
-                _age = (_dt.datetime.now(_dt.timezone.utc)
-                        - _dt.datetime.strptime(_when, "%Y-%m-%dT%H:%M:%SZ")
-                        .replace(tzinfo=_dt.timezone.utc))
-                _hours = _age.total_seconds() / 3600.0
-            except Exception:                                        # noqa: BLE001
-                _hours = 0.0
-            if _bad:
-                for _f in _bad:
-                    print("suite: %s failed at %s (%s)" % (_f, _when, _r.get("commit", "?")))
-                repairs["suite"] = _bad
-            elif _hours > 30:
-                print("suite: the last full run is %.0f h old (%s) — the 04:40 job is not landing"
-                      % (_hours, _when))
-                repairs["suite"] = ["stale: %.0f h" % _hours]
-            else:
-                repairs["suite"] = ["%d file(s), all green at %s" % (_sum.get("ran", 0), _when)]
+        _lines, _rep = suite_report()
+        for _line in _lines:
+            print(_line)
+        repairs["suite"] = _rep
     except Exception as exc:                                            # noqa: BLE001
         print("ledger_watch: the suite report could not be read (%s: %s)"
               % (type(exc).__name__, exc))

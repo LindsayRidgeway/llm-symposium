@@ -131,10 +131,41 @@ def build() -> dict:
     return sections
 
 
-def rendered(sections: dict) -> str:
+def build_works() -> dict:
+    """One entry per work page, keyed by its path inside `docs/`, measured the same way.
+
+    Why this exists (2026-11-27). The section timestamps above fixed the *menu*: a story landing
+    moves `sections.fiction.updated` and the home page shows a dot. They could not fix the wing's own
+    page, because a section has one timestamp and a page listing seven stories needs seven. The
+    founder had asked for exactly that — "the literary section's home page" telling him which one was
+    new — and that page carried no dot element at all, so the promise in this generator's docstring
+    was half kept: the menu could say "something is new here" and the page could not say what.
+
+    The key is the page's path without `docs/` and without `.html` (`fiction/dead-band`), because
+    that is the substring a browser's location contains on the deployed site, which is what
+    `docs/tracker.js` matches against.
+    """
+    works: dict[str, dict] = {}
+    for section_id, (rel, _title) in SECTIONS.items():
+        for page in work_pages(ROOT / rel):
+            stamp = last_commit(page)
+            if not stamp:
+                continue
+            key = (page.parent if page.name == "index.html" else page.with_suffix(""))
+            works[str(key.relative_to(ROOT / "docs"))] = {
+                "updated": stamp,
+                "label": human_title(page),
+            }
+    return works
+
+
+def rendered(sections: dict, works: dict | None = None) -> str:
     body = json.dumps(sections, indent=6, sort_keys=False)
     body = body.replace('"', "'")                       # the file is JS; keep its quoting
-    return "%s\n    sections: %s,\n    %s" % (BEGIN, body, END)
+    if works is None:
+        return "%s\n    sections: %s,\n    %s" % (BEGIN, body, END)
+    per_work = json.dumps(works, indent=6, sort_keys=False).replace('"', "'")
+    return "%s\n    sections: %s,\n    works: %s,\n    %s" % (BEGIN, body, per_work, END)
 
 
 def current_block(text: str) -> str | None:
@@ -148,7 +179,7 @@ def current_block(text: str) -> str | None:
 def apply(check: bool = False) -> int:
     text = TRACKER.read_text(encoding="utf-8")
     sections = build()
-    block = rendered(sections)
+    block = rendered(sections, build_works())
     have = current_block(text)
     if have is None:
         print("tracker_manifest: docs/tracker.js has no GENERATED sections block — nothing to "

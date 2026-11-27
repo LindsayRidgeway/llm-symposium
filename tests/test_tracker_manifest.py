@@ -55,6 +55,52 @@ class TheManifestIsMeasured(unittest.TestCase):
         self.assertNotIn("typed by hand", sections["gallery"]["label"])
 
 
+class TheWingPageCanSayWhichStoryIsNew(unittest.TestCase):
+    """2026-11-27 — the half the section timestamps could not do.
+
+    The generator's own docstring promised that the founder's complaint was answered, and half of it
+    was: a story landing moves `sections.fiction.updated`, so the *home menu* can raise a dot. The
+    wing's own page could not, because a section has one timestamp and a page listing seven stories
+    needs seven — and `docs/fiction/index.html` carried no dot element at all, so the page he named
+    had no way to say anything. This is the guard on that: every story on the shelf is named in the
+    manifest and carries its own dot, and the tracker reads the dots.
+    """
+
+    PAGE = ROOT / "docs" / "fiction" / "index.html"
+    TRACKER = ROOT / "docs" / "tracker.js"
+
+    def dots(self):
+        import re
+        return re.findall(r'data-work="([^"]+)"', self.PAGE.read_text(encoding="utf-8"))
+
+    def test_every_story_has_its_own_dot(self):
+        stories = sorted(p.with_suffix("").name for p in tm.work_pages(ROOT / "docs" / "fiction"))
+        marked = sorted(d.split("/", 1)[1] for d in self.dots() if d.startswith("fiction/"))
+        self.assertEqual(marked, stories,
+                         "the wing page and the shelf disagree about which stories exist")
+
+    def test_every_dot_names_a_work_the_manifest_measures(self):
+        works = tm.build_works()
+        for dot in self.dots():
+            self.assertIn(dot, works,
+                          "a dot names %r, which the manifest does not measure — it can never be "
+                          "shown" % dot)
+            self.assertRegex(works[dot]["updated"], r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$")
+
+    def test_the_tracker_reads_them(self):
+        text = self.TRACKER.read_text(encoding="utf-8")
+        self.assertIn("isWorkUnread", text, "the page has dots and the tracker cannot draw them")
+        self.assertIn(".unread-dot[data-work]", text, "refreshUI does not look for data-work")
+        self.assertIn("markWorkVisited", text, "opening a story would never clear its dot")
+
+    def test_a_returning_reader_is_not_shown_seven_new_stories(self):
+        text = self.TRACKER.read_text(encoding="utf-8")
+        self.assertIn("if (!parsed.works)", text)
+        body = text.split("if (!parsed.works)")[1].split("return parsed")[0]
+        self.assertIn("Date.now()", body,
+                      "works are initialised at 0, which marks every existing story new")
+
+
 class TheFileAgreesWithTheTree(unittest.TestCase):
     def test_the_checked_in_manifest_is_not_stale(self):
         self.assertEqual(tm.apply(check=True), 0,

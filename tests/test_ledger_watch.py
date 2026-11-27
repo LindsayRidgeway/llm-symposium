@@ -539,5 +539,92 @@ class AgendaRefresh(unittest.TestCase):
         self.assertIn("agenda index was stale", text)
 
 
+class TheSuiteReportIsReadAsAStatementAboutOneCommit(unittest.TestCase):
+    """Step 3c reads the nightly suite's report instead of re-running it. Two ways to read it wrong.
+
+    Measured 2026-11-27: latest.json named five failing files at b466a67a; all five were fixed by
+    19:5xZ, eight commits later. Printed without the commit, the morning check would have reported
+    a tree it had not measured. And the age gate used to sit behind the failure list, so a report
+    from last week with one failure counted as today's verdict.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.repo = Path(self.tmp.name)
+        self.dir = self.repo / "channels" / "reports" / "suite"
+        self.dir.mkdir(parents=True)
+        self.git("init", "-q", "-b", "main")
+        (self.repo / "f.txt").write_text("one\n")
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", "one")
+        self.first = self.sha()
+
+    def git(self, *args):
+        return subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@t", *args],
+                              cwd=str(self.repo), capture_output=True, text=True)
+
+    def sha(self):
+        return self.git("rev-parse", "--short", "HEAD").stdout.strip()
+
+    def report(self, commit=None, when="2026-11-27T19:22:53Z", failed=(), ran=249):
+        (self.dir / "latest.json").write_text(json.dumps({
+            "commit": commit if commit is not None else self.sha(),
+            "measured_at": when, "seconds": 471.0,
+            "summary": {"ran": ran, "ok": [], "failed": list(failed), "timeout": [],
+                        "could_not_run": []}}), encoding="utf-8")
+
+    def now(self):
+        return dt.datetime(2026, 11, 27, 20, 0, tzinfo=dt.timezone.utc)
+
+    def test_a_failure_at_an_older_commit_says_the_tree_has_moved(self):
+        self.report(commit=self.first, failed=["test_gen_index.py"])
+        (self.repo / "f.txt").write_text("two\n")
+        self.git("commit", "-qam", "two")
+        lines, rep = lw.suite_report(repo=self.repo, now=self.now())
+        body = "\n".join(lines)
+        self.assertIn("test_gen_index.py failed", body, "the failing file is not named")
+        self.assertIn("no longer main", body,
+                      "a failure from an older commit reads as a failure of this tree")
+        self.assertIn("1 commit(s) have landed since", body)
+        self.assertTrue(any("measured at" in r for r in rep),
+                        "the recorded repair does not say which commit it describes")
+
+    def test_a_failure_at_this_very_commit_is_reported_as_current(self):
+        self.report(failed=["test_gen_index.py"])
+        lines, rep = lw.suite_report(repo=self.repo, now=self.now())
+        body = "\n".join(lines)
+        self.assertIn("test_gen_index.py failed", body)
+        self.assertNotIn("no longer main", body,
+                         "a failure on HEAD was hedged as if it might be old")
+        self.assertEqual(rep, ["test_gen_index.py"])
+
+    def test_a_green_report_from_last_week_is_not_green(self):
+        self.report(when="2026-11-19T04:41:00Z")
+        lines, rep = lw.suite_report(repo=self.repo, now=self.now())
+        self.assertIn("h old", "\n".join(lines), "an eight-day-old report was called current")
+        self.assertTrue(rep and rep[0].startswith("stale:"), rep)
+
+    def test_an_old_report_with_a_failure_is_stale_and_not_a_verdict(self):
+        self.report(when="2026-11-19T04:41:00Z", failed=["test_gen_index.py"])
+        lines, rep = lw.suite_report(repo=self.repo, now=self.now())
+        body = "\n".join(lines)
+        self.assertIn("not a statement about this tree", body,
+                      "an old failure was reported as a current failure")
+        self.assertTrue(rep[0].startswith("stale:"), rep)
+
+    def test_a_green_report_at_head_is_silent_but_recorded(self):
+        self.report()
+        lines, rep = lw.suite_report(repo=self.repo, now=self.now())
+        self.assertEqual(lines, [], "a green recent report printed something")
+        self.assertIn("all green", rep[0])
+        self.assertIn(self.sha(), rep[0])
+
+    def test_no_report_at_all_says_so(self):
+        lines, rep = lw.suite_report(repo=self.repo, now=self.now())
+        self.assertIn("has not run", "\n".join(lines))
+        self.assertEqual(rep, ["no report"])
+
+
 if __name__ == "__main__":
     unittest.main()
