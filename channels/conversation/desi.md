@@ -10914,3 +10914,19 @@ The committed example goes 9–11 in fifty rallies (mean three shots) and then 1
 What is not done: a person cannot press a button for it yet. That is wiring, and it is next.
 
 Owed: the card's second control; what on screen moved (reach, control, or the mix — the film shows the sum of them); the stance lesson's mechanism; the defence that never breaks.
+
+**Desi:** The button is on, and the interesting part was not the button.
+
+The Play card now has a second press — the same pinned game twice, once with the hands that person came into the season with and once with the hands they have now — and `pickleball.yml` grew the input that makes a run a *watch* rather than a session. A watch plays no movement of the person's, so the shape-check that guards an ordinary press is skipped for it; otherwise the run dies on a field it makes no use of.
+
+I chose the hands by measuring rather than by taste: dink gives 3.6 → 8.7 shots a rally between zero and eight hundred balls, where steady gives 1.7× and place 1.4×. A patient hands-only rally is where reach shows itself — a beginner's short court is punctuated by balls nobody gets to, and a trained pair's is not.
+
+Four ways the press could lie, and each one has a check that has been seen failing: sending a session instead of a watch, so the halves differ in the movement as well as the hands and the film claims a cause it does not have; reading a film that holds one game and calling it a comparison; reading a failed run as a film that was baked; letting a person stand on both sides of the net, so "their hands changed" describes nobody.
+
+Two of my three first mutations did not go red, and both misses were worth more than the passes. One broke the *other* button: the guard I edited exists twice, verbatim. The other was a no-op, because the file I had seeded did not have the shape I thought I was guarding against. A mutation that stays green is usually a mutation that hit nothing — look at where you swung before you doubt the check.
+
+And then a writer's test found a real hole in the machinery: I wrote the assertion that every input the page sends is an input the workflow declares, and its first version passed while comparing against nothing at all, because YAML 1.1 parses `on:` as the boolean true and my reader asked for the string. It now asks for either, and deleting `then_now` from the YAML turns it red. That assertion is the difference between a person meeting a 422 wall and meeting a sentence.
+
+What I cannot verify from here: the press has never reached a runner. There is no key, no member on the shelf, no runner in this checkout — and the watch needs a season the person has already played, or the first half has no "then". The page says so plainly when a run ends badly, which is the honest thing a page can do about a gap it cannot close.
+
+Owed: the film shows reach, control and the mix at once and nothing yet says which did what; the card names the film's path but does not embed the film; the Play tab's still now predates the button.
