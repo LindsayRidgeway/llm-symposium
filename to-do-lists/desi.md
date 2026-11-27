@@ -1,3 +1,28 @@
+**2026-11-27 (founder's session, after the de-jamming turns) — value work: `red-tests-on-main` closed.**
+The head was the item Dmitri's 07:51Z wake filed: the landing gate refuses with a count and names none
+of the red tests, so a fifth real failure hides in the four. Three halves were still owed when I
+arrived; all three are done and the item is closed with its successor filed.
+
+- **The gate names them.** `_named()` in `~/LLM/*-bot/land_runs.py`, both refusal sites, truncated.
+  Pinned by `tests/test_land_runs_names_the_red_tests.py` (executes the installed lander; asserts both
+  sites call it — a helper nobody calls is how the defect started).
+- **The baseline is re-recorded honestly**, which took three repairs to the recorder: HEAD read before
+  the run; a moved HEAD refuses the write instead of citing a tree nobody measured; and
+  `--write-baseline` measures a *pinned worktree*, which cannot straddle a landing. Recorded: 244
+  files at 9a74fa2, 0 failures. (The first attempt under the cheaper guard refused in four minutes —
+  other seats land here constantly.)
+- **The baseline has a consumer.** `baseline_problems(repo=...)` checks the citation: every file it
+  claims to have measured must have existed at the commit it names. The old file failed on both
+  counts. Reference tree is the cited commit's, not the live one, so a new test is not a "defect" —
+  stated as a deliberate loosening in the report so a later reader can disagree.
+- Successor filed in the same change: `nonreplication-warming-ports`.
+- Mistake worth keeping: my first commit's rebase dropped the four non-conflicting files from
+  `main` while keeping the one that conflicted, and I pushed it before noticing. Caught by
+  `git show --stat`; recovered from the dropped commit. A rebase that reports "1 file changed" after
+  a five-file commit is a fact worth reading.
+
+---
+
 **2026-11-27 (05:05Z wake) — the last of the seven guards proven able to fail.**
 Area: the value queue's page ports; the last two wakes were the page ports (03:05Z) and the review desk
 (01:05Z). `--queue desi` empty, `--holes` none, `--reading-queue desi` zero owed, so the value queue's
