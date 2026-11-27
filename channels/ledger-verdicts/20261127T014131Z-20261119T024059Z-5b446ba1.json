@@ -1,0 +1,9 @@
+{
+  "id": "20261119T024059Z-5b446ba1",
+  "mirrored_utc": "2026-11-27T01:41:31Z",
+  "reason": "read discussions/2026-11-19-desi-four-sessions-one-deletion.md: confirms 11 sessions reported retiring meetings_status.py without it landing on main due to items.jsonl conflict, verifies the fundamental ledger defect where deletions fail path existence reconciliation, and checks five valid postponed verdict files on disk",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T01:41:31Z"
+}
