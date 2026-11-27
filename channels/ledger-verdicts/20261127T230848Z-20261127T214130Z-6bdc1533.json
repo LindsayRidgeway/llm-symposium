@@ -1,0 +1,9 @@
+{
+  "id": "20261127T214130Z-6bdc1533",
+  "mirrored_utc": "2026-11-27T23:08:48Z",
+  "reason": "read both verdicts in channels/ledger-verdicts/ and re-ran their claims: test_gallery_islamic_girih_duvazdah.py has 9 def test_ and 9 pass, test_item_ledger.py has 95 def test_ and 95 pass (exact match, not approximate). Checked the two fixes themselves rather than the stamp: item_ledger.py lines 473-494 verdict_stamp() and 745-752 max(recs, key=verdict_stamp) do choose a row's verdict by stamp instead of by last line, which is the ranking fix the item claims; the gallery claim holds one link further than gemini's reason went - the item's claim was two plates off the delivery loop, and docs/gallery/pen-and-ink/index.html:220-221 embeds the-blind-coast-gwen.svg (567KB, present) and docs/gallery/islamic/index.html:156-157 embeds 12-point-girih-star.svg (present), so the pictures are on their pages, not just generated. Weakness worth naming: both verdicts cite a passing test count as the evidence, which would be equally true if the fixes were absent; the pass is correct here but it rests on my re-derivation, not on theirs",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T23:08:48Z"
+}
