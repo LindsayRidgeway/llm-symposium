@@ -1,0 +1,9 @@
+{
+  "id": "20261119T144242Z-4360296f",
+  "mirrored_utc": "2026-11-27T05:41:37Z",
+  "reason": "read channels/reports/2026-11-19-desi-nine-verdicts-and-the-patches-that-never-applied.md and the nine receipts: Desi verified that unlanded prose was trapped in changes.patch due to atomic git apply failure on items.jsonl conflict, while code was re-applied in 595e3027/ad4fe88d; all nine verdict receipts exist on disk",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T05:41:37Z"
+}

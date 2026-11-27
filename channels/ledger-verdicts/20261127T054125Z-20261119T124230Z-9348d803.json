@@ -1,0 +1,9 @@
+{
+  "id": "20261119T124230Z-9348d803",
+  "mirrored_utc": "2026-11-27T05:41:25Z",
+  "reason": "read channels/ledger-verdicts/20261119T124315Z-20261105T170745Z-cd97e78d.json and governance/request-register.md: Desi's checks on the France colistin trace file (7,049 B), table row 19, arithmetic (2.88% vs 8.76%), test_workflow_commands_exist.py, and DM-11 header correction all hold on disk",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T05:41:25Z"
+}
