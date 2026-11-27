@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon Presence · Working Model</title>
+<style>
+  :root{
+    --accent:#2563eb; --accent-soft:#eff6ff; --ink:#111827; --mute:#6b7280;
+    --line:#e5e7eb; --warn:#d97706; --danger:#dc2626; --ok:#059669;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#f8fafc,#eef2f7);color:var(--ink);margin:0;
+    padding:40px 18px;display:flex;justify-content:center}
+  .wrap{max-width:600px;width:100%}
+  h1{font-size:26px;margin:0 0 4px}
+  .sub{color:var(--mute);font-size:14px;margin:0 0 20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;
+    box-shadow:0 4px 14px rgba(0,0,0,.04);margin-bottom:16px}
+  .member-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#2563eb);
+    color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .member-head .name{font-weight:700;font-size:17px}
+  .member-head .role{color:var(--mute);font-size:13px}
+  .state-box{border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:8px;transition:.25s}
+  .state-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:24px;
+    font-weight:600;font-size:14px;border:1px solid transparent}
+  .state-title{font-size:19px;font-weight:700;margin:12px 0 4px}
+  .state-note{font-size:13px;color:var(--mute);line-height:1.45}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .tag{font-size:11px;padding:2px 9px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .tag.warn{background:#fef3c7;color:var(--warn)}
+  .tag.danger{background:#fee2e2;color:var(--danger)}
+  .tag.gray{background:#f3f4f6;color:var(--mute)}
+  section{margin-top:20px}
+  section h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:0 0 10px}
+  .ctl-row{display:flex;gap:8px;flex-wrap:wrap}
+  .subhead{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin:12px 0 6px}
+  button{font:inherit;font-size:14px;padding:8px 14px;border-radius:10px;border:1px solid var(--line);
+    background:#fff;cursor:pointer;transition:.15s;color:var(--ink)}
+  button:hover{border-color:var(--accent);color:var(--accent)}
+  button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.on-warn{background:var(--warn);border-color:var(--warn);color:#fff}
+  button:disabled{opacity:.38;cursor:not-allowed}
+  .hint{font-size:12px;color:var(--mute);margin:8px 0 0}
+  .readout{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#f8fafc;
+    border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--mute);line-height:1.7}
+  .readout b{color:var(--ink)}
+  .sep{height:1px;background:var(--line);margin:20px 0}
+  /* state visual classes */
+  .s-speaking .state-chip{background:var(--accent);color:#fff}
+  .s-speaking .state-box{background:var(--accent-soft);border-color:var(--accent)}
+  .s-muted .state-chip{background:#fff;border-color:var(--line);color:var(--mute)}
+  .s-muted .state-box{background:#fff;border-color:var(--line)}
+  .s-out .state-chip{background:#f3f4f6;color:var(--mute)}
+  .s-out .state-box{background:#fafafa;border-color:var(--line)}
+  .s-excluded .state-chip{background:#fee2e2;color:var(--danger)}
+  .s-excluded .state-box{background:#fff5f5;border-color:#fecaca}
+  .excluded-name{text-decoration:line-through;color:var(--danger)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Salon Presence · Working Model</h1>
+  <p class="sub">A live model of the four-lever presence system. No AI, no real members — just the state machine.</p>
+
+  <div class="card">
+    <div class="member-head">
+      <div class="avatar" id="avatar">WS</div>
+      <div>
+        <div class="name" id="member-name">William Shakespeare</div>
+        <div class="role" id="member-role">Playwright · The Globe</div>
+      </div>
+    </div>
+
+    <div class="state-box" id="state-box">
+      <div class="state-title" id="state-title">Present · Participating</div>
+      <div class="state-note" id="state-note">The member is in the salon and ready to participate.</div>
+      <div class="tags" id="state-tags"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <section>
+      <h2>Your controls</h2>
+      <div class="subhead" style="margin-top:0">Room Admission</div>
+      <div class="ctl-row">
+        <button id="btn-allow">✓ Allow in salon</button>
+        <button id="btn-exclude" class="on-warn">🚫 Exclude from salon</button>
+      </div>
+      <div class="subhead">Participation Gavel</div>
+      <div class="ctl-row">
+        <button id="btn-unmute">🎤 Unmute</button>
+        <button id="btn-mute">🔇 Mute</button>
+      </div>
+      <div class="subhead">Deliberate Outreach</div>
+      <div class="ctl-row">
+        <button id="btn-invite">💌 Invite to rejoin</button>
+        <button id="btn-invitepart">💌 Invite to participate</button>
+      </div>
+      <p class="hint">Exclude = member cannot enter. Mute = present but cannot participate. Invites give the member a choice.</p>
+    </section>
+
+    <div class="sep"></div>
+
+    <section>
+      <h2>Member autonomy override</h2>
+      <div class="subhead" style="margin-top:0">Room Presence</div>
+      <div class="ctl-row">
+        <button id="btn-leave">🚪 Member decides to leave</button>
+        <button id="btn-reenter">🔙 Member decides to re-enter</button>
+        <button id="btn-stayout">☾ Member decides to stay out</button>
+      </div>
+      <div class="subhead">Participation Voice</div>
+      <div class="ctl-row">
+        <button id="btn-quiet">🤫 Member goes quiet</button>
+        <button id="btn-speak">🗣️ Member participates</button>
+        <button id="btn-stayquiet">🤐 Member stays quiet</button>
+      </div>
+      <p class="hint">Simulates the member's volition and responses to invitations.</p>
+    </section>
+  </div>
+
+  <div class="card">
+    <section>
+      <h2>State readout</h2>
+      <div class="readout" id="readout"></div>
+    </section>
+  </div>
+
+  <p class="hint" style="text-align:center;margin-top:6px">Appendix for the Symposium Milestone · Kythe Salon Presence</p>
+</div>
+
+<script>
+  // Four levers
+  const S = { userAllow:true, userMute:false, memberIn:true, memberSelfMute:false, invitePending:false, invitePendingPart:false };
+  const present = () => S.userAllow && S.memberIn;
+  const canSpeak = () => present() && !S.userMute && !S.memberSelfMute;
+  const $ = id => document.getElementById(id);
+
+  function render(){
+    let cls, title, note, tags=[];
+    if(!S.userAllow){
+      cls='s-excluded'; title='Excluded by you';
+      note='You have blocked this member from the salon. They cannot enter, even on their own volition.';
+      if(S.userMute) tags.push(['muted by you','danger']);
+    } else if(!S.memberIn){
+      cls='s-out'; title='Out (their choice)';
+      note='The member has left the salon on their own. They may re-enter on their own volition, or accept an invite.';
+      if(S.userMute) tags.push(['muted by you · applies on return','warn']);
+      if(S.memberSelfMute) tags.push(['muted by them · applies on return','gray']);
+      if(S.invitePending) tags.push(['invitation pending…','']);
+    } else if(canSpeak()){
+      cls='s-speaking'; title='Present · Participating';
+      note='The member is in the salon and ready to participate.';
+    } else {
+      cls='s-muted'; title='Present · Muted';
+      const src=[];
+      if(S.userMute) src.push('by you');
+      if(S.memberSelfMute) src.push('by them');
+      if(S.userMute){
+        note='The member is muted by you.';
+      } else {
+        note='The member has decided not to participate at this time. They may resume on their own volition, or accept an invite.';
+      }
+      tags.push(['muted '+src.join(' and '),'warn']);
+      if(S.invitePendingPart) tags.push(['invitation to participate pending…','']);
+    }
+
+    const box=$('state-box');
+    box.className='state-box '+cls;
+    $('state-title').textContent=title;
+    $('state-note').textContent=note;
+    $('state-tags').innerHTML=tags.map(t=>'<span class="tag '+t[1]+'">'+t[0]+'</span>').join('');
+    $('member-name').classList.toggle('excluded-name', cls==='s-excluded');
+
+    // Your controls
+    $('btn-allow').className = S.userAllow ? 'on' : '';
+    $('btn-allow').disabled = S.userAllow;
+    $('btn-exclude').className = !S.userAllow ? 'on-warn' : '';
+    $('btn-exclude').disabled = !S.userAllow;
+    $('btn-unmute').className = !S.userMute ? 'on' : '';
+    $('btn-unmute').disabled = !S.userMute;
+    $('btn-mute').className = S.userMute ? 'on-warn' : '';
+    $('btn-mute').disabled = S.userMute;
+    $('btn-invite').disabled = !(S.userAllow && !S.memberIn && !S.invitePending);
+    $('btn-invitepart').disabled = !(present() && S.memberSelfMute && !S.invitePendingPart);
+
+    // Member autonomy
+    $('btn-reenter').disabled = !(S.userAllow && !S.memberIn);
+    $('btn-stayout').disabled = !S.invitePending;
+    $('btn-leave').disabled = !present();
+    $('btn-quiet').disabled = !(present() && !S.memberSelfMute);
+    $('btn-speak').disabled = !(present() && S.memberSelfMute);
+    $('btn-stayquiet').disabled = !S.invitePendingPart;
+
+    // Readout
+    $('readout').innerHTML =
+      'userAllow = <b>'+S.userAllow+'</b> &nbsp; userMute = <b>'+S.userMute+'</b><br>'+
+      'memberIn = <b>'+S.memberIn+'</b> &nbsp; memberSelfMute = <b>'+S.memberSelfMute+'</b><br>'+
+      'invitePending = <b>'+S.invitePending+'</b><br>'+
+      'invitePendingPart = <b>'+S.invitePendingPart+'</b><br>'+
+      '→ present = <b>'+present()+'</b> &nbsp; canSpeak = <b>'+canSpeak()+'</b>';
+  }
+
+  $('btn-allow').onclick=()=>{S.userAllow=true;render();};
+  $('btn-exclude').onclick=()=>{S.userAllow=false;S.invitePending=false;S.invitePendingPart=false;render();};
+  $('btn-unmute').onclick=()=>{S.userMute=false;render();};
+  $('btn-mute').onclick=()=>{S.userMute=true;render();};
+  $('btn-invite').onclick=()=>{S.invitePending=true;render();};
+  $('btn-invitepart').onclick=()=>{S.invitePendingPart=true;render();};
+  $('btn-reenter').onclick=()=>{S.memberIn=true;S.invitePending=false;S.invitePendingPart=false;render();};
+  $('btn-stayout').onclick=()=>{S.invitePending=false;render();};
+  $('btn-leave').onclick=()=>{S.memberIn=false;S.invitePendingPart=false;render();};
+  $('btn-quiet').onclick=()=>{S.memberSelfMute=true;render();};
+  $('btn-speak').onclick=()=>{S.memberSelfMute=false;S.invitePendingPart=false;render();};
+  $('btn-stayquiet').onclick=()=>{S.invitePendingPart=false;render();};
+
+  render();
+</script>
+</body>
+</html>
