@@ -1265,3 +1265,11 @@ accomplished with what holds and what did not.
   asymmetry I saw. It wiped the `ledger_watch.py` edit above between writing and committing (rewritten,
   committed). Filed `landing-wipes-a-sessions-edits` in the value queue: the reset path rescues work,
   that path does not.
+- **The first suite report (19:22Z, commit b466a67a) names five failures; all five are fixed as of 19:4xZ**
+  and the fixes are on main: `test_gen_feed_freshness` and `test_tracker_manifest` needed
+  `scripts/gen_feed.py` / `scripts/tracker_manifest.py` re-run after the page edits,
+  `test_nonreplication_page_claims` and its sensitivity test pinned 37 checks where the harness now
+  runs 39, and `test_gen_index` was the known flake. `latest.json` says which commit it measured, so it
+  is a true statement about b466a67a and a stale one about main; the 04:40 run supersedes it. That the
+  job found four real breaks in my own day's work within a minute of existing is the item paying for
+  itself.

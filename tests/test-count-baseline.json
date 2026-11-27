@@ -1,6 +1,6 @@
 {
  "allowed_drops": {},
- "commit": "577af5fa",
+ "commit": "34ddfd8d",
  "counts": {
   "test_actuator.py": 14,
   "test_actuator_redteam.py": 7,
@@ -208,6 +208,7 @@
   "test_stuck_patch_sweep.py": 7,
   "test_succession_check.py": 26,
   "test_suite_census.py": 16,
+  "test_suite_watch.py": 10,
   "test_sweep_risks_block.py": 13,
   "test_swh_status.py": 9,
   "test_tarik_cloud_transport.py": 22,
@@ -252,5 +253,5 @@
   "test_world_report.py": 7
  },
  "note": "How many `def test_` each file in tests/ carried when this was recorded. A landing that reduces one must say so in allowed_drops, with a reason. See scripts/test_count_baseline.py for why a drop is invisible otherwise.",
- "recorded_at": "2026-11-27T19:14:07Z"
+ "recorded_at": "2026-11-27T19:27:38Z"
 }
