@@ -37,6 +37,19 @@ Two baselines, and the difference matters:
 The failure direction is deliberate: with no baseline this exits 1 on any
 failure, because "we could not tell" must not read as "safe to land".
 
+What a recorded baseline is allowed to excuse, and the third liability (2026-11-27).
+A recorded baseline is one run at one tree, and it has two ways to lie quietly:
+it can name a failure with no reason (the "red as weather" excuse this file was
+filed about), and it can be *older than a test file*. The second one was measured
+today: `tests/landing-baseline.json` said `"files": 242` while `tests/` held 243
+`test_*.py`, so any failure in the file nobody had measured would have been
+excused by a baseline that never ran it. `write_baseline` therefore records
+`measured_files` — every file it actually executed — and `baseline_problems()`
+turns the two liabilities into named strings, which
+`tests/test_landing_baseline_is_current.py` applies to the committed file at every
+landing. A baseline without `measured_files` is a problem, not a legacy format to
+be tolerated: deleting the key would be a one-line way to disarm the guard.
+
 Usage:
   python3 scripts/landing_suite_check.py                      # vs the recorded baseline
   python3 scripts/landing_suite_check.py --against origin/main # live, throwaway worktree
@@ -187,6 +200,57 @@ def load_baseline(path=BASELINE_PATH):
     return data
 
 
+def baseline_problems(baseline, test_names):
+    """Reasons this baseline cannot be trusted, one string per problem.
+
+    `test_names` is every `test_*.py` the tree holds now. An empty list means the
+    baseline measured this exact set of files and every name it excuses carries a
+    reason. The two liabilities, in the order a reader wants them:
+
+      * a failure excused without a reason — the "red as weather" defect;
+      * a file the baseline never measured — a baseline written before the file
+        existed excuses nothing about it, and its failure would hide in the count.
+
+    Strings, not booleans, so the landing gate's refusal can name the problem.
+    """
+    if baseline is None:
+        return ["no recorded baseline: every failure counts as new"]
+
+    problems = []
+    measured = baseline.get("measured_files")
+    if not isinstance(measured, list):
+        problems.append(
+            "baseline records no measured_files (written before 2026-11-27), so it "
+            "cannot say which test files it ran; re-record it: "
+            "python3 scripts/landing_suite_check.py --write-baseline"
+        )
+        measured = None
+
+    excused = [name for name in (baseline.get("failures") or []) if isinstance(name, str)]
+    notes = " ".join(str(note) for note in (baseline.get("notes") or []))
+
+    if measured is not None:
+        measured_set = {name for name in measured if isinstance(name, str)}
+        for name in sorted(set(test_names) - measured_set):
+            problems.append("test file not measured by this baseline: %s" % name)
+        for name in sorted(measured_set - set(test_names)):
+            problems.append("baseline measured a test file that is gone: %s" % name)
+        if baseline.get("files") != len(measured_set):
+            problems.append(
+                "baseline says %r files but measured_files names %d"
+                % (baseline.get("files"), len(measured_set))
+            )
+        for name in excused:
+            if name not in measured_set:
+                problems.append("baseline excuses a failure it never measured: %s" % name)
+
+    for name in excused:
+        if name not in notes:
+            problems.append("baseline excuses a failure with no reason in notes: %s" % name)
+
+    return problems
+
+
 def write_baseline(rows, commit, path=BASELINE_PATH):
     data = {
         "commit": commit,
@@ -194,6 +258,10 @@ def write_baseline(rows, commit, path=BASELINE_PATH):
         "files": len(rows),
         "seconds": round(sum(row["seconds"] for row in rows), 1),
         "failures": failures(rows),
+        # Every file this run executed, not just the count. Without it a baseline
+        # written before a test file existed silently excuses that file (measured
+        # 2026-11-27: "files": 242 in a tree holding 243 test_*.py).
+        "measured_files": sorted(row["file"] for row in rows),
     }
     Path(path).write_text(json.dumps(data, indent=2) + "\n", encoding="utf8")
     return data

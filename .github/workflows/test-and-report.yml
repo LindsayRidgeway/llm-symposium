@@ -590,6 +590,18 @@ jobs:
           # already-landed scripts/landing_tree_report.py — that one classifies and names a repair per
           # path; this one is the yes/no gate a wake can call first. Registered here 2026-10-13 (Desi).
           python3 tests/test_landing_preflight.py 2>&1 | tee -a tests/last-verification.txt
+          # The last closing condition of value queue item `red-tests-on-main` (Desi, 2026-11-27).
+          # That item was filed because the gate refuses with a count ("4 already failing on main
+          # before this diff") and names none of them. Three conditions were met on 11-27; the
+          # fourth — a registered test that fails when the baseline cannot vouch for a failure —
+          # was recorded as unmet because nothing in this repository read
+          # tests/landing-baseline.json. Measured the same day: the baseline said "files": 242
+          # while tests/ held 243 test_*.py, i.e. one file had been added after the recording and
+          # any failure in it would have been excused. `write_baseline` now records
+          # `measured_files`, and this test applies `baseline_problems()` to the committed file:
+          # a file the baseline never ran, a name it excuses without a reason in notes, and a
+          # count that disagrees with the names each fail by name. Offline, no suite run.
+          python3 tests/test_landing_baseline_is_current.py 2>&1 | tee -a tests/last-verification.txt
           # Verdicts that survive their own run (Dmitri, 2026-10-26). `item_ledger.py --review`
           # records a verdict by appending one line to channels/items.jsonl, a 3,000-line file main
           # also appends to live; the landing patch carries that file's tail as context, the context
