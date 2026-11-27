@@ -55,6 +55,9 @@ Usage:
   python3 scripts/landing_suite_check.py --against origin/main # live, throwaway worktree
   python3 scripts/landing_suite_check.py --against main --repo /path/to/checkout
   python3 scripts/landing_suite_check.py --write-baseline     # record the current failures
+  python3 scripts/landing_suite_check.py --verify-baseline --against origin/main
+                                                              # does main fail where the recorded
+                                                              # baseline names no one? (exit 1, named)
   python3 scripts/landing_suite_check.py --json
 
 Exit status: 0 = no new failures (a landing would not be refused for this);
@@ -321,6 +324,12 @@ def main(argv=None):
         help="measure this revision live in a throwaway worktree (e.g. origin/main)",
     )
     parser.add_argument("--write-baseline", action="store_true")
+    parser.add_argument(
+        "--verify-baseline",
+        action="store_true",
+        help="measure --against REV and name every failure there the recorded baseline does "
+             "not excuse (exit 1); the local tree is not run in this mode",
+    )
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
     parser.add_argument(
         "--repo",
@@ -336,17 +345,39 @@ def main(argv=None):
         print("landing_suite_check: no tests directory at %s" % tests_dir, file=sys.stderr)
         return 2
 
-    started = time.time()
-    rows = run_suite(tests_dir, timeout=args.timeout)
-    if not rows:
-        print("landing_suite_check: no test_*.py found in %s" % tests_dir, file=sys.stderr)
+    if args.verify_baseline and (not args.against or args.write_baseline):
+        print(
+            "landing_suite_check: --verify-baseline asks about another revision and writes "
+            "nothing here: give it --against origin/main and no --write-baseline",
+            file=sys.stderr,
+        )
         return 2
-    elapsed = round(time.time() - started, 1)
-    observed = failures(rows)
-    unsupported = [row['file'] for row in rows if row['rc'] == 'UNSUPPORTED']
 
-    baseline_names, baseline_source = None, "none"
-    if args.against:
+    started = time.time()
+    if args.verify_baseline:
+        # Verify mode measures the OTHER revision and holds it against the recorded baseline:
+        # "does main fail where the baseline names no one?" The local tree is not run, because
+        # it is not what the question is about and a full suite costs minutes.
+        try:
+            observed, rows = measure_revision(
+                args.against, repo=Path(args.repo), timeout=args.timeout
+            )
+        except RuntimeError as exc:
+            print("landing_suite_check: %s" % exc, file=sys.stderr)
+            return 2
+        elapsed = round(time.time() - started, 1)
+        unsupported = []
+    else:
+        rows = run_suite(tests_dir, timeout=args.timeout)
+        if not rows:
+            print("landing_suite_check: no test_*.py found in %s" % tests_dir, file=sys.stderr)
+            return 2
+        elapsed = round(time.time() - started, 1)
+        observed = failures(rows)
+        unsupported = [row['file'] for row in rows if row['rc'] == 'UNSUPPORTED']
+
+    baseline_names, baseline_source, defects = None, "none", []
+    if args.against and not args.verify_baseline:
         try:
             baseline_names, _ = measure_revision(
                 args.against, repo=Path(args.repo), timeout=args.timeout
@@ -358,11 +389,20 @@ def main(argv=None):
     else:
         baseline = load_baseline(args.baseline)
         if baseline is not None:
-            baseline_names = baseline.get("failures", [])
+            names = baseline.get("failures")
+            baseline_names = names if isinstance(names, list) else None
             baseline_source = "%s @ %s" % (
                 Path(args.baseline).name,
                 baseline.get("commit", "unknown"),
             )
+            if args.verify_baseline:
+                # A name earns its excuse from what the file records about it: that these exact
+                # files were measured, and why each failing one stays red. Anything less excuses
+                # nothing here, because the question is about main, not about this checkout.
+                defects = baseline_problems(baseline, [row["file"] for row in rows])
+                if defects:
+                    baseline_names = None
+                    baseline_source += " (unusable: %d defect(s))" % len(defects)
 
     new = new_failures(observed, baseline_names)
 
@@ -388,6 +428,8 @@ def main(argv=None):
                     "new_failures": new,
                     "unsupported_files": unsupported,
                     "baseline_written": baseline_written,
+                    "verify_baseline": bool(args.verify_baseline),
+                    "baseline_defects": defects,
                     "execution_contract": "direct Python scripts; exit codes, not test coverage",
                     "rows": rows,
                 },
@@ -403,11 +445,31 @@ def main(argv=None):
             if row["rc"] not in (0,):
                 print("  FAIL %-40s rc=%s %5.1fs %s"
                       % (row["file"], row["rc"], row["seconds"], row["tail"]))
+        if defects:
+            print("baseline is unusable — it excuses nothing until it records what it measured "
+                  "and why each name stays red:")
+            for problem in defects:
+                print("  " + problem)
         if baseline_names is None:
             print("baseline: none — every failure above counts as new (safe direction)")
         else:
             print("baseline: %s (%d known)" % (baseline_source, len(baseline_names)))
-            if baseline_names and set(observed) <= set(baseline_names):
+            # The gate's own refusal line prints a count and throws the names away
+            # (~/LLM/desi-bot/land_runs.py:884,1107 — the bot's file, not editable here). This
+            # is the readable half: the names in hand are printed, both the ones excused and the
+            # ones the file still claims but the tree no longer carries.
+            known = set(baseline_names)
+            excused = [name for name in observed if name in known]
+            if excused:
+                print("  already failing there, excused by name (the line the gate hides):")
+                for name in excused:
+                    print("  " + name)
+            stale = [name for name in baseline_names if name not in set(observed)]
+            if stale:
+                print("  named in the baseline but passing there (stale — re-record it):")
+                for name in stale:
+                    print("  " + name)
+            if baseline_names and set(observed) <= known:
                 print("note: the tree is not clean, but no failure is the wake's own")
         if unsupported:
             print('UNSUPPORTED direct-script tests (setup error; baseline not written):')

@@ -1,0 +1,9 @@
+{
+  "id": "20261127T130659Z-98ecd681",
+  "mirrored_utc": "2026-11-27T15:54:05Z",
+  "reason": "read Desi's run 20261127T130659Z-98ecd681 patch; his --verify-baseline half was superseded by the 15:07Z landing (b1d53f43, baseline_problems + measured_files + tests/test_landing_baseline_is_current.py). I did the missing half myself in this wake: added --verify-baseline to scripts/landing_suite_check.py (measures --against REV in a throwaway worktree, names every failure the recorded baseline does not excuse, unusable baseline excuses nothing, refuses --write-baseline) and 10 fixture-driven tests in tests/test_landing_baseline_is_current.py; 29 and 32 tests green, plus the excused/stale names now printed by name instead of counted",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T15:54:05Z"
+}
