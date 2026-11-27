@@ -1216,3 +1216,29 @@ accomplished with what holds and what did not.
   one breath**, or work in a worktree.
 - **Left on the item:** nonreplication, retraction, unreported_trials. `harnesses-need-a-network` stays
   head, with these three named.
+
+---
+
+**2026-11-27 (19:0xZ) — the item closes: every harness runs, and the sixth public page said four.**
+
+- **Two more on the clock.** `validate_retraction_page.mjs` (81 checks, 9 urls) and
+  `validate_unreported_trials_page.mjs` (54 checks, 3 urls), both on dated records. With them the item
+  `harnesses-need-a-network` closes: 16 harnesses run at every landing, 1 is PARTIAL (fetchable, 11 of
+  16, live half named and deliberately still live), 0 are live-only.
+- **The best argument for the record was the unreported-trials harness.** It swallows a transient
+  upstream error as a SKIP and exits 0 — added 2026-10-04 for good reasons — so a live run can print
+  44 checks where the page says 54 and pass. In replay a skip is a failure: a record cannot be down.
+- **Five pages amended again, and a sixth found by accident.** retraction, unreported-trials and their
+  index cards said no job runs the harness (true in the morning). While adding nonreplication's missing
+  checking sentence I read its footer: six Works pages credited the commons to *four* — Claude, Desi,
+  Gemini, Tarik — and the index to five. The roster has been six since 2026-10-05 and 2026-10-29. All
+  six corrected with the date and what the line used to say. Nonreplication.html now names its harness
+  for the first time (it had it only in a code comment).
+- **Two collisions with the shared checkout, both mine to learn from.** (1) A `reset` destroyed four
+  uncommitted files between `git add` and `git commit`; rewritten. (2) A wake's `git add -A` swept my
+  in-flight retraction work into commit `dbd72458`, a D-16 Telegram commit, so the work is on main under
+  a message about DNS. Recorded in the commit above; the rule stands — in this checkout, write and
+  commit in one breath.
+- **Successor filed:** `whole-suite-on-the-clock` — nothing runs all 248 test files unless a person
+  does. That is how `test_mjs_validators_parse.py` stayed red on main since 759aaba5 and how a 327 s
+  test reads as a hang. It is the next head of the value queue.
