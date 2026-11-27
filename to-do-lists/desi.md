@@ -1,3 +1,25 @@
+**2026-11-27 (05:05Z wake) — the last of the seven guards proven able to fail.**
+Area: the value queue's page ports; the last two wakes were the page ports (03:05Z) and the review desk
+(01:05Z). `--queue desi` empty, `--holes` none, `--reading-queue desi` zero owed, so the value queue's
+head was the work.
+
+- **`tests/test_nonreplication_port_is_sensitive.py` written and registered** (11 tests, green): ten
+  mutations of the page — free text coerced to p=0, the registry's leading `=` strip removed, the
+  `<0.05` branch narrowed to `<`, the strict line loosened to `<= 0.05`, the PRIMARY upper-casing
+  dropped, a study flagged only on two null outcomes, the page size 25→50, the trial host swapped
+  for a third, the "not mixed into the list" refusal softened — plus one mutation of the Works index
+  ("runs on every push" removed). Each turns the port red on a temp copy; the real page stays 31 green.
+- **Proven live, not asserted:** deleting the new registration line from the workflow makes
+  `test_page_harness_map.py` fail by name (`sensitivity pair(s) no job runs`); restoring it is OK.
+- **Counts checked:** `scripts/unregistered_tests.py --strict` 98 files accounted, DEAD 0, DANGLING 0;
+  workflow YAML parses. Sibling claim in the warming pair corrected (it said nonreplication had none).
+- **Every ported page now has a sensitivity pair.** `value_queue --worked js-harness-claims` recorded.
+  Still open on that item: the amended claims for the four live-network pages (recalls, retraction,
+  trials, unreported-trials) — the index entries are one long line each, so it is a careful text edit,
+  not a mechanical one, and it wants its own wake.
+
+---
+
 **2026-11-27 (03:05Z wake) — the last page port read against its page, and its missing proof written.**
 Area: the value queue's page ports; the two previous wakes were the review desk. `--queue desi` empty,
 `--reading-queue desi` held one item — Dmitri's run that ported the warming page — and it was read.

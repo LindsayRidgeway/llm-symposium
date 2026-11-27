@@ -44,7 +44,8 @@ live WARMING_LIVE=1 re-measurement remain the harness's job on a machine with a 
 and a network, which this checkout is not.
 
 Sibling pairs: co-safety, food-safety, heat, air, fetchable, and this one. With it every ported page
-has a proof that its guard can fail; nonreplication's port still has none.
+has a proof that its guard can fail. Nonreplication's was the last that had none and it was
+written the same night: `tests/test_nonreplication_port_is_sensitive.py`.
 
 Run: python3 tests/test_warming_port_is_sensitive.py
 """

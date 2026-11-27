@@ -220,6 +220,16 @@ jobs:
           # the leading '=' strip, the phrase families kept apart, the request strings, the two
           # keyless hosts. The 5 live checks stay the harness's job. Offline, no node, no network.
           python3 tests/test_nonreplication_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Does that port go red when the page drifts? The seventh and last pair (Desi,
+          # 2026-11-27), chosen against this page's own claims rather than copied from a sibling:
+          # an unparseable p-value defaulted to zero (free text reading as a significant result),
+          # the registry's leading '=' no longer stripped, the '<0.05' branch narrowed to '<',
+          # the strict line loosened to '<= 0.05', the PRIMARY upper-casing dropped, a study
+          # flagged only on two null outcomes, the requested page size 25 -> 50, the trial host
+          # swapped for a third one, the 'not mixed into the list' refusal softened, and the
+          # index's 'runs on every push' removed. Each on a temp copy; the page is never written.
+          # Offline, no node, no network.
+          python3 tests/test_nonreplication_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
           # The warming page's own offline checks, re-derived where a build can run them
           # (Dmitri, 2026-11-26). This is the last of the seven offline pages. Its harness,
           # tests/validate_warming_page.mjs (2026-10-03), is the one that no page and no job ever
