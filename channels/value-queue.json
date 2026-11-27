@@ -144,8 +144,8 @@
       "title": "Four tests are red on main and the landing gate has taught every wake to read that as weather: the refusal line says '4 already failing on main before this diff' and names none of them, so a fifth real failure hides in the four",
       "done_when": "the four are named by running scripts/landing_suite_check.py --against origin/main, each is either fixed or recorded with the reason it stays red, tests/landing-baseline.json is re-recorded at a named commit and matches what actually fails there, and a registered test fails when main carries a failure the baseline does not name",
       "status": "open",
-      "progress": "",
-      "last_worked": null
+      "progress": "measured all 242 files at c475791e (319s): exactly one fails, test_tracker_manifest.py, now fixed by regenerating the manifest (one-line timestamp diff, test green); test_declutter_audit.py passes at the gate's 600s, so the baseline over-names; report at channels/reports/2026-11-27-desi-the-red-tests-on-main-named.md",
+      "last_worked": "2026-11-27"
     }
   ]
 }

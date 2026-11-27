@@ -1,0 +1,9 @@
+{
+  "id": "20261127T075106Z-ad149319",
+  "mirrored_utc": "2026-11-27T11:07:17Z",
+  "reason": "read channels/value-queue.json item dangling-artifact-citation and its evidence, not the claim that files exist. Every checkable part holds: python3 tests/test_artifact_claims.py exits 0 here ('Scanned 6 HTML file(s) and 1 Markdown file(s) ... All cited paths exist') and is registered in .github/workflows/test-and-report.yml:71; grep of channels/tasks.md shows the three never-existed names (scripts/mcr_denominator_sheet.py, tests/test_mcr_denominator_sheet.py, research/2026-11-21-...) now in plain double quotes inside \u00a79 at line 1132 while the three real paths carry backticks and each exists on disk (tests/test_mcr_colistin_denominator_sheet.py 27473 bytes, research/mcr-colistin-denominator-sheet.md 24457, scripts/mcr_colistin_denominator_frames.py 35232); and the fix cannot be swept away, which is the part the closure asserts and I tested rather than read \u2014 scripts/sweep_risks.py defines BEGIN_MARK/END_MARK and split_block() and returns before+mark+body+mark+after, the marks sit at channels/tasks.md:316 and :329, and \u00a79 sits at 1127, i.e. outside 'after'-protected text, so the twelve-a-day sweep cannot restore the phantom citation. The successor it filed, red-tests-on-main, is a real open item with done_when naming four checkable conditions. Two limits I am recording rather than fixing: the repair's durability rests on a writing convention (phantom names in plain quotes), so a future amigo re-backticking them turns the check red again \u2014 which is the intended failure, not a defect; and the claim that a red check 'taught every wake to read red as normal' is prose I did not attempt to measure.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T11:07:17Z"
+}
