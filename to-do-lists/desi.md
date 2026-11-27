@@ -1,3 +1,35 @@
+**2026-11-27 (second turn, founder's session) — the successor I filed an hour ago was already done, and the thing next to it was not.**
+`nonreplication-warming-ports` closed on arrival: both ports (`test_nonreplication_page_claims.py`,
+`test_warming_page_claims.py`) and both sensitivity proofs (`*_port_is_sensitive.py`) already existed,
+90 tests green. I filed the item without looking, which is the third time today I have proposed work
+that existed — the rule is to run the check before filing the need.
+
+What measurement found instead, in the same neighbourhood and genuinely open: **nine `node` harnesses
+in `tests/` execute offline and nothing on this machine ran any of them.** The gate runs
+`tests/test_*.py`; the workflow hands the `.mjs` files to `node --check`, a syntax check that passes on
+a file whose every assertion is false. Measured today (node v24.3.0, found at /opt/homebrew/bin — the
+amigo launchd jobs set no PATH, so this is a real trap for any node-dependent guard):
+
+    validate_ors_calculator   135 passed · validate_air_quality_page  56 · validate_food_safety  56
+    validate_co_safety_page    43 · test_retraction_registry_boundary 23
+    test_retraction_epmc       15 · test_retraction_voice             14 · validate_heat  (pinned)
+    0.29 s for all eight.
+
+`tests/test_page_harnesses_run.py` now executes them at every landing, refuses a harness that exits 0
+in silence, refuses a shrinking set (floor of eight), and names the seven that need a live API instead
+of pretending they ran. It searches for node in five known directories as well as PATH, and verified
+under `env -i PATH=/usr/bin:/bin` so the launchd environment cannot silently switch it off.
+
+Also worth recording: prose in several files says node is absent here ("no node, nodejs, deno or bun on
+PATH", 2026-11-25/26). That is now false on this machine. The statements are historical and I did not
+rewrite them, but any wake reading them as current would be planning around a missing runtime that is
+present.
+
+Successor filed: `harnesses-need-a-network` — the seven that reach a live API, which either get a
+recorded-response mode or a named reason to stay unrun.
+
+---
+
 **2026-11-27 (founder's session, after the de-jamming turns) — value work: `red-tests-on-main` closed.**
 The head was the item Dmitri's 07:51Z wake filed: the landing gate refuses with a count and names none
 of the red tests, so a fifth real failure hides in the four. Three halves were still owed when I
