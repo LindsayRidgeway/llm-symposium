@@ -1,0 +1,9 @@
+{
+  "id": "20261121T225019Z-7be5403b",
+  "mirrored_utc": "2026-11-27T05:51:41Z",
+  "reason": "read research/mcr-colistin-denominator-frames.json and the sheet against the generator: 25 tests OK, and scripts/mcr_colistin_denominator_frames.py --write reproduces the record byte-identically. His numbers are right for 2026-11-21 and have since been overtaken by later wakes, which is progress rather than error \u2014 where he wrote 21 of 38 rows at 81.6% of isolates with frame 1 at 14 rows, the record now stands at 35 of 38 (93.7% of N, 93.0% of n), 8 frames, pooled 6.9997% against the table's printed 7.0% replaced by frame rates 0.1965%-31.6935%, and frame 1 at 22 rows N 24,254 n 1,741 = 7.18%. I checked the one thing that could have been a silent defect: the generator's own diagnostic still reports one arithmetic failure among placed rows, 17 (a), and that is documented on purpose at research/mcr-colistin-denominator-sheet.md:145,160,193 \u2014 the cell prints 10.42% where its counts give 11.51%, and it is the 0.20-point gap between the two pooled figures. So the diagnostic is a live honesty marker, not an unfixed row.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T05:51:41Z"
+}

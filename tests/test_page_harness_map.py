@@ -103,7 +103,8 @@ OTHER_HARNESSES = (
 # actually run here. This dict is the item's progress bar: six of the ten pages are ported and
 # four still rest on a file nothing runs — recalls, retraction, trials and unreported-trials, all
 # four named live-network in Dmitri's audit, whose honest close is an amended claim rather than a
-# port. A shorter list here is the measure of the item, nothing else. (The sentence said seven and
+# port — and on 2026-11-27 those four were amended in place, so no page in MAP now rests on a
+# sentence nothing backs. A shorter list here is the measure of the item, nothing else. (The sentence said seven and
 # named co-safety and food-safety, both of which were ported before it was corrected on
 # 2026-11-26, and then named nonreplication after that was ported too: a progress bar that
 # miscounts its own progress is the one kind of stale test worth a comment.)
@@ -115,6 +116,23 @@ PYTHON_REDERIVED = {
     "docs/works/heat.html": "test_heat_page_claims.py",
     "docs/works/nonreplication.html": "test_nonreplication_page_claims.py",
 }
+
+# The four pages whose harness checks the LIVE network, so no port can replace it: recalls,
+# retraction, trials and unreported-trials. Their honest close is the other half of the item's
+# condition — "or carries an amended claim saying exactly what ran" — so what is pinned here is
+# that the amendment is still on the page and still says the measured thing: that no registered
+# job executes the harness, that the only check is a syntax parse, and that the figures rest on
+# the dated by-hand measurement instead. Both places a reader meets the claim are pinned: the
+# entry page, and the one-line entry in docs/works/index.html that repeats it. A page rewritten
+# back to "Checked by X, which runs…" fails here rather than reading as checked.
+AMENDED_LIVE = (
+    "docs/works/recalls.html",
+    "docs/works/retraction.html",
+    "docs/works/trials.html",
+    "docs/works/unreported-trials.html",
+)
+AMENDMENT_MARKER = "Amended 2026-11-27"
+AMENDMENT_CLAIM = "no job in this repository runs"
 
 # The seventh offline page, and the only one whose harness no page names: `docs/works/warming.html`
 # says nothing about being checked, so `validate_warming_page.mjs` sits in ORPHANS above and its 28
@@ -248,6 +266,43 @@ class TestPageHarnessMap(unittest.TestCase):
                 problems.append(f"{page}: tests/{test} is not run by the workflow, so it "
                                 f"cannot fail a build — register it in the same change")
         self.assertEqual(problems, [], "ported pages whose Python guard cannot run")
+
+    def test_every_page_that_names_a_harness_is_either_ported_or_amended(self):
+        """The item's condition, as a test. A page may name a harness only if a registered
+        Python test re-derives what that harness asserts, or the page says what actually ran.
+        A page in neither is a claim resting on a file nothing executes."""
+        unexplained = []
+        for page in sorted(MAP):
+            if page == "docs/works/index.html":
+                continue  # a listing page; each entry's claim is pinned on its own page below
+            if page in PYTHON_REDERIVED or page in AMENDED_LIVE:
+                continue
+            unexplained.append(page)
+        self.assertEqual(unexplained, [],
+                         "pages naming a harness with neither a registered Python port nor an "
+                         "amended claim: add the port, or amend the page and add it to AMENDED_LIVE")
+        self.assertEqual([p for p in AMENDED_LIVE if p not in MAP], [],
+                         "AMENDED_LIVE names a page that does not name a harness")
+
+    def test_the_amended_live_claims_still_say_what_ran(self):
+        """Four pages whose harness needs the live network. The amendment is the whole close,
+        so it is pinned in both places a reader meets the claim."""
+        problems = []
+        for page in AMENDED_LIVE:
+            text = _read(page)
+            if AMENDMENT_MARKER not in text:
+                problems.append(f"{page}: the {AMENDMENT_MARKER} amendment is gone")
+            if AMENDMENT_CLAIM not in text:
+                problems.append(f"{page}: no longer says that no job here runs the harness")
+            if "which runs this page's own script" in text and AMENDMENT_CLAIM not in text:
+                problems.append(f"{page}: back to claiming the harness runs")
+        index = _read("docs/works/index.html")
+        n = index.count(AMENDMENT_MARKER)
+        if n < len(AMENDED_LIVE):
+            problems.append(f"docs/works/index.html: {n} amendment marker(s) for "
+                            f"{len(AMENDED_LIVE)} amended entries — the index repeats each "
+                            f"entry's claim and must be amended with it")
+        self.assertEqual(problems, [], "amended claims that no longer hold")
 
     def test_every_sensitivity_pair_is_registered_in_ci(self):
         """A port can be proven sensitive and still protect nothing if no job runs the proof.
