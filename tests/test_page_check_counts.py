@@ -79,6 +79,7 @@ class TheDetectorFiresOnTheRealCase(unittest.TestCase):
     def setUp(self):
         self.record = {"harnesses": {"validate_unreported_trials_page.mjs": 54,
                                      "validate_recalls_page.mjs": 94,
+                                     "validate_trials_page.mjs": 34,
                                      "validate_heat_page.mjs": 57}}
 
     def test_an_understated_count_is_named(self):
@@ -124,6 +125,38 @@ class TheDetectorFiresOnTheRealCase(unittest.TestCase):
                              "with two harnesses named, a bare number cannot be attributed — saying "
                              "nothing is right, guessing is not")
 
+    def test_the_index_is_checked_card_by_card(self):
+        """Two harnesses on one page are two claims, not an unattributable number.
+
+        The page-level rule skipped any file naming two harnesses. The Works index names twelve, so
+        every number on the page a stranger actually reads was outside the check — and a card on it
+        came to say "is 54, not the 50" about a harness that runs 34 (2026-11-27).
+        """
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            d = Path(td)
+            (d / "index.html").write_text(
+                '<div class="card"><p>tests/validate_heat_page.mjs (57 checks)</p></div>\n'
+                '<div class="card"><p>tests/validate_recalls_page.mjs (60 checks)</p></div>\n',
+                encoding="utf-8")
+            found = pcc.problems_in_pages(self.record, d)
+        self.assertEqual(len(found), 1, found)
+        self.assertIn("validate_recalls_page.mjs", found[0])
+        self.assertIn("60", found[0])
+
+    def test_a_number_stated_as_an_amendment_is_checked_too(self):
+        """The exact sentence that was wrong, in the form nothing was looking at."""
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            d = Path(td)
+            (d / "index.html").write_text(
+                '<div class="card"><p>tests/validate_trials_page.mjs re-checks the page. Amended: the '
+                'count is 54, not the 50 printed before it.</p></div>\n', encoding="utf-8")
+            found = pcc.problems_in_pages(self.record, d)
+        self.assertEqual(len(found), 1, found)
+        self.assertIn("is 54", found[0])
+        self.assertIn("which runs 34", found[0])
+
     def test_no_record_is_not_a_pass(self):
         found = pcc.problems(None, {"validate_heat_page.mjs": 57})
         self.assertTrue(found and "no recorded counts" in found[0])
@@ -168,7 +201,7 @@ class TheOfflineSetIsAskedNotGuessed(unittest.TestCase):
         self.assertTrue(pcc.runs_offline(ROOT / "tests" / "validate_trials_page.mjs"))
 
     def test_a_live_harness_is_not(self):
-        self.assertFalse(pcc.runs_offline(ROOT / "tests" / "validate_recalls_page.mjs"))
+        self.assertFalse(pcc.runs_offline(ROOT / "tests" / "validate_retraction_page.mjs"))
 
 
 if __name__ == "__main__":

@@ -19,6 +19,92 @@
 // establishes that the page's own code, run against a real recorded response, still passes every
 // assertion the record supports. The liveness claims need the live run, which is a deliberate act.
 import fs from "node:fs";
+import path from "node:path";
+
+// --- install(): replay a whole route table, for a harness that fetches many URLs ----------------
+//
+// `net()` above answers ONE url from a file a page-side harness knows in advance. A harness that
+// exercises a page end to end cannot: the page builds its own queries, so the harness does not know
+// them, and a recording keyed by hand would drift the moment the page changed a parameter. So
+// `install()` patches globalThis.fetch instead — the page's own code calls it, unchanged.
+//
+//   HARNESS_RECORD=tests/fixtures/validate_recalls_page.replay.json node tests/validate_recalls_page.mjs
+//   HARNESS_REPLAY=tests/fixtures/validate_recalls_page.replay.json node tests/validate_recalls_page.mjs
+//
+// A URL missing from the record is a LOUD failure, not an empty answer: silently answering nothing
+// would let a page that changed its query keep passing against a record of the query it used to make.
+export function install() {
+  const replay = process.env.HARNESS_REPLAY;
+  const record = process.env.HARNESS_RECORD;
+  const real = globalThis.fetch;
+  const today = new Date().toISOString().slice(0, 10);
+  const used = new Set();
+
+  const response = (status, text) => ({
+    ok: status >= 200 && status < 300,
+    status,
+    headers: { get: () => null },
+    clone() { return response(status, text); },
+    json: async () => JSON.parse(text),
+    text: async () => text,
+  });
+
+  if (replay) {
+    const rec = JSON.parse(fs.readFileSync(replay, "utf8"));
+    const routes = rec.responses || (rec.url ? { [rec.url]: { status: rec.status, body: rec.body } } : null);
+    if (!routes || !Object.keys(routes).length) {
+      throw new Error(`replay file ${replay} records no responses: refusing to run against a half-record`);
+    }
+    globalThis.fetch = async url => {
+      const key = String(url);
+      used.add(key);
+      const hit = routes[key];
+      if (!hit) {
+        throw new Error(
+          `replay file ${replay} has no response for\n    ${key}\n` +
+          `  it records ${Object.keys(routes).length} url(s):\n    ` +
+          Object.keys(routes).join("\n    ") +
+          `\n  the page now asks something the record does not answer — re-record it, and say why ` +
+          `the query changed`);
+      }
+      return response(hit.status || 200, typeof hit.body === "string" ? hit.body : JSON.stringify(hit.body));
+    };
+    return {
+      mode: "replay",
+      label: `recorded ${rec.recorded || "unknown date"}`,
+      recorded: rec.recorded || null,
+      urls: Object.keys(routes),
+      used: () => [...used],
+      expect_all_used() {
+        const idle = Object.keys(routes).filter(u => !used.has(u));
+        if (idle.length) {
+          throw new Error(`the record answers ${idle.length} url(s) this run never asked for:\n    ` +
+                          idle.join("\n    ") + `\n  the page stopped asking them; re-record`);
+        }
+      },
+    };
+  }
+
+  if (record) {
+    const out = { recorded: today, responses: {} };
+    const flush = () => {
+      fs.mkdirSync(path.dirname(path.resolve(record)), { recursive: true });
+      fs.writeFileSync(record, JSON.stringify(out, null, 1) + "\n");
+    };
+    globalThis.fetch = async (url, opts) => {
+      const res = await real(url, opts);
+      const text = await res.clone().text();
+      out.responses[String(url)] = { status: res.status, body: text };
+      used.add(String(url));
+      flush();                     // after every call: a harness that dies still leaves what it got
+      return res;
+    };
+    return { mode: "record", label: `live, recording ${record}`, urls: [], used: () => [...used], flush };
+  }
+
+  return { mode: "live", label: "live", urls: [], used: () => [] };
+}
+
 
 export function net() {
   const path = process.env.HARNESS_REPLAY;

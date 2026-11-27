@@ -183,17 +183,39 @@ def reconcile(counts: dict, failed: dict, previous: dict, previous_when: str = "
 
 HARNESS_NAME = re.compile(r"validate_[a-z_0-9]+\.mjs")
 ANY_CHECK_NUMBER = re.compile(r"(\d+)\s+checks")
+# The amendment idiom the Works cards use to state a corrected number: "is 94, not the 60 printed
+# before it". It carries a number with no word "checks" beside it, so a card can state a wrong count
+# in this form and the scan above never sees it — which is exactly what happened on 2026-11-27, when
+# the trials card said "is 54, not the 50" about a harness that runs 34. The idiom is checked too.
+AMENDMENT_COUNT = re.compile(r"\b(?:is|runs|stands at)\s+(\d+)\b[^.;]{0,60}?\bnot the\b")
+
+
+def units(page: Path):
+    """(label, text) pairs: one per card for an index page, one for the page itself otherwise.
+
+    The index names a different harness in each card, so checking it as a single document could never
+    attribute a number — which is how a card came to say "54, not the 50 printed before it" about the
+    trials harness (34 checks) and nothing noticed (2026-11-27). A card is a claim; check the claim.
+    """
+    raw = page.read_text(encoding="utf-8", errors="replace")
+    if '<div class="card">' in raw:
+        for i, chunk in enumerate(raw.split('<div class="card">')[1:], 1):
+            end = chunk.find("</div>")
+            yield "%s card %d" % (page.name, i), chunk if end < 0 else chunk[:end]
+    else:
+        yield page.name, raw
 
 
 def problems_in_pages(record: dict, pages_dir: Path) -> list:
-    """Pages that print their own check count in each direction.
+    """Units that print their own check count in each direction.
 
     The Works index is the obvious place a number is printed, and it was not the only one: with the
     index corrected, `docs/works/trials.html` still said "all 33 checks pass" — and the harness ran 34,
     because a check had been added to it that morning. Found 2026-11-27 by widening the question from
-    "what does the index say" to "what does every page say".
+    "what does the index say" to "what does every page say", and then from "page" to "card", because
+    the index survived that widening with a number copied from the card below it.
 
-    A page is checkable only when it names exactly one harness: with two names, "56 checks" cannot be
+    A unit is checkable only when it names exactly one harness: with two names, "56 checks" cannot be
     attributed, and guessing would be worse than saying nothing.
     """
     if not isinstance(record, dict) or not isinstance(record.get("harnesses"), dict):
@@ -201,18 +223,25 @@ def problems_in_pages(record: dict, pages_dir: Path) -> list:
     counts = record["harnesses"]
     found = []
     for page in sorted(Path(pages_dir).glob("*.html")):
-        text = TAGS.sub(" ", page.read_text(encoding="utf-8", errors="replace"))
-        named = set(HARNESS_NAME.findall(text))
-        if len(named) != 1:
-            continue
-        harness = named.pop()
-        if harness not in counts:
-            continue
-        for m in ANY_CHECK_NUMBER.finditer(text):
-            number = int(m.group(1))
-            if number != counts[harness]:
-                found.append("%s prints %d checks for %s, which runs %d"
-                             % (page.name, number, harness, counts[harness]))
+        for label, raw in units(page):
+            text = TAGS.sub(" ", raw)
+            named = set(HARNESS_NAME.findall(text))
+            if len(named) != 1:
+                continue
+            harness = named.pop()
+            if harness not in counts:
+                found.append("%s names %s, which has no recorded count" % (label, harness))
+                continue
+            for m in ANY_CHECK_NUMBER.finditer(text):
+                number = int(m.group(1))
+                if number != counts[harness]:
+                    found.append("%s prints %d checks for %s, which runs %d"
+                                 % (label, number, harness, counts[harness]))
+            for m in AMENDMENT_COUNT.finditer(text):
+                number = int(m.group(1))
+                if number != counts[harness]:
+                    found.append("%s says the count \"is %d, not the ... printed before it\" for %s, "
+                                 "which runs %d" % (label, number, harness, counts[harness]))
     return found
 
 

@@ -110,19 +110,20 @@ OFFLINE = {
     "test_retraction_voice.mjs": "offline checks; registry requests are refused",
     "validate_trials_page.mjs": "runs on a recorded response (HARNESS_REPLAY, see harness_net.mjs)",
     "validate_warming_page.mjs": "stubbed fetch; the live Boston figure runs only under WARMING_LIVE=1",
+    "validate_recalls_page.mjs": "runs on a recorded response (HARNESS_REPLAY, see harness_net.mjs)",
 }
 
-# These five need a live API on their default path. Named so that a green run still tells the truth
+# These four need a live API on their default path. Named so that a green run still tells the truth
 # about what it did not check; `harnesses-need-a-network` is the queue item that shrinks this set.
 NETWORK = {
     "validate_nonreplication_page.mjs": "three live keyless records",
     "validate_fetchable_page.mjs": "five live hosts, re-measured per run",
     "validate_retraction_page.mjs": "the registry and Europe PMC, live",
-    "validate_recalls_page.mjs": "openFDA, live",
     "validate_unreported_trials_page.mjs": "the registry and Europe PMC, live",
 }
 
-REPLAY_ENV = {"validate_trials_page.mjs": "HARNESS_REPLAY"}
+REPLAY_ENV = {"validate_trials_page.mjs": "HARNESS_REPLAY",
+              "validate_recalls_page.mjs": "HARNESS_REPLAY"}
 
 
 def replay_fixture(path: Path) -> Path:
@@ -194,6 +195,51 @@ class TheHarnessesActuallyRun(unittest.TestCase):
                             "a record trimmed to 3 studies still passed: the replay asserts nothing "
                             "about how much of the world it is looking at")
         self.assertIn("FAIL", (r.stdout or "") + (r.stderr or ""))
+
+    def test_the_recalls_replay_can_fail_too(self):
+        """Same proof for the route-table record: trim the 2,000-row sample, the harness goes red.
+
+        The recalls harness records seven urls because the page builds its own queries; its strongest
+        claim about the world is "over a 2,000-row sample of the whole drug record, every row carries
+        a start date". A record that answers with three rows must fail that claim rather than pass it.
+        """
+        fixture = HARNESSES / "fixtures" / "validate_recalls_page.replay.json"
+        if not fixture.is_file():
+            self.skipTest("no recalls record to mutate")
+        record = json.loads(fixture.read_text(encoding="utf-8"))
+        routes = record.get("responses") or {}
+        whole = [u for u in routes if "search=&limit=1000" in u]
+        if len(whole) < 2:
+            self.skipTest("the record no longer holds the two whole-index pages this test trims")
+        with tempfile.TemporaryDirectory() as td:
+            broken = Path(td) / "broken.replay.json"
+            body = json.loads(routes[whole[1]]["body"])
+            body["results"] = body["results"][:3]
+            routes[whole[1]]["body"] = json.dumps(body)
+            broken.write_text(json.dumps(record), encoding="utf-8")
+            r = run(HARNESSES / "validate_recalls_page.mjs",
+                    dict(os.environ, HARNESS_REPLAY=str(broken)))
+        self.assertNotEqual(r.returncode, 0,
+                            "a whole-index page trimmed to 3 rows still passed: the sample-size "
+                            "claim is not pinned by anything")
+        self.assertIn("FAIL", (r.stdout or "") + (r.stderr or ""))
+
+    def test_a_record_the_page_no_longer_asks_for_is_reported(self):
+        """The other direction: an unused url means the capture is stale and looks healthy."""
+        fixture = HARNESSES / "fixtures" / "validate_recalls_page.replay.json"
+        if not fixture.is_file():
+            self.skipTest("no recalls record to extend")
+        record = json.loads(fixture.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as td:
+            stale = Path(td) / "stale.replay.json"
+            record.setdefault("responses", {})["https://api.fda.gov/drug/enforcement.json?search=nobody-asks-this"] = \
+                {"status": 200, "body": '{"results": []}'}
+            stale.write_text(json.dumps(record), encoding="utf-8")
+            r = run(HARNESSES / "validate_recalls_page.mjs",
+                    dict(os.environ, HARNESS_REPLAY=str(stale)))
+        self.assertNotEqual(r.returncode, 0,
+                            "the record answered a url this run never asked for and the harness "
+                            "still exited 0: a stale capture would look like a passing one")
 
     def test_the_network_ones_are_named_rather_than_skipped_in_silence(self):
         self.assertGreaterEqual(len(NETWORK), 1, "no harness reaches the network: the split changed")

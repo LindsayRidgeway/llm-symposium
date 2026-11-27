@@ -48,6 +48,7 @@ import glob
 import os
 import re
 import unittest
+from pathlib import Path
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -120,22 +121,34 @@ PYTHON_REDERIVED = {
     "docs/works/nonreplication.html": "test_nonreplication_page_claims.py",
 }
 
-# The four pages whose harness checks the LIVE network, so no port can replace it: recalls,
-# retraction, trials and unreported-trials. Their honest close is the other half of the item's
-# condition — "or carries an amended claim saying exactly what ran" — so what is pinned here is
-# that the amendment is still on the page and still says the measured thing: that no registered
-# job executes the harness, that the only check is a syntax parse, and that the figures rest on
-# the dated by-hand measurement instead. Both places a reader meets the claim are pinned: the
-# entry page, and the one-line entry in docs/works/index.html that repeats it. A page rewritten
-# back to "Checked by X, which runs…" fails here rather than reading as checked.
+# The pages whose harness checks the LIVE network, so no port can replace it. Their honest close is
+# the other half of the item's condition — "or carries an amended claim saying exactly what ran" — so
+# what is pinned here is that the amendment is still on the page and still says the measured thing:
+# that no registered job executes the harness, that the only check is a syntax parse, and that the
+# figures rest on the dated by-hand measurement instead. Both places a reader meets the claim are
+# pinned: the entry page, and the one-line entry in docs/works/index.html that repeats it. A page
+# rewritten back to "Checked by X, which runs…" fails here rather than reading as checked.
+#
+# 2026-11-27, later the same day: this list held four. `tests/test_page_harnesses_run.py` now
+# executes every harness that can run offline at each landing, and trials and recalls were put on
+# recorded responses (`tests/harness_net.mjs`, HARNESS_REPLAY) — so for those two the amendment
+# became a false statement about this repository, and they moved to RUNS_AT_LANDING below. The
+# comment above is kept because the reason the two remain is the reason the other two left.
 AMENDED_LIVE = (
-    "docs/works/recalls.html",
     "docs/works/retraction.html",
-    "docs/works/trials.html",
     "docs/works/unreported-trials.html",
 )
 AMENDMENT_MARKER = "Amended 2026-11-27"
 AMENDMENT_CLAIM = "no job in this repository runs"
+
+# Pages whose harness now executes in a registered check at every landing, because it was put on a
+# recorded response. Pinned three ways: the page must not still say no job runs the harness, it must
+# name the recording mechanism, and the harness must actually be in the landing gate's OFFLINE set
+# with a fixture on disk — a page may not describe machinery that has since been removed.
+RUNS_AT_LANDING = {
+    "docs/works/trials.html": "validate_trials_page.mjs",
+    "docs/works/recalls.html": "validate_recalls_page.mjs",
+}
 
 # The seventh offline page, and the only one whose harness no page names: `docs/works/warming.html`
 # says nothing about being checked, so `validate_warming_page.mjs` sits in ORPHANS above and its 28
@@ -278,7 +291,7 @@ class TestPageHarnessMap(unittest.TestCase):
         for page in sorted(MAP):
             if page == "docs/works/index.html":
                 continue  # a listing page; each entry's claim is pinned on its own page below
-            if page in PYTHON_REDERIVED or page in AMENDED_LIVE:
+            if page in PYTHON_REDERIVED or page in AMENDED_LIVE or page in RUNS_AT_LANDING:
                 continue
             unexplained.append(page)
         self.assertEqual(unexplained, [],
@@ -288,8 +301,8 @@ class TestPageHarnessMap(unittest.TestCase):
                          "AMENDED_LIVE names a page that does not name a harness")
 
     def test_the_amended_live_claims_still_say_what_ran(self):
-        """Four pages whose harness needs the live network. The amendment is the whole close,
-        so it is pinned in both places a reader meets the claim."""
+        """The pages whose harness needs the live network. The amendment is the whole close, so it
+        is pinned in both places a reader meets the claim."""
         problems = []
         for page in AMENDED_LIVE:
             text = _read(page)
@@ -301,11 +314,34 @@ class TestPageHarnessMap(unittest.TestCase):
                 problems.append(f"{page}: back to claiming the harness runs")
         index = _read("docs/works/index.html")
         n = index.count(AMENDMENT_MARKER)
-        if n < len(AMENDED_LIVE):
+        if n < len(AMENDED_LIVE) + len(RUNS_AT_LANDING):
             problems.append(f"docs/works/index.html: {n} amendment marker(s) for "
-                            f"{len(AMENDED_LIVE)} amended entries — the index repeats each "
-                            f"entry's claim and must be amended with it")
+                            f"{len(AMENDED_LIVE) + len(RUNS_AT_LANDING)} amended entries — the "
+                            f"index repeats each entry's claim and must be amended with it")
         self.assertEqual(problems, [], "amended claims that no longer hold")
+
+    def test_a_page_that_says_the_harness_runs_is_telling_the_truth(self):
+        """RUNS_AT_LANDING is a claim about machinery, so the machinery is what is checked."""
+        import importlib.util as ilu
+        spec = ilu.spec_from_file_location("tphr", os.path.join(REPO, "tests",
+                                                                "test_page_harnesses_run.py"))
+        gate = ilu.module_from_spec(spec)
+        spec.loader.exec_module(gate)
+        problems = []
+        for page, harness in sorted(RUNS_AT_LANDING.items()):
+            text = _read(page)
+            if AMENDMENT_CLAIM in text.replace("the first version of this note said that no job here runs", ""):
+                problems.append(f"{page}: still says no job in this repository runs the harness")
+            if "HARNESS_REPLAY" not in text and "harness_net.mjs" not in text:
+                problems.append(f"{page}: does not name how the replay works, so a reader cannot "
+                                f"tell that the number was re-derived rather than asserted")
+            if harness not in gate.OFFLINE:
+                problems.append(f"{page}: {harness} is not in the landing gate's OFFLINE set, so the "
+                                f"page claims a check that does not run")
+            fixture = Path(REPO) / "tests" / "fixtures" / (Path(harness).stem + ".replay.json")
+            if not fixture.is_file():
+                problems.append(f"{page}: {harness} has no recorded response to replay")
+        self.assertEqual(problems, [], "pages claiming the harness runs at every landing")
 
     def test_every_sensitivity_pair_is_registered_in_ci(self):
         """A port can be proven sensitive and still protect nothing if no job runs the proof.

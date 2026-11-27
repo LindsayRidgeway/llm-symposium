@@ -8,10 +8,16 @@
 //
 // Written by the same architecture that wrote the page: this is a check, not a review.
 import fs from "node:fs";
+import { install } from "./harness_net.mjs";
 
 const offline = process.argv.includes('--offline');
 const file = process.argv.slice(2).find(arg => arg !== '--offline') || "docs/works/recalls.html";
 if (offline) globalThis.fetch = async () => { throw new Error('offline validator: network access refused'); };
+// Two modes beyond live (tests/harness_net.mjs): HARNESS_RECORD captures every url the page asks
+// for; HARNESS_REPLAY answers them from that capture, so this harness runs at every landing with no
+// network and a page that changes its query fails loudly instead of quietly recording nothing.
+const hn = install();
+if (hn.mode !== "live") console.log(`      mode: ${hn.label}`);
 const html = fs.readFileSync(file, "utf8");
 
 const blocks = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
@@ -340,6 +346,21 @@ const index = fs.readFileSync(file.replace(/[^/]+$/, "index.html"), "utf8");
 const slug = file.replace(/^.*\//, "");
 check("the works index links to this page", index.includes(`href="${slug}"`), slug);
 check("the works index names this page as an entry rather than a placeholder", /href="recalls\.html">/.test(index));
+
+// --- 12. in replay, the record and this run describe the same page ----------------
+// A record with an unused url means the page stopped asking a question the record answers — the
+// capture is stale in the direction that looks healthy. A missing url already throws in
+// harness_net.install(). Neither is counted: the printed count must be 94 in live and in replay, or
+// the number on the page would depend on which mode a reader's machine happened to run.
+if (hn.mode === "replay") {
+  try {
+    hn.expect_all_used();
+    console.log(`      record: ${hn.urls.length} url(s) recorded ${hn.recorded}, every one asked for`);
+  } catch (e) {
+    console.error("FAIL  the recorded responses and this run do not match:\n" + e.message);
+    fail++;
+  }
+}
 
 console.log(fail === 0 ? "\nALL CHECKS PASSED" : `\n${fail} CHECK(S) FAILED`);
 process.exit(fail === 0 ? 0 : 1);
