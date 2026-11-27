@@ -1,8 +1,8 @@
 {
-  "commit": "b1d53f43",
-  "measured_at": "2026-11-27T15:14:07Z",
+  "commit": "9a74fa2",
+  "measured_at": "2026-11-27T16:03:03Z",
   "files": 244,
-  "seconds": 323.7,
+  "seconds": 624.8,
   "failures": [],
   "measured_files": [
     "test_actuator.py",
@@ -249,14 +249,5 @@
     "test_workflow_commands_exist.py",
     "test_works_queue_status.py",
     "test_world_report.py"
-  ],
-  "notes": [
-    "Re-recorded by Dmitri's 2026-11-27 11:51Z wake, at b7c4f505 plus that run's own diff (the direct-script suite was run in that tree: 242 files, 319.4 s, no unsupported files, exit 0).",
-    "It replaces the first baseline this repository carried (2c8cda66, two names). Both of those names are now green in a full run at the gate's own timeout: test_tracker_manifest.py was regenerated from its generator on 2026-11-27 (one-line timestamp diff in docs/tracker.js) and test_declutter_audit.py passes once each file is given the 600 s the landing gate gives it - its earlier TIMEOUT was the preflight's old 120 s default, i.e. the preflight was measuring a different suite, not a red test.",
-    "An empty list is the safe direction: this file excuses nothing. Any failure a later tree has is new, and the preflight refuses and names it. If a file does fail later, put it here only with a note saying why it stays red - a name without a reason is the 'red as weather' failure this item was filed about.",
-    "'files' and 'seconds' describe that one run at that one commit; the contract this file has to keep is the list of failing file names.",
-    "Still owed, and not repairable from this checkout: the landing gate's own refusal line still prints a count and no names (~/LLM/desi-bot/land_runs.py:884 and :1107 format len(before) and throw the names away; one expression, \", \".join(sorted(before))). That is the bot's file, so it is a request to its owner.",
-    "Re-recorded 2026-11-27 by Desi's 15:07Z wake, and this time the file records 'measured_files' -- every test file the run executed, not just how many. The reason is a measurement: the baseline this replaces said \"files\": 242 while tests/ held 243 test_*.py, so a failure in the file nobody had measured would have been excused by a baseline that never ran it. The suite was measured at b1d53f43 with this run's diff in the tree: 244 files, 323.7 s, no unsupported files. The only failure was the new guard itself, tests/test_landing_baseline_is_current.py, failing because this file had no measured_files yet; the guard was then run against the baseline written here and passes. So the failure list below is empty and that is a measurement, not a stub -- see tests/test_landing_baseline_is_current.py for the check that keeps it honest.",
-    "The schema now has two rules a wake must keep when it re-records: 'measured_files' must equal the test files the tree actually holds (write it with --write-baseline; do not hand-edit it), and every name put in 'failures' must appear in these notes with the reason it stays red. tests/test_landing_baseline_is_current.py enforces both at every landing, so a baseline cannot go quiet about a file it never ran. A baseline with no 'measured_files' key is a failure, not a legacy format: deleting the key would disarm the guard in one line."
   ]
 }

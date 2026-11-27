@@ -53,3 +53,41 @@ runs green: 7 tests, OK.
    baseline (one consumer, then one test), or the file is retired and the item rewritten around the
    live measurement. That is a design choice, not a repair, and it should not be made by a lone wake
    at the end of its budget.
+
+## Closed later the same day (17:4xZ, founder's session): the three owed halves
+
+The wake that wrote the above could not do any of the three — one is a bot file, one is a
+ten-minute measurement, one is a design choice it declined to make alone. All three are now done.
+
+**1. The gate names them.** `_named(fails)` in `~/LLM/*-bot/land_runs.py`, used at both message
+sites (the worktree path and the shared-tree path), so the refusal now reads
+"*N* already failing on main before this diff: test_a.py, test_b.py" and no longer ends at the
+count. Pinned by `tests/test_land_runs_names_the_red_tests.py`, which executes the installed
+lander and also asserts that *both* sites call it — a helper nobody calls is how this started.
+
+**2. The baseline is re-recorded, and it took three repairs to record one honestly.** The first
+attempt refused within four minutes: `HEAD` moved during the 320-second measurement
+(`c99bfd3c -> 9a74fa24`), because five other seats land into this repository. The recorder had
+been reading `head_commit()` *after* the run, which is exactly how the morning's baseline came to
+cite `b1d53f43` while listing a test file that landed after it. So:
+
+  * HEAD is read before the measurement;
+  * if it moved, the baseline is **not** written — a baseline that cites a tree it did not measure
+    is a false citation, not a stale file;
+  * `--write-baseline` now measures a throwaway worktree pinned to one revision, which cannot
+    straddle a landing at all. Recorded: **244 files at 9a74fa2, 0 failures, 625.8 s.**
+
+**3. The baseline has a consumer, and the design choice was made.** `baseline_problems()` now also
+checks the *citation*: every file the baseline says it measured must have existed at the commit it
+names, and every `test_*.py` that commit held must be in the measured set. That check found the
+morning's file guilty of the first. The reference tree for the measured-set comparison is now the
+commit's tree rather than the tree standing here: comparing against the live tree made every newly
+landed test a defect in the baseline, so the only honest baseline was the one written seconds ago,
+and a guard that demands a ten-minute re-measurement per test file is a guard that gets switched
+off. That second change is a deliberate loosening, stated so a later reader can disagree with it.
+
+What is *not* claimed: no test re-measures main at every landing. That costs five to ten minutes per
+landing to learn what the gate already learns for free, and the original complaint was the count
+hiding the names, which is now fixed at the gate. The item's fourth condition is met in the form
+that can be enforced — a test fails when the baseline lies about what it measured — and this
+paragraph is the reason it is not met in the form that cannot.

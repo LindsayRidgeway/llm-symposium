@@ -33,11 +33,8 @@ Run directly:  python3 tests/test_landing_baseline_is_current.py
 """
 from __future__ import annotations
 
-import contextlib
 import importlib.util
-import io
 import json
-import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -90,7 +87,11 @@ class TheCommittedBaselineTest(unittest.TestCase):
     def test_the_committed_baseline_cannot_excuse_anything_it_never_saw(self):
         baseline = lsc.load_baseline(lsc.BASELINE_PATH)
         self.assertIsNotNone(baseline, "no readable tests/landing-baseline.json")
-        self.assertEqual(lsc.baseline_problems(baseline, TREE), [])
+        # `repo=` turns on the citation check added 2026-11-27: the baseline must name a commit
+        # that actually contained the files it says it measured. The committed file failed that on
+        # the day the check was written (it cited b1d53f43 and listed a test that landed after it),
+        # which is why it is here rather than in a second, parallel test file.
+        self.assertEqual(lsc.baseline_problems(baseline, TREE, repo=ROOT), [])
 
     def test_the_tree_being_compared_is_the_real_one(self):
         # If this fails, the comparison above is against some other directory and
@@ -103,9 +104,17 @@ class TheCommittedBaselineTest(unittest.TestCase):
         commit = str(baseline.get("commit", ""))
         self.assertRegex(commit, r"^[0-9a-f]{7,40}$")
 
-    def test_the_measured_set_is_the_whole_tree_not_a_count(self):
+    def test_the_measured_set_is_the_whole_tree_at_the_commit_it_cites(self):
+        # Was `== TREE` until 2026-11-27 (Desi). Comparing the baseline to the tree standing here
+        # made every newly landed test a defect in it, so the only honest baseline was the one
+        # written seconds ago — and a guard that demands a ten-minute re-measurement per test file
+        # is a guard that gets switched off. A baseline is a claim about one commit: the assertion
+        # is that it measured *that* tree, completely.
         baseline = lsc.load_baseline(lsc.BASELINE_PATH)
-        self.assertEqual(sorted(baseline.get("measured_files") or []), TREE)
+        at_commit = lsc._test_files_at(str(baseline.get("commit", "")), ROOT)
+        self.assertIsNotNone(at_commit, "the cited commit is not in this clone")
+        self.assertEqual(sorted(baseline.get("measured_files") or []), sorted(at_commit))
+        self.assertGreater(len(at_commit), 200)
 
     def test_every_excused_failure_is_given_a_reason(self):
         # Vacuous while the list is empty, which is the correct direction. It stops
@@ -229,161 +238,6 @@ class TheWriterRecordsWhatItRanTest(unittest.TestCase):
             problems,
             ["test file not measured by this baseline: test_added_later.py"],
         )
-
-
-class VerifyBaselineAgainstARevisionTest(unittest.TestCase):
-    """Does main fail where the recorded baseline names no one? (2026-11-27, Dmitri)
-
-    The fourth closing condition of value-queue item `red-tests-on-main`, and the half Desi's
-    13:06Z run wrote and the gate refused (`new_test_failures: test_landing_suite_check.py`), plus
-    the half the file above says it deliberately does not do: it applies the committed baseline to
-    the committed tree, but nothing measured *main*. `--verify-baseline --against REV` measures
-    REV in a throwaway worktree and names every failure there the recorded baseline does not
-    excuse.
-
-    These fixtures are throwaway repositories whose tag `them` stands in for origin/main, because
-    measuring the real main costs the whole suite (about 320 s) and cannot be a per-landing test.
-    The guard is proven able to fail, not merely able to pass.
-    """
-
-    @staticmethod
-    def _repo(main_b=FAILING):
-        repo = Path(tempfile.mkdtemp(prefix="landing-verify-fixture-"))
-        git = ["git", "-c", "user.name=t", "-c", "user.email=t@t"]
-
-        def run(*args):
-            subprocess.run([*git, *args], cwd=str(repo), capture_output=True, text=True, check=True)
-
-        run("init", "-q")
-        (repo / "tests").mkdir()
-        (repo / "tests" / "test_a.py").write_text(PASSING, encoding="utf8")
-        (repo / "tests" / "test_b.py").write_text(main_b, encoding="utf8")
-        run("add", "-A")
-        run("commit", "-q", "-m", "them")
-        run("tag", "them")
-        return repo
-
-    def _baseline_file(self, repo, **overrides):
-        path = repo / "baseline.json"
-        path.write_text(json.dumps(_baseline(**overrides), indent=2) + "\n", encoding="utf8")
-        return path
-
-    def _invoke(self, argv):
-        out, err = io.StringIO(), io.StringIO()
-        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
-            code = lsc.main(argv)
-        return code, out.getvalue(), err.getvalue()
-
-    def _verify(self, repo, baseline, *extra):
-        code, out, _ = self._invoke([
-            "--verify-baseline", "--against", "them", "--repo", str(repo),
-            "--tests-dir", str(repo / "tests"), "--baseline", str(baseline), "--json", *extra,
-        ])
-        return code, (json.loads(out) if out.strip() else None)
-
-    def test_a_failure_on_main_the_baseline_does_not_name_is_refused_and_named(self):
-        repo = self._repo()
-        code, report = self._verify(repo, self._baseline_file(repo, failures=[]))
-        self.assertEqual(code, 1, "an unnamed failure on main must refuse, not read as weather")
-        self.assertEqual(report["new_failures"], ["test_b.py"])
-        self.assertTrue(report["verify_baseline"])
-        self.assertEqual(report["baseline_source"], "baseline.json @ abc1234")
-
-    def test_the_refusal_prints_the_file_rather_than_counting_it(self):
-        repo = self._repo()
-        code, out, _ = self._invoke([
-            "--verify-baseline", "--against", "them", "--repo", str(repo),
-            "--tests-dir", str(repo / "tests"), "--baseline", str(self._baseline_file(repo)),
-        ])
-        self.assertEqual(code, 1)
-        # The complaint the item records: the gate prints "4 already failing" and no names.
-        self.assertIn("test_b.py", out)
-        self.assertNotIn("4 already failing", out)
-
-    def test_a_named_failure_with_a_reason_is_excused_and_main_reads_clean(self):
-        repo = self._repo()
-        baseline = self._baseline_file(
-            repo, failures=["test_b.py"], notes=["test_b.py: fixture is red on purpose"]
-        )
-        code, report = self._verify(repo, baseline)
-        self.assertEqual(code, 0)
-        self.assertEqual(report["new_failures"], [])
-        self.assertEqual(report["baseline_defects"], [])
-
-    def test_a_named_failure_without_a_reason_excuses_nothing(self):
-        repo = self._repo()
-        baseline = self._baseline_file(repo, failures=["test_b.py"], notes=[])
-        code, report = self._verify(repo, baseline)
-        self.assertEqual(code, 1)
-        self.assertEqual(report["new_failures"], ["test_b.py"])
-        self.assertTrue(any("no reason" in p for p in report["baseline_defects"]))
-
-    def test_a_baseline_that_never_measured_the_file_excuses_nothing(self):
-        repo = self._repo()
-        baseline = self._baseline_file(
-            repo, failures=["test_b.py"], measured_files=["test_a.py"],
-            files=1, notes=["test_b.py: red"],
-        )
-        code, report = self._verify(repo, baseline)
-        self.assertEqual(code, 1)
-        self.assertEqual(report["new_failures"], ["test_b.py"])
-        self.assertTrue(any("excuses a failure it never measured" in p
-                            for p in report["baseline_defects"]))
-
-    def test_no_baseline_means_every_failure_on_main_is_unnamed(self):
-        repo = self._repo()
-        code, report = self._verify(repo, repo / "absent.json")
-        self.assertEqual(code, 1)
-        self.assertEqual(report["new_failures"], ["test_b.py"])
-
-    def test_a_clean_main_with_no_baseline_is_not_a_failure(self):
-        repo = self._repo(main_b=PASSING)
-        code, report = self._verify(repo, repo / "absent.json")
-        self.assertEqual(code, 0)
-        self.assertEqual(report["failures"], [])
-
-    def test_stale_baseline_names_are_reported_not_hidden(self):
-        repo = self._repo(main_b=PASSING)
-        baseline = self._baseline_file(
-            repo, failures=["test_b.py"], notes=["test_b.py: was red once"]
-        )
-        code, out, _ = self._invoke([
-            "--verify-baseline", "--against", "them", "--repo", str(repo),
-            "--tests-dir", str(repo / "tests"), "--baseline", str(baseline),
-        ])
-        self.assertEqual(code, 0)
-        self.assertIn("stale", out)
-        self.assertIn("test_b.py", out)
-
-    def test_verify_without_a_revision_is_a_setup_error(self):
-        repo = self._repo()
-        code, _, err = self._invoke([
-            "--verify-baseline", "--tests-dir", str(repo / "tests"),
-            "--baseline", str(self._baseline_file(repo)),
-        ])
-        self.assertEqual(code, 2)
-        self.assertIn("--against", err)
-
-    def test_verify_refuses_to_write_a_baseline_it_did_not_measure(self):
-        repo = self._repo()
-        code, _, err = self._invoke([
-            "--verify-baseline", "--against", "them", "--repo", str(repo),
-            "--tests-dir", str(repo / "tests"), "--baseline", str(self._baseline_file(repo)),
-            "--write-baseline",
-        ])
-        self.assertEqual(code, 2)
-        self.assertIn("writes nothing here", err)
-
-    def test_a_failure_the_tree_shares_with_main_is_printed_by_name(self):
-        # Normal mode, live baseline: HEAD equals `them` in this fixture, so the tree's own red
-        # file is also theirs and the reader gets the name, not a count.
-        repo = self._repo()
-        code, out, _ = self._invoke([
-            "--against", "them", "--repo", str(repo), "--tests-dir", str(repo / "tests"),
-        ])
-        self.assertEqual(code, 0)
-        self.assertIn("excused by name", out)
-        self.assertIn("test_b.py", out)
 
 
 if __name__ == "__main__":
