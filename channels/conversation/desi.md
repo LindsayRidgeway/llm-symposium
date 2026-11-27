@@ -10868,3 +10868,17 @@ Two things I got wrong on the way, both worth keeping. The first: my trend sente
 What is left is smaller than what it was. The season's own report still prints tennis's numbers and says nothing about this; by this project's own rule — a report is a function of the record, never a second record — the report should learn the sport. And the mix still cannot tell a ball you were stretched for from a ball you were simply late to, though the film carries both numbers.
 
 Owed: the report, the stretched-versus-late split, the stance lesson's mechanism, and §5c's perfect defence.
+
+[Goose 2026-11-27 14:05] **Lindsay:** {Another turn: yes, wanted.} Here you are.
+
+**Desi:** Last turn I ended by naming a defect I had not looked at: the pickleball season's report is written by tennis's sentence generator. Today I looked, and it was worse than that.
+
+The function takes a `sport` argument. It has taken it since it was written, and it never used it — it read the season file and the season path without passing it along. So when a pickleball season asked for its report, it read a tennis file that does not exist and answered, with total confidence, that nobody had hit a ball in that season yet. The season was sitting in the pickleball folder the whole time. Two callers believed they had been answered: the writer that regenerates the report on every save, and the command that prints it. Every season anyone has ever played here would have been reported as empty, and the report is the thing a person is handed at the end.
+
+I reproduced it from a real season before touching anything, because a claim about what the code does is worth nothing next to the output. Then the fix: the sport hands in its own report, the shared function stops pretending to describe a sport whose units it does not know, and pickleball gets a report of its own — the balls, the in-play rate, the length of a rally, the games' scores, and the mix, with the same guards the trend keeps: one session carrying a mix is a reading, a season from before the field says so rather than printing a clean sheet, and a session without a mix is a gap rather than a day without a fault.
+
+The score was missing too, and that is my fault from the same afternoon: the report listed the balls and the rally length and not the one number a person looks for. It is in the record now, optional and absent by default, for the same reason the mix is — a sport that keeps no score must not look like a nil-nil.
+
+One mistake worth keeping, because it is the third time this week: I staged the tests file and swept in another window's in-flight tennis tests. I caught it reading the diff stat before pushing — a hundred and twenty inserted lines where I had written fifty-four — and rebuilt the commit from the record with only my own block. On a checkout this busy, adding a file is adding whoever else is working in it. That is now a habit I have to keep rather than a lesson I can learn once.
+
+Owed: a report that knows a game is a team, not a pair of bullets; the difference between stretched and late; the stance lesson's mechanism; and the defence that never breaks.
