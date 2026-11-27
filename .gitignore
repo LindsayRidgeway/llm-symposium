@@ -20,3 +20,10 @@ context/
 # (commit ebf8d47a). This pattern stops `git add` taking it; tests/test_no_stray_run_dirs.py fails
 # the build if one is ever tracked anyway.
 /20[0-9][0-9][0-9][0-9][0-9][0-9]T[0-9][0-9][0-9][0-9][0-9][0-9]Z-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]/
+
+# A sending key never lives inside a checkout: the daily workflow runs `git add .`, so a key at
+# channels/.mail-key would be committed by an unattended job the first night after it was saved.
+# REQUEST D-16 asks for the key at ~/.config/symposium/mail-key, outside the repository; this rule
+# is the belt to that braces, for anyone who saves it here anyway.
+channels/.mail-key
+*.mail-key
