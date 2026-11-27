@@ -196,6 +196,14 @@
       "status": "open",
       "progress": "",
       "last_worked": null
+    },
+    {
+      "id": "landing-wipes-a-sessions-edits",
+      "title": "A landing stops taking or discarding another session's uncommitted work",
+      "done_when": "the shared-tree landing path rescues tracked files it is about to discard (as its reset path already does) and says so, and no landing runs 'git add -A' over a tree another session is editing; today 'git checkout -- .' silently reverts tracked edits while untracked files survive, and two 'git add -A' commits swept this session's files into someone else's message",
+      "status": "open",
+      "progress": "",
+      "last_worked": null
     }
   ]
 }
