@@ -40,6 +40,7 @@ failure, because "we could not tell" must not read as "safe to land".
 Usage:
   python3 scripts/landing_suite_check.py                      # vs the recorded baseline
   python3 scripts/landing_suite_check.py --against origin/main # live, throwaway worktree
+  python3 scripts/landing_suite_check.py --against main --repo /path/to/checkout
   python3 scripts/landing_suite_check.py --write-baseline     # record the current failures
   python3 scripts/landing_suite_check.py --json
 
@@ -253,6 +254,12 @@ def main(argv=None):
     )
     parser.add_argument("--write-baseline", action="store_true")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
+    parser.add_argument(
+        "--repo",
+        default=str(REPO_ROOT),
+        help="repository to resolve --against and HEAD in (default: this checkout); "
+             "the tests use it to drive the live path against a fixture",
+    )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
 
@@ -273,7 +280,9 @@ def main(argv=None):
     baseline_names, baseline_source = None, "none"
     if args.against:
         try:
-            baseline_names, _ = measure_revision(args.against, timeout=args.timeout)
+            baseline_names, _ = measure_revision(
+                args.against, repo=Path(args.repo), timeout=args.timeout
+            )
         except RuntimeError as exc:
             print("landing_suite_check: %s" % exc, file=sys.stderr)
             return 2
@@ -291,7 +300,7 @@ def main(argv=None):
 
     baseline_written = False
     if args.write_baseline and not unsupported:
-        written = write_baseline(rows, head_commit(), Path(args.baseline))
+        written = write_baseline(rows, head_commit(repo=Path(args.repo)), Path(args.baseline))
         baseline_written = True
         if not args.json:
             print(

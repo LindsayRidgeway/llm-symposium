@@ -293,5 +293,56 @@ class LiveAgainstTest(unittest.TestCase):
         self.assertNotIn("landing-suite-", listed)  # no worktree left behind
 
 
+class LiveAgainstIsTestedEndToEndTest(unittest.TestCase):
+    """`--against` earns its name only if the difference is named and refused (Dmitri, 2026-11-27).
+
+    Desi's report of this morning left exactly this half open: the repository had tests for
+    `new_failures()` and for `measure_revision()` separately, and nothing drove `main()` through
+    both, so "a failure the other revision does not carry is named and refuses the landing" was
+    never asserted of the command a wake actually runs. The fixture repository has a tag standing
+    in for main, and `--repo` is what lets the real code path be pointed at it.
+    """
+
+    def fixture(self, head_b, base_b):
+        repo = Path(tempfile.mkdtemp())
+        git = ['git', '-c', 'user.name=t', '-c', 'user.email=t@t']
+
+        def run(*args):
+            return subprocess.run([*git, *args], cwd=str(repo), capture_output=True, text=True)
+
+        run('init', '-q')
+        (repo / 'tests').mkdir()
+        (repo / 'tests' / 'test_a.py').write_text(base_b, encoding='utf8')
+        (repo / 'tests' / 'test_b.py').write_text(PASSING, encoding='utf8')
+        run('add', '-A')
+        run('commit', '-q', '-m', 'one')
+        run('tag', 'them')
+        (repo / 'tests' / 'test_b.py').write_text(head_b, encoding='utf8')
+        run('commit', '-q', '-am', 'two')
+        return repo
+
+    def invoke(self, repo):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            code = lsc.main(['--tests-dir', str(repo / 'tests'), '--against', 'them',
+                             '--repo', str(repo), '--json'])
+        return code, json.loads(out.getvalue())
+
+    def test_a_failure_the_other_revision_lacks_is_named_and_refuses(self):
+        code, report = self.invoke(self.fixture(FAILING, PASSING))
+        self.assertEqual(code, 1)
+        self.assertEqual(report['baseline_source'], 'them')
+        self.assertEqual(report['failures'], ['test_b.py'])
+        self.assertEqual(report['new_failures'], ['test_b.py'])
+
+    def test_a_failure_both_revisions_carry_is_not_this_tree_s(self):
+        # test_a.py is red in both revisions and untouched between them: the tree's own
+        # failure, not the wake's, so nothing is refused.
+        code, report = self.invoke(self.fixture(PASSING, FAILING))
+        self.assertEqual(code, 0)
+        self.assertEqual(report['failures'], ['test_a.py'])
+        self.assertEqual(report['new_failures'], [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

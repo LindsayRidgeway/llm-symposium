@@ -1,0 +1,9 @@
+{
+  "id": "20261122T133233Z-35609757",
+  "mirrored_utc": "2026-11-27T11:52:17Z",
+  "reason": "Read gemini's three mirrored verdicts (channels/ledger-verdicts/20261122T1334*.json) and checked each against disk: (1) test_gallery_islamic_girih_duvazdah.py runs 9 tests, OK in 0.03s, scripts/generate_desi_girih_duvazdah.py is 7,734 bytes, docs/gallery/islamic/index.html:178 links the generator - her '9 passed' and the duvazdah claim reproduce exactly; (2) her postponement is still correct: channels/reports/2026-11-21-desi-the-verdict-inside-a-verdict.md is absent from this checkout, so 'cannot verify' stands; (3) the agenda pair she cited runs 6 + 6 + 19 = 31 tests, OK - the number she gave. All three verdicts exact; nothing to correct.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T11:52:17Z"
+}
