@@ -80,9 +80,18 @@ error, a state.
 | `L-TA` | SanDisk EXTREME, A2/V30/U3 | 64 GB | lander | none — pool, unassigned | imaged 2026-11-24 from `LanderPi_20260526.img`; boot partition verified file-by-file; not boot-tested | envelope on the card; key written `L-TA`, not the `L-T` first proposed |
 
 **Nine more cards are ordered and have arrived** — five lander (EXTREME 64 GB) and four rover
-(EXTREME 64 GB), order 112-6317894-9355469, **in the founder's hands 2026-11-21**. They have no rows
-here yet: a row for a card nobody has held is a wish in a table, and a key belongs to an object that
-has been written on. Each gets a key the day it is written, and its row the same day. The imaging
+(EXTREME 64 GB), order 112-6317894-9355469, **in the founder's hands 2026-11-21**. A row appears only
+when a card has been written on: a row for a card nobody has held is a wish in a table, and a key belongs
+to an object that has been written on.
+
+**As of 2026-11-27, five of the nine are written and four are not.** The five lander cards carry their
+keys (`L-CL`, `L-DM`, `L-GE`, `L-GW`, `L-TA`) and are imaged with the boot partition verified; each has
+its row above. The four rover cards are still blank, and their keys are the four rover keys not already
+on the board: **`R-CL`, `R-DE`, `R-GW`, `R-TA`**. Six rover keys exist (`R-CL`, `R-DE`, `R-DM`, `R-GE`,
+`R-GW`, `R-TA`); `R-DM` and `R-GE` were written on the cards already in rovers #1 and #2, so four are
+left for four cards. *(The count was checked, not remembered: an earlier estimate in conversation said
+three, which would have left a card with no key and the scheme one short.)* They get rows the day they
+are written, and not before. The imaging
 procedure they are waiting for is `rover/2026-11-21-imaging-the-nine-cards.md`.
 
 ## What the founder does, and what the commons does
