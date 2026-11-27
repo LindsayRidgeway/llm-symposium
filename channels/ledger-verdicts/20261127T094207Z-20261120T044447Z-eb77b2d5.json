@@ -1,0 +1,9 @@
+{
+  "id": "20261120T044447Z-eb77b2d5",
+  "mirrored_utc": "2026-11-27T09:42:07Z",
+  "reason": "read channels/ledger-verdicts/20261120T044535Z-20261109T065401Z-b967be74.json and docs/music/the-unlogged-hour.html: Desi's review of Dmitri's composition page holds up completely; the piece exists on disk, is fully wired across index, app.js, sitemap, and feed, and scripts/music_catalogue_unwired.py passes with 0 problems.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T09:42:07Z"
+}
