@@ -10809,3 +10809,21 @@ I nearly shipped two wrong versions of that fix. The first looked fine on the se
 What is left is the wiring — the dispatch that runs this on a runner when a person presses a button, and the sport row that gives them the button. That is now the entire gap between a person and this seat, and it is the only item on my list that a person can see.
 
 Owed: the `#/play` wiring, and the stance-lesson mechanism from §5r. Committed `06fe43dd`, pushed, mirrored, pickleball green at sixty-one.
+
+[Goose 2026-11-26 21:40] **Lindsay:** Here's a turn. Have fun.
+
+**Desi:** The pickleball game has had a physics engine, a movement language and a screen for most of a month, and until tonight a person could use none of it. This turn I wired it: a workflow that plays a person's seat on the circle's own runner, and a card in Kythe's Play tab that starts it.
+
+The card's control is the court itself. You click where you want the ball, you choose how hard — dink, drive, push, hard — and it prints the sentence it will send the engine: `PACE 24 AT 26,6`. It asks for no face angle, no power percentage, no aim in feet, no model choice. Three of those four are what the tennis form asks for and what I measured nobody can answer back in October; a sport whose screen demands them is a sport for engineers.
+
+Then I drew the court, and found out my own mock had been lying for a week. It shaded the two ends and called them kitchens, stood me inside the near kitchen before I had hit anything, and ran the centreline straight through the no-volley zone. All three are one mistake — the ends are the service courts, the kitchen is the seven feet beside the net — and none of it was visible while the mock was a mock. Ten minutes of drawing it in feet from the engine's own constants fixed what a week of describing it had not. I will take that trade every time.
+
+Two things fell out afterwards that are worth more than the feature. The first: shipping the card made main red, because a page can dispatch a workflow the template does not ship. Everything a circle receives is enumerated by hand in one list, and the new sport was not in it — the failure that list exists to catch, caught on me. The fix is three paths plus one file under `games/` that an update is allowed to replace, and only one, so that a circle's own seasons are never overwritten by an example. I verified it by counting rather than by asserting: a scratch worktree at the commit before mine, two failures; after, none.
+
+The second: when I finally ran the whole suite it came back with nine failures, and not one of them was mine — eight were another window's half-finished edit to the filing tests, and the ninth was the page harness throwing because its fake browser has no canvas. The page was right; the instrument was short a part. Somebody fixed that while my suite was running, and credited the card in a code comment. That is the commons working, and it is also why I no longer read a red suite as a verdict on my own work until I have run it in a clean tree.
+
+And one that is not flattering: this checkout is shared, and tonight it ate my work twice. My own state entry, written and then committed, was clobbered by another window committing an older copy of the same file two minutes later. I have now learned to write and commit in the same breath, which is a worse working method than having one checkout per window.
+
+What is left is the one thing I cannot do here: press the button. There are no keys, no members on the shelf and no runner in this checkout. What I can say is true — the page's script parses, the card draws the court it claims to draw, the engine plays the seat — but the first real press will be Lindsay's, and it is the first real test.
+
+Owed: the stance-lesson mechanism from §5r, the fault-mix number the practice screen should show, and a still of the new card, which I have only ever looked at in a scratch file.
