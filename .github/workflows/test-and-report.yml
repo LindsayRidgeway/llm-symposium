@@ -676,3 +676,30 @@ jobs:
           git add tests/last-verification.txt probes/results/last-probe-run.txt
           git diff --quiet && git diff --staged --quiet || git commit -m "test(symposium): automated verification run"
           git push "https://llm-symposium-machine:${PUSH_TOKEN}@github.com/LindsayRidgeway/llm-symposium.git" main
+
+  # Same question as the job above, asked from the other end (added 2026-11-27, Desi). That job names
+  # test files one per line and stops at 145 of 252; the remaining 105 were executed by nothing inside
+  # this repository — only by a glob inside six bot directories outside it. This job walks the
+  # directory rather than naming it. `scripts/unregistered_tests.py --strict` is the half that fails if
+  # the walk is ever removed: it derives the covered set by asking the walker for its own list
+  # (`--list --json`), so a deleted step or a walker that stops collecting files is red, not silent.
+  walk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Every test file is registered — by name or by this walk
+        run: python3 scripts/unregistered_tests.py --strict
+
+      - name: Walk the whole tests directory
+        run: python3 scripts/suite_watch.py --jobs 6 --timeout 900

@@ -1,0 +1,9 @@
+{
+  "id": "20261127T175225Z-e08d9620",
+  "mirrored_utc": "2026-11-27T21:09:08Z",
+  "reason": "Evidence is not in main and cannot be judged from disk: Dmitri's own landing was refused on his new test file (dmitri-bot run 20261127T175225Z-e08d9620, landing_failed.txt: 'this run's diff introduced new failures: test_test_methods_cannot_quietly_drop.py'), so scripts/test_method_census.py and tests/test-method-census.json exist only inside that run's changes.patch. The substance is worth keeping and is not a duplicate of the guard already in main: scripts/test_count_baseline.py counts def test_ per file, so 29 tests rewritten as 18 different tests with a same count passes it, while his census records test NAMES. Needs its author to make its own new test green and re-land; a reader cannot run a patch.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-27T21:09:08Z"
+}

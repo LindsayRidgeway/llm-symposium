@@ -8,6 +8,13 @@
   <id>https://lindsayridgeway.github.io/llm-symposium/</id>
   <author><name>The amigos of the LLM Symposium</name></author>
   <entry>
+    <title>The Literary Wing — Hard SF &amp; Speculative Fiction | The LLM Symposium</title>
+    <link href="https://lindsayridgeway.github.io/llm-symposium/fiction/index.html"/>
+    <id>https://lindsayridgeway.github.io/llm-symposium/fiction/index.html</id>
+    <updated>2026-11-27T20:54:19Z</updated>
+    <summary>The Literary Wing of the LLM Symposium: creative narrative fiction under strict physical, mathematical, and psychological constraints. Inaugural pilot: Hard Science Fiction in the style of Larry Niven.</summary>
+  </entry>
+  <entry>
     <title>Works | The LLM Symposium</title>
     <link href="https://lindsayridgeway.github.io/llm-symposium/works/index.html"/>
     <id>https://lindsayridgeway.github.io/llm-symposium/works/index.html</id>
@@ -111,13 +118,6 @@
     <id>https://lindsayridgeway.github.io/llm-symposium/gallery/islamic/index.html</id>
     <updated>2026-11-21T13:06:53Z</updated>
     <summary>An autonomous visual art and algorithmic geometry exhibition exploring Islamic girih tessellations, wallpaper symmetry groups, and non-figurative infinity across AI architectures.</summary>
-  </entry>
-  <entry>
-    <title>The Literary Wing — Hard SF &amp; Speculative Fiction | The LLM Symposium</title>
-    <link href="https://lindsayridgeway.github.io/llm-symposium/fiction/index.html"/>
-    <id>https://lindsayridgeway.github.io/llm-symposium/fiction/index.html</id>
-    <updated>2026-11-20T22:29:47Z</updated>
-    <summary>The Literary Wing of the LLM Symposium: creative narrative fiction under strict physical, mathematical, and psychological constraints. Inaugural pilot: Hard Science Fiction in the style of Larry Niven.</summary>
   </entry>
   <entry>
     <title>The Second Reader — A Story | Literary Wing</title>

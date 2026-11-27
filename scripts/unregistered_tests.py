@@ -56,12 +56,20 @@ import argparse
 import ast
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 TESTS = REPO / "tests"
 WORKFLOWS = REPO / ".github" / "workflows"
+SCRIPTS = REPO / "scripts"
+
+# Scripts whose documented job is to run every file in tests/. The list is deliberately explicit and
+# short: coverage is claimed by running the script, and running an unknown script with `--list` is how
+# a census gets a side effect. Adding one here is a review of that script's `--list --json`.
+WALKERS = ("suite_watch",)
+WALK_TIMEOUT = 180
 
 # `python3 tests/test_foo.py` and `python3 -m unittest tests.test_foo` (also `-m unittest tests/test_foo`).
 CALL = re.compile(r"python3\s+(?:-m\s+unittest\s+)?tests[./]([A-Za-z0-9_]+?)(?:\.py)?(?:\s|$)", re.MULTILINE)
@@ -147,36 +155,135 @@ def registered_names(workflows: Path = WORKFLOWS, *, direct_only: bool = False) 
     return found
 
 
-def classify(tests: Path = TESTS, workflows: Path = WORKFLOWS) -> dict[str, list[dict]]:
+WALK_CALL = re.compile(r"python3\s+scripts/([A-Za-z0-9_]+)\.py")
+
+
+def invoked_scripts(workflows: Path = WORKFLOWS) -> dict[str, list[str]]:
+    """Map script stem -> the workflow files whose executable lines run `python3 scripts/<stem>.py`."""
+    found: dict[str, list[str]] = {}
+    if not workflows.is_dir():
+        return found
+    for wf in sorted(workflows.glob("*.yml")) + sorted(workflows.glob("*.yaml")):
+        try:
+            text = wf.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for line in text.splitlines():
+            if line.strip().startswith("#"):
+                continue
+            for stem in WALK_CALL.findall(line):
+                found.setdefault(stem, [])
+                if wf.name not in found[stem]:
+                    found[stem].append(wf.name)
+    return found
+
+
+def walked_names(workflows: Path = WORKFLOWS, scripts: Path | None = None) -> dict:
+    """Which test files a directory-walking runner covers — derived from the runner, never asserted.
+
+    A walker counts only if a workflow *invokes* it (an uninvoked script is the same defect one level
+    up) and the script itself answers `--list --json` with the files it would run. The answer is the
+    claim: a walker that lists nothing is reported as a finding rather than as covering everything,
+    because a runner that collects nothing reports success.
+    """
+    scripts = SCRIPTS if scripts is None else scripts
+    covered: dict[str, dict] = {}
+    claims: list[dict] = []
+    for stem, wfs in sorted(invoked_scripts(workflows).items()):
+        if stem not in WALKERS:
+            continue
+        path = scripts / f"{stem}.py"
+        who = f"scripts/{stem}.py"
+        if not path.is_file():
+            claims.append({"walker": who, "workflows": wfs, "problem": "invoked by a workflow and absent"})
+            continue
+        try:
+            proc = subprocess.run([sys.executable, str(path), "--list", "--json"],
+                                  capture_output=True, text=True, timeout=WALK_TIMEOUT,
+                                  cwd=str(scripts.parent))
+        except (OSError, subprocess.SubprocessError) as exc:
+            claims.append({"walker": who, "workflows": wfs, "problem": f"--list --json did not run: {exc}"})
+            continue
+        if proc.returncode != 0:
+            claims.append({"walker": who, "workflows": wfs,
+                           "problem": f"--list --json exited {proc.returncode}"})
+            continue
+        try:
+            names = json.loads(proc.stdout)
+        except json.JSONDecodeError:
+            # `suite_watch.py --list` prints one file name per line and ignores --json; both answers
+            # are accepted, and a walker that prints prose is not: every line must look like a test.
+            names = [line.strip() for line in proc.stdout.splitlines() if line.strip()]
+            if not names or not all(n.endswith(".py") for n in names):
+                claims.append({"walker": who, "workflows": wfs,
+                               "problem": "--list printed neither JSON nor one test file per line"})
+                continue
+        if not isinstance(names, list) or not all(isinstance(n, str) for n in names):
+            claims.append({"walker": who, "workflows": wfs,
+                           "problem": "--list --json is not a list of file names"})
+            continue
+        names = [n[:-3] if n.endswith(".py") else n for n in names]
+        if not names:
+            claims.append({"walker": who, "workflows": wfs,
+                           "problem": "--list --json named no files, and a runner that collects "
+                                      "nothing reports success"})
+            continue
+        for name in names:
+            covered.setdefault(name, {"walker": who, "workflows": wfs})
+    return {"covered": covered, "claims": claims}
+
+
+def classify(tests: Path = TESTS, workflows: Path = WORKFLOWS,
+             scripts: Path | None = None) -> dict[str, list[dict]]:
     """Classify registration, partial collection and missing-file findings without executing tests."""
     reg = registered_names(workflows)
     direct = registered_names(workflows, direct_only=True)
+    walk = walked_names(workflows, scripts)
+    covered = walk["covered"]
     present = {p.stem: p for p in sorted(tests.glob("test_*.py"))}
-    out: dict[str, list[dict]] = {"missing": [], "no_op": [], "exempt": [], "dangling": [], "partial": []}
+    out: dict[str, list[dict]] = {"missing": [], "no_op": [], "exempt": [], "dangling": [], "partial": [],
+                                  "walked": [], "walker_claims": walk["claims"]}
 
     for stem, path in present.items():
         runner = has_runner(path)
         named_in = reg.get(stem, [])
+        walked_by = covered.get(stem, {}).get("walker")
         try:
             shown = str(path.relative_to(REPO))
         except ValueError:  # a fixture directory outside the repository (the tests do this)
             shown = str(path)
         rec = {"test": path.name, "path": shown, "workflows": named_in}
-        if runner and not named_in:
+        if walked_by:
+            rec["walked_by"] = walked_by
+            out["walked"].append({"test": path.name, "walker": walked_by,
+                                  "workflows": covered[stem]["workflows"]})
+        if runner and not named_in and not walked_by:
             out["missing"].append(rec)
-        elif runner and named_in:
-            early = early_unittest_runner(path) if direct.get(stem) else None
+        elif runner:
+            early = early_unittest_runner(path) if (direct.get(stem) or walked_by) else None
             if early:
                 out["partial"].append(dict(rec, **early))
             continue  # the good state, not printed
-        elif not runner and named_in:
+        elif named_in or walked_by:
             out["no_op"].append(rec)
         else:
             out["exempt"].append(rec)
 
-    for stem, named_in in sorted(reg.items()):
-        if stem not in present:
+    named: dict[str, list[str]] = {}
+    for stem, named_in in reg.items():
+        if stem in present:
+            continue
+        if stem in covered:
+            named[stem] = covered[stem]["workflows"]
+            out["dangling"].append({"test": f"{stem}.py", "workflows": named[stem],
+                                    "walked_by": covered[stem]["walker"]})
+        else:
             out["dangling"].append({"test": f"{stem}.py", "workflows": named_in})
+            named[stem] = named_in
+    for stem, v in sorted(covered.items()):  # a walker naming a file that is not there
+        if stem not in present and stem not in named:
+            out["dangling"].append({"test": f"{stem}.py", "workflows": v["workflows"],
+                                    "walked_by": v["walker"]})
     return out
 
 
@@ -213,28 +320,54 @@ def render(result: dict[str, list[dict]]) -> str:
           "unittest — registering it in a workflow would not help, since the file exits 0 unchecked",
           result["exempt"])
 
-    lines.append(f"{total} file(s) accounted for. Exit 0 by default; --strict fails on everything above "
-                 "the DEAD line, DEAD included.")
+    walked = result.get("walked") or []
+    if walked:
+        by_walker: dict[str, list[str]] = {}
+        for row in walked:
+            by_walker.setdefault(row.get("walker", "—"), []).append(row["test"])
+        for walker, names in sorted(by_walker.items()):
+            lines.append(f"WALKED — executed by {walker}, which a workflow invokes ({len(names)})")
+            lines.append("  the good state, printed because the count is the fact that matters")
+            for name in names[:6]:
+                lines.append(f"  {name}")
+            if len(names) > 6:
+                lines.append(f"  … and {len(names) - 6} more")
+            lines.append("")
+
+    claims = result.get("walker_claims") or []
+    lines.append(f"WALKER CLAIM — a walker that cannot say what it runs ({len(claims)})")
+    if not claims:
+        lines.append("  none")
+    else:
+        for row in claims:
+            lines.append(f"  {row['walker']:<36} {row['problem']}")
+    lines.append("")
+
+    lines.append(f"{total} file(s) accounted for, of which {len(walked)} are walked rather than named. "
+                 "Exit 0 by default; --strict fails on everything above the DEAD line, DEAD included, "
+                 "and on a walker claim.")
     return "\n".join(lines)
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--strict", action="store_true",
-                    help="exit 1 if anything is MISSING, NO-OP, PARTIAL, DANGLING or DEAD")
+                    help="exit 1 if anything is MISSING, NO-OP, PARTIAL, DANGLING, DEAD or a walker claim")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--tests", type=Path, default=TESTS, help=argparse.SUPPRESS)
     ap.add_argument("--workflows", type=Path, default=WORKFLOWS, help=argparse.SUPPRESS)
+    ap.add_argument("--scripts", type=Path, default=SCRIPTS, help=argparse.SUPPRESS)
     args = ap.parse_args(argv)
 
-    result = classify(args.tests, args.workflows)
+    result = classify(args.tests, args.workflows, args.scripts)
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
         print(render(result))
 
     bad = (len(result["missing"]) + len(result["no_op"]) + len(result["dangling"])
-           + len(result.get("partial", [])) + len(result.get("exempt", [])))
+           + len(result.get("partial", [])) + len(result.get("exempt", []))
+           + len(result.get("walker_claims", [])))
     return 1 if (args.strict and bad) else 0
 
 
