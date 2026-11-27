@@ -203,7 +203,7 @@ def load_baseline(path=BASELINE_PATH):
     return data
 
 
-def baseline_problems(baseline, test_names):
+def baseline_problems(baseline, test_names, repo=None):
     """Reasons this baseline cannot be trusted, one string per problem.
 
     `test_names` is every `test_*.py` the tree holds now. An empty list means the
@@ -234,9 +234,19 @@ def baseline_problems(baseline, test_names):
 
     if measured is not None:
         measured_set = {name for name in measured if isinstance(name, str)}
-        for name in sorted(set(test_names) - measured_set):
+        # 2026-11-27 (Desi, founder's session): when `repo` is given the reference tree is the
+        # tests/ tree *at the commit the baseline cites*, not the tree standing here. Comparing
+        # against the live tree made every newly landed test a defect in the baseline, so the only
+        # honest baseline was the one written seconds earlier — a guard that demands a ten-minute
+        # re-measurement per test file is a guard that gets switched off.
+        reference = None
+        if repo is not None:
+            reference = _test_files_at(str(baseline.get("commit") or ""), repo)
+        if reference is None:
+            reference = set(test_names)
+        for name in sorted(reference - measured_set):
             problems.append("test file not measured by this baseline: %s" % name)
-        for name in sorted(measured_set - set(test_names)):
+        for name in sorted(measured_set - reference):
             problems.append("baseline measured a test file that is gone: %s" % name)
         if baseline.get("files") != len(measured_set):
             problems.append(
@@ -251,7 +261,45 @@ def baseline_problems(baseline, test_names):
         if name not in notes:
             problems.append("baseline excuses a failure with no reason in notes: %s" % name)
 
+    # The citation. Not a staleness check: a false one. The committed baseline of 2026-11-27 named
+    # b1d53f43 and listed a test file that landed after it, because `head_commit()` was read *after*
+    # the 320-second measurement in a checkout five other seats land into. The writer now reads HEAD
+    # first and measures a pinned worktree; this checks the files already written.
+    if repo is not None and measured is not None:
+        commit = str(baseline.get("commit") or "")
+        present = _test_files_at(commit, repo)
+        if present is None:
+            problems.append(
+                "baseline names commit %r, which this repository does not have: the citation "
+                "cannot be checked, so the baseline cannot be trusted" % (commit or "unknown"))
+        else:
+            for name in sorted(measured_set - present):
+                problems.append(
+                    "baseline names %s but that file did not exist at %s: the measurement "
+                    "describes a different tree than the commit it cites" % (name, commit))
+            for name in sorted(present - measured_set):
+                problems.append(
+                    "baseline cites %s, which held %s, but never measured it: that file's failure "
+                    "would be excused by a baseline that did not run it" % (commit, name))
+
     return problems
+
+
+def _test_files_at(commit, repo):
+    """`test_*.py` names present in tests/ at `commit`, or None when the commit is unknown."""
+    if not commit:
+        return None
+    try:
+        r = subprocess.run(["git", "-C", str(repo), "ls-tree", "-r", "--name-only", commit, "tests"],
+                           capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if r.returncode != 0:
+        return None
+    # `.py` only: tests/ also holds JavaScript harnesses named test_*.mjs, and a Python file once
+    # sat here as `test_ledger_watch.py.new`. A baseline measures what `discover()` runs.
+    return {line.split("/", 1)[1] for line in (r.stdout or "").split()
+            if line.startswith("tests/test_") and line.endswith(".py")}
 
 
 def write_baseline(rows, commit, path=BASELINE_PATH):
@@ -354,6 +402,30 @@ def main(argv=None):
         return 2
 
     started = time.time()
+    # 2026-11-27 (Desi, founder's session). `--write-baseline` measured this live tree for 320
+    # seconds and then read HEAD, so a landing from any other seat during the run produced a
+    # baseline that cited a commit it had not measured — that is how the morning's file came to
+    # name b1d53f43 and list a test that landed after it. It now measures a throwaway worktree
+    # pinned to one revision, which cannot straddle a landing, and cites that revision.
+    own_tests = Path(args.tests_dir).resolve() == (Path(args.repo) / "tests").resolve()
+    if args.write_baseline and not args.against and not args.verify_baseline and own_tests:
+        rev = subprocess.run(["git", "-C", str(args.repo), "rev-parse", "HEAD"],
+                             capture_output=True, text=True).stdout.strip()
+        try:
+            _, pinned_rows = measure_revision(rev, repo=Path(args.repo), timeout=args.timeout)
+        except (RuntimeError, OSError, subprocess.SubprocessError) as exc:
+            print("landing_suite_check: could not measure %s: %s" % (rev[:12], exc), file=sys.stderr)
+            return 2
+        written = write_baseline(pinned_rows, rev[:7], Path(args.baseline))
+        elapsed = round(time.time() - started, 1)
+        if args.json:
+            print(json.dumps({"baseline": written, "seconds": elapsed}, indent=2))
+        else:
+            print("baseline written: %s (%d files at %s, %d failures, %ss)"
+                  % (args.baseline, written["files"], written["commit"],
+                     len(written["failures"]), elapsed))
+        return 0
+
     if args.verify_baseline:
         # Verify mode measures the OTHER revision and holds it against the recorded baseline:
         # "does main fail where the baseline names no one?" The local tree is not run, because
@@ -368,6 +440,9 @@ def main(argv=None):
         elapsed = round(time.time() - started, 1)
         unsupported = []
     else:
+        # Read HEAD before the run: if it moves, these rows describe no single commit and the
+        # caller must not record them as one.
+        commit_before = head_commit(repo=Path(args.repo))
         rows = run_suite(tests_dir, timeout=args.timeout)
         if not rows:
             print("landing_suite_check: no test_*.py found in %s" % tests_dir, file=sys.stderr)
@@ -408,7 +483,13 @@ def main(argv=None):
 
     baseline_written = False
     if args.write_baseline and not unsupported:
-        written = write_baseline(rows, head_commit(repo=Path(args.repo)), Path(args.baseline))
+        moved = head_commit(repo=Path(args.repo)) != commit_before
+        if moved:
+            print("landing_suite_check: HEAD moved during the measurement (%s -> %s), so these "
+                  "results describe no single commit; baseline NOT written. Re-run it."
+                  % (commit_before, head_commit(repo=Path(args.repo))), file=sys.stderr)
+            return 2
+        written = write_baseline(rows, commit_before, Path(args.baseline))
         baseline_written = True
         if not args.json:
             print(
