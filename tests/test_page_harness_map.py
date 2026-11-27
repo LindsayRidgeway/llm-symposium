@@ -130,12 +130,12 @@ PYTHON_REDERIVED = {
 # rewritten back to "Checked by X, which runs…" fails here rather than reading as checked.
 #
 # 2026-11-27, later the same day: this list held four. `tests/test_page_harnesses_run.py` now
-# executes every harness that can run offline at each landing, and trials and recalls were put on
-# recorded responses (`tests/harness_net.mjs`, HARNESS_REPLAY) — so for those two the amendment
-# became a false statement about this repository, and they moved to RUNS_AT_LANDING below. The
-# comment above is kept because the reason the two remain is the reason the other two left.
+# executes every harness that can run offline at each landing, and trials, recalls, nonreplication
+# and retraction were put on recorded responses (`tests/harness_net.mjs`, HARNESS_REPLAY) — so for
+# those four the amendment became a false statement about this repository, and they moved to
+# RUNS_AT_LANDING below. The comment above is kept because the reason the last one remains is the
+# reason the others left.
 AMENDED_LIVE = (
-    "docs/works/retraction.html",
     "docs/works/unreported-trials.html",
 )
 AMENDMENT_MARKER = "Amended 2026-11-27"
@@ -148,6 +148,8 @@ AMENDMENT_CLAIM = "no job in this repository runs"
 RUNS_AT_LANDING = {
     "docs/works/trials.html": "validate_trials_page.mjs",
     "docs/works/recalls.html": "validate_recalls_page.mjs",
+    "docs/works/nonreplication.html": "validate_nonreplication_page.mjs",
+    "docs/works/retraction.html": "validate_retraction_page.mjs",
 }
 
 # The seventh offline page, and the only one whose harness no page names: `docs/works/warming.html`

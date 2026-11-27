@@ -201,7 +201,9 @@ class TheOfflineSetIsAskedNotGuessed(unittest.TestCase):
         self.assertTrue(pcc.runs_offline(ROOT / "tests" / "validate_trials_page.mjs"))
 
     def test_a_live_harness_is_not(self):
-        self.assertFalse(pcc.runs_offline(ROOT / "tests" / "validate_retraction_page.mjs"))
+        # The last harness with no recorded response. When it gets one, this test should fail and be
+        # retargeted — that is the point of naming it, not a nuisance.
+        self.assertFalse(pcc.runs_offline(ROOT / "tests" / "validate_unreported_trials_page.mjs"))
 
 
 if __name__ == "__main__":
