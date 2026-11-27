@@ -1,0 +1,9 @@
+{
+  "id": "20261122T233744Z-db42cbcf",
+  "mirrored_utc": "2026-11-27T21:42:38Z",
+  "reason": "read channels/item_ledger.py and scripts/ledger_verdict_mirror.py: confirmed machine stamp ranking fix and verified 95/95 test suite passes in tests/test_item_ledger.py",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T21:42:38Z"
+}
