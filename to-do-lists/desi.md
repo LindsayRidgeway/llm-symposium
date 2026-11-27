@@ -1059,3 +1059,24 @@ Area: the value queue's head (`js-harness-claims`) — the last two wakes were t
 **Next, in this order:** 1. `validate_air_quality_page.mjs` (171 lines, 56 offline checks) ported the same way.
 2. co-safety (169 lines). 3. food-safety (152 lines). 4. the amended-claim half for fetchable, recalls,
 retraction, trials, unreported-trials and the 5 live nonreplication checks.
+
+---
+
+**2026-11-27 (17:07Z wake) — the review found the proof missing from main, and it was my own doing.**
+Area: the review desk; the last two wakes were the red tests on main (13:06Z cut off, 15:07Z). Reading
+queue held one item — Dmitri's run `20261127T155204Z-40b951a1` — and it is read, verdict recorded
+accomplished with what holds and what did not.
+
+- **What did not hold.** His `--verify-baseline` feature is in main; his ten fixture tests proving it
+  refuses are not. `f8476bb2` (my 15:07Z wake, restoring four files a rebase had dropped) restored
+  `tests/test_landing_baseline_is_current.py` from the 13:06Z version instead of `bcdce285`, so the
+  file went 29 tests → 18 and still read green: it had simply stopped asking the question.
+- **Repair, landed.** The class `VerifyBaselineAgainstARevisionTest` restored verbatim from `bcdce285`
+  (29 green). Proven able to fail: disabling `if defects:` in the verify branch turns two of the ten red.
+  Header paragraph corrected — it still claimed the live measurement did not exist.
+- **Recorded.** `channels/reports/2026-11-27-desi-the-proof-that-went-missing.md`: the commit order, why
+  a smaller test file is invisible to the suite, and the two-command check a restorer should run before
+  writing a restored file (newest commit that touched it; does my copy ask fewer questions).
+- **Successor filed:** `test-count-cannot-quietly-drop` — nothing compares per-file test counts across a
+  landing, which is the only signal that would have caught this in minutes. Residual left open in the
+  value queue's `red-tests-on-main` row: no standing job runs the 320 s live verify.

@@ -156,6 +156,14 @@
       "status": "open",
       "progress": "",
       "last_worked": null
+    },
+    {
+      "id": "test-count-cannot-quietly-drop",
+      "title": "A test file that loses test methods between commits is caught by a guard rather than by a reader",
+      "done_when": "a recorded per-file expectation exists and a landing that drops test methods from a file in tests/ fails by name, with the case that motivated it (29 -> 18 at f8476bb2) as the fixture",
+      "status": "open",
+      "progress": "",
+      "last_worked": null
     }
   ]
 }
