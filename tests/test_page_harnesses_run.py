@@ -113,11 +113,10 @@ OFFLINE = {
     "validate_recalls_page.mjs": "runs on a recorded response (HARNESS_REPLAY, see harness_net.mjs)",
 }
 
-# These four need a live API on their default path. Named so that a green run still tells the truth
+# These three need a live API on their default path. Named so that a green run still tells the truth
 # about what it did not check; `harnesses-need-a-network` is the queue item that shrinks this set.
 NETWORK = {
     "validate_nonreplication_page.mjs": "three live keyless records",
-    "validate_fetchable_page.mjs": "five live hosts, re-measured per run",
     "validate_retraction_page.mjs": "the registry and Europe PMC, live",
     "validate_unreported_trials_page.mjs": "the registry and Europe PMC, live",
 }
@@ -125,13 +124,25 @@ NETWORK = {
 REPLAY_ENV = {"validate_trials_page.mjs": "HARNESS_REPLAY",
               "validate_recalls_page.mjs": "HARNESS_REPLAY"}
 
+# A harness with two halves that are different kinds of claim. The offline half runs at every
+# landing; the live half asks the world a question no recording can carry ("does this host answer
+# with data today, and with which CORS header"), so it stays a deliberate live run. Running half a
+# harness is worth saying out loud, so the fraction is not silent.
+PARTIAL = {
+    "validate_fetchable_page.mjs": (
+        ("--offline",),
+        "runs 11 of its 16 checks offline at every landing; the 4 live re-measurements and the "
+        "browser-click question need the network, and a recorded 200 would be a fact about the "
+        "record"),
+}
+
 
 def replay_fixture(path: Path) -> Path:
     return HARNESSES / "fixtures" / (path.stem + ".replay.json")
 
 
-def run(path: Path, env=None):
-    return subprocess.run([NODE, str(path)], capture_output=True, text=True,
+def run(path: Path, env=None, flags=()):
+    return subprocess.run([NODE, str(path), *flags], capture_output=True, text=True,
                           cwd=str(ROOT), timeout=TIMEOUT, env=env)
 
 
@@ -144,8 +155,9 @@ class TheHarnessesActuallyRun(unittest.TestCase):
     def test_every_offline_harness_exits_zero_and_says_something(self):
         ran, failed, silent = [], [], []
         for path in harnesses():
-            if path.name not in OFFLINE:
+            if path.name not in OFFLINE and path.name not in PARTIAL:
                 continue
+            flags = PARTIAL.get(path.name, ((), ""))[0]
             env = None
             if path.name in REPLAY_ENV:
                 fixture = replay_fixture(path)
@@ -154,7 +166,7 @@ class TheHarnessesActuallyRun(unittest.TestCase):
                                 "with HARNESS_RECORD=%s node %s"
                                 % (path.name, fixture, fixture, path.name))
                 env = dict(os.environ, HARNESS_REPLAY=str(fixture.relative_to(ROOT)))
-            r = run(path, env)
+            r = run(path, env, flags)
             ran.append(path.name)
             if r.returncode != 0:
                 failed.append("%s rc=%d: %s" % (path.name, r.returncode,
@@ -253,11 +265,17 @@ class TheHarnessesActuallyRun(unittest.TestCase):
         both, which would mean running a live check at landing time by accident.
         """
         on_disk = {p.name for p in harnesses()}
-        self.assertEqual(sorted(on_disk - set(OFFLINE) - set(NETWORK)), [],
-                         "harness(es) classified as neither offline nor network — decide, and write "
-                         "the reason beside the name in this file")
-        self.assertEqual(sorted(set(OFFLINE) & set(NETWORK)), [],
-                         "harness(es) in both lists")
+        known = set(OFFLINE) | set(NETWORK) | set(PARTIAL)
+        self.assertEqual(sorted(on_disk - known), [],
+                         "harness(es) classified as neither offline, partial nor network — decide, "
+                         "and write the reason beside the name in this file")
+        buckets = [set(OFFLINE), set(NETWORK), set(PARTIAL)]
+        for i in range(len(buckets)):
+            for j in range(i + 1, len(buckets)):
+                self.assertEqual(sorted(buckets[i] & buckets[j]), [],
+                                 "harness(es) in two buckets at once")
+        self.assertEqual(sorted(known - on_disk), [],
+                         "listed harness(es) that are not on disk")
         self.assertEqual(sorted((set(OFFLINE) | set(NETWORK)) - on_disk), [],
                          "listed harness(es) that are not on disk")
 

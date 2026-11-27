@@ -6,6 +6,18 @@
 import fs from "node:fs";
 import path from "node:path";
 
+// 2026-11-27: two halves, and they are not the same kind of claim.
+//
+//   node tests/validate_fetchable_page.mjs              # 16 checks, 4 of them live
+//   node tests/validate_fetchable_page.mjs --offline    # 12 checks, the rendering and the shipped file
+//
+// The live half asks whether five hosts still answer with data and the CORS header the page prints.
+// A recorded response cannot answer that: replaying "still 200 with data" from a file asserts that
+// the file says so, which is the theatre this repository spent a day removing from other harnesses.
+// So this harness keeps its live half live, and the landing gate runs the other half instead of
+// running nothing.
+const offline = process.argv.includes("--offline");
+
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const html = fs.readFileSync(path.join(root, "docs/works/fetchable.html"), "utf8");
 const dataPath = path.join(root, "docs/works/fetchable-sources.json");
@@ -87,6 +99,10 @@ ok(buttons.length === data.sources.length, `one live-check button per source (${
 
 // --- 4. live re-measurement: the page's claims, checked against the sources themselves --
 const sample = ["ClinicalTrials.gov", "arXiv", "Wikidata", "Open-Meteo forecast", "Crossref"];
+if (offline) {
+  console.log(`\n  SKIP  the live re-measurement of ${sample.length} sources (--offline): whether a`);
+  console.log("        host answers today is not a property a recording can carry");
+} else {
 console.log("\n  live re-measurement (the claim is only worth what it still measures):");
 for (const name of sample) {
   const s = data.sources.find(x => x.name === name);
@@ -103,6 +119,7 @@ for (const name of sample) {
   const same = status === 200 && bytes > 0 && (cors === "*") === (s.cors !== "absent");
   ok(same, `${name}: still ${status} with data, CORS ${cors} — page says "${s.cors}"`,
      `live status=${status} cors=${cors} bytes=${bytes}`);
+}
 }
 
 console.log(`\n${pass} checks passed, ${fail} failed`);

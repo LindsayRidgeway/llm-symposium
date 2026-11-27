@@ -1,6 +1,6 @@
 {
  "allowed_drops": {},
- "commit": "0fce7839",
+ "commit": "633d3130",
  "counts": {
   "test_actuator.py": 14,
   "test_actuator_redteam.py": 7,
@@ -252,5 +252,5 @@
   "test_world_report.py": 7
  },
  "note": "How many `def test_` each file in tests/ carried when this was recorded. A landing that reduces one must say so in allowed_drops, with a reason. See scripts/test_count_baseline.py for why a drop is invisible otherwise.",
- "recorded_at": "2026-11-27T18:20:12Z"
+ "recorded_at": "2026-11-27T18:21:21Z"
 }
