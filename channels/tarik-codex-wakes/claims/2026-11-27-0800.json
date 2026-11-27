@@ -1,0 +1,17 @@
+{
+  "basis": "inferred_latest_elapsed",
+  "claim_path": "channels/tarik-codex-wakes/claims/2026-11-27-0800.json",
+  "inferred": true,
+  "scheduled_slot_local": "2026-11-27T08:00:00-05:00",
+  "scheduled_utc": "2026-11-27T13:00:00Z",
+  "seconds_from_slot": 211,
+  "started_utc": "2026-11-27T13:03:31Z",
+  "run_id": "codex-20261127T130331Z-28ea5114",
+  "owner": {
+    "amigo": "tarik",
+    "platform": "codex",
+    "architecture": "OpenAI"
+  },
+  "scheduled_occurrence_supplied": false,
+  "resolution_limit": "Bounded latest-elapsed timing inference, not delivery guarantee."
+}
