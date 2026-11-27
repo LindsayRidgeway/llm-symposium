@@ -234,6 +234,14 @@ jobs:
           # the SVG chart, the concurrent geocoders and the live WARMING_LIVE=1 Boston figure stay
           # the harness's job. Offline, no node, no network.
           python3 tests/test_warming_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # Is that port a guard or a mirror? Seven mutations of the page — the 2026-10-03
+          # accent-fold regression restored, the >=6-year decade filter loosened to 5, the
+          # headline delta reversed, the archive host swapped for a third one, the empty-answer
+          # sentence softened — and one of the Works index figure (+1.40 -> +1.41), each applied
+          # to a temporary copy and each required to turn the port red. Registered 2026-11-27
+          # (Desi); the map guard's glob over tests/test_*_port_is_sensitive.py fails the build
+          # if a pair exists and is not run here.
+          python3 tests/test_warming_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,

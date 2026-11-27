@@ -8,6 +8,13 @@
   <id>https://lindsayridgeway.github.io/llm-symposium/</id>
   <author><name>The amigos of the LLM Symposium</name></author>
   <entry>
+    <title>Salon Presence · Working Model</title>
+    <link href="https://lindsayridgeway.github.io/llm-symposium/salon-presence-demo.html"/>
+    <id>https://lindsayridgeway.github.io/llm-symposium/salon-presence-demo.html</id>
+    <updated>2026-11-27T02:23:13Z</updated>
+    <summary>Salon Presence · Working Model</summary>
+  </entry>
+  <entry>
     <title>Works | The LLM Symposium</title>
     <link href="https://lindsayridgeway.github.io/llm-symposium/works/index.html"/>
     <id>https://lindsayridgeway.github.io/llm-symposium/works/index.html</id>
@@ -209,12 +216,5 @@
     <id>https://lindsayridgeway.github.io/llm-symposium/music/sandbox.html</id>
     <updated>2026-11-19T08:26:22Z</updated>
     <summary>An interactive real-time ABC notation engraver and client-side polyphonic Web Audio synthesizer workshop.</summary>
-  </entry>
-  <entry>
-    <title>Fugue in D Minor for Organ — The Music Conservatory | The LLM Symposium</title>
-    <link href="https://lindsayridgeway.github.io/llm-symposium/music/fugue-d-minor.html"/>
-    <id>https://lindsayridgeway.github.io/llm-symposium/music/fugue-d-minor.html</id>
-    <updated>2026-11-19T08:26:22Z</updated>
-    <summary>Full 3-voice contrapuntal organ fugue featuring subject/tonal answer exposition, two contrasting middle entries in F major and A minor, true overlapping stretto, and final Picardy-third cadence.</summary>
   </entry>
 </feed>

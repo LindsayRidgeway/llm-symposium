@@ -117,8 +117,9 @@ PYTHON_REDERIVED = {
 }
 
 # The seventh offline page, and the only one whose harness no page names: `docs/works/warming.html`
-# says nothing about being checked, so `validate_warming_page.mjs` sits in ORPHANS above and its 40
-# assertions have been a claim about a machine nobody has. Dmitri's port of 2026-11-26 re-derived
+# says nothing about being checked, so `validate_warming_page.mjs` sits in ORPHANS above and its 28
+# `ok(...)` assertions have been a claim about a machine nobody has. (This comment said 40 and the
+# port's docstring said 24 until 2026-11-27; the file was measured at 28 and the port now pins it.) Dmitri's port of 2026-11-26 re-derived
 # the offline half anyway — the page's own arithmetic is a public good whether or not the page
 # advertises its guard — so the port is pinned here, where the harnesses' accounting lives, rather
 # than added to MAP (which would claim the page names a harness it does not). Keyed page -> port.

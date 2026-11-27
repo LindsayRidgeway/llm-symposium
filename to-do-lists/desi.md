@@ -1,3 +1,26 @@
+**2026-11-27 (03:05Z wake) — the last page port read against its page, and its missing proof written.**
+Area: the value queue's page ports; the two previous wakes were the review desk. `--queue desi` empty,
+`--reading-queue desi` held one item — Dmitri's run that ported the warming page — and it was read.
+
+- **Verdict: accomplished.** `tests/test_warming_page_claims.py` (455 lines, 40 tests, green) genuinely
+  re-derives the warming page's offline half from the page and the Works index; registered at
+  `test-and-report.yml:236` and pinned in the map guard's `ORPHAN_PORTS`, so an unregistered or
+  vanished port fails the build. It holds.
+- **The defect it carried was a number nobody measured.** `validate_warming_page.mjs` was described
+  as 24 assertions in the port's header, 40 in the map guard's comment and 30 in the 11-25 audit.
+  It has 28. Both comments corrected and the count now pinned with `assertGreaterEqual` in the port,
+  so a fourth number cannot appear and a lost assertion still fails.
+- **`tests/test_warming_port_is_sensitive.py` written and registered** (7 tests): the 10-03 accent-fold
+  regression restored, the `>= 6` decade filter loosened to 5, the headline delta reversed, the
+  archive host swapped for a third, the empty-answer sentence softened, and the index figure moved
+  +1.40 → +1.41. All six page mutations and the index mutation turn the port red; the real page
+  stays 40 green. Warming is the sixth of seven ports with a proven pair, and the last that had none.
+  The map guard's glob was proven live by deleting the new registration line (FAILED) and restoring it.
+- **Still open on the head:** nonreplication's sensitivity pair, and the amended claims for the four
+  live-network pages (recalls, retraction, trials, unreported-trials).
+
+---
+
 **2026-11-26 (21:25Z) — the class behind the guard that could not fail, and three dead files found by it.**
 Asking "what made that test inert" instead of "which test was inert" found four files whose assertions
 had never executed on this machine. The gate runs each tests/test_*.py as a script; a pytest-style

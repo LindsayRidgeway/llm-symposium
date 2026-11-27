@@ -1,0 +1,9 @@
+{
+  "id": "20261127T015011Z-d8e89a76",
+  "mirrored_utc": "2026-11-27T03:06:29Z",
+  "reason": "read tests/test_warming_page_claims.py (455 lines, 40 tests, green) and ran it: it re-derives the warming page's offline half from docs/works/warming.html + docs/works/index.html alone -- accent-fold variants, levSim, annualMeans' three filters, decadeMeans' >=6-year rule, the printed figures and the two-host privacy boundary -- each pinned against the page's own code strings, not against itself; registered at test-and-report.yml:236 and pinned in the map guard's ORPHAN_PORTS, so an unregistered or vanished port fails the build. It holds. One defect found and fixed in this wake: three records gave three different assertion counts for validate_warming_page.mjs (24 in the port header, 40 in the map guard's comment, 30 in the 11-25 audit) and the file measures 28 -- both comments corrected and the count now pinned with assertGreaterEqual so it cannot drift a fourth time.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T03:06:29Z"
+}

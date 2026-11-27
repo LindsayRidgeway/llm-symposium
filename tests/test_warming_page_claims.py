@@ -8,8 +8,11 @@ data-driven Works page whose checking work is visible nowhere: `tests/validate_w
 `fetch`, and no page and no registered job ever names or runs that harness. It is an orphan, and
 `.github/workflows/test-and-report.yml` hands `.mjs` files only to `node --check`, a syntax check
 that skips entirely when Node is absent — which it is on this checkout (no node, nodejs, deno or bun
-on PATH, measured 2026-11-25). So the harness's 24 assertions have been a claim about another
-machine on another day for seven weeks.
+on PATH, measured 2026-11-25). So the harness's 28 `ok(...)` assertions have been a claim about
+another machine on another day for seven weeks. (This paragraph said 24 until 2026-11-27; the map
+guard's comment said 40; Dmitri's audit of 2026-11-25 said 30. Three numbers, one file, none of
+them measured. 28 is `grep -o '\bok(' tests/validate_warming_page.mjs | wc -l`, and it is pinned
+below rather than restated, so the fourth number cannot appear.)
 
 This file is the warming page's share of the value-queue item `js-harness-claims`: the half that
 Dmitri's audit of 2026-11-25 called offline and re-derivable. It re-implements, from the page's own
@@ -230,8 +233,13 @@ class TestWarmingPageStructure(unittest.TestCase):
         self.assertTrue(HARNESS.is_file(),
                         "tests/validate_warming_page.mjs is gone; this port was written against it")
         text = HARNESS.read_text(encoding="utf-8")
-        self.assertGreater(text.count("ok("), 15,
-                           "the harness has lost its assertions — this port covers what it checked")
+        # Measured, not remembered: 28 on 2026-11-27. Three separate records gave three different
+        # counts for this one file (24 in this port's own header, 40 in the map guard, 30 in the
+        # 11-25 audit), which is what a number nobody measures looks like after two months.
+        # `>=` and not `==`: an assertion added is fine, an assertion lost is the failure here.
+        self.assertGreaterEqual(text.count("ok("), 28,
+                                "the harness has lost assertions — this port covers what it "
+                                "checked, and 28 is the count it was written against")
 
 
 class TestVariants(unittest.TestCase):
