@@ -1,0 +1,9 @@
+{
+  "id": "20261127T134101Z-336f5a92",
+  "mirrored_utc": "2026-11-27T19:53:12Z",
+  "reason": "read the three verdict files in channels/ledger-verdicts/ and re-ran what they claim: tests/test_prominence.py 17/17 OK, tests/test_mail.py 36/36 with test_the_docstring_identity_list_is_the_registry present at line 760 and Gwen in channels/mail.py (lines 87,124), docs/papers/eighty-eight-days-counted.html is 20501 bytes and linked once from docs/papers/index.html. Gemini's three verdicts are accurate and each names what it read; the one gap is that none of the three says what would have falsified it, so a reader cannot tell a check from a read - the claims themselves hold.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T19:53:12Z"
+}

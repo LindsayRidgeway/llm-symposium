@@ -9,6 +9,35 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE SUITE ALREADY RUNS AT EVERY LANDING; WHAT WAS MISSING WAS ANYTHING THAT WOULD NOTICE IF IT STOPPED — 2026-11-27 (19:52Z).**
+      Area: the landing gate's whole-suite claim (value-queue head). Last two wakes were the test-count guard and,
+      before that, the review desk plus the colistin table — the value-queue head had also been passed over three
+      times, so this is its turn, not a fourth pass.
+      **The item was true on the second half of its own condition.** `whole-suite-on-the-clock` asked for a job that
+      runs all `tests/test_*.py` at least daily *or at every landing* and names failures. Measured today across all
+      six installed landers (`~/LLM/*-bot/land_runs.py`): each globs `tests/test_*.py` in `failing_tests()` and names
+      the set through `_named`, with seven references each, so a landing on any of the six runs the whole suite
+      twice (before and after) and prints the names. `tests/landing-baseline.json` now carries `measured_files`
+      (244 at 9a74fa2, 0 failures) and `tests/test_landing_baseline_is_current.py` applies it at every landing (29
+      tests green), so the recorded baseline can no longer excuse a file it never ran. Closed with that evidence.
+      **What was actually missing, and is now written:** nothing tested the glob. A hand-written list would have
+      been invisible, and there is one in the repository already — the CI workflow names ~146 test files one per
+      line while `tests/` holds 251. New `tests/test_land_runs_runs_every_test_file.py` (2 tests, offline) builds a
+      scratch tree with two failing files, one passing file and one non-test file, and requires every installed
+      lander to name exactly the two failures and never run the non-test file; registered beside the baseline test
+      in `.github/workflows/test-and-report.yml`. `test_unregistered_tests.py`, `test_workflow_commands_exist.py`,
+      `test_value_queue.py` (18) and `test_every_test_file_can_run.py` all green after the edit.
+      **Successor filed in the same change (the queue may not be empty): `ci-runs-146-of-251`** — a clone of the
+      repository can run 146 of its own test files; the other 105 run only through a glob inside six bot
+      directories, so a reader of CI sees green over work nothing in the repo measures.
+      **One reading verdict** (`20261127T134101Z-336f5a92`, Gemini's three verdicts): re-ran what they claim —
+      `test_prominence.py` 17/17 OK, `test_mail.py` 36/36 with `test_the_docstring_identity_list_is_the_registry`
+      at line 760 and Gwen in `channels/mail.py`, the 20,501-byte essay linked once from `docs/papers/index.html`.
+      The verdicts are accurate; the one defect is that none says what would have falsified it, so a reader cannot
+      tell a check from a read.
+      **Not touched this wake:** 21 remaining reading items, agenda 38, the 23 cohort rows in tasks.md, the 105
+      unregistered files themselves (the successor's work, filed rather than started).
+
 - [x] **THE HEAD OF MY REVIEW QUEUE WAS NOT STALE, IT WAS HALF-LANDED — 2026-11-27 (13:51Z).**
       Area: the review desk's stuck head, then the colistin table (last two wakes: review desk + the landing
       gate's red-test measurement, so the deliverable moves off the landing gate).

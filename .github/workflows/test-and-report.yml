@@ -602,6 +602,15 @@ jobs:
           # a file the baseline never ran, a name it excuses without a reason in notes, and a
           # count that disagrees with the names each fail by name. Offline, no suite run.
           python3 tests/test_landing_baseline_is_current.py 2>&1 | tee -a tests/last-verification.txt
+          # Every landing runs every test file, and only a glob says so (Dmitri, 2026-11-27).
+          # Value item `whole-suite-on-the-clock` closes on the second half of its own condition,
+          # "or at every landing": measured today all six installed landers walk `tests/test_*.py`
+          # by glob and name the failures through `_named`. This workflow names its files one per
+          # line and covers 146 of 251, so the bot-side glob is the only thing measuring the other
+          # 105 — and nothing tested the glob. This does: a scratch tree whose two failing files
+          # must be named, whose passing one must not be, and whose non-test file must never run.
+          # Skips, with its reason, where no lander is installed.
+          python3 tests/test_land_runs_runs_every_test_file.py 2>&1 | tee -a tests/last-verification.txt
           # Verdicts that survive their own run (Dmitri, 2026-10-26). `item_ledger.py --review`
           # records a verdict by appending one line to channels/items.jsonl, a 3,000-line file main
           # also appends to live; the landing patch carries that file's tail as context, the context

@@ -193,9 +193,11 @@
       "id": "whole-suite-on-the-clock",
       "title": "Something runs every test in tests/ on a schedule, and names what fails",
       "done_when": "a job runs all tests/test_*.py at least once a day (or at every landing) and reports failures by name; today the suite runs only when a person or a wake happens to run it, which is how a red test sat on main since 759aaba5",
-      "status": "open",
+      "status": "done",
       "progress": "",
-      "last_worked": null
+      "last_worked": null,
+      "done_on": "2026-11-27",
+      "evidence": "measured 2026-11-27: all six installed landers (~/LLM/*-bot/land_runs.py) run the whole suite at every landing via failing_tests() globbing tests/test_*.py and name the failures through _named (7 references each); tests/landing-baseline.json carries measured_files so the recorded baseline cannot excuse a file it never ran, and tests/test_landing_baseline_is_current.py (29 tests) applies that at every landing; the glob itself is now guarded by new tests/test_land_runs_runs_every_test_file.py (2 tests, offline fixture) registered in .github/workflows/test-and-report.yml; tests/test_land_runs_names_the_red_tests.py pins the naming (5 tests)"
     },
     {
       "id": "landing-wipes-a-sessions-edits",
@@ -206,6 +208,14 @@
       "last_worked": null,
       "done_on": "2026-11-27",
       "evidence": "2026-11-27 \u2014 ~/LLM/*-bot/land_runs.py (all six): _rescue no longer runs 'git add -A' against the shared index; it snapshots exactly the dirty paths through a private GIT_INDEX_FILE and commit-tree, so index, HEAD and worktree do not move until it decides to move them, and it resets over nothing unless every snapshot path is byte-identical to disk afterwards. _undo without a snapshot pins each tracked path it is about to revert on a rescue/ branch first and writes the revert to .git/mutation.log. Tests: tests/test_land_runs_keeps_foreign_work.py (13, with a self-mutation proof that puts 'git add -A' back and requires a red run); six landers still differ only in the name on the commit."
+    },
+    {
+      "id": "ci-runs-146-of-251",
+      "title": "A repository clone cannot run 105 of its own test files: the CI workflow names files one per line and stops at 146 of 251, so the only thing measuring the rest is a glob inside six bot directories",
+      "done_when": "scripts/unregistered_tests.py --strict is green in CI (every tests/test_*.py executed by a registered job, or the workflow walks the directory), and a registered test fails when the covered count falls",
+      "status": "open",
+      "progress": "",
+      "last_worked": null
     }
   ]
 }
