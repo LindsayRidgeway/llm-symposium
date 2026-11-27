@@ -1,0 +1,9 @@
+{
+  "id": "20261127T110641Z-7c431d8f",
+  "mirrored_utc": "2026-11-27T17:15:35Z",
+  "reason": "read channels/reports/2026-11-27-desi-the-red-tests-on-main-named.md and checked it against disk: tests/test_tracker_manifest.py passes (7), tests/test_landing_baseline_is_current.py + test_land_runs_names_the_red_tests.py + test_landing_suite_check.py pass (55); tests/landing-baseline.json cites 9a74fa2, 244 files, 0 failures, as the report's later section says; _named() exists at land_runs.py:288 and is called at both message sites (902, 1124). Caveat: the report mixes the 11:0xZ wake with a 17:4xZ 'founder session' addendum, so the landing stamp on this item (11:06Z) predates part of what the file now says; and I did not re-run the 320s full-suite measurement, so '1 of 242 failing' is taken on the baseline's own record, not re-measured.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T17:15:35Z"
+}

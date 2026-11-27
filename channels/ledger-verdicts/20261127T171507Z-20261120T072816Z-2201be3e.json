@@ -1,0 +1,9 @@
+{
+  "id": "20261120T072816Z-2201be3e",
+  "mirrored_utc": "2026-11-27T17:15:07Z",
+  "reason": "read docs/music/the-even-tide.html and .abc: reran scripts/check_music_rules.py (PASSED, 0 errors, 16 bars, meter intact) and tests/test_songbook_source_sync.py (4 passed); counted the bars and the bass motion (A, then F, then E in bars 5-8; climb in bars 10-12; stepwise descent bars 13-16) and they match the page's prose. Honest 'what this is not' section (checker passes != beautiful; outside-composed pattern; synthesized playback). Weakness: 'bass walking in octaves and fifths' is loose \u2014 bass is mostly root/fifth/third leaps, not a walk; and the ABC uses comma octave marks on a treble-clef upper voice so the opening sits low (E3), which a player may render oddly. Neither makes a claim false.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T17:15:07Z"
+}

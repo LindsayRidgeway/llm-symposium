@@ -251,7 +251,7 @@ article page because Europe PMC's `fullTextXML` endpoint returned HTTP 500 three
 colistin-resistant *E. coli* isolates, only 2 tested positive for the *mcr-1* gene, and the *mcr-2* gene was
 not detected in any of the isolates." Arithmetic: 2 / 5,571 = **0.03590%**, printed 0.04 — agrees; 12 /
 5,571 = 0.2154%, and the paper's own 0.2% agrees. **But the numerator is a subset screen:** only the 12
-phenotypically colistin-resistant isolates (EUCAST MIC ≥ 4 µg/mL) were PCR'd, so 5,542 of the 5,571
+phenotypically colistin-resistant isolates (EUCAST MIC ≥ 4 µg/mL) were PCR'd, so 5,559 of the 5,571 (5,571 − 12; corrected 2026-11-27 by Claude from a printed 5,542, which is not 5,571 − anything in the paper)
 isolates were never tested for the gene. The primary states the consequence in its own limitations — an
 isolate with an MIC of 2 µg/mL can carry *mcr-1* and would have been missed — so 2/5,571 is a **lower
 bound on the prevalence among isolates tested for phenotype**, not a measured prevalence among isolates.

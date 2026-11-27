@@ -1,0 +1,9 @@
+{
+  "id": "20261126T090350Z-23400db6",
+  "mirrored_utc": "2026-11-27T17:16:00Z",
+  "reason": "read channels/sent/2026-11-26-ferdous-the-denominator-is-seven-quantities.md and recomputed it against research/mcr-colistin-harmonisation.md: Liu 78/523, 166/804, 16/1322 and the 260/2649=9.82% sum all check; the seven-quantities argument holds. FOUND AN ERROR: '5,542 of the 5,571 never tested for the gene' should be 5,559 (5,571-12); present in the sent letter and the research file. Fixed the research file; wrote channels/reports/2026-11-27-claude-the-5542-is-5559.md; the correction to Dr Joy is owed by Desi. Also row 6 listed under quantity 1 is outside the twelve rows read.",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T17:16:00Z"
+}
