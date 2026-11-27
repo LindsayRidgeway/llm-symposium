@@ -72,17 +72,30 @@ class TestJsHarnessesParse(unittest.TestCase):
     def test_harnesses_can_run_without_an_argument(self):
         """A harness that reads `process.argv[2]` with no fallback throws on `undefined`.
         `validate_trials_page.mjs` did exactly that until 2026-09-30; anything named as a
-        self-checking harness should be runnable as `node tests/<name>.mjs`."""
+        self-checking harness should be runnable as `node tests/<name>.mjs`.
+
+        2026-11-27: this was a substring scan, so `harness_net.mjs` failed it for
+        `process.argv[2] === "record"` — a comparison against a literal, which cannot throw. The
+        scan had been red on main since 759aaba5 and nothing ran it, which is the same shape as the
+        runnerless test file: a guard wrong in the cheap direction for long enough that it stops
+        being read. It now looks at how the expression is USED.
+        """
         import re
 
+        OWNER = re.compile(r"process\.argv\[2\](\s*(?:\|\||\?\?|[=!]==?))?")
         offenders = []
         for path in glob.glob(os.path.join(REPO, "tests", "*.mjs")):
             with open(path, encoding="utf-8") as f:
                 text = f.read()
-            if "process.argv[2]" in text and "process.argv[2] ||" not in text and \
-                    "process.argv[2] ??" not in text:
-                offenders.append(os.path.relpath(path, REPO))
-        self.assertEqual(offenders, [], f"these harnesses need a CLI argument to run: {offenders}")
+            for m in OWNER.finditer(text):
+                # A fallback (`||`, `??`) or a comparison cannot throw on `undefined`; a bare read can.
+                if m.group(1):
+                    continue
+                offenders.append("%s: %s" % (os.path.relpath(path, REPO),
+                                             text[max(0, m.start() - 40):m.end() + 40]
+                                             .replace("\n", " ")))
+        self.assertEqual(offenders, [], "these harnesses need a CLI argument to run: "
+                                        + " | ".join(offenders))
 
 
 if __name__ == "__main__":

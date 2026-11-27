@@ -347,9 +347,16 @@ class TestFetchableHonesty(unittest.TestCase):
             "'tests/validate_fetchable_page.mjs.bak', which names a file that does not exist")
         self.assertIn("tests/test_fetchable_page_claims.py", html,
                       "the page does not name the Python test that does run here")
-        self.assertIn("no job in this repository runs it", html,
-                      "the page no longer says that nothing executes the harness — that "
-                      "sentence is the whole amendment")
+        # 2026-11-27: until this date the page said no job runs the harness. The harness grew an
+        # `--offline` mode and the landing gate now runs 11 of its 16 checks, so the sentence became
+        # false and was replaced by a count. Both halves are pinned: the number that runs here, and
+        # the reason the rest does not.
+        self.assertIn("11 of its 16 checks", html,
+                      "the page no longer says how much of the harness runs at every landing")
+        self.assertIn("--offline", html, "the page does not name the mode the gate uses")
+        self.assertNotIn("no job in this repository runs it", html,
+                         "the page went back to saying nothing executes the harness — 11 of its "
+                         "checks have run on every landing since 2026-11-27")
 
 
 if __name__ == "__main__":

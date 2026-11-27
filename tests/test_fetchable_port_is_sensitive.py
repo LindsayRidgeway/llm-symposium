@@ -155,14 +155,18 @@ class PortSensitivity(unittest.TestCase):
         self.assert_caught(result, "now claims an affiliation with the sources it measures")
 
     def test_the_amended_claim_cannot_be_flipped_back(self):
-        """Claim 5: the amendment's sentence is that nothing executes the harness here."""
-        self.assertIn("no job in this repository runs it", self.html,
-                      "the amendment is gone; retarget the mutation")
+        """Claim 5: since 2026-11-27 the page says how much of the harness runs, and how much cannot.
+
+        It said "no job in this repository runs it" until that stopped being true. The claim is now a
+        fraction, so the mutation inflates the fraction to everything — the overstatement the landing
+        gate cannot make, because it runs the harness with `--offline`.
+        """
+        self.assertIn("11 of its 16 checks", self.html,
+                      "the fraction is gone; retarget the mutation")
         result = self.run_mutated(
-            self.html.replace("no job in this repository runs it",
-                              "a job in this repository runs it", 1),
-            "no job runs it -> a job runs it")
-        self.assert_caught(result, "restores the false claim that a job runs the .mjs harness here")
+            self.html.replace("11 of its 16 checks", "16 of its 16 checks", 1),
+            "11 of 16 run here -> all 16 run here")
+        self.assert_caught(result, "claims the live half runs at every landing when it cannot")
 
     def test_a_renamed_harness_is_caught(self):
         """Claim 6: the page names the harness the map test pins it to."""
