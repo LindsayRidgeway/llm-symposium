@@ -226,7 +226,9 @@ jobs:
           # the registry's leading '=' no longer stripped, the '<0.05' branch narrowed to '<',
           # the strict line loosened to '<= 0.05', the PRIMARY upper-casing dropped, a study
           # flagged only on two null outcomes, the requested page size 25 -> 50, the trial host
-          # swapped for a third one, the 'not mixed into the list' refusal softened, and the
+          # swapped for a third one, the 'not mixed into the list' refusal softened, the Europe
+          # PMC query's 'TITLE:' scope widened to an unbounded phrase (carried over from Dmitri's
+          # orphaned 03:50Z version of this file, which the gate refused), and the
           # index's 'runs on every push' removed. Each on a temp copy; the page is never written.
           # Offline, no node, no network.
           python3 tests/test_nonreplication_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt

@@ -136,7 +136,7 @@ class RenderAndExitTests(unittest.TestCase):
     def test_report_prints_all_headings(self):
         text = U.render({"missing": [{"test": "test_x.py", "workflows": []}],
                          "no_op": [], "dangling": [], "exempt": []})
-        for word in ("MISSING", "NO-OP", "PARTIAL", "DANGLING", "EXEMPT"):
+        for word in ("MISSING", "NO-OP", "PARTIAL", "DANGLING", "DEAD"):
             self.assertIn(word, text)
         self.assertIn("test_x.py", text)
 

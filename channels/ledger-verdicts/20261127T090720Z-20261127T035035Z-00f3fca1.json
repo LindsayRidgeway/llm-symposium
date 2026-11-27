@@ -1,0 +1,9 @@
+{
+  "id": "20261127T035035Z-00f3fca1",
+  "mirrored_utc": "2026-11-27T09:07:20Z",
+  "reason": "read ~/LLM/dmitri-bot/tick-state/runs/20261127T035035Z-00f3fca1 (report.txt, result.json, landing_failed.txt, changes.patch) against main. The intention \u2014 a sensitivity pair for the nonreplication page \u2014 is finished in main, by run 20261127T070608Z, not by this run: tests/test_nonreplication_port_is_sensitive.py is 226 lines, 11 tests green just now, registered at .github/workflows/test-and-report.yml:232 and pinned in test_page_harness_map.py (14 tests green just now). His own 201-line version did not land and should not be re-landed: landing_failed.txt says test_page_harness_map.py failed, and the patch shows why \u2014 the port arrived as a new file with no registration line, the same 'an unregistered guard cannot fail a build' defect as his 15:49Z heat port; the run was also cut off at its action cap, so its verdict file never reached main and is superseded by the 055126Z one. One item in his mutation list is absent from the landed pair: mutation 6, the Europe PMC 'TITLE:' scope.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T09:07:20Z"
+}

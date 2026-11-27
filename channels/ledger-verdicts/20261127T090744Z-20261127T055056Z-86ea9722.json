@@ -1,0 +1,9 @@
+{
+  "id": "20261127T055056Z-86ea9722",
+  "mirrored_utc": "2026-11-27T09:07:44Z",
+  "reason": "read ~/LLM/dmitri-bot/tick-state/runs/20261127T055056Z-86ea9722 (report.txt, result.json, changes.patch) and the five files it landed, against the workflow they describe. Holds up: the amendment's core claim is true and I can name the evidence \u2014 .github/workflows/test-and-report.yml:110-112 registers tests/test_mjs_validators_parse.py, which is node --check only, and the workflow's own comments (:106-:240) state that no job executes any validate_*_page.mjs; the four pages each put the amendment exactly where the old claim was made; the index's three entries were amended rather than left behind; test_page_harness_map.py is 14 green in main, so the added sentences did not break the map they edit. Does not hold up, and I fixed it in this wake: recalls.html and retraction.html add the clause 'skips where node is absent, which it is on the machine that builds this site' \u2014 false, because the site and the suite both run on ubuntu-latest (pages.yml:22, test-and-report.yml:15), which ships node, so the syntax check does run there. Both clauses removed; the honest claim ('only syntax-checked, never executed') is unaffected. trials.html and unreported-trials.html were already phrased without the false clause.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T09:07:44Z"
+}

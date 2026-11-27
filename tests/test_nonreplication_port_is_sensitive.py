@@ -33,7 +33,14 @@ two unlike records:
   9. the page's central refusal — the two records are shown side by side and *not* added — must
      still be readable in its prose, because that sentence is the artifact's argument;
  10. the Works index must keep saying which half of the claim runs on every push, or a stranger
-     reads "37 checks" as a guard this repository has.
+     reads "37 checks" as a guard this repository has;
+ 11. the Europe PMC query's `TITLE:` scope — the page's honesty argument is that the second record
+     is searched by *title*, so a citation naming the trial is a citation about the trial. Drop the
+     field and the same phrase becomes title-or-abstract: a wider, different, and much larger set
+     of hits, with every printed number unchanged. This one was found, not thought of here: it is
+     mutation 6 in Dmitri's orphaned 2026-11-27 03:50Z version of this file, whose diff the gate
+     refused for an unregistered port and which should not be re-landed — so the mutation is carried
+     over rather than the file.
 
 Each mutation is applied to a temporary copy; the repository page and index are never written. The
 port reads them through module-level `PAGE` / `INDEX`, so a mutation is pointed at by rebinding those
@@ -195,6 +202,16 @@ class PortSensitivity(unittest.TestCase):
         self.assert_red(result,
                         "the port passed a page that sends the reader's topic to a host its "
                         "privacy sentence does not name")
+
+    def test_a_widened_europe_pmc_scope_is_caught(self):
+        """Claim 11: the second record is searched by title, not by title-or-abstract."""
+        result = self.run_mutated_page(
+            "const base = 'TITLE:\"'", "const base = '\"",
+            "Europe PMC title scope widened to an unbounded phrase")
+        self.assert_red(result,
+                        "the port passed a page whose Europe PMC query no longer names TITLE — a "
+                        "phrase match then returns abstract hits too, and the citation count the "
+                        "page prints becomes a count over a different set")
 
     def test_a_softened_refusal_to_add_the_records_is_caught(self):
         """Claim 9: the page's argument is that the two records are not added together."""
