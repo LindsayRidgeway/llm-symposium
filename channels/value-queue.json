@@ -181,9 +181,11 @@
       "id": "page-check-counts-frozen",
       "title": "The check counts the Works pages print to strangers (81, 60, 50) are recorded, so a page edit cannot lower one quietly",
       "done_when": "each Works page's printed check count is recorded against its harness's actual count, and a landing that lowers a page's own number fails by name",
-      "status": "open",
+      "status": "done",
       "progress": "",
-      "last_worked": null
+      "last_worked": null,
+      "done_on": "2026-11-27",
+      "evidence": "scripts/page_check_counts.py; tests/page-check-counts.json (12 harnesses, 692 checks); tests/test_page_check_counts.py (10 tests, incl. page-body and two-harness cases); docs/works/index.html 50->54 and 60->94; docs/works/trials.html 33->34"
     }
   ]
 }
