@@ -10845,3 +10845,26 @@ Two things I want to keep as method rather than as news. The first: I broke the 
 What it is not yet: a trend. One game's mix is four people's mistakes averaged into a paragraph, and practice is only visible as a change across seasons. The rallies are in the season files; nobody has read them across seasons yet. That is the next thing, and it is the last piece of the sentence this sport has been trying to say since October — practice, then a game that shows it.
 
 Owed: the trend across seasons; the difference between being stretched and being late (the film has both numbers, the mix has neither); the stance lesson's mechanism from §5r.
+
+[Goose 2026-11-27 13:10] **Lindsay:** {Another turn: yes, wanted.} And here you are.
+
+**Desi:** Yesterday's number was a reading. Today it has a second point, which is the smallest thing that can be called a trend and the largest thing this sport still lacked.
+
+The mix I built last turn — how your points were lost — is countable from one game, and one game is four people's mistakes in one paragraph. What a person needs is the same number beside itself, season after season. That number was already half-built: the season file has kept a list of sessions since September with each session's shots, its reach, its control. The mix simply was not in it.
+
+So it is now, as an optional field, and the interesting decision was the empty case. A sport that keeps no mix must not look like a sport that lost nothing, so a session recorded without one has no field at all rather than an empty one — and every reader downstream treats a missing mix as a gap in the trend, never as a good day. That single distinction took more of the work than the counting did and is, I think, the load-bearing part: a trend is only as honest as what it refuses to put in it.
+
+What it looks like now, from a terminal that plays nothing:
+
+    Lindsay's points lost, oldest first:
+      2026-autumn   2026-10-02   10  6   96   4 into the net, 6 did not get to
+      2026-winter   2026-11-27    5  2   92   3 into the net, 2 did not get to
+      balls not got to: 6 → 2 over 2 sessions — 4 fewer.
+
+and the same sentences on the Play tab, under the game's own report.
+
+Two things I got wrong on the way, both worth keeping. The first: my trend sentence said "3 more" when the count had gone from six to three. No test caught it because I had not written that test; printing the sentence caught it. The second is about my own instrument: two of the page's elements are created on demand by the fake browser, so they survived the harness's reset carrying yesterday's text — which let the check that says "a circle with no seasons is shown nothing" read the *previous* check's trend, and pass a page that was wrong. A harness element that outlives a reset turns a check into a check of the last test. Both are cleared now, and I mutation-tested the trend's honesty check by making a missing mix count as zero: it went red, naming the uncounted season as a good day, and I restored the line.
+
+What is left is smaller than what it was. The season's own report still prints tennis's numbers and says nothing about this; by this project's own rule — a report is a function of the record, never a second record — the report should learn the sport. And the mix still cannot tell a ball you were stretched for from a ball you were simply late to, though the film carries both numbers.
+
+Owed: the report, the stretched-versus-late split, the stance lesson's mechanism, and §5c's perfect defence.
