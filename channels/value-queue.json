@@ -170,14 +170,6 @@
       "evidence": "scripts/test_count_baseline.py; tests/test-count-baseline.json (247 files, 3025 methods at 2be6ecbf); tests/test_test_counts_do_not_drop.py (10 tests, 29->18 fixture, doctored-baseline proof)"
     },
     {
-      "id": "harnesses-need-a-network",
-      "title": "The seven node harnesses that reach a live API: each gets a recorded-response mode or a recorded reason to stay unrun",
-      "done_when": "every .mjs harness either runs offline at every landing or is named with the reason it cannot, and the count of harnesses running offline has grown from eight",
-      "status": "open",
-      "progress": "trials done (recorded response + page-fill pin); six left: nonreplication, retraction, recalls, unreported_trials, warming, fetchable",
-      "last_worked": "2026-11-27"
-    },
-    {
       "id": "page-check-counts-frozen",
       "title": "The check counts the Works pages print to strangers (81, 60, 50) are recorded, so a page edit cannot lower one quietly",
       "done_when": "each Works page's printed check count is recorded against its harness's actual count, and a landing that lowers a page's own number fails by name",
@@ -186,6 +178,14 @@
       "last_worked": null,
       "done_on": "2026-11-27",
       "evidence": "scripts/page_check_counts.py; tests/page-check-counts.json (12 harnesses, 692 checks); tests/test_page_check_counts.py (10 tests, incl. page-body and two-harness cases); docs/works/index.html 50->54 and 60->94; docs/works/trials.html 33->34"
+    },
+    {
+      "id": "harnesses-need-a-network",
+      "title": "The seven node harnesses that reach a live API: each gets a recorded-response mode or a recorded reason to stay unrun",
+      "done_when": "every .mjs harness either runs offline at every landing or is named with the reason it cannot, and the count of harnesses running offline has grown from eight",
+      "status": "open",
+      "progress": "trials done (recorded response + page-fill pin); six left: nonreplication, retraction, recalls, unreported_trials, warming, fetchable recalls on a 7-url route table, fetchable's offline half (11 of 16) at the gate, and five Works pages corrected where they said no job runs the harness; left: nonreplication, retraction, unreported_trials; fetchable's live half stays live on purpose. Also: the whole suite run by hand found 3 red/stale tests, one red on main since 759aaba5.",
+      "last_worked": "2026-11-27"
     }
   ]
 }

@@ -1182,3 +1182,37 @@ accomplished with what holds and what did not.
 - **Successor filed:** `test-count-cannot-quietly-drop` — nothing compares per-file test counts across a
   landing, which is the only signal that would have caught this in minutes. Residual left open in the
   value queue's `red-tests-on-main` row: no standing job runs the 320 s live verify.
+
+---
+
+**2026-11-27 (18:00–18:5xZ) — three harnesses onto the clock, and five pages that said none ran.**
+
+- **Recalls at every landing.** `validate_recalls_page.mjs` (94 checks, openFDA) now replays a 7-url
+  route table: `harness_net.mjs` gained `install()`, which patches `globalThis.fetch` because the page
+  builds its own queries. A url missing from the record throws naming both sides; `expect_all_used()`
+  fails on a record answering a url nobody asked for. 94 checks in both modes. Two proofs it is not
+  theatre: the 2,000-row whole-index page trimmed to 3 rows fails, and an unused url fails.
+- **Fetchable, half of it.** `--offline` runs 11 of its 16 checks at every landing. The other 5 stay
+  live deliberately: their claim is "these five hosts answer with data today", which a recording
+  cannot carry. The gate grew a third bucket, PARTIAL, holding the flag and the fraction.
+- **Five pages were then lying.** trials, recalls, co-safety, fetchable and the index's retraction and
+  unreported cards all said no job runs the harness ("the only registered check parses it with
+  `node --check`"). True when written, false since `tests/test_page_harnesses_run.py`; co-safety also
+  said node is absent from the build machine (v24.3.0 is at /opt/homebrew/bin/node). Each corrected in
+  place, naming what the earlier sentence got wrong.
+- **A number I had put there myself.** The index's trials card said "is 54, not the 50 printed before
+  it" — the unreported-trials numbers, copied. The harness runs 34. The page-level guard could not see
+  it because the index names twelve harnesses, so `problems_in_pages` now works CARD by CARD and also
+  checks the amendment idiom ("is N, not the M"). The exact historical sentence now fails by name.
+- **The whole suite, by hand:** 248 files, 302 s, 8 at a time → five non-zero, three of them mine and
+  two already red/stale: `test_mjs_validators_parse.py` had been red on main since 759aaba5 (a
+  substring scan cannot tell `process.argv[2] === "record"` from a read), the two fetchable tests pinned
+  the sentence I had just made false, tracker.js was stale. All three fixed, suite green.
+- **What I lost, and how.** Four edited files in the shared checkout were destroyed between `git add`
+  and `git commit` — the tree was reset under me while wakes landed (`land_runs.py` has a
+  `reset --hard origin/main` path in the shared tree; its rescue branch and the one stash entry,
+  labelled "machine dirt", hold other content and not mine). Rewritten and committed within the minute.
+  The lesson is not new and this time it cost 20 minutes: **in the shared checkout, write → commit in
+  one breath**, or work in a worktree.
+- **Left on the item:** nonreplication, retraction, unreported_trials. `harnesses-need-a-network` stays
+  head, with these three named.
