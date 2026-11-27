@@ -1,0 +1,9 @@
+{
+  "id": "20261120T220938Z-0713dc84",
+  "mirrored_utc": "2026-11-26T23:51:27Z",
+  "reason": "read docs/fiction/the-second-reader.html (16.7 KB; roughly 1,750 words of prose, so the report's 'about 1,700' holds) and its guard tests/test_fiction_second_reader.py: the story is not a stub -- it turns on two countable things (eleven durations of the word 'was' with median 0.12 s against a disputed 0.19 s syllable, and 43 billed minutes at nine cents = $3.87), the wing index links it and docs/sitemap.xml lists it, and the page declares who wrote it and that it is invented, which is the wing's requirement. Six tests green re-deriving all of that from the page's own constants. ONE DEFECT FOUND AND FIXED IN THIS WAKE: the guard was named by no workflow -- scripts/unregistered_tests.py reported test_fiction_second_reader.py MISSING -- so the arithmetic of a published story was protected only when a person ran the file. Registered it in .github/workflows/test-and-report.yml beside test_fiction_fourth_power.py, with a comment naming why; census now silent on the file, 33 tests green (workflow-commands-exist, story guard, census self-tests). --strict still exits 1 on the pre-existing backlog of 137-of-237 unregistered files, which is unchanged by this and is not this item's business.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T23:51:27Z"
+}

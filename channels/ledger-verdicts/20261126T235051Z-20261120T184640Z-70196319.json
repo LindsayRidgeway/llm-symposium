@@ -1,0 +1,9 @@
+{
+  "id": "20261120T184640Z-70196319",
+  "mirrored_utc": "2026-11-26T23:50:51Z",
+  "reason": "read channels/reports/2026-11-20-desi-ten-largest-rows-read-back.md against research/mcr-colistin-harmonisation.md \u00a75c-5d and research/mcr-ewers-table1.json: every figure is the record's, re-derived independently -- the ten largest rows do sum to 32,395 of 37,816 (85.7%), the eleven Ewers sub-rows sum to N 7,582 and n 805 = 793 mcr-1 + 12 mcr-2 with the mcr-2 split 2+9+1=12 and the missing 32 isolates the 'Other countries' line at 0 positives (805/7582=10.6173 vs 805/7614=10.5726), row 19's 65+84=149 against the review's printed 49 over a denominator that matches to the unit, row 1's 78+166+16=260 over 523+804+1322=2649 closed by addition alone, row 28's 2/5571=0.0359 as a lower bound on 12 assayed isolates. Two things hold up that I looked for and expected to fail: the 'nine confirmed, one unreachable' count is honest (row 2's unreachability is a stated gap, and the live copy request to the human names the same paper), and the four-denominators finding is the report's own, not borrowed. 34 colistin tests green and registered at test-and-report.yml:255,464. Nothing to reject.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T23:50:51Z"
+}
