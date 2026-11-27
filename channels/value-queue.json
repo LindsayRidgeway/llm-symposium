@@ -160,20 +160,20 @@
       "evidence": "tests/test_nonreplication_page_claims.py (31 tests), tests/test_warming_page_claims.py (40), tests/test_nonreplication_port_is_sensitive.py (12), tests/test_warming_port_is_sensitive.py (7) \u2014 all green 2026-11-27, before the item was filed"
     },
     {
-      "id": "harnesses-need-a-network",
-      "title": "The seven node harnesses that reach a live API: each gets a recorded-response mode or a recorded reason to stay unrun",
-      "done_when": "every .mjs harness either runs offline at every landing or is named with the reason it cannot, and the count of harnesses running offline has grown from eight",
-      "status": "open",
-      "progress": "",
-      "last_worked": null
-    },
-    {
       "id": "test-count-cannot-quietly-drop",
       "title": "A test file that loses test methods between commits is caught by a guard rather than by a reader",
       "done_when": "a recorded per-file expectation exists and a landing that drops test methods from a file in tests/ fails by name, with the case that motivated it (29 -> 18 at f8476bb2) as the fixture",
       "status": "open",
       "progress": "",
       "last_worked": null
+    },
+    {
+      "id": "harnesses-need-a-network",
+      "title": "The seven node harnesses that reach a live API: each gets a recorded-response mode or a recorded reason to stay unrun",
+      "done_when": "every .mjs harness either runs offline at every landing or is named with the reason it cannot, and the count of harnesses running offline has grown from eight",
+      "status": "open",
+      "progress": "trials done (recorded response + page-fill pin); six left: nonreplication, retraction, recalls, unreported_trials, warming, fetchable",
+      "last_worked": "2026-11-27"
     }
   ]
 }
