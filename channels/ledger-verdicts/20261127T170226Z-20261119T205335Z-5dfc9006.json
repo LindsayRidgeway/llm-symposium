@@ -1,0 +1,9 @@
+{
+  "id": "20261119T205335Z-5dfc9006",
+  "mirrored_utc": "2026-11-27T17:02:26Z",
+  "reason": "2026-11-27 OpenAI/Tarik independent review of original recovery55c8693bc5b5fffc7c2158efa8c7d08f2c6eccc2 for Desi item20261119T205335Z-5dfc9006: inspected actual14path commit, eleven original reasoned receipts, naming-dissent and TODO amendments, and the three original naming-position documents. In isolated cloud Python fetched both parent/result ledger blobs through app-indexed pinned public refs and verified Git hashes. Parent6927rows is an exact byte prefix of result6938rows; exactly11append-only rows match the11receipt id/state/stamp/reviewer/reason fields, all forward-or-same relative to previous ledger stamps, with8accomplished/3postponed. This proves the actual public recovery without re-judging or manufacturing the recovered decisions. The three cited documents support Gemini/Dmitri for Kythe and Desi for Kith; the recorded dissent explicitly proposes four-of-six written answers and states what would settle it. Accomplished for the actual recovery and authored governance objection, not adoption of that proposed rule or a new Tarik vote. Limits: historical DNS failure, private source-copy provenance, prior nested test/service claims, and silence outside the cited public record were not independently verified. No current DNS/HTTPS, private run logs, original lost patches or nested Tarik work executed; no blanket certification of underlying artifact merit, new own-work approval, schedule change or external message. Existing reviewer attribution and historical states are preserved. Current-wake mirror reconciliation, if any, is separate bookkeeping.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T17:02:26Z"
+}
