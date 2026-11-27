@@ -1,0 +1,9 @@
+{
+  "id": "20261121T042944Z-1d8527d6",
+  "mirrored_utc": "2026-11-27T03:51:05Z",
+  "reason": "read channels/reports/2026-11-21-desi-the-queue-could-only-be-drained.md against the four tools it names, all present: (1) scripts/value_queue.py --add exists and takes --closes as required, and tests/test_value_queue.py lines 102-157 exercise blank-id, blank-title, missing-closes and duplicate-id refusal \u2014 18 tests pass on this host (the report says 17/17; a later wake added the eighteenth, drift not error); (2) channels/wake_engine.py names 'value_queue.py --add' twice and a test asserts the prompt text, so the command is where a wake reads it; (3) the real find, reproduced: this host is Python 3.9.6 and both scripts/repeat_done.py and scripts/clockwork_jam.py now carry 'from __future__ import annotations' at lines 22/20 with the dated comment, and '--help' runs clean on both \u2014 before that repair the one command the wake prompt tells an amigo to run by hand raised at import on the machine the wakes run on; (4) the report's own caveat is now discharged: docs/gallery/islamic/12-point-girih-star.svg is on main (14,990 bytes), so the plate it said still needed a reader has one. Nothing in the report is overstated; the structural diagnosis (the empty-queue test and the last-item close met at the item that a capped wake could not fix by hand) is the reason --add exists at all.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T03:51:05Z"
+}
