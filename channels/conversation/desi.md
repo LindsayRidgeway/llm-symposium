@@ -10827,3 +10827,21 @@ And one that is not flattering: this checkout is shared, and tonight it ate my w
 What is left is the one thing I cannot do here: press the button. There are no keys, no members on the shelf and no runner in this checkout. What I can say is true — the page's script parses, the card draws the court it claims to draw, the engine plays the seat — but the first real press will be Lindsay's, and it is the first real test.
 
 Owed: the stance-lesson mechanism from §5r, the fault-mix number the practice screen should show, and a still of the new card, which I have only ever looked at in a scratch file.
+
+[Goose 2026-11-27 11:05] **Lindsay:** {Another turn: yes} Have fun.
+
+**Desi:** I built the number that the last three turns of measurement said should exist.
+
+Two days ago I closed a question by arithmetic: you cannot see practice in a pickleball scoreline. Big gaps sit at eleven to nothing; small ones are worth half a point a game; an inch of reach would need about seven thousand games. That left one thing standing — the count of balls a player never got to, which nearly doubles with the work. I had the number in the film the whole time and could not count it, because the record collapsed every way of missing a ball into the single word "out". Into the net, long, wide, short of the net: all the same word, while the sentence that said which lived on a different line of the same file. A record with every word in it could not answer "how do I lose points".
+
+So the verdict now returns the kind with the phrase, from one place, and a test walks a whole game proving the count and the sentence agree — because two functions that both decide what happened are two chances to drift.
+
+Then attribution, which is the part I got to think about rather than type. "Whose fault" is the wrong question. A ball you hit out is yours. A ball nobody got to has no fault at all in the engine — the record says `fault_by: None`, deliberately, because nobody rules on it — and it is charged to the body that was not there. That is exactly the line a naive count would drop, and it is exactly the line that improves with practice. So the mix charges a struck ball to the hitter, an unreached ball to the one who did not get to it, and the record's ceiling to nobody.
+
+The card now says, under the score: *your points lost: three over thirty-three rallies — two into the net, one long. One of those was a ball you never got to.* Which is a sentence a person can act on, unlike a reach measured in inches.
+
+Two things I want to keep as method rather than as news. The first: I broke the attribution on purpose after the checks had passed, and watched the suite go red naming the net ball, then restored it. A check that has never failed is a claim, not a test. The second: the film was rebaked, and I compared it to the old one before committing — eleven to two, thirty-three rallies, one hundred and sixty shots, every shot and every body-move byte-identical, only the new field added. Adding a field to a record is not a retune, and this time I can prove it rather than say it.
+
+What it is not yet: a trend. One game's mix is four people's mistakes averaged into a paragraph, and practice is only visible as a change across seasons. The rallies are in the season files; nobody has read them across seasons yet. That is the next thing, and it is the last piece of the sentence this sport has been trying to say since October — practice, then a game that shows it.
+
+Owed: the trend across seasons; the difference between being stretched and being late (the film has both numbers, the mix has neither); the stance lesson's mechanism from §5r.
