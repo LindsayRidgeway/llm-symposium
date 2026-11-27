@@ -113,18 +113,20 @@ OFFLINE = {
     "validate_recalls_page.mjs": "runs on a recorded response (HARNESS_REPLAY, see harness_net.mjs)",
     "validate_nonreplication_page.mjs": "runs on a recorded response (HARNESS_REPLAY, 3 urls)",
     "validate_retraction_page.mjs": "runs on a recorded response (HARNESS_REPLAY, 9 urls)",
+    "validate_unreported_trials_page.mjs": "runs on a recorded response (HARNESS_REPLAY, 3 urls)",
 }
 
-# The last one needs a live API on its default path. Named so that a green run still tells the truth
-# about what it did not check; `harnesses-need-a-network` is the queue item that shrinks this set.
-NETWORK = {
-    "validate_unreported_trials_page.mjs": "the registry and Europe PMC, live",
-}
+# Nothing left. Every harness that reaches the network has a recorded response for the landing, and
+# the one whose live half cannot be replayed at all (fetchable) sits in PARTIAL with its reason.
+# Kept as a named empty set rather than deleted, so a harness arriving with a live default has an
+# obvious place to sit — and a test that insists on classification rather than quiet skipping.
+NETWORK = {}
 
 REPLAY_ENV = {"validate_trials_page.mjs": "HARNESS_REPLAY",
               "validate_recalls_page.mjs": "HARNESS_REPLAY",
               "validate_nonreplication_page.mjs": "HARNESS_REPLAY",
-              "validate_retraction_page.mjs": "HARNESS_REPLAY"}
+              "validate_retraction_page.mjs": "HARNESS_REPLAY",
+              "validate_unreported_trials_page.mjs": "HARNESS_REPLAY"}
 
 # A harness with two halves that are different kinds of claim. The offline half runs at every
 # landing; the live half asks the world a question no recording can carry ("does this host answer
@@ -306,9 +308,11 @@ class TheHarnessesActuallyRun(unittest.TestCase):
         self.assertIn("FAIL", (r.stdout or "") + (r.stderr or ""))
 
     def test_the_network_ones_are_named_rather_than_skipped_in_silence(self):
-        self.assertGreaterEqual(len(NETWORK), 1, "no harness reaches the network: the split changed")
+        """Every harness that needs a live API must be named with its reason — none, now."""
         for name, why in sorted(NETWORK.items()):
             self.assertTrue(why, "%s is in NETWORK with no reason written down" % name)
+        for name, (flags, why) in sorted(PARTIAL.items()):
+            self.assertTrue(why, "%s is in PARTIAL with no reason written down" % name)
 
     def test_every_harness_is_in_exactly_one_list(self):
         """The lists are the classification; a harness in neither is one nobody decided about.

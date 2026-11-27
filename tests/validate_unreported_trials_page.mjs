@@ -3,7 +3,22 @@
 // query string, the date rule, the pagination and the card renderer are tested as shipped.
 //
 //   node tests/validate_unreported_trials_page.mjs [docs/works/unreported-trials.html]
+//   HARNESS_REPLAY=tests/fixtures/validate_unreported_trials_page.replay.json node ...
+//
+// Three modes, and the difference matters for the count this page prints:
+//   live      — every request goes out; a transient upstream error SKIPs a section and the printed
+//               count silently drops (that skip was added 2026-10-04 so a 503 would not discard the
+//               offline checks — honest, but it makes "54 checks" a number about the weather);
+//   replay    — every request is answered from a dated record (tests/harness_net.mjs), so the count
+//               is the same every time and nothing is skipped;
+//   --offline — sections 4 and 5 do not run at all.
+// What a record cannot establish is that the registry still answers; a url the page asks for and the
+// record does not have throws rather than reading as an empty answer.
 import fs from "node:fs";
+import { install } from "./harness_net.mjs";
+
+const net = install();
+if (net.mode !== "live") console.log("mode: " + net.label);
 
 const file = process.argv[2] || "docs/works/unreported-trials.html";
 const html = fs.readFileSync(file, "utf8");
@@ -221,6 +236,19 @@ const hosts = [...new Set([...html.matchAll(/https?:\/\/[a-z0-9.\-]+/gi)].map(m 
 console.log("      external hosts referenced:", hosts.join(" "));
 check("only keyless public APIs are contacted", hosts.every(h =>
   /clinicaltrials\.gov|ebi\.ac\.uk|europepmc\.org|pubmed\.ncbi\.nlm\.nih\.gov|doi\.org|github\.com/.test(h)));
+
+if (net.mode === "replay") {
+  try {
+    net.expect_all_used();
+    console.log("record: " + net.urls.length + " url(s), every one asked for");
+  } catch (e) {
+    console.log("FAIL  the record and this run do not match:\n" + e.message); fail++;
+  }
+  if (skipped) {
+    console.log("FAIL  " + skipped + " section(s) were skipped in replay — a record cannot be down");
+    fail++;
+  }
+}
 
 console.log(fail === 0
   ? (skipped ? `\nALL OFFLINE CHECKS PASSED (${skipped} live check(s) skipped — upstream unavailable)` : "\nALL CHECKS PASSED")

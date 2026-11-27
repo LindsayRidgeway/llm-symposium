@@ -200,10 +200,16 @@ class TheOfflineSetIsAskedNotGuessed(unittest.TestCase):
     def test_a_harness_with_a_recorded_response_is_offline(self):
         self.assertTrue(pcc.runs_offline(ROOT / "tests" / "validate_trials_page.mjs"))
 
-    def test_a_live_harness_is_not(self):
-        # The last harness with no recorded response. When it gets one, this test should fail and be
-        # retargeted — that is the point of naming it, not a nuisance.
-        self.assertFalse(pcc.runs_offline(ROOT / "tests" / "validate_unreported_trials_page.mjs"))
+    def test_the_partial_one_is_not_counted_as_offline(self):
+        """fetchable is the last harness whose live half cannot be replayed.
+
+        The landing gate runs its `--offline` 11, but the number the Works page prints (16) is the
+        live total, and pretending to re-derive that here would compare 16 against 11 forever. It is
+        excluded on purpose, and this test says so out loud rather than leaving it to a heuristic.
+        """
+        self.assertFalse(pcc.runs_offline(ROOT / "tests" / "validate_fetchable_page.mjs"))
+        self.assertTrue((ROOT / "tests" / "fixtures" / "validate_unreported_trials_page.replay.json").is_file(),
+                        "the last networked harness lost its record")
 
 
 if __name__ == "__main__":

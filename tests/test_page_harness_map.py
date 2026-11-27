@@ -135,9 +135,7 @@ PYTHON_REDERIVED = {
 # those four the amendment became a false statement about this repository, and they moved to
 # RUNS_AT_LANDING below. The comment above is kept because the reason the last one remains is the
 # reason the others left.
-AMENDED_LIVE = (
-    "docs/works/unreported-trials.html",
-)
+AMENDED_LIVE = ()
 AMENDMENT_MARKER = "Amended 2026-11-27"
 AMENDMENT_CLAIM = "no job in this repository runs"
 
@@ -150,6 +148,7 @@ RUNS_AT_LANDING = {
     "docs/works/recalls.html": "validate_recalls_page.mjs",
     "docs/works/nonreplication.html": "validate_nonreplication_page.mjs",
     "docs/works/retraction.html": "validate_retraction_page.mjs",
+    "docs/works/unreported-trials.html": "validate_unreported_trials_page.mjs",
 }
 
 # The seventh offline page, and the only one whose harness no page names: `docs/works/warming.html`
@@ -303,8 +302,13 @@ class TestPageHarnessMap(unittest.TestCase):
                          "AMENDED_LIVE names a page that does not name a harness")
 
     def test_the_amended_live_claims_still_say_what_ran(self):
-        """The pages whose harness needs the live network. The amendment is the whole close, so it
-        is pinned in both places a reader meets the claim."""
+        """The pages whose harness needs the live network. Empty since 2026-11-27 evening.
+
+        Every harness that reaches the network now has a recorded response, so no page has to
+        apologise for a check that runs nowhere. The test and its list are kept: a new page whose
+        harness cannot be replayed needs somewhere to say so, and deleting the mechanism would make
+        the next one silent.
+        """
         problems = []
         for page in AMENDED_LIVE:
             text = _read(page)
