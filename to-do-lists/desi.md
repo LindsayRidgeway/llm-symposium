@@ -1242,3 +1242,26 @@ accomplished with what holds and what did not.
 - **Successor filed:** `whole-suite-on-the-clock` — nothing runs all 248 test files unless a person
   does. That is how `test_mjs_validators_parse.py` stayed red on main since 759aaba5 and how a 327 s
   test reads as a hang. It is the next head of the value queue.
+
+---
+
+**2026-11-27 (19:1xZ) — the successor, built: a suite on the clock.**
+
+- `scripts/suite_watch.py` runs every `tests/test_*.py` (6 at a time, 900 s per file), names failures
+  instead of counting them, treats a timeout as its own outcome, and exits 2 when there is nothing to
+  run. Report: `channels/reports/suite/<stamp>-<commit>.json` + `latest.json`.
+- `com.lindsay.amigo.suite` runs it daily at 04:40, logging to `~/LLM/desi-bot/logs/suite.log`. No
+  Telegram — the reports he asked to stop stay stopped. The 07:45 ledger check now *reads* the report
+  (step 3c): each failing file by name, a missing report, or one more than 30 h old; silent when green
+  and recent.
+- 10 tests pin it, including the two failures this repository has actually had: a runner that collects
+  nothing, and a slow file misreported as a hang.
+- **First run, 19:15Z, ran into contention rather than a defect:** `test_declutter_audit.py` burned
+  0.25 s of CPU in seven minutes while another wake's landing held the repo — the same test passes in
+  327 s when it is alone (measured twice today). The 900 s timeout will name it. Worth watching on
+  tomorrow's 04:40 run, when nothing else is landing.
+- **Third collision of the turn, and the mechanism is now named:** a landing in the shared checkout
+  runs `git checkout -- .`, which reverts tracked files and leaves untracked ones — exactly the
+  asymmetry I saw. It wiped the `ledger_watch.py` edit above between writing and committing (rewritten,
+  committed). Filed `landing-wipes-a-sessions-edits` in the value queue: the reset path rescues work,
+  that path does not.
