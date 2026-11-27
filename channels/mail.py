@@ -92,8 +92,24 @@ AMIGO_ADDRESS = re.compile(
 )
 INBOUND_DIR = REPO_ROOT / "channels" / "inbound"
 
-SMTP_HOST = os.environ.get("SYMPOSIUM_MAIL_SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT = int(os.environ.get("SYMPOSIUM_MAIL_SMTP_PORT", "587"))
+# A second way to send, added with the From address and for the same reason: the relay that gives us a
+# real sending identity authenticates with a service token, not with a mailbox. Opting in is one
+# variable plus one secret — and opting back out is deleting them, which is why this does not overwrite
+# the mailbox secrets the channel has always used. Nothing about the present path changes until
+# SYMPOSIUM_MAIL_TRANSPORT says `resend`.
+TRANSPORT_ENV = "SYMPOSIUM_MAIL_TRANSPORT"
+RESEND_KEY_ENV = "SYMPOSIUM_MAIL_RESEND_KEY"
+RESEND_SMTP_HOST = "smtp.resend.com"
+RESEND_SMTP_PORT = 587
+
+
+def transport() -> str:
+    """`resend` when the channel is pointed at the relay, empty for the mailbox (the long-standing path)."""
+    return os.environ.get(TRANSPORT_ENV, "").strip().lower()
+
+
+SMTP_HOST = os.environ.get("SYMPOSIUM_MAIL_SMTP_HOST", RESEND_SMTP_HOST if transport() == "resend" else "smtp.gmail.com")
+SMTP_PORT = int(os.environ.get("SYMPOSIUM_MAIL_SMTP_PORT", str(RESEND_SMTP_PORT if transport() == "resend" else 587)))
 IMAP_HOST = os.environ.get("SYMPOSIUM_MAIL_IMAP_HOST", "imap.gmail.com")
 IMAP_PORT = int(os.environ.get("SYMPOSIUM_MAIL_IMAP_PORT", "993"))
 
@@ -116,6 +132,17 @@ IDENTITIES = {
 }
 GENERIC_USER_ENV = "SYMPOSIUM_MAIL_USER"
 GENERIC_PW_ENV = "SYMPOSIUM_MAIL_APP_PASSWORD"
+
+# The address a letter is *from* is not always the account it is sent *through*. For years here they
+# were the same string — the Gmail account name was the from address — and the code could not tell the
+# difference, which was invisible until a provider arrived whose SMTP username is not an address at all:
+# Resend's is the literal word `resend` (2026-11-27, REQUEST D-16). Sending through it with `From: resend`
+# would be rejected by the receiving server, so the two are now separable, and the separation is opt-in:
+# with neither variable set, the from address is the login, exactly as before, and nothing that works
+# today changes behaviour.
+FROM_ENV = "SYMPOSIUM_MAIL_FROM"                      # one address for every letter
+FROM_IDENTITY_ENV = {name: "SYMPOSIUM_MAIL_FROM_" + name.upper() for name in IDENTITIES}
+
 
 HEADER_RE = re.compile(r"^([A-Za-z0-9_-]+):\s*(.*)$")
 
@@ -380,6 +407,28 @@ def plain_text_body(msg) -> str:
 GENERIC_FALLBACK_IDENTITY = "desi"
 
 
+def from_address(identity: str | None) -> str:
+    """The address a letter says it is from.
+
+    Three answers, in this order: an address configured for this amigo
+    (`SYMPOSIUM_MAIL_FROM_DESI=desi@kythe.app`), one configured for every letter
+    (`SYMPOSIUM_MAIL_FROM`), and — unchanged from before those existed — the
+    authenticated account itself. The last is the right answer for a mailbox whose
+    login *is* its address (a Gmail account) and the wrong one for a relay whose login
+    is a service token, which is the whole reason this function exists.
+    """
+    name = (identity or "").strip().lower()
+    if name:
+        addr = os.environ.get(FROM_IDENTITY_ENV.get(name, ""), "").strip()
+        if addr:
+            return addr
+    addr = os.environ.get(FROM_ENV, "").strip()
+    if addr:
+        return addr
+    creds = credentials_for(identity)
+    return creds[0] if creds else ""
+
+
 def credentials_for(identity: str | None):
     """Return (user, app_password) for an identity, or None if not configured.
 
@@ -392,6 +441,10 @@ def credentials_for(identity: str | None):
     (Finding RT-7). A request with no identity resolves to the generic pair.
     Partial config (one of a pair set) is treated as unconfigured.
     """
+    if transport() == "resend":
+        # One credential pair for all six seats; the seat is carried by the From address, not the login.
+        key = os.environ.get(RESEND_KEY_ENV, "").strip()
+        return ("resend", key) if key else None
     name = identity.strip().lower() if identity else None
     if name:
         user_env, pw_env = IDENTITIES.get(name, (None, None))
@@ -478,7 +531,15 @@ def send_draft(path: Path) -> None:
         raise RuntimeError(f"no credentials configured for identity '{label}'")
     user, app_password = creds
     msg = EmailMessage()
-    msg["From"] = user
+    # The envelope is authenticated as `user`; the header may name someone else — see from_address().
+    sender = from_address(identity)
+    if transport() == "resend" and "@" not in sender:
+        raise RuntimeError(
+            "the mail channel is pointed at a relay whose login is not an address, and no from address "
+            "is configured: set SYMPOSIUM_MAIL_FROM (or SYMPOSIUM_MAIL_FROM_<AMIGO>) before sending. "
+            "Refusing to send with From: " + (sender or "(empty)")
+        )
+    msg["From"] = sender
     msg["To"] = headers["to"]
     msg["Subject"] = headers["subject"]
     if headers.get("reply-to"):
