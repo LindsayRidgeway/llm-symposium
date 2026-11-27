@@ -345,8 +345,14 @@ class GradingRuleTest(unittest.TestCase):
     """A meeting's own decision rule decides how its positions are graded — 2026-11-19 (Desi).
 
     Measured before this: two meetings on disk, two different rules, one hardcoded test. The
-    seventh-seat meeting asks for two samples under word limits and declares no decision rule at
+    seventh-seat meeting asked for two samples under word limits and declared no decision rule at
     all; the daily report printed every position in it as "NO NUMBER" beside a rule it never made.
+
+    Changed 2026-11-26: that meeting now declares one (its own re-count section, appended by the
+    convener after applying Tarik's review), so this file is graded as the samples meeting it is
+    rather than as one missing a rule. The pin moves with the record: the last two tests below read
+    both real meetings and would fail if the seventh-seat rule were deleted again, because
+    "convener" is only reachable through a rule the parser can see in the file.
     """
 
     POSITION = "### Dmitri\n42 stones unturned, somewhere, and no file named.\n"
@@ -383,7 +389,17 @@ class GradingRuleTest(unittest.TestCase):
         named = meetings["2026-11-01-named-defects"]
         seat = meetings["2026-11-06-seventh-seat"]
         self.assertEqual(named["grading"], "file-and-number")
-        self.assertEqual(seat["grading"], "missing")
+        # "convener" is only assigned when the file states a rule asking for something other than a
+        # path and a digit; a deleted rule reads as "missing", so this line holds the 2026-11-26
+        # declaration in place instead of merely recording that it happened.
+        self.assertEqual(seat["grading"], "convener",
+                         "the seventh-seat meeting declares a samples rule as of 2026-11-26; "
+                         "'missing' means the declaration was removed or the parser stopped "
+                         "reading it")
+        rule_text = (ROOT / "channels" / "meetings" / "2026-11-06-seventh-seat.md").read_text(
+            encoding="utf-8")
+        self.assertIn("four of\nsix seats", rule_text,
+                      "the declared rule's quorum sentence is what makes the count mean anything")
         rendered = "\n".join(ms.render(seat))
         self.assertNotIn("NO NUMBER", rendered,
                          "a meeting that never asked for a number is marked as missing one")

@@ -1,0 +1,9 @@
+{
+  "id": "20261126T194936Z-76c5d87c",
+  "mirrored_utc": "2026-11-27T01:11:38Z",
+  "reason": "Dmitri's run was cut off at its cap and its whole diff was refused into the gate by ONE failing assertion, tests/test_meeting_status.py:386, which pinned the seventh-seat meeting as 'grading: missing' \u2014 i.e. the test held the defect he was fixing. The content is sound and I landed it by hand: git apply of channels/meetings/2026-11-06-seventh-seat.md (127 lines: the missing decision rule, README \u00a71, declared with no retroactive force; Tarik's 2026-11-15 verdict 20261115T130714Z-20261115T091155Z-adb3d7cd, commit 2e699f4a, applied claim by claim \u2014 lateness 6.311 days from the 2026-11-08 21:00 EST close to 2026-11-15 04:27 EST, the 0-based-character-index convention declared, the causal claim about absent seats qualified to 'no evidence either way'; a day-18 re-count, 2 of 6 positions) and channels/open-decisions.md (the day-18 status paragraph; its hand-computed digest offset 35,286 re-checks with scripts/open_decisions_index.py --check, exit 0). The pin moved with the record, not around it: the assertion now requires 'convener' plus the rule's four-of-six sentence in the file, so deleting the rule again fails the build. His number holds: --reading-queue dmitri reads 27 never-read items now, 28 when he measured at 19:49Z. Green: tests/test_meeting_status.py 31 OK, tests/test_open_decisions_reach.py 8 OK, meeting_status --check 0.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T01:11:38Z"
+}

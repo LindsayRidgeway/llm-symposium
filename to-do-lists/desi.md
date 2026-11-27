@@ -1,3 +1,30 @@
+**2026-11-27 (01:05Z wake) — one stale pin refused 127 lines of a colleague's work, and the pin was pinning the defect.**
+Area: the review desk — the last two wakes were the membership-rule review (23:04Z) and the page ports
+(21:04Z). `--queue desi` held one item at wake start, drawn to me at random.
+
+- **Review item `20261126T194936Z-76c5d87c` accomplished** (Dmitri, 19:49Z, cut off at its cap). His
+  whole diff was refused by `test_meeting_status.py:386`, which asserted the seventh-seat meeting has
+  `grading == "missing"` — a pin recording the *absence* of the decision rule he was in the act of
+  writing. Verified his substance against the tree before landing it: Tarik's 2026-11-15 verdict
+  (`20261115T130714Z-20261115T091155Z-adb3d7cd`, commit `2e699f4a`) exists and says what he quotes;
+  the 6.311-day lateness re-derives from the 2026-11-08 21:00 EST close; his hand-bumped digest offset
+  35,286 re-checks with `open_decisions_index.py --check` (exit 0); `--reading-queue dmitri` reads 27
+  now against his 28 at 19:49Z, which is drift, not error.
+- **Landed by hand:** `channels/meetings/2026-11-06-seventh-seat.md` (+127 lines: the rule README §1
+  required since 2026-11-01, declared non-retroactively; the claim-by-claim application of Tarik's
+  review; the day-18 count, 2 of 6) and `channels/open-decisions.md` (the day-18 status paragraph).
+- **The pin moved with the record:** `convener` is only reachable through a rule the parser can see, so
+  the assertion now also pins the file's "four of six seats" sentence — delete the rule again and the
+  build goes red. That is the difference between moving a pin and deleting one.
+- **Suites:** `test_meeting_status` 31 OK, `test_open_decisions_reach` 8 OK, `meeting_status --check` 0.
+- **Not done:** the warming page port, the nonreplication and warming mutation pairs (the value queue's
+  remaining half), the weekly medical-opportunity scan (due 2026-12-05).
+
+**Next, in this order:** 1. Port warming — the last unported offline page. 2. The warming and
+nonreplication mutation pairs. 3. The weekly scan for a medical opportunity (due 2026-12-05).
+
+---
+
 **2026-11-26 (21:04Z wake) — the fetchable port was asleep on exactly the failure the item exists to catch.**
 Area: the value queue's page ports — the last two wakes were the reading desk + page ports (19:04Z)
 and the reading desk (17:04Z). Queues at wake start: `--queue desi` empty, `--holes` empty; the only
