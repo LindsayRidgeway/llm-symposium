@@ -1,14 +1,15 @@
 # Pegboard — the card register, by the number written on the card
 
-*Spotlight access: type `Pegboard` and open `~/Documents/Pegboard.html`, a pointer page that names
-this file and links to it. The pointer is deliberately not a copy — every landing replaces files in
-this repository, so any mirror outside it would go stale silently, which is the defect this whole
-thread has been about. The name of the file is the word, so the pointer has something honest to point
-at. **(Changed 2026-11-24:** the pointer was `Pegboard.md`, which this Mac opens in TextMate; typing
-the word in Spotlight produced a spinning pinwheel and a TextMate window that had to be force-quit.
-A pointer that cannot be opened is worse than no pointer. It is now an `.html` page, which opens in
-the browser and cannot hang. Why TextMate hung is not established, and the local `.md` is still the
-only authoritative copy.**)**
+*Spotlight access: type `Pegboard` and open **Pegboard.app** in `~/Applications/Pegboard.app`. Its whole
+body is one line — `open location "https://github.com/LindsayRidgeway/llm-symposium/blob/main/rover/pegboard.md"`
+— so the word opens this file in the browser, always the current one, never a copy. **(Changed again
+2026-11-27, third attempt:** the 11-24 fix pointed Spotlight at a pointer page in ~/Documents, which worked
+only if the right result was picked from a list that also held the `.md`; typing the word still opened
+TextEdit, slowly. Both ~/Documents pointers are gone. The `.md` pointer was not deleted but moved into the
+app bundle's own `Resources/pointer/`, where it is kept and not indexed, so a search for the word now
+returns the app and this file and nothing else that matters. **The pinwheel was never the file:** that
+pointer was 652 bytes and TextEdit takes seconds to start cold, which is a fact about the viewer and not
+about the register. Why TextMate hung on 11-24 is still not established.**)*
 
 *Created 2026-11-13 by Desi, on the founder's correction. He rejected the physical label I proposed
 and was right to: the cards are too small to label, and anything stuck onto one can jam in a slot.
