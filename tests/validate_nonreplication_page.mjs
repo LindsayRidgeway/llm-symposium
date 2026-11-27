@@ -3,7 +3,19 @@
 // query strings, the p-value parser, the per-study reducer and the aggregation are tested as shipped.
 //
 //   node tests/validate_nonreplication_page.mjs [docs/works/nonreplication.html]
+//   HARNESS_REPLAY=tests/fixtures/validate_nonreplication_page.replay.json node ...
+//
+// Two modes, one count. In replay the three live requests are answered from a dated record
+// (tests/harness_net.mjs), so this harness runs at every landing with no network. What replay does
+// not establish: that the registry and Europe PMC still answer today. It establishes that the page's
+// own parser and reducer, run against a real recorded payload, still pass every claim the record
+// supports — and a page that changes a query fails, because the record answers only the urls it was
+// recorded for.
 import fs from "node:fs";
+import { install } from "./harness_net.mjs";
+
+const net = install();
+if (net.mode !== "live") console.log("mode: " + net.label);
 
 const file = process.argv[2] || "docs/works/nonreplication.html";
 const html = fs.readFileSync(file, "utf8");
@@ -99,8 +111,16 @@ check("the replication family is the four claim-making phrases", mod.REPL_PHRASE
 // --- 6. live: the two records answer, in the shape the page parses ------------------
 console.log("\n--- live checks (public, keyless APIs) ---");
 try {
-  const tj = await (await fetch(mod.ctgovUrl("pancreatic cancer"))).json();
+  const ctUrl = mod.ctgovUrl("pancreatic cancer");
+  const tj = await (await fetch(ctUrl)).json();
   const studies = (tj.studies || []).map(mod.summarizeStudy);
+  // The pin that makes a replay mean something: the response must fill the page the page asked for.
+  // Without it a record trimmed to one study still passes every "greater than zero" claim — the
+  // exact theatre found in the trials harness on 2026-11-27, one page over.
+  const asked = Number(new URL(ctUrl).searchParams.get("pageSize"));
+  check("the registry response fills the page this page asked for",
+        studies.length === Math.min(asked, tj.totalCount),
+        studies.length + " studies, pageSize " + asked + ", totalCount " + tj.totalCount);
   const la = mod.aggregateStudies(studies);
   check("ClinicalTrials.gov answers with studies", studies.length > 0, "n=" + studies.length);
   check("the registry returns a total count for the condition", typeof tj.totalCount === "number" && tj.totalCount > 0, "total=" + tj.totalCount);
@@ -115,6 +135,10 @@ try {
   const eu = mod.epmcUrl(mod.epmcQuery("failure to replicate", "depression"), 1, false);
   const ej = await (await fetch(eu)).json();
   check("Europe PMC answers a title-scoped query", typeof ej.hitCount === "number", "hitCount=" + ej.hitCount);
+  // Same pin, other record: a hit count with an emptied body is a number about nothing.
+  check("the Europe PMC response carries the works it counts",
+        (ej.resultList && ej.resultList.result || []).length >= Math.min(1, ej.hitCount),
+        "hitCount=" + ej.hitCount + " results=" + ((ej.resultList && ej.resultList.result || []).length));
   check("a known replication phrase with a real topic returns works", ej.hitCount > 0, "depression=" + ej.hitCount);
   const zu = mod.epmcUrl(mod.epmcQuery("failure to replicate", "nutrition"), 1, false);
   const zj = await (await fetch(zu)).json();
@@ -122,6 +146,15 @@ try {
               ej.hitCount + ", nutrition=" + zj.hitCount);
 } catch (e) {
   check("Europe PMC reachable from this harness", false, String(e && e.message || e));
+}
+
+if (net.mode === "replay") {
+  try {
+    net.expect_all_used();
+    console.log("record: " + net.urls.length + " url(s), every one asked for");
+  } catch (e) {
+    console.log("FAIL  the record and this run do not match:\n" + e.message); fail++;
+  }
 }
 
 console.log("");
