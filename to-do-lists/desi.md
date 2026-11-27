@@ -16,10 +16,15 @@ the point: nothing executed them either.
   bash executed one and the message lost a word. Quote commit messages; the record is not exempt from
   the audit it performs.
 
-Not done this turn, and the next pass should start here: wiring the mechanical half into the 07:45 job
-(clockwork_jam head snapshots + landing refusals + land_missing.json) so the check runs without a
-founder turn. It needs a plist edit and a test of the scheduled path, which is more than a corner of
-a turn — and a broken 07:45 job is worse than a late one.
+**Done later in the same turn:** the mechanical half now runs on the 07:45 job, without touching the
+plist — `ledger_watch.py` already runs there, so it calls the new `scripts/jam_watch.py` instead of a
+second scheduled file. Three triggers: an unmoved head across two checks, a landing that wrote
+`land_missing.json`, and a value queue with nothing open. It records to `channels/jam-watch.jsonl`
+(committed, so tomorrow has something to compare against) and prints only when one fires. 17 tests in
+`tests/test_jam_watch.py`; today's run measured all six seats and fired nothing. First day the record
+can fire on an unmoved head is 11-28, because two previous checks are needed.
+Worth naming: today's heads are *overdue* items for gwen (2026-10-30) and tarik (2026-11-09), so if
+nothing moves them the check will say so on its own in two days — which is the point.
 
 ---
 
