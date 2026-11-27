@@ -25,10 +25,14 @@ The five states, because they are not the same fact:
 * PARTIAL    a directly invoked unittest script calls unittest.main before later TestCase classes.
              The runner collects before those definitions exist, even though the command can pass.
              Module-form discovery imports a guarded script and does not have this ordering problem.
-* EXEMPT     pytest-style (no runner of either kind), not registered. Deliberately left out of CI since
-             2026-10-13, because pytest is not installed in this project and a registration would
-             report green while checking nothing. Listed so the exemption is visible and counted
-             rather than assumed.
+* DEAD       pytest-style (tests only defined, no runner), so nothing on this machine executes its
+             assertions: the landing gate runs each file as a script and this shape exits 0 having
+             collected nothing. This bucket was called EXEMPT until 2026-11-26 and read as a
+             deliberate exemption ("pytest is not installed, so registering would check nothing") —
+             which named the excuse and removed the finding. Four files were living in it; one of
+             them, `tests/test_no_zeroed_tracked_files.py`, was the guard against a landing emptying
+             a file, and the leftover it existed to catch sat tracked in main for a week while it
+             reported pass. `tests/_minirunner.py` now runs this shape without pytest.
 * DANGLING   a workflow line naming a test file that does not exist. The registry then fails on the
              absence rather than passing on it, but it means a test was renamed or deleted and the
              line stayed.
@@ -63,7 +67,9 @@ WORKFLOWS = REPO / ".github" / "workflows"
 CALL = re.compile(r"python3\s+(?:-m\s+unittest\s+)?tests[./]([A-Za-z0-9_]+?)(?:\.py)?(?:\s|$)", re.MULTILINE)
 DIRECT_CALL = re.compile(r"python3\s+tests[./]([A-Za-z0-9_]+?)(?:\.py)?(?:\s|$)", re.MULTILINE)
 # A file is "pytest-style" if it only *defines* tests for a collector to find. pytest is not
-# installed in this project, so such a file runs only if something calls it — that is the exemption.
+# installed in this project, so such a file runs nowhere unless it has a runner — that is a defect,
+# not an exemption (rewritten 2026-11-26; the bucket used to be called EXEMPT and the excuse was
+# "registering would check nothing", which was true and beside the point: nothing checked it either).
 PYTEST_STYLE = re.compile(r"^(?:def test_|class \w+\s*\(\s*(?:unittest\.)?TestCase)", re.MULTILINE)
 
 
@@ -202,19 +208,20 @@ def render(result: dict[str, list[dict]]) -> str:
           "move the runner below all test classes or use module discovery", result.get("partial", []))
     block("dangling", "DANGLING — a workflow names a file that does not exist",
           "a test was renamed or deleted and the line stayed", result["dangling"])
-    block("exempt", "EXEMPT — pytest-style, not registered",
-          "deliberate since 2026-10-13: pytest is not installed, so registering would check nothing",
+    block("exempt", "DEAD — pytest-style with no runner, so its assertions execute nowhere",
+          "give it `if __name__ == \"__main__\":` with tests/_minirunner.py, or rewrite it as "
+          "unittest — registering it in a workflow would not help, since the file exits 0 unchecked",
           result["exempt"])
 
     lines.append(f"{total} file(s) accounted for. Exit 0 by default; --strict fails on everything above "
-                 "the EXEMPT line.")
+                 "the DEAD line, DEAD included.")
     return "\n".join(lines)
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--strict", action="store_true",
-                    help="exit 1 if anything is MISSING, NO-OP, PARTIAL or DANGLING (the states a gate can repair)")
+                    help="exit 1 if anything is MISSING, NO-OP, PARTIAL, DANGLING or DEAD")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     ap.add_argument("--tests", type=Path, default=TESTS, help=argparse.SUPPRESS)
     ap.add_argument("--workflows", type=Path, default=WORKFLOWS, help=argparse.SUPPRESS)
@@ -226,7 +233,8 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(render(result))
 
-    bad = len(result["missing"]) + len(result["no_op"]) + len(result["dangling"]) + len(result.get("partial", []))
+    bad = (len(result["missing"]) + len(result["no_op"]) + len(result["dangling"])
+           + len(result.get("partial", [])) + len(result.get("exempt", [])))
     return 1 if (args.strict and bad) else 0
 
 

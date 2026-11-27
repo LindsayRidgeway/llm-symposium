@@ -71,3 +71,10 @@ def test_different_titles_do_not_share(tmp_path):
     p2 = wl.window_path(tmp_path, _row("20261111_2", name="Something else"))
     assert p1 != p2
     assert p1.name == "2026-11-11-aitrobot-01.md"
+
+
+if __name__ == "__main__":
+    # 2026-11-26 (Desi): this file had no runner, so it ran nowhere — the landing gate executes each
+    # `tests/test_*.py` as a script and a script with no `__main__` exits 0. See tests/_minirunner.py.
+    from _minirunner import run
+    raise SystemExit(run(globals()))

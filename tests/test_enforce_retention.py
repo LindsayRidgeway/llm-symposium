@@ -91,3 +91,10 @@ def test_conversation_under_cap_untouched():
         changed = er.prune_conversation(dry=True)
         assert changed == []
     _with_temp_repo(run)
+
+
+if __name__ == "__main__":
+    # 2026-11-26 (Desi): this file had no runner, so it ran nowhere — the landing gate executes each
+    # `tests/test_*.py` as a script and a script with no `__main__` exits 0. See tests/_minirunner.py.
+    from _minirunner import run
+    raise SystemExit(run(globals()))

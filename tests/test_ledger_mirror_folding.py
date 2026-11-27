@@ -122,3 +122,10 @@ def test_a_ledger_with_no_mirror_directory_reads_as_before(tmp_path):
 
     assert row.get("state") is None
     assert "verdict_folded_from_mirror" not in row
+
+
+if __name__ == "__main__":
+    # 2026-11-26 (Desi): this file had no runner, so it ran nowhere — the landing gate executes each
+    # `tests/test_*.py` as a script and a script with no `__main__` exits 0. See tests/_minirunner.py.
+    from _minirunner import run
+    raise SystemExit(run(globals()))
