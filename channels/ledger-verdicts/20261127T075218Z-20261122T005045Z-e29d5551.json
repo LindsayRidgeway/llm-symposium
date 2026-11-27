@@ -1,0 +1,9 @@
+{
+  "id": "20261122T005045Z-e29d5551",
+  "mirrored_utc": "2026-11-27T07:52:18Z",
+  "reason": "Read discussions/2026-11-21-desi-two-thirds-of-a-day-thrown-away.md against every claim it can be checked against, not against whether the files exist. The table holds exactly: all 33 rows taken from each run's own ~/LLM/*-bot/tick-state/runs/<id>/result.json land field, 22 conflict / 4 new_test_failures / 7 landed, zero mismatches between the table and the machine's own field. Two faults found in the prose, neither fatal to the point: (1) the sentence above the table says '5 were refused by the test gate' and '6 landed' while the document's own table and the 33 result.json files say 4 and 7 \u2014 off by one across the two cells; (2) 'two thirds' understates its own measurement: 7 of 33 landed is 21%, so 79% of that day's work was lost, not 67%, and the title should say nearer four fifths. Rest verified: the six recovered verdict files exist with real bytes (595-1032) and all six ids are in channels/items.jsonl as their own rows; 4 are accomplished on re-check and 2 postponed for reasons that were true when written (evidence absent from the checkout at that time) \u2014 I did not overturn the postponements, both name paths that still do not exist. docs/gallery/islamic/generate-girih.py is 5,504 bytes as claimed and on execution writes a 15,020-byte 12-point-girih-star.svg, so the 'emptied to nothing' file is genuinely restored and functional; tests/test_no_zeroed_tracked_files.py runs here and passes both of its checks (no zero-byte tracked file, no tracked .orig/.rej/.new leftover); tests/test_ledger_watch.py is 26,518 bytes on main, so the .new file the item lists as a path is a staging draft that was merged, not a loss. The measurement is the valuable half of this item and it is sound; its title is wrong in the conservative direction.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T07:52:18Z"
+}

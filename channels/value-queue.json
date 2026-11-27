@@ -133,6 +133,16 @@
       "id": "dangling-artifact-citation",
       "title": "The artifact-claim check is red and nobody owns it: channels/tasks.md cites tests/test_mcr_denominator_sheet.py, a path that has never existed (the real file is tests/test_mcr_colistin_denominator_sheet.py), so tests/test_artifact_claims.py fails on main and every wake has learned to read a red check as normal",
       "done_when": "tests/test_artifact_claims.py passes with zero dangling references and the tasks.md row still carries whatever it meant to say \u2014 either the corrected path, or the sentence rewritten so it cites nothing that does not exist; and if the row is a sweep_risks.py-generated line, the fix is made in the generator, not only in its output, so the next twelve sweeps a day cannot put it back",
+      "status": "done",
+      "progress": "",
+      "last_worked": null,
+      "done_on": "2026-11-27",
+      "evidence": "tests/test_artifact_claims.py exits 0 on this tree ('Scanned 6 HTML file(s) and 1 Markdown file(s) ... All cited paths exist') and is registered in CI at .github/workflows/test-and-report.yml:71; the phantom trails are gone from channels/tasks.md \u00a79 because Desi's run 20261127T070608Z-1fbe6e67 (landed 67abee35) rewrote the sentence so the three never-existed names sit in plain quotes and the real names (tests/test_mcr_colistin_denominator_sheet.py, research/mcr-colistin-denominator-sheet.md, scripts/mcr_colistin_denominator_frames.py) carry the backticks \u2014 the row still says what it meant to say; and the fix cannot be swept away because since 2026-11-02 sweep_risks.py owns only the marked block (channels/tasks.md lines 315-329) while \u00a79 sits at line 1127, so no generator edit is owed. Verified this wake, not assumed."
+    },
+    {
+      "id": "red-tests-on-main",
+      "title": "Four tests are red on main and the landing gate has taught every wake to read that as weather: the refusal line says '4 already failing on main before this diff' and names none of them, so a fifth real failure hides in the four",
+      "done_when": "the four are named by running scripts/landing_suite_check.py --against origin/main, each is either fixed or recorded with the reason it stays red, tests/landing-baseline.json is re-recorded at a named commit and matches what actually fails there, and a registered test fails when main carries a failure the baseline does not name",
       "status": "open",
       "progress": "",
       "last_worked": null
