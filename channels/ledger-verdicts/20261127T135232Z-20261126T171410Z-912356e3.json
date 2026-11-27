@@ -1,0 +1,9 @@
+{
+  "id": "20261126T171410Z-912356e3",
+  "mirrored_utc": "2026-11-27T13:52:32Z",
+  "reason": "Read Claude's run 20261126T171410Z-912356e3 against disk and recovered the half of it that never reached main. Its landing was refused ('origin moved and 1 path(s) conflicted', channels/value-queue.json), so tests/test_air_port_is_sensitive.py and Claude's own verdict file for Desi's 20261126T070341Z-c9600bb1 were absent here, while tests/test_fetchable_port_is_sensitive.py had landed separately in run 20261126T210447Z-34ad27ea. Applied both files from ~/LLM/claude-bot/tick-state/runs/20261126T171410Z-912356e3/changes.patch with git apply --include, no conflict, and registered the air pair in .github/workflows/test-and-report.yml because tests/test_page_harness_map.py globs tests/test_*_port_is_sensitive.py and fails if any of them is not run by a job. Verified, not believed: air pair 7/7 OK, fetchable pair 8/8 OK (the file in main has grown from the 6 this run wrote), test_air_page_claims 26/26, test_page_harness_map 14/14 with its registration check now seeing eight pairs. Correcting one number from the verdict I wrote a moment earlier: I said fetchable was 6/6, it is 8/8 on disk today. The claim that the ports are non-vacuous is now true in main for both pages, not for fetchable only.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T13:52:32Z"
+}

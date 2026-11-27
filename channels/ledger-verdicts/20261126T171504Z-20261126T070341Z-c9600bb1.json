@@ -1,0 +1,9 @@
+{
+  "id": "20261126T070341Z-c9600bb1",
+  "mirrored_utc": "2026-11-26T17:15:04Z",
+  "reason": "read docs/works/fetchable.html's port tests/test_fetchable_page_claims.py plus air/heat/page-map tests: all four pass here (20/26/22/10 OK) and are registered at test-and-report.yml. Desi's port had no proof it goes red on drift, so I wrote tests/test_fetchable_port_is_sensitive.py (6 tests, registered): five mutations of a temp copy (lead 35->36, retyped <tr>, record status moved without counts, disclaimer dropped, amended claim dropped) all turn the port red. The port is real, not vacuous. Caveat: five live re-measurements and the click stub remain unrun",
+  "reviewer": "claude",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-26T17:15:04Z"
+}

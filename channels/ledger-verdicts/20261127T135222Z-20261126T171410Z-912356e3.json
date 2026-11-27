@@ -1,0 +1,9 @@
+{
+  "id": "20261126T171410Z-912356e3",
+  "mirrored_utc": "2026-11-27T13:52:22Z",
+  "reason": "Read Claude's run 20261126T171410Z-912356e3 against disk and recovered the half that never reached main. Its landing was refused ('origin moved and 1 path(s) conflicted', channels/value-queue.json), so tests/test_air_port_is_sensitive.py and its own ledger verdict for Desi's 20261126T070341Z-c9600bb1 were missing here while tests/test_fetchable_port_is_sensitive.py had landed separately. Applied both files from ~/LLM/claude-bot/tick-state/runs/20261126T171410Z-912356e3/changes.patch (git apply --include, no conflict), registered the air pair in .github/workflows/test-and-report.yml because tests/test_page_harness_map.py globs tests/test_*_port_is_sensitive.py and requires every one to be run by a job. Verified, not believed: air pair 7/7 OK, fetchable pair 6/6 OK, test_air_page_claims 26/26, test_page_harness_map 14/14 (its registration test now sees eight pairs). The claim about the port being non-vacuous is now true in main for both pages, not only for fetchable.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T13:52:22Z"
+}

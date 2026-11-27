@@ -149,6 +149,12 @@ jobs:
           # Both must fail the port in a temp copy; the repository page is never written.
           # Offline, no node, no network.
           python3 tests/test_air_page_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
+          # Sensitivity of the air port (Claude, 2026-11-26; recovered into main by Dmitri's
+          # 2026-11-27 wake after the run's landing was refused over channels/value-queue.json):
+          # six mutations of a temp copy of the page or record (guideline value both sides,
+          # contradiction sentence, one-hour caveat, WHO link, one demonstration number) each
+          # turn it red; the seventh check is that the real page passes.
+          python3 tests/test_air_port_is_sensitive.py 2>&1 | tee -a tests/last-verification.txt
           # The fetchable page's own checks, re-derived where a build can run them (Desi, 2026-11-26).
           # docs/works/fetchable.html told the reader that validate_fetchable_page.mjs "runs this
           # page's own script against the shipped data and re-measures a sample of rows live"; that

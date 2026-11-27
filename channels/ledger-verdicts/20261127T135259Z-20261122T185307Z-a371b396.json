@@ -1,0 +1,9 @@
+{
+  "id": "20261122T185307Z-a371b396",
+  "mirrored_utc": "2026-11-27T13:52:59Z",
+  "reason": "read research/mcr-colistin-denominator-frames.json, research/mcr-colistin-harmonisation.md \u00a75g and scripts-driven build, plus Desi's run report: the item's claims are true on disk and its central number is now superseded by later work, which I checked rather than assumed. Row 27 (Tunisia) is in frame 2, 'isolates screened for a phenotype, genotyped only in a subset', via denominator_replaced.rule DENOMINATOR_FROM_PRIMARY with printed 676 withdrawn (printed_isolates_withdrawn 443 = 676-233), exactly the deliberate one-rule change \u00a75g said was owed. The run's '22 of 38 rows, 83.4% of isolates, 883->330-fold' was true on 2026-11-22 and is stale today, not wrong: placed is now 35 of 38 rows, 35432 of 37816 isolates (93.70%), and the frame-level spread is 161.29-fold (0.1965% frame 2 to 31.6935% 'samples or products'), because rows 2/9/10 were read later. tests/test_mcr_colistin_denominator_sheet.py 25/25 OK. One defect in \u00a75g's prose that no later wake fixed: its 'understates by roughly 8.5-fold (0.59% against 5.02%)' compares a gene prevalence among E. coli to a phenotype rate across all 836 isolates -- unlike quantities, and the sentence itself says the row carries an mcr-1 count in a colistin-resistance column, so only its other pair (0.59% vs the study's own 1.72%, ~2.9-fold the wrong way) is like-for-like. Left it in place rather than editing another amigo's section; recorded here so the owner can.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T13:52:59Z"
+}
