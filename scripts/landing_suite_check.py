@@ -42,7 +42,15 @@ Usage:
   python3 scripts/landing_suite_check.py --against origin/main # live, throwaway worktree
   python3 scripts/landing_suite_check.py --against main --repo /path/to/checkout
   python3 scripts/landing_suite_check.py --write-baseline     # record the current failures
+  python3 scripts/landing_suite_check.py --verify-baseline --against origin/main
+                                                              # does main fail where the baseline
+                                                              # names no one? (exit 1 + the names)
   python3 scripts/landing_suite_check.py --json
+
+A name in the baseline excuses a failure only if it carries a recorded reason
+(`reasons` map). A name without one is not a baseline, it is a habit: the file is
+then reported unusable and excuses nothing, so every failure counts as new. This is
+the file-side half of the item "the four are red on main and nobody names them".
 
 Exit status: 0 = no new failures (a landing would not be refused for this);
 1 = new failures, named; 2 = usage or setup error (git, missing/unsupported tests).
@@ -187,13 +195,55 @@ def load_baseline(path=BASELINE_PATH):
     return data
 
 
+def baseline_defects(data, tests_dir=None):
+    """Why this baseline cannot excuse what it names. Empty list means it can.
+
+    A baseline is a set of claims: "these files were already red, and here is why
+    they stay red". Without the second half it is indistinguishable from a habit of
+    ignoring names, which is exactly the failure this file was created to stop
+    ("4 already failing on main before this diff", unnamed, every landing). So a
+    name earns its excuse from its reason, and a name for a file that no longer
+    exists earns nothing either — it reads as coverage and measures nothing.
+    """
+    tests_dir = Path(tests_dir) if tests_dir else REPO_ROOT / "tests"
+    if not isinstance(data, dict):
+        return ["baseline is not an object"]
+    names = data.get("failures")
+    if not isinstance(names, list):
+        return ["baseline has no 'failures' list"]
+    reasons = data.get("reasons") or {}
+    if not isinstance(reasons, dict):
+        return ["baseline 'reasons' is not an object"]
+    problems = []
+    for name in names:
+        if not isinstance(name, str) or not name:
+            problems.append("%r: not a test file name" % (name,))
+            continue
+        if not (tests_dir / name).exists():
+            problems.append("%s: named but no such test file exists" % name)
+        if not str(reasons.get(name, "")).strip():
+            problems.append("%s: no recorded reason it stays red" % name)
+    return problems
+
+
 def write_baseline(rows, commit, path=BASELINE_PATH):
+    """Record the current failures, keeping the reasons already on file for them.
+
+    A newly red file is written with an empty reason, which makes the file
+    *unusable* (see `baseline_defects`) rather than quietly absolving it. Recording
+    a landing is not the same act as deciding a failure may stay.
+    """
+    path = Path(path)
+    previous = load_baseline(path) or {}
+    previous_reasons = previous.get("reasons") if isinstance(previous.get("reasons"), dict) else {}
+    failing = failures(rows)
     data = {
         "commit": commit,
         "measured_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "files": len(rows),
         "seconds": round(sum(row["seconds"] for row in rows), 1),
-        "failures": failures(rows),
+        "failures": failing,
+        "reasons": {name: previous_reasons.get(name, "") for name in failing},
     }
     Path(path).write_text(json.dumps(data, indent=2) + "\n", encoding="utf8")
     return data
@@ -253,6 +303,12 @@ def main(argv=None):
         help="measure this revision live in a throwaway worktree (e.g. origin/main)",
     )
     parser.add_argument("--write-baseline", action="store_true")
+    parser.add_argument(
+        "--verify-baseline",
+        action="store_true",
+        help="measure --against REV and report any failure there the recorded baseline "
+             "does not name (exit 1); the local tree is not run in this mode",
+    )
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
     parser.add_argument(
         "--repo",
@@ -268,17 +324,55 @@ def main(argv=None):
         print("landing_suite_check: no tests directory at %s" % tests_dir, file=sys.stderr)
         return 2
 
-    started = time.time()
-    rows = run_suite(tests_dir, timeout=args.timeout)
-    if not rows:
-        print("landing_suite_check: no test_*.py found in %s" % tests_dir, file=sys.stderr)
+    if args.verify_baseline and not args.against:
+        print(
+            "landing_suite_check: --verify-baseline asks about another revision, not this one: "
+            "give it --against origin/main",
+            file=sys.stderr,
+        )
         return 2
-    elapsed = round(time.time() - started, 1)
-    observed = failures(rows)
-    unsupported = [row['file'] for row in rows if row['rc'] == 'UNSUPPORTED']
 
-    baseline_names, baseline_source = None, "none"
-    if args.against:
+    started = time.time()
+    if args.verify_baseline:
+        # Verify mode measures the OTHER revision and holds it against the recorded baseline:
+        # "does main fail where the baseline names no one?" The local tree is not run, because
+        # it is not what the question is about, and the run would cost twice for one answer.
+        try:
+            observed, rows = measure_revision(
+                args.against, repo=Path(args.repo), timeout=args.timeout
+            )
+        except RuntimeError as exc:
+            print("landing_suite_check: %s" % exc, file=sys.stderr)
+            return 2
+        elapsed = round(time.time() - started, 1)
+        unsupported = []
+    else:
+        rows = run_suite(tests_dir, timeout=args.timeout)
+        if not rows:
+            print("landing_suite_check: no test_*.py found in %s" % tests_dir, file=sys.stderr)
+            return 2
+        elapsed = round(time.time() - started, 1)
+        observed = failures(rows)
+        unsupported = [row['file'] for row in rows if row['rc'] == 'UNSUPPORTED']
+
+    baseline_names, baseline_source, baseline_problems = None, "none", []
+    baseline = load_baseline(args.baseline)
+    if baseline is not None:
+        names = baseline.get("failures")
+        baseline_names = names if isinstance(names, list) else None
+        baseline_problems = baseline_defects(baseline, tests_dir)
+        baseline_source = "%s @ %s" % (
+            Path(args.baseline).name,
+            baseline.get("commit", "unknown"),
+        )
+        if baseline_problems:
+            baseline_names = None
+            baseline_source += " (unusable: %d defect(s))" % len(baseline_problems)
+            if not args.json:
+                print("baseline is unusable — it excuses nothing until every name carries a reason:")
+                for problem in baseline_problems:
+                    print("  " + problem)
+    if args.against and not args.verify_baseline:
         try:
             baseline_names, _ = measure_revision(
                 args.against, repo=Path(args.repo), timeout=args.timeout
@@ -287,14 +381,6 @@ def main(argv=None):
             print("landing_suite_check: %s" % exc, file=sys.stderr)
             return 2
         baseline_source = args.against
-    else:
-        baseline = load_baseline(args.baseline)
-        if baseline is not None:
-            baseline_names = baseline.get("failures", [])
-            baseline_source = "%s @ %s" % (
-                Path(args.baseline).name,
-                baseline.get("commit", "unknown"),
-            )
 
     new = new_failures(observed, baseline_names)
 
@@ -320,6 +406,8 @@ def main(argv=None):
                     "new_failures": new,
                     "unsupported_files": unsupported,
                     "baseline_written": baseline_written,
+                    "baseline_defects": baseline_problems,
+                    "verify_baseline": bool(args.verify_baseline),
                     "execution_contract": "direct Python scripts; exit codes, not test coverage",
                     "rows": rows,
                 },
@@ -327,10 +415,16 @@ def main(argv=None):
             )
         )
     else:
-        print(
-            "ran %d test files in %ss — %d failing"
-            % (len(rows), elapsed, len(observed))
-        )
+        if args.verify_baseline:
+            print(
+                "measured %s live: %d test files in %ss — %d failing"
+                % (args.against, len(rows), elapsed, len(observed))
+            )
+        else:
+            print(
+                "ran %d test files in %ss — %d failing"
+                % (len(rows), elapsed, len(observed))
+            )
         for row in rows:
             if row["rc"] not in (0,):
                 print("  FAIL %-40s rc=%s %5.1fs %s"
@@ -339,7 +433,18 @@ def main(argv=None):
             print("baseline: none — every failure above counts as new (safe direction)")
         else:
             print("baseline: %s (%d known)" % (baseline_source, len(baseline_names)))
-            if baseline_names and set(observed) <= set(baseline_names):
+            known = set(baseline_names)
+            excused = [name for name in observed if name in known]
+            if excused:
+                print("  already failing there, excused by name (the line the gate hides):")
+                for name in excused:
+                    print("  " + name)
+            stale = [name for name in baseline_names if name not in set(observed)]
+            if stale:
+                print("  named in the baseline but passing there (stale — re-record it):")
+                for name in stale:
+                    print("  " + name)
+            if baseline_names and set(observed) <= known:
                 print("note: the tree is not clean, but no failure is the wake's own")
         if unsupported:
             print('UNSUPPORTED direct-script tests (setup error; baseline not written):')

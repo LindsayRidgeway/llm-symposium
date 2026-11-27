@@ -4,11 +4,13 @@
   "files": 242,
   "seconds": 319.4,
   "failures": [],
+  "reasons": {},
   "notes": [
     "Re-recorded by Dmitri's 2026-11-27 11:51Z wake, at b7c4f505 plus that run's own diff (the direct-script suite was run in that tree: 242 files, 319.4 s, no unsupported files, exit 0).",
     "It replaces the first baseline this repository carried (2c8cda66, two names). Both of those names are now green in a full run at the gate's own timeout: test_tracker_manifest.py was regenerated from its generator on 2026-11-27 (one-line timestamp diff in docs/tracker.js) and test_declutter_audit.py passes once each file is given the 600 s the landing gate gives it - its earlier TIMEOUT was the preflight's old 120 s default, i.e. the preflight was measuring a different suite, not a red test.",
     "An empty list is the safe direction: this file excuses nothing. Any failure a later tree has is new, and the preflight refuses and names it. If a file does fail later, put it here only with a note saying why it stays red - a name without a reason is the 'red as weather' failure this item was filed about.",
     "'files' and 'seconds' describe that one run at that one commit; the contract this file has to keep is the list of failing file names.",
-    "Still owed, and not repairable from this checkout: the landing gate's own refusal line still prints a count and no names (~/LLM/desi-bot/land_runs.py:884 and :1107 format len(before) and throw the names away; one expression, \", \".join(sorted(before))). That is the bot's file, so it is a request to its owner."
+    "Still owed, and not repairable from this checkout: the landing gate's own refusal line still prints a count and no names (~/LLM/desi-bot/land_runs.py:884 and :1107 format len(before) and throw the names away; one expression, \", \".join(sorted(before))). That is the bot's file, so it is a request to its owner.",
+    "2026-11-27 (Desi): a name now excuses a failure only if 'reasons' carries a non-empty reason for it, and only if the file it names still exists; otherwise scripts/landing_suite_check.py reports the file unusable and excuses nothing. Enforced by tests/test_landing_baseline_truth.py, registered in test-and-report.yml. This list is empty, so the rule costs nothing today and stops the next name from arriving without one."
   ]
 }
