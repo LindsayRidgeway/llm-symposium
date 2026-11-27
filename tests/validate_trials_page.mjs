@@ -2,6 +2,10 @@
 // Runs the page's OWN extracted script against a stub DOM and the live registry,
 // so the query string, the distance maths and the card renderer are tested as shipped.
 import fs from "node:fs";
+// 2026-11-27 (Desi): this harness reached a live registry and nothing on this machine ever ran it.
+// HARNESS_REPLAY=<fixture> answers the fetch from a recorded response so it runs at every landing;
+// every check that depends on the record says which mode produced it. See tests/harness_net.mjs.
+import { net } from "./harness_net.mjs";
 
 const file = process.argv[2] || "docs/works/trials.html";
 const html = fs.readFileSync(file, "utf8");
@@ -52,13 +56,38 @@ check("query carries countTotal=true", url.includes("countTotal=true"));
 check("query requests LocationGeoPoint (the distance field)", url.includes("LocationGeoPoint"));
 check("place is URL-encoded, not concatenated raw", mod.apiUrl("a b", "New York, NY").includes("New+York%2C+NY"));
 
-const res = await fetch(url);
-check("live registry answers HTTP 200 for the page's exact query", res.ok, "HTTP " + res.status);
+const api = net();
+if (!api.live && api.url) {
+  // The recorded body must answer the URL the page builds *now*: a fixture recorded against an
+  // older query would make every assertion below a statement about a page we no longer ship.
+  check("the record answers the query this page builds today", api.url === url,
+    api.url === url ? "" : `recorded ${api.url}`);
+}
+const res = await api.fetch(url);
+check(`${api.label} registry answers HTTP 200 for the page's exact query`, res.ok, "HTTP " + res.status);
 const j = await res.json();
+if (process.env.HARNESS_RECORD) {
+  // Record what was just fetched, for the replay mode. Written from inside the harness because the
+  // URL is the page's own apiUrl(): a recorder that built its own query would be recording a
+  // different request than the one this file validates.
+  fs.mkdirSync("tests/fixtures", { recursive: true });
+  fs.writeFileSync(process.env.HARNESS_RECORD, JSON.stringify({
+    url, status: res.status, recorded: new Date().toISOString().slice(0, 10), body: j,
+  }, null, 1) + "\n");
+  console.log(`      recorded ${url} -> ${process.env.HARNESS_RECORD}`);
+}
 const studies = j.studies || [];
-check("live registry returns studies", studies.length > 0, `n=${studies.length} of totalCount=${j.totalCount}`);
+check(`${api.label} registry returns studies`, studies.length > 0, `n=${studies.length} of totalCount=${j.totalCount}`);
 check("totalCount is present, so the page can say '50 of N'", typeof j.totalCount === "number", String(j.totalCount));
-check("every returned study is RECRUITING as asked",
+// 2026-11-27: without this the replay was not sensitive to a trimmed record — a fixture cut to three
+// studies still passed every check below, because they are all statements of the form "at least one"
+// and "some". The record must fill the page the query asked for, or the run is about a smaller world
+// than the page describes.
+const pageSize = Number(new URL(url).searchParams.get("pageSize"));
+check(`${api.label} response fills the requested page`,
+  studies.length === Math.min(pageSize, j.totalCount),
+  `${studies.length} studies, pageSize ${pageSize}, totalCount ${j.totalCount}`);
+check(`${api.label} studies are all RECRUITING as asked`,
   studies.every(s => s.protocolSection.statusModule.overallStatus === "RECRUITING"));
 
 // --- 3. distance ordering, on real records ---------------------------------
@@ -87,7 +116,7 @@ check("returned studies list sites far outside the searched place (why nearest-f
 // --- 4. the renderer runs on real records and quotes rather than rewrites --
 let rendered = "", err = null;
 try { rendered = studies.map((s, i) => mod.renderStudy(s, i + 1)).join(""); } catch (e) { err = e; }
-check("renderStudy runs over every live study", !err && rendered.length > 2000, err ? err.message : `${rendered.length} chars`);
+check("renderStudy runs over every returned study", !err && rendered.length > 2000, err ? err.message : `${rendered.length} chars`);
 check("cards link to the registry page for the same NCT id",
   studies.every(s => rendered.includes("clinicaltrials.gov/study/" + s.protocolSection.identificationModule.nctId)));
 check("eligibility text is shown verbatim (not summarised)",

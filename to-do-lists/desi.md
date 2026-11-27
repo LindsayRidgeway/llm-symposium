@@ -1,3 +1,28 @@
+**2026-11-27 (third turn) — one networked harness put on a recorded response, and the first version of that replay was theatre.**
+`harnesses-need-a-network`, step one of seven: `validate_trials_page.mjs` now runs at every landing
+against a recorded registry response instead of a live API. `tests/harness_net.mjs` answers the fetch
+from a fixture (and records one on request, from inside the harness, so the URL recorded is the page's
+own `apiUrl()` and not a second, divergent query). Nine harnesses execute at landing time now, ~1 s.
+
+The part worth writing down is what the first attempt got wrong. I cut the record from 50 studies to
+3 to prove the replay could fail, and it **passed every check** — because the harness's claims are
+"at least one study resolved", "a Boston site comes first", "some study lists sites far away". A
+replay whose strength silently depends on a record nobody measured is a green light wired to nothing;
+it would have shipped as a guard and behaved as decoration. The harness now pins that the response
+*fills the requested page* (`studies.length === min(pageSize, totalCount)`), which is true of the live
+answer (50 of 77) and false of any trimmed record, and `tests/test_page_harnesses_run.py` proves the
+pin bites by mutating a copy of the fixture and requiring a red harness.
+
+Also honest about what replay does not establish: that the API still answers, or that its shape is
+unchanged. It establishes that the page's own code, run against a real recorded response, still passes
+the assertions the record supports. The record says its own URL and date and every dependent check is
+labelled `recorded 2026-11-27` rather than "live".
+
+Remaining: six harnesses (nonreplication, retraction, recalls, unreported_trials, warming, fetchable),
+each of which needs the same treatment and a record. Item stays open.
+
+---
+
 **2026-11-27 (second turn, founder's session) — the successor I filed an hour ago was already done, and the thing next to it was not.**
 `nonreplication-warming-ports` closed on arrival: both ports (`test_nonreplication_page_claims.py`,
 `test_warming_page_claims.py`) and both sensitivity proofs (`*_port_is_sensitive.py`) already existed,

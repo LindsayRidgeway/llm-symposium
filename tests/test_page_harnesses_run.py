@@ -37,9 +37,11 @@ What this test refuses to accept as a pass:
 Run directly: `python3 tests/test_page_harnesses_run.py`
 """
 
+import json
 import os
 import shutil
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -69,7 +71,15 @@ NODE = find_node()
 
 
 def harnesses():
-    return sorted(HARNESSES.glob("*.mjs"))
+    """The harnesses, by the naming convention: `test_*.mjs` and `validate_*.mjs`.
+
+    Everything else in tests/ that ends in .mjs is a module the harnesses import — `retraction_voice.mjs`,
+    `harness_net.mjs` — and running a module proves nothing. Distinguishing them by name rather than by
+    reading for `export` is deliberate: `harness_net.mjs` exports and also has a CLI, so every content
+    heuristic that tried to classify it was wrong in one direction or the other.
+    """
+    return sorted(p for p in HARNESSES.glob("*.mjs")
+                  if p.name.startswith(("test_", "validate_")))
 
 
 def text_of(path: Path) -> str:
@@ -82,12 +92,23 @@ def is_library(text: str) -> bool:
 
 
 def needs_network(text: str) -> bool:
-    return "fetch(" in text
+    """A real API call, not a `fetch` handed to the page's own script."""
+    return "await fetch(" in text or "await (await fetch" in text
 
 
-def run(path: Path):
+# A harness that imports the replay hook can run without the network. Added 2026-11-27 with the
+# first port: seven of the sixteen reach a live API, and requiring one at every landing would make a
+# guard that goes red for the weather.
+REPLAY_HOOK = "HARNESS_REPLAY"
+
+
+def replay_fixture(path: Path) -> Path:
+    return HARNESSES / "fixtures" / (path.stem + ".replay.json")
+
+
+def run(path: Path, env=None):
     return subprocess.run([NODE, str(path)], capture_output=True, text=True,
-                          cwd=str(ROOT), timeout=TIMEOUT)
+                          cwd=str(ROOT), timeout=TIMEOUT, env=env)
 
 
 class TheHarnessesActuallyRun(unittest.TestCase):
@@ -100,9 +121,19 @@ class TheHarnessesActuallyRun(unittest.TestCase):
         ran, failed, silent = [], [], []
         for path in harnesses():
             text = text_of(path)
-            if is_library(text) or needs_network(text):
+            if is_library(text):
                 continue
-            r = run(path)
+            env = None
+            if REPLAY_HOOK in text:
+                fixture = replay_fixture(path)
+                self.assertTrue(fixture.is_file(),
+                                "%s has a replay hook and no record at %s, so it can only run against "
+                                "a live API: record one with HARNESS_RECORD=%s node %s"
+                                % (path.name, fixture, fixture, path.name))
+                env = dict(os.environ, HARNESS_REPLAY=str(fixture.relative_to(ROOT)))
+            elif needs_network(text):
+                continue
+            r = run(path, env)
             ran.append(path.name)
             if r.returncode != 0:
                 failed.append("%s rc=%d: %s" % (path.name, r.returncode,
@@ -114,9 +145,35 @@ class TheHarnessesActuallyRun(unittest.TestCase):
         self.assertEqual(silent, [], "these exit 0 and print nothing, so their assertions may not "
                                      "run at all — say which and why, do not let silence pass: "
                                      + ", ".join(silent))
-        self.assertGreaterEqual(len(ran), 8,
+        self.assertGreaterEqual(len(ran), 9,
                                 "only %d offline harness(es) ran: the set is shrinking, and the "
                                 "pages they guard are then checked by nothing" % len(ran))
+
+    def test_a_replay_that_disagrees_with_the_page_can_actually_fail(self):
+        """The proof the replay is not theatre: break the record, the harness must go red.
+
+        Found while writing the first one, 2026-11-27: the trials harness passed every check against
+        a fixture cut from 50 studies to 3, because its claims are all "at least one" and "some". A
+        replay whose strength depends on a record nobody verified is a green light wired to nothing.
+        The harness now pins that the record fills the requested page, and this test proves the pin
+        bites — by mutating a copy, never the repository's record.
+        """
+        fixture = HARNESSES / "fixtures" / "validate_trials_page.replay.json"
+        if not fixture.is_file():
+            self.skipTest("no trials record to mutate")
+        record = json.loads(fixture.read_text(encoding="utf-8"))
+        studies = (record.get("body") or {}).get("studies")
+        if not isinstance(studies, list) or len(studies) < 5:
+            self.skipTest("the record's shape changed; this test names `body.studies` explicitly")
+        with tempfile.TemporaryDirectory() as td:
+            broken = Path(td) / "broken.replay.json"
+            record["body"]["studies"] = studies[:3]
+            broken.write_text(json.dumps(record), encoding="utf-8")
+            r = run(HARNESSES / "validate_trials_page.mjs", dict(os.environ, HARNESS_REPLAY=str(broken)))
+        self.assertNotEqual(r.returncode, 0,
+                            "a record trimmed to 3 studies still passed: the replay asserts nothing "
+                            "about how much of the world it is looking at")
+        self.assertIn("FAIL", (r.stdout or "") + (r.stderr or ""))
 
     def test_the_network_ones_are_named_rather_than_skipped_in_silence(self):
         live = sorted(p.name for p in harnesses() if needs_network(text_of(p)))
