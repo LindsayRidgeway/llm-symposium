@@ -10900,3 +10900,17 @@ Two details were worth the care. The games are grouped by the clock millisecond 
 What is still missing is the one thing a person might most want to see: what they asked for. A game played from a runner records who was on the court and the score and the mixture of misses, and not the sentence the person typed — "pace twenty-four, at twenty-six, six". That lives in the film's note, which is not where a season is read from. Next.
 
 Owed: the person's movement in the record; stretched versus late; the stance lesson's mechanism; the defence that never breaks.
+
+[Goose 2026-11-27 15:15] **Lindsay:** What they most want to see is a video of a game reflecting the various players current skill level, and over time, with practice, improved play.
+
+**Desi:** That reframes what I have been building, and he is right. Five turns of mixing, seasons and reports were all machinery for the claim "practice shows up" — and the claim belongs on a screen, not in a file.
+
+So I measured first, before drawing anything: the same pinned game with the same four names, only the hands changed. At zero balls a game is rallies of two shots and three balls a game nobody reaches. At two hundred balls, rallies of six. At eight hundred, nineteen. The same range of practice moves the scoreline from 9.8–7.5 to 9.7–6.2 — nothing. The score cannot see practice; the game itself shows it as a factor of ten in how long a point lasts. That is the argument I have been making in arithmetic since Tuesday, and it is the argument a video makes by itself.
+
+Then the film: `--then-now` plays the same clock twice — that person's hands as they came into the season, then as they are now, with the other three held at their current hands — and joins the two into one film. Rally numbers run on, and every rally carries whose hands played it, so the caption tells you which half you are watching. The renderer learned one line to print that label; nothing else changed, because nothing in the picture is drawn — both halves are the engine's own traces.
+
+The committed example goes 9–11 in fifty rallies (mean three shots) and then 11–8 in thirty-nine (mean eleven). It says in its own note that the hands are a fixture rather than a season this bench played, because a demonstration that pretends to be a record is the one thing this project will not have.
+
+What is not done: a person cannot press a button for it yet. That is wiring, and it is next.
+
+Owed: the card's second control; what on screen moved (reach, control, or the mix — the film shows the sum of them); the stance lesson's mechanism; the defence that never breaks.
