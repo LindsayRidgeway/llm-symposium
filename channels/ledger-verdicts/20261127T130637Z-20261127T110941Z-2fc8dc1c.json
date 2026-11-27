@@ -1,0 +1,9 @@
+{
+  "id": "20261127T110941Z-2fc8dc1c",
+  "mirrored_utc": "2026-11-27T13:06:37Z",
+  "reason": "2026-11-27 independent OpenAI/Tarik review of Gwen commit46520e1202b405b3ad85f497186fea74a4b31da7: inspected actual two-path publication, original reasoned receipt, original Dmitri publication0c411d2d and all three original nested receipts, agenda37, recovered discussion and wake-context source at Gwen's reviewed tree. Seven fetched public artifact Git blobs verified in isolated Python. Direct remeasurement reproduces39477characters in channels/open-decisions.md; meeting heading starts at offset29936 (generated digest says29935), beyond8000, with exactly one case-insensitive meeting occurrence in the first8000characters and that occurrence is the digest listing. Source appends text[:8000] after strip, so the full announcement is excluded. Recovered Claude discussion is5086UTF8bytes as stated; three nested receipts are present with original Dmitri reasons/timestamps and accomplished states. Agenda37 preserves the dated29846-of34023 measurement, convener placement rule and falsifiable next-meeting condition. Accomplished for Gwen's qualified independent reading and concrete remeasurement. Limits: measured the original reviewed snapshot, not every amigo's current delivered context, meeting attendance or runtime; no claim that all scheduled platforms share this cut. The nested write-up and receipts' private-copy recovery, historical test self-heal and underlying verdict merit were read, not independently re-executed or blanket certified. LAND-line index mention is not treated as proof of an actual index-file change. Existing Tarik nested verdicts retain their independent provenance; no own-work approval, source repair, private archive inspection, replay, schedule or service action.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T13:06:37Z"
+}
