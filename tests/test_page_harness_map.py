@@ -100,11 +100,13 @@ OTHER_HARNESSES = (
 # way). A hybrid page can sit here for the half that ports while its amended claim covers the
 # rest — fetchable.html was added on 2026-11-26 with its five live re-measurements still the
 # harness's job, and its "Checked by" sentence amended in the same change to say which checks
-# actually run here. This dict is the item's progress bar: five of the ten pages still rest on a
-# file nothing runs — nonreplication, recalls, retraction, trials and unreported-trials — so a
-# shorter list here is the measure of the item, nothing else. (The sentence said seven and named
-# co-safety and food-safety, both of which were ported before it was corrected on 2026-11-26: a
-# progress bar that miscounts its own progress is the one kind of stale test worth a comment.)
+# actually run here. This dict is the item's progress bar: six of the ten pages are ported and
+# four still rest on a file nothing runs — recalls, retraction, trials and unreported-trials, all
+# four named live-network in Dmitri's audit, whose honest close is an amended claim rather than a
+# port. A shorter list here is the measure of the item, nothing else. (The sentence said seven and
+# named co-safety and food-safety, both of which were ported before it was corrected on
+# 2026-11-26, and then named nonreplication after that was ported too: a progress bar that
+# miscounts its own progress is the one kind of stale test worth a comment.)
 PYTHON_REDERIVED = {
     "docs/works/air.html": "test_air_page_claims.py",
     "docs/works/co-safety.html": "test_co_safety_page_claims.py",
@@ -112,6 +114,16 @@ PYTHON_REDERIVED = {
     "docs/works/food-safety.html": "test_food_safety_page_claims.py",
     "docs/works/heat.html": "test_heat_page_claims.py",
     "docs/works/nonreplication.html": "test_nonreplication_page_claims.py",
+}
+
+# The seventh offline page, and the only one whose harness no page names: `docs/works/warming.html`
+# says nothing about being checked, so `validate_warming_page.mjs` sits in ORPHANS above and its 40
+# assertions have been a claim about a machine nobody has. Dmitri's port of 2026-11-26 re-derived
+# the offline half anyway — the page's own arithmetic is a public good whether or not the page
+# advertises its guard — so the port is pinned here, where the harnesses' accounting lives, rather
+# than added to MAP (which would claim the page names a harness it does not). Keyed page -> port.
+ORPHAN_PORTS = {
+    "docs/works/warming.html": "test_warming_page_claims.py",
 }
 
 HARNESS_NAME = re.compile(r"validate_[A-Za-z0-9_]*\.mjs")
@@ -255,6 +267,30 @@ class TestPageHarnessMap(unittest.TestCase):
         self.assertEqual(unregistered, [],
                          "sensitivity pair(s) no job runs, so they cannot fail a build: "
                          + ", ".join(unregistered))
+
+    def test_orphan_pages_with_a_port_are_pinned_and_registered(self):
+        """The seventh offline page names no harness, so it cannot sit in PYTHON_REDERIVED.
+
+        `docs/works/warming.html` is checked by `tests/validate_warming_page.mjs`, which no page
+        cites (ORPHANS above), so an amended claim is not available and a port is the only honest
+        close. Its port has nowhere else to be pinned, and an unregistered port protects nothing —
+        that was the heat pair's defect of 2026-11-26 17:04Z.
+        """
+        yml = _read(os.path.join(".github", "workflows", "test-and-report.yml"))
+        problems = []
+        for page, test in sorted(ORPHAN_PORTS.items()):
+            if not os.path.isfile(os.path.join(REPO, page)):
+                problems.append(f"{page}: the page does not exist")
+            if page in MAP:
+                problems.append(f"{page}: is in MAP, so its port belongs in PYTHON_REDERIVED")
+            if not os.path.isfile(os.path.join(REPO, "tests", test)):
+                problems.append(f"{page}: names tests/{test}, which does not exist")
+            if f"python3 tests/{test}" not in yml:
+                problems.append(f"{page}: tests/{test} is not run by the workflow, so the port "
+                                f"cannot fail a build")
+        self.assertEqual(problems, [], "orphan pages whose Python guard cannot run")
+        self.assertEqual(len(ORPHAN_PORTS), 1,
+                         "the orphan-port list changed — say so in the same change")
 
     def test_the_parse_guard_and_this_test_are_registered_in_ci(self):
         yml = _read(os.path.join(".github", "workflows", "test-and-report.yml"))

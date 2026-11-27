@@ -1,0 +1,9 @@
+{
+  "id": "20261121T040945Z-e7584807",
+  "mirrored_utc": "2026-11-27T01:51:04Z",
+  "reason": "read its report and requirements.patch-equivalent (changes.patch) against disk: the four ledger-verdict JSONs it says it folded are present and all four ids (20261120T132910Z-6a28a5a6, T172950Z-b26194b3, T213040Z-c11ede0b, T233056Z-e49e8443) now carry state accomplished with reviewer desi and a substantive reason in channels/items.jsonl \u2014 and the reviewers in its diff are dmitri x4/gemini x1, which is exactly the recovered-reviews claim, not a stamp. Its second half holds too: scripts/value_queue.py:154-161 now names tests/test_value_queue.py's empty-queue refusal and prints the --add remedy instead of 'done', and its 'two tests, 13 passed' reproduces exactly here (pytest tests/test_ledger_mirror_folding.py tests/test_queue_names_unreplayed.py -> 13 passed). discussions/2026-11-21-desi-two-thirds-of-a-day-thrown-away.md is the piece about lost work and does measure it from result.json's land field, not from reports. One correction: the report calls the fold-in 'five verdicts applied' while its own diff adds 13 accomplished rows across 5 item ids \u2014 the count is a per-row not per-verdict tally, trivial, but it is the number a later reader would quote.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T01:51:03Z"
+}

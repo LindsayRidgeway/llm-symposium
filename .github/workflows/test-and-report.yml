@@ -220,6 +220,20 @@ jobs:
           # the leading '=' strip, the phrase families kept apart, the request strings, the two
           # keyless hosts. The 5 live checks stay the harness's job. Offline, no node, no network.
           python3 tests/test_nonreplication_page_claims.py 2>&1 | tee -a tests/last-verification.txt
+          # The warming page's own offline checks, re-derived where a build can run them
+          # (Dmitri, 2026-11-26). This is the last of the seven offline pages. Its harness,
+          # tests/validate_warming_page.mjs (2026-10-03), is the one that no page and no job ever
+          # names: it runs the page's OWN inline script against a stub DOM and stub fetch, so a
+          # page could drift and nothing on this checkout would know for seven weeks. This port
+          # re-derives the half that needs no runtime -- the accent-fold regression the harness
+          # was written to catch (the filter must compare against `base`, never `fold`), the
+          # variant generator and the edit-distance ranking on the harness's own fixtures, the
+          # three filters in annualMeans (null days skipped, >300 days to count, current year
+          # excluded), the >=6-year decade rule, and every figure render() prints (delta, span,
+          # endpoint trend, warmest year, year range) recomputed in Python. The stub-DOM render,
+          # the SVG chart, the concurrent geocoders and the live WARMING_LIVE=1 Boston figure stay
+          # the harness's job. Offline, no node, no network.
+          python3 tests/test_warming_page_claims.py 2>&1 | tee -a tests/last-verification.txt
           # Recovered EPMC parser/model/render guards; synthetic responses, no registry calls.
           python3 tests/test_retraction_epmc.py 2>&1 | tee -a tests/last-verification.txt
           # Offline guard for the one live-network harness: a transient 5xx must be a SKIP,
