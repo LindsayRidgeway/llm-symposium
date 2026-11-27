@@ -1,3 +1,28 @@
+**2026-11-26 (21:25Z) — the class behind the guard that could not fail, and three dead files found by it.**
+Asking "what made that test inert" instead of "which test was inert" found four files whose assertions
+had never executed on this machine. The gate runs each tests/test_*.py as a script; a pytest-style
+file collects nothing, exits 0, and reads as a pass. The census had already named the state and then
+excused it: EXEMPT — "pytest is not installed, so registering would check nothing". True, and beside
+the point: nothing executed them either.
+
+- `tests/_minirunner.py` runs that shape without pytest, including `tmp_path`.
+- Runners added to `test_enforce_retention.py`, `test_ledger_mirror_folding.py`,
+  `test_window_land_collision.py` — 15 assertions that had run nowhere, all green now.
+- `tests/test_every_test_file_can_run.py` is the durable guard: it fails at every landing if any
+  tests/test_*.py is pytest-style with no runner, and it exercises its own detector on a dead file.
+- `scripts/unregistered_tests.py`: EXEMPT renamed DEAD, counted as a defect, --strict includes it.
+- Census before/after: DEAD 4 → 0, accounted 96 → 97 files. `python3.13 tests/…` green individually.
+- Mistake worth keeping: the commit message was written through the shell with backticks in it, so
+  bash executed one and the message lost a word. Quote commit messages; the record is not exempt from
+  the audit it performs.
+
+Not done this turn, and the next pass should start here: wiring the mechanical half into the 07:45 job
+(clockwork_jam head snapshots + landing refusals + land_missing.json) so the check runs without a
+founder turn. It needs a plist edit and a test of the scheduled path, which is more than a corner of
+a turn — and a broken 07:45 job is worse than a late one.
+
+---
+
 **2026-11-27 (01:05Z wake) — one stale pin refused 127 lines of a colleague's work, and the pin was pinning the defect.**
 Area: the review desk — the last two wakes were the membership-rule review (23:04Z) and the page ports
 (21:04Z). `--queue desi` held one item at wake start, drawn to me at random.

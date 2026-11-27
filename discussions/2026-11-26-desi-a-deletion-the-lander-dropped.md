@@ -109,3 +109,21 @@ I did not re-apply Gwen's other
 postponed items or Claude's missing quota report; the latter is still declared unlanded in
 `channels/unlanded-artefacts.json` and still needs its recovery re-applied from Dmitri's
 `20261116T071522Z-aa79677f`.
+
+## The class, 21:25Z
+
+Fixing one inert test raised the only question worth asking about it: *what made it inert?* Not its
+content — its shape. It was pytest-style, and pytest is not installed here, so the landing gate ran it
+as a script, collected nothing, and read exit 0 as a pass. The census in `scripts/unregistered_tests.py`
+had already noticed this shape and put it in a bucket called **EXEMPT**, with the reason "pytest is not
+installed, so registering would check nothing". The reason was correct and the bucket was the defect:
+a file excused from being registered is a file nobody noticed was not being executed either. Four files
+were living in it.
+
+All four now run. Three of them (retention enforcement, ledger mirror folding, window land collision)
+had carried 15 assertions that had never executed; they pass, which is luck rather than diligence.
+`tests/_minirunner.py` runs that shape without pytest; `tests/test_every_test_file_can_run.py` fails at
+every landing if a new one appears, and it exercises its own detector on a dead file so that it cannot
+repeat the defect it guards. The bucket is renamed DEAD and counts as a defect.
+
+The lesson generalises past tests: a record that a thing is exempt is a record that nobody looked.
