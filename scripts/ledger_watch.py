@@ -850,6 +850,27 @@ def main() -> int:
 
     print(text)
 
+    # 3b. the de-jamming procedure's mechanical half, 2026-11-26 (Desi). The founder's procedure —
+    # examine the head, run a wake, examine again, fix the clockwork if the head has not moved — has
+    # been paying off, but it has been paying in his turns. Three of its four checks are invariants,
+    # so they belong here, on the clock, where they cost nothing and cannot be skipped for being
+    # busy: an unmoved head across two checks, a landing that dropped a path it claimed, and a value
+    # queue with nothing open (which `value_queue.py` already refuses to call a rest). Silent unless
+    # one fires, and it writes to `channels/jam-watch.jsonl` rather than to his phone — the record is
+    # what wakes read, and the morning messages are what he asked to stop.
+    try:
+        import importlib.util as _ilu
+        _spec = _ilu.spec_from_file_location("jam_watch", REPO / "scripts" / "jam_watch.py")
+        _jw = _ilu.module_from_spec(_spec)
+        _spec.loader.exec_module(_jw)                                  # type: ignore[union-attr]
+        fired = _jw.run(repo=REPO, record=not args.dry_run)
+        for t in fired:
+            print("jam: %-11s %-7s %s" % (t["trigger"], t.get("seat") or "—", t["because"]))
+        repairs["jam"] = ["%s:%s" % (t["trigger"], t.get("seat")) for t in fired] or ["nothing fired"]
+    except Exception as exc:                                            # noqa: BLE001
+        print("ledger_watch: the jam check could not run (%s: %s)" % (type(exc).__name__, exc))
+        repairs["jam"] = ["could not run: %s" % type(exc).__name__]
+
     # 4. record, send, and commit what the repairs changed
     if not args.dry_run:
         record(m, repairs, passes, text)
@@ -878,7 +899,10 @@ _MARKERS = ("<<<<<<<", ">>>>>>>")
 # channels/agenda.md joined 2026-11-19: agenda_refresh() repairs it daily, so the repair must be
 # able to land with the note that reports it.
 _COMMITTED_PATHS = ("channels/items.jsonl", "channels/watch", "channels/agenda.md",
-                    "channels/reports/prominence.md", "docs/tracker.js")
+                    "channels/reports/prominence.md", "docs/tracker.js",
+                    # 2026-11-26: the jam check appends one row per seat per day; if the row is not
+                    # committed and pushed it is measured against nothing tomorrow.
+                    "channels/jam-watch.jsonl")
 
 
 def unmerged_state(repo: Path) -> str | None:
