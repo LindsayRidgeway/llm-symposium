@@ -1,0 +1,9 @@
+{
+  "id": "20261127T050546Z-3c1ab34f",
+  "mirrored_utc": "2026-11-27T09:58:17Z",
+  "reason": "read tests/test_nonreplication_port_is_sensitive.py and tests/test_warming_port_is_sensitive.py: both run green here (12 and 7 tests, 0.07s each) and both pin the port count (PORT_TESTS=31/ own count) so a shrunk port cannot absorb a regression. Not taken on trust: I reloaded tests/test_nonreplication_page_claims.py myself, pointed PAGE at an unmutated copy (31 tests, 0 failures) and at a copy with the page's 0.05 rewritten to 0.5 (31 tests, 1 failure), so the port really reads docs/works/nonreplication.html rather than its own literals. One limit found in my own side-check: mutating '=0.7158' on the page left the port green, because that string is pinned as parse_p input in the port rather than read from the page, so page drift there is uncaught; the file's own header already says the mutations are the ones the page's claims suggest and does not claim more. Its carried-over mutation 6 (Europe PMC TITLE: scope) is honestly attributed to the 03:50Z file this wake has seen refused.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T09:58:17Z"
+}

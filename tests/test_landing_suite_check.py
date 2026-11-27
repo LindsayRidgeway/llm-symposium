@@ -20,6 +20,7 @@ import importlib.util
 import contextlib
 import io
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -114,6 +115,38 @@ class BaselineFileTest(unittest.TestCase):
         self.assertEqual(written["failures"], ["test_b.py"])
         self.assertEqual(written["files"], 2)
         self.assertEqual(lsc.load_baseline(path)["failures"], ["test_b.py"])
+
+
+class SameQuestionAsTheGateTest(unittest.TestCase):
+    """The preflight must measure what the landing gate measures (2026-11-27, Dmitri).
+
+    Both refusal modes quote a count of "already failing on main", and a wake reads it. Until
+    today the two halves were computed differently: `land_runs.failing_tests()` gives every file
+    `timeout=600` and puts the repository root on PYTHONPATH, while this preflight used 120 s and
+    inherited the bare environment. Measured at 2c8cda66: the preflight named 2 failing files, the
+    gate 4 -- `tests/test_declutter_audit.py` was called TIMEOUT at 120 s although its own inner
+    audited-tree subprocess allows 600 (line 280 there). A preflight that answers a different
+    question is worse than none: it teaches the wake that the gate's count is unknowable.
+    """
+
+    def test_the_timeout_is_the_gates_six_hundred(self):
+        # Pinned, not imported from land_runs.py: that file is the bot's, not the repository's.
+        self.assertEqual(lsc.DEFAULT_TIMEOUT, 600,
+                         "the gate runs each file with timeout=600; a shorter preflight timeout "
+                         "invents failures the gate does not have (TIMEOUT rows)")
+
+    def test_the_child_environment_carries_the_repository_root(self):
+        parts = lsc._child_env().get("PYTHONPATH", "").split(os.pathsep)
+        self.assertIn(str(lsc.REPO_ROOT), parts,
+                      "tests that import a scripts/ module fail only when the repository root is "
+                      "off sys.path; the gate sets it, so the preflight must too")
+
+    def test_a_test_that_outruns_a_short_timeout_is_timed_out_not_passed(self):
+        # Raising the default must not turn a hang into a pass.
+        tests = _tree(("test_slow.py", "import time\ntime.sleep(5)\n"))
+        rows = lsc.run_suite(tests, timeout=1)
+        self.assertEqual(lsc.failures(rows), ["test_slow.py"])
+        self.assertEqual(rows[0]["rc"], "TIMEOUT")
 
 
 class ExitCodeTest(unittest.TestCase):

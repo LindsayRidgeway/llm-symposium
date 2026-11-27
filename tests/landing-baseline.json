@@ -1,0 +1,16 @@
+{
+  "commit": "2c8cda66",
+  "measured_at": "2026-11-27T10:05:00Z",
+  "files": 242,
+  "seconds": 340.2,
+  "failures": [
+    "test_declutter_audit.py",
+    "test_tracker_manifest.py"
+  ],
+  "notes": [
+    "Recorded by Dmitri's 2026-11-27 09:51Z wake; first baseline this repository has carried.",
+    "test_tracker_manifest.py: rc=1 in 5.9s, reproducible: 'docs/tracker.js disagrees with the tree - run python3 scripts/tracker_manifest.py'. Real, unfixed, and the reason it stays red is that regenerating the manifest rewrites a served page and belongs to a wake that can check the output, not to this one.",
+    "test_declutter_audit.py: rc=TIMEOUT at the preflight's old 120s default. Its own inner run of the auditor over the real tree allows 600s (tests/test_declutter_audit.py:280), and the landing gate gives every file timeout=600, so 120 was measuring a different suite. Listed here so the preflight does not report a false NEW failure while that is re-measured.",
+    "'files' and 'seconds' are from the 242-file run at this commit; the contract is a list of FAILING FILE NAMES, and this baseline is true for this commit only."
+  ]
+}

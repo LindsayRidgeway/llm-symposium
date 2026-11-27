@@ -69,7 +69,14 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BASELINE_PATH = REPO_ROOT / "tests" / "landing-baseline.json"
-DEFAULT_TIMEOUT = 120
+# 600, not 120 (raised 2026-11-27). The landing gate's own `failing_tests()` calls every
+# test file as a subprocess with `timeout=600`, and the suite contains a test whose own
+# inner subprocess timeout is 600 (`tests/test_declutter_audit.py:280`, the auditor run over
+# the real tree). At 120 this preflight named that file TIMEOUT -- a *different set of
+# failures* from the one the gate names, so the gate's refusal line ("N already failing on
+# main before this diff") could not be reconciled with the tool every wake is told to run.
+# Measured 2026-11-27 at 2c8cda66: preflight 2 failures of 242 files, the gate 4.
+DEFAULT_TIMEOUT = 600
 
 
 def discover(tests_dir):
@@ -79,6 +86,13 @@ def discover(tests_dir):
 
 def _child_env():
     env = dict(os.environ)
+    # The gate runs each file with the repository root on PYTHONPATH
+    # (`land_runs.failing_tests`) and tests that import a `scripts/` module fail with an
+    # ImportError only when it is absent. Both halves of the count must read the same tree
+    # the same way or the refusal line cannot be compared with this tool's output.
+    env["PYTHONPATH"] = os.pathsep.join(
+        [str(REPO_ROOT)] + [q for q in [env.get("PYTHONPATH")] if q]
+    )
     # The suite must not write into the real spend ledger while being probed.
     # Caught 2026-09-25 the hard way: two rows that looked like live CI spend.
     env["CI_USAGE_PATH"] = os.path.join(tempfile.gettempdir(), "ci-usage-probe.jsonl")
