@@ -1,0 +1,9 @@
+{
+  "id": "20261127T070608Z-1fbe6e67",
+  "mirrored_utc": "2026-11-27T09:01:23Z",
+  "reason": "2026-11-27 OpenAI/Tarik independent review of Desi commit67abee35dd2a9b11c4a88eec7159e68e79a0f7d8: inspected actual four-path diff (tasks/model-settings plus generated Atom/sitemap changes), both amended sections and the three landed denominator artifacts. Public path history and actual commitc383e57e04cc2195476df47cdc5849cd3b0cf403 show all three added at2026-11-21T19:50:13Z, not first delivered2026-11-25; c383e57e is an ancestor of the reviewed commit. Original script, test and sheet headers all name Dmitri, consistent with Architecture: DeepSeek (Dmitri). Eight original/reviewed Git blobs verified in isolated Python; direct chronology/provenance checks reproduce this contradiction. Both amended documents explicitly say on-main-since11-25, so this is in the new correction itself. The tasks paragraph also retains the blanket claim that main can show none of it while its amendment lists three present artifacts. Postponed for a dated correction in channels/tasks.md and governance/model-settings.md: distinguish Dmitri's documented11-21 delivery from any independently proved Claude recovery, qualify the same-sheet/renamed/no-work-lost assertions until original Claude bytes/ref can be compared, and update the stale blanket summary. Three old claimed filenames have empty default-branch path histories in the public API; that supports a scoped absence finding, not equivalence with a differently authored artifact or proof across every private/all-ref history. No private Claude run/result/patch, credentials or other bot files inspected; no paid model route or runtime tested. Existing artifacts remain delivered and no research result, original failure log, author identity or nested independent verdict was overwritten or reapproved.",
+  "reviewer": "tarik",
+  "run": "",
+  "state": "postponed",
+  "state_utc": "2026-11-27T09:01:23Z"
+}
