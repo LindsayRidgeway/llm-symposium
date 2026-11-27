@@ -86,6 +86,9 @@ ORPHANS = (
 # `.mjs` files under tests/ that are not page harnesses at all: the retraction page's
 # registry and voice checks. Listed so the total stays legible.
 OTHER_HARNESSES = (
+    # A module, not a harness: `tests/harness_net.mjs` answers a harness's fetch from a recorded
+    # response so the page can be checked at every landing without the network (2026-11-27).
+    "harness_net.mjs",
     "retraction_voice.mjs",
     "test_retraction_epmc.mjs",
     "test_retraction_registry_boundary.mjs",
@@ -227,7 +230,7 @@ class TestPageHarnessMap(unittest.TestCase):
                          "move it from ORPHANS into MAP; if one was deleted, say so")
 
     def test_every_js_harness_is_accounted_for(self):
-        """The sixteen: MAP's named set + ORPHANS + OTHER_HARNESSES."""
+        """Every .mjs under tests/: MAP's named set + ORPHANS + OTHER_HARNESSES."""
         named = {n for names in MAP.values() for n in names}
         accounted = named | set(ORPHANS) | set(OTHER_HARNESSES)
         on_disk = set(_on_disk())

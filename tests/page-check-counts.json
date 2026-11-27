@@ -1,0 +1,18 @@
+{
+ "harnesses": {
+  "validate_air_quality_page.mjs": 56,
+  "validate_co_safety_page.mjs": 43,
+  "validate_fetchable_page.mjs": 16,
+  "validate_food_safety_page.mjs": 56,
+  "validate_heat_page.mjs": 57,
+  "validate_nonreplication_page.mjs": 37,
+  "validate_ors_calculator.mjs": 135,
+  "validate_recalls_page.mjs": 94,
+  "validate_retraction_page.mjs": 81,
+  "validate_trials_page.mjs": 34,
+  "validate_unreported_trials_page.mjs": 54,
+  "validate_warming_page.mjs": 29
+ },
+ "method": "lines in the harness's own output beginning `ok` or `PASS`",
+ "recorded_at": "2026-11-27T18:00:59Z"
+}

@@ -1,3 +1,27 @@
+**2026-11-27 (fifth turn) — the numbers the pages print to strangers, re-derived; two were wrong, and a third went wrong an hour after I fixed the first two.**
+`page-check-counts-frozen`, built and closed. `scripts/page_check_counts.py` runs each harness and
+counts its own check lines; `tests/page-check-counts.json` records 12 harnesses / 692 checks;
+`tests/test_page_check_counts.py` compares three things at every landing — the printed number against
+the record, the record against the harness for every harness that runs offline, and a floor on how many
+printed numbers the parser found (a parser that silently matches nothing is the loudest possible lie).
+
+Measured findings, all repairs:
+- `docs/works/index.html`: unreported-trials said **50**, harness runs **54**; recalls said **60**,
+  harness runs **94**. Both understated — safe direction, still false. Corrected, and each card's
+  amendment now says what it said before and why it moved.
+- `docs/works/trials.html`: said "all **33** checks pass", harness runs **34** — and that one is mine,
+  introduced an hour earlier when I added the page-fill pin to the trials harness in the *previous*
+  turn. The page that promises a stranger a number was stale because I changed the code and not the
+  page. Corrected, with the reason in its amendment.
+- The guard was widened mid-turn for that reason: it now checks *every* page that prints a count and
+  names exactly one harness, not just the index. `test_page_harness_map.py` also had to learn that
+  `harness_net.mjs` is a module, not a harness — 17 `.mjs` files under tests/ now.
+
+Lesson worth keeping: I verified the index, corrected it, and pushed past the page that carried the
+same claim. "Every place a number is printed" is a list, and I had checked one entry of it.
+
+---
+
 **2026-11-27 (fourth turn) — a test file that loses test methods now fails by name, and the case that motivated it was mine.**
 `test-count-cannot-quietly-drop`, built. `scripts/test_count_baseline.py` records how many `def test_`
 each file in `tests/` carries — 247 files, 3025 methods at 2be6ecbf — and
