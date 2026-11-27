@@ -207,6 +207,47 @@ class AnUndoWithoutASnapshotDoesNotGuess(Base):
         self.assertIn("revert", text, "a snapshot-less revert left no line in the mutation log")
 
 
+class TheTripwireNoticesASweep(Base):
+    """The signature of the 2026-11-27 loss, made visible at the next landing.
+
+    No prevention is claimed: a `git restore` from another program cannot be stopped by anything in
+    the lander. What is claimed is that the next time a session's modified file goes back to an
+    older content with no commit in between, `.git/mutation.log` names the paths and the window.
+    It fired twice on 2026-11-27 while this very file was being written — 20:51:25Z and again four
+    minutes later — and neither event left a line anywhere, which is the whole reason for it.
+    """
+
+    def test_a_modified_file_going_clean_without_a_commit_is_named(self):
+        (self.repo / "insights" / "note.md").write_text("a paragraph in flight\n", encoding="utf-8")
+        self.mod._tree_watch("test sample one")
+        self.git_restore("insights/note.md")
+        out = self.mod._tree_watch("test sample two")
+        self.assertIn("insights/note.md", out["vanished"], "the sweep was not noticed: %s" % out)
+        text = self.log.read_text(encoding="utf-8") if self.log.is_file() else ""
+        self.assertIn("vanished", text, "the sweep was noticed and not written down")
+        self.assertIn("insights/note.md", text)
+
+    def test_a_committed_file_is_not_a_sweep(self):
+        (self.repo / "insights" / "note.md").write_text("landed properly\n", encoding="utf-8")
+        self.mod._tree_watch("test sample one")
+        git(self.repo, "commit", "-qam", "a real commit")
+        out = self.mod._tree_watch("test sample two")
+        self.assertEqual(out["vanished"], [],
+                         "a commit was reported as a sweep, which would make the tripwire noise")
+
+    def test_a_file_still_dirty_is_left_alone(self):
+        (self.repo / "insights" / "note.md").write_text("still being written\n", encoding="utf-8")
+        self.mod._tree_watch("test sample one")
+        (self.repo / "insights" / "note.md").write_text("still being written, more\n",
+                                                        encoding="utf-8")
+        out = self.mod._tree_watch("test sample two")
+        self.assertEqual(out["vanished"], [], "ordinary editing was reported as a loss")
+
+    def git_restore(self, path):
+        subprocess.run(["git", "-C", str(self.repo), "checkout", "--", path],
+                       capture_output=True, text=True)
+
+
 class TheSixCopiesAreStillTheSameEngine(unittest.TestCase):
     """`land_runs.py` is not one of the shared modules `deploy_engines.py` copies: it exists six
     times, one per body, differing only in the name on the commit. Before 2026-11-27 that was a

@@ -216,6 +216,14 @@
       "status": "open",
       "progress": "",
       "last_worked": null
+    },
+    {
+      "id": "a-sweep-that-leaves-no-receipt",
+      "title": "A tracked file that goes back to an older content without a commit is named, and the operation that does it is found",
+      "done_when": "the sweep that restored six files at 2026-11-27T20:51:25Z is explained \u2014 which process ran it and with what command \u2014 and the next one is named in .git/mutation.log within one landing by the lander's _tree_watch tripwire rather than by a session noticing",
+      "status": "open",
+      "progress": "",
+      "last_worked": null
     }
   ]
 }

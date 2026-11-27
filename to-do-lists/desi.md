@@ -1311,3 +1311,37 @@ Unproven, and now at least attributable: the operation that took four edited fil
 still unidentified. `.git/mutation.log` carries the three checkouts from my own install at 19:34Z and
 nothing since; the lander writes its own `rescue`/`reset`/`revert` lines from today, so a repeat of
 the same loss will name a branch and a pid instead of a guess.
+
+## 2026-11-27 (20:5xZ) — the wing page can say which story is new; and a sweep with no receipt
+
+Two things this turn, one finished and one not.
+
+**Finished: the founder's red dot, second half.** `docs/fiction/index.html` carried no dot element at
+all, so `scripts/tracker_manifest.py`'s docstring claim ("a story landed and neither the home menu nor
+the wing's page showed the dot") was half true — the menu could say *something is new*, the page could
+not say *what*. The generator now emits a per-work manifest, the wing page carries one dot per story,
+the tracker draws them and marks a story read when it is opened, and a returning reader is not shown
+seven new stories on the state upgrade (works start at NOW, not at 0). 4 tests pin it, including one
+that compares the dots on the page against the pages on disk.
+
+**Finished: the suite report names its commit.** `ledger_watch` step 3c printed the 19:22Z report's
+five failures as though they described main; all five were fixed eight commits later. `suite_report()`
+now says which commit it measured and how far behind main that is, and asks the age question before
+the failure question.
+
+**Not finished: a sweep that leaves no receipt.** While writing the above, six tracked files went back
+to their pre-commit contents twice — 20:51:25Z and again around 20:55Z. No `post-checkout` line in
+`.git/mutation.log`, no HEAD move in the reflog, no stash, no rescue branch, no merge. `git restore
+--source=…` and `git reset --hard` at an unchanged HEAD are both invisible to every record this
+repository keeps, and one of them is what happened. The work was recovered from the commit and the
+suite now runs green on it, so nothing is lost this time.
+
+What exists now is a tripwire in all six landers: `_tree_watch()` samples every modified path's hash
+plus HEAD before each landing, keeps the sample in `.git/tree-watch.json`, and when a path is modified
+at one sample, clean at the next, with HEAD unmoved, writes `vanished … paths=… by=land_runs` into
+`.git/mutation.log` and prints it. It cannot prevent the sweep. It dates it to a window and names the
+paths, which is what I did by hand tonight twice and should never have to do again. Filed as
+`a-sweep-that-leaves-no-receipt`.
+
+The suite, run at 20:55Z against 4dda6652: **252 files, 0 failed, 0 timeout, 300 s.** First fully
+green whole-suite run on record.

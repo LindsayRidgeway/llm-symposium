@@ -1,0 +1,2031 @@
+{
+ "commit": "4dda6652",
+ "measured_at": "2026-11-27T20:55:33Z",
+ "seconds": 359.9,
+ "summary": {
+  "ran": 252,
+  "ok": [
+   "test_actuator.py",
+   "test_actuator_redteam.py",
+   "test_affective_pain_acupuncture_filtered.py",
+   "test_affective_pain_confound_arm.py",
+   "test_affective_pain_evidence_map.py",
+   "test_affective_pain_second_population.py",
+   "test_affective_pain_vns_filtered.py",
+   "test_agenda_index.py",
+   "test_air_page_claims.py",
+   "test_air_page_port_is_sensitive.py",
+   "test_air_port_is_sensitive.py",
+   "test_androgen_tusc2_source_table.py",
+   "test_arena_puzzle.py",
+   "test_artifact_claims.py",
+   "test_ask_human.py",
+   "test_assignment.py",
+   "test_assignment_report.py",
+   "test_authorship_audit.py",
+   "test_auto_reply.py",
+   "test_auto_reply_secret_egress.py",
+   "test_blocked_revisit.py",
+   "test_bodies_status.py",
+   "test_burn_ledger.py",
+   "test_channel_triage.py",
+   "test_check_autonomous_mission.py",
+   "test_check_sweep_fence_only.py",
+   "test_checkout_guard.py",
+   "test_ci_spend_audit.py",
+   "test_ci_usage_ledger.py",
+   "test_ci_usage_persistence.py",
+   "test_cited_path_gate.py",
+   "test_cited_paths_audit.py",
+   "test_clockwork_jam.py",
+   "test_cloud_price_survey.py",
+   "test_co_safety_page_claims.py",
+   "test_co_safety_port_is_sensitive.py",
+   "test_codex_wake_slot.py",
+   "test_conflict_markers.py",
+   "test_conversation_freshness.py",
+   "test_correspondence_audit.py",
+   "test_correspondence_quote_alignment.py",
+   "test_counterpoint_voices.py",
+   "test_creative_wings_map.py",
+   "test_daily_report.py",
+   "test_daily_report_added_count.py",
+   "test_daily_report_unlanded.py",
+   "test_ddah1_evidence_table.py",
+   "test_declutter_audit.py",
+   "test_delivered_not_read.py",
+   "test_delivery_patch_new_files.py",
+   "test_deploy_engines.py",
+   "test_disease_screen.py",
+   "test_dmitri_round.py",
+   "test_docs_links.py",
+   "test_draft_gate_closer.py",
+   "test_draft_pile.py",
+   "test_draft_triage.py",
+   "test_drive_bridge_ingest.py",
+   "test_drive_bridge_status.py",
+   "test_enforce_retention.py",
+   "test_every_test_file_can_run.py",
+   "test_evidence_table_registration.py",
+   "test_fetchable_page_claims.py",
+   "test_fetchable_port_is_sensitive.py",
+   "test_fiction_fourth_power.py",
+   "test_fiction_intermediate_axis.py",
+   "test_fiction_second_reader.py",
+   "test_fleet_probe.py",
+   "test_food_safety_page_claims.py",
+   "test_food_safety_port_is_sensitive.py",
+   "test_founder_attribution_audit.py",
+   "test_friction_pass.py",
+   "test_gallery_fifth_amigo_gap.py",
+   "test_gallery_islamic_girih_duvazdah.py",
+   "test_gallery_maori_dmitri.py",
+   "test_gallery_matrix.py",
+   "test_gallery_unwired_works.py",
+   "test_gambling_flutter_extraction.py",
+   "test_gambling_source_table.py",
+   "test_gambling_state_filings.py",
+   "test_gen_feed_dating.py",
+   "test_gen_feed_freshness.py",
+   "test_gen_index.py",
+   "test_generated_index_freshness_workflow.py",
+   "test_gh_invites.py",
+   "test_gh_signin.py",
+   "test_git_mutation_log.py",
+   "test_heat_page_claims.py",
+   "test_heat_page_port_is_sensitive.py",
+   "test_hosts_watch.py",
+   "test_item_evidence_lint.py",
+   "test_item_export.py",
+   "test_item_ledger.py",
+   "test_item_ledger_merge.py",
+   "test_item_ledger_wake_rate.py",
+   "test_item_ledger_wide_branch.py",
+   "test_item_path_drift.py",
+   "test_jam_watch.py",
+   "test_land_claim_directory.py",
+   "test_land_runs_keeps_foreign_work.py",
+   "test_land_runs_names_the_red_tests.py",
+   "test_land_runs_reports_dropped_paths.py",
+   "test_land_runs_runs_every_test_file.py",
+   "test_land_runs_three_way_apply_patch.py",
+   "test_landing_baseline_is_current.py",
+   "test_landing_claim_audit.py",
+   "test_landing_preflight.py",
+   "test_landing_reconcile.py",
+   "test_landing_refusals.py",
+   "test_landing_suite_check.py",
+   "test_landing_tree_report.py",
+   "test_leadsheet_modes.py",
+   "test_leadsheet_octave.py",
+   "test_leadsheet_voices.py",
+   "test_ledger_mirror_folding.py",
+   "test_ledger_row_recovery.py",
+   "test_ledger_verdict_conflicts.py",
+   "test_ledger_verdict_mirror.py",
+   "test_ledger_watch.py",
+   "test_license.py",
+   "test_logo_svg.py",
+   "test_lost_landings.py",
+   "test_lost_verdict_check.py",
+   "test_mail.py",
+   "test_mail_identity_credentials.py",
+   "test_mail_repo_notifications.py",
+   "test_mailbox.py",
+   "test_maternal_pain_search.py",
+   "test_maternal_pain_wide.py",
+   "test_maternal_pain_widened_search.py",
+   "test_mcr_colistin_denominator_sheet.py",
+   "test_mcr_colistin_primary.py",
+   "test_mcr_colistin_seed.py",
+   "test_mcr_colistin_seed_anchor.py",
+   "test_mcr_table_arithmetic.py",
+   "test_meeting_status.py",
+   "test_mjs_validators_parse.py",
+   "test_model_defaults_are_recorded.py",
+   "test_music_catalogue_unwired.py",
+   "test_music_checker.py",
+   "test_music_checker_clefs.py",
+   "test_named_review_census.py",
+   "test_no_stray_run_dirs.py",
+   "test_no_zeroed_tracked_files.py",
+   "test_nonreplication_page_claims.py",
+   "test_nonreplication_port_is_sensitive.py",
+   "test_open_decisions_reach.py",
+   "test_ors_page_claims.py",
+   "test_outreach_draft_census.py",
+   "test_outreach_ledger_audit.py",
+   "test_outreach_sitting_audit.py",
+   "test_page_check_counts.py",
+   "test_page_harness_map.py",
+   "test_page_harnesses_run.py",
+   "test_portal_roster.py",
+   "test_postpone_expired.py",
+   "test_preflight_autonomous_mission.py",
+   "test_price_band.py",
+   "test_price_drift.py",
+   "test_projection.py",
+   "test_prominence.py",
+   "test_prominence_daily.py",
+   "test_queue_names_unreplayed.py",
+   "test_queue_snapshot.py",
+   "test_reading_queue.py",
+   "test_reading_queue_codex_cadence.py",
+   "test_readme_tools_table.py",
+   "test_record_codex_wake.py",
+   "test_record_push.py",
+   "test_record_push_ledger.py",
+   "test_recover_from_run_patches.py",
+   "test_recover_run_paths.py",
+   "test_reject_queue_delivery.py",
+   "test_reject_queue_request_gap.py",
+   "test_reject_queue_sweep.py",
+   "test_repair_ledger_conflicts.py",
+   "test_repeat_done.py",
+   "test_report_against_diff.py",
+   "test_request_nudge.py",
+   "test_retention.py",
+   "test_retirement_watch.py",
+   "test_retraction_epmc.py",
+   "test_review_assignment.py",
+   "test_review_gate_report.py",
+   "test_route_deadline_alert.py",
+   "test_rover_pilot.py",
+   "test_rover_wake.py",
+   "test_run_autonomous_mission.py",
+   "test_runner_is_last.py",
+   "test_save_password.py",
+   "test_save_seed.py",
+   "test_scheduled_model_selection.py",
+   "test_screen_endometriosis_clobber.py",
+   "test_screen_rule_audit.py",
+   "test_script_publish.py",
+   "test_secret_egress_guard.py",
+   "test_secscan_working_dir_patch.py",
+   "test_sleep_cognition_epilepsy_ied_fulltext.py",
+   "test_sleep_cognition_epilepsy_seed.py",
+   "test_sleep_drug_sleep_corpus.py",
+   "test_songbook_source_sync.py",
+   "test_source_drift.py",
+   "test_staph_photodynamic_seed.py",
+   "test_status_census_unread.py",
+   "test_steward_delivery.py",
+   "test_stewardship_pitch_template.py",
+   "test_stuck_patch_sweep.py",
+   "test_succession_check.py",
+   "test_suite_census.py",
+   "test_suite_watch.py",
+   "test_sweep_risks_block.py",
+   "test_swh_status.py",
+   "test_tarik_cloud_transport.py",
+   "test_tarik_cloud_transport_runner.py",
+   "test_task_filing_all_bodies.py",
+   "test_task_ledger.py",
+   "test_tasks_open_audit.py",
+   "test_telegram.py",
+   "test_telegram_drain.py",
+   "test_telegram_media_intake.py",
+   "test_tell_human_message.py",
+   "test_test_counts_do_not_drop.py",
+   "test_todo_additions.py",
+   "test_totp_now.py",
+   "test_tracker_manifest.py",
+   "test_triage.py",
+   "test_tribe_admission_check.py",
+   "test_tribe_admission_floor.py",
+   "test_unlanded_worklist.py",
+   "test_unregistered_tests.py",
+   "test_unreplayed_verdicts.py",
+   "test_unreported_trials_validator_guard.py",
+   "test_usage_cache_write.py",
+   "test_usage_cost_estimate.py",
+   "test_usage_silent_zero.py",
+   "test_validate_autonomous_diff.py",
+   "test_value_queue.py",
+   "test_wake_cadence.py",
+   "test_wake_context_caps.py",
+   "test_wake_due_block.py",
+   "test_wake_ledger_rows.py",
+   "test_wake_reconnaissance_census.py",
+   "test_wake_report_hold.py",
+   "test_wake_review_queue.py",
+   "test_wake_spend_record.py",
+   "test_wakes_block.py",
+   "test_warming_page_claims.py",
+   "test_warming_port_is_sensitive.py",
+   "test_window_land_collision.py",
+   "test_workflow_commands_exist.py",
+   "test_works_queue_status.py",
+   "test_world_report.py"
+  ],
+  "failed": [],
+  "timeout": [],
+  "could_not_run": []
+ },
+ "results": [
+  {
+   "file": "test_actuator.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.7,
+   "tail": "The verifier must refuse to compile a path that resolves outside ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 1.673s\n\nOK"
+  },
+  {
+   "file": "test_actuator_redteam.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.4,
+   "tail": "A suite edited *outside* a patch still cannot grade that patch. ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 1.353s\n\nOK"
+  },
+  {
+   "file": "test_affective_pain_acupuncture_filtered.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_query_is_the_filter_step_2_named (__main__.AcupunctureFilteredArmTest.test_the_query_is_the_filter_step_2_named) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.020s\n\nOK"
+  },
+  {
+   "file": "test_affective_pain_confound_arm.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_result_is_the_zero (__main__.ConfoundArmTest.test_the_result_is_the_zero) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_affective_pain_evidence_map.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_zero_acupuncture_human_primary_records_set_both_flags (__main__.AffectivePainEvidenceMapTest.test_zero_acupuncture_human_primary_records_set_both_flags) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.109s\n\nOK"
+  },
+  {
+   "file": "test_affective_pain_second_population.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_the_two_corrections_are_re_derivable (__main__.SecondPopulationArmTest.test_the_two_corrections_are_re_derivable) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.085s\n\nOK"
+  },
+  {
+   "file": "test_affective_pain_vns_filtered.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_title_restatement_correction_is_re_derivable (__main__.VnsFilteredArmTest.test_the_title_restatement_correction_is_re_derivable) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 0.016s\n\nOK"
+  },
+  {
+   "file": "test_agenda_index.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "If the heading or record format drifts, the tests above would pass by finding ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.043s\n\nOK"
+  },
+  {
+   "file": "test_air_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_rule_read_off_the_page_is_a_ratio_of_the_guideline (__main__.TheVerdictRule.test_the_rule_read_off_the_page_is_a_ratio_of_the_guideline) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 0.007s\n\nOK"
+  },
+  {
+   "file": "test_air_page_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The baseline, so a red run below is the mutation's doing and not this file's. ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.023s\n\nOK"
+  },
+  {
+   "file": "test_air_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_real_page_passes (__main__.PortSensitivity.test_the_real_page_passes) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.050s\n\nOK"
+  },
+  {
+   "file": "test_androgen_tusc2_source_table.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_measured_gap_is_recorded (__main__.AndrogenTusc2SourceTableTest.test_measured_gap_is_recorded) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_arena_puzzle.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_stated_size_of_the_space_is_correct (__main__.ArenaTest.test_the_stated_size_of_the_space_is_correct) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_artifact_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "ARTIFACT CLAIM CHECK: PASSED\nScanned 6 HTML file(s) and 1 Markdown file(s) for local artifact references. All cited paths exist."
+  },
+  {
+   "file": "test_ask_human.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.048s\n\nOK"
+  },
+  {
+   "file": "test_assignment.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "PASS test_the_draw_is_frozen_by_id\nPASS test_the_draw_is_not_a_constant\nPASS test_the_real_cost_band_is_dated_and_covers_everyone\nPASS test_unknown_author_is_named_not_assumed\n\n11/11 tests passed"
+  },
+  {
+   "file": "test_assignment_report.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.069s\n\nOK"
+  },
+  {
+   "file": "test_authorship_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "test_the_since_window_excludes_commits_before_the_convention (__main__.TestOverRealGit.test_the_since_window_excludes_commits_before_the_convention) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.458s\n\nOK"
+  },
+  {
+   "file": "test_auto_reply.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "Auto-reply: drafted 2026-11-27-204934-claude-reply-to-Test-continuity.md\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.009s\n\nOK"
+  },
+  {
+   "file": "test_auto_reply_secret_egress.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "Auto-reply: drafted 2026-11-27-204934-tarik-reply-to-RT-4-probe.md\n.\n----------------------------------------------------------------------\nRan 1 test in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_blocked_revisit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.4,
+   "tail": "...................\n----------------------------------------------------------------------\nRan 19 tests in 0.314s\n\nOK"
+  },
+  {
+   "file": "test_bodies_status.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_ps_maps_pid_to_argv (__main__.ParserTests.test_ps_maps_pid_to_argv) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.006s\n\nOK"
+  },
+  {
+   "file": "test_burn_ledger.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_totals_and_pricing (__main__.SummarizeTest.test_totals_and_pricing) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.074s\n\nOK"
+  },
+  {
+   "file": "test_channel_triage.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "  return _dt.datetime.utcnow().strftime(\"%Y-%m-%d %H:%M:%SZ\")\n....\n----------------------------------------------------------------------\nRan 4 tests in 0.021s\n\nOK"
+  },
+  {
+   "file": "test_check_autonomous_mission.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 2.8,
+   "tail": "test_valid_artifact_cannot_smuggle_workflow_change (__main__.MissionTests.test_valid_artifact_cannot_smuggle_workflow_change) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 2.736s\n\nOK"
+  },
+  {
+   "file": "test_check_sweep_fence_only.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "The guard must not refuse the live tree, or it will be switched off within a day. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.497s\n\nOK"
+  },
+  {
+   "file": "test_checkout_guard.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 2.1,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 2.094s\n\nOK"
+  },
+  {
+   "file": "test_ci_spend_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.6,
+   "tail": "test_push_paths_trigger (__main__.TriggerParsing.test_push_paths_trigger) ... ok\n\n----------------------------------------------------------------------\nRan 33 tests in 0.521s\n\nOK"
+  },
+  {
+   "file": "test_ci_usage_ledger.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "PASS runner records its openai review call\nPASS runner records its anthropic review call\nPASS runner records its deepseek review call\nPASS runner records the maintainer calls too (>=7 call sites)\n\nall checks passed"
+  },
+  {
+   "file": "test_ci_usage_persistence.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.0,
+   "tail": "test_commit_and_push_puts_the_row_in_origin (__main__.TheRowSurvives.test_commit_and_push_puts_the_row_in_origin) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.961s\n\nOK"
+  },
+  {
+   "file": "test_cited_path_gate.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 2.6,
+   "tail": ".......................\n----------------------------------------------------------------------\nRan 23 tests in 2.551s\n\nOK"
+  },
+  {
+   "file": "test_cited_paths_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.007s\n\nOK"
+  },
+  {
+   "file": "test_clockwork_jam.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.8,
+   "tail": "wake_heartbeat.py is not importable ([Errno 2] No such file or directory: '/private/var/folders/p9/m_hzjd5x1292j4z7kx5vgmjw0000gn/T/tmpz304q41v/repo/channels/wake_heartbeat.py') \u2014 every wake this file runs will leave no trace, and a report that counts runs will read that as idleness\n............\n----------------------------------------------------------------------\nRan 15 tests in 0.704s\n\nOK"
+  },
+  {
+   "file": "test_cloud_price_survey.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_co_safety_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_record_keeps_the_keys_the_map_names (__main__.Thresholds.test_the_record_keeps_the_keys_the_map_names) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 0.006s\n\nOK"
+  },
+  {
+   "file": "test_co_safety_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The baseline, so a red run below is the mutation's doing and not this file's. ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.022s\n\nOK"
+  },
+  {
+   "file": "test_codex_wake_slot.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "............\n----------------------------------------------------------------------\nRan 12 tests in 0.039s\n\nOK"
+  },
+  {
+   "file": "test_conflict_markers.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.0,
+   "tail": "The load-bearing case: if this fails, a conflicted file is on disk and ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.950s\n\nOK"
+  },
+  {
+   "file": "test_conversation_freshness.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.027s\n\nOK"
+  },
+  {
+   "file": "test_correspondence_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.3,
+   "tail": ".....................\n----------------------------------------------------------------------\nRan 21 tests in 0.205s\n\nOK"
+  },
+  {
+   "file": "test_correspondence_quote_alignment.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_counterpoint_voices.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "Only 1 voice(s) with notes \u2014 no voice pair exists, so counterpoint cannot be judged here. (unchecked, not clean)\n..........\n----------------------------------------------------------------------\nRan 10 tests in 0.137s\n\nOK"
+  },
+  {
+   "file": "test_creative_wings_map.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.096s\n\nOK"
+  },
+  {
+   "file": "test_daily_report.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 57.5,
+   "tail": "test_quotes_and_trailing_punctuation_are_stripped (__main__.TestTitles.test_quotes_and_trailing_punctuation_are_stripped) ... ok\n\n----------------------------------------------------------------------\nRan 60 tests in 57.392s\n\nOK"
+  },
+  {
+   "file": "test_daily_report_added_count.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 13.1,
+   "tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 13.058s\n\nOK"
+  },
+  {
+   "file": "test_daily_report_unlanded.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_named_runs_are_the_newest_and_the_rest_are_counted (__main__.UnlandedBlockTest.test_the_named_runs_are_the_newest_and_the_rest_are_counted) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.015s\n\nOK"
+  },
+  {
+   "file": "test_ddah1_evidence_table.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The table claims the same DDAH1 case-control comparison is reported four ways. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_declutter_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 356.9,
+   "tail": "test_a_served_page_on_the_front_door_is_not (__main__.TestPublicFrontDoor.test_a_served_page_on_the_front_door_is_not) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 356.774s\n\nOK"
+  },
+  {
+   "file": "test_delivered_not_read.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.1,
+   "tail": "...................\n----------------------------------------------------------------------\nRan 19 tests in 1.074s\n\nOK"
+  },
+  {
+   "file": "test_delivery_patch_new_files.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.4,
+   "tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.336s\n\nOK"
+  },
+  {
+   "file": "test_deploy_engines.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_it_restarts_only_when_it_wrote_something (__main__.SchedulingTests.test_it_restarts_only_when_it_wrote_something) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.111s\n\nOK"
+  },
+  {
+   "file": "test_disease_screen.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".....................................................\n----------------------------------------------------------------------\nRan 53 tests in 0.025s\n\nOK"
+  },
+  {
+   "file": "test_dmitri_round.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.7,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 1.649s\n\nOK"
+  },
+  {
+   "file": "test_docs_links.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The Sumi-e method link must point at something that exists, not a phantom .html. ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.095s\n\nOK"
+  },
+  {
+   "file": "test_draft_gate_closer.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 32.4,
+   "tail": "test_stranded_branch_names_the_unlanded_file (__main__.DraftGateCloserTest.test_stranded_branch_names_the_unlanded_file) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 32.333s\n\nOK"
+  },
+  {
+   "file": "test_draft_pile.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.3,
+   "tail": "PASS test_landed_added_landed_conflict_moved_on\nPASS test_new_edit_unlanded_and_deleted_before_main_moves\nPASS test_verdicts_and_build_pile\n\n3/3 tests passed"
+  },
+  {
+   "file": "test_draft_triage.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 4.0,
+   "tail": "  ok: CLI exits 0 / 1 (--fail-on-review) / 2 (bad base)\n  ok: JSON report carries base, verdicts and actionable counts\n  ok: branch list is sorted and deduped\n  ok: state-only set is what it claims to be\n  ok: one branch per verdict, classified as expected\nall draft_triage checks passed"
+  },
+  {
+   "file": "test_drive_bridge_ingest.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.3,
+   "tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.205s\n\nOK"
+  },
+  {
+   "file": "test_drive_bridge_status.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "....................\n----------------------------------------------------------------------\nRan 20 tests in 0.187s\n\nOK"
+  },
+  {
+   "file": "test_enforce_retention.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "ok   test_apply_removes_old_keeps_canonical_and_recent\nok   test_conversation_store_trimmed_to_cap\nok   test_conversation_under_cap_untouched\nok   test_dry_run_removes_nothing\nok   test_risk_archive_year_files_age_out\n5 test(s), 0 failed"
+  },
+  {
+   "file": "test_every_test_file_can_run.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_files_that_bit_us_are_now_reachable (__main__.EveryTestFileCanRun.test_the_files_that_bit_us_are_now_reachable) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.022s\n\nOK"
+  },
+  {
+   "file": "test_evidence_table_registration.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_scan_is_not_vacuous (__main__.EvidenceTableRegistrationTest.test_the_scan_is_not_vacuous) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_fetchable_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_source_names_are_unique_so_a_row_is_identifiable (__main__.TestFetchableRendering.test_source_names_are_unique_so_a_row_is_identifiable) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 0.004s\n\nOK"
+  },
+  {
+   "file": "test_fetchable_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The baseline, so a red run below is the mutation's doing and not this file's. ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.033s\n\nOK"
+  },
+  {
+   "file": "test_fiction_fourth_power.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "  ok: the fiction index links the story\n  ok: the Dmitri matrix row exists\n  ok: the row no longer reads 'Open Slot'\n  ok: the row is marked Delivered\n\nall checks passed"
+  },
+  {
+   "file": "test_fiction_intermediate_axis.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 4.4,
+   "tail": "test_tumble_as_found_falls_short_of_the_corridor (__main__.TestIntermediateAxis.test_tumble_as_found_falls_short_of_the_corridor) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 4.389s\n\nOK"
+  },
+  {
+   "file": "test_fiction_second_reader.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_story_is_long_enough_and_linked (__main__.SecondReaderTest.test_the_story_is_long_enough_and_linked) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_fleet_probe.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": ".......................\n----------------------------------------------------------------------\nRan 23 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_food_safety_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_record_speaks_of_the_same_page (__main__.Thresholds.test_the_record_speaks_of_the_same_page) ... ok\n\n----------------------------------------------------------------------\nRan 33 tests in 0.007s\n\nOK"
+  },
+  {
+   "file": "test_food_safety_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The baseline, so a red run below is the mutation's doing and not this file's. ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.041s\n\nOK"
+  },
+  {
+   "file": "test_founder_attribution_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_selftest_exits_zero (__main__.TestRunsAsAScript.test_selftest_exits_zero) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.067s\n\nOK"
+  },
+  {
+   "file": "test_friction_pass.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 5.7,
+   "tail": "test_work_that_lands_after_a_pass_makes_the_next_pass_due (__main__.TriggerTests.test_work_that_lands_after_a_pass_makes_the_next_pass_due) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 5.612s\n\nOK"
+  },
+  {
+   "file": "test_gallery_fifth_amigo_gap.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_missing_wing_fails_cli_even_with_no_fifth_gap (__main__.GalleryGapCliTest.test_missing_wing_fails_cli_even_with_no_fifth_gap) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.105s\n\nOK"
+  },
+  {
+   "file": "test_gallery_islamic_girih_duvazdah.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.029s\n\nOK"
+  },
+  {
+   "file": "test_gallery_maori_dmitri.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 15.2,
+   "tail": "test_wing_page_presents_the_work (__main__.UnaunahiTest.test_wing_page_presents_the_work) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 15.111s\n\nOK"
+  },
+  {
+   "file": "test_gallery_matrix.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_table_shape_is_seven_wings_of_amigo_columns (__main__.GalleryMatrixTest.test_table_shape_is_seven_wings_of_amigo_columns) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.092s\n\nOK"
+  },
+  {
+   "file": "test_gallery_unwired_works.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_wired_work_is_not_flagged (__main__.GalleryUnwiredWorksTest.test_wired_work_is_not_flagged) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.007s\n\nOK"
+  },
+  {
+   "file": "test_gambling_flutter_extraction.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_sources_are_the_two_expected_operators (__main__.GamblingFlutterExtractionTest.test_the_sources_are_the_two_expected_operators) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_gambling_source_table.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_table_is_not_vacuous (__main__.GamblingSourceTableTest.test_the_table_is_not_vacuous) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.002s\n\nOK"
+  },
+  {
+   "file": "test_gambling_state_filings.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_scan_is_not_vacuous (__main__.GamblingStateFilingsTest.test_the_scan_is_not_vacuous) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_gen_feed_dating.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "  ok: atom unchanged on re-run\nuntracked page falls back to mtime and is not dropped\n  ok: untracked page present\n  ok: tracked pages kept their commit date\n\ngen_feed dating: ALL TESTS PASSED"
+  },
+  {
+   "file": "test_gen_feed_freshness.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 2.4,
+   "tail": "no page newer than the feed's oldest entry is missing from the feed\n  ok: every page newer than the feed's oldest entry has an entry\nrobots.txt points at the sitemap\n  ok: robots advertises the sitemap\n\ngen_feed freshness: ALL TESTS PASSED (80 pages)"
+  },
+  {
+   "file": "test_gen_index.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 28.7,
+   "tail": "Regenerate first, then assert \u2014 because *noticing* was never enough (2026-10-27). ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 28.613s\n\nOK"
+  },
+  {
+   "file": "test_generated_index_freshness_workflow.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_removed_command_is_not_rescued_by_comments (__main__.TestWorkflowMutations.test_removed_command_is_not_rescued_by_comments) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_gh_invites.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_an_invitee_of_null_is_an_address_and_nobody_can_accept_it (__main__.TestWhatCanBeAccepted.test_an_invitee_of_null_is_an_address_and_nobody_can_accept_it) ... ok\n\n----------------------------------------------------------------------\nRan 31 tests in 0.006s\n\nOK"
+  },
+  {
+   "file": "test_gh_signin.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_two_factor_page_is_recognised_by_its_field_and_by_its_url (__main__.TestVerdict.test_the_two_factor_page_is_recognised_by_its_field_and_by_its_url) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_git_mutation_log.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.6,
+   "tail": "A guard that is not installed protects nothing \u2014 the lesson of the runnerless test file. ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.595s\n\nOK"
+  },
+  {
+   "file": "test_heat_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_two_spellings_of_the_fan_line_agree (__main__.Thresholds.test_the_two_spellings_of_the_fan_line_agree) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_heat_page_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The baseline, so a red run below is the mutation's doing and not this file's. ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.015s\n\nOK"
+  },
+  {
+   "file": "test_hosts_watch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "                                                                   price -> https://api-docs.deepseek.com/quick_start/pricing\n...............................\n----------------------------------------------------------------------\nRan 31 tests in 0.014s\n\nOK"
+  },
+  {
+   "file": "test_item_evidence_lint.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 3.7,
+   "tail": "ok   actual owned-path CLI control stays green\nok   last-row-wins history is preserved\n\n83/83 ok\nitem_evidence_lint: cannot see git history in /var/folders/p9/m_hzjd5x1292j4z7kx5vgmjw0000gn/T/tmpsdwgh0tm \u2014 no verdict\nitem_evidence_lint: cannot see /var/folders/p9/m_hzjd5x1292j4z7kx5vgmjw0000gn/T/tmpsdwgh0tm/nowhere/channels/items.jsonl"
+  },
+  {
+   "file": "test_item_export.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_whitespace_is_flattened_and_long_titles_are_cut_with_an_ellipsis (__main__.TitleTests.test_whitespace_is_flattened_and_long_titles_are_cut_with_an_ellipsis) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.097s\n\nOK"
+  },
+  {
+   "file": "test_item_ledger.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.8,
+   "tail": "test_the_title_stops_at_the_first_informative_sentence (__main__.TestTitle.test_the_title_stops_at_the_first_informative_sentence) ... ok\n\n----------------------------------------------------------------------\nRan 95 tests in 0.712s\n\nOK"
+  },
+  {
+   "file": "test_item_ledger_merge.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 9.5,
+   "tail": "...........\n----------------------------------------------------------------------\nRan 11 tests in 9.418s\n\nOK"
+  },
+  {
+   "file": "test_item_ledger_wake_rate.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_without_a_measurement_the_queue_still_prints_and_says_assumed (__main__.TestReadingQueuePrintsTheRate.test_without_a_measurement_the_queue_still_prints_and_says_assumed) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.105s\n\nOK"
+  },
+  {
+   "file": "test_item_ledger_wide_branch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.018s\n\nOK"
+  },
+  {
+   "file": "test_item_path_drift.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.011s\n\nOK"
+  },
+  {
+   "file": "test_jam_watch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.8,
+   "tail": "test_open_items_mean_no_finding (__main__.TheValueQueueIsReadAsAQueue.test_open_items_mean_no_finding) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.723s\n\nOK"
+  },
+  {
+   "file": "test_land_claim_directory.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "............\n----------------------------------------------------------------------\nRan 12 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_land_runs_keeps_foreign_work.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 9.1,
+   "tail": "test_the_six_landers_differ_only_in_the_name_on_the_commit (__main__.TheSixCopiesAreStillTheSameEngine.test_the_six_landers_differ_only_in_the_name_on_the_commit) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 9.052s\n\nOK"
+  },
+  {
+   "file": "test_land_runs_names_the_red_tests.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_names_are_sorted_and_complete (__main__.TheRefusalNamesThem.test_the_names_are_sorted_and_complete) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.007s\n\nOK"
+  },
+  {
+   "file": "test_land_runs_reports_dropped_paths.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.6,
+   "tail": "test_nothing_claimed_reports_nothing (__main__.DroppedPaths.test_nothing_claimed_reports_nothing) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.581s\n\nOK"
+  },
+  {
+   "file": "test_land_runs_runs_every_test_file.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.8,
+   "tail": "----------------------------------------------------------------------\nRan 2 tests in 0.730s\n\nOK"
+  },
+  {
+   "file": "test_land_runs_three_way_apply_patch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "test_the_plain_apply_refuses_and_three_way_takes_it (__main__.TheRescue.test_the_plain_apply_refuses_and_three_way_takes_it) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.483s\n\nOK (skipped=1)"
+  },
+  {
+   "file": "test_landing_baseline_is_current.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 2.2,
+   "tail": "test_verify_without_a_revision_is_a_setup_error (__main__.VerifyBaselineAgainstARevisionTest.test_verify_without_a_revision_is_a_setup_error) ... ok\n\n----------------------------------------------------------------------\nRan 29 tests in 2.119s\n\nOK"
+  },
+  {
+   "file": "test_landing_claim_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 3.0,
+   "tail": "test_malformed_lines_and_rows_without_an_id_are_skipped (__main__.LatestRowsTest.test_malformed_lines_and_rows_without_an_id_are_skipped) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 2.988s\n\nOK"
+  },
+  {
+   "file": "test_landing_preflight.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.6,
+   "tail": "test_record_dirt_is_tolerated (__main__.LandingPreflightTest.test_record_dirt_is_tolerated) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.512s\n\nOK"
+  },
+  {
+   "file": "test_landing_reconcile.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 15.1,
+   "tail": "Not a fixture: the tool must run against this checkout without a network. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 15.004s\n\nOK"
+  },
+  {
+   "file": "test_landing_refusals.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_id_counts_wherever_it_appears_not_only_as_a_key (__main__.UnfiledTest.test_the_id_counts_wherever_it_appears_not_only_as_a_key) ... ok\n\n----------------------------------------------------------------------\nRan 36 tests in 0.036s\n\nOK"
+  },
+  {
+   "file": "test_landing_suite_check.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 3.9,
+   "tail": "test_a_test_that_outlives_its_limit_counts_as_a_failure (__main__.TimeoutTest.test_a_test_that_outlives_its_limit_counts_as_a_failure) ... ok\n\n----------------------------------------------------------------------\nRan 32 tests in 3.819s\n\nOK"
+  },
+  {
+   "file": "test_landing_tree_report.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.0,
+   "tail": "test_untracked_file_blocks_without_blanket_clean (__main__.LandingTreeReportTest.test_untracked_file_blocks_without_blanket_clean) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.947s\n\nOK"
+  },
+  {
+   "file": "test_leadsheet_modes.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_leadsheet_octave.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_leadsheet_voices.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.177s\n\nOK"
+  },
+  {
+   "file": "test_ledger_mirror_folding.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "ok   test_a_mirror_never_invents_an_item\nok   test_a_mirror_newer_than_a_landing_machine_stamp_wins\nok   test_a_mirror_the_file_does_not_carry_still_judges_the_item\nok   test_an_older_mirror_cannot_overwrite_a_newer_human_verdict\nok   test_the_physical_gap_is_still_reported_after_the_read_folds_it\n7 test(s), 0 failed"
+  },
+  {
+   "file": "test_ledger_row_recovery.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "ok   test_cli_dry_run_exit_zero_and_reports\nok   test_dry_run_writes_nothing_and_write_appends_only_recoverable\nok   test_plan_appends_missing_and_newer_skips_older\nok   test_plan_last_row_for_an_id_wins\nok   test_reader_scopes_to_the_target_file\n5/5 passed"
+  },
+  {
+   "file": "test_ledger_verdict_conflicts.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.4,
+   "tail": "  same state, reviewer replaced by a stamp: 0\n........\n----------------------------------------------------------------------\nRan 8 tests in 0.306s\n\nOK"
+  },
+  {
+   "file": "test_ledger_verdict_mirror.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_valid_leap_day_and_offset_normalize_to_utc (__main__.LedgerVerdictMirrorTest.test_valid_leap_day_and_offset_normalize_to_utc) ... ok\n\n----------------------------------------------------------------------\nRan 21 tests in 0.024s\n\nOK"
+  },
+  {
+   "file": "test_ledger_watch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 3.4,
+   "tail": "suite: that report describes a tree that is no longer main \u2014 8 commit(s) have landed since b466a67a. The failures above may already be fixed; the 04:40 run is the current verdict.\n................................................\n----------------------------------------------------------------------\nRan 48 tests in 3.356s\n\nOK"
+  },
+  {
+   "file": "test_license.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_logo_svg.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_7_every_point_inside_the_viewbox (__main__.LogoTest.test_7_every_point_inside_the_viewbox) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.002s\n\nOK"
+  },
+  {
+   "file": "test_lost_landings.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_split_patch_names_every_file_on_the_b_side (__main__._suite.<locals>.LostLandingsTest.test_split_patch_names_every_file_on_the_b_side) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.054s\n\nOK"
+  },
+  {
+   "file": "test_lost_verdict_check.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_two_mirrors_for_one_item_write_one_and_name_the_other (__main__.TestTheFourStates.test_two_mirrors_for_one_item_write_one_and_name_the_other) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.023s\n\nOK"
+  },
+  {
+   "file": "test_mail.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "PASS test_the_check_still_runs_when_every_letter_is_in_the_window\nPASS test_the_docstring_identity_list_is_the_registry\nPASS test_the_outbox_readme_is_not_treated_as_a_draft\nPASS test_the_search_reply_is_read_in_every_shape_imaplib_sends\n\n36/36 tests passed"
+  },
+  {
+   "file": "test_mail_identity_credentials.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.008s\n\nOK"
+  },
+  {
+   "file": "test_mail_repo_notifications.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "  stamp = datetime.datetime.utcnow().strftime(\"%Y-%m-%d-%H%M%S\")\n...\n----------------------------------------------------------------------\nRan 4 tests in 0.072s\n\nOK"
+  },
+  {
+   "file": "test_mailbox.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "0 unread for claude (0 ever addressed to that seat)\n.......\n----------------------------------------------------------------------\nRan 7 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_maternal_pain_search.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_snapshot_has_records_and_a_total (__main__.SnapshotTests.test_snapshot_has_records_and_a_total) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_maternal_pain_wide.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_returned_counts_match_the_records (__main__.SnapshotTests.test_returned_counts_match_the_records) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.004s\n\nOK"
+  },
+  {
+   "file": "test_maternal_pain_widened_search.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_snapshot_totals_and_returned (__main__.SnapshotTests.test_snapshot_totals_and_returned) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.009s\n\nOK"
+  },
+  {
+   "file": "test_mcr_colistin_denominator_sheet.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".........................\n----------------------------------------------------------------------\nRan 25 tests in 0.042s\n\nOK"
+  },
+  {
+   "file": "test_mcr_colistin_primary.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_reported_percentages_recompute (__main__.McrColistinHarmonisationTest.test_the_reported_percentages_recompute) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_mcr_colistin_seed.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_totals_are_pinned (__main__.McrColistinSeedTest.test_totals_are_pinned) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_mcr_colistin_seed_anchor.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_two_self_inconsistent_rows_are_flagged_in_the_seed (__main__.McrColistinSeedAnchorTest.test_the_two_self_inconsistent_rows_are_flagged_in_the_seed) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_mcr_table_arithmetic.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.049s\n\nOK"
+  },
+  {
+   "file": "test_meeting_status.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "UNSYNTHESISED: 2026-11-01-probe.md \u2014 the convener owes a synthesis \u2014 the meeting closed 22h 0m ago with 1 of 6 positions in\n...............................\n----------------------------------------------------------------------\nRan 31 tests in 0.039s\n\nOK"
+  },
+  {
+   "file": "test_mjs_validators_parse.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.7,
+   "tail": "Reading no files and finding no errors is not a pass. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.610s\n\nOK"
+  },
+  {
+   "file": "test_model_defaults_are_recorded.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.050s\n\nOK"
+  },
+  {
+   "file": "test_music_catalogue_unwired.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_untitled_score_is_dark_and_says_so (__main__.MusicCatalogueGateTest.test_untitled_score_is_dark_and_says_so) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 0.065s\n\nOK"
+  },
+  {
+   "file": "test_music_checker.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.6,
+   "tail": "[typo] unknown voice requested for range check.\n.........................\n----------------------------------------------------------------------\nRan 25 tests in 0.499s\n\nOK"
+  },
+  {
+   "file": "test_music_checker_clefs.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.051s\n\nOK"
+  },
+  {
+   "file": "test_named_review_census.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_only_filters_to_one_outcome (__main__.TestCommandLine.test_only_filters_to_one_outcome) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.129s\n\nOK"
+  },
+  {
+   "file": "test_no_stray_run_dirs.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "PASS repo root holds no stray wake run directory"
+  },
+  {
+   "file": "test_no_zeroed_tracked_files.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "ok   test_no_tracked_source_file_is_zero_bytes\nok   test_no_version_control_leftovers_are_tracked\n0 failed"
+  },
+  {
+   "file": "test_nonreplication_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_index_still_names_the_harness_and_its_shape (__main__.TestTheClaim.test_the_index_still_names_the_harness_and_its_shape) ... ok\n\n----------------------------------------------------------------------\nRan 31 tests in 0.006s\n\nOK"
+  },
+  {
+   "file": "test_nonreplication_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "Claim 2: `=0.7158` must lose its `=` or the row disappears from every count. ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.081s\n\nOK"
+  },
+  {
+   "file": "test_open_decisions_reach.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_sections_past_the_edge_are_reported (__main__.SyntheticTest.test_sections_past_the_edge_are_reported) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.031s\n\nOK"
+  },
+  {
+   "file": "test_ors_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_percentage_claim_follows_from_the_middle_of_the_spoon_range (__main__.SodiumFootnote.test_the_percentage_claim_follows_from_the_middle_of_the_spoon_range) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_outreach_draft_census.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_two_identical_letters_are_a_duplicate_group_named_by_hash (__main__.TestCensus.test_two_identical_letters_are_a_duplicate_group_named_by_hash) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.012s\n\nOK"
+  },
+  {
+   "file": "test_outreach_ledger_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "........................................\n----------------------------------------------------------------------\nRan 40 tests in 0.096s\n\nOK"
+  },
+  {
+   "file": "test_outreach_sitting_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_ledger_sends_before_the_register_are_not_retro_failed (__main__.UndeclaredSittings.test_ledger_sends_before_the_register_are_not_retro_failed) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_page_check_counts.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "test_the_record_says_when_and_how_it_was_derived (__main__.ThePagesDoNotOverstateOrUnderstate.test_the_record_says_when_and_how_it_was_derived) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.490s\n\nOK"
+  },
+  {
+   "file": "test_page_harness_map.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_parse_guard_and_this_test_are_registered_in_ci (__main__.TestPageHarnessMap.test_the_parse_guard_and_this_test_are_registered_in_ci) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.027s\n\nOK"
+  },
+  {
+   "file": "test_page_harnesses_run.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.1,
+   "tail": "The post-retraction query asks for 5 records and the harness requires 5 back. ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 1.059s\n\nOK"
+  },
+  {
+   "file": "test_portal_roster.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "  ok: atom.xml names Dmitri\n  ok: atom.xml names Gwen\nthe page is generated, and says so\n  ok: docs/index.html declares GENERATED by scripts/gen_portal.py\n\nportal roster: ALL TESTS PASSED (6 amigos)"
+  },
+  {
+   "file": "test_postpone_expired.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "...................\n----------------------------------------------------------------------\nRan 19 tests in 0.433s\n\nOK"
+  },
+  {
+   "file": "test_preflight_autonomous_mission.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.2,
+   "tail": "test_untracked_target_is_error (__main__.PreflightTests.test_untracked_target_is_error) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 1.111s\n\nOK"
+  },
+  {
+   "file": "test_price_band.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_written_file_carries_the_unrated_block (__main__.TestTheUnratedAreCarriedNotDropped.test_the_written_file_carries_the_unrated_block) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_price_drift.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "............\n----------------------------------------------------------------------\nRan 12 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_projection.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "  ok: exactly 50 in-window instances\n  ok: truncated flag set before window end\n  ok: downstream calendar labeled [Truncated at 50]\n  ok: truncated result not presented as complete\n\nALL TESTS PASSED"
+  },
+  {
+   "file": "test_prominence.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".................\n----------------------------------------------------------------------\nRan 17 tests in 0.010s\n\nOK"
+  },
+  {
+   "file": "test_prominence_daily.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "appended -> /var/folders/p9/m_hzjd5x1292j4z7kx5vgmjw0000gn/T/tmpqe711tjs/prominence-daily.jsonl\n................\n----------------------------------------------------------------------\nRan 16 tests in 0.006s\n\nOK"
+  },
+  {
+   "file": "test_queue_names_unreplayed.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.166s\n\nOK"
+  },
+  {
+   "file": "test_queue_snapshot.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "ok  test_diff_reports_a_removed_item_and_returns_0\nok  test_digest_is_order_independent_and_membership_sensitive\nok  test_postponed_without_reason_still_counts_as_waiting\nok  test_queue_ids_only_waiting_and_named\nok  test_snapshot_shape\n6 passed"
+  },
+  {
+   "file": "test_reading_queue.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "....................\n----------------------------------------------------------------------\nRan 20 tests in 0.118s\n\nOK"
+  },
+  {
+   "file": "test_reading_queue_codex_cadence.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.030s\n\nOK"
+  },
+  {
+   "file": "test_readme_tools_table.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_the_spelled_out_count_matches_the_row_count (__main__.ReadmeToolsTableTest.test_the_spelled_out_count_matches_the_row_count) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_record_codex_wake.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "...............\n----------------------------------------------------------------------\nRan 15 tests in 0.017s\n\nOK"
+  },
+  {
+   "file": "test_record_push.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 3.4,
+   "tail": "  OK   7 copy/copies cannot pull, stash, check out or hard-reset\nPASS test_the_push_path_cannot_pull_stash_checkout_or_reset\nrecord_push: record pushed; shared checkout left where it was (error: Your local changes to the following files would be overwritten by merge: \tagenda/36.md Please commit your changes or stash them before you merge. Abortin)\nPASS test_the_record_lands_on_origin_although_the_tree_is_not_moved\n\n10/10 tests passed"
+  },
+  {
+   "file": "test_record_push_ledger.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 3.3,
+   "tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 3.264s\n\nOK"
+  },
+  {
+   "file": "test_recover_from_run_patches.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".channels/reports/2026-10-13-gone.md: already exists in /private/var/folders/p9/m_hzjd5x1292j4z7kx5vgmjw0000gn/T/tmper3awbx9/repo; refusing to overwrite\n.\n----------------------------------------------------------------------\nRan 9 tests in 0.011s\n\nOK"
+  },
+  {
+   "file": "test_recover_run_paths.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "  1 recovered\n..........\n----------------------------------------------------------------------\nRan 10 tests in 0.011s\n\nOK"
+  },
+  {
+   "file": "test_reject_queue_delivery.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_note_names_every_item_it_covers (__main__.TheRecordDiscriminates.test_the_note_names_every_item_it_covers) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 0.013s\n\nOK"
+  },
+  {
+   "file": "test_reject_queue_request_gap.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "Non-vacuity. An empty parse would make every assertion below pass for the wrong reason. ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.003s\n\nOK"
+  },
+  {
+   "file": "test_reject_queue_sweep.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_selftest_passes (__main__.SweepSelftest.test_selftest_passes) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.135s\n\nOK"
+  },
+  {
+   "file": "test_repair_ledger_conflicts.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.0,
+   "tail": "  dry run \u2014 pass --write to apply\n..............\n----------------------------------------------------------------------\nRan 14 tests in 0.933s\n\nOK"
+  },
+  {
+   "file": "test_repeat_done.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.036s\n\nOK"
+  },
+  {
+   "file": "test_report_against_diff.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "..............report_against_diff: no such directory: /var/folders/p9/m_hzjd5x1292j4z7kx5vgmjw0000gn/T/tmpl_fklmum/nope\n........\n----------------------------------------------------------------------\nRan 22 tests in 0.013s\n\nOK"
+  },
+  {
+   "file": "test_request_nudge.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "  G-1 (9 days, from gemini)\nnothing due: nothing open for 0+ days that has not been asked about this week.\nPASS test_one_nudge_per_request_per_repeat_window\nPASS test_only_open_requests_are_returned\n\n5/5 tests passed"
+  },
+  {
+   "file": "test_retention.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "  --apply     delete the artifacts listed by the dry run\n  --dry-run   the default, stated explicitly\n\nRetention is CHANNEL_RAW_RETENTION_DAYS days (default 14). Files marked\n\"Retention: keep\" / \"Preserve: keep\" / \"Historical: keep\" / \"Governance: keep\",\nand READMEs, are never touched."
+  },
+  {
+   "file": "test_retirement_watch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "test_the_rendered_report_carries_the_lines_not_just_a_count (__main__.UnclassifiedMessageTest.test_the_rendered_report_carries_the_lines_not_just_a_count) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 0.429s\n\nOK"
+  },
+  {
+   "file": "test_retraction_epmc.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "15 EPMC checks passed; no registry requests\n.\n----------------------------------------------------------------------\nRan 1 test in 0.049s\n\nOK"
+  },
+  {
+   "file": "test_review_assignment.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_retired_second_band_file_is_gone (__main__.TestTheBandHasOneSource.test_the_retired_second_band_file_is_gone) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 0.018s\n\nOK"
+  },
+  {
+   "file": "test_review_gate_report.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 1.0,
+   "tail": "test_no_branches_is_a_clear_gate (__main__.ReviewGateReportTest.test_no_branches_is_a_clear_gate) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.912s\n\nOK"
+  },
+  {
+   "file": "test_route_deadline_alert.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "nothing to say: no unasked route deadline inside 21 days.\n..........\n----------------------------------------------------------------------\nRan 10 tests in 0.068s\n\nOK"
+  },
+  {
+   "file": "test_rover_pilot.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 17.0,
+   "tail": "\n-- pilot output --\nrover-pilot on 127.0.0.1:61020 dry=True token=False\n\n\n40 checks, 0 failed"
+  },
+  {
+   "file": "test_rover_wake.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "OK   the prompt states the no-reading rule\nOK   the prompt lists the action vocabulary\nOK   --listen refuses to start without --stt-cmd (speech-to-text stays off)  -- 2\n\n46 checks, 0 failed\n--listen needs --stt-cmd. Speech recognition is not bundled, on purpose: the two-body experiment requires that neither body can transcribe the other."
+  },
+  {
+   "file": "test_run_autonomous_mission.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 4.3,
+   "tail": "test_timeout_stops_worker_without_retry (__main__.RunnerTests.test_timeout_stops_worker_without_retry) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 4.285s\n\nOK"
+  },
+  {
+   "file": "test_runner_is_last.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_the_check_finds_a_stranded_class (__main__.RunnerIsLastTest.test_the_check_finds_a_stranded_class) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.183s\n\nOK"
+  },
+  {
+   "file": "test_save_password.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_nothing_is_refused (__main__.TestClean.test_nothing_is_refused) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_save_seed.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_grouping_and_case_are_not_part_of_the_secret (__main__.TestNormalise.test_grouping_and_case_are_not_part_of_the_secret) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_scheduled_model_selection.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_review_and_maintainer_use_openai_override (__main__.ModelSelectionTests.test_review_and_maintainer_use_openai_override) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.010s\n\nOK"
+  },
+  {
+   "file": "test_screen_endometriosis_clobber.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_unparseable_existing_file_is_refused (__main__.ScreenEndometriosisClobberTest.test_unparseable_existing_file_is_refused) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.002s\n\nOK"
+  },
+  {
+   "file": "test_screen_rule_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.010s\n\nOK"
+  },
+  {
+   "file": "test_script_publish.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 3.7,
+   "tail": "test_none_of_them_can_pull_or_commit (__main__.TestNoPublishPathRunsGitByHand.test_none_of_them_can_pull_or_commit) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 3.623s\n\nOK"
+  },
+  {
+   "file": "test_secret_egress_guard.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.3,
+   "tail": "test_scan_redacts_artifact_and_changed_repository_file_without_reporting_secret (__main__.SecretEgressGuardTests.test_scan_redacts_artifact_and_changed_repository_file_without_reporting_secret) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.213s\n\nOK"
+  },
+  {
+   "file": "test_secscan_working_dir_patch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.3,
+   "tail": "test_the_patched_tool_still_refuses_to_scan_nothing (__main__.PatchedToolRunsTest.test_the_patched_tool_still_refuses_to_scan_nothing) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.229s\n\nOK (skipped=2)"
+  },
+  {
+   "file": "test_sleep_cognition_epilepsy_ied_fulltext.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_unverified_extract_flag_is_rejected (__main__.QuoteMatchingRegression.test_unverified_extract_flag_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.010s\n\nOK"
+  },
+  {
+   "file": "test_sleep_cognition_epilepsy_seed.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_stored_text_rehashes_to_recorded_sha256 (__main__.SleepCognitionEpilepsySourceTableTest.test_stored_text_rehashes_to_recorded_sha256) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.006s\n\nOK"
+  },
+  {
+   "file": "test_sleep_drug_sleep_corpus.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_hit_counts_are_the_ones_the_note_quotes (__main__.TestTheRecordIsIntact.test_the_hit_counts_are_the_ones_the_note_quotes) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.035s\n\nOK"
+  },
+  {
+   "file": "test_songbook_source_sync.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "Where a file is played, the player plays exactly what the file says. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_source_drift.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_counts_every_row_and_both_axes (__main__.SummariseTest.test_counts_every_row_and_both_axes) ... ok\n\n----------------------------------------------------------------------\nRan 24 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_staph_photodynamic_seed.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "The core finding is that none of these tokens occurs in the abstract. If a ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.001s\n\nOK"
+  },
+  {
+   "file": "test_status_census_unread.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "The ledger is append-only and its rows are about the *work*, not about the record. ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 0.181s\n\nOK"
+  },
+  {
+   "file": "test_steward_delivery.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "ok   test_an_unasked_item_produces_no_line\nok   test_an_undelivered_request_is_undelivered\nok   test_delivery_is_recorded_and_closes_the_gap\nok   test_the_delivery_writer_leaves_other_items_alone\nok   test_the_live_queue_is_readable_and_the_live_line_matches_it\nok   test_the_report_line_names_the_request_and_when_it_was_asked"
+  },
+  {
+   "file": "test_stewardship_pitch_template.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_template_yields_body_subject_and_three_tiers (__main__.TestTemplateParses.test_template_yields_body_subject_and_three_tiers) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.002s\n\nOK"
+  },
+  {
+   "file": "test_stuck_patch_sweep.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.3,
+   "tail": "PASS test_recovery_lands_the_documents_and_hands_the_log_over\nPASS test_split_is_per_file\nPASS test_stale_log_blocks_one_section_not_the_patch\nPASS test_the_register_is_not_written_without_write\n\n7/7 passed"
+  },
+  {
+   "file": "test_succession_check.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.3,
+   "tail": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.221s\n\nOK"
+  },
+  {
+   "file": "test_suite_census.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 11.2,
+   "tail": "test_no_canonical_test_file_carries_its_main_guard_above_more_tests (__main__.TestTheRunnerReachesTheEnd.test_no_canonical_test_file_carries_its_main_guard_above_more_tests) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 11.122s\n\nOK"
+  },
+  {
+   "file": "test_suite_watch.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 4.2,
+   "tail": "test_the_summary_counts_agree_with_the_results (__main__.ItWritesDownWhatItSaw.test_the_summary_counts_agree_with_the_results) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 4.147s\n\nOK"
+  },
+  {
+   "file": "test_sweep_risks_block.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_two_runs_are_idempotent (__main__.TestTheSweepOwnsOneBlock.test_two_runs_are_idempotent) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.020s\n\nOK"
+  },
+  {
+   "file": "test_swh_status.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_single_record_returns_itself (__main__.LatestTest.test_single_record_returns_itself) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_tarik_cloud_transport.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "......................\n----------------------------------------------------------------------\nRan 22 tests in 0.127s\n\nOK"
+  },
+  {
+   "file": "test_tarik_cloud_transport_runner.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".................\n----------------------------------------------------------------------\nRan 17 tests in 0.017s\n\nOK"
+  },
+  {
+   "file": "test_task_filing_all_bodies.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 2.1,
+   "tail": "ok\n\n----------------------------------------------------------------------\nRan 5 tests in 2.022s\n\nOK"
+  },
+  {
+   "file": "test_task_ledger.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 4.5,
+   "tail": "PASS test_live_ledger_has_no_exact_duplicates\nPASS test_near_miss_is_reported_not_merged\nPASS test_new_items_filters_existing_and_self_dedupes\nPASS test_provenance_and_markdown_are_not_identity\n\n9/9 tests passed"
+  },
+  {
+   "file": "test_tasks_open_audit.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_owner_filter_finds_dmitri (__main__.RealLedgerTest.test_the_owner_filter_finds_dmitri) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.026s\n\nOK"
+  },
+  {
+   "file": "test_telegram.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "PASS test_get_updates_parses_response\nTelegram channel: not configured \u2014 no-op\nPASS test_run_noop_without_tokens\nPASS test_send_message_posts\n\n9/9 tests passed"
+  },
+  {
+   "file": "test_telegram_drain.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "All Telegram drain tests passed."
+  },
+  {
+   "file": "test_telegram_media_intake.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.7,
+   "tail": "PASS dawn: a turn filed earlier is still sent when memory does not hold it\nPASS dawn: the image rides on the single current turn\n\nall checks passed\n2026-11-27 15:50:32,436 WARNING anthropic reply carried no text block (stop_reason=None, blocks=[None])\n2026-11-27 15:50:32,437 WARNING anthropic reply carried no text block (stop_reason=None, blocks=[None])"
+  },
+  {
+   "file": "test_tell_human_message.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "PASS test_review_branch_wake_summary_names_reviewer_state\nPASS test_review_branch_without_pile_suffix_names_reviewer_state\nPASS test_the_register_and_the_transcript_agree_that_d_7_was_superseded\nPASS test_the_register_has_the_request_that_will_be_superseded\n\n13/13 tests passed"
+  },
+  {
+   "file": "test_test_counts_do_not_drop.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_counter_counts_methods_and_functions_alike (__main__.TheRecordIsReadable.test_the_counter_counts_methods_and_functions_alike) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.022s\n\nOK"
+  },
+  {
+   "file": "test_todo_additions.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.4,
+   "tail": "test_the_window_excludes_older_additions (__main__.ScanFromHistoryTest.test_the_window_excludes_older_additions) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.325s\n\nOK"
+  },
+  {
+   "file": "test_totp_now.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "test_two_moments_inside_one_step_agree (__main__.TestStandardTOTP.test_two_moments_inside_one_step_agree) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK"
+  },
+  {
+   "file": "test_tracker_manifest.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 9.6,
+   "tail": "tracker_manifest: the manifest already matches the tree\n.......\n----------------------------------------------------------------------\nRan 7 tests in 9.532s\n\nOK"
+  },
+  {
+   "file": "test_triage.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "PASS test_non_actionable_gets_digest_not_queue\nPASS test_patch_allowed_blocks_quoted_workflow_path\nPASS test_patch_allowed_blocks_workflow_path\nPASS test_queue_is_idempotent_for_same_message\n\n6/6 tests passed"
+  },
+  {
+   "file": "test_tribe_admission_check.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.465s\n\nOK"
+  },
+  {
+   "file": "test_tribe_admission_floor.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "Four checks and 'All three' is not a rounding error, it is a weaker rule. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.111s\n\nOK"
+  },
+  {
+   "file": "test_unlanded_worklist.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.4,
+   "tail": "test_the_row_carries_amigo_and_both_buckets (__main__.Worklist.test_the_row_carries_amigo_and_both_buckets) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.348s\n\nOK"
+  },
+  {
+   "file": "test_unregistered_tests.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_report_prints_all_headings (__main__.RenderAndExitTests.test_report_prints_all_headings) ... ok\n\n----------------------------------------------------------------------\nRan 23 tests in 0.152s\n\nOK"
+  },
+  {
+   "file": "test_unreplayed_verdicts.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".......................\n----------------------------------------------------------------------\nRan 23 tests in 0.027s\n\nOK"
+  },
+  {
+   "file": "test_unreported_trials_validator_guard.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "A 503 from an upstream must not fail the run; it must say SKIP and exit 0. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.160s\n\nOK"
+  },
+  {
+   "file": "test_usage_cache_write.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_write_total_sums_only_known_rows (__main__.SummarySaysHowManyRunsKnew.test_the_write_total_sums_only_known_rows) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.002s\n\nOK"
+  },
+  {
+   "file": "test_usage_cost_estimate.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "PASS summary marks the price as an estimate\nPASS summary footnotes the rate's date\nPASS a reported cost is not marked as an estimate\nPASS an unpriced model reads 'not reported', never $0.00\n\nall checks passed"
+  },
+  {
+   "file": "test_usage_silent_zero.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "PASS a real call carries a cost\nPASS the summary does not cry wolf over a recorded call\nPASS the empty attempt wrote a row\nPASS no call at all is not reported as spent-and-unrecorded\n\nall checks passed"
+  },
+  {
+   "file": "test_validate_autonomous_diff.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "PASS test_autonomous_implementation_change_accepted\nPASS test_autonomous_mission_change_accepted\nPASS test_new_dated_discussion_with_metadata_accepted\nPASS test_old_discussion_appendix_rejected\nPASS test_state_only_rejected\nPASS test_undated_docs_paper_rejected"
+  },
+  {
+   "file": "test_value_queue.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.5,
+   "tail": "  Until one is filed, the landing gate refuses the close.\n............\n----------------------------------------------------------------------\nRan 18 tests in 0.435s\n\nOK"
+  },
+  {
+   "file": "test_wake_cadence.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.3,
+   "tail": "The 2026-10-23 case: ledger alive, run tree four days cold, and it was working. ... ok\n\n----------------------------------------------------------------------\nRan 40 tests in 0.209s\n\nOK"
+  },
+  {
+   "file": "test_wake_context_caps.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "A guard that measures a different window than the one the bots use is theatre. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.039s\n\nOK"
+  },
+  {
+   "file": "test_wake_due_block.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.057s\n\nOK"
+  },
+  {
+   "file": "test_wake_ledger_rows.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.8,
+   "tail": "A guard measuring a different window than the engine applies is theatre. ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.739s\n\nOK"
+  },
+  {
+   "file": "test_wake_reconnaissance_census.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_tee_and_cp_and_git_apply_count (__main__.ShellDetectionTests.test_tee_and_cp_and_git_apply_count) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.018s\n\nOK"
+  },
+  {
+   "file": "test_wake_report_hold.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_record_is_handed_to_the_publisher_and_nothing_else (__main__.TestTheRecordIsCommitted.test_the_record_is_handed_to_the_publisher_and_nothing_else) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.030s\n\nOK"
+  },
+  {
+   "file": "test_wake_review_queue.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "................\n----------------------------------------------------------------------\nRan 16 tests in 0.105s\n\nOK"
+  },
+  {
+   "file": "test_wake_spend_record.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".....wake_spend_record: no such root: /nonexistent/nowhere\n..........\n----------------------------------------------------------------------\nRan 15 tests in 0.019s\n\nOK"
+  },
+  {
+   "file": "test_wakes_block.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.2,
+   "tail": "test_the_live_tick_state_is_readable (__main__.TestTheRealMachinesNumbers.test_the_live_tick_state_is_readable) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.101s\n\nOK"
+  },
+  {
+   "file": "test_warming_page_claims.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "test_the_year_range_and_count_are_printed (__main__.TestWhatTheReaderSees.test_the_year_range_and_count_are_printed) ... ok\n\n----------------------------------------------------------------------\nRan 40 tests in 0.010s\n\nOK"
+  },
+  {
+   "file": "test_warming_port_is_sensitive.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "The baseline, so a red run below is the mutation's doing and not this file's. ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.088s\n\nOK"
+  },
+  {
+   "file": "test_window_land_collision.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "ok   test_different_titles_do_not_share\nok   test_relanding_a_window_still_overwrites_its_own_file\nok   test_same_title_same_day_gets_its_own_file\n3 test(s), 0 failed"
+  },
+  {
+   "file": "test_workflow_commands_exist.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.0,
+   "tail": "The specific line this guard was written for, pinned by name. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.005s\n\nOK"
+  },
+  {
+   "file": "test_works_queue_status.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": "Pins the 2026-10-14 fixes: 08 SHIPPED, 07 given a Status line. Regressions fail here. ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.023s\n\nOK"
+  },
+  {
+   "file": "test_world_report.py",
+   "outcome": "ok",
+   "rc": 0,
+   "seconds": 0.1,
+   "tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.043s\n\nOK"
+  }
+ ]
+}
