@@ -3,11 +3,22 @@
 // so the DOI parser, the verdict logic, the query builders and the renderer are tested as shipped.
 //
 //   node tests/validate_retraction_page.mjs docs/works/retraction.html
+//   HARNESS_REPLAY=tests/fixtures/validate_retraction_page.replay.json node ...
 //
 // It is self-checking in the sense that matters: the URLs it fetches are built by the page's own
 // functions, and where it can it re-derives a number by a second route and compares.
+//
+// In replay the nine requests to OpenAlex and Crossref are answered from a dated record
+// (tests/harness_net.mjs), so the harness runs at every landing with no network. The claims the
+// record can carry are the page's: that it reads the retraction flag and date out of a real payload,
+// that it counts what the API counted, and that the post-retraction query returns exactly the five
+// records it asked for. The claim it cannot carry is that OpenAlex still answers.
 import fs from "node:fs";
+import { install } from "./harness_net.mjs";
 import { scanVoice } from "./retraction_voice.mjs";
+
+const net = install();
+if (net.mode !== "live") console.log("mode: " + net.label);
 
 const file = process.argv[2] || "docs/works/retraction.html";
 const html = fs.readFileSync(file, "utf8");
@@ -319,6 +330,15 @@ for (const claimFile of COUNT_CLAIMS) {
   } catch (e) { /* run from outside the repo: the claim is simply unchecked */ }
   check(`${claimFile} publishes the number of checks this harness actually runs`,
     claimed === ranTotal, claimed === null ? `ran ${ranTotal}, this file states no count` : `ran ${ranTotal}, this file says ${claimed}`);
+}
+
+if (net.mode === "replay") {
+  try {
+    net.expect_all_used();
+    console.log("record: " + net.urls.length + " url(s), every one asked for");
+  } catch (e) {
+    console.log("FAIL  the record and this run do not match:\n" + e.message); fail++;
+  }
 }
 
 console.log("\n" + (fail === 0 ? "ALL CHECKS PASSED" : fail + " CHECK(S) FAILED"));

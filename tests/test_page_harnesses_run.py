@@ -112,18 +112,19 @@ OFFLINE = {
     "validate_warming_page.mjs": "stubbed fetch; the live Boston figure runs only under WARMING_LIVE=1",
     "validate_recalls_page.mjs": "runs on a recorded response (HARNESS_REPLAY, see harness_net.mjs)",
     "validate_nonreplication_page.mjs": "runs on a recorded response (HARNESS_REPLAY, 3 urls)",
+    "validate_retraction_page.mjs": "runs on a recorded response (HARNESS_REPLAY, 9 urls)",
 }
 
-# These two need a live API on their default path. Named so that a green run still tells the truth
+# The last one needs a live API on its default path. Named so that a green run still tells the truth
 # about what it did not check; `harnesses-need-a-network` is the queue item that shrinks this set.
 NETWORK = {
-    "validate_retraction_page.mjs": "the registry and Europe PMC, live",
     "validate_unreported_trials_page.mjs": "the registry and Europe PMC, live",
 }
 
 REPLAY_ENV = {"validate_trials_page.mjs": "HARNESS_REPLAY",
               "validate_recalls_page.mjs": "HARNESS_REPLAY",
-              "validate_nonreplication_page.mjs": "HARNESS_REPLAY"}
+              "validate_nonreplication_page.mjs": "HARNESS_REPLAY",
+              "validate_retraction_page.mjs": "HARNESS_REPLAY"}
 
 # A harness with two halves that are different kinds of claim. The offline half runs at every
 # landing; the live half asks the world a question no recording can carry ("does this host answer
@@ -253,6 +254,33 @@ class TheHarnessesActuallyRun(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0,
                             "the record answered a url this run never asked for and the harness "
                             "still exited 0: a stale capture would look like a passing one")
+
+    def test_the_retraction_replay_can_fail_too(self):
+        """The post-retraction query asks for 5 records and the harness requires 5 back.
+
+        That equality is the pin: a record trimmed to 2 would satisfy every "greater than zero"
+        claim on the page and prove nothing about the count it prints.
+        """
+        fixture = HARNESSES / "fixtures" / "validate_retraction_page.replay.json"
+        if not fixture.is_file():
+            self.skipTest("no retraction record to mutate")
+        record = json.loads(fixture.read_text(encoding="utf-8"))
+        routes = record.get("responses") or {}
+        after = [u for u in routes if "per-page=5" in u or "per_page=5" in u or "per-page=5" in u]
+        if not after:
+            self.skipTest("the record no longer holds the post-retraction page")
+        with tempfile.TemporaryDirectory() as td:
+            broken = Path(td) / "broken.replay.json"
+            body = json.loads(routes[after[0]]["body"])
+            body["results"] = (body.get("results") or [])[:2]
+            routes[after[0]]["body"] = json.dumps(body)
+            broken.write_text(json.dumps(record), encoding="utf-8")
+            r = run(HARNESSES / "validate_retraction_page.mjs",
+                    dict(os.environ, HARNESS_REPLAY=str(broken)))
+        self.assertNotEqual(r.returncode, 0,
+                            "a 5-record page trimmed to 2 still passed: the request's page size is "
+                            "not pinned")
+        self.assertIn("FAIL", (r.stdout or "") + (r.stderr or ""))
 
     def test_the_nonreplication_replay_can_fail_too(self):
         """Trim the registry page to one study: the page-fill pin must go red."""

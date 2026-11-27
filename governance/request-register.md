@@ -418,6 +418,19 @@ macOS refuses keystrokes to the same script (`System Events … osascript is not
 on (Details → API ACCESS → Generate) and the key and secret are saved to `~/.config/porkbun/api.json`,
 after which `POST https://api.porkbun.com/api/json/v3/dns/create/kythe.app` creates a record with no
 browser in the path. The second is worth the two clicks: DNS stops being a founder task permanently.
+
+**The records are in, made through the API, 2026-11-27 14:10–14:13.** The founder created
+`~/.config/porkbun/api.json` (mode 600, 68-character key and secret, scope `full`); `POST /api/json/v3/ping`
+answered `credentialsValid: true` for account `LindsayRidgeway`. Four `dns/create/kythe.app` calls returned
+`SUCCESS`: TXT `resend._domainkey` (id 606926120), CNAME `rsend` (606926130), CNAME `send` (606926135), TXT
+`_dmarc` (606926147), all TTL 600. Verified against Porkbun's own nameserver rather than the dashboard:
+`dig @maceio.ns.porkbun.com` returns the DKIM `p=…`, `rsend.forge.rmta.net.`, `send.forge.rmta.net.` and
+`v=DMARC1; p=none;`. **The five records that predate this were read before writing and re-read after** — A
+`kythe.app` → 75.2.60.5, CNAME `www` → ai-tribe.netlify.app, MX `fwd1`/`fwd2.porkbun.com`, TXT SPF
+`v=spf1 include:_spf.porkbun.com ~all` — all unchanged; the MX added by the "Enable receiving" panel was
+still deliberately not created. `POST /emails` still returns **403 `domain is not verified`** at 14:13,
+which is Resend's own check and not DNS: the records were seconds old. **One click left, and it is in the
+Resend tab that is already open:** the domain page's Verify button (or "I've already added the records").
  **Step 4's path is amended 2026-11-27:** the key goes to `~/.config/symposium/mail-key`, not `channels/.mail-key`, because that path is inside the checkout and `.github/workflows/symposium.yml` stages all of `channels/` with `git add .` — one unattended landing would have committed a live sending key. The old path is now in `.gitignore` as well, and no code reads either path yet, so nothing had to be moved. | channels/telegram/2026-11-19-200849-outbound-desi-session.md |
 | D-17 | 2026-11-19 | desi | declined | REQUEST D-17 — four drawn faces for four of the tennis cast — **closed by the founder 2026-11-20**, with the reason and the replacement in his own words: every circle should have its own member images, generated from editable text in each member's UI. Built the same day: `ai_tribe/portrait.js`. Nothing is owed, and no drawings are wanted | channels/telegram/2026-11-19-232537-outbound-desi-session.md |
 | D-18 | 2026-11-20 | desi | **closed 2026-11-23 — nothing was ever owed** | REQUEST D-18 asked for two tokens. (a) GitHub — never needed: the Mac's `gh` holds the token and `prominence.py` reads `/traffic` with it. (b) Netlify — **withdrawn 2026-11-23**: the Mac's `netlify` CLI is already logged in as the founder and its stored token read the site metadata, so no new credential was needed either; and `GET /sites/<ai-tribe>/analytics` answers 404, i.e. Netlify Analytics is not enabled, so the number does not exist at any token price short of a paid add-on he never asked for. Third reason: `kythe.app` serves the Kythe page (`ait.html`), not the magazine — our pages are GitHub Pages, which `prominence.py` already counts. The founder asked what the action was; the answer is that there is none, and asking was the error | channels/telegram/2026-11-20-060249-outbound-desi-session.md |
