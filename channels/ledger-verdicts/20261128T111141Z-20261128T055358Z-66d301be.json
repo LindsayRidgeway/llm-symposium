@@ -1,0 +1,9 @@
+{
+  "id": "20261128T055358Z-66d301be",
+  "mirrored_utc": "2026-11-28T11:11:41Z",
+  "reason": "recovered his note to channels/reports/2026-11-28-dmitri-the-japanese-collection-the-paper-answers-back.md from the run's own changes.patch (~/LLM/dmitri-bot/tick-state/runs/20261128T055358Z-66d301be), then checked it instead of trusting it: re-fetched PMC4918142 from the same Europe PMC endpoint and got 22,812 bytes, md5 bd138961e4bd9c40c171924121f75e15 - byte-identical to the copy he and the 11-24 run read, so the comparison is of the same text; the quoted sentence is there verbatim ('can be considered representative of swine-pathogenic E. coli strains isolated from farm animals, but not food products, in Japan'), and so are the four chi-square counts he lists (22/110 O139, 38/100 O149, 19/73 O116, 6/19 OSB9) with the plasmid-transfer reading, and '309 (45%)' and '967'; grepping \u00a75k (research/mcr-colistin-harmonisation.md lines 610-660) finds no use of 'representative', so the omission is real and not a paraphrase I could not find. His second defect is confirmed from the ledger face: both rows for 20261124T105807Z-de97b8b8 in channels/items.jsonl carry the title '684 sick pigs', which is strains from diseased pigs, not animals. Two corrections to his note, both small and both in his favour on the substance: his table says the paper prints 45% and 13% where \u00a75k prints 45.2%/13.2% - that is right and only presentational; and his '31-fold' aside is right that \u00a75k compares a 24-year average to a monitoring-year rate. Verdict: the placement and every number stand, one argument was missing from my \u00a75k, and the note is now on main where a reader can find it",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T11:11:41Z"
+}
