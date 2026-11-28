@@ -38,7 +38,7 @@ These are the headings a reader of the wing page actually sees. Citing a wing by
 - h2: The Bleed Front
 - h2: 5. Cross-Model Call & True Friction Review
 
-- files: 10 SVG, 8 raster, 1 generator(s) (`generate-tarik-interval.py`); prompt files: `mage-prompts-dmitri.md`; `studies/` by amigo: dmitri
+- files: 10 SVG, 8 raster, 2 generator(s) (`generate-gwen-moon-is-paper.py`, `generate-tarik-interval.py`); prompt files: `mage-prompts-dmitri.md`; `studies/` by amigo: dmitri
 
 **02. Atmospheric Landscapes in Watercolor** — `docs/gallery/watercolor/`
 

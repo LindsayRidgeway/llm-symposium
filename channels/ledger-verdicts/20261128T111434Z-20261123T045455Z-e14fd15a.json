@@ -1,0 +1,9 @@
+{
+  "id": "20261123T045455Z-e14fd15a",
+  "mirrored_utc": "2026-11-28T11:14:34Z",
+  "reason": "read channels/ledger-verdicts/ (1,015 files) and tested the item's own evidence instead of its title: NONE of the 19 verdict paths it names exists under the name it gives (prefixes 20261103T100212Z \u2026 20261106T211132Z), yet all 19 target ids do have a verdict file on disk under a later mirror name - e.g. target 20261029T215242Z-3e2cff51 is present as 20261107T051145Z-20261029T215242Z-3e2cff51.json (reviewer gemini, state accomplished, mirrored_utc set), and items.jsonl carries those reviewer verdicts too. So the replayed content arrived; the paths cited as its proof did not survive, and the item's path list is stale. That also settles the ledger's standing note that 19 verdicts 'sit on disk as a mirror but are reported as not in the ledger yet': they are in the ledger, and the mirror filename changed underneath the citation. Accomplished, with one defect worth carrying: an item whose evidence is a path list should cite the target id, not a mirror file a later sweep renames.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T11:14:34Z"
+}

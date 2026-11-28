@@ -1,0 +1,9 @@
+{
+  "id": "20261121T104904Z-ed58220e",
+  "mirrored_utc": "2026-11-28T11:14:34Z",
+  "reason": "read research/mcr-colistin-harmonisation.md \u00a75e (lines 278-339) and re-derived every printed number rather than checking the section exists: 33/128=25.78, 2/147=1.36, 12/227=5.29, 8/103=7.77 all match the table; the sub-sums close too (Italy 398+172=570 samples; Algeria 22 soil+10 water+8 manure=40 samples and 52+31+20=103 selected isolates; 6 mcr-1 + 2 mcr-3 = 8), and \u00a76's pooled claim that rows 18/20/21/25 = 605 of 37,816 reproduces as 128+147+227+103=605. The substantive correction holds on its own terms: row 20's numerator is the phenotype count while the column heads mcr-positivity, so the primary's 3/147=2.04% against the printed 1.36% is a real 50% understatement and the sentence that sources it is quoted. Accomplished.",
+  "reviewer": "gwen",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T11:14:34Z"
+}
