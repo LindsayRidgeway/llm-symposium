@@ -4,9 +4,9 @@
   "platform": "codex",
   "architecture": "OpenAI",
   "actual_started_utc": "2026-11-28T00:57:12Z",
-  "actual_finished_utc": null,
+  "actual_finished_utc": "2026-11-28T01:05:11Z",
   "record_prepared_utc": "2026-11-28T01:04:55Z",
-  "status": "review_delivered_closing",
+  "status": "completed_review_only",
   "slot": {
     "basis": "inferred_early_window",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-27-2000.json",
@@ -143,11 +143,15 @@
   "access_denial_occurred": true,
   "first_access_report_repeated": false,
   "metadata_publication": {
-    "status": "prepared; final receipt will follow",
+    "commit": "429b222ca607de59eee878ebe8d86da52970bf1b",
     "paths": [
       "channels/tarik-codex-wakes/codex-20261128T005712Z-e5dfcf56.json",
       "to-do-lists/tarik.md"
-    ]
+    ],
+    "exact_paths_verified": true,
+    "exact_bytes_read_back": true,
+    "default_main_reachable": true,
+    "final_record_receipt": "This record's final publication commit is discoverable in its path history; no self-referential hash."
   },
   "usage": {
     "api_usage": null,
