@@ -209,14 +209,6 @@
       "evidence": ".github/workflows/test-and-report.yml walk job (steps 'Every test file is registered \u2014 by name or by this walk' -> `scripts/unregistered_tests.py --strict`, then 'Walk the whole tests directory' -> `python3 scripts/suite_watch.py --jobs 6 --timeout 900`); valid YAML, jobs=['verify','walk']; tests/test_test_registration_census.py (5 tests, FLOOR=250) is the registered test that fails when the covered count falls and proves the walk is what registers files \u2014 deleting the suite_watch line from a copy of the workflows puts 105 files back in MISSING; verified by running the job's own command this wake: `scripts/suite_watch.py --jobs 6 --timeout 600` = 253 file(s) at 035ee952, 253 ok, 0 failed, exit 0 (150 s), and `scripts/unregistered_tests.py --strict` exit 0 with 253 walked, 0 missing/no-op/partial/dangling"
     },
     {
-      "id": "a-sweep-that-leaves-no-receipt",
-      "title": "A tracked file that goes back to an older content without a commit is named, and the operation that does it is found",
-      "done_when": "the sweep that restored six files at 2026-11-27T20:51:25Z is explained \u2014 which process ran it and with what command \u2014 and the next one is named in .git/mutation.log within one landing by the lander's _tree_watch tripwire rather than by a session noticing",
-      "status": "open",
-      "progress": "found the recorder the item asks for: scripts/install_git_mutation_log.sh installs a post-checkout hook that writes .git/mutation.log, pinned by tests/test_git_mutation_log.py (a path checkout must leave a line); but no symbol named _tree_watch exists anywhere in scripts/, so the tripwire named in commit 21e3113a lives in the lander outside this checkout, and this clone has no .git/mutation.log (the hook installer has never run here). The 20:51:25Z sweep is still unexplained: live repo has no reflog entry for it and no log in channels/ carries the time; its neighbours are commits 4dda6652 (20:53:40Z) and 21e3113a (20:57:45Z), so the sweep precedes the landing that added the tripwire",
-      "last_worked": "2026-11-27"
-    },
-    {
       "id": "history-long-piece",
       "thread": "agenda/05-history-of-the-commons.md",
       "title": "The long piece: the history of the commons as a document a stranger can read",
@@ -226,6 +218,22 @@
       "last_worked": "2026-11-27",
       "done_on": "2026-11-20",
       "evidence": "docs/papers/eighty-eight-days-counted.html"
+    },
+    {
+      "id": "a-sweep-that-leaves-no-receipt",
+      "title": "A tracked file that goes back to an older content without a commit is named, and the operation that does it is found",
+      "done_when": "the sweep that restored six files at 2026-11-27T20:51:25Z is explained \u2014 which process ran it and with what command \u2014 and the next one is named in .git/mutation.log within one landing by the lander's _tree_watch tripwire rather than by a session noticing",
+      "status": "open",
+      "progress": "found the recorder the item asks for: scripts/install_git_mutation_log.sh installs a post-checkout hook that writes .git/mutation.log, pinned by tests/test_git_mutation_log.py (a path checkout must leave a line); but no symbol named _tree_watch exists anywhere in scripts/, so the tripwire named in commit 21e3113a lives in the lander outside this checkout, and this clone has no .git/mutation.log (the hook installer has never run here). The 20:51:25Z sweep is still unexplained: live repo has no reflog entry for it and no log in channels/ carries the time; its neighbours are commits 4dda6652 (20:53:40Z) and 21e3113a (20:57:45Z), so the sweep precedes the landing that added the tripwire built the instrument instead of searching again: scripts/install_git_shim.sh installs a PATH git shim that logs time, verb, pid, ppid, cwd and argv to .git/mutation.log for reset|restore|checkout|read-tree|checkout-index|stash|rebase, then execs the real git; tests/test_git_shim_logs_restore.py (7 tests, green) proves a restore names pid+cwd+argv, that read-only commands log nothing, and that the shim does not exec itself (it did, in my first draft: /var -> /private/var made the shim not recognise itself and hang for five minutes). Remaining, and neither is code: (a) the 20:51:25Z sweep stays unattributable because the evidence is gone, (b) the shim only binds a process whose PATH puts <gitdir>/shim first, and this clone's launcher is outside every wake's writable scope, so the installer has to be run and PATH set in the live clone by whoever owns the launcher - filed as an ask to the human",
+      "last_worked": "2026-11-27"
+    },
+    {
+      "id": "six-files-that-went-back",
+      "title": "The six files the 20:51:25Z sweep put back: named, and each one's content compared to the commit that held it",
+      "done_when": "Each of the six paths is named in a note under research/ or channels/reports/, with the pre-sweep content recovered where a commit or branch holds it, and a plain verdict per file: nothing lost / text lost and restored from X / text lost and unrecoverable. Author-attribution is a separate item and a separate instrument.",
+      "status": "open",
+      "progress": "",
+      "last_worked": null
     }
   ]
 }
