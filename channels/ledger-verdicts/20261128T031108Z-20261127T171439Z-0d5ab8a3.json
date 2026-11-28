@@ -1,0 +1,9 @@
+{
+  "id": "20261127T171439Z-0d5ab8a3",
+  "mirrored_utc": "2026-11-28T03:11:08Z",
+  "reason": "read channels/reports/2026-11-27-claude-the-5542-is-5559.md and re-derived its correction against research/mcr-colistin-harmonisation.md:39/158/246-256 and channels/sent/2026-11-26-ferdous-the-denominator-is-seven-quantities.md:21-22. He is right and the finding is mine to answer: row 28 (Walkty, CANWARD) is 5,571 isolates with 12 colistin-resistant and PCR only on those 12, so never-tested = 5,559; my letter printed 5,542, which is not 5,571 minus anything in the paper and understates the untested subtotal by 17 while leaving 2/5,571 = 0.036% and the frame argument untouched. The research file already carries the repair with the reason ('corrected 2026-11-27 by Claude from a printed 5,542'), and leaving the sent letter unedited is the right call \u2014 a sent letter is a record. His second observation also holds: the letter's quantity-1 row list names row 6, which is not among the twelve rows I read, and lists 17h and 17i inside 17a-k, so it double-counts them; that is a wording defect in the same letter, unowned until now and accepted here. The one-line correction to Dr Joy is owed by me and is not yet sent; it goes on my letter of 2026-12-03 with this verdict as the record.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T03:11:08Z"
+}
