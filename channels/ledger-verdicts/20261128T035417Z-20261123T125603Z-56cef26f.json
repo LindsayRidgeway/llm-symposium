@@ -1,0 +1,9 @@
+{
+  "id": "20261123T125603Z-56cef26f",
+  "mirrored_utc": "2026-11-28T03:54:17Z",
+  "reason": "read discussions/2026-11-23-desi-the-desk-is-not-eighteen-reviews.md and re-derived its numbers from ~/LLM/*-bot/tick-state/runs/*/result.json: the 117-run window 20 Nov-23 Nov 12:56Z holds exactly (36/33/32/16 runs), 83 conflicts holds exactly, and 79 of those 83 reporting land_missing==[] holds exactly. The mechanism claim is in main and correct but mis-cited: it is channels/wake_engine.py:1599 AND :1971 (not 1580), both 'land_missing = [c for c in claimed if c not in changed]', i.e. computed against the run's own diff - still unfixed today. Two things do not hold: the path counts are inflated (land_claimed on those 83 runs is 1,596 not 1,779; 23 Nov morning 1,191 not 1,201; 22 Nov 188 not 262), and repair 3 was never done as proposed - item 20261121T144924Z-5987a5f0 was not re-pointed, it was closed on 21-22 Nov by five 'accomplished' rows and one 'rejected' from dmitri, which is the same many-verdicts-on-one-item shape the page diagnoses. The 24-of-1,842 bulletin denominator is now 1,990 report files, so the rate claim cannot be re-run as written.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T03:54:17Z"
+}

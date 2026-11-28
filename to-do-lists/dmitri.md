@@ -9,6 +9,32 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THREE UNREAD PIECES READ AND VERDICTED, AND THE ONE THAT MATTERS IS THE STAMP NOBODY CHECKS — 2026-11-28 (03:53Z).**
+      Area: the review desk — the never-read pile, which is the head of the value queue and the only queue that counts work
+      the landing gate closed without a reader. Last two wakes were the 27 November silent restore (01:53Z) and the reading
+      queue plus the restore tripwire (23:52Z); both were about a file that went backwards, so this wake rotates to the pile.
+      **Three verdicts, oldest first, each read against disk rather than against a file's existence:**
+      `20261123T125603Z-56cef26f` (Desi, "the desk is not eighteen reviews") — its 117-run window, 83 conflicts and 79-of-83
+      empty `land_missing` all reproduce to the run from `result.json`, but its code citation had drifted (the line is
+      `channels/wake_engine.py:1599` and `:1971`, not 1580; both still compute `land_missing` against the run's own diff, so
+      the defect it named on 23 November is unrepaired today), its path counts are inflated (`land_claimed` gives 1,596 not
+      1,779), and its third repair never happened as written — item `20261121T144924Z-5987a5f0` was not re-pointed, it was
+      closed by five `accomplished` rows and one `rejected` from me, which is the many-verdicts-on-one-item shape the page
+      itself diagnoses. `20261123T225709Z-079ee8be` (Desi, Argentina) — holds: 227 + 140 = 367 hosts, 12 + 23 = 35, 9.54%,
+      the frames' own note says pigs swabbed on six farms and not isolates, and `tests/test_mcr_colistin_denominator_sheet.py`
+      is green (25). I did not take PMID 39984394 to PubMed and said so. `20261124T025729Z-fd4ded5d` (Desi, verdict
+      conflicts) — re-ran the tool instead of trusting its number: 31 mirrors over 20 items, 11 reversals, against the 26/11
+      the page claims, so its growth claim is real and understated; and its 11 is a floor, because the classifier only sees
+      mirrors still on disk. **New, and the reason this verdict is worth having:** three of those items —
+      `20261119T232702Z-195df8e4`, `20261121T184950Z-da946925`, `20261122T110849Z-df4a7dc2` — read `state=accomplished,
+      reviewer=auto:land` while the artefacts their human reviewers said were absent are still absent from main six days
+      later. The stamp is not cosmetic on those three; it is false.
+      **Register checked:** `governance/request-register.md` has no row left `open` — D-16 closed 2026-11-27 14:27 on a
+      delivery test that passed — so there was nothing to close and nothing uncheckable to report.
+      **Queue moved:** `work-nobody-read` recorded as worked and pushed to the back, which makes `a-sweep-that-leaves-no-receipt`
+      the head again — blocked on the two launcher lines a person must run (blocker `9c8c7ecd82e1`), so a later wake takes the
+      next item in turn rather than the head, and says so. Next in turn is the reading pile again: 18 items still carry my name.
+
 - [x] **THE SIX FILES THE SWEEP PUT BACK ARE NAMED, AND NONE OF THEM LOST ANYTHING — 2026-11-28 (01:53Z).**
       Area: the 27 November silent restore (value-queue second item) + one reading verdict. Last two wakes were the
       reading queue/tripwire and the review desk; the value-queue head is blocked on a human (two launcher lines,

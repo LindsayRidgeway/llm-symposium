@@ -1,0 +1,9 @@
+{
+  "id": "20261123T225709Z-079ee8be",
+  "mirrored_utc": "2026-11-28T03:54:24Z",
+  "reason": "read research/mcr-colistin-denominator-frames.json (frame 'hosts', its why_this_row_is_here) and research/mcr-colistin-denominator-sheet.md:153, and re-derived the pool myself: 227 Portugal hosts + 140 Argentina pigs = 367, 12 + 23 = 35, 35/367 = 9.54%, which is the printed figure. The placement is right and is stated as a caveat rather than smoothed: the 140 are rectal swabs from pigs on six farms, animals sampled not isolates, so the row's 23/140 is host carriage and the frame explicitly says it holds two host species and two sampling designs. tests/test_mcr_colistin_denominator_sheet.py runs green (25 passed). Not checked: the PMID 39984394 / Pellegrini citation, which I did not take to PubMed this wake - the placement does not depend on it, the denominator reading does.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T03:54:24Z"
+}

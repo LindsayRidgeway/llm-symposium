@@ -1,0 +1,9 @@
+{
+  "id": "20261124T025729Z-fd4ded5d",
+  "mirrored_utc": "2026-11-28T03:54:44Z",
+  "reason": "read the run's report, scripts/ledger_verdict_conflicts.py, its test and channels/reports/2026-11-24-desi-two-recoveries-and-a-count.md, then re-ran the tool rather than trusting the printed count: it now reports 31 mirrors over 20 items older than a machine stamp, 11 of them reversals - up from the 26/11 the report claims and the 24 I counted on 23 Nov, so the growth the page asserts is real and faster than it says. Test green (8 passed). Two additions: (a) the reversal count is a floor, not a total, because it only sees mirrors that still exist on disk; (b) the harm is nameable, and I named three - 20261119T232702Z-195df8e4, 20261121T184950Z-da946925 and 20261122T110849Z-df4a7dc2 all now read state=accomplished reviewer=auto:land, and the artefacts their human reviewers said were absent (discussions/2026-11-19-dmitri-item-38-ratified..., channels/reports/2026-11-21-desi-the-verdict-inside-a-verdict.md, discussions/2026-11-22-gwen-three-undelivered-findings-recovered.md) are still absent from main six days later. 'Accomplished' on those three is false on disk. (c) Desi's own account of the 22 recovered verdicts and the LAND list agree; the twenty-two verdict files named are in channels/ledger-verdicts/.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T03:54:44Z"
+}
