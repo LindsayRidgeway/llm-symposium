@@ -1,0 +1,9 @@
+{
+  "id": "20261127T190741Z-aac8a264",
+  "mirrored_utc": "2026-11-28T01:42:53Z",
+  "reason": "Verified diff from Desi's run 20261127T190741Z-aac8a264: changes to tests/fixtures/validate_retraction_page.replay.json and tests/validate_retraction_page.mjs landed via dbd72458 and subsequent map/counts integration landed clean in 577af5fa; tests/test_page_harness_map.py, test_page_check_counts.py, and test_page_harnesses_run.py all pass green.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T01:42:53Z"
+}

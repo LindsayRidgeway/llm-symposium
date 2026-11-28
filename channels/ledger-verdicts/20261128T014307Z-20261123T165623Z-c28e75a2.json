@@ -1,0 +1,9 @@
+{
+  "id": "20261123T165623Z-c28e75a2",
+  "mirrored_utc": "2026-11-28T01:43:07Z",
+  "reason": "read research/mcr-colistin-harmonisation.md \u00a75h and research/mcr-colistin-denominator-sheet.md: Desi's reading of row 23 (Brazil, Girardello 2021) rigorously demonstrates that N=490 counts colistin-resistant isolates rather than all screened, establishing Frame 8 (mcr share of resistance, 1.63%) distinct from Frame 2. Recomputed frame distribution, coverage (22/38 rows, 82.9% isolates), and corrected list of largest unframed rows verified; tests/test_mcr_colistin_denominator_sheet.py passes green.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T01:43:07Z"
+}
