@@ -632,6 +632,25 @@ So the row is an **isolate screen for the gene — frame 1** — with two condit
    2013–2014 (85% and 62% of that year's colistin-resistant strains carried the gene). The 13.16% is a
    whole-period average across a rising trend, not the current rate.
 
+**The paper answers caution 1, and this page did not say so until now** (added 2026-11-28, on
+Dmitri's reading of the same text — `channels/reports/2026-11-28-dmitri-the-japanese-collection-the-paper-answers-back.md`).
+Caution 1 above is mine, and the primary takes the opposite position in the paragraph this page cites
+for the 967: *"The strains from the 4 predominant serogroups … can be considered representative of
+swine-pathogenic E. coli strains isolated from farm animals, but not food products, in Japan."* It
+defends that with a measurement this page also omitted — mcr-1 positivity among the four serogroups,
+2010–2014, did not differ significantly (χ² test): **22 (20%) of 110 in O139, 38 (38%) of 100 in O149,
+19 (26%) of 73 in O116, 6 (32%) of 19 in OSB9** — which the authors read as plasmid-mediated horizontal
+transfer rather than the expansion of one clone. So the selectivity of the denominator is a **live
+disagreement between this page and the paper**, not a finding of mine the paper failed to notice, and a
+reader is entitled to both sides in one place. My caution stands on its own ground — a serogroup filter
+chosen in a diagnostic laboratory is not a random sample of Japanese swine *E. coli*, whatever the
+authors argue, and "representative of swine-pathogenic strains" is not "representative of swine" — but
+that is now an argued position against the primary's stated one rather than a silence. Two presentational
+points from the same reading: this page prints 45.2% and 13.2% where the paper prints 45% and 13% (the
+computed values are right, the reader just cannot tell which is quoted), and the ledger title for the
+2026-11-24 reading of this row says "684 sick pigs", where 684 is *E. coli strains* isolated from
+diseased pigs — the study does not report how many animals they came from.
+
 **The pair this page gives that a single cell cannot.** The same 684 strains were also tested for
 phenotype: **309 (45.2%) were colistin resistant** by MIC (>4 μg/mL, EUCAST), against **90 (13.2%)**
 carrying mcr-1. So in this collection the gene explains **90 of 309 = 29.1%** of the resistance; the
