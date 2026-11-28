@@ -276,7 +276,9 @@ def baseline_problems(baseline, test_names, repo=None):
             for name in sorted(measured_set - present):
                 problems.append(
                     "baseline names %s but that file did not exist at %s: the measurement "
-                    "describes a different tree than the commit it cites" % (name, commit))
+                    "describes a different tree than the commit it cites; remove the name rather "
+                    "than re-record: a test file that landed after the cited commit needs no entry "
+                    "here, and hand-adding one is what makes the baseline lie" % (name, commit))
             for name in sorted(present - measured_set):
                 problems.append(
                     "baseline cites %s, which held %s, but never measured it: that file's failure "

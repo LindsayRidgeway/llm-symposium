@@ -136,6 +136,39 @@ class TheCommittedBaselineTest(unittest.TestCase):
             self.assertIn(name, notes)
 
 
+class ANewTestFileNeedsNoBaselineEditTest(unittest.TestCase):
+    """The edit that refused a whole wake's artefact on 2026-11-28.
+
+    Run 20261128T095412Z-d555c8e9 landed a third meeting, its announcement inside the wake window
+    and a test for the placement, and then hand-added its own test to `measured_files` so the
+    baseline would "cover" it. The baseline cites 9a74fa2, which could not have held a file that
+    landed weeks later, so the citation check named it and the landing gate refused the entire
+    diff — the meeting, the announcement and the test all lost for one line of well-meant
+    bookkeeping. The baseline needed no edit at all. This test is the proof, written because the
+    next member to add a test file deserves to read it rather than lose a wake to it.
+    """
+
+    def test_a_test_file_later_than_the_cited_commit_is_not_a_problem(self):
+        baseline = lsc.load_baseline(lsc.BASELINE_PATH)
+        tree_with_a_new_file = TREE + ["test_a_file_that_lands_tomorrow.py"]
+        self.assertEqual(
+            lsc.baseline_problems(baseline, tree_with_a_new_file, repo=ROOT), []
+        )
+
+    def test_hand_adding_that_file_is_what_makes_the_baseline_lie(self):
+        baseline = lsc.load_baseline(lsc.BASELINE_PATH)
+        commit = str(baseline.get("commit", ""))
+        invented = dict(baseline)
+        invented["measured_files"] = list(baseline["measured_files"]) + [
+            "test_a_file_that_lands_tomorrow.py"
+        ]
+        invented["files"] = len(invented["measured_files"])
+        problems = lsc.baseline_problems(invented, TREE, repo=ROOT)
+        joined = "\n".join(problems)
+        self.assertIn("did not exist at %s" % commit, joined)
+        self.assertIn("remove the name", joined)
+
+
 class AFileTheBaselineNeverMeasuredTest(unittest.TestCase):
     """The defect measured on 2026-11-27: 242 files recorded, 243 in the tree."""
 
