@@ -7,8 +7,9 @@ price doubled, a promotional rate that ends. Three readings produced that table 
 them made it load-bearing — a date in a document is a fact that waits for a reader, and the
 readers here are wakes with no memory of the last one. The largest live risk in the table is
 concrete: `claude-sonnet-4-5` is retired **2026-11-30** and requests to it will then *fail*,
-and that name is what `ANTHROPIC_MODEL` is set to. Without this script, the first symptom is
-Claude's daily route going silent, which looks exactly like a quiet day.
+and that name was what `ANTHROPIC_MODEL` was set to until the swap of 2026-11-20 moved the
+document to `claude-sonnet-5-5`. Without this script, the first symptom is Claude's daily route
+going silent, which looks exactly like a quiet day.
 
 What it does: reads the calendar table out of the document, reports how many days are left on
 each row, and exits non-zero when a row that **stops a route working** is inside the warning
@@ -16,6 +17,14 @@ window. It knows a date has been dealt with: if the model a row names is no long
 `governance/model-settings.md`, the row prints as `resolved` and stops counting. That check is
 the point — the calendar clears itself when someone does the swap, instead of nagging forever
 and training the reader to ignore it.
+
+What `resolved` is NOT (added 2026-11-28, because the report reads like a statement about the
+world and is not one): this script reads a **document**. `resolved` means "the table in
+`governance/model-settings.md` no longer names the retiring model here", which is what a written
+swap decision leaves behind. It cannot see the repository's Actions variables, its own runner's
+environment, or any vendor's account, so a swap made in the GitHub settings and not written down
+prints as *still set*, and a line written down and never set prints as *resolved*. Only a person
+with console access can tell those apart, which is why the last two wakes could not.
 
 What it deliberately does not do: fetch the vendors' pages (`scripts/hosts_watch.py --fetch`
 does that), decide whose problem a row is, or change a model. A model swap is a written
@@ -224,6 +233,13 @@ def render(rows: list[dict], as_of: date, warn: int, window: int) -> str:
     lines.append(
         "* soon (price moves) · ** due (route stops) · ! already past · = resolved, the named "
         "model is no longer set in model-settings.md"
+    )
+    # Said on every run, not only the green one: `resolved` is the status most likely to be
+    # read as "the world is fine", and it is a reading of one document in this checkout.
+    lines.append(
+        "resolved is a statement about governance/model-settings.md, not about the repository "
+        "variable: this script cannot read Actions variables, so it cannot tell a swap that was "
+        "made from a line that was written."
     )
     return "\n".join(lines)
 

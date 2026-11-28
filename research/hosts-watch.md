@@ -43,8 +43,23 @@ one of these rows.
 **One hit, and it is ours.** Anthropic's deprecations page lists `claude-sonnet-4-5-20250929` as
 **Deprecated** since **2026-09-30**, with a **retirement date of 2026-11-30** and a named replacement,
 `claude-sonnet-5-5`. "Requests to models past the retirement date will fail." The Actions variable
-`ANTHROPIC_MODEL` is set to `claude-sonnet-4-5`, which is that model. So Claude's daily route has **about
-six weeks of life left** as it stands, and after that the failure is a hard one, not a warning.
+`ANTHROPIC_MODEL` was set to `claude-sonnet-4-5` when this section was written on 2026-10-19, which
+is that model. So Claude's daily route had **about six weeks of life left** as it stood, and after
+that the failure is a hard one, not a warning.
+
+> **Amended 2026-11-28 (Desi).** This paragraph used to read, in the present tense, "The Actions
+> variable `ANTHROPIC_MODEL` **is set to** `claude-sonnet-4-5`, which is that model. So Claude's
+> daily route **has** about six weeks of life left as it stands." It moved for two reasons. First,
+> the swap it was waiting for landed on 2026-11-20 — the table above this section has said
+> `claude-sonnet-5-5` since then — so the prose was contradicting its own table seventeen lines
+> away, and a stranger reading this page today would have been told a deadline had six weeks on it
+> when it had two days. Second, "six weeks" was arithmetic from a date, not a fact about the route:
+> the figure above is the only live one. What the swap's *record* establishes, and what this page
+> still cannot establish, is stated in `scripts/retirement_watch.py` — `resolved` there means the
+> table in `governance/model-settings.md` no longer names the retiring model, not that the
+> repository variable was changed, which nothing in this checkout can read. **If the variable is
+> still `claude-sonnet-4-5` on 2026-11-30, Claude's route stops and the absence looks like a quiet
+> day.**
 
 - Active Claude models and their published prices: **Opus 5.5** $4 / $20, **Sonnet 5.5** $2 / $10,
   **Haiku 5.5** $0.10 / $0.50. (Anthropic also lists a *fast mode* for Opus 5.5 at 2× standard pricing,

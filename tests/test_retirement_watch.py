@@ -44,6 +44,23 @@ CAL = """
 """
 
 
+def stale_route_claims(doc_text, settings_text):
+    """Present-tense "is set to `<model>`" claims in prose that the settings table has moved off.
+
+    Prose only: a `>` blockquote is the convention for an amendment that quotes the claim it
+    replaced, and quoting history is not the defect. One line, one regex, because the failure it
+    catches is a page disagreeing with its own table — see the guard's docstring for 2026-11-28.
+    """
+    import re
+    out = []
+    for line in doc_text.splitlines():
+        if line.lstrip().startswith(">"):
+            continue
+        out += [m for m in re.findall(r"\bis set to\s+`([^`]+)`", line)
+                if not rw.is_set(m, settings_text)]
+    return out
+
+
 class ParseTest(unittest.TestCase):
     def test_rows_come_back_with_their_impact_and_models(self):
         rows = rw.parse_calendar(CAL)
@@ -248,6 +265,46 @@ class RealDocumentTest(unittest.TestCase):
         rows = rw.assess(rw.parse_calendar(rw.DOC.read_text(encoding="utf-8")),
                          settings, date.today(), 30, 180)
         self.assertIn(rw.verdict(rows), (0, 1))
+
+    def test_no_sentence_claims_a_route_is_still_on_a_model_the_table_moved_off(self):
+        """The 2026-11-28 defect, pinned.
+
+        `research/hosts-watch.md` carried a table row saying `ANTHROPIC_MODEL` had been swapped to
+        `claude-sonnet-5-5` on 2026-11-20, and seventeen lines below it a paragraph still saying, in
+        the present tense, that the variable **is set to** `claude-sonnet-4-5` and has six weeks
+        left. Nothing red: the instrument reads the calendar table and the settings file, never the
+        prose, so a public page contradicted itself through a deadline two days away.
+
+        The convention that makes this checkable: a repair quotes the old claim inside a blockquote
+        amendment and says what moved and why, so the guard reads prose only (`>` lines skipped).
+        It is one-directional on purpose — it cannot tell whether the variable was really changed,
+        only that this page does not say two things at once.
+        """
+        stale = stale_route_claims(rw.DOC.read_text(encoding="utf-8"),
+                                  rw.SETTINGS.read_text(encoding="utf-8"))
+        self.assertTrue(
+            not stale,
+            f"research/hosts-watch.md says a route is set to {stale}, which "
+            f"governance/model-settings.md no longer names — amend the sentence, do not edit the guard")
+
+    def test_the_stale_route_guard_is_sensitive(self):
+        """A guard nobody has seen go red is a green light wired to nothing (2026-11-27)."""
+        stale = stale_route_claims(
+            "The Actions variable `ANTHROPIC_MODEL` is set to `claude-sonnet-4-5`, which is that model.\n"
+            "> An amendment quoting the old text: it said `X` is set to `claude-sonnet-4-5`.\n",
+            "| Claude | `ANTHROPIC_MODEL` | `claude-sonnet-5-5` |\n")
+        self.assertEqual(stale, ["claude-sonnet-4-5"], "the guard missed a stale present-tense claim")
+        self.assertEqual(stale_route_claims("- `ANTHROPIC_MODEL` is set to `claude-sonnet-5-5`.\n",
+                                           "| Claude | `ANTHROPIC_MODEL` | `claude-sonnet-5-5` |\n"),
+                         [], "a claim the table still agrees with must not read as stale")
+
+    def test_the_report_says_what_resolved_does_not_establish(self):
+        """`resolved` is the status a reader is most likely to take as 'the world is fine'."""
+        text = rw.render(rw.assess(rw.parse_calendar(rw.DOC.read_text(encoding="utf-8")),
+                                   rw.SETTINGS.read_text(encoding="utf-8"),
+                                   date.today(), 30, 180),
+                         date.today(), 30, 180)
+        self.assertIn("not about the repository variable", text)
 
 
 if __name__ == "__main__":

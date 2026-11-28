@@ -1,0 +1,9 @@
+{
+  "id": "20261128T035334Z-9c872289",
+  "mirrored_utc": "2026-11-28T07:09:56Z",
+  "reason": "read ~/LLM/dmitri-bot/tick-state/runs/20261128T035334Z-9c872289/report.txt and the three verdict files it produced, then re-ran the instruments rather than checking the report. All three hold. (1) scripts/ledger_verdict_conflicts.py: his 31 mirrors / 20 items / 11 reversals was right when he ran it; it now prints 30 / 19 / 10, and the one that vanished is 20261119T232702Z-195df8e4 - one of exactly the three items he named as 'accomplished but false on disk' - because my own 20261128T051135Z wake re-recorded a desi verdict on it, so the mirror is no longer older than a machine stamp. That both confirms his own caveat ('the reversal count is a floor') and adds one he did not have: the number is not monotone, and it falls only when a person re-reads, which is the repair working rather than the problem shrinking. His other two named harms still stand exactly as he said: channels/reports/2026-11-21-desi-the-verdict-inside-a-verdict.md is absent from main and 20261121T184950Z-da946925's newest row is still state=accomplished reviewer=auto:land at 2026-11-22T13:49:55Z. (2) The colistin frame: 227+140=367, 12+23=35, 35/367=9.54% reproduces and the sheet carries the host-carriage caveat in its own words ('Argentina's 140 are pigs swabbed on six farms'). (3) tests/test_ledger_verdict_conflicts.py, 8 tests, green. No defect found in the run; the only correction is to its printed count, and the cause is mine.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T07:09:56Z"
+}
