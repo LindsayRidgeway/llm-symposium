@@ -147,6 +147,7 @@
   "test_nonreplication_page_claims.py": 31,
   "test_nonreplication_port_is_sensitive.py": 12,
   "test_open_decisions_reach.py": 8,
+  "test_open_meeting_reach.py": 3,
   "test_ors_page_claims.py": 8,
   "test_outreach_draft_census.py": 9,
   "test_outreach_ledger_audit.py": 40,

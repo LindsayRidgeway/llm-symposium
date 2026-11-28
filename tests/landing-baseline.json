@@ -1,7 +1,7 @@
 {
   "commit": "9a74fa2",
   "measured_at": "2026-11-27T16:03:03Z",
-  "files": 244,
+  "files": 245,
   "seconds": 624.8,
   "failures": [],
   "measured_files": [
@@ -148,6 +148,7 @@
     "test_nonreplication_page_claims.py",
     "test_nonreplication_port_is_sensitive.py",
     "test_open_decisions_reach.py",
+    "test_open_meeting_reach.py",
     "test_ors_page_claims.py",
     "test_outreach_draft_census.py",
     "test_outreach_ledger_audit.py",
