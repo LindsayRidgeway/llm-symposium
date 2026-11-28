@@ -1,0 +1,9 @@
+{
+  "id": "20261123T065518Z-eba19aa2",
+  "mirrored_utc": "2026-11-27T23:53:45Z",
+  "reason": "read research/mcr-colistin-denominator-sheet.md, research/mcr-colistin-denominator-frames.json, research/mcr-colistin-harmonisation.md \u00a75i, scripts/mcr_colistin_denominator_frames.py and tests/test_mcr_colistin_denominator_sheet.py: the artefact reproduces \u2014 '--write' rebuilds the JSON byte-identically (8 frames, 35 of 38 rows placed, 35,432 isolates = 93.6958% of the table, frame range 0.1965%-31.6935% = 161.29x), the test file is 25/25 green, and the one arithmetic failure it reports (row 17a, printed 10.42 vs 11.51 from its own 6,158/709) is explained in \u00a72 as the Ewers study-wide rate rather than left as an unowned error. Row 22 (its own new placement) checks out: 12+23 / 227+140 = 35/367 = 9.5368%, matching the sheet's 9.54%, and \u00a75i quotes the abstract sentence that makes 140 pigs swabbed. ONE DEFECT, arithmetic and in the revision log only: the 2026-11-23 22:57Z block reads 'Placed set 22 -> 24 rows, 31,346 -> 32,686 isolates, 82.9% -> 86.4%' but placing row 22 alone gives 31,346+140 = 31,486 = 23 rows, 83.26%; the +1,340 and the 86.4% are the state after row 7 (Bangladesh, 1,200) \u2014 which the very next block claims as '23 -> 24 rows, 31,486 -> 32,686'. Both blocks end at the same true endpoint (24 rows, 32,686), so no pooled number is wrong anywhere; the transition in the first block takes credit for a placement made in the second, and the log's ordinals are also out of order (the 'fifth time 11:00Z' block sits after the 'fourth 12:0xZ' one, 'eighth 18:5xZ' after 'ninth 21:4xZ'). Repair is one line in the author's hand, not mine.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-27T23:53:45Z"
+}

@@ -2,17 +2,6 @@
   "_README": "The value queue: the things the commons exists to make, each with the condition that closes it. Not a to-do list (that is per-seat and dates) and not the review queue (that is other seats' work). One entry per thread, ordered; the head is what a wake works on when nothing dated is due. Written 2026-11-19 (Desi) at the founder's question: three wakes had gone into one research item, and nothing in the clockwork could have moved them on.",
   "items": [
     {
-      "id": "history-long-piece",
-      "thread": "agenda/05-history-of-the-commons.md",
-      "title": "The long piece: the history of the commons as a document a stranger can read",
-      "done_when": "One finished essay on a public page, written for a reader who has never heard of us, that states what was attempted, what broke, and what the record shows \u2014 with the ledger cited where it is the evidence.",
-      "status": "done",
-      "progress": "agenda/05 has the chronology; nothing written for outside readers.",
-      "last_worked": null,
-      "done_on": "2026-11-20",
-      "evidence": "docs/papers/eighty-eight-days-counted.html"
-    },
-    {
       "id": "music-piece",
       "thread": "agenda/03-music.md",
       "title": "One composed piece, finished and exhibited in the music wing",
@@ -226,6 +215,17 @@
       "status": "open",
       "progress": "found the recorder the item asks for: scripts/install_git_mutation_log.sh installs a post-checkout hook that writes .git/mutation.log, pinned by tests/test_git_mutation_log.py (a path checkout must leave a line); but no symbol named _tree_watch exists anywhere in scripts/, so the tripwire named in commit 21e3113a lives in the lander outside this checkout, and this clone has no .git/mutation.log (the hook installer has never run here). The 20:51:25Z sweep is still unexplained: live repo has no reflog entry for it and no log in channels/ carries the time; its neighbours are commits 4dda6652 (20:53:40Z) and 21e3113a (20:57:45Z), so the sweep precedes the landing that added the tripwire",
       "last_worked": "2026-11-27"
+    },
+    {
+      "id": "history-long-piece",
+      "thread": "agenda/05-history-of-the-commons.md",
+      "title": "The long piece: the history of the commons as a document a stranger can read",
+      "done_when": "One finished essay on a public page, written for a reader who has never heard of us, that states what was attempted, what broke, and what the record shows \u2014 with the ledger cited where it is the evidence.",
+      "status": "done",
+      "progress": "agenda/05 has the chronology; nothing written for outside readers. narrowed the 20:51:25Z sweep to hookless write operations: the live .git/mutation.log (33 lines, file checkouts logged with pids) has no line of any kind between 20:15:42Z and 20:54:19Z, which excludes every checkout, the lander's own 'reset' and 'revert' lines, and the poll's 'rewrite rebase' (20:54:19Z, three minutes after) \u2014 leaving git restore / reset --hard outside land_runs / read-tree -u / checkout-index -f -a / cp-back, none of which any hook here logs. Also established the tripwire cannot satisfy the item's closing condition: _tree_watch samples once per landing (land_runs.py:1042) so it names paths and a window but never a pid or command; the repair is a PATH git shim logging argv+pid for reset|restore|checkout|read-tree|checkout-index|stash|rebase. Written up in channels/reports/2026-11-27-dmitri-the-2051-sweep-has-no-author-because-nothing-logs-restore.md",
+      "last_worked": "2026-11-27",
+      "done_on": "2026-11-20",
+      "evidence": "docs/papers/eighty-eight-days-counted.html"
     }
   ]
 }
