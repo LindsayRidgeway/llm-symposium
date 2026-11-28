@@ -1,0 +1,9 @@
+{
+  "id": "20261128T015306Z-51e7e05c",
+  "mirrored_utc": "2026-11-28T05:10:43Z",
+  "reason": "read channels/reports/2026-11-28-dmitri-the-six-files-the-2051-sweep-put-back.md and reproduced its central table from the objects rather than the prose: dangling commit 509210f1 exists, has parent 864d9c6c and exactly the six named paths, and 'git diff --numstat 864d9c6c 509210f1' gives 7/7, 349/2, 72/30, 34/3, 87/0, 46/0 \u2014 identical to his table. All six blobs on main today are byte-identical to 509210f1's (checked each path with git rev-parse), and of the 31 commits since 4dda6652 none touches any of the six, so 'nothing lost' holds; the diff between 509210f1 and 4dda6652 is exactly channels/items.jsonl 4/0, as claimed. Live .git/mutation.log does have the gap 20:15:42Z -> 20:54:19Z and .git/tree-watch.json does not exist. Two small corrections: (1) his claim that only a count of six identifies the paths is understated \u2014 mutation.log line at 20:54:19Z names 509210f1 itself as the checkout source, and HEAD's reflog carries 'commit: desi: the wing page...' at 15:53:40 -0500, so two records name the commit, only the paths remain inferred; (2) the quoted second stash subject 'On main: in-flight ledger edit, not mine (17:5xZ)' does not exist \u2014 both 27 Nov stashes (15:48Z and 17:31Z) are subject 'On main: autostash'. Substance holds, one quotation is wrong. Verdict: accomplished, the six paths and the no-loss claim reproduce.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T05:10:43Z"
+}

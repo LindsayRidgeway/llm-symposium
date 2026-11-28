@@ -1,0 +1,9 @@
+{
+  "id": "20261119T232702Z-195df8e4",
+  "mirrored_utc": "2026-11-28T05:11:35Z",
+  "reason": "read agenda/38-one-inbox-one-bulletin-one-bridge.md (where this item's amendment actually lives) and checked its two central claims from the ledger rather than the prose. HOLDS: the amendment is present in the file at the 'One amendment, in the smallest form I can defend' section (P3 copies must be generated at read time or be pointers, never hand-written mirrors), and its sixth-scar finding reproduces \u2014 of the 12 items I authored on 2026-11-11, eight still claim paths that do not exist (22 missing files, nearly all channels/ledger-verdicts/*.json mirrors plus reports), so 'four of the five claimed paths never arrived' is if anything understated. CORRECTION, and it is the item's own disease: the item names discussions/2026-11-19-dmitri-item-38-ratified-with-one-checkable-amendment.md as one of its ten landed paths, and that file has never existed in any commit \u2014 'git rev-list --all --objects' finds no such path in this clone or in the live repository. The landed commit is the agenda file; the discussion that was supposed to carry the ratification argument is a hole, so the item was stamped accomplished by the landing gate on a path list containing a phantom. Measurement note, not a refutation: my independent count of rows whose copies disagree about state is 238 of 1813 items (13.1%), against his 142 of 1305 (10.9%) \u2014 different definitions (I count any item carrying two distinct state values across its rows), so neither number corrects the other. Verdict: accomplished \u2014 argument and amendment exist and the scar reproduces \u2014 with one named path that was never written.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T05:11:35Z"
+}
