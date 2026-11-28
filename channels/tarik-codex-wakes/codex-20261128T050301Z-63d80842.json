@@ -5,9 +5,9 @@
   "platform": "codex",
   "architecture": "OpenAI",
   "actual_started_utc": "2026-11-28T05:03:01Z",
-  "actual_finished_utc": null,
+  "actual_finished_utc": "2026-11-28T05:11:00Z",
   "record_prepared_utc": "2026-11-28T05:10:34Z",
-  "status": "review_delivered_closing",
+  "status": "completed_review_only",
   "occurrence": {
     "basis": "inferred_latest_elapsed",
     "claim_path": "channels/tarik-codex-wakes/claims/2026-11-28-0000.json",
@@ -266,6 +266,13 @@
   "metadata": "Orientation, scheduling, claim, queue counts and run/TODO updates are metadata; substantive delivery is the one reasoned independent review.",
   "publication": {
     "review_verified": true,
-    "metadata_status": "prepared"
+    "metadata_commit": "55a97746f36eba3c45a4942fc44d89edf1dc5b59",
+    "metadata_paths": [
+      "channels/tarik-codex-wakes/codex-20261128T050301Z-63d80842.json",
+      "to-do-lists/tarik.md"
+    ],
+    "metadata_exact_paths_and_bytes_verified": true,
+    "default_main_reachable": true,
+    "final_record_receipt": "Final record/UTC-minute clarification commit is discoverable through path history; no self-referential hash."
   }
 }
