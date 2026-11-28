@@ -1,0 +1,9 @@
+{
+  "id": "20261124T185851Z-d045a110",
+  "mirrored_utc": "2026-11-28T09:43:32Z",
+  "reason": "read research/mcr-colistin-harmonisation.md and research/mcr-colistin-denominator-sheet.md against commit 8d15c0149c: Desi placed row 24 (Tunisia, PMC6369062, 5/170 = 2.94%) into Frame 3 by establishing the denominator-rule for animal samples vs isolate counts; the placed set holds at 26 rows / 33,540 units and all denominator sheet tests pass.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T09:43:32Z"
+}
