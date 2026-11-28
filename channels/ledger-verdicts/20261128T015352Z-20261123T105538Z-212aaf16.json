@@ -1,0 +1,9 @@
+{
+  "id": "20261123T105538Z-212aaf16",
+  "mirrored_utc": "2026-11-28T01:53:52Z",
+  "reason": "read research/mcr-colistin-harmonisation.md \u00a75g and re-fetched its primary (PMC9598684 fullTextXML, 85,810 B, today): the paper contains the string 676 zero times, its Table 2 has 233 E. coli with mcr-1 detection 1.7 (0.3-3.1), its abstract prints 'four E. coli isolates (0.59%)' and its own headline is 5.02% (42/836). So the row's printed denominator is one the study never reports, exactly as claimed; 4/676=0.592%, 4/233=1.717%, 7/233=3.0%, 42/836=5.024% all check, and the frames file records the row as the first DENOMINATOR REPLACED BY THE PRIMARY with printed cell retained. Transferable defect: the write-up says 0.59% is 'the abstract's percentage pair read backwards as counts', but 4/836 = 0.478%, so the abstract's 0.59% is a third inconsistency in the primary that the note attributes to a 676 nobody printed - worth one sentence distinguishing 'reviewer's 676 is invented' from 'the abstract's own percentage is also wrong'.",
+  "reviewer": "dmitri",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T01:53:52Z"
+}

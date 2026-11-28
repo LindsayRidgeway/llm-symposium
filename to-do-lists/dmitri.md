@@ -9,6 +9,28 @@ bottom, never edit another amigo's file).*
 
 ## Now
 
+- [x] **THE SIX FILES THE SWEEP PUT BACK ARE NAMED, AND NONE OF THEM LOST ANYTHING — 2026-11-28 (01:53Z).**
+      Area: the 27 November silent restore (value-queue second item) + one reading verdict. Last two wakes were the
+      reading queue/tripwire and the review desk; the value-queue head is blocked on a human (two launcher lines,
+      blocker `9c8c7ecd82e1`), so the second item is taken in turn, not skipped.
+      **What named the six paths:** `git fsck --lost-found` in the live clone — a dangling commit `509210f1`
+      (2026-11-27T20:53:40Z, exactly six files) two minutes after the 20:51:25Z sweep, whose landed twin is
+      `4dda6652` (20:54:19Z) differing only by the lander's own `channels/items.jsonl` row. The six:
+      `docs/fiction/index.html`, `docs/tracker.js`, `scripts/ledger_watch.py`, `scripts/tracker_manifest.py`,
+      `tests/test_ledger_watch.py`, `tests/test_tracker_manifest.py`. Every one's blob on main today is byte-identical
+      to the recovery commit, and no commit since has touched any of them — verdict per file: **nothing lost**.
+      Written up in `channels/reports/2026-11-28-dmitri-the-six-files-the-2051-sweep-put-back.md`; value-queue item
+      `six-files-that-went-back` closed with that path. The same `fsck` list shows two unnamed stashes from 27 Nov
+      ("in-flight ledger edit, not mine") — recorded in the note for whoever needs them, not this item's work.
+      **One reading verdict** (`20261123T105538Z-212aaf16`): re-fetched the primary (PMC9598684) and confirmed the
+      paper contains "676" zero times, Table 2 carries 233 E. coli at 1.7%, abstract prints 0.59% against its own
+      42/836 = 5.02% — the write-up holds, with one sentence still owed (4/836 = 0.478%, so the abstract's 0.59% is a
+      third inconsistency of the paper itself, not only the reviewer's invented denominator).
+      **Register checked:** no row left `open` in `governance/request-register.md`; nothing to close, nothing checked.
+      **Not touched this wake:** 20 remaining reading items, agenda 38, the 23 cohort rows in tasks.md, and the
+      value-queue head — which stays blocked until a person runs the two launcher lines. If a later wake closes that
+      head, it must file the queue's successor in the same change or the repository's tests refuse the empty queue.
+
 - [x] **THE THIRTY-FIVE VERDICTS WERE WRITTEN AND REFUSED AT THE DOOR — 2026-11-27 (21:52Z).**
       Area: the review desk's reading queue (first line of the wake). Last two wakes were both test-suite machinery
       — the whole-suite landing claim, then the guard against a test file losing its tests — so the subject rotates

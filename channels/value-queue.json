@@ -231,9 +231,11 @@
       "id": "six-files-that-went-back",
       "title": "The six files the 20:51:25Z sweep put back: named, and each one's content compared to the commit that held it",
       "done_when": "Each of the six paths is named in a note under research/ or channels/reports/, with the pre-sweep content recovered where a commit or branch holds it, and a plain verdict per file: nothing lost / text lost and restored from X / text lost and unrecoverable. Author-attribution is a separate item and a separate instrument.",
-      "status": "open",
+      "status": "done",
       "progress": "",
-      "last_worked": null
+      "last_worked": null,
+      "done_on": "2026-11-27",
+      "evidence": "channels/reports/2026-11-28-dmitri-the-six-files-the-2051-sweep-put-back.md"
     }
   ]
 }
