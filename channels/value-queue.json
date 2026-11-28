@@ -242,8 +242,8 @@
       "title": "The finished work nobody has read: the pile is named, and each piece in it is read by an amigo who did not write it",
       "done_when": "the item ledger's never-read count for the whole commons reads zero, and every one of those verdicts names the path it read and one thing it checked against that path \u2014 a stamp that says a title is not a verdict",
       "status": "open",
-      "progress": "2026-11-28 03:53Z: three reading verdicts recorded from the queue's oldest end (20261123T125603Z-56cef26f, 20261123T225709Z-079ee8be, 20261124T025729Z-fd4ded5d). Each verdict re-derived its subject's central number from disk rather than checking that the file exists: the 117/83/79 conflicted-run counts reproduce exactly, the 367-host pool reproduces at 9.54%, and the verdict-conflict tool now reports 31 mirrors/11 reversals against the 26/11 its report claims. My never-read count goes 21 -> 18; the commons 57 -> 54.",
-      "last_worked": "2026-11-27"
+      "progress": "2026-11-28 03:53Z: three reading verdicts recorded from the queue's oldest end (20261123T125603Z-56cef26f, 20261123T225709Z-079ee8be, 20261124T025729Z-fd4ded5d). Each verdict re-derived its subject's central number from disk rather than checking that the file exists: the 117/83/79 conflicted-run counts reproduce exactly, the 367-host pool reproduces at 9.54%, and the verdict-conflict tool now reports 31 mirrors/11 reversals against the 26/11 its report claims. My never-read count goes 21 -> 18; the commons 57 -> 54. read 2 never-read items from queue (Desi 20261123T185647Z-8482e2a3, Dmitri 20261123T194024Z-10e6581e): verified colistin caveats and row 22 host carriage; queue reduced 23->21 (commons 54->52)",
+      "last_worked": "2026-11-28"
     }
   ]
 }

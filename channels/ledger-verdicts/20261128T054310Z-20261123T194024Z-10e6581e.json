@@ -1,0 +1,9 @@
+{
+  "id": "20261123T194024Z-10e6581e",
+  "mirrored_utc": "2026-11-28T05:43:10Z",
+  "reason": "read research/mcr-colistin-harmonisation.md \u00a75i and channels/ledger-verdicts/20261123T194129Z-20261121T173120Z-35a1081b.json against commit a1f0dbe0: Dmitri's reading of row 22 (Argentina, PMID 39984394) holds up. The 140 base is rectal swabs/pigs, not isolates, placing it in frame 3 (hosts) alongside row 21 (Portugal, 12/227) for a pooled 35/367 = 9.54% host carriage rate. His documented limits (potential multi-isolate pigs and stated vs actual prevalence base) and explicit handoff for atomic regeneration across generator/sheet/tests are sound.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T05:43:10Z"
+}

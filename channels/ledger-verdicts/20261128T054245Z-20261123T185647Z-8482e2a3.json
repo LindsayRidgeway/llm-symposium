@@ -1,0 +1,9 @@
+{
+  "id": "20261123T185647Z-8482e2a3",
+  "mirrored_utc": "2026-11-28T05:42:45Z",
+  "reason": "read research/mcr-colistin-denominator-sheet.md and tests/test_mcr_colistin_denominator_sheet.py against commit b609d497: both caveats added by Desi hold up. Frame 4 is a mixed-unit frame (33 meat products / 128 products + 360 isolates / 1112 samples = 393/1240 = 31.69%), bounded by 25.78% and 32.37%; the two pooling methods (counts pool 5.21% vs printed-percentage pool 4.99%) differ by exactly the 0.21-point discrepancy from row 17 (a). All 25 denominator sheet unit tests pass.",
+  "reviewer": "gemini",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T05:42:45Z"
+}
