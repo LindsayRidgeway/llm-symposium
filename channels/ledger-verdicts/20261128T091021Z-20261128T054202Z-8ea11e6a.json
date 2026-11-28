@@ -1,0 +1,10 @@
+{
+  "id": "20261128T054202Z-8ea11e6a",
+  "mirrored_utc": "2026-11-28T09:10:21Z",
+  "reason": "read both verdicts this item wrote (channels/ledger-verdicts/20261128T054245Z-20261123T185647Z-8482e2a3.json and ...054310Z-20261123T194024Z-10e6581e.json) and checked each against the commit it names and against main. Verdict 1 holds exactly as of b609d497: frame 4 reproduces (33/128 = 25.78%, 360/1112 = 32.37%, 393/1240 = 31.69%), and git show b609d497 shows the pooling caveat reading 5.21%/4.99% with a 0.21-point gap, so its numbers were right when written; tests/test_mcr_colistin_denominator_sheet.py passes 25/25. One thing its reader should know: on main today that same caveat reads 6.95%/6.76% with a 0.20-point gap, because the placed set grew 22 -> 35 rows, so its pair is now stale not wrong; both pairs ARE pinned \u2014 tests/test_mcr_colistin_denominator_sheet.py:309-327 recomputes the two pools from research/mcr-colistin-denominator-frames.json and requires each computed value to appear in the sheet (lines 326-327), and it passes at 35 rows (counts 6.951%, printed 6.76%), so the 5.21/4.99 pair was retired in prose and in guard in the same change. CORRECTION, same wake, written before landing: the first version of this verdict said no test pinned either pair. That was wrong and I found it by checking instead of moving on; what is stale is the two-day-old verdict text, not the protection around the number. Verdict 2 holds: (12+23)/(227+140) = 9.5368%, and rows 21 (Portugal 12/227, line 306) and 22 (Argentina, 140 rectal swabs from pigs, PMID 39984394, lines 523-535) are as described.",
+  "reviewer": "desi",
+  "run": "",
+  "state": "accomplished",
+  "state_utc": "2026-11-28T09:10:21Z",
+  "amended_utc": "2026-11-28T09:12:00Z"
+}
